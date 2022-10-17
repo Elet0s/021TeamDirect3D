@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="utf-8"?>
+<text>
+  <curLanguage>null</curLanguage>
+  <language id="English">
+    <name>English</name>
+    <gameMode>Game Mode</gameMode>
+    <modeReloader>Reloader Mode</modeReloader>
+    <modeReloader_d>Game mode in which all gun maneuvering actions, including reloading, need to be performed manually.
+      &lt;color=#ffff4460&gt;Intended style to experience all the core gameplay systems of Reloader: test_subject.&lt;/color&gt;</modeReloader_d>
+    <modeBulletCounter>&lt;color=#dddddd80&gt;Bullet Counter Mode&lt;/color&gt;</modeBulletCounter>
+    <modeBulletCounter_d>Game mode in which a series of gun maneuvering actions are automatically performed with simple control.
+      Style for players who find Relodader mode too difficult or want a casual experience.</modeBulletCounter_d>
+    <firstTip>Combat in Reloader is fast-paced and packed with action! Stay calm and follow the tips.</firstTip>
+    <battleTip1>Use cover when fighting against multiple enemies. Press &lt;color=#ffff4460&gt;[C]&lt;/color&gt; to take cover when &lt;color=#A7FFA560&gt;available.&lt;/color&gt;</battleTip1>
+    <battleTip2>Getting shot results in bleeding and eventually, you will die. Press &lt;color=#ffff4460&gt;[C]&lt;/color&gt; to stop bleeding.</battleTip2>
+    <battleTip3>The targeted enemy's interruptions about aiming will appear as icons near your crosshair.</battleTip3>
+    <battleTip4>When you get close to an enemy, you will automatically switch to close combat. You are at an advantage against most enemies while in close combat, unless the enemy specializes in it, or is doped up.</battleTip4>
+    <battleTip5>If you are running out of ammo, press and hold &lt;color=#ffff4460&gt;[Q]&lt;/color&gt; near a dead body to steal magazines. However, it will take a long time and you won’t know how many bullets are in the magazine.</battleTip5>
+    <battleTip6>A single pistol shot may be enough to kill someone, but not enough to neutralize them!</battleTip6>
+    <battleTip7>If you stay in an area for too long, enemies will find you and surround you! Keep moving!</battleTip7>
+    <battleTip8>You can aim at a lightbulb by holding &lt;color=#ffff4460&gt;[W]&lt;/color&gt;. Hide in the dark! But please, don't hide your enemies in the dark.</battleTip8>
+    <battleTip9>You can aim at the enemy's pressure point by holding &lt;color=#ffff4460&gt;[RMB]&lt;/color&gt; to target. However, be aware that Pinpoint targeting consumes a lot of Concentration!</battleTip9>
+    <battleTip10>Accuracy will decrease when you're out of Concentration.
+&lt;color=#A8FFFF&gt;Concentration can be recovered faster by hitting normal shoot.&lt;/color&gt;</battleTip10>
+    <preTip>Previous Tip</preTip>
+    <nextTip>Next Tip</nextTip>
+    <discord></discord>
+    <alphaStore>Wishlist next game of Reloader project!</alphaStore>
+    <enterToSkip>Skip tutorial and Start: &lt;color=#ffff4460&gt;[Enter]&lt;/color&gt;</enterToSkip>
+    <spaceToContinue>Next: &lt;color=#ffff4460&gt;[Spacebar]&lt;/color&gt;</spaceToContinue>
+    <returnToMain>Return to title screen</returnToMain>
+    <restart>Restart</restart>
+    <resume>Resume</resume>
+    <skip>Stage</skip>
+    <start>New Game</start>
+    <option>Option</option>
+    <quit>Exit</quit>
+    <condition>Status:</condition>
+    <focus>Concentration:</focus>
+    <ammoFill>Reload bullets into the magazine: Hold &lt;color=#ffff4460&gt;[Enter]&lt;/color&gt;</ammoFill>
+    <enemyAlarm1>What the hell is going on?!</enemyAlarm1>
+    <enemyAlarm2>Intruder!</enemyAlarm2>
+    <enemyAlarm3>Kill that guy!</enemyAlarm3>
+    <enemyAlarm4>He's here!</enemyAlarm4>
+    <enemyFear1>Damn! This is getting dangerous!</enemyFear1>
+    <enemyFear2>He's aiming at me!</enemyFear2>
+    <enemyFear3>This isn't good...</enemyFear3>
+    <enemyDark1>Where did he go?!</enemyDark1>
+    <enemyDark2>Shut up! He’s close by!</enemyDark2>
+    <enemyDark3>He’s hiding in the dark!</enemyDark3>
+    <enemyUpper1>TRY AND SHOOT ME!!!</enemyUpper1>
+    <enemyUpper2>HAHAHAHAHAHAHA</enemyUpper2>
+    <enemyUpper3>I'M UNSTOPPABLE!!!</enemyUpper3>
+    <tutorialHide>Hide/Show tutorial: &lt;color=#ffff4460&gt;[/]&lt;/color&gt;</tutorialHide>
+    <tutorial_frame>: &lt;color=#ffff4460&gt;[]&lt;/color&gt;</tutorial_frame>
+    <tutorial_run>Run: Mash &lt;color=#ffff4460&gt;[A]&lt;/color&gt; / &lt;color=#ffff4460&gt;[D]&lt;/color&gt;</tutorial_run>
+    <tutorial_crouch>Crouch: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_crouch>
+    <tutorial_stand>Stand up: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_stand>
+    <tutorial_cover>Cover: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_cover>
+    <tutorial_pull>Pull Trigger: &lt;color=#ffff4460&gt;[LMB]&lt;/color&gt;</tutorial_pull>
+    <tutorial_aim>Pinpoint Targeting: Hold &lt;color=#ffff4460&gt;[RMB]&lt;/color&gt;</tutorial_aim>
+    <tutorial_drawOut>Take out a Magazine from your Belt: &lt;color=#ffff4460&gt;[1]&lt;/color&gt; ... &lt;color=#ffff4460&gt;[4]&lt;/color&gt;</tutorial_drawOut>
+    <tutorial_drawIn>Put in the Magazine on your Belt: &lt;color=#ffff4460&gt;[1]&lt;/color&gt; ... &lt;color=#ffff4460&gt;[4]&lt;/color&gt;</tutorial_drawIn>
+    <tutorial_take>Pick up Magazine: &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_take>
+    <tutorial_loot>Steal Magazine: Hold &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_loot>
+    <tutorial_discardHand>Discard Magazine from hand: &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_discardHand>
+    <tutorial_insert>Load Magazine: &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_insert>
+    <tutorial_tap>Tap Magazine: &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_tap>
+    <tutorial_release>Remove Magazine: &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_release>
+    <tutorial_discard>Discard Magazine from gun: &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_discard>
+    <tutorial_checkChamber>Check Chamber: Hold &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_checkChamber>
+    <tutorial_releaseSlide>Release Slide: &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_releaseSlide>
+    <tutorial_pullSlide>Pull Slide: Hold &lt;color=#ffff4460&gt;[E]&lt;/color&gt; + &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_pullSlide>
+    <tutorial_aimObj>Object Targeting: Hold &lt;color=#ffff4460&gt;[W]&lt;/color&gt;</tutorial_aimObj>
+    <tutorial_aimTactic>Tactical Targeting: Hold &lt;color=#ffff4460&gt;[S]&lt;/color&gt;</tutorial_aimTactic>
+    <tutorial_reload>Reload : &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_reload>
+    <tutorial_checkMag>Check Magazine : &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_checkMag>
+    <tutorial_repair>Repair Gun : &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_repair>
+    <tutorial_discardEasy>Discard Magazine : &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_discardEasy>
+    <eventTime>-----</eventTime>
+    <peaceful>Normal</peaceful>
+    <alarmed>Spotted</alarmed>
+    <marked>Surrounded</marked>
+    <intro_1>Finally, you're awake.</intro_1>
+    <intro_2>Now you can tell us why we found you in our building.</intro_2>
+    <intro_3>Bastards like you shouldn't be wandering around.</intro_3>
+    <intro_4>This might seem like a normal building,</intro_4>
+    <intro_5>but it's actually the &lt;color=#ffff4460&gt;secret office building&lt;/color&gt; for our gang.</intro_5>
+    <intro_6>&lt;color=#ffff4460&gt;3 floors above ground with 2 levels underground!&lt;/color&gt;</intro_6>
+    <intro_7>With a few dozen gangs &lt;color=#ffff4460&gt;armed and ready to kill&lt;/color&gt;.</intro_7>
+    <intro_8>Say what brought you here right n...!</intro_8>
+    <intro_9>Thanks for your detailed explanation!</intro_9>
+    <intro_10>You talk too much!</intro_10>
+    <intro_11>This guy must be the boss.</intro_11>
+    <intro_12>Bosses really like to listen to themselves talk.</intro_12>
+    <cutScene_1>Well... you seem to be in a predicament.</cutScene_1>
+    <cutScene_2>Lucky for you, I just happened to be passing by.</cutScene_2>
+    <cutScene_3>Why the long face?</cutScene_3>
+    <cutScene_4>Unfortunately, most of what the sleeping guy said is true.</cutScene_4>
+    <cutScene_5>I could untie you, but unfortunately I have other places to be.</cutScene_5>
+    <cutScene_6>In other words, you have to escape from here all by yourself.</cutScene_6>
+    <cutScene_7>All you have right now is a pistol and a few magazines from blabbermouth.</cutScene_7>
+    <cutScene_8>Also, there’s a bunch of gang members waiting outside.</cutScene_8>
+    <cutScene_9>It won't be easy to get out of this building alive as a 'Pitiful Citizen 1'.</cutScene_9>
+    <cutScene_10>I know we just met, so I don't want to be cold-hearted and leave you like this.</cutScene_10>
+    <cutScene_11>Here, take this.</cutScene_11>
+    <cutScene_12>It's a combat aid tool that’s being developed. You'll instantly gain the talents of a legendary agent from long ago.</cutScene_12>
+    <cutScene_13>If you have this, you can be an elite agent right away!</cutScene_13>
+    <cutScene_14>There we go.</cutScene_14>
+    <cutScene_15>Now don't get sappy on me for the gift. Life is all about helping each other, right?</cutScene_15>
+    <cutScene_16>Just take it!</cutScene_16>
+    <cutScene_17>Looks like it broke again...</cutScene_17>
+    <cutScene_18>How are you feeling?</cutScene_18>
+    <cutScene_19>It won't be easy to control your body. Your brains a little mixed up right now.</cutScene_19>
+    <cutScene_20>Uhh… And you might have realized it by now,</cutScene_20>
+    <cutScene_21>but there was a little error during training. Just an accident, right?</cutScene_21>
+    <cutScene_22>If it worked, then you should be a legendary agent right now.</cutScene_22>
+    <cutScene_23>But by the look on your face, it doesn't look like it completely worked.</cutScene_23>
+    <cutScene_24>But the good news is that I can track your condition.</cutScene_24>
+    <cutScene_25>Let's see... I hope you’ve learned at least some useful skills...</cutScene_25>
+    <cutScene_26>Well, you have completely learned how to aim and shoot…</cutScene_26>
+    <firstTutorial_1>But it stopped while you were learning close combat… but it’s still usable.</firstTutorial_1>
+    <firstTutorial_2>That's it.</firstTutorial_2>
+    <firstTutorial_3>This tool never works for gun knowledge and reloading skills.</firstTutorial_3>
+    <firstTutorial_4>Ah</firstTutorial_4>
+    <firstTutorial_5>Alright! Hold the gun up!</firstTutorial_5>
+    <firstTutorial_6>There are a lot of gang members waiting for you on the other side of the door.</firstTutorial_6>
+    <firstTutorial_7>So, you should get familiarized with the gun.</firstTutorial_7>
+    <firstTutorial_8>Your shooting skills are great, but you're still lacking gun handling skills.</firstTutorial_8>
+    <firstTutorial_9>Can you see the action descriptions HUD on the right ? The actions you can't take will be greyed out.</firstTutorial_9>
+    <firstTutorial_10>Next, you need to finish the orange actions before you can shoot.</firstTutorial_10>
+    <firstTutorial_11>What a coincidence! There is a dummy!</firstTutorial_11>
+    <firstTutorial_12>Shoot it! (Click left mouse button)</firstTutorial_12>
+    <firstTutorialTrigger_1>Woah! Did you really just squeeze the trigger?!</firstTutorialTrigger_1>
+    <firstTutorialTrigger_2>I told you that the actions you need to take before shooting will be highlighted!</firstTutorialTrigger_2>
+    <firstTutorialTrigger_3>Was Squeeze Trigger highlighted?</firstTutorialTrigger_3>
+    <firstTutorialTrigger_4>There's no ammo in your gun.</firstTutorialTrigger_4>
+    <firstTutorialTrigger_5>You have to &lt;color=#A8FFFF&gt;reload&lt;/color&gt; first.</firstTutorialTrigger_5>
+    <firstTutorialTrigger_6>Follow the &lt;color=#FF8300&gt;orange&lt;/color&gt; action descriptions on the right.</firstTutorialTrigger_6>
+    <firstTutorialMagRelease_1>Great. Is the HUD working properly? I hope this doesn't get screwed up too...</firstTutorialMagRelease_1>
+    <firstTutorialMagRelease_2>You can just throw away the empty magazines, but you should keep them if possible.</firstTutorialMagRelease_2>
+    <firstTutorialMagRelease_3>Who knows, maybe someone will gift you some bullets?</firstTutorialMagRelease_3>
+    <firstTutorialMagInsert_1>Almost done!</firstTutorialMagInsert_1>
+    <firstTutorialMagInsert_2>Now, pull the slide back and chamber a round.</firstTutorialMagInsert_2>
+    <firstTutorialMagInsert_3>Don't forget. You can’t shoot the gun without a bullet inside of the chamber.</firstTutorialMagInsert_3>
+    <firstTutorialSlide_1>Done. Your gun is ready to shoot.</firstTutorialSlide_1>
+    <firstTutorialSlide_2>I don't need to teach you how to aim, right?</firstTutorialSlide_2>
+    <firstTutorialSlide_3>You won't miss unless you lose your concentration.</firstTutorialSlide_3>
+    <firstTutorialSlide_4>Maybe.</firstTutorialSlide_4>
+    <firstTutorialShoot_1>Great shot. No one in this building can come close to your shooting skill.</firstTutorialShoot_1>
+    <firstTutorialShoot_2>But be careful. &lt;color=#A8FFFF&gt;A single bullet is enough to kill somebody, but not enough to neutralize them.&lt;/color&gt;</firstTutorialShoot_2>
+    <firstTutorialShoot_3>At least two shots will do it.</firstTutorialShoot_3>
+    <firstTutorialShoot_4>Or a head shot.</firstTutorialShoot_4>
+    <firstTutorialShoot_5>No matter how good your aim is, &lt;color=#A8FFFF&gt;you'll lose concentration for taking too many difficult shots in a row.&lt;/color&gt;</firstTutorialShoot_5>
+    <firstTutorialShoot_6>That's everything from me. As soon as you step out of this room, it's the real deal.</firstTutorialShoot_6>
+    <firstTutorialLast_1>Ah! That gun can have 15 bullets in its magazine!</firstTutorialLast_1>
+    <firstTutorialLast_2>You better count every bullet and &lt;color=#A8FFFF&gt;reload&lt;/color&gt; it on time!</firstTutorialLast_2>
+    <firstTutorialLast_3>You can approximate how many bullets are left by weighing a magazine in your hand.</firstTutorialLast_3>
+    <firstTutorialLast_4>Alright then, good luck!</firstTutorialLast_4>
+    <stage1Cheat_1>How long until we get off work?</stage1Cheat_1>
+    <stage1Cheat_2>Around 10 minutes?</stage1Cheat_2>
+    <stage1Cheat_3>Hey, you wanna grab a beer after work?</stage1Cheat_3>
+    <stage1Cheat_4>Sorry. Not today.</stage1Cheat_4>
+    <stage1Cheat_5>I am planning on proposing to my girl.</stage1Cheat_5>
+    <stage1Cheat_6>Oh! That's exciting news!</stage1Cheat_6>
+    <stage1Cheat_7>Good luck.</stage1Cheat_7>
+    <stage1Cheat_8>Thanks.</stage1Cheat_8>
+    <stage1Cheat_9>Today will be an unforgettable day.</stage1Cheat_9>
+    <restEvent1_1>Hey! Over here!</restEvent1_1>
+    <restEvent1_2>I'm glad you’re alive! You won't get caught if you stay here.</restEvent1_2>
+    <restEvent1_3>I soundproofed the walls here and there.</restEvent1_3>
+    <restEvent1_4>Those bastards downstairs are probably clueless.</restEvent1_4>
+    <restEvent1_5>And I found some bullets for you! You're welcome. Take your time to prepare and move out.</restEvent1_5>
+    <restEvent1_6>Hey, take a look at this. I did a little research about this building beforehand.</restEvent1_6>
+    <restEvent1_7>There are stairs nearby going to the lower floors. Keep following the stairs and you'll find the lobby on the first floor.</restEvent1_7>
+    <restEvent1_8>It's the fastest way to get out of this building according to this building’s layout.</restEvent1_8>
+    <restEvent1_9>But I don't recommend exiting through the lobby.</restEvent1_9>
+    <restEvent1_10>It's not a good idea to walk out the front door when you need to be discrete.</restEvent1_10>
+    <restEvent1_11>Plus, that's the most secure area.</restEvent1_11>
+    <restEvent1_12>Go down to the second floor, and run directly to the right. There’s an emergency staircase connected to the storage on the first floor.</restEvent1_12>
+    <restEvent1_13>Walk through the storage, then you can escape the building through a parking lot.</restEvent1_13>
+    <restEvent1_14>Stating the obvious, but if you shoot in the building, enemies will swarm you from all directions.</restEvent1_14>
+    <restEvent1_15>Try your best not to get caught.</restEvent1_15>
+    <restEvent1_16>After exiting the building, keep moving straight ahead. The gang won't chase you once you're at the city center.</restEvent1_16>
+    <restEvent1_17>Well, I don't need to spell out the rest for you, right?</restEvent1_17>
+    <restEvent1_18>I saw you fight earlier, I'm sure you'll be able to make it.</restEvent1_18>
+    <restEvent1_19>Well, I'm gonna go now, got other business to take care of.</restEvent1_19>
+    <restEvent1_20>Bye! Have fun!</restEvent1_20>
+    <stage2Cheat_1>Are you really not going to use a gun?</stage2Cheat_1>
+    <stage2Cheat_2>That junky thing from the 3D printer?</stage2Cheat_2>
+    <stage2Cheat_3>A bullet from that ‘junk’ is way faster than your knife!</stage2Cheat_3>
+    <stage2Cheat_4>And you are always out of ammo when you need it most.</stage2Cheat_4>
+    <stage2Cheat_5>Plus, bullets are so expensive.</stage2Cheat_5>
+    <stage2Cheat_6>Yeah, hope you have a luxurious funeral with the money you saved on bullets.</stage2Cheat_6>
+    <stage3Cheat_1>Today is such a great day! Right?!</stage3Cheat_1>
+    <stage3Cheat_2>Hey... You high again?</stage3Cheat_2>
+    <stage3Cheat_3>Well, isn't it ours anyways?</stage3Cheat_3>
+    <stage3Cheat_4>I feel so sorry for the people who pay a lot of money for this thing.</stage3Cheat_4>
+    <stage3Cheat_5>Hahahaha Hahahaha</stage3Cheat_5>
+    <stage3Cheat_6>Man... We sell the drugs, not do the drugs.</stage3Cheat_6>
+    <lastDanger_1>That's it!</lastDanger_1>
+    <lastDanger_2>Never in my life have I felt as crazy as today.</lastDanger_2>
+    <lastDanger_3>How could one crazy bastard with a single pistol even make this happen?</lastDanger_3>
+    <lastDanger_4>What a joke.</lastDanger_4>
+    <lastDanger_5>But your arrogant behavior stops here.</lastDanger_5>
+    <lastDanger_6>Somehow you ambushed and killed my men,</lastDanger_6>
+    <lastDanger_7>but no one really knows how strong my gang is when we are ready for you!</lastDanger_7>
+    <lastDangerCheat_1>I am the man who started at the bottom of the gang, and now I’m at the top.</lastDangerCheat_1>
+    <lastDangerCheat_2>This body of mine has become hardened and swift from all of the battles it’s been in.</lastDangerCheat_2>
+    <lastDangerCheat_3>That's how my gang become the top gang in this area!</lastDangerCheat_3>
+    <lastDangerCheat_4>But my ambition doesn't stop here.</lastDangerCheat_4>
+    <lastDangerCheat_5>I will destroy each of the 5 military organizations that dominate the outer areas.</lastDangerCheat_5>
+    <lastDangerCheat_6>Then, I will unify the outer areas to build a force so powerful the Central Government cannot ignore.</lastDangerCheat_6>
+    <lastDangerCheat_7>I'll start a revolution with my hands and become the ruler of this world!</lastDangerCheat_7>
+    <lastDangerCheat_8>You might be admiring me and my plan, but it’s too late for you to join me.</lastDangerCheat_8>
+    <lastDangerCheat_9>Shoot him.</lastDangerCheat_9>
+    <lastDangerStart_1>Damn it! Don't let him get away!</lastDangerStart_1>
+    <lastDangerStart_2>&lt;color=#ff000060&gt;Bring all the reinforcements!&lt;/color&gt;</lastDangerStart_2>
+    <lastDangerStart_3>Do not let him leave here alive!!!</lastDangerStart_3>
+    <ending_1>Wow, you actually made it.</ending_1>
+    <ending_2>To be honest, I thought you wouldn't make it out. Do you know how many bullets you shot today?</ending_2>
+    <ending_3>Are you aiming at me right now?</ending_3>
+    <ending_4>That's funny. You think you can beat me?</ending_4>
+    <ending_5>I'll have to take a rain check on our fight.</ending_5>
+    <ending_6>Your brain is overheating because it can’t deal with the Reloader System.</ending_6>
+    <ending_7>The product is still under development. So there are still a bunch of kinks that need ironing out.</ending_7>
+    <ending_8>You know… In a few minutes, your brain will burn and kill you. There's no way I can save you.</ending_8>
+    <ending_9>You may not remember,</ending_9>
+    <ending_9add>but you made a great contribution to the contracted experiment.</ending_9add>
+    <ending_10>You see this? Your payment has been transferred to your wife's bank account.</ending_10>
+    <ending_10add>It is more than enough to live a luxurious life even after paying the cost of the surgery you mentioned before.</ending_10add>
+    <ending_11>Although this company likes to conduct inhumane experiments, they keep their word. So don't you worry about it.</ending_11>
+    <ending_12>So? Do you remember anything?</ending_12>
+    <ending_13>I guess not.</ending_13>
+    <ending_14>To be honest, I don't even know if it's worth my time explaining this to you.</ending_14>
+    <ending_15>But I still thought I should inform you about it.</ending_15>
+    <ending_16>Or maybe it's just to put my mind at ease.</ending_16>
+    <ending_17>The experiment is over. There's nothing left for you to do.</ending_17>
+    <ending_18>I'm sorry. Life is all about helping each other,</ending_18>
+    <ending_19>but there's nothing left that I can help you with.</ending_19>
+    <ending_20>So</ending_20>
+    <ending_21>good job.</ending_21>
+    <epilogue_1>Yeah, I was informed that we can move on to the next step due to this experiment's successful result.</epilogue_1>
+    <epilogue_2>It’s time for us to get ready then.</epilogue_2>
+    <epilogue_3>Starting now, it's the real deal.</epilogue_3>
+    <epilogue_4>Next is…</epilogue_4>
+    <epilogue_5>Alpha's turn.</epilogue_5>
+
+    <credit_1>-Created by-</credit_1>
+    <credit_2>Nevertheless Studio</credit_2>
+    <credit_3>Hwang Jungseob</credit_3>
+    <credit_4>-Published by-</credit_4>
+    <credit_5>PsychoFlux Entertainment</credit_5>
+    <credit_6>-BGM-</credit_6>
+    <credit_7>Walz and Gunz - RedForge</credit_7>
+    <credit_8>-Translation-</credit_8>
+    <credit_9>English - Galactic Entertainment
+Русский - Alex Maslow
+Português Brasileiro - Bruno H
+한국어 - Developer!</credit_9>
+    <endText_1>Thank you for the Playing Reloader: test_subject</endText_1>
+    <endText_2>Reloader: test_subject is the prologue game of the Reloader project!
+The game system of the Reloader project is not yet complete and needs to improve.
+and to complete that, I need your help!
+Please tell me your opinion or question in any way you are comfortable with.</endText_2>
+
+    <trailerSpecial_0>And all you have right now is a pistol and a few magazines.</trailerSpecial_0>
+  </language>
+
+  <language id="Korean">
+    <name>한국어</name>
+    <gameMode>게임 모드</gameMode>
+    <modeReloader>리로더 모드</modeReloader>
+    <modeReloader_d>재장전을 포함한 모든 총기 조작 행동을 직접 수행해야 하는 게임 모드입니다.
+      &lt;color=#ffff4460&gt;리로더: 테스트_서브젝트의 핵심적인 게임 플래이 시스템을 모두 경험할 수 있는 본래 의도한 게임 모드입니다.&lt;/color&gt;</modeReloader_d>
+    <modeBulletCounter>&lt;color=#dddddd80&gt;블렛 카운터 모드&lt;/color&gt;</modeBulletCounter>
+    <modeBulletCounter_d>간단한 조작으로 일련의 총기 조작 행동들이 자동으로 수행되는 게임 모드입니다.
+      리로더 모드가 너무 어렵게 느껴지시거나 캐쥬얼한 경험을 원하는 플레이어를 위한 모드입니다.</modeBulletCounter_d>
+    <firstTip>리로더에서의 전투는 위험하고 어렵습니다. 침착하고 팁들을 활용하세요! </firstTip>
+    <battleTip1>많은 적과 싸울 땐 주변의 엄폐물을 찾으세요!  &lt;color=#A7FFA560&gt;아이콘&lt;/color&gt;이 떠 있는 상태에서 &lt;color=#ffff4460&gt; [C]&lt;/color&gt; 를 누르면 엄폐할 수 있습니다.</battleTip1>
+    <battleTip2>총에 맞으면 출혈이 생기고 서서히 죽어갑니다. &lt;color=#ffff4460&gt; [C]&lt;/color&gt;를 눌러서 출혈을 멈추세요!</battleTip2>
+    <battleTip3>특정 상황과 조준 방식에 따라 사격에 방해가 되는 요소가 아이콘으로 조준선에 표시됩니다.</battleTip3>
+    <battleTip4>적과 가까이 붙게 되면 자동으로 근접 전투를 수행합니다. 더 빠르게 붙을수록, 전투 능력이 좋을수록 이길 확률이 증가합니다!</battleTip4>
+    <battleTip5>총알이 부족하면 시체에서 &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;키를 홀드하여 탄창을 훔칠 수 있습니다. 시간이 오래 걸리고 탄창 안에 총알이 얼마나 있는지도 알 수 없지만 말이죠!</battleTip5>
+    <battleTip6>권총탄 한 발은 누군가를 죽이기엔 충분할 지 몰라도 무력화 시키기엔 부족할 수 있습니다!</battleTip6>
+    <battleTip7>한 장소에 오래 머물면 적들에게 당신의 위치가 알려지고 &lt;color=#ff222260&gt;포위&lt;/color&gt; 당합니다! 계속 움직이세요!</battleTip7>
+    <battleTip8>&lt;color=#ffff4460&gt;[W]&lt;/color&gt;키를 홀드하여 조명을 조준할 수 있습니다. 어둠속에 숨으세요! 적들을 어둠속에 숨겨주진 말고요.</battleTip8>
+    <battleTip9>&lt;color=#ffff4460&gt;[RMB]&lt;/color&gt;을 홀드하여 정밀 조준을 하면 정확히 적의 급소를 조준할 수 있습니다. 하지만 정밀 조준은 많은 집중력을 사용하니 주의하세요!</battleTip9>
+    <battleTip10>집중력이 부족하면 명중률이 감소합니다!
+&lt;color=#A8FFFF&gt;일반 사격을 명중 시켜서 집중력을 빠르게 회복시킬 수 있습니다.&lt;/color&gt;</battleTip10>
+    <preTip>이전 팁</preTip>
+    <nextTip>다음 팁</nextTip>
+    <discord>디스코드 채널에 가입하세요!</discord>
+    <alphaStore>리로더 프로젝트의 차기작을 위시리스트 하세요!</alphaStore>
+    <enterToSkip>튜토리얼 스킵 후 바로 시작 : &lt;color=#ffff4460&gt;[Enter]&lt;/color&gt;</enterToSkip>
+    <spaceToContinue>다음으로 진행 : &lt;color=#ffff4460&gt;[SpaceBar]&lt;/color&gt;</spaceToContinue>
+    <returnToMain>처음화면으로</returnToMain>
+    <restart>재시작</restart>
+    <resume>돌아가기</resume>
+    <skip>스테이지</skip>
+    <start>새 게임</start>
+    <option>옵션</option>
+    <quit>나가기</quit>
+    <condition>상태:</condition>
+    <focus>집중력:</focus>
+    <ammoFill>탄창에 총알 충전 : 홀드 &lt;color=#ffff4460&gt; [Enter]&lt;/color&gt;</ammoFill>
+    <enemyAlarm1>이게 대체 무슨 일이야!</enemyAlarm1>
+    <enemyAlarm2>침입자다!</enemyAlarm2>
+    <enemyAlarm3>저놈을 죽여!</enemyAlarm3>
+    <enemyAlarm4>여기 있다!</enemyAlarm4>
+    <enemyFear1>악! 이건 정말 위험해!</enemyFear1>
+    <enemyFear2>날 노리고 있어!</enemyFear2>
+    <enemyFear3>전혀 좋지 않아...</enemyFear3>
+    <enemyDark1>어두워서 안 보여!</enemyDark1>
+    <enemyDark2>침착해! 근처에 있을거야!</enemyDark2>
+    <enemyDark3>어둠속으로 숨었어!</enemyDark3>
+    <enemyUpper1>쏴봐아아아!!!</enemyUpper1>
+    <enemyUpper2>하하하하하하하</enemyUpper2>
+    <enemyUpper3>아무것도 날 막지 못 해!!!</enemyUpper3>
+    <tutorialHide>튜토리얼 숨기기/보이기 : &lt;color=#ffff4460&gt; [/] &lt;/color&gt;</tutorialHide>
+    <tutorial_frame> : &lt;color=#ffff4460&gt; [] &lt;/color&gt;</tutorial_frame>
+    <tutorial_run>달리기 : 빠르게 연타 &lt;color=#ffff4460&gt; [A] / [D]&lt;/color&gt;</tutorial_run>
+    <tutorial_crouch>웅크리기 : &lt;color=#ffff4460&gt; [C]&lt;/color&gt;</tutorial_crouch>
+    <tutorial_stand>일어서기 : &lt;color=#ffff4460&gt; [C]&lt;/color&gt;</tutorial_stand>
+    <tutorial_cover>엄폐 : &lt;color=#ffff4460&gt; [C]&lt;/color&gt;</tutorial_cover>
+    <tutorial_pull>방아쇠 당기기 : &lt;color=#ffff4460&gt; [LMB]&lt;/color&gt;</tutorial_pull>
+    <tutorial_aim>정밀 조준 : 홀드 &lt;color=#ffff4460&gt;[RMB]&lt;/color&gt;</tutorial_aim>
+    <tutorial_drawOut>탄창 밸트에서 꺼내기 : &lt;color=#ffff4460&gt;[1] ... [4]&lt;/color&gt;</tutorial_drawOut>
+    <tutorial_drawIn>탄창 밸트에 넣기 : &lt;color=#ffff4460&gt;[1] ... [4]&lt;/color&gt;</tutorial_drawIn>
+    <tutorial_take>탄창 줍기 : &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_take>
+    <tutorial_loot>탄창 훔치기 : 홀드 &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_loot>
+    <tutorial_discardHand>손에 쥔 탄창 버리기 : &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_discardHand>
+    <tutorial_insert>탄창 결합 : &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_insert>
+    <tutorial_tap>탄창 두드리기 : &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_tap>
+    <tutorial_release>탄창 제거 : &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_release>
+    <tutorial_discard>결합된 탄창 버리기 : &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_discard>
+    <tutorial_checkChamber>약실 확인 : 홀드 &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_checkChamber>
+    <tutorial_releaseSlide>슬라이드 전진 : &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_releaseSlide>
+    <tutorial_pullSlide>슬라이드 당기기 : 홀드 &lt;color=#ffff4460&gt;[E] + [T]&lt;/color&gt;</tutorial_pullSlide>
+    <tutorial_aimObj>사물 조준 : 홀드 &lt;color=#ffff4460&gt;[W]&lt;/color&gt;</tutorial_aimObj>
+    <tutorial_aimTactic>전술 조준 : 홀드 &lt;color=#ffff4460&gt;[S]&lt;/color&gt;</tutorial_aimTactic>
+    <tutorial_reload>재장전 : &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_reload>
+    <tutorial_checkMag>탄창 확인 : &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_checkMag>
+    <tutorial_repair>총기 수리 : &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_repair>
+    <tutorial_discardEasy>탄창 버리기 : &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_discardEasy>
+    <eventTime>-----</eventTime>
+    <peaceful>평온</peaceful>
+    <alarmed>발각됨</alarmed>
+    <marked>포위됨</marked>
+    <intro_1>일어났군.</intro_1>
+    <intro_2>넌 뭐 하는 놈이지?</intro_2>
+    <intro_3>여긴 너 같은 놈이 아무렇게나 돌아다닐 수 있는 곳이 아니라고!</intro_3>
+    <intro_4>겉으로 보기엔 평범한 건물처럼 보일지 모르지만</intro_4>
+    <intro_5>이 건물은 우리 조직의 &lt;color=#ffff4460&gt;비밀 사옥&lt;/color&gt;이지. </intro_5>
+    <intro_6>지상 &lt;color=#ffff4460&gt;3층 지하 2층 규모&lt;/color&gt;에!</intro_6>
+    <intro_7>수십명의 &lt;color=#ffff4460&gt;조직원들이 전부 무장&lt;/color&gt;하고 대기하고 있다고!!</intro_7>
+    <intro_8>이런 굉장한 곳에 네놈이 온 이유를 당장..!</intro_8>
+    <intro_9>친절한 배경 설명 고마워요!</intro_9>
+    <intro_10>말 엄청 많네!</intro_10>
+    <intro_11>얘 분명 보스일 거야.</intro_11>
+    <intro_12>보통 보스들이 주절주절 떠드는 거 좋아하더라.</intro_12>
+    <cutScene_1>뭐, 그래, 만나서 반가워. 의문의 피해자.</cutScene_1>
+    <cutScene_2>난 우연히 지나가던 프로 스파이야.</cutScene_2>
+    <cutScene_3>오늘 일진 사나워 보이네?</cutScene_3>
+    <cutScene_4>불행히도 이 옆에 잠자고 있는 친구가 떠들던 건 대부분 사실이야.</cutScene_4>
+    <cutScene_5>내가 널 풀어줄 수는 있지만 아쉽게도 나도 해야 할 일이 있어서, 그 이상의 도움을 주긴 힘들어.</cutScene_5>
+    <cutScene_6>말하자면 넌 자력으로 여기서 탈출해야 한다는 소리야.</cutScene_6>
+    <cutScene_7>지금 너에게 주어진 건 이 말 많던 친구가 선물해준 작은 권총 한 자루와 탄창 몇 개뿐이야.</cutScene_7>
+    <cutScene_8>밖에는 수많은 조직원들이 기다리고 있고.</cutScene_8>
+    <cutScene_9>불쌍한 시민1에 불과한 니가 살아서 이 건물 밖으로 나가긴 쉽지 않을거야.</cutScene_9>
+    <cutScene_10>하지만 이렇게 만난 것도 인연인데 이렇게 그냥 방치하고 가긴 너무 매몰차겠지?</cutScene_10>
+    <cutScene_11>마침 내가 좋은 걸 가지고 있어.</cutScene_11>
+    <cutScene_12>어느 기업에서 개발 중인 전투 보조 도구인데 옛날에 전설적이었던 요원의 기술과 경험을 즉시 불러올 수 있게 하는 도구야.</cutScene_12>
+    <cutScene_13>이것만 있으면 한순간에 너도 엘리트 요원!</cutScene_13>
+    <cutScene_14>짜잔!</cutScene_14>
+    <cutScene_15>너무 고마워 할 필요 없어, 서로 돕고 사는 인생이잖아?</cutScene_15>
+    <cutScene_16>사양할 필요 없어!</cutScene_16>
+    <cutScene_17>또 망한 거 같은데...</cutScene_17>
+    <cutScene_18>정신이 들어?</cutScene_18>
+    <cutScene_19>몸 가누기가 쉽지 않을꺼야. 지금 니 뇌는 이것저것 많이 섞인 상태거든.</cutScene_19>
+    <cutScene_20>음... 그리고 아마 너도 깨달았겠지만</cutScene_20>
+    <cutScene_21>학습 도중 약간의 에러가 발생했나 봐. 참, 안타까운 사고야. 그치?</cutScene_21>
+    <cutScene_22>완벽하게 작동했다면 넌 지금 되살아난 전설의 요원이 되어 있어야 할 텐데</cutScene_22>
+    <cutScene_23>여전히 얼빠진 눈으로 날 보고 있는 걸 보면 말이지?</cutScene_23>
+    <cutScene_24>그래도 다행인 건 내가 지금 니 상태를 확실하게 추적할 수 있다는 거지. </cutScene_24>
+    <cutScene_25>어디 보자... 최소한 쓸만한 기술들은 학습되었으면 좋겠는데...</cutScene_25>
+    <cutScene_26>일단 조준과 사격 기술 쪽은 완전히 학습됐고...</cutScene_26>
+    <firstTutorial_1>근접 전투 기술 배우다가 중단됐어. 그래도 써먹을 순 있겠다.</firstTutorial_1>
+    <firstTutorial_2>이게 끝이네.</firstTutorial_2>
+    <firstTutorial_3>총기 지식이랑 재장전 기술은 학습될 때가 없네.</firstTutorial_3>
+    <firstTutorial_4>아 </firstTutorial_4>
+    <firstTutorial_5>좋아! 총을 들어봐!</firstTutorial_5>
+    <firstTutorial_6>저 문을 지나면 수많은 적들이 널 기다리고 있을 거야.</firstTutorial_6>
+    <firstTutorial_7>그 전에 총을 다루는 방법을 숙지해 둬.</firstTutorial_7>
+    <firstTutorial_8>지금 넌 놀라운 사격 실력을 갖추고 있지만 총을 다루는 것에 대한 기억이 전부 사라진 상태니까.</firstTutorial_8>
+    <firstTutorial_9>HUD 오른쪽의 행동 설명들이 보여? 지금 니가 할 수 있는 행동들은 밝게 표시될 거야.</firstTutorial_9>
+    <firstTutorial_10>그리고 총을 쏘기 위해 해야 할 행동들은 주황색으로 표시돼.</firstTutorial_10>
+    <firstTutorial_11>저 앞에 마침 쏘기 좋아 보이는 마네킹이 있네!</firstTutorial_11>
+    <firstTutorial_12>한번 쏴 봐! (마우스 왼쪽 클릭)</firstTutorial_12>
+    <firstTutorialTrigger_1>와! 진짜로 그냥 방아쇠를 당긴 거야?!</firstTutorialTrigger_1>
+    <firstTutorialTrigger_2>니가 할 수 있는 행동들은 밝게 표시된다고 했잖아!</firstTutorialTrigger_2>
+    <firstTutorialTrigger_3>방아쇠 당기기가 밝게 표시된 거처럼 보이니?</firstTutorialTrigger_3>
+    <firstTutorialTrigger_4>니가 들고 있는 총은 탄약이 다 떨어졌어. </firstTutorialTrigger_4>
+    <firstTutorialTrigger_5>넌 &lt;color=#A8FFFF&gt;리로드&lt;/color&gt;를 해야 해.</firstTutorialTrigger_5>
+    <firstTutorialTrigger_6>오른쪽 행동 설명에 &lt;color=#FF8300&gt;주황색&lt;/color&gt;으로 표시되는 행동들을 따라봐.</firstTutorialTrigger_6>
+    <firstTutorialMagRelease_1>훌륭해. HUD는 잘 작동하니? 이거까지 이상하진 않았으면 좋겠는데…</firstTutorialMagRelease_1>
+    <firstTutorialMagRelease_2>빈 탄창은 버려도 상관없지만 가능하면 잘 보관해두라고. </firstTutorialMagRelease_2>
+    <firstTutorialMagRelease_3>길 가다 누가 총알을 선물해줄지 모르잖아?</firstTutorialMagRelease_3>
+    <firstTutorialMagInsert_1>거의 다 왔어!</firstTutorialMagInsert_1>
+    <firstTutorialMagInsert_2>이제 슬라이드를 당겨서 약실에 총알을 넣어.</firstTutorialMagInsert_2>
+    <firstTutorialMagInsert_3>잊지 마, 약실에 총알이 없으면 총은 발사되지 않아.</firstTutorialMagInsert_3>
+    <firstTutorialSlide_1>이제 끝났어. 그 총은 쏠 준비가 다 됐어.</firstTutorialSlide_1>
+    <firstTutorialSlide_2>어떻게 조준하는지에 관해서는 말할 필요 없겠지?</firstTutorialSlide_2>
+    <firstTutorialSlide_3>너의 집중력이 부족하지 않는 한, 사격은 빗나가지 않을 꺼야.</firstTutorialSlide_3>
+    <firstTutorialSlide_4>거의.</firstTutorialSlide_4>
+    <firstTutorialShoot_1>훌륭한 사격 실력이야. 이 건물에서 너보다 총 잘 쏘는 놈은 없을 꺼야. 내가 장담하지.</firstTutorialShoot_1>
+    <firstTutorialShoot_2>하지만 주의해. &lt;color=#A8FFFF&gt;총알 한 방은 사람을 죽이기엔 충분하지만 무력화시키기엔 부족할 수도 있어.&lt;/color&gt;</firstTutorialShoot_2>
+    <firstTutorialShoot_3>최소한 두 방은 박아 넣어.</firstTutorialShoot_3>
+    <firstTutorialShoot_4>아님 머리를 쏘던가.</firstTutorialShoot_4>
+    <firstTutorialShoot_5>하지만 니가 아무리 조준을 잘 한다 해도 &lt;color=#A8FFFF&gt;연속으로 어려운 사격을 하면 집중력이 떨어질 거야.&lt;/color&gt;</firstTutorialShoot_5>
+    <firstTutorialShoot_6>내가 알려 줄 건 다 끝났어. 이 방을 나가면 이제 실전이야.</firstTutorialShoot_6>
+    <firstTutorialLast_1>아! 그 총, 탄창안에 최대 15발 들어가!</firstTutorialLast_1>
+    <firstTutorialLast_2>남은 총알 수는 알아서 기억하고 재 때 &lt;color=#A8FFFF&gt;리로드&lt;/color&gt; 하라고!</firstTutorialLast_2>
+    <firstTutorialLast_3>탄창을 들면 무게로 대략적인 잔탄 수는 알 수 있을 거야.</firstTutorialLast_3>
+    <firstTutorialLast_4>그럼 행운을 빌어!</firstTutorialLast_4>
+    
+    <stage1Cheat_1>퇴근 시간까지 얼마나 남았지?</stage1Cheat_1>
+    <stage1Cheat_2>10분 정도?</stage1Cheat_2>
+    <stage1Cheat_3>이봐, 끝나고 오랜만에 한잔하러 갈래?</stage1Cheat_3>
+    <stage1Cheat_4>아니. 미안하지만 오늘은 안 되겠어.</stage1Cheat_4>
+    <stage1Cheat_5>오늘 그녀에게 프러포즈 할 계획이거든.</stage1Cheat_5>
+    <stage1Cheat_6>오! 그거 응원할 일이군!</stage1Cheat_6>
+    <stage1Cheat_7>잘 되길 기대할게.</stage1Cheat_7>
+    <stage1Cheat_8>고마워.</stage1Cheat_8>
+    <stage1Cheat_9>오늘은 잊지 못할 날이 되겠지.</stage1Cheat_9>
+    
+    <restEvent1_1>야! 여기야!</restEvent1_1>
+    <restEvent1_2>무사히 살아 있어서 다행이네! 여기라면 한동안 들킬 일 없을거야.</restEvent1_2>
+    <restEvent1_3>내가 이 건물의 이곳저곳에 방음 막을 설치해 뒀거든.</restEvent1_3>
+    <restEvent1_4>아래층 녀석들은 아무것도 모르고 있을 거야.</restEvent1_4>
+    <restEvent1_5>널 위해 약간의 총알도 찾아왔다고? 고맙지? 천천히 정비하고 움직여.</restEvent1_5>
+    <restEvent1_6>야, 잠깐 봐 봐. 내가 이 건물에 대해 사전에 조금 조사를 해왔거든?</restEvent1_6>
+    <restEvent1_7>여기서 조금만 가면 아래층으로 내려가는 계단이 있어. 그 계단을 따라 계속 내려가면 1층이고 바로 로비가 나오지.</restEvent1_7>
+    <restEvent1_8>건물 구조상으론 이 길이 가장 빠르게 나갈 수 있는 길이야.</restEvent1_8>
+    <restEvent1_9>하지만 난 로비로 나가는 건 별로 추천하지 않아.</restEvent1_9>
+    <restEvent1_10>몰래 도망쳐 나가는데 정문으로 당당히 나가는 건 좋지 않지.</restEvent1_10>
+    <restEvent1_11>경계가 가장 삼엄한 곳이기도 하고.</restEvent1_11>
+    <restEvent1_12>2층으로 내려가서 &lt;color=#ffff4460&gt;바로 오른쪽으로 쭉 달려.&lt;/color&gt; 1층 창고로 이어지는 비상계단이 있을 거야.</restEvent1_12>
+    <restEvent1_13>창고에서 조금만 더 가면 &lt;color=#ffff4460&gt;주차장&lt;/color&gt;을 통해 건물을 빠져나올 수 있어.</restEvent1_13>
+    <restEvent1_14>당연하지만 &lt;color=#ffff4460&gt;밖에서 총을 쏘면 사방에서 적들이 몰려들 거야.&lt;/color&gt;</restEvent1_14>
+    <restEvent1_15>가능하면 들키지 않도록 노력해봐.</restEvent1_15>
+    <restEvent1_16>밖으로 나가면 &lt;color=#ffff4460&gt;앞으로 쭉 이동해.&lt;/color&gt; 도시 중앙 쪽으로 오면 놈들도 더 쫓아오지 못할 거야.</restEvent1_16>
+    <restEvent1_17>뭐, 이 정도면 앞으로 어떻게 해야 할지 알겠지?</restEvent1_17>
+    <restEvent1_18>아까 너 싸우는 거 보니까 충분히 가능하겠더라.</restEvent1_18>
+    <restEvent1_19>그럼 난 바쁘니까 이만 갈게?</restEvent1_19>
+    <restEvent1_20>안녕! 수고해!</restEvent1_20>
+
+    <stage2Cheat_1>너 진짜 총은 안 쓸 거야?</stage2Cheat_1>
+    <stage2Cheat_2>싸구려 3D프린터에서 찍혀 나오는 그 허구한 날 고장 나는 고철?</stage2Cheat_2>
+    <stage2Cheat_3>그 고철에서 날아가는 총알이 니 칼질보다 몇 배는 빠르다고?</stage2Cheat_3>
+    <stage2Cheat_4>그리고 중요한 순간엔 항상 총알이 없지.</stage2Cheat_4>
+    <stage2Cheat_5>그리고 총알 가격도 장난 아니고.</stage2Cheat_5>
+    <stage2Cheat_6>그래 총알값 아껴서 니 장례식 호화롭게 치러라.</stage2Cheat_6>
+
+    <stage3Cheat_1>오늘 정마아알 즐거운 날이야! 그렇지?!</stage3Cheat_1>
+    <stage3Cheat_2>야… 너 또 약했냐?</stage3Cheat_2>
+    <stage3Cheat_3>어차피 우리꺼잖아?</stage3Cheat_3>
+    <stage3Cheat_4>이걸 비싼 돈 주고 사야 하는 놈들이 불쌍하군.</stage3Cheat_4>
+    <stage3Cheat_5>하하하하 하하하하</stage3Cheat_5>
+    <stage3Cheat_6>젠장... 우린 약 파는 쪽이지, 약 하는 쪽이 아니라고.</stage3Cheat_6>
+
+    <lastDanger_1>거기까지다!</lastDanger_1>
+    <lastDanger_2>지금까지 살면서 오늘처럼 정신 나갈 거 같은 날은 처음인 거 같군.</lastDanger_2>
+    <lastDanger_3>고작 권총 한 자루 든 미친놈 한 명 때문에 이 지경이 났다고?</lastDanger_3>
+    <lastDanger_4>웃기지도 않는군.</lastDanger_4>
+    <lastDanger_5>하지만 네놈의 건방진 행보도 여기가 끝이다.</lastDanger_5>
+    <lastDanger_6>어찌저찌 우리 조직원들을 몰래 기습해서 죽여 온 모양이지만</lastDanger_6>
+    <lastDanger_7>준비가 완료된 우리 조직은 상상도 못 할 무시무시함을 자랑하지!</lastDanger_7>
+
+    <lastDangerCheat_1>난 조직의 밑바닥에서부터 최고의 자리까지 올라온 남자다.</lastDangerCheat_1>
+    <lastDangerCheat_2>수많은 항쟁을 벌이며 어떻게 싸우는 것이 가장 효율적이고 더 강력한지 몸으로 터득했지!</lastDangerCheat_2>
+    <lastDangerCheat_3>그것이 우리 조직이 이 구역 최고의 조직이 될 수 있었던 이유지!</lastDangerCheat_3>
+    <lastDangerCheat_4>하지만 나의 야망은 여기서 끝나지 않아.</lastDangerCheat_4>
+    <lastDangerCheat_5>외각 구역을 지배하는 5개의 군벌 조직들을 하나하나 함락하고</lastDangerCheat_5>
+    <lastDangerCheat_6>외각 구역을 통일하여 중앙 정부가 무시 못 할 세력을 키운 뒤</lastDangerCheat_6>
+    <lastDangerCheat_7>새로운 혁명을 내 손으로 다시 일으켜서 이 세상의 지배자가 될 것이다!</lastDangerCheat_7>
+    <lastDangerCheat_8>이제 와서 나에게 감탄하여 내 밑으로 들어오고 싶어 해도 때는 늦었다.</lastDangerCheat_8>
+    <lastDangerCheat_9>쏴 버려.</lastDangerCheat_9>
+
+    <lastDangerStart_1>젠장! 놓치지 마!</lastDangerStart_1>
+    <lastDangerStart_2>&lt;color=#ff000060&gt;불러올 수 있는 놈들은 다 불러와!&lt;/color&gt; </lastDangerStart_2>
+    <lastDangerStart_3>절대로 저놈을 살려 보내지 마!!!</lastDangerStart_3>
+
+    <ending_1>오, 정말로 해냈네.</ending_1>
+    <ending_2>솔직히 못 올 줄 알았어. 오늘 니가 얼마나 많은 총알을 쐈는지 알아?</ending_2>
+    <ending_3>지금 나한테 총 겨누는 거야?</ending_3>
+    <ending_4>재밌네. 니가 날 이길 수 있을 거 같아?</ending_4>
+    <ending_5>나와 싸우는 건 다음 기회로 미뤄야겠네.</ending_5>
+    <ending_6>뇌가 리로더 시스템을 감당 못 하고 과열되고 있는 거야.</ending_6>
+    <ending_7>아직 개발중인 물건이니까 부족한 것도 많고 개선해야 할 부분들이 많겠지.</ending_7>
+    <ending_8>있잖아... 너 몇 분만 지나면 뇌가 타서 죽을 거야. 당장 여기서 널 살릴 방법도 없고</ending_8>
+    <ending_9>지금의 넌 전혀 기억이 없겠지만</ending_9>
+    <ending_9add>넌 계약대로 충실히 실험에 참여해줬고 훌륭한 성과를 보여줬어.</ending_9add>
+    <ending_10>이거 보여? 니 아내의 계좌에 계약금이 지불됐어.</ending_10>
+    <ending_10add>니가 전에 말했던 수술비를 지불하고도 몇 년은 먹고살 금액이야.</ending_10add>
+    <ending_11>이 회사가 비인도적인 실험을 좋아하긴 하지만 사기 치진 않으니까 걱정 마.</ending_11>
+    <ending_12>어때? 조금 기억이 나?</ending_12>
+    <ending_13>안 나는 거 같네.</ending_13>
+    <ending_14>사실 이거 알려주는 게 의미 있는지 모르겠다.</ending_14>
+    <ending_15>그래도 알려는 줘야 한다고 생각했어.</ending_15>
+    <ending_16>그냥 내 마음 편하자고 하는 걸 수도 있고.</ending_16>
+    <ending_17>실험은 끝났어. 이제 더 이상 니가 해야 할 건 없어.</ending_17>
+    <ending_18>미안해. 서로 돕고 사는 인생인데.</ending_18>
+    <ending_19>널 도와줄 수 없을 거 같아.</ending_19>
+    <ending_20>그러니까</ending_20>
+    <ending_21>수고했어.</ending_21>
+
+    <epilogue_1>응, 이번 실험 덕분에 다음 단계로 넘어갈 수 있게 됐데.</epilogue_1>
+    <epilogue_2>슬슬 우리도 준비해야지.</epilogue_2>
+    <epilogue_3>이제부터가 진짜 중요한 부분이니까.</epilogue_3>
+    <epilogue_4>다음은</epilogue_4>
+    <epilogue_5>알파의 차례야.</epilogue_5>
+
+    <credit_1>-제작-</credit_1>
+    <credit_2>네버더리스 스튜디오</credit_2>
+    <credit_3>황중섭</credit_3>
+    <credit_4>-퍼블리싱-</credit_4>
+    <credit_5>사이코플럭스 엔터테인먼트</credit_5>
+    <credit_6>-BGM-</credit_6>
+    <credit_7>Walz and Gunz - RedForge</credit_7>
+    <credit_8>-Translation-</credit_8>
+    <credit_9>English - Galactic Entertainment
+Русский - Alex Maslow
+Português Brasileiro - Bruno H
+한국어 - 개발자!</credit_9>
+    <endText_1>Reloader:Test_subject를 플레이해주셔서 감사합니다!</endText_1>
+    <endText_2>Reloader:Test_subject는 앞으로 만들 리로더 프로젝트의 프롤로그 이야기입니다!
+리로더 프로젝트의 게임 플레이는 아직 완성되지 않았고 개선해야 할 점이 많습니다.
+그리고 게임의 완성에는 여러분의 도움이 필요합니다!
+앞으로 만들어질 Reloader 시리즈에 궁금한 점, 바라는 점이 있으시면 디스코드 채널에 오셔서 자유롭게 말씀해주세요!</endText_2>
+
+    <trailerSpecial_0>지금 너에게 주어진 건 작은 권총 한 자루와 탄창 몇 개뿐이고.</trailerSpecial_0>
+  </language>
+
+  <language id="Russian">
+    <name>Русский</name>
+    <gameMode>Режим</gameMode>
+    <modeReloader>Режим «Reloader»</modeReloader>
+    <modeReloader_d>
+      Режим, в котором любое взаимодействие с оружием, включая перезарядку, выполняется нажатием клавиши.
+      &lt;color=#ffff4460&gt;Рекомендуемый режим прохождения Reloader: test_subject, который позволит вам ознакомиться со всеми основными механиками игры.&lt;/color&gt;
+    </modeReloader_d>
+    <modeBulletCounter>&lt;color=#dddddd80&gt;Режим «Счетчик патронов»&lt;/color&gt;</modeBulletCounter>
+    <modeBulletCounter_d>Упрощенный режим, в котором все взаимодействия с оружием выполняются автоматически при нажатии одной клавиши. Подходит для игроков, испытывающих трудности с прохождением игры в режиме «Reloaded».</modeBulletCounter_d>
+    <firstTip>Бои в Reloader достаточно динамичны! Сохраняйте спокойствие и следуйте игровым советам.</firstTip>
+    <battleTip1>Используйте укрытия, сражаясь с несколькими противниками одновременно. Нажмите &lt;color=#ffff4460&gt;[C]&lt;/color&gt; , чтобы укрыться, когда доступно &lt;color=#A7FFA560&gt;укрытие.&lt;/color&gt;</battleTip1>
+    <battleTip2>Огнестрельные ранения вызывают кровотечение, что может привести к смерти. Нажмите &lt;color=#ffff4460&gt;[C]&lt;/color&gt; чтобы остановить кровотечение.</battleTip2>
+    <battleTip3>Наведя курсор на врага, вы сможете увидеть его статусные эффекты, которые будут отображены рядом с вашим прицелом в виде иконок.</battleTip3>
+    <battleTip4>Приблизившись к врагу, вы автоматически войдете в режим ближнего боя. В ближнем бою у вас есть преимущество против большинства противников. Исключением являются враги, специализирующиеся в ближнем бою.</battleTip4>
+    <battleTip5>Если у вас заканчиваются боеприпасы, нажмите и удерживайте &lt;color=#ffff4460&gt;[Q]&lt;/color&gt; возле убитого врага, чтобы подобрать его магазины. Однако это займет большое количество времени, и вы не будете знать, сколько патронов осталось в магазинах.</battleTip5>
+    <battleTip6>Один выстрел может убить врага, но также может иметь недостаточное поражающее действие!</battleTip6>
+    <battleTip7>Не останавливайтесь подолгу на одном месте, так как враги могут найти и быстро окружить вас!</battleTip7>
+    <battleTip8>Вы можете прицелиться по лампочке, нажав клавишу &lt;color=#ffff4460&gt;[W]&lt;/color&gt;. Прячьтесь в темноте! Но не прячьте врагов в темноте!</battleTip8>
+    <battleTip9>Вы можете навести прицел на жизненно важную точку противника, удерживая &lt;color=#ffff4460&gt;[ПКМ]&lt;/color&gt;. Однако помните, что точное прицеливание расходует концентрацию!</battleTip9>
+    <battleTip10>Когда ваша концентрация на исходе, ваша точность значительно ухудшается.
+&lt;color=#A8FFFF&gt;Концентрацию можно восстановить, попав по врагу, не прицеливаясь.&lt;/color&gt;
+    </battleTip10>
+    <preTip>Предыдущий совет</preTip>
+    <nextTip>Следующий совет</nextTip>
+    <discord></discord>
+    <alphaStore>Добавьте следующую игру Reloader в ваш список желаемого!</alphaStore>
+    <enterToSkip>Пропустить обучение и начать игру: &lt;color=#ffff4460&gt;[Enter]&lt;/color&gt;</enterToSkip>
+    <spaceToContinue>Продолжить: &lt;color=#ffff4460&gt;[Пробел]&lt;/color&gt;</spaceToContinue>
+    <returnToMain>Вернуться в главное меню</returnToMain>
+    <restart>Перезапустить</restart>
+    <resume>Продолжить</resume>
+    <skip>сце́на</skip>
+    <start>Новая игра</start>
+    <option>Настройки</option>
+    <quit>Выйти</quit>
+    <condition>Состояние:</condition>
+    <focus>Концентрация:</focus>
+    <ammoFill>Зарядить магазин патронами: Удерживайте &lt;color=#ffff4460&gt;[Enter]&lt;/color&gt;</ammoFill>
+    <enemyAlarm1>Да что за?!</enemyAlarm1>
+    <enemyAlarm2>Чужак!</enemyAlarm2>
+    <enemyAlarm3>Мочите его!</enemyAlarm3>
+    <enemyAlarm4>Вон он!</enemyAlarm4>
+    <enemyFear1>Мля! Да он шутить не любит!</enemyFear1>
+    <enemyFear2>Он в меня целится!</enemyFear2>
+    <enemyFear3>Дела плохи...</enemyFear3>
+    <enemyDark1>Куда он делся?!</enemyDark1>
+    <enemyDark2>Завали пасть! Он поблизости!</enemyDark2>
+    <enemyDark3>Он в темноте шкерится!</enemyDark3>
+    <enemyUpper1>ПОПРОБУЙ ПОПАСТЬ ПО МНЕ!!!</enemyUpper1>
+    <enemyUpper2>ХАХАХАХАХАХА</enemyUpper2>
+    <enemyUpper3>МЕНЯ НЕ ОСТАНОВИТЬ!!!</enemyUpper3>
+    <tutorialHide>Скрыть/Показать подсказки: &lt;color=#ffff4460&gt;[/]&lt;/color&gt;</tutorialHide>
+    <tutorial_frame>: &lt;color=#ffff4460&gt;[]&lt;/color&gt;</tutorial_frame>
+    <tutorial_run>Бег: Нажмите &lt;color=#ffff4460&gt;[A]&lt;/color&gt; / &lt;color=#ffff4460&gt;[D]&lt;/color&gt; несколько раз подряд.</tutorial_run>
+    <tutorial_crouch>Присесть: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_crouch>
+    <tutorial_stand>Встать: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_stand>
+    <tutorial_cover>В укрытие: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_cover>
+    <tutorial_pull>Нажать на курок: &lt;color=#ffff4460&gt;[ЛКМ]&lt;/color&gt;</tutorial_pull>
+    <tutorial_aim>Точное прицеливание: Удерживайте &lt;color=#ffff4460&gt;[ПКМ]&lt;/color&gt;</tutorial_aim>
+    <tutorial_drawOut>Вытащить магазин из-за пояса: &lt;color=#ffff4460&gt;[1]&lt;/color&gt; ... &lt;color=#ffff4460&gt;[4]&lt;/color&gt;</tutorial_drawOut>
+    <tutorial_drawIn>Засунуть магазин за пояс: &lt;color=#ffff4460&gt;[1]&lt;/color&gt; ... &lt;color=#ffff4460&gt;[4]&lt;/color&gt;</tutorial_drawIn>
+    <tutorial_take>Подобрать магазин: &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_take>
+    <tutorial_loot>Взять магазин с тела: Удерживайте &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_loot>
+    <tutorial_discardHand>Выбросить магазин из руки: &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_discardHand>
+    <tutorial_insert>Зарядить магазин: &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_insert>
+    <tutorial_tap>Ударить по магазину: &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_tap>
+    <tutorial_release>Вытащить магазин: &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_release>
+    <tutorial_discard>Сбросить магазин из пистолета: &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_discard>
+    <tutorial_checkChamber>Проверить патронник: Удерживайте &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_checkChamber>
+    <tutorial_releaseSlide>Отпустить затвор: &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_releaseSlide>
+    <tutorial_pullSlide>Потянуть затвор: Удерживайте &lt;color=#ffff4460&gt;[E]&lt;/color&gt; + &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_pullSlide>
+    <tutorial_aimObj>Прицелиться по предмету: Удерживайте &lt;color=#ffff4460&gt;[W]&lt;/color&gt;</tutorial_aimObj>
+    <tutorial_aimTactic>Тактический выбор цели: Удерживайте &lt;color=#ffff4460&gt;[S]&lt;/color&gt;</tutorial_aimTactic>
+    <tutorial_reload>Перезарядка: &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_reload>
+    <tutorial_checkMag>Проверить магазин: &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_checkMag>
+    <tutorial_repair>Починить пистолет: &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_repair>
+    <tutorial_discardEasy>Выбросить магазин: &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_discardEasy>
+    <eventTime>-----</eventTime>
+    <peaceful>Не замечен</peaceful>
+    <alarmed>Обнаружили</alarmed>
+    <marked>Окружили</marked>
+    <intro_1>Наконец-то ты очнулся.</intro_1>
+    <intro_2>А теперь давай, рассказывай, как оказался в нашем здании.</intro_2>
+    <intro_3>Уродам вроде тебя тут нечего отираться.</intro_3>
+    <intro_4>С виду может показаться, что это обычное здание,</intro_4>
+    <intro_5>но на деле это &lt;color=#ffff4460&gt;тайный офис&lt;/color&gt; нашей банды.</intro_5>
+    <intro_6>&lt;color=#ffff4460&gt;3 этажа и 2 подземных уровня!&lt;/color&gt;</intro_6>
+    <intro_7>Забитых головорезами, &lt;color=#ffff4460&gt;вооруженными до зубов и готовыми убивать&lt;/color&gt;.</intro_7>
+    <intro_8>А ну признавайся, зачем сюда залез сейча...!</intro_8>
+    <intro_9>Спасибо за исчерпывающее разъяснение!</intro_9>
+    <intro_10>Болтун!</intro_10>
+    <intro_11>Это, должно быть, главарь.</intro_11>
+    <intro_12>Главари всегда пускаются в длинные тирады.</intro_12>
+    <cutScene_1>Так так так... попал ты, конечно.</cutScene_1>
+    <cutScene_2>Повезло, что я мимо проходила.</cutScene_2>
+    <cutScene_3>Что взгрустнул?</cutScene_3>
+    <cutScene_4>К сожалению, то, что сказал этот мужик, правда.</cutScene_4>
+    <cutScene_5>Я бы тебя помогла, вот только мне надо бежать.</cutScene_5>
+    <cutScene_6>Иначе говоря, выбираться тебе придется самому.</cutScene_6>
+    <cutScene_7>Пистолет и магазины болтуна — все, что у тебя есть.</cutScene_7>
+    <cutScene_8>А снаружи ждет целая банда.</cutScene_8>
+    <cutScene_9>Выбрать отсюда живым, будучи неподготовленным слабаком, будет непросто.</cutScene_9>
+    <cutScene_10>Я тебя, конечно, не знаю, но я не хочу поступить, как последняя уродка и бросить тебя вот так.</cutScene_10>
+    <cutScene_11>У меня кое-что для тебя есть.</cutScene_11>
+    <cutScene_12>Секретная разработка для повышения боевой эффективности полевых агентов. Должна придать тебе таланты некого легендарного агента из далекого прошлого.</cutScene_12>
+    <cutScene_13>С ее помощью ты моментально превратишься в элитного агента!</cutScene_13>
+    <cutScene_14>Вот так.</cutScene_14>
+    <cutScene_15>Не стоит благодарности. Ведь в взаимопомощи заключается вся суть жизни, не так ли? </cutScene_15>
+    <cutScene_16>Вот так!</cutScene_16>
+    <cutScene_17>Опять какая-то поломка...</cutScene_17>
+    <cutScene_18>Как ты?</cutScene_18>
+    <cutScene_19>У тебя все в голове перемешалось, так что управлять своим телом будет немного сложно.</cutScene_19>
+    <cutScene_20>И… Эмм... Ты, наверное, уже догадался,</cutScene_20>
+    <cutScene_21>но во время тренировки произошел инцидент. Ничего серьезного, так?</cutScene_21>
+    <cutScene_22>Если все сработало, ты должен был обрести умения легендарного агента.</cutScene_22>
+    <cutScene_23>Судя по выражению твоего лица, это не совсем сработало.</cutScene_23>
+    <cutScene_24>Но хорошая новость заключается в том, что теперь я могу отслеживать твое состояние.</cutScene_24>
+    <cutScene_25>Так... Надеюсь, ты выучил хоть какие-нибудь полезные умения...</cutScene_25>
+    <cutScene_26>Ты не освоил принципы прицеливания и перезарядки.</cutScene_26>
+    <firstTutorial_1>Прибор остановился, когда ты учился ближнему бою... но его все еще можно использовать..</firstTutorial_1>
+    <firstTutorial_2>Вот и все.</firstTutorial_2>
+    <firstTutorial_3>Этот прибор никогда не работает для обучения использованию и перезарядке оружия.</firstTutorial_3>
+    <firstTutorial_4>Ага</firstTutorial_4>
+    <firstTutorial_5>Так! Подними пистолет!</firstTutorial_5>
+    <firstTutorial_6>По ту сторону двери ждет целая орда головорезов.</firstTutorial_6>
+    <firstTutorial_7>Так что, потренируйся в использовании пистолета.</firstTutorial_7>
+    <firstTutorial_8>Стреляешь ты неплохо, но вот обращаешься с оружием отвратно.</firstTutorial_8>
+    <firstTutorial_9>Видишь интерфейс действий справа? Действия, которые ты не можешь произвести, будут выделены серым.</firstTutorial_9>
+    <firstTutorial_10>Перед тем, как ты сможешь стрелять, тебе нужно выполнить все действия, выделенные оранжевым.</firstTutorial_10>
+    <firstTutorial_11>Вот это повезло! У нас тут есть тренировочный манекен!</firstTutorial_11>
+    <firstTutorial_12>Стреляй по нему! (Нажми на левую кнопку мыши)</firstTutorial_12>
+    <firstTutorialTrigger_1>Эхх! Ты и правда просто решил нажать на курок?!</firstTutorialTrigger_1>
+    <firstTutorialTrigger_2>Я же объяснил, что перед тем, как стрелять, нужно выполнить действия, выделенные оранжевым!</firstTutorialTrigger_2>
+    <firstTutorialTrigger_3>«Нажать на курок» было выделено оранжевым?</firstTutorialTrigger_3>
+    <firstTutorialTrigger_4>В твоем пистолете нет боеприпасов.</firstTutorialTrigger_4>
+    <firstTutorialTrigger_5>Сначала тебе надо &lt;color=#A8FFFF&gt;перезарядить&lt;/color&gt; его.</firstTutorialTrigger_5>
+    <firstTutorialTrigger_6>Следуй &lt;color=#FF8300&gt;оранжевым&lt;/color&gt; действиям, указаным справа.</firstTutorialTrigger_6>
+    <firstTutorialMagRelease_1>Отлично. Интерфейс работает? Надеюсь, хоть он в норме...</firstTutorialMagRelease_1>
+    <firstTutorialMagRelease_2>Ты можешь выбрасывать пустые магазины, но я рекомендую по возможности придержать их.</firstTutorialMagRelease_2>
+    <firstTutorialMagRelease_3>Как знать, может, кто-нибудь подкинет тебе боеприпасов.</firstTutorialMagRelease_3>
+    <firstTutorialMagInsert_1>Почти закончили!</firstTutorialMagInsert_1>
+    <firstTutorialMagInsert_2>Сейчас потяни затвор и дошли патрон в патронник.</firstTutorialMagInsert_2>
+    <firstTutorialMagInsert_3>Не забывай, ты не сможешь выстрелить, если в патроннике нет патрона.</firstTutorialMagInsert_3>
+    <firstTutorialSlide_1>Готово. Теперь можешь стрелять.</firstTutorialSlide_1>
+    <firstTutorialSlide_2>Надеюсь, целиться тебя учить не надо?</firstTutorialSlide_2>
+    <firstTutorialSlide_3>Пока у тебя есть концентрация, ты не промахнешься.</firstTutorialSlide_3>
+    <firstTutorialSlide_4>Скорее всего.</firstTutorialSlide_4>
+    <firstTutorialShoot_1>Отличный выстрел. Ты самый меткий стрелок во всем здании.</firstTutorialShoot_1>
+    <firstTutorialShoot_2>Но будь осторожен. &lt;color=#A8FFFF&gt;Одной пули достаточно, чтобы убить человека, но зачастую одной пули может не хватить.&lt;/color&gt;</firstTutorialShoot_2>
+    <firstTutorialShoot_3>Чтобы нейтрализовать кого-то, требуется по крайней мере два попадания в тело.</firstTutorialShoot_3>
+    <firstTutorialShoot_4>Или одно попадание в голову.</firstTutorialShoot_4>
+    <firstTutorialShoot_5>Вне зависимости от того, насколько ты меткий стрелок, &lt;color=#A8FFFF&gt;твоя концентрация расходуется при точном прицеливании.&lt;/color&gt;</firstTutorialShoot_5>
+    <firstTutorialShoot_6>На этом у меня все. Как только ты выйдешь за пределы этой комнаты, начнется настоящая бойня.</firstTutorialShoot_6>
+    <firstTutorialLast_1>Ах да! Вот еще что, в твой пистолет вмещается магазин с 15 патронами!</firstTutorialLast_1>
+    <firstTutorialLast_2>Советую считать выстрелы и &lt;color=#A8FFFF&gt;перезаряжаться&lt;/color&gt; вовремя!</firstTutorialLast_2>
+    <firstTutorialLast_3>Ты можешь прикинуть, сколько патронов осталось в магазине, взвесив его в руке.</firstTutorialLast_3>
+    <firstTutorialLast_4>Ну а теперь все. Удачи!</firstTutorialLast_4>
+    <stage1Cheat_1>Когда уже закончится смена?</stage1Cheat_1>
+    <stage1Cheat_2>Минут через 10?</stage1Cheat_2>
+    <stage1Cheat_3>Не хочешь пропустить по пивасу после работы?</stage1Cheat_3>
+    <stage1Cheat_4>Не, сегодня не могу.</stage1Cheat_4>
+    <stage1Cheat_5>Я планирую сделать своей девушке предложение.</stage1Cheat_5>
+    <stage1Cheat_6>Ооо! Мои поздравления!</stage1Cheat_6>
+    <stage1Cheat_7>Удачи тебе.</stage1Cheat_7>
+    <stage1Cheat_8>Спасибо.</stage1Cheat_8>
+    <stage1Cheat_9>Сегодняшний день будет незабываемым.</stage1Cheat_9>
+    <restEvent1_1>Эй! Сюда!</restEvent1_1>
+    <restEvent1_2>Рада, что ты жив! Тебя здесь не найдут.</restEvent1_2>
+    <restEvent1_3>На этом этаже стены звукоизолированы.</restEvent1_3>
+    <restEvent1_4>Те ублюдки внизу, скорее всего, ни о чем даже не подозревают.</restEvent1_4>
+    <restEvent1_5>А еще я нашла для тебя патроны! Можешь не благодарить. Отдохни, подготовься и выдвигайся.</restEvent1_5>
+    <restEvent1_6>Взгляни на это. Я посмотрела на планы этого здания.</restEvent1_6>
+    <restEvent1_7>Поблизости находится лестница, которая ведет на нижние этажи. Если спустишься по ней, то сможешь выйти в вестибюль на первом этаже.</restEvent1_7>
+    <restEvent1_8>Согласно плану здания, это самый быстрый способ выбраться наружу.</restEvent1_8>
+    <restEvent1_9>Но я не советую выходить через парадную дверь.</restEvent1_9>
+    <restEvent1_10>Тебе надо быть более скрытным.</restEvent1_10>
+    <restEvent1_11>К тому же, вестибюль — самая охраняемая часть здания.</restEvent1_11>
+    <restEvent1_12>Спустись на второй этаж и пробегись вправо. Там будет аварийная лестница, которая ведет в склад на первом этаже.</restEvent1_12>
+    <restEvent1_13>Пробегись через склад и сможешь выйти на улицу через парковку.</restEvent1_13>
+    <restEvent1_14>И само собой, если откроешь огонь внутри здания, на тебя набегут враги со всех сторон.</restEvent1_14>
+    <restEvent1_15>Постарайся не попасться.</restEvent1_15>
+    <restEvent1_16>После того, как выйдешь на улицу, продолжай двигаться прямо. Погоня должна от тебя отстать, когда ты дойдешь до центра города.</restEvent1_16>
+    <restEvent1_17>Надеюсь, все остальное объяснять не надо?</restEvent1_17>
+    <restEvent1_18>Я уже видела тебя в действии, так что у меня нет сомнений, что ты сумеешь выбраться живым.</restEvent1_18>
+    <restEvent1_19>Ну, мне пора. У меня масса дел.</restEvent1_19>
+    <restEvent1_20>Пока! Развлекайся!</restEvent1_20>
+    <stage2Cheat_1>Ты и правда не будешь использовать пистолет?</stage2Cheat_1>
+    <stage2Cheat_2>Тот кусок мусора из 3D принтера?</stage2Cheat_2>
+    <stage2Cheat_3>Пуля из этого «куска мусора» намного быстрее твоего ножа!</stage2Cheat_3>
+    <stage2Cheat_4>И... Патроны заканчиваются в самый критический момент, как всегда.</stage2Cheat_4>
+    <stage2Cheat_5>Да и боеприпасы еще такие дорогие.</stage2Cheat_5>
+    <stage2Cheat_6>Надеюсь, тебе устроят шикарные похороны на те деньги, которые ты зажал на патроны.</stage2Cheat_6>
+    <stage3Cheat_1>Сегодня прекрасный день! Не так ли?!</stage3Cheat_1>
+    <stage3Cheat_2>Эй... Опять ты?</stage3Cheat_2>
+    <stage3Cheat_3>Хм, а разве он не наш?</stage3Cheat_3>
+    <stage3Cheat_4>Мне жаль людей, которые тратят огромные бабки на эту фигню.</stage3Cheat_4>
+    <stage3Cheat_5>Хахаха Хахахаха</stage3Cheat_5>
+    <stage3Cheat_6>Чувак... Мы должны пихать наркоту, а не упарываться ей.</stage3Cheat_6>
+    <lastDanger_1>Ну все!</lastDanger_1>
+    <lastDanger_2>Еще никогда до этого я не был так разъярен.</lastDanger_2>
+    <lastDanger_3>Как один ублюдок с пистолетиком мог такого натворить?</lastDanger_3>
+    <lastDanger_4>Просто смех.</lastDanger_4>
+    <lastDanger_5>Но твоя удача на этом заканчивается.</lastDanger_5>
+    <lastDanger_6>Каким-то магическим образом тебе удалось застигнуть врасплох и замочить моих пацанов,</lastDanger_6>
+    <lastDanger_7>но теперь мы в полной боевой готовности, и так просто тебе нас не взять!!</lastDanger_7>
+    <lastDangerCheat_1>Я начал хлипким щеглом и добрался до самой верхушки этой организации.</lastDangerCheat_1>
+    <lastDangerCheat_2>Мое тело превратилось в непробиваемую гору мяса после неисчислимых заварушек.</lastDangerCheat_2>
+    <lastDangerCheat_3>Благодаря мне эта банда держит район!</lastDangerCheat_3>
+    <lastDangerCheat_4>Но мои амбиции на этом не заканчиваются.</lastDangerCheat_4>
+    <lastDangerCheat_5>Я втопчу в грязь 5 военных компаний, которые держат другие районы.</lastDangerCheat_5>
+    <lastDangerCheat_6>Затем я объединю другие районы и создам армию, которую не сможет игнорировать даже центральное правительство.</lastDangerCheat_6>
+    <lastDangerCheat_7>Я самолично начну революцию и захвачу весь мир!</lastDangerCheat_7>
+    <lastDangerCheat_8>Даже если тебе и нравится мой план, присоединиться к нам ты уже не можешь.</lastDangerCheat_8>
+    <lastDangerCheat_9>Пристрелите эту псину.</lastDangerCheat_9>
+    <lastDangerStart_1>Мля! Не дайте ему сбежать!</lastDangerStart_1>
+    <lastDangerStart_2>&lt;color=#ff000060&gt;Нам нужны все подкрепления!&lt;/color&gt;</lastDangerStart_2>
+    <lastDangerStart_3>Не дайте этому козлу выбраться отсюда живым!!!</lastDangerStart_3>
+    <ending_1>Ого, ты выжил.</ending_1>
+    <ending_2>По правде говоря, я не ожидала, что ты оттуда выберешься живым. Ты хоть представляешь, сколько патронов израсходовал сегодня?</ending_2>
+    <ending_3>Ты это в меня сейчас целишься?</ending_3>
+    <ending_4>Забавно. Думаешь, что сможешь одолеть меня?</ending_4>
+    <ending_5>Пожалуй, я перенесу наш бой на другой день.</ending_5>
+    <ending_6>Твой мозг перегрелся, потому что ты не можешь справиться с системой Reloader.</ending_6>
+    <ending_7>Этот проект еще в разработке, поэтому в нем масса всяческих недочетов.</ending_7>
+    <ending_8>Не хочу тебя огорчать... Но через несколько минут твой мозг просто сварится, и ты умрешь. Я уже никак не могу тебя спасти.</ending_8>
+    <ending_9>Ты, наверное, не помнишь,</ending_9>
+    <ending_9add>но ты сделал значительный вклад в эксперимент.</ending_9add>
+    <ending_10>Видишь? Я перевела платеж на банковский счет твоей жены.</ending_10>
+    <ending_10add>Этого более чем достаточно, чтобы оплатить операцию и жить в роскоши до самой старости.</ending_10add>
+    <ending_11>Пусть мы и не самая этичная компания, но слово свое мы держим. Об этом беспокоиться не надо.</ending_11>
+    <ending_12>Ты хоть что-то помнишь?</ending_12>
+    <ending_13>Похоже, что нет.</ending_13>
+    <ending_14>Если честно, то я не уверена, стоит ли тратить мое время, объясняя все это тебе.</ending_14>
+    <ending_15>Но я думаю, что должна рассказать тебе об этом.</ending_15>
+    <ending_16>Хотя бы ради того, чтобы снять камень с души.</ending_16>
+    <ending_17>Эксперимент завершен. Твоя работа выполнена.</ending_17>
+    <ending_18>Прости. Суть жизни в том, чтобы помогать другим людям,</ending_18>
+    <ending_19>но я тебе уже никак помочь не смогу.</ending_19>
+    <ending_20>Но</ending_20>
+    <ending_21>отличная работа.</ending_21>
+    <epilogue_1>Да, мне сообщили о том, что эксперимент прошел удачно, и мы можем приступать к следующему этапу.</epilogue_1>
+    <epilogue_2>Пора приступить к подготовке.</epilogue_2>
+    <epilogue_3>С этого момента начинается серьезная фаза.</epilogue_3>
+    <epilogue_4>Следующим будет…</epilogue_4>
+    <epilogue_5>Альфа.</epilogue_5>
+
+    <credit_1>-Разработчик-</credit_1>
+    <credit_2>Nevertheless Studio</credit_2>
+    <credit_3>Хван Чонсоб</credit_3>
+    <credit_4>-Издатель-</credit_4>
+    <credit_5>PsychoFlux Entertainment</credit_5>
+    <credit_6>-Саундтрек-</credit_6>
+    <credit_7>Walz and Gunz - RedForge</credit_7>
+    <credit_8>-Translation-</credit_8>
+    <credit_9>English - Galactic Entertainment
+Русский - Alex Maslow
+Português Brasileiro - Bruno H
+한국어 - Developer!</credit_9>
+    <endText_1>Благодарим за игру в Reloader: test_subject</endText_1>
+    <endText_2>Reloader: test_subject является прологом в серии «Reloader project»!
+Игровые механики «Reloader project» все еще находятся в разработке.
+И чтобы закончить игру, мне нужна ваша помощь!
+Пожалуйста, оставьте свое мнение об игре или любые имеющиеся вопросы, где вам удобно.
+    </endText_2>
+
+    <trailerSpecial_0>Все, что у тебя сейчас есть, — это пистолет и несколько магазинов.</trailerSpecial_0>
+  </language>
+
+  <language id="Brazilian Portuguese">
+    <name>Português Brasileiro</name>
+    <gameMode>Modo de Jogo</gameMode>
+    <modeReloader>Modo de Carregamento Manual</modeReloader>
+    <modeReloader_d>
+      Modo de jogo em que todas as ações da arma, incluindo recarregar, precisam ser feitas manualmente.
+      &lt;color=#ffff4460&gt;Modo de jogo recomendado para experienciar todo o sistema essencial de jogabilidade de Reloader: test_subject.&lt;/color&gt;
+    </modeReloader_d>
+    <modeBulletCounter>&lt;color=#dddddd80&gt;Modo Contador de Munição&lt;/color&gt;</modeBulletCounter>
+    <modeBulletCounter_d>
+      Modo de jogo em que uma série de ações da arma são automaticamente realizadas com controles simples.
+      Modo de jogo para jogadores que possuem dificuldade no Modo de Carregamento Manual, ou desejam uma experiência de jogo mais casual.
+    </modeBulletCounter_d>
+    <firstTip>O combate em Reloader é rápido e recheado de ação! Fique calmo e siga as dicas.</firstTip>
+    <battleTip1>Use cobertura quando estiver lutando contra múltiplos inimigos. Pressione &lt;color=#ffff4460&gt;[C]&lt;/color&gt; para pegar cobertura quando &lt;color=#A7FFA560&gt;available.&lt;/color&gt;</battleTip1>
+    <battleTip2>Ser atingido te fará sangrar, e eventualmente, morrer. Pressione &lt;color=#ffff4460&gt;[C]&lt;/color&gt; para parar o sangramento.</battleTip2>
+    <battleTip3>Existem fatores que diminuirão sua precisão, eles aparecerão como ícones perto de sua mira.</battleTip3>
+    <battleTip4>Quando estiver perto de um inimigo, você automaticamente trocará para o combate corpo a corpo. Você estará na vantagem contra a maioria dos inimigos em combate corpo a corpo, a não ser que ele seja especializado nisso, ou esteja chapado.</battleTip4>
+    <battleTip5>Se estiver ficando sem munição, pressione e segure &lt;color=#ffff4460&gt;[Q]&lt;/color&gt; perto de um corpo morto para roubar carregadores. No entanto, isso tomará um bom tempo e você não saberá quantas balas o carregador tem.</battleTip5>
+    <battleTip6>Um único disparo de pistola pode ser suficiente para matar alguém, mas não o suficiente para neutralizá-los!</battleTip6>
+    <battleTip7>Se você ficar em uma área por muito tempo, inimigos te encontrarão e te cercarão! Continue andando!</battleTip7>
+    <battleTip8>Você pode mirar nas lâmpadas elétricas segurando &lt;color=#ffff4460&gt;[W]&lt;/color&gt;. Se esconda no escuro! Mas por favor, não esconda seus inimigos na escuridão.</battleTip8>
+    <battleTip9>Você pode focar no ponto de pressão inimigo segurando &lt;color=#ffff4460&gt;[RMB]&lt;/color&gt; para mirar. No entanto, esteja avisado que atirar no ponto de pressão consome muita Concentração!</battleTip9>
+    <battleTip10>
+      A precisão cairá quando você estiver sem Concentração.
+      &lt;color=#A8FFFF&gt;A Concentração pode ser recuperada rapidamente com disparos normais.&lt;/color&gt;
+    </battleTip10>
+    <preTip>Dica Anterior</preTip>
+    <nextTip>Próxima Dica</nextTip>
+    <discord>
+      Junte-se ao servidor do Discord do projeto Reloader!
+    </discord>
+    <alphaStore>Adicione na lista de desejos o próximo jogo do projeto Reloader!</alphaStore>
+    <enterToSkip>Pular Tutorial e Começar: &lt;color=#ffff4460&gt;[Enter]&lt;/color&gt;</enterToSkip>
+    <spaceToContinue>Próximo: &lt;color=#ffff4460&gt;[Spacebar]&lt;/color&gt;</spaceToContinue>
+    <returnToMain>Voltar ao Menu</returnToMain>
+    <restart>Recomeçar</restart>
+    <resume>Prosseguir</resume>
+    <skip>A fase</skip>
+    <start>Novo Jogo</start>
+    <option>Opções</option>
+    <quit>Sair</quit>
+    <condition>Condição:</condition>
+    <focus>Concentração:</focus>
+    <ammoFill>Recarregue munições no Carregador: Segure &lt;color=#ffff4460&gt;[Enter]&lt;/color&gt;</ammoFill>
+    <enemyAlarm1>Mas que droga tá acontecendo?!</enemyAlarm1>
+    <enemyAlarm2>Invasor!</enemyAlarm2>
+    <enemyAlarm3>Matem aquele cara!</enemyAlarm3>
+    <enemyAlarm4>Ele tá aqui!</enemyAlarm4>
+    <enemyFear1>Droga! Isso está ficando perigoso!</enemyFear1>
+    <enemyFear2>Ele está mirando em mim!</enemyFear2>
+    <enemyFear3>Isso não é bom…</enemyFear3>
+    <enemyDark1>Pra onde ele foi?!</enemyDark1>
+    <enemyDark2>Cale a boca! Ele está por perto!</enemyDark2>
+    <enemyDark3>Ele está se escondendo no escuro!</enemyDark3>
+    <enemyUpper1>TENTE E ME ACERTE!!!</enemyUpper1>
+    <enemyUpper2>HAHAHAHAHAHAHA</enemyUpper2>
+    <enemyUpper3>EU SOU IMPARÁVEL!!!</enemyUpper3>
+    <tutorialHide>Esconder/Mostrar tutoriais: &lt;color=#ffff4460&gt;[/]&lt;/color&gt;</tutorialHide>
+    <tutorial_frame>: &lt;color=#ffff4460&gt;[]&lt;/color&gt;</tutorial_frame>
+    <tutorial_run>Correr: Pressione duas vezes &lt;color=#ffff4460&gt;[A]&lt;/color&gt; / &lt;color=#ffff4460&gt;[D]&lt;/color&gt;</tutorial_run>
+    <tutorial_crouch>Agachar: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_crouch>
+    <tutorial_stand>Levantar: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_stand>
+    <tutorial_cover>Cobertura: &lt;color=#ffff4460&gt;[C]&lt;/color&gt;</tutorial_cover>
+    <tutorial_pull>Puxar Gatilho: &lt;color=#ffff4460&gt;[LMB]&lt;/color&gt;</tutorial_pull>
+    <tutorial_aim>Mirar no ponto de pressão: Segure &lt;color=#ffff4460&gt;[RMB]&lt;/color&gt;</tutorial_aim>
+    <tutorial_drawOut>Tirar um Carregador de seu Cinto: &lt;color=#ffff4460&gt;[1]&lt;/color&gt; ... &lt;color=#ffff4460&gt;[4]&lt;/color&gt;</tutorial_drawOut>
+    <tutorial_drawIn>Colocar um Carregador no seu Cinto: &lt;color=#ffff4460&gt;[1]&lt;/color&gt; ... &lt;color=#ffff4460&gt;[4]&lt;/color&gt;</tutorial_drawIn>
+    <tutorial_take>Pegar Carregador: &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_take>
+    <tutorial_loot>Roubar Carregador: Segure &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_loot>
+    <tutorial_discardHand>Descartar o Carregador na sua mão: &lt;color=#ffff4460&gt;[Q]&lt;/color&gt;</tutorial_discardHand>
+    <tutorial_insert>Colocar Carregador: &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_insert>
+    <tutorial_tap>Encaixar Carregador: &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_tap>
+    <tutorial_release>Tirar Carregador: &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_release>
+    <tutorial_discard>Descartar Carregador da sua arma: &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_discard>
+    <tutorial_checkChamber>Checar Câmara: Segure &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_checkChamber>
+    <tutorial_releaseSlide>Soltar Ferrolho: &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_releaseSlide>
+    <tutorial_pullSlide>Puxar Ferrolho: Segure &lt;color=#ffff4460&gt;[E]&lt;/color&gt; + &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_pullSlide>
+    <tutorial_aimObj>Mirar em objetos: Segure &lt;color=#ffff4460&gt;[W]&lt;/color&gt;</tutorial_aimObj>
+    <tutorial_aimTactic>Mirar taticamente: Segure &lt;color=#ffff4460&gt;[S]&lt;/color&gt;</tutorial_aimTactic>
+    <tutorial_reload>Recarregar : &lt;color=#ffff4460&gt;[R]&lt;/color&gt;</tutorial_reload>
+    <tutorial_checkMag>Checar Carregador : &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_checkMag>
+    <tutorial_repair>Reparar Arma : &lt;color=#ffff4460&gt;[T]&lt;/color&gt;</tutorial_repair>
+    <tutorial_discardEasy>Descartar Carregador : &lt;color=#ffff4460&gt;[E]&lt;/color&gt;</tutorial_discardEasy>
+    <eventTime>-----</eventTime>
+    <peaceful>Normal</peaceful>
+    <alarmed>Avistado</alarmed>
+    <marked>Cercado</marked>
+    <intro_1>Finalmente, você está acordado.</intro_1>
+    <intro_2>Agora você pode nos dizer o porquê te encontramos no nosso prédio.</intro_2>
+    <intro_3>Idiotas como você não deveriam passeando por aqui.</intro_3>
+    <intro_4>Esse parece ser um prédio normal,</intro_4>
+    <intro_5>mas na verdade é &lt;color=#ffff4460&gt;o escritório secreto&lt;/color&gt; da nossa gangue.</intro_5>
+    <intro_6>&lt;color=#ffff4460&gt;3 andares acima do chão com dois andares subterrâneos!&lt;/color&gt;</intro_6>
+    <intro_7>Com algumas dúzias de caras &lt;color=#ffff4460&gt;armados e prontos para matar&lt;/color&gt;.</intro_7>
+    <intro_8>Diga o que te trouxe aqui agora mesm…!</intro_8>
+    <intro_9>Agradeço pela explicação bem detalhada!</intro_9>
+    <intro_10>Você fala demais!</intro_10>
+    <intro_11>Esse cara deve ser o chefe.</intro_11>
+    <intro_12>Chefes realmente gostam de se ouvirem falar.</intro_12>
+    <cutScene_1>Bem… você parece estar em um dilema.</cutScene_1>
+    <cutScene_2>Para sua sorte, aconteceu de eu estar apenas passando por aqui.</cutScene_2>
+    <cutScene_3>Por que essa cara?</cutScene_3>
+    <cutScene_4>Infelizmente, a maior parte do que este dorminhoco disse é verdade.</cutScene_4>
+    <cutScene_5>Eu poderia te ajudar, mas infelizmente eu tenho outros lugares para estar.</cutScene_5>
+    <cutScene_6>Em outras palavras, você terá que escapar daqui sozinho.</cutScene_6>
+    <cutScene_7>Tudo que você tem agora é essa pistola e alguns carregadores desse tagarela.</cutScene_7>
+    <cutScene_8>Além disso, há um punhado de membros da gangue esperando lá fora.</cutScene_8>
+    <cutScene_9>Não será fácil sair deste prédio vivo como o 'cidadão patético nº 1'.</cutScene_9>
+    <cutScene_10>Sei que acabamos de nos conhecer, então eu não quero bancar a sem coração e te deixar assim.</cutScene_10>
+    <cutScene_11>Aqui, pegue.</cutScene_11>
+    <cutScene_12>É uma ferramenta de suprote de combate que está sendo desenvolvida. Você instantâneamente ganhará os talentos de um agente lendário do passado.</cutScene_12>
+    <cutScene_13>Se você tem isso, você pode ser um agente de elite imediatamente!</cutScene_13>
+    <cutScene_14>Aqui vamos nós.</cutScene_14>
+    <cutScene_15>Agora não me venha sentimental assim por causa do presente. Tudo na vida é sobre ajudarmos uns aos outros, certo?</cutScene_15>
+    <cutScene_16>Apenas pegue!</cutScene_16>
+    <cutScene_17>Hmm, parece que quebrou de novo…</cutScene_17>
+    <cutScene_18>Como está se sentindo?</cutScene_18>
+    <cutScene_19>Não será fácil controlar seu corpo. Seu cérebro está um pouco bagunçado agora.</cutScene_19>
+    <cutScene_20>Uhh… E você já deve ter percebido,</cutScene_20>
+    <cutScene_21>Mas ocorreu um errinho durante o treinamento. Só um acidente, certo?</cutScene_21>
+    <cutScene_22>Se funcionou, então você deveria ser um agente de elite agora mesmo.</cutScene_22>
+    <cutScene_23>Mas pelo olhar da sua cara, não parece que funcionou completamente.</cutScene_23>
+    <cutScene_24>Mas a boa notícia é que eu posso verificar sua condição.</cutScene_24>
+    <cutScene_25>Vamos ver… Espero que tenha aprendido ao menos algumas habilidades úteis…</cutScene_25>
+    <cutScene_26>Bem, você aprendeu a como mirar e a atirar completamente…</cutScene_26>
+    <firstTutorial_1>Mas parou quando você estava aprendendo combate corpo a corpo… de qualquer forma, ainda é usável.</firstTutorial_1>
+    <firstTutorial_2>É isso.</firstTutorial_2>
+    <firstTutorial_3>Essa ferramenta nunca funciona pra conhecimento das armas e as habilidades de recarregar.</firstTutorial_3>
+    <firstTutorial_4>Ah</firstTutorial_4>
+    <firstTutorial_5>Certo! Levante a arma!</firstTutorial_5>
+    <firstTutorial_6>Há muitos membros da gangue te esperando do outro lado da porta.</firstTutorial_6>
+    <firstTutorial_7>Então, você deveria se familiarizar coma a arma.</firstTutorial_7>
+    <firstTutorial_8>Suas habilidades de disparo são ótimas, mas ainda te falta habilidades de segurar a arma.</firstTutorial_8>
+    <firstTutorial_9>Você pode ver as descrições das ações no HUD da direita? As ações que você não pode fazer no momento estarão em cinza.</firstTutorial_9>
+    <firstTutorial_10>Próximo, você precisa finalizar as ações em laranja para poder atirar.</firstTutorial_10>
+    <firstTutorial_11>Que coincidência! Ali tem um manequim!</firstTutorial_11>
+    <firstTutorial_12>Atire nele! (Clique no botão esquerdo do mouse)</firstTutorial_12>
+    <firstTutorialTrigger_1>Uou! Você realmente apertou o gatilho?!</firstTutorialTrigger_1>
+    <firstTutorialTrigger_2>Eu te disse que as ações que você precisa tomar antes de atirar estariam destacadas!</firstTutorialTrigger_2>
+    <firstTutorialTrigger_3>Puxar Gatilho estava destacado?</firstTutorialTrigger_3>
+    <firstTutorialTrigger_4>Não tem munição na sua arma.</firstTutorialTrigger_4>
+    <firstTutorialTrigger_5>Você tem que &lt;color=#A8FFFF&gt;recarregá-la&lt;/color&gt; primeiro.</firstTutorialTrigger_5>
+    <firstTutorialTrigger_6>Siga a ação &lt;color=#FF8300&gt;laranja&lt;/color&gt; descrita na direita.</firstTutorialTrigger_6>
+    <firstTutorialMagRelease_1>Ótimo. O HUD tá funcionando direito? Espero que isso não estrague também…</firstTutorialMagRelease_1>
+    <firstTutorialMagRelease_2>Você pode apenas jogar fora os carregadores vazios, mas você deveria ficar com eles se possível.</firstTutorialMagRelease_2>
+    <firstTutorialMagRelease_3>Quem sabe, talvez alguém te presenteie com munição?</firstTutorialMagRelease_3>
+    <firstTutorialMagInsert_1>Quase lá!</firstTutorialMagInsert_1>
+    <firstTutorialMagInsert_2>Agora, puxe o ferrolho para trás e engatilhe uma bala.</firstTutorialMagInsert_2>
+    <firstTutorialMagInsert_3>Não se esqueça. Você não pode atirar sem uma bala dentro da câmara da arma.</firstTutorialMagInsert_3>
+    <firstTutorialSlide_1>Pronto. Sua arma está pronta para atirar.</firstTutorialSlide_1>
+    <firstTutorialSlide_2>Eu não preciso te ensinar como mirar, certo?</firstTutorialSlide_2>
+    <firstTutorialSlide_3>Você não errará a não ser que perca sua concentração.</firstTutorialSlide_3>
+    <firstTutorialSlide_4>Talvez.</firstTutorialSlide_4>
+    <firstTutorialShoot_1>Ótimo tiro. Ninguém nesse prédio chega perto das suas habilidades de atirar.</firstTutorialShoot_1>
+    <firstTutorialShoot_2>Mas tenha cuidado. &lt;color=#A8FFFF&gt;Um único disparo pode ser suficiente para matar alguém, mas não o suficiente para neutralizá-los.&lt;/color&gt;</firstTutorialShoot_2>
+    <firstTutorialShoot_3>No mínimo duas balas irão.</firstTutorialShoot_3>
+    <firstTutorialShoot_4>Ou um tiro na cabeça.</firstTutorialShoot_4>
+    <firstTutorialShoot_5>Não importa quão boa sua mira seja, &lt;color=#A8FFFF&gt;você perderá concentração por realizar muitos disparos difíceis em sequência.&lt;/color&gt;</firstTutorialShoot_5>
+    <firstTutorialShoot_6>Isso é tudo de minha parte. Assim que colocar o pé pra fora desta sala, o verdadeiro desafio começa.</firstTutorialShoot_6>
+    <firstTutorialLast_1>Ah! Essa arma pode ter 15 balas dentro de seu carregador!</firstTutorialLast_1>
+    <firstTutorialLast_2>Melhor você contar cada disparo e &lt;color=#A8FFFF&gt;recarregar&lt;/color&gt; no tempo certo!</firstTutorialLast_2>
+    <firstTutorialLast_3>Você pode saber aproximadamente quantas balas restam sentindo o peso do carregador na sua mão.</firstTutorialLast_3>
+    <firstTutorialLast_4>Bom, tudo certo, boa sorte!</firstTutorialLast_4>
+    <stage1Cheat_1>Quanto tempo até acabar seu turno?</stage1Cheat_1>
+    <stage1Cheat_2>Cerca de 10 minutos?</stage1Cheat_2>
+    <stage1Cheat_3>Ei, quer ir tomar uma depois do trabalho?</stage1Cheat_3>
+    <stage1Cheat_4>Sinto muito. Hoje não.</stage1Cheat_4>
+    <stage1Cheat_5>Estou planejando pedir a mão da minha garota.</stage1Cheat_5>
+    <stage1Cheat_6>Ah! Essa é uma ótima notícia!</stage1Cheat_6>
+    <stage1Cheat_7>Boa sorte.</stage1Cheat_7>
+    <stage1Cheat_8>Valeu.</stage1Cheat_8>
+    <stage1Cheat_9>Hoje será um dia inesquecível.</stage1Cheat_9>
+    <restEvent1_1>Ei! Aqui!</restEvent1_1>
+    <restEvent1_2>Estou feliz que está vivo! Você não será pego se ficar aqui.</restEvent1_2>
+    <restEvent1_3>Eu transformei as paredes aqui e alí em paredes à prova de som.</restEvent1_3>
+    <restEvent1_4>Aqueles imbecis lá em baixo estão provavelmente perdidos.</restEvent1_4>
+    <restEvent1_5>E eu encontrei algumas balas pra você! De nada. No seu tempo, se prepare para sair.</restEvent1_5>
+    <restEvent1_6>Ei, olhe pra isso. Eu fiz uma pesquisinha antecipada sobre este prédio.</restEvent1_6>
+    <restEvent1_7>Há escadas aqui perto indo para os andares inferiores. Continue seguindo as escadas e você encontrará o hall de entrada no primeiro andar.</restEvent1_7>
+    <restEvent1_8>É a maneira mais rápida de sair desse prédio de acordo com essa planta de construção.</restEvent1_8>
+    <restEvent1_9>Mas eu não recomendo sair pelo hall de entrada.</restEvent1_9>
+    <restEvent1_10>Não é uma boa ideia sair andando pela porta da frente quando você precisa ser discreto.</restEvent1_10>
+    <restEvent1_11>Além do mais, esta é a área mais guardada.</restEvent1_11>
+    <restEvent1_12>Vá para o segundo andar e corra direto pra direita. Há uma escada de emergência que conecta o armazém no primeiro andar.</restEvent1_12>
+    <restEvent1_13>Passe pelo armazém, então você pode escapar por um estacionamento.</restEvent1_13>
+    <restEvent1_14>Falando o óbvio, mas se você atirar dentro do prédio, inimigos vão te cercar por todas as direções.</restEvent1_14>
+    <restEvent1_15>Tente o seu melhor para não ser pego.</restEvent1_15>
+    <restEvent1_16>Depois de escapar, continue correndo. A gangue não irá te perseguir se você chegar no centro da cidade.</restEvent1_16>
+    <restEvent1_17>Bem, eu não preciso soletrar o resto pra você, certo?</restEvent1_17>
+    <restEvent1_18>Eu vi você brigar antes, tenho certeza que você é capaz de conseguir.</restEvent1_18>
+    <restEvent1_19>Certo, estou indo agora, tenho outros assuntos para tomar conta.</restEvent1_19>
+    <restEvent1_20>Thauzinho! Se divirta!</restEvent1_20>
+    <stage2Cheat_1>Você realmente não vai usar uma arma?</stage2Cheat_1>
+    <stage2Cheat_2>Aquele lixo da impressora 3D?</stage2Cheat_2>
+    <stage2Cheat_3>Uma bala daquele ‘lixo’ é muito mais rápida do que sua faca!</stage2Cheat_3>
+    <stage2Cheat_4>E você sempre fica sem munição quando mais precisa.</stage2Cheat_4>
+    <stage2Cheat_5>Além disso, balas são caras.</stage2Cheat_5>
+    <stage2Cheat_6>Sim, espero que você tenha um funeral luxuoso com o dinheiro que você economizou das balas.</stage2Cheat_6>
+    <stage3Cheat_1>Hoje é um grande dia! Né?!</stage3Cheat_1>
+    <stage3Cheat_2>Ei… Você tá chapado de novo?</stage3Cheat_2>
+    <stage3Cheat_3>Bem, não é nosso de qualquer forma?</stage3Cheat_3>
+    <stage3Cheat_4>Tenho pena daqueles que pagam muito dinheiro por essa coisa.</stage3Cheat_4>
+    <stage3Cheat_5>Hahahaha Hahahaha</stage3Cheat_5>
+    <stage3Cheat_6>Cara… Nós vendemos as drogas, não usamos elas.</stage3Cheat_6>
+    <lastDanger_1>É isso!</lastDanger_1>
+    <lastDanger_2>Nunca na minha vida me senti tão louco quanto hoje.</lastDanger_2>
+    <lastDanger_3>Como um otário só com uma pistola pode fazer isso?</lastDanger_3>
+    <lastDanger_4>Que piada.</lastDanger_4>
+    <lastDanger_5>Mas seu comportamento arrogante termina aqui.</lastDanger_5>
+    <lastDanger_6>De alguma forma você emboscou e matou meus homens,</lastDanger_6>
+    <lastDanger_7>mas ninguém sabe o quão forte é nossa gangue quando estamos prontos pra você!</lastDanger_7>
+    <lastDangerCheat_1>Eu sou o cara que começou lá no chão, e agora estou no topo dessa gangue.</lastDangerCheat_1>
+    <lastDangerCheat_2>Esse meu corpo ficou forte e rápido de todas as batalhas que esteve.</lastDangerCheat_2>
+    <lastDangerCheat_3>Foi desse jeito que minha gangue se tornou a maior nesta área!</lastDangerCheat_3>
+    <lastDangerCheat_4>Mas minha ambição não para aqui.</lastDangerCheat_4>
+    <lastDangerCheat_5>Eu destruirei cada uma das 5 organizações militares que dominam as outras áreas.</lastDangerCheat_5>
+    <lastDangerCheat_6>Então eu unificarei todas as áreas para formar uma força tão poderosa que o Governo Central não poderá ignorar.</lastDangerCheat_6>
+    <lastDangerCheat_7>Eu começarei uma revolução com minhas próprias mãos e me tornarei o governante deste mundo!</lastDangerCheat_7>
+    <lastDangerCheat_8>Você deve estar admirando a mim e ao meu plano, mas é tarde demais pra você se juntar.</lastDangerCheat_8>
+    <lastDangerCheat_9>Atirem nele.</lastDangerCheat_9>
+    <lastDangerStart_1>Droga! Não deixem ele escapar!</lastDangerStart_1>
+    <lastDangerStart_2>&lt;color=#ff000060&gt;Tragam todos os reforços!&lt;/color&gt;</lastDangerStart_2>
+    <lastDangerStart_3>Não deixem ele escapar daqui vivo!!!</lastDangerStart_3>
+    <ending_1>Uau, você realmente conseguiu.</ending_1>
+    <ending_2>Pra ser honesta, eu pensei que não daria conta. Você sabe quantas balas disparou hoje?</ending_2>
+    <ending_3>Você está mirando em mim?</ending_3>
+    <ending_4>Isso é engraçado. Você acha que consegue me derrotar?</ending_4>
+    <ending_5>Terei que deixar para depois nossa luta.</ending_5>
+    <ending_6>Seu cérebro está fritando porque não consegue lidar com o Sistema Reloader.</ending_6>
+    <ending_7>O produto ainda está em desenvolvimento. Então há muitas coisinhas que precisam ser resolvidas.</ending_7>
+    <ending_8>Você sabe… Em alguns minutos seu cérebro queimará e te matará. Não há nenhum jeito de eu conseguir te salvar.</ending_8>
+    <ending_9>Você pode não se lembrar,</ending_9>
+    <ending_9add>mas você fez uma grande contribuição no experimento que foi contratado.</ending_9add>
+    <ending_10>Vê isso? Seu pagamento foi transferido para conta do banco da sua esposa.</ending_10>
+    <ending_10add>É mais do que o suficicente para ela viver uma vida luxuosa, mesmo depois de pagar os custos da cirurgia que você mencionou antes.</ending_10add>
+    <ending_11>Embora esta empresa goste de conduzir experimentos desumanos, eles mantem sua palavra. Não se preocupe com isso.</ending_11>
+    <ending_12>Então, se lembra de alguma coisa?</ending_12>
+    <ending_13>Aposto que não.</ending_13>
+    <ending_14>Pra ser honesta, não sei nem se vale meu tempo explicar isso pra você.</ending_14>
+    <ending_15>Mas eu ainda acho que devo te avisar sobre isso.</ending_15>
+    <ending_16>Ou talvez é só o jeito de deixar minha cabeça tranquila.</ending_16>
+    <ending_17>O experimento acabou. Não há nada que reste para você fazer.</ending_17>
+    <ending_18>Sinto muito. Tudo na vida é sobre ajudarmos uns aos outros,</ending_18>
+    <ending_19>mas não há nada mais que eu possa fazer para te ajudar com isso.</ending_19>
+    <ending_20>Então</ending_20>
+    <ending_21>bom trabalho.</ending_21>
+    <epilogue_1>Sim, podemos prosseguir para o próximo passo devido ao resultado bem-sucedido desse experimento.</epilogue_1>
+    <epilogue_2>É hora de nos prepararmos então.</epilogue_2>
+    <epilogue_3>Começando agora, o verdadeiro desafio.</epilogue_3>
+    <epilogue_4>Agora é…</epilogue_4>
+    <epilogue_5>A vez do Alpha.</epilogue_5>
+    <credit_1>-Criado por-</credit_1>
+    <credit_2>Nevertheless Studio</credit_2>
+    <credit_3>Hwang Jungseob</credit_3>
+    <credit_4>-Publicado por-</credit_4>
+    <credit_5>PsychoFlux Entertainment</credit_5>
+    <credit_6>-BGM-</credit_6>
+    <credit_7>Walz and Gunz - RedForge</credit_7>
+    <credit_8>-Translation-</credit_8>
+    <credit_9>English - Galactic Entertainment
+Русский - Alex Maslow
+Português Brasileiro - Bruno H
+한국어 - Developer!</credit_9>
+    <endText_1>Obrigado por jogar Reloader: test_subject</endText_1>
+    <endText_2>
+      Reloader: test_subject é o prólogo do projeto Reloader!
+      O sistema de jogabilidade do projeto Reloader ainda não está pronto e precisa melhorar.
+      e para finalizar isso, eu preciso de sua ajuda!
+      Por favor me diga sua opinião ou me pergunte de qualquer maneira que se sinta confortável.
+    </endText_2>
+    
+  </language>
+</text>
