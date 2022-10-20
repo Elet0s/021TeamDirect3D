@@ -1,0 +1,95 @@
+#include "PreCompile.h"
+#include "GameEngineMesh.h"
+#include "GameEngineDevice.h"
+#include "GameEngineVertexBuffer.h"
+#include "GameEngineIndexBuffer.h"
+
+GameEngineMesh::GameEngineMesh()
+    : vertexBuffer_(nullptr),
+    indexBuffer_(nullptr)
+{
+    SetVertexBuffer_InputAssembler1("RectVertex");
+    SetIndexBuffer_InputAssembler2("RectIndex");
+}
+
+GameEngineMesh::~GameEngineMesh()
+{
+}
+
+GameEngineMesh* GameEngineMesh::Create(const std::string& _meshName)
+{
+    return Create(_meshName, _meshName, _meshName);
+}
+
+GameEngineMesh* GameEngineMesh::Create(
+    const std::string& _meshName,
+    const std::string& _vertexBufferName,
+    const std::string& _indexBufferName
+)
+{
+    GameEngineMesh* newRes = CreateNamedRes(_meshName);
+    newRes->SetVertexBuffer_InputAssembler1(_vertexBufferName);
+    newRes->SetIndexBuffer_InputAssembler2(_indexBufferName);
+    return newRes;
+}
+
+void GameEngineMesh::SetVertexBuffer_InputAssembler1(const std::string& _vertexBufferName)
+{
+    this->vertexBuffer_ = GameEngineVertexBuffer::Find(_vertexBufferName);
+
+    if (nullptr == vertexBuffer_)
+    {
+        MsgBoxAssertString(_vertexBufferName + ": 그런 이름의 버텍스버퍼가 존재하지 않습니다.");
+        return;
+    }
+}
+
+void GameEngineMesh::SetIndexBuffer_InputAssembler2(const std::string& _indexBufferName)
+{
+    this->indexBuffer_ = GameEngineIndexBuffer::Find(_indexBufferName);
+
+    if (nullptr == indexBuffer_)
+    {
+        MsgBoxAssertString(_indexBufferName + ": 그런 이름의 인덱스버퍼가 존재하지 않습니다.");
+        return;
+    }
+}
+
+void GameEngineMesh::Setting()
+{
+    this->InputAssembler1_VertexBufferSetting();
+    this->InputAssembler2_IndexBufferSetting();
+}
+
+void GameEngineMesh::Render()
+{
+    GameEngineDevice::GetContext()->DrawIndexed(	//인덱스에 연동된 정점들을 그리는 함수.
+        this->indexBuffer_->GetIndexCount(),//인덱스 개수.
+        0,									//읽기 시작할 인덱스 버퍼의 원소 번호. 
+        0									//읽기 시작할 버텍스 버퍼의 원소 번호. 
+    );
+    //내가 사용하려는 카메라 렌더타겟이 뭔지 어떻게 알고 거기다 그리는거지??
+    //->카메라 렌더하기 전에 카메라의 렌더타겟을 먼저 디바이스 컨텍스트에 세팅하고, 
+    // 그 디바이스 컨텍스트를 통해 렌더링 파이프라인 과정을 진행하므로 여기서 렌더타겟을 지정해주지 않아도 
+    // 내가 원하는 카메라의 렌더타겟에 렌더할 수 있게 된다.
+}
+
+const GameEngineInputLayoutDesc& GameEngineMesh::GetInputLayoutDesc() const
+{
+    if (nullptr == this->vertexBuffer_)
+    {
+        MsgBoxAssert("버텍스버퍼가 없습니다. 인풋 레이아웃 세팅을 가져올 수 없습니다.");
+    }
+
+    return vertexBuffer_->GetInputLayoutDesc();
+}
+
+void GameEngineMesh::InputAssembler1_VertexBufferSetting()
+{
+    this->vertexBuffer_->Setting();
+}
+
+void GameEngineMesh::InputAssembler2_IndexBufferSetting()
+{
+    this->indexBuffer_->Setting();
+}

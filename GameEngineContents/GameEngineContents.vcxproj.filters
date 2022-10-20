@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{d9ca16bb-3410-433a-81e3-f72cb3564401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{9108e38e-43e8-4c9f-abeb-deece498860e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{3aa935bf-c64f-4d01-81da-9c185fd54c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\00. Global">
+      <UniqueIdentifier>{23be44f3-ea54-4a44-9e0d-d3274cf8c33a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\01. Login">
+      <UniqueIdentifier>{488b34dc-6fe5-4fc1-86a2-f6a4eb26a25f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02. Play">
+      <UniqueIdentifier>{88d4ff25-7ace-4d9d-8f72-7ee0ddc30e4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\00. Global\Actor">
+      <UniqueIdentifier>{ba306fd0-5b4f-4cb3-9ad3-9600af026f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\00. Global\Gui">
+      <UniqueIdentifier>{7292cf92-6206-40f0-b95f-eaf527fee2cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{511b7861-1332-4deb-b12c-bdb89781028c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{cf75bfa8-49ff-4b38-a299-672f96be44d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{49eaa654-7298-49ed-b9f7-9ed69c2a1903}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalContentsValue.cpp" />
+    <ClCompile Include="TileMapActor.cpp">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="MetaSpriteWindow.cpp">
+      <Filter>Actor\00. Global\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorWindow.cpp">
+      <Filter>Actor\00. Global\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginUI.cpp">
+      <Filter>Actor\01. Login</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\DirectX_Practice01\GameEngineContents\Monster.cpp">
+      <Filter>Actor\02. Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\DirectX_Practice01\GameEngineContents\Player.cpp">
+      <Filter>Actor\02. Play</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MetaLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalContentsValue.h" />
+    <ClInclude Include="TileMapActor.h">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="MetaSpriteWindow.h">
+      <Filter>Actor\00. Global\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorWindow.h">
+      <Filter>Actor\00. Global\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginUI.h">
+      <Filter>Actor\01. Login</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\DirectX_Practice01\GameEngineContents\Monster.h">
+      <Filter>Actor\02. Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\DirectX_Practice01\GameEngineContents\Player.h">
+      <Filter>Actor\02. Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MetaLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

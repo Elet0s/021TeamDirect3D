@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{96d26240-1a04-48aa-a766-97e94f4b6574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{472beba9-66af-4f0a-9ef2-4262895f461f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{3ebaf693-1ebe-402d-8cc0-d11572dc6693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{15c51c79-fa41-46b6-a784-dbde1b16067c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{4ba55d3e-f912-4c5c-a582-659e7c540889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{62a3f91f-a1f2-4de5-84fc-f6683f53f9d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="String">
+      <UniqueIdentifier>{f3f66c58-1c98-4373-9b12-8d43e4357433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{c466c9e4-577f-4272-b944-40ec7f3c41f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{43231f77-1cbc-4799-9e67-b0d77fb4da21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Sound">
+      <UniqueIdentifier>{29656954-b8c6-45a0-8081-33fdcfb26708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Sound\Bin%28Library%29">
+      <UniqueIdentifier>{5f6ca0c0-31ad-49e2-b6ba-f78ee3110ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Sound\Inc%28Header%29">
+      <UniqueIdentifier>{1ffc2276-75e0-4435-a3d2-6a04d69b326d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Sound\Bin%28Library%29\Debug">
+      <UniqueIdentifier>{a8fb0287-935b-40da-bdbc-289cd7b68f72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Sound\Bin%28Library%29\Release">
+      <UniqueIdentifier>{75310a32-b4a0-417b-a899-03a5d9665bd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{8135bedc-3e1d-4591-9825-93a9f3727900}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngineDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDirectory.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEnginePath.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRandom.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTime.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTransform.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineString.h">
+      <Filter>String</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDebugObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineNameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FMOD\Include\fmod.h">
+      <Filter>ThirdParty\Sound\Inc%28Header%29</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FMOD\Include\fmod.hpp">
+      <Filter>ThirdParty\Sound\Inc%28Header%29</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FMOD\Include\fmod_codec.h">
+      <Filter>ThirdParty\Sound\Inc%28Header%29</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FMOD\Include\fmod_common.h">
+      <Filter>ThirdParty\Sound\Inc%28Header%29</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FMOD\Include\fmod_dsp.h">
+      <Filter>ThirdParty\Sound\Inc%28Header%29</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FMOD\Include\fmod_dsp_effects.h">
+      <Filter>ThirdParty\Sound\Inc%28Header%29</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FMOD\Include\fmod_errors.h">
+      <Filter>ThirdParty\Sound\Inc%28Header%29</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FMOD\Include\fmod_output.h">
+      <Filter>ThirdParty\Sound\Inc%28Header%29</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineInput.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameEngineDebug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineFile.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEnginePath.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDirectory.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTransform.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTransform_Collision.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineMath.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRandom.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTime.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineWindow.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineString.cpp">
+      <Filter>String</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDebugObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineNameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineInput.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Debug\fmodL.dll">
+      <Filter>ThirdParty\Sound\Bin%28Library%29\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Release\fmod.dll">
+      <Filter>ThirdParty\Sound\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Debug\fmodL_vc.lib">
+      <Filter>ThirdParty\Sound\Bin%28Library%29\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\bin\Release\fmod_vc.lib">
+      <Filter>ThirdParty\Sound\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
+</Project>
