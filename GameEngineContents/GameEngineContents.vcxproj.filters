@@ -55,12 +55,6 @@
     <ClCompile Include="LoginUI.cpp">
       <Filter>Actor\01. Login</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\DirectX_Practice01\GameEngineContents\Monster.cpp">
-      <Filter>Actor\02. Play</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\DirectX_Practice01\GameEngineContents\Player.cpp">
-      <Filter>Actor\02. Play</Filter>
-    </ClCompile>
     <ClCompile Include="LoginLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -75,6 +69,12 @@
     </ClCompile>
     <ClCompile Include="TileMapRenderer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\02. Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor\02. Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,12 +97,6 @@
     <ClInclude Include="LoginUI.h">
       <Filter>Actor\01. Login</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\DirectX_Practice01\GameEngineContents\Monster.h">
-      <Filter>Actor\02. Play</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\DirectX_Practice01\GameEngineContents\Player.h">
-      <Filter>Actor\02. Play</Filter>
-    </ClInclude>
     <ClInclude Include="Enums.h">
       <Filter>Global</Filter>
     </ClInclude>
@@ -120,6 +114,12 @@
     </ClInclude>
     <ClInclude Include="TileMapRenderer.h">
       <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actor\02. Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\02. Play</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

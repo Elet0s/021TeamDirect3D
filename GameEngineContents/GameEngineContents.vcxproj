@@ -149,8 +149,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\DirectX_Practice01\GameEngineContents\Monster.h" />
-    <ClInclude Include="..\..\DirectX_Practice01\GameEngineContents\Player.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GlobalContentsValue.h" />
@@ -160,14 +158,14 @@
     <ClInclude Include="MapEditorWindow.h" />
     <ClInclude Include="MetaLevel.h" />
     <ClInclude Include="MetaSpriteWindow.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="TileMapActor.h" />
     <ClInclude Include="TileMapRenderer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\DirectX_Practice01\GameEngineContents\Monster.cpp" />
-    <ClCompile Include="..\..\DirectX_Practice01\GameEngineContents\Player.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="GlobalContentsValue.cpp" />
     <ClCompile Include="LoginLevel.cpp" />
@@ -176,6 +174,8 @@
     <ClCompile Include="MapEditorWindow.cpp" />
     <ClCompile Include="MetaLevel.cpp" />
     <ClCompile Include="MetaSpriteWindow.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
