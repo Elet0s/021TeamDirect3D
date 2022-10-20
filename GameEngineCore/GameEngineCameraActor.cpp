@@ -4,7 +4,7 @@
 GameEngineCameraActor::GameEngineCameraActor()
 	: cameraComponent_(nullptr),
 	freeCameraMode_(false),
-	cameraMovingSpeed_(100.f),
+	cameraMovingSpeed_(500.f),
 	rotationSpeed_(180.f),
 	prevProjectionMode_(CameraProjectionMode::Orthographic)
 {
@@ -84,8 +84,8 @@ void GameEngineCameraActor::Update(float _deltaTime)
 	{
 		float4 mouseDir = this->cameraComponent_->GetMouseWorldDirection();
 		float4 rotMouseDir;
-		rotMouseDir.y = -mouseDir.x;	//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
-		rotMouseDir.x = mouseDir.y;		//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
+		rotMouseDir.x = -mouseDir.y;			//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
+		rotMouseDir.y = mouseDir.x;				//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
 		GetTransform().SetAddWorldRotation(rotMouseDir * rotationSpeed_);
 	}
 

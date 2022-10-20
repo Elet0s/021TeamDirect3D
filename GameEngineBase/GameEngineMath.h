@@ -1017,7 +1017,7 @@ public:
 		this->arr2D[0][3] = 0.f;
 
 		this->arr2D[1][0] = 0.f;
-		this->arr2D[1][1] = _height * 0.5f;
+		this->arr2D[1][1] = -_height * 0.5f;
 		this->arr2D[1][2] = 0.f;
 		this->arr2D[1][3] = 0.f;
 
