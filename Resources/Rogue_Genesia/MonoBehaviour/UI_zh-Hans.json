@@ -1,0 +1,1635 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "UI_zh-Hans",
+  "m_LocaleId": {
+    "m_Code": "zh-Hans"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 3905891805363733533
+  },
+  "m_Metadata": {
+    "m_Items": [
+      {
+        "id": 0
+      }
+    ]
+  },
+  "m_TableData": [
+    {
+      "m_Id": 767261622272,
+      "m_Localized": "灵魂卡牌",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559641309184,
+      "m_Localized": "菜单",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559666475008,
+      "m_Localized": "宝物",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559666475009,
+      "m_Localized": "状态",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858579304448,
+      "m_Localized": "普通状态",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247488,
+      "m_Localized": "成就",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79319247412215808,
+      "m_Localized": "敌人（开发中）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247489,
+      "m_Localized": "灵魂卡牌",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247490,
+      "m_Localized": "宝物",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67545630752063488,
+      "m_Localized": "下一页",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67545630789812224,
+      "m_Localized": "上一页",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093068226560,
+      "m_Localized": "杀敌数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975296,
+      "m_Localized": "游玩局数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975297,
+      "m_Localized": "杀敌总数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975298,
+      "m_Localized": "精英击杀总数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975299,
+      "m_Localized": "头目击杀总数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975300,
+      "m_Localized": "伤害总数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975301,
+      "m_Localized": "总生存时间",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975302,
+      "m_Localized": "日",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975303,
+      "m_Localized": "关卡完成总数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975304,
+      "m_Localized": "金币总数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169600,
+      "m_Localized": "拾取虚空磁体次数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169601,
+      "m_Localized": "拾取灵魂宝石次数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169602,
+      "m_Localized": "拾取食物数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169603,
+      "m_Localized": "拾取金币数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70401229621772288,
+      "m_Localized": "击杀",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74064869663129600,
+      "m_Localized": "继续上一局游戏",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72651765574221824,
+      "m_Localized": "{other}世界等级",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 68962951639023616,
+      "m_Localized": "解锁{other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 74084524561743872,
+      "m_Localized": "完成{other}后解锁",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 68168380843769856,
+      "m_Localized": "新成就！",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380881518592,
+      "m_Localized": "商店",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380881518593,
+      "m_Localized": "获取奖励！",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 767307759616,
+      "m_Localized": "离开游戏",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 58306035854295040,
+      "m_Localized": "重新开始",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948614746112,
+      "m_Localized": "游玩",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605148413952,
+      "m_Localized": "返回",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60662511260352512,
+      "m_Localized": "准心",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774081,
+      "m_Localized": "声音",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774082,
+      "m_Localized": "选项",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774083,
+      "m_Localized": "制作团队",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774084,
+      "m_Localized": "罗格模式",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287168,
+      "m_Localized": "F等级的世界",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287169,
+      "m_Localized": "E等级的世界",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287170,
+      "m_Localized": "D等级的世界（开发中）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521655463936,
+      "m_Localized": "F等级幸存者",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521689018368,
+      "m_Localized": "E等级幸存者（开发中）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521689018369,
+      "m_Localized": "D等级幸存者（开发中）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287171,
+      "m_Localized": "（未解锁）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774085,
+      "m_Localized": "幸存者模式",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62535401752707072,
+      "m_Localized": "灵魂商店",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837158540689408,
+      "m_Localized": "退出",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72853903315255296,
+      "m_Localized": "结束游戏",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837454360756224,
+      "m_Localized": "操作方法",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837454360756225,
+      "m_Localized": "图像",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388992,
+      "m_Localized": "准心颜色",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74064869692489728,
+      "m_Localized": "大小：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388993,
+      "m_Localized": "红色：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388994,
+      "m_Localized": "绿色",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388995,
+      "m_Localized": "蓝色：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63491867397537792,
+      "m_Localized": "瞄准线",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845577251209216,
+      "m_Localized": "音乐：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845577251209217,
+      "m_Localized": "音效：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46866851297968128,
+      "m_Localized": "重试",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46866851297968129,
+      "m_Localized": "返回主菜单",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699475406848,
+      "m_Localized": "奖励",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049806012416,
+      "m_Localized": "还有未获取的奖励",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049843761152,
+      "m_Localized": "继续",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049843761153,
+      "m_Localized": "是否退出？",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 58306035879460864,
+      "m_Localized": "是否重开？",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72853903340421120,
+      "m_Localized": "是否结束本局？",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62164085811920896,
+      "m_Localized": "质量：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62180733180657664,
+      "m_Localized": "禁用",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411653050368,
+      "m_Localized": "低",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410496,
+      "m_Localized": "中",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410497,
+      "m_Localized": "高",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410498,
+      "m_Localized": "超高",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62180733180657665,
+      "m_Localized": "最高",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410499,
+      "m_Localized": "自定义",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410500,
+      "m_Localized": "分辨率：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410501,
+      "m_Localized": "全屏：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410502,
+      "m_Localized": "垂直同步：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410503,
+      "m_Localized": "纹理：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604800,
+      "m_Localized": "阴影：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604801,
+      "m_Localized": "烟雾：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604802,
+      "m_Localized": "景深：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604803,
+      "m_Localized": "屏幕空间反射：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604804,
+      "m_Localized": "整体光照：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604805,
+      "m_Localized": "后置处理：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604806,
+      "m_Localized": "视觉效果：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62189039462858752,
+      "m_Localized": "确认",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62189039496413184,
+      "m_Localized": "应用",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404902506496,
+      "m_Localized": "伤害数值：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060928,
+      "m_Localized": "禁用",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060929,
+      "m_Localized": "只显示整数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060930,
+      "m_Localized": "包含小数点",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72998716094234624,
+      "m_Localized": "敌人闪光：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74755764435763200,
+      "m_Localized": "卡牌信息细节：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76357862231326720,
+      "m_Localized": "低生命值特效：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76709688835260416,
+      "m_Localized": "全部",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76709987251601408,
+      "m_Localized": "仅限锁定",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46850097637179392,
+      "m_Localized": "游戏制作：Ouadi Huard",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46850097641373696,
+      "m_Localized": "音乐制作：Myrtle Mist",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70093518594064384,
+      "m_Localized": "刷新商店",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72437026696937472,
+      "m_Localized": "刷新铁匠铺",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699513155584,
+      "m_Localized": "治疗",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699513155585,
+      "m_Localized": "生命值",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347399163904,
+      "m_Localized": "生命值",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329728,
+      "m_Localized": "生命值再生",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329729,
+      "m_Localized": "基础伤害",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329730,
+      "m_Localized": "伤害系数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329731,
+      "m_Localized": "攻击速率",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329732,
+      "m_Localized": "额外投射物",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329733,
+      "m_Localized": "投射物穿刺",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329734,
+      "m_Localized": "投射物体积",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329735,
+      "m_Localized": "投射物持续时间",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329736,
+      "m_Localized": "投射物速度",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329737,
+      "m_Localized": "范围",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329738,
+      "m_Localized": "击退",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329739,
+      "m_Localized": "经验系数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329740,
+      "m_Localized": "移动速度",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063709085696,
+      "m_Localized": "拾取范围",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329742,
+      "m_Localized": "防御",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329743,
+      "m_Localized": "减伤",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329744,
+      "m_Localized": "冲刺次数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329745,
+      "m_Localized": "冲刺冷却",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329746,
+      "m_Localized": "冲刺延迟",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329747,
+      "m_Localized": "恢复冲刺次数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652834172928,
+      "m_Localized": "灵魂经验",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652867727360,
+      "m_Localized": "暴击率",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652867727361,
+      "m_Localized": "暴击伤害",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 53621140041187328,
+      "m_Localized": "按任意键",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 767311953920,
+      "m_Localized": "你的灵魂变强了！\n请选择灵魂卡牌",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77472467728941056,
+      "m_Localized": "你击败了强大的敌人！\n请选择宝物",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 3954047664128,
+      "m_Localized": "等级",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416361269477376,
+      "m_Localized": "污秽",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416486146490368,
+      "m_Localized": "普通",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416528299245568,
+      "m_Localized": "罕见",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416562432491520,
+      "m_Localized": "稀有",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73249871416213504,
+      "m_Localized": "史诗",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416598050521088,
+      "m_Localized": "传说",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73249871466545152,
+      "m_Localized": "至高",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77576134419234816,
+      "m_Localized": "进化",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41581305776521216,
+      "m_Localized": "升级奖励",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 44811535886532602,
+      "m_Localized": "关卡完成\n请获取奖励！",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 51269830675480576,
+      "m_Localized": "经验",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45748622483734528,
+      "m_Localized": "金币",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45748622513094656,
+      "m_Localized": "选择卡牌",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76707686432587776,
+      "m_Localized": "<color=#ff0000ff>进行突破</color>",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769648828416,
+      "m_Localized": "收集",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799936,
+      "m_Localized": "已生存时间：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799937,
+      "m_Localized": "杀敌数量：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807462400000,
+      "m_Localized": "伤害总数：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120256,
+      "m_Localized": "最大关卡数：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120257,
+      "m_Localized": "金币：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63039627918524416,
+      "m_Localized": "金币总数：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996213796864,
+      "m_Localized": "灵魂等级：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799938,
+      "m_Localized": "完成",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799939,
+      "m_Localized": "关卡",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48408877533446144,
+      "m_Localized": "区域",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994240,
+      "m_Localized": "战斗",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994241,
+      "m_Localized": "精英",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994242,
+      "m_Localized": "头目",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994243,
+      "m_Localized": "商店",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72119642501103616,
+      "m_Localized": "铁匠铺",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72119642530463744,
+      "m_Localized": "集群",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994244,
+      "m_Localized": "事件",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994245,
+      "m_Localized": "宝箱",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45763929931726848,
+      "m_Localized": "下一关",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911936,
+      "m_Localized": "击杀怪物：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911937,
+      "m_Localized": "生存：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911938,
+      "m_Localized": "击杀精英",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74752099616505856,
+      "m_Localized": "击杀精英",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911939,
+      "m_Localized": "击杀头目",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911940,
+      "m_Localized": "关卡结束：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120258,
+      "m_Localized": "伤害汇总",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996247351296,
+      "m_Localized": "加入Steam愿望单",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996247351297,
+      "m_Localized": "加入Discord",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252611940352,
+      "m_Localized": "选择关卡",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252637106176,
+      "m_Localized": "拉伸镜头",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252637106177,
+      "m_Localized": "平移镜头",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73663179252252672,
+      "m_Localized": "标记",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911673540608,
+      "m_Localized": "请加入Steam愿望单！",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911698706432,
+      "m_Localized": "感谢游玩！",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911698706433,
+      "m_Localized": "感谢游玩《罗格：救世传说》的试用版\n\n我们的游戏仍有许多内容可以添加并改进，也希望能获得您的支持与反馈。\n轻点加入Steam愿望单，便是支持我们的最佳方式。\n如此一来您也可以在Steam上随时了解更新进度！\n您也可以加入Discord频道，与其他玩家分享您的强力套路。",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086049247232,
+      "m_Localized": "重置按键",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607360,
+      "m_Localized": "上",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607361,
+      "m_Localized": "下",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607362,
+      "m_Localized": "左",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607363,
+      "m_Localized": "右",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607364,
+      "m_Localized": "冲刺",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607365,
+      "m_Localized": "地图 | 快速移动",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72891293325017088,
+      "m_Localized": "地图 | 标记",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72891293362765824,
+      "m_Localized": "菜单 | 确认",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74486593349173248,
+      "m_Localized": "菜单 | 暂停",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79317852655140864,
+      "m_Localized": "手柄震动",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 80685411941957632,
+      "m_Localized": "自动瞄准",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223040,
+      "m_Localized": "最大生命值",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223041,
+      "m_Localized": "额外投射物",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223042,
+      "m_Localized": "伤害",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71002519733223424,
+      "m_Localized": "基础伤害系数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099200,
+      "m_Localized": "重抽",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099201,
+      "m_Localized": "重抽稀有度",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099202,
+      "m_Localized": "清除",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293504,
+      "m_Localized": "精英关卡宝物",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293505,
+      "m_Localized": "问号不会出现精英关卡",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293506,
+      "m_Localized": "过度击杀会启用经验系数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71002519733223425,
+      "m_Localized": "虚空磁体也会吸取金币",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74529604338663424,
+      "m_Localized": "至高卡牌掉落率",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74529604372217856,
+      "m_Localized": "显示普通战斗目标",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79388181356298240,
+      "m_Localized": "每打破{other}个木箱会固定掉落虚空磁体",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 79388181377269760,
+      "m_Localized": "每打破{other}个木箱会固定掉落虚空磁体",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 72613131504533504,
+      "m_Localized": "攻击速率",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512647286784,
+      "m_Localized": "下一等级",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841216,
+      "m_Localized": "上一等级",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841217,
+      "m_Localized": "重置",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841218,
+      "m_Localized": "灵魂商店 | {other} 等级",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 82256325687066624,
+      "m_Localized": "世界已经得到拯救！",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325724815360,
+      "m_Localized": "灵魂金币获取数：",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325724815361,
+      "m_Localized": "已解锁{other}灵魂商店升级",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 82964935337525248,
+      "m_Localized": "重抽",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885376,
+      "m_Localized": "重置稀有度",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885377,
+      "m_Localized": "清除",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885378,
+      "m_Localized": "Free",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "SmartFormatTag",
+        "ns": "UnityEngine.Localization.Metadata",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

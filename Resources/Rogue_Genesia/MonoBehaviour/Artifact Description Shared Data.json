@@ -1,0 +1,327 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -4826179110787420926
+  },
+  "m_Name": "Artifact Description Shared Data",
+  "m_TableCollectionName": "Artifact Description",
+  "m_TableCollectionNameGuidString": "00e14f276dfdc5b499841df1ec37f4e9",
+  "m_Entries": [
+    {
+      "m_Id": 23557410865171,
+      "m_Key": "AdamantiteRod",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865185,
+      "m_Key": "AdventurerLicence",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865179,
+      "m_Key": "BattleRuby",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865182,
+      "m_Key": "BeefStatue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865177,
+      "m_Key": "BhikkhuPearl",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865183,
+      "m_Key": "BlackSphereStatue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865176,
+      "m_Key": "ChampionBracer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865158,
+      "m_Key": "CheatingHand",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865180,
+      "m_Key": "ChickenStatue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865167,
+      "m_Key": "ChronosLace",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865186,
+      "m_Key": "CollectionBook",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 31833553752506368,
+      "m_Key": "CorruptedCore",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865178,
+      "m_Key": "CowardSaphir",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865174,
+      "m_Key": "CursedBelt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865187,
+      "m_Key": "Dice",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865159,
+      "m_Key": "DuplicationChest",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670850,
+      "m_Key": "GilgameshCrown",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670849,
+      "m_Key": "GilgameshRing",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865152,
+      "m_Key": "GilgameshSeal",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865166,
+      "m_Key": "GlassSword",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865153,
+      "m_Key": "HelmOfControl",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865175,
+      "m_Key": "HermesHood",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865168,
+      "m_Key": "HolyCross",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865173,
+      "m_Key": "LightningBoots",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670848,
+      "m_Key": "MagnifyingGlass",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865163,
+      "m_Key": "MartyrCloak",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865155,
+      "m_Key": "MidasSword",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865170,
+      "m_Key": "MithrilCompass",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865169,
+      "m_Key": "OuroborosNecklace",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865157,
+      "m_Key": "PersonalTrainer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865160,
+      "m_Key": "PhoenixTotem",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865162,
+      "m_Key": "PocketHealer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865181,
+      "m_Key": "PorkStatue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865154,
+      "m_Key": "PortalDevice",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865161,
+      "m_Key": "PouchOfGreed",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865172,
+      "m_Key": "SacredSword",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865164,
+      "m_Key": "SageLeaf",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865184,
+      "m_Key": "ShopKeeperPlate",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557352144896,
+      "m_Key": "SoulGauntlet",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865156,
+      "m_Key": "TrainingWeight",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10512242434588672,
+      "m_Key": "TrollBlood",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865165,
+      "m_Key": "WindLace",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_KeyGenerator": {
+    "id": 0
+  },
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "DistributedUIDGenerator",
+        "ns": "UnityEngine.Localization.Tables",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

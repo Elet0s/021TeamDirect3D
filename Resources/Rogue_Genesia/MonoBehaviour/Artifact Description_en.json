@@ -1,0 +1,329 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Artifact Description_en",
+  "m_LocaleId": {
+    "m_Code": "en"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 5263071400576003132
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 23557352144896,
+      "m_Localized": "Automatically absorb 50% of all soul gems at the end of each stage",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670848,
+      "m_Localized": "Increase Soul gem experience by 50%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670849,
+      "m_Localized": "Tainted and normal rarity Soulcards are 75% less likely to appear",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670850,
+      "m_Localized": "Heroic Soulcards are 200% more likely to appear",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865152,
+      "m_Localized": "Tainted rarity Soulcards are 99.9% less likely to appear",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865153,
+      "m_Localized": "All projectiles follow your aim",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865154,
+      "m_Localized": "Projectile loop back at the other side of the screen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865155,
+      "m_Localized": "Each enemy kill grants 1 Gold",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865156,
+      "m_Localized": "Reduce Experience Gain by 33%\nnew Soulcards start at level 2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865157,
+      "m_Localized": "Increase experience gain by 100%\nReduce gold gain by 50%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865158,
+      "m_Localized": "You can now pick between 4 Soulcards",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865159,
+      "m_Localized": "Gain 10% of your gold each stage",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865160,
+      "m_Localized": "Resurrect you back to full life and kill\nall enemies. (Single Use)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865161,
+      "m_Localized": "Draw 3 Soulcards",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865162,
+      "m_Localized": "Fully heal you on level up",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865163,
+      "m_Localized": "Taking damage increases your damage by 50% for 6 seconds \n(12 seconds cooldown)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865164,
+      "m_Localized": "Shields you from all harm for 4 seconds after taking damage\n(12 seconds cooldown)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865165,
+      "m_Localized": "Taking damage increases your movement speed by 50% for 6 seconds\n(12 seconds cooldown)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865166,
+      "m_Localized": "Doubles your Damage\n- 60% Max health",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865167,
+      "m_Localized": "Returns you to the first stage with all your equipment intact",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865168,
+      "m_Localized": "+ 25% Damage\n+ 25% MoveSpeed\n+ 25% Health\n+ 25% Pick-up range",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865169,
+      "m_Localized": "On death, return to the previous stage\n(Single Use)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865170,
+      "m_Localized": "Reduce stage requirement by 35%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865171,
+      "m_Localized": "Increase stage requirement by 35%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865172,
+      "m_Localized": "Reduces bosses and elites health by 30%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865173,
+      "m_Localized": "Removes Cooldown between dashes\n+ 2 Dash charge",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865174,
+      "m_Localized": "Regen 1.5% of your health per second\n- 50% Max health",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865175,
+      "m_Localized": "Movement speed also increases attack speed",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865176,
+      "m_Localized": "Allows you to draw 2 Soul-Cards at the end of an elite stage",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865177,
+      "m_Localized": "Increase monster amount by 20%\nReduce monster health by 20%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865178,
+      "m_Localized": "Removes kill requirement from normal stages",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865179,
+      "m_Localized": "Removes time requirement from normal stages",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865180,
+      "m_Localized": "Food increases max health by 1.5% up to 300% (1840 foods)\nDiminishing returns after the first 33 foods.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865181,
+      "m_Localized": "Food increases damage by 1% up to 300% (2920 foods)\nDiminishing returns after 50 foods.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865182,
+      "m_Localized": "Food heals an additional 20% of your max health",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865183,
+      "m_Localized": "Food also attracts all soul-gems",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865184,
+      "m_Localized": "Shop prices are reduced by 50%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865185,
+      "m_Localized": "Shop contains more items\nCards in shops are of better quality",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865186,
+      "m_Localized": "Each Soulcard increases your damage by 2%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865187,
+      "m_Localized": "Gives one free reroll every time you select cards",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10512242434588672,
+      "m_Localized": "+100% Health Regen\nHealth regen can regen up to 200% of your max health",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 31833553752506368,
+      "m_Localized": "Soul-cards at max level can overcap anytime \nbut are 90% less likely to appear.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

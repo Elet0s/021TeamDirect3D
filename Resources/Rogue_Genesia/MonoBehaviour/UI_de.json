@@ -1,0 +1,1635 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "UI_de",
+  "m_LocaleId": {
+    "m_Code": "de"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 3905891805363733533
+  },
+  "m_Metadata": {
+    "m_Items": [
+      {
+        "id": 0
+      }
+    ]
+  },
+  "m_TableData": [
+    {
+      "m_Id": 72651765574221824,
+      "m_Localized": "{other} Rang Welt",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 68962951639023616,
+      "m_Localized": "Schalte {other} frei",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 74084524561743872,
+      "m_Localized": "Freigeschaltet durch {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 79388181356298240,
+      "m_Localized": "Jede {other}. zerstörte Kiste enthält einen garantierten Leeremagnet",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 79388181377269760,
+      "m_Localized": "Garantierter Leerenmagnet nach {other} zerbrochenen Kisten",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 81911512680841218,
+      "m_Localized": "SoulShop | {other} Tier",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 767261622272,
+      "m_Localized": "Seelenkarten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559641309184,
+      "m_Localized": "Menü",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559666475008,
+      "m_Localized": "Artefakte",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559666475009,
+      "m_Localized": "Statistiken",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858579304448,
+      "m_Localized": "Allgemeine Statistiken",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247488,
+      "m_Localized": "Errungenschaften",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79319247412215808,
+      "m_Localized": "Gegner (Ist noch in der Entwicklung)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247489,
+      "m_Localized": "Seelenkarten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247490,
+      "m_Localized": "Artefakte",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67545630752063488,
+      "m_Localized": "Nächste Seite",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67545630789812224,
+      "m_Localized": "Vorherige Seite",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093068226560,
+      "m_Localized": "Anzahl der Tode",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975296,
+      "m_Localized": "Durchläufe gestartet",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975297,
+      "m_Localized": "Gesamtanzahl der getöteten Gegner",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975298,
+      "m_Localized": "Gesamtanzahl der getöteten Eliten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975299,
+      "m_Localized": "Gesamtanzahl der getöteten Bosse",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975300,
+      "m_Localized": "Gesamter Schaden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975301,
+      "m_Localized": "Insgesamt überlebte Zeit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975302,
+      "m_Localized": "Tage",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975303,
+      "m_Localized": "Gesamte abgeschlossene Etappen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975304,
+      "m_Localized": "Gesamtes Gold",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169600,
+      "m_Localized": "Leeremagneten aufgesammelt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169601,
+      "m_Localized": "Seelensteine aufgesammelt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169602,
+      "m_Localized": "Essen aufgesammelt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169603,
+      "m_Localized": "Geldmünzen aufgesammelt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70401229621772288,
+      "m_Localized": "Opfer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74064869663129600,
+      "m_Localized": "Letzten Durchlauf fortsetzten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380843769856,
+      "m_Localized": "Neue Errungenschaft",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380881518592,
+      "m_Localized": "Laden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380881518593,
+      "m_Localized": "Plünder deine Belohnungen!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 767307759616,
+      "m_Localized": "Spiel beenden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 58306035854295040,
+      "m_Localized": "Neu starten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948614746112,
+      "m_Localized": "Spielen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605148413952,
+      "m_Localized": "Zurück",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60662511260352512,
+      "m_Localized": "Fadenkreuz",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774081,
+      "m_Localized": "Ton",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774082,
+      "m_Localized": "Optionen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774083,
+      "m_Localized": "Credits",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774084,
+      "m_Localized": "Rogs Modus",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287168,
+      "m_Localized": "F-Rang Welt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287169,
+      "m_Localized": "E-Rang Welt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287170,
+      "m_Localized": "D-Rang Welt (Kommt zu einen später Zeitpunkt)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521655463936,
+      "m_Localized": "F-Rang Überleben",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521689018368,
+      "m_Localized": "E-Rang Überleben (Kommt zu einen später Zeitpunkt)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521689018369,
+      "m_Localized": "D-Rang Überleben (Kommt zu einen später Zeitpunkt)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287171,
+      "m_Localized": "(Gesperrt)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774085,
+      "m_Localized": "Überlebens Modus",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62535401752707072,
+      "m_Localized": "Seelen Laden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837158540689408,
+      "m_Localized": "Beenden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72853903315255296,
+      "m_Localized": "Spiel beenden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837454360756224,
+      "m_Localized": "Steuerung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837454360756225,
+      "m_Localized": "Grafiken",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388992,
+      "m_Localized": "Fadenkreuz Farben",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74064869692489728,
+      "m_Localized": "Skala",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388993,
+      "m_Localized": "Rot:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388994,
+      "m_Localized": "Grün:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388995,
+      "m_Localized": "Blau:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63491867397537792,
+      "m_Localized": "Schusslinie",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845577251209216,
+      "m_Localized": "Musik:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845577251209217,
+      "m_Localized": "SFX",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46866851297968128,
+      "m_Localized": "Wiederholen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46866851297968129,
+      "m_Localized": "Zurück zum Hauptmenü",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699475406848,
+      "m_Localized": "BELOHNUNG",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049806012416,
+      "m_Localized": "Du hast noch nicht beanspruchte Belohnungen übrig",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049843761152,
+      "m_Localized": "Fortsetzen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049843761153,
+      "m_Localized": "Willst du aufhören?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 58306035879460864,
+      "m_Localized": "Willst du das Spiel neustarten?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72853903340421120,
+      "m_Localized": "Willst du das Spiel beenden?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62164085811920896,
+      "m_Localized": "Qualität:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62180733180657664,
+      "m_Localized": "Deaktiviert",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411653050368,
+      "m_Localized": "Niedrig",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410496,
+      "m_Localized": "Mittel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410497,
+      "m_Localized": "Hoch",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410498,
+      "m_Localized": "Ultra",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62180733180657665,
+      "m_Localized": "Maximum",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410499,
+      "m_Localized": "Benutzerdefiniert",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410500,
+      "m_Localized": "Auflösung:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410501,
+      "m_Localized": "Vollbild:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410502,
+      "m_Localized": "V-Sync:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410503,
+      "m_Localized": "Texturen:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604800,
+      "m_Localized": "Schatten:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604801,
+      "m_Localized": "Nebel:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604802,
+      "m_Localized": "Tiefenschärfe:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604803,
+      "m_Localized": "Reflektionen:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604804,
+      "m_Localized": "Globale Beleuchtung:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604805,
+      "m_Localized": "Nachbearbeitung:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604806,
+      "m_Localized": "Visuelle Effekte:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62189039462858752,
+      "m_Localized": "Bestätigen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62189039496413184,
+      "m_Localized": "Anwenden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404902506496,
+      "m_Localized": "Schadensnummer:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060928,
+      "m_Localized": "Deaktiviert",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060929,
+      "m_Localized": "Nur Ganzzahl",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060930,
+      "m_Localized": "Mit Dezimalstellen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72998716094234624,
+      "m_Localized": "Blinkende Gegner:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74755764435763200,
+      "m_Localized": "Detaillierte Karteninformationen:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76357862231326720,
+      "m_Localized": "Effekte bei geringer Gesundheit:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76709688835260416,
+      "m_Localized": "Alle",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76709987251601408,
+      "m_Localized": "Nur gesperrte",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46850097637179392,
+      "m_Localized": "Ein Spiel von Ouadi Huard",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46850097641373696,
+      "m_Localized": "Musik von Myrtle Mist",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70093518594064384,
+      "m_Localized": "Laden neu rollen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72437026696937472,
+      "m_Localized": "Schmied neu rollen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699513155584,
+      "m_Localized": "Heilung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699513155585,
+      "m_Localized": "LP",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347399163904,
+      "m_Localized": "Lebenspunkte",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329728,
+      "m_Localized": "Gesundheitsregeneration",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329729,
+      "m_Localized": "Basisschaden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329730,
+      "m_Localized": "Schadensmultiplikator",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329731,
+      "m_Localized": "Angriffsgeschwindigkeit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329732,
+      "m_Localized": "Zusätzliche Projektile",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329733,
+      "m_Localized": "Projektil-Durchdringung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329734,
+      "m_Localized": "Projektil-Größe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329735,
+      "m_Localized": "Projektil-Lebensdauer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329736,
+      "m_Localized": "Projektil-Geschwindigkeit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329737,
+      "m_Localized": "Angriffsfläche",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329738,
+      "m_Localized": "Rückstoß",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329739,
+      "m_Localized": "Erfahrungsmultiplikator",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329740,
+      "m_Localized": "Laufgeschwindigkeit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063709085696,
+      "m_Localized": "Aufsammelreichweite",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329742,
+      "m_Localized": "Verteidigung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329743,
+      "m_Localized": "Schadenminderung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329744,
+      "m_Localized": "Sprints",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329745,
+      "m_Localized": "Sprint-Abklingzeit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329746,
+      "m_Localized": "Sprintverzögerung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329747,
+      "m_Localized": "Wiederhergestellte Sprints",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652834172928,
+      "m_Localized": "Seelenerfahrung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652867727360,
+      "m_Localized": "Kritische Trefferchance",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652867727361,
+      "m_Localized": "Kritischer Schaden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 53621140041187328,
+      "m_Localized": "Drücke eine beliebige Taste",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 767311953920,
+      "m_Localized": "Deine Seele wird stärker! Wähle deine Seelenkarte",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77472467728941056,
+      "m_Localized": "Du hast einen starken Feind besiegt! Wähle dein Artefakt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 3954047664128,
+      "m_Localized": "Stufe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416361269477376,
+      "m_Localized": "Verunreinigt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416486146490368,
+      "m_Localized": "Normal",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416528299245568,
+      "m_Localized": "Ungewöhnlich",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416562432491520,
+      "m_Localized": "Selten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73249871416213504,
+      "m_Localized": "Episch",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416598050521088,
+      "m_Localized": "Heroisch",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73249871466545152,
+      "m_Localized": "Aufgestiegen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77576134419234816,
+      "m_Localized": "Evolution",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41581305776521216,
+      "m_Localized": "Stufenaufstiegsbonus",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 44811535886532602,
+      "m_Localized": "Etappe abgeschlossen\nHol dir deine Belohnung!Etappe abgeschlossen\nHol dir deine Belohnung!Etappe abgeschlossen\nHol dir deine Belohnung!Etappe abgeschlossen\nHol dir deine Belohnung!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 51269830675480576,
+      "m_Localized": "Erfahrung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45748622483734528,
+      "m_Localized": "Geldmünzen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45748622513094656,
+      "m_Localized": "Kartenauswahl",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76707686432587776,
+      "m_Localized": "<color=#ff0000ff>Limitbrecher-Service</color>",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769648828416,
+      "m_Localized": "Einsammeln",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799936,
+      "m_Localized": "Zeit überlebt:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799937,
+      "m_Localized": "Gegner getötet:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807462400000,
+      "m_Localized": "Gesamter Schaden:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120256,
+      "m_Localized": "Maximale Etappe:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120257,
+      "m_Localized": "Geld:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63039627918524416,
+      "m_Localized": "Gesamtes Geld:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996213796864,
+      "m_Localized": "Seelenstufe:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799938,
+      "m_Localized": "Abgeschlossen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799939,
+      "m_Localized": "Etappe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48408877533446144,
+      "m_Localized": "Gebiet",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994240,
+      "m_Localized": "KAMPF",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994241,
+      "m_Localized": "ELITE",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994242,
+      "m_Localized": "BOSS",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994243,
+      "m_Localized": "Laden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72119642501103616,
+      "m_Localized": "Schmied",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72119642530463744,
+      "m_Localized": "Ansturm",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994244,
+      "m_Localized": "Ereignis",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994245,
+      "m_Localized": "Truhe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45763929931726848,
+      "m_Localized": "Nächste Etappe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911936,
+      "m_Localized": "Gegner getötet:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911937,
+      "m_Localized": "Überlebe :",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911938,
+      "m_Localized": "Töte den Elite",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74752099616505856,
+      "m_Localized": "Töte die Eliten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911939,
+      "m_Localized": "Töte den Boss",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911940,
+      "m_Localized": "Ende der Etappe:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120258,
+      "m_Localized": "Schadensübersicht",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996247351296,
+      "m_Localized": "Bitte setze das Spiel auf deine Steam-Wunschliste",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996247351297,
+      "m_Localized": "Trete dem Discord bei",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252611940352,
+      "m_Localized": "Etappe wählen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252637106176,
+      "m_Localized": "Kamera vergrößern",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252637106177,
+      "m_Localized": "Kamera bewegen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73663179252252672,
+      "m_Localized": "Platzierung der Markierungen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911673540608,
+      "m_Localized": "AUF DIE WUNSCHLISTE IN STEAM!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911698706432,
+      "m_Localized": "Danke!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911698706433,
+      "m_Localized": "Vielen Dank, dass du die Demo von Rogie:Genesia gespielt hast.\n\nEs gibt eine Menge Features und Verbesserungen, die wir hinzufügen wollen, und wir würden uns über eure Unterstützung und euer Feedback freuen. \nDer beste Weg, uns zu helfen, ist, das Spiel auf Steam auf deine Wunschliste zu setzen.\nSo können wir euch über den Fortschritt des Spiels via Steam auf dem Laufenden halten!\nIhr könnt auch unserem Discord beitreten und eure mächtigen Builds mit anderen Spielern teilen.Vielen Dank, dass du die Demo von Rogie:Genesia gespielt hast.\n\nEs gibt eine Menge Features und Verbesserungen, die wir hinzufügen wollen, und wir würden uns über eure Unterstützung und euer Feedback freuen. \nDer beste Weg, uns zu helfen, ist, das Spiel auf Steam auf deine Wunschliste zu setzen.\nSo können wir euch über den Fortschritt des Spiels via Steam auf dem Laufenden halten!\nIhr könnt auch unserem Discord beitreten und eure mächtigen Builds mit anderen Spielern teilen.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086049247232,
+      "m_Localized": "Tastenkombinationen zurücksetzen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607360,
+      "m_Localized": "Nach oben laufen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607361,
+      "m_Localized": "Nach unten laufen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607362,
+      "m_Localized": "Nach links laufen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607363,
+      "m_Localized": "Nach rechts laufen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607364,
+      "m_Localized": "Sprint",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607365,
+      "m_Localized": "Karte | Schnelle Bewegung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72891293325017088,
+      "m_Localized": "Karte | Markierungsplatzierung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72891293362765824,
+      "m_Localized": "Menü | Bestätigen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74486593349173248,
+      "m_Localized": "Menü | Pausieren",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79317852655140864,
+      "m_Localized": "Vibration des Joysticks",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 80685411941957632,
+      "m_Localized": "Automatisch Zielen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223040,
+      "m_Localized": "Maximales Leben",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223041,
+      "m_Localized": "Zusätzliche Projektile",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223042,
+      "m_Localized": "Schaden",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71002519733223424,
+      "m_Localized": "Basisschaden Multiplikator",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099200,
+      "m_Localized": "Neu rollen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099201,
+      "m_Localized": "Neu rollen mit der selben Seltenheit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099202,
+      "m_Localized": "Verbannen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293504,
+      "m_Localized": "Artefakt am Ende einer Elite-Etappe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293505,
+      "m_Localized": "Die Elitestufe kann kein Fragezeichen mehr sein",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293506,
+      "m_Localized": "Erfahrungsmultiplikator bei Übertötung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71002519733223425,
+      "m_Localized": "Leeremagnet zieht auch Goldmünzen an",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74529604338663424,
+      "m_Localized": "Chance, dass eine Karte der Seltenheit Aufgestiegen auftaucht",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74529604372217856,
+      "m_Localized": "Kampfziele der normalen Etappen anzeigen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72613131504533504,
+      "m_Localized": "Angriffsgeschwindigkeit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512647286784,
+      "m_Localized": "Nächstes Tier",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841216,
+      "m_Localized": "Vorheriges Tier",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841217,
+      "m_Localized": "Zurücksetzten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325687066624,
+      "m_Localized": "Welt gerettet!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325724815360,
+      "m_Localized": "Seelensteine erhalten:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325724815361,
+      "m_Localized": "{other} Seelenshop-Verbesserung freigeschaltet",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 82964935337525248,
+      "m_Localized": "Neu rollen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885376,
+      "m_Localized": "Neu rollen der Seltenheit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885377,
+      "m_Localized": "Verbannen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885378,
+      "m_Localized": "Free",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "SmartFormatTag",
+        "ns": "UnityEngine.Localization.Metadata",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

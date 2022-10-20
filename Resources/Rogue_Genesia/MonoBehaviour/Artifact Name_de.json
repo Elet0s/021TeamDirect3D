@@ -1,0 +1,329 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Artifact Name_de",
+  "m_LocaleId": {
+    "m_Code": "de"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": -4909407611126789505
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 4849602871296,
+      "m_Localized": "Seelenhandschuh",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785856,
+      "m_Localized": "Vergrößerungskristall",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785857,
+      "m_Localized": "Gilgameschs Ring",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785858,
+      "m_Localized": "Gilgameschs Krone",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785859,
+      "m_Localized": "Gilgameschs Siegel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785860,
+      "m_Localized": "Helm der Kontrolle",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785861,
+      "m_Localized": "Portalsplitter",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785862,
+      "m_Localized": "Schwert des Midas",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785863,
+      "m_Localized": "Trainingsgewichte",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785864,
+      "m_Localized": "Alte Münze",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785865,
+      "m_Localized": "Hand des Betrügers",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785866,
+      "m_Localized": "Vervielfältigungs-Truhe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785867,
+      "m_Localized": "Phönix-Totem",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785868,
+      "m_Localized": "Beutel der Gier",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785869,
+      "m_Localized": "Das Schienbein des Heiligen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785870,
+      "m_Localized": "Umhang des Märtyrers",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785871,
+      "m_Localized": "Blatt des Weisen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785872,
+      "m_Localized": "Ring des Windes",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785873,
+      "m_Localized": "Glasschwert",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785874,
+      "m_Localized": "Lanze des Chronos",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785875,
+      "m_Localized": "Heiliges Kreuz",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785876,
+      "m_Localized": "Halskette des Ouroboros",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785877,
+      "m_Localized": "Mythril Kompass",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785878,
+      "m_Localized": "Adamantit Stab",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785879,
+      "m_Localized": "Heiliges Schwert",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785880,
+      "m_Localized": "Blitzstiefel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785881,
+      "m_Localized": "Verfluchter Gürtel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785882,
+      "m_Localized": "Kapuze des Hermes",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785883,
+      "m_Localized": "Armschiene des Champions",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785884,
+      "m_Localized": "Bhikkhu Perle",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785885,
+      "m_Localized": "Saphir des Feiglings",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785886,
+      "m_Localized": "Rubin des Kämpfers",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785887,
+      "m_Localized": "Hühner-Statue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785888,
+      "m_Localized": "Schweinefleisch-Statue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785889,
+      "m_Localized": "Rindfleisch-Statue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785890,
+      "m_Localized": "Leeren-Statue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785891,
+      "m_Localized": "Plakette des Ladenbesitzers",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785892,
+      "m_Localized": "Abenteurer-Lizenz",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785893,
+      "m_Localized": "Sammelbuch",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785894,
+      "m_Localized": "Geschnitzter Würfel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10512331722932224,
+      "m_Localized": "Trollblut",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 31833646207549440,
+      "m_Localized": "Verdorbener Kern",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

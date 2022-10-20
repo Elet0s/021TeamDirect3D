@@ -1,0 +1,329 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Artifact Name_en",
+  "m_LocaleId": {
+    "m_Code": "en"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": -4909407611126789505
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 4849602871296,
+      "m_Localized": "Soul Gauntlet",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785856,
+      "m_Localized": "Magnifying Crystal",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785857,
+      "m_Localized": "Gilgamesh's Ring",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785858,
+      "m_Localized": "Gilgamesh's Crown",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785859,
+      "m_Localized": "Gilgamesh's Seal",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785860,
+      "m_Localized": "Helm of Control",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785861,
+      "m_Localized": "Portal Shard",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785862,
+      "m_Localized": "Sword of Midas",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785863,
+      "m_Localized": "Training weight",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785864,
+      "m_Localized": "Old Coin",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785865,
+      "m_Localized": "Hand of the Cheater",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785866,
+      "m_Localized": "Duplication chest",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785867,
+      "m_Localized": "Phoenix totem",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785868,
+      "m_Localized": "Pouch of Greed",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785869,
+      "m_Localized": "Saint's Shinbone",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785870,
+      "m_Localized": "Martyr's Cloak",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785871,
+      "m_Localized": "Sage's Leaf",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785872,
+      "m_Localized": "Wind's ring",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785873,
+      "m_Localized": "Glass Sword",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785874,
+      "m_Localized": "Chronos' Lace",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785875,
+      "m_Localized": "Holy Cross",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785876,
+      "m_Localized": "Ouroboros Necklace",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785877,
+      "m_Localized": "Mythril Compass",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785878,
+      "m_Localized": "Adamantite Rod",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785879,
+      "m_Localized": "Sacred Sword",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785880,
+      "m_Localized": "Lightning boots",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785881,
+      "m_Localized": "Cursed Belt",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785882,
+      "m_Localized": "Hermes' Hood",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785883,
+      "m_Localized": "Champion's Bracer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785884,
+      "m_Localized": "Bhikkhu Pearl",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785885,
+      "m_Localized": "Coward's Saphir",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785886,
+      "m_Localized": "Fighter's Ruby",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785887,
+      "m_Localized": "Chicken Statue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785888,
+      "m_Localized": "Pork Statue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785889,
+      "m_Localized": "Beef Statue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785890,
+      "m_Localized": "Void Statue",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785891,
+      "m_Localized": "Shop-Keeper's Plate",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785892,
+      "m_Localized": "Adventurer's Licence",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785893,
+      "m_Localized": "Collection Book",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 4849665785894,
+      "m_Localized": "Carved Dice",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10512331722932224,
+      "m_Localized": "Troll Blood",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 31833646207549440,
+      "m_Localized": "Corrupted Core",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

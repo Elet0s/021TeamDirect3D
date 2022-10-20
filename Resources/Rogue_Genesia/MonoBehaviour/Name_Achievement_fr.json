@@ -1,0 +1,644 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Name_Achievement_fr",
+  "m_LocaleId": {
+    "m_Code": "fr"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 3198013944170918527
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 1167771918090240,
+      "m_Localized": "Ce n'est que le commencement",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976320,
+      "m_Localized": "Revenant",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976323,
+      "m_Localized": "Première richesse",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976324,
+      "m_Localized": "L'or pour des jours difficiles",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976325,
+      "m_Localized": "Une partie riche",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976326,
+      "m_Localized": "Quel est le poids de tout cet ors ?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976327,
+      "m_Localized": "Company",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976328,
+      "m_Localized": "Brigade",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976329,
+      "m_Localized": "Division",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976330,
+      "m_Localized": "L'armée d'une seul âme",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976331,
+      "m_Localized": "Âme Tactique",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976332,
+      "m_Localized": "Âme Strategique",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976333,
+      "m_Localized": "C'était un boss ?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170625,
+      "m_Localized": "Premier pas en tant que héro",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170626,
+      "m_Localized": "Est-ce du boeuf ?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170627,
+      "m_Localized": "Le gout de poulet",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170628,
+      "m_Localized": "Un arrière gout de porc",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170629,
+      "m_Localized": "Je ne pense pas que je devrais les mélanger.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036545507328,
+      "m_Localized": "Large et faible",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701632,
+      "m_Localized": "Rassemble le pouvoir du vent !",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701633,
+      "m_Localized": "Concentration",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701635,
+      "m_Localized": "Orbite",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701636,
+      "m_Localized": "Fée née du mana",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701637,
+      "m_Localized": "Explosion !",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701638,
+      "m_Localized": "Dégâts sur la durée ?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701639,
+      "m_Localized": "Les Samouraïs sont plus cool",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701640,
+      "m_Localized": "Montée de colère",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701641,
+      "m_Localized": "Ça ne fait que s'améliorer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701642,
+      "m_Localized": "L'acier plus fort que le fer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701643,
+      "m_Localized": "Tout dans la défense",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701644,
+      "m_Localized": "Feu d'artifice",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701645,
+      "m_Localized": "Vitalité",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701646,
+      "m_Localized": "Piquant",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701647,
+      "m_Localized": "Soin rapide",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701648,
+      "m_Localized": "Ça n'a pas l'air naturel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701649,
+      "m_Localized": "Devenir plus léger",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701650,
+      "m_Localized": "Devenir plus lourd",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701651,
+      "m_Localized": "Aucune portée ne suffit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701652,
+      "m_Localized": "Un projectiles, deux morts",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701653,
+      "m_Localized": "Surcharge d'armes",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251675693858816,
+      "m_Localized": "Je reviendrais",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993804337152,
+      "m_Localized": "Reincarnation",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531456,
+      "m_Localized": "Un petit pas pour une âme",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531457,
+      "m_Localized": "Débutant",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531458,
+      "m_Localized": "Un autre jour, un autre monde à sauver",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531459,
+      "m_Localized": "Dash plus rapide",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531460,
+      "m_Localized": "Plus de dashs à la fois",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531461,
+      "m_Localized": "Plus de delais",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1424300479037440,
+      "m_Localized": "La mort est une force",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531463,
+      "m_Localized": "Blessure profonde",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1422125010993152,
+      "m_Localized": "Flèche plus rapide",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010408656896,
+      "m_Localized": "Les dégats sont la seule chose dont j'ai besoin !",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851200,
+      "m_Localized": "La protection est aussi important",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851201,
+      "m_Localized": "Rien de mieux que la vitesse de déplacement",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851203,
+      "m_Localized": "Ta précision laisse à désirer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851204,
+      "m_Localized": "C'est là ou ça devient fou !",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190459281408,
+      "m_Localized": "Running in the 90's",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190492835840,
+      "m_Localized": "Gas Gas Gas",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190492835841,
+      "m_Localized": "Rogue:Survivors",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131576315904,
+      "m_Localized": "Fin du second Danger",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064640,
+      "m_Localized": "Sacrifier ses dégats pour de la vitesse ?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064641,
+      "m_Localized": "Il lui manque une vis",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064642,
+      "m_Localized": "Mes mains devienne lourdes",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064643,
+      "m_Localized": "Se sentir léger",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064644,
+      "m_Localized": "Faster",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6747694246346752,
+      "m_Localized": "Epicé",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6747694267318272,
+      "m_Localized": "Brûlant !",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 7192408393203712,
+      "m_Localized": "Tu auras surement besoin de plus de santé",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 7483461562220544,
+      "m_Localized": "Un ami du vide",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 8588211930218496,
+      "m_Localized": "Comment vais-je utiliser tous ces dashs ?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225603809280,
+      "m_Localized": "Certains veillerons sur toi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780800,
+      "m_Localized": "Commencer à se faire la main",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780801,
+      "m_Localized": "50 tentatives, mais combien de morts ?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780802,
+      "m_Localized": "Il est plus fort, non ?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780804,
+      "m_Localized": "21 niveau d'âme plus tard",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780805,
+      "m_Localized": "Marchand d'arme",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780806,
+      "m_Localized": "Tant pie pour l'armure, rien ne vaux la chair!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780807,
+      "m_Localized": "Ça s'applique avant la défense ?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780808,
+      "m_Localized": "Comme une forteresse",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9652900915265536,
+      "m_Localized": "Abuser du marchand pour brisée les limites !!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921314803712,
+      "m_Localized": "Une invention de trop",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921348358144,
+      "m_Localized": "L'épée favorite de la déesse du vent.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921348358145,
+      "m_Localized": "Plus de projectiles",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 11256736775880704,
+      "m_Localized": "C'est un bug ?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12032803845390336,
+      "m_Localized": "Ne peut-on pas avoir plus de dégâts critiques ?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13775658993532928,
+      "m_Localized": "Les squelettes sont brutaux !",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 14541033641295872,
+      "m_Localized": "Plus de puissance de feu",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

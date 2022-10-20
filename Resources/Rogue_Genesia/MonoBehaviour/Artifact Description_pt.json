@@ -1,0 +1,329 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Artifact Description_pt",
+  "m_LocaleId": {
+    "m_Code": "pt"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 5263071400576003132
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 23557410865171,
+      "m_Localized": "Aumentar a exigência do Estágio em 35%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865185,
+      "m_Localized": "Loja contém mais itens\nCartas em Lojas possuem uma melhor qualidade",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865179,
+      "m_Localized": "Remove o requisito de Tempo dos Estágios normais",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865182,
+      "m_Localized": "Comida cura 20% adicionais de sua Vida Máxima",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865177,
+      "m_Localized": "Aumentar a quantidade de Inimigos em 20%\nReduza a Vida dos Inimigos em 20%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865183,
+      "m_Localized": "Comida também atrai todas as Gemas D'Alma",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865176,
+      "m_Localized": "Permite que você desenhe 2 Soul-Cards no final de uma fase de elite",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865158,
+      "m_Localized": "Agora você pode escolher entre 4 Cartas D'Alma",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865180,
+      "m_Localized": "Consumíveis aumentam a Vida Máxima em 1,5% até 300% (total de 1840)\nDiminui lentamente a eficácia após os pri",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865167,
+      "m_Localized": "Retorne ao primeiro estágio com todo o seu equipamento intacto",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865186,
+      "m_Localized": "Cada Carta D'Alma aumenta seu Dano em 2%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 31833553752506368,
+      "m_Localized": "Cartas D'Alma no nível máximo podem passar o limite de nível a qualquer momento, mas são 90% menos propensos a aparecer.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865178,
+      "m_Localized": "Remove o requisito de inimigos mortos de Estágios normais",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865174,
+      "m_Localized": "Regenera 1,5% de sua Vida Máxima por segundo\n- 50% Vida Máxima",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865187,
+      "m_Localized": "Dá um Re-rolamento grátis cada vez que você subir de",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865159,
+      "m_Localized": "Ganhe 10% do seu Ouro total a cada Estágio",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670850,
+      "m_Localized": "Cartas D'Alma de raridade Heróico são 200% mais propensos a aparecer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670849,
+      "m_Localized": "Cartas D'Alma de raridade Básico e Normal são 75% menos propensos a aparecer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865152,
+      "m_Localized": "Raridade contaminada Soulcards são 99,9% menos propensos a aparecer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865166,
+      "m_Localized": "Dobra seu Dano\n- 60% Vida Máxima",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865153,
+      "m_Localized": "Todos os projéteis seguem a sua a",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865175,
+      "m_Localized": "Velocidade de Movimento também aumenta a Velocidade de Ataque",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865168,
+      "m_Localized": "+ 25% Dano\n+ 25% Velocidade de Movimento\n+ 25% Vida Máxima\n+ 25% Raio de Coleta",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865173,
+      "m_Localized": "Remove o atraso entre os Avanços\n+ 2 Cargas de Avanço",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670848,
+      "m_Localized": "Aumente a experiência obtida de Gemas D'Alma em 50%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865163,
+      "m_Localized": "Receber dano aumenta seu Dano em 50% por 6 segundos \n(12 segundos de recarga)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865155,
+      "m_Localized": "Cada morte inimiga concede 1 de Ouro",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865170,
+      "m_Localized": "Reduzir a exigência do Estágio em 35%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865169,
+      "m_Localized": "Ao morrer, retorne à fase anterior\n(Uso único)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865157,
+      "m_Localized": "Aumenta o ganho de Experiência em 100%\nReduz o ganho de Ouro em 50%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865160,
+      "m_Localized": "Ao morrer, ressucite de volta à vida e destrua \ntodos os inimigos. (Uso único)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865162,
+      "m_Localized": "Cure totalmente a sua Vida ao subir de nível",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865181,
+      "m_Localized": "Consumíveis aumentam o seu Dano em 1% até 300% (total de 2920)\nDiminui lentamente a eficácia após coletar 50 co",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865154,
+      "m_Localized": "Projéteis atravessam de um lado da tela ao outro",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865161,
+      "m_Localized": "Ao pegar este artefato, escolha 1 entre 3 Cartas D'Alma",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865172,
+      "m_Localized": "Reduz a Vida de Chefes e Elites em 30%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865164,
+      "m_Localized": "Protege você de todos os danos por 4 segundos após sofrer dano\n(12 segundos de recarga)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865184,
+      "m_Localized": "Os preços das Lojas são reduzidos em 50%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557352144896,
+      "m_Localized": "Absorva automaticamente 50% de todas as Gemas D'Alma no final de cada Estágio",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865156,
+      "m_Localized": "Reduz o ganho de Experiência em 33%, porém novas Cartas D'Alma começam no nível 2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10512242434588672,
+      "m_Localized": "+100% Regeneração de Vida\nRegeneração de Vida pode exceder até 200% de sua Vida Máxima",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865165,
+      "m_Localized": "Sofrer dano aumenta sua Velocidade de Movimento em 50% por 6 segundos\n(12 segundos de recarga)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

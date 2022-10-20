@@ -1,0 +1,329 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Artifact Description_zh-Hans",
+  "m_LocaleId": {
+    "m_Code": "zh-Hans"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 5263071400576003132
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 23557410865171,
+      "m_Localized": "通关条件增加35%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865185,
+      "m_Localized": "商店中物品更多\n商店中卡牌稀有度更高",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865179,
+      "m_Localized": "移除普通关卡的时间限制",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865182,
+      "m_Localized": "食物可以额外回复20%最大生命值",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865177,
+      "m_Localized": "提升20%怪物数量\n降低20%怪物生命值",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865183,
+      "m_Localized": "食物也可以吸收所有灵魂宝石",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865176,
+      "m_Localized": "精英关卡后可以获得2张灵魂卡牌",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865158,
+      "m_Localized": "可以从4张灵魂卡牌中进行选择",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865180,
+      "m_Localized": "食物可以提升1.5%最大生命值，最多300%（1840个食物）\n效果在获取33个食物后降低。",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865167,
+      "m_Localized": "所有装备原封不动，但返回第一关",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865186,
+      "m_Localized": "每张灵魂卡牌使伤害提升2%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 31833553752506368,
+      "m_Localized": "灵魂卡牌达到最高等级后仍然可以突破\n但出现的几率降低90%。",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865178,
+      "m_Localized": "移除普通关卡的击杀限制",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865174,
+      "m_Localized": "每秒回复1.5%最大生命值\n最大生命值减半",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865187,
+      "m_Localized": "每次选择卡牌都有一次免费重抽机会",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865159,
+      "m_Localized": "每关获得10%的当前金币",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670850,
+      "m_Localized": "传说卡牌出现的概率增加200%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670849,
+      "m_Localized": "污秽和普通灵魂卡牌出现的概率降低75%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865152,
+      "m_Localized": "污秽灵魂卡牌出现的概率降低99.9%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865166,
+      "m_Localized": "伤害翻倍\n降低60%的最大生命",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865153,
+      "m_Localized": "所有投射物都向瞄准的方向发射",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865175,
+      "m_Localized": "移动速度也会同时提升攻速",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865168,
+      "m_Localized": "+25%伤害\n+25%移动速度\n+25%生命值\n+25%拾取范围",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865173,
+      "m_Localized": "移除冲刺的使用间隔\n增加2次冲刺次数",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670848,
+      "m_Localized": "灵魂宝石的经验提高50%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865163,
+      "m_Localized": "受到伤害时，6秒内造成的伤害提高50%\n（12秒冷却）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865155,
+      "m_Localized": "击杀敌人后获得1金币",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865170,
+      "m_Localized": "通关条件降低35%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865169,
+      "m_Localized": "死亡时，返回上一关\n（限一次）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865157,
+      "m_Localized": "经验获取翻倍\n金币获取减半",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865160,
+      "m_Localized": "满血复活并杀死\n所有敌人（限一次）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865162,
+      "m_Localized": "升级时回复所有生命值",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865181,
+      "m_Localized": "食物可以提升1%伤害，最多300%（2920个食物）\n效果在获取50个食物后降低。",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865154,
+      "m_Localized": "投射物进入屏幕一侧后，会在另一侧再次出现",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865161,
+      "m_Localized": "抽3张灵魂卡牌",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865172,
+      "m_Localized": "头目和精英的生命值降低30%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865164,
+      "m_Localized": "受伤后4秒内无敌\n（12秒冷却）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865184,
+      "m_Localized": "商店中的物品打五折",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557352144896,
+      "m_Localized": "每关结束时自动吸收场内一半的灵魂宝石",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865156,
+      "m_Localized": "经验获取降低33%\n新的灵魂卡牌一开始便是2级",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10512242434588672,
+      "m_Localized": "生命值再生速度翻倍\n生命值再生可以回复至最大生命值的200%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865165,
+      "m_Localized": "受到伤害时，6秒内移动速度提高50%\n（12秒冷却）",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

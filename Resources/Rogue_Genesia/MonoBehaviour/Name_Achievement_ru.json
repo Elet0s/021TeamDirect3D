@@ -1,0 +1,644 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Name_Achievement_ru",
+  "m_LocaleId": {
+    "m_Code": "ru"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 3198013944170918527
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 1167771918090240,
+      "m_Localized": "Это только начало",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993804337152,
+      "m_Localized": "Реинкарнация",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976320,
+      "m_Localized": "Мститель",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1424300479037440,
+      "m_Localized": "Смерть сама по себе является силой!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225603809280,
+      "m_Localized": "Некоторые будут смотреть на вас",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531456,
+      "m_Localized": "Маленький шаг для души",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531457,
+      "m_Localized": "Новобранец",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531458,
+      "m_Localized": "Еще один день, еще один мир, чтобы спасти",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780800,
+      "m_Localized": "Взять себя в руки",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780801,
+      "m_Localized": "50 попыток, сколько смертей?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976323,
+      "m_Localized": "Первые достижения",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976324,
+      "m_Localized": "Золото на черный день",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976325,
+      "m_Localized": "Богатый пробег",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976326,
+      "m_Localized": "Насколько тяжело все это золото?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976327,
+      "m_Localized": "Компания",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976328,
+      "m_Localized": "Бригада",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976329,
+      "m_Localized": "Разделение",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976330,
+      "m_Localized": "Одна душевая армия",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976331,
+      "m_Localized": "Тактическая душа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976332,
+      "m_Localized": "Стратегическая душа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976333,
+      "m_Localized": "Это босс?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010408656896,
+      "m_Localized": "Урон - единственное, что мне нужно!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851200,
+      "m_Localized": "Защита также важна",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851201,
+      "m_Localized": "Скорость передвижения - это путь к успеху",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170625,
+      "m_Localized": "Первый шаг в роли героя",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780802,
+      "m_Localized": "Он стал сильнее, верно?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131576315904,
+      "m_Localized": "Конец второй опасности",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170626,
+      "m_Localized": "Это говядина?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170627,
+      "m_Localized": "Определенно на вкус как курица",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170628,
+      "m_Localized": "Послевкусие свинины",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170629,
+      "m_Localized": "Я не думаю, что я должен их смешать",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036545507328,
+      "m_Localized": "Большой и слабый",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251675693858816,
+      "m_Localized": "Я вернусь",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701632,
+      "m_Localized": "Соберите силу ветра!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701633,
+      "m_Localized": "Фокус",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921348358145,
+      "m_Localized": "Больше снарядов",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701635,
+      "m_Localized": "Орбиталь",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701636,
+      "m_Localized": "Wisp рожден из маны",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701637,
+      "m_Localized": "Взрыв!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701638,
+      "m_Localized": "Урон с течением времени?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701639,
+      "m_Localized": "Самураи круче",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 14541033641295872,
+      "m_Localized": "Злоупотребление магазинами для разрушения пределов!!!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9652900915265536,
+      "m_Localized": "Злоупотребление магазинами, чтобы сломать пределы !!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921314803712,
+      "m_Localized": "Слишком много изобретений",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921348358144,
+      "m_Localized": "Любимый меч богини ветра",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701640,
+      "m_Localized": "Накопившийся гнев",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701641,
+      "m_Localized": "Все становится лучше",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064640,
+      "m_Localized": "Пожертвовать частью урона ради скорости?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701642,
+      "m_Localized": "Сталь, мощнее железа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701643,
+      "m_Localized": "Все на защиту",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064641,
+      "m_Localized": "Ему не хватает винта",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701644,
+      "m_Localized": "Салют",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701645,
+      "m_Localized": "Жизнеспособность",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701646,
+      "m_Localized": "Колючий",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6747694246346752,
+      "m_Localized": "Шипастый",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6747694267318272,
+      "m_Localized": "Самый шипастый!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701647,
+      "m_Localized": "Быстрое исцеление",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701648,
+      "m_Localized": "Это не выглядит естественным",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701649,
+      "m_Localized": "Становится легче",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701650,
+      "m_Localized": "Становится тяжелее",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701651,
+      "m_Localized": "Нет достаточного диапазона",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701652,
+      "m_Localized": "Один снаряд, два убийства",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701653,
+      "m_Localized": "Перегрузка оружия",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531459,
+      "m_Localized": "Быстрый рывок",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531460,
+      "m_Localized": "Больше рывков одновременно",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 8588211930218496,
+      "m_Localized": "Как я буду использовать все эти рывки?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531461,
+      "m_Localized": "Больше никаких задержек",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1422125010993152,
+      "m_Localized": "Быстрые стрелы",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064642,
+      "m_Localized": "Мои руки становятся тяжелыми",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064643,
+      "m_Localized": "Чувствуя легче",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064644,
+      "m_Localized": "Быстрее",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531463,
+      "m_Localized": "Глубокая рана",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12032803845390336,
+      "m_Localized": "Разве мы не можем получить более критический урон?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780804,
+      "m_Localized": "Спустя 21 уровней душ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780805,
+      "m_Localized": "Военная собака",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 11256736775880704,
+      "m_Localized": "Это ошибка?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851203,
+      "m_Localized": "Твоей точности немного не хватает",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851204,
+      "m_Localized": "Вот где начинается безумие!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 7192408393203712,
+      "m_Localized": "Вам может понадобиться больше здоровья",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780806,
+      "m_Localized": "К черту с доспехами, ничто не сравнится с плотью!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 7483461562220544,
+      "m_Localized": "Друг из пустоты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780807,
+      "m_Localized": "Это применяется перед плоской защитой?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780808,
+      "m_Localized": "Как крепость",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190459281408,
+      "m_Localized": "Бег в 90 -х годах",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190492835840,
+      "m_Localized": "Газ Газ Газ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190492835841,
+      "m_Localized": "Rogue:Survivors",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13775658993532928,
+      "m_Localized": "Скелеты жестоки!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

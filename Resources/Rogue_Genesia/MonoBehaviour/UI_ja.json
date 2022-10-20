@@ -1,0 +1,116 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "UI_ja",
+  "m_LocaleId": {
+    "m_Code": "ja"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 3905891805363733533
+  },
+  "m_Metadata": {
+    "m_Items": [
+      {
+        "id": 0
+      }
+    ]
+  },
+  "m_TableData": [
+    {
+      "m_Id": 74084524561743872,
+      "m_Localized": "",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 68962951639023616,
+      "m_Localized": "",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 72651765574221824,
+      "m_Localized": "",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 79388181356298240,
+      "m_Localized": "",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 79388181377269760,
+      "m_Localized": "",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 81911512680841218,
+      "m_Localized": "",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 82256325724815361,
+      "m_Localized": "",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "SmartFormatTag",
+        "ns": "UnityEngine.Localization.Metadata",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

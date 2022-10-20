@@ -1,0 +1,642 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -4826179110787420926
+  },
+  "m_Name": "Name_Achievement Shared Data",
+  "m_TableCollectionName": "Name_Achievement",
+  "m_TableCollectionNameGuidString": "6b0b7dbe13c3fc54aba494a12527d0c2",
+  "m_Entries": [
+    {
+      "m_Id": 1167771918090240,
+      "m_Key": "death_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993804337152,
+      "m_Key": "death_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976320,
+      "m_Key": "death_10",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1424300479037440,
+      "m_Key": "death_20",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225603809280,
+      "m_Key": "death_30",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531456,
+      "m_Key": "Game_Count_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531457,
+      "m_Key": "Game_Count_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531458,
+      "m_Key": "Game_Count_10",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780800,
+      "m_Key": "Game_Count_20",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780801,
+      "m_Key": "Game_Count_50",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976323,
+      "m_Key": "10kglobalgold",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976324,
+      "m_Key": "10kgold",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976325,
+      "m_Key": "10ktotalgold",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976326,
+      "m_Key": "100kglobalgold",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976327,
+      "m_Key": "Kill_Monster_100",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976328,
+      "m_Key": "Kill_Monster_1k",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976329,
+      "m_Key": "Kill_Monster_10k",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976330,
+      "m_Key": "Kill_Monster_100k",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976331,
+      "m_Key": "Kill_Monster_1m",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976332,
+      "m_Key": "Kill_Monster_10m",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976333,
+      "m_Key": "Kill_Elite_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010408656896,
+      "m_Key": "Kill_Elite_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851200,
+      "m_Key": "Kill_Elite_3",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851201,
+      "m_Key": "Kill_Elite_4",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170625,
+      "m_Key": "Kill_Boss_F1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780802,
+      "m_Key": "Kill_Boss_E1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131576315904,
+      "m_Key": "Kill_Boss_E2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170626,
+      "m_Key": "Food_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170627,
+      "m_Key": "Food_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170628,
+      "m_Key": "Food_3",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170629,
+      "m_Key": "VoidAndFood",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036545507328,
+      "m_Key": "SpearLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251675693858816,
+      "m_Key": "PikeLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701632,
+      "m_Key": "BowLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701633,
+      "m_Key": "CleaveLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921348358145,
+      "m_Key": "ShurikenLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701635,
+      "m_Key": "MagicWandLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701636,
+      "m_Key": "ThunderStaffLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701637,
+      "m_Key": "DeathAuraLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701638,
+      "m_Key": "FireRingLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701639,
+      "m_Key": "KunaiLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 14541033641295872,
+      "m_Key": "WindBladeLevel_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9652900915265536,
+      "m_Key": "MagicWispLevel_8",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921314803712,
+      "m_Key": "KatanaLevel_8",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921348358144,
+      "m_Key": "WindBladeLevel_8",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701640,
+      "m_Key": "Damage_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701641,
+      "m_Key": "Damage_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064640,
+      "m_Key": "Damage_3",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701642,
+      "m_Key": "Defence_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701643,
+      "m_Key": "Defence_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064641,
+      "m_Key": "Defence_3",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701644,
+      "m_Key": "FireWork",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701645,
+      "m_Key": "Health_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701646,
+      "m_Key": "Health_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6747694246346752,
+      "m_Key": "Health_3",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6747694267318272,
+      "m_Key": "Health_4",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701647,
+      "m_Key": "Health_Regen_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701648,
+      "m_Key": "Health_Regen_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701649,
+      "m_Key": "Move_Speed_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701650,
+      "m_Key": "PSize_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701651,
+      "m_Key": "Pick_Up_Range",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701652,
+      "m_Key": "Piercing_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701653,
+      "m_Key": "Weapon_Count_3",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531459,
+      "m_Key": "Dash_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531460,
+      "m_Key": "Dash_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 8588211930218496,
+      "m_Key": "Dash_3",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531461,
+      "m_Key": "Dash_CD_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1422125010993152,
+      "m_Key": "PLifeTime_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064642,
+      "m_Key": "Attack_Speed_slow_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064643,
+      "m_Key": "SL_20",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064644,
+      "m_Key": "PSpeed_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531463,
+      "m_Key": "CrossBowLevel_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12032803845390336,
+      "m_Key": "Weapon_MaxLevel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780804,
+      "m_Key": "Weapon_MaxLevel_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780805,
+      "m_Key": "Weapon_MaxLevel_3",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 11256736775880704,
+      "m_Key": "Weapon_SuperShopTrick",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851203,
+      "m_Key": "CriticalDamage_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851204,
+      "m_Key": "CriticalChance_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 7192408393203712,
+      "m_Key": "Negative_Defence_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780806,
+      "m_Key": "Negative_Defence_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 7483461562220544,
+      "m_Key": "Pick_Up_Range_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780807,
+      "m_Key": "Damage_Mitigation_1",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780808,
+      "m_Key": "Damage_Mitigation_2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190459281408,
+      "m_Key": "Finish_E_20Min",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190492835840,
+      "m_Key": "Finish_F_10Min",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190492835841,
+      "m_Key": "Reach_10Min",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13775658993532928,
+      "m_Key": "Reach_30Min",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_KeyGenerator": {
+    "id": 0
+  },
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "DistributedUIDGenerator",
+        "ns": "UnityEngine.Localization.Tables",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

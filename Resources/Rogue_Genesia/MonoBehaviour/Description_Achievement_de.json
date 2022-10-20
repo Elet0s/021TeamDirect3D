@@ -1,0 +1,267 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Description_Achievement_de",
+  "m_LocaleId": {
+    "m_Code": "de"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 172104565907251535
+  },
+  "m_Metadata": {
+    "m_Items": [
+      {
+        "id": 0
+      }
+    ]
+  },
+  "m_TableData": [
+    {
+      "m_Id": 1135932935454720,
+      "m_Localized": "Besitze {objective} Goldmünzen",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1129571174531072,
+      "m_Localized": "Erhalte {objective} Goldmünzen in einem einzigen Durchlauf",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1129571174531073,
+      "m_Localized": "Gewinne insgesamt {current}/{objective} Goldmünzen",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061056,
+      "m_Localized": "Töte {current}/{objective} {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061057,
+      "m_Localized": "Töte {current}/{objective} Feinde",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061058,
+      "m_Localized": "Erreiche mindestens {objective} {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 5970761896116224,
+      "m_Localized": "Erreiche {objective} im Überlebens-Modus",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 5966361014255616,
+      "m_Localized": "Beende eine {other} Welt in weniger als {objective}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061065,
+      "m_Localized": "Sammle {current}/{objective} {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061064,
+      "m_Localized": "Starte {currente}/{objective} Durchläufe",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061063,
+      "m_Localized": "Stirb {current}/{objective} mal",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061062,
+      "m_Localized": "Erhöhe deine Seelenstufe auf {objective}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061061,
+      "m_Localized": "Verbessere insgesamt {objective} Waffen bis zur Stufe {current}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061060,
+      "m_Localized": "Verbessere {other} bis zur Stufe {objective}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061059,
+      "m_Localized": "Erreiche {objective} oder weniger {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061066,
+      "m_Localized": "Goldmünzen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1135933078061067,
+      "m_Localized": "Seelenstein",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1135933078061068,
+      "m_Localized": "Essen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1135933078061069,
+      "m_Localized": "Leeremagnete",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251615648202752,
+      "m_Localized": "Speer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251615648202753,
+      "m_Localized": "F-Rang Goblin-Schamane",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365139012403200,
+      "m_Localized": "E-Rang Goblin-Schamane",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6337309450125312,
+      "m_Localized": "E-Rang Riesenwurm",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251615648202754,
+      "m_Localized": "Eliten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "SmartFormatTag",
+        "ns": "UnityEngine.Localization.Metadata",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

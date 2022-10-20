@@ -1,0 +1,267 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Description_Achievement_pt",
+  "m_LocaleId": {
+    "m_Code": "pt"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 172104565907251535
+  },
+  "m_Metadata": {
+    "m_Items": [
+      {
+        "id": 0
+      }
+    ]
+  },
+  "m_TableData": [
+    {
+      "m_Id": 1135932935454720,
+      "m_Localized": "Adquira {objective} moedas de ouro",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1129571174531072,
+      "m_Localized": "Ganhe {objective} moedas de ouro em uma única partida",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1129571174531073,
+      "m_Localized": "Ganhe {current}/{objective} moedas de ouro no total",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061056,
+      "m_Localized": "Matar {current}/{objective} {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061057,
+      "m_Localized": "Matar {current}/{objective} inimigos",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061058,
+      "m_Localized": "Alcance pelo menos {objective} {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 5970761896116224,
+      "m_Localized": "Alcance {objective} no modo sobrevivência",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 5966361014255616,
+      "m_Localized": "Termine um mundo {other} em menos de {objective}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061065,
+      "m_Localized": "Pegue {current}/{objective} {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061064,
+      "m_Localized": "Iniciar {current}/{objective} partidas",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061063,
+      "m_Localized": "Morra {current}/{objective} vezes",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061062,
+      "m_Localized": "Aumente o nível da sua alma até {objective}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061061,
+      "m_Localized": "Melhore {objective} armas até o nível {current}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061060,
+      "m_Localized": "Obtenha {other} até o nível {objective}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061059,
+      "m_Localized": "Alcance {objective} ou menos {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 1135933078061066,
+      "m_Localized": "moedas de ouro",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1135933078061067,
+      "m_Localized": "joia da alma",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1135933078061068,
+      "m_Localized": "comida",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1135933078061069,
+      "m_Localized": "imãs do vazio",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251615648202752,
+      "m_Localized": "Lança",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251615648202753,
+      "m_Localized": "Xamã Goblin (Ranque F)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365139012403200,
+      "m_Localized": "Xamã Goblin (Ranque E)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6337309450125312,
+      "m_Localized": "Minhoca Gigante (Ranque F)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251615648202754,
+      "m_Localized": "Elites",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "SmartFormatTag",
+        "ns": "UnityEngine.Localization.Metadata",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

@@ -1,0 +1,908 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -4826179110787420926
+  },
+  "m_Name": "Soul Bonus Table Shared Data",
+  "m_TableCollectionName": "Soul Bonus Table Name",
+  "m_TableCollectionNameGuidString": "83cd43036e42907418339782e5b8099c",
+  "m_Entries": [
+    {
+      "m_Id": 99654254592,
+      "m_Key": "Modifier_FireSpirit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 348342927360,
+      "m_Key": "Modifier_IceSpirit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 412385755136,
+      "m_Key": "Modifier_Fractal",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46922952857042944,
+      "m_Key": "Modifier_VoidSpirit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 430878441472,
+      "m_Key": "Modifier_ThornSpike",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12413908500480,
+      "m_Key": "Modifier_ThornFirework",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12434951323648,
+      "m_Key": "Modifier_Evasion",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12507605057536,
+      "m_Key": "Modifier_4",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12510939529216,
+      "m_Key": "Modifier_5",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12543369887744,
+      "m_Key": "Modifier_6",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12544749813760,
+      "m_Key": "Modifier_7",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12545454456832,
+      "m_Key": "Modifier_8",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12546125545472,
+      "m_Key": "Modifier_9",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12546788245504,
+      "m_Key": "Modifier_10",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12547404808192,
+      "m_Key": "Modifier_11",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12548088479744,
+      "m_Key": "Modifier_12",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12548751179776,
+      "m_Key": "Modifier_13",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12549384519680,
+      "m_Key": "Modifier_14",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12549963333632,
+      "m_Key": "Modifier_15",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12550512787456,
+      "m_Key": "Modifier_16",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12551188070400,
+      "m_Key": "Modifier_17",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12551880130560,
+      "m_Key": "Modifier_18",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12590417395712,
+      "m_Key": "Modifier_19",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12590996209664,
+      "m_Key": "Modifier_20",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12591591800832,
+      "m_Key": "Modifier_21",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12592179003392,
+      "m_Key": "Modifier_22",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12592707485696,
+      "m_Key": "Modifier_23",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12593210802176,
+      "m_Key": "Weapon_Bow",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12618074636288,
+      "m_Key": "Weapon_CrossBow",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12619257430016,
+      "m_Key": "Weapon_MagicWand",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12620415057920,
+      "m_Key": "Weapon_Spear",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13113317081088,
+      "m_Key": "Weapon_FireRing",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13113874923520,
+      "m_Key": "Weapon_Katana",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13114357268480,
+      "m_Key": "Weapon_Pike",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13114877362176,
+      "m_Key": "Weapon_Swordrang",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13115447787520,
+      "m_Key": "Weapon_Kunai",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13115993047040,
+      "m_Key": "Weapon_EvilRing",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13116542500864,
+      "m_Key": "Weapon_ThunderStaff",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13117138092032,
+      "m_Key": "Weapon_Cleave",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13117683351552,
+      "m_Key": "Weapon_Shuriken",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13118253776896,
+      "m_Key": "Weapon_VoidWisp",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74925960106557440,
+      "m_Key": "Weapon_Thorn",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13119436570624,
+      "m_Key": "Weapon_MagicWisp",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77163333171232768,
+      "m_Key": "Weapon_WindKatana",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77163333192204288,
+      "m_Key": "Weapon_FireKatana",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77080067193913344,
+      "m_Key": "Weapon_WindBlade",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13121827323904,
+      "m_Key": "Weapon_15",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13122443886592,
+      "m_Key": "Weapon_16",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13123026894848,
+      "m_Key": "Weapon_17",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13123601514496,
+      "m_Key": "Weapon_18",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13124125802496,
+      "m_Key": "Weapon_19",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13124725587968,
+      "m_Key": "Weapon_20",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13125333762048,
+      "m_Key": "Weapon_21",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13125962907648,
+      "m_Key": "Weapon_22",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13126566887424,
+      "m_Key": "Weapon_23",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13127196033024,
+      "m_Key": "Weapon_24",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13127762264064,
+      "m_Key": "Weapon_25",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13128437547008,
+      "m_Key": "Weapon_26",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13130446618624,
+      "m_Key": "Weapon_27",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13131163844608,
+      "m_Key": "Weapon_28",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13132510216192,
+      "m_Key": "Source_Other",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13133122584576,
+      "m_Key": "Stats_Agility",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13133672038400,
+      "m_Key": "Stats_Celerity",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13165099958272,
+      "m_Key": "Stats_Dash",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13165762658304,
+      "m_Key": "Stats_Durability",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13166341472256,
+      "m_Key": "Stats_GodWrath",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13166949646336,
+      "m_Key": "Stats_MultiHanded",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13167507488768,
+      "m_Key": "Stats_Muscle",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13223564361728,
+      "m_Key": "Stats_Range",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13224260616192,
+      "m_Key": "Stats_Regeneration",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13224881373184,
+      "m_Key": "Stats_Sharpener",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13225485352960,
+      "m_Key": "Stats_StrongerThrow",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13226101915648,
+      "m_Key": "Stats_Void",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845357587120128,
+      "m_Key": "Stats_Heavy",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845357612285952,
+      "m_Key": "Stats_Quick",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845357612285953,
+      "m_Key": "Stats_String",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46922952878014464,
+      "m_Key": "Stats_Area",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46950757154111488,
+      "m_Key": "Stats_Recursion",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47603882567352320,
+      "m_Key": "Stats_Dash_Delay",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47603882584129536,
+      "m_Key": "Stats_Dash_Regen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48032417106837504,
+      "m_Key": "Stats_Sharp_Edge",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48244941148340224,
+      "m_Key": "Stats_Auto_Heal",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48244953613811712,
+      "m_Key": "Stats_IronWill",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52519789320159232,
+      "m_Key": "Stats_IronSkin",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52519789341130752,
+      "m_Key": "Stats_SteelSkin",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52519789341130753,
+      "m_Key": "Stats_StoneSkin",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52519789341130754,
+      "m_Key": "Stats_SliperySkin",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 53008625812848640,
+      "m_Key": "Stats_Turtle",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52503858745393154,
+      "m_Key": "Stats_CriticalDamage",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52503858745393153,
+      "m_Key": "Stats_CriticalChance",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68902970269057024,
+      "m_Key": "Stats_CriticalFocus",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72038278158303232,
+      "m_Key": "Stats_Clumsy",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73066923819745280,
+      "m_Key": "Stats_Lunatic",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73066923849105408,
+      "m_Key": "Stats_LightHanded",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73066923849105409,
+      "m_Key": "Stats_StoneHanded",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73066923849105410,
+      "m_Key": "Stats_Hypersonic",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73071397980291072,
+      "m_Key": "Stats_Light_Armor",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73072728107335680,
+      "m_Key": "Stats_CritPatience",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663219732480,
+      "m_Key": "Stats_Average",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481216,
+      "m_Key": "Stats_CriticalDamage_normal",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481217,
+      "m_Key": "Stats_Lens",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481218,
+      "m_Key": "Stats_DamascusSteel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481219,
+      "m_Key": "Stats_Tower",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481220,
+      "m_Key": "Stats_Compromise",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481221,
+      "m_Key": "Stats_Momentum",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481222,
+      "m_Key": "Stats_Fast-Learner",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74218695162544128,
+      "m_Key": "Stats_Low_Pressure",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311516954624,
+      "m_Key": "Stats_Overworked",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926144,
+      "m_Key": "Stats_BloodPressure",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926145,
+      "m_Key": "Stats_Cardio",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926146,
+      "m_Key": "Stats_Accumulation",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926147,
+      "m_Key": "Stats_Aiming",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926148,
+      "m_Key": "Stats_ForgedIron",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926149,
+      "m_Key": "Stats_Perfection",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926150,
+      "m_Key": "Stats_Practice",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926151,
+      "m_Key": "Stats_Black_Blood",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926152,
+      "m_Key": "Stats_Castle",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926153,
+      "m_Key": "Stats_Flesh",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926154,
+      "m_Key": "Stats_Impenetrable",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926155,
+      "m_Key": "Stats_Martyr",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926156,
+      "m_Key": "Stats_Overloaded",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926157,
+      "m_Key": "Stats_Single_Handed",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926158,
+      "m_Key": "Stats_Tradeoff",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926159,
+      "m_Key": "Stats_Bookworm",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 53008625833820160,
+      "m_Key": "OnEffect_Thorn",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_KeyGenerator": {
+    "id": 0
+  },
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "DistributedUIDGenerator",
+        "ns": "UnityEngine.Localization.Tables",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

@@ -1,0 +1,1621 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "UI_tr",
+  "m_LocaleId": {
+    "m_Code": "tr"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 3905891805363733533
+  },
+  "m_Metadata": {
+    "m_Items": [
+      {
+        "id": 0
+      }
+    ]
+  },
+  "m_TableData": [
+    {
+      "m_Id": 767261622272,
+      "m_Localized": "Ruh Kartları",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559641309184,
+      "m_Localized": "Menü",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559666475008,
+      "m_Localized": "Eserler",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559666475009,
+      "m_Localized": "İstatistikler",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 767307759616,
+      "m_Localized": "Oyundan Çık",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 58306035854295040,
+      "m_Localized": "Tekrar Dene",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948614746112,
+      "m_Localized": "Oyna",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605148413952,
+      "m_Localized": "Geri",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60662511260352512,
+      "m_Localized": "Nişangah",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774081,
+      "m_Localized": "Ses",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774082,
+      "m_Localized": "Ayarlar",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774083,
+      "m_Localized": "Kredi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774084,
+      "m_Localized": "Haydut Modu",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774085,
+      "m_Localized": "Hayatta Kalma Mode",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62535401752707072,
+      "m_Localized": "Ruh Dükkanı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837158540689408,
+      "m_Localized": "Çıkış",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837454360756224,
+      "m_Localized": "Tuş Bağlantıları",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837454360756225,
+      "m_Localized": "Video",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388992,
+      "m_Localized": "Nişangah Rengi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388993,
+      "m_Localized": "Kırmızı:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388994,
+      "m_Localized": "Yeşil:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388995,
+      "m_Localized": "Mavi:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63491867397537792,
+      "m_Localized": "Nişangah Çizgisi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845577251209216,
+      "m_Localized": "Müzik",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845577251209217,
+      "m_Localized": "SFX",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46866851297968128,
+      "m_Localized": "Yeniden Dene",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46866851297968129,
+      "m_Localized": "Ana Menüye Dön",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699475406848,
+      "m_Localized": "Ödül",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049806012416,
+      "m_Localized": "Ödülü kabul et",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049843761152,
+      "m_Localized": "Devam Et",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049843761153,
+      "m_Localized": "Gerçektende Çıkmak İstiyor musun",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 58306035879460864,
+      "m_Localized": "Yeniden Başlatmayı Onayla",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62164085811920896,
+      "m_Localized": "Kalite:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62180733180657664,
+      "m_Localized": "Devre Dışı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411653050368,
+      "m_Localized": "Düşük",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410496,
+      "m_Localized": "Orta",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410497,
+      "m_Localized": "Yüksek",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410498,
+      "m_Localized": "Ultra",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62180733180657665,
+      "m_Localized": "Maksimum",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410499,
+      "m_Localized": "Özel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410500,
+      "m_Localized": "Çözünürlük:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410501,
+      "m_Localized": "Tam ekran:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410502,
+      "m_Localized": "V-Sync:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410503,
+      "m_Localized": "Dokular:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604800,
+      "m_Localized": "Gölgeler:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604801,
+      "m_Localized": "Sis",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604802,
+      "m_Localized": "Alan derinliği",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604803,
+      "m_Localized": "Yansımalar",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604804,
+      "m_Localized": "Küresel aydınlatma",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604805,
+      "m_Localized": "Rötüş",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604806,
+      "m_Localized": "Görsel efektler",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62189039462858752,
+      "m_Localized": "Onayla",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62189039496413184,
+      "m_Localized": "Uygula",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699513155584,
+      "m_Localized": "İyileşmek",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699513155585,
+      "m_Localized": "Sağlık",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347399163904,
+      "m_Localized": "Sağlık Durumu",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329728,
+      "m_Localized": "Sağlık Yenilemesi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329729,
+      "m_Localized": "Temel Hasar",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329730,
+      "m_Localized": "Online Hasar",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329731,
+      "m_Localized": "Atak hızı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329732,
+      "m_Localized": "Ek Mermiler",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329734,
+      "m_Localized": "Mermi Boyutu",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329735,
+      "m_Localized": "Mermi Süresi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329736,
+      "m_Localized": "Mermi Hızı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329737,
+      "m_Localized": "Alan Boyutu",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329738,
+      "m_Localized": "Tepme",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329739,
+      "m_Localized": "XP",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329740,
+      "m_Localized": "Hareket Hızı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063709085696,
+      "m_Localized": "Toplama Mesafesi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329742,
+      "m_Localized": "Savunma",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329743,
+      "m_Localized": "Hasar azaltma",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329744,
+      "m_Localized": "Dash Şarzı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329745,
+      "m_Localized": "Hızlı Bekleme süresi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329746,
+      "m_Localized": "Dash Gecikmesi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329747,
+      "m_Localized": "Yenilenen Dash",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652834172928,
+      "m_Localized": "Ruh Deneyimi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652867727360,
+      "m_Localized": "Kritik Şans",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652867727361,
+      "m_Localized": "Kritik Hasar",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 53621140041187328,
+      "m_Localized": "Bir tuşa basın",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 767311953920,
+      "m_Localized": "Ruhun Güçleniyor Ruh Kartını Seç",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 3954047664128,
+      "m_Localized": "Seviye",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416361269477376,
+      "m_Localized": "Lekeli",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416486146490368,
+      "m_Localized": "Normal",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416528299245568,
+      "m_Localized": "Olağan dışı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416562432491520,
+      "m_Localized": "Nadir",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416598050521088,
+      "m_Localized": "Heroic",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41581305776521216,
+      "m_Localized": "Seviye Atlama Bonusu",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 44811535886532602,
+      "m_Localized": "Aşama Tamamlandı Ödülünü al!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 51269830675480576,
+      "m_Localized": "Deneyim",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45748622483734528,
+      "m_Localized": "Atın Para",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45748622513094656,
+      "m_Localized": "Kart Seç",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769648828416,
+      "m_Localized": "Topla",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799936,
+      "m_Localized": "Hayatta Kalma süresi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799937,
+      "m_Localized": "Öldürdüğü Düşman Sayısı:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807462400000,
+      "m_Localized": "Toplam Hasar:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120256,
+      "m_Localized": "Maksimum:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120257,
+      "m_Localized": "Altın:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63039627918524416,
+      "m_Localized": "Toplam Altın:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996213796864,
+      "m_Localized": "Ruh Seviyesi:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799938,
+      "m_Localized": "Tamamlandı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799939,
+      "m_Localized": "Aşama",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48408877533446144,
+      "m_Localized": "Alan",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994240,
+      "m_Localized": "COMBAT",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994241,
+      "m_Localized": "ELİT",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994242,
+      "m_Localized": "PATRON",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994243,
+      "m_Localized": "Mağaza",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994244,
+      "m_Localized": "Etkinlik",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994245,
+      "m_Localized": "Sandık",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45763929931726848,
+      "m_Localized": "Sıradaki Aşama",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911936,
+      "m_Localized": "Öldürülen Canavarlar:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911937,
+      "m_Localized": "Hatta Kalma:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911938,
+      "m_Localized": "Öldürülen Elitler:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911939,
+      "m_Localized": "Öldürülen Patronlar:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911940,
+      "m_Localized": "Aşama Sonu:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120258,
+      "m_Localized": "Hasar Toplamı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996247351296,
+      "m_Localized": "Oyunu Steam'de İstek Listesine Alın",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996247351297,
+      "m_Localized": "Discord sunucumuza katıl",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252611940352,
+      "m_Localized": "Aşama seç",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252637106176,
+      "m_Localized": "Zoom Kamerası",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252637106177,
+      "m_Localized": "Kamerayı Hareket Ettir",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68962951639023616,
+      "m_Localized": "Kilidi aç {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 65551086049247232,
+      "m_Localized": "Tuş Atamalarını Sıfırla",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607360,
+      "m_Localized": "Yukarı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607361,
+      "m_Localized": "Aşağı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607362,
+      "m_Localized": "Sola",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607363,
+      "m_Localized": "Sağa",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607364,
+      "m_Localized": "Sıçrama",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607365,
+      "m_Localized": "Harita / Hızlı Hareket",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911673540608,
+      "m_Localized": "STEAM'DE İSTEK LİSTESİ!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911698706432,
+      "m_Localized": "Teşekkür ederim",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911698706433,
+      "m_Localized": "\"Rogie:Genesia'nın demosunu oynadığınız için teşekkür ederiz.\r\n\r\nEklemek istediğimiz birçok özellik ve iyileştirme var ve desteğinizi ve geri bildiriminizi istiyoruz.\r\nYardım etmenin en iyi yolu, oyunu Steam'de istek listesine eklemektir.\r\nAyrıca, oyunun ilerleyişi hakkında sizi steam üzerinden bilgilendirmemize de izin verecek!\r\nAyrıca discordumuza katılabilir ve güçlü yapılarınızı diğer oyuncularla paylaşabilirsiniz.\"",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72651765574221824,
+      "m_Localized": "{other} Dünya Sıralaması",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 74084524561743872,
+      "m_Localized": "Kilidi açıldı {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 79388181356298240,
+      "m_Localized": "There is a guaranteed void magnet every {other} crates broken",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 79388181377269760,
+      "m_Localized": "Guaranteed void magnet every {other} crates broken",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 72891293325017088,
+      "m_Localized": "Harita | Pin Yerleşimi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72891293362765824,
+      "m_Localized": "Menü | Onayla",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74486593349173248,
+      "m_Localized": "Menü | Duraklat",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79317852655140864,
+      "m_Localized": "Kontrolör titreşimi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 80685411941957632,
+      "m_Localized": "Otomatik Hedefleme",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841218,
+      "m_Localized": "SoulShop | {other} Tier",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 82256325687066624,
+      "m_Localized": "World Saved!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325724815360,
+      "m_Localized": "Soul-Coin Gained:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325724815361,
+      "m_Localized": "{other} Soul-Shop upgrade unleashed",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 67308858579304448,
+      "m_Localized": "Genel İstatistikler",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247488,
+      "m_Localized": "Başarılar",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79319247412215808,
+      "m_Localized": "Düşmanlar (Daha Sonra Geliyor)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247489,
+      "m_Localized": "Ruh Kartı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247490,
+      "m_Localized": "Tarihi Eserler",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67545630752063488,
+      "m_Localized": "Sonraki sayfa",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67545630789812224,
+      "m_Localized": "Önceki sayfa",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093068226560,
+      "m_Localized": "Ölüm Sayısı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975296,
+      "m_Localized": "Çalıştırma Başladı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975297,
+      "m_Localized": "Öldürülen toplam düşman",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975298,
+      "m_Localized": "Toplam elit öldürüldü",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975299,
+      "m_Localized": "Öldürülen toplam patron",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975300,
+      "m_Localized": "Toplam hasar",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975301,
+      "m_Localized": "Hayatta kalınan toplam süre",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975302,
+      "m_Localized": "gün",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975303,
+      "m_Localized": "Tamamlanan toplam aşama",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975304,
+      "m_Localized": "Toplam altın",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169600,
+      "m_Localized": "Boş mıknatıs alındı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169601,
+      "m_Localized": "Ruh-gem alındı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169602,
+      "m_Localized": "Toplanan yiyecekler",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169603,
+      "m_Localized": "Altın sikkeler toplandı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70401229621772288,
+      "m_Localized": "Öldür",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74064869663129600,
+      "m_Localized": "Kaldığınız yerden devam edin",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380843769856,
+      "m_Localized": "Yeni başarı!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380881518592,
+      "m_Localized": "Mağaza",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380881518593,
+      "m_Localized": "Ödüllerinizi toplayın!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287168,
+      "m_Localized": "F-Rank Dünyası",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287169,
+      "m_Localized": "E-Rank Dünyası",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287170,
+      "m_Localized": "D-Rank Dünyası (Daha Sonra Geliyor)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521655463936,
+      "m_Localized": "F-Sırası Hayatta Kalanlar",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521689018368,
+      "m_Localized": "E-Rank Hayatta Kalanlar (Daha Sonra Geliyor)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521689018369,
+      "m_Localized": "D-Sırası Hayatta Kalanlar (Daha Sonra Geliyor)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287171,
+      "m_Localized": "(Kilitli)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72853903315255296,
+      "m_Localized": "Oyunun sonu",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74064869692489728,
+      "m_Localized": "Ölçek: ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72853903340421120,
+      "m_Localized": "Koşuyu bitirmek ister misin?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404902506496,
+      "m_Localized": "Hasar numarası: ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060928,
+      "m_Localized": "Devre Dışı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060929,
+      "m_Localized": "Yalnızca tamsayı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060930,
+      "m_Localized": "Ondalık sayılarla",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72998716094234624,
+      "m_Localized": "Yanıp sönen düşmanlar:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74755764435763200,
+      "m_Localized": "Detaylı Kart Bilgisi:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76357862231326720,
+      "m_Localized": "Düşük sağlık etkisi:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76709688835260416,
+      "m_Localized": "Tümü",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76709987251601408,
+      "m_Localized": "Sadece kilitlendi",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46850097637179392,
+      "m_Localized": "Oyun Yazan Ouadi Huard",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46850097641373696,
+      "m_Localized": "Müzik: Myrtle Mist",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70093518594064384,
+      "m_Localized": "Yeniden Rulo Dükkanı",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72437026696937472,
+      "m_Localized": "Yeniden Rulo Demirci",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76707686432587776,
+      "m_Localized": "<color=#ff0000ff>Limitbreak hizmeti</color>",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72119642501103616,
+      "m_Localized": "Demirci",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72119642530463744,
+      "m_Localized": "Sürü",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74752099616505856,
+      "m_Localized": "Seçkinleri öldürün",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73663179252252672,
+      "m_Localized": "Pim yerleştirme",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223040,
+      "m_Localized": "Max Health",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223041,
+      "m_Localized": "Additional Projectiles",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223042,
+      "m_Localized": "Damage",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71002519733223424,
+      "m_Localized": "Base damage multiplier",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099200,
+      "m_Localized": "Reroll",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099201,
+      "m_Localized": "Rarity-reroll",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099202,
+      "m_Localized": "Banish",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293504,
+      "m_Localized": "Artifact on elite stage",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293505,
+      "m_Localized": "Elites stage can no longer be a question mark",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293506,
+      "m_Localized": "Experience multiplier on overkill",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71002519733223425,
+      "m_Localized": "Void magnet also attract gold coins",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74529604338663424,
+      "m_Localized": "Ascended card drop chance",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74529604372217856,
+      "m_Localized": "Display normal fight objectives",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72613131504533504,
+      "m_Localized": "Attack Speed",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512647286784,
+      "m_Localized": "Next Tier",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841216,
+      "m_Localized": "Previous Tier",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841217,
+      "m_Localized": "Refund",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935337525248,
+      "m_Localized": "Reroll",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885376,
+      "m_Localized": "Rarity Reroll",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885377,
+      "m_Localized": "Banish",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885378,
+      "m_Localized": "Free",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73249871416213504,
+      "m_Localized": "Epic",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73249871466545152,
+      "m_Localized": "Ascended",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77576134419234816,
+      "m_Localized": "Evolution",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "SmartFormatTag",
+        "ns": "UnityEngine.Localization.Metadata",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

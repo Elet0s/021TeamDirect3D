@@ -1,0 +1,1628 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "UI_ru",
+  "m_LocaleId": {
+    "m_Code": "ru"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 3905891805363733533
+  },
+  "m_Metadata": {
+    "m_Items": [
+      {
+        "id": 0
+      }
+    ]
+  },
+  "m_TableData": [
+    {
+      "m_Id": 767261622272,
+      "m_Localized": "Карты душ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559641309184,
+      "m_Localized": "Меню",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559666475008,
+      "m_Localized": "Артефакты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47193559666475009,
+      "m_Localized": "Статистики",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 767307759616,
+      "m_Localized": "Выход из игры",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 58306035854295040,
+      "m_Localized": "Перезапустить",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948614746112,
+      "m_Localized": "Играть",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605148413952,
+      "m_Localized": "Назад",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60662511260352512,
+      "m_Localized": "Прицел",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774081,
+      "m_Localized": "Звук",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774082,
+      "m_Localized": "Настройки",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774083,
+      "m_Localized": "Кредиты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774084,
+      "m_Localized": "Режим мошенников",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46836605177774085,
+      "m_Localized": "Выживание",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62535401752707072,
+      "m_Localized": "Магазин Душ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837158540689408,
+      "m_Localized": "Выход из игры",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837454360756224,
+      "m_Localized": "Cочетания клавиш",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46837454360756225,
+      "m_Localized": "Видео",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388992,
+      "m_Localized": "Цвет прицела",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388993,
+      "m_Localized": "Красный :",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388994,
+      "m_Localized": "Зеленый :",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60663201202388995,
+      "m_Localized": "Синий :",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63491867397537792,
+      "m_Localized": "Линия прицеливания",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845577251209216,
+      "m_Localized": "Музыка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845577251209217,
+      "m_Localized": "Звуковые эффекты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46866851297968128,
+      "m_Localized": "Повторить попытку",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46866851297968129,
+      "m_Localized": "Возвращаться в меня",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699475406848,
+      "m_Localized": "Награда",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049806012416,
+      "m_Localized": "Подтвердить вознаграждение",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049843761152,
+      "m_Localized": "Продолжить",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 50925049843761153,
+      "m_Localized": "Подтвердить выход",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 58306035879460864,
+      "m_Localized": "Подтвердить повторый запуск",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62164085811920896,
+      "m_Localized": "Качество",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62180733180657664,
+      "m_Localized": "Искалеченный",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411653050368,
+      "m_Localized": "Низкий",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410496,
+      "m_Localized": "Средний",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410497,
+      "m_Localized": "Высокий",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410498,
+      "m_Localized": "Ультра",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62180733180657665,
+      "m_Localized": "Максимальный",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410499,
+      "m_Localized": "Персонализированный",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410500,
+      "m_Localized": "Разрешение",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410501,
+      "m_Localized": "Полный экран",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410502,
+      "m_Localized": "Вертикальная синхронизация",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411682410503,
+      "m_Localized": "Текстуры",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604800,
+      "m_Localized": "Тени",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604801,
+      "m_Localized": "Туман",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604802,
+      "m_Localized": "Резкость",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604803,
+      "m_Localized": "Отражения",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604804,
+      "m_Localized": "Глобальное освещение:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604805,
+      "m_Localized": "Пост обработка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62163411686604806,
+      "m_Localized": "Визуальные эффекты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62189039462858752,
+      "m_Localized": "Подтвердить",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62189039496413184,
+      "m_Localized": "Применить",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46850097637179392,
+      "m_Localized": "Игра от Ouadi Huard",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46850097641373696,
+      "m_Localized": "Музыка от Myrtle Mist",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699513155584,
+      "m_Localized": "Исцелять",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46889699513155585,
+      "m_Localized": "Здоровье",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347399163904,
+      "m_Localized": "Шкала здоровья",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329728,
+      "m_Localized": "Регенерация здоровья",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329729,
+      "m_Localized": "Основной урон",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329730,
+      "m_Localized": "Множитель урона",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329731,
+      "m_Localized": "Скорость атаки",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329732,
+      "m_Localized": "Дополнительные снаряды",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329733,
+      "m_Localized": "Проницаемость снаряда",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329734,
+      "m_Localized": "Размер снаряда",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329735,
+      "m_Localized": "Долговечность снаряда",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329736,
+      "m_Localized": "Скорость снаряда",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329737,
+      "m_Localized": "Размер площади",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329738,
+      "m_Localized": "Отдача",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329739,
+      "m_Localized": "Множитель здоровья",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329740,
+      "m_Localized": "Скорость движения",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063709085696,
+      "m_Localized": "Дальность захвата",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329742,
+      "m_Localized": "Защита",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329743,
+      "m_Localized": "Уменьшение урона",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329744,
+      "m_Localized": "Перезарядка рывка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329745,
+      "m_Localized": "Время восстановления рывка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329746,
+      "m_Localized": "Задержка рывка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47515347424329747,
+      "m_Localized": "Скорость зарядки рывка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652834172928,
+      "m_Localized": "Опыт",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652867727360,
+      "m_Localized": "Шанс крита",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 60405652867727361,
+      "m_Localized": "Критический урон",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 53621140041187328,
+      "m_Localized": "Нажмите на любую кнопку",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 767311953920,
+      "m_Localized": "Твоя душа становится сильнее!\nВыберите свою Карту Духа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 3954047664128,
+      "m_Localized": "Уровень",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416361269477376,
+      "m_Localized": "Испорченный",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416486146490368,
+      "m_Localized": "Обычный",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416528299245568,
+      "m_Localized": "Не обычный",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416562432491520,
+      "m_Localized": "Редкий",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41416598050521088,
+      "m_Localized": "Эпический",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 41581305776521216,
+      "m_Localized": "Бонус за повышение уровня",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 44811535886532602,
+      "m_Localized": "Этап завершен\r\nЗабери свою награду!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 51269830675480576,
+      "m_Localized": "Опыт",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45748622483734528,
+      "m_Localized": "Золотая монета",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45748622513094656,
+      "m_Localized": "Выбор карты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769648828416,
+      "m_Localized": "Собирать",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799936,
+      "m_Localized": "Время выживания:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799937,
+      "m_Localized": "Врагов убито:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807462400000,
+      "m_Localized": "Общий урон:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120256,
+      "m_Localized": "Максимальный этаж",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120257,
+      "m_Localized": "Золото",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63039627918524416,
+      "m_Localized": "Максимальное золото",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996213796864,
+      "m_Localized": "Уровень духа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799938,
+      "m_Localized": "Выполнено",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769669799939,
+      "m_Localized": "Этап",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48408877533446144,
+      "m_Localized": "Зона",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994240,
+      "m_Localized": "Комбат",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994241,
+      "m_Localized": "Элита",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994242,
+      "m_Localized": "Босс",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994243,
+      "m_Localized": "Магазин ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994244,
+      "m_Localized": "Cобытие",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45762769673994245,
+      "m_Localized": "Сундук",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 45763929931726848,
+      "m_Localized": "Следующий этап",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911936,
+      "m_Localized": "Убито монстров:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911937,
+      "m_Localized": "Выживание",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911938,
+      "m_Localized": "Убито элит",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911939,
+      "m_Localized": "Уничтожить боссов",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 56959948639911940,
+      "m_Localized": "Конец Этапа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 61565807521120258,
+      "m_Localized": "Сумма урона",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996247351296,
+      "m_Localized": "Добавить игру в желаемое в Steam",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 62945996247351297,
+      "m_Localized": "Присоеденяйтесь в сервер Discord",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252611940352,
+      "m_Localized": "Выбор Этапа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252637106176,
+      "m_Localized": "Увеличить камеру",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63103252637106177,
+      "m_Localized": "Переместить камеру",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68962951639023616,
+      "m_Localized": "Разблокировать{other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 65551086049247232,
+      "m_Localized": "Сбрасывает сочетания клавиш",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607360,
+      "m_Localized": "Вверх",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607361,
+      "m_Localized": "Вниз",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607362,
+      "m_Localized": "Влево",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607363,
+      "m_Localized": "Вправо",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607364,
+      "m_Localized": "Рывок",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 65551086078607365,
+      "m_Localized": "Карта | Быстрое движение",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911673540608,
+      "m_Localized": "СПИСОК ЖЕЛАНИЙ В STEAM!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911698706432,
+      "m_Localized": "Спасибо",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 63760911698706433,
+      "m_Localized": "\"Спасибо, что сыграли демо Rogie:Genesia\n\nЕсть много функций и улучшений, которые мы хотим добавить, и мы хотели бы вашей поддержки и обратной связи. \nЛучший способ помочь нам, это добавление игры в желаемые в Steam\nЭто также позволит нам информировать вас о ходе игры через Steam!\nВы также можете присоединиться к нам в Discord и поделиться своими мощными сборками с другими игроками.\"",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72651765574221824,
+      "m_Localized": "{other} Мировой Рейтинг",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 74084524561743872,
+      "m_Localized": "Разблокирован {other}",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 67308858579304448,
+      "m_Localized": "Общая статистика",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247488,
+      "m_Localized": "Достижения",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79319247412215808,
+      "m_Localized": "Враги (появится позже)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247489,
+      "m_Localized": "Карта души",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67308858621247490,
+      "m_Localized": "Артефакты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67545630752063488,
+      "m_Localized": "Следующая страница",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67545630789812224,
+      "m_Localized": "Предыдущая страница",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093068226560,
+      "m_Localized": "Количество смертей",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975296,
+      "m_Localized": "Запуск запущен",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975297,
+      "m_Localized": "Всего убитых врагов",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975298,
+      "m_Localized": "Всего убито элиты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975299,
+      "m_Localized": "Всего боссов убито",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975300,
+      "m_Localized": "Общий урон",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975301,
+      "m_Localized": "Общее время выживания",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975302,
+      "m_Localized": "День",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975303,
+      "m_Localized": "Всего завершенных этапов",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093105975304,
+      "m_Localized": "Всего золота",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169600,
+      "m_Localized": "Пустотный магнит захвачен",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169601,
+      "m_Localized": "Душа-алмаза захвачена",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169602,
+      "m_Localized": "Еды захвачено",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68061093110169603,
+      "m_Localized": "Золотых монет захвачено",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70401229621772288,
+      "m_Localized": "Убийство",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74064869663129600,
+      "m_Localized": "Продолжить последний запуск",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380843769856,
+      "m_Localized": "Новое достижение!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380881518592,
+      "m_Localized": "Магазин",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68168380881518593,
+      "m_Localized": "Получайте награды!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287168,
+      "m_Localized": "Мир F-ранга",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287169,
+      "m_Localized": "Мир E-ранга",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287170,
+      "m_Localized": "Мир D-ранга(Будет позже)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521655463936,
+      "m_Localized": "Выжившие F-ранга",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521689018368,
+      "m_Localized": "Выжившие E-ранга(Будет позже)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 78969521689018369,
+      "m_Localized": "Выжившие D-ранга(Будет позже)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70806025969287171,
+      "m_Localized": "Заблокировано",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72853903315255296,
+      "m_Localized": "Конец Игры",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74064869692489728,
+      "m_Localized": "Масштаб: ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72853903340421120,
+      "m_Localized": "Хотите закончить забег?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404902506496,
+      "m_Localized": "Номер повреждений:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060928,
+      "m_Localized": "Отключен",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060929,
+      "m_Localized": "Только целое число",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71941404936060930,
+      "m_Localized": "С десятичными цифрами",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72998716094234624,
+      "m_Localized": "Мигающие враги:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74755764435763200,
+      "m_Localized": "Подробная информация о карте:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76357862231326720,
+      "m_Localized": "Низкое влияние на здоровье:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76709688835260416,
+      "m_Localized": "Всё",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76709987251601408,
+      "m_Localized": "Только блокировка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70093518594064384,
+      "m_Localized": "Перевоплощение магазина",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72437026696937472,
+      "m_Localized": "Перевоплощение кузнеца",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77472467728941056,
+      "m_Localized": "You've defeated a great foe!\nSelect your artifact",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73249871416213504,
+      "m_Localized": "Epique",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73249871466545152,
+      "m_Localized": "Ascended",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77576134419234816,
+      "m_Localized": "Evolution",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76707686432587776,
+      "m_Localized": "<color=#ff0000ff>Услуга по нарушению лимита</color>",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72119642501103616,
+      "m_Localized": "Кузнец",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72119642530463744,
+      "m_Localized": "Рой",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74752099616505856,
+      "m_Localized": "Уничтожить элиту",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72891293325017088,
+      "m_Localized": "Карта | Размещение булавки",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72891293362765824,
+      "m_Localized": "Меню | Подтверждать",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74486593349173248,
+      "m_Localized": "Меню | Пауза",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79317852655140864,
+      "m_Localized": "Вибрация регулятора",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 80685411941957632,
+      "m_Localized": "Автоприцеливание",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223040,
+      "m_Localized": "Максимальное здоровье",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223041,
+      "m_Localized": "Дополнительные снаряды",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 67900063755223042,
+      "m_Localized": "Урон",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71002519733223424,
+      "m_Localized": "Основной множитель урона",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099200,
+      "m_Localized": "Повторная прокатка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099201,
+      "m_Localized": "Повторный бросок редкости",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604770099202,
+      "m_Localized": "Изгнать",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293504,
+      "m_Localized": "Артефакт на элитном этапе",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293505,
+      "m_Localized": "Этап элиты больше не может быть знаком вопроса",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 70302604774293506,
+      "m_Localized": "Множитель опыта при чрезмерном убийстве",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 71002519733223425,
+      "m_Localized": "Магнит пустоты также притягивает золотые монеты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74529604338663424,
+      "m_Localized": "Шанс выпадения карты вознесения",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74529604372217856,
+      "m_Localized": "Отображение целей обычного боя",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 79388181356298240,
+      "m_Localized": "Гарантированный магнит пустоты в каждом из {other} разбитых ящиков",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 79388181377269760,
+      "m_Localized": "Гарантированный недействительный магнит каждый {other} разбитый ящик",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 72613131504533504,
+      "m_Localized": "Скорость атаки",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512647286784,
+      "m_Localized": "Next Tier",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841216,
+      "m_Localized": "Previous Tier",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841217,
+      "m_Localized": "Refund",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 81911512680841218,
+      "m_Localized": "SoulShop | {other} Tier",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 82256325687066624,
+      "m_Localized": "World Saved!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325724815360,
+      "m_Localized": "Soul-Coin Gained:",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82256325724815361,
+      "m_Localized": "{other} Soul-Shop upgrade unleashed",
+      "m_Metadata": {
+        "m_Items": [
+          {
+            "id": 0
+          }
+        ]
+      }
+    },
+    {
+      "m_Id": 82964935337525248,
+      "m_Localized": "Reroll",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885376,
+      "m_Localized": "Rarity Reroll",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885377,
+      "m_Localized": "Banish",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 82964935366885378,
+      "m_Localized": "Free",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "SmartFormatTag",
+        "ns": "UnityEngine.Localization.Metadata",
+        "asm": "Unity.Localization"
+      },
+      "data": {}
+    }
+  }
+}

@@ -1,0 +1,644 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Name_Achievement_de",
+  "m_LocaleId": {
+    "m_Code": "de"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 3198013944170918527
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 1167771918090240,
+      "m_Localized": "Dies ist nur der Anfang",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993804337152,
+      "m_Localized": "Reinkarnation",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976320,
+      "m_Localized": "Der Wiedergeborene",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1424300479037440,
+      "m_Localized": "Der Tod ist eine Kraft an sich!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225603809280,
+      "m_Localized": "Einige werden zu dir aufschauen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531456,
+      "m_Localized": "Ein kleiner Schritt für eine Seele",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531457,
+      "m_Localized": "Neueinsteiger",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531458,
+      "m_Localized": "Ein neuer Tag, eine neue Welt zum Retten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780800,
+      "m_Localized": "Ich habe den Dreh raus",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780801,
+      "m_Localized": "50 Versuche, wie viele Tode?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976323,
+      "m_Localized": "Erste Gewinne",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976324,
+      "m_Localized": "Gold für einen regnerischen Tag",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976325,
+      "m_Localized": "Ein reicher Durchlauf",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976326,
+      "m_Localized": "Wie schwer ist das ganze Gold?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976327,
+      "m_Localized": "Gesellschaft",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976328,
+      "m_Localized": "Brigade",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976329,
+      "m_Localized": "Division",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976330,
+      "m_Localized": "Einseelenarmee",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976331,
+      "m_Localized": "Taktische Seele",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976332,
+      "m_Localized": "Strategische Seele",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772001976333,
+      "m_Localized": "Ist das ein Boss?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010408656896,
+      "m_Localized": "Schaden ist das Einzige, was ich brauche!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851200,
+      "m_Localized": "Verteidigung ist auch wichtig",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851201,
+      "m_Localized": "Bewegungsgeschwindigkeit ist das A und O",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170625,
+      "m_Localized": "Erster Schritt als Held",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780802,
+      "m_Localized": "Er ist stärker geworden, oder?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131576315904,
+      "m_Localized": "Ende der zweiten Gefahr",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170626,
+      "m_Localized": "Ist das Rindfleisch?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170627,
+      "m_Localized": "Schmeckt auf jeden Fall wie Huhn",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170628,
+      "m_Localized": "Schweinefleisch-Nachgeschmack",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1167772006170629,
+      "m_Localized": "Ich glaube nicht, dass ich sie verwechseln sollte.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036545507328,
+      "m_Localized": "Groß und schwach",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1251675693858816,
+      "m_Localized": "Ich komme wieder.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701632,
+      "m_Localized": "Sammle die Kraft des Windes!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701633,
+      "m_Localized": "Fokus",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921348358145,
+      "m_Localized": "Mehr Projektile",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701635,
+      "m_Localized": "Orbital",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701636,
+      "m_Localized": "Irrlicht aus dem Mana geboren",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701637,
+      "m_Localized": "Explosion!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701638,
+      "m_Localized": "Schaden über Zeit?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701639,
+      "m_Localized": "Samurais sind cooler",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 14541033641295872,
+      "m_Localized": "Mehr Feuerkraft",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9652900915265536,
+      "m_Localized": "Läden missbrauchen, um Grenzen zu überschreiten!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921314803712,
+      "m_Localized": "Eine Erfindung zu viel",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10352921348358144,
+      "m_Localized": "Das Lieblingsschwert der Windgöttin",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701640,
+      "m_Localized": "Aufgestaute Wut",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701641,
+      "m_Localized": "Es wird immer besser",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064640,
+      "m_Localized": "Ich opfere ein bisschen Schaden für Geschwindigkeit?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701642,
+      "m_Localized": "Stahl, stärker als Eisen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701643,
+      "m_Localized": "Alles in Verteidigung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064641,
+      "m_Localized": "Ist er noch ganz sauber?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701644,
+      "m_Localized": "Feuerwerk",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701645,
+      "m_Localized": "Vitalität",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701646,
+      "m_Localized": "Stachelig",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6747694246346752,
+      "m_Localized": "Stacheliger",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6747694267318272,
+      "m_Localized": "Am stacheligsten!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701647,
+      "m_Localized": "Schnelle Heilung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701648,
+      "m_Localized": "Das sieht nicht natürlich aus",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701649,
+      "m_Localized": "Werde Leichter",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701650,
+      "m_Localized": "Werde Schwerer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701651,
+      "m_Localized": "Keine Reichweite ist genug",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701652,
+      "m_Localized": "Ein Projektil, zwei Tote",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1249036549701653,
+      "m_Localized": "Überfluss an Waffen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531459,
+      "m_Localized": "Schnellerer Sprint",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531460,
+      "m_Localized": "Mehr Sprints",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 8588211930218496,
+      "m_Localized": "Wie soll ich all diese Sprints benutzen?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531461,
+      "m_Localized": "Keine Verzögerung mehr",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1422125010993152,
+      "m_Localized": "Schnellere Pfeile",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064642,
+      "m_Localized": "Meine Hände werden schwer",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064643,
+      "m_Localized": "Fühlt sich leichter an",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 6336131614064644,
+      "m_Localized": "Schneller",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 1416993808531463,
+      "m_Localized": "Tiefe Wunde",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12032803845390336,
+      "m_Localized": "Können wir nicht noch mehr kritischen Schaden haben?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780804,
+      "m_Localized": "21 Seelenstufen später",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780805,
+      "m_Localized": "Veteran",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 11256736775880704,
+      "m_Localized": "Ist das ein Bug?!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851203,
+      "m_Localized": "Deine Genauigkeit lässt zu wünschen übrig",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 2172010412851204,
+      "m_Localized": "Jetzt wird's verrückt!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 7192408393203712,
+      "m_Localized": "Du brauchst vielleicht mehr Gesundheit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780806,
+      "m_Localized": "Zum Teufel mit der Rüstung, nichts geht über das Fleisch!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 7483461562220544,
+      "m_Localized": "Ein Freund aus der Leere",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780807,
+      "m_Localized": "Es wird vor der flachen Verteidigung angewandt?",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 9365225624780808,
+      "m_Localized": "Wie eine Festung",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190459281408,
+      "m_Localized": "Running in the 90's",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190492835840,
+      "m_Localized": "Gas Gas Gas",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 5972190492835841,
+      "m_Localized": "Rogue:Überlebende",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13775658993532928,
+      "m_Localized": "Skelette sind brutal!",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

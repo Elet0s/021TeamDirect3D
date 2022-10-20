@@ -1,0 +1,672 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Soul Bonus Table Name_ru",
+  "m_LocaleId": {
+    "m_Code": "ru"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": -6578544613459147837
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 99654254592,
+      "m_Localized": "Огненный Дух",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 348342927360,
+      "m_Localized": "Ледяной Дух",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 412385755136,
+      "m_Localized": "Фрактал",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46922952857042944,
+      "m_Localized": "Дух Пустоты",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12593210802176,
+      "m_Localized": "Лук",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12618074636288,
+      "m_Localized": "Арбалет",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12619257430016,
+      "m_Localized": "Волшебная Палочка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12620415057920,
+      "m_Localized": "Копье",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13113317081088,
+      "m_Localized": "Кольцо Огня",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13113874923520,
+      "m_Localized": "Катана",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13114357268480,
+      "m_Localized": "Пика",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13114877362176,
+      "m_Localized": "Меч",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13115447787520,
+      "m_Localized": "Кунаи",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13115993047040,
+      "m_Localized": "Аура Смерти",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13116542500864,
+      "m_Localized": "Гром",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13117138092032,
+      "m_Localized": "Топор",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13132510216192,
+      "m_Localized": "Другое",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13133122584576,
+      "m_Localized": "Ловкость",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13133672038400,
+      "m_Localized": "Скорость",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13165099958272,
+      "m_Localized": "Рывок",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13165762658304,
+      "m_Localized": "Стойкость",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13166341472256,
+      "m_Localized": "Божий Гнев",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13166949646336,
+      "m_Localized": "Многорукий",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13167507488768,
+      "m_Localized": "Мышцы",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13223564361728,
+      "m_Localized": "Дальность",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13224260616192,
+      "m_Localized": "Фактор Лечения",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13224881373184,
+      "m_Localized": "Точильный Камень",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13225485352960,
+      "m_Localized": "Проницаемость",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13226101915648,
+      "m_Localized": "Пустота",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845357587120128,
+      "m_Localized": "Тяжелый ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845357612285952,
+      "m_Localized": "Легкий",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46845357612285953,
+      "m_Localized": "Натянутая Струна",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46922952878014464,
+      "m_Localized": "Зона",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 46950757154111488,
+      "m_Localized": "Рекурсия",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47603882567352320,
+      "m_Localized": "Перезарядка Рывка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 47603882584129536,
+      "m_Localized": "Нефть",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48032417106837504,
+      "m_Localized": "Острый Край",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48244941148340224,
+      "m_Localized": "Лечение",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 48244953613811712,
+      "m_Localized": "Железная Воля",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52519789320159232,
+      "m_Localized": "Железная Кожа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52519789341130752,
+      "m_Localized": "Стальная Кожа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52519789341130753,
+      "m_Localized": "Каменная Кожа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52519789341130754,
+      "m_Localized": "Скользкая Кожа",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 53008625812848640,
+      "m_Localized": "Черепаха",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 53008625833820160,
+      "m_Localized": "Колючка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74925960106557440,
+      "m_Localized": "Колючка",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 430878441472,
+      "m_Localized": "Колючий шип",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12413908500480,
+      "m_Localized": "Фейерверк из колючек",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 12434951323648,
+      "m_Localized": "Уклонение",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13117683351552,
+      "m_Localized": "Сирюкен",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13118253776896,
+      "m_Localized": "<color=#ffcc33ff>Пустота</color>",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 13119436570624,
+      "m_Localized": "Волшебная паутина",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77163333171232768,
+      "m_Localized": "<color=#ffcc33ff>Ламе де Сильф</color>",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77163333192204288,
+      "m_Localized": "<color=#ffcc33ff>Катана Мастера</color>",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 77080067193913344,
+      "m_Localized": "Клинок Ветра",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52503858745393154,
+      "m_Localized": "Слабое место",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 52503858745393153,
+      "m_Localized": "Анализ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 68902970269057024,
+      "m_Localized": "Абсолютная сосредоточенность",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 72038278158303232,
+      "m_Localized": "Неуклюжий",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73066923819745280,
+      "m_Localized": "Лунатик",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73066923849105408,
+      "m_Localized": "Лёгкая рука",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73066923849105409,
+      "m_Localized": "Каменная Рукоять",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73066923849105410,
+      "m_Localized": "Гиперзвуковой",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73071397980291072,
+      "m_Localized": "Легкая броня",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73072728107335680,
+      "m_Localized": "Терпение",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663219732480,
+      "m_Localized": "Средний",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481216,
+      "m_Localized": "Точность",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481217,
+      "m_Localized": "Объектив",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481218,
+      "m_Localized": "Дамасская сталь",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481219,
+      "m_Localized": "Башня",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481220,
+      "m_Localized": "Компромисс",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481221,
+      "m_Localized": "Моментум",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 73684663257481222,
+      "m_Localized": "Студент",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 74218695162544128,
+      "m_Localized": "Низкое давление",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311516954624,
+      "m_Localized": "Перегруженный работой",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926144,
+      "m_Localized": "Кровяное давление",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926145,
+      "m_Localized": "Кардио",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926146,
+      "m_Localized": "Накопление",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926147,
+      "m_Localized": "Нацеливание",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926148,
+      "m_Localized": "Кованое железо",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926149,
+      "m_Localized": "Совершенство",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926150,
+      "m_Localized": "Практика",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926151,
+      "m_Localized": "Черная Кровь",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926152,
+      "m_Localized": "Замок",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926153,
+      "m_Localized": "Плоть",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926154,
+      "m_Localized": "Непроницаемый",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926155,
+      "m_Localized": "Мученик",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926156,
+      "m_Localized": "Перегруженный ",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926157,
+      "m_Localized": "Одноручный",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926158,
+      "m_Localized": "Торговля",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 76092311537926159,
+      "m_Localized": "Книжный Червь",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}

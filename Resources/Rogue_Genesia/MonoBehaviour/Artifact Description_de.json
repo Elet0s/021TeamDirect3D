@@ -1,0 +1,329 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -2766267126516050984
+  },
+  "m_Name": "Artifact Description_de",
+  "m_LocaleId": {
+    "m_Code": "de"
+  },
+  "m_SharedData": {
+    "m_FileID": 0,
+    "m_PathID": 5263071400576003132
+  },
+  "m_Metadata": {
+    "m_Items": []
+  },
+  "m_TableData": [
+    {
+      "m_Id": 23557410865171,
+      "m_Localized": "Erhöhung der Etappenanforderungen um 35%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865185,
+      "m_Localized": "Laden enthält mehr Artikel\nKarten in Läden sind von besserer Qualität",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865179,
+      "m_Localized": "Entfernt die Zeitziele von normalen Etappen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865182,
+      "m_Localized": "Essen heilt zusätzlich 20% der maximalen Gesundheit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865177,
+      "m_Localized": "Monstermenge ist um 20% erhöht\nGesundheit der Monster ist um 20 % verringern",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865183,
+      "m_Localized": "Essen zieht auch alle Seelensteine an",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865176,
+      "m_Localized": "Ermöglicht es dir, am Ende einer Elite-Etappe 2 Seelenkarten zu ziehen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865158,
+      "m_Localized": "Du kannst jetzt zwischen 4 Seelenkarten wählen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865180,
+      "m_Localized": "Essen erhöht die maximale Gesundheit um 1,5% bis zu einem maximum von 300% (1840 Mahlzeiten)\nAbnehmender Effekt pro Essen nach den ersten 33 Mahlzeiten.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865167,
+      "m_Localized": "Bringt dich mit deiner gesamten Ausrüstung zur ersten Etappe zurück",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865186,
+      "m_Localized": "Jede Seelenkarte erhöht deinen Schaden um 2%.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 31833553752506368,
+      "m_Localized": "Seelenkarten der Höchststufe können jederzeit ein Level über das normale Limit gebracht werden\naber es ist 90% unwahrscheinlicher, dass sie erscheinen.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865178,
+      "m_Localized": "Entfernt Tötungsziele von normalen Etappen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865174,
+      "m_Localized": "Regeneriert 1,5% des maximalen Lebens pro Sekunde\n- 50% maximale Gesundheit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865187,
+      "m_Localized": "Jedes Mal, wenn du Karten auswählst, kannst du einmal kostenlos neu rollen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865159,
+      "m_Localized": "Erhalte 10% deines Goldes pro Etappe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670850,
+      "m_Localized": "Die Wahrscheinlichkeit, dass heroische Seelenkarten erscheinen, steigt um 200%.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670849,
+      "m_Localized": "Die Wahrscheinlichkeit, dass Seelenkarten der Seltenheit Verunreinigt und Normal erscheinen, ist um 75% geringer.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865152,
+      "m_Localized": "Die Wahrscheinlichkeit, dass Seelenkarten mit Seltenheit Verunreinigt erscheinen, ist um 99,9% geringer.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865166,
+      "m_Localized": "Verdoppelt deinen Schaden\n- 60% maximale GesundheitVerdoppelt deinen Schaden\n- 60% maximale Gesundheit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865153,
+      "m_Localized": "Alle Geschosse folgen deinem Fadenkreuz",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865175,
+      "m_Localized": "Bewegungsgeschwindigkeit erhöht auch die Angriffsgeschwindigkeit",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865168,
+      "m_Localized": "+ 25% Schaden\n+ 25% Bewegungsgeschwindigkeit\n+ 25% maximale Gesundheit\n+ 25% Aufsammelreichweite+ 25% Schaden\n+ 25% Bewegungsgeschwindigkeit\n+ 25% maximale Gesundheit\n+ 25% Aufsammelreichweite",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865173,
+      "m_Localized": "Entfernt die Verzögerung zwischen den Sprints\n+ 2 SprintsEntfernt die Verzögerung zwischen den Sprints\n+ 2 Sprints",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557406670848,
+      "m_Localized": "Erhöhe die Erfahrung von Seelensteinen um 50%.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865163,
+      "m_Localized": "Wenn du Schaden nimmst, erhöht sich dein Schaden für 6 Sekunden um 50%. \n(12 Sekunden Abklingzeit)Wenn du Schaden nimmst, erhöht sich dein Schaden für 6 Sekunden um 50%. \n(12 Sekunden Abklingzeit)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865155,
+      "m_Localized": "Jeder getötete Feind gewährt dir 1 Gold",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865170,
+      "m_Localized": "Reduzierung des Etappenziels um 35%",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865169,
+      "m_Localized": "Bei Tod, Rückkehr zur vorherigen Etappe\n(Einmalige Benutzung)Bei Tod, Rückkehr zur vorherigen Etappe\n(Einmalige Benutzung)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865157,
+      "m_Localized": "Erfahrungsgewinn wird um 100% erhöht\nVerringerung des Goldgewinns um 50%.Erfahrungsgewinn wird um 100% erhöht\nVerringerung des Goldgewinns um 50%.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865160,
+      "m_Localized": "Widererweckt dich beim Tot zu vollem Leben und tötet alle Feinde. (Einmalige Verwendung)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865162,
+      "m_Localized": "Vollständige Heilung bei Stufenaufstieg",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865181,
+      "m_Localized": "Essen erhöht den Schaden um 1% bis zu 300% (2920 Mahlzeiten)\nAbnehmender Effekt pro Essen nach den ersten 50 Mahlzeiten.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865154,
+      "m_Localized": "Projektile erscheinen auf der entgegengesetzten Seite des Bildschirms wenn sie diesen verlassen",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865161,
+      "m_Localized": "Ziehe 3 Seelenkarten",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865172,
+      "m_Localized": "Reduziert die Gesundheit von Bossen und Eliten um 30%.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865164,
+      "m_Localized": "Schützt dich für 4 Sekunden vor jeglichem Schaden, nachdem du Schaden genommen hast._x000D_\n(12 Sekunden Abklingzeit)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865184,
+      "m_Localized": "Ladenpreise werden um 50% reduziert",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557352144896,
+      "m_Localized": "Automatisches Aufsammeln von 50% aller Seelensteine am Ende jeder Etappe",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865156,
+      "m_Localized": "33% weniger Erfahrungszuwachs\nNeue Seelenkarten beginnen auf Stufe 2",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 10512242434588672,
+      "m_Localized": "+100% Gesundheitsregeneration\nGesundheitsregeneration kann bis zu 200% der maximalen Gesundheit wiederherstellen.",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    },
+    {
+      "m_Id": 23557410865165,
+      "m_Localized": "Wenn du Schaden nimmst, erhöht sich dein Bewegungstempo 6 Sekunden lang um 50%._x000D_\n(12 Sekunden Abklingzeit)",
+      "m_Metadata": {
+        "m_Items": []
+      }
+    }
+  ],
+  "references": {
+    "version": 1,
+    "00000000": {
+      "type": {
+        "class": "Terminus",
+        "ns": "UnityEngine.DMAT",
+        "asm": "FAKE_ASM"
+      },
+      "data": {}
+    }
+  }
+}
