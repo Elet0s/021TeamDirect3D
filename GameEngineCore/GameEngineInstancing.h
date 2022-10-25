@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngineShaderResourceHelper.h"
 
-class GameEngineRenderingPipeLine;
+class GameEngineMaterial;
 class GameEngineInstancingBuffer;
 class GameEngineInstancing
 {
@@ -41,7 +41,7 @@ public:
 private:
 	std::vector<char> dataBuffer_;
 	GameEngineShaderResourceHelper shaderResourceHelper_;
-	GameEngineRenderingPipeLine* instancingPipeLine_;
+	GameEngineMaterial* instancingPipeLine_;
 	GameEngineInstancingBuffer* instancingBuffer_;
 
 	int dataInsert_;

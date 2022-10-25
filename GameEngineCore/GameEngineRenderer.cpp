@@ -21,7 +21,7 @@ GameEngineRenderUnit::~GameEngineRenderUnit()
 
 void GameEngineRenderUnit::SetPipeLine(const std::string& _renderingPipeLineName)
 {
-	renderingPipeLine_ = GameEngineRenderingPipeLine::Find(_renderingPipeLineName);
+	renderingPipeLine_ = GameEngineMaterial::Find(_renderingPipeLineName);
 
 	if (nullptr == renderingPipeLine_)
 	{
@@ -126,12 +126,12 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 	shaderResourceHelper_.AllResourcesReset();
 }
 
-GameEngineRenderingPipeLine* GameEngineRenderUnit::GetPipeLine()
+GameEngineMaterial* GameEngineRenderUnit::GetPipeLine()
 {
 	return this->renderingPipeLine_;
 }
 
-GameEngineRenderingPipeLine* GameEngineRenderUnit::GetClonePipeLine()
+GameEngineMaterial* GameEngineRenderUnit::GetClonePipeLine()
 {
 	if (false == renderingPipeLine_->IsOriginal())
 	{
@@ -142,9 +142,9 @@ GameEngineRenderingPipeLine* GameEngineRenderUnit::GetClonePipeLine()
 	return renderingPipeLine_;
 }
 
-GameEngineRenderingPipeLine* GameEngineRenderUnit::ClonePipeLine(GameEngineRenderingPipeLine* _original)
+GameEngineMaterial* GameEngineRenderUnit::ClonePipeLine(GameEngineMaterial* _original)
 {
-	GameEngineRenderingPipeLine* clone = GameEngineRenderingPipeLine::Create();
+	GameEngineMaterial* clone = GameEngineMaterial::Create();
 	clone->Copy(_original);
 	return clone;
 }
@@ -184,9 +184,9 @@ void GameEngineRenderer::SetRenderingOrder(int _renderingOrder)
 	camera_->ChangeRenderingOrder(this, _renderingOrder);
 }
 
-bool GameEngineRenderer::IsInstancing(GameEngineRenderingPipeLine* _pipeLine)
+bool GameEngineRenderer::IsInstancing(GameEngineMaterial* _pipeLine)
 {
-	std::unordered_map<GameEngineRenderingPipeLine*, GameEngineInstancing>::iterator instancingIter
+	std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator instancingIter
 		= this->camera_->instancingMap_.find(_pipeLine);
 
 	if (this->camera_->instancingMap_.end() == instancingIter)
@@ -197,7 +197,7 @@ bool GameEngineRenderer::IsInstancing(GameEngineRenderingPipeLine* _pipeLine)
 	return true == isInstancing_ && GameEngineInstancing::minInstancingCount_ <= instancingIter->second.count_;
 }
 
-void GameEngineRenderer::InstancingDataSetting(GameEngineRenderingPipeLine* _pipeLine)
+void GameEngineRenderer::InstancingDataSetting(GameEngineMaterial* _pipeLine)
 {
 	int instancingIndex = this->camera_->PushInstancingIndex(_pipeLine);
 

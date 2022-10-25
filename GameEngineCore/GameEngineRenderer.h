@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngineTransformComponent.h"
 #include "GameEngineCamera.h"
-#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineMaterial.h"
 #include "GameEngineShaderResourceHelper.h"
 #include "GameEngineMesh.h"
 
@@ -47,11 +47,11 @@ public:
     // 부모 렌더러가 등록된 카메라의 렌더타겟에 옮기는 함수.
     void Render(float _deltaTime);
 
-    GameEngineRenderingPipeLine* GetPipeLine();
+    GameEngineMaterial* GetPipeLine();
 
-    GameEngineRenderingPipeLine* GetClonePipeLine();
+    GameEngineMaterial* GetClonePipeLine();
 
-    GameEngineRenderingPipeLine* ClonePipeLine(GameEngineRenderingPipeLine* _original);
+    GameEngineMaterial* ClonePipeLine(GameEngineMaterial* _original);
 
     //렌더유닛에 부모 렌더러를 지정하고 EngineShaderResourceSetting() 함수를 호출해서 엔진 기본 상수버퍼를 등록하는 함수.
     void SetRenderer(GameEngineRenderer* _parentRenderer);    
@@ -71,7 +71,7 @@ private:
 
     GameEngineInputLayout* inputLayout_;    //
 
-    GameEngineRenderingPipeLine* renderingPipeLine_;    //셰이더리소스들을 렌더타겟에 그릴 렌더링 파이프라인.
+    GameEngineMaterial* renderingPipeLine_;    //셰이더리소스들을 렌더타겟에 그릴 렌더링 파이프라인.
 
     D3D11_PRIMITIVE_TOPOLOGY topology_;     //
 
@@ -80,7 +80,7 @@ private:
 };
 
 class GameEngineShaderResourceHelper;
-class GameEngineRenderingPipeLine;
+class GameEngineMaterial;
 class GameEngineRenderer: public GameEngineTransformComponent
 {
     //모든 렌더러가 공통적으로 가져야 하는 기능만을 최소한도로 가진 인터페이스 클래스.
@@ -106,8 +106,8 @@ public:
 public:
 	void ChangeCamera(CameraOrder _order);
     void SetRenderingOrder(int _renderingOrder);
-    bool IsInstancing(GameEngineRenderingPipeLine* _pipeLine);
-    void InstancingDataSetting(GameEngineRenderingPipeLine* _pipeLine);
+    bool IsInstancing(GameEngineMaterial* _pipeLine);
+    void InstancingDataSetting(GameEngineMaterial* _pipeLine);
 
 public:
     inline int GetRenderingOrder()

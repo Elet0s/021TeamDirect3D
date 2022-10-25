@@ -1,5 +1,5 @@
 #pragma once
-#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineMaterial.h"
 #include "GameEngineShader.h"
 
 class GameEngineShaderResourceHelper
@@ -36,7 +36,7 @@ private:
 
 public:	
 	//매개변수로 들어온 렌더링 파이프라인이 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하는 함수.
-	void ResourceCheck(GameEngineRenderingPipeLine* _pipeLine);
+	void ResourceCheck(GameEngineMaterial* _pipeLine);
 
 	//이 셰이더 리소스 세터가 주어진 이름의 상수버퍼를 가지고 있는가를 외부에서 확인하는 함수.
 	bool IsConstantBuffer(const std::string& _name);

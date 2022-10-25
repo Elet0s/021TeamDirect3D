@@ -11,7 +11,7 @@
 #include "GameEngineInstancingBuffer.h"
 
 #include "GameEngineMesh.h"
-#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineMaterial.h"
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineInputLayout.h"
 #include "GameEngineVertexShader.h"
@@ -336,8 +336,8 @@ void EngineTextureLoad()
 void EngineRenderingPipeLine()
 {
 
-	GameEngineRenderingPipeLine* newRenderingPipeLine1 
-		= GameEngineRenderingPipeLine::Create("Color");
+	GameEngineMaterial* newRenderingPipeLine1 
+		= GameEngineMaterial::Create("Color");
 	newRenderingPipeLine1->SetVertexShader("Color.hlsl");
 	newRenderingPipeLine1->SetPixelShader("Color.hlsl");
 	newRenderingPipeLine1->SetRasterizer("EngineRasterizer");
@@ -345,8 +345,8 @@ void EngineRenderingPipeLine()
 	newRenderingPipeLine1->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineRenderingPipeLine* newRenderingPipeLine2 
-		= GameEngineRenderingPipeLine::Create("Texture");
+	GameEngineMaterial* newRenderingPipeLine2 
+		= GameEngineMaterial::Create("Texture");
 	newRenderingPipeLine2->SetVertexShader("Texture.hlsl");
 	newRenderingPipeLine2->SetPixelShader("Texture.hlsl");
 	newRenderingPipeLine2->SetRasterizer("EngineRasterizer");
@@ -354,8 +354,8 @@ void EngineRenderingPipeLine()
 	newRenderingPipeLine2->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineRenderingPipeLine* newRenderingPipeLine3 
-		= GameEngineRenderingPipeLine::Create("TextureAtlas");
+	GameEngineMaterial* newRenderingPipeLine3 
+		= GameEngineMaterial::Create("TextureAtlas");
 	newRenderingPipeLine3->SetVertexShader("TextureAtlas.hlsl");
 	newRenderingPipeLine3->SetPixelShader("TextureAtlas.hlsl");
 	newRenderingPipeLine3->SetRasterizer("EngineRasterizer");
@@ -363,8 +363,8 @@ void EngineRenderingPipeLine()
 	newRenderingPipeLine3->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineRenderingPipeLine* newRenderingPipeLine4 
-		= GameEngineRenderingPipeLine::Create("3DDebug");
+	GameEngineMaterial* newRenderingPipeLine4 
+		= GameEngineMaterial::Create("3DDebug");
 	newRenderingPipeLine4->SetVertexShader("Debug3D.hlsl");
 	newRenderingPipeLine4->SetPixelShader("Debug3D.hlsl");
 	newRenderingPipeLine4->SetRasterizer("EngineRasterizer");
@@ -372,8 +372,8 @@ void EngineRenderingPipeLine()
 	newRenderingPipeLine4->SetDepthStencil_OutputMerger("AlwaysDepth");
 
 
-	GameEngineRenderingPipeLine* newRenderingPipeLine5 
-		= GameEngineRenderingPipeLine::Create("DebugTexture");
+	GameEngineMaterial* newRenderingPipeLine5 
+		= GameEngineMaterial::Create("DebugTexture");
 	newRenderingPipeLine5->SetVertexShader("DebugTexture.hlsl");
 	newRenderingPipeLine5->SetPixelShader("DebugTexture.hlsl");
 	newRenderingPipeLine5->SetRasterizer("EngineRasterizer");
@@ -381,8 +381,8 @@ void EngineRenderingPipeLine()
 	newRenderingPipeLine5->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineRenderingPipeLine* newRenderingPipeLine6 
-		= GameEngineRenderingPipeLine::Create("TargetMerge");
+	GameEngineMaterial* newRenderingPipeLine6 
+		= GameEngineMaterial::Create("TargetMerge");
 	newRenderingPipeLine6->SetVertexShader("TargetMerge.hlsl");
 	newRenderingPipeLine6->SetPixelShader("TargetMerge.hlsl");
 	newRenderingPipeLine6->SetRasterizer("EngineRasterizer");
@@ -390,8 +390,8 @@ void EngineRenderingPipeLine()
 	newRenderingPipeLine6->SetDepthStencil_OutputMerger("AlwaysDepth");
 
 
-	GameEngineRenderingPipeLine* newRenderingPipeLine7 
-		= GameEngineRenderingPipeLine::Create("Blur");
+	GameEngineMaterial* newRenderingPipeLine7 
+		= GameEngineMaterial::Create("Blur");
 	newRenderingPipeLine7->SetVertexShader("Blur.hlsl"); 
 	newRenderingPipeLine7->SetPixelShader("Blur.hlsl");
 	newRenderingPipeLine7->SetRasterizer("EngineRasterizer");
@@ -562,7 +562,7 @@ void GameEngineCore::EngineResourceInitialize()
 void GameEngineCore::EngineResourceDestroy()
 {
 	//사각형, 육면체, 에러텍스쳐 등등, 엔진 수준에서 기본적으로 지원되어야 하는 리소스를 삭제하는 함수.
-	GameEngineRenderingPipeLine::ResourceDestroy();
+	GameEngineMaterial::ResourceDestroy();
 
 	GameEngineInputLayout::ResourceDestroy();
 	GameEngineVertexBuffer::ResourceDestroy();

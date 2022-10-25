@@ -9,7 +9,7 @@ enum class CameraProjectionMode
 };
 
 class GameEngineInstancing;
-class GameEngineRenderingPipeLine;
+class GameEngineMaterial;
 class GameEngineCamera: public GameEngineTransformComponent
 {
 	//카메라. 
@@ -31,18 +31,30 @@ public:
 	GameEngineCamera& operator=(GameEngineCamera&& _other) = delete;
 
 public:
-	float4 GetMouseScreenPosition();	//마우스 포인터의 위치를 윈도우 스크린 좌표로 받아오는 함수.
-	float4 GetMouseWorldPosition();		//마우스 포인터의 위치를 월드좌표(화면 정중앙 좌표 0, 0)로 받아오는 함수.
+	//마우스 포인터의 위치를 윈도우 스크린 좌표로 받아오는 함수.
+	float4 GetMouseScreenPosition();
+
+	//마우스 포인터의 위치를 월드좌표(고정 카메라 기준)로 받아오는 함수.
+	float4 GetMouseWorldPosition();
+
+	//마우스 포인터의 위치를 월드좌표(이동 카메라 기준)로 받아오는 함수.
 	float4 GetMouseWorldPositionToActor();
-	void SetCameraOrder(CameraOrder _order);	//할 일이 있을지는 모르겠지만, 카메라 오더 런타임에 변경 금지.
+
+	//주어진 월드좌표를 윈도우좌표로 바꾸는 함수.
+	float4 GetWorldPositionToScreenPosition(const float4& _worldPosition);
+	//이거 카메라 위치까지 반영해야 하는거 아닌가??
+
+	//카메라의 순서를 변경하는 함수.
+	void SetCameraOrder(CameraOrder _order);
+	//할 일이 있을지는 모르겠지만, 카메라 오더 런타임에 변경 금지.
 
 
 	GameEngineInstancing* GetInstancing(const std::string& _name);
-	GameEngineInstancing* GetInstancing(GameEngineRenderingPipeLine* _pipeLine);
+	GameEngineInstancing* GetInstancing(GameEngineMaterial* _pipeLine);
 
-	void PushInstancing(GameEngineRenderingPipeLine* _pipeLine, int _count);
-	int PushInstancingData(GameEngineRenderingPipeLine* _pipeLine, void* _data, int _dataSize);
-	int PushInstancingIndex(GameEngineRenderingPipeLine* _pipeLine);	
+	void PushInstancing(GameEngineMaterial* _pipeLine, int _count);
+	int PushInstancingData(GameEngineMaterial* _pipeLine, void* _data, int _dataSize);
+	int PushInstancingIndex(GameEngineMaterial* _pipeLine);	
 
 public:
 	void SetProjectionMode(CameraProjectionMode _mode)
@@ -107,7 +119,7 @@ private:
 private:
 	std::map<int, std::list<GameEngineRenderer*>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.
 
-	std::unordered_map<GameEngineRenderingPipeLine*, GameEngineInstancing> instancingMap_;	//
+	std::unordered_map<GameEngineMaterial*, GameEngineInstancing> instancingMap_;	//
 	//비정렬 맵으로 한 이유: 순회할 일이 거의 없을거라고 생각한 상황에서 비정렬 맵을 그냥 써보고 싶어서.
 
 	//비정렬 맵(Unordered Map): 들어오는 키값을 해시함수를 거쳐서 나온 숫자로 바꿔서, 

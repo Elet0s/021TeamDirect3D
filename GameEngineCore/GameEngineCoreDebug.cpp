@@ -2,7 +2,7 @@
 #include "GameEngineCoreDebug.h"
 #include "GameEngineCore.h"
 #include "GameEngineCamera.h"
-#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineMaterial.h"
 #include "GameEngineShaderResourceHelper.h"
 #include "GameEngineTexture.h"
 #include "GameEngineRenderer.h"

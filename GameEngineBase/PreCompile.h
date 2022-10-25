@@ -16,6 +16,7 @@
 #include <functional>
 
 #include <string>
+#include <string_view>
 #include <map>
 #include <vector>
 #include <set>

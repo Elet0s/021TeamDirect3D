@@ -4,7 +4,7 @@
 #include "GameEngineRenderer.h"
 #include "GameEngineActor.h"
 #include "GameEngineDevice.h"
-#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineMaterial.h"
 #include "GameEngineVertexShader.h"
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineVertexes.h"
@@ -26,6 +26,8 @@ GameEngineCamera::GameEngineCamera()
 	viewportDesc_.Height = size_.y;
 	viewportDesc_.MinDepth = 0.0f;	
 	viewportDesc_.MaxDepth = 1.f;	//<-1.f이 대입되어 MinDepth와 격차가 생겨야 깊이테스트를 제대로 할 수 있다.
+
+	viewportMatrix_.Viewport(size_.x, size_.y, 0, 0, 0, 1);
 }
 
 GameEngineCamera::~GameEngineCamera()
@@ -92,6 +94,20 @@ float4 GameEngineCamera::GetMouseWorldPositionToActor()
 	return GetTransform().GetWorldPosition() + GetMouseWorldPosition();
 }
 
+float4 GameEngineCamera::GetWorldPositionToScreenPosition(const float4& _worldPosition)
+{
+	float4 pos = _worldPosition;
+
+	pos *= this->viewMatrix_;			//pos에 뷰행렬 적용, 뷰스페이스 좌표로 변경.
+	pos *= this->projectionMatrix_;		//pos에 투영행렬 적용, 
+	pos /= pos.w;						//pos.w에 저장된 pos의 상대z값만큼 pos값 축소.
+	//
+
+	pos *= this->viewportMatrix_;		//pos에 뷰포트행렬 적용.
+
+	return pos;
+}
+
 void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 {
 	this->GetActor()->GetLevel()->PushCamera(this, _order);
@@ -99,11 +115,11 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 
 GameEngineInstancing* GameEngineCamera::GetInstancing(const std::string& _name)
 {
-	GameEngineRenderingPipeLine* instancingPipeLine = GameEngineRenderingPipeLine::Find(_name);
+	GameEngineMaterial* instancingPipeLine = GameEngineMaterial::Find(_name);
 	return GetInstancing(instancingPipeLine);
 }
 
-GameEngineInstancing* GameEngineCamera::GetInstancing(GameEngineRenderingPipeLine* _pipeLine)
+GameEngineInstancing* GameEngineCamera::GetInstancing(GameEngineMaterial* _pipeLine)
 {
 	if (nullptr == _pipeLine)
 	{
@@ -111,7 +127,7 @@ GameEngineInstancing* GameEngineCamera::GetInstancing(GameEngineRenderingPipeLin
 		return nullptr;
 	}
 
-	std::unordered_map<GameEngineRenderingPipeLine*, GameEngineInstancing>::iterator findIter 
+	std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator findIter 
 		= instancingMap_.find(_pipeLine);
 
 	//if (instancingMap_.end() == findIter)	//인스턴싱이 없다면 생성 후 반환.
@@ -158,7 +174,7 @@ GameEngineInstancing* GameEngineCamera::GetInstancing(GameEngineRenderingPipeLin
 	return &findIter->second;
 }
 
-void GameEngineCamera::PushInstancing(GameEngineRenderingPipeLine* _pipeLine, int _count)
+void GameEngineCamera::PushInstancing(GameEngineMaterial* _pipeLine, int _count)
 {
 	if (false == _pipeLine->GetVertexShader()->IsInstancing())
 	{
@@ -222,7 +238,7 @@ void GameEngineCamera::PushInstancing(GameEngineRenderingPipeLine* _pipeLine, in
 	//}
 }
 
-int GameEngineCamera::PushInstancingData(GameEngineRenderingPipeLine* _pipeLine, void* _data, int _dataSize)
+int GameEngineCamera::PushInstancingData(GameEngineMaterial* _pipeLine, void* _data, int _dataSize)
 {
 	int dataOffset = instancingMap_[_pipeLine].dataInsert_ * _dataSize;
 
@@ -236,7 +252,7 @@ int GameEngineCamera::PushInstancingData(GameEngineRenderingPipeLine* _pipeLine,
 	return insertResultIndex;
 }
 
-int GameEngineCamera::PushInstancingIndex(GameEngineRenderingPipeLine* _pipeLine)
+int GameEngineCamera::PushInstancingIndex(GameEngineMaterial* _pipeLine)
 {
 	int insertCount = instancingMap_[_pipeLine].dataInsert_;
 
@@ -317,7 +333,7 @@ void GameEngineCamera::Render(float _deltaTime)
 		break;
 	}
 
-	for (std::unordered_map<GameEngineRenderingPipeLine*, GameEngineInstancing>::iterator iter = instancingMap_.begin();
+	for (std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator iter = instancingMap_.begin();
 		iter != instancingMap_.end(); iter++)
 	{
 		iter->second.dataInsert_ = 0;

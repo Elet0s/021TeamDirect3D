@@ -2,7 +2,7 @@
 #include "GameEngineShaderResourceHelper.h"
 #include "GameEngineVertexShader.h"
 #include "GameEnginePixelShader.h"
-#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineMaterial.h"
 #include "GameEngineConstantBuffer.h"
 #include "GameEngineTexture.h"
 #include "GameEngineFolderTexture.h"
@@ -17,7 +17,7 @@ GameEngineShaderResourceHelper::~GameEngineShaderResourceHelper()
 {
 }
 
-void GameEngineShaderResourceHelper::ResourceCheck(GameEngineRenderingPipeLine* _pipeLine)
+void GameEngineShaderResourceHelper::ResourceCheck(GameEngineMaterial* _pipeLine)
 {
 	if (nullptr == _pipeLine)
 	{

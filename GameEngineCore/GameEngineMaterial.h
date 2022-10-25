@@ -9,7 +9,7 @@ class GameEngineRasterizer;
 class GameEnginePixelShader;
 class GameEngineDepthStencil;
 class GameEngineBlend;
-class GameEngineRenderingPipeLine: public GameEngineRes<GameEngineRenderingPipeLine>
+class GameEngineMaterial: public GameEngineRes<GameEngineMaterial>
 {
 	//이 클래스의 존재 이유: 셰이더와 셰이더리소스, 래스터라이저와 블렌드, 깊이스텐실을 가지고 
 	// 렌더링 과정에 관여하는 클래스.
@@ -22,22 +22,22 @@ class GameEngineRenderingPipeLine: public GameEngineRes<GameEngineRenderingPipeL
 
 
 public:
-	GameEngineRenderingPipeLine();
-	~GameEngineRenderingPipeLine();
+	GameEngineMaterial();
+	~GameEngineMaterial();
 
 protected:
-	GameEngineRenderingPipeLine(const GameEngineRenderingPipeLine& _other) = delete;
-	GameEngineRenderingPipeLine(GameEngineRenderingPipeLine&& _other) noexcept = delete;
+	GameEngineMaterial(const GameEngineMaterial& _other) = delete;
+	GameEngineMaterial(GameEngineMaterial&& _other) noexcept = delete;
 
 private:
-	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine& _other) = delete;
-	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine&& _other) = delete;
+	GameEngineMaterial& operator=(const GameEngineMaterial& _other) = delete;
+	GameEngineMaterial& operator=(const GameEngineMaterial&& _other) = delete;
 
 
 public:	
 	
-	static GameEngineRenderingPipeLine* Create(const std::string& _renderingPipeLineName);
-	static GameEngineRenderingPipeLine* Create();
+	static GameEngineMaterial* Create(const std::string& _renderingPipeLineName);
+	static GameEngineMaterial* Create();
 	static void AllShaderReset();
 
 public:
@@ -52,7 +52,7 @@ public:
 	void SetDepthStencil_OutputMerger(const std::string& _name);
 
 	void RenderInstancing(int _renderingCount, class GameEngineInstancingBuffer* _instancingBuffer);
-	void Copy(GameEngineRenderingPipeLine* _original);
+	void Copy(GameEngineMaterial* _original);
 
 	void Setting();
 public:

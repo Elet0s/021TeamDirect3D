@@ -10,7 +10,7 @@ class GameEngineInputLayout: public GameEngineRes<GameEngineInputLayout>
 	// 대한 정보를 버텍스셰이더에게 넘기기 위한 인터페이스.
 
 	friend GameEngineRes<GameEngineInputLayout>;
-	friend class GameEngineRenderingPipeLine;
+	friend class GameEngineMaterial;
 	//GameEngineInputLayout 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
 
 

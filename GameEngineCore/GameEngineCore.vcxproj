@@ -176,7 +176,7 @@
     <ClInclude Include="GameEnginePixelShader.h" />
     <ClInclude Include="GameEngineRasterizer.h" />
     <ClInclude Include="GameEngineRenderer.h" />
-    <ClInclude Include="GameEngineRenderingPipeLine.h" />
+    <ClInclude Include="GameEngineMaterial.h" />
     <ClInclude Include="GameEngineRenderTarget.h" />
     <ClInclude Include="GameEngineRes.h" />
     <ClInclude Include="GameEngineSampler.h" />
@@ -236,7 +236,7 @@
     <ClCompile Include="GameEnginePixelShader.cpp" />
     <ClCompile Include="GameEngineRasterizer.cpp" />
     <ClCompile Include="GameEngineRenderer.cpp" />
-    <ClCompile Include="GameEngineRenderingPipeLine.cpp" />
+    <ClCompile Include="GameEngineMaterial.cpp" />
     <ClCompile Include="GameEngineRenderTarget.cpp" />
     <ClCompile Include="GameEngineRes.cpp" />
     <ClCompile Include="GameEngineSampler.cpp" />

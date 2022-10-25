@@ -106,6 +106,27 @@
     <Filter Include="Debug">
       <UniqueIdentifier>{888f1880-9925-4638-ba3c-16555ea41837}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty\FBX_SDK">
+      <UniqueIdentifier>{172fefbf-3ec7-42c5-b060-c5dbfc255032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FBX_SDK\Inc%28Header%29">
+      <UniqueIdentifier>{824852f3-47aa-4042-bd0d-354f7e080e49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29">
+      <UniqueIdentifier>{8d6da275-7bf7-483c-9218-242ff6ee40ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29\Debug">
+      <UniqueIdentifier>{f6a1b849-ebc6-4992-b06e-44dfc1e76d59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29\Release">
+      <UniqueIdentifier>{dfb483dc-37af-4a48-9d24-fa0f390e5f57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29\Debug\Compressed Library File">
+      <UniqueIdentifier>{be094637-cea0-4ba4-9cdb-1fcafffedc4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29\Release\Compressed Library File">
+      <UniqueIdentifier>{550e66d7-9b92-48d8-9acf-75dac70c4bb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -202,7 +223,7 @@
       <Filter>Object\Component\Rendering\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="GEngine.cpp" />
-    <ClCompile Include="GameEngineRenderingPipeLine.cpp">
+    <ClCompile Include="GameEngineMaterial.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRes.cpp">
@@ -377,7 +398,7 @@
     <ClInclude Include="GameEngineRes.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineRenderingPipeLine.h">
+    <ClInclude Include="GameEngineMaterial.h">
       <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineFont.h">
