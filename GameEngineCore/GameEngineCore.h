@@ -7,10 +7,6 @@ class GameEngineCore
 	friend GEngine;
 	friend class GameEngineStatusWindow;
 
-	static std::map<std::string, class GameEngineLevel*> allLevels_;
-	static GameEngineLevel* currentLevel_;
-	static GameEngineLevel* nextLevel_;
-
 protected:
 	GameEngineCore();
 	~GameEngineCore();
@@ -107,8 +103,14 @@ protected:	//컨텐츠코어만 사용해야 하는 함수들.
 		}
 	}
 
+public:
+	static GameEngineThreadPool engineThreadPool_;
 
 
+private:
+	static std::map<std::string, class GameEngineLevel*> allLevels_;
+	static GameEngineLevel* currentLevel_;
+	static GameEngineLevel* nextLevel_;
 
 
 };

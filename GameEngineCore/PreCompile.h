@@ -21,4 +21,7 @@
 #include <GameEngineBase\GameEngineSound.h>
 #include <GameEngineBase\GameEngineString.h>
 
+#include <GameEngineBase\GameEngineThread.h>
+#include <GameEngineBase\GameEngineThreadPool.h>
+
 #include <GameEngineBase\GameEngineWindow.h>

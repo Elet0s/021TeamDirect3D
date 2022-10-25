@@ -15,6 +15,10 @@
 
 #include <functional>
 
+#include <thread>
+#include <atomic>
+#include <mutex>
+
 #include <string>
 #include <string_view>
 #include <map>

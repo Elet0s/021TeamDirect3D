@@ -9,6 +9,8 @@
 
 #pragma comment(lib, "GameEngineBase.lib")
 
+GameEngineThreadPool GameEngineCore::engineThreadPool_;
+
 GameEngineLevel* GameEngineCore::currentLevel_ = nullptr;
 GameEngineLevel* GameEngineCore::nextLevel_ = nullptr;
 
@@ -67,6 +69,8 @@ void GameEngineCore::CoreStart(GameEngineCore* _userCore)
 	EngineResourceInitialize();
 	//엔진코어 초기화 및 각종 엔진 리소스 준비.
 	//유저코어의 스타트 이전에 엔진 리소스 준비가 끝나있어야 한다.
+
+	engineThreadPool_.Initialize("GameEngineThread");
 
 	GameEngineDevice::CreateSwapChain();
 	//스왑체인 생성.

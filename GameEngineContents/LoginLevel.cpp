@@ -13,6 +13,15 @@ LoginLevel::~LoginLevel()
 {
 }
 
+//void ThreadLoading(GameEngineThread* _Thread) 
+//{
+//	for (size_t i = 0; i < 10; i++)
+//	{
+//		GameEngineDebug::OutputString("로딩중...\n");
+//		Sleep(1);
+//	}
+//}
+
 void LoginLevel::Start()
 {
 	if (false == GameEngineInput::GetInst()->IsKey("P"))
@@ -28,7 +37,7 @@ void LoginLevel::Start()
 	//[0]  [0]  [1]   [0]	앞을 보고 있다.
 	//[0]  [0]  [-100][0]	뒤로 100만큼 물러나서.
 
-
+	//loadingThread_.Start("LoginLoading", ThreadLoading);
 
 }
 
