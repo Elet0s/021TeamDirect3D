@@ -51,14 +51,14 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 
         if (true == ImGui::Button("Create a Map"))
         {
-           this->tileMap_->tileRenderer_->CreateIsometricTileMap(scale_[0], scale_[1], { 64, 32 }, selectFolderTexture_, 32);
+           //this->tileMap_->tileRenderer_->CreateIsometricTileMap(scale_[0], scale_[1], { 64, 32 }, selectFolderTexture_, 32);
         }
 
 
         std::string selectIndex = "Select Index = ";
         int x = 0;
         int y = 0;
-        this->tileMap_->tileRenderer_->GetTileIndex(_level->GetMainCamera()->GetMouseWorldPosition(), x, y);
+        //;this->tileMap_->tileRenderer_->GetTileIndex(_level->GetMainCamera()->GetMouseWorldPosition(), x, y);
 
         selectIndex += std::to_string(x);
         selectIndex += " " + std::to_string(y);
@@ -96,6 +96,6 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 
         float4 mousePos = _level->GetMainCamera()->GetMouseWorldPosition();
 
-        tileMap_->tileRenderer_->SetTileIndex(mousePos, selectTile_);
+        //tileMap_->tileRenderer_->SetTileIndex(mousePos, selectTile_);
     }
 }

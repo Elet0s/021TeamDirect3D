@@ -76,6 +76,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor\02. Play</Filter>
     </ClCompile>
+    <ClCompile Include="MyTileMapRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -120,6 +126,12 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Actor\02. Play</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTileMapRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="TestLevel.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

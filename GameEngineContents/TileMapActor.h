@@ -1,6 +1,6 @@
 #pragma once
 
-class TileMapRenderer;
+class MyTileMapRenderer;
 class TileMapActor : public GameEngineActor
 {
 
@@ -18,7 +18,7 @@ private:
 
 
 public:	
-	TileMapRenderer* tileRenderer_;
+	MyTileMapRenderer* tileRenderer_;
 
 protected:
 	void Start() override;

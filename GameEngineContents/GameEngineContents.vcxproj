@@ -159,9 +159,17 @@
     <ClInclude Include="MetaLevel.h" />
     <ClInclude Include="MetaSpriteWindow.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MyTileMapRenderer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="TestLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TileMapActor.h" />
     <ClInclude Include="TileMapRenderer.h" />
   </ItemGroup>
@@ -175,11 +183,19 @@
     <ClCompile Include="MetaLevel.cpp" />
     <ClCompile Include="MetaSpriteWindow.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MyTileMapRenderer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TestLevel.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="TileMapActor.cpp" />
     <ClCompile Include="TileMapRenderer.cpp" />

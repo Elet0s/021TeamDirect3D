@@ -2,6 +2,7 @@
 #include "ContentsCore.h"
 #include "LoginLevel.h"
 #include "PlayLevel.h"
+#include "TestLevel.h"
 #include "MapEditorLevel.h"
 #include "MetaLevel.h"
 
@@ -50,6 +51,7 @@ void ContentsCore::Start()
 
 	CreateLevel<LoginLevel>("Login");
 	CreateLevel<PlayLevel>("Play");
+	CreateLevel<TestLevel>("TestLevel");
 	CreateLevel<MapEditorLevel>("MapEditor");
 	CreateLevel<MetaLevel>("MetaEditor");
 

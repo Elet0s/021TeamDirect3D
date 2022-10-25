@@ -17,6 +17,7 @@ MapEditorLevel::~MapEditorLevel()
 void MapEditorLevel::Start()
 {
 	tileMap_ = CreateActor<TileMapActor>(ObjectOrder::TileMap);
+	
 }
 
 void MapEditorLevel::Update(float _deltaTime)
