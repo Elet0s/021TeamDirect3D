@@ -152,11 +152,8 @@
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GlobalContentsValue.h" />
-    <ClInclude Include="LoginLevel.h" />
     <ClInclude Include="LoginUI.h" />
-    <ClInclude Include="MapEditorLevel.h" />
     <ClInclude Include="MapEditorWindow.h" />
-    <ClInclude Include="MetaLevel.h" />
     <ClInclude Include="MetaSpriteWindow.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MyTileMapRenderer.h">
@@ -164,23 +161,27 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
-    <ClInclude Include="TestLevel.h">
+    <ClInclude Include="StageLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="TileMapActor.h" />
     <ClInclude Include="TileMapRenderer.h" />
+    <ClInclude Include="TitleLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="WorldMapLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="GlobalContentsValue.cpp" />
-    <ClCompile Include="LoginLevel.cpp" />
     <ClCompile Include="LoginUI.cpp" />
-    <ClCompile Include="MapEditorLevel.cpp" />
     <ClCompile Include="MapEditorWindow.cpp" />
-    <ClCompile Include="MetaLevel.cpp" />
     <ClCompile Include="MetaSpriteWindow.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MyTileMapRenderer.cpp">
@@ -188,17 +189,24 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
+    <ClCompile Include="StageLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="TileMapActor.cpp" />
     <ClCompile Include="TileMapRenderer.cpp" />
+    <ClCompile Include="TitleLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="WorldMapLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

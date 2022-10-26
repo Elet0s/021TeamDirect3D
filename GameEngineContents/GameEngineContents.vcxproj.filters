@@ -55,18 +55,6 @@
     <ClCompile Include="LoginUI.cpp">
       <Filter>Actor\01. Login</Filter>
     </ClCompile>
-    <ClCompile Include="LoginLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="MapEditorLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="MetaLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="TileMapRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -76,10 +64,13 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor\02. Play</Filter>
     </ClCompile>
-    <ClCompile Include="MyTileMapRenderer.cpp">
-      <Filter>Renderer</Filter>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
+    <ClCompile Include="WorldMapLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="StageLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
@@ -106,18 +97,6 @@
     <ClInclude Include="Enums.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="LoginLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MapEditorLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MetaLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="TileMapRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -127,10 +106,13 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\02. Play</Filter>
     </ClInclude>
-    <ClInclude Include="MyTileMapRenderer.h">
-      <Filter>Renderer</Filter>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="TestLevel.h">
+    <ClInclude Include="WorldMapLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="StageLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
