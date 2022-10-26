@@ -114,7 +114,30 @@ void GameEngineFile::Read(void* _readData, size_t _dataSize, size_t _readSize)
 	);
 }
 
-void GameEngineFile::Write(void* _writeData, size_t _writeSize)
+void GameEngineFile::Read(std::string& _Data)
+{
+	int Size = 0;
+	Read(&Size, sizeof(int), sizeof(int));
+	_Data.resize(Size);
+	Read(&_Data[0], Size, Size);
+}
+
+void GameEngineFile::Read(float4x4& _Data)
+{
+	Read(&_Data, sizeof(float4x4), sizeof(float4x4));
+}
+
+void GameEngineFile::Read(float4& _Data)
+{
+	Read(&_Data, sizeof(float4), sizeof(float4));
+}
+
+void GameEngineFile::Read(float& _Data)
+{
+	Read(&_Data, sizeof(float), sizeof(float));
+}
+
+void GameEngineFile::Write(const void* _writeData, size_t _writeSize)
 {
 	fwrite(
 		_writeData,
@@ -122,6 +145,20 @@ void GameEngineFile::Write(void* _writeData, size_t _writeSize)
 		1,			//쓰는 횟수.
 		filePtr_
 	);
+}
+
+void GameEngineFile::Write(const std::string& _Text)
+{
+	// 크기를 저장해줘야 합니다.
+// string은? 크기가 일정한 데이터를 가지고 있나요?
+	int Size = static_cast<int>(_Text.size());
+	Write(&Size, sizeof(int));
+	Write(_Text.c_str(), _Text.size());
+}
+
+void GameEngineFile::Write(const float4& _Data)
+{
+	Write(&_Data, sizeof(float4));
 }
 
 std::string GameEngineFile::GetString()

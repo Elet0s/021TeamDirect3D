@@ -49,6 +49,9 @@ protected:
 
 	void RecursiveAllNodes(fbxsdk::FbxNode* _node, std::vector<FBXNodeInfo>& _allNodes);
 
+	void FBXInfoDebugFunction(fbxsdk::FbxNode* _RootNode);
+
+	void RecursiveAllNode(fbxsdk::FbxNode* _Node, std::function<void(fbxsdk::FbxNode*)> _Function = nullptr);
 
 
 protected:
