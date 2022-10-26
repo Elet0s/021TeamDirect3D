@@ -27,10 +27,10 @@ void TestLevel::Start()
 
 	tileMap_ = CreateActor<TileMapActor>();
 	tileMap_->tileRenderer_->CreateTileMap(10, 10, { 128,128 }, "grassTexture.png");
-	tileMap_->tileRenderer_->SetPivot(PivotMode::LeftTop);
+	//tileMap_->tileRenderer_->SetPivot(PivotMode::LeftTop);
 	
 
-	GetMainCameraActor()->GetTransform().SetWorldMove({ 640.f, -360.f });
+	//GetMainCameraActor()->GetTransform().SetWorldMove({ 640.f, -360.f });
 }
 
 void TestLevel::Update(float _DeltaTime)

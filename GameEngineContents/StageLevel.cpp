@@ -13,18 +13,18 @@ StageLevel::~StageLevel()
 void StageLevel::Start()
 {
 
-	////////////府家胶//////////
-	//GameEngineDirectory Dir;
-	//Dir.MoveParentToExistChildDirectory("ContentsResources");
-	//Dir.MoveToChild("ContentsResources");
-	//Dir.MoveToChild("Player");
-	//std::vector<GameEngineFile> Textures = Dir.GetAllFiles();
-	//for (size_t i = 0; i < Textures.size(); i++)
-	//{
-	//	GameEngineTexture::Load(Textures[i].GetFullPath());
-	//}
-	////////////Cut//////////
-	//GameEngineTexture::Cut("Player_Idle.png", 11, 1);
+////////////府家胶//////////
+//GameEngineDirectory Dir;
+//Dir.MoveParentToExistChildDirectory("ContentsResources");
+//Dir.MoveToChild("ContentsResources");
+//Dir.MoveToChild("Player");
+//std::vector<GameEngineFile> Textures = Dir.GetAllFiles();
+//for (size_t i = 0; i < Textures.size(); i++)
+//{
+//	GameEngineTexture::Load(Textures[i].GetFullPath());
+//}
+////////////Cut//////////
+//GameEngineTexture::Cut("Player_Idle.png", 11, 1);
 
 
 

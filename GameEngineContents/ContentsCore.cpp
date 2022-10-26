@@ -33,7 +33,7 @@ void ContentsCore::Start()
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<TestLevel>("Test");
 	CreateLevel<LoginLevel>("Login");
-	ChangeLevel("Stage");
+	ChangeLevel("WorldMap");
 
 
 	//GameEngineTime::SetFrameLimit(60);

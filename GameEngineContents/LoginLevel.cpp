@@ -15,10 +15,6 @@ LoginLevel::~LoginLevel()
 
 void LoginLevel::Start()
 {
-	if (false == GameEngineInput::GetInst()->IsKey("P"))
-	{
-		GameEngineInput::GetInst()->CreateKey("LevelChange", 'P');
-	}
 
 	//GameEngineCameraActor* tempCameraActor = CreateActor<GameEngineCameraActor>(GameObjectGroup::UI);
 	//tempCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
@@ -34,10 +30,6 @@ void LoginLevel::Start()
 
 void LoginLevel::Update(float _deltaTime)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
-	{
-		GEngine::ChangeLevel("Play");
-	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("FreeCameraModeOnOff"))
 	{
