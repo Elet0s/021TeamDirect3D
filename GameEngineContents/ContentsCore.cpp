@@ -31,8 +31,8 @@ void ContentsCore::Start()
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<WorldMapLevel>("WorldMap");
 	CreateLevel<StageLevel>("Stage");
-	CreateLevel<StageLevel>("Test");
-	CreateLevel<StageLevel>("Login");
+	CreateLevel<TestLevel>("Test");
+	CreateLevel<LoginLevel>("Login");
 	ChangeLevel("Stage");
 
 

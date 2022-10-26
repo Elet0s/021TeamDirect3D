@@ -13,15 +13,6 @@ LoginLevel::~LoginLevel()
 {
 }
 
-//void ThreadLoading(GameEngineThread* _Thread) 
-//{
-//	for (size_t i = 0; i < 10; i++)
-//	{
-//		GameEngineDebug::OutputString("·ÎµùÁß...\n");
-//		Sleep(1);
-//	}
-//}
-
 void LoginLevel::Start()
 {
 	if (false == GameEngineInput::GetInst()->IsKey("P"))
@@ -60,22 +51,4 @@ void LoginLevel::End()
 
 void LoginLevel::LevelStartEvent()
 {
-	if (nullptr == GameEngineTexture::Find("LoginBackground.png"))
-	{
-		GameEngineDirectory dir;
-		dir.MoveParentToExistChildDirectory("ContentsResources");
-		dir.MoveToChild("ContentsResources");
-		dir.MoveToChild("Texture");
-		dir.MoveToChild("Login");
-
-		std::vector<GameEngineFile> shaders = dir.GetAllFiles();
-
-		for (size_t i = 0; i < shaders.size(); i++)
-		{
-			GameEngineTexture::Load(shaders[i].GetFullPath());
-		}
-	}
-
-	LoginUI* ptr = CreateActor<LoginUI>(GameObjectGroup::UI);
-	ptr->CreateComponent<GameEngineCollision>();
 }

@@ -25,7 +25,6 @@ private:
 	void LevelStartEvent() override;
 
 private:
-	GameEngineThread loadingThread_;
 
 };
 

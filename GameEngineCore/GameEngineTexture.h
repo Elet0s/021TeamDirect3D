@@ -1,6 +1,6 @@
 #pragma once
 #include "GameEngineRes.h"
-#include <GameEngineCore\ThirdParty\DirectXTex\Include\DirectXTex.h>
+#include <DirectXTex.h>
 
 struct PixelColor
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include "GameEngineRes.h"
-#include <GameEngineCore\ThirdParty\FW1FontWrapper\Include\FW1FontWrapper.h>
+#include <FW1FontWrapper.h>
 
 #pragma comment(lib, "FW1FontWrapper.lib")
 
