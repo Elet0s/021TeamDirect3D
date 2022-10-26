@@ -16,7 +16,7 @@ public:
 	Player& operator=(Player&& _other) = delete;
 
 public:
-	bool MonsterCollision(GameEngineCollision* _this, GameEngineCollision* _other);
+
 
 
 public:
@@ -38,10 +38,7 @@ protected:
 
 
 private:
-	GameEngineDefaultRenderer* playerRenderer_;
-	float speed_;
-
-	float4 color_;
+	GameEngineTextureRenderer* playerRenderer_;
 
 	GameEngineStateManager stateManager_;
 

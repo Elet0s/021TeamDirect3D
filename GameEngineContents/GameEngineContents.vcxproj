@@ -153,7 +153,6 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GlobalContentsValue.h" />
     <ClInclude Include="LoginLevel.h" />
-    <ClInclude Include="LoginUI.h" />
     <ClInclude Include="MapEditorWindow.h" />
     <ClInclude Include="MetaSpriteWindow.h" />
     <ClInclude Include="Monster.h" />
@@ -170,6 +169,10 @@
     <ClInclude Include="TestLevel.h" />
     <ClInclude Include="TileMapActor.h" />
     <ClInclude Include="TileMapRenderer.h" />
+    <ClInclude Include="TimeActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
@@ -183,7 +186,6 @@
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="GlobalContentsValue.cpp" />
     <ClCompile Include="LoginLevel.cpp" />
-    <ClCompile Include="LoginUI.cpp" />
     <ClCompile Include="MapEditorWindow.cpp" />
     <ClCompile Include="MetaSpriteWindow.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -203,6 +205,10 @@
     <ClCompile Include="TestLevel.cpp" />
     <ClCompile Include="TileMapActor.cpp" />
     <ClCompile Include="TileMapRenderer.cpp" />
+    <ClCompile Include="TimeActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>

@@ -54,7 +54,7 @@ private:
 	int tileX_;
 	int tileY_;
 
-	GameEngineFolderTexture* tileTextures_;
+	GameEngineTexture* tileTextures_;
 
 	float4 tileScale_;
 	float4 tileScaleHalf_;
