@@ -13,9 +13,6 @@
     <Filter Include="Actor\00. Global">
       <UniqueIdentifier>{23be44f3-ea54-4a44-9e0d-d3274cf8c33a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\01. Login">
-      <UniqueIdentifier>{488b34dc-6fe5-4fc1-86a2-f6a4eb26a25f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\02. Play">
       <UniqueIdentifier>{88d4ff25-7ace-4d9d-8f72-7ee0ddc30e4e}</UniqueIdentifier>
     </Filter>
@@ -52,9 +49,6 @@
     <ClCompile Include="MapEditorWindow.cpp">
       <Filter>Actor\00. Global\Gui</Filter>
     </ClCompile>
-    <ClCompile Include="LoginUI.cpp">
-      <Filter>Actor\01. Login</Filter>
-    </ClCompile>
     <ClCompile Include="TileMapRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -73,12 +67,17 @@
     <ClCompile Include="StageLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="MyTileMapRenderer.cpp" />
     <ClCompile Include="TestLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="LoginLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTileMapRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeActor.cpp">
+      <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,9 +96,6 @@
     </ClInclude>
     <ClInclude Include="MapEditorWindow.h">
       <Filter>Actor\00. Global\Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="LoginUI.h">
-      <Filter>Actor\01. Login</Filter>
     </ClInclude>
     <ClInclude Include="Enums.h">
       <Filter>Global</Filter>
@@ -122,12 +118,17 @@
     <ClInclude Include="StageLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="MyTileMapRenderer.h" />
     <ClInclude Include="TestLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="LoginLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTileMapRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeActor.h">
+      <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

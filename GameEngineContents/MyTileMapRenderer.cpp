@@ -32,11 +32,11 @@ void MyTileMapRenderer::CreateTileMap(
 	}*/
 	
 
-	tileTextures_ = GameEngineFolderTexture::Find("MapTile");
+	tileTextures_ = GameEngineTexture::Find(_Texture);
 
 	if (nullptr == tileTextures_)
 	{
-		//MsgBoxAssert(_folderTexture + ": 존재하지 않는 폴더텍스처입니다.");
+		MsgBoxAssertString(_Texture + ": 존재하지 않는 폴더텍스처입니다.");
 		return;
 	}
 
@@ -54,11 +54,11 @@ void MyTileMapRenderer::CreateTileMap(
 		{
 			if (x < 5)
 			{
-				allTiles_[y][x].tileImage_ = tileTextures_->GetTexture(Random.RandomInt(0,4));
+				allTiles_[y][x].tileImage_ = tileTextures_;
 			}
 			else
 			{
-				allTiles_[y][x].tileImage_ = tileTextures_->GetTexture(Random.RandomInt(0, 4));
+				allTiles_[y][x].tileImage_ = tileTextures_;
 			}
 		}
 	}
@@ -124,7 +124,7 @@ void MyTileMapRenderer::Render(float _deltaTime)
 			float4 tilePos = this->GetTransform().GetWorldPosition();
 			tilePos.x = x * tileScale_.x;
 			tilePos.y = y * -tileScale_.y;
-			tilePos.z = tilePos.y;
+			//tilePos.z = tilePos.y;
 
 			tileTransform.SetLocalScale(allTiles_[y][x].tileImage_->GetScale());
 			tileTransform.SetLocalPosition(tilePos);
@@ -138,13 +138,13 @@ void MyTileMapRenderer::Render(float _deltaTime)
 
 void MyTileMapRenderer::Start()
 {
-	if (false == GameEngineInput::GetInst()->IsKey("MoveMap_Right"))
+	/*if (false == GameEngineInput::GetInst()->IsKey("MoveMap_Right"))
 	{
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Right", VK_RIGHT);
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Left", VK_LEFT);
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Up", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Down", VK_DOWN);
-	}
+	}*/
 
 	this->SetPipeLine("TextureAtlas");
 
@@ -162,7 +162,7 @@ void MyTileMapRenderer::Start()
 void MyTileMapRenderer::Update(float _deltaTime)
 {
 
-	if (KeyFree == true)
+	/*if (KeyFree == true)
 	{
 		if (GameEngineInput::GetInst()->IsPressed("MoveMap_Right"))
 		{
@@ -195,7 +195,7 @@ void MyTileMapRenderer::Update(float _deltaTime)
 		GameEngineInput::GetInst()->IsFree("MoveMap_Down"))
 	{
 		KeyFree = true;
-	}
+	}*/
 }
 
 

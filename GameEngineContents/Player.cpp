@@ -5,9 +5,7 @@
 Player* Player::mainPlayer_ = nullptr;
 
 Player::Player()
-	: playerRenderer_(nullptr), 
-	speed_(50.f),
-	color_(float4::Black)
+	: playerRenderer_(nullptr)
 {
 	mainPlayer_ = this;
 	//SetLevelOverOn();
@@ -17,58 +15,36 @@ Player::~Player()
 {
 }
 
-bool Player::MonsterCollision(GameEngineCollision* _this, GameEngineCollision* _other)
-{
-	_other->GetActor()->Death();
-	return true;
-}
-
 void Player::Start()
 {
 	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("PlayerLeft", 'J');
-		GameEngineInput::GetInst()->CreateKey("PlayerRight", 'L');
-		GameEngineInput::GetInst()->CreateKey("PlayerUp", 'I');
-		GameEngineInput::GetInst()->CreateKey("PlayerDown", 'K');
-		GameEngineInput::GetInst()->CreateKey("PlayerForward", 'Y');
-		GameEngineInput::GetInst()->CreateKey("PlayerBack", 'U');
+		GameEngineInput::GetInst()->CreateKey("PlayerLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("PlayerRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("PlayerUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("PlayerDown", VK_DOWN);
 	}
 
 	this->GetTransform().SetLocalScale(1, 1, 1);
 	this->GetTransform().SetWorldScale(1, 1, 1);
 
 
-	playerRenderer_ = CreateComponent<GameEngineDefaultRenderer>("PlayerRenderer");
+	playerRenderer_ = CreateComponent<GameEngineTextureRenderer>("PlayerRenderer");
 	playerRenderer_->GetTransform().SetLocalScale(100, 100, 100);
-	playerRenderer_->SetMesh("Box");
-	playerRenderer_->SetPipeLine("Color");
-	playerRenderer_->GetShaderResourceHelper().SetConstantBuffer_Link("ResultColor", this->color_);
+	playerRenderer_->SetMesh("Rect");
+	playerRenderer_->SetPipeLine("TextureAtlas");
+	playerRenderer_->SetFolderTextureToIndex("Player_Idle.png", 0);
 
-	//GameEngineFontRenderer* fontRenderer = CreateComponent<GameEngineFontRenderer>();
-	//fontRenderer->SetText("¾È³çÇÏ¼¼¿ä", "±Ã¼­");
-	//fontRenderer->SetColor({ 1.0f, 0.0f, 0.0f });
-	//fontRenderer->SetTextPosition({0, 0});
-	//fontRenderer->SetRenderingOrder(10000);
-	//fontRenderer->SetSize(80);
-
-
-	stateManager_.CreateState("Idle",
-		std::bind(&Player::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2),
-		std::bind(&Player::IdleStart, this, std::placeholders::_1)
+	stateManager_.CreateState("Idle"
+		, std::bind(&Player::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Player::IdleStart, this, std::placeholders::_1)
 	);
-	stateManager_.CreateState("Move",
-		std::bind(&Player::MoveUpdate, this, std::placeholders::_1, std::placeholders::_2),
-		[this](const StateInfo& _info)->void{ /*playerRenderer_->ChangeFrameAnimation("Move");*/ }
-	);
-	stateManager_.ChangeState("Idle");
 
-
-
-
-
-
-
+	stateManager_.CreateState("Move"
+		, std::bind(&Player::MoveUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, [/*&*/=](const StateInfo& _Info)
+		{
+		});
 }
 
 void Player::Update(float _deltaTime)
@@ -117,29 +93,29 @@ void Player::MoveUpdate(float _deltaTime, const StateInfo& _info)
 
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
 	{
-		this->GetTransform().SetWorldMove(GetTransform().GetLeftVector() * speed_ * _deltaTime);
+		this->GetTransform().SetWorldMove(GetTransform().GetLeftVector() * 200.0f * _deltaTime);
 		playerRenderer_->GetTransform().PixLocalNegativeX();
 	}
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
 	{
-		this->GetTransform().SetWorldMove(GetTransform().GetRightVector() * speed_ * _deltaTime);
+		this->GetTransform().SetWorldMove(GetTransform().GetRightVector() * 200.0f * _deltaTime);
 		playerRenderer_->GetTransform().PixLocalPositiveX();
 	}
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerUp"))
 	{
-		this->GetTransform().SetWorldMove(GetTransform().GetUpVector() *speed_ * _deltaTime);
+		this->GetTransform().SetWorldMove(GetTransform().GetUpVector() * 200.0f * _deltaTime);
 	}
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
 	{
-		this->GetTransform().SetWorldMove(GetTransform().GetDownVector() * speed_ * _deltaTime);
+		this->GetTransform().SetWorldMove(GetTransform().GetDownVector() * 200.0f * _deltaTime);
 	}
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerForward"))
 	{
-		this->GetTransform().SetWorldMove(GetTransform().GetForwardVector() * speed_ * _deltaTime);
+		this->GetTransform().SetWorldMove(GetTransform().GetForwardVector() * 200.0f * _deltaTime);
 	}
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerBack"))
 	{
-		this->GetTransform().SetWorldMove(GetTransform().GetBackVector() * speed_ * _deltaTime);
+		this->GetTransform().SetWorldMove(GetTransform().GetBackVector() * 200.0f * _deltaTime);
 	}
 
 	this->GetLevel()->GetMainCameraActorTransform().SetLocalPosition(this->GetTransform().GetLocalPosition() + float4::Back * 100.f);
