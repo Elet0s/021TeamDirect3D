@@ -48,13 +48,13 @@ public:
 	//일반 멀티바이트 스트링 문자열을 와이드바이트 스트링으로 전환후 반환하는 함수.
 	static std::wstring AnsiToUnicodeReturn(const std::string& _inText);
 
-	//
+	//일반 멀티바이트 스트링 문자열을 UTF-8 스트링으로 전환하는 함수.
 	static void AnsiToUTF8(const std::string& _inText, std::string& _outText);
 
-	//
+	//일반 멀티바이트 스트링 문자열을 UTF-8 스트링으로 전환후 반환하는 함수.
 	static std::string AnsiToUTF8Return(const std::string& _inText);
 
-	//
+	//와이드바이트 문자열을 UTF-8 스트링으로 전환하는 함수.
 	static void UnicodeToUTF8(const std::wstring& _inText, std::string& _outText);
 };
 

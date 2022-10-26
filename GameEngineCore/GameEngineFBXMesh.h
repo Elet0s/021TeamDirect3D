@@ -191,6 +191,8 @@ public:
 // 설명 :
 class GameEngineFBXMesh : public GameEngineFBX, public GameEngineRes<GameEngineFBXMesh>
 {
+	// .fbx 파일에서 버텍스버퍼, 인덱스버퍼를 만들 수 있는 정보를 추출하는 클래스.
+
 public:
 	// constrcuter destructer
 	GameEngineFBXMesh();
