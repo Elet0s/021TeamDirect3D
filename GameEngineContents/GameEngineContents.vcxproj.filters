@@ -73,6 +73,13 @@
     <ClCompile Include="StageLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="MyTileMapRenderer.cpp" />
+    <ClCompile Include="TestLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -113,6 +120,13 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="StageLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTileMapRenderer.h" />
+    <ClInclude Include="TestLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>

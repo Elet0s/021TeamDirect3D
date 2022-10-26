@@ -3,6 +3,8 @@
 #include "TitleLevel.h"
 #include "WorldMapLevel.h"
 #include "StageLevel.h"
+#include "TestLevel.h"
+#include"LoginLevel.h"
 
 ContentsCore::ContentsCore()
 {
@@ -29,7 +31,8 @@ void ContentsCore::Start()
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<WorldMapLevel>("WorldMap");
 	CreateLevel<StageLevel>("Stage");
-
+	CreateLevel<StageLevel>("Test");
+	CreateLevel<StageLevel>("Login");
 	ChangeLevel("Stage");
 
 
