@@ -32,3 +32,6 @@
 #include <GameEngineCore\GameEngineCoreDebug.h>
 
 #include <GameEngineCore\GEngine.h>
+
+#include"GameEngineCore/GameEngineFBXMesh.h"
+
