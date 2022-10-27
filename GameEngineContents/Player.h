@@ -3,7 +3,7 @@
 class GameEngineDefaultRenderer;
 class Player: public GameEngineActor
 {
-	static Player* mainPlayer_;
+	static Player* mainplayer_;
 
 public:
 
@@ -16,13 +16,13 @@ public:
 	Player& operator=(Player&& _other) = delete;
 
 public:
-
+	float speed_;
 
 
 public:
 	static Player* GetMainPlayer()
 	{
-		return mainPlayer_;
+		return mainplayer_;
 	}
 
 protected:
@@ -38,9 +38,9 @@ protected:
 
 
 private:
-	GameEngineTextureRenderer* playerRenderer_;
-
-	GameEngineStateManager stateManager_;
+	GameEngineTextureRenderer* playerrenderer_;
+	GameEngineCollision* collision_;
+	GameEngineStateManager statemanager_;
 
 };
 

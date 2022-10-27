@@ -20,6 +20,6 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override {};
 private:
-	TileMapActor* tileMap_;
+	TileMapActor* tilemap;
 };
 

@@ -3,6 +3,8 @@
 #include "MyTileMapRenderer.h"
 #include "TileMapActor.h"
 #include "TimeActor.h"
+#include "Player.h"
+#include "GlobalContentsValue.h"
 
 TestLevel::TestLevel() 
 {
@@ -60,10 +62,16 @@ void TestLevel::Start()
 
 	
 
-	tileMap_ = CreateActor<TileMapActor>();
-	tileMap_->tileRenderer_->CreateTileMap(20, 20, { 128,128 }, "grassTexture.png");
-	tileMap_->tileRenderer_->SetPivot(PivotMode::LeftTop);
+	tilemap = CreateActor<TileMapActor>();
+	tilemap->tileRenderer_->CreateTileMap(20, 20, { 128,128 }, "grassTexture.png");
+	tilemap->tileRenderer_->SetPivot(PivotMode::LeftTop);
 	
+	if (nullptr == Player::GetMainPlayer())
+	{
+		Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
+		NewPlayer->SetLevelOverOn();
+	}
+
 	CreateActor<TimeActor>();
 
 	//GetMainCameraActor()->GetTransform().SetWorldMove({ 640.f, -360.f });
