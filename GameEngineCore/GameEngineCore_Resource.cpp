@@ -10,6 +10,7 @@
 #include "GameEngineStructuredBuffer.h"
 #include "GameEngineInstancingBuffer.h"
 
+#include "GameEngineFBXMesh.h"
 #include "GameEngineMesh.h"
 #include "GameEngineMaterial.h"
 #include "GameEngineVertexBuffer.h"
@@ -563,6 +564,7 @@ void GameEngineCore::EngineResourceDestroy()
 {
 	//사각형, 육면체, 에러텍스쳐 등등, 엔진 수준에서 기본적으로 지원되어야 하는 리소스를 삭제하는 함수.
 	GameEngineMaterial::ResourceDestroy();
+	GameEngineFBXMesh::ResourceDestroy();
 
 	GameEngineInputLayout::ResourceDestroy();
 	GameEngineVertexBuffer::ResourceDestroy();
