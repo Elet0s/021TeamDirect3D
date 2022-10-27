@@ -79,6 +79,9 @@
     <ClCompile Include="TimeActor.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="StageUI.cpp">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -128,6 +131,9 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="TimeActor.h">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="StageUI.h">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
   </ItemGroup>

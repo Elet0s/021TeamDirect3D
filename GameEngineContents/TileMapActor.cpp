@@ -19,7 +19,7 @@ void TileMapActor::Start()
 	for (size_t i = 0; i < 100; i++)
 	{
 		float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(0, 80));
-		float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(0, 45));
+		float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(0, 80));
 		X *= 32.0f;
 		Y *= 32.0f;
 		GameEngineTextureRenderer* TextureRenderer = CreateComponent<GameEngineTextureRenderer>();

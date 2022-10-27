@@ -3,6 +3,7 @@
 #include "MyTileMapRenderer.h"
 #include "TileMapActor.h"
 #include "TimeActor.h"
+#include "StageUI.h"
 #include "Player.h"
 #include "GlobalContentsValue.h"
 
@@ -73,8 +74,9 @@ void TestLevel::Start()
 	}
 
 	CreateActor<TimeActor>();
+	CreateActor<StageUI>()->SoulCoinRenderersOff();
 
-	//GetMainCameraActor()->GetTransform().SetWorldMove({ 640.f, -360.f });
+	GetMainCameraActor()->GetTransform().SetWorldMove({ 640.f, -360.f });
 }
 
 void TestLevel::Update(float _DeltaTime)
