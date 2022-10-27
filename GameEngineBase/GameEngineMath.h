@@ -445,14 +445,14 @@ public:
 	}
 
 	//정규화: 벡터의 방향은 그대로 유지하면서 길이만 1로 줄이는 것.
-	const float4& Normalize()
+	const float4& Normalize3D()
 	{
 		this->directXVector_ = DirectX::XMVector3Normalize(this->directXVector_);
 		return *this;
 	}
 
 	//정규화: 벡터의 방향은 그대로 유지하면서 길이만 1로 줄이는 것.
-	static float4 NormalizeReturn(const float4& _vector)
+	static float4 Normalize3DReturn(const float4& _vector)
 	{
 		return DirectX::XMVector3Normalize(_vector.directXVector_);
 	}

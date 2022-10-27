@@ -370,28 +370,28 @@ public:
 
 	inline float4 GetForwardVector() const
 	{
-		return float4::NormalizeReturn(data_.worldWorldMatrix_.arrVector[2]);
+		return float4::Normalize3DReturn(data_.worldWorldMatrix_.arrVector[2]);
 	}
 	inline float4 GetUpVector() const
 	{
-		return float4::NormalizeReturn(data_.worldWorldMatrix_.arrVector[1]);
+		return float4::Normalize3DReturn(data_.worldWorldMatrix_.arrVector[1]);
 	}	
 	inline float4 GetRightVector() const
 	{
-		return float4::NormalizeReturn(data_.worldWorldMatrix_.arrVector[0]);
+		return float4::Normalize3DReturn(data_.worldWorldMatrix_.arrVector[0]);
 	}
 
 	inline float4 GetBackVector() const
 	{
-		return -(float4::NormalizeReturn(data_.worldWorldMatrix_.arrVector[2]));
+		return -(float4::Normalize3DReturn(data_.worldWorldMatrix_.arrVector[2]));
 	}
 	inline float4 GetDownVector() const
 	{
-		return -(float4::NormalizeReturn(data_.worldWorldMatrix_.arrVector[1]));
+		return -(float4::Normalize3DReturn(data_.worldWorldMatrix_.arrVector[1]));
 	}	
 	inline float4 GetLeftVector() const
 	{
-		return -(float4::NormalizeReturn(data_.worldWorldMatrix_.arrVector[0]));
+		return -(float4::Normalize3DReturn(data_.worldWorldMatrix_.arrVector[0]));
 	}
 
 	void SetViewMatrix(const float4x4& _viewMatrix)

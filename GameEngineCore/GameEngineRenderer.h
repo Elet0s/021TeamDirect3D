@@ -26,9 +26,9 @@ public:
     GameEngineRenderUnit();
     ~GameEngineRenderUnit();
 
+    GameEngineRenderUnit(const GameEngineRenderUnit& _other);
+    //GameEngineRenderUnit(GameEngineRenderUnit&& _other) noexcept;
 private:
-    GameEngineRenderUnit(const GameEngineRenderUnit& _other) = delete;
-    GameEngineRenderUnit(GameEngineRenderUnit&& _other) noexcept = delete;
     GameEngineRenderUnit& operator=(const GameEngineRenderUnit& _other) = delete;
     GameEngineRenderUnit& operator=(GameEngineRenderUnit&& _other) = delete;
 
@@ -71,7 +71,7 @@ private:
 
     GameEngineInputLayout* inputLayout_;    //
 
-    GameEngineMaterial* renderingPipeLine_;    //셰이더리소스들을 렌더타겟에 그릴 렌더링 파이프라인.
+    GameEngineMaterial* material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
 
     D3D11_PRIMITIVE_TOPOLOGY topology_;     //
 

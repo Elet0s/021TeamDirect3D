@@ -27,10 +27,6 @@ private:
 	GameEngineFBX& operator=(const GameEngineFBX& _other) = delete;
 	GameEngineFBX& operator=(const GameEngineFBX&& _other) = delete;
 
-	//형변환은 최소화.
-	//메모리 배치는 최대한 연속적으로.
-	//깊은 복사 == 복사생성자 사용 최소화.
-
 public:
 	std::vector<FBXNodeInfo> CheckAllNodes();
 
@@ -40,20 +36,32 @@ protected:
 	//FBX SDK 인터페이스 생성 및 초기화 함수. 
 	bool CreateFBXSystemInitialize(const std::string& _path);
 
+	//.fbx 안의 메쉬 기본 화전값 알아내는 함수.
 	void FBXConvertScene();
 
+	//
 	void FBXInfoDebugFunction(fbxsdk::FbxNode* _RootNode);
-
+	
+	//전체 노드 순회.
 	void RecursiveAllNodes(fbxsdk::FbxNode* _Node, std::function<void(fbxsdk::FbxNode*)> _Function = nullptr);
 
 
 
 	//기하 형변환 함수들.
 
+	//FBXMatrix->float4x4.
 	float4x4 FBXMatrixToFloat4x4(const fbxsdk::FbxMatrix& _baseTransform);
+
+	//float4x4->FBXMatrix.
 	fbxsdk::FbxMatrix FLoat4x4ToFBXMatirx(const float4x4& _matrix);
+
+	//FBXVector4->float4
 	float4 FBXVecToFloat4(const fbxsdk::FbxVector4& _baseVector);
+
+	//FBXVector4->float4 트랜스폼 변환 함수. Z축 반전 주의.
 	float4 FBXVecToTransform(const fbxsdk::FbxVector4& _baseVector);
+
+	//FBXQuarternion->float4
 	float4 FBXQuaternionToFloat4(const fbxsdk::FbxQuaternion& _baseQuarternion);
 
 protected:
@@ -65,7 +73,8 @@ protected:
 
 	fbxsdk::FbxAMatrix convertMatrix_;
 	fbxsdk::FbxAMatrix jointMatrix_;
-	fbxsdk::FbxVector4 axisVector_;
+	fbxsdk::FbxVector4 axisVector_;		//.fbx파일의 기본 회전값. 
+	//파일 내 메쉬가 어느 방향을 향하고 있을 지 알 수 없으므로 기본 회전값을 알아둬야 한다.
 
 
 

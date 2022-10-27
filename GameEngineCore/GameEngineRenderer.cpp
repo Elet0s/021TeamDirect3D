@@ -9,7 +9,7 @@ GameEngineRenderUnit::GameEngineRenderUnit()
 	: parentRenderer_(nullptr),
 	mesh_(nullptr),
 	inputLayout_(nullptr),
-	renderingPipeLine_(nullptr),
+	material_(nullptr),
 	topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 {
 	SetMesh("Rect");
@@ -19,11 +19,22 @@ GameEngineRenderUnit::~GameEngineRenderUnit()
 {
 }
 
+GameEngineRenderUnit::GameEngineRenderUnit(const GameEngineRenderUnit& _other)
+{
+	this->parentRenderer_ = _other.parentRenderer_;
+	this->mesh_ = _other.mesh_;
+	this->inputLayout_ = _other.inputLayout_;
+	this->material_ = _other.material_;
+	this->topology_ = _other.topology_;
+
+	this->shaderResourceHelper_.ResourceCheck(this->material_);
+}
+
 void GameEngineRenderUnit::SetPipeLine(const std::string& _renderingPipeLineName)
 {
-	renderingPipeLine_ = GameEngineMaterial::Find(_renderingPipeLineName);
+	material_ = GameEngineMaterial::Find(_renderingPipeLineName);
 
-	if (nullptr == renderingPipeLine_)
+	if (nullptr == material_)
 	{
 		MsgBoxAssertString(_renderingPipeLineName + ": 그런 이름의 렌더링 파이프라인이 존재하지 않습니다.");
 		return;
@@ -33,14 +44,14 @@ void GameEngineRenderUnit::SetPipeLine(const std::string& _renderingPipeLineName
 	{
 		inputLayout_ = GameEngineInputLayout::Create(
 			this->mesh_->GetInputLayoutDesc(),
-			this->renderingPipeLine_->GetVertexShader()
+			this->material_->GetVertexShader()
 		);
 		//메쉬의 버텍스버퍼와 렌더링 파이프라인의 버텍스셰이더가 모두 준비되면 인풋 레이아웃을 생성한다.
 		//어떤게 먼저 준비될 지 모르므로 메쉬가 먼저 준비되는 경우와 렌더링 파이프라인이 먼저 준비되는 경우 
 		// 두가지 모두 대비한다.
 	}
 
-	shaderResourceHelper_.ResourceCheck(this->renderingPipeLine_);
+	shaderResourceHelper_.ResourceCheck(this->material_);
 }
 
 void GameEngineRenderUnit::SetMesh(const std::string& _meshName)
@@ -53,11 +64,11 @@ void GameEngineRenderUnit::SetMesh(const std::string& _meshName)
 		return;
 	}
 
-	if (nullptr == inputLayout_ && nullptr != renderingPipeLine_)
+	if (nullptr == inputLayout_ && nullptr != material_)
 	{
 		inputLayout_ = GameEngineInputLayout::Create(
 			this->mesh_->GetInputLayoutDesc(),
-			this->renderingPipeLine_->GetVertexShader()
+			this->material_->GetVertexShader()
 		);
 		//메쉬의 버텍스버퍼와 렌더링 파이프라인의 버텍스셰이더가 모두 준비되면 인풋 레이아웃을 생성한다.
 		//어떤게 먼저 준비될 지 모르므로 메쉬가 먼저 준비되는 경우와 렌더링 파이프라인이 먼저 준비되는 경우 
@@ -93,7 +104,7 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(GameEngineRenderer* _pare
 
 void GameEngineRenderUnit::Render(float _deltaTime)
 {
-	if (nullptr == this->renderingPipeLine_)
+	if (nullptr == this->material_)
 	{
 		MsgBoxAssert("렌더링 파이프라인이 없습니다. 렌더링을 할 수 없습니다.");
 		return;
@@ -117,7 +128,7 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 
 	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
 
-	renderingPipeLine_->Setting();
+	material_->Setting();
 
 	shaderResourceHelper_.AllResourcesSetting();
 
@@ -128,18 +139,18 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 
 GameEngineMaterial* GameEngineRenderUnit::GetPipeLine()
 {
-	return this->renderingPipeLine_;
+	return this->material_;
 }
 
 GameEngineMaterial* GameEngineRenderUnit::GetClonePipeLine()
 {
-	if (false == renderingPipeLine_->IsOriginal())
+	if (false == material_->IsOriginal())
 	{
-		return renderingPipeLine_;
+		return material_;
 	}
 
-	renderingPipeLine_ = ClonePipeLine(renderingPipeLine_);
-	return renderingPipeLine_;
+	material_ = ClonePipeLine(material_);
+	return material_;
 }
 
 GameEngineMaterial* GameEngineRenderUnit::ClonePipeLine(GameEngineMaterial* _original)

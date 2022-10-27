@@ -116,10 +116,10 @@ void GameEngineFile::Read(void* _readData, size_t _dataSize, size_t _readSize)
 
 void GameEngineFile::Read(std::string& _Data)
 {
-	int Size = 0;
-	Read(&Size, sizeof(int), sizeof(int));
-	_Data.resize(Size);
-	Read(&_Data[0], Size, Size);
+	int textSize = 0;
+	Read(&textSize, sizeof(int), sizeof(int));
+	_Data.resize(textSize);
+	Read(&_Data[0], textSize, textSize);
 }
 
 void GameEngineFile::Read(float4x4& _Data)

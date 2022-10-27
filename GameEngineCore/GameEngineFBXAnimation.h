@@ -24,9 +24,6 @@ private:
 
 
 public:	
-	static GameEngineFBXAnimation* Create(const std::string& _name);
-
-	void Setting();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
 
 };
 

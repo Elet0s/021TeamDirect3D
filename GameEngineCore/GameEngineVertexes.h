@@ -48,4 +48,7 @@ struct GameEngineVertex
 	float4 position_;
 	float4 color_;
 	float4 texcoord_;
+	float4 normal_;
+	float4 binormal_;
+	float4 tangent_;
 };

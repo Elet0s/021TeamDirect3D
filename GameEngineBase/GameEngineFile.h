@@ -38,18 +38,14 @@ public:
 
 	void Read(void* _readData, size_t _dataSize, size_t _readSize);
 	void Read(std::string& _Data);
-
 	void Read(float4x4& _Data);
-
 	void Read(float4& _Data);
-
 	void Read(float& _Data);
 
 	void Write(const void* _writeData, size_t _writeSize);
-
 	void Write(const std::string& _Text);
-
 	void Write(const float4& _Data);
+
 	std::string GetString();
 	uintmax_t GetFileSize() const;
 	static uintmax_t GetFileSize(const std::filesystem::path& _path);

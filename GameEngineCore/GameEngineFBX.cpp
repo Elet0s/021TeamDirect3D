@@ -72,7 +72,7 @@ bool GameEngineFBX::CreateFBXSystemInitialize(const std::string& _path)
 	}
 
 	scene_ = fbxsdk::FbxScene::Create(fbxManager_, "");
-	//신 생성.
+	//씬 생성.
 
 	if (nullptr == scene_)
 	{
@@ -210,10 +210,6 @@ void GameEngineFBX::RecursiveAllNodes(fbxsdk::FbxNode* _Node, std::function<void
 		_Function(_Node);
 	}
 
-	//FBXNodeInfo& NewNodeInfo = _AllNode.emplace_back();
-	//NewNodeInfo.Name = _Node->GetName();
-	//NewNodeInfo.Node = _Node;
-
 	int Count = _Node->GetChildCount();
 
 	for (int i = 0; i < Count; i++)
@@ -221,16 +217,6 @@ void GameEngineFBX::RecursiveAllNodes(fbxsdk::FbxNode* _Node, std::function<void
 		fbxsdk::FbxNode* Node = _Node->GetChild(i);
 		RecursiveAllNodes(Node);
 	}
-
-	//std::vector<T,Allocator>::emplace_back<class... Args>(): std::vector<T,Allocator>::push_back()은 
-	// 주어진 객체를 복사하거나 지정된 자료형의 생성자로 임시 객체(rValue)를 생성하고 
-	// 그 임시 객체(rValue)를 다시 복사 생성해서 벡터에 넣는데, emplace_back<>()은 넣어준 변수에 맞는 생성자를 호출해서 
-	// 임시 객체 없이 바로 벡터에 삽입해서 효율이 더 좋다고 한다. 
-	// 그리고 emplace_back<>()은 생성한 객체의 참조를 바로 받아볼 수도 있다.
-	//하지만, 가변인자를 매개변수로 받는 emplace_back<>()은 어떤 생성자를 호출해서 생성 삽입할 지 알 수 없어서, 
-	// push_back()이라면 거부할 비정상 인자도 emplace_back<>()은 그대로 받아서 저장해버리기때문에 
-	// 컴파일 단계가 아니라 런타임 중간에 문제를 일으킬 수 있으니 주의해야 한다고 한다. 
-
 }
 
 void GameEngineFBX::FBXInfoDebugFunction(fbxsdk::FbxNode* _RootNode)

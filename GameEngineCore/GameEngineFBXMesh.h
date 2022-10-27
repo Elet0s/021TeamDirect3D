@@ -5,9 +5,8 @@
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineIndexBuffer.h"
 
-
 // 지금설명하기 힘듬.
-class FbxExIW
+class FBXExIW
 {
 public:
 	int Index;
@@ -15,7 +14,7 @@ public:
 };
 
 
-class FbxExMaterialSettingData
+class FBXExMaterialSettingData
 {
 public:
 	std::string Name;
@@ -73,11 +72,15 @@ public:
 
 
 public:
-	FbxExMaterialSettingData() {}
-	~FbxExMaterialSettingData() {}
+	FBXExMaterialSettingData()
+	{
+	}
+	~FBXExMaterialSettingData()
+	{
+	}
 };
 
-struct FbxExMeshInfo
+struct FBXExMeshInfo
 {
 	std::string Name;
 	fbxsdk::FbxMesh* Mesh;
@@ -98,9 +101,10 @@ struct FbxExMeshInfo
 	int LodLevel;
 	int MorphNum;
 
-	FbxExMeshInfo()
+	FBXExMeshInfo()
 	{
 		Name;
+		Mesh = nullptr;
 		UniqueId = 0;
 		FaceNum = 0;
 		VertexNum = 0;
@@ -117,12 +121,16 @@ struct FbxExMeshInfo
 };
 
 
-struct FbxRenderUnit
+struct FBXRenderUnit
 {
 public:
 	int Index;
 	int IsLodLv;
 	bool IsLod;
+
+	float4 MinBoundBox;
+	float4 MaxBoundBox;
+	float4 BoundScaleBox;
 
 	//       자신의 정보를 
 	//       들고 있던 node
@@ -133,57 +141,27 @@ public:
 	std::map<FbxMesh*, std::vector<GameEngineVertex>*> FbxVertexMap;
 
 	//       애니메이션이 있다면 채워져 있을겁니다.
-	std::map<FbxMesh*, std::map<int, std::vector<FbxExIW>>> MapWI;
+	std::map<FbxMesh*, std::map<int, std::vector<FBXExIW>>> MapWI;
 
 	std::vector<GameEngineVertex> Vertexs;
 
 	std::vector<std::vector<std::vector<unsigned int>>> Indexs;
 
-	std::vector<std::vector<FbxExMaterialSettingData>> MaterialData;
+	std::vector<std::vector<FBXExMaterialSettingData>> MaterialData;
 
 
 	std::vector<GameEngineVertexBuffer*> GameEngineVertexBuffers;
 	std::vector<std::vector<GameEngineIndexBuffer*>> GameEngineIndexBuffers;
-	// std::vector<std::vector<std::shared_ptr<DirectMesh>>> m_Mesh;
 
-
-	// FbxMeshSet(const FbxMeshSet& _Other) = delete;
-	// FbxMeshSet(FbxMeshSet&& _Other) noexcept = delete;
-	// FbxMeshSet& operator=(const FbxMeshSet& _Other) = delete;
-	// FbxMeshSet& operator=(FbxMeshSet&& _Other) noexcept = delete;
-
-	FbxRenderUnit() :
+	FBXRenderUnit() :
+		Index(0),
 		IsLod(false),
 		IsLodLv(-1)
 	{
 	}
 
-	~FbxRenderUnit()
+	~FBXRenderUnit()
 	{
-		//for (size_t i = 0; i < GameEngineVertexBuffers.size(); i++)
-		//{
-		//	if (nullptr == GameEngineVertexBuffers[i])
-		//	{
-		//		continue;
-		//	}
-		//	delete GameEngineVertexBuffers[i];
-		//	GameEngineVertexBuffers[i] = nullptr;
-		//}
-
-		//// 서브셋 때문에
-		//for (size_t i = 0; i < GameEngineIndexBuffers.size(); i++)
-		//{
-		//	for (size_t j = 0; j < GameEngineIndexBuffers[i].size(); j++)
-		//	{
-		//		if (nullptr == GameEngineIndexBuffers[i][j])
-		//		{
-		//			continue;
-		//		}
-		//		delete GameEngineIndexBuffers[i][j];
-		//		GameEngineIndexBuffers[i][j] = nullptr;
-		//	}
-		//}
-
 	}
 };
 
@@ -204,17 +182,19 @@ public:
 	GameEngineFBXMesh& operator=(const GameEngineFBXMesh& _Other) = delete;
 	GameEngineFBXMesh& operator=(GameEngineFBXMesh&& _Other) noexcept = delete;
 
-	static GameEngineFBXMesh* Load(const std::string& _Path)
-	{
-		return Load(_Path, GameEnginePath::GetFileName(_Path));
-	}
+
+
+public:
+	static GameEngineFBXMesh* Load(const std::string& _Path);
 
 	static GameEngineFBXMesh* Load(const std::string& _Path, const std::string& _Name);
 
+	class GameEngineMesh* GetGameEngineMesh(int _SubIndex);
+
 
 protected:
-	std::vector<FbxExMeshInfo> MeshInfos;
-	std::vector<FbxRenderUnit> RenderUnitInfos;
+	std::vector<FBXExMeshInfo> MeshInfos;
+	std::vector<FBXRenderUnit> RenderUnitInfos;
 
 private:
 	void LoadMesh(const std::string& _Path, const std::string& _Name);
@@ -229,9 +209,15 @@ private:
 	void VertexBufferCheck();
 	fbxsdk::FbxAMatrix ComputeTotalMatrix(fbxsdk::FbxNode* Node);
 	bool IsOddNegativeScale(const fbxsdk::FbxAMatrix& TotalMatrix);
-	void FbxRenderUnitMaterialSetting(fbxsdk::FbxNode* _Node, FbxRenderUnit* _RenderData);
+	void FBXRenderUnitMaterialSetting(fbxsdk::FbxNode* _Node, FBXRenderUnit* _RenderData);
 	float4 MaterialColor(fbxsdk::FbxSurfaceMaterial* pMtrl, const char* _ColorName, const char* _FactorName);
 	float MaterialFactor(fbxsdk::FbxSurfaceMaterial* pMtrl, const char* _FactorName);
 	std::string MaterialTex(fbxsdk::FbxSurfaceMaterial* pMtrl, const char* _FactorName);
+
+	void LoadBinormal(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int _Index);
+	void LoadTangent(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int _Index);
+	void LoadNormal(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int _Index);
+	void DrawSetWeightAndIndexSetting(FBXRenderUnit* _DrawSet, fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxCluster* _Cluster, int _BoneIndex);
+	void LoadUV(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int VertexCount, int _Index);
 
 };
