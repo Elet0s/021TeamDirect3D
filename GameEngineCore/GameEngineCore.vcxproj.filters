@@ -588,20 +588,50 @@
     <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\alembic-md.pdb">
       <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\alembic-mt.pdb" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.pdb" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.pdb" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.pdb" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-md.pdb" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.pdb" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.pdb" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-mt.pdb" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.lib" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.lib" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.lib" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-md.lib" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.lib" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.lib" />
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-mt.lib" />
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.lib">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.lib">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.lib">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-md.lib">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-md.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.lib">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.lib">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-mt.lib">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-mt.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\alembic-mt.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
