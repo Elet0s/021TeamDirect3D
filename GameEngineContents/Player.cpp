@@ -125,9 +125,17 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 void Player::Update(float _deltaTime)
 {
 	statemanager_.Update(_deltaTime);
+	GetLevel()->GetMainCameraActor()->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -100);
+	float4 a = GetTransform().GetWorldPosition();
+	float4 b = GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
+	//GetLevel()->GetMainCameraActor()->GetTransform().SetWorldPosition({ 640.f, -360.f });
 }
 
 void Player::End()
 {
 }
 
+void Player::SetLevel(GameEngineLevel* _NowLevel)
+{
+	nowlevel_ = _NowLevel;
+}

@@ -60,9 +60,8 @@ void TestLevel::Start()
 			GameEngineFolderTexture::Load(Dir.GetFullPath());
 		}
 	}
-
 	
-
+	
 	tilemap = CreateActor<TileMapActor>();
 	tilemap->tileRenderer_->CreateTileMap(20, 20, { 128,128 }, "grassTexture.png");
 	tilemap->tileRenderer_->SetPivot(PivotMode::LeftTop);
@@ -71,10 +70,11 @@ void TestLevel::Start()
 	{
 		Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
 		NewPlayer->SetLevelOverOn();
+		NewPlayer->SetLevel(this);
 	}
 
-	CreateActor<TimeActor>();
-	CreateActor<StageUI>()->SoulCoinRenderersOff();
+	//CreateActor<TimeActor>();
+	//CreateActor<StageUI>()->SoulCoinRenderersOff();
 
 	GetMainCameraActor()->GetTransform().SetWorldMove({ 640.f, -360.f });
 }

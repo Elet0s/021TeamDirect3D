@@ -25,6 +25,8 @@ public:
 		return mainplayer_;
 	}
 
+	void SetLevel(GameEngineLevel* _NowLevel);
+
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -38,6 +40,7 @@ protected:
 
 
 private:
+	GameEngineLevel* nowlevel_;
 	GameEngineTextureRenderer* playerrenderer_;
 	GameEngineCollision* collision_;
 	GameEngineStateManager statemanager_;
