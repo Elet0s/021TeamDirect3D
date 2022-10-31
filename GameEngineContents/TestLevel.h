@@ -16,11 +16,19 @@ public:
 	TestLevel& operator=(const TestLevel& _Other) = delete;
 	TestLevel& operator=(TestLevel&& _Other) noexcept = delete;
 
+
+	void CreateMapAndCamraMove();
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override {};
 private:
+	
+
+	void MoveWorld(int _Dir);
+
+	std::vector<std::vector<TileMapActor*>> tilemaps_;
+	
 	std::vector<Monster*> Monster_;
 	TileMapActor* tilemap;
 };

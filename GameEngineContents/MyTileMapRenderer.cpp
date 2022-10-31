@@ -122,8 +122,8 @@ void MyTileMapRenderer::Render(float _deltaTime)
 		for (size_t x = 0; x < allTiles_[y].size(); x++)
 		{
 			float4 tilePos = this->GetTransform().GetWorldPosition();
-			tilePos.x = x * tileScale_.x;
-			tilePos.y = y * -tileScale_.y;
+			tilePos.x += x * tileScale_.x;
+			tilePos.y += y * -tileScale_.y;
 			//tilePos.z = tilePos.y;
 
 			tileTransform.SetLocalScale(allTiles_[y][x].tileImage_->GetScale());
@@ -201,7 +201,7 @@ void MyTileMapRenderer::Update(float _deltaTime)
 
 void  MyTileMapRenderer::MoveWorld(int _Dir)
 {
-	std::vector<std::vector<Tile>> CopyTiles_;
+	/*std::vector<std::vector<Tile>> CopyTiles_;
 	CopyTiles_.resize(tileY_);
 	for (size_t y = 0; y < CopyTiles_.size(); y++)
 	{
@@ -297,7 +297,7 @@ void  MyTileMapRenderer::MoveWorld(int _Dir)
 			break;
 		}	
 
-		allTiles_.swap(CopyTiles_);
+		allTiles_.swap(CopyTiles_);*/
 }
 
 
