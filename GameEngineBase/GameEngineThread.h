@@ -6,16 +6,6 @@ class GameEngineThread : public GameEngineNameObject
 	//std::thread와, 이 스레드가 실행할 함수를 하나로 묶어 관리하는 클래스.
 	//GameEngineThread 단독으로 사용할 수도 있고, GameEngineThreadPool에 넣어서 사용할 수도 있다.
 
-	//Heterogeneous Style
-	//작업을 종류별로 쪼개서 해당 작업 전담 스레드에게 맡기는 스타일.
-	//구성 초기부터 멀티스레딩 상황을 염두에 두었다면 이 방식이 더 낫다고 한다.
-
-	//Homogenous(Event Driven, Data Driven) Style
-	//작업 종류 상관없이 들어오는 순서대로 대기중인 스레드에게 맡기는 스타일.
-	//주로 서버에서 사용.
-	//이 프레임워크에선 이 방식으로 진행.
-
-
 public:
 	GameEngineThread();
 	GameEngineThread(const std::string& _threadName, std::function<void(GameEngineThread*)> _callback);
@@ -46,10 +36,16 @@ private:
 
 	std::thread thread_;	//스레드. 
 	//모든 스레드는 main()함수가 실행되면서 생성되는 메인 스레드의 자식 스레드이다.
+
+
+	//std::thread: 각 운영체제마다 다른 스레드 생성 및 운용 방식을, C++위원회에서 통일된 인터페이스로 포장해서 
+	// C++ 표준 라이브러리에 등록한 스레드 생성 운용 클래스. 실제로 같은 생성자에서도 Windows환경에서는 _beginthreadex()를, 
+	// macOS환경에서는 _VSTD::__libcpp_thread_create()를 호출해서 스레드를 생성한다.
+
 	//  thread(const thread&) = delete;
 	//	thread& operator=(const thread&) = delete;
 	//std::thread는 복사생성이 불가능하다.
 
 	std::function<void(GameEngineThread*)> workFunction_;	//이 스레드가 실행할 함수의 포인터.
-	//자기가 자기 안의 함수를 호출할때 매개변수가 자기 자신이면 무한 재귀되는게 아닌가??
+
 };

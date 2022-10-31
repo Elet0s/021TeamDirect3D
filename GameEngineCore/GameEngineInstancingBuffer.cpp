@@ -63,13 +63,13 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _dataSize)
 {
     if (nullptr == _data)
     {
-        MsgBoxAssertString(this->GetNameConstRef() + ": 데이터가 없습니다.");
+        MsgBoxAssertString(this->GetNameCopy() + ": 데이터가 없습니다.");
         return;
     }
 
     if (instancingBufferDesc_.ByteWidth != _dataSize)
     {
-        MsgBoxAssertString(this->GetNameConstRef() + ": 상수버퍼 전체 크기가 안 맞습니다.");
+        MsgBoxAssertString(this->GetNameCopy() + ": 상수버퍼 전체 크기가 안 맞습니다.");
         return;
     }
 

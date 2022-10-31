@@ -29,11 +29,11 @@ cbuffer DebugInfo : register(b8)
 }
 
 Texture2D Tex : register(t0);
-SamplerState Smp : register(s0);
+SamplerState POINTWRAP : register(s0);
 
 float4 Texture_PS(Output _input) : SV_Target0
 {
-    float4 texColor = Tex.Sample(Smp, _input.tex_.xy);
+    float4 texColor = Tex.Sample(POINTWRAP, _input.tex_.xy);
     
     if (color_.a <= 0.f)
     {

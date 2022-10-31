@@ -190,7 +190,7 @@ protected:
 	//내가 입력한 HLSL코드의 내용대로 셰이더의 리소스가 있는지 확인하고, 리소스세터를 통해 리소스 정보를 저장한다.
 	//상수버퍼는 찾아봐서 있으면 가져오고 없다면 생성한다.
 	//텍스처와 샘플러는 일단 엔진 기본제공 리소스를 세팅한다. 
-	void ShaderResCheck();
+	void ShaderResCheck(const std::string_view& _thisShaderName);
 	//이 과정을 통해 이 프레임워크의 셰이더는 스스로가 어떤 셰이더리소스를 필요로 하는지 전부 알 수 있다.
 
 protected:

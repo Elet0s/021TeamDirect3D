@@ -29,16 +29,6 @@ public:
 		return objectName_;
 	}
 
-	const std::string& GetNameConstRef()	
-	{
-		return objectName_;
-	}
-
-	const char* GetNameConstPtr()
-	{
-		return objectName_.c_str();
-	}
-
 private:
 	std::string objectName_;
 

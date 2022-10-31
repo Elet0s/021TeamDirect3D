@@ -104,7 +104,7 @@ protected:	//컨텐츠코어만 사용해야 하는 함수들.
 	}
 
 public:
-	static GameEngineThreadPool engineThreadPool_;
+	static GameEngineThreadPool engineThreadPool_;	//엔진 차원에서 제공하는 스레드풀.
 
 
 private:

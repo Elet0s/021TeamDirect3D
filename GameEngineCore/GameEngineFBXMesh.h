@@ -4,6 +4,8 @@
 #include "GameEngineVertexes.h"
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineIndexBuffer.h"
+#include "GameEngineTexture.h"
+#include "GameEngineMesh.h"
 
 // 지금설명하기 힘듬.
 class FBXExIW
@@ -124,7 +126,7 @@ struct FBXExMeshInfo
 struct FBXRenderUnit
 {
 public:
-	int Index;
+	int VectorIndex;
 	int IsLodLv;
 	bool IsLod;
 
@@ -133,11 +135,11 @@ public:
 	float4 BoundScaleBox;
 
 	//       자신의 정보를 
-	//       들고 있던 node
-	//       의 mesh
-	//       이매쉬에서  이점들을 빼냈다라고 보면 됩니다.
-	//       얻어온 점들에 대한 모든 정보이고.
-	//       만약 필요하다면 더 얻어야 할수도 있다.
+//       들고 있던 node
+//       의 mesh
+//       이매쉬에서  이점들을 빼냈다라고 보면 됩니다.
+//       얻어온 점들에 대한 모든 정보이고.
+//       만약 필요하다면 더 얻어야 할수도 있다.
 	std::map<FbxMesh*, std::vector<GameEngineVertex>*> FbxVertexMap;
 
 	//       애니메이션이 있다면 채워져 있을겁니다.
@@ -145,18 +147,24 @@ public:
 
 	std::vector<GameEngineVertex> Vertexs;
 
-	std::vector<std::vector<std::vector<unsigned int>>> Indexs;
+	// 머리
+	// 다리 
+	// 몸통
+	std::vector<std::vector<unsigned int>> Indexs;
 
-	std::vector<std::vector<FBXExMaterialSettingData>> MaterialData;
+	std::vector<FBXExMaterialSettingData> MaterialData;
 
 
-	std::vector<GameEngineVertexBuffer*> GameEngineVertexBuffers;
-	std::vector<std::vector<GameEngineIndexBuffer*>> GameEngineIndexBuffers;
+	GameEngineVertexBuffer* VertexBuffer;
+	std::vector<GameEngineIndexBuffer*> IndexBuffers;
 
-	FBXRenderUnit() :
-		Index(0),
+	std::vector<GameEngineMesh*> Meshs;
+
+	FBXRenderUnit()
+		:VectorIndex(0),
 		IsLod(false),
-		IsLodLv(-1)
+		IsLodLv(-1),
+		VertexBuffer(nullptr)
 	{
 	}
 
@@ -166,22 +174,23 @@ public:
 };
 
 
-// 설명 :
-class GameEngineFBXMesh : public GameEngineFBX, public GameEngineRes<GameEngineFBXMesh>
+class GameEngineFBXMesh : public GameEngineRes<GameEngineFBXMesh>, public GameEngineFBX
 {
-	// .fbx 파일에서 버텍스버퍼, 인덱스버퍼를 만들 수 있는 정보를 추출하는 클래스.
+	friend GameEngineRes<GameEngineFBXMesh>;
+	//GameEngineFBXMesh 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
 
-public:
-	// constrcuter destructer
+
+private:
 	GameEngineFBXMesh();
 	~GameEngineFBXMesh();
+	//외부에서 제멋대로 리소스를 생성/삭제하는걸 막기 위해서 생성자/소멸자를 프라이빗으로 지정해서 외부 접근을 막는다.
+	//이 프레임워크의 리소스는 반드시 소멸자가 아니라 ResourceDestroy()함수에서 제거해야 한다.
+	//프로그램 끝날때까지 리소스삭제를 안하면 끝나는 문제지만 그래도 최대한 막아둔다.
 
-	// delete Function
-	GameEngineFBXMesh(const GameEngineFBXMesh& _Other) = delete;
-	GameEngineFBXMesh(GameEngineFBXMesh&& _Other) noexcept = delete;
-	GameEngineFBXMesh& operator=(const GameEngineFBXMesh& _Other) = delete;
-	GameEngineFBXMesh& operator=(GameEngineFBXMesh&& _Other) noexcept = delete;
-
+	GameEngineFBXMesh(const GameEngineFBXMesh& _other) = delete;
+	GameEngineFBXMesh(GameEngineFBXMesh&& _other) noexcept = delete;
+	GameEngineFBXMesh& operator=(const GameEngineFBXMesh& _other) = delete;
+	GameEngineFBXMesh& operator=(const GameEngineFBXMesh&& _other) = delete;
 
 
 public:
@@ -189,7 +198,20 @@ public:
 
 	static GameEngineFBXMesh* Load(const std::string& _Path, const std::string& _Name);
 
-	class GameEngineMesh* GetGameEngineMesh(int _SubIndex);
+	GameEngineMesh* GetGameEngineMesh(size_t _MeshIndex, size_t _SubIndex);
+
+	const FBXExMaterialSettingData& GetMaterialSettingData(size_t _MeshIndex, size_t _SubIndex);
+
+public:
+	size_t GetRenderUnitCount()
+	{
+		return RenderUnitInfos.size();
+	}
+
+	size_t GetSubSetCount(size_t _RenderUnitIndex)
+	{
+		return RenderUnitInfos[_RenderUnitIndex].Indexs.size();
+	}
 
 
 protected:
@@ -219,5 +241,4 @@ private:
 	void LoadNormal(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int _Index);
 	void DrawSetWeightAndIndexSetting(FBXRenderUnit* _DrawSet, fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxCluster* _Cluster, int _BoneIndex);
 	void LoadUV(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int VertexCount, int _Index);
-
 };

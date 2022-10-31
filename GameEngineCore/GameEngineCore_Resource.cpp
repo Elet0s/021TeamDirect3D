@@ -236,23 +236,23 @@ void EngineTextureLoad()
 	// 메모리 캐시의 효율도 급격하게 떨어진다. 따라서 텍스처 단계에서 다운스케일링을 통한 안티앨리어싱을 해줄 필요가 있는데, 
 	// 이것을 미리 해두는 것이 밉매핑, 밉매핑을 위한 텍스처 모음이 밉맵이다.
 
-	D3D11_SAMPLER_DESC pointSamplerDesc = { };
+	D3D11_SAMPLER_DESC pointClampSamplerDesc = { };
 
-	pointSamplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT;
+	pointClampSamplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT;
 	//D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT: 
 	// 축소(Minification), 확대(Magnification), 밉 레벨 샘플링을 전부 포인터 샘플링으로 한다.
 	//포토샵 확대/축소의 최단입점(Nearest Neighbor. 주변 색을 섞지 않고 그 중 하나만 골라서 씀) 옵션과 같은 기능.
-	
+
 	//D3D11_FILTER::D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR:
 	//축소(Minification), 확대(Magnification)는 포인터 샘플링으로, 밉 레벨 샘플링은 선형보간한다.
 
 	//D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_LINEAR:
 	//축소(Minification), 확대(Magnification), 밉 레벨 샘플링을 전부 선형보간 한다. 
-	
+
 	//D3D11_FILTER::D3D11_FILTER_ANISOTROPIC:
 	// 비등방성(ANISOTROPIC) 필터링: 상하좌우를 동일한 비율로 확대 축소한 밉맵 이미지를 사용하는 것이 아니라, 
 	// 상하나 좌우 비율을 다른 비율로 확대 축소한 밉맵이미지를 사용해서 카메라가 다양한 위치로 움직여도 그에 맞는 적절한 밉맵을 사용하는 기법.
-	
+
 	//이 외에도 많은 필터링 옵션들이 있다. 
 
 
@@ -266,16 +266,16 @@ void EngineTextureLoad()
 	//	D3D11_TEXTURE_ADDRESS_MIRROR_ONCE = 5	좌우/상하를 뒤집어서 한번만 그린다.
 	//} 	D3D11_TEXTURE_ADDRESS_MODE;
 
-	pointSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
-	pointSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
-	pointSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
+	pointClampSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
+	pointClampSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
+	pointClampSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
 
 	//D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP가 기본인 이유: 
 	// 실수 오차로 UV값이 1을 초과해도 더 그리지 않고 무시해 버리므로 가장 깔끔하게 나온다.
 
 
-	pointSamplerDesc.MipLODBias = 0.f;
-	pointSamplerDesc.MaxAnisotropy = 1;	//1: 비등방성 밉맵 생성 안함.
+	pointClampSamplerDesc.MipLODBias = 0.f;
+	pointClampSamplerDesc.MaxAnisotropy = 1;	//1: 비등방성 밉맵 생성 안함.
 
 	//	typedef 
 	//	enum D3D11_COMPARISON_FUNC
@@ -290,26 +290,54 @@ void EngineTextureLoad()
 	//		D3D11_COMPARISON_ALWAYS = 8			언제나 통과.
 	//	} 	D3D11_COMPARISON_FUNC;	
 
-	pointSamplerDesc.ComparisonFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_NEVER;
+	pointClampSamplerDesc.ComparisonFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_NEVER;
 	//애초에 필터 옵션을 비교하지 않는 옵션으로 했기 때문에 뭘 골라도 어차피 적용되지 않는다.
 
-	pointSamplerDesc.MinLOD = -FLT_MAX;
-	pointSamplerDesc.MaxLOD = FLT_MAX;
+	pointClampSamplerDesc.MinLOD = -FLT_MAX;
+	pointClampSamplerDesc.MaxLOD = FLT_MAX;
 
-	GameEngineSampler::Create("EngineSampler_Point", pointSamplerDesc);	
+	GameEngineSampler::Create("POINTCLAMP", pointClampSamplerDesc);
 
 
-	D3D11_SAMPLER_DESC linearSamplerDesc = {};
-	linearSamplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	linearSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
-	linearSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
-	linearSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
-	linearSamplerDesc.MipLODBias = 0.f;
-	linearSamplerDesc.MaxAnisotropy = 1;
-	linearSamplerDesc.ComparisonFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_NEVER;
-	linearSamplerDesc.MinLOD = -FLT_MAX;
-	linearSamplerDesc.MaxLOD = FLT_MAX;
-	GameEngineSampler::Create("EngineSampler_Linear", linearSamplerDesc);
+	D3D11_SAMPLER_DESC pointWrapSamplerDesc = {};
+	pointWrapSamplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT;
+	pointWrapSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	pointWrapSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	pointWrapSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	pointWrapSamplerDesc.MipLODBias = 0.f;
+	pointWrapSamplerDesc.MaxAnisotropy = 1;
+	pointWrapSamplerDesc.ComparisonFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_NEVER;
+	pointWrapSamplerDesc.MinLOD = -FLT_MAX;
+	pointWrapSamplerDesc.MaxLOD = FLT_MAX;
+	GameEngineSampler::Create("POINTWRAP", pointWrapSamplerDesc);
+
+
+
+	D3D11_SAMPLER_DESC linearMirrorSamplerDesc = {};
+	linearMirrorSamplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	linearMirrorSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_MIRROR;
+	linearMirrorSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_MIRROR;
+	linearMirrorSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_MIRROR;
+	linearMirrorSamplerDesc.MipLODBias = 0.f;
+	linearMirrorSamplerDesc.MaxAnisotropy = 1;
+	linearMirrorSamplerDesc.ComparisonFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_NEVER;
+	linearMirrorSamplerDesc.MinLOD = -FLT_MAX;
+	linearMirrorSamplerDesc.MaxLOD = FLT_MAX;
+	GameEngineSampler::Create("LINEARMIRROR", linearMirrorSamplerDesc);
+
+
+
+	D3D11_SAMPLER_DESC linearWrapSamplerDesc = {};
+	linearWrapSamplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	linearWrapSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	linearWrapSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	linearWrapSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	linearWrapSamplerDesc.MipLODBias = 0.f;
+	linearWrapSamplerDesc.MaxAnisotropy = 1;
+	linearWrapSamplerDesc.ComparisonFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_NEVER;
+	linearWrapSamplerDesc.MinLOD = -FLT_MAX;
+	linearWrapSamplerDesc.MaxLOD = FLT_MAX;
+	GameEngineSampler::Create("LINEARWRAP", linearWrapSamplerDesc);
 
 	//D3D11 ERROR: ID3D11DeviceContext::DrawIndexed: 
 	//The Pixel Shader unit expects a Sampler configured for default filtering to be set at Slot 0, 

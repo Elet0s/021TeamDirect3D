@@ -19,14 +19,18 @@ private:
 
 public:	
 	void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName);
-	void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName, int _meshIndex, int _subsetIndex = 0);
+	void SetFBXMesh(
+		const std::string& _fbxMeshName, const std::string& _materialName,
+		size_t _meshIndex,
+		size_t _subsetIndex = 0
+	);
 
-	void Render(float _DeltaTime) override;
+	void Render(float _deltaTime) override;
 
 
 private:
 	class GameEngineFBXMesh* FBXMesh;
 
-	std::vector<GameEngineRenderUnit> Unit;
+	std::vector<std::vector<GameEngineRenderUnit>> Unit;
 };
 

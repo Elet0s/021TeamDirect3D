@@ -21,11 +21,11 @@ Output TargetMerge_VS(Input _input)
 }
 
 Texture2D Tex : register(t0);
-SamplerState Smp : register(s0);
+SamplerState LINEARWRAP : register(s0);
 
 float4 TargetMerge_PS(Output _input): SV_Target0
 {
-    float4 resultColor = Tex.Sample(Smp, _input.tex_.xy);
+    float4 resultColor = Tex.Sample(LINEARWRAP, _input.tex_.xy);
 
     if(resultColor.a <= 0.f)
     {

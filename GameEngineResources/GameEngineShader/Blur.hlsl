@@ -35,11 +35,11 @@ cbuffer WindowScale : register(b0)
 }
 
 Texture2D Tex : register(t0);
-SamplerState Smp : register(s0);
+SamplerState POINTWRAP : register(s0);
 
 float4 Blur_PS(Output _input) : SV_Target0
 {
-    float2 pixelUVSize = float2(1.f / windowScale_.x, 1.f/ windowScale_.y);
+    float2 pixelUVSize = float2(1.f / windowScale_.x, 1.f / windowScale_.y);
     //float2 pixelUVSize = float2(1.f / 1280.f, 1.f / 720.f);
     float2 centerPixelUV = _input.tex_.xy;
     float2 startUV = centerPixelUV - (pixelUVSize * 2.f);
@@ -51,7 +51,7 @@ float4 Blur_PS(Output _input) : SV_Target0
     {
         for (int x = 0; x < 5; ++x)
         {
-            resultColor += Tex.Sample(Smp, currentUV) * Gaussian[y][x];
+            resultColor += Tex.Sample(POINTWRAP, currentUV) * Gaussian[y][x];
             currentUV.x += pixelUVSize.x;
         }
         currentUV.x = startUV.x;

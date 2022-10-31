@@ -40,12 +40,12 @@ Output Texture_VS(Input _input)
 //    float4 plusColor_;
 //};
 
-Texture2D Tex : register(t0);
-SamplerState Smp : register(s0);
+Texture2D DiffuseTexture : register(t0);
+SamplerState LINEARWRAP : register(s0);
 
 float4 Texture_PS(Output _input) : SV_Target0 //SV_Target[n]: n번 렌더타겟에 결과값을 저장한다.
-{   
-    float4 resultColor = Tex.Sample(Smp, _input.texcoord_.xy);
+{
+    float4 resultColor = DiffuseTexture.Sample(LINEARWRAP, _input.texcoord_.xy);
     //float4 color = (Tex.Sample(Smp, _input.texcoord_.xy) * mulColor_) + plusColor_;
     
     if (resultColor.a <= 0.f)

@@ -64,7 +64,7 @@ GameEngineVertexShader* GameEngineVertexShader::Load(
     newRes->SetEntrtyPoint(_entryPoint);
     newRes->CompileHLSLCode(_path);
     newRes->CreateVertexShader();
-    newRes->ShaderResCheck();
+    newRes->ShaderResCheck(newRes->GetName());
     return newRes;
 }
 
@@ -81,7 +81,7 @@ void GameEngineVertexShader::InstancingShaderCompile(
     instancingVertexShader_->SetEntrtyPoint(_entryPoint);
     instancingVertexShader_->CompileHLSLCode(_path);
     instancingVertexShader_->CreateInstancingShader();
-    instancingVertexShader_->ShaderResCheck();
+    instancingVertexShader_->ShaderResCheck(instancingVertexShader_->GetName());
 }
 
 void GameEngineVertexShader::CreateVertexShader()

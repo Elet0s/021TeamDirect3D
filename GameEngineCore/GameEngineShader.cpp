@@ -205,7 +205,7 @@ void GameEngineShader::CompileHLSLCode(const std::string& _path)
 	//컴파일에 문제가 없었다면 errorMessage는 널포인터인상태 그대로 내려오므로 릴리즈할 것이 없다.
 }
 
-void GameEngineShader::ShaderResCheck()
+void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 {
 	if (nullptr == binaryCode_)
 	{
@@ -364,9 +364,13 @@ void GameEngineShader::ShaderResCheck()
 				newSamplerSetter.parentShaderType_ = this->shaderType_;
 				//부모 셰이더가 어떤 셰이더인지 저장한다.
 
-				newSamplerSetter.sampler_ = GameEngineSampler::Find("EngineSampler_Linear");
-				//이 샘플러세터가 가질 샘플러로 일단 엔진 기본제공 샘플러인 "EngineSampler_Linear"를 지정하고
-				// 다른 샘플러가 필요하면 이 셰이더를 가진 렌더러 차원에서 다른것으로 바꿔준다.
+				newSamplerSetter.sampler_ = GameEngineSampler::Find(uppercaseResourceName);
+
+				if (nullptr == newSamplerSetter.sampler_)
+				{
+					MsgBoxAssertString(uppercaseResourceName + ": 그런 이름의 샘플러가 존재하지 않습니다. \nShaderName: " + _thisShaderName.data());
+					return;
+				}
 
 				newSamplerSetter.bindPoint_ = resInfo.BindPoint;
 

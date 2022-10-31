@@ -20,7 +20,6 @@ void GameEngineDefaultRenderer::SetPipeLine(const std::string& _renderingPipeLin
 {
 	this->renderUnit_.SetPipeLine(_renderingPipeLineName);
 	this->renderUnit_.SetRenderer(this);
-	GameEngineRenderer::PushRendererToMainCamera();
 }
 
 void GameEngineDefaultRenderer::SetMesh(const std::string& _meshName)

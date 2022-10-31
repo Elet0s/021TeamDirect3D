@@ -34,11 +34,20 @@ public:
 		const std::string& _indexBufferName
 	);
 
+	static GameEngineMesh* Create(
+		GameEngineVertexBuffer* _vertexBuffer,
+		GameEngineIndexBuffer* _indexBuffer
+	);
+
 	//이 메쉬에 버텍스버퍼를 세팅하는 함수.
 	void SetVertexBuffer_InputAssembler1(const std::string& _vertexBufferName);
 
+	void SetVertexBuffer_InputAssembler1(GameEngineVertexBuffer* _vertexBuffer);
+
 	//이 메쉬에 인덱스버퍼를 세팅하는 함수.
 	void SetIndexBuffer_InputAssembler2(const std::string& _indexBufferName);
+
+	void SetIndexBuffer_InputAssembler2(GameEngineIndexBuffer* _indexBuffer);
 
 	void Setting();	//이 리소스를 렌더링 파이프라인에 연결하는 함수.
 
@@ -50,8 +59,6 @@ private:
 	void InputAssembler1_VertexBufferSetting();
 
 	void InputAssembler2_IndexBufferSetting();
-
-
 
 private:
 	GameEngineVertexBuffer* vertexBuffer_;

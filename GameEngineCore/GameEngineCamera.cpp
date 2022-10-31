@@ -16,7 +16,7 @@ GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
 	projectionMode_(CameraProjectionMode::Perspective),
 	nearZ_(0.1f),
-	farZ_(10000.f),
+	farZ_(1000000.f),
 	fovAngleY_(60.f),
 	cameraRenderTarget_(nullptr)
 {
@@ -178,7 +178,7 @@ void GameEngineCamera::PushInstancing(GameEngineMaterial* _pipeLine, int _count)
 {
 	if (false == _pipeLine->GetVertexShader()->IsInstancing())
 	{
-		MsgBoxAssertString(_pipeLine->GetNameConstRef() + ": 인스턴싱이 불가능한 렌더러입니다.");
+		MsgBoxAssertString(_pipeLine->GetNameCopy() + ": 인스턴싱이 불가능한 렌더러입니다.");
 	}
 
 	GameEngineInstancing& instancing = instancingMap_[_pipeLine];

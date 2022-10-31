@@ -112,12 +112,12 @@ protected:
 			//지역변수로 생성되면서 생성자 매개변수로 넣어진 std::mutex 객체의 lock() 함수를 호출해서 메모리에 접근제한을 걸고,
 			//스코프가 닫히고 소멸될 때 소멸자에서 std::mutex의 unlock() 함수를 호출해서 메모리에 걸린 접근제한을 해제하게 한다.
 			//그래서 한번 생성만 해 두면 자동으로 잠금과 해제를 해 준다.
-			insertResult = namedRes_.insert(std::make_pair(newRes->GetNameConstRef(), newRes));
+			insertResult = namedRes_.insert(std::make_pair(newRes->GetNameCopy(), newRes));
 		}
 
 		if (false == insertResult.second)
 		{
-			MsgBoxAssertString(newRes->GetNameConstRef() + ": 이미 존재하는 리소스 이름입니다.");
+			MsgBoxAssertString(newRes->GetNameCopy() + ": 이미 존재하는 리소스 이름입니다.");
 			return nullptr;
 		}
 
@@ -144,10 +144,9 @@ protected:
 
 protected:
 	bool isOriginal_;
-
-private:
 	std::string path_;
 
+private:
 	static std::map<std::string, ResType*> namedRes_;
 	static std::list<ResType*> unnamedRes_;
 
@@ -156,11 +155,12 @@ private:
 
 	//std::mutex: 여러 스레드들이 공유할 수 있는 특정 메모리 영역에 한개 스레드만 접근할 수 있게 해서
 	// 경쟁 상태(Race Condition) 발생을 예방하는 클래스.
-	// 잠긴 메모리는 사실상 싱글스레딩 상태가 되므로 멀티스레딩의 의미가 사라지므로 남발해선 안된다.
-	//lock()함수로 메모리를 잠근 상태에서 한번 더 lock() 함수를 호출하거나 unlock()함수 호출을 잊어버리면
-	//잠금 해제가 안되는 deadlock상태가 되어 다시 그 메모리에 접근할 수 없게 된다.
+	// 잠긴 메모리는 사실상 싱글스레딩 상태가 되어 멀티스레딩의 의미가 사라지므로 남발해선 안된다.
+	//lock()함수로 메모리를 잠근 상태에서 같은 스레드에서 한번 더 lock() 함수를 호출하거나 unlock()함수 호출을 잊어버리면
+	//잠금 해제가 안되는 deadlock상태가 되어 다시는 그 메모리에 접근할 수 없게 된다.
+	//mutex는 mutual exclusion(상호 배제)의 줄임말이라고 한다.
 
-
+	//경쟁 상태(Race Condition): 여러 스레드가 공유하는 메모리의 데이터에 동시에 접근해서 연산의 결과가 왜곡되는 상태. 
 };
 
 //템플릿을 가진 정적 멤버변수는 초기화를 여기서 한다.

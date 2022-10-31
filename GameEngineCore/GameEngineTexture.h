@@ -88,13 +88,13 @@ public:
 	{
 		if (true == this->cutData_.empty())
 		{
-			MsgBoxAssertString(this->GetNameConstRef() + ": 아직 자르지 않은 텍스쳐입니다.");
+			MsgBoxAssertString(this->GetNameCopy() + ": 아직 자르지 않은 텍스쳐입니다.");
 			return float4();
 		}
 
 		if (cutData_.size() <= _index)
 		{
-			MsgBoxAssertString(this->GetNameConstRef() + ": 프레임 범위를 넘어섰습니다.");
+			MsgBoxAssertString(this->GetNameCopy() + ": 프레임 범위를 넘어섰습니다.");
 			return float4();
 		}
 

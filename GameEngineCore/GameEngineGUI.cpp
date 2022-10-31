@@ -9,7 +9,7 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 
 void GameEngineGUIWindow::Begin()
 {
-    std::string guiWindowName = GameEngineString::AnsiToUTF8Return(this->GetNameConstPtr());
+    std::string guiWindowName = GameEngineString::AnsiToUTF8Return(this->GetNameCopy());
 
     ImGui::Begin(guiWindowName.c_str(), &IsUpdateRef());
 }

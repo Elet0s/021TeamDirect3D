@@ -33,6 +33,13 @@ GameEngineIndexBuffer* GameEngineIndexBuffer::Create(
 	return newRes;
 }
 
+GameEngineIndexBuffer* GameEngineIndexBuffer::Create(const void* _data, UINT _indexSize, UINT _indexCount)
+{
+	GameEngineIndexBuffer* newRes = CreateUnnamedRes();
+	newRes->CreateIndexBuffer(_data, _indexSize, _indexCount);
+	return newRes;
+}
+
 void GameEngineIndexBuffer::Setting()
 {
 	if (nullptr == indexBuffer_)

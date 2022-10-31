@@ -36,6 +36,14 @@ GameEngineVertexBuffer* GameEngineVertexBuffer::Create(
 	return newRes;
 }
 
+GameEngineVertexBuffer* GameEngineVertexBuffer::Create(const void* _data, UINT _vertexSize, UINT _vertexCount, const GameEngineInputLayoutDesc& _info)
+{
+	GameEngineVertexBuffer* newRes = CreateUnnamedRes();
+	newRes->inputLayoutDesc_ = &_info;	//const 자료형* 변수에 const 자료형&의 주소값을 넣어주므로 복사하는데 아무 문제 없다.
+	newRes->CreateVertexBuffer(_data, _vertexSize, _vertexCount);
+	return newRes;
+}
+
 void GameEngineVertexBuffer::Setting()
 {
 	if (nullptr == vertexBuffer_)

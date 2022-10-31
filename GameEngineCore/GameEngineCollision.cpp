@@ -121,7 +121,7 @@ bool GameEngineCollision::IsCollision(
 
 					if (false == insertResult.second)
 					{
-						MsgBoxAssertString(otherCollision->GetNameConstRef() 
+						MsgBoxAssertString(otherCollision->GetNameCopy() 
 							+ ": 이미 충돌했던 충돌체가 아직 정리되지 않은 상태에서 다시 충돌했습니다.");
 						return true;
 					}
@@ -162,7 +162,7 @@ bool GameEngineCollision::IsCollision(
 				{
 					if (0 == collisionCheck_.erase(otherCollision))
 					{
-						MsgBoxAssertString(otherCollision->GetNameConstRef()
+						MsgBoxAssertString(otherCollision->GetNameCopy()
 							+ ": 충돌한 적 없는 충돌체를 제거하려고 했습니다.");
 						return false;
 					}

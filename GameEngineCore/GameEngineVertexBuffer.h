@@ -36,6 +36,14 @@ public:
 		UINT _vertexCount,
 		const GameEngineInputLayoutDesc& _info
 	);
+
+	static GameEngineVertexBuffer* Create(
+		const void* _data,
+		UINT _vertexSize,
+		UINT _vertexCount,
+		const GameEngineInputLayoutDesc& _info
+	);
+
 	void Setting();
 
 public:
@@ -54,13 +62,21 @@ public:
 		);
 	}
 
+	template<typename VertexType>
+	static GameEngineVertexBuffer* Create(
+		const std::vector<VertexType>& _vertex
+	)
+	{
+		return Create(
+			&_vertex[0],
+			static_cast<UINT>(sizeof(VertexType)),
+			static_cast<UINT>(_vertex.size()),
+			VertexType::inputLayoutInfo_
+		);
+	}
+
 	const GameEngineInputLayoutDesc& GetInputLayoutDesc() const
 	{
-		if (nullptr == this->inputLayoutDesc_)
-		{
-			MsgBoxAssert("가져올 인풋 레이아웃 정보가 없습니다.");
-		}
-
 		return *inputLayoutDesc_;
 	}
 

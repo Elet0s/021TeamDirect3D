@@ -386,6 +386,18 @@ public:
 		return POINT(this->IX(), this->IY());
 	}
 
+	std::string ToString()
+	{
+		std::string value;
+		value += "x : ";
+		value += std::to_string(x);
+		value += ", y : ";
+		value += std::to_string(y);
+		value += ", z : ";
+		value += std::to_string(z);
+		return value;
+	}
+
 
 public:
 	static float4 Lerp(const float4& p1, const float4& p2, float _time)

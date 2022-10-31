@@ -36,6 +36,13 @@ public:
 		UINT _indexSize,
 		UINT _indexCount
 	);
+
+	static GameEngineIndexBuffer* Create(
+		const void* _data,
+		UINT _indexSize,
+		UINT _indexCount
+	);
+
 	void Setting();
 
 public:
@@ -47,6 +54,18 @@ public:
 	{
 		return Create(
 			_name,
+			&_indexes[0],
+			static_cast<UINT>(sizeof(IndexType)),
+			static_cast<UINT>(_indexes.size())
+		);
+	}
+
+	template<typename IndexType>
+	static GameEngineIndexBuffer* Create(
+		const std::vector<IndexType>& _indexes
+	)
+	{
+		return Create(
 			&_indexes[0],
 			static_cast<UINT>(sizeof(IndexType)),
 			static_cast<UINT>(_indexes.size())

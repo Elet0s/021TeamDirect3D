@@ -126,7 +126,7 @@ public:
 			return "";
 		}
 
-		return currentState_->GetNameConstRef();
+		return currentState_->GetNameCopy();
 	}
 
 	float GetCurrentStateTime()

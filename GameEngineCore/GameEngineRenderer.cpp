@@ -76,6 +76,28 @@ void GameEngineRenderUnit::SetMesh(const std::string& _meshName)
 	}
 }
 
+void GameEngineRenderUnit::SetMesh(GameEngineMesh* _mesh)
+{
+	if (nullptr == _mesh)
+	{
+		MsgBoxAssert("메쉬가 존재하지 않습니다.");
+		return;
+	}
+
+	this->mesh_ = _mesh;
+
+	if (nullptr == inputLayout_ && nullptr != material_)
+	{
+		inputLayout_ = GameEngineInputLayout::Create(
+			this->mesh_->GetInputLayoutDesc(),
+			this->material_->GetVertexShader()
+		);
+		//메쉬의 버텍스버퍼와 렌더링 파이프라인의 버텍스셰이더가 모두 준비되면 인풋 레이아웃을 생성한다.
+		//어떤게 먼저 준비될 지 모르므로 메쉬가 먼저 준비되는 경우와 렌더링 파이프라인이 먼저 준비되는 경우 
+		// 두가지 모두 대비한다.
+	}
+}
+
 void GameEngineRenderUnit::EngineShaderResourceSetting(GameEngineRenderer* _parentRenderer)
 {
 	if (nullptr == _parentRenderer)

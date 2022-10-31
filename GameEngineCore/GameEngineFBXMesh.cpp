@@ -16,14 +16,105 @@ GameEngineFBXMesh* GameEngineFBXMesh::Load(const std::string& _Path)
 
 GameEngineFBXMesh* GameEngineFBXMesh::Load(const std::string& _Path, const std::string& _Name)
 {
-	GameEngineFBXMesh* NewRes = CreateNamedRes(_Name);
-	NewRes->LoadMesh(_Path, _Name);
-	return NewRes;
+	GameEngineFBXMesh* newRes = CreateNamedRes(_Name);
+	newRes->SetPath(_Path);
+	newRes->LoadMesh(_Path, _Name);
+	return newRes;
 }
 
-GameEngineMesh* GameEngineFBXMesh::GetGameEngineMesh(int _SubIndex)
+GameEngineMesh* GameEngineFBXMesh::GetGameEngineMesh(size_t _MeshIndex, size_t _SubIndex)
 {
-	return nullptr;
+	if (RenderUnitInfos.size() <= _MeshIndex)
+	{
+		MsgBoxAssert("존재하지 않는 랜더 유니트를 사용하려고 했습니다.");
+	}
+
+	FBXRenderUnit& Unit = RenderUnitInfos[_MeshIndex];
+
+	if (nullptr == Unit.VertexBuffer)
+	{
+		GameEngineVertexBuffer* VertexBuffer = GameEngineVertexBuffer::Create(Unit.Vertexs);
+
+		if (nullptr == VertexBuffer)
+		{
+			MsgBoxAssert("FBX 버텍스 버퍼 생성 실패.");
+		}
+
+		Unit.VertexBuffer = VertexBuffer;
+	}
+
+	if (Unit.Indexs.size() <= _SubIndex)
+	{
+		MsgBoxAssert("존재하지 않는 서브셋을 만들려고 했습니다. 인덱스 버퍼를 생성할수 없습니다.");
+	}
+
+	if (Unit.IndexBuffers.empty())
+	{
+		Unit.IndexBuffers.resize(Unit.Indexs.size());
+	}
+
+	if (nullptr == Unit.IndexBuffers[_SubIndex])
+	{
+		GameEngineIndexBuffer* IndexBuffer = GameEngineIndexBuffer::Create(Unit.Indexs[_SubIndex]);
+
+		if (nullptr == IndexBuffer)
+		{
+			MsgBoxAssert("FBX 버텍스 버퍼 생성 실패.");
+		}
+
+		Unit.IndexBuffers[_SubIndex] = IndexBuffer;
+	}
+
+	if (Unit.Meshs.empty())
+	{
+		Unit.Meshs.resize(Unit.Indexs.size());
+	}
+
+	if (nullptr == Unit.Meshs[_SubIndex])
+	{
+		Unit.Meshs[_SubIndex] = GameEngineMesh::Create(Unit.VertexBuffer, Unit.IndexBuffers[_SubIndex]);
+	}
+
+	// 끝나면 이에 해당하는 메테리얼을 확인합니다.
+
+	if (
+		false == Unit.MaterialData[_SubIndex].DifTextureName.empty()
+		&& "" != Unit.MaterialData[_SubIndex].DifTextureName
+		)
+	{
+		GameEngineTexture* Texture = GameEngineTexture::Find(Unit.MaterialData[_SubIndex].DifTextureName);
+
+		if (nullptr == Texture)
+		{
+			//this->path_ = GameEngineDirectory::GetFolderPath(GetPath());
+
+			//std::string FilePath = path_ + Unit.MaterialData[_SubIndex].DifTextureName;
+
+			GameEnginePath FilePath = GameEnginePath(GetPath());
+			FilePath.ReplaceFileName(Unit.MaterialData[_SubIndex].DifTextureName);
+			GameEngineTexture::Load(FilePath.GetFullPath());
+		}
+	}
+
+
+	return Unit.Meshs[_SubIndex];
+}
+
+const FBXExMaterialSettingData& GameEngineFBXMesh::GetMaterialSettingData(size_t _MeshIndex, size_t _SubIndex)
+{
+	if (RenderUnitInfos.size() <= _MeshIndex)
+	{
+		MsgBoxAssert("존재하지 않는 랜더 유니트를 사용하려고 했습니다.");
+	}
+
+	FBXRenderUnit& Unit = RenderUnitInfos[_MeshIndex];
+
+	if (Unit.MaterialData.size() <= _SubIndex)
+	{
+		MsgBoxAssert("존재하지 않는 재질정보를 얻어오려고 했습니다.");
+	}
+
+	return Unit.MaterialData[_SubIndex];
 }
 
 void GameEngineFBXMesh::LoadMesh(const std::string& _Path, const std::string& _Name)
@@ -82,7 +173,7 @@ void GameEngineFBXMesh::VertexBufferCheck()
 		// 인덱스 버퍼 기준으로 만들어야 한다.
 		// 나중에 변경
 		FBXRenderUnit& RenderUnit = RenderUnitInfos.emplace_back();
-		RenderUnit.Index = meshInfoIndex;
+		RenderUnit.VectorIndex = meshInfoIndex;
 
 		if (RenderUnit.MapWI.end() == RenderUnit.MapWI.find(pMesh))
 		{
@@ -92,7 +183,7 @@ void GameEngineFBXMesh::VertexBufferCheck()
 		RenderUnit.IsLod = meshInfo.bIsLodGroup;
 		RenderUnit.IsLodLv = meshInfo.LodLevel;
 		std::vector<GameEngineVertex>& VtxData = RenderUnit.Vertexs;
-		std::vector<std::vector<UINT>>& IdxData = RenderUnit.Indexs.emplace_back();
+		std::vector<std::vector<UINT>>& IdxData = RenderUnit.Indexs;
 
 		// 버텍스 개수입니다.
 		int controlPointsCount = pMesh->GetControlPointsCount();
@@ -127,29 +218,29 @@ void GameEngineFBXMesh::VertexBufferCheck()
 			VtxData[controlPointIndex].position_ = FBXVecToTransform(calculateControlPoint);
 			VtxData[controlPointIndex].position_.w = 1.0f;
 
-			if (RenderUnit.MaxBoundBox.x < VtxData[controlPointIndex].position_.x) 
-			{ 
+			if (RenderUnit.MaxBoundBox.x < VtxData[controlPointIndex].position_.x)
+			{
 				RenderUnit.MaxBoundBox.x = VtxData[controlPointIndex].position_.x;
 			}
-			if (RenderUnit.MaxBoundBox.y < VtxData[controlPointIndex].position_.y) 
-			{ 
-				RenderUnit.MaxBoundBox.y = VtxData[controlPointIndex].position_.y; 
+			if (RenderUnit.MaxBoundBox.y < VtxData[controlPointIndex].position_.y)
+			{
+				RenderUnit.MaxBoundBox.y = VtxData[controlPointIndex].position_.y;
 			}
-			if (RenderUnit.MaxBoundBox.z < VtxData[controlPointIndex].position_.z) 
-			{ 
+			if (RenderUnit.MaxBoundBox.z < VtxData[controlPointIndex].position_.z)
+			{
 				RenderUnit.MaxBoundBox.z = VtxData[controlPointIndex].position_.z;
 			}
 
-			if (RenderUnit.MinBoundBox.x > VtxData[controlPointIndex].position_.x) 
+			if (RenderUnit.MinBoundBox.x > VtxData[controlPointIndex].position_.x)
 			{
 				RenderUnit.MinBoundBox.x = VtxData[controlPointIndex].position_.x;
 			}
-			if (RenderUnit.MinBoundBox.y > VtxData[controlPointIndex].position_.y) 
-			{ 
+			if (RenderUnit.MinBoundBox.y > VtxData[controlPointIndex].position_.y)
+			{
 				RenderUnit.MinBoundBox.y = VtxData[controlPointIndex].position_.y;
 			}
-			if (RenderUnit.MinBoundBox.z > VtxData[controlPointIndex].position_.z) 
-			{ 
+			if (RenderUnit.MinBoundBox.z > VtxData[controlPointIndex].position_.z)
+			{
 				RenderUnit.MinBoundBox.z = VtxData[controlPointIndex].position_.z;
 			}
 		}
@@ -176,7 +267,7 @@ void GameEngineFBXMesh::VertexBufferCheck()
 			int PolygonSize = pMesh->GetPolygonSize(PolygonIndex);
 			if (3 != PolygonSize)
 			{
-				MsgBoxAssert("삼각형이 아닌 면이 발견되었습니다.");
+				MsgBoxAssert("삼각형 아님.");
 			}
 
 			int IndexArray[3] = { 0, };
@@ -304,9 +395,7 @@ void GameEngineFBXMesh::FBXRenderUnitMaterialSetting(fbxsdk::FbxNode* _Node, FBX
 
 	if (MtrlCount > 0)
 	{
-		_RenderData->MaterialData.push_back(std::vector<FBXExMaterialSettingData>());
-
-		std::vector<FBXExMaterialSettingData>& MatrialSet = _RenderData->MaterialData[_RenderData->MaterialData.size() - 1];
+		std::vector<FBXExMaterialSettingData>& MatrialSet = _RenderData->MaterialData;
 
 		for (int i = 0; i < MtrlCount; i++)
 		{
@@ -333,9 +422,12 @@ void GameEngineFBXMesh::FBXRenderUnitMaterialSetting(fbxsdk::FbxNode* _Node, FBX
 			MatData.TransparencyFactor = MaterialFactor(pMtrl, "TransparencyFactor");
 
 			MatData.DifTexturePath = MaterialTex(pMtrl, "DiffuseColor");
-			// fbxsdk::FbxSurfaceMaterial::sNormalMap = 0x00007ff68291bfa0 "NormalMap"
 			MatData.NorTexturePath = MaterialTex(pMtrl, "NormalMap");
 			MatData.SpcTexturePath = MaterialTex(pMtrl, "SpecularColor");
+
+			MatData.DifTextureName = GameEnginePath::GetFileName(MatData.DifTexturePath);
+			MatData.NorTextureName = GameEnginePath::GetFileName(MatData.NorTexturePath);
+			MatData.SpcTextureName = GameEnginePath::GetFileName(MatData.SpcTexturePath);
 		}
 
 	}
@@ -343,7 +435,6 @@ void GameEngineFBXMesh::FBXRenderUnitMaterialSetting(fbxsdk::FbxNode* _Node, FBX
 	{
 		MsgBoxAssert("매쉬는 존재하지만 재질은 존재하지 않습니다.");
 	}
-
 }
 
 fbxsdk::FbxNode* GameEngineFBXMesh::RecursiveFindParentLodGroup(fbxsdk::FbxNode* parentNode)

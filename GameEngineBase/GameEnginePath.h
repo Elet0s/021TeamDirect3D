@@ -29,11 +29,12 @@ public:
 	std::string GetFileName() const;
 	std::string GetStem() const;
 	std::string GetExtention() const;
+	std::string ReplaceFileName(const std::string& _newFileName);
 
 	static std::string GetFileName(const std::string& _path);
 	static std::string GetStem(const std::string& _path);
 	static std::string GetExtension(const std::string& _path);
-	
+	static std::string GetFolderPath(const std::string& _path);
 
 };
 

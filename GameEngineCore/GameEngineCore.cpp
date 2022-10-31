@@ -70,7 +70,7 @@ void GameEngineCore::CoreStart(GameEngineCore* _userCore)
 	//엔진코어 초기화 및 각종 엔진 리소스 준비.
 	//유저코어의 스타트 이전에 엔진 리소스 준비가 끝나있어야 한다.
 
-	engineThreadPool_.Initialize("GameEngineThread");
+	engineThreadPool_.Initialize("GameEngineThread");	//엔진 기본제공 스레드풀 준비.
 
 	GameEngineDevice::CreateSwapChain();
 	//스왑체인 생성.

@@ -38,6 +38,7 @@ public:
 
     //렌더유닛에 메쉬를 지정하는 함수. 
     void SetMesh(const std::string& _meshName);
+    void SetMesh(GameEngineMesh* _mesh);
 
     //새 부모 렌더러를 지정하고 렌더유닛이 가진 셰이더리소스헬퍼에
     // 엔진 기본제공 상수버퍼인 "TRANSFORMDATA"와 "RENDEROPTION"을 등록하는 함수.
