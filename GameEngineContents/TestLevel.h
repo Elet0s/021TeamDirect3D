@@ -2,6 +2,7 @@
 
 // Ό³Έν :
 class TileMapActor;
+class Monster;
 class TestLevel : public GameEngineLevel
 {
 public:
@@ -20,6 +21,7 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override {};
 private:
+	std::vector<Monster*> Monster_;
 	TileMapActor* tilemap;
 };
 

@@ -17,6 +17,8 @@ TestLevel::~TestLevel()
 
 void TestLevel::Start()
 {
+
+
 	if (nullptr == GameEngineTexture::Find("grassTexture.png"))
 	{
 		{
@@ -71,12 +73,19 @@ void TestLevel::Start()
 		Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
 		NewPlayer->SetLevelOverOn();
 		NewPlayer->SetLevel(this);
+		NewPlayer->GetTransform().SetWorldPosition({ 640.f, -360.f });
 	}
 
-	//CreateActor<TimeActor>();
-	//CreateActor<StageUI>()->SoulCoinRenderersOff();
+	{
+		for (size_t i = 0; i < 10; i++)
+		{
+			Monster* BlackEyes = CreateActor<Monster>(ObjectOrder::Monster);
+			Monster_.push_back(BlackEyes);
+		}
+	}
 
-	GetMainCameraActor()->GetTransform().SetWorldMove({ 640.f, -360.f });
+	CreateActor<TimeActor>();
+	CreateActor<StageUI>()->SoulCoinRenderersOff();
 }
 
 void TestLevel::Update(float _DeltaTime)
