@@ -51,4 +51,6 @@ struct GameEngineVertex
 	float4 normal_;
 	float4 binormal_;
 	float4 tangent_;
+	float4 weight_;		// 애니메이션 가중치
+	int index_[4];
 };

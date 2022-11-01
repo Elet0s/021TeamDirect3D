@@ -16,6 +16,11 @@ GameEngineFile::GameEngineFile(const std::string& _path) : filePtr_(nullptr)
 	path_ = _path;
 }
 
+GameEngineFile::GameEngineFile(const std::string_view& _path): filePtr_(nullptr)
+{
+	path_ = _path;
+}
+
 GameEngineFile::GameEngineFile(const std::filesystem::path& _path) : filePtr_(nullptr)
 {
 	path_ = _path;
@@ -114,27 +119,32 @@ void GameEngineFile::Read(void* _readData, size_t _dataSize, size_t _readSize)
 	);
 }
 
-void GameEngineFile::Read(std::string& _Data)
+void GameEngineFile::Read(std::string& _text)
 {
-	int textSize = 0;
-	Read(&textSize, sizeof(int), sizeof(int));
-	_Data.resize(textSize);
-	Read(&_Data[0], textSize, textSize);
+	int size = 0;
+	Read(&size, sizeof(int), sizeof(int));
+	_text.resize(size);
+	Read(&_text[0], size, size);
 }
 
-void GameEngineFile::Read(float4x4& _Data)
+void GameEngineFile::Read(float4x4& _data)
 {
-	Read(&_Data, sizeof(float4x4), sizeof(float4x4));
+	Read(&_data, sizeof(float4x4), sizeof(float4x4));
 }
 
-void GameEngineFile::Read(float4& _Data)
+void GameEngineFile::Read(float4& _data)
 {
-	Read(&_Data, sizeof(float4), sizeof(float4));
+	Read(&_data, sizeof(float4), sizeof(float4));
 }
 
-void GameEngineFile::Read(float& _Data)
+void GameEngineFile::Read(float& _data)
 {
-	Read(&_Data, sizeof(float), sizeof(float));
+	Read(&_data, sizeof(float), sizeof(float));
+}
+
+void GameEngineFile::Read(double& _data)
+{
+	Read(&_data, sizeof(double), sizeof(double));
 }
 
 void GameEngineFile::Write(const void* _writeData, size_t _writeSize)
@@ -147,18 +157,33 @@ void GameEngineFile::Write(const void* _writeData, size_t _writeSize)
 	);
 }
 
-void GameEngineFile::Write(const std::string& _Text)
+void GameEngineFile::Write(const std::string& _text)
 {
 	// 크기를 저장해줘야 합니다.
-// string은? 크기가 일정한 데이터를 가지고 있나요?
-	int Size = static_cast<int>(_Text.size());
-	Write(&Size, sizeof(int));
-	Write(_Text.c_str(), _Text.size());
+	// string은? 크기가 일정한 데이터를 가지고 있나요?
+	int size = static_cast<int>(_text.size());
+	Write(&size, sizeof(int));
+	Write(_text.c_str(), _text.size());
 }
 
-void GameEngineFile::Write(const float4& _Data)
+void GameEngineFile::Write(const float4x4& _data)
 {
-	Write(&_Data, sizeof(float4));
+	Write(&_data, sizeof(float4x4));
+}
+
+void GameEngineFile::Write(const float4& _data)
+{
+	Write(&_data, sizeof(float4));
+}
+
+void GameEngineFile::Write(const float& _data)
+{
+	Write(&_data, sizeof(float));
+}
+
+void GameEngineFile::Write(const double& _data)
+{
+	Write(&_data, sizeof(double));
 }
 
 std::string GameEngineFile::GetString()

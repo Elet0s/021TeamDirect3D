@@ -14,7 +14,7 @@ public:
 		objectName_ = _name;
 	}
 
-	inline void SetName(std::string_view _name)
+	inline void SetName(const std::string_view& _name)
 	{
 		objectName_ = _name;
 	}

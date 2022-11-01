@@ -27,6 +27,16 @@ public:
 
 	void Render(float _deltaTime) override;
 
+	std::vector<std::vector<GameEngineRenderUnit>>& GetAllRenderUnit()
+	{
+		return Unit;
+	}
+
+	void CreateAnimation(
+		const std::string& _AnimationName,
+		const std::string& _MeshFBX,
+		const std::string& _AnimationFBX
+	);
 
 private:
 	class GameEngineFBXMesh* FBXMesh;

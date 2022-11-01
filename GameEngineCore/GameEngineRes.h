@@ -94,6 +94,11 @@ public:
 		path_ = _path;
 	}
 
+	void SetPath(const std::string_view& _path)
+	{
+		path_ = _path;
+	}
+
 	const std::string& GetPath()
 	{
 		return path_;
@@ -150,8 +155,10 @@ private:
 	static std::map<std::string, ResType*> namedRes_;
 	static std::list<ResType*> unnamedRes_;
 
-	static std::mutex namedResLock_;
-	static std::mutex unnamedResLock_;
+	static std::mutex namedResLock_;	//namedRes_의 뮤텍스.
+	static std::mutex unnamedResLock_;	//unnamedRes_의 뮤텍스.
+	//0번스레드가 1번스레드가 namedRes_와 unnamedRes_에 뭔가 작업하는 동안 2번스레드가 어느 컨테이너에 접근할 지
+	// 알 수 없으므로 각 컨테이너마다 각각의 뮤텍스가 필요하다.
 
 	//std::mutex: 여러 스레드들이 공유할 수 있는 특정 메모리 영역에 한개 스레드만 접근할 수 있게 해서
 	// 경쟁 상태(Race Condition) 발생을 예방하는 클래스.

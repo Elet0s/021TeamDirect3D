@@ -43,16 +43,29 @@ std::vector<FBXNodeInfo> GameEngineFBX::CheckAllNodes()
 	return AllNode;
 }
 
+void GameEngineFBX::FBXInit(const std::string& _path)
+{
+	if (false == CreateFBXSystemInitialize(_path))
+	{
+		MsgBoxAssert("시스템 로드에 실패했습니다.");
+	}
+
+	FBXConvertScene();
+}
+
 bool GameEngineFBX::CreateFBXSystemInitialize(const std::string& _path)
 {
-	fbxManager_ = fbxsdk::FbxManager::Create();
-	//FBX매니저 생성.
-
 	if (nullptr == fbxManager_)
 	{
-		MsgBoxAssert("FBX 매니저 생성에 실패했습니다.");
-		return false;
+		fbxManager_ = fbxsdk::FbxManager::Create();
+
+		if (nullptr == fbxManager_)
+		{
+			MsgBoxAssert("FBX 매니저 생성에 실패했습니다.");
+			return false;
+		}
 	}
+
 
 	// FBX파일을 읽는 방법을 정의한다.
 	// IO적인 측면에서 정의내리는 단계.

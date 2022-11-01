@@ -36,25 +36,29 @@ private:
 	GameEngineString& operator=(GameEngineString&& _other) = delete;
 
 public:
-	//주어진 문자들을 전부 대문자로 변경하는 함수. 바꿔진 텍스트를 반환한다.
-	static std::string ToUpperReturn(const std::string& _text);	
-
 	//주어진 문자들을 전부 대문자로 변경하는 함수. 입력받은 텍스트를 바꾼다.
-	static void ToUpper(std::string& _text);	
+	static void ToUpper(std::string& _text);
 
-	//일반 멀티바이트 스트링 문자열을 와이드바이트 스트링으로 전환하는 함수.
-	static void AnsiToUnicode(const std::string& _inText, std::wstring& _outText);
+	//주어진 문자들을 전부 대문자로 변경하는 함수. 바꿔진 텍스트를 반환한다.
+	static std::string ToUpperReturn(const std::string& _text);
 
-	//일반 멀티바이트 스트링 문자열을 와이드바이트 스트링으로 전환후 반환하는 함수.
+
+	static bool AnsiToUnicode(const std::string& _inText, std::wstring& _outText);
 	static std::wstring AnsiToUnicodeReturn(const std::string& _inText);
 
-	//일반 멀티바이트 스트링 문자열을 UTF-8 스트링으로 전환하는 함수.
-	static void AnsiToUTF8(const std::string& _inText, std::string& _outText);
+	static bool UnicodeToUTF8(const std::wstring& _inText, std::string& _outText);
+	static std::string UnicodeToUTF8Return(const std::wstring& _inText);
 
-	//일반 멀티바이트 스트링 문자열을 UTF-8 스트링으로 전환후 반환하는 함수.
+	static bool AnsiToUTF8(const std::string& _inText, std::string& _outText);
 	static std::string AnsiToUTF8Return(const std::string& _inText);
 
-	//와이드바이트 문자열을 UTF-8 스트링으로 전환하는 함수.
-	static void UnicodeToUTF8(const std::wstring& _inText, std::string& _outText);
+	static bool UTF8ToUnicode(const std::string& _inText, std::wstring& _outText);
+	static std::wstring UTF8ToUnicodeReturn(const std::string& _inText);
+
+	static bool UnicodeToAnsi(const std::wstring& _inText, std::string& _outText);
+	static std::string UnicodeToAnsiReturn(const std::wstring& _inText);
+
+	static bool UTF8ToAnsi(const std::string& _inText, std::string& _outText);
+	static std::string UTF8ToAnsiReturn(const std::string& _inText);
 };
 

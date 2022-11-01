@@ -8,6 +8,7 @@ namespace GameEngineDebug
 	void ConsoleOpen();
 	void OutputString(const std::string& _text);
 	void Destroy();
+	void GetLastErrorPrint();
 };
 
 #define MsgBox(text) MessageBeep(0);	\
