@@ -33,6 +33,8 @@ public:
 
 
 protected:
+	void FBXInit(const std::string& _path);
+
 	//FBX SDK 인터페이스 생성 및 초기화 함수. 
 	bool CreateFBXSystemInitialize(const std::string& _path);
 

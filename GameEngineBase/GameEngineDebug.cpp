@@ -1,17 +1,6 @@
 #include "PreCompile.h"
 #include "GameEngineDebug.h"
 
-
-//HANDLE GameEngineDebug::hConsole_ = nullptr;
-//
-//GameEngineDebug::GameEngineDebug()
-//{
-//}
-//
-//GameEngineDebug::~GameEngineDebug()
-//{
-//}
-
 namespace GameEngineDebug
 {
 	HANDLE hConsole_ = nullptr;
@@ -20,7 +9,6 @@ namespace GameEngineDebug
 	{
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 		//_CrtSetBreakAlloc(3311);
-
 	}
 
 	void ConsoleOpen()
@@ -48,6 +36,39 @@ namespace GameEngineDebug
 		{
 			FreeConsole();
 			hConsole_ = nullptr;
+		}
+	}
+
+	void GetLastErrorPrint()
+	{
+		DWORD error = GetLastError();
+		char* errorMessage = nullptr;
+
+		FormatMessageA(
+			FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER,
+			nullptr,
+			error,
+			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+			(char*)&errorMessage,
+			0,
+			nullptr
+		);
+
+		if (nullptr != errorMessage)
+		{
+			std::string errorText = "ErrorCode: ";
+			errorText += std::to_string(error);
+			errorText += " ErrorMessage: ";
+			errorText += errorMessage;
+
+			MessageBoxA(
+				nullptr,
+				errorText.c_str(),
+				"Error!",
+				MB_OK
+			);
+
+			LocalFree(errorMessage);
 		}
 	}
 }
