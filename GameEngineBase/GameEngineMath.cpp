@@ -50,3 +50,71 @@ float4& operator*=(float4& _vector, const float4x4& _matrix)
 	_vector = DirectX::XMVector4Transform(_vector.directXVector_, _matrix.directXMatrix_);
 	return _vector;
 }
+
+float4 float4::MatrixToQuarternion(const float4x4& _matrix)
+{
+	return DirectX::XMQuaternionRotationMatrix(_matrix.directXMatrix_);
+
+	//float4 Return;
+
+	//if (_matrix.arrVector[0].IsNearlyZero() || _matrix.arrVector[1].IsNearlyZero() || _matrix.arrVector[2].IsNearlyZero())
+	//{
+	//	Return.x = 0.0f;
+	//	Return.y = 0.0f;
+	//	Return.z = 0.0f;
+	//	Return.w = 1.0f;
+	//	return Return;
+	//}
+
+	//float	s;
+
+	//// Check diagonal (trace)
+	//const float tr = _matrix.arr2D[0][0] + _matrix.arr2D[1][1] + _matrix.arr2D[2][2];
+
+	//if (tr > 0.0f)
+	//{
+	//	float InvS = InvSqrt(tr + 1.f);
+	//	Return.w = 0.5f * (1.f / InvS);
+	//	s = 0.5f * InvS;
+
+	//	Return.x = (_matrix.arr2D[1][2] - _matrix.arr2D[2][1]) * s;
+	//	Return.y = (_matrix.arr2D[2][0] - _matrix.arr2D[0][2]) * s;
+	//	Return.z = (_matrix.arr2D[0][1] - _matrix.arr2D[1][0]) * s;
+	//}
+	//else
+	//{
+	//	// diagonal is negative
+	//	int i = 0;
+
+	//	if (_matrix.arr2D[1][1] > _matrix.arr2D[0][0])
+	//		i = 1;
+
+	//	if (_matrix.arr2D[2][2] > _matrix.arr2D[i][i])
+	//		i = 2;
+
+	//	static const int nxt[3] = { 1, 2, 0 };
+	//	const int j = nxt[i];
+	//	const int k = nxt[j];
+
+	//	s = _matrix.arr2D[i][i] - _matrix.arr2D[j][j] - _matrix.arr2D[k][k] + 1.0f;
+
+	//	float InvS = InvSqrt(s);
+
+	//	float qt[4];
+	//	qt[i] = 0.5f * (1.f / InvS);
+
+	//	s = 0.5f * InvS;
+
+	//	qt[3] = (_matrix.arr2D[j][k] - _matrix.arr2D[k][j]) * s;
+	//	qt[j] = (_matrix.arr2D[i][j] + _matrix.arr2D[j][i]) * s;
+	//	qt[k] = (_matrix.arr2D[i][k] + _matrix.arr2D[k][i]) * s;
+
+	//	Return.x = qt[0];
+	//	Return.y = qt[1];
+	//	Return.z = qt[2];
+	//	Return.w = qt[3];
+	//}
+
+	//return Return;
+}
+

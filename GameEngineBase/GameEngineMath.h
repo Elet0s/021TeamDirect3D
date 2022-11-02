@@ -425,17 +425,6 @@ public:
 
 	static float VectorXYToRadian(const float4& _thisPosition, const float4& _targetPosition)
 	{
-		//float4 direction = _targetPosition - _thisPosition;
-		//direction.Normalize();
-	
-		//float angle = acosf(direction.x);
-		//if (_thisPosition.y > _targetPosition.y)
-		//{
-		//	angle = GameEngineMath::PI2 - angle;
-		//}
-	
-		//return angle;
-	
 		return DirectX::XMVector2AngleBetweenVectors(
 			_thisPosition.directXVector_,
 			_targetPosition.directXVector_
@@ -451,6 +440,7 @@ public:
 		return sqrtf((x * x) + (y * y) + (z * z));
 	}
 
+	//절대값 반환.
 	float4 ABS3DReturn() const
 	{
 		return float4(fabsf(x), fabsf(y), fabsf(z));
@@ -471,22 +461,22 @@ public:
 
 	// 외적을 쓸수 있는곳
 	// 마우스 클릭시 회전방향 알아낼때.
-	
+
 	//벡터곱(Vector Product), 가위곱(Cross Product)
-	static float4 Cross(const float4& _vectorA, const float4& _vectorB)
+	static float4 Cross3D(const float4& _vectorA, const float4& _vectorB)
 	{
 		return DirectX::XMVector3Cross(_vectorA.directXVector_, _vectorB.directXVector_);
 	}
 
 	//벡터곱(Vector Product), 가위곱(Cross Product)
-	const float4& Cross(const float4& _other)
+	const float4& Cross3D(const float4& _other)
 	{
 		this->directXVector_ = DirectX::XMVector3Cross(this->directXVector_, _other.directXVector_);
 		return *this;
 	}
 
 	//스칼라곱(Scalar Product), 점곱(Dot Product)
-	static float Dot(const float4& _vectorA, const float4& _vectorB)
+	static float DotProduct3D(const float4& _vectorA, const float4& _vectorB)
 	{
 		return DirectX::XMVector3Dot(
 			_vectorA.directXVector_,
@@ -494,6 +484,7 @@ public:
 		).m128_f32[0];
 	}
 
+	//절대값 반환.
 	static float4 ABS3DReturn(const float4& _position)
 	{
 		return _position.ABS3DReturn();
@@ -594,12 +585,68 @@ public:
 		);
 	}
 
-	//60분법 벡터를 쿼터니온으로 전환하는 함수. 
+	float4 RadianVectorBetweenVectors(const float4& _targetVector)
+	{
+		return DirectX::XMVector3AngleBetweenVectors(
+			this->directXVector_,
+			_targetVector.directXVector_
+		);
+	}
+
+	static float4 RadianVectorBetweenVectors(const float4& _originVector, const float4& _targetVector)
+	{
+		return DirectX::XMVector3AngleBetweenVectors(
+			_originVector.directXVector_,
+			_targetVector.directXVector_
+		);
+	}
+
+	//이 벡터와 저 벡터를 잇는 벡터 생성.
+	float4 DegreeVectorBetweenVectors(const float4& _targetVector)
+	{
+		return RadianVectorBetweenVectors(_targetVector) * GameEngineMath::RadianToDegree;
+	}
+
+	//두 벡터를 잇는 벡터 생성.
+	static float4 DegreeVectorBetweenVectors(const float4& _originVector, const float4& _targetVector)
+	{
+		return RadianVectorBetweenVectors(_originVector, _targetVector) * GameEngineMath::RadianToDegree;
+	}
+
+	//60분법 회전 벡터를 쿼터니온으로 전환하는 함수. 
 	float4 DegreeRotationToQuarternionReturn() const
 	{
 		return DirectX::XMQuaternionRotationRollPitchYawFromVector(
 			(*this * GameEngineMath::DegreeToRadian).directXVector_
 		);
+	}
+
+	//회전행렬->쿼터니온벡터.
+	static float4 MatrixToQuarternion(const class float4x4& _matrix);
+
+	//제곱근의 역수(1/_value^(1/2))
+	static float InvSqrt(float _value)
+	{
+		const __m128 fOneHalf = _mm_set_ss(0.5f);
+		__m128 Y0, X0, X1, X2, FOver2;
+		float temp;
+
+		Y0 = _mm_set_ss(_value);
+		X0 = _mm_rsqrt_ss(Y0);	// 1/sqrt estimate (12 bits)
+		FOver2 = _mm_mul_ss(Y0, fOneHalf);
+
+		// 1st Newton-Raphson iteration
+		X1 = _mm_mul_ss(X0, X0);
+		X1 = _mm_sub_ss(fOneHalf, _mm_mul_ss(FOver2, X1));
+		X1 = _mm_add_ss(X0, _mm_mul_ss(X0, X1));
+
+		// 2nd Newton-Raphson iteration
+		X2 = _mm_mul_ss(X1, X1);
+		X2 = _mm_sub_ss(fOneHalf, _mm_mul_ss(FOver2, X2));
+		X2 = _mm_add_ss(X1, _mm_mul_ss(X1, X2));
+
+		_mm_store_ss(&temp, X2);
+		return temp;
 	}
 
 public:
@@ -626,6 +673,16 @@ public:
 	bool IsZero2D() const
 	{
 		return x == 0.f && y == 0.f;
+	}
+
+	bool IsZero3D() const
+	{
+		return x == 0.f && y == 0.f && z == 0.f;
+	}
+
+	bool IsNearlyZero() const
+	{
+		return fabsf(x) <= 1.e-4f && fabsf(y) <= 1.e-4f && fabsf(z) <= 1.e-4f;
 	}
 
 	UINT GetUINTColor() const
@@ -748,14 +805,31 @@ public:
 		return *this;
 	}
 
+	//크기, 회전, 이동 한번에 변환.
+	static float4x4 Transformation(
+		const float4& _scale,
+		const float4& _rotationQuarternion,
+		const float4& _position
+	)
+	{
+		return DirectX::XMMatrixTransformation(
+			float4::Zero.directXVector_,	//크기 조정 중심.
+			float4::Zero.directXVector_,	//크기 조정 방향??
+			_scale.directXVector_,			//크기 변화량.
+			float4::Zero.directXVector_,	//회전 조정 중심.
+			_rotationQuarternion.directXVector_,	//회전량.
+			_position.directXVector_		//
+		);
+	}
+
 	//행렬식 구하기.
-	float Determinant()
+	float Determinant() const
 	{
 		return DirectX::XMMatrixDeterminant(this->directXMatrix_).m128_f32[0];
 	}
 
 	//행렬식 구하기.
-	static float Determinant(const float4x4 _matrix)
+	static float Determinant(const float4x4& _matrix)
 	{
 		return DirectX::XMMatrixDeterminant(_matrix.directXMatrix_).m128_f32[0];
 	}
@@ -775,7 +849,6 @@ public:
 	static float4x4 InverseReturn(const float4x4& _matrix)
 	{
 		float4 determinantVector = DirectX::XMMatrixDeterminant(_matrix.directXMatrix_);
-
 
 		float4x4 invertedMatrix = DirectX::XMMatrixInverse(
 			&determinantVector.directXVector_,	//대상 행렬의 행렬식.
@@ -863,6 +936,63 @@ public:
 			_positionZ
 		);
 		return *this;
+	}
+
+	//행렬에서 크기만 벡터로 추출.
+	//추출된 행렬의 크기는 1이 된다.
+	float4 ExtractScaling()
+	{
+		float4 returnVector = float4::Zero;
+
+		float Tolerance = 1.e-8f;	//허용 오차 범위.
+
+		const float SquareSum0 = (arr2D[0][0] * arr2D[0][0]) + (arr2D[0][1] * arr2D[0][1]) + (arr2D[0][2] * arr2D[0][2]);
+		const float SquareSum1 = (arr2D[1][0] * arr2D[1][0]) + (arr2D[1][1] * arr2D[1][1]) + (arr2D[1][2] * arr2D[1][2]);
+		const float SquareSum2 = (arr2D[2][0] * arr2D[2][0]) + (arr2D[2][1] * arr2D[2][1]) + (arr2D[2][2] * arr2D[2][2]);
+
+		if (SquareSum0 > Tolerance)
+		{
+			float Scale0 = sqrtf(SquareSum0);
+			returnVector.x = Scale0;
+			float InvScale0 = 1.f / Scale0;
+			arr2D[0][0] *= InvScale0;
+			arr2D[0][1] *= InvScale0;
+			arr2D[0][2] *= InvScale0;
+		}
+		else
+		{
+			returnVector.x = 0;
+		}
+
+		if (SquareSum1 > Tolerance)
+		{
+			float Scale1 = sqrtf(SquareSum1);
+			returnVector.y = Scale1;
+			float InvScale1 = 1.f / Scale1;
+			arr2D[1][0] *= InvScale1;
+			arr2D[1][1] *= InvScale1;
+			arr2D[1][2] *= InvScale1;
+		}
+		else
+		{
+			returnVector.y = 0;
+		}
+
+		if (SquareSum2 > Tolerance)
+		{
+			float Scale2 = sqrtf(SquareSum2);
+			returnVector.z = Scale2;
+			float InvScale2 = 1.f / Scale2;
+			arr2D[2][0] *= InvScale2;
+			arr2D[2][1] *= InvScale2;
+			arr2D[2][2] *= InvScale2;
+		}
+		else
+		{
+			returnVector.z = 0;
+		}
+
+		return returnVector;
 	}
 
 	const float4x4& LookAtLH(const float4& _eyePosition, const float4& _focusPosition, const float4& _upDirection)
@@ -1006,8 +1136,6 @@ public:
 		//this->arr2D[3][1] = 0.0f;
 		//this->arr2D[3][2] = -fRange * _nearZ;
 		//this->arr2D[3][3] = 0.0f; <-투영행렬은 이동행렬이 아니라 크기변환행렬의 일종이므로 여기에 0이 들어간다.
-
-
 	}
 
 	void Viewport(
@@ -1042,9 +1170,7 @@ public:
 		this->arr2D[3][1] = _height * 0.5f + _right;
 		this->arr2D[3][2] = 0.5f;
 		this->arr2D[3][3] = 1.f;
-			
 	}
-
 };
 
 float4 operator*(const float4& _vector, const float4x4& _matrix);

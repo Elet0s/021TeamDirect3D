@@ -52,5 +52,5 @@ struct GameEngineVertex
 	float4 binormal_;
 	float4 tangent_;
 	float4 weight_;		// 애니메이션 가중치
-	int index_[4];
+	int blendedIndices_[4] = { 0, };		//이 버텍스를 움직이는 모든 본들의 번호.
 };
