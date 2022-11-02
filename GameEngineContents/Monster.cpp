@@ -4,7 +4,7 @@
 #include "Player.h"
 
 Monster::Monster()
-	:speed_(0)
+	:speed_(2.0f)
 	, MXmove_(0)	
 	, MYmove_(0)
 	,collision_()
@@ -41,10 +41,37 @@ void Monster::Start()
 	
 	monsterrenderer_->GetTransform().SetLocalScale(100, 100, 100);
 	monsterrenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-	monsterrenderer_->CreateFrameAnimation_CutTexture("BlackEyes", FrameAnimation_Desc("BlackEyes.png", 0, 5, 0.2f));
+	monsterrenderer_->CreateFrameAnimation_CutTexture("BlackEyes", FrameAnimation_Desc("BlackEyes.png", 0, 5, 0.1f));
 	monsterrenderer_->ChangeFrameAnimation("BlackEyes");
 
-	GetTransform().SetWorldPosition(static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 1280)), static_cast<float>(-(GameEngineRandom::mainRandom_.RandomInt(1, 640))), 0.0f);
+	
+
+	for (size_t i = 0; i < 1; i++)
+	{
+		int px = static_cast<int>(Player::GetMainPlayer()->GetTransform().GetWorldPosition().x);
+		int py = static_cast<int>(Player::GetMainPlayer()->GetTransform().GetWorldPosition().y);
+		float srangeX = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(px - 1280, px + 1280));
+		float srangeY = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(py - 720, py + 720));
+
+		if (srangeX > px + 640 || srangeX < px - 640)
+		{
+			if (srangeY > py + 360 || srangeY < py - 360)
+			{
+				GetTransform().SetWorldPosition(srangeX, srangeY, 0.0f);
+			}
+			else
+			{
+				i--;
+			}
+		}
+		else
+		{
+			i--;
+		}
+	}
+
+
+
 }
 void Monster::Chaseplayer()
 {
@@ -56,22 +83,20 @@ void Monster::Chaseplayer()
 	float RangeY = abs(my - py) / (abs(mx - px) + abs(my - py));
 	if (mx -px < 0)
 	{
-		MXmove_ = mx + 1.0f * RangeX;
+		MXmove_ = mx + speed_ * RangeX;
 	}
 	else if (mx - px >=0)
 	{
-		MXmove_ = mx - 1.0f * RangeX;
+		MXmove_ = mx - speed_ * RangeX;
 	}
 	if (my -py < 0)
 	{
-		MYmove_ = my + 1.0f * RangeY;
+		MYmove_ = my + speed_ * RangeY;
 	}
 	else if (my - py >= 0)
 	{
-		MYmove_ = my - 1.0f * RangeY;
+		MYmove_ = my - speed_ * RangeY;
 	}
-
-
 	GetTransform().SetWorldPosition(MXmove_, MYmove_, 0.0f);
 }
 
