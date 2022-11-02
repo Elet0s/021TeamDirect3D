@@ -24,22 +24,6 @@ void ContentsCore::Start()
 		GameEngineInput::GetInst()->CreateKey("LevelChangeKey", 'P');
 	}
 
-	{
-		GameEngineDirectory Dir;
-
-		Dir.MoveParentToExistChildDirectory("GameEngineResources");
-		Dir.MoveToChild("Resources");
-		Dir.MoveToChild("Rogue_Genesia");
-		Dir.MoveToChild("Animator"); 
-		Dir.MoveToChild("IntroAnimation");
-		GameEngineFBXMesh* Mesh = GameEngineFBXMesh::Load(Dir.PlusFilePath("IntroAnimation.FBX"));
-
-		std::vector<FBXNodeInfo> Nodes = Mesh->CheckAllNodes();
-
-		int a = 0;
-
-	}
-
 	//GameEngineDebug::ConsoleOpen(); 콘솔창이 필요하면 복원.
 
 	//RTTI(Run-Time Type information): 런타임 형식 정보. 

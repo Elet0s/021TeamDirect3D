@@ -803,27 +803,6 @@ void GameEngineFBXMesh::LoadNormal(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _M
 	_ArrVtx[_Index].normal_.Normalize3D();
 }
 
-void GameEngineFBXMesh::DrawSetWeightAndIndexSetting(FBXRenderUnit* _DrawSet, fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxCluster* _Cluster, int _BoneIndex)
-{
-	if (nullptr == _DrawSet)
-	{
-		return;
-	}
-
-	int iIndexCount = _Cluster->GetControlPointIndicesCount();
-
-	for (size_t i = 0; i < iIndexCount; i++)
-	{
-		FBXExIW IW;
-		IW.Index = _BoneIndex;
-
-		IW.Weight = _Cluster->GetControlPointWeights()[i];
-		int ControlPointIndices = _Cluster->GetControlPointIndices()[i];
-
-		_DrawSet->MapWI[_Mesh][ControlPointIndices].push_back(IW);
-	}
-}
-
 void GameEngineFBXMesh::LoadUV(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int VertexCount, int _Index)
 {
 	int iCount = _Mesh->GetElementUVCount();
