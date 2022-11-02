@@ -37,7 +37,7 @@ private:
 	float cameraMovingSpeed_;
 	float rotationSpeed_;
 
-	CameraProjectionMode prevProjectionMode_;
+	ProjectionMode prevProjectionMode_;
 	GameEngineTransform originalTransform_;
 
 };

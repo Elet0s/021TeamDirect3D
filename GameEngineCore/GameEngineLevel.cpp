@@ -17,13 +17,13 @@ GameEngineLevel::GameEngineLevel()
 
 	GameEngineCameraActor* mainCameraActor = CreateActor<GameEngineCameraActor>();
 	mainCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
-	mainCameraActor->GetCameraComponent()->SetProjectionMode(CameraProjectionMode::Orthographic);
+	mainCameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	mainCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MainCamera);
 
 
 	GameEngineCameraActor* UICameraActor = CreateActor<GameEngineCameraActor>();
 	UICameraActor->GetTransform().SetLocalPosition(0, 0, -100);
-	UICameraActor->GetCameraComponent()->SetProjectionMode(CameraProjectionMode::Orthographic);
+	UICameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	UICameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::UICamera);
 }
 
@@ -290,13 +290,11 @@ void GameEngineLevel::PushRenderer(GameEngineRenderer* _renderer, int _cameraOrd
 void GameEngineLevel::PushCamera(GameEngineCamera* _camera, int _cameraOrder)
 {
 	if (static_cast<int>(CameraOrder::UICamera) < _cameraOrder
-		|| static_cast<int>(CameraOrder::MainCamera) > _cameraOrder)
+		|| static_cast<int>(CameraOrder::TileCamera) > _cameraOrder)
 	{
 		MsgBoxAssert("카메라 오더가 허용 범위를 넘어섰습니다.");
 		return;
 	}
-
-	cameras_.resize(static_cast<size_t>(_cameraOrder) + 1);
 
 	cameras_[_cameraOrder] = _camera;
 }

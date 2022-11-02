@@ -3,8 +3,8 @@
 
 enum class CameraOrder
 {
+	TileCamera,	
 	MainCamera,
-	User0,	
 	User1,	
 	User2,	
 	User3,	
@@ -119,7 +119,34 @@ public:
 
 		return dynamic_cast<ActorType*>(newActor);
 	}
+
+	void PushRenderer(GameEngineRenderer* _renderer, CameraOrder _order)
+	{
+		PushRenderer(_renderer, static_cast<int>(_order));
+	}
+
+	void PushRendererToMainCamera(GameEngineRenderer* _renderer)
+	{
+		PushRenderer(_renderer, static_cast<int>(CameraOrder::MainCamera));
+	}
+
+	void PushRendererToUICamera(GameEngineRenderer* _renderer)
+	{
+		PushRenderer(_renderer, static_cast<int>(CameraOrder::UICamera));
+	}
+
 protected:
+	void PushCamera(GameEngineCamera* _camera, CameraOrder _order)
+	{
+		PushCamera(_camera, static_cast<int>(_order));
+	}
+
+	void PushActor(GameEngineActor* _actor, int _objectGroupIndex)
+	{
+		std::list<GameEngineActor*>& actorGroup = allActors_[_objectGroupIndex];
+		actorGroup.push_back(_actor);
+	}
+
 
 private:
 	void LevelUpdate(float _deltaTime);
@@ -155,32 +182,8 @@ private:
 	//레벨이 교체되서 더이상 업데이트를 하지 않을 때 액터들이 가진 AllLevelEndEvent() 함수들을 전부 호출하는 함수.
 	void ActorLevelEndEvent();
 
-private:
-	void PushCamera(GameEngineCamera* _camera, CameraOrder _order)
-	{
-		PushCamera(_camera, static_cast<int>(_order));
-	}
 
-	void PushRenderer(GameEngineRenderer* _renderer, CameraOrder _order)
-	{
-		PushRenderer(_renderer, static_cast<int>(_order));
-	}
 
-	void PushRendererToMainCamera(GameEngineRenderer* _renderer)
-	{
-		PushRenderer(_renderer, static_cast<int>(CameraOrder::MainCamera));
-	}
-
-	void PushRendererToUICamera(GameEngineRenderer* _renderer)
-	{
-		PushRenderer(_renderer, static_cast<int>(CameraOrder::UICamera));
-	}
-
-	void PushActor(GameEngineActor* _actor, int _objectGroupIndex)
-	{
-		std::list<GameEngineActor*>& actorGroup = allActors_[_objectGroupIndex];
-		actorGroup.push_back(_actor);
-	}
 
 private:
 	//이 레벨의 모든 액터들이 저장된 맵.
