@@ -80,8 +80,8 @@ void TestLevel::Start()
 
 	if (nullptr == Player::GetMainPlayer())
 	{
+
 		Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
-		NewPlayer->GetTransform().SetWorldPosition(float4{ 960.0f, -960.f, 0.0f });
 		NewPlayer->SetLevelOverOn();
 		NewPlayer->SetLevel(this);
 		NewPlayer->GetTransform().SetWorldPosition({ 640.f, -360.f });

@@ -29,7 +29,6 @@ void Player::Start()
 		for (size_t i = 0; i < Shaders.size(); i++)
 		{
 			GameEngineTexture::Load(Shaders[i].GetFullPath());
-
 		}
 		///////////////텍스처로드///////////////
 
@@ -54,8 +53,7 @@ void Player::Start()
 		playerrenderer_->GetTransform().SetLocalPosition(0,0,-100);
 		playerrenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
 		playerrenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
-		//playerrenderer_->ChangeFrameAnimation("PlayerIdle");
-		
+
 		{
 			statemanager_.CreateState("Idle"
 				, std::bind(&Player::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -120,16 +118,16 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		GetTransform().SetWorldMove(GetTransform().GetDownVector() * speed_ * _DeltaTime);
 	}
+
 }
 
 void Player::Update(float _deltaTime)
 {
 	if (GetLevel()->GetMainCameraActor()->IsFreeCameraMode() == false)
 	{
-		GetLevel()->GetMainCameraActor()->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -100);
+		GetLevel()->GetMainCameraActor()->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -100.0f);
 	}
 	statemanager_.Update(_deltaTime);
-	//GetLevel()->GetMainCameraActor()->GetTransform().SetWorldPosition({ 640.f, -360.f });
 }
 
 void Player::End()
