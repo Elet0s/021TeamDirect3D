@@ -24,12 +24,14 @@ protected:
 	void End() override {};
 private:
 	
-
+	void UpdateWorld();
 	void MoveWorld(int _Dir);
 
 	std::vector<std::vector<TileMapActor*>> tilemaps_;
 	
 	std::vector<Monster*> Monster_;
 	TileMapActor* tilemap;
+
+	GameEngineCameraActor* tileCameraActor_;
 };
 

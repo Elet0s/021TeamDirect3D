@@ -146,6 +146,8 @@ void MyTileMapRenderer::Start()
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Down", VK_DOWN);
 	}*/
 
+	this->GetActor()->GetLevel()->PushRenderer(this, CameraOrder::TileCamera);
+
 	this->SetPipeLine("TextureAtlas");
 
 	atlasDataInst_.frameData_.posX = 0.f;
@@ -156,148 +158,17 @@ void MyTileMapRenderer::Start()
 	
 	GetShaderResourceHelper().SetConstantBuffer_Link("AtlasData", this->atlasDataInst_);
 	GetShaderResourceHelper().SetConstantBuffer_Link("PixelData", this->pixelData_);
-	PushRendererToMainCamera();
 }
 
 void MyTileMapRenderer::Update(float _deltaTime)
 {
 
-	/*if (KeyFree == true)
-	{
-		if (GameEngineInput::GetInst()->IsPressed("MoveMap_Right"))
-		{
-			MoveWorld(0);
-			KeyFree = false;
-		}
-
-		else if (GameEngineInput::GetInst()->IsPressed("MoveMap_Left"))
-		{
-			MoveWorld(1);
-			KeyFree = false;
-		}
-
-		else if (GameEngineInput::GetInst()->IsPressed("MoveMap_Up"))
-		{
-			MoveWorld(2);
-			KeyFree = false;
-		}
-
-		else if (GameEngineInput::GetInst()->IsPressed("MoveMap_Down"))
-		{
-			MoveWorld(3);
-			KeyFree = false;
-		}
-	}
-
-	if (GameEngineInput::GetInst()->IsFree("MoveMap_Right") &&
-		GameEngineInput::GetInst()->IsFree("MoveMap_Left") &&
-		GameEngineInput::GetInst()->IsFree("MoveMap_Up") &&
-		GameEngineInput::GetInst()->IsFree("MoveMap_Down"))
-	{
-		KeyFree = true;
-	}*/
 }
 
 
 void  MyTileMapRenderer::MoveWorld(int _Dir)
 {
-	/*std::vector<std::vector<Tile>> CopyTiles_;
-	CopyTiles_.resize(tileY_);
-	for (size_t y = 0; y < CopyTiles_.size(); y++)
-	{
-		CopyTiles_[y].resize(tileX_);
-	}
 
-	switch (_Dir)
-	{
-	case 0:
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CX = x + 1;
-				if (CX == tileX_)
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[y][CX - tileX_].tileImage_;
-				}
-				else
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[y][CX].tileImage_;
-				}
-			}
-		}
-			break;
-	case 1:
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CX = x - 1;
-				if (CX < 0)
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[y][tileX_ - 1].tileImage_;
-				}
-				else
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[y][CX].tileImage_;
-				}
-			}
-		}
-		break;
-	case 2:
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CY = y - 1;
-				if (CY < 0)
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[tileY_ - 1][x].tileImage_;
-				}
-				else
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[CY][x].tileImage_;
-				}
-			}
-		}
-			break;
-	case 3:
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CY = y + 1;
-				if (CY == 10)
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[CY - tileY_][x].tileImage_;
-				}
-				else
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[CY][x].tileImage_;
-				}
-			}
-		}
-			break;
-	default:
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CX = x + 1;
-				if (CX == 10)
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[y][x - 9].tileImage_;
-				}
-				else
-				{
-					CopyTiles_[y][x].tileImage_ = allTiles_[y][CX].tileImage_;
-				}
-			}
-		}
-			break;
-		}	
-
-		allTiles_.swap(CopyTiles_);*/
 }
 
 

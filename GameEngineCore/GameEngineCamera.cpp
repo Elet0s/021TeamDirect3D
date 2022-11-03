@@ -14,7 +14,7 @@
 
 GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
-	projectionMode_(CameraProjectionMode::Perspective),
+	projectionMode_(ProjectionMode::Perspective),
 	nearZ_(0.1f),
 	farZ_(1000000.f),
 	fovAngleY_(60.f),
@@ -300,7 +300,7 @@ void GameEngineCamera::Render(float _deltaTime)
 	//투영모드에 맞게 오브젝트들을 축소할 투영행렬을 구한다.
 	switch (projectionMode_)
 	{
-	case CameraProjectionMode::Perspective:
+	case ProjectionMode::Perspective:
 		//projection_.ProjectPerspectiveLH(
 		//	planeSize_.x * 0.0001f,	 //근평면의 가로길이.
 		//	planeSize_.y * 0.0001f,	 //근평면의 세로길이.  
@@ -319,7 +319,7 @@ void GameEngineCamera::Render(float _deltaTime)
 		);
 
 		break;
-	case CameraProjectionMode::Orthographic:
+	case ProjectionMode::Orthographic:
 		projectionMatrix_.ProjectOrthographicLH(
 			size_.x,
 			size_.y,
