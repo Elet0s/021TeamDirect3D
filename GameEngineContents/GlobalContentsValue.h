@@ -1,6 +1,12 @@
 #pragma once
 #include "Player.h"
 #include "Monster.h"
+#include "BlackEyes.h"
+#include "Brown.h"
+#include "Green.h"
+#include "NormalGoblin.h"
+#include "RedFlyingEyes.h"
+#include "FlyingEyes.h"
 
 enum class ObjectOrder
 {

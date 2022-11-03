@@ -4,7 +4,6 @@
 #include "TileMapActor.h"
 #include "TimeActor.h"
 #include "StageUI.h"
-#include "Player.h"
 #include "GlobalContentsValue.h"
 
 TestLevel::TestLevel() : tileCameraActor_(nullptr)
@@ -84,7 +83,7 @@ void TestLevel::Start()
 
 
 	if (nullptr == Player::GetMainPlayer())
-	{d
+	{
 
 		Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
 		NewPlayer->SetLevelOverOn();
@@ -93,10 +92,35 @@ void TestLevel::Start()
 	}
 
 	{
-		for (size_t i = 0; i < 100; i++)
+		for (size_t i = 0; i < 10; i++)
 		{
-			Monster* BlackEyes = CreateActor<Monster>(ObjectOrder::Monster);
-			Monster_.push_back(BlackEyes);
+			BlackEyes* NewMonster = CreateActor<BlackEyes>(ObjectOrder::Monster);
+			Monster_.push_back(NewMonster);
+		}
+		for (size_t i = 0; i < 10; i++)
+		{
+			Brown* NewMonster = CreateActor<Brown>(ObjectOrder::Monster);
+			Monster_.push_back(NewMonster);
+		}
+		for (size_t i = 0; i < 10; i++)
+		{
+			Green* NewMonster = CreateActor<Green>(ObjectOrder::Monster);
+			Monster_.push_back(NewMonster);
+		}
+		for (size_t i = 0; i < 10; i++)
+		{
+			NormalGoblin* NewMonster = CreateActor<NormalGoblin>(ObjectOrder::Monster);
+			Monster_.push_back(NewMonster);
+		}
+		for (size_t i = 0; i < 10; i++)
+		{
+			RedFlyingEyes* NewMonster = CreateActor<RedFlyingEyes>(ObjectOrder::Monster);
+			Monster_.push_back(NewMonster);
+		}
+		for (size_t i = 0; i < 10; i++)
+		{
+			FlyingEyes* NewMonster = CreateActor<FlyingEyes>(ObjectOrder::Monster);
+			Monster_.push_back(NewMonster);
 		}
 	}
 

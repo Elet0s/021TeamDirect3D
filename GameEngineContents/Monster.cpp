@@ -4,11 +4,9 @@
 #include "Player.h"
 
 Monster::Monster()
-	:speed_(2.0f)
+	:speed_(100.0f)
 	, MXmove_(0)	
 	, MYmove_(0)
-	,collision_()
-	,monsterrenderer_()
 {
 }
 
@@ -18,34 +16,10 @@ Monster::~Monster()
 
 void Monster::Start()
 {
-	if (nullptr == GameEngineTexture::Find("BlackEyes.png"))
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("Monster");
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
-		for (size_t i = 0; i < Shaders.size(); i++)
-		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
-
-		}
-		///////////////텍스처로드///////////////
-
-		GameEngineTexture::Cut("BlackEyes.png", 6, 1);
-		///////////////텍스처 cut///////////////
-	}
-
-	monsterrenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	
-	monsterrenderer_->GetTransform().SetLocalScale(100, 100, 100);
-	monsterrenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-	monsterrenderer_->CreateFrameAnimation_CutTexture("BlackEyes", FrameAnimation_Desc("BlackEyes.png", 0, 5, 0.1f));
-	monsterrenderer_->ChangeFrameAnimation("BlackEyes");
-
-	
-
+}
+void Monster::SummonMon()
+{
 	for (size_t i = 0; i < 1; i++)
 	{
 		int px = static_cast<int>(Player::GetMainPlayer()->GetTransform().GetWorldPosition().x);
@@ -54,6 +28,10 @@ void Monster::Start()
 		float srangeY = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(py - 720, py + 720));
 
 		if (srangeX > px + 640 || srangeX < px - 640)
+		{
+			GetTransform().SetWorldPosition(srangeX, srangeY, 0.0f);
+		}
+		else if (srangeX< px + 640 && srangeX>px -640)
 		{
 			if (srangeY > py + 360 || srangeY < py - 360)
 			{
@@ -69,11 +47,8 @@ void Monster::Start()
 			i--;
 		}
 	}
-
-
-
 }
-void Monster::Chaseplayer()
+void Monster::Chaseplayer(float _deltaTime)
 {
 	float mx = GetTransform().GetWorldPosition().x;
 	float my = GetTransform().GetWorldPosition().y;
@@ -83,29 +58,30 @@ void Monster::Chaseplayer()
 	float RangeY = abs(my - py) / (abs(mx - px) + abs(my - py));
 	if (mx -px < 0)
 	{
-		MXmove_ = mx + speed_ * RangeX;
+		MXmove_ = mx + (speed_ * RangeX * _deltaTime);
+		this->GetTransform().PixLocalPositiveX();
+
 	}
 	else if (mx - px >=0)
 	{
-		MXmove_ = mx - speed_ * RangeX;
+		MXmove_ = mx - (speed_ * RangeX * _deltaTime);
+		this->GetTransform().PixLocalNegativeX();
 	}
 	if (my -py < 0)
 	{
-		MYmove_ = my + speed_ * RangeY;
+		MYmove_ = my + (speed_ * RangeY * _deltaTime);
 	}
 	else if (my - py >= 0)
 	{
-		MYmove_ = my - speed_ * RangeY;
+		MYmove_ = my - (speed_ * RangeY * _deltaTime);
 	}
 	GetTransform().SetWorldPosition(MXmove_, MYmove_, 0.0f);
 }
 
 void Monster::Update(float _deltaTime)
 {
-	Chaseplayer();
 }
 
 void Monster::End()
 {
 }
-

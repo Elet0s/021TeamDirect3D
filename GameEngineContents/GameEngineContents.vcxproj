@@ -149,9 +149,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BlackEyes.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Brown.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="FlyingEyes.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GlobalContentsValue.h" />
+    <ClInclude Include="Green.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="LoginUI.h" />
     <ClInclude Include="LoginLevel.h" />
     <ClInclude Include="MapEditorWindow.h" />
@@ -161,8 +177,16 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="NormalGoblin.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="RedFlyingEyes.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="StageLevel.h">
       <SubType>
       </SubType>
@@ -188,8 +212,24 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlackEyes.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Brown.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="FlyingEyes.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GlobalContentsValue.cpp" />
+    <ClCompile Include="Green.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="LoginUI.cpp" />
     <ClCompile Include="LoginLevel.cpp" />
     <ClCompile Include="MapEditorWindow.cpp" />
@@ -199,10 +239,18 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="NormalGoblin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="RedFlyingEyes.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="StageLevel.cpp">
       <SubType>

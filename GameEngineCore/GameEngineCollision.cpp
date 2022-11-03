@@ -48,7 +48,7 @@ public:
 GameEngineCollisionFunctionInit inst_;
 
 GameEngineCollision::GameEngineCollision()
-	: debugType_(CollisionType::CT_Max),
+	: debugType_(CollisionType::CT_Sphere2D),
 	collisionMode_(CollisionMode::Single),
 	color_(1.f, 0.f, 0.f, 0.5f),
 	debugCameraOrder_(CameraOrder::MainCamera)	//기본 디버그카메라 세팅: 메인카메라.

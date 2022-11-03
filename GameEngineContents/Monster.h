@@ -15,16 +15,15 @@ public:
 	Monster& operator=(Monster&& _other) = delete;
 public:
 	float speed_;
-	float	MXmove_;
-	float	MYmove_;
+	float MXmove_;
+	float MYmove_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-private:
+	void Chaseplayer(float _deltaTime);
+	void SummonMon();
 
-	void Chaseplayer();
-	GameEngineTextureRenderer* monsterrenderer_;
-	GameEngineCollision* collision_;
+	GameEngineTextureRenderer* MonRenderer_;
+	GameEngineCollision* MonCollision_;
 };
-
