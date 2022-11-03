@@ -110,7 +110,10 @@ void TestLevel::Update(float _DeltaTime)
 		this->GetMainCameraActor()->GetTransform().GetWorldPosition()
 	);
 
-	UpdateWorld();
+
+	GameEngineCore::engineThreadPool_.Work(std::bind(&TestLevel::UpdateWorld, this));
+
+	//UpdateWorld();
 
 	//GameEngineCore::engineThreadPool_.Work(std::bind<void>(&TestLevel::UpdateWorld, this));
 	
