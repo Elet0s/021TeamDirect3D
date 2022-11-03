@@ -84,7 +84,7 @@ void TestLevel::Start()
 
 
 	if (nullptr == Player::GetMainPlayer())
-	{
+	{d
 
 		Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
 		NewPlayer->SetLevelOverOn();
@@ -93,7 +93,7 @@ void TestLevel::Start()
 	}
 
 	{
-		for (size_t i = 0; i < 10; i++)
+		for (size_t i = 0; i < 100; i++)
 		{
 			Monster* BlackEyes = CreateActor<Monster>(ObjectOrder::Monster);
 			Monster_.push_back(BlackEyes);
