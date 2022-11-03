@@ -1,4 +1,6 @@
 #pragma once
+
+class MyWorldMapRenderer;
 class WorldMapLevel : public GameEngineLevel
 {
 public:
@@ -15,5 +17,6 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 private:
+	MyWorldMapRenderer* worldmap;
 	void LevelStartEvent() override;
 };

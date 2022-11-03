@@ -180,5 +180,12 @@
     <ClInclude Include="RedFlyingEyes.h">
       <Filter>Actor\02. Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="LoginUI.h" />
+    <ClInclude Include="MyWorldMapRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMapActor.h">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

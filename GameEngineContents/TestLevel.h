@@ -30,8 +30,6 @@ private:
 	std::vector<std::vector<TileMapActor*>> tilemaps_;
 	
 	std::vector<Monster*> Monster_;
-	TileMapActor* tilemap;
-
 	GameEngineCameraActor* tileCameraActor_;
 };
 

@@ -1,9 +1,8 @@
 #pragma once
 
-// Ό³Έν :
 class Tile
 {
-	friend class MyTileMapRenderer;
+	friend class MyWorldMapRenderer;
 
 	int tileIndex_;
 	int zValue_;
@@ -15,18 +14,18 @@ public:
 };
 
 
-class MyTileMapRenderer : public GameEngineDefaultRenderer
+class MyWorldMapRenderer : public GameEngineDefaultRenderer
 {
 public:
 	// constrcuter destructer
-	MyTileMapRenderer();
-	~MyTileMapRenderer();
+	MyWorldMapRenderer();
+	~MyWorldMapRenderer();
 
 	// delete Function
-	MyTileMapRenderer(const MyTileMapRenderer& _Other) = delete;
-	MyTileMapRenderer(MyTileMapRenderer&& _Other) noexcept = delete;
-	MyTileMapRenderer& operator=(const MyTileMapRenderer& _Other) = delete;
-	MyTileMapRenderer& operator=(MyTileMapRenderer&& _Other) noexcept = delete;
+	MyWorldMapRenderer(const MyWorldMapRenderer& _Other) = delete;
+	MyWorldMapRenderer(MyWorldMapRenderer&& _Other) noexcept = delete;
+	MyWorldMapRenderer& operator=(const MyWorldMapRenderer& _Other) = delete;
+	MyWorldMapRenderer& operator=(MyWorldMapRenderer&& _Other) noexcept = delete;
 
 
 
@@ -40,7 +39,7 @@ public:
 	void GetTileIndex(const float4& _pos, int& _x, int& _y);
 
 	void SetPivot(PivotMode _pivot);
-	
+
 
 protected:
 	void Render(float _deltaTime) override;
@@ -70,4 +69,3 @@ private:
 
 
 };
-

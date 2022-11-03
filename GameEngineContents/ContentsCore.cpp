@@ -17,6 +17,21 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("Texture");
+		Dir.MoveToChild("Map");
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+
 	GameEngineFont::Load("±Ã¼­");
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))

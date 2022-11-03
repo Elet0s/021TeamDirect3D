@@ -1,22 +1,22 @@
 #include "PreCompile.h"
+#include "MyWorldMapRenderer.h"
 #include <GameEngineBase/GameEngineRandom.h>
-#include "MyTileMapRenderer.h"
 #include "Enums.h"
 
-MyTileMapRenderer::MyTileMapRenderer() 
+MyWorldMapRenderer::MyWorldMapRenderer()
 	:pivotmode_(PivotMode::Center)
 	, tileTextures_(nullptr)
-	,tileX_(0)
-	,tileY_(0)
+	, tileX_(0)
+	, tileY_(0)
 	, KeyFree(true)
 {
 }
 
-MyTileMapRenderer::~MyTileMapRenderer() 
+MyWorldMapRenderer::~MyWorldMapRenderer()
 {
 }
 
-void MyTileMapRenderer::CreateTileMap(
+void MyWorldMapRenderer::CreateTileMap(
 	int _x,
 	int _y,
 	const float4& _tileScale,
@@ -30,7 +30,7 @@ void MyTileMapRenderer::CreateTileMap(
 		MsgBoxAssertString(_Texture + ": 존재하지 않는 폴더텍스처입니다.");
 		return;
 	}*/
-	
+
 
 	tileTextures_ = GameEngineTexture::Find(_Texture);
 
@@ -64,7 +64,7 @@ void MyTileMapRenderer::CreateTileMap(
 	}
 }
 
-void MyTileMapRenderer::SetTileIndex(const float4& _pos, size_t _index)
+void MyWorldMapRenderer::SetTileIndex(const float4& _pos, size_t _index)
 {
 	if (0 > _index)
 	{
@@ -100,7 +100,7 @@ void MyTileMapRenderer::SetTileIndex(const float4& _pos, size_t _index)
 	//allTiles_[tileIndexY][tileIndexX].tileImage_ = tileTextures_->GetTexture(_index);
 }
 
-void MyTileMapRenderer::GetTileIndex(const float4& _pos, int& _x, int& _y)
+void MyWorldMapRenderer::GetTileIndex(const float4& _pos, int& _x, int& _y)
 {
 	float fX = (_pos.x / tilescalehalf_.x + _pos.y / -tilescalehalf_.y) / 2.f;
 	float fY = (_pos.y / -tilescalehalf_.y - _pos.x / tilescalehalf_.x) / 2.f;
@@ -109,8 +109,10 @@ void MyTileMapRenderer::GetTileIndex(const float4& _pos, int& _x, int& _y)
 	_y = static_cast<int>(roundf(fY));
 }
 
-void MyTileMapRenderer::Render(float _deltaTime)
+void MyWorldMapRenderer::Render(float _deltaTime)
 {
+	
+
 	static GameEngineTransform tileTransform;
 
 	//tileTransform.SetLocalScale(this->tileScale_);
@@ -123,11 +125,12 @@ void MyTileMapRenderer::Render(float _deltaTime)
 		{
 			float4 tilePos = this->GetTransform().GetWorldPosition();
 			tilePos.x += x * tilescale_.x;
-			tilePos.y += y * -tilescale_.y;
-			//tilePos.z = tilePos.y;
+			tilePos.y += -tilescale_.y * sinf(30.f * GameEngineMath::DegreeToRadian) * y;
+			tilePos.z += -tilescale_.y * cosf(30.f * GameEngineMath::DegreeToRadian) * y;
 
 			tileTransform.SetLocalScale(alltiles_[y][x].tileImage_->GetScale());
 			tileTransform.SetLocalPosition(tilePos);
+			tileTransform.SetLocalRotation( float4(60.f,0.f,0.f));
 			tileTransform.CalculateWorldViewProjection();
 			this->GetShaderResourceHelper().SetConstantBuffer_Link("TransformData", tileTransform.GetTransformData());
 			this->GetShaderResourceHelper().SetTexture("Tex", alltiles_[y][x].tileImage_);
@@ -136,7 +139,7 @@ void MyTileMapRenderer::Render(float _deltaTime)
 	}
 }
 
-void MyTileMapRenderer::Start()
+void MyWorldMapRenderer::Start()
 {
 	/*if (false == GameEngineInput::GetInst()->IsKey("MoveMap_Right"))
 	{
@@ -146,7 +149,7 @@ void MyTileMapRenderer::Start()
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Down", VK_DOWN);
 	}*/
 
-	this->GetActor()->GetLevel()->PushRenderer(this, CameraOrder::TileCamera);
+	this->GetActor()->GetLevel()->PushRenderer(this, CameraOrder::MainCamera);
 
 	this->SetPipeLine("TextureAtlas");
 
@@ -155,24 +158,24 @@ void MyTileMapRenderer::Start()
 	atlasdatainst_.frameData_.sizeX = 1.f;
 	atlasdatainst_.frameData_.sizeY = 1.f;
 	atlasdatainst_.pivotPos_ = float4::Zero;
-	
+
 	GetShaderResourceHelper().SetConstantBuffer_Link("AtlasData", this->atlasdatainst_);
 	GetShaderResourceHelper().SetConstantBuffer_Link("PixelData", this->pixeldata_);
 }
 
-void MyTileMapRenderer::Update(float _deltaTime)
+void MyWorldMapRenderer::Update(float _deltaTime)
 {
 
 }
 
 
-void  MyTileMapRenderer::MoveWorld(int _Dir)
+void  MyWorldMapRenderer::MoveWorld(int _Dir)
 {
 
 }
 
 
-void MyTileMapRenderer::SetPivot(PivotMode _pivot)
+void MyWorldMapRenderer::SetPivot(PivotMode _pivot)
 {
 	switch (_pivot)
 	{

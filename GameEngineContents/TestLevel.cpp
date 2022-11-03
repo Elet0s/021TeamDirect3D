@@ -23,9 +23,9 @@ void TestLevel::Start()
 
 
 
-	if (nullptr == GameEngineTexture::Find("grassTexture.png"))
+	if (true)
 	{
-		{
+		/*{
 			GameEngineDirectory Dir;
 			Dir.MoveParentToExistChildDirectory("ContentsResources");
 			Dir.MoveToChild("ContentsResources");
@@ -38,7 +38,7 @@ void TestLevel::Start()
 			{
 				GameEngineTexture::Load(Shaders[i].GetFullPath());
 			}
-		}
+		}*/
 
 		{
 			GameEngineDirectory Dir;
@@ -54,17 +54,7 @@ void TestLevel::Start()
 			}
 		}
 
-		{
-			GameEngineDirectory Dir;
-			Dir.MoveParentToExistChildDirectory("ContentsResources");
-			Dir.MoveToChild("ContentsResources");
-			Dir.MoveToChild("Texture");
-			Dir.MoveToChild("Map");
-			Dir.MoveToChild("Grass");
-
-
-			GameEngineFolderTexture::Load(Dir.GetFullPath());
-		}
+		
 	}
 
 	tilemaps_.resize(3);
@@ -130,9 +120,6 @@ void TestLevel::Start()
 
 void TestLevel::Update(float _DeltaTime)
 {						
-	tileCameraActor_->GetTransform().SetWorldPosition(
-		this->GetMainCameraActor()->GetTransform().GetWorldPosition()
-	);
 
 
 	GameEngineCore::engineThreadPool_.Work(std::bind(&TestLevel::UpdateWorld, this));
@@ -176,19 +163,19 @@ void TestLevel::UpdateWorld()
 	float4 CenterPos = tilemaps_[1][1]->GetTransform().GetWorldPosition() + float4(320.f, -320.f);
 	int Dir = -1;
 
-	if (CenterPos.x + 320.f <= tileCameraActor_->GetTransform().GetWorldPosition().x)
+	if (CenterPos.x + 320.f < tileCameraActor_->GetTransform().GetWorldPosition().x)
 	{
 		Dir = 0;
 	}
-	else if (CenterPos.x - 320.f >= tileCameraActor_->GetTransform().GetWorldPosition().x)
+	else if (CenterPos.x - 320.f > tileCameraActor_->GetTransform().GetWorldPosition().x)
 	{
 		Dir = 1;
 	}
-	else if (CenterPos.y + 320.f <= tileCameraActor_->GetTransform().GetWorldPosition().y)
+	else if (CenterPos.y + 320.f < tileCameraActor_->GetTransform().GetWorldPosition().y)
 	{
 		Dir = 2;
 	}
-	else if (CenterPos.y - 320.f >= tileCameraActor_->GetTransform().GetWorldPosition().y)
+	else if (CenterPos.y - 320.f > tileCameraActor_->GetTransform().GetWorldPosition().y)
 	{
 		Dir = 3;
 	}

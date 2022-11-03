@@ -14,6 +14,7 @@ TimeActor::~TimeActor()
 
 void TimeActor::Start()
 {
+
 	GameEngineFont::Load("Free Pixel");
 
 	{
