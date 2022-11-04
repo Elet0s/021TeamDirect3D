@@ -107,6 +107,12 @@
     <ClCompile Include="RedFlyingEyes.cpp">
       <Filter>Actor\02. Play\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="WorldMapActor.cpp">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="MyWorldMapRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">

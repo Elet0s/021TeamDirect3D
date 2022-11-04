@@ -51,7 +51,7 @@ void WorldMapActor::Start()
 			
 			GameEngineTextureRenderer* TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
 			TextureRenderer->SetPivot(PivotMode::Bot);
-			TextureRenderer->SetFolderTextureToIndex("Grass", GameEngineRandom::mainRandom_.RandomInt(0, 2));
+			TextureRenderer->SetFolderTextureToIndex("Grass", 0);
 			TextureRenderer->ScaleToTexture();
 			TextureRenderer->GetTransform().SetWorldPosition(tilePos);
 

@@ -341,6 +341,8 @@ void EngineTextureLoad()
 	linearWrapSamplerDesc.MaxLOD = FLT_MAX;
 	GameEngineSampler::Create("LINEARWRAP", linearWrapSamplerDesc);
 
+	
+
 	//D3D11 ERROR: ID3D11DeviceContext::DrawIndexed: 
 	//The Pixel Shader unit expects a Sampler configured for default filtering to be set at Slot 0, 
 	//but the sampler bound at this slot is configured for comparison filtering.  
