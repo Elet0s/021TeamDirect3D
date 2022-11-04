@@ -61,12 +61,12 @@ namespace GameEngineDebug
 
 		debugRenderUnit_ = new GameEngineRenderUnit();
 		debugRenderUnit_->SetMesh("Box");
-		debugRenderUnit_->SetPipeLine("3DDebug");
+		debugRenderUnit_->SetMaterial("3DDebug");
 		//debugRenderUnit_의 생성 시점을 "Box" 메쉬와 "3DDebug" 렌더링 파이프라인 이후로 지연시킨다.
 
 		debugTextureRenderUnit_ = new GameEngineRenderUnit();
 		debugTextureRenderUnit_->SetMesh("Rect");
-		debugTextureRenderUnit_->SetPipeLine("3DDebug");
+		debugTextureRenderUnit_->SetMaterial("3DDebug");
 		//debugTextureRenderUnit_의 생성 시점을 "Rect" 메쉬와 "3DDebug" 렌더링 파이프라인 이후로 지연시킨다.
 
 

@@ -30,13 +30,13 @@ GameEngineRenderUnit::GameEngineRenderUnit(const GameEngineRenderUnit& _other)
 	this->shaderResourceHelper_.ResourceCheck(this->material_);
 }
 
-void GameEngineRenderUnit::SetPipeLine(const std::string& _renderingPipeLineName)
+void GameEngineRenderUnit::SetMaterial(const std::string_view& _materialName)
 {
-	material_ = GameEngineMaterial::Find(_renderingPipeLineName);
+	material_ = GameEngineMaterial::Find(_materialName);
 
 	if (nullptr == material_)
 	{
-		MsgBoxAssertString(_renderingPipeLineName + ": 그런 이름의 렌더링 파이프라인이 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_materialName) + ": 그런 이름의 마테리얼이 존재하지 않습니다.");
 		return;
 	}
 
@@ -54,13 +54,13 @@ void GameEngineRenderUnit::SetPipeLine(const std::string& _renderingPipeLineName
 	shaderResourceHelper_.ResourceCheck(this->material_);
 }
 
-void GameEngineRenderUnit::SetMesh(const std::string& _meshName)
+void GameEngineRenderUnit::SetMesh(const std::string_view& _meshName)
 {
 	mesh_ = GameEngineMesh::Find(_meshName);
 
 	if (nullptr == mesh_)
 	{
-		MsgBoxAssertString(_meshName + ": 그런 이름의 메쉬가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_meshName) + ": 그런 이름의 메쉬가 존재하지 않습니다.");
 		return;
 	}
 
@@ -118,7 +118,7 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(GameEngineRenderer* _pare
 	{
 		this->shaderResourceHelper_.SetConstantBuffer_Link(
 			"RENDEROPTION",
-			&this->parentRenderer_->renderOption_,
+			&this->parentRenderer_->renderOptionInst_,
 			sizeof(RenderOption)
 		);
 	}
@@ -196,7 +196,7 @@ void GameEngineRenderUnit::SetRenderer(GameEngineRenderer* _parentRenderer)
 
 GameEngineRenderer::GameEngineRenderer()
 	: camera_(nullptr),
-	renderOption_(),
+	renderOptionInst_(),
 	cameraOrder_(CameraOrder::MainCamera),
 	renderingOrder_(0),
 	isInstancing_(false)

@@ -16,36 +16,36 @@ void GameEngineString::ToUpper(std::string& _text)
 		_text.begin(),
 		_text.end(),
 		_text.begin(),
-		[](char c)->char
+		[](int c)->int
 		{
 			if ('a' <= c && 'z' >= c)
 			{
-				return static_cast<char>(std::toupper(static_cast<int>(c)));
+				return std::toupper(c);
 			}
 			return c;
 		}
 	);
 }
 
-std::string GameEngineString::ToUpperReturn(const std::string& _text)
+std::string GameEngineString::ToUpperReturn(const std::string_view& _text)
 {
-	std::string uppercaseText = _text;
+	std::string returnText = _text.data();
 
 	std::transform(
-		uppercaseText.begin(),
-		uppercaseText.end(),
-		uppercaseText.begin(),
-		[](char c)->char
+		returnText.begin(),
+		returnText.end(),
+		returnText.begin(),
+		[](int c)->int
 		{
 			if ('a' <= c && 'z' >= c)
 			{
-				return static_cast<char>(std::toupper(static_cast<int>(c)));
+				return std::toupper(c);
 			}
 			return c;
 		}
 	);
 
-	return uppercaseText;
+	return returnText;
 }
 
 bool GameEngineString::AnsiToUnicode(const std::string& _inText, std::wstring& _outText)

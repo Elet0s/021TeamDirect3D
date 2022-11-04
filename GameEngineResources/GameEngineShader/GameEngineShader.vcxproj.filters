@@ -22,10 +22,10 @@
     <FxCompile Include="DebugTexture.hlsl">
       <Filter>Debug</Filter>
     </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RenderOption.hlsli" />
-    <None Include="TransformHeader.hlsli" />
+    <FxCompile Include="RenderOption.hlsli" />
+    <FxCompile Include="TextureAnimation.hlsl">
+      <Filter>Object</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -37,5 +37,8 @@
     <Filter Include="RenderTargetEffect">
       <UniqueIdentifier>{85bee332-ab17-40db-a76f-aeb4c633ac25}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TransformHeader.hlsli" />
   </ItemGroup>
 </Project>

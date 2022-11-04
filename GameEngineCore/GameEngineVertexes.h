@@ -45,12 +45,12 @@ struct GameEngineVertex
 	static GameEngineInputLayoutDesc inputLayoutInfo_;
 	//버텍스 하나마다 inputLayoutInfo_ 한개씩만 가진다. 
 
-	float4 position_;
-	float4 color_;
-	float4 texcoord_;
-	float4 normal_;
-	float4 binormal_;
-	float4 tangent_;
-	float4 weight_;		// 애니메이션 가중치
-	int blendedIndices_[4] = { 0, };		//이 버텍스를 움직이는 모든 본들의 번호.
+	float4 POSITION;
+	float4 COLOR;
+	float4 TEXCOORD;
+	float4 NORMAL;
+	float4 BINORMAL;
+	float4 TANGENT;
+	float4 WEIGHT;		// 애니메이션 가중치
+	int BLENDINDICES[4] = { 0, };		//이 버텍스를 움직이는 모든 본들의 번호.
 };

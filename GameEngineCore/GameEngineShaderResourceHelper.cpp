@@ -17,19 +17,19 @@ GameEngineShaderResourceHelper::~GameEngineShaderResourceHelper()
 {
 }
 
-void GameEngineShaderResourceHelper::ResourceCheck(GameEngineMaterial* _pipeLine)
+void GameEngineShaderResourceHelper::ResourceCheck(GameEngineMaterial* _material)
 {
-	if (nullptr == _pipeLine)
+	if (nullptr == _material)
 	{
-		MsgBoxAssert("렌더링 파이프라인이 없습니다.");
+		MsgBoxAssert("마테리얼이 없습니다.");
 		return;
 	}
 	
-	ShaderCheck(_pipeLine->GetVertexShader());
-	ShaderCheck(_pipeLine->GetPixelShader());
+	ShaderCheck(_material->GetVertexShader());
+	ShaderCheck(_material->GetPixelShader());
 }
 
-bool GameEngineShaderResourceHelper::IsConstantBuffer(const std::string& _name)
+bool GameEngineShaderResourceHelper::IsConstantBuffer(const std::string_view& _name)
 {
 	std::string uppercaseCBufferSetterName = GameEngineString::ToUpperReturn(_name);
 
@@ -43,7 +43,7 @@ bool GameEngineShaderResourceHelper::IsConstantBuffer(const std::string& _name)
 	}
 }
 
-bool GameEngineShaderResourceHelper::IsStructuredBuffer(const std::string& _name)
+bool GameEngineShaderResourceHelper::IsStructuredBuffer(const std::string_view& _name)
 {
 	std::string uppercaseSBufferSetterName = GameEngineString::ToUpperReturn(_name);
 
@@ -57,7 +57,7 @@ bool GameEngineShaderResourceHelper::IsStructuredBuffer(const std::string& _name
 	}
 }
 
-bool GameEngineShaderResourceHelper::IsTexture(const std::string& _name)
+bool GameEngineShaderResourceHelper::IsTexture(const std::string_view& _name)
 {
 	const std::string uppercaseTextureSetterName = GameEngineString::ToUpperReturn(_name);
 
@@ -72,7 +72,7 @@ bool GameEngineShaderResourceHelper::IsTexture(const std::string& _name)
 
 }
 
-bool GameEngineShaderResourceHelper::IsSampler(const std::string& _name)
+bool GameEngineShaderResourceHelper::IsSampler(const std::string_view& _name)
 {
 	std::string uppercaseSamplerName = GameEngineString::ToUpperReturn(_name);
 
@@ -88,14 +88,14 @@ bool GameEngineShaderResourceHelper::IsSampler(const std::string& _name)
 }
 
 void GameEngineShaderResourceHelper::SetConstantBuffer_Link(
-	const std::string& _name,
+	const std::string_view& _name,
 	const void* _data,
 	unsigned int _dataSize
 )
 {
 	if (false == IsConstantBuffer(_name))
 	{
-		MsgBoxAssertString(_name + ": 그런 이름의 상수버퍼 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_name) + ": 그런 이름의 상수버퍼 세터가 존재하지 않습니다.");
 		return;
 	}
 
@@ -126,14 +126,14 @@ void GameEngineShaderResourceHelper::SetConstantBuffer_Link(
 }
 
 void GameEngineShaderResourceHelper::SetConstantBuffer_New(
-	const std::string& _name,
+	const std::string_view& _name,
 	const void* _data, 
 	unsigned int _dataSize
 )
 {
 	if (false == IsConstantBuffer(_name))
 	{
-		MsgBoxAssertString(_name + ": 그런 이름의 상수버퍼가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_name) + ": 그런 이름의 상수버퍼가 존재하지 않습니다.");
 		return;
 	}
 

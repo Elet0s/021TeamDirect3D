@@ -8,7 +8,7 @@ GameEngineRenderTarget::GameEngineRenderTarget()
 	depthStencilView_(nullptr)
 {
 	mergeUnit_.SetMesh("Fullrect");
-	mergeUnit_.SetPipeLine("TargetMerge");
+	mergeUnit_.SetMaterial("TargetMerge");
 }
 
 GameEngineRenderTarget::~GameEngineRenderTarget()

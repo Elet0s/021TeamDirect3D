@@ -40,7 +40,7 @@ public:
 	static void ToUpper(std::string& _text);
 
 	//주어진 문자들을 전부 대문자로 변경하는 함수. 바꿔진 텍스트를 반환한다.
-	static std::string ToUpperReturn(const std::string& _text);
+	static std::string ToUpperReturn(const std::string_view& _text);
 
 
 	static bool AnsiToUnicode(const std::string& _inText, std::wstring& _outText);

@@ -83,10 +83,12 @@ private:
 
 	static ID3D11DeviceContext* deviceContext_;	//다이렉트X의 디바이스 컨텍스트.
 	//그래픽카드에 렌더링 관련 연산을 명령할 때 필요하다. 
-	//다이렉트 9때는 없었지만 11때는 device와 deviceContext가 분리되었다.
+	//다이렉트 9때는 없었지만 11때 device와 deviceContext가 분리되었다.
 
 	static IDXGISwapChain* swapChain_;	//수직동기화와 다중 버퍼링을 하는데 사용되는 다이렉트X의 인터페이스.
 	//필요한 윈도우 개수만큼 만들면 된다.
+	//핵심 역할은 백버퍼 렌더타겟에 그려진 렌더링 정보를 OS(Windows)를 통해 모니터에 전달하는것이다.
+	//그렇게 해서 전달된 렌더링 정보대로 OS가 이 프로세스에게 할당된 윈도우에 해당하는 픽셀들에 그리는 것이다.
 
 	static GameEngineRenderTarget* backBufferRenderTarget_;
 	//백버퍼로 쓰이는 렌더타겟. 여기에 그려지는것만이 더블버퍼링 과정을 거쳐 화면에 그려진다.

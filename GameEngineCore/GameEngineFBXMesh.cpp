@@ -254,33 +254,33 @@ void GameEngineFBXMesh::VertexBufferCheck()
 			// FBX는 기본적으로 3d 맥스에서 사용하는데. 
 			// 데카르트 좌표계에서 z만 -가 되어있다.
 
-			VtxData[controlPointIndex].position_ = FBXVecToTransform(calculateControlPoint);
-			VtxData[controlPointIndex].position_.w = 1.0f;
+			VtxData[controlPointIndex].POSITION = FBXVecToTransform(calculateControlPoint);
+			VtxData[controlPointIndex].POSITION.w = 1.0f;
 
-			if (RenderUnit.MaxBoundBox.x < VtxData[controlPointIndex].position_.x)
+			if (RenderUnit.MaxBoundBox.x < VtxData[controlPointIndex].POSITION.x)
 			{
-				RenderUnit.MaxBoundBox.x = VtxData[controlPointIndex].position_.x;
+				RenderUnit.MaxBoundBox.x = VtxData[controlPointIndex].POSITION.x;
 			}
-			if (RenderUnit.MaxBoundBox.y < VtxData[controlPointIndex].position_.y)
+			if (RenderUnit.MaxBoundBox.y < VtxData[controlPointIndex].POSITION.y)
 			{
-				RenderUnit.MaxBoundBox.y = VtxData[controlPointIndex].position_.y;
+				RenderUnit.MaxBoundBox.y = VtxData[controlPointIndex].POSITION.y;
 			}
-			if (RenderUnit.MaxBoundBox.z < VtxData[controlPointIndex].position_.z)
+			if (RenderUnit.MaxBoundBox.z < VtxData[controlPointIndex].POSITION.z)
 			{
-				RenderUnit.MaxBoundBox.z = VtxData[controlPointIndex].position_.z;
+				RenderUnit.MaxBoundBox.z = VtxData[controlPointIndex].POSITION.z;
 			}
 
-			if (RenderUnit.MinBoundBox.x > VtxData[controlPointIndex].position_.x)
+			if (RenderUnit.MinBoundBox.x > VtxData[controlPointIndex].POSITION.x)
 			{
-				RenderUnit.MinBoundBox.x = VtxData[controlPointIndex].position_.x;
+				RenderUnit.MinBoundBox.x = VtxData[controlPointIndex].POSITION.x;
 			}
-			if (RenderUnit.MinBoundBox.y > VtxData[controlPointIndex].position_.y)
+			if (RenderUnit.MinBoundBox.y > VtxData[controlPointIndex].POSITION.y)
 			{
-				RenderUnit.MinBoundBox.y = VtxData[controlPointIndex].position_.y;
+				RenderUnit.MinBoundBox.y = VtxData[controlPointIndex].POSITION.y;
 			}
-			if (RenderUnit.MinBoundBox.z > VtxData[controlPointIndex].position_.z)
+			if (RenderUnit.MinBoundBox.z > VtxData[controlPointIndex].POSITION.z)
 			{
-				RenderUnit.MinBoundBox.z = VtxData[controlPointIndex].position_.z;
+				RenderUnit.MinBoundBox.z = VtxData[controlPointIndex].POSITION.z;
 			}
 		}
 
@@ -694,11 +694,11 @@ void GameEngineFBXMesh::LoadBinormal(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix 
 	BiNormal = conversionMeshMatrix.MultT(BiNormal);
 
 
-	_ArrVtx[_Index].binormal_.x = (float)BiNormal.mData[0];
-	_ArrVtx[_Index].binormal_.y = (float)BiNormal.mData[1];
-	_ArrVtx[_Index].binormal_.z = -(float)BiNormal.mData[2];
-	_ArrVtx[_Index].binormal_.w = (float)BiNormal.mData[3];
-	_ArrVtx[_Index].binormal_.Normalize3D();
+	_ArrVtx[_Index].BINORMAL.x = (float)BiNormal.mData[0];
+	_ArrVtx[_Index].BINORMAL.y = (float)BiNormal.mData[1];
+	_ArrVtx[_Index].BINORMAL.z = -(float)BiNormal.mData[2];
+	_ArrVtx[_Index].BINORMAL.w = (float)BiNormal.mData[3];
+	_ArrVtx[_Index].BINORMAL.Normalize3D();
 }
 
 void GameEngineFBXMesh::LoadTangent(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int _Index)
@@ -745,11 +745,11 @@ void GameEngineFBXMesh::LoadTangent(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _
 	Tangent = conversionMeshMatrix.MultT(Tangent);
 
 
-	_ArrVtx[_Index].tangent_.x = (float)Tangent.mData[0];
-	_ArrVtx[_Index].tangent_.y = (float)Tangent.mData[1];
-	_ArrVtx[_Index].tangent_.z = -(float)Tangent.mData[2];
-	_ArrVtx[_Index].tangent_.w = (float)Tangent.mData[3];
-	_ArrVtx[_Index].tangent_.Normalize3D();
+	_ArrVtx[_Index].TANGENT.x = (float)Tangent.mData[0];
+	_ArrVtx[_Index].TANGENT.y = (float)Tangent.mData[1];
+	_ArrVtx[_Index].TANGENT.z = -(float)Tangent.mData[2];
+	_ArrVtx[_Index].TANGENT.w = (float)Tangent.mData[3];
+	_ArrVtx[_Index].TANGENT.Normalize3D();
 }
 
 void GameEngineFBXMesh::LoadNormal(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int _Index)
@@ -796,11 +796,11 @@ void GameEngineFBXMesh::LoadNormal(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _M
 	fbxsdk::FbxAMatrix conversionMeshMatrix = _MeshMatrix.Transpose();
 	Normal = conversionMeshMatrix.MultT(Normal);
 
-	_ArrVtx[_Index].normal_.x = (float)Normal.mData[0];
-	_ArrVtx[_Index].normal_.y = (float)Normal.mData[1];
-	_ArrVtx[_Index].normal_.z = -(float)Normal.mData[2];
-	_ArrVtx[_Index].normal_.w = (float)Normal.mData[3];
-	_ArrVtx[_Index].normal_.Normalize3D();
+	_ArrVtx[_Index].NORMAL.x = (float)Normal.mData[0];
+	_ArrVtx[_Index].NORMAL.y = (float)Normal.mData[1];
+	_ArrVtx[_Index].NORMAL.z = -(float)Normal.mData[2];
+	_ArrVtx[_Index].NORMAL.w = (float)Normal.mData[3];
+	_ArrVtx[_Index].NORMAL.Normalize3D();
 }
 
 void GameEngineFBXMesh::LoadUV(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshMatrix, std::vector<GameEngineVertex>& _ArrVtx, int VtxId, int VertexCount, int _Index)
@@ -875,8 +875,8 @@ void GameEngineFBXMesh::LoadUV(fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxAMatrix _MeshM
 		break;
 	}
 
-	_ArrVtx[_Index].texcoord_.x = (float)result.x;
-	_ArrVtx[_Index].texcoord_.y = 1.0f - (float)result.y;
+	_ArrVtx[_Index].TEXCOORD.x = (float)result.x;
+	_ArrVtx[_Index].TEXCOORD.y = 1.0f - (float)result.y;
 }
 
 bool GameEngineFBXMesh::ImportBone()
@@ -1556,8 +1556,8 @@ void GameEngineFBXMesh::CalAnimationVertexData(FBXRenderUnit& _DrawSet)
 				Index[i] = _WI.second[i].Index;
 			}
 
-			memcpy_s(VertexData[_WI.first].weight_.arr1D, sizeof(float4), Weight, sizeof(float4));
-			memcpy_s(VertexData[_WI.first].blendedIndices_, sizeof(float4), Index, sizeof(float4));
+			memcpy_s(VertexData[_WI.first].WEIGHT.arr1D, sizeof(float4), Weight, sizeof(float4));
+			memcpy_s(VertexData[_WI.first].BLENDINDICES, sizeof(float4), Index, sizeof(float4));
 		}
 	}
 }

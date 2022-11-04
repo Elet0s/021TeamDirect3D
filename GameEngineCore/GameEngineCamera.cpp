@@ -353,6 +353,9 @@ void GameEngineCamera::Render(float _deltaTime)
 		{
 			if (true == renderer->IsUpdate())
 			{
+				renderer->renderOptionInst_.deltaTime_ = _deltaTime;
+				renderer->renderOptionInst_.sumDeltaTime_ += _deltaTime;
+
 				renderer->GetTransform().SetViewMatrix(viewMatrix_);
 				renderer->GetTransform().SetProjectionMatrix(projectionMatrix_);
 				//카메라에 저장된 뷰행렬과 투영행렬을 렌더러의 트랜스폼에 저장한다.

@@ -18,7 +18,7 @@ void GameEngineDefaultRenderer::Render(float _deltaTime)
 
 void GameEngineDefaultRenderer::SetPipeLine(const std::string& _renderingPipeLineName)
 {
-	this->renderUnit_.SetPipeLine(_renderingPipeLineName);
+	this->renderUnit_.SetMaterial(_renderingPipeLineName);
 	this->renderUnit_.SetRenderer(this);
 }
 

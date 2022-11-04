@@ -31,13 +31,40 @@ void EngineInputLayout()
 		"POSITION",
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT
 	);
+
 	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
 		"COLOR",
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT
 	);
+
 	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
 		"TEXCOORD",
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT
+	);
+
+	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+		"NORMAL",
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT
+	);
+
+	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+		"BINORMAL",
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT
+	);
+
+	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+		"TANGENT",
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT
+	);
+
+	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+		"BLENDWEIGHT",
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT
+	);
+
+	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+		"BLENDINDICES",
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_SINT
 	);
 
 	GameEngineVertex::inputLayoutInfo_.ResetOffset();
@@ -369,67 +396,76 @@ void EngineTextureLoad()
 void EngineRenderingPipeLine()
 {
 
-	GameEngineMaterial* newRenderingPipeLine1 
+	GameEngineMaterial* newMaterial1
 		= GameEngineMaterial::Create("Color");
-	newRenderingPipeLine1->SetVertexShader("Color.hlsl");
-	newRenderingPipeLine1->SetPixelShader("Color.hlsl");
-	newRenderingPipeLine1->SetRasterizer("EngineRasterizer");
-	newRenderingPipeLine1->SetBlend_OutputMerger("AlphaBlend");
-	newRenderingPipeLine1->SetDepthStencil_OutputMerger("EngineBaseDepth");
+	newMaterial1->SetVertexShader("Color.hlsl");
+	newMaterial1->SetPixelShader("Color.hlsl");
+	newMaterial1->SetRasterizer("EngineRasterizer");
+	newMaterial1->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial1->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newRenderingPipeLine2 
+	GameEngineMaterial* newMaterial2
 		= GameEngineMaterial::Create("Texture");
-	newRenderingPipeLine2->SetVertexShader("Texture.hlsl");
-	newRenderingPipeLine2->SetPixelShader("Texture.hlsl");
-	newRenderingPipeLine2->SetRasterizer("EngineRasterizer");
-	newRenderingPipeLine2->SetBlend_OutputMerger("AlphaBlend");
-	newRenderingPipeLine2->SetDepthStencil_OutputMerger("EngineBaseDepth");
+	newMaterial2->SetVertexShader("Texture.hlsl");
+	newMaterial2->SetPixelShader("Texture.hlsl");
+	newMaterial2->SetRasterizer("EngineRasterizer");
+	newMaterial2->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial2->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newRenderingPipeLine3 
+	GameEngineMaterial* newMaterial3
 		= GameEngineMaterial::Create("TextureAtlas");
-	newRenderingPipeLine3->SetVertexShader("TextureAtlas.hlsl");
-	newRenderingPipeLine3->SetPixelShader("TextureAtlas.hlsl");
-	newRenderingPipeLine3->SetRasterizer("EngineRasterizer");
-	newRenderingPipeLine3->SetBlend_OutputMerger("AlphaBlend");
-	newRenderingPipeLine3->SetDepthStencil_OutputMerger("EngineBaseDepth");
+	newMaterial3->SetVertexShader("TextureAtlas.hlsl");
+	newMaterial3->SetPixelShader("TextureAtlas.hlsl");
+	newMaterial3->SetRasterizer("EngineRasterizer");
+	newMaterial3->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial3->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newRenderingPipeLine4 
+	GameEngineMaterial* newMaterial4
 		= GameEngineMaterial::Create("3DDebug");
-	newRenderingPipeLine4->SetVertexShader("Debug3D.hlsl");
-	newRenderingPipeLine4->SetPixelShader("Debug3D.hlsl");
-	newRenderingPipeLine4->SetRasterizer("EngineRasterizer");
-	newRenderingPipeLine4->SetBlend_OutputMerger("AlphaBlend");
-	newRenderingPipeLine4->SetDepthStencil_OutputMerger("AlwaysDepth");
+	newMaterial4->SetVertexShader("Debug3D.hlsl");
+	newMaterial4->SetPixelShader("Debug3D.hlsl");
+	newMaterial4->SetRasterizer("EngineRasterizer");
+	newMaterial4->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial4->SetDepthStencil_OutputMerger("AlwaysDepth");
 
 
-	GameEngineMaterial* newRenderingPipeLine5 
+	GameEngineMaterial* newMaterial5
 		= GameEngineMaterial::Create("DebugTexture");
-	newRenderingPipeLine5->SetVertexShader("DebugTexture.hlsl");
-	newRenderingPipeLine5->SetPixelShader("DebugTexture.hlsl");
-	newRenderingPipeLine5->SetRasterizer("EngineRasterizer");
-	newRenderingPipeLine5->SetBlend_OutputMerger("AlphaBlend");
-	newRenderingPipeLine5->SetDepthStencil_OutputMerger("EngineBaseDepth");
+	newMaterial5->SetVertexShader("DebugTexture.hlsl");
+	newMaterial5->SetPixelShader("DebugTexture.hlsl");
+	newMaterial5->SetRasterizer("EngineRasterizer");
+	newMaterial5->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial5->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newRenderingPipeLine6 
+	GameEngineMaterial* newMaterial6
 		= GameEngineMaterial::Create("TargetMerge");
-	newRenderingPipeLine6->SetVertexShader("TargetMerge.hlsl");
-	newRenderingPipeLine6->SetPixelShader("TargetMerge.hlsl");
-	newRenderingPipeLine6->SetRasterizer("EngineRasterizer");
-	newRenderingPipeLine6->SetBlend_OutputMerger("AlphaBlend");
-	newRenderingPipeLine6->SetDepthStencil_OutputMerger("AlwaysDepth");
+	newMaterial6->SetVertexShader("TargetMerge.hlsl");
+	newMaterial6->SetPixelShader("TargetMerge.hlsl");
+	newMaterial6->SetRasterizer("EngineRasterizer");
+	newMaterial6->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial6->SetDepthStencil_OutputMerger("AlwaysDepth");
 
 
-	GameEngineMaterial* newRenderingPipeLine7 
+	GameEngineMaterial* newMaterial7
 		= GameEngineMaterial::Create("Blur");
-	newRenderingPipeLine7->SetVertexShader("Blur.hlsl"); 
-	newRenderingPipeLine7->SetPixelShader("Blur.hlsl");
-	newRenderingPipeLine7->SetRasterizer("EngineRasterizer");
-	newRenderingPipeLine7->SetBlend_OutputMerger("AlphaBlend");
-	newRenderingPipeLine7->SetDepthStencil_OutputMerger("EngineBaseDepth");
+	newMaterial7->SetVertexShader("Blur.hlsl");
+	newMaterial7->SetPixelShader("Blur.hlsl");
+	newMaterial7->SetRasterizer("EngineRasterizer");
+	newMaterial7->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial7->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+
+	GameEngineMaterial* newMaterial8
+		= GameEngineMaterial::Create("TextureAnimation");
+	newMaterial8->SetVertexShader("TextureAnimation.hlsl");
+	newMaterial8->SetPixelShader("TextureAnimation.hlsl");
+	newMaterial8->SetRasterizer("EngineRasterizer");
+	newMaterial8->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial8->SetDepthStencil_OutputMerger("EngineBaseDepth");
 }
 
 void EngineMesh()

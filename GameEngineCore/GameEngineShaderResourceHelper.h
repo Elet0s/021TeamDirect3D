@@ -35,24 +35,24 @@ private:
 
 
 public:	
-	//매개변수로 들어온 렌더링 파이프라인이 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하는 함수.
-	void ResourceCheck(GameEngineMaterial* _pipeLine);
+	//매개변수로 들어온 마테리얼이 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하는 함수.
+	void ResourceCheck(GameEngineMaterial* _material);
 
 	//이 셰이더 리소스 세터가 주어진 이름의 상수버퍼를 가지고 있는가를 외부에서 확인하는 함수.
-	bool IsConstantBuffer(const std::string& _name);
+	bool IsConstantBuffer(const std::string_view& _name);
 
 	//이 셰이더 리소스 세터가 주어진 이름의 텍스처를 가지고 있는가를 외부에서 확인하는 함수.
-	bool IsTexture(const std::string& _name);
+	bool IsTexture(const std::string_view& _name);
 
 	//이 셰이더 리소스 세터가 주어진 이름의 샘플러를 가지고 있는가를 외부에서 확인하는 함수.
-	bool IsSampler(const std::string& _name);
+	bool IsSampler(const std::string_view& _name);
 
 	//이 셰이더 리소스 세터가 주어진 이름의 구조화버퍼를 가지고 있는가를 외부에서 확인하는 함수.
-	bool IsStructuredBuffer(const std::string& _name);
+	bool IsStructuredBuffer(const std::string_view& _name);
 
 
-	void SetConstantBuffer_Link(const std::string& _name, const void* _data, unsigned int _dataSize);	//참조로 연결??
-	void SetConstantBuffer_New(const std::string& _name, const void* _data, unsigned int _dataSize);	//깊은 복사??
+	void SetConstantBuffer_Link(const std::string_view& _name, const void* _data, unsigned int _dataSize);	//참조로 연결??
+	void SetConstantBuffer_New(const std::string_view& _name, const void* _data, unsigned int _dataSize);	//깊은 복사??
 	//외부 데이터를 복사받아야 하는 등의 SetConstantBufferLink()를 사용할 수 없는 예외적인 상황에만 사용할 것.
 
 	GameEngineTexture* SetTexture(const std::string& _textureSetterName, const std::string& _textureName);
@@ -130,7 +130,7 @@ private:
 	//해당 셰이더리소스헬퍼가 가진 모든 상수버퍼, 텍스처, 샘플러를 매 루프마다 갱신하고 정점셰이더나 픽셀셰이더에 연결하는 함수.
 	void AllResourcesSetting();
 
-	//
+	//해당 셰이더리소스헬퍼가 디바이스 컨텍스트에 연결했던 모든 상수버퍼, 텍스처, 샘플러를 널포인터로 대체하는 함수.
 	void AllResourcesReset();
 
 private:

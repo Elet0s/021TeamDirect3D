@@ -9,7 +9,7 @@ struct RenderOption
 {
     float deltaTime_ = 0.f;
     float sumDeltaTime_ = 0.f;      
-    int temp01_ = 0;    
+    int isAnimation_ = 0;    
     int temp02_ = 0;
 };
 
@@ -34,10 +34,10 @@ private:
 
 public:
     //렌더유닛에 렌더링 파이프라인을 지정하는 함수.
-    void SetPipeLine(const std::string& _renderingPipeLineName);
+    void SetMaterial(const std::string_view& _materialName);
 
     //렌더유닛에 메쉬를 지정하는 함수. 
-    void SetMesh(const std::string& _meshName);
+    void SetMesh(const std::string_view& _meshName);
     void SetMesh(GameEngineMesh* _mesh);
 
     //새 부모 렌더러를 지정하고 렌더유닛이 가진 셰이더리소스헬퍼에
@@ -91,9 +91,6 @@ class GameEngineRenderer: public GameEngineTransformComponent
 	friend GameEngineLevel;
 	friend class GameEngineCamera;
 
-    friend GameEngineRenderUnit;
-    //렌더옵션 가져다 써야해서 프렌드.
-
 public:
 
 	GameEngineRenderer();
@@ -121,7 +118,8 @@ public:
         isInstancing_ = true;
     }
 
-
+public:
+    RenderOption renderOptionInst_;
 
 protected:
 	virtual void Start();
@@ -132,7 +130,6 @@ protected:
 
 protected:
     class GameEngineCamera* camera_;    //렌더러가 등록된 카메라.
-    RenderOption renderOption_;
 
 private:
 	CameraOrder cameraOrder_;

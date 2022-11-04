@@ -172,11 +172,11 @@ void GameEngineConstantBuffer::ResourceDestroy()
 	}
 }
 
-GameEngineConstantBuffer* GameEngineConstantBuffer::CreateNamedRes(const std::string& _name, int _byteWidth)
+GameEngineConstantBuffer* GameEngineConstantBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
 {
 	std::string uppercaseCBufferName = GameEngineString::ToUpperReturn(_name);
 
-	GameEngineConstantBuffer* findBuffer = Find(_name, _byteWidth);
+	GameEngineConstantBuffer* findBuffer = Find(uppercaseCBufferName, _byteWidth);
 
 	//같은 이름, 같은 바이트크기의 상수버퍼가 없으면 만들고, 있으면 공유한다.
 	if (nullptr != findBuffer)

@@ -24,7 +24,7 @@ void GameEngineBlur::EffectInit()
 		float4::Zero
 	);
 
-	effectUnit_.SetPipeLine("Blur");
+	effectUnit_.SetMaterial("Blur");
 	effectUnit_.SetMesh("Fullrect");
 	effectUnit_.GetShaderResourceHelper().SetConstantBuffer_New(
 		"WindowScale",

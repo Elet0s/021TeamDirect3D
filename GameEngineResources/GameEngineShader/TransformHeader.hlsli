@@ -38,7 +38,7 @@ cbuffer TransformData : register(b0) //<-register(b0): 렌더링 파이프라인 0번 슬�
     float4x4 worldViewProjectionMatrix_; //월드행렬에 뷰행렬 + 투영행렬까지 적용된 행렬.
 };
 
-struct TransformData
+struct InstTransformData
 {
     float4 localScaleVector_; //로컬 좌표상 크기. 크기가 0인 물체는 존재할 수 없으므로 기본값이 1이 되어야 한다.
     float4 localRotationVector_; //로컬 좌표상 자전(각도).
@@ -67,4 +67,4 @@ struct TransformData
     float4x4 worldViewProjectionMatrix_; //월드행렬에 뷰행렬 + 투영행렬까지 적용된 행렬.
 };
 
-StructuredBuffer<TransformData> allInstancingTransformDataBuffer : register(t12);
+StructuredBuffer<InstTransformData> allInstancingTransformDataBuffer : register(t12);

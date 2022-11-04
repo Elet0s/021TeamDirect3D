@@ -33,6 +33,11 @@ void GameEngineSamplerSetter::Setting() const
 
 void GameEngineStructuredBufferSetter::Setting() const
 {
+	if (true == settingDataBufferToGPU_.empty())
+	{
+		//settingDataBufferToGPU_가 비었다는건 구조화버퍼를 쓰지 않는다는 뜻이므로 세팅하지 않고 넘어간다.
+		return;
+	}
 	structuredBuffer_->ChangeData(&settingDataBufferToGPU_[0], static_cast<UINT>(settingDataBufferToGPU_.size()));
 	settingFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
 }
@@ -155,6 +160,62 @@ GameEngineConstantBufferSetter& GameEngineShader::GetConstantBufferSetter(const 
 	}
 
 	return constantBufferSetterMap_[uppercaseSetterName];
+}
+
+bool GameEngineShader::IsConstantBuffer(const std::string_view& _name)
+{
+	std::string uppercaseCBufferSetterName = GameEngineString::ToUpperReturn(_name);
+
+	if (constantBufferSetterMap_.end() == constantBufferSetterMap_.find(uppercaseCBufferSetterName))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool GameEngineShader::IsTexture(const std::string_view& _name)
+{
+	const std::string uppercaseTextureSetterName = GameEngineString::ToUpperReturn(_name);
+
+	if (textureSetterMap_.end() == textureSetterMap_.find(uppercaseTextureSetterName))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool GameEngineShader::IsSampler(const std::string_view& _name)
+{
+	std::string uppercaseSamplerName = GameEngineString::ToUpperReturn(_name);
+
+	if (samplerSetterMap_.end() == samplerSetterMap_.find(uppercaseSamplerName))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool GameEngineShader::IsStructuredBuffer(const std::string_view& _name)
+{
+	std::string uppercaseSBufferSetterName = GameEngineString::ToUpperReturn(_name);
+
+	if (structuredBufferSetterMap_.end() == structuredBufferSetterMap_.find(uppercaseSBufferSetterName))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 void GameEngineShader::CreateVersion(const std::string& _shaderType, UINT _versionHigh, UINT _versionLow)
@@ -291,7 +352,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 				//부모 셰이더가 어떤 셰이더인지 저장한다.
 
 				newCBufferSetter.constantBuffer_ = GameEngineConstantBuffer::CreateAndFind(
-					uppercaseResourceName,	//만들려는 상수버퍼가 없으면 만들고, 이미 있으면 공유한다.
+					newCBufferSetter.GetNameCopy(),	//만들려는 상수버퍼가 없으면 만들고, 이미 있으면 공유한다.
 					cBufferDesc			//같은 이름, 같은 크기의 상수 버퍼는 셰이더리소스헬퍼들이 포인터를 공유한다.
 							//그래서 이미 만들어져 있는걸 또 만들어도 터뜨리지 않고 대신 이미 만들어져 있는걸 공유한다.
 				);
@@ -336,7 +397,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 				newTextureSetter.bindPoint_ = resInfo.BindPoint;
 				
 				std::pair<std::map<std::string, GameEngineTextureSetter>::iterator, bool> insertResult
-					= textureSetterMap_.insert(std::make_pair(uppercaseResourceName, newTextureSetter));
+					= textureSetterMap_.insert(std::make_pair(newTextureSetter.GetNameCopy(), newTextureSetter));
 				//맵에 겹치는 키값을 가진 원소를 삽입하려고 하면 중복된 키값을 가진 원소를 가리키는 
 				//이터레이터와 false가 든 페어를 반환하고 삽입 시도는 무시된다.
 				//삽입이 성공했다면 삽입한 원소를 가리키는 이터레이터와 true를 가진 페어를 반환한다.
@@ -375,7 +436,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 				newSamplerSetter.bindPoint_ = resInfo.BindPoint;
 
 				std::pair<std::map<std::string, GameEngineSamplerSetter>::iterator, bool> insertResult
-					= samplerSetterMap_.insert(std::make_pair(uppercaseResourceName, newSamplerSetter));
+					= samplerSetterMap_.insert(std::make_pair(newSamplerSetter.GetNameCopy(), newSamplerSetter));
 				//맵에 겹치는 키값을 가진 원소를 삽입하려고 하면 중복된 키값을 가진 원소를 가리키는 
 				//이터레이터와 false가 든 페어를 반환하고 삽입 시도는 무시된다.
 				//삽입이 성공했다면 삽입한 원소를 가리키는 이터레이터와 true를 가진 페어를 반환한다.
@@ -414,7 +475,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 
 				std::pair<std::map<std::string, GameEngineStructuredBufferSetter>::iterator, bool> insertResult 
 					= structuredBufferSetterMap_.insert(
-						std::make_pair(uppercaseResourceName, newSBufferSetter)
+						std::make_pair(newSBufferSetter.GetNameCopy(), newSBufferSetter)
 				);
 
 				if (false == insertResult.second)

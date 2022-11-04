@@ -65,7 +65,7 @@ public:
 	}
 
 private:
-	static GameEngineConstantBuffer* CreateNamedRes(const std::string& _name, int _byteWidth);
+	static GameEngineConstantBuffer* CreateNamedRes(const std::string_view& _name, int _byteWidth);
 	void CreateConstantBuffer(const D3D11_SHADER_BUFFER_DESC& _desc);
 
 private:

@@ -176,9 +176,19 @@ public:
 	//지정한 경로의 HLSL코드를 해석하고 그 내용대로 셰이더와 셰이더리소스를 만드는 함수.
 	static void AutoCompile(const std::string& _path);
 
-public:
 	GameEngineConstantBufferSetter& GetConstantBufferSetter(const std::string& _name);
 
+	//이 셰이더 리소스 세터가 주어진 이름의 상수버퍼를 가지고 있는가를 외부에서 확인하는 함수.
+	bool IsConstantBuffer(const std::string_view& _name);
+
+	//이 셰이더 리소스 세터가 주어진 이름의 텍스처를 가지고 있는가를 외부에서 확인하는 함수.
+	bool IsTexture(const std::string_view& _name);
+
+	//이 셰이더 리소스 세터가 주어진 이름의 샘플러를 가지고 있는가를 외부에서 확인하는 함수.
+	bool IsSampler(const std::string_view& _name);
+
+	//이 셰이더 리소스 세터가 주어진 이름의 구조화버퍼를 가지고 있는가를 외부에서 확인하는 함수.
+	bool IsStructuredBuffer(const std::string_view& _name);
 
 protected:
 	//읽어들인 HLSL코드를 컴파일하는데 필요한 HLSL 버전을 생성하는 함수.

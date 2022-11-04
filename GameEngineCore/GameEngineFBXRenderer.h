@@ -6,7 +6,7 @@ class GameEngineFBXRenderer: public GameEngineRenderer
 	//이 클래스의 존재 이유:
 public:
 	GameEngineFBXRenderer();
-	~GameEngineFBXRenderer();
+	virtual ~GameEngineFBXRenderer() = 0;
 
 protected:
 	GameEngineFBXRenderer(const GameEngineFBXRenderer& _other) = delete;
@@ -18,8 +18,8 @@ private:
 
 
 public:	
-	void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName);
-	void SetFBXMesh(
+	virtual void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName);
+	virtual void SetFBXMesh(
 		const std::string& _fbxMeshName, const std::string& _materialName,
 		size_t _meshIndex,
 		size_t _subsetIndex = 0
@@ -32,11 +32,10 @@ public:
 		return Unit;
 	}
 
-	void CreateAnimation(
-		const std::string& _AnimationName,
-		const std::string& _MeshFBX,
-		const std::string& _AnimationFBX
-	);
+	inline class GameEngineFBXMesh* GetFBXMesh()
+	{
+		return FBXMesh;
+	}
 
 private:
 	class GameEngineFBXMesh* FBXMesh;

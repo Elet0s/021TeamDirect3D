@@ -37,10 +37,8 @@ protected:
 	GameEngineRes& operator=(GameEngineRes&& _other) = delete;
 
 public:
-	static ResType* Find(const std::string& _resName)
+	static ResType* Find(const std::string_view& _resName)
 	{
-		std::string uppercaseResName = GameEngineString::ToUpperReturn(_resName);
-
 		typename std::map<std::string, ResType*>::iterator findIter;
 		{
 			std::lock_guard<std::mutex> lockInst(namedResLock_);
@@ -49,7 +47,7 @@ public:
 			//스코프가 닫히고 소멸될 때 소멸자에서 std::mutex의 unlock() 함수를 호출해서 메모리에 걸린 접근제한을 해제하게 한다.
 			//그래서 한번 생성만 해 두면 자동으로 잠금과 해제를 해 준다.
 
-			findIter = namedRes_.find(uppercaseResName);
+			findIter = namedRes_.find(GameEngineString::ToUpperReturn(_resName));
 			if (namedRes_.end() == findIter)
 			{
 				return  nullptr;
@@ -99,13 +97,13 @@ public:
 		path_ = _path;
 	}
 
-	const std::string& GetPath()
+	const std::string& GetPath() const
 	{
 		return path_;
 	}
 
 protected:
-	static ResType* CreateNamedRes(const std::string& _resName = "")
+	static ResType* CreateNamedRes(const std::string_view& _resName = "")
 	{
 		ResType* newRes = CreateRes(_resName);
 
@@ -137,12 +135,10 @@ protected:
 		return newRes;
 	}
 
-	static ResType* CreateRes(const std::string& _resName = "")
+	static ResType* CreateRes(const std::string_view& _resName = "")
 	{
-		std::string uppercaseResName = GameEngineString::ToUpperReturn(_resName);
-
 		ResType* newRes = new ResType();
-		newRes->SetName(uppercaseResName);
+		newRes->SetName(GameEngineString::ToUpperReturn(_resName));
 
 		return newRes;
 	}

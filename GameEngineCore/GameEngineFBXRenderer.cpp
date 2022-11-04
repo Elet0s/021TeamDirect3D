@@ -57,7 +57,7 @@ void GameEngineFBXRenderer::SetFBXMesh(
 	}
 
 	GameEngineRenderUnit& RenderUnit = Unit[_meshIndex][_subsetIndex];
-	RenderUnit.SetPipeLine(_materialName);
+	RenderUnit.SetMaterial(_materialName);
 
 	GameEngineMesh* FbxMesh = FBXMesh->GetGameEngineMesh(_meshIndex, _subsetIndex);
 	RenderUnit.SetMesh(FbxMesh);
@@ -86,12 +86,4 @@ void GameEngineFBXRenderer::Render(float _deltaTime)
 			Unit[UnitIndex][SubSetIndex].Render(_deltaTime);
 		}
 	}
-}
-
-void GameEngineFBXRenderer::CreateAnimation(
-	const std::string& _AnimationName,
-	const std::string& _MeshFBX,
-	const std::string& _AnimationFBX
-)
-{
 }
