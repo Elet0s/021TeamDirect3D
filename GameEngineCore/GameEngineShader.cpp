@@ -82,7 +82,7 @@ GameEngineShader::~GameEngineShader()
 	}
 }
 
-void GameEngineShader::AutoCompile(const std::string& _path)
+void GameEngineShader::AutoCompile(const std::string_view& _path)
 {
 	GameEngineFile file = GameEngineFile(_path);
 	file.Open(OpenMode::Read, FileMode::Text);
@@ -218,16 +218,17 @@ bool GameEngineShader::IsStructuredBuffer(const std::string_view& _name)
 	}
 }
 
-void GameEngineShader::CreateVersion(const std::string& _shaderType, UINT _versionHigh, UINT _versionLow)
+void GameEngineShader::CreateVersion(const std::string_view& _shaderType, UINT _versionHigh, UINT _versionLow)
 {
 	shaderVersion_ = "";
-	shaderVersion_ += _shaderType + "_";
+	shaderVersion_ += _shaderType;
+	shaderVersion_ += "_";
 	shaderVersion_ += std::to_string(_versionHigh);
 	shaderVersion_ += "_";
 	shaderVersion_ += std::to_string(_versionLow);
 }
 
-void GameEngineShader::CompileHLSLCode(const std::string& _path)
+void GameEngineShader::CompileHLSLCode(const std::string_view& _path)
 {
 	unsigned int compileFlag = 0;
 #ifdef _DEBUG
@@ -238,7 +239,7 @@ void GameEngineShader::CompileHLSLCode(const std::string& _path)
 	ID3DBlob* errorMessage = { 0 };		//컴파일 실패시 에러코드를 받는 변수.
 
 	//와이드스트링 경로.
-	std::wstring unicodePath = GameEngineString::AnsiToUnicodeReturn(_path);	
+	std::wstring unicodePath = GameEngineString::AnsiToUnicodeReturn(_path);
 
 
 	if (S_OK != D3DCompileFromFile( //hlsl 컴파일 함수.
@@ -352,7 +353,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 				//부모 셰이더가 어떤 셰이더인지 저장한다.
 
 				newCBufferSetter.constantBuffer_ = GameEngineConstantBuffer::CreateAndFind(
-					newCBufferSetter.GetNameCopy(),	//만들려는 상수버퍼가 없으면 만들고, 이미 있으면 공유한다.
+					newCBufferSetter.GetName(),	//만들려는 상수버퍼가 없으면 만들고, 이미 있으면 공유한다.
 					cBufferDesc			//같은 이름, 같은 크기의 상수 버퍼는 셰이더리소스헬퍼들이 포인터를 공유한다.
 							//그래서 이미 만들어져 있는걸 또 만들어도 터뜨리지 않고 대신 이미 만들어져 있는걸 공유한다.
 				);
@@ -360,7 +361,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 				newCBufferSetter.bindPoint_ = resInfo.BindPoint;
 
 				std::pair<std::map<std::string, GameEngineConstantBufferSetter>::iterator, bool> insertResult = 
-					constantBufferSetterMap_.insert(std::make_pair(uppercaseResourceName, newCBufferSetter));
+					constantBufferSetterMap_.insert(std::make_pair(newCBufferSetter.GetName(), newCBufferSetter));
 				//맵에 겹치는 키값을 가진 원소를 삽입하려고 하면 중복된 키값을 가진 원소를 가리키는 
 				//이터레이터와 false가 든 페어를 반환하고 삽입 시도는 무시된다.
 				//삽입이 성공했다면 삽입한 원소를 가리키는 이터레이터와 true를 가진 페어를 반환한다.

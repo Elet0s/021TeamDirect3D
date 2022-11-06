@@ -34,12 +34,12 @@ private:
 
 public:	
 	static GameEngineConstantBuffer* Create(
-		const std::string& _name,	//상수버퍼는 이름이 반드시 있어야 한다. 그래서 다른 리소스 생성함수와는 다르게 이름 기본값이 없다.
+		const std::string_view& _name,	//상수버퍼는 이름이 반드시 있어야 한다. 그래서 다른 리소스 생성함수와는 다르게 이름 기본값이 없다.
 		const D3D11_SHADER_BUFFER_DESC& _desc
 	);
-	static GameEngineConstantBuffer* Find(const std::string& _name, int _byteWidth);
+	static GameEngineConstantBuffer* Find(const std::string_view& _name, int _byteWidth);
 	static GameEngineConstantBuffer* CreateAndFind(
-		const std::string& _name,
+		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc
 	);
 

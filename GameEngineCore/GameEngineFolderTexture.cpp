@@ -22,19 +22,19 @@ GameEngineFolderTexture::~GameEngineFolderTexture()
 	//해제도 직접 해줘야 한다.
 }
 
-GameEngineFolderTexture* GameEngineFolderTexture::Load(const std::string& _path)
+GameEngineFolderTexture* GameEngineFolderTexture::Load(const std::string_view& _path)
 {
 	return Load(_path, GameEnginePath::GetFileName(_path));
 }
 
-GameEngineFolderTexture* GameEngineFolderTexture::Load(const std::string& _path, const std::string _name)
+GameEngineFolderTexture* GameEngineFolderTexture::Load(const std::string_view& _path, const std::string_view& _name)
 {
 	GameEngineFolderTexture* newFolderTexture = CreateNamedRes(_name);
 	newFolderTexture->LoadFolder(_path);
 	return newFolderTexture;
 }
 
-void GameEngineFolderTexture::LoadFolder(const std::string& _path)
+void GameEngineFolderTexture::LoadFolder(const std::string_view& _path)
 {
 	GameEngineDirectory folderTextureDir = _path;
 	std::vector<GameEngineFile> allFolderFiles = folderTextureDir.GetAllFiles();

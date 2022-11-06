@@ -41,7 +41,7 @@ private:
 
 
 public:	
-	void SetText(const std::string& _text, const std::string& _font = "µ¸¿ò");
+	void SetText(const std::string_view& _text, const std::string_view& _font = "µ¸¿ò");
 
 public:
 	const std::string& GetText()

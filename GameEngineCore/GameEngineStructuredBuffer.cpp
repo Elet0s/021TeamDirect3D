@@ -32,7 +32,7 @@ GameEngineStructuredBuffer::~GameEngineStructuredBuffer()
 }
 
 GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateStructuredBuffer(
-	const std::string& _name,
+	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
 	int _dataCount
 )
@@ -42,11 +42,10 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateStructuredBuffer(
 	return newRes;
 }
 
-GameEngineStructuredBuffer* GameEngineStructuredBuffer::Find(const std::string& _name, int _byteWidth)
+GameEngineStructuredBuffer* GameEngineStructuredBuffer::Find(const std::string_view& _name, int _byteWidth)
 {
-	std::string uppercaseSBufferName = GameEngineString::ToUpperReturn(_name);
 	std::map<std::string, std::map<int, GameEngineStructuredBuffer*>>::iterator nameFindIter
-		= allStructuredBuffers_.find(uppercaseSBufferName);
+		= allStructuredBuffers_.find(GameEngineString::ToUpperReturn(_name));
 
 	if (allStructuredBuffers_.end() == nameFindIter)
 	{
@@ -64,7 +63,7 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::Find(const std::string& 
 }
 
 GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateAndFind(
-	const std::string& _name,
+	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
 	int _dataCount
 )
@@ -181,7 +180,7 @@ void GameEngineStructuredBuffer::PSReset(int _bindPoint)
 
 void GameEngineStructuredBuffer::ResourceDestroy()
 {
-	for (std::pair<std::string, std::map<int, GameEngineStructuredBuffer*>> nameSortedBuffer: allStructuredBuffers_)
+	for (std::pair<std::string, std::map<int, GameEngineStructuredBuffer*>> nameSortedBuffer : allStructuredBuffers_)
 	{
 		for (std::pair<int, GameEngineStructuredBuffer*> sizeSortedBuffer : nameSortedBuffer.second)
 		{
@@ -191,10 +190,8 @@ void GameEngineStructuredBuffer::ResourceDestroy()
 	}
 }
 
-GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateNamedRes(const std::string& _name, int _byteWidth)
+GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
 {
-	std::string uppercaseBufferName = GameEngineString::ToUpperReturn(_name);
-
 	GameEngineStructuredBuffer* findBuffer = Find(_name, _byteWidth);
 
 	if (nullptr != findBuffer)
@@ -205,7 +202,8 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateNamedRes(const std
 	{
 		GameEngineStructuredBuffer* newBuffer = CreateRes(_name);
 		//GameEngineRes의 namedRes_에 등록시키지 않기 위해 CreateRes()함수를 직접 호출해서 생성한다.
-		allStructuredBuffers_[uppercaseBufferName][_byteWidth] = newBuffer;
+
+		allStructuredBuffers_[newBuffer->GetNameCopy()][_byteWidth] = newBuffer;
 
 		return newBuffer;
 	}

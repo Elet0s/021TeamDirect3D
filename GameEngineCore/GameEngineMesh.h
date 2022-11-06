@@ -3,7 +3,7 @@
 
 class GameEngineVertexBuffer;
 class GameEngineIndexBuffer;
-class GameEngineMesh: public GameEngineRes<GameEngineMesh>
+class GameEngineMesh : public GameEngineRes<GameEngineMesh>
 {
 	//메쉬를 구성하는 두가지 요소인 버텍스버퍼와 인덱스버퍼를 묶어서 관리하는 클래스.
 
@@ -23,15 +23,15 @@ private:
 	GameEngineMesh& operator=(const GameEngineMesh&& _other) = delete;
 
 
-public:	
+public:
 	//메쉬와 동일한 이름을 가진 버텍스버퍼와 인덱스버퍼로 메쉬 생성,
-	static GameEngineMesh* Create(const std::string& _meshName);
+	static GameEngineMesh* Create(const std::string_view& _meshName);
 
 	//메쉬 이름, 버텍스버퍼 이름, 인덱스버퍼 이름을 각각 지정해서 메쉬 생성.
 	static GameEngineMesh* Create(
-		const std::string& _meshName,
-		const std::string& _vertexBufferName,
-		const std::string& _indexBufferName
+		const std::string_view& _meshName,
+		const std::string_view& _vertexBufferName,
+		const std::string_view& _indexBufferName
 	);
 
 	static GameEngineMesh* Create(
@@ -40,12 +40,12 @@ public:
 	);
 
 	//이 메쉬에 버텍스버퍼를 세팅하는 함수.
-	void SetVertexBuffer_InputAssembler1(const std::string& _vertexBufferName);
+	void SetVertexBuffer_InputAssembler1(const std::string_view& _vertexBufferName);
 
 	void SetVertexBuffer_InputAssembler1(GameEngineVertexBuffer* _vertexBuffer);
 
 	//이 메쉬에 인덱스버퍼를 세팅하는 함수.
-	void SetIndexBuffer_InputAssembler2(const std::string& _indexBufferName);
+	void SetIndexBuffer_InputAssembler2(const std::string_view& _indexBufferName);
 
 	void SetIndexBuffer_InputAssembler2(GameEngineIndexBuffer* _indexBuffer);
 
@@ -59,6 +59,8 @@ private:
 	void InputAssembler1_VertexBufferSetting();
 
 	void InputAssembler2_IndexBufferSetting();
+
+
 
 private:
 	GameEngineVertexBuffer* vertexBuffer_;

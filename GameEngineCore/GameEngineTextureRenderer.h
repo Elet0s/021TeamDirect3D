@@ -79,7 +79,7 @@ public:
 		}
 	}	
 	
-	FrameAnimation_Desc(const std::string _textureName, const std::vector<UINT>& _frames, float _interval, bool _isLoop = true)
+	FrameAnimation_Desc(const std::string& _textureName, const std::vector<UINT>& _frames, float _interval, bool _isLoop = true)
 		: textureName_(_textureName),
 		isLoop_(_isLoop),
 		interval_(_interval),
@@ -166,10 +166,10 @@ private:
 
 
 public:	
-	void SetTexture(const std::string& _textureName);	//폴더텍스처용.
+	void SetTexture(const std::string_view& _textureName);	//폴더텍스처용.
 	void SetTexture(GameEngineTexture* _texture);		//폴더텍스처용.
-	void SetFolderTextureToIndex(const std::string& _textureName, UINT _index);
-	void SetTexture(const std::string& _textureName, int _index);	//아틀라스텍스처용.
+	void SetFolderTextureToIndex(const std::string_view& _textureName, UINT _index);
+	void SetTexture(const std::string_view& _textureName, int _index);	//아틀라스텍스처용.
 	void SetTexture(GameEngineTexture* _texture, int _index);		//아틀라스텍스처용.
 
 	void SetFrame(int _index);	//애니메이션의 특정 프레임 지정.
@@ -178,23 +178,23 @@ public:
 	void SetPivot(PivotMode _pivot);
 	void SetPivotToVector(const float4& _localPos);
 
-	void SetSamplingMode_Point();	
+	void SetSamplingMode_Point();
 	//필터가 D3D11_FILTER_MIN_MAG_MIP_POINT로 세팅된 샘플러 사용.
 
-	void SetSamplingMode_Linear();	
+	void SetSamplingMode_Linear();
 	//필터가 D3D11_FILTER_MIN_MAG_MIP_LINEAR로 세팅된 샘플러 사용.
 
 
-	void CreateFrameAnimation_CutTexture(const std::string& _animationName, const FrameAnimation_Desc& _desc);
-	void CreateFrameAnimation_FolderTexture(const std::string& _animationName, const FrameAnimation_Desc& _desc);
-	
-	void ChangeFrameAnimation(const std::string& _animationName, bool _isForcedChange = false);
+	void CreateFrameAnimation_CutTexture(const std::string_view& _animationName, const FrameAnimation_Desc& _desc);
+	void CreateFrameAnimation_FolderTexture(const std::string_view& _animationName, const FrameAnimation_Desc& _desc);
+
+	void ChangeFrameAnimation(const std::string_view& _animationName, bool _isForcedChange = false);
 
 	void ScaleToTexture();	//텍스처 크기에 메쉬 스케일을 자동으로 맞춰주는 함수.
 
 	void ScaleToCutTexture(int _index);		//잘린 텍스처 크기에 메쉬 스케일을 자동으로 맞춰주는 함수.
 
-	void CurAnimationReset();	
+	void CurAnimationReset();
 	void CurAnimationSetStartPivotFrame(int _setFrame);	//애니메이션 중 내가 원하는 프레임으로 옮기는 함수.
 
 	void CurAnimationPauseSwitch();
@@ -207,44 +207,44 @@ public:
 public:
 
 	void AnimationBindStart(
-		const std::string& _animationName,
+		const std::string_view& _animationName,
 		std::function<void(const FrameAnimation_Desc&)> _function)
 	{
 		std::string uppercaseAnimationName = GameEngineString::ToUpperReturn(_animationName);
 
 		if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 		{
-			MsgBoxAssertString(_animationName + ": 그런 이름의 애니메이션이 없습니다.");
+			MsgBoxAssertString(std::string(_animationName) + ": 그런 이름의 애니메이션이 없습니다.");
 			return;
 		}
 
 		allAnimations_[uppercaseAnimationName].start_ = _function;
-	}	
-	
+	}
+
 	void AnimationBindFrame(
-		const std::string& _animationName,
+		const std::string_view& _animationName,
 		std::function<void(const FrameAnimation_Desc&)> _function)
 	{
 		std::string uppercaseAnimationName = GameEngineString::ToUpperReturn(_animationName);
 
 		if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 		{
-			MsgBoxAssertString(_animationName + ": 그런 이름의 애니메이션이 없습니다.");
+			MsgBoxAssertString(std::string(_animationName) + ": 그런 이름의 애니메이션이 없습니다.");
 			return;
 		}
 
 		allAnimations_[uppercaseAnimationName].frame_ = _function;
-	}	
-	
+	}
+
 	void AnimationBindTime(
-		const std::string& _animationName,
+		const std::string_view& _animationName,
 		std::function<void(const FrameAnimation_Desc&, float)> _function)
 	{
 		std::string uppercaseAnimationName = GameEngineString::ToUpperReturn(_animationName);
 
 		if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 		{
-			MsgBoxAssertString(_animationName + ": 그런 이름의 애니메이션이 없습니다.");
+			MsgBoxAssertString(std::string(_animationName) + ": 그런 이름의 애니메이션이 없습니다.");
 			return;
 		}
 
@@ -252,14 +252,14 @@ public:
 	}
 
 	void AnimationBindEnd(
-		const std::string& _animationName,
+		const std::string_view& _animationName,
 		std::function<void(const FrameAnimation_Desc&)> _function)
 	{
 		std::string uppercaseAnimationName = GameEngineString::ToUpperReturn(_animationName);
 
 		if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 		{
-			MsgBoxAssertString(_animationName + ": 그런 이름의 애니메이션이 없습니다.");
+			MsgBoxAssertString(std::string(_animationName) + ": 그런 이름의 애니메이션이 없습니다.");
 			return;
 		}
 

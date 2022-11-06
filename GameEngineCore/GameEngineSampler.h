@@ -24,7 +24,7 @@ private:
 
 
 public:	
-	static GameEngineSampler* Create(const std::string& _name, const D3D11_SAMPLER_DESC& _desc);
+	static GameEngineSampler* Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc);
 
 	void VSSetting(int _bindPoint);	
 	void PSSetting(int _bindPoint);	

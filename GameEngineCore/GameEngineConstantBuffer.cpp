@@ -21,7 +21,7 @@ GameEngineConstantBuffer::~GameEngineConstantBuffer()
 }
 
 GameEngineConstantBuffer* GameEngineConstantBuffer::Create(
-	const std::string& _name,
+	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc
 )
 {
@@ -32,12 +32,10 @@ GameEngineConstantBuffer* GameEngineConstantBuffer::Create(
 	return newBuffer;
 }
 
-GameEngineConstantBuffer* GameEngineConstantBuffer::Find(const std::string& _name, int _byteWidth)
+GameEngineConstantBuffer* GameEngineConstantBuffer::Find(const std::string_view& _name, int _byteWidth)
 {
-	std::string uppercaseCBufferName = GameEngineString::ToUpperReturn(_name);
-
 	std::map<std::string, std::map<int, GameEngineConstantBuffer*>>::iterator namedIter =
-		allConstantBuffers_.find(uppercaseCBufferName);
+		allConstantBuffers_.find(GameEngineString::ToUpperReturn(_name));
 
 	if (allConstantBuffers_.end() == namedIter)
 	{
@@ -55,7 +53,7 @@ GameEngineConstantBuffer* GameEngineConstantBuffer::Find(const std::string& _nam
 }
 
 GameEngineConstantBuffer* GameEngineConstantBuffer::CreateAndFind(
-	const std::string& _name,
+	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc
 )
 {
@@ -174,9 +172,7 @@ void GameEngineConstantBuffer::ResourceDestroy()
 
 GameEngineConstantBuffer* GameEngineConstantBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
 {
-	std::string uppercaseCBufferName = GameEngineString::ToUpperReturn(_name);
-
-	GameEngineConstantBuffer* findBuffer = Find(uppercaseCBufferName, _byteWidth);
+	GameEngineConstantBuffer* findBuffer = Find(_name, _byteWidth);
 
 	//같은 이름, 같은 바이트크기의 상수버퍼가 없으면 만들고, 있으면 공유한다.
 	if (nullptr != findBuffer)
@@ -186,9 +182,9 @@ GameEngineConstantBuffer* GameEngineConstantBuffer::CreateNamedRes(const std::st
 	}
 	else
 	{
-		GameEngineConstantBuffer* newCBuffer = CreateRes(uppercaseCBufferName);
+		GameEngineConstantBuffer* newCBuffer = CreateRes(_name);
 		//GameEngineRes의 namedRes_에 등록시키지 않기 위해 CreateRes()함수를 직접 호출해서 생성한다.
-		allConstantBuffers_[uppercaseCBufferName][_byteWidth] = newCBuffer;
+		allConstantBuffers_[newCBuffer->GetNameCopy()][_byteWidth] = newCBuffer;
 
 		return newCBuffer;
 	}

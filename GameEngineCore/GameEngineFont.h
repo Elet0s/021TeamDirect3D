@@ -27,17 +27,17 @@ private:
 
 
 public:
-	static GameEngineFont* Load(const std::string& _path, const std::string& _name);
+	static GameEngineFont* Load(const std::string_view& _path, const std::string_view& _name);
 	void FontDraw(
-		const std::string& _text,
+		const std::string_view& _text,
 		float _fontSize,
 		const float4& _screenPos,
 		const float4& _color,
 		UINT _flag = FW1_LEFT
 	);
 
-public:	
-	static GameEngineFont* Load(const std::string& _path)
+public:
+	static GameEngineFont* Load(const std::string_view& _path)
 	{
 		return Load(_path, GameEnginePath::GetFileName(_path));
 	}
@@ -45,7 +45,7 @@ public:
 
 
 private:
-	void LoadFont(const std::string& _path);
+	void LoadFont(const std::string_view& _path);
 
 private:
 	IFW1FontWrapper* fontWrapper_;

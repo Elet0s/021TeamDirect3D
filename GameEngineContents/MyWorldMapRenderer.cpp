@@ -151,7 +151,7 @@ void MyWorldMapRenderer::Start()
 
 	this->GetActor()->GetLevel()->PushRenderer(this, CameraOrder::MainCamera);
 
-	this->SetPipeLine("TextureAtlas");
+	this->SetMaterial("TextureAtlas");
 
 	atlasdatainst_.frameData_.posX = 0.f;
 	atlasdatainst_.frameData_.posY = 0.f;

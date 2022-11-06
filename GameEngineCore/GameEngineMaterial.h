@@ -35,21 +35,20 @@ private:
 
 
 public:	
-	
-	static GameEngineMaterial* Create(const std::string& _renderingPipeLineName);
+	static GameEngineMaterial* Create(const std::string_view& _materialName);
 	static GameEngineMaterial* Create();
 	static void AllShaderReset();
 
 public:
 	//세팅 준비 함수들.
 
-	void SetVertexShader(const std::string& _name);	
-	void SetVertexShader(GameEngineVertexShader* _vertexShader);	
+	void SetVertexShader(const std::string_view& _name);
+	void SetVertexShader(GameEngineVertexShader* _vertexShader);
 
-	void SetRasterizer(const std::string& _name);
-	void SetPixelShader(const std::string& _name);
-	void SetBlend_OutputMerger(const std::string& _name);
-	void SetDepthStencil_OutputMerger(const std::string& _name);
+	void SetRasterizer(const std::string_view& _name);
+	void SetPixelShader(const std::string_view& _name);
+	void SetBlend_OutputMerger(const std::string_view& _name);
+	void SetDepthStencil_OutputMerger(const std::string_view& _name);
 
 	void RenderInstancing(int _renderingCount, class GameEngineInstancingBuffer* _instancingBuffer);
 	void Copy(GameEngineMaterial* _original);

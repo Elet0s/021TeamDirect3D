@@ -31,7 +31,7 @@ private:
 
 public:
 	static GameEngineIndexBuffer* Create(
-		const std::string& _name,
+		const std::string_view& _name,
 		const void* _data,
 		UINT _indexSize,
 		UINT _indexCount
@@ -48,7 +48,7 @@ public:
 public:
 	template<typename IndexType>
 	static GameEngineIndexBuffer* Create(
-		const std::string& _name,
+		const std::string_view& _name,
 		const std::vector<IndexType>& _indexes
 	)
 	{

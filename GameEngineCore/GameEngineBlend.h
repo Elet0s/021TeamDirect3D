@@ -25,7 +25,7 @@ private:
 
 public:	
 	static GameEngineBlend* Create(
-		const std::string& _name,
+		const std::string_view& _name,
 		const D3D11_BLEND_DESC& _desc
 	);
 	void Setting();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.

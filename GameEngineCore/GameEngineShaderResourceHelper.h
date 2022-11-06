@@ -55,57 +55,32 @@ public:
 	void SetConstantBuffer_New(const std::string_view& _name, const void* _data, unsigned int _dataSize);	//깊은 복사??
 	//외부 데이터를 복사받아야 하는 등의 SetConstantBufferLink()를 사용할 수 없는 예외적인 상황에만 사용할 것.
 
-	GameEngineTexture* SetTexture(const std::string& _textureSetterName, const std::string& _textureName);
-	GameEngineTexture* SetTexture(const std::string& _textureSetterName, GameEngineTexture* _texture);
-	GameEngineTexture* SetTexture(const std::string& _textureSetterName, const std::string& _folderTextureName, int _index);
-	
-	GameEngineSampler* SetSampler(const std::string& _samplerSetterName, GameEngineSampler* _sampler);
-	GameEngineSampler* SetSampler(const std::string& _samplerSetterName, const std::string& _samplerName);
+	GameEngineTexture* SetTexture(const std::string_view& _textureSetterName, const std::string_view& _textureName);
+	GameEngineTexture* SetTexture(const std::string_view& _textureSetterName, GameEngineTexture* _texture);
+	GameEngineTexture* SetTexture(const std::string_view& _textureSetterName, const std::string_view& _folderTextureName, int _index);
+
+	GameEngineSampler* SetSampler(const std::string_view& _samplerSetterName, GameEngineSampler* _sampler);
+	GameEngineSampler* SetSampler(const std::string_view& _samplerSetterName, const std::string_view& _samplerName);
 
 	// 인스턴싱을 하려고 하는데 그 쉐이더에서 상수버퍼를 사용했을때.
 	void AllConstantBufferNew();
 
 
-	GameEngineStructuredBufferSetter* GetStructuredBufferSetter(const std::string& _name);
+	GameEngineStructuredBufferSetter* GetStructuredBufferSetter(const std::string_view& _sBufferName);
 
 
 public:
 	template<typename Resource>
-	void SetConstantBuffer_Link(const std::string& _name, const Resource& _data)
+	void SetConstantBuffer_Link(const std::string_view& _name, const Resource& _data)
 	{
 		SetConstantBuffer_Link(_name, &_data, static_cast<UINT>(sizeof(Resource)));
 	}
 
 	template<typename Resource>
-	void SetConstantBuffer_New(const std::string& _name, const Resource& _data)
+	void SetConstantBuffer_New(const std::string_view& _name, const Resource& _data)
 	{
 		SetConstantBuffer_New(_name, &_data, static_cast<UINT>(sizeof(Resource)));
 	}
-
-	//template<typename Resource>
-	//Resource* GetConstantBufferNewData(const std::string& _cBufferName)
-	//{
-	//	std::string uppercaseCBufferName = GameEngineString::ToUpperReturn(_cBufferName);
-
-	//	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator findIter
-	//		= constantBufferSetterMap_.find(uppercaseCBufferName);
-
-	//	if (constantBufferSetterMap_.end() == findIter)
-	//	{
-	//		return nullptr;
-	//	}
-
-	//	int resourceSize = sizeof(Resource);
-
-	//	if (resourceSize != findIter->second.constantBuffer_->GetBufferDesc().ByteWidth)
-	//	{
-	//		MsgBoxAssert("찾는 상수버퍼의 이름과 크기가 맞지 않습니다.");
-	//		return nullptr;
-	//	}
-
-	//	Resource* data = reinterpret_cast<Resource*>(&findIter->second.originalData_[0]);
-	//	return data;
-	//}
 
 
 protected:

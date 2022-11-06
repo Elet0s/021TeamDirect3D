@@ -23,7 +23,7 @@ GameEngineVertexBuffer::~GameEngineVertexBuffer()
 }
 
 GameEngineVertexBuffer* GameEngineVertexBuffer::Create(
-	const std::string& _name,
+	const std::string_view& _name,
 	const void* _data,
 	UINT _vertexSize,
 	UINT _vertexCount,

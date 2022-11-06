@@ -66,7 +66,7 @@ private:
 
 public:
 	//스레드풀 초기화 함수. _threadCount가 기본값인 0이라면 IOCP 객체가 자동으로 적절한 스레드 개수를 정한다.
-	void Initialize(const std::string& _threadName, int _threadCount = 0);
+	void Initialize(const std::string_view& _threadName, int _threadCount = 0);
 	//코어 수 * 2가 멀티스레딩에 적절한 스레드 개수라고 한다. 
 
 	//Work라는 단어와는 다르게 이 함수를 호출하는 메인스레드가 직접 뭔가를 작업하는 것이 아니라, IO완료큐에 작업을 등록시키는 함수.

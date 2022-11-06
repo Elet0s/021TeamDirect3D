@@ -175,15 +175,13 @@ void GameEngineShaderResourceHelper::SetConstantBuffer_New(
 }
 
 GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
-	const std::string& _textureSetterName,
-	const std::string& _textureName
+	const std::string_view& _textureSetterName,
+	const std::string_view& _textureName
 )
 {
-	std::string uppercaseTextureSetterName = GameEngineString::ToUpperReturn(_textureSetterName);
-
-	if (false == IsTexture(uppercaseTextureSetterName))
+	if (false == IsTexture(_textureSetterName))
 	{
-		MsgBoxAssertString(_textureSetterName + ": 그런 이름의 텍스쳐 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_textureSetterName) + ": 그런 이름의 텍스쳐 세터가 존재하지 않습니다.");
 		return nullptr;
 	}
 
@@ -191,15 +189,15 @@ GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
 }
 
 GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
-	const std::string& _textureSetterName,
+	const std::string_view& _textureSetterName,
 	GameEngineTexture* _texture
 )
 {
 	std::string uppercaseTextureSetterName = GameEngineString::ToUpperReturn(_textureSetterName);
 
-	if (false == this->IsTexture(uppercaseTextureSetterName))
+	if (false == this->IsTexture(_textureSetterName))
 	{
-		MsgBoxAssertString(_textureSetterName + ":그런 이름의 텍스쳐 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_textureSetterName) + ":그런 이름의 텍스쳐 세터가 존재하지 않습니다.");
 		return nullptr;
 	}
 
@@ -209,8 +207,8 @@ GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
 	std::multimap<std::string, GameEngineTextureSetter>::iterator nameUpperBound
 		= textureSetterMap_.upper_bound(uppercaseTextureSetterName);
 
-	for(std::multimap<std::string, GameEngineTextureSetter>::iterator iter = nameLowerBound;
-		iter != nameUpperBound ; ++iter)
+	for (std::multimap<std::string, GameEngineTextureSetter>::iterator iter = nameLowerBound;
+		iter != nameUpperBound; ++iter)
 	{
 		BindTexture(iter->second, _texture);
 	}
@@ -219,33 +217,32 @@ GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
 }
 
 GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
-	const std::string& _textureSetterName, const std::string& _folderTextureName, int _index)
+	const std::string_view& _textureSetterName, const std::string_view& _folderTextureName, int _index)
 {
 	if (false == IsTexture(_textureSetterName))
 	{
-		MsgBoxAssertString(_textureSetterName + ": 그런 이름의 텍스터 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_textureSetterName) + ": 그런 이름의 텍스터 세터가 존재하지 않습니다.");
 		return nullptr;
 	}
 
-	std::string uppercaseFolderTextureName = GameEngineString::ToUpperReturn(_folderTextureName);
-
-	GameEngineFolderTexture* folderTexture = GameEngineFolderTexture::Find(uppercaseFolderTextureName);
+	GameEngineFolderTexture* folderTexture = GameEngineFolderTexture::Find(_folderTextureName);
 
 	if (nullptr == folderTexture)
 	{
-		MsgBoxAssertString(_folderTextureName + ": 그런 이름의 폴더 텍스처가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_folderTextureName) + ": 그런 이름의 폴더 텍스처가 존재하지 않습니다.");
 	}
 
 	return SetTexture(_textureSetterName, folderTexture->GetTexture(_index));
 }
 
-GameEngineSampler* GameEngineShaderResourceHelper::SetSampler(const std::string& _samplerSetterName, GameEngineSampler* _sampler)
+GameEngineSampler* GameEngineShaderResourceHelper::SetSampler(
+	const std::string_view& _samplerSetterName, GameEngineSampler* _sampler)
 {
 	std::string uppercaseSamplerSetterName = GameEngineString::ToUpperReturn(_samplerSetterName);
 
 	if (false == IsSampler(_samplerSetterName))
 	{
-		MsgBoxAssertString(_samplerSetterName + ": 그런 이름의 샘플러 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_samplerSetterName) + ": 그런 이름의 샘플러 세터가 존재하지 않습니다.");
 		return nullptr;
 	}
 
@@ -260,17 +257,18 @@ GameEngineSampler* GameEngineShaderResourceHelper::SetSampler(const std::string&
 	{
 		BindSampler(iter->second, _sampler);
 	}
-
+	 
 	return _sampler;
 }
 
-GameEngineSampler* GameEngineShaderResourceHelper::SetSampler(const std::string& _samplerSetterName, const std::string& _samplerName)
+GameEngineSampler* GameEngineShaderResourceHelper::SetSampler(
+	const std::string_view& _samplerSetterName, const std::string_view& _samplerName)
 {
-	std::string uppercaseSamplerSetterName = GameEngineString::ToUpperReturn(_samplerSetterName);
+	//std::string uppercaseSamplerSetterName = GameEngineString::ToUpperReturn(_samplerSetterName);
 
 	if (false == IsSampler(_samplerSetterName))
 	{
-		MsgBoxAssertString(_samplerSetterName + ": 그런 이름의 샘플러 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_samplerSetterName) + ": 그런 이름의 샘플러 세터가 존재하지 않습니다.");
 		return nullptr;
 	}
 
@@ -290,9 +288,9 @@ void GameEngineShaderResourceHelper::AllConstantBufferNew()
 	}
 }
 
-GameEngineStructuredBufferSetter* GameEngineShaderResourceHelper::GetStructuredBufferSetter(const std::string& _name)
+GameEngineStructuredBufferSetter* GameEngineShaderResourceHelper::GetStructuredBufferSetter(const std::string_view& _sBufferName)
 {
-	std::string uppercaseSBufferName = GameEngineString::ToUpperReturn(_name);
+	std::string uppercaseSBufferName = GameEngineString::ToUpperReturn(_sBufferName);
 
 	std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator findIter
 		= structuredBufferSetterMap_.find(uppercaseSBufferName);

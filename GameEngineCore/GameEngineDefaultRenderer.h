@@ -30,10 +30,10 @@ private:
 public:	
 	virtual void Render(float _deltaTime) override;
 
-	//렌더러에 필요한 렌더링 파이프라인을 등록하고 이 렌더러를 메인 카메라에 등록하는 함수.
-	void SetPipeLine(const std::string& _renderingPipeLineName);
+	//렌더러에 필요한 마테리얼을 등록하는 함수.
+	void SetMaterial(const std::string_view& _materialName);
 
-	void SetMesh(const std::string& _meshName);
+	void SetMesh(const std::string_view& _meshName);
 
 
 	virtual void InstancingOn();

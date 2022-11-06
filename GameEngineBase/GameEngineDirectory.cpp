@@ -28,6 +28,16 @@ GameEngineDirectory::GameEngineDirectory(const std::string& _path)
 	}
 }
 
+GameEngineDirectory::GameEngineDirectory(const std::string_view& _path)
+{
+	path_ = _path;
+	if (false == std::filesystem::exists(path_))
+	{
+		MsgBoxAssert("존재하지 않는 경로입니다.");
+		return;
+	}
+}
+
 GameEngineDirectory::GameEngineDirectory(const std::filesystem::path& _path)
 {
 	path_ = _path;
@@ -67,7 +77,7 @@ void GameEngineDirectory::MoveToParent()
 	path_ = path_.parent_path();
 }
 
-void GameEngineDirectory::MoveToParent(const std::string& _parentName)
+void GameEngineDirectory::MoveToParent(const std::string_view& _parentName)
 {
 	while (false == IsRoot())
 	{
@@ -79,16 +89,16 @@ void GameEngineDirectory::MoveToParent(const std::string& _parentName)
 	}
 }
 
-bool GameEngineDirectory::MoveParentToExistChildDirectory(const std::string& _childName)
+bool GameEngineDirectory::MoveParentToExistChildDirectory(const std::string_view& _childName)
 {
 	std::string findDirectory = GameEngineString::ToUpperReturn(_childName);
 	std::vector<GameEngineFile> returnVector;
-	
+
 	while (true)
 	{
 		std::filesystem::directory_iterator dirIter(this->path_);
 
-		for (const std::filesystem::directory_entry& entry: dirIter)
+		for (const std::filesystem::directory_entry& entry : dirIter)
 		{
 			if (true == entry.is_directory())
 			{
@@ -118,7 +128,7 @@ bool GameEngineDirectory::IsRoot() const
 	//std::filesystem::path::root_path() 현재 주어진 경로의 루트 경로를 반환하는 함수.
 }
 
-void GameEngineDirectory::MoveToChild(const std::string& _childName)
+void GameEngineDirectory::MoveToChild(const std::string_view& _childName)
 {
 	std::filesystem::path checkPath = this->path_;
 	checkPath.append(_childName);
@@ -132,15 +142,15 @@ void GameEngineDirectory::MoveToChild(const std::string& _childName)
 	this->path_ = checkPath;
 }
 
-std::string GameEngineDirectory::PlusFilePath(const std::string& _fileName)
+std::string GameEngineDirectory::PlusFilePath(const std::string_view& _fileName)
 {
-	return this->GetFullPath() + "\\" + _fileName;
+	return this->GetFullPath() + "\\" + _fileName.data();
 }
 
-std::vector<GameEngineFile> GameEngineDirectory::GetAllFiles(const std::string& _ext /*= ""*/)
+std::vector<GameEngineFile> GameEngineDirectory::GetAllFiles(const std::string_view& _ext /*= ""*/)
 {
 	std::filesystem::directory_iterator dirIter(path_);
-	std::string extension = _ext;
+	std::string extension = _ext.data();
 
 	if (extension != "")
 	{
@@ -182,7 +192,7 @@ std::vector<GameEngineDirectory> GameEngineDirectory::GetAllDirectories()
 	std::filesystem::directory_iterator dirIter(path_);
 	std::vector<GameEngineDirectory> returnVector;
 
-	for (const std::filesystem::directory_entry& entry: dirIter)
+	for (const std::filesystem::directory_entry& entry : dirIter)
 	{
 		if (true == entry.is_directory())
 		{

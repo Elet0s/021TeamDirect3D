@@ -38,7 +38,7 @@ GameEngineTexture::~GameEngineTexture()
 	}
 }
 
-GameEngineTexture* GameEngineTexture::Create(const std::string& _name, ID3D11Texture2D* _texture)
+GameEngineTexture* GameEngineTexture::Create(const std::string_view& _name, ID3D11Texture2D* _texture)
 {
 	GameEngineTexture* newRes = CreateNamedRes(_name);
 	newRes->texture2D_ = _texture;
@@ -61,12 +61,12 @@ GameEngineTexture* GameEngineTexture::Create(const D3D11_TEXTURE2D_DESC& _desc)
 	return newRes;
 }
 
-GameEngineTexture* GameEngineTexture::Load(const std::string& _path)
+GameEngineTexture* GameEngineTexture::Load(const std::string_view& _path)
 {
 	return Load(_path, GameEnginePath::GetFileName(_path));
 }
 
-GameEngineTexture* GameEngineTexture::Load(const std::string& _path, const std::string& _name)
+GameEngineTexture* GameEngineTexture::Load(const std::string_view& _path, const std::string_view& _name)
 {
 	GameEngineTexture* newRes = CreateNamedRes(_name);
 	newRes->TextureLoad(_path);
@@ -83,7 +83,7 @@ void GameEngineTexture::VSSetting(int _bindPoint)
 
 	GameEngineDevice::GetContext()->VSSetShaderResources(
 		_bindPoint,
-		1, 
+		1,
 		&shaderResourceView_
 	);
 }
@@ -170,7 +170,7 @@ ID3D11DepthStencilView* GameEngineTexture::CreateDepthStencilView()
 	{
 		return depthStencilView_;
 	}
-	
+
 	if (S_OK != GameEngineDevice::GetDevice()->CreateDepthStencilView(
 		texture2D_,
 		nullptr,
@@ -184,12 +184,12 @@ ID3D11DepthStencilView* GameEngineTexture::CreateDepthStencilView()
 	return depthStencilView_;
 }
 
-void GameEngineTexture::Cut(const std::string& _textureName, int _x, int _y)
+void GameEngineTexture::Cut(const std::string_view& _textureName, int _x, int _y)
 {
 	GameEngineTexture* findTexture = GameEngineTexture::Find(_textureName);
 	if (nullptr == findTexture)
 	{
-		MsgBoxAssertString(_textureName + ": 그런 이름의 텍스쳐가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_textureName) + ": 그런 이름의 텍스쳐가 존재하지 않습니다.");
 		return;
 	}
 	else
@@ -247,60 +247,60 @@ PixelColor GameEngineTexture::GetPixelToPixelColor(int _x, int _y)
 
 	switch (format)
 	{
-	//case DXGI_FORMAT_R32G32B32A32_TYPELESS:
-	//	break;
-	//case DXGI_FORMAT_R32G32B32A32_FLOAT:
-	//	break;
-	//case DXGI_FORMAT_R32G32B32A32_UINT:
-	//	break;
-	//case DXGI_FORMAT_R32G32B32A32_SINT:
-	//	break;
-	//case DXGI_FORMAT_R32G32B32_TYPELESS:
-	//	break;
-	//case DXGI_FORMAT_R32G32B32_FLOAT:
-	//	break;
-	//case DXGI_FORMAT_R32G32B32_UINT:
-	//	break;
-	//case DXGI_FORMAT_R32G32B32_SINT:
-	//	break;
-	//case DXGI_FORMAT_R16G16B16A16_TYPELESS:
-	//	break;
-	//case DXGI_FORMAT_R16G16B16A16_FLOAT:
-	//	break;
-	//case DXGI_FORMAT_R16G16B16A16_UNORM:
-	//	break;
-	//case DXGI_FORMAT_R16G16B16A16_UINT:
-	//	break;
-	//case DXGI_FORMAT_R16G16B16A16_SNORM:
-	//	break;
-	//case DXGI_FORMAT_R16G16B16A16_SINT:
-	//	break;
-	//case DXGI_FORMAT_R32G32_TYPELESS:
-	//	break;
-	//case DXGI_FORMAT_R32G32_FLOAT:
-	//	break;
-	//case DXGI_FORMAT_R32G32_UINT:
-	//	break;
-	//case DXGI_FORMAT_R32G32_SINT:
-	//	break;
-	//case DXGI_FORMAT_R32G8X24_TYPELESS:
-	//	break;
-	//case DXGI_FORMAT_D32_FLOAT_S8X24_UINT:
-	//	break;
-	//case DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS:
-	//	break;
-	//case DXGI_FORMAT_X32_TYPELESS_G8X24_UINT:
-	//	break;
-	//case DXGI_FORMAT_R10G10B10A2_TYPELESS:
-	//	break;
-	//case DXGI_FORMAT_R10G10B10A2_UNORM:
-	//	break;
-	//case DXGI_FORMAT_R10G10B10A2_UINT:
-	//	break;
-	//case DXGI_FORMAT_R11G11B10_FLOAT:
-	//	break;
-	//case DXGI_FORMAT_R8G8B8A8_TYPELESS:
-	//	break;
+		//case DXGI_FORMAT_R32G32B32A32_TYPELESS:
+		//	break;
+		//case DXGI_FORMAT_R32G32B32A32_FLOAT:
+		//	break;
+		//case DXGI_FORMAT_R32G32B32A32_UINT:
+		//	break;
+		//case DXGI_FORMAT_R32G32B32A32_SINT:
+		//	break;
+		//case DXGI_FORMAT_R32G32B32_TYPELESS:
+		//	break;
+		//case DXGI_FORMAT_R32G32B32_FLOAT:
+		//	break;
+		//case DXGI_FORMAT_R32G32B32_UINT:
+		//	break;
+		//case DXGI_FORMAT_R32G32B32_SINT:
+		//	break;
+		//case DXGI_FORMAT_R16G16B16A16_TYPELESS:
+		//	break;
+		//case DXGI_FORMAT_R16G16B16A16_FLOAT:
+		//	break;
+		//case DXGI_FORMAT_R16G16B16A16_UNORM:
+		//	break;
+		//case DXGI_FORMAT_R16G16B16A16_UINT:
+		//	break;
+		//case DXGI_FORMAT_R16G16B16A16_SNORM:
+		//	break;
+		//case DXGI_FORMAT_R16G16B16A16_SINT:
+		//	break;
+		//case DXGI_FORMAT_R32G32_TYPELESS:
+		//	break;
+		//case DXGI_FORMAT_R32G32_FLOAT:
+		//	break;
+		//case DXGI_FORMAT_R32G32_UINT:
+		//	break;
+		//case DXGI_FORMAT_R32G32_SINT:
+		//	break;
+		//case DXGI_FORMAT_R32G8X24_TYPELESS:
+		//	break;
+		//case DXGI_FORMAT_D32_FLOAT_S8X24_UINT:
+		//	break;
+		//case DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS:
+		//	break;
+		//case DXGI_FORMAT_X32_TYPELESS_G8X24_UINT:
+		//	break;
+		//case DXGI_FORMAT_R10G10B10A2_TYPELESS:
+		//	break;
+		//case DXGI_FORMAT_R10G10B10A2_UNORM:
+		//	break;
+		//case DXGI_FORMAT_R10G10B10A2_UINT:
+		//	break;
+		//case DXGI_FORMAT_R11G11B10_FLOAT:
+		//	break;
+		//case DXGI_FORMAT_R8G8B8A8_TYPELESS:
+		//	break;
 
 	case DXGI_FORMAT_R8G8B8A8_UNORM:
 	{
@@ -521,32 +521,43 @@ PixelColor GameEngineTexture::GetPixelToPixelColor(int _x, int _y)
 	return returnColor;
 }
 
-void GameEngineTexture::TextureLoad(const std::string& _path)
+void GameEngineTexture::TextureLoad(const std::string_view& _path)
 {
 	std::string uppercaseExtension = GameEngineString::ToUpperReturn(GameEnginePath::GetExtension(_path));
 
 	std::wstring unicodePath = GameEngineString::AnsiToUnicodeReturn(_path);
 
 
-	if (uppercaseExtension == "TGA")
+	if (uppercaseExtension == ".TGA")
 	{
-		MsgBoxAssert("TGA: 아직 처리 준비되지 않은 이미지 포맷입니다.");
-		return;
+		if (S_OK != DirectX::LoadFromTGAFile(
+			unicodePath.c_str(),
+			DirectX::TGA_FLAGS_NONE,
+			&metaData_,
+			scratchImage_
+		))
+		{
+			MsgBoxAssertString(std::string(_path) + ": 텍스쳐 로드 실패.");
+			return;
+		}
 	}
-	else if (uppercaseExtension == "DDS")
+	else if (uppercaseExtension == ".DDS")
 	{
 		MsgBoxAssert("DDS: 아직 처리 준비되지 않은 이미지 포맷입니다.");
 		return;
 	}
-	else if (S_OK != DirectX::LoadFromWICFile(//
-		unicodePath.c_str(),				  //
-		DirectX::WIC_FLAGS_NONE,			  //
-		&metaData_,							  //
-		scratchImage_						  //
-	))
+	else if (uppercaseExtension == ".PNG")
 	{
-		MsgBoxAssertString(_path + ": 텍스쳐 로드 실패.");
-		return;
+		if (S_OK != DirectX::LoadFromWICFile(//
+			unicodePath.c_str(),				  //
+			DirectX::WIC_FLAGS_NONE,			  //
+			&metaData_,							  //
+			scratchImage_						  //
+		))
+		{
+			MsgBoxAssertString(std::string(_path) + ": 텍스쳐 로드 실패.");
+			return;
+		}
 	}
 
 
@@ -561,7 +572,7 @@ void GameEngineTexture::TextureLoad(const std::string& _path)
 		&shaderResourceView_					  //
 	))
 	{
-		MsgBoxAssertString(_path + ": 셰이더 리소스 생성 실패.");
+		MsgBoxAssertString(std::string(_path) + ": 셰이더 리소스 생성 실패.");
 		return;
 	}
 
@@ -603,7 +614,7 @@ void GameEngineTexture::Cut(int _x, int _y)
 			frameData.sizeY = sizeY;
 			cutData_.push_back(frameData);
 
-			cuttingStart.x += sizeX;	
+			cuttingStart.x += sizeX;
 		}
 
 		cuttingStart.x = 0.f;

@@ -16,7 +16,7 @@ GameEngineDepthStencil::~GameEngineDepthStencil()
 }
 
 GameEngineDepthStencil* GameEngineDepthStencil::Create(
-    const std::string& _name,
+    const std::string_view& _name,
     const D3D11_DEPTH_STENCIL_DESC& _desc
 )
 {

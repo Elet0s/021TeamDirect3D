@@ -70,7 +70,7 @@
     <ClCompile Include="TestLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="LoginLevel.cpp">
+    <ClCompile Include="ShaderTestLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="MyTileMapRenderer.cpp">
@@ -149,7 +149,7 @@
     <ClInclude Include="TestLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="LoginLevel.h">
+    <ClInclude Include="ShaderTestLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="MyTileMapRenderer.h">

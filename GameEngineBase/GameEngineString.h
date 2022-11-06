@@ -43,22 +43,22 @@ public:
 	static std::string ToUpperReturn(const std::string_view& _text);
 
 
-	static bool AnsiToUnicode(const std::string& _inText, std::wstring& _outText);
-	static std::wstring AnsiToUnicodeReturn(const std::string& _inText);
+	static bool AnsiToUnicode(const std::string_view& _inText, std::wstring& _outText);
+	static std::wstring AnsiToUnicodeReturn(const std::string_view& _inText);
 
-	static bool UnicodeToUTF8(const std::wstring& _inText, std::string& _outText);
-	static std::string UnicodeToUTF8Return(const std::wstring& _inText);
+	static bool UnicodeToUTF8(const std::wstring_view& _inText, std::string& _outText);
+	static std::string UnicodeToUTF8Return(const std::wstring_view& _inText);
 
-	static bool AnsiToUTF8(const std::string& _inText, std::string& _outText);
-	static std::string AnsiToUTF8Return(const std::string& _inText);
+	static bool AnsiToUTF8(const std::string_view& _inText, std::string& _outText);
+	static std::string AnsiToUTF8Return(const std::string_view& _inText);
 
-	static bool UTF8ToUnicode(const std::string& _inText, std::wstring& _outText);
-	static std::wstring UTF8ToUnicodeReturn(const std::string& _inText);
+	static bool UTF8ToUnicode(const std::string_view& _inText, std::wstring& _outText);
+	static std::wstring UTF8ToUnicodeReturn(const std::string_view& _inText);
 
-	static bool UnicodeToAnsi(const std::wstring& _inText, std::string& _outText);
-	static std::string UnicodeToAnsiReturn(const std::wstring& _inText);
+	static bool UnicodeToAnsi(const std::wstring_view& _inText, std::string& _outText);
+	static std::string UnicodeToAnsiReturn(const std::wstring_view& _inText);
 
-	static bool UTF8ToAnsi(const std::string& _inText, std::string& _outText);
-	static std::string UTF8ToAnsiReturn(const std::string& _inText);
+	static bool UTF8ToAnsi(const std::string_view& _inText, std::string& _outText);
+	static std::string UTF8ToAnsiReturn(const std::string_view& _inText);
 };
 

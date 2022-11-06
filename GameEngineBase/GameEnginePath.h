@@ -13,6 +13,7 @@ public:
 	GameEnginePath();
 	GameEnginePath(const std::filesystem::path& _path);
 	GameEnginePath(const std::string& _path);
+	GameEnginePath(const std::string_view& _path);
 	GameEnginePath(const char* _path);
 	~GameEnginePath();
 
@@ -29,12 +30,13 @@ public:
 	std::string GetFileName() const;
 	std::string GetStem() const;
 	std::string GetExtention() const;
-	std::string ReplaceFileName(const std::string& _newFileName);
+	std::string ReplaceFileName(const std::string_view& _newFileName);
 
-	static std::string GetFileName(const std::string& _path);
-	static std::string GetStem(const std::string& _path);
-	static std::string GetExtension(const std::string& _path);
-	static std::string GetFolderPath(const std::string& _path);
+	static std::string GetFileName(const std::string_view& _path);
+	static std::string GetStem(const std::string_view& _path);
+	static std::string GetExtension(const std::string_view& _path);
+	static std::string GetFolderPath(const std::string_view& _path);
+
 
 };
 

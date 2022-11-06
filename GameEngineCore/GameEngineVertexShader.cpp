@@ -42,8 +42,8 @@ void GameEngineVertexShader::Setting()
 }
 
 GameEngineVertexShader* GameEngineVertexShader::Load(
-    const std::string& _path,
-    const std::string& _entryPoint,
+    const std::string_view& _path,
+    const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
     UINT _versionLow /*= 0*/
 )
@@ -52,9 +52,9 @@ GameEngineVertexShader* GameEngineVertexShader::Load(
 }
 
 GameEngineVertexShader* GameEngineVertexShader::Load(
-    const std::string& _path,
-    const std::string& _name,
-    const std::string& _entryPoint,
+    const std::string_view& _path,
+    const std::string_view& _name,
+    const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
     UINT _versionLow /*= 0*/
 )
@@ -69,8 +69,8 @@ GameEngineVertexShader* GameEngineVertexShader::Load(
 }
 
 void GameEngineVertexShader::InstancingShaderCompile(
-    const std::string& _path, 
-    const std::string& _entryPoint,
+    const std::string_view& _path, 
+    const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
     UINT _versionLow /*= 0*/
 )

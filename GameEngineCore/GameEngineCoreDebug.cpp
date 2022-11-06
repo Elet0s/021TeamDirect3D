@@ -62,12 +62,12 @@ namespace GameEngineDebug
 		debugRenderUnit_ = new GameEngineRenderUnit();
 		debugRenderUnit_->SetMesh("Box");
 		debugRenderUnit_->SetMaterial("3DDebug");
-		//debugRenderUnit_의 생성 시점을 "Box" 메쉬와 "3DDebug" 렌더링 파이프라인 이후로 지연시킨다.
+		//debugRenderUnit_의 생성 시점을 "Box" 메쉬와 "3DDebug" 마테리얼 생성 이후로 지연시킨다.
 
 		debugTextureRenderUnit_ = new GameEngineRenderUnit();
 		debugTextureRenderUnit_->SetMesh("Rect");
 		debugTextureRenderUnit_->SetMaterial("3DDebug");
-		//debugTextureRenderUnit_의 생성 시점을 "Rect" 메쉬와 "3DDebug" 렌더링 파이프라인 이후로 지연시킨다.
+		//debugTextureRenderUnit_의 생성 시점을 "Rect" 메쉬와 "3DDebug" 마테리얼 생성 이후로 지연시킨다.
 
 
 		isOnce = true;
@@ -263,7 +263,7 @@ namespace GameEngineDebug
 		debugTransform.SetLocalRotation(_rotation);
 		debugTransform.SetLocalPosition(_position);
 
-		if (_scale.CompareInt2D(float4::Zero))
+		if (true ==_scale.CompareInt2D(float4::Zero))
 			//크기 설정이 기본값인 float4::Zero라면, 크기설정을 할 생각이 없는 것으로 생각하고 텍스처 자체 크기로 세팅한다. 
 		{
 			debugTransform.SetLocalScale(_texture->GetScale());

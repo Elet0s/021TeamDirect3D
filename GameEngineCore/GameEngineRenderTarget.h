@@ -63,7 +63,7 @@ private:
 	
 public:
 
-	static GameEngineRenderTarget* Create(const std::string& _name);
+	static GameEngineRenderTarget* Create(const std::string_view& _name);
 	static GameEngineRenderTarget* Create();
 
 	void CreateRenderTargetTexture(	//렌더타겟으로 쓸 게임엔진텍스처 객체를 생성, 저장하는 함수.

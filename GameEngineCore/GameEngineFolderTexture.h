@@ -23,8 +23,8 @@ private:
 
 
 public:	
-	static GameEngineFolderTexture* Load(const std::string& _path);
-	static GameEngineFolderTexture* Load(const std::string& _path, const std::string _name);
+	static GameEngineFolderTexture* Load(const std::string_view& _path);
+	static GameEngineFolderTexture* Load(const std::string_view& _path, const std::string_view& _name);
 
 public:
 	size_t GetTextureCount()
@@ -44,7 +44,7 @@ public:
 	}
 
 private:
-	void LoadFolder(const std::string& _path);
+	void LoadFolder(const std::string_view& _path);
 
 private:
 	std::vector<GameEngineTexture*> textures_;

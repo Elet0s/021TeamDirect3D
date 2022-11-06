@@ -36,7 +36,7 @@ SoundSystemCreater CreateInst = SoundSystemCreater();
 
 std::map<std::string, GameEngineSound*> GameEngineSound::allResources_;
 
-GameEngineSound::GameEngineSound(): sound_(nullptr)
+GameEngineSound::GameEngineSound() : sound_(nullptr)
 {
 }
 
@@ -44,13 +44,13 @@ GameEngineSound::~GameEngineSound()
 {
 }
 
-GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string& _name, unsigned int _loopCount /*= 0*/)
+GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string_view& _name, unsigned int _loopCount /*= 0*/)
 {
     std::string uppercaseSoundName = GameEngineString::ToUpperReturn(_name);
     GameEngineSound* findSound = GameEngineSound::FindResources(uppercaseSoundName);
     if (nullptr == findSound)
     {
-        MsgBoxAssertString(_name + ": 그런 이름의 사운드가 존재하지 않습니다.");
+        MsgBoxAssertString(std::string(_name) + ": 그런 이름의 사운드가 존재하지 않습니다.");
         return GameEngineSoundPlayer();
     }
 
@@ -63,13 +63,13 @@ GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string& _name
     return GameEngineSoundPlayer(findSound, playControl);
 }
 
-void GameEngineSound::SoundPlayOneshot(const std::string& _name, int _loopCount)
+void GameEngineSound::SoundPlayOneshot(const std::string_view& _name, int _loopCount)
 {
     std::string uppercaseSoundName = GameEngineString::ToUpperReturn(_name);
     GameEngineSound* findSound = GameEngineSound::FindResources(uppercaseSoundName);
     if (nullptr == findSound)
     {
-        MsgBoxAssertString(_name + ": 그런 이름의 사운드가 존재하지 않습니다.");
+        MsgBoxAssertString(std::string(_name) + ": 그런 이름의 사운드가 존재하지 않습니다.");
         return;
     }
 
@@ -90,16 +90,16 @@ void GameEngineSound::Update()
 
 GameEngineSound* GameEngineSound::LoadResource(const GameEngineFile& _path)
 {
-    return LoadResource(_path.GetFullPath());
+    return LoadResource(_path.GetFullPath(), _path.GetFileName());
 }
 
-GameEngineSound* GameEngineSound::LoadResource(const std::string& _path)
+GameEngineSound* GameEngineSound::LoadResource(const std::string_view& _path)
 {
     GameEnginePath newPath = GameEnginePath(_path);
     return LoadResource(_path, newPath.GetFileName());
 }
 
-GameEngineSound* GameEngineSound::LoadResource(const std::string& _path, const std::string& _name)
+GameEngineSound* GameEngineSound::LoadResource(const std::string_view& _path, const std::string_view& _name)
 {
     std::string uppercaseResourceName = GameEngineString::ToUpperReturn(_name);
     GameEngineSound* newSound = new GameEngineSound();
@@ -107,7 +107,7 @@ GameEngineSound* GameEngineSound::LoadResource(const std::string& _path, const s
     {
         delete newSound;
         newSound = nullptr;
-        MsgBoxAssertString(_name + ": 그런 이름의 사운드가 존재하지 않습니다.");
+        MsgBoxAssertString(std::string(_name) + ": 그런 이름의 사운드가 존재하지 않습니다.");
         return nullptr;
     }
 
@@ -116,7 +116,7 @@ GameEngineSound* GameEngineSound::LoadResource(const std::string& _path, const s
     return newSound;
 }
 
-GameEngineSound* GameEngineSound::FindResources(const std::string& _name)
+GameEngineSound* GameEngineSound::FindResources(const std::string_view& _name)
 {
     std::string uppercaseResourceName = GameEngineString::ToUpperReturn(_name);
     std::map<std::string, GameEngineSound*>::iterator findIter = allResources_.find(uppercaseResourceName);
@@ -148,9 +148,9 @@ void GameEngineSound::ResourceDestroy()
     }
 }
 
-bool GameEngineSound::Load(const std::string& _path)
+bool GameEngineSound::Load(const std::string_view& _path)
 {
-    if (FMOD_OK != soundSystem_->createSound(_path.c_str(), FMOD_LOOP_NORMAL, nullptr, &sound_))
+    if (FMOD_OK != soundSystem_->createSound(_path.data(), FMOD_LOOP_NORMAL, nullptr, &sound_))
     {
         MsgBoxAssert("사운드를 불러오는데 실패했습니다.");
         return false;
@@ -168,7 +168,7 @@ GameEngineSoundPlayer::GameEngineSoundPlayer(GameEngineSound* _sound, FMOD::Chan
 {
 }
 
-GameEngineSoundPlayer::GameEngineSoundPlayer(): sound_(nullptr), controlHandle_(nullptr)
+GameEngineSoundPlayer::GameEngineSoundPlayer() : sound_(nullptr), controlHandle_(nullptr)
 {
 }
 

@@ -48,12 +48,12 @@ std::string GameEngineString::ToUpperReturn(const std::string_view& _text)
 	return returnText;
 }
 
-bool GameEngineString::AnsiToUnicode(const std::string& _inText, std::wstring& _outText)
+bool GameEngineString::AnsiToUnicode(const std::string_view& _inText, std::wstring& _outText)
 {
 	int outSize = MultiByteToWideChar(		//
 		CP_ACP,								//
 		0,									//
-		_inText.c_str(),					//
+		_inText.data(),					//
 		static_cast<int>(_inText.size()),	//
 		nullptr,							//
 		0									//
@@ -71,7 +71,7 @@ bool GameEngineString::AnsiToUnicode(const std::string& _inText, std::wstring& _
 	if (0 == MultiByteToWideChar(				//
 		CP_ACP,									//
 		0,										//
-		_inText.c_str(),						//
+		_inText.data(),						//
 		static_cast<int>(_inText.size()),		//	
 		&_outText[0],							//
 		outSize									//
@@ -84,14 +84,14 @@ bool GameEngineString::AnsiToUnicode(const std::string& _inText, std::wstring& _
 	return true;
 }
 
-std::wstring GameEngineString::AnsiToUnicodeReturn(const std::string& _inText)
+std::wstring GameEngineString::AnsiToUnicodeReturn(const std::string_view& _inText)
 {
 	std::wstring returnText = L"";
 
 	int size = MultiByteToWideChar(
 		CP_ACP,
 		0,
-		_inText.c_str(),
+		_inText.data(),
 		static_cast<int>(_inText.size()),
 		nullptr,
 		0
@@ -107,7 +107,7 @@ std::wstring GameEngineString::AnsiToUnicodeReturn(const std::string& _inText)
 	if (0 >= MultiByteToWideChar(
 		CP_ACP,
 		0,
-		_inText.c_str(),
+		_inText.data(),
 		static_cast<int>(_inText.size()),
 		&returnText[0],
 		size
@@ -120,10 +120,10 @@ std::wstring GameEngineString::AnsiToUnicodeReturn(const std::string& _inText)
 	return returnText;
 }
 
-bool GameEngineString::UnicodeToUTF8(const std::wstring& _inText, std::string& _outText)
+bool GameEngineString::UnicodeToUTF8(const std::wstring_view& _inText, std::string& _outText)
 {
 	int outSize = WideCharToMultiByte(
-		CP_UTF8, 0, _inText.c_str(), static_cast<int>(_inText.size()), nullptr, 0, nullptr, nullptr);
+		CP_UTF8, 0, _inText.data(), static_cast<int>(_inText.size()), nullptr, 0, nullptr, nullptr);
 
 	if (0 >= outSize)
 	{
@@ -136,7 +136,7 @@ bool GameEngineString::UnicodeToUTF8(const std::wstring& _inText, std::string& _
 	if (0 == WideCharToMultiByte(			//
 		CP_UTF8,							//
 		0,									//
-		_inText.c_str(),					//
+		_inText.data(),						//
 		static_cast<int>(_inText.size()),	//
 		&_outText[0],						//
 		static_cast<int>(_outText.size()),	//
@@ -151,14 +151,14 @@ bool GameEngineString::UnicodeToUTF8(const std::wstring& _inText, std::string& _
 	return true;
 }
 
-std::string GameEngineString::UnicodeToUTF8Return(const std::wstring& _inText)
+std::string GameEngineString::UnicodeToUTF8Return(const std::wstring_view& _inText)
 {
 	std::string result = "";
 	UnicodeToUTF8(_inText, result);
 	return result;
 }
 
-bool GameEngineString::AnsiToUTF8(const std::string& _inText, std::string& _outText)
+bool GameEngineString::AnsiToUTF8(const std::string_view& _inText, std::string& _outText)
 {
 	std::wstring wideString = L"";
 	AnsiToUnicode(_inText, wideString);
@@ -166,7 +166,7 @@ bool GameEngineString::AnsiToUTF8(const std::string& _inText, std::string& _outT
 	return true;
 }
 
-std::string GameEngineString::AnsiToUTF8Return(const std::string& _inText)
+std::string GameEngineString::AnsiToUTF8Return(const std::string_view& _inText)
 {
 	std::wstring wideString = L"";
 	std::string result = "";
@@ -177,13 +177,13 @@ std::string GameEngineString::AnsiToUTF8Return(const std::string& _inText)
 	return result;
 }
 
-bool GameEngineString::UTF8ToUnicode(const std::string& _inText, std::wstring& _outText)
+bool GameEngineString::UTF8ToUnicode(const std::string_view& _inText, std::wstring& _outText)
 {
 	_outText.clear();
 	int outSize = MultiByteToWideChar(
 		CP_UTF8,
 		0,
-		_inText.c_str(),
+		_inText.data(),
 		static_cast<int>(_inText.size()),
 		nullptr,
 		0
@@ -200,7 +200,7 @@ bool GameEngineString::UTF8ToUnicode(const std::string& _inText, std::wstring& _
 	if (0 >= MultiByteToWideChar(
 		CP_UTF8,
 		0,
-		_inText.c_str(),
+		_inText.data(),
 		static_cast<int>(_inText.size()),
 		&_outText[0],
 		outSize
@@ -213,19 +213,19 @@ bool GameEngineString::UTF8ToUnicode(const std::string& _inText, std::wstring& _
 	return true;
 }
 
-std::wstring GameEngineString::UTF8ToUnicodeReturn(const std::string& _inText)
+std::wstring GameEngineString::UTF8ToUnicodeReturn(const std::string_view& _inText)
 {
 	std::wstring returnText = L"";
 	UTF8ToUnicode(_inText, returnText);
 	return returnText;
 }
 
-bool GameEngineString::UnicodeToAnsi(const std::wstring& _inText, std::string& _outText)
+bool GameEngineString::UnicodeToAnsi(const std::wstring_view& _inText, std::string& _outText)
 {
 	int outSize = WideCharToMultiByte(
 		CP_ACP,
 		0,
-		_inText.c_str(),
+		_inText.data(),
 		static_cast<int>(_inText.size()),
 		nullptr,
 		0,
@@ -244,7 +244,7 @@ bool GameEngineString::UnicodeToAnsi(const std::wstring& _inText, std::string& _
 	if (0 >= WideCharToMultiByte(
 		CP_UTF8,
 		0,
-		_inText.c_str(),
+		_inText.data(),
 		static_cast<int>(_inText.size()),
 		&_outText[0],
 		static_cast<int>(_outText.size()),
@@ -259,19 +259,19 @@ bool GameEngineString::UnicodeToAnsi(const std::wstring& _inText, std::string& _
 	return true;
 }
 
-std::string GameEngineString::UnicodeToAnsiReturn(const std::wstring& _inText)
+std::string GameEngineString::UnicodeToAnsiReturn(const std::wstring_view& _inText)
 {
 	std::string returnText = "";
 	UnicodeToAnsi(_inText, returnText);
 	return returnText;
 }
 
-bool GameEngineString::UTF8ToAnsi(const std::string& _inText, std::string& _outText)
+bool GameEngineString::UTF8ToAnsi(const std::string_view& _inText, std::string& _outText)
 {
 	return UnicodeToAnsi(UTF8ToUnicodeReturn(_inText), _outText);
 }
 
-std::string GameEngineString::UTF8ToAnsiReturn(const std::string& _inText)
+std::string GameEngineString::UTF8ToAnsiReturn(const std::string_view& _inText)
 {
 	std::string returnText = "";
 	std::wstring wideString = L"";

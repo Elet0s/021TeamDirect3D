@@ -45,7 +45,7 @@ float4 TextureAnimation_PS(Output _input) : SV_Target0
         clip(-1);
     }
     
-    if (resultColor.a >= 1.f)
+    if (resultColor.a > 1.f)
     {
         resultColor.a = 1.f;
     }

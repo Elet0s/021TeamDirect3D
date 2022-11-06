@@ -23,13 +23,13 @@ private:
 
 public:	
 	static GameEngineStructuredBuffer* CreateStructuredBuffer(
-		const std::string& _name,
+		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
 		int _dataCount
 	);
-	static GameEngineStructuredBuffer* Find(const std::string& _name, int _byteWidth);
+	static GameEngineStructuredBuffer* Find(const std::string_view& _name, int _byteWidth);
 	static GameEngineStructuredBuffer* CreateAndFind(
-		const std::string& _name,
+		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
 		int _dataCount
 	);
@@ -58,7 +58,7 @@ public:
 	}
 
 protected:
-	static GameEngineStructuredBuffer* CreateNamedRes(const std::string& _name, int _byteWidth);
+	static GameEngineStructuredBuffer* CreateNamedRes(const std::string_view& _name, int _byteWidth);
 	//GameEngineRes의 리소스저장 컨테이너를 쓸 수 없으므로 전용 컨테이너를 따로 만들고 리소스 생성과 삭제 절차도 다시 만들어야 한다.
 
 

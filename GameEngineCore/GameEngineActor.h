@@ -38,7 +38,7 @@ public:
 public:
 
 	template<typename ComponentType>
-	ComponentType* CreateComponent(const std::string& _componentName = "")
+	ComponentType* CreateComponent(const std::string_view& _componentName = "")
 	{
 		GameEngineComponent* newComponent = new ComponentType();
 

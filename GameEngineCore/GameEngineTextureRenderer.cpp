@@ -126,11 +126,11 @@ GameEngineTextureRenderer::~GameEngineTextureRenderer()
 {
 }
 
-void GameEngineTextureRenderer::SetTexture(const std::string& _textureName)
+void GameEngineTextureRenderer::SetTexture(const std::string_view& _textureName)
 {
 	if (nullptr == GameEngineTexture::Find(_textureName))
 	{
-		MsgBoxAssertString(_textureName + ": 그런 이름의 텍스처가 없습니다.");
+		MsgBoxAssertString(std::string(_textureName) + ": 그런 이름의 텍스처가 없습니다.");
 		return;
 	}
 
@@ -149,12 +149,12 @@ void GameEngineTextureRenderer::SetTexture(GameEngineTexture* _texture)
 	this->GetShaderResourceHelper().SetTexture("Tex", _texture);
 }
 
-void GameEngineTextureRenderer::SetFolderTextureToIndex(const std::string& _textureName, UINT _index)
+void GameEngineTextureRenderer::SetFolderTextureToIndex(const std::string_view& _textureName, UINT _index)
 {
 	GameEngineFolderTexture* folderTexture = GameEngineFolderTexture::Find(_textureName);
 	if (nullptr == folderTexture)
 	{
-		MsgBoxAssertString(_textureName + ": 그런 이름의 폴더 텍스처가 없습니다.");
+		MsgBoxAssertString(std::string(_textureName) + ": 그런 이름의 폴더 텍스처가 없습니다.");
 		return;
 	}
 
@@ -166,7 +166,7 @@ void GameEngineTextureRenderer::SetFolderTextureToIndex(const std::string& _text
 	atlasDataInst_.frameData_.sizeY = 1.f;
 }
 
-void GameEngineTextureRenderer::SetTexture(const std::string& _textureName, int _index)
+void GameEngineTextureRenderer::SetTexture(const std::string_view& _textureName, int _index)
 {
 	this->SetTexture(_textureName);
 	this->SetFrame(_index);
@@ -252,13 +252,13 @@ void GameEngineTextureRenderer::SetSamplingMode_Linear()
 	this->GetShaderResourceHelper().SetSampler("Smp", "EngineSampler_Linear");
 }
 
-void GameEngineTextureRenderer::CreateFrameAnimation_CutTexture(const std::string& _animationName, const FrameAnimation_Desc& _desc)
+void GameEngineTextureRenderer::CreateFrameAnimation_CutTexture(const std::string_view& _animationName, const FrameAnimation_Desc& _desc)
 {
 	std::string uppercaseAnimationName = GameEngineString::ToUpperReturn(_animationName);
 
 	if (allAnimations_.end() != allAnimations_.find(uppercaseAnimationName))
 	{
-		MsgBoxAssertString(_animationName + ": 같은 이름의 애니메이션이 이미 존재합니다.");
+		MsgBoxAssertString(std::string(_animationName) + ": 같은 이름의 애니메이션이 이미 존재합니다.");
 		return;
 	}
 
@@ -270,13 +270,13 @@ void GameEngineTextureRenderer::CreateFrameAnimation_CutTexture(const std::strin
 	newAnimation.folderTexture_ = nullptr;
 }
 
-void GameEngineTextureRenderer::CreateFrameAnimation_FolderTexture(const std::string& _animationName, const FrameAnimation_Desc& _desc)
+void GameEngineTextureRenderer::CreateFrameAnimation_FolderTexture(const std::string_view& _animationName, const FrameAnimation_Desc& _desc)
 {
 	std::string uppercaseAnimationName = GameEngineString::ToUpperReturn(_animationName);
 
 	if (allAnimations_.end() != allAnimations_.find(uppercaseAnimationName))
 	{
-		MsgBoxAssertString(_animationName + ": 같은 이름의 애니메이션이 이미 존재합니다.");
+		MsgBoxAssertString(std::string(_animationName) + ": 같은 이름의 애니메이션이 이미 존재합니다.");
 		return;
 	}
 
@@ -299,13 +299,13 @@ void GameEngineTextureRenderer::CreateFrameAnimation_FolderTexture(const std::st
 }
 
 void GameEngineTextureRenderer::ChangeFrameAnimation(
-	const std::string& _animationName, bool _isForcedChange /*= false*/)
+	const std::string_view& _animationName, bool _isForcedChange /*= false*/)
 {
 	std::string uppercaseAnimationName = GameEngineString::ToUpperReturn(_animationName);
 
 	if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 	{
-		MsgBoxAssertString(_animationName + ": 그런 이름의 애니메이션이 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_animationName) + ": 그런 이름의 애니메이션이 존재하지 않습니다.");
 		return;
 	}
 
@@ -335,11 +335,11 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(
 		}
 		else
 		{
-			MsgBoxAssertString(_animationName + ": 텍스처가 준비되지 않은 애니메이션입니다.");
+			MsgBoxAssertString(std::string(_animationName) + ": 텍스처가 준비되지 않은 애니메이션입니다.");
 			return;
 		}
 	}
-	
+
 }
 
 void GameEngineTextureRenderer::ScaleToTexture()
@@ -430,7 +430,7 @@ void GameEngineTextureRenderer::Update(float _deltaTime)
 
 void GameEngineTextureRenderer::SetTextureRendererSetting()
 {
-	this->SetPipeLine("TextureAtlas");
+	this->SetMaterial("TextureAtlas");
 
 	atlasDataInst_.frameData_.posX = 0.f;
 	atlasDataInst_.frameData_.posY = 0.f;

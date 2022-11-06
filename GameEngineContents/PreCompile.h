@@ -7,6 +7,8 @@
 #include <GameEngineCore\GameEngineUpdateObject.h>
 #include <GameEngineCore\GameEngineLevel.h>
 #include <GameEngineCore\GameEngineActor.h>
+#include <GameEngineCore\GameEngineVertexShader.h>
+#include <GameEngineCore\GameEnginePixelShader.h>
 
 #include <GameEngineCore\GameEngineCamera.h>
 #include <GameEngineCore\GameEngineCameraActor.h>
@@ -33,4 +35,6 @@
 
 #include <GameEngineCore\GEngine.h>
 
-#include"GameEngineCore\GameEngineFBXMesh.h"
+#include <GameEngineCore\GameEngineFBXMesh.h>
+
+

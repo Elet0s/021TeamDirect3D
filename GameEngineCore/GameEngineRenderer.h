@@ -33,7 +33,7 @@ private:
     GameEngineRenderUnit& operator=(GameEngineRenderUnit&& _other) = delete;
 
 public:
-    //렌더유닛에 렌더링 파이프라인을 지정하는 함수.
+    //렌더유닛에 마테리얼을 지정하는 함수.
     void SetMaterial(const std::string_view& _materialName);
 
     //렌더유닛에 메쉬를 지정하는 함수. 
@@ -48,11 +48,11 @@ public:
     // 부모 렌더러가 등록된 카메라의 렌더타겟에 옮기는 함수.
     void Render(float _deltaTime);
 
-    GameEngineMaterial* GetPipeLine();
+    GameEngineMaterial* GetMaterial();
 
-    GameEngineMaterial* GetClonePipeLine();
+    GameEngineMaterial* GetCloneMaterial();
 
-    GameEngineMaterial* ClonePipeLine(GameEngineMaterial* _original);
+    GameEngineMaterial* CloneMaterial(GameEngineMaterial* _original);
 
     //렌더유닛에 부모 렌더러를 지정하고 EngineShaderResourceSetting() 함수를 호출해서 엔진 기본 상수버퍼를 등록하는 함수.
     void SetRenderer(GameEngineRenderer* _parentRenderer);    

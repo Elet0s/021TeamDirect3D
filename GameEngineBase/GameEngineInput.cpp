@@ -46,7 +46,7 @@ void GameEngineInput::GameEngineKey::Update(float _deltaTime)
 	}
 }
 
-void GameEngineInput::CreateKey(const std::string& _keyName, int _keyValue)
+void GameEngineInput::CreateKey(const std::string_view& _keyName, int _keyValue)
 {
 	if (true == _keyName.empty())	//이름없는 키는 생성금지.
 	{
@@ -115,71 +115,71 @@ void GameEngineInput::Reset()
 	}
 }
 
-float GameEngineInput::GetTime(const std::string& _keyName)
+float GameEngineInput::GetTime(const std::string_view& _keyName)
 {
 	std::string uppercaseKeyName = GameEngineString::ToUpperReturn(_keyName);
 
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(_keyName + ": 그런 이름의 키가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_keyName) + ": 그런 이름의 키가 존재하지 않습니다.");
 		return false;
 	}
 
 	return allKeys_[uppercaseKeyName].time_;
 }
 
-bool GameEngineInput::IsDown(const std::string& _keyName)
+bool GameEngineInput::IsDown(const std::string_view& _keyName)
 {
 	std::string uppercaseKeyName = GameEngineString::ToUpperReturn(_keyName);
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(_keyName + ": 그런 이름의 키가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_keyName) + ": 그런 이름의 키가 존재하지 않습니다.");
 		return false;
 	}
 
 	return allKeys_[uppercaseKeyName].isDown_;
 }
 
-bool GameEngineInput::IsPressed(const std::string& _keyName)
+bool GameEngineInput::IsPressed(const std::string_view& _keyName)
 {
 	std::string uppercaseKeyName = GameEngineString::ToUpperReturn(_keyName);
 
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(_keyName + ": 그런 이름의 키가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_keyName) + ": 그런 이름의 키가 존재하지 않습니다.");
 		return false;
 	}
 
 	return allKeys_[uppercaseKeyName].isPressed_;
 }
 
-bool GameEngineInput::IsUp(const std::string& _keyName)
+bool GameEngineInput::IsUp(const std::string_view& _keyName)
 {
 	std::string uppercaseKeyName = GameEngineString::ToUpperReturn(_keyName);
 
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(_keyName + ": 그런 이름의 키가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_keyName) + ": 그런 이름의 키가 존재하지 않습니다.");
 		return false;
 	}
 
 	return allKeys_[uppercaseKeyName].isUp_;
 }
 
-bool GameEngineInput::IsFree(const std::string& _keyName)
+bool GameEngineInput::IsFree(const std::string_view& _keyName)
 {
 	std::string uppercaseKeyName = GameEngineString::ToUpperReturn(_keyName);
 
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(_keyName + ": 그런 이름의 키가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_keyName) + ": 그런 이름의 키가 존재하지 않습니다.");
 		return false;
 	}
 
 	return allKeys_[uppercaseKeyName].isFree_;
 }
 
-bool GameEngineInput::IsKey(const std::string& _keyName)
+bool GameEngineInput::IsKey(const std::string_view& _keyName)
 {
 	std::string uppercaseKeyName = GameEngineString::ToUpperReturn(_keyName);
 

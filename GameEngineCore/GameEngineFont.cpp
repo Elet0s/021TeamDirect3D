@@ -45,7 +45,7 @@ GameEngineFont::~GameEngineFont()
 	}
 }
 
-GameEngineFont* GameEngineFont::Load(const std::string& _path, const std::string& _name)
+GameEngineFont* GameEngineFont::Load(const std::string_view& _path, const std::string_view& _name)
 {
 	GameEngineFont* newRes = CreateNamedRes(_name);
 	newRes->LoadFont(_path);
@@ -53,8 +53,8 @@ GameEngineFont* GameEngineFont::Load(const std::string& _path, const std::string
 }
 
 void GameEngineFont::FontDraw(
-	const std::string& _text,
-	float _fontSize, 
+	const std::string_view& _text,
+	float _fontSize,
 	const float4& _screenPos,
 	const float4& _color,
 	UINT _flag /*= FW1_LEFT*/
@@ -69,11 +69,11 @@ void GameEngineFont::FontDraw(
 		_screenPos.x,
 		_screenPos.y,
 		_color.GetUINTColor(),
-		_flag 
+		_flag
 	);
 }
 
-void GameEngineFont::LoadFont(const std::string& _path)
+void GameEngineFont::LoadFont(const std::string_view& _path)
 {
 	std::wstring wPath = GameEngineString::AnsiToUnicodeReturn(_path);
 
@@ -87,4 +87,3 @@ void GameEngineFont::LoadFont(const std::string& _path)
 		return;
 	}
 }
-

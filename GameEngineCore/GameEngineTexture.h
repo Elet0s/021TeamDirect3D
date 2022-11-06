@@ -57,12 +57,14 @@ private:
 
 public:	
 	
-	static GameEngineTexture* Create(const std::string& _name, ID3D11Texture2D* _texture);
+public:
+
+	static GameEngineTexture* Create(const std::string_view& _name, ID3D11Texture2D* _texture);
 	static GameEngineTexture* Create(ID3D11Texture2D* _texture);
 	static GameEngineTexture* Create(const D3D11_TEXTURE2D_DESC& _desc);
 
-	static GameEngineTexture* Load(const std::string& _path);
-	static GameEngineTexture* Load(const std::string& _path, const std::string& _name);
+	static GameEngineTexture* Load(const std::string_view& _path);
+	static GameEngineTexture* Load(const std::string_view& _path, const std::string_view& _name);
 
 	void VSSetting(int _bindPoint);
 	void PSSetting(int _bindPoint);
@@ -70,15 +72,15 @@ public:
 	void VSReset(int _bindPoint);
 	void PSReset(int _bindPoint);
 
-	ID3D11RenderTargetView* CreateRenderTargetView();	
-	ID3D11ShaderResourceView* CreateShaderResourceView();	
-	ID3D11DepthStencilView* CreateDepthStencilView();	
+	ID3D11RenderTargetView* CreateRenderTargetView();
+	ID3D11ShaderResourceView* CreateShaderResourceView();
+	ID3D11DepthStencilView* CreateDepthStencilView();
 
 	//지정한 텍스처를 가로 x등분, 세로 y등분으로 균일 분할.
-	static void Cut(const std::string& _textureName, int _x, int _y);
+	static void Cut(const std::string_view& _textureName, int _x, int _y);
 
 	//원하는 절단 지점의 픽셀좌표와 크기를 UV값으로 변환 후 저장.
-	void Cut(UINT _startX, UINT _startY, UINT _sizeX, UINT _sizeY);	
+	void Cut(UINT _startX, UINT _startY, UINT _sizeX, UINT _sizeY);
 
 	float4 GetPixelToFloat4(int _x, int _y);	//float4는 실수 특성상 색상값의 오차 발생 가능성 있음.
 	PixelColor GetPixelToPixelColor(int _x, int _y);	//unsigned int 형태로 받아서 색상값의 오차 없음.
@@ -104,7 +106,7 @@ public:
 	float4 GetScale()
 	{
 		//(metadata_.width), (metadata_.height)이거쓰면 0,0되서 텍스쳐 생성에 실패함 뜸
-		return float4(static_cast<float>(desc_.Width), 
+		return float4(static_cast<float>(desc_.Width),
 			static_cast<float>(desc_.Height));
 	}
 
@@ -125,8 +127,8 @@ public:
 			cutData_[_index].posY * static_cast<float>(desc_.Height));
 	}
 
-private: 
-	void TextureLoad(const std::string& _path);	
+private:
+	void TextureLoad(const std::string_view& _path);
 	//지정한 경로에서 텍스처를 불러오는 함수.셰이더리소스뷰 생성 과정까지 포함되어 있음.
 
 	void TextureCreate(const D3D11_TEXTURE2D_DESC& _desc);	//ID3D11Texture2D* 형 텍스처 생성 함수. 
@@ -156,6 +158,5 @@ private:
 	DirectX::TexMetadata metaData_;		//DirectXTex로 불러온 텍스처의 각종 정보들.
 
 	std::vector<float4> cutData_;	//프레임 애니메이션 만들 때 필요한 아틀라스텍스처 분할 정보.
-
 };
 

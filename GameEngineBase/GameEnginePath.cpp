@@ -2,19 +2,23 @@
 #include "GameEnginePath.h"
 #include "GameEngineDebug.h"
 
-GameEnginePath::GameEnginePath(): path_(std::filesystem::current_path())
+GameEnginePath::GameEnginePath() : path_(std::filesystem::current_path())
 {
 }
 
-GameEnginePath::GameEnginePath(const std::filesystem::path& _path): path_(_path)
+GameEnginePath::GameEnginePath(const std::filesystem::path& _path) : path_(_path)
 {
 }
 
-GameEnginePath::GameEnginePath(const std::string& _path): path_(_path)
+GameEnginePath::GameEnginePath(const std::string& _path) : path_(_path)
 {
 }
 
-GameEnginePath::GameEnginePath(const char* _path): path_(_path)
+GameEnginePath::GameEnginePath(const std::string_view& _path) : path_(_path)
+{
+}
+
+GameEnginePath::GameEnginePath(const char* _path) : path_(_path)
 {
 }
 
@@ -52,30 +56,30 @@ std::string GameEnginePath::GetExtention() const
 	return path_.extension().string();
 }
 
-std::string GameEnginePath::ReplaceFileName(const std::string& _newFileName)
+std::string GameEnginePath::ReplaceFileName(const std::string_view& _newFileName)
 {
 	return path_.replace_filename(_newFileName).string();
 }
 
-std::string GameEnginePath::GetFileName(const std::string& _path)
+std::string GameEnginePath::GetFileName(const std::string_view& _path)
 {
 	std::filesystem::path returnFileName = _path;
 	return returnFileName.filename().string();
 }
 
-std::string GameEnginePath::GetStem(const std::string& _path)
+std::string GameEnginePath::GetStem(const std::string_view& _path)
 {
 	std::filesystem::path returnStem = _path;
 	return returnStem.stem().string();
 }
 
-std::string GameEnginePath::GetExtension(const std::string& _path)
+std::string GameEnginePath::GetExtension(const std::string_view& _path)
 {
 	std::filesystem::path returnExtention = _path;
 	return returnExtention.extension().string();
 }
 
-std::string GameEnginePath::GetFolderPath(const std::string& _path)
+std::string GameEnginePath::GetFolderPath(const std::string_view& _path)
 {
 	std::filesystem::path returnFolderPath = _path;
 	return returnFolderPath.remove_filename().string();

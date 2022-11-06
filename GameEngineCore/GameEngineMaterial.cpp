@@ -14,21 +14,21 @@
 
 GameEngineMaterial::GameEngineMaterial()
 	: vertexShader_(nullptr),
-	rasterizer_(nullptr),	
+	rasterizer_(nullptr),
 	pixelShader_(nullptr),
 	depthStencil_(nullptr),
 	blend_(nullptr)
 {
-	
+
 }
 
 GameEngineMaterial::~GameEngineMaterial()
 {
 }
 
-GameEngineMaterial* GameEngineMaterial::Create(const std::string& _renderingPipeLineName)
+GameEngineMaterial* GameEngineMaterial::Create(const std::string_view& _materialName)
 {
-	return CreateNamedRes(_renderingPipeLineName);
+	return CreateNamedRes(_materialName);
 }
 
 GameEngineMaterial* GameEngineMaterial::Create()
@@ -45,13 +45,13 @@ void GameEngineMaterial::AllShaderReset()
 	GameEngineDevice::GetContext()->PSSetShader(nullptr, nullptr, 0);
 }
 
-void GameEngineMaterial::SetVertexShader(const std::string& _name)
+void GameEngineMaterial::SetVertexShader(const std::string_view& _name)
 {
 	this->vertexShader_ = GameEngineVertexShader::Find(_name);
 
 	if (nullptr == vertexShader_)
 	{
-		MsgBoxAssertString(_name + ": 그런 이름의 버텍스셰이더가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_name) + ": 그런 이름의 버텍스셰이더가 존재하지 않습니다.");
 		return;
 	}
 }
@@ -67,46 +67,46 @@ void GameEngineMaterial::SetVertexShader(GameEngineVertexShader* _vertexShader)
 	}
 }
 
-void GameEngineMaterial::SetRasterizer(const std::string& _name)
+void GameEngineMaterial::SetRasterizer(const std::string_view& _name)
 {
 	this->rasterizer_ = GameEngineRasterizer::Find(_name);
 
 	if (nullptr == rasterizer_)
 	{
-		MsgBoxAssertString(_name + ": 그런 이름의 래스터라이저가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_name) + ": 그런 이름의 래스터라이저가 존재하지 않습니다.");
 		return;
 	}
 }
 
-void GameEngineMaterial::SetPixelShader(const std::string& _name)
+void GameEngineMaterial::SetPixelShader(const std::string_view& _name)
 {
 	this->pixelShader_ = GameEnginePixelShader::Find(_name);
 
 	if (nullptr == pixelShader_)
 	{
-		MsgBoxAssertString(_name + ": 그런 이름의 픽셀셰이더가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_name) + ": 그런 이름의 픽셀셰이더가 존재하지 않습니다.");
 		return;
 	}
 }
 
-void GameEngineMaterial::SetDepthStencil_OutputMerger(const std::string& _name)
+void GameEngineMaterial::SetDepthStencil_OutputMerger(const std::string_view& _name)
 {
 	this->depthStencil_ = GameEngineDepthStencil::Find(_name);
 
 	if (nullptr == depthStencil_)
 	{
-		MsgBoxAssertString(_name + ": 그런 이름의 깊이스텐실이 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_name) + ": 그런 이름의 깊이스텐실이 존재하지 않습니다.");
 		return;
 	}
 }
 
-void GameEngineMaterial::SetBlend_OutputMerger(const std::string& _name)
+void GameEngineMaterial::SetBlend_OutputMerger(const std::string_view& _name)
 {
 	this->blend_ = GameEngineBlend::Find(_name);
 
 	if (nullptr == blend_)
 	{
-		MsgBoxAssertString(_name + ": 그런 이름의 블렌드가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_name) + ": 그런 이름의 블렌드가 존재하지 않습니다.");
 		return;
 	}
 }

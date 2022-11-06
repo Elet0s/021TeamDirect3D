@@ -3,4 +3,8 @@
   <ItemGroup>
     <FxCompile Include="Test.hlsl" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="TransformHeader.hlsli" />
+    <None Include="RenderOption.hlsli" />
+  </ItemGroup>
 </Project>

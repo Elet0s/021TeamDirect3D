@@ -4,7 +4,7 @@
 #include "WorldMapLevel.h"
 #include "StageLevel.h"
 #include "TestLevel.h"
-#include"LoginLevel.h"
+#include "ShaderTestLevel.h"
 
 
 ContentsCore::ContentsCore()
@@ -39,6 +39,8 @@ void ContentsCore::Start()
 		GameEngineInput::GetInst()->CreateKey("LevelChangeKey", 'P');
 	}
 
+	PrepareContentsShader("ContentsResources");
+
 	//GameEngineDebug::ConsoleOpen(); 콘솔창이 필요하면 복원.
 
 	//RTTI(Run-Time Type information): 런타임 형식 정보. 
@@ -48,6 +50,7 @@ void ContentsCore::Start()
 	CreateLevel<WorldMapLevel>("WorldMap");
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<TestLevel>("Test");
+	CreateLevel<ShaderTestLevel>("ShaderTest");
 	ChangeLevel("WorldMap");
 
 
@@ -61,4 +64,36 @@ void ContentsCore::Update(float _deltaTime)
 
 void ContentsCore::End()
 {
+}
+
+void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
+{
+	GameEngineDirectory contentsShaderDir;
+	if (true == contentsShaderDir.MoveParentToExistChildDirectory(_dirName))
+	{
+		contentsShaderDir.MoveToChild(_dirName);
+		contentsShaderDir.MoveToChild("Shader");
+		std::vector<GameEngineFile> contentsShaderPath = contentsShaderDir.GetAllFiles(".hlsl");
+
+		for (GameEngineFile& path : contentsShaderPath)
+		{
+			GameEngineShader::AutoCompile(path.GetFullPath());
+		}
+	}
+	else
+	{
+		MsgBoxAssertString(std::string(_dirName) + "그런 이름의 디렉토리가 없습니다. 디렉토리명을 확인하세요.");
+		return;
+	}
+
+
+	GameEngineMaterial* newContentsMaterial0
+		= GameEngineMaterial::Create("Test");
+	newContentsMaterial0->SetVertexShader("Test.hlsl");
+	newContentsMaterial0->SetPixelShader("Test.hlsl");
+	newContentsMaterial0->SetRasterizer("EngineRasterizer");
+	newContentsMaterial0->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial0->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+
 }

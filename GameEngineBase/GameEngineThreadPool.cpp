@@ -50,7 +50,7 @@ GameEngineThreadPool::~GameEngineThreadPool()
 
 }
 
-void GameEngineThreadPool::Initialize(const std::string& _threadName, int _threadCount /*= 0*/)
+void GameEngineThreadPool::Initialize(const std::string_view& _threadName, int _threadCount /*= 0*/)
 {
 	this->createdThreadCount_ = _threadCount;
 
@@ -100,9 +100,9 @@ void GameEngineThreadPool::Initialize(const std::string& _threadName, int _threa
 		GameEngineThread* newThread = new GameEngineThread();
 		allThreads_.push_back(newThread);
 
-		newThread->SetName(_threadName + std::to_string(i));
+		newThread->SetName(_threadName.data() + std::to_string(i));
 		newThread->Start(
-			_threadName + std::to_string(i),
+			_threadName.data() + std::to_string(i),
 			std::bind(ThreadPoolFunction, this, newThread, iocpHandle_)
 			//
 		);

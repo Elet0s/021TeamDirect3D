@@ -169,7 +169,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="LoginUI.h" />
-    <ClInclude Include="LoginLevel.h" />
+    <ClInclude Include="ShaderTestLevel.h" />
     <ClInclude Include="MapEditorWindow.h" />
     <ClInclude Include="MetaSpriteWindow.h" />
     <ClInclude Include="Monster.h" />
@@ -239,7 +239,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LoginUI.cpp" />
-    <ClCompile Include="LoginLevel.cpp" />
+    <ClCompile Include="ShaderTestLevel.cpp" />
     <ClCompile Include="MapEditorWindow.cpp" />
     <ClCompile Include="MetaSpriteWindow.cpp" />
     <ClCompile Include="Monster.cpp" />

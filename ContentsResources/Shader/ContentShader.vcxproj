@@ -151,6 +151,10 @@
   <ItemGroup>
     <FxCompile Include="Test.hlsl" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="RenderOption.hlsli" />
+    <None Include="TransformHeader.hlsli" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

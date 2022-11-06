@@ -15,7 +15,7 @@ GameEngineSampler::~GameEngineSampler()
     }
 }
 
-GameEngineSampler* GameEngineSampler::Create(const std::string& _name, const D3D11_SAMPLER_DESC& _desc)
+GameEngineSampler* GameEngineSampler::Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc)
 {
     GameEngineSampler* newSampler = CreateNamedRes(_name);
     newSampler->Create(_desc);

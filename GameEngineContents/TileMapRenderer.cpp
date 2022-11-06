@@ -120,7 +120,7 @@ void TileMapRenderer::Render(float _deltaTime)
 
 void TileMapRenderer::Start()
 {
-	this->SetPipeLine("TextureAtlas");
+	this->SetMaterial("TextureAtlas");
 
 	this->frameData_.posX = 0.f;
 	this->frameData_.posY = 0.f;

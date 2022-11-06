@@ -92,14 +92,14 @@ public:
 
 	//액터 생성 함수.
 	template<typename ActorType, typename GroupIndexType>
-	ActorType* CreateActor(GroupIndexType _type, const std::string& _actorName = "")
+	ActorType* CreateActor(GroupIndexType _type, const std::string_view& _actorName = "")
 	{
 		return CreateActor<ActorType>(static_cast<int>(_type), _actorName);
 	}
 
 	//액터 생성 함수.
 	template<typename ActorType>
-	ActorType* CreateActor(int _objectGroupIndex = 0, const std::string& _actorName = "")
+	ActorType* CreateActor(int _objectGroupIndex = 0, const std::string_view& _actorName = "")
 	{
 		GameEngineActor* newActor = new ActorType();
 

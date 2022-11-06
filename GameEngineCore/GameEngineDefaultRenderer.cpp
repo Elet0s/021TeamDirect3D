@@ -16,13 +16,13 @@ void GameEngineDefaultRenderer::Render(float _deltaTime)
 	this->renderUnit_.Render(_deltaTime);
 }
 
-void GameEngineDefaultRenderer::SetPipeLine(const std::string& _renderingPipeLineName)
+void GameEngineDefaultRenderer::SetMaterial(const std::string_view& _materialName)
 {
-	this->renderUnit_.SetMaterial(_renderingPipeLineName);
+	this->renderUnit_.SetMaterial(_materialName);
 	this->renderUnit_.SetRenderer(this);
 }
 
-void GameEngineDefaultRenderer::SetMesh(const std::string& _meshName)
+void GameEngineDefaultRenderer::SetMesh(const std::string_view& _meshName)
 {
 	this->renderUnit_.SetMesh(_meshName);
 }

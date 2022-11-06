@@ -22,14 +22,14 @@ GameEngineFontRenderer::~GameEngineFontRenderer()
 {
 }
 
-void GameEngineFontRenderer::SetText(const std::string& _text, const std::string& _font /*= "돋움"*/)
+void GameEngineFontRenderer::SetText(const std::string_view& _text, const std::string_view& _font /*= "돋움"*/)
 {
 	text_ = _text;
 	font_ = GameEngineFont::Find(_font);
 
 	if (nullptr == font_)
 	{
-		MsgBoxAssertString(_font + ": 그런 이름의 폰트가 없습니다.");
+		MsgBoxAssertString(std::string(_font) + ": 그런 이름의 폰트가 없습니다.");
 		return;
 	}
 }

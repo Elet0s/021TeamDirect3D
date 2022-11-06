@@ -159,23 +159,23 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 	shaderResourceHelper_.AllResourcesReset();
 }
 
-GameEngineMaterial* GameEngineRenderUnit::GetPipeLine()
+GameEngineMaterial* GameEngineRenderUnit::GetMaterial()
 {
 	return this->material_;
 }
 
-GameEngineMaterial* GameEngineRenderUnit::GetClonePipeLine()
+GameEngineMaterial* GameEngineRenderUnit::GetCloneMaterial()
 {
 	if (false == material_->IsOriginal())
 	{
 		return material_;
 	}
 
-	material_ = ClonePipeLine(material_);
+	material_ = CloneMaterial(material_);
 	return material_;
 }
 
-GameEngineMaterial* GameEngineRenderUnit::ClonePipeLine(GameEngineMaterial* _original)
+GameEngineMaterial* GameEngineRenderUnit::CloneMaterial(GameEngineMaterial* _original)
 {
 	GameEngineMaterial* clone = GameEngineMaterial::Create();
 	clone->Copy(_original);

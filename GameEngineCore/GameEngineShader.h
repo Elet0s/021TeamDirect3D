@@ -174,7 +174,7 @@ private:
 
 public:	
 	//지정한 경로의 HLSL코드를 해석하고 그 내용대로 셰이더와 셰이더리소스를 만드는 함수.
-	static void AutoCompile(const std::string& _path);
+	static void AutoCompile(const std::string_view& _path);
 
 	GameEngineConstantBufferSetter& GetConstantBufferSetter(const std::string& _name);
 
@@ -192,10 +192,10 @@ public:
 
 protected:
 	//읽어들인 HLSL코드를 컴파일하는데 필요한 HLSL 버전을 생성하는 함수.
-	void CreateVersion(const std::string& _shaderType, UINT _versionHigh, UINT _versionLow);
+	void CreateVersion(const std::string_view& _shaderType, UINT _versionHigh, UINT _versionLow);
 
 	//ShaderCompile()함수를 대체하는, 셰이더 공용 HLSL코드 컴파일 함수.
-	void CompileHLSLCode(const std::string& _path);
+	void CompileHLSLCode(const std::string_view& _path);
 
 	//내가 입력한 HLSL코드의 내용대로 셰이더의 리소스가 있는지 확인하고, 리소스세터를 통해 리소스 정보를 저장한다.
 	//상수버퍼는 찾아봐서 있으면 가져오고 없다면 생성한다.
@@ -224,7 +224,7 @@ protected:
 	// 하지만 그정도로 최적화된 메모리관리가 아직은 필요 없으므로 위와같이 저장한다.
 
 protected:
-	inline void SetEntrtyPoint(const std::string& _entryPoint)
+	inline void SetEntrtyPoint(const std::string_view& _entryPoint)
 	{
 		entryPoint_ = _entryPoint;
 	}

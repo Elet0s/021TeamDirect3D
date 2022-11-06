@@ -42,15 +42,15 @@ class GameEngineInput
 
 
 public:	
-	void CreateKey(const std::string& _keyName, int _keyValue);
+	void CreateKey(const std::string_view& _keyName, int _keyValue);
 	void Update(float _deltaTime);
 	void Reset();
-	float GetTime(const std::string& _keyName);
-	bool IsDown(const std::string& _keyName);
-	bool IsPressed(const std::string& _keyName);
-	bool IsUp(const std::string& _keyName);
-	bool IsFree(const std::string& _keyName);
-	bool IsKey(const std::string& _keyName);
+	float GetTime(const std::string_view& _keyName);
+	bool IsDown(const std::string_view& _keyName);
+	bool IsPressed(const std::string_view& _keyName);
+	bool IsUp(const std::string_view& _keyName);
+	bool IsFree(const std::string_view& _keyName);
+	bool IsKey(const std::string_view& _keyName);
 
 
 public:

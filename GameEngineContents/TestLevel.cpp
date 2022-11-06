@@ -120,37 +120,8 @@ void TestLevel::Start()
 
 void TestLevel::Update(float _DeltaTime)
 {						
-
-
+	tileCameraActor_->GetTransform().SetWorldPosition(GetMainCameraActorTransform().GetWorldPosition());
 	GameEngineCore::engineThreadPool_.Work(std::bind(&TestLevel::UpdateWorld, this));
-
-	//UpdateWorld();
-
-	//GameEngineCore::engineThreadPool_.Work(std::bind<void>(&TestLevel::UpdateWorld, this));
-	
-								//1180
-	//float4 CenterPos = tilemaps_[1][1]->GetTransform().GetWorldPosition() + float4(320.f, -320.f);
-	//int Dir = -1;
-	//if (CenterPos.x + 320.f <= GetMainCameraActor()->GetTransform().GetWorldPosition().x)
-	//{
-	//	Dir = 0;
-	//}												
-	//else if (CenterPos.x - 320.f >= GetMainCameraActor()->GetTransform().GetWorldPosition().x)
-	//{
-	//	Dir = 1;
-	//}
-	//else if (CenterPos.y + 320.f <= GetMainCameraActor()->GetTransform().GetWorldPosition().y)
-	//{
-	//	Dir = 2;
-	//}
-	//else if (CenterPos.y - 320.f >= GetMainCameraActor()->GetTransform().GetWorldPosition().y)
-	//{
-	//	Dir = 3;
-	//}
-
-	//MoveWorld(Dir);
-
-
 }
 
 void TestLevel::CreateMapAndCamraMove()

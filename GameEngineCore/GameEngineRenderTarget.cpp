@@ -22,7 +22,7 @@ GameEngineRenderTarget::~GameEngineRenderTarget()
 	allEffects_.clear();
 }
 
-GameEngineRenderTarget* GameEngineRenderTarget::Create(const std::string& _name)
+GameEngineRenderTarget* GameEngineRenderTarget::Create(const std::string_view& _name)
 {
 	return CreateNamedRes(_name);
 }

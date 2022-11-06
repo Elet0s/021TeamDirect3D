@@ -38,7 +38,9 @@ public:
 	void End() override;
 
 
+
 private:
+	void PrepareContentsShader(const std::string_view& _dirName);
 
 };
 
