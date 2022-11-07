@@ -26,6 +26,7 @@ private:
 	
 	void UpdateWorld();
 	void MoveWorld(int _Dir);
+	void MoveCamera();
 
 	std::vector<std::vector<TileMapActor*>> tilemaps_;
 	

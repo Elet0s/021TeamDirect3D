@@ -125,7 +125,7 @@ void Player::Update(float _deltaTime)
 {
 	if (GetLevel()->GetMainCameraActor()->IsFreeCameraMode() == false)
 	{
-		GetLevel()->GetMainCameraActor()->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -100.0f);
+		//GetLevel()->GetMainCameraActor()->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -100.0f);
 	}
 	statemanager_.Update(_deltaTime);
 }

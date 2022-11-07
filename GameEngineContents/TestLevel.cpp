@@ -66,7 +66,7 @@ void TestLevel::Start()
 		{
 			tilemaps_[i][j] = CreateActor<TileMapActor>();
 			tilemaps_[i][j]->GetTransform().SetWorldPosition(float4(640.f * static_cast<float>(j), -(640.f * static_cast<float>(i))));
-			tilemaps_[i][j]->tileRenderer_->CreateTileMap(5, 5, { 128, 128 }, "grassTexture.png");
+			tilemaps_[i][j]->tileRenderer_->CreateTileMap(10, 5, { 128, 128 }, "grassTexture.png");
 			tilemaps_[i][j]->tileRenderer_->SetPivot(PivotMode::LeftTop);
 		}
 	}
@@ -78,7 +78,8 @@ void TestLevel::Start()
 		Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
 		NewPlayer->SetLevelOverOn();
 		NewPlayer->SetLevel(this);
-		NewPlayer->GetTransform().SetWorldPosition({ 640.f, -360.f });
+		NewPlayer->GetTransform().SetWorldPosition({ 960.f, -960.f });
+		GetMainCameraActor()->GetTransform().SetWorldPosition(float4(NewPlayer->GetTransform().GetWorldPosition().x , NewPlayer->GetTransform().GetWorldPosition().y, -100.f));
 	}
 
 	{
@@ -132,22 +133,24 @@ void TestLevel::CreateMapAndCamraMove()
 
 void TestLevel::UpdateWorld()
 {
-	float4 CenterPos = tilemaps_[1][1]->GetTransform().GetWorldPosition() + float4(320.f, -320.f);
+	float4 CenterPos = tilemaps_[1][1]->GetTransform().GetWorldPosition() + float4(640.f, -320.f);
+	float4 PlayerPos = Player::GetMainPlayer()->GetTransform().GetWorldPosition();
+
 	int Dir = -1;
 
-	if (CenterPos.x + 320.f < GetMainCameraActor()->GetTransform().GetWorldPosition().x)
+	if (CenterPos.x + 640.f < PlayerPos.x)
 	{
 		Dir = 0;
 	}
-	else if (CenterPos.x - 320.f > GetMainCameraActor()->GetTransform().GetWorldPosition().x)
+	else if (CenterPos.x - 640.f > PlayerPos.x)
 	{
 		Dir = 1;
 	}
-	else if (CenterPos.y + 320.f < GetMainCameraActor()->GetTransform().GetWorldPosition().y)
+	else if (CenterPos.y + 320.f < PlayerPos.y)
 	{
 		Dir = 2;
 	}
-	else if (CenterPos.y - 320.f > GetMainCameraActor()->GetTransform().GetWorldPosition().y)
+	else if (CenterPos.y - 320.f > PlayerPos.y)
 	{
 		Dir = 3;
 	}
@@ -157,6 +160,8 @@ void TestLevel::UpdateWorld()
 
 void TestLevel::MoveWorld(int _Dir)
 {
+	MoveCamera();
+
 	std::vector<std::vector<TileMapActor*>> CopyTiles_;
 	CopyTiles_.resize(3);
 	for (size_t y = 0; y < CopyTiles_.size(); y++)
@@ -170,7 +175,7 @@ void TestLevel::MoveWorld(int _Dir)
 	case 0:   // ¿À¸¥ÂÊÀ¸·Î °¬À»¶§
 		for (int y = 0; y < CopyTiles_.size(); y++)
 		{
-			tilemaps_[y][0]->GetTransform().SetWorldPosition(float4(tilemaps_[y][2]->GetTransform().GetWorldPosition().x + 640, tilemaps_[y][2]->GetTransform().GetWorldPosition().y));
+			tilemaps_[y][0]->GetTransform().SetWorldPosition(float4(tilemaps_[y][2]->GetTransform().GetWorldPosition().x + 1280, tilemaps_[y][2]->GetTransform().GetWorldPosition().y));
 		}
 		for (int y = 0; y < CopyTiles_.size(); y++)
 		{
@@ -187,13 +192,12 @@ void TestLevel::MoveWorld(int _Dir)
 				}
 			}
 		}
-		
 		break;
 	case 1:
 		// ¿ÞÂÊÀ¸·Î °¬À»¶§
 		for (int y = 0; y < CopyTiles_.size(); y++)
 		{
-			tilemaps_[y][2]->GetTransform().SetWorldPosition(float4(tilemaps_[y][0]->GetTransform().GetWorldPosition().x - 640, tilemaps_[y][2]->GetTransform().GetWorldPosition().y));
+			tilemaps_[y][2]->GetTransform().SetWorldPosition(float4(tilemaps_[y][0]->GetTransform().GetWorldPosition().x - 1280, tilemaps_[y][2]->GetTransform().GetWorldPosition().y));
 		}
 		for (int y = 0; y < CopyTiles_.size(); y++)
 		{
@@ -259,6 +263,51 @@ void TestLevel::MoveWorld(int _Dir)
 	}
 
 	tilemaps_.swap(CopyTiles_);
+
+	
+}
+
+void TestLevel::MoveCamera()
+{
+	float Time = GameEngineTime::GetDeltaTime();
+	float4 MoveVector = Player::GetMainPlayer()->GetTransform().GetWorldPosition() - GetMainCameraActorTransform().GetWorldPosition();
+	float4 MouseDir = float4::Zero;
+
+	float4 CheckPos = GetMainCamera()->GetMouseWorldPositionToActor() - Player::GetMainPlayer()->GetTransform().GetWorldPosition();
+
+	if (CheckPos.x > 360.f)
+	{
+		MouseDir.x = 100.f;
+	}
+	else if (CheckPos.x < -360.f)
+	{
+		MouseDir.x = -100.f;
+	}
+
+	if (CheckPos.y > 180.f)
+	{
+		MouseDir.y = 100.f;
+	}
+	else if (CheckPos.x < -180.f)
+	{
+		MouseDir.y = -100.f;
+	}
+
+
+	if (abs(MoveVector.x) < 1.0f)
+	{
+		MoveVector.x = 0.f;
+	}
+
+	if (abs(MoveVector.y) < 1.0f)
+	{
+		MoveVector.y = 0.f;
+	}
+
+	MoveVector.Normalize3D();
+
+
+	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x * 220.f + MouseDir.x) * Time, (MoveVector.y * 220.f + MouseDir.y )* Time));
 }
 
 
