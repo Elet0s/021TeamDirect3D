@@ -290,7 +290,7 @@ void GameEngineLevel::PushRenderer(GameEngineRenderer* _renderer, int _cameraOrd
 void GameEngineLevel::PushCamera(GameEngineCamera* _camera, int _cameraOrder)
 {
 	if (static_cast<int>(CameraOrder::UICamera) < _cameraOrder
-		|| static_cast<int>(CameraOrder::TileCamera) > _cameraOrder)
+		|| static_cast<int>(CameraOrder::MainCamera) > _cameraOrder)
 	{
 		MsgBoxAssert("카메라 오더가 허용 범위를 넘어섰습니다.");
 		return;

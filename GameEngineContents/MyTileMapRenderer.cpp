@@ -146,7 +146,9 @@ void MyTileMapRenderer::Start()
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Down", VK_DOWN);
 	}*/
 
-	this->GetActor()->GetLevel()->PushRenderer(this, CameraOrder::TileCamera);
+	//this->GetActor()->GetLevel()->PushRenderer(this, CameraOrder::TileCamera);
+
+	ChangeCamera(CameraOrder::MainCamera);
 
 	this->SetMaterial("TextureAtlas");
 

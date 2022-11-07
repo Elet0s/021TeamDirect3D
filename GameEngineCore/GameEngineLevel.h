@@ -3,8 +3,8 @@
 
 enum class CameraOrder
 {
-	TileCamera,	
 	MainCamera,
+	User0,
 	User1,	
 	User2,	
 	User3,	
