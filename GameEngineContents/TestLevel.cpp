@@ -306,8 +306,10 @@ void TestLevel::MoveCamera()
 
 	MoveVector.Normalize3D();
 
-
-	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x * 220.f + MouseDir.x) * Time, (MoveVector.y * 220.f + MouseDir.y )* Time));
+	if (GetMainCameraActor()->IsFreeCameraMode() == false)
+	{
+		GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x * 420.f + MouseDir.x) * Time, (MoveVector.y * 420.f + MouseDir.y) * Time));
+	}
 }
 
 

@@ -24,7 +24,7 @@ public:
 	{
 		return mainplayer_;
 	}
-
+	CollisionReturn MonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	void SetLevel(GameEngineLevel* _NowLevel);
 
 protected:

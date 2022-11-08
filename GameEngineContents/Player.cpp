@@ -121,13 +121,18 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 }
 
+CollisionReturn Player::MonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	_Other->GetRoot()->Off();
+	return CollisionReturn::Stop;
+}
+
 void Player::Update(float _deltaTime)
 {
-	if (GetLevel()->GetMainCameraActor()->IsFreeCameraMode() == false)
-	{
-		//GetLevel()->GetMainCameraActor()->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -100.0f);
-	}
+
 	statemanager_.Update(_deltaTime);
+	collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D,
+	std::bind(&Player::MonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 void Player::End()
