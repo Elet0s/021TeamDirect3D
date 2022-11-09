@@ -13,7 +13,6 @@ struct FBXNodeInfo
 
 class GameEngineFBX
 {
-	// .fbx 파일에서 버텍스버퍼, 인덱스버퍼를 만드는데 필요한 정보를 추출하는데 필요한 인터페이스를 생성, 초기화하는 클래스.
 
 protected:
 	GameEngineFBX();
@@ -43,7 +42,7 @@ protected:
 
 	//
 	void FBXInfoDebugFunction(fbxsdk::FbxNode* _RootNode);
-	
+
 	//전체 노드 순회.
 	void RecursiveAllNodes(fbxsdk::FbxNode* _Node, std::function<void(fbxsdk::FbxNode*)> _Function = nullptr);
 
@@ -54,8 +53,8 @@ protected:
 	//FBXMatrix->float4x4.
 	float4x4 FBXMatrixToFloat4x4(const fbxsdk::FbxMatrix& _baseTransform);
 
-	//float4x4->FBXMatrix.
-	fbxsdk::FbxMatrix FLoat4x4ToFBXMatirx(const float4x4& _matrix);
+	//float4x4->FBXAMatrix.
+	fbxsdk::FbxAMatrix Float4x4ToFBXAMatrix(const float4x4& _matrix);
 
 	//FBXVector4->float4
 	float4 FBXVecToFloat4(const fbxsdk::FbxVector4& _baseVector);

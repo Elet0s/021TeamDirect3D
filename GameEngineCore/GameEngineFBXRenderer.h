@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngineRenderer.h"
 
-class GameEngineFBXRenderer: public GameEngineRenderer 
+class GameEngineFBXRenderer : public GameEngineRenderer
 {
 	//이 클래스의 존재 이유:
 public:
@@ -17,16 +17,18 @@ private:
 	GameEngineFBXRenderer& operator=(const GameEngineFBXRenderer&& _other) = delete;
 
 
-public:	
+public:
 	virtual void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName);
-	virtual void SetFBXMesh(
-		const std::string& _fbxMeshName, const std::string& _materialName,
+	virtual GameEngineRenderUnit* SetFBXMesh(
+		const std::string& _fbxMeshName,
+		const std::string& _materialName,
 		size_t _meshIndex,
 		size_t _subsetIndex = 0
-	);
+	);	// SetFbxMesh를 해서 만들어진 랜더 유니트를 사용하게 하기 위해서 리턴해준다.
 
 	void Render(float _deltaTime) override;
 
+public:
 	std::vector<std::vector<GameEngineRenderUnit>>& GetAllRenderUnit()
 	{
 		return Unit;

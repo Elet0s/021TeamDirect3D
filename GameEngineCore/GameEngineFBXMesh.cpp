@@ -1,5 +1,6 @@
 ﻿#include "PreCompile.h"
 #include "GameEngineFBXMesh.h"
+#include "GameEngineStructuredBuffer.h"
 
 GameEngineFBXMesh::GameEngineFBXMesh()
 {
@@ -7,6 +8,10 @@ GameEngineFBXMesh::GameEngineFBXMesh()
 
 GameEngineFBXMesh::~GameEngineFBXMesh()
 {
+	for (size_t i = 0; i < AllBoneStructuredBuffers.size(); i++)
+	{
+		delete AllBoneStructuredBuffers[i];
+	}
 }
 
 GameEngineFBXMesh* GameEngineFBXMesh::Load(const std::string& _Path)
@@ -29,7 +34,7 @@ GameEngineMesh* GameEngineFBXMesh::GetGameEngineMesh(size_t _MeshIndex, size_t _
 		MsgBoxAssert("존재하지 않는 랜더 유니트를 사용하려고 했습니다.");
 	}
 
-	FBXRenderUnit& Unit = RenderUnitInfos[_MeshIndex];
+	FBXRenderUnitInfo& Unit = RenderUnitInfos[_MeshIndex];
 
 	if (nullptr == Unit.VertexBuffer)
 	{
@@ -107,7 +112,7 @@ const FBXExMaterialSettingData& GameEngineFBXMesh::GetMaterialSettingData(size_t
 		MsgBoxAssert("존재하지 않는 랜더 유니트를 사용하려고 했습니다.");
 	}
 
-	FBXRenderUnit& Unit = RenderUnitInfos[_MeshIndex];
+	FBXRenderUnitInfo& Unit = RenderUnitInfos[_MeshIndex];
 
 	if (Unit.MaterialData.size() <= _SubIndex)
 	{
@@ -117,7 +122,7 @@ const FBXExMaterialSettingData& GameEngineFBXMesh::GetMaterialSettingData(size_t
 	return Unit.MaterialData[_SubIndex];
 }
 
-Bone* GameEngineFBXMesh::FindBone(int MeshIndex, int _BoneIndex)
+Bone* GameEngineFBXMesh::FindBone(size_t MeshIndex, size_t _BoneIndex)
 {
 	// m_vecRefBones 벡터로 들고 있는애
 
@@ -136,7 +141,7 @@ Bone* GameEngineFBXMesh::FindBone(int MeshIndex, int _BoneIndex)
 	return &AllBones[MeshIndex][_BoneIndex];
 }
 
-Bone* GameEngineFBXMesh::FindBone(int MeshIndex, std::string _Name)
+Bone* GameEngineFBXMesh::FindBone(size_t MeshIndex, const std::string& _Name)
 {
 	if (0 == AllBones.size())
 	{
@@ -175,6 +180,13 @@ void GameEngineFBXMesh::MeshLoad()
 
 	VertexBufferCheck();
 
+	ImportBone();
+
+	CreateGameEngineStructuredBuffer();
+
+	AllBones; // 본정보체
+	AllBoneStructuredBuffers;
+	AllFindMap;
 	RenderUnitInfos;
 	MeshInfos;
 }
@@ -211,7 +223,7 @@ void GameEngineFBXMesh::VertexBufferCheck()
 
 		// 인덱스 버퍼 기준으로 만들어야 한다.
 		// 나중에 변경
-		FBXRenderUnit& RenderUnit = RenderUnitInfos.emplace_back();
+		FBXRenderUnitInfo& RenderUnit = RenderUnitInfos.emplace_back();
 		RenderUnit.VectorIndex = meshInfoIndex;
 
 		if (RenderUnit.MapWI.end() == RenderUnit.MapWI.find(pMesh))
@@ -289,7 +301,7 @@ void GameEngineFBXMesh::VertexBufferCheck()
 		RenderUnit.BoundScaleBox.z = RenderUnit.MaxBoundBox.z - RenderUnit.MinBoundBox.z;
 
 		// 머티리얼 정보를 얻어오고 텍스처의 경로를 알아낸다.
-		FBXRenderUnitMaterialSetting(pMeshNode, &RenderUnit);
+		FBXRenderUnitInfoMaterialSetting(pMeshNode, &RenderUnit);
 
 		pMesh->GetElementMaterialCount();
 		fbxsdk::FbxGeometryElementMaterial* pGeometryElementMaterial = pMesh->GetElementMaterial();
@@ -428,7 +440,7 @@ std::string GameEngineFBXMesh::MaterialTex(fbxsdk::FbxSurfaceMaterial* pMtrl, co
 	return Str;
 }
 
-void GameEngineFBXMesh::FBXRenderUnitMaterialSetting(fbxsdk::FbxNode* _Node, FBXRenderUnit* _RenderData)
+void GameEngineFBXMesh::FBXRenderUnitInfoMaterialSetting(fbxsdk::FbxNode* _Node, FBXRenderUnitInfo* _RenderData)
 {
 	int MtrlCount = _Node->GetMaterialCount();
 
@@ -564,7 +576,7 @@ void GameEngineFBXMesh::MeshNodeCheck()
 		{
 			Info.Name = GameEngineString::AnsiToUTF8Return(geoMetry->GetName());
 		}
-		else 
+		else
 		{
 			Info.Name = nullptr != geoMetryNode ? GameEngineString::AnsiToUTF8Return(geoMetryNode->GetName()) : "None";
 		}
@@ -1408,7 +1420,7 @@ void GameEngineFBXMesh::LoadSkinAndCluster()
 
 	for (int i = 0; i < RenderUnitInfos.size(); ++i)
 	{
-		FBXRenderUnit& RenderInfo = RenderUnitInfos[i];
+		FBXRenderUnitInfo& RenderInfo = RenderUnitInfos[i];
 		std::vector<FbxClusterData>& ClusterInfo = ClusterData[i];
 
 		// 클러스터는 가중치 정보와 인덱스 정보를 가지고 있는데
@@ -1459,7 +1471,7 @@ void GameEngineFBXMesh::ImportCluster()
 	}
 }
 
-void GameEngineFBXMesh::LoadAnimationVertexData(FBXRenderUnit* _DrawData, const std::vector<FbxClusterData>& vecClusterData)
+void GameEngineFBXMesh::LoadAnimationVertexData(FBXRenderUnitInfo* _DrawData, const std::vector<FbxClusterData>& vecClusterData)
 {
 	for (auto& clusterData : vecClusterData)
 	{
@@ -1479,7 +1491,7 @@ void GameEngineFBXMesh::LoadAnimationVertexData(FBXRenderUnit* _DrawData, const 
 	}
 }
 
-void GameEngineFBXMesh::DrawSetWeightAndIndexSetting(FBXRenderUnit* _DrawSet, fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxCluster* _Cluster, int _BoneIndex)
+void GameEngineFBXMesh::DrawSetWeightAndIndexSetting(FBXRenderUnitInfo* _DrawSet, fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxCluster* _Cluster, int _BoneIndex)
 {
 	if (nullptr == _DrawSet)
 	{
@@ -1500,7 +1512,7 @@ void GameEngineFBXMesh::DrawSetWeightAndIndexSetting(FBXRenderUnit* _DrawSet, fb
 	}
 }
 
-void GameEngineFBXMesh::CalAnimationVertexData(FBXRenderUnit& _DrawSet)
+void GameEngineFBXMesh::CalAnimationVertexData(FBXRenderUnitInfo& _DrawSet)
 {
 	for (auto& _WISet : _DrawSet.MapWI)
 	{
@@ -1560,4 +1572,27 @@ void GameEngineFBXMesh::CalAnimationVertexData(FBXRenderUnit& _DrawSet)
 			memcpy_s(VertexData[_WI.first].BLENDINDICES, sizeof(float4), Index, sizeof(float4));
 		}
 	}
+}
+
+void GameEngineFBXMesh::CreateGameEngineStructuredBuffer()
+{
+	for (size_t i = 0; i < AllBones.size(); i++)
+	{
+		GameEngineStructuredBuffer* NewStructuredBuffer = AllBoneStructuredBuffers.emplace_back(new GameEngineStructuredBuffer());
+		NewStructuredBuffer->CreateOrResize(
+			sizeof(float4x4),
+			static_cast<unsigned int>(AllBones[i].size()),
+			nullptr
+		);
+	}
+}
+
+GameEngineStructuredBuffer* GameEngineFBXMesh::GetAnimationStructuredBuffer(size_t _Index)
+{
+	if (AllBoneStructuredBuffers.size() <= _Index)
+	{
+		MsgBoxAssert("스트럭처드 버퍼 인덱스 오버");
+	}
+
+	return AllBoneStructuredBuffers[_Index];
 }

@@ -9,7 +9,7 @@ enum class ShaderType
 };
 
 class GameEngineShader;
-class ShaderResSetter: public GameEngineNameObject
+class ShaderResSetter : public GameEngineNameObject
 {
 	//각각의 셰이더들끼리 상수버퍼나 다른 셰이더 리소스들은 공유하더라도, 바인드포인트 등의
 	// 셰이더 리소스 스스로가 알 수 없는 정보가 다른 경우에 대응하기 위해 만든, 셰이더리소스 외부정보 전담관리용 클래스.
@@ -36,7 +36,7 @@ protected:
 };
 
 class GameEngineConstantBuffer;
-class GameEngineConstantBufferSetter: public ShaderResSetter
+class GameEngineConstantBufferSetter : public ShaderResSetter
 {
 	//셰이더들이 필요로 하는 각각의 상수버퍼가 가져야 하는 정보 관리 클래스.
 
@@ -51,7 +51,7 @@ public:
 	//Map()함수를 통해 GPU로 보내질, 각각의 상수버퍼들이 가진 데이터의 주소값. 
 	const void* settingDataToGPU_;
 
-	UINT byteWidth_;	//상수버퍼 전체 크기. 
+	size_t size_;	//상수버퍼 전체 크기. 
 	//상수버퍼는 크기와 이름 두가지로 분류되어 저장하고 있으므로 
 	//상수버퍼세터도 자기가 담당하는 상수버퍼를 정확히 찾기 위해 둘 다 저장한다.
 
@@ -59,22 +59,23 @@ public:
 	// 아예 자기 메모리로 만든다??
 
 	void Setting() const;
+	void Bind();
 
-//private:	<-일일히 다 막기엔 일이 너무 복잡해져서 막지는 않지만 외부에서 사용해선 안된다.
-// 여기서 외부는 이 리소스를 직접 사용할 GameEngineShader의 자식 클래스들과 셰이더를 사용할 GameEngineRenderingPipeLine,
-// 렌더링 파이프라인을 사용할 GameEngineDefaultRenderer클래스와 그 자식클래스들을 제외하고는 다 외부이다.
+	//private:	<-일일히 다 막기엔 일이 너무 복잡해져서 막지는 않지만 외부에서 사용해선 안된다.
+	// 여기서 외부는 이 리소스를 직접 사용할 GameEngineShader의 자식 클래스들과 셰이더를 사용할 GameEngineRenderingPipeLine,
+	// 렌더링 파이프라인을 사용할 GameEngineDefaultRenderer클래스와 그 자식클래스들을 제외하고는 다 외부이다.
 
 	GameEngineConstantBufferSetter()
 		: constantBuffer_(nullptr),
 		settingDataToGPU_(nullptr),
-		byteWidth_(-1)
+		size_(-1)
 	{
 	}
 
 };
 
 class GameEngineTexture;
-class GameEngineTextureSetter: public ShaderResSetter
+class GameEngineTextureSetter : public ShaderResSetter
 {
 	//이 클래스의 목적은??
 
@@ -87,12 +88,13 @@ public:
 
 	void Setting() const;
 	void Reset() const;
+	void Bind();
 
-//private:	<-일일히 다 막기엔 일이 너무 복잡해져서 막지는 않지만 외부에서 사용해선 안된다.
-// 여기서 외부는 이 리소스를 직접 사용할 GameEngineShader의 자식 클래스들과 셰이더를 사용할 GameEngineRenderingPipeLine,
-// 렌더링 파이프라인을 사용할 GameEngineDefaultRenderer클래스와 그 자식클래스들을 제외하고는 다 외부이다.
+	//private:	<-일일히 다 막기엔 일이 너무 복잡해져서 막지는 않지만 외부에서 사용해선 안된다.
+	// 여기서 외부는 이 리소스를 직접 사용할 GameEngineShader의 자식 클래스들과 셰이더를 사용할 GameEngineRenderingPipeLine,
+	// 렌더링 파이프라인을 사용할 GameEngineDefaultRenderer클래스와 그 자식클래스들을 제외하고는 다 외부이다.
 
-	GameEngineTextureSetter(): texture_(nullptr)
+	GameEngineTextureSetter() : texture_(nullptr)
 	{
 	}
 };
@@ -108,33 +110,38 @@ public:
 	GameEngineSampler* sampler_;
 
 	void Setting() const;
+	void Bind();
 
-//private:	<-일일히 다 막기엔 일이 너무 복잡해져서 막지는 않지만 외부에서 사용해선 안된다.
-// 여기서 외부는 이 리소스를 직접 사용할 GameEngineShader의 자식 클래스들과 셰이더를 사용할 GameEngineRenderingPipeLine,
-// 렌더링 파이프라인을 사용할 GameEngineDefaultRenderer클래스와 그 자식클래스들을 제외하고는 다 외부이다.
+	//private:	<-일일히 다 막기엔 일이 너무 복잡해져서 막지는 않지만 외부에서 사용해선 안된다.
+	// 여기서 외부는 이 리소스를 직접 사용할 GameEngineShader의 자식 클래스들과 셰이더를 사용할 GameEngineRenderingPipeLine,
+	// 렌더링 파이프라인을 사용할 GameEngineDefaultRenderer클래스와 그 자식클래스들을 제외하고는 다 외부이다.
 
-	GameEngineSamplerSetter(): sampler_(nullptr)
+	GameEngineSamplerSetter() : sampler_(nullptr)
 	{
 	}
 };
 
 class GameEngineStructuredBuffer;
-class GameEngineStructuredBufferSetter: public ShaderResSetter
+class GameEngineStructuredBufferSetter : public ShaderResSetter
 {
-public: 
+public:
 	void Setting() const;
-	void Resize(int _count);
-	int GetDataSize();
+	void Bind();
+	void Resize(UINT _count);
+	size_t GetDataSize();
 
+	// 상수버퍼와 완전히 동일하게 동일하게 생각하면 됩니다.
 	GameEngineStructuredBuffer* structuredBuffer_;
-	std::vector<char> settingDataBufferToGPU_;
+	const void* settingDataToGPU_;
+	size_t size_;
+	std::vector<char> originalData_;
 
 public:
 	template <typename DataType>
-	void Push(DataType& _data, int _count)
+	void Push(DataType& _data, UINT _count)
 	{
-		int leftSize = sizeof(DataType);
-		int rightSize = this->GetDataSize();
+		size_t leftSize = sizeof(DataType);
+		size_t rightSize = this->GetDataSize();
 
 		if (leftSize != rightSize)
 		{
@@ -144,13 +151,16 @@ public:
 		PushData(&_data, _count);
 	}
 
-	GameEngineStructuredBufferSetter(): structuredBuffer_(nullptr)
+	GameEngineStructuredBufferSetter()
+		: structuredBuffer_(nullptr),
+		settingDataToGPU_(nullptr),
+		size_(-1)
 	{
 	}
 
 
 private:
-	void PushData(const void* _data, int _count);
+	void PushData(const void* _data, UINT _count);
 };
 
 
@@ -172,9 +182,9 @@ private:
 	GameEngineShader& operator=(const GameEngineShader&& _other) = delete;
 
 
-public:	
+public:
 	//지정한 경로의 HLSL코드를 해석하고 그 내용대로 셰이더와 셰이더리소스를 만드는 함수.
-	static void AutoCompile(const std::string_view& _path);
+	static void AutoCompile(const std::string& _path);
 
 	GameEngineConstantBufferSetter& GetConstantBufferSetter(const std::string& _name);
 
@@ -229,6 +239,6 @@ protected:
 		entryPoint_ = _entryPoint;
 	}
 
-	
+
 };
 

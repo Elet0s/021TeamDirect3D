@@ -23,7 +23,7 @@ void GameEngineFBXRenderer::SetFBXMesh(const std::string& _fbxMeshName, const st
 	}
 }
 
-void GameEngineFBXRenderer::SetFBXMesh(
+GameEngineRenderUnit* GameEngineFBXRenderer::SetFBXMesh(
 	const std::string& _fbxMeshName,
 	const std::string& _materialName,
 	size_t _meshIndex,
@@ -35,7 +35,7 @@ void GameEngineFBXRenderer::SetFBXMesh(
 	if (nullptr == FindFBXMesh)
 	{
 		MsgBoxAssert("존재하지 않는 FBXMesh를 세팅했습니다.");
-		return;
+		return nullptr;
 	}
 
 	if (nullptr == FBXMesh && nullptr != FindFBXMesh)
@@ -66,10 +66,15 @@ void GameEngineFBXRenderer::SetFBXMesh(
 	{
 		const FBXExMaterialSettingData& MatData = FBXMesh->GetMaterialSettingData(_meshIndex, _subsetIndex);
 
-		RenderUnit.GetShaderResourceHelper().SetTexture("DiffuseTexture", MatData.DifTextureName);
+		if (nullptr != GameEngineTexture::Find(MatData.DifTextureName))
+		{
+			RenderUnit.GetShaderResourceHelper().SetTexture("DiffuseTexture", MatData.DifTextureName);
+		}
 	}
 
 	RenderUnit.SetRenderer(this);
+
+	return &RenderUnit;
 }
 
 void GameEngineFBXRenderer::Render(float _deltaTime)

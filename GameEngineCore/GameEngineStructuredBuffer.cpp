@@ -82,7 +82,7 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateAndFind(
 	return newBuffer;
 }
 
-void GameEngineStructuredBuffer::ChangeData(const void* _data, unsigned int _dataSize)
+void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _size)
 {
 	// 512 라이트 데이터를 세팅해줄수 있는 버퍼를 만들었다고 하더라도
 	// 진짜 512개의 라이트를 세팅하는것은 아닐수가 있으므로
@@ -95,7 +95,7 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, unsigned int _dat
 		return;
 	}
 
-	if (structuredBufferDesc_.ByteWidth != _dataSize)
+	if (structuredBufferDesc_.ByteWidth != _size)
 	{
 		MsgBoxAssertString(this->GetNameCopy() + ": 데이터의 전체 크기가 서로 맞지 않습니다.");
 		return;
@@ -121,7 +121,7 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, unsigned int _dat
 		destMemoryPtrInGPU_.pData,
 		structuredBufferDesc_.ByteWidth,
 		_data,
-		_dataSize
+		_size
 	);
 
 
@@ -132,7 +132,7 @@ void GameEngineStructuredBuffer::VSSetting(int _bindPoint)
 {
 	if (nullptr == shaderResourceView_)
 	{
-		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		MsgBoxAssert("구조화 버퍼가 없습니다.");
 		return;
 	}
 
@@ -250,7 +250,7 @@ void GameEngineStructuredBuffer::CreateOrResize(unsigned int _dataUnitSize, unsi
 
 
 	structuredBufferDesc_.ByteWidth = dataUnitSize_ * dataCount_;
-	//GPU에 생성할 구조화 버퍼 메모리의 전체 크기(최소단위 ??)
+	//GPU에 생성할 구조화 버퍼 메모리의 전체 크기
 
 	structuredBufferDesc_.Usage = D3D11_USAGE_DYNAMIC;	//버퍼의 사용 방식.
 	//D3D11_USAGE_DYNAMIC: GPU는 읽기만, CPU는 쓰기만 가능.
@@ -271,16 +271,20 @@ void GameEngineStructuredBuffer::CreateOrResize(unsigned int _dataUnitSize, unsi
 	//사실상 구조화버퍼 전용 기능이므로 반드시 넣어준다.
 
 	D3D11_SUBRESOURCE_DATA initialData = { 0 };
+	D3D11_SUBRESOURCE_DATA* initialDataPtr = nullptr;
 	if (nullptr != _initialData)
 	{
 		initialData.pSysMem = _initialData;
 		initialData.SysMemPitch = 0;			//2, 3차원 텍스처가 아니므로 0.
 		initialData.SysMemSlicePitch = 0;		//3차원 텍스처가 아니므로 0.
+		initialDataPtr = &initialData;
 	}
 
 	if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(
 		&structuredBufferDesc_,
-		&initialData,
+		initialDataPtr,
+		//널포인터를 따로 넣어주지 않으면 모든 값이 0인 D3D11_SUBRESOURCE_DATA의 포인터를 넣어준 것으로 알고 
+		// 구조화버퍼를 생성하려다가 실패한다.
 		&structuredBuffer_
 	))
 	{

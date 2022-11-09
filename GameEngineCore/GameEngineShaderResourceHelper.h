@@ -34,7 +34,7 @@ private:
 	GameEngineShaderResourceHelper& operator=(const GameEngineShaderResourceHelper&& _other) = delete;
 
 
-public:	
+public:
 	//매개변수로 들어온 마테리얼이 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하는 함수.
 	void ResourceCheck(GameEngineMaterial* _material);
 
@@ -82,7 +82,6 @@ public:
 		SetConstantBuffer_New(_name, &_data, static_cast<UINT>(sizeof(Resource)));
 	}
 
-
 protected:
 	//리소스 준비시점에, 짝으로 배치된 렌더링 파이프라인의 셰이더가 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하고, 
 	// 매 렌더링마다 갱신된 셰이더리소스들을 렌더링 파이프라인에 각 셰이더들이 요구했던대로 렌더링 파이프라인에 연결하는 함수. 
@@ -90,17 +89,17 @@ protected:
 
 
 private:
-	//상수버퍼를 가지고 있다가 상수버퍼세터가 settingFunction을 통해 상수버퍼를 요구하면 렌더링 파이프라인에 연결하는 함수. 
-	void BindConstantBuffer(GameEngineConstantBufferSetter& _cBufferSetter, GameEngineConstantBuffer* _cBuffer);
+	////상수버퍼를 가지고 있다가 상수버퍼세터가 settingFunction을 통해 상수버퍼를 요구하면 렌더링 파이프라인에 연결하는 함수. 
+	//void BindConstantBuffer(GameEngineConstantBufferSetter& _cBufferSetter, GameEngineConstantBuffer* _cBuffer);
 
-	//텍스처를 가지고 있다가 텍스처세터가 settingFunction을 통해 텍스처를 요구하면 렌더링 파이프라인에 연결하는 함수.
-	void BindTexture(GameEngineTextureSetter& _textureSetter, GameEngineTexture* _texture);
+	////텍스처를 가지고 있다가 텍스처세터가 settingFunction을 통해 텍스처를 요구하면 렌더링 파이프라인에 연결하는 함수.
+	//void BindTexture(GameEngineTextureSetter& _textureSetter, GameEngineTexture* _texture);
 
-	//샘플러를 가지고 있다가 샘플러세터가 settingFunction을 통해 샘플러를 요구하면 렌더링 파이프라인에 연결하는 함수.
-	void BindSampler(GameEngineSamplerSetter& _samplerSetter, GameEngineSampler* _sampler);
+	////샘플러를 가지고 있다가 샘플러세터가 settingFunction을 통해 샘플러를 요구하면 렌더링 파이프라인에 연결하는 함수.
+	//void BindSampler(GameEngineSamplerSetter& _samplerSetter, GameEngineSampler* _sampler);
 
-	//
-	void BindStructuredBuffer(GameEngineStructuredBufferSetter& _sBufferSetter, GameEngineStructuredBuffer* _sBuffer);
+	////
+	//void BindStructuredBuffer(GameEngineStructuredBufferSetter& _sBufferSetter, GameEngineStructuredBuffer* _sBuffer);
 
 	//해당 셰이더리소스헬퍼가 가진 모든 상수버퍼, 텍스처, 샘플러를 매 루프마다 갱신하고 정점셰이더나 픽셀셰이더에 연결하는 함수.
 	void AllResourcesSetting();

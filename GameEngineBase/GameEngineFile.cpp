@@ -157,13 +157,13 @@ void GameEngineFile::Write(const void* _writeData, size_t _writeSize)
 	);
 }
 
-void GameEngineFile::Write(const std::string& _text)
+void GameEngineFile::Write(const std::string_view& _text)
 {
 	// 크기를 저장해줘야 합니다.
 	// string은? 크기가 일정한 데이터를 가지고 있나요?
 	int size = static_cast<int>(_text.size());
 	Write(&size, sizeof(int));
-	Write(_text.c_str(), _text.size());
+	Write(_text.data(), _text.size());
 }
 
 void GameEngineFile::Write(const float4x4& _data)

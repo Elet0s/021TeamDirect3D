@@ -400,9 +400,21 @@ public:
 
 
 public:
+	//선형 보간(Linear Interpolation)
 	static float4 Lerp(const float4& p1, const float4& p2, float _time)
 	{
 		return p1 * (1.0f - _time) + p2 * _time;
+	}
+
+	//구면 선형 보간(Spherical Linear Interpolation) 
+	static float4 SLerpQuaternion(const float4& _left, const float4& _right, float _ratio)
+	{
+		if (1.0f <= _ratio)
+		{
+			_ratio = 1.0f;
+		}
+
+		return DirectX::XMQuaternionSlerp(_left.directXVector_, _right.directXVector_, _ratio);
 	}
 
 	static float4 DegreeToDirection2D(float _degree)
@@ -819,6 +831,17 @@ public:
 			float4::Zero.directXVector_,	//회전 조정 중심.
 			_rotationQuarternion.directXVector_,	//회전량.
 			_position.directXVector_		//
+		);
+	}
+
+	static float4x4 Affine(const float4& _scale, const float4& _rotationQuarternion, const float4& _position)
+	{
+		// _Rot.DirectVector 쿼터니온 입니다.
+		return DirectX::XMMatrixAffineTransformation(
+			_scale.directXVector_,
+			float4::Zero.directXVector_,
+			_rotationQuarternion.directXVector_,
+			_position.directXVector_
 		);
 	}
 

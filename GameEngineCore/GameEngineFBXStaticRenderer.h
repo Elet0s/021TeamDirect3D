@@ -18,8 +18,8 @@ private:
 
 
 public:
-	virtual void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName) override;
-	virtual void SetFBXMesh(
+	void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName) override;
+	GameEngineRenderUnit* SetFBXMesh(
 		const std::string& _fbxMeshName,
 		const std::string& _materialName,
 		size_t _meshIndex,

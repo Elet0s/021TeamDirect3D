@@ -1,9 +1,10 @@
 #pragma once
 #include "GameEngineTransformBase.h"
 #include "GameEngineUpdateObject.h"
+#include "GameEngineComponent.h"
 
 class GameEngineTransformComponent;
-class GameEngineComponent;
+//class GameEngineComponent;
 class GameEngineLevel;
 class GameEngineActor:
 	public GameEngineNameObject,

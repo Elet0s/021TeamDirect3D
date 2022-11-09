@@ -1,6 +1,6 @@
  #include "PreCompile.h"
 #include "GameEngineLevel.h"
-#include "GameEngineActor.h"
+//#include "GameEngineActor.h"
 #include "GameEngineRenderer.h"
 #include "GameEngineCamera.h"
 #include "GameEngineCameraActor.h"

@@ -7,6 +7,8 @@ class GameEngineFBXAnimation;
 class FBXRendererAnimation : public std::enable_shared_from_this<FBXRendererAnimation>
 {
 public:
+	class GameEngineFBXAnimationRenderer* ParentRenderer;
+
 	// SetFBX 본을 가지고 있는 매쉬
 	GameEngineFBXMesh* Mesh;
 
@@ -22,8 +24,19 @@ public:
 	UINT Start;
 	UINT End;
 
+
+public:
+	void Init(int _Index);
+	void Reset();
+	void Update(float _deltaTime);
+
 public:
 	FBXRendererAnimation()
+		: CurFrameTime(0.0f)
+		, FrameTime(0.0f) // 0.1
+		, CurFrame(0)
+		, Start(0)
+		, End(0)
 	{
 	}
 
@@ -32,9 +45,22 @@ public:
 	}
 };
 
+struct AnimationBoneData
+{
+public:
+	int Index = -1;
+	float4 Scale;
+	float4 RotQuaternion;
+	float4 Pos;
+	float4 RotEuler;
+};
+
 class GameEngineFBXAnimationRenderer : public GameEngineFBXRenderer
 {
 	//이 클래스의 존재 이유:
+
+	friend class FBXRendererAnimation;
+
 public:
 	GameEngineFBXAnimationRenderer();
 	~GameEngineFBXAnimationRenderer();
@@ -49,19 +75,27 @@ private:
 
 
 public:
-	virtual void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName) override;
-	virtual void SetFBXMesh(
+	void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName) override;
+	GameEngineRenderUnit* SetFBXMesh(
 		const std::string& _fbxMeshName,
 		const std::string& _materialName,
 		size_t _meshIndex,
 		size_t _subsetIndex = 0
 	) override;
 
-	void CreateFBXAnimation(const std::string& _AnimationName, const std::string& _AnimationFBX);
+	void CreateFBXAnimation(const std::string& _AnimationName, const std::string& _AnimationFBX, int _Index = 0);
 
+	void ChangeAnimation(const std::string& _AnimationName);
+
+	void Update(float _deltaTime) override;
 
 private:
 	std::map<std::string, std::shared_ptr<FBXRendererAnimation>> Animations;
 	std::shared_ptr<FBXRendererAnimation> CurAnimation;
+
+	std::map<size_t, std::vector<float4x4>> AnimationBoneMatrixs;
+	// std::map<size_t, std::vector<float4x4>> PrevAnimationBoneMatrixs;
+
+	std::map<size_t, std::vector<AnimationBoneData>> AnimationBoneDatas;
 };
 

@@ -75,7 +75,7 @@ GameEngineTexture* GameEngineTexture::Load(const std::string_view& _path, const 
 
 void GameEngineTexture::VSSetting(int _bindPoint)
 {
-	if (nullptr == shaderResourceView_)
+	if (nullptr == this->shaderResourceView_)
 	{
 		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
 		return;
@@ -90,7 +90,7 @@ void GameEngineTexture::VSSetting(int _bindPoint)
 
 void GameEngineTexture::PSSetting(int _bindPoint)
 {
-	if (nullptr == shaderResourceView_)
+	if (nullptr == this->shaderResourceView_)
 	{
 		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
 		return;

@@ -7,7 +7,8 @@
 #include "GameEngineTexture.h"
 #include "GameEngineMesh.h"
 
-// 지금설명하기 힘듬.
+
+//정점의 본 인덱스와 가중치.
 class FBXExIW
 {
 public:
@@ -123,7 +124,7 @@ struct FBXExMeshInfo
 };
 
 
-struct FBXRenderUnit
+struct FBXRenderUnitInfo
 {
 public:
 	int VectorIndex;
@@ -135,11 +136,11 @@ public:
 	float4 BoundScaleBox;
 
 	//       자신의 정보를 
-//       들고 있던 node
-//       의 mesh
-//       이매쉬에서  이점들을 빼냈다라고 보면 됩니다.
-//       얻어온 점들에 대한 모든 정보이고.
-//       만약 필요하다면 더 얻어야 할수도 있다.
+	//       들고 있던 node
+	//       의 mesh
+	//       이매쉬에서  이점들을 빼냈다라고 보면 됩니다.
+	//       얻어온 점들에 대한 모든 정보이고.
+	//       만약 필요하다면 더 얻어야 할수도 있다.
 	std::map<FbxMesh*, std::vector<GameEngineVertex>*> FbxVertexMap;
 
 	//       애니메이션이 있다면 채워져 있을겁니다.
@@ -160,7 +161,7 @@ public:
 
 	std::vector<GameEngineMesh*> Meshs;
 
-	FBXRenderUnit()
+	FBXRenderUnitInfo()
 		:VectorIndex(0),
 		IsLod(false),
 		IsLodLv(-1),
@@ -168,7 +169,7 @@ public:
 	{
 	}
 
-	~FBXRenderUnit()
+	~FBXRenderUnitInfo()
 	{
 	}
 };
@@ -508,12 +509,13 @@ struct Bone
 	}
 };
 
-
+class GameEngineStructuredBuffer;
 class GameEngineFBXMesh : public GameEngineRes<GameEngineFBXMesh>, public GameEngineFBX
 {
 	friend GameEngineRes<GameEngineFBXMesh>;
 	//GameEngineFBXMesh 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
 
+	friend class GameEngineFBXAnimation;
 
 private:
 	GameEngineFBXMesh();
@@ -538,8 +540,10 @@ public:
 	const FBXExMaterialSettingData& GetMaterialSettingData(size_t _MeshIndex, size_t _SubIndex);
 
 	// Bone 찾아주는 함수
-	Bone* FindBone(int MeshIndex, int _BoneIndex);
-	Bone* FindBone(int MeshIndex, std::string _Name);
+	Bone* FindBone(size_t MeshIndex, size_t _BoneIndex);
+	Bone* FindBone(size_t MeshIndex, const std::string& _Name);
+
+	GameEngineStructuredBuffer* GetAnimationStructuredBuffer(size_t _Index);
 
 public:
 	size_t GetRenderUnitCount()
@@ -552,11 +556,24 @@ public:
 		return RenderUnitInfos[_RenderUnitIndex].Indexs.size();
 	}
 
+	size_t GetBoneCount(size_t _Index)
+	{
+		return AllBones[_Index].size();
+	}
+
+
+	size_t GetMeshInfosCount()
+	{
+		return MeshInfos.size();
+	}
 
 protected:
+	// 매쉬가 있어
 	std::vector<FBXExMeshInfo> MeshInfos;
-	std::vector<FBXRenderUnit> RenderUnitInfos;
+	// 매쉬의 버텍스가 이렇이렇게 되어있어.
+	std::vector<FBXRenderUnitInfo> RenderUnitInfos;
 	std::vector<std::vector<Bone>> AllBones; // 본정보체
+	std::vector<GameEngineStructuredBuffer*> AllBoneStructuredBuffers; // 본정보체
 	std::vector<std::map<std::string, Bone*>> AllFindMap;
 	std::vector<std::vector<FbxClusterData>> ClusterData;
 
@@ -565,15 +582,17 @@ private:
 
 	void MeshLoad();
 
+	// 매쉬 정보 획득
 	void MeshNodeCheck();
 	fbxsdk::FbxNode* RecursiveFindParentLodGroup(fbxsdk::FbxNode* parentNode);
 	fbxsdk::FbxNode* FindLODGroupNode(fbxsdk::FbxNode* NodeLodGroup, int LodIndex, fbxsdk::FbxNode* NodeToFind);
 	fbxsdk::FbxNode* RecursiveGetFirstMeshNode(fbxsdk::FbxNode* Node, fbxsdk::FbxNode* NodeToFind);
 
+	// 버텍스 정보
 	void VertexBufferCheck();
 	fbxsdk::FbxAMatrix ComputeTotalMatrix(fbxsdk::FbxNode* Node);
 	bool IsOddNegativeScale(const fbxsdk::FbxAMatrix& TotalMatrix);
-	void FBXRenderUnitMaterialSetting(fbxsdk::FbxNode* _Node, FBXRenderUnit* _RenderData);
+	void FBXRenderUnitInfoMaterialSetting(fbxsdk::FbxNode* _Node, FBXRenderUnitInfo* _RenderData);
 	float4 MaterialColor(fbxsdk::FbxSurfaceMaterial* pMtrl, const char* _ColorName, const char* _FactorName);
 	float MaterialFactor(fbxsdk::FbxSurfaceMaterial* pMtrl, const char* _FactorName);
 	std::string MaterialTex(fbxsdk::FbxSurfaceMaterial* pMtrl, const char* _FactorName);
@@ -595,8 +614,10 @@ private:
 	// 애니메이션 버텍스 정보
 	void LoadSkinAndCluster();
 	void ImportCluster();
-	void LoadAnimationVertexData(FBXRenderUnit* _DrawData, const std::vector<FbxClusterData>& vecClusterData);
-	void DrawSetWeightAndIndexSetting(FBXRenderUnit* _DrawSet, fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxCluster* _Cluster, int _BoneIndex);
-	void CalAnimationVertexData(FBXRenderUnit& _DrawSet);
+	void LoadAnimationVertexData(FBXRenderUnitInfo* _DrawData, const std::vector<FbxClusterData>& vecClusterData);
+	void DrawSetWeightAndIndexSetting(FBXRenderUnitInfo* _DrawSet, fbxsdk::FbxMesh* _Mesh, fbxsdk::FbxCluster* _Cluster, int _BoneIndex);
+	void CalAnimationVertexData(FBXRenderUnitInfo& _DrawSet);
 
+	// 스트럭처드 버퍼 생성로직.
+	void CreateGameEngineStructuredBuffer();
 };

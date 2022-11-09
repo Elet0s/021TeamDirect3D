@@ -66,7 +66,6 @@ bool GameEngineFBX::CreateFBXSystemInitialize(const std::string& _path)
 		}
 	}
 
-
 	// FBX파일을 읽는 방법을 정의한다.
 	// IO적인 측면에서 정의내리는 단계.
 	// these defines are used for hierarchical properties names 구조도를 타고 읽겠다.
@@ -76,7 +75,6 @@ bool GameEngineFBX::CreateFBXSystemInitialize(const std::string& _path)
 	importer_ = fbxsdk::FbxImporter::Create(fbxManager_, "");
 
 	if (false == importer_->Initialize(GameEngineString::AnsiToUTF8Return(_path).c_str(), -1, ioSetting_))
-		//언어 관련 문제가 생기는것을 방지하기 위해 모든 fbx의 모든 문자열은 UTF-8 형식으로 되어있다.
 	{
 		importer_->Destroy();
 		ioSetting_->Destroy();
@@ -85,7 +83,6 @@ bool GameEngineFBX::CreateFBXSystemInitialize(const std::string& _path)
 	}
 
 	scene_ = fbxsdk::FbxScene::Create(fbxManager_, "");
-	//씬 생성.
 
 	if (nullptr == scene_)
 	{
@@ -159,30 +156,30 @@ void GameEngineFBX::FBXConvertScene()
 	{
 		if (OriginUpVector == fbxsdk::FbxAxisSystem::EUpVector::eXAxis)
 		{
-			axisVector_.mData[1] += 180.0;
+			axisVector_.mData[1] += 180;
 		}
 		else
 		{
-			axisVector_.mData[0] += 180.0;
+			axisVector_.mData[0] += 180;
 		}
 
 		if (OriginFrontSign != EngineFrontSign && OriginCoordSystem == EngineCoordSystem)
 		{
-			axisVector_.mData[static_cast<int>(OriginUpVector) - 1] += 180.0;
+			axisVector_.mData[static_cast<int>(OriginUpVector) - 1] += 180;
 		}
 	}
 	else if (OriginUpVector == fbxsdk::FbxAxisSystem::EUpVector::eXAxis)
 	{
 		//origin up vector 가 x up vector 일때를 아직 만나보지를 못했다.
 
-		axisVector_.mData[1] += OriginUpSign * 90.0;
+		axisVector_.mData[1] += OriginUpSign * 90;
 	}
 	else
 	{
-		axisVector_.mData[0] += OriginUpSign * 90.0;
+		axisVector_.mData[0] += OriginUpSign * 90;
 		if (OriginUpSign != EngineFrontSign)
 		{
-			axisVector_.mData[static_cast<int>(OriginUpVector) - 1] += OriginUpSign * 180.0;
+			axisVector_.mData[static_cast<int>(OriginUpVector) - 1] += OriginUpSign * 180;
 		}
 	}
 
@@ -216,6 +213,16 @@ void GameEngineFBX::FBXConvertScene()
 	return;
 }
 
+void GameEngineFBX::FBXInfoDebugFunction(fbxsdk::FbxNode* _RootNode)
+{
+	if (nullptr == _RootNode)
+	{
+		return;
+	}
+
+	std::string Name = _RootNode->GetName();
+}
+
 void GameEngineFBX::RecursiveAllNodes(fbxsdk::FbxNode* _Node, std::function<void(fbxsdk::FbxNode*)> _Function /*= nullptr*/)
 {
 	if (nullptr != _Function)
@@ -236,16 +243,6 @@ void GameEngineFBX::RecursiveAllNodes(fbxsdk::FbxNode* _Node, std::function<void
 	}
 }
 
-void GameEngineFBX::FBXInfoDebugFunction(fbxsdk::FbxNode* _RootNode)
-{
-	if (nullptr == _RootNode)
-	{
-		return;
-	}
-
-	std::string Name = _RootNode->GetName();
-}
-
 float4x4 GameEngineFBX::FBXMatrixToFloat4x4(const fbxsdk::FbxMatrix& _baseTransform)
 {
 	float4x4 mat;
@@ -261,7 +258,7 @@ float4x4 GameEngineFBX::FBXMatrixToFloat4x4(const fbxsdk::FbxMatrix& _baseTransf
 	return mat;
 }
 
-fbxsdk::FbxMatrix GameEngineFBX::FLoat4x4ToFBXMatirx(const float4x4& _matrix)
+fbxsdk::FbxAMatrix GameEngineFBX::Float4x4ToFBXAMatrix(const float4x4& _matrix)
 {
 	fbxsdk::FbxAMatrix mat;
 	for (int y = 0; y < 4; y++)

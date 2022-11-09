@@ -1,12 +1,14 @@
 #pragma once
 #include "GameEngineRes.h"
 
-class GameEngineStructuredBuffer: public GameEngineRes<GameEngineStructuredBuffer>
+class GameEngineStructuredBuffer : public GameEngineRes<GameEngineStructuredBuffer>
 {
 	friend GameEngineRes<GameEngineStructuredBuffer>;
 	//GameEngineStructuredBuffer 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
 
 	friend class GameEngineStructuredBufferSetter;
+
+	friend class GameEngineFBXMesh;
 
 private:
 	GameEngineStructuredBuffer();
@@ -21,7 +23,7 @@ private:
 	GameEngineStructuredBuffer& operator=(const GameEngineStructuredBuffer&& _other) = delete;
 
 
-public:	
+public:
 	static GameEngineStructuredBuffer* CreateStructuredBuffer(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
@@ -34,7 +36,7 @@ public:
 		int _dataCount
 	);
 
-	void ChangeData(const void* _data, unsigned int _dataSize);
+	void ChangeData(const void* _data, size_t _dataSize);
 
 	//구조화 버퍼를 렌더링 파이프라인의 정점셰이더에 연결하는 함수.
 	void VSSetting(int _bindPoint);
@@ -52,7 +54,7 @@ public:
 
 
 public:
-	inline int GetDataSize()
+	inline size_t GetDataSize()
 	{
 		return dataUnitSize_;
 	}
@@ -82,9 +84,9 @@ private:
 	ID3D11Buffer* structuredBuffer_;
 	D3D11_BUFFER_DESC structuredBufferDesc_;
 	D3D11_SHADER_BUFFER_DESC shaderBufferDesc_;
-	D3D11_MAPPED_SUBRESOURCE destMemoryPtrInGPU_;
+	D3D11_MAPPED_SUBRESOURCE destMemoryPtrInGPU_;	//구조화버퍼의 데이터를 받을 그래픽카드 내 메모리의 주소값.
 
-	ID3D11ShaderResourceView* shaderResourceView_;	//
+	ID3D11ShaderResourceView* shaderResourceView_;	//셰이더 리소스뷰.
 	//구조화버퍼는 버퍼지만 셰이더 리소스로 분류되므로 셰이더 리소스 뷰가 필요하다.
 
 	unsigned int dataCount_;	//데이터 개수.

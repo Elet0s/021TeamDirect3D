@@ -45,7 +45,7 @@ public:
 	void Read(double& _data);
 
 	void Write(const void* _writeData, size_t _writeSize);
-	void Write(const std::string& _text);
+	void Write(const std::string_view& _text);
 	void Write(const float4x4& _data);
 	void Write(const float4& _data);
 	void Write(const float& _data);

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngineUpdateObject.h"
+#include "GameEngineActor.h"
 
 enum class CameraOrder
 {
@@ -18,7 +19,7 @@ enum class CameraOrder
 class GameEngineCamera;
 class GameEngineCameraActor;
 class GameEngineRenderer;
-class GameEngineActor;
+//class GameEngineActor;
 class GameEngineTransform;
 class GameEngineCollision;
 class GameEngineLevel: public GameEngineNameObject, public GameEngineUpdateObject

@@ -99,23 +99,25 @@ public:
 
 public: 
 
+	//최종 월드행렬을 계산하는 함수. 
 	void CalculateWorldMatrix();
-	//최종 월드행렬을 계산하는 함수. 트랜스폼 변경이 일어날 때마다 매번 호출되어 
+	// 트랜스폼 변경이 일어날 때마다 매번 호출되어 
 	// 자기 자신과 자식 트랜스폼들의 월드행렬까지 전부 계산하므로 
 	// 더 이상 다른 곳에서 월드행렬 계산을 할 필요가 없다.
 
-	void CalculateWorldViewProjection();
 	//월드행렬 * 뷰행렬 * 투영행렬.
+	void CalculateWorldViewProjection();
 
-	void SetParentTransform(GameEngineTransform& _newParent);
 	//자기 자신의 트랜스폼을 부모 오브젝트의 트랜스폼에 붙이는 함수.
+	void SetParentTransform(GameEngineTransform& _newParent);
 
-	void DetachTransform();	
 	//자기 자신의 트랜스폼을 부모 오브젝트의 트랜스폼에서 떼어내는 함수.
+	void DetachTransform();
 
+	//
 	void PixLocalNegativeX();
 
-
+	//
 	void PixLocalPositiveX();
 
 	void Copy(const GameEngineTransform& _transform);
