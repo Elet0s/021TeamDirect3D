@@ -279,25 +279,6 @@ void TestLevel::MoveCamera()
 
 	float4 CheckPos = GetMainCamera()->GetMouseWorldPositionToActor() - Player::GetMainPlayer()->GetTransform().GetWorldPosition();
 
-	if (CheckPos.x > 360.f)
-	{
-		MouseDir.x = 100.f;
-	}
-	else if (CheckPos.x < -360.f)
-	{
-		MouseDir.x = -100.f;
-	}
-
-	if (CheckPos.y > 180.f)
-	{
-		MouseDir.y = 100.f;
-	}
-	else if (CheckPos.x < -180.f)
-	{
-		MouseDir.y = -100.f;
-	}
-
-
 	if (abs(MoveVector.x) < 1.0f)
 	{
 		MoveVector.x = 0.f;
@@ -307,13 +288,29 @@ void TestLevel::MoveCamera()
 	{
 		MoveVector.y = 0.f;
 	}
-
-	MoveVector.Normalize3D();
-
-	if (GetMainCameraActor()->IsFreeCameraMode() == false)
+	if (MoveVector.IX() == 100 && MoveVector.IY() == 100)
 	{
-		GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x * 420.f + MouseDir.x) * Time, (MoveVector.y * 420.f + MouseDir.y) * Time));
+		if (CheckPos.x > 360.f)
+		{
+			MouseDir.x = 100.f;
+		}
+		else if (CheckPos.x < -360.f)
+		{
+			MouseDir.x = -100.f;
+		}
+
+		if (CheckPos.y > 180.f)
+		{
+			MouseDir.y = 100.f;
+		}
+		else if (CheckPos.x < -180.f)
+		{
+			MouseDir.y = -100.f;
+		}
 	}
+
+	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x + MouseDir.x) * Time, (MoveVector.y + MouseDir.y) * Time));
+
 }
 
 
