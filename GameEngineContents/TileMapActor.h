@@ -25,6 +25,6 @@ protected:
 	void End() override;
 
 private:
-
+	void ResourceLoad();
 };
 

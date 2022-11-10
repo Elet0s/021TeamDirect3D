@@ -27,7 +27,7 @@ void WorldMapActor::Start()
 		TextureRenderer->ScaleToTexture();
 		TextureRenderer->GetTransform().SetWorldPosition(float4{ X,-Y, -500.f});
 	}*/
-	if(nullptr == GameEngineFolderTexture::Find("Grass"))
+	if (nullptr == GameEngineFolderTexture::Find("Grass"))
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistChildDirectory("ContentsResources");
