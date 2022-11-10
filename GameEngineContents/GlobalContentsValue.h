@@ -13,6 +13,7 @@ enum class ObjectOrder
 	TileMap,
 	Player,
 	Monster,
+	Mouse,
 	UI = 1000
 };
 

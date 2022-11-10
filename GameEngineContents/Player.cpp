@@ -3,13 +3,13 @@
 #include "GlobalContentsValue.h"
 #include "GameEngineCore/GameEngineCollision.h"
 
-Player* Player::mainplayer_ = nullptr;
+Player* Player::mainPlayer_ = nullptr;
 
 Player::Player()
-	: playerrenderer_(nullptr)
+	: playerRenderer_(nullptr)
 	,speed_(200.0f)
 {
-	mainplayer_ = this;
+	mainPlayer_ = this;
 	//SetLevelOverOn();
 }
 
@@ -23,6 +23,7 @@ void Player::Start()
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistChildDirectory("ContentsResources");
 		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("Actor");
 		Dir.MoveToChild("Player");
 		
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
@@ -48,32 +49,32 @@ void Player::Start()
 			collision_->ChangeOrder(ObjectOrder::Player);
 		}
 
-		playerrenderer_ = CreateComponent<GameEngineTextureRenderer>();
-		playerrenderer_->GetTransform().SetLocalScale(100, 100, 100);
-		playerrenderer_->GetTransform().SetLocalPosition(0,0,-100);
-		playerrenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
-		playerrenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
+		playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+		playerRenderer_->GetTransform().SetLocalScale(100, 100, 100);
+		playerRenderer_->GetTransform().SetLocalPosition(0,0,-100);
+		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
+		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
 
 		{
-			statemanager_.CreateState("Idle"
+			stateManager_.CreateState("Idle"
 				, std::bind(&Player::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
 				, std::bind(&Player::IdleStart, this, std::placeholders::_1)
 			);
 
-			statemanager_.CreateState("Move"
+			stateManager_.CreateState("Move"
 				, std::bind(&Player::MoveUpdate, this, std::placeholders::_1, std::placeholders::_2)
 				, [/*&*/=](const StateInfo& _Info)
 				{
-					playerrenderer_->ChangeFrameAnimation("PlayerRun");
+					playerRenderer_->ChangeFrameAnimation("PlayerRun");
 				});
-			statemanager_.ChangeState("Idle");
+			stateManager_.ChangeState("Idle");
 		}
 
 }
 
 void Player::IdleStart(const StateInfo& _Info)
 {
-	playerrenderer_->ChangeFrameAnimation("PlayerIdle");
+	playerRenderer_->ChangeFrameAnimation("PlayerIdle");
 }
 
 void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -84,7 +85,7 @@ void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
 		true == GameEngineInput::GetInst()->IsPressed("PlayerUp") ||
 		true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
 	{
-		statemanager_.ChangeState("Move");
+		stateManager_.ChangeState("Move");
 	}
 }
 
@@ -95,20 +96,20 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 		false == GameEngineInput::GetInst()->IsPressed("PlayerUp") &&
 		false == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
 	{
-		statemanager_.ChangeState("Idle");
+		stateManager_.ChangeState("Idle");
 		return;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * speed_ * _DeltaTime);
-		playerrenderer_->GetTransform().PixLocalNegativeX();
+		playerRenderer_->GetTransform().PixLocalNegativeX();
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetRightVector() * speed_ * _DeltaTime);
-		playerrenderer_->GetTransform().PixLocalPositiveX();
+		playerRenderer_->GetTransform().PixLocalPositiveX();
 	}
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerUp"))
 	{
@@ -130,7 +131,7 @@ CollisionReturn Player::MonsterCollision(GameEngineCollision* _This, GameEngineC
 void Player::Update(float _deltaTime)
 {
 
-	statemanager_.Update(_deltaTime);
+	stateManager_.Update(_deltaTime);
 	collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D,
 	std::bind(&Player::MonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -141,5 +142,5 @@ void Player::End()
 
 void Player::SetLevel(GameEngineLevel* _NowLevel)
 {
-	nowlevel_ = _NowLevel;
+	nowLevel_ = _NowLevel;
 }

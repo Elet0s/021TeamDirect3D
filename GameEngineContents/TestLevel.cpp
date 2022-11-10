@@ -5,6 +5,7 @@
 #include "TimeActor.h"
 #include "StageUI.h"
 #include "GlobalContentsValue.h"
+#include "Mouse.h"
 
 TestLevel::TestLevel() //: tileCameraActor_(nullptr)
 {
@@ -114,7 +115,10 @@ void TestLevel::Start()
 			Monster_.push_back(NewMonster);
 		}
 	}
+	{
+		Mouse* NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
 
+	}
 	CreateActor<TimeActor>();
 	CreateActor<StageUI>()->SoulCoinRenderersOff();
 }

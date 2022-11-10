@@ -11,36 +11,25 @@ RedFlyingEyes::~RedFlyingEyes()
 }
 void RedFlyingEyes::Start()
 {
-	if (nullptr == GameEngineTexture::Find("RedFlyingEyes.png"))
+	////////////Load////////////
+	if (nullptr == GameEngineTexture::Find("BlackEyes.png"))
 	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("Monster");
-
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
-		for (size_t i = 0; i < Shaders.size(); i++)
-		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
-
-		}
+		Monster::Start();
 	}
-		///////////////텍스처로드///////////////
+	////////////Cut////////////
+	GameEngineTexture::Cut("RedFlyingEyes.png", 6, 1);
 
-		GameEngineTexture::Cut("RedFlyingEyes.png", 6, 1);
-		///////////////텍스처 cut///////////////
-	
 
-		MonRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 
-		MonRenderer_->GetTransform().SetLocalScale(100, 100, 100);
-		MonRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-		MonRenderer_->CreateFrameAnimation_CutTexture("RedFlyingEyes", FrameAnimation_Desc("RedFlyingEyes.png", 0, 5, 0.1f));
-		MonRenderer_->ChangeFrameAnimation("RedFlyingEyes");
+	monRenderer_->GetTransform().SetLocalScale(100, 100, 100);
+	monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
+	monRenderer_->CreateFrameAnimation_CutTexture("RedFlyingEyes", FrameAnimation_Desc("RedFlyingEyes.png", 0, 5, 0.1f));
+	monRenderer_->ChangeFrameAnimation("RedFlyingEyes");
 
-		MonCollision_ = CreateComponent<GameEngineCollision>();
-		MonCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });
-		MonCollision_->ChangeOrder(ObjectOrder::Monster);
+	monCollision_ = CreateComponent<GameEngineCollision>();
+	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });
+	monCollision_->ChangeOrder(ObjectOrder::Monster);
 	SummonMon();
 
 }

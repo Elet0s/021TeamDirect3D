@@ -3,7 +3,7 @@
 class GameEngineDefaultRenderer;
 class Player: public GameEngineActor
 {
-	static Player* mainplayer_;
+	static Player* mainPlayer_;
 
 public:
 
@@ -22,7 +22,7 @@ public:
 public:
 	static Player* GetMainPlayer()
 	{
-		return mainplayer_;
+		return mainPlayer_;
 	}
 	CollisionReturn MonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	void SetLevel(GameEngineLevel* _NowLevel);
@@ -40,10 +40,10 @@ protected:
 
 
 private:
-	GameEngineLevel* nowlevel_;
-	GameEngineTextureRenderer* playerrenderer_;
+	GameEngineLevel* nowLevel_;
+	GameEngineTextureRenderer* playerRenderer_;
 	GameEngineCollision* collision_;
-	GameEngineStateManager statemanager_;
+	GameEngineStateManager stateManager_;
 
 };
 

@@ -15,8 +15,8 @@ public:
 	Monster& operator=(Monster&& _other) = delete;
 public:
 	float speed_;
-	float MXmove_;
-	float MYmove_;
+	float mxMove_;
+	float myMove_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -24,6 +24,6 @@ protected:
 	void Chaseplayer(float _deltaTime);
 	void SummonMon();
 
-	GameEngineTextureRenderer* MonRenderer_;
-	GameEngineCollision* MonCollision_;
+	GameEngineTextureRenderer* monRenderer_;
+	GameEngineCollision* monCollision_;
 };

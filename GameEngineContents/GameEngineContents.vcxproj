@@ -169,6 +169,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="LoginUI.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="ShaderTestLevel.h" />
     <ClInclude Include="MapEditorWindow.h" />
     <ClInclude Include="MetaSpriteWindow.h" />
@@ -239,6 +240,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LoginUI.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="ShaderTestLevel.cpp" />
     <ClCompile Include="MapEditorWindow.cpp" />
     <ClCompile Include="MetaSpriteWindow.cpp" />

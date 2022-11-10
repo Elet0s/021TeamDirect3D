@@ -113,6 +113,9 @@
     <ClCompile Include="MyWorldMapRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -191,6 +194,9 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="WorldMapActor.h">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
   </ItemGroup>
