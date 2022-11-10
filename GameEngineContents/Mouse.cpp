@@ -37,14 +37,14 @@ void Mouse::Start()
 	}
 
 	mouseRenderer = CreateComponent<GameEngineTextureRenderer>();
-	mouseRenderer->GetTransform().SetLocalScale(64, 64, -100);
-	//mouseRenderer->ChangeCamera(CameraOrder::UICamera);
+	mouseRenderer->GetTransform().SetLocalScale(64, 64, 100);
+	mouseRenderer->ChangeCamera(CameraOrder::UICamera);
 	mouseRenderer->SetTexture("Cursor.png");
 }
 void Mouse::Update(float _DeltaTime)
 {
 	GetCurPos();
-	mouseRenderer->GetTransform().SetLocalPosition(GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().x+10.0f, GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().y,0.0f);
+	mouseRenderer->GetTransform().SetLocalPosition(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x+10.0f, GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,-100.0f);
 
 }
 void Mouse::End()
