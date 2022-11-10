@@ -164,8 +164,8 @@ void TestLevel::UpdateWorld()
 
 void TestLevel::MoveWorld(int _Dir)
 {
-	MoveCamera();
-
+	PlayerMoveCamera();
+	MouseMoveCamera();
 	std::vector<std::vector<TileMapActor*>> CopyTiles_;
 	CopyTiles_.resize(3);
 	for (size_t y = 0; y < CopyTiles_.size(); y++)
@@ -271,13 +271,10 @@ void TestLevel::MoveWorld(int _Dir)
 	
 }
 
-void TestLevel::MoveCamera()
+void TestLevel::PlayerMoveCamera()
 {
 	float Time = GameEngineTime::GetDeltaTime();
 	float4 MoveVector = Player::GetMainPlayer()->GetTransform().GetWorldPosition() - GetMainCameraActorTransform().GetWorldPosition();
-	float4 MouseDir = float4::Zero;
-
-	float4 CheckPos = GetMainCamera()->GetMouseWorldPositionToActor() - Player::GetMainPlayer()->GetTransform().GetWorldPosition();
 
 	if (abs(MoveVector.x) < 1.0f)
 	{
@@ -288,8 +285,19 @@ void TestLevel::MoveCamera()
 	{
 		MoveVector.y = 0.f;
 	}
-	if (MoveVector.IX() == 100 && MoveVector.IY() == 100)
-	{
+
+	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x) * Time, (MoveVector.y) * Time));
+
+}
+
+void TestLevel::MouseMoveCamera()
+{
+	float Time = GameEngineTime::GetDeltaTime();
+
+	float4 MouseDir = float4::Zero;
+	float4 CheckPos = GetMainCamera()->GetMouseWorldPositionToActor() - Player::GetMainPlayer()->GetTransform().GetWorldPosition();
+
+
 		if (CheckPos.x > 360.f)
 		{
 			MouseDir.x = 100.f;
@@ -307,9 +315,9 @@ void TestLevel::MoveCamera()
 		{
 			MouseDir.y = -100.f;
 		}
-	}
+	
 
-	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x + MouseDir.x) * Time, (MoveVector.y + MouseDir.y) * Time));
+	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MouseDir.x) * Time, (MouseDir.y) * Time));
 
 }
 

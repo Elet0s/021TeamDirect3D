@@ -26,8 +26,8 @@ private:
 	
 	void UpdateWorld();
 	void MoveWorld(int _Dir);
-	void MoveCamera();
-
+	void MouseMoveCamera();
+	void PlayerMoveCamera();
 	std::vector<std::vector<TileMapActor*>> tilemaps_;
 	
 	std::vector<Monster*> Monster_;
