@@ -4,9 +4,8 @@
 #include "GameEngineComponent.h"
 
 class GameEngineTransformComponent;
-//class GameEngineComponent;
 class GameEngineLevel;
-class GameEngineActor:
+class GameEngineActor :
 	public GameEngineNameObject,
 	public GameEngineUpdateObject,
 	public GameEngineTransformBase
@@ -19,9 +18,9 @@ class GameEngineActor:
 
 	friend GameEngineLevel;
 	friend class GameEngineCamera;
-	
 
-protected:
+
+public:
 	GameEngineActor();
 	virtual ~GameEngineActor() /*= 0*/;
 
@@ -34,20 +33,20 @@ private:
 
 public:
 	void DetachObject() override;
-	void SetParent(GameEngineUpdateObject* _newParent) override;	//액터에 레벨이 아닌 새 부모를 붙이는 함수.
+	void SetParent(std::shared_ptr<GameEngineUpdateObject> _newParent) override;	//액터에 레벨이 아닌 새 부모를 붙이는 함수.
 
 public:
 
 	template<typename ComponentType>
-	ComponentType* CreateComponent(const std::string_view& _componentName = "")
+	std::shared_ptr<ComponentType> CreateComponent(const std::string_view& _componentName = "")
 	{
-		GameEngineComponent* newComponent = new ComponentType();
+		std::shared_ptr<GameEngineComponent> newComponent = std::make_shared<ComponentType>();
 
-		newComponent->SetParent(this);
+		newComponent->SetParent(shared_from_this());
 		newComponent->SetName(_componentName);
 		newComponent->Start();
 
-		return dynamic_cast<ComponentType*>(newComponent);
+		return std::dynamic_pointer_cast<ComponentType>(newComponent);
 	}
 
 	inline GameEngineLevel* GetLevel()

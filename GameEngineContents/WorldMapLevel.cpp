@@ -14,7 +14,7 @@ WorldMapLevel::~WorldMapLevel()
 void WorldMapLevel::Start()
 {
 
-	WorldMapActor* WorldMap = CreateActor<WorldMapActor>();
+	std::shared_ptr<WorldMapActor> WorldMap = CreateActor<WorldMapActor>();
 
 	WorldMap->worldmaprenderer_->CreateTileMap(50, 20, {128,128}, "grassTexture.png");
 }

@@ -6,6 +6,7 @@
 #include "StageUI.h"
 #include "GlobalContentsValue.h"
 #include "Mouse.h"
+#include "Player.h"
 
 TestLevel::TestLevel() //: tileCameraActor_(nullptr)
 {
@@ -73,50 +74,53 @@ void TestLevel::Start()
 	}
 
 
-	if (nullptr == Player::GetMainPlayer())
-	{
+	//if (nullptr == Player::GetMainPlayer())
+	//{
 
-		Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
-		NewPlayer->SetLevelOverOn();
-		NewPlayer->SetLevel(this);
-		NewPlayer->GetTransform().SetWorldPosition({ 960.f, -960.f });
-		GetMainCameraActor()->GetTransform().SetWorldPosition(float4(NewPlayer->GetTransform().GetWorldPosition().x , NewPlayer->GetTransform().GetWorldPosition().y, -100.f));
-	}
+		//Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
+		//NewPlayer->SetLevelOverOn();
+		//NewPlayer->SetLevel(this);
+		//NewPlayer->GetTransform().SetWorldPosition({ 960.f, -960.f });
+		//GetMainCameraActor()->GetTransform().SetWorldPosition(float4(NewPlayer->GetTransform().GetWorldPosition().x , NewPlayer->GetTransform().GetWorldPosition().y, -100.f));
+	//}
+
+	Player::MakeMainPlayer(this, { 960.f, -960.f });
+
 
 	{
 		for (size_t i = 0; i < 10; i++)
 		{
-			BlackEyes* NewMonster = CreateActor<BlackEyes>(ObjectOrder::Monster);
+			std::shared_ptr<BlackEyes> NewMonster = CreateActor<BlackEyes>(ObjectOrder::Monster);
 			Monster_.push_back(NewMonster);
 		}
 		for (size_t i = 0; i < 10; i++)
 		{
-			Brown* NewMonster = CreateActor<Brown>(ObjectOrder::Monster);
+			std::shared_ptr<Brown> NewMonster = CreateActor<Brown>(ObjectOrder::Monster);
 			Monster_.push_back(NewMonster);
 		}
 		for (size_t i = 0; i < 10; i++)
 		{
-			Green* NewMonster = CreateActor<Green>(ObjectOrder::Monster);
+			std::shared_ptr<Green> NewMonster = CreateActor<Green>(ObjectOrder::Monster);
 			Monster_.push_back(NewMonster);
 		}
 		for (size_t i = 0; i < 10; i++)
 		{
-			NormalGoblin* NewMonster = CreateActor<NormalGoblin>(ObjectOrder::Monster);
+			std::shared_ptr<NormalGoblin> NewMonster = CreateActor<NormalGoblin>(ObjectOrder::Monster);
 			Monster_.push_back(NewMonster);
 		}
 		for (size_t i = 0; i < 10; i++)
 		{
-			RedFlyingEyes* NewMonster = CreateActor<RedFlyingEyes>(ObjectOrder::Monster);
+			std::shared_ptr<RedFlyingEyes> NewMonster = CreateActor<RedFlyingEyes>(ObjectOrder::Monster);
 			Monster_.push_back(NewMonster);
 		}
 		for (size_t i = 0; i < 10; i++)
 		{
-			FlyingEyes* NewMonster = CreateActor<FlyingEyes>(ObjectOrder::Monster);
+			std::shared_ptr<FlyingEyes> NewMonster = CreateActor<FlyingEyes>(ObjectOrder::Monster);
 			Monster_.push_back(NewMonster);
 		}
 	}
 	{
-		Mouse* NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
+		std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
 
 	}
 	CreateActor<TimeActor>();
@@ -166,7 +170,7 @@ void TestLevel::MoveWorld(int _Dir)
 {
 	PlayerMoveCamera();
 	MouseMoveCamera();
-	std::vector<std::vector<TileMapActor*>> CopyTiles_;
+	std::vector<std::vector<std::shared_ptr<TileMapActor>>> CopyTiles_;
 	CopyTiles_.resize(3);
 	for (size_t y = 0; y < CopyTiles_.size(); y++)
 	{

@@ -2,7 +2,7 @@
 #include "GameEngineRenderTarget.h"
 #include "GameEngineRenderer.h"
 
-class GameEngineBlur: public GameEnginePostEffect
+class GameEngineBlur : public GameEnginePostEffect
 {
 	//이 클래스의 존재 이유:
 public:
@@ -18,13 +18,13 @@ private:
 	GameEngineBlur& operator=(const GameEngineBlur&& _other) = delete;
 
 
-public:	
+public:
 	virtual void EffectInit() override;
-	virtual void Effect(GameEngineRenderTarget* _renderTarget) override;
+	virtual void Effect(std::shared_ptr<GameEngineRenderTarget> _renderTarget) override;
 
 
 private:
-	GameEngineRenderTarget* copiedRenderTarget_;
+	std::shared_ptr<GameEngineRenderTarget> copiedRenderTarget_;
 	GameEngineRenderUnit effectUnit_;
 
 };

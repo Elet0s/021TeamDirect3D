@@ -2,7 +2,7 @@
 #include "GameEngineStructuredBuffer.h"
 #include "GameEngineDevice.h"
 
-std::map<std::string, std::map<int, GameEngineStructuredBuffer*>> GameEngineStructuredBuffer::allStructuredBuffers_;
+std::map<std::string, std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>> GameEngineStructuredBuffer::allStructuredBuffers_;
 
 GameEngineStructuredBuffer::GameEngineStructuredBuffer()
 	: structuredBuffer_(nullptr),
@@ -31,20 +31,20 @@ GameEngineStructuredBuffer::~GameEngineStructuredBuffer()
 	}
 }
 
-GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateStructuredBuffer(
+std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateStructuredBuffer(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
 	int _dataCount
 )
 {
-	GameEngineStructuredBuffer* newRes = CreateNamedRes(_name, _desc.Size);
+	std::shared_ptr<GameEngineStructuredBuffer> newRes = CreateNamedRes(_name, _desc.Size);
 	newRes->CreateOrResize(_desc, _dataCount, nullptr);
 	return newRes;
 }
 
-GameEngineStructuredBuffer* GameEngineStructuredBuffer::Find(const std::string_view& _name, int _byteWidth)
+std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::Find(const std::string_view& _name, int _byteWidth)
 {
-	std::map<std::string, std::map<int, GameEngineStructuredBuffer*>>::iterator nameFindIter
+	std::map<std::string, std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>>::iterator nameFindIter
 		= allStructuredBuffers_.find(GameEngineString::ToUpperReturn(_name));
 
 	if (allStructuredBuffers_.end() == nameFindIter)
@@ -52,7 +52,7 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::Find(const std::string_v
 		return nullptr;
 	}
 
-	std::map<int, GameEngineStructuredBuffer*>::iterator sizeFindIter = nameFindIter->second.find(_byteWidth);
+	std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>::iterator sizeFindIter = nameFindIter->second.find(_byteWidth);
 
 	if (nameFindIter->second.end() == sizeFindIter)
 	{
@@ -62,20 +62,20 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::Find(const std::string_v
 	return sizeFindIter->second;
 }
 
-GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateAndFind(
+std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateAndFind(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
 	int _dataCount
 )
 {
-	GameEngineStructuredBuffer* findBuffer = Find(_name, _desc.Size);
+	std::shared_ptr<GameEngineStructuredBuffer> findBuffer = Find(_name, _desc.Size);
 
 	if (nullptr != findBuffer)
 	{
 		return findBuffer;
 	}
 
-	GameEngineStructuredBuffer* newBuffer = CreateNamedRes(_name, _desc.Size);
+	std::shared_ptr<GameEngineStructuredBuffer> newBuffer = CreateNamedRes(_name, _desc.Size);
 
 	newBuffer->CreateOrResize(_desc, _dataCount);
 
@@ -180,19 +180,23 @@ void GameEngineStructuredBuffer::PSReset(int _bindPoint)
 
 void GameEngineStructuredBuffer::ResourceDestroy()
 {
-	for (std::pair<std::string, std::map<int, GameEngineStructuredBuffer*>> nameSortedBuffer : allStructuredBuffers_)
+	for (std::pair<std::string, std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>> nameSortedBuffer : allStructuredBuffers_)
 	{
-		for (std::pair<int, GameEngineStructuredBuffer*> sizeSortedBuffer : nameSortedBuffer.second)
-		{
-			delete sizeSortedBuffer.second;
-			sizeSortedBuffer.second = nullptr;
-		}
+		//for (std::pair<int, std::shared_ptr<GameEngineStructuredBuffer>> sizeSortedBuffer : nameSortedBuffer.second)
+		//{
+		//	delete sizeSortedBuffer.second;
+		//	sizeSortedBuffer.second = nullptr;
+		//}
+
+		nameSortedBuffer.second.clear();
 	}
+
+	allStructuredBuffers_.clear();
 }
 
-GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
+std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
 {
-	GameEngineStructuredBuffer* findBuffer = Find(_name, _byteWidth);
+	std::shared_ptr<GameEngineStructuredBuffer> findBuffer = Find(_name, _byteWidth);
 
 	if (nullptr != findBuffer)
 	{
@@ -200,7 +204,7 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateNamedRes(const std
 	}
 	else
 	{
-		GameEngineStructuredBuffer* newBuffer = CreateRes(_name);
+		std::shared_ptr<GameEngineStructuredBuffer> newBuffer = CreateRes(_name);
 		//GameEngineRes의 namedRes_에 등록시키지 않기 위해 CreateRes()함수를 직접 호출해서 생성한다.
 
 		allStructuredBuffers_[newBuffer->GetNameCopy()][_byteWidth] = newBuffer;

@@ -13,21 +13,21 @@ GameEngineRenderTarget::GameEngineRenderTarget()
 
 GameEngineRenderTarget::~GameEngineRenderTarget()
 {
-	for (GameEnginePostEffect* effect: allEffects_)
-	{
-		delete effect;
-		effect = nullptr;
-	}
+	//for (GameEnginePostEffect* effect: allEffects_)
+	//{
+	//	delete effect;
+	//	effect = nullptr;
+	//}
 
 	allEffects_.clear();
 }
 
-GameEngineRenderTarget* GameEngineRenderTarget::Create(const std::string_view& _name)
+std::shared_ptr<GameEngineRenderTarget> GameEngineRenderTarget::Create(const std::string_view& _name)
 {
 	return CreateNamedRes(_name);
 }
 
-GameEngineRenderTarget* GameEngineRenderTarget::Create()
+std::shared_ptr<GameEngineRenderTarget> GameEngineRenderTarget::Create()
 {
 	return CreateUnnamedRes();
 }
@@ -37,7 +37,7 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	const float4& _color
 )
 {
-	GameEngineTexture* newTexture = GameEngineTexture::Create(_texture);
+	std::shared_ptr<GameEngineTexture> newTexture = GameEngineTexture::Create(_texture);
 	//_texture를 저장할 newTexture를 생성한다.
 
 	CreateRenderTargetTexture(newTexture, _color);
@@ -61,7 +61,7 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	newTextureDesc.Width = _size.UIX();
 	newTextureDesc.Height = _size.UIY();
 	newTextureDesc.MipLevels = 1;
-	newTextureDesc.ArraySize = 1;	
+	newTextureDesc.ArraySize = 1;
 	newTextureDesc.Format = _format;
 	newTextureDesc.SampleDesc.Count = 1;
 	newTextureDesc.SampleDesc.Quality = 0;
@@ -76,12 +76,12 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	const float4& _color
 )
 {
-	GameEngineTexture* newTexture = GameEngineTexture::Create(_desc);
+	std::shared_ptr<GameEngineTexture> newTexture = GameEngineTexture::Create(_desc);
 	CreateRenderTargetTexture(newTexture, _color);
 }
 
 void GameEngineRenderTarget::CreateRenderTargetTexture(
-	GameEngineTexture* _texture,
+	std::shared_ptr<GameEngineTexture> _texture,
 	const float4& _color
 )
 {
@@ -92,13 +92,13 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	//newTexture에서 생성한 렌더타겟뷰를 저장한다.
 
 	this->shaderResourceViews_.push_back(_texture->CreateShaderResourceView());
-	//
+	//newTexture에서 생성한 셰이더리소스뷰를 저장한다.
 
 	this->clearColors_.push_back(_color);
 	//_color도 저장한다.
 }
 
-GameEngineTexture* GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
+std::shared_ptr<GameEngineTexture> GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
 {
 	if (renderTargets_.size() <= _index)
 	{
@@ -109,19 +109,42 @@ GameEngineTexture* GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
 	return renderTargets_[_index];
 }
 
-void GameEngineRenderTarget::CreateDepthTexture(int _index)
+void GameEngineRenderTarget::CreateDepthTexture(int _renderTargetIndex)
 {
 	D3D11_TEXTURE2D_DESC depthTextureDesc = { 0 };
-	depthTextureDesc.Width = renderTargets_[_index]->GetScale().UIX();
-	depthTextureDesc.Height = renderTargets_[_index]->GetScale().UIY();
+	//깊이스텐실뷰 생성에 필요한 desc 초기화.
+
+	depthTextureDesc.Width = renderTargets_[_renderTargetIndex]->GetScale().UIX();
+	//깊이스텐실뷰 가로길이: _renderTargetIndex번 렌더타겟의 가로길이.
+	//웬만해선 0번 하나만 쓸 것이다.
+
+	depthTextureDesc.Height = renderTargets_[_renderTargetIndex]->GetScale().UIY();
+	//깊이스텐실뷰 세로길이: _renderTargetIndex번 렌더타겟의 세로길이.
+	//웬만해선 0번 하나만 쓸 것이다.
+
 	depthTextureDesc.MipLevels = 1;
+	//??
+
 	depthTextureDesc.ArraySize = 1;
+	//텍스처 배열 크기: 1.
+
 	depthTextureDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
+	//텍스처 형식: 깊이 표현용 무부호 정규화된 24비트 정수와 스텐실 표현용 8비트 무부호 정수.
+
 	depthTextureDesc.SampleDesc.Count = 1;
+	//멀티샘플링에 참조할 픽셀당 샘플 개수: 1개(참조 안함).
+
 	depthTextureDesc.SampleDesc.Quality = 0;
+	//멀티샘플링 품질 수준: 0 == 멀티샘플링 안함.
+
 	depthTextureDesc.Usage = D3D11_USAGE_DEFAULT;
+	//텍스처 사용처: 기본.
+
 	depthTextureDesc.CPUAccessFlags = 0;
+	//CPU의 버퍼 접근 허용 여부. 0: 읽기/쓰기 둘다 불가. 
+
 	depthTextureDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
+	//텍스처 연결방식: 깊이스텐실로 연결.
 
 	depthTexture_ = GameEngineTexture::Create(depthTextureDesc);
 
@@ -129,7 +152,7 @@ void GameEngineRenderTarget::CreateDepthTexture(int _index)
 }
 
 
-void GameEngineRenderTarget::SetDepthTexture(GameEngineTexture* _depthTexture)
+void GameEngineRenderTarget::SetDepthTexture(std::shared_ptr<GameEngineTexture> _depthTexture)
 {
 	depthTexture_ = _depthTexture;
 	depthStencilView_ = depthTexture_->CreateDepthStencilView();
@@ -167,18 +190,18 @@ void GameEngineRenderTarget::Setting()
 	GameEngineDevice::GetContext()->OMSetRenderTargets(		//지정한 렌더타겟뷰를 렌더링 파이프라인에 연결하는 함수.
 		static_cast<UINT>(renderTargetViews_.size()),	//연결할	렌더타겟뷰 수. 0~8개 지정 가능.
 		&renderTargetViews_[0],			//렌더타겟뷰 배열 주소.
-		depthStencilView_	
+		depthStencilView_
 	);
 }
 
-void GameEngineRenderTarget::Copy(GameEngineRenderTarget* _otherRenderTarget, int _index /*= 0*/)
+void GameEngineRenderTarget::Copy(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index /*= 0*/)
 {
 	this->Clear();
 	mergeUnit_.GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
 	Effect(mergeUnit_);
 }
 
-void GameEngineRenderTarget::Merge(GameEngineRenderTarget* _otherRenderTarget, int _index /*= 0*/)
+void GameEngineRenderTarget::Merge(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index /*= 0*/)
 {
 	mergeUnit_.GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
 	Effect(mergeUnit_);
@@ -192,11 +215,11 @@ void GameEngineRenderTarget::Effect(GameEngineRenderUnit& _renderUnit)
 
 void GameEngineRenderTarget::EffectProcess()
 {
-	for (GameEnginePostEffect* effect : allEffects_)
+	for (std::shared_ptr<GameEnginePostEffect>& effect : allEffects_)
 	{
 		if (true == effect->IsUpdate())
 		{
-			effect->Effect(this);
+			//effect->Effect(std::dynamic_pointer_cast<GameEngineRenderTarget>(shared_from_this()));
 		}
 	}
 }

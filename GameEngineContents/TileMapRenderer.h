@@ -6,7 +6,7 @@ class Tile
 
 	int tileIndex_;
 	int zValue_;
-	GameEngineTexture* tileImage_;
+	std::shared_ptr<GameEngineTexture> tileImage_;
 public:
 	Tile() : tileIndex_(0), zValue_(0), tileImage_(nullptr)
 	{
@@ -46,7 +46,7 @@ private:
 	void Update(float _deltaTime) override;
 
 private:
-	GameEngineFolderTexture* tileTextures_;
+	std::shared_ptr<GameEngineFolderTexture> tileTextures_;
 
 	int tileX_;
 	int tileY_;

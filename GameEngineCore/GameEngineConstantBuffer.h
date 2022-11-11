@@ -17,8 +17,8 @@ class GameEngineConstantBuffer : public GameEngineRes<GameEngineConstantBuffer>
 	//상수버퍼 자체와 상수버퍼 세팅 구조를 헷갈리지 말 것.
 	//상수버퍼는 셰이더가 컴파일되고 생성되는 시점에 같이 생성된다.
 	//렌더러마다 각각의 상수버퍼를 전부 다 만들 수는 없으므로 돌려 쓴다.
-	
-	
+
+
 public:
 	GameEngineConstantBuffer();
 	~GameEngineConstantBuffer();
@@ -32,13 +32,13 @@ private:
 	GameEngineConstantBuffer& operator=(const GameEngineConstantBuffer&& _other) = delete;
 
 
-public:	
-	static GameEngineConstantBuffer* Create(
+public:
+	static std::shared_ptr<GameEngineConstantBuffer> Create(
 		const std::string_view& _name,	//상수버퍼는 이름이 반드시 있어야 한다. 그래서 다른 리소스 생성함수와는 다르게 이름 기본값이 없다.
 		const D3D11_SHADER_BUFFER_DESC& _desc
 	);
-	static GameEngineConstantBuffer* Find(const std::string_view& _name, int _byteWidth);
-	static GameEngineConstantBuffer* CreateAndFind(
+	static std::shared_ptr<GameEngineConstantBuffer> Find(const std::string_view& _name, int _byteWidth);
+	static std::shared_ptr<GameEngineConstantBuffer> CreateAndFind(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc
 	);
@@ -65,11 +65,11 @@ public:
 	}
 
 private:
-	static GameEngineConstantBuffer* CreateNamedRes(const std::string_view& _name, int _byteWidth);
+	static std::shared_ptr<GameEngineConstantBuffer> CreateNamedRes(const std::string_view& _name, int _byteWidth);
 	void CreateConstantBuffer(const D3D11_SHADER_BUFFER_DESC& _desc);
 
 private:
-	static std::map<std::string, std::map<int, GameEngineConstantBuffer*>> allConstantBuffers_;
+	static std::map<std::string, std::map<int, std::shared_ptr<GameEngineConstantBuffer>>> allConstantBuffers_;
 	//상수버퍼를 이름과 바이트 크기로까지 구분하기 위해 이중 맵 구조 사용.
 	//그래서 여러 셰이더들이 똑같은 상수버퍼를 쓰는 경우에도 문제가 생기지 않는다.
 

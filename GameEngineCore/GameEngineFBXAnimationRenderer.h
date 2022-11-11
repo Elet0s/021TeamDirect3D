@@ -10,10 +10,10 @@ public:
 	class GameEngineFBXAnimationRenderer* ParentRenderer;
 
 	// SetFBX 본을 가지고 있는 매쉬
-	GameEngineFBXMesh* Mesh;
+	std::shared_ptr<GameEngineFBXMesh> Mesh;
 
 	// 애니메이션을 가지고 있는 FBX
-	GameEngineFBXAnimation* Animation;
+	std::shared_ptr<GameEngineFBXAnimation> Animation;
 
 	FbxExAniData* FBXAnimationData;
 

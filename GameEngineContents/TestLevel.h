@@ -18,6 +18,8 @@ public:
 
 
 	void CreateMapAndCamraMove();
+
+
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -28,9 +30,9 @@ private:
 	void MoveWorld(int _Dir);
 	void MouseMoveCamera();
 	void PlayerMoveCamera();
-	std::vector<std::vector<TileMapActor*>> tilemaps_;
+	std::vector<std::vector<std::shared_ptr<TileMapActor>>> tilemaps_;
 	
-	std::vector<Monster*> Monster_;
+	std::vector<std::shared_ptr<Monster>> Monster_;
 	//GameEngineCameraActor* tileCameraActor_;
 };
 

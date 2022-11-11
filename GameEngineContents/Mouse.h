@@ -16,9 +16,9 @@ public:
 	Mouse& operator=(const Mouse& _Other) = delete;
 	Mouse& operator=(Mouse&& _Other) noexcept = delete;
 public:
-	GameEngineTextureRenderer* mouseRenderer;
+	std::shared_ptr<GameEngineTextureRenderer> mouseRenderer;
 	GameEngineLevel* mouseLevel;
-	GameEngineCollision* mouseCollision_;
+	std::shared_ptr<GameEngineCollision> mouseCollision_;
 
 	inline void GetCurPos()
 	{

@@ -8,12 +8,12 @@
 struct RenderOption
 {
     float deltaTime_ = 0.f;
-    float sumDeltaTime_ = 0.f;      
-    int isAnimation_ = 0;    
+    float sumDeltaTime_ = 0.f;
+    int isAnimation_ = 0;
     int temp02_ = 0;
 };
 
-class GameEngineRenderUnit
+class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>
 {
     //이 프레임워크에서 렌더링에 필수적인 두가지 요소인 렌더링 파이프라인과 셰이더리소스헬퍼를 
     // 한데 모아 렌더러를 통해 관리하기 편하기 위해 만든 클래스.
@@ -27,7 +27,8 @@ public:
     ~GameEngineRenderUnit();
 
     GameEngineRenderUnit(const GameEngineRenderUnit& _other);
-    //GameEngineRenderUnit(GameEngineRenderUnit&& _other) noexcept;
+    //GameEngineRenderUnit(GameEngineRenderUnit&& _other) noexcept = delete;
+
 private:
     GameEngineRenderUnit& operator=(const GameEngineRenderUnit& _other) = delete;
     GameEngineRenderUnit& operator=(GameEngineRenderUnit&& _other) = delete;
@@ -38,24 +39,24 @@ public:
 
     //렌더유닛에 메쉬를 지정하는 함수. 
     void SetMesh(const std::string_view& _meshName);
-    void SetMesh(GameEngineMesh* _mesh);
+    void SetMesh(std::shared_ptr<GameEngineMesh> _mesh);
 
     //새 부모 렌더러를 지정하고 렌더유닛이 가진 셰이더리소스헬퍼에
     // 엔진 기본제공 상수버퍼인 "TRANSFORMDATA"와 "RENDEROPTION"을 등록하는 함수.
-    void EngineShaderResourceSetting(GameEngineRenderer* _parentRenderer);
+    void EngineShaderResourceSetting(std::shared_ptr<GameEngineRenderer> _parentRenderer);
 
     //렌더유닛의 셰이더리소스헬퍼에 저장된 셰이더리소스들을 렌더링 파이프라인을 통해 
     // 부모 렌더러가 등록된 카메라의 렌더타겟에 옮기는 함수.
     void Render(float _deltaTime);
 
-    GameEngineMaterial* GetMaterial();
+    std::shared_ptr<GameEngineMaterial> GetPipeLine();
 
-    GameEngineMaterial* GetCloneMaterial();
+    std::shared_ptr<GameEngineMaterial> GetClonePipeLine();
 
-    GameEngineMaterial* CloneMaterial(GameEngineMaterial* _original);
+    std::shared_ptr<GameEngineMaterial> ClonePipeLine(std::shared_ptr<GameEngineMaterial> _original);
 
     //렌더유닛에 부모 렌더러를 지정하고 EngineShaderResourceSetting() 함수를 호출해서 엔진 기본 상수버퍼를 등록하는 함수.
-    void SetRenderer(GameEngineRenderer* _parentRenderer);    
+    void SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer);
 
 
 public:
@@ -66,13 +67,13 @@ public:
 
 
 private:
-    GameEngineRenderer* parentRenderer_;    //이 렌더유닛을 가진 부모 렌더러.
+    std::weak_ptr<GameEngineRenderer> parentRenderer_;    //이 렌더유닛을 가진 부모 렌더러.
 
-    GameEngineMesh* mesh_;                  //
+    std::shared_ptr<GameEngineMesh> mesh_;                  //
 
-    GameEngineInputLayout* inputLayout_;    //
+    std::shared_ptr<GameEngineInputLayout> inputLayout_;    //
 
-    GameEngineMaterial* material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
+    std::shared_ptr<GameEngineMaterial> material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
 
     D3D11_PRIMITIVE_TOPOLOGY topology_;     //
 
@@ -82,30 +83,30 @@ private:
 
 class GameEngineShaderResourceHelper;
 class GameEngineMaterial;
-class GameEngineRenderer: public GameEngineTransformComponent
+class GameEngineRenderer : public GameEngineTransformComponent
 {
     //모든 렌더러가 공통적으로 가져야 하는 기능만을 최소한도로 가진 인터페이스 클래스.
     //실질적인 역할은 트랜스폼 정보를 가지고 게임엔진카메라에 등록되어 렌더링 대상이 되고, 
     //자식 렌더러들의 형식을 규정한다.
 
-	friend GameEngineLevel;
-	friend class GameEngineCamera;
+    friend GameEngineLevel;
+    friend class GameEngineCamera;
 
 public:
 
-	GameEngineRenderer();
-	~GameEngineRenderer();
+    GameEngineRenderer();
+    ~GameEngineRenderer();
 
-	GameEngineRenderer(const GameEngineRenderer& _other) = delete;
-	GameEngineRenderer(GameEngineRenderer&& _other) noexcept = delete;
-	GameEngineRenderer& operator=(const GameEngineRenderer& _other) = delete;
-	GameEngineRenderer& operator=(GameEngineRenderer&& _other) = delete;
+    GameEngineRenderer(const GameEngineRenderer& _other) = delete;
+    GameEngineRenderer(GameEngineRenderer&& _other) noexcept = delete;
+    GameEngineRenderer& operator=(const GameEngineRenderer& _other) = delete;
+    GameEngineRenderer& operator=(GameEngineRenderer&& _other) = delete;
 
 public:
-	void ChangeCamera(CameraOrder _order);
+    void ChangeCamera(CameraOrder _order);
     void SetRenderingOrder(int _renderingOrder);
-    bool IsInstancing(GameEngineMaterial* _pipeLine);
-    void InstancingDataSetting(GameEngineMaterial* _pipeLine);
+    bool IsInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine);
+    void InstancingDataSetting(std::shared_ptr<GameEngineMaterial> _pipeLine);
 
 public:
     inline int GetRenderingOrder()
@@ -121,18 +122,19 @@ public:
 public:
     RenderOption renderOptionInst_;
 
-protected:
-	virtual void Start();
-	virtual void Render(float _deltaTime) = 0;	
-
-	void PushRendererToMainCamera();	//렌더러가 메인카메라에 등록하는 함수.
-	void PushRendererToUICamera();		//렌더러가 UI카메라에 등록하는 함수.
 
 protected:
-    class GameEngineCamera* camera_;    //렌더러가 등록된 카메라.
+    virtual void Start();
+    virtual void Render(float _deltaTime) = 0;
+
+    void PushRendererToMainCamera();	//렌더러가 메인카메라에 등록하는 함수.
+    void PushRendererToUICamera();		//렌더러가 UI카메라에 등록하는 함수.
+
+protected:
+    std::weak_ptr<class GameEngineCamera> camera_;    //렌더러가 등록된 카메라.
 
 private:
-	CameraOrder cameraOrder_;
+    CameraOrder cameraOrder_;
     int renderingOrder_;
     bool isInstancing_;
 };

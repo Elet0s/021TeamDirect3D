@@ -66,7 +66,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
         ImGui::Text(selectIndex.c_str());
     }
 
-    GameEngineFolderTexture* selectFolderTexture = GameEngineFolderTexture::Find(selectFolderTexture_);
+    std::shared_ptr<GameEngineFolderTexture> selectFolderTexture = GameEngineFolderTexture::Find(selectFolderTexture_);
 
     if (nullptr != selectFolderTexture)
     {
@@ -74,7 +74,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 
         for (size_t i = 0; i < selectFolderTexture->GetTextureCount(); i++)
         {
-            GameEngineTexture* tileImage = selectFolderTexture->GetTexture(i);
+            std::shared_ptr<GameEngineTexture> tileImage = selectFolderTexture->GetTexture(i);
             if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(tileImage->CreateShaderResourceView()), { 64, 32 }))
             {
                 selectTile_ = i;

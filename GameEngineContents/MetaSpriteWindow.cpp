@@ -114,7 +114,7 @@ void MetaSpriteWindow::MetaFileButton(GameEngineLevel* _level)
 				++startPos;
 			}
 
-			GameEngineActor* newActor = _level->CreateActor<GameEngineActor>();
+			std::shared_ptr<GameEngineActor> newActor = _level->CreateActor<GameEngineActor>();
 			newActor->GetTransform().SetLocalPosition(-500, 0, 0);
 
 			renderer_ = newActor->CreateComponent<GameEngineTextureRenderer>();

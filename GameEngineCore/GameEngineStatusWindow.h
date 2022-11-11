@@ -1,18 +1,18 @@
 #pragma once
 #include "GameEngineGUI.h"
 
-class GameEngineImageShotWindow: public GameEngineGUIWindow
+class GameEngineImageShotWindow : public GameEngineGUIWindow
 {
 
 public:
-	GameEngineImageShotWindow(): renderTexture_(nullptr)
+	GameEngineImageShotWindow() : renderTexture_(nullptr)
 	{
 	}
 
 public:
 	void RenderTextureSetting(ImTextureID _renderTexture, ImVec2 _size);
 
-	void Initialize(class GameEngineLevel* _level) ;
+	void Initialize(class GameEngineLevel* _level);
 	void OnGUI(class GameEngineLevel* _level, float _deltaTime) override;
 
 private:
@@ -21,7 +21,7 @@ private:
 };
 
 
-class GameEngineStatusWindow: public GameEngineGUIWindow
+class GameEngineStatusWindow : public GameEngineGUIWindow
 {
 
 public:
@@ -37,18 +37,18 @@ private:
 	GameEngineStatusWindow& operator=(const GameEngineStatusWindow&& _other) = delete;
 
 
-public:	
+public:
 	static void AddDebugRenderTarget(
 		const std::string& _renderTargetName,
-		class GameEngineRenderTarget* _renderTarget);
+		std::shared_ptr<class GameEngineRenderTarget> _renderTarget);
 
 private:
 	void Initialize(class GameEngineLevel* _level) override;
 	void OnGUI(class GameEngineLevel* _level, float _deltaTime) override;
 
 private:
-	std::list<GameEngineImageShotWindow*> imageshotWindows_;
-	static std::map<std::string, class GameEngineRenderTarget*> debugRenderTargets_;
+	std::list<std::shared_ptr<GameEngineImageShotWindow>> imageshotWindows_;
+	static std::map<std::string, std::shared_ptr<class GameEngineRenderTarget>> debugRenderTargets_;
 
 };
 

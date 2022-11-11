@@ -1,4 +1,4 @@
-#include "PreCompile.h"
+ï»¿#include "PreCompile.h"
 #include "GameEngineStatusWindow.h"
 #include "GameEngineRenderTarget.h"
 #include "GameEngineLevel.h"
@@ -23,7 +23,7 @@ void GameEngineImageShotWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 	}
 }
 
-std::map<std::string, GameEngineRenderTarget*> GameEngineStatusWindow::debugRenderTargets_;
+std::map<std::string, std::shared_ptr<GameEngineRenderTarget>> GameEngineStatusWindow::debugRenderTargets_;
 
 GameEngineStatusWindow::GameEngineStatusWindow()
 {
@@ -35,12 +35,12 @@ GameEngineStatusWindow::~GameEngineStatusWindow()
 
 void GameEngineStatusWindow::AddDebugRenderTarget(
 	const std::string& _renderTargetName,
-	GameEngineRenderTarget* _renderTarget
+	std::shared_ptr<GameEngineRenderTarget> _renderTarget
 )
 {
 	if (debugRenderTargets_.end() != debugRenderTargets_.find(_renderTargetName))
 	{
-		MsgBoxAssertString(_renderTargetName + ": ÀÌ¹Ì °°Àº ÀÌ¸§ÀÇ ·»´õÅ¸°ÙÀÌ Á¸ÀçÇÕ´Ï´Ù.");
+		MsgBoxAssertString(_renderTargetName + ": ì´ë¯¸ ê°™ì€ ì´ë¦„ì˜ ë Œë”íƒ€ê²Ÿì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
 		return;
 	}
 
@@ -88,21 +88,21 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 
 	ImGui::Text("All RenderTargets");
 
-	for (std::pair<std::string, GameEngineRenderTarget*> renderTargetPair: debugRenderTargets_)
+	for (std::pair<std::string, std::shared_ptr<GameEngineRenderTarget>> renderTargetPair : debugRenderTargets_)
 	{
 		if (true == ImGui::TreeNodeEx(renderTargetPair.first.c_str(), 0))
 		{
-			GameEngineRenderTarget* renderTarget = renderTargetPair.second;
+			std::shared_ptr<GameEngineRenderTarget> renderTarget = renderTargetPair.second;
 
-			for (ID3D11ShaderResourceView* shaderResourceView: renderTarget->shaderResourceViews_ )
+			for (ID3D11ShaderResourceView* shaderResourceView : renderTarget->shaderResourceViews_)
 			{
 				float4 renderTargetScale = GameEngineWindow::GetScale() * 0.2f;
 
-				if (true == ImGui::ImageButton(static_cast<ImTextureID>(shaderResourceView), 
+				if (true == ImGui::ImageButton(static_cast<ImTextureID>(shaderResourceView),
 					{ renderTargetScale.x, renderTargetScale.y })
-				)
+					)
 				{
-					GameEngineImageShotWindow* newImageShotWindow 
+					std::shared_ptr<GameEngineImageShotWindow> newImageShotWindow
 						= GameEngineGUI::CreateGUIWindow<GameEngineImageShotWindow>("Image Shot", nullptr);
 
 					newImageShotWindow->RenderTextureSetting(static_cast<ImTextureID>(shaderResourceView),

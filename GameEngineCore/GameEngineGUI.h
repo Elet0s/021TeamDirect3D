@@ -4,12 +4,15 @@
 #include "imgui_impl_win32.h"
 #include "GameEngineUpdateObject.h"
 
-class GameEngineGUIWindow: public GameEngineNameObject, public GameEngineUpdateObject
+class GameEngineGUIWindow
+	: public GameEngineNameObject,
+	public GameEngineUpdateObject,
+	public std::enable_shared_from_this<GameEngineGUIWindow>
 {
 	//이 클래스의 존재 이유는??
 
 	friend class GameEngineGUI;
-	
+
 
 	void Begin();
 	void End();
@@ -43,17 +46,17 @@ private:
 	GameEngineGUI& operator=(const GameEngineGUI& _other) = delete;
 	GameEngineGUI& operator=(const GameEngineGUI&& _other) = delete;
 
-public:	
+public:
 	static void Render(class GameEngineLevel* _level, float _deltaTime);
 	static std::string OpenFileDlg(const std::string& _title, const std::string& _startPath);
 	static std::string OpenFolderDlg(const std::string& _title, const std::string& _startPath);
 
 public:
 	template<typename GUIWindowType>
-	static GUIWindowType* CreateGUIWindow(const std::string& _name, GameEngineLevel* _level)
+	static std::shared_ptr<GUIWindowType> CreateGUIWindow(const std::string& _name, GameEngineLevel* _level)
 	{
-		GUIWindowType* newWindow = new GUIWindowType();
-		GameEngineGUIWindow* initWindow = newWindow;	//
+		std::shared_ptr<GUIWindowType> newWindow = std::make_shared<GUIWindowType>();
+		GameEngineGUIWindow* initWindow = newWindow.get();	//
 		initWindow->SetName(_name);
 		initWindow->Initialize(_level);
 		guiWindows_.push_back(newWindow);
@@ -65,7 +68,7 @@ protected:
 	static void Destroy();
 
 private:
-	static std::list<GameEngineGUIWindow*> guiWindows_;
+	static std::list<std::shared_ptr<GameEngineGUIWindow>> guiWindows_;
 
 };
 

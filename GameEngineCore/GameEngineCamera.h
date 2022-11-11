@@ -2,7 +2,7 @@
 #include "GameEngineLevel.h"
 #include "GameEngineTransformComponent.h"
 
-enum class ProjectionMode
+enum class CameraProjectionMode
 {
 	Perspective, //원근투영.
 	Orthographic //직교투영.
@@ -10,13 +10,13 @@ enum class ProjectionMode
 
 class GameEngineInstancing;
 class GameEngineMaterial;
-class GameEngineCamera: public GameEngineTransformComponent
+class GameEngineCamera : public GameEngineTransformComponent
 {
 	//카메라. 
 	//월드공간의 오브젝트들이 뷰 스페이스라고 하는 가상의 카메라 시야범위 안에 들어 왔을때, 
 	// 오브젝트들을 구성하는 정점들을 뷰행렬에 맞춰서 재배치하고 투영행렬에 맞춰서 축소한 후
 	// 뷰포트행렬대로 다시 확대한 만큼의 정점 좌표를 계산해서 변형된 대로 그리는 컴포넌트.
-	
+
 	friend GameEngineLevel;
 	friend class GameEngineRenderer;
 
@@ -42,7 +42,6 @@ public:
 
 	//주어진 월드좌표를 윈도우좌표로 바꾸는 함수.
 	float4 GetWorldPositionToScreenPosition(const float4& _worldPosition);
-	//이거 카메라 위치까지 반영해야 하는거 아닌가??
 
 	//카메라의 순서를 변경하는 함수.
 	void SetCameraOrder(CameraOrder _order);
@@ -50,14 +49,14 @@ public:
 
 
 	GameEngineInstancing* GetInstancing(const std::string& _name);
-	GameEngineInstancing* GetInstancing(GameEngineMaterial* _pipeLine);
+	GameEngineInstancing* GetInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine);
 
-	void PushInstancing(GameEngineMaterial* _pipeLine, int _count);
-	int PushInstancingData(GameEngineMaterial* _pipeLine, void* _data, int _dataSize);
-	int PushInstancingIndex(GameEngineMaterial* _pipeLine);	
+	void PushInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine, int _count);
+	int PushInstancingData(std::shared_ptr<GameEngineMaterial> _pipeLine, void* _data, int _dataSize);
+	int PushInstancingIndex(std::shared_ptr<GameEngineMaterial> _pipeLine);
 
 public:
-	void SetProjectionMode(ProjectionMode _mode)
+	void SetProjectionMode(CameraProjectionMode _mode)
 	{
 		projectionMode_ = _mode;
 	}
@@ -65,11 +64,11 @@ public:
 	{
 		return mouseDirection_;
 	}
-	ProjectionMode GetProjectionMode()
+	CameraProjectionMode GetProjectionMode()
 	{
 		return projectionMode_;
 	}
-	
+
 	inline void SetProjectionSize(const float4& _size)
 	{
 		size_ = _size;
@@ -89,7 +88,7 @@ public:
 		return projectionMatrix_;
 	}
 
-	inline class GameEngineRenderTarget* GetCameraRenderTarget()
+	inline std::shared_ptr<class GameEngineRenderTarget> GetCameraRenderTarget()
 	{
 		return cameraRenderTarget_;
 	}
@@ -98,12 +97,12 @@ public:
 protected:
 	void Start();
 
-private: 
+private:
 	//이 카메라가 가진 렌더러들에게 이 카메라가 가진 렌더타겟에 렌더링 정보를 적용시키게 하는 함수.
 	void Render(float _deltaTime);
 
 	//주어진 렌더러를 이 카메라에 등록하는 함수.
-	void PushRenderer(GameEngineRenderer* _renderer);
+	void PushRenderer(std::shared_ptr<GameEngineRenderer> _renderer);
 
 	//렌더러를 등록 해제하는 함수. 직접 삭제하는 함수가 아님에 주의할 것.
 	void Release(float _deltaTime);
@@ -111,13 +110,13 @@ private:
 	void Update(float _dletaTime) override;
 
 	//이 카메라의 렌더러들을 다른 레벨의 카메라로 옮기는 함수.
-	void OverRenderer(GameEngineCamera* _nextCamera);		
+	void OverRenderer(std::shared_ptr<GameEngineCamera> _nextCamera);
 
 	//렌더링 순서 변경.
-	void ChangeRenderingOrder(GameEngineRenderer* _renderer, int _newRenderingOrder);
+	void ChangeRenderingOrder(std::shared_ptr<GameEngineRenderer> _renderer, int _newRenderingOrder);
 
 private:
-	std::map<int, std::list<GameEngineRenderer*>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.
+	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.
 
 	std::unordered_map<GameEngineMaterial*, GameEngineInstancing> instancingMap_;	//
 	//비정렬 맵으로 한 이유: 순회할 일이 거의 없을거라고 생각한 상황에서 비정렬 맵을 그냥 써보고 싶어서.
@@ -160,7 +159,7 @@ private:
 
 
 
-	ProjectionMode projectionMode_;	//직교투영/원근투영 설정. 
+	CameraProjectionMode projectionMode_;	//직교투영/원근투영 설정. 
 	float4 size_;	//투영행렬을 계산할 기준 평면 == 내가 사용중인 윈도우의 크기. 근평면이라는 보장은 없음.
 	float nearZ_;		//원근 중심에서 근평면까지의 거리. 
 	float farZ_;		//원근 중심에서 원평면까지의 거리.
@@ -188,6 +187,6 @@ private:
 	float4 prevMousePosition_;	//이전 마우스포인터 위치.
 	float4 mouseDirection_;		//마우스포인터가 이동한 방향.
 
-	GameEngineRenderTarget* cameraRenderTarget_;
+	std::shared_ptr<GameEngineRenderTarget> cameraRenderTarget_;
 };
 

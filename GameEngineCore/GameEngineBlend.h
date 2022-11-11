@@ -2,20 +2,16 @@
 #include "GameEngineRes.h"
 
 
-class GameEngineBlend: public GameEngineRes<GameEngineBlend>
+class GameEngineBlend : public GameEngineRes<GameEngineBlend>
 {
 	//블렌드스테이트 생성, 관리 삭제 담당 클래스.
 	//블렌드: 색상 혼합 및 반투명을 제어하는 기술.
 
-	friend GameEngineRes<GameEngineBlend>;
-	//GameEngineBlend 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
-
-private:
+public:
 	GameEngineBlend();
 	~GameEngineBlend();
-	//외부에서 제멋대로 리소스를 생성/삭제하는걸 막기 위해서 생성자/소멸자를 프라이빗으로 지정해서 외부 접근을 막는다.
-	//이 프레임워크의 리소스는 반드시 소멸자가 아니라 ResourceDestroy()함수에서 제거해야 한다.
-	//프로그램 끝날때까지 리소스삭제를 안하면 끝나는 문제지만 그래도 최대한 막아둔다.
+
+private:
 
 	GameEngineBlend(const GameEngineBlend& _other) = delete;
 	GameEngineBlend(GameEngineBlend&& _other) noexcept = delete;
@@ -23,8 +19,8 @@ private:
 	GameEngineBlend& operator=(const GameEngineBlend&& _other) = delete;
 
 
-public:	
-	static GameEngineBlend* Create(
+public:
+	static std::shared_ptr<GameEngineBlend> Create(
 		const std::string_view& _name,
 		const D3D11_BLEND_DESC& _desc
 	);
@@ -45,7 +41,7 @@ private:
 	// 
 	//	D3D11_RENDER_TARGET_BLEND_DESC RenderTarget[8];		렌더타겟에 적용될 알파블렌딩 설정값 정보를 저장할 D3D11_RENDER_TARGET_BLEND_DESC구조체 배열.
 	//														 최대 8개 렌더타겟에 각각 다른 알파블렌딩 방식을 저장할 수 있다.
-	
+
 	//	typedef struct D3D11_RENDER_TARGET_BLEND_DESC
 	//	{
 	//		BOOL BlendEnable;						알파블렌딩을 할 지 여부.
@@ -59,7 +55,7 @@ private:
 	//	} 	D3D11_RENDER_TARGET_BLEND_DESC;
 	//
 	//} 	D3D11_BLEND_DESC;
-	
+
 	// 
 	//알파블렌딩 공식.
 	//output: 최종 결과물.

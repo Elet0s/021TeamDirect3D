@@ -24,6 +24,6 @@ protected:
 	void Chaseplayer(float _deltaTime);
 	void SummonMon();
 
-	GameEngineTextureRenderer* monRenderer_;
-	GameEngineCollision* monCollision_;
+	std::shared_ptr<GameEngineTextureRenderer> monRenderer_;
+	std::shared_ptr<GameEngineCollision> monCollision_;
 };

@@ -17,6 +17,6 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 private:
-	MyWorldMapRenderer* worldmap;
+	std::shared_ptr<MyWorldMapRenderer> worldmap;
 	void LevelStartEvent() override;
 };

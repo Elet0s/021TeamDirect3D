@@ -137,7 +137,7 @@ void GameEngineTextureRenderer::SetTexture(const std::string_view& _textureName)
 	this->currentTexture_ = this->GetShaderResourceHelper().SetTexture("Tex", _textureName);
 }
 
-void GameEngineTextureRenderer::SetTexture(GameEngineTexture* _texture)
+void GameEngineTextureRenderer::SetTexture(std::shared_ptr<GameEngineTexture> _texture)
 {
 	if (nullptr == _texture)
 	{
@@ -151,7 +151,7 @@ void GameEngineTextureRenderer::SetTexture(GameEngineTexture* _texture)
 
 void GameEngineTextureRenderer::SetFolderTextureToIndex(const std::string_view& _textureName, UINT _index)
 {
-	GameEngineFolderTexture* folderTexture = GameEngineFolderTexture::Find(_textureName);
+	std::shared_ptr<GameEngineFolderTexture> folderTexture = GameEngineFolderTexture::Find(_textureName);
 	if (nullptr == folderTexture)
 	{
 		MsgBoxAssertString(std::string(_textureName) + ": 그런 이름의 폴더 텍스처가 없습니다.");
@@ -172,7 +172,7 @@ void GameEngineTextureRenderer::SetTexture(const std::string_view& _textureName,
 	this->SetFrame(_index);
 }
 
-void GameEngineTextureRenderer::SetTexture(GameEngineTexture* _texture, int _index)
+void GameEngineTextureRenderer::SetTexture(std::shared_ptr<GameEngineTexture> _texture, int _index)
 {
 	if (nullptr == _texture)
 	{
@@ -406,7 +406,7 @@ bool GameEngineTextureRenderer::IsCurAnimationPaused()
 	return currentAnimation_->isPaused_;
 }
 
-GameEngineTexture* GameEngineTextureRenderer::GetCurrentTexture() const
+std::shared_ptr<GameEngineTexture> GameEngineTextureRenderer::GetCurrentTexture() const
 {
 	return currentTexture_;
 }

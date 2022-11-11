@@ -26,12 +26,12 @@ GameEngineMaterial::~GameEngineMaterial()
 {
 }
 
-GameEngineMaterial* GameEngineMaterial::Create(const std::string_view& _materialName)
+std::shared_ptr<GameEngineMaterial> GameEngineMaterial::Create(const std::string_view& _materialName)
 {
 	return CreateNamedRes(_materialName);
 }
 
-GameEngineMaterial* GameEngineMaterial::Create()
+std::shared_ptr<GameEngineMaterial> GameEngineMaterial::Create()
 {
 	return CreateUnnamedRes();
 }
@@ -56,7 +56,7 @@ void GameEngineMaterial::SetVertexShader(const std::string_view& _name)
 	}
 }
 
-void GameEngineMaterial::SetVertexShader(GameEngineVertexShader* _vertexShader)
+void GameEngineMaterial::SetVertexShader(std::shared_ptr<GameEngineVertexShader> _vertexShader)
 {
 	this->vertexShader_ = _vertexShader;
 
@@ -113,7 +113,7 @@ void GameEngineMaterial::SetBlend_OutputMerger(const std::string_view& _name)
 
 void GameEngineMaterial::RenderInstancing(
 	int _renderingCount,
-	GameEngineInstancingBuffer* _instancingBuffer
+	std::shared_ptr<GameEngineInstancingBuffer> _instancingBuffer
 )
 {
 	InputAssembler1_InstancingBufferSetting(_instancingBuffer);
@@ -127,7 +127,7 @@ void GameEngineMaterial::RenderInstancing(
 	this->InstancingDraw(_renderingCount);
 }
 
-void GameEngineMaterial::Copy(GameEngineMaterial* _original)
+void GameEngineMaterial::Copy(std::shared_ptr<GameEngineMaterial> _original)
 {
 	this->vertexShader_ = _original->vertexShader_;
 	this->rasterizer_ = _original->rasterizer_;
@@ -145,7 +145,7 @@ void GameEngineMaterial::Setting()
 	OutputMerger_BlendSetting();
 }
 
-void GameEngineMaterial::InputAssembler1_InstancingBufferSetting(GameEngineInstancingBuffer* _instancingBuffer)
+void GameEngineMaterial::InputAssembler1_InstancingBufferSetting(std::shared_ptr<GameEngineInstancingBuffer> _instancingBuffer)
 {
 	//// 그래픽리소스에 Setting이라는 함수가 존재한다면
 	//// 그건 이제부터 그 설정으로 랜더링 파이프라인이 돌아가게 된다는 뜻이 됩니다.

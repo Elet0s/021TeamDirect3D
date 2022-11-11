@@ -149,7 +149,7 @@ void MyWorldMapRenderer::Start()
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Down", VK_DOWN);
 	}*/
 
-	this->GetActor()->GetLevel()->PushRenderer(this, CameraOrder::MainCamera);
+	PushRendererToMainCamera();
 
 	this->SetMaterial("TextureAtlas");
 

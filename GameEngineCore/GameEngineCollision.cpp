@@ -13,8 +13,8 @@ public:
 	GameEngineCollisionFunctionInit()
 	{
 		memset(
-			GameEngineCollision::collisionFunctions_, 
-			0, 
+			GameEngineCollision::collisionFunctions_,
+			0,
 			sizeof(GameEngineCollision::collisionFunctions_));
 
 		GameEngineCollision::collisionFunctions_[static_cast<int>(CollisionType::CT_Sphere)][static_cast<int>(CollisionType::CT_Sphere)]
@@ -48,7 +48,7 @@ public:
 GameEngineCollisionFunctionInit inst_;
 
 GameEngineCollision::GameEngineCollision()
-	: debugType_(CollisionType::CT_Sphere2D),
+	: debugType_(CollisionType::CT_Max),
 	collisionMode_(CollisionMode::Single),
 	color_(1.f, 0.f, 0.f, 0.5f),
 	debugCameraOrder_(CameraOrder::MainCamera)	//기본 디버그카메라 세팅: 메인카메라.
@@ -62,16 +62,17 @@ GameEngineCollision::~GameEngineCollision()
 
 void GameEngineCollision::ChangeOrder(int _collisionOrder)
 {
-	this->GetActor()->GetLevel()->PushCollision(this, _collisionOrder);
+	this->GetActor()->GetLevel()->PushCollision(
+		std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), _collisionOrder);
 }
 
 bool GameEngineCollision::IsCollision(
-	CollisionType _thisType, 
+	CollisionType _thisType,
 	int _collisionGroup,
 	CollisionType _otherType,
-	std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _update /*= nullptr*/,
-	std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _enter /*= nullptr*/,
-	std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _exit /*= nullptr*/
+	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update /*= nullptr*/,
+	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter /*= nullptr*/,
+	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit /*= nullptr*/
 )
 {
 	if (false == this->IsUpdate())
@@ -88,16 +89,16 @@ bool GameEngineCollision::IsCollision(
 		return false;
 	}
 
-	std::map<int, std::list<GameEngineCollision*>>& allCollisions
+	std::map<int, std::list<std::shared_ptr<GameEngineCollision>>>& allCollisions
 		= this->GetActor()->GetLevel()->allCollisions_;
 
-	std::list<GameEngineCollision*>& collisionGroup = allCollisions[_collisionGroup];
+	std::list<std::shared_ptr<GameEngineCollision>>& collisionGroup = allCollisions[_collisionGroup];
 
 	bool isCollided = false;	//충돌 여부.
 
-	for (GameEngineCollision* otherCollision : collisionGroup)
+	for (std::shared_ptr<GameEngineCollision> otherCollision : collisionGroup)
 	{
-		if (this == otherCollision)
+		if (shared_from_this() == otherCollision)
 		{
 			continue;
 		}
@@ -116,24 +117,26 @@ bool GameEngineCollision::IsCollision(
 				if (collisionCheck_.end() == collisionCheck_.find(otherCollision))
 				{
 					//첫 충돌.
-					std::pair<std::set<GameEngineCollision*>::iterator, bool> insertResult 
+					std::pair<std::set<std::shared_ptr<GameEngineCollision>>::iterator, bool> insertResult
 						= collisionCheck_.insert(otherCollision);
 
 					if (false == insertResult.second)
 					{
-						MsgBoxAssertString(otherCollision->GetNameCopy() 
+						MsgBoxAssertString(otherCollision->GetNameCopy()
 							+ ": 이미 충돌했던 충돌체가 아직 정리되지 않은 상태에서 다시 충돌했습니다.");
 						return true;
 					}
 
-					if (nullptr != _enter && CollisionReturn::Stop == _enter(this, otherCollision))
+					if (nullptr != _enter && CollisionReturn::Stop == _enter(
+						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
 					{
 						return true;
 					}
 				}
 				else
 				{
-					if (nullptr != _update && CollisionReturn::Stop == _update(this, otherCollision))
+					if (nullptr != _update && CollisionReturn::Stop == _update(
+						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
 					{
 						return true;
 					}
@@ -143,7 +146,8 @@ bool GameEngineCollision::IsCollision(
 			{
 				if (nullptr != _update)
 				{
-					if (CollisionReturn::Stop == _update(this, otherCollision))
+					if (CollisionReturn::Stop == _update(
+						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
 					{
 						return true;
 					}
@@ -167,7 +171,8 @@ bool GameEngineCollision::IsCollision(
 						return false;
 					}
 
-					if (nullptr != _exit && CollisionReturn::Stop == _exit(this, otherCollision))
+					if (nullptr != _exit && CollisionReturn::Stop == _exit(
+						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
 					{
 						return false;
 					}
@@ -182,13 +187,13 @@ bool GameEngineCollision::IsCollision(
 
 void GameEngineCollision::DebugRender()
 {
-	GameEngineCamera* debugCamera 
+	std::shared_ptr<GameEngineCamera> debugCamera
 		= this->GetActor()->GetLevel()->cameras_[static_cast<UINT>(debugCameraOrder_)];
 
 	switch (this->debugType_)
 	{
-	//case CollisionType::CT_Point2D:
-	//	break;
+		//case CollisionType::CT_Point2D:
+		//	break;
 
 	case CollisionType::CT_Sphere2D:
 		GameEngineDebug::DrawSphere(GetTransform(), debugCamera, color_);
@@ -204,8 +209,8 @@ void GameEngineCollision::DebugRender()
 
 
 
-	//case CollisionType::CT_Point:
-	//	break;
+		//case CollisionType::CT_Point:
+		//	break;
 
 	case CollisionType::CT_Sphere:
 		GameEngineDebug::DrawSphere(GetTransform(), debugCamera, color_);
@@ -221,7 +226,7 @@ void GameEngineCollision::DebugRender()
 
 
 	default:
-		MsgBoxAssert("아직 지원되지 않는 콜리전 타입입니다.");
+		MsgBoxAssert("지원되지 않는 콜리전 타입입니다. 콜리전타입이 Max가 아닌지 확인하십시오.");
 		break;
 	}
 }
@@ -233,5 +238,6 @@ void GameEngineCollision::SetUIDebugCamera()
 
 void GameEngineCollision::Start()
 {
-	this->GetActor()->GetLevel()->PushCollision(this, this->GetOrder());
+	this->GetActor()->GetLevel()->PushCollision(
+		std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), this->GetOrder());
 }

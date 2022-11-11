@@ -18,7 +18,7 @@ private:
 
 
 public:	
-	MyTileMapRenderer* tileRenderer_;
+	std::shared_ptr<MyTileMapRenderer> tileRenderer_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

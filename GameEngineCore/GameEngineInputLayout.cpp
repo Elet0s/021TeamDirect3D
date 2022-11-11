@@ -4,7 +4,7 @@
 #include "GameEngineVertexes.h"
 #include "GameEngineVertexShader.h"
 
-GameEngineInputLayout::GameEngineInputLayout(): inputLayout_(nullptr)
+GameEngineInputLayout::GameEngineInputLayout() : inputLayout_(nullptr)
 {
 }
 
@@ -19,7 +19,7 @@ GameEngineInputLayout::~GameEngineInputLayout()
 
 void GameEngineInputLayout::CreateInputLayout(
     const GameEngineInputLayoutDesc& _desc,
-    GameEngineVertexShader* _vertexShader
+    std::shared_ptr<GameEngineVertexShader> _vertexShader
 )
 {
     if (S_OK != GameEngineDevice::GetDevice()->CreateInputLayout(	//ÀÎÇ²·¹ÀÌ¾Æ¿ô »ý¼º ÇÔ¼ö.
@@ -46,12 +46,12 @@ void GameEngineInputLayout::Setting()
     GameEngineDevice::GetContext()->IASetInputLayout(inputLayout_);
 }
 
-GameEngineInputLayout* GameEngineInputLayout::Create(
+std::shared_ptr<GameEngineInputLayout> GameEngineInputLayout::Create(
     const GameEngineInputLayoutDesc& _desc,
-    GameEngineVertexShader* _vertexShader
+    std::shared_ptr<GameEngineVertexShader> _vertexShader
 )
 {
-    GameEngineInputLayout* newRes = CreateUnnamedRes();
+    std::shared_ptr<GameEngineInputLayout> newRes = CreateUnnamedRes();
     newRes->CreateInputLayout(_desc, _vertexShader);
     return newRes;
 }

@@ -31,7 +31,7 @@ private:
 	GameEngineInstancing& operator=(const GameEngineInstancing&& _other) = delete;
 
 
-public: 
+public:
 	void InstancingBufferChangeData();
 
 public:

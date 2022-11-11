@@ -22,7 +22,7 @@ GameEngineVertexBuffer::~GameEngineVertexBuffer()
 	}
 }
 
-GameEngineVertexBuffer* GameEngineVertexBuffer::Create(
+std::shared_ptr<GameEngineVertexBuffer> GameEngineVertexBuffer::Create(
 	const std::string_view& _name,
 	const void* _data,
 	UINT _vertexSize,
@@ -30,15 +30,15 @@ GameEngineVertexBuffer* GameEngineVertexBuffer::Create(
 	const GameEngineInputLayoutDesc& _info
 )
 {
-	GameEngineVertexBuffer* newRes = CreateNamedRes(_name);
+	std::shared_ptr<GameEngineVertexBuffer> newRes = CreateNamedRes(_name);
 	newRes->inputLayoutDesc_ = &_info;	//const 자료형* 변수에 const 자료형&의 주소값을 넣어주므로 복사하는데 아무 문제 없다.
 	newRes->CreateVertexBuffer(_data, _vertexSize, _vertexCount);
 	return newRes;
 }
 
-GameEngineVertexBuffer* GameEngineVertexBuffer::Create(const void* _data, UINT _vertexSize, UINT _vertexCount, const GameEngineInputLayoutDesc& _info)
+std::shared_ptr<GameEngineVertexBuffer> GameEngineVertexBuffer::Create(const void* _data, UINT _vertexSize, UINT _vertexCount, const GameEngineInputLayoutDesc& _info)
 {
-	GameEngineVertexBuffer* newRes = CreateUnnamedRes();
+	std::shared_ptr<GameEngineVertexBuffer> newRes = CreateUnnamedRes();
 	newRes->inputLayoutDesc_ = &_info;	//const 자료형* 변수에 const 자료형&의 주소값을 넣어주므로 복사하는데 아무 문제 없다.
 	newRes->CreateVertexBuffer(_data, _vertexSize, _vertexCount);
 	return newRes;

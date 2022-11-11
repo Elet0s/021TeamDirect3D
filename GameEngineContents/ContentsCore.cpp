@@ -87,7 +87,7 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	}
 
 
-	GameEngineMaterial* newContentsMaterial0
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial0
 		= GameEngineMaterial::Create("Test");
 	newContentsMaterial0->SetVertexShader("Test.hlsl");
 	newContentsMaterial0->SetPixelShader("Test.hlsl");

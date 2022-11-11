@@ -29,10 +29,10 @@ private:
 
 private:
 	int curFrame_;
-	GameEngineTextureRenderer* renderer_;
+	std::shared_ptr<GameEngineTextureRenderer> renderer_;
 
 	GameEngineDirectory metaDir_;
-	GameEngineTexture* targetTexture_;
+	std::shared_ptr<GameEngineTexture> targetTexture_;
 
 	std::string curMetaFolder_;
 	std::string curAtlasFolder_;

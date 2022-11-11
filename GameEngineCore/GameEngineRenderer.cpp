@@ -6,7 +6,7 @@
 #include "GameEngineDevice.h"
 
 GameEngineRenderUnit::GameEngineRenderUnit()
-	: parentRenderer_(nullptr),
+	: parentRenderer_(),
 	mesh_(nullptr),
 	inputLayout_(nullptr),
 	material_(nullptr),
@@ -76,7 +76,7 @@ void GameEngineRenderUnit::SetMesh(const std::string_view& _meshName)
 	}
 }
 
-void GameEngineRenderUnit::SetMesh(GameEngineMesh* _mesh)
+void GameEngineRenderUnit::SetMesh(std::shared_ptr<GameEngineMesh> _mesh)
 {
 	if (nullptr == _mesh)
 	{
@@ -98,7 +98,7 @@ void GameEngineRenderUnit::SetMesh(GameEngineMesh* _mesh)
 	}
 }
 
-void GameEngineRenderUnit::EngineShaderResourceSetting(GameEngineRenderer* _parentRenderer)
+void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngineRenderer> _parentRenderer)
 {
 	if (nullptr == _parentRenderer)
 	{
@@ -108,17 +108,17 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(GameEngineRenderer* _pare
 
 	if (true == this->shaderResourceHelper_.IsConstantBuffer("TRANSFORMDATA"))
 	{
-		this->shaderResourceHelper_.SetConstantBuffer_Link(
+		shaderResourceHelper_.SetConstantBuffer_Link(
 			"TRANSFORMDATA",
-			&this->parentRenderer_->GetTransformData(),
-			sizeof(this->parentRenderer_->GetTransformData())
+			&this->parentRenderer_.lock()->GetTransformData(),
+			sizeof(parentRenderer_.lock()->GetTransformData())
 		);
 	}
 	if (true == this->shaderResourceHelper_.IsConstantBuffer("RENDEROPTION"))
 	{
 		this->shaderResourceHelper_.SetConstantBuffer_Link(
 			"RENDEROPTION",
-			&this->parentRenderer_->renderOptionInst_,
+			&this->parentRenderer_.lock()->renderOptionInst_,
 			sizeof(RenderOption)
 		);
 	}
@@ -130,14 +130,14 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 	{
 		MsgBoxAssert("렌더링 파이프라인이 없습니다. 렌더링을 할 수 없습니다.");
 		return;
-	}	
-	
+	}
+
 	if (nullptr == this->mesh_)
 	{
 		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
 		return;
-	}	
-	
+	}
+
 	if (nullptr == this->inputLayout_)
 	{
 		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
@@ -159,43 +159,43 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 	shaderResourceHelper_.AllResourcesReset();
 }
 
-GameEngineMaterial* GameEngineRenderUnit::GetMaterial()
+std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetPipeLine()
 {
 	return this->material_;
 }
 
-GameEngineMaterial* GameEngineRenderUnit::GetCloneMaterial()
+std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetClonePipeLine()
 {
 	if (false == material_->IsOriginal())
 	{
 		return material_;
 	}
 
-	material_ = CloneMaterial(material_);
+	material_ = ClonePipeLine(material_);
 	return material_;
 }
 
-GameEngineMaterial* GameEngineRenderUnit::CloneMaterial(GameEngineMaterial* _original)
+std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::ClonePipeLine(std::shared_ptr<GameEngineMaterial> _original)
 {
-	GameEngineMaterial* clone = GameEngineMaterial::Create();
+	std::shared_ptr<GameEngineMaterial> clone = GameEngineMaterial::Create();
 	clone->Copy(_original);
 	return clone;
 }
 
-void GameEngineRenderUnit::SetRenderer(GameEngineRenderer* _parentRenderer)
+void GameEngineRenderUnit::SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer)
 {
 	parentRenderer_ = _parentRenderer;
-	if (nullptr == parentRenderer_)
-	{
-		MsgBoxAssert("존재하지 않는 렌더러입니다.");
-		return;
-	}
+	//if (nullptr == parentRenderer_)
+	//{
+	//	MsgBoxAssert("존재하지 않는 렌더러입니다.");
+	//	return;
+	//}
 
 	EngineShaderResourceSetting(_parentRenderer);
 }
 
 GameEngineRenderer::GameEngineRenderer()
-	: camera_(nullptr),
+	: camera_(),
 	renderOptionInst_(),
 	cameraOrder_(CameraOrder::MainCamera),
 	renderingOrder_(0),
@@ -209,20 +209,22 @@ GameEngineRenderer::~GameEngineRenderer()
 
 void GameEngineRenderer::ChangeCamera(CameraOrder _order)
 {
-	this->GetActor()->GetLevel()->PushRenderer(this, _order);
+	this->GetActor()->GetLevel()->PushRenderer(
+		std::dynamic_pointer_cast<GameEngineRenderer>(shared_from_this()), _order);
 }
 
 void GameEngineRenderer::SetRenderingOrder(int _renderingOrder)
 {
-	camera_->ChangeRenderingOrder(this, _renderingOrder);
+	camera_.lock()->ChangeRenderingOrder(
+		std::dynamic_pointer_cast<GameEngineRenderer>(shared_from_this()), _renderingOrder);
 }
 
-bool GameEngineRenderer::IsInstancing(GameEngineMaterial* _pipeLine)
+bool GameEngineRenderer::IsInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine)
 {
 	std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator instancingIter
-		= this->camera_->instancingMap_.find(_pipeLine);
+		= this->camera_.lock()->instancingMap_.find(_pipeLine.get());
 
-	if (this->camera_->instancingMap_.end() == instancingIter)
+	if (this->camera_.lock()->instancingMap_.end() == instancingIter)
 	{
 		return false;
 	}
@@ -230,11 +232,11 @@ bool GameEngineRenderer::IsInstancing(GameEngineMaterial* _pipeLine)
 	return true == isInstancing_ && GameEngineInstancing::minInstancingCount_ <= instancingIter->second.count_;
 }
 
-void GameEngineRenderer::InstancingDataSetting(GameEngineMaterial* _pipeLine)
+void GameEngineRenderer::InstancingDataSetting(std::shared_ptr<GameEngineMaterial> _pipeLine)
 {
-	int instancingIndex = this->camera_->PushInstancingIndex(_pipeLine);
+	int instancingIndex = this->camera_.lock()->PushInstancingIndex(_pipeLine);
 
-	GameEngineInstancing* instancing = camera_->GetInstancing(_pipeLine);
+	GameEngineInstancing* instancing = camera_.lock()->GetInstancing(_pipeLine);
 
 	if (nullptr == instancing)
 	{
@@ -244,7 +246,7 @@ void GameEngineRenderer::InstancingDataSetting(GameEngineMaterial* _pipeLine)
 
 	if (true == instancing->shaderResourceHelper_.IsStructuredBuffer("allInstancingTransformDatas"))
 	{
-		GameEngineStructuredBufferSetter* sBufferSetter 
+		GameEngineStructuredBufferSetter* sBufferSetter
 			= instancing->shaderResourceHelper_.GetStructuredBufferSetter("allInstancingTransformDatas");
 
 		sBufferSetter->Push(this->GetTransformData(), instancingIndex);
@@ -253,16 +255,17 @@ void GameEngineRenderer::InstancingDataSetting(GameEngineMaterial* _pipeLine)
 
 void GameEngineRenderer::Start()
 {
+	GameEngineRenderer::PushRendererToMainCamera();
 }
 
 void GameEngineRenderer::PushRendererToMainCamera()
 {
-	this->GetRoot<GameEngineActor>()->GetLevel()->PushRendererToMainCamera(this);
+	this->GetRoot<GameEngineActor>()->GetLevel()->PushRendererToMainCamera(std::dynamic_pointer_cast<GameEngineRenderer>(shared_from_this()));
 }
 
 void GameEngineRenderer::PushRendererToUICamera()
 {
-	this->GetActor()->GetLevel()->PushRendererToUICamera(this);
+	this->GetActor()->GetLevel()->PushRendererToUICamera(std::dynamic_pointer_cast<GameEngineRenderer>(shared_from_this()));
 }
 
 //void GameEngineRenderer::Render(float _deltaTime)

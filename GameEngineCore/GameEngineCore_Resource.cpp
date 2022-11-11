@@ -82,12 +82,30 @@ void EngineInputLayout()
 
 void EngineSubSetting()
 {
+	//typedef struct D3D11_RASTERIZER_DESC
+	//{
+	//	D3D11_FILL_MODE FillMode;		정점들을 잇는 선 사이를 채울지 말지 결정하는 옵션.
+	//	D3D11_CULL_MODE CullMode;		앞뒷면 중 어느 면을 컬링할지 결정하는 옵션.
+	//	BOOL FrontCounterClockwise;		반시계방향으로 배치된 정점들을 정면으로 판정할지, 그 반대로 할지 결정하는 옵션.
+	//	INT DepthBias;					깊이 바이아스??
+	//	FLOAT DepthBiasClamp;			깊이 바이아스 클램프??
+	//	FLOAT SlopeScaledDepthBias;		??
+	//	BOOL DepthClipEnable;			깊이 클리핑 적용 여부.
+	//	BOOL ScissorEnable;				시저렉탱글 컬링(지정한 사각형 밖의 모든 요소를 그리지 않음) 적용 여부.
+	//	BOOL MultisampleEnable;			멀티샘플링 적용 여부.
+	//	BOOL AntialiasedLineEnable;		라인 안티앨리어싱(픽셀단위 너비의 선에 안티앨리어싱) 적용 여부.
+	//} 	D3D11_RASTERIZER_DESC;
+
+
 	D3D11_RASTERIZER_DESC rasterizerDesc = {};
 
 	rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;	//바꾸면 좌우반전시 렌더링 안됨.
 
 	GameEngineRasterizer::Create("EngineRasterizer", rasterizerDesc);
+
+
+
 
 
 	//typedef struct D3D11_BLEND_DESC
@@ -99,7 +117,7 @@ void EngineSubSetting()
 	// 
 	//	D3D11_RENDER_TARGET_BLEND_DESC RenderTarget[8];		렌더타겟에 적용될 알파블렌딩 설정값 정보를 저장할 D3D11_RENDER_TARGET_BLEND_DESC구조체 배열.
 	//														 최대 8개 렌더타겟에 각각 다른 알파블렌딩 방식을 저장할 수 있다.
-	
+
 	//	typedef struct D3D11_RENDER_TARGET_BLEND_DESC
 	//	{
 	//		BOOL BlendEnable;						알파블렌딩을 할 지 여부.
@@ -195,7 +213,7 @@ void EngineSubSetting()
 
 	D3D11_DEPTH_STENCIL_DESC engineBaseDepthStencilDesc = { 0 };
 
-	engineBaseDepthStencilDesc.DepthEnable = true;	
+	engineBaseDepthStencilDesc.DepthEnable = true;
 	//true: 깊이테스트 함.
 
 	engineBaseDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL;
@@ -368,8 +386,6 @@ void EngineTextureLoad()
 	linearWrapSamplerDesc.MaxLOD = FLT_MAX;
 	GameEngineSampler::Create("LINEARWRAP", linearWrapSamplerDesc);
 
-	
-
 	//D3D11 ERROR: ID3D11DeviceContext::DrawIndexed: 
 	//The Pixel Shader unit expects a Sampler configured for default filtering to be set at Slot 0, 
 	//but the sampler bound at this slot is configured for comparison filtering.  
@@ -393,10 +409,10 @@ void EngineTextureLoad()
 	}
 }
 
-void EngineMaterial()
+void EngineRenderingPipeLine()
 {
 
-	GameEngineMaterial* newMaterial1
+	std::shared_ptr<GameEngineMaterial> newMaterial1
 		= GameEngineMaterial::Create("Color");
 	newMaterial1->SetVertexShader("Color.hlsl");
 	newMaterial1->SetPixelShader("Color.hlsl");
@@ -405,7 +421,7 @@ void EngineMaterial()
 	newMaterial1->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newMaterial2
+	std::shared_ptr<GameEngineMaterial> newMaterial2
 		= GameEngineMaterial::Create("Texture");
 	newMaterial2->SetVertexShader("Texture.hlsl");
 	newMaterial2->SetPixelShader("Texture.hlsl");
@@ -414,7 +430,7 @@ void EngineMaterial()
 	newMaterial2->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newMaterial3
+	std::shared_ptr<GameEngineMaterial> newMaterial3
 		= GameEngineMaterial::Create("TextureAtlas");
 	newMaterial3->SetVertexShader("TextureAtlas.hlsl");
 	newMaterial3->SetPixelShader("TextureAtlas.hlsl");
@@ -423,7 +439,7 @@ void EngineMaterial()
 	newMaterial3->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newMaterial4
+	std::shared_ptr<GameEngineMaterial> newMaterial4
 		= GameEngineMaterial::Create("3DDebug");
 	newMaterial4->SetVertexShader("Debug3D.hlsl");
 	newMaterial4->SetPixelShader("Debug3D.hlsl");
@@ -432,7 +448,7 @@ void EngineMaterial()
 	newMaterial4->SetDepthStencil_OutputMerger("AlwaysDepth");
 
 
-	GameEngineMaterial* newMaterial5
+	std::shared_ptr<GameEngineMaterial> newMaterial5
 		= GameEngineMaterial::Create("DebugTexture");
 	newMaterial5->SetVertexShader("DebugTexture.hlsl");
 	newMaterial5->SetPixelShader("DebugTexture.hlsl");
@@ -441,7 +457,7 @@ void EngineMaterial()
 	newMaterial5->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newMaterial6
+	std::shared_ptr<GameEngineMaterial> newMaterial6
 		= GameEngineMaterial::Create("TargetMerge");
 	newMaterial6->SetVertexShader("TargetMerge.hlsl");
 	newMaterial6->SetPixelShader("TargetMerge.hlsl");
@@ -450,7 +466,7 @@ void EngineMaterial()
 	newMaterial6->SetDepthStencil_OutputMerger("AlwaysDepth");
 
 
-	GameEngineMaterial* newMaterial7
+	std::shared_ptr<GameEngineMaterial> newMaterial7
 		= GameEngineMaterial::Create("Blur");
 	newMaterial7->SetVertexShader("Blur.hlsl");
 	newMaterial7->SetPixelShader("Blur.hlsl");
@@ -459,7 +475,7 @@ void EngineMaterial()
 	newMaterial7->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	GameEngineMaterial* newMaterial8
+	std::shared_ptr<GameEngineMaterial> newMaterial8
 		= GameEngineMaterial::Create("TextureAnimation");
 	newMaterial8->SetVertexShader("TextureAnimation.hlsl");
 	newMaterial8->SetPixelShader("TextureAnimation.hlsl");
@@ -526,15 +542,15 @@ void EngineMesh()
 	//기본 육면체.
 	std::vector<GameEngineVertex> boxVertex;
 	boxVertex.reserve(8);
-	boxVertex.push_back({ float4(-0.5f, 0.5f, -0.5f), float4(), float4(0, 0)});		//0번 점.
-	boxVertex.push_back({ float4(0.5f, 0.5f, -0.5f), float4(), float4(1, 0)});		//1번 점.
-	boxVertex.push_back({ float4(0.5f, -0.5f, -0.5f), float4(), float4(1, 1)});		//2번 점.
-	boxVertex.push_back({ float4(-0.5f, -0.5f, -0.5f), float4(), float4(0, 1)});	//3번 점.
+	boxVertex.push_back({ float4(-0.5f, 0.5f, -0.5f), float4(), float4(0, 0) });		//0번 점.
+	boxVertex.push_back({ float4(0.5f, 0.5f, -0.5f), float4(), float4(1, 0) });		//1번 점.
+	boxVertex.push_back({ float4(0.5f, -0.5f, -0.5f), float4(), float4(1, 1) });		//2번 점.
+	boxVertex.push_back({ float4(-0.5f, -0.5f, -0.5f), float4(), float4(0, 1) });	//3번 점.
 
-	boxVertex.push_back({ float4(0.5f, 0.5f, 0.5f), float4(), float4(0, 1)});		//4번 점.
-	boxVertex.push_back({ float4(-0.5f, 0.5f, 0.5f), float4(), float4(1, 1)});		//5번 점.
-	boxVertex.push_back({ float4(-0.5f, -0.5f, 0.5f), float4(), float4(1, 0)});		//6번 점.
-	boxVertex.push_back({ float4(0.5f, -0.5f, 0.5f), float4(), float4(0, 0)});		//7번 점.
+	boxVertex.push_back({ float4(0.5f, 0.5f, 0.5f), float4(), float4(0, 1) });		//4번 점.
+	boxVertex.push_back({ float4(-0.5f, 0.5f, 0.5f), float4(), float4(1, 1) });		//5번 점.
+	boxVertex.push_back({ float4(-0.5f, -0.5f, 0.5f), float4(), float4(1, 0) });		//6번 점.
+	boxVertex.push_back({ float4(0.5f, -0.5f, 0.5f), float4(), float4(0, 0) });		//7번 점.
 	GameEngineVertexBuffer::Create("BoxVertex", boxVertex);
 
 	std::vector<int> boxIndex;
@@ -597,13 +613,13 @@ void EngineMesh()
 
 
 
-	
+
 	GameEngineFont::Load("돋움");
 }
 
 void ShaderCompile()
 {
-	GameEngineDirectory engineResourceDir;   
+	GameEngineDirectory engineResourceDir;
 
 	engineResourceDir.MoveParentToExistChildDirectory("GameEngineResources");
 	engineResourceDir.MoveToChild("GameEngineResources");
@@ -625,15 +641,13 @@ void GameEngineCore::EngineResourceInitialize()
 	EngineSubSetting();		//엔진 기본제공 래스터라이저, 블렌드, 깊이스텐실을 생성하는 함수.
 	ShaderCompile();		//엔진 기본제공 HLSL코드를 컴파일해서 셰이더와 셰이더리소스를 생성, 연결하는 함수.
 
-	EngineMaterial();	//엔진 기본제공 렌더링 파이프라인들을 생성하는 함수.
+	EngineRenderingPipeLine();	//엔진 기본제공 렌더링 파이프라인들을 생성하는 함수.
 }
 
 void GameEngineCore::EngineResourceDestroy()
 {
 	//사각형, 육면체, 에러텍스쳐 등등, 엔진 수준에서 기본적으로 지원되어야 하는 리소스를 삭제하는 함수.
 	GameEngineMaterial::ResourceDestroy();
-	GameEngineFBXMesh::ResourceDestroy();
-	GameEngineFBXAnimation::ResourceDestroy();
 
 	GameEngineInputLayout::ResourceDestroy();
 	GameEngineVertexBuffer::ResourceDestroy();
@@ -645,6 +659,8 @@ void GameEngineCore::EngineResourceDestroy()
 	GameEngineBlend::ResourceDestroy();
 
 	GameEngineMesh::ResourceDestroy();
+	GameEngineFBXMesh::ResourceDestroy();
+	GameEngineFBXAnimation::ResourceDestroy();
 
 	GameEngineConstantBuffer::ResourceDestroy();
 	GameEngineStructuredBuffer::ResourceDestroy();
@@ -656,7 +672,7 @@ void GameEngineCore::EngineResourceDestroy()
 	GameEngineSound::ResourceDestroy();
 	GameEngineFont::ResourceDestroy();
 
-	GameEngineDevice::Destroy();	
+	GameEngineDevice::Destroy();
 	//모든 리소스들은 다이렉트X 디바이스의 지원이 있어야 존재할 수 있으므로,
 	// 리소스를 전부 파괴한 후에 디바이스를 정리한다.
 }

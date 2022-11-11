@@ -6,7 +6,7 @@ GameEngineCameraActor::GameEngineCameraActor()
 	freeCameraMode_(false),
 	cameraMovingSpeed_(500.f),
 	rotationSpeed_(180.f),
-	prevProjectionMode_(ProjectionMode::Orthographic)
+	prevProjectionMode_(CameraProjectionMode::Orthographic)
 {
 }
 
@@ -26,7 +26,7 @@ void GameEngineCameraActor::Start()
 		GameEngineInput::GetInst()->CreateKey("CamDown", 'E');
 		GameEngineInput::GetInst()->CreateKey("CamForward", 'W');
 		GameEngineInput::GetInst()->CreateKey("CamBack", 'S');
-								 
+
 		GameEngineInput::GetInst()->CreateKey("CamRot", VK_RBUTTON);
 		GameEngineInput::GetInst()->CreateKey("CamBoost", VK_LSHIFT);
 	}
@@ -68,7 +68,7 @@ void GameEngineCameraActor::Update(float _deltaTime)
 		this->GetTransform().SetLocalMove(
 			this->GetTransform().GetDownVector() * cameraSpeed * _deltaTime);
 	}
-	
+
 	if (true == GameEngineInput::GetInst()->IsPressed("CamForward"))
 	{
 		this->GetTransform().SetLocalMove(
@@ -84,12 +84,10 @@ void GameEngineCameraActor::Update(float _deltaTime)
 	{
 		float4 mouseDir = this->cameraComponent_->GetMouseWorldDirection();
 		float4 rotMouseDir;
-		rotMouseDir.x = -mouseDir.y;			//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
-		rotMouseDir.y = mouseDir.x;				//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
+		rotMouseDir.x = -mouseDir.y;		//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
+		rotMouseDir.y = mouseDir.x;	//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
 		GetTransform().SetAddWorldRotation(rotMouseDir * rotationSpeed_);
 	}
-
-
 }
 
 void GameEngineCameraActor::End()
@@ -103,7 +101,7 @@ void GameEngineCameraActor::FreeCameraModeOnOff()
 	if (true == freeCameraMode_)
 	{
 		prevProjectionMode_ = cameraComponent_->GetProjectionMode();
-		cameraComponent_->SetProjectionMode(ProjectionMode::Perspective);
+		cameraComponent_->SetProjectionMode(CameraProjectionMode::Perspective);
 		originalTransform_.Copy(this->GetTransform());
 	}
 	else

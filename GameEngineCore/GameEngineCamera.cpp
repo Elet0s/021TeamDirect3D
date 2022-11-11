@@ -14,7 +14,7 @@
 
 GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
-	projectionMode_(ProjectionMode::Perspective),
+	projectionMode_(CameraProjectionMode::Perspective),
 	nearZ_(0.1f),
 	farZ_(1000000.f),
 	fovAngleY_(60.f),
@@ -24,7 +24,7 @@ GameEngineCamera::GameEngineCamera()
 	viewportDesc_.TopLeftY = 0;
 	viewportDesc_.Width = size_.x;
 	viewportDesc_.Height = size_.y;
-	viewportDesc_.MinDepth = 0.0f;	
+	viewportDesc_.MinDepth = 0.0f;
 	viewportDesc_.MaxDepth = 1.f;	//<-1.f이 대입되어 MinDepth와 격차가 생겨야 깊이테스트를 제대로 할 수 있다.
 
 	viewportMatrix_.Viewport(size_.x, size_.y, 0, 0, 0, 1);
@@ -37,14 +37,14 @@ GameEngineCamera::~GameEngineCamera()
 float4 GameEngineCamera::GetMouseScreenPosition()
 {
 	POINT pointerPosition;
-	if (false == GetCursorPos(&pointerPosition))	
+	if (false == GetCursorPos(&pointerPosition))
 		//화면 전체 기준 마우스 포인터의 좌표를 윈도우 스크린 좌표(좌상단 0, 0)로 반환하는 함수.
 	{
 		MsgBoxAssert("마우스 포인터 좌표를 얻어오는데 실패했습니다.");
 		return float4::Zero;
 	}
 
-	if(false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
+	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
 		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
 		&pointerPosition	//변환할 화면 전체기준 마우스 포인터 좌표.
 	))
@@ -77,21 +77,25 @@ float4 GameEngineCamera::GetMouseWorldPosition()
 
 	float4 pointerPos = float4(static_cast<float>(pointerPosition.x), static_cast<float>(pointerPosition.y));
 
-	float4x4 invertedViewportMatrix;
-	invertedViewportMatrix.Viewport(size_.x, size_.y, 0.f, 0.f, 0.f, 1.f);
-	invertedViewportMatrix.Inverse();
+	//float4x4 invertedViewportMatrix;
+	//invertedViewportMatrix.Viewport(size_.x, size_.y, 0.f, 0.f, 0.f, 1.f);
+	//invertedViewportMatrix.Inverse();
 
-	float4x4 invertedProjectionMatrix = projectionMatrix_.InverseReturn();
+	//pointerPos *= invertedViewportMatrix;
 
-	pointerPos *= invertedViewportMatrix;
-	pointerPos *= invertedProjectionMatrix;
+	pointerPos *= this->viewportMatrix_.InverseReturn();
+
+	//float4x4 invertedProjectionMatrix = projectionMatrix_.InverseReturn();
+	//pointerPos *= invertedProjectionMatrix;
+
+	pointerPos *= this->projectionMatrix_.InverseReturn();
 
 	return pointerPos;
 }
 
 float4 GameEngineCamera::GetMouseWorldPositionToActor()
 {
-	return GetTransform().GetWorldPosition() + GetMouseWorldPosition();
+	return this->GetTransform().GetWorldPosition() + GetMouseWorldPosition();
 }
 
 float4 GameEngineCamera::GetWorldPositionToScreenPosition(const float4& _worldPosition)
@@ -110,16 +114,16 @@ float4 GameEngineCamera::GetWorldPositionToScreenPosition(const float4& _worldPo
 
 void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 {
-	this->GetActor()->GetLevel()->PushCamera(this, _order);
+	GetActor()->GetLevel()->PushCamera(std::dynamic_pointer_cast<GameEngineCamera>(shared_from_this()), _order);
 }
 
 GameEngineInstancing* GameEngineCamera::GetInstancing(const std::string& _name)
 {
-	GameEngineMaterial* instancingPipeLine = GameEngineMaterial::Find(_name);
+	std::shared_ptr<GameEngineMaterial> instancingPipeLine = GameEngineMaterial::Find(_name);
 	return GetInstancing(instancingPipeLine);
 }
 
-GameEngineInstancing* GameEngineCamera::GetInstancing(GameEngineMaterial* _pipeLine)
+GameEngineInstancing* GameEngineCamera::GetInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine)
 {
 	if (nullptr == _pipeLine)
 	{
@@ -127,8 +131,8 @@ GameEngineInstancing* GameEngineCamera::GetInstancing(GameEngineMaterial* _pipeL
 		return nullptr;
 	}
 
-	std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator findIter 
-		= instancingMap_.find(_pipeLine);
+	std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator findIter
+		= instancingMap_.find(_pipeLine.get());
 
 	//if (instancingMap_.end() == findIter)	//인스턴싱이 없다면 생성 후 반환.
 	//{
@@ -174,14 +178,14 @@ GameEngineInstancing* GameEngineCamera::GetInstancing(GameEngineMaterial* _pipeL
 	return &findIter->second;
 }
 
-void GameEngineCamera::PushInstancing(GameEngineMaterial* _pipeLine, int _count)
+void GameEngineCamera::PushInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine, int _count)
 {
 	if (false == _pipeLine->GetVertexShader()->IsInstancing())
 	{
 		MsgBoxAssertString(_pipeLine->GetNameCopy() + ": 인스턴싱이 불가능한 렌더러입니다.");
 	}
 
-	GameEngineInstancing& instancing = instancingMap_[_pipeLine];
+	GameEngineInstancing& instancing = instancingMap_[_pipeLine.get()];
 
 	instancing.count_ += _count;
 
@@ -238,23 +242,23 @@ void GameEngineCamera::PushInstancing(GameEngineMaterial* _pipeLine, int _count)
 	//}
 }
 
-int GameEngineCamera::PushInstancingData(GameEngineMaterial* _pipeLine, void* _data, int _dataSize)
+int GameEngineCamera::PushInstancingData(std::shared_ptr<GameEngineMaterial> _pipeLine, void* _data, int _dataSize)
 {
-	int dataOffset = instancingMap_[_pipeLine].dataInsert_ * _dataSize;
+	int dataOffset = instancingMap_[_pipeLine.get()].dataInsert_ * _dataSize;
 
 	// PushInstancing에서 이미 버퍼는 충분한 사이즈만큼 늘어나 있어야 한다.
 
-	char* dataPtr = &instancingMap_[_pipeLine].dataBuffer_[dataOffset];
-	memcpy_s(dataPtr, instancingMap_[_pipeLine].dataBuffer_.size() - dataOffset, _data, _dataSize);
+	char* dataPtr = &instancingMap_[_pipeLine.get()].dataBuffer_[dataOffset];
+	memcpy_s(dataPtr, instancingMap_[_pipeLine.get()].dataBuffer_.size() - dataOffset, _data, _dataSize);
 	dataOffset += _dataSize;
-	int insertResultIndex = instancingMap_[_pipeLine].dataInsert_;
-	++instancingMap_[_pipeLine].dataInsert_;
+	int insertResultIndex = instancingMap_[_pipeLine.get()].dataInsert_;
+	++instancingMap_[_pipeLine.get()].dataInsert_;
 	return insertResultIndex;
 }
 
-int GameEngineCamera::PushInstancingIndex(GameEngineMaterial* _pipeLine)
+int GameEngineCamera::PushInstancingIndex(std::shared_ptr<GameEngineMaterial> _pipeLine)
 {
-	int insertCount = instancingMap_[_pipeLine].dataInsert_;
+	int insertCount = instancingMap_[_pipeLine.get()].dataInsert_;
 
 	return PushInstancingData(_pipeLine, &insertCount, sizeof(int));
 }
@@ -271,7 +275,7 @@ void GameEngineCamera::Start()
 	cameraRenderTarget_->SetDepthTexture(GameEngineDevice::GetBackBuffer()->GetDepthTexture());
 }
 
-bool ZSort(GameEngineRenderer* _rendererA, GameEngineRenderer* _rendererB)
+bool ZSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameEngineRenderer> _rendererB)
 {
 	//
 	return _rendererA->GetTransform().GetWorldPosition().z > _rendererB->GetTransform().GetWorldPosition().z;
@@ -300,7 +304,7 @@ void GameEngineCamera::Render(float _deltaTime)
 	//투영모드에 맞게 오브젝트들을 축소할 투영행렬을 구한다.
 	switch (projectionMode_)
 	{
-	case ProjectionMode::Perspective:
+	case CameraProjectionMode::Perspective:
 		//projection_.ProjectPerspectiveLH(
 		//	planeSize_.x * 0.0001f,	 //근평면의 가로길이.
 		//	planeSize_.y * 0.0001f,	 //근평면의 세로길이.  
@@ -313,13 +317,13 @@ void GameEngineCamera::Render(float _deltaTime)
 
 		projectionMatrix_.ProjectPerspectiveFovLH(
 			fovAngleY_ * GameEngineMath::DegreeToRadian,
-			size_.x / size_.y,	
+			size_.x / size_.y,
 			nearZ_,
 			farZ_
 		);
 
 		break;
-	case ProjectionMode::Orthographic:
+	case CameraProjectionMode::Orthographic:
 		projectionMatrix_.ProjectOrthographicLH(
 			size_.x,
 			size_.y,
@@ -340,14 +344,14 @@ void GameEngineCamera::Render(float _deltaTime)
 		//인스턴싱 정보 초기화.
 	}
 
-	for (std::pair<const int, std::list<GameEngineRenderer*>>& rendererGroup : allRenderers_)
+	for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
 	{
 		float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
 
-		std::list<GameEngineRenderer*>& sortingRendererList = rendererGroup.second;
+		std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
 		sortingRendererList.sort(ZSort);
 
-		for (GameEngineRenderer* const renderer : rendererGroup.second)
+		for (std::shared_ptr<GameEngineRenderer> const renderer : rendererGroup.second)
 			//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 			//하지만 renderer가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
 		{
@@ -387,7 +391,7 @@ void GameEngineCamera::Render(float _deltaTime)
 	//}
 }
 
-void GameEngineCamera::PushRenderer(GameEngineRenderer* _renderer)
+void GameEngineCamera::PushRenderer(std::shared_ptr<GameEngineRenderer> _renderer)
 {
 	allRenderers_[_renderer->GetOrder()].push_back(_renderer);
 	//게임엔진카메라의 소멸자가 호출되지 않으면, allRenderers 푸시백 과정에서 새로 동적할당된 노드들이 해제되지 
@@ -396,10 +400,10 @@ void GameEngineCamera::PushRenderer(GameEngineRenderer* _renderer)
 
 void GameEngineCamera::Release(float _deltaTime)
 {
-	for (std::map<int, std::list<GameEngineRenderer*>>::iterator mapIter = allRenderers_.begin();
+	for (std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>>::iterator mapIter = allRenderers_.begin();
 		mapIter != allRenderers_.end(); mapIter++)
 	{
-		for (std::list<GameEngineRenderer*>::iterator listIter = mapIter->second.begin();
+		for (std::list<std::shared_ptr<GameEngineRenderer>>::iterator listIter = mapIter->second.begin();
 			listIter != mapIter->second.end(); /*listIter++*/)
 		{
 			(*listIter)->ReleaseUpdate(_deltaTime);
@@ -408,7 +412,7 @@ void GameEngineCamera::Release(float _deltaTime)
 			if (true == (*listIter)->IsDead())
 			{
 				//delete (*listIter);	//더이상 카메라에서 렌더러 삭제를 직접 하지 않는다.
-				listIter = mapIter->second.erase(listIter);	
+				listIter = mapIter->second.erase(listIter);
 				//대신 카메라의 allRenderers_ 리스트에서만 제거한다.
 			}
 			else
@@ -434,7 +438,7 @@ void GameEngineCamera::Update(float _dletaTime)
 	//이전 마우스포인터 위치 갱신.
 }
 
-void GameEngineCamera::OverRenderer(GameEngineCamera* _nextCamera)
+void GameEngineCamera::OverRenderer(std::shared_ptr<GameEngineCamera> _nextCamera)
 {
 	if (nullptr == _nextCamera)
 	{
@@ -442,19 +446,19 @@ void GameEngineCamera::OverRenderer(GameEngineCamera* _nextCamera)
 		return;
 	}
 
-	std::map<int, std::list<GameEngineRenderer*>>::iterator startGroupIter = allRenderers_.begin();
-	std::map<int, std::list<GameEngineRenderer*>>::iterator endGroupIter = allRenderers_.end();
+	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>>::iterator startGroupIter = allRenderers_.begin();
+	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>>::iterator endGroupIter = allRenderers_.end();
 
 	for (; startGroupIter != endGroupIter; ++startGroupIter)
 	{
-		std::list<GameEngineRenderer*>& group = startGroupIter->second;
+		std::list<std::shared_ptr<GameEngineRenderer>>& group = startGroupIter->second;
 
-		std::list<GameEngineRenderer*>::iterator groupStart = group.begin();
-		std::list<GameEngineRenderer*>::iterator groupEnd = group.end();
+		std::list<std::shared_ptr<GameEngineRenderer>>::iterator groupStart = group.begin();
+		std::list<std::shared_ptr<GameEngineRenderer>>::iterator groupEnd = group.end();
 
 		for (; groupStart != groupEnd; )
 		{
-			GameEngineActor* root = (*groupStart)->GetRoot<GameEngineActor>();
+			std::shared_ptr<GameEngineActor> root = (*groupStart)->GetRoot<GameEngineActor>();
 
 			if (true == root->isLevelOver_)
 			{
@@ -469,7 +473,7 @@ void GameEngineCamera::OverRenderer(GameEngineCamera* _nextCamera)
 	}
 }
 
-void GameEngineCamera::ChangeRenderingOrder(GameEngineRenderer* _renderer, int _newRenderingOrder)
+void GameEngineCamera::ChangeRenderingOrder(std::shared_ptr<GameEngineRenderer> _renderer, int _newRenderingOrder)
 {
 	this->allRenderers_[_renderer->GetRenderingOrder()].remove(_renderer);
 

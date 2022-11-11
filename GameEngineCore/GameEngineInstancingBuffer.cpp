@@ -19,9 +19,9 @@ GameEngineInstancingBuffer::~GameEngineInstancingBuffer()
     }
 }
 
-GameEngineInstancingBuffer* GameEngineInstancingBuffer::Create(unsigned int _count, unsigned int _size)
+std::shared_ptr<GameEngineInstancingBuffer> GameEngineInstancingBuffer::Create(unsigned int _count, unsigned int _size)
 {
-    GameEngineInstancingBuffer* newRes = CreateUnnamedRes();
+    std::shared_ptr<GameEngineInstancingBuffer> newRes = CreateUnnamedRes();
     newRes->CreateInstancingBuffer(_count, _size);
     return newRes;
 }
@@ -42,10 +42,10 @@ void GameEngineInstancingBuffer::CreateInstancingBuffer(unsigned int _count, uns
     instancingBufferDesc_.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
     //수시로 내용을 바꿔줘야 하므로 CPU액세스가 가능하게 한다.
 
-    instancingBufferDesc_.Usage = D3D11_USAGE_DYNAMIC;  
+    instancingBufferDesc_.Usage = D3D11_USAGE_DYNAMIC;
     //상수버퍼처럼 런타임 중간에 수시로 내용이 바뀔 예정이니까 동적으로 지정.
 
-    instancingBufferDesc_.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;    
+    instancingBufferDesc_.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
     //인스턴싱 버퍼는 정점버퍼의 일종.
 
     if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(
@@ -79,7 +79,7 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _dataSize)
 
     GameEngineDevice::GetContext()->Map(
         this->instancingBuffer_,
-        0, 
+        0,
         D3D11_MAP_WRITE_DISCARD,
         0,
         &destMemoryPtrInGPU
@@ -97,7 +97,7 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _dataSize)
         _data,
         _dataSize
     );
-     
+
     GameEngineDevice::GetContext()->Unmap(this->instancingBuffer_, 0);
 }
 
@@ -108,6 +108,6 @@ void GameEngineInstancingBuffer::Release()
         instancingBuffer_->Release();
         instancingBuffer_ = nullptr;
         bufferCount_ = 0;
-        dataSize_ = 0; 
+        dataSize_ = 0;
     }
 }

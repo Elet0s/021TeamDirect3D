@@ -26,7 +26,7 @@ protected:
 	void OnGUI(GameEngineLevel* _level, float _deltaTime) override;
 
 private:
-	TileMapActor* tileMap_;
+	std::shared_ptr<TileMapActor> tileMap_;
 	std::string selectFolderTexture_;
 	int scale_[2];
 	size_t selectTile_;

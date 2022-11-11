@@ -49,7 +49,7 @@ void WorldMapActor::Start()
 			tilePos.y += -128.f * sinf(30.f * GameEngineMath::DegreeToRadian) * y;
 			tilePos.z += -128.f * cosf(30.f * GameEngineMath::DegreeToRadian) * y;
 			
-			GameEngineTextureRenderer* TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
+			std::shared_ptr<GameEngineTextureRenderer> TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
 			TextureRenderer->SetPivot(PivotMode::Bot);
 			TextureRenderer->SetFolderTextureToIndex("Grass", 0);
 			TextureRenderer->ScaleToTexture();

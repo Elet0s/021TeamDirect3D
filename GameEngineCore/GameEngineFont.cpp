@@ -32,7 +32,7 @@ private:
 GameEngineFontInit inst_;
 
 
-GameEngineFont::GameEngineFont(): fontWrapper_(nullptr)
+GameEngineFont::GameEngineFont() : fontWrapper_(nullptr)
 {
 }
 
@@ -45,9 +45,9 @@ GameEngineFont::~GameEngineFont()
 	}
 }
 
-GameEngineFont* GameEngineFont::Load(const std::string_view& _path, const std::string_view& _name)
+std::shared_ptr<GameEngineFont> GameEngineFont::Load(const std::string_view& _path, const std::string_view& _name)
 {
-	GameEngineFont* newRes = CreateNamedRes(_name);
+	std::shared_ptr<GameEngineFont> newRes = CreateNamedRes(_name);
 	newRes->LoadFont(_path);
 	return newRes;
 }
@@ -87,3 +87,4 @@ void GameEngineFont::LoadFont(const std::string_view& _path)
 		return;
 	}
 }
+

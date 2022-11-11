@@ -7,7 +7,7 @@ class Tile
 
 	int tileIndex_;
 	int zValue_;
-	GameEngineTexture* tileImage_;
+	std::shared_ptr<GameEngineTexture> tileImage_;
 public:
 	Tile() : tileIndex_(0), zValue_(0), tileImage_(nullptr)
 	{
@@ -56,7 +56,7 @@ private:
 	int tileX_;
 	int tileY_;
 
-	GameEngineTexture* tileTextures_;
+	std::shared_ptr<GameEngineTexture> tileTextures_;
 
 	float4 tilescale_;
 	float4 tilescalehalf_;

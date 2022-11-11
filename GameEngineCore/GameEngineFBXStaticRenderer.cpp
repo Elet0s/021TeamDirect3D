@@ -12,7 +12,7 @@ GameEngineFBXStaticRenderer::~GameEngineFBXStaticRenderer()
 
 void GameEngineFBXStaticRenderer::SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName)
 {
-	GameEngineMaterial* Material = GameEngineMaterial::Find(_materialName);
+	std::shared_ptr<GameEngineMaterial> Material = GameEngineMaterial::Find(_materialName);
 
 	if (nullptr == Material)
 	{
@@ -36,7 +36,7 @@ GameEngineRenderUnit* GameEngineFBXStaticRenderer::SetFBXMesh(
 	size_t _subsetIndex
 )
 {
-	GameEngineMaterial* Material = GameEngineMaterial::Find(_materialName);
+	std::shared_ptr<GameEngineMaterial> Material = GameEngineMaterial::Find(_materialName);
 
 	if (nullptr == Material)
 	{

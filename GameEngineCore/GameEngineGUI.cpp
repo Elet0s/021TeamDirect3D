@@ -28,7 +28,7 @@ void GameEngineGUIWindow::Update(float _deltaTime)
 }
 
 
-std::list<GameEngineGUIWindow*> GameEngineGUI::guiWindows_;
+std::list<std::shared_ptr<GameEngineGUIWindow>> GameEngineGUI::guiWindows_;
 
 GameEngineGUI::GameEngineGUI()
 {
@@ -44,10 +44,10 @@ void GameEngineGUI::Render(GameEngineLevel* _level, float _deltaTime)
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();  //<-ImGUI 렌더링 시작 함수??
-    
 
 
-    for (GameEngineGUIWindow* guiWindow : guiWindows_)
+
+    for (std::shared_ptr<GameEngineGUIWindow> guiWindow : guiWindows_)
     {
         if (true == guiWindow->IsUpdate())
         {
@@ -99,7 +99,7 @@ void GameEngineGUI::Initialize()
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); 
+    ImGuiIO& io = ImGui::GetIO();
     (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -146,15 +146,16 @@ void GameEngineGUI::Initialize()
 
 void GameEngineGUI::Destroy()
 {
-    for (GameEngineGUIWindow* guiWindow : guiWindows_)
-    {
-        if (nullptr != guiWindow)
-        {
-            delete guiWindow;
-            guiWindow = nullptr;
-        }
-    }
-    
+    //for (GameEngineGUIWindow* guiWindow : guiWindows_)
+    //{
+    //    if (nullptr != guiWindow)
+    //    {
+    //        delete guiWindow;
+    //        guiWindow = nullptr;
+    //    }
+    //}
+
+    guiWindows_.clear();
 
     // Cleanup
     ImGui_ImplDX11_Shutdown();

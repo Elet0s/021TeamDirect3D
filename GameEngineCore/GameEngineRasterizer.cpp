@@ -2,7 +2,7 @@
 #include "GameEngineRasterizer.h"
 #include "GameEngineDevice.h"
 
-GameEngineRasterizer::GameEngineRasterizer(): rasterizerState_(nullptr), rasterizerDesc_()
+GameEngineRasterizer::GameEngineRasterizer() : rasterizerState_(nullptr), rasterizerDesc_()
 {
 }
 
@@ -15,12 +15,12 @@ GameEngineRasterizer::~GameEngineRasterizer()
     }
 }
 
-GameEngineRasterizer* GameEngineRasterizer::Create(
+std::shared_ptr<GameEngineRasterizer> GameEngineRasterizer::Create(
     const std::string_view& _name,
     const D3D11_RASTERIZER_DESC& _desc
 )
 {
-    GameEngineRasterizer* newRes = CreateNamedRes(_name);
+    std::shared_ptr<GameEngineRasterizer> newRes = CreateNamedRes(_name);
     newRes->Create(_desc);
     return newRes;
 }

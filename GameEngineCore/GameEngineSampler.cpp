@@ -2,7 +2,7 @@
 #include "GameEngineSampler.h"
 #include "GameEngineDevice.h"
 
-GameEngineSampler::GameEngineSampler(): samplerState_(nullptr), samplerDesc_()
+GameEngineSampler::GameEngineSampler() : samplerState_(nullptr), samplerDesc_()
 {
 }
 
@@ -15,9 +15,9 @@ GameEngineSampler::~GameEngineSampler()
     }
 }
 
-GameEngineSampler* GameEngineSampler::Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc)
+std::shared_ptr<GameEngineSampler> GameEngineSampler::Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc)
 {
-    GameEngineSampler* newSampler = CreateNamedRes(_name);
+    std::shared_ptr<GameEngineSampler> newSampler = CreateNamedRes(_name);
     newSampler->Create(_desc);
     return newSampler;
 }

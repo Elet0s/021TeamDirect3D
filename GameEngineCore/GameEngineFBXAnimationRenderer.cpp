@@ -141,7 +141,7 @@ GameEngineFBXAnimationRenderer::~GameEngineFBXAnimationRenderer()
 
 void GameEngineFBXAnimationRenderer::SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName)
 {
-	GameEngineMaterial* Material = GameEngineMaterial::Find(_materialName);
+	std::shared_ptr<GameEngineMaterial> Material = GameEngineMaterial::Find(_materialName);
 
 	if (nullptr == Material)
 	{
@@ -165,7 +165,7 @@ GameEngineRenderUnit* GameEngineFBXAnimationRenderer::SetFBXMesh(
 	size_t _SubSetIndex /*= 0*/
 )
 {
-	GameEngineMaterial* Mat = GameEngineMaterial::Find(_Material);
+	std::shared_ptr<GameEngineMaterial> Mat = GameEngineMaterial::Find(_Material);
 
 	if (nullptr == Mat)
 	{
@@ -179,7 +179,7 @@ GameEngineRenderUnit* GameEngineFBXAnimationRenderer::SetFBXMesh(
 		return nullptr;
 	}
 
-	GameEngineFBXMesh* FindFBXMesh = GameEngineFBXMesh::Find(_Name);
+	std::shared_ptr<GameEngineFBXMesh> FindFBXMesh = GameEngineFBXMesh::Find(_Name);
 
 	if (nullptr == FindFBXMesh)
 	{
@@ -253,7 +253,7 @@ void GameEngineFBXAnimationRenderer::CreateFBXAnimation(
 		return;
 	}
 
-	GameEngineFBXAnimation* Animation = GameEngineFBXAnimation::Find(_AnimationFBX);
+	std::shared_ptr<GameEngineFBXAnimation> Animation = GameEngineFBXAnimation::Find(_AnimationFBX);
 
 	if (nullptr == Animation)
 	{

@@ -16,13 +16,13 @@ GameEngineVertexShader::~GameEngineVertexShader()
     {
         vertexShader_->Release();
         vertexShader_ = nullptr;
-    }    
-    
-    if (nullptr != instancingVertexShader_)
-    {
-        delete instancingVertexShader_;
-        instancingVertexShader_ = nullptr;
-    }   
+    }
+
+    //if (nullptr != instancingVertexShader_)
+    //{
+    //    delete instancingVertexShader_;
+    //    instancingVertexShader_ = nullptr;
+    //}   
 }
 
 void GameEngineVertexShader::Setting()
@@ -41,7 +41,7 @@ void GameEngineVertexShader::Setting()
     );
 }
 
-GameEngineVertexShader* GameEngineVertexShader::Load(
+std::shared_ptr<GameEngineVertexShader> GameEngineVertexShader::Load(
     const std::string_view& _path,
     const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
@@ -51,7 +51,7 @@ GameEngineVertexShader* GameEngineVertexShader::Load(
     return Load(_path, GameEnginePath::GetFileName(_path), _entryPoint, _versionHigh, _versionLow);
 }
 
-GameEngineVertexShader* GameEngineVertexShader::Load(
+std::shared_ptr<GameEngineVertexShader> GameEngineVertexShader::Load(
     const std::string_view& _path,
     const std::string_view& _name,
     const std::string_view& _entryPoint,
@@ -59,7 +59,7 @@ GameEngineVertexShader* GameEngineVertexShader::Load(
     UINT _versionLow /*= 0*/
 )
 {
-    GameEngineVertexShader* newRes = CreateNamedRes(_name);
+    std::shared_ptr<GameEngineVertexShader> newRes = CreateNamedRes(_name);
     newRes->CreateVersion("vs", _versionHigh, _versionLow);
     newRes->SetEntrtyPoint(_entryPoint);
     newRes->CompileHLSLCode(_path);
@@ -69,13 +69,13 @@ GameEngineVertexShader* GameEngineVertexShader::Load(
 }
 
 void GameEngineVertexShader::InstancingShaderCompile(
-    const std::string_view& _path, 
+    const std::string_view& _path,
     const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
     UINT _versionLow /*= 0*/
 )
 {
-    instancingVertexShader_ = new GameEngineVertexShader(); //GameEngineRes에 등록되지 않는 점 주의.
+    instancingVertexShader_ = std::make_shared<GameEngineVertexShader>(); //GameEngineRes에 등록되지 않는 점 주의.
     instancingVertexShader_->SetName(_entryPoint);
     instancingVertexShader_->CreateVersion("vs", _versionHigh, _versionLow);
     instancingVertexShader_->SetEntrtyPoint(_entryPoint);

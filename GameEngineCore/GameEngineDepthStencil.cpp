@@ -2,7 +2,7 @@
 #include "GameEngineDepthStencil.h"
 #include "GameEngineDevice.h"
 
-GameEngineDepthStencil::GameEngineDepthStencil(): depthStencilState_(nullptr), depthStencilDesc_()
+GameEngineDepthStencil::GameEngineDepthStencil() : depthStencilState_(nullptr), depthStencilDesc_()
 {
 }
 
@@ -15,12 +15,12 @@ GameEngineDepthStencil::~GameEngineDepthStencil()
     }
 }
 
-GameEngineDepthStencil* GameEngineDepthStencil::Create(
+std::shared_ptr<GameEngineDepthStencil> GameEngineDepthStencil::Create(
     const std::string_view& _name,
     const D3D11_DEPTH_STENCIL_DESC& _desc
 )
 {
-    GameEngineDepthStencil* newRes = CreateNamedRes(_name);
+    std::shared_ptr<GameEngineDepthStencil> newRes = CreateNamedRes(_name);
     newRes->Create(_desc);
     return newRes;
 }

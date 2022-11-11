@@ -5,7 +5,7 @@
 #include "GameEngineBlend.h"
 #include "GameEngineCamera.h"
 
-GameEngineRenderTarget* GameEngineFontRenderer::fontTarget_ = nullptr;
+std::shared_ptr<GameEngineRenderTarget> GameEngineFontRenderer::fontTarget_ = nullptr;
 
 GameEngineFontRenderer::GameEngineFontRenderer()
 	:font_(nullptr),
@@ -56,8 +56,8 @@ void GameEngineFontRenderer::Render(float _deltaTime)
 	if (FontPositionMode::World == mode_)
 	{
 		position = this->GetTransform().GetWorldPosition();
-		position *= camera_->GetViewMatrix();
-		position *= camera_->GetProjectionMatrix();
+		position *= camera_.lock()->GetViewMatrix();
+		position *= camera_.lock()->GetProjectionMatrix();
 
 		float4 windowSize = GameEngineWindow::GetScale();
 
@@ -73,9 +73,9 @@ void GameEngineFontRenderer::Render(float _deltaTime)
 
 	fontTarget_->Clear();
 	fontTarget_->Setting();
-	font_->FontDraw(text_, fontSize_, position, fontColor_, 
+	font_->FontDraw(text_, fontSize_, position, fontColor_,
 		static_cast<int>(lr_) | static_cast<int>(tb_));
 	GameEngineMaterial::AllShaderReset();
 
-	camera_->GetCameraRenderTarget()->Merge(fontTarget_);
+	camera_.lock()->GetCameraRenderTarget()->Merge(fontTarget_);
 }

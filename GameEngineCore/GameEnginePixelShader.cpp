@@ -2,7 +2,7 @@
 #include "GameEnginePixelShader.h"
 #include "GameEngineDevice.h"
 
-GameEnginePixelShader::GameEnginePixelShader(): pixelShader_(nullptr)
+GameEnginePixelShader::GameEnginePixelShader() : pixelShader_(nullptr)
 {
     shaderType_ = ShaderType::PixelShader;
 }
@@ -32,7 +32,7 @@ void GameEnginePixelShader::Setting()
     );
 }
 
-GameEnginePixelShader* GameEnginePixelShader::Load(
+std::shared_ptr<GameEnginePixelShader> GameEnginePixelShader::Load(
     const std::string_view& _path,
     const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
@@ -42,7 +42,7 @@ GameEnginePixelShader* GameEnginePixelShader::Load(
     return Load(_path, GameEnginePath::GetFileName(_path), _entryPoint, _versionHigh, _versionLow);
 }
 
-GameEnginePixelShader* GameEnginePixelShader::Load(
+std::shared_ptr<GameEnginePixelShader> GameEnginePixelShader::Load(
     const std::string_view& _path,
     const std::string_view& _name,
     const std::string_view& _entryPoint,
@@ -50,7 +50,7 @@ GameEnginePixelShader* GameEnginePixelShader::Load(
     UINT _versionLow /*= 0*/
 )
 {
-    GameEnginePixelShader* newRes = CreateNamedRes(_name);
+    std::shared_ptr<GameEnginePixelShader> newRes = CreateNamedRes(_name);
     newRes->CreateVersion("ps", _versionHigh, _versionLow);
     newRes->SetEntrtyPoint(_entryPoint);
     newRes->CompileHLSLCode(_path);

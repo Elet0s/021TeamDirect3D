@@ -16,7 +16,7 @@ public:
 	WorldMapActor& operator=(WorldMapActor&& _Other) noexcept = delete;
 
 public:
-	MyWorldMapRenderer* worldmaprenderer_;
+	std::shared_ptr<MyWorldMapRenderer> worldmaprenderer_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

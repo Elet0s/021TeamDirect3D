@@ -2,7 +2,7 @@
 #include "GameEngineBlur.h"
 #include "GameEngineRenderTarget.h"
 
-GameEngineBlur::GameEngineBlur(): copiedRenderTarget_(nullptr)
+GameEngineBlur::GameEngineBlur() : copiedRenderTarget_(nullptr)
 {
 }
 
@@ -32,7 +32,7 @@ void GameEngineBlur::EffectInit()
 	);
 }
 
-void GameEngineBlur::Effect(GameEngineRenderTarget* _renderTarget)
+void GameEngineBlur::Effect(std::shared_ptr<GameEngineRenderTarget> _renderTarget)
 {
 	copiedRenderTarget_->Copy(_renderTarget);
 

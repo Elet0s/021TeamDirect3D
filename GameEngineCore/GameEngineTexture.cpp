@@ -38,37 +38,37 @@ GameEngineTexture::~GameEngineTexture()
 	}
 }
 
-GameEngineTexture* GameEngineTexture::Create(const std::string_view& _name, ID3D11Texture2D* _texture)
+std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(const std::string_view& _name, ID3D11Texture2D* _texture)
 {
-	GameEngineTexture* newRes = CreateNamedRes(_name);
+	std::shared_ptr<GameEngineTexture> newRes = CreateNamedRes(_name);
 	newRes->texture2D_ = _texture;
 	_texture->GetDesc(&newRes->desc_);
 	return newRes;
 }
 
-GameEngineTexture* GameEngineTexture::Create(ID3D11Texture2D* _texture)
+std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(ID3D11Texture2D* _texture)
 {
-	GameEngineTexture* newRes = CreateUnnamedRes();
+	std::shared_ptr<GameEngineTexture> newRes = CreateUnnamedRes();
 	newRes->texture2D_ = _texture;
 	_texture->GetDesc(&newRes->desc_);
 	return newRes;
 }
 
-GameEngineTexture* GameEngineTexture::Create(const D3D11_TEXTURE2D_DESC& _desc)
+std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(const D3D11_TEXTURE2D_DESC& _desc)
 {
-	GameEngineTexture* newRes = CreateUnnamedRes();
+	std::shared_ptr<GameEngineTexture> newRes = CreateUnnamedRes();
 	newRes->TextureCreate(_desc);
 	return newRes;
 }
 
-GameEngineTexture* GameEngineTexture::Load(const std::string_view& _path)
+std::shared_ptr<GameEngineTexture> GameEngineTexture::Load(const std::string_view& _path)
 {
 	return Load(_path, GameEnginePath::GetFileName(_path));
 }
 
-GameEngineTexture* GameEngineTexture::Load(const std::string_view& _path, const std::string_view& _name)
+std::shared_ptr<GameEngineTexture> GameEngineTexture::Load(const std::string_view& _path, const std::string_view& _name)
 {
-	GameEngineTexture* newRes = CreateNamedRes(_name);
+	std::shared_ptr<GameEngineTexture> newRes = CreateNamedRes(_name);
 	newRes->TextureLoad(_path);
 	return newRes;
 }
@@ -186,7 +186,7 @@ ID3D11DepthStencilView* GameEngineTexture::CreateDepthStencilView()
 
 void GameEngineTexture::Cut(const std::string_view& _textureName, int _x, int _y)
 {
-	GameEngineTexture* findTexture = GameEngineTexture::Find(_textureName);
+	std::shared_ptr<GameEngineTexture> findTexture = GameEngineTexture::Find(_textureName);
 	if (nullptr == findTexture)
 	{
 		MsgBoxAssertString(std::string(_textureName) + ": 그런 이름의 텍스쳐가 존재하지 않습니다.");

@@ -23,8 +23,8 @@ private:
 	void End() override {};
 	void SetTimer(std::string& _Text);
 
-	GameEngineFontRenderer* TimeRenderer_;
-	GameEngineTextureRenderer* UIRenderer_;
+	std::shared_ptr<GameEngineFontRenderer> TimeRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> UIRenderer_;
 	std::string TimeString;
 
 

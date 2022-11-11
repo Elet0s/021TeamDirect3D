@@ -153,15 +153,12 @@ public:
 class GameEngineFBXMesh;
 class GameEngineFBXAnimation : public GameEngineRes<GameEngineFBXAnimation>, public GameEngineFBX
 {
-	friend GameEngineRes<GameEngineFBXAnimation>;
-	//GameEngineFBXAnimation 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
 
-private:
+public:
 	GameEngineFBXAnimation();
 	~GameEngineFBXAnimation();
-	//외부에서 제멋대로 리소스를 생성/삭제하는걸 막기 위해서 생성자/소멸자를 프라이빗으로 지정해서 외부 접근을 막는다.
-	//이 프레임워크의 리소스는 반드시 소멸자가 아니라 ResourceDestroy()함수에서 제거해야 한다.
-	//프로그램 끝날때까지 리소스삭제를 안하면 끝나는 문제지만 그래도 최대한 막아둔다.
+
+private:
 
 	GameEngineFBXAnimation(const GameEngineFBXAnimation& _other) = delete;
 	GameEngineFBXAnimation(GameEngineFBXAnimation&& _other) noexcept = delete;
@@ -170,17 +167,17 @@ private:
 
 
 public:
-	static GameEngineFBXAnimation* Load(const std::string& _Path)
+	static std::shared_ptr<GameEngineFBXAnimation> Load(const std::string& _Path)
 	{
 		return Load(_Path, GameEnginePath::GetFileName(_Path));
 	}
 
-	static GameEngineFBXAnimation* Load(const std::string& _Path, const std::string& _Name);
+	static std::shared_ptr<GameEngineFBXAnimation> Load(const std::string& _Path, const std::string& _Name);
 
 
 	// 애니메이션 프레임 행렬계산.
 	// 여기서 프레임의 의미는 Animation TimeEndCount - TimeStartCount
-	void AnimationMatrixLoad(GameEngineFBXMesh* _Mesh, int _AnimationIndex);
+	void AnimationMatrixLoad(std::shared_ptr<GameEngineFBXMesh> _Mesh, int _AnimationIndex);
 
 	FbxExAniData* GetAnimationData(int _Index)
 	{
@@ -196,9 +193,9 @@ protected:
 	void LoadMesh(const std::string& _Path, const std::string& _Name);
 
 	// 애니메이션은 노드의 어트리뷰트가 다 eMesh인 녀석에게 들어있으므로 그녀석에게서 애니메이션 로드 함수를 실행시키는 역할을 한다.
-	void ProcessAnimationLoad(GameEngineFBXMesh* _Mesh, fbxsdk::FbxNode* pNode, int _index);
-	bool AnimationLoad(GameEngineFBXMesh* _Mesh, fbxsdk::FbxNode* _Node, int AnimationIndex);
-	void ProcessAnimationCheckState(GameEngineFBXMesh* _Fbx, int userAniDataIndex);
+	void ProcessAnimationLoad(std::shared_ptr<GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* pNode, int _index);
+	bool AnimationLoad(std::shared_ptr<GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* _Node, int AnimationIndex);
+	void ProcessAnimationCheckState(std::shared_ptr<GameEngineFBXMesh> _Fbx, int userAniDataIndex);
 	fbxsdk::FbxAMatrix GetGeometryTransformation(fbxsdk::FbxNode* pNode);
 
 	// 런

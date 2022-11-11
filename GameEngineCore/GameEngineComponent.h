@@ -2,7 +2,7 @@
 #include "GameEngineUpdateObject.h"
 
 class GameEngineActor;
-class GameEngineComponent: public GameEngineNameObject, public GameEngineUpdateObject
+class GameEngineComponent : public GameEngineNameObject, public GameEngineUpdateObject
 {
 	friend class GameEngineActor;
 
@@ -19,9 +19,6 @@ protected:
 
 
 public:
-
-public:
-	void SetParent(GameEngineUpdateObject* _newParent) override;
 
 protected:
 	virtual void Start();

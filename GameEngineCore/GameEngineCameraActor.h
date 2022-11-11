@@ -2,7 +2,7 @@
 #include "GameEngineActor.h"
 #include "GameEngineCamera.h"
 
-class GameEngineCameraActor: public GameEngineActor
+class GameEngineCameraActor : public GameEngineActor
 {
 
 public:
@@ -22,7 +22,7 @@ public:
 	void FreeCameraModeOnOff();
 
 public:
-	GameEngineCamera* GetCameraComponent()
+	std::shared_ptr<GameEngineCamera> GetCameraComponent()
 	{
 		return cameraComponent_;
 	}
@@ -32,12 +32,12 @@ public:
 	}
 
 private:
-	GameEngineCamera* cameraComponent_;
+	std::shared_ptr<GameEngineCamera> cameraComponent_;
 	bool freeCameraMode_;
 	float cameraMovingSpeed_;
 	float rotationSpeed_;
 
-	ProjectionMode prevProjectionMode_;
+	CameraProjectionMode prevProjectionMode_;
 	GameEngineTransform originalTransform_;
 
 };

@@ -23,8 +23,8 @@ protected:
 
 
 private:
-	GameEngineActor* shaderTestActor_;
-	GameEngineDefaultRenderer* shaderTestRenderer_;
+	std::shared_ptr<GameEngineActor> shaderTestActor_;
+	std::shared_ptr<GameEngineDefaultRenderer> shaderTestRenderer_;
 
 };
 

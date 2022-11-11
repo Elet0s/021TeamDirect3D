@@ -34,13 +34,13 @@ public:
 		return Unit;
 	}
 
-	inline class GameEngineFBXMesh* GetFBXMesh()
+	inline std::shared_ptr<class GameEngineFBXMesh> GetFBXMesh()
 	{
 		return FBXMesh;
 	}
 
 private:
-	class GameEngineFBXMesh* FBXMesh;
+	std::shared_ptr<class GameEngineFBXMesh> FBXMesh;
 
 	std::vector<std::vector<GameEngineRenderUnit>> Unit;
 };

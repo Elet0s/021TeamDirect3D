@@ -19,7 +19,7 @@ void GameEngineDefaultRenderer::Render(float _deltaTime)
 void GameEngineDefaultRenderer::SetMaterial(const std::string_view& _materialName)
 {
 	this->renderUnit_.SetMaterial(_materialName);
-	this->renderUnit_.SetRenderer(this);
+	this->renderUnit_.SetRenderer(std::dynamic_pointer_cast<GameEngineRenderer>(shared_from_this()));
 }
 
 void GameEngineDefaultRenderer::SetMesh(const std::string_view& _meshName)

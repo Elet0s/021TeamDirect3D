@@ -233,7 +233,7 @@ GameEngineShader::~GameEngineShader()
 	}
 }
 
-void GameEngineShader::AutoCompile(const std::string& _path)
+void GameEngineShader::AutoCompile(const std::string_view& _path)
 {
 	GameEngineFile file = GameEngineFile(_path);
 	file.Open(OpenMode::Read, FileMode::Text);
@@ -244,7 +244,7 @@ void GameEngineShader::AutoCompile(const std::string& _path)
 	size_t vsEntryIndex = allHLSLCode.find("_VS(");
 	if (std::string::npos != vsEntryIndex)
 	{
-		GameEngineVertexShader* vertexShader = nullptr;
+		std::shared_ptr<GameEngineVertexShader> vertexShader = nullptr;
 
 		size_t firstIndex = allHLSLCode.find_last_of(" ", vsEntryIndex);
 		std::string vsEntryName

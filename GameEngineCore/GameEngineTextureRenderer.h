@@ -28,7 +28,7 @@ struct PixelData
 	float4 plusColor_;
 	float4 slice_;
 
-	PixelData(): mulColor_(float4::White), plusColor_(float4::Zero), slice_(float4::Zero)
+	PixelData() : mulColor_(float4::White), plusColor_(float4::Zero), slice_(float4::Zero)
 	{
 	}
 };
@@ -44,7 +44,7 @@ class FrameAnimation_Desc
 	//프레임 애니메이션 생성에 필요한 각종 상세정보들을 모아서 저장, 관리하는 클래스.
 public:
 	std::string textureName_;
-	
+
 	bool isLoop_;		//true == 애니메이션 무한반복. false == 1회반복 후 마지막프레임에서 정지.
 	float interval_;	//프레임간 시간간격. 기본값 0.1f
 
@@ -63,8 +63,8 @@ public:
 		frameTime_(0.f),
 		renderer_(nullptr)
 	{
-	}	
-	
+	}
+
 	FrameAnimation_Desc(const std::string& _textureName, UINT _start, UINT _end, float _interval, bool _isLoop = true)
 		: textureName_(_textureName),
 		isLoop_(_isLoop),
@@ -77,8 +77,8 @@ public:
 		{
 			frames_.push_back(frameIndex);
 		}
-	}	
-	
+	}
+
 	FrameAnimation_Desc(const std::string& _textureName, const std::vector<UINT>& _frames, float _interval, bool _isLoop = true)
 		: textureName_(_textureName),
 		isLoop_(_isLoop),
@@ -113,8 +113,8 @@ class FrameAnimation
 
 	GameEngineTextureRenderer* parentRenderer_;	//부모 렌더러.
 
-	GameEngineTexture* cutTexture_;			//단일 텍스쳐.			
-	GameEngineFolderTexture* folderTexture_;	//폴더단위 텍스쳐들 모음.
+	std::shared_ptr<GameEngineTexture> cutTexture_;			//단일 텍스쳐.			
+	std::shared_ptr<GameEngineFolderTexture> folderTexture_;	//폴더단위 텍스쳐들 모음.
 	//두개가 동시에 사용되는 경우는 없음!
 
 	bool bOnceStart_;
@@ -144,7 +144,7 @@ public:
 };
 
 class GameEngineTexture;
-class GameEngineTextureRenderer: public GameEngineDefaultRenderer
+class GameEngineTextureRenderer : public GameEngineDefaultRenderer
 {
 	//특정 텍스처나 그 텍스처로 만든 애니메이션을 렌더링하는 렌더러.
 
@@ -165,12 +165,12 @@ private:
 	GameEngineTextureRenderer& operator=(const GameEngineTextureRenderer&& _other) = delete;
 
 
-public:	
+public:
 	void SetTexture(const std::string_view& _textureName);	//폴더텍스처용.
-	void SetTexture(GameEngineTexture* _texture);		//폴더텍스처용.
+	void SetTexture(std::shared_ptr<GameEngineTexture> _texture);		//폴더텍스처용.
 	void SetFolderTextureToIndex(const std::string_view& _textureName, UINT _index);
 	void SetTexture(const std::string_view& _textureName, int _index);	//아틀라스텍스처용.
-	void SetTexture(GameEngineTexture* _texture, int _index);		//아틀라스텍스처용.
+	void SetTexture(std::shared_ptr<GameEngineTexture> _texture, int _index);		//아틀라스텍스처용.
 
 	void SetFrame(int _index);	//애니메이션의 특정 프레임 지정.
 
@@ -202,7 +202,7 @@ public:
 	void CurAnimationPauseOff();
 	bool IsCurAnimationPaused();
 
-	GameEngineTexture* GetCurrentTexture() const;
+	std::shared_ptr<GameEngineTexture> GetCurrentTexture() const;
 
 public:
 
@@ -310,7 +310,7 @@ private:
 
 private:
 	PivotMode pivotMode_;				//현재 사용중인 텍스처의 렌더링 기준점.
-	GameEngineTexture* currentTexture_;	//현재 사용중인 텍스처.					
+	std::shared_ptr<GameEngineTexture> currentTexture_;	//현재 사용중인 텍스처.					
 
 	std::map<std::string, FrameAnimation> allAnimations_;	//<-왜 애니메이션을 값형으로 저장??
 	FrameAnimation* currentAnimation_;

@@ -29,7 +29,7 @@ void GameEngineInstancing::InstancingBufferChangeData()
 	{
 		MsgBoxAssert("인스턴싱에 버퍼가 없습니다.");
 		return;
-	}	
+	}
 
 	instancingBuffer_->ChangeData(&dataBuffer_[0], dataBuffer_.size());
 }

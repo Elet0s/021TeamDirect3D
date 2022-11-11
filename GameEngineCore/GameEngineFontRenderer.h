@@ -23,7 +23,7 @@ enum class FontPositionMode	//글자의 좌표계 설정.
 
 class GameEngineRenderTarget;
 class GameEngineFont;
-class GameEngineFontRenderer: public GameEngineDefaultRenderer
+class GameEngineFontRenderer : public GameEngineDefaultRenderer
 {
 	//이 클래스의 존재 이유:
 
@@ -40,7 +40,7 @@ private:
 	GameEngineFontRenderer& operator=(const GameEngineFontRenderer&& _other) = delete;
 
 
-public:	
+public:
 	void SetText(const std::string_view& _text, const std::string_view& _font = "돋움");
 
 public:
@@ -82,7 +82,7 @@ public:
 	}
 
 	//글자의 좌표를 월드좌표계/윈도우좌표계로 설정.
-	void SetPositionMode(FontPositionMode _mode)	 	
+	void SetPositionMode(FontPositionMode _mode)
 	{
 		mode_ = _mode;
 	}
@@ -92,10 +92,10 @@ protected:
 	virtual void Render(float _deltaTime) override;
 
 private:
-	static GameEngineRenderTarget* fontTarget_;
+	static std::shared_ptr<GameEngineRenderTarget> fontTarget_;
 
 	std::string text_;
-	GameEngineFont* font_;
+	std::shared_ptr<GameEngineFont> font_;
 	float fontSize_;
 	float4 fontColor_;
 	float4 textPosition_;	//글자 위치. 기본설정은 윈도우좌표계 기반

@@ -36,18 +36,18 @@ public:
 protected:
 
 private:
-	GameEngineFontRenderer* stagefontrenderer_;
-	GameEngineFontRenderer* spacefontrenderer_;
-	GameEngineFontRenderer* coinfontrenderer_;
-	GameEngineFontRenderer* soulfontrenderer_;
+	std::shared_ptr<GameEngineFontRenderer> stagefontrenderer_;
+	std::shared_ptr<GameEngineFontRenderer> spacefontrenderer_;
+	std::shared_ptr<GameEngineFontRenderer> coinfontrenderer_;
+	std::shared_ptr<GameEngineFontRenderer> soulfontrenderer_;
 
-	GameEngineTextureRenderer* coinrenderer_;
-	GameEngineTextureRenderer* soulrenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> coinrenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> soulrenderer_;
 
-	GameEngineTextureRenderer* stageboxrenderer_;
-	GameEngineTextureRenderer* spaceboxrenderer_;
-	GameEngineTextureRenderer* coinboxrenderer_;
-	GameEngineTextureRenderer* soulboxrenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> stageboxrenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> spaceboxrenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> coinboxrenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> soulboxrenderer_;
 
 	void Start() override;
 	void Update(float _deltaTime) override;

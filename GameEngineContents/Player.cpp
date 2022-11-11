@@ -1,16 +1,14 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "GlobalContentsValue.h"
-#include "GameEngineCore/GameEngineCollision.h"
 
-Player* Player::mainPlayer_ = nullptr;
+std::shared_ptr<Player> Player::mainPlayer_;
 
 Player::Player()
-	: playerRenderer_(nullptr)
-	,speed_(200.0f)
+	: nowLevel_(nullptr),
+	playerRenderer_(nullptr),
+	speed_(200.0f)
 {
-	mainPlayer_ = this;
-	//SetLevelOverOn();
 }
 
 Player::~Player()
@@ -122,7 +120,7 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 }
 
-CollisionReturn Player::MonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+CollisionReturn Player::MonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	_Other->GetRoot()->Off();
 	return CollisionReturn::Stop;
@@ -143,4 +141,22 @@ void Player::End()
 void Player::SetLevel(GameEngineLevel* _NowLevel)
 {
 	nowLevel_ = _NowLevel;
+}
+
+void Player::MakeMainPlayer(
+	GameEngineLevel* _thisLevel,
+	const float4& _initPosition,
+	const std::string_view& _playerName /*= "MainPlayer"*/
+)
+{
+	mainPlayer_ = _thisLevel->CreateActor<Player>(ObjectOrder::Player, _playerName);
+
+	mainPlayer_->SetLevel(_thisLevel);
+	mainPlayer_->SetLevelOverOn();
+	mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
+	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(
+		mainPlayer_->GetTransform().GetWorldPosition().x,
+		mainPlayer_->GetTransform().GetWorldPosition().y,
+		-100.f
+	);
 }

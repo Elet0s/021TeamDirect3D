@@ -17,12 +17,12 @@ struct PixelColor
 		unsigned int color_;
 	};
 
-	PixelColor(): color_(0)
+	PixelColor() : color_(0)
 	{
 	}
 };
 
-class GameEngineTexture: public GameEngineRes<GameEngineTexture>
+class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
 	//ID3D11Texture2D* 형태로 할당된 텍스쳐와 거기서 파생된 각종 서브리소스뷰들을 저장, 관리하기 위한 클래스.
 	//자기 텍스쳐와 관계된 리소스뷰들'만' 관리하는 클래스.
@@ -33,8 +33,6 @@ class GameEngineTexture: public GameEngineRes<GameEngineTexture>
 
 	//리소스뷰: 일종의 형변환을 통해 텍스쳐에서 파생된 리소스들을 렌더링 파이프라인에 연결할 수 있는 형태로 만든 것.
 
-	friend GameEngineRes<GameEngineTexture>;
-	//GameEngineTexture클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
 
 	friend class GameEngineFolderTexture;
 	//GameEngineDepthStencilTexture는 왜 프렌드??
@@ -42,12 +40,10 @@ class GameEngineTexture: public GameEngineRes<GameEngineTexture>
 	friend class GameEngineDepthStencilTexture;
 	//GameEngineDepthStencilTexture는 왜 프렌드??
 
-private:
+public:
 	GameEngineTexture();
 	~GameEngineTexture();
-	//외부에서 제멋대로 리소스를 생성/삭제하는걸 막기 위해서 생성자/소멸자를 프라이빗으로 지정해서 외부 접근을 막는다.
-	//이 프레임워크의 리소스는 반드시 소멸자가 아니라 ResourceDestroy()함수에서 제거해야 한다.
-	//프로그램 끝날때까지 리소스삭제를 안하면 끝나는 문제지만 그래도 최대한 막아둔다.
+private:
 
 	GameEngineTexture(const GameEngineTexture& _other) = delete;
 	GameEngineTexture(GameEngineTexture&& _other) noexcept = delete;
@@ -55,16 +51,14 @@ private:
 	GameEngineTexture& operator=(const GameEngineTexture&& _other) = delete;
 
 
-public:	
-	
 public:
 
-	static GameEngineTexture* Create(const std::string_view& _name, ID3D11Texture2D* _texture);
-	static GameEngineTexture* Create(ID3D11Texture2D* _texture);
-	static GameEngineTexture* Create(const D3D11_TEXTURE2D_DESC& _desc);
+	static std::shared_ptr<GameEngineTexture> Create(const std::string_view& _name, ID3D11Texture2D* _texture);
+	static std::shared_ptr<GameEngineTexture> Create(ID3D11Texture2D* _texture);
+	static std::shared_ptr<GameEngineTexture> Create(const D3D11_TEXTURE2D_DESC& _desc);
 
-	static GameEngineTexture* Load(const std::string_view& _path);
-	static GameEngineTexture* Load(const std::string_view& _path, const std::string_view& _name);
+	static std::shared_ptr<GameEngineTexture> Load(const std::string_view& _path);
+	static std::shared_ptr<GameEngineTexture> Load(const std::string_view& _path, const std::string_view& _name);
 
 	void VSSetting(int _bindPoint);
 	void PSSetting(int _bindPoint);
@@ -158,5 +152,6 @@ private:
 	DirectX::TexMetadata metaData_;		//DirectXTex로 불러온 텍스처의 각종 정보들.
 
 	std::vector<float4> cutData_;	//프레임 애니메이션 만들 때 필요한 아틀라스텍스처 분할 정보.
+
 };
 

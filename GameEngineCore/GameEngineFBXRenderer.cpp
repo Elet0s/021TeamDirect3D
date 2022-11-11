@@ -12,7 +12,7 @@ GameEngineFBXRenderer::~GameEngineFBXRenderer()
 
 void GameEngineFBXRenderer::SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName)
 {
-	GameEngineFBXMesh* FindFBXMesh = GameEngineFBXMesh::Find(_fbxMeshName);
+	std::shared_ptr<GameEngineFBXMesh> FindFBXMesh = GameEngineFBXMesh::Find(_fbxMeshName);
 	// 너 몇개 가지고 있어.
 	for (size_t UnitCount = 0; UnitCount < FindFBXMesh->GetRenderUnitCount(); UnitCount++)
 	{
@@ -30,7 +30,7 @@ GameEngineRenderUnit* GameEngineFBXRenderer::SetFBXMesh(
 	size_t _subsetIndex /*= 0*/
 )
 {
-	GameEngineFBXMesh* FindFBXMesh = GameEngineFBXMesh::Find(_fbxMeshName);
+	std::shared_ptr<GameEngineFBXMesh> FindFBXMesh = GameEngineFBXMesh::Find(_fbxMeshName);
 
 	if (nullptr == FindFBXMesh)
 	{
@@ -59,7 +59,7 @@ GameEngineRenderUnit* GameEngineFBXRenderer::SetFBXMesh(
 	GameEngineRenderUnit& RenderUnit = Unit[_meshIndex][_subsetIndex];
 	RenderUnit.SetMaterial(_materialName);
 
-	GameEngineMesh* FbxMesh = FBXMesh->GetGameEngineMesh(_meshIndex, _subsetIndex);
+	std::shared_ptr<GameEngineMesh> FbxMesh = FBXMesh->GetGameEngineMesh(_meshIndex, _subsetIndex);
 	RenderUnit.SetMesh(FbxMesh);
 
 	if (RenderUnit.GetShaderResourceHelper().IsTexture("DiffuseTexture"))
@@ -72,7 +72,7 @@ GameEngineRenderUnit* GameEngineFBXRenderer::SetFBXMesh(
 		}
 	}
 
-	RenderUnit.SetRenderer(this);
+	RenderUnit.SetRenderer(std::dynamic_pointer_cast<GameEngineRenderer>(shared_from_this()));
 
 	return &RenderUnit;
 }
@@ -83,7 +83,7 @@ void GameEngineFBXRenderer::Render(float _deltaTime)
 	{
 		for (size_t SubSetIndex = 0; SubSetIndex < Unit[UnitIndex].size(); SubSetIndex++)
 		{
-			if (nullptr == Unit[UnitIndex][SubSetIndex].GetMaterial())
+			if (nullptr == Unit[UnitIndex][SubSetIndex].GetPipeLine())
 			{
 				continue;
 			}
