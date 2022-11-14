@@ -140,6 +140,11 @@ protected:
 	static std::shared_ptr<ResType> CreateRes(const std::string_view& _resName = "")
 	{
 		std::shared_ptr<ResType> newRes = std::make_shared<ResType>();
+		if (nullptr == newRes)
+		{
+			MsgBoxAssert("newRes 생성 실패!");
+			return nullptr;
+		}
 		newRes->SetName(GameEngineString::ToUpperReturn(_resName));
 
 		return newRes;

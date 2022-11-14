@@ -34,33 +34,34 @@ Output TextureShadow_VS(Input _input)
     
     
     newOutput.pos_ = mul(vertexPos, worldViewProjectionMatrix_); //WVP행렬 적용.
-    
+    newOutput.texcoord_ = _input.texcoord_;
     //newOutput.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
     //newOutput.texcoord_.y = (_input.texcoord_.y * textureFrameSize_.y) + textureFramePos_.y;
-    
-    
-    
-    
     
     return newOutput;
 }
 
-//Texture2D Tex : register(t0);
-//SamplerState LINEARCLAMP : register(s0);
-
-cbuffer ShadowColor : register(b8)
-{
-    float4 color_;
-}
+Texture2D Tex : register(t0);
+SamplerState POINTCLAMP : register(s0);
 
 float4 TextureShadow_PS(Output _input) : SV_Target0
 {  
-    //if (Tex.Sample(LINEARCLAMP, _input.texcoord_.xy).a <= 0.f)
-    //{
-    //    clip(-1);
-    //}
-    //else
-    //{
-        return color_;
-    //}
+    float4 sampledColor = Tex.Sample(POINTCLAMP, _input.texcoord_.xy);
+    float4 shadowColor = (float4) 0;
+    
+    if (sampledColor.a <= 0.f)
+    {
+        clip(-1);
+    }
+    else if (sampledColor.a >= 0.75f)
+    {
+        shadowColor.a = 0.75f;
+    }
+    else
+    {
+        shadowColor.a = sampledColor.a;
+    }
+    
+
+    return shadowColor;
 }

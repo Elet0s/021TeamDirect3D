@@ -50,8 +50,9 @@ void ContentsCore::Start()
 	CreateLevel<WorldMapLevel>("WorldMap");
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<TestLevel>("Test");
-	CreateLevel<ShaderTestLevel>("ShaderTest");
-	ChangeLevel("WorldMap");
+	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
+	ChangeLevel("ShaderTestLevel");
+	//ChangeLevel("WorldMap");
 
 
 	//GameEngineTime::SetFrameLimit(60);
@@ -97,9 +98,9 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 
 
 	std::shared_ptr<GameEngineMaterial> newContentsMaterial1
-		= GameEngineMaterial::Create("TextureShadow");
-	newContentsMaterial1->SetVertexShader("TextureShadow.hlsl");
-	newContentsMaterial1->SetPixelShader("TextureShadow.hlsl");
+		= GameEngineMaterial::Create("Texture2DShadow");
+	newContentsMaterial1->SetVertexShader("Texture2DShadow.hlsl");
+	newContentsMaterial1->SetPixelShader("Texture2DShadow.hlsl");
 	newContentsMaterial1->SetRasterizer("EngineRasterizer");
 	newContentsMaterial1->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial1->SetDepthStencil_OutputMerger("EngineBaseDepth");

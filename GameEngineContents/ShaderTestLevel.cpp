@@ -4,7 +4,7 @@
 //#include "Enums.h"
 //#include "Player.h"
 //#include "GlobalContentsValue.h"
-#include "ContentsTextureShadowRenderer.h"
+#include "Texture2DShadowRenderer.h"
 
 ShaderTestLevel::ShaderTestLevel(): shaderTestActor_(nullptr), shaderTestRenderer_(nullptr)
 {
@@ -27,7 +27,7 @@ void ShaderTestLevel::Start()
 	shaderTestActor_->GetTransform().SetWorldPosition(float4::Zero);
 
 
-	shaderTestRenderer_ = shaderTestActor_->CreateComponent<ContentsTextureShadowRenderer>("ShaderTestRenderer");
+	shaderTestRenderer_ = shaderTestActor_->CreateComponent<Texture2DShadowRenderer>("ShaderTestRenderer");
 
 	shaderTestRenderer_->GetTransform().SetWorldScale(100, 100, 1);
 }

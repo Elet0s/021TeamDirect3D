@@ -23,6 +23,8 @@
 
 #include <GameEngineCore\GameEngineFont.h>
 #include <GameEngineCore\GameEngineTexture.h>
+#include <GameEngineCore\GameEngineSampler.h>
+#include <GameEngineCore\GameEngineConstantBuffer.h>
 #include <GameEngineCore\GameEngineFolderTexture.h>
 #include <GameEngineCore\GameEngineGUI.h>
 #include <GameEngineCore\GameEngineStatusWindow.h>

@@ -408,8 +408,7 @@ void GameEngineShader::CompileHLSLCode(const std::string_view& _path)
 	))
 	{
 		std::string errorText = reinterpret_cast<char*>(errorMessage->GetBufferPointer());
-		MsgBoxAssertString(entryPoint_ + ": HLSL코드 컴파일 실패.");
-		MsgBoxAssertString(errorText);
+		MsgBoxAssertString(entryPoint_ + ": HLSL코드 컴파일 실패.\n" + errorText);
 		errorMessage->Release();
 		return;
 	}

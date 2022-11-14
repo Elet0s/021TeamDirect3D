@@ -158,7 +158,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsCore.h" />
-    <ClInclude Include="ContentsTextureShadowRenderer.h">
+    <ClInclude Include="Texture2DShadowRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -234,7 +234,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
-    <ClCompile Include="ContentsTextureShadowRenderer.cpp">
+    <ClCompile Include="Texture2DShadowRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>

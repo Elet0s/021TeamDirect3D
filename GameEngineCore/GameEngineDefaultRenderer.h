@@ -10,7 +10,7 @@ class GameEngineDefaultRenderer: public GameEngineRenderer
 	// 렌더링 파이프라인을 통해 윈도우 범위 내의 픽셀별 색상값으로 바꿔 렌더타겟에 전달하는 컴포넌트.
 	//실질적인 렌더링을 수행하는 컴포넌트이다.
 
-
+	
 public:
 	GameEngineDefaultRenderer();
 	~GameEngineDefaultRenderer();
