@@ -386,6 +386,20 @@ void EngineTextureLoad()
 	linearWrapSamplerDesc.MaxLOD = FLT_MAX;
 	GameEngineSampler::Create("LINEARWRAP", linearWrapSamplerDesc);
 
+
+
+	//D3D11_SAMPLER_DESC linearClampSamplerDesc = {};
+	//linearClampSamplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	//linearClampSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
+	//linearClampSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
+	//linearClampSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
+	//linearClampSamplerDesc.MipLODBias = 0.f;
+	//linearClampSamplerDesc.MaxAnisotropy = 1;
+	//linearClampSamplerDesc.ComparisonFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_NEVER;
+	//linearClampSamplerDesc.MinLOD = -FLT_MAX;
+	//linearClampSamplerDesc.MaxLOD = FLT_MAX;
+	//GameEngineSampler::Create("LINEARCLAMP", linearClampSamplerDesc);
+
 	//D3D11 ERROR: ID3D11DeviceContext::DrawIndexed: 
 	//The Pixel Shader unit expects a Sampler configured for default filtering to be set at Slot 0, 
 	//but the sampler bound at this slot is configured for comparison filtering.  

@@ -158,6 +158,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="ContentsTextureShadowRenderer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Enums.h" />
     <ClInclude Include="FlyingEyes.h">
       <SubType>
@@ -230,6 +234,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="ContentsTextureShadowRenderer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="FlyingEyes.cpp">
       <SubType>
       </SubType>

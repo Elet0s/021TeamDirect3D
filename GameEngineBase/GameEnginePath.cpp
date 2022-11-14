@@ -61,6 +61,11 @@ std::string GameEnginePath::ReplaceFileName(const std::string_view& _newFileName
 	return path_.replace_filename(_newFileName).string();
 }
 
+std::string GameEnginePath::ReplaceExtention(const std::string_view& _newExtention)
+{
+	return path_.replace_extension(_newExtention).string();
+}
+
 std::string GameEnginePath::GetFileName(const std::string_view& _path)
 {
 	std::filesystem::path returnFileName = _path;

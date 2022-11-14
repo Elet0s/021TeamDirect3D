@@ -116,6 +116,9 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="ContentsTextureShadowRenderer.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -198,6 +201,9 @@
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>Actor\00. Global\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsTextureShadowRenderer.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

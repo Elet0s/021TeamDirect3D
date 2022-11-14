@@ -4,6 +4,7 @@ class GameEngineDefaultRenderer;
 class Player: public GameEngineActor
 {
 	static std::shared_ptr<Player> mainPlayer_;
+	static bool isInitialized_;
 
 public:
 	Player();
@@ -15,7 +16,7 @@ public:
 	Player& operator=(Player&& _other) = delete;
 
 public:
-	static void MakeMainPlayer(
+	static void CreatePlayer(
 		GameEngineLevel* _thisLevel,
 		const float4& _initPosition,
 		const std::string_view& _playerName = "MainPlayer"
@@ -24,8 +25,13 @@ public:
 
 
 public:
-	static std::shared_ptr<Player>& GetMainPlayer()
+	static std::shared_ptr<Player>& GetPlayerInst()
 	{
+		if (nullptr == mainPlayer_)
+		{
+			MsgBoxAssert("아직 플레이어 생성을 하지 않았습니다.");
+		}
+
 		return mainPlayer_;
 	}
 

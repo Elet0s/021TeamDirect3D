@@ -84,8 +84,7 @@ void TestLevel::Start()
 		//GetMainCameraActor()->GetTransform().SetWorldPosition(float4(NewPlayer->GetTransform().GetWorldPosition().x , NewPlayer->GetTransform().GetWorldPosition().y, -100.f));
 	//}
 
-	Player::MakeMainPlayer(this, { 960.f, -960.f });
-
+	Player::CreatePlayer(this, { 960.f, -960.f });
 
 	{
 		for (size_t i = 0; i < 10; i++)
@@ -142,7 +141,7 @@ void TestLevel::CreateMapAndCamraMove()
 void TestLevel::UpdateWorld()
 {
 	float4 CenterPos = tilemaps_[1][1]->GetTransform().GetWorldPosition() + float4(640.f, -320.f);
-	float4 PlayerPos = Player::GetMainPlayer()->GetTransform().GetWorldPosition();
+	float4 PlayerPos = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
 
 	int Dir = -1;
 
@@ -278,7 +277,7 @@ void TestLevel::MoveWorld(int _Dir)
 void TestLevel::PlayerMoveCamera()
 {
 	float Time = GameEngineTime::GetDeltaTime();
-	float4 MoveVector = Player::GetMainPlayer()->GetTransform().GetWorldPosition() - GetMainCameraActorTransform().GetWorldPosition();
+	float4 MoveVector = Player::GetPlayerInst()->GetTransform().GetWorldPosition() - GetMainCameraActorTransform().GetWorldPosition();
 
 	if (abs(MoveVector.x) < 1.0f)
 	{
@@ -299,7 +298,7 @@ void TestLevel::MouseMoveCamera()
 	float Time = GameEngineTime::GetDeltaTime();
 
 	float4 MouseDir = float4::Zero;
-	float4 CheckPos = GetMainCamera()->GetMouseWorldPositionToActor() - Player::GetMainPlayer()->GetTransform().GetWorldPosition();
+	float4 CheckPos = GetMainCamera()->GetMouseWorldPositionToActor() - Player::GetPlayerInst()->GetTransform().GetWorldPosition();
 
 
 		if (CheckPos.x > 360.f)

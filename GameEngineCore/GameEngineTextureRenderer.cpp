@@ -244,12 +244,12 @@ void GameEngineTextureRenderer::SetPivotToVector(const float4& _localPos)
 
 void GameEngineTextureRenderer::SetSamplingMode_Point()
 {
-	this->GetShaderResourceHelper().SetSampler("Smp", "EngineSampler_Point");
+	//this->GetShaderResourceHelper().SetSampler("Smp", "EngineSampler_Point");
 }
 
 void GameEngineTextureRenderer::SetSamplingMode_Linear()
 {
-	this->GetShaderResourceHelper().SetSampler("Smp", "EngineSampler_Linear");
+	//this->GetShaderResourceHelper().SetSampler("Smp", "EngineSampler_Linear");
 }
 
 void GameEngineTextureRenderer::CreateFrameAnimation_CutTexture(const std::string_view& _animationName, const FrameAnimation_Desc& _desc)
@@ -415,7 +415,7 @@ void GameEngineTextureRenderer::Start()
 {
 	GameEngineDefaultRenderer::Start();
 
-	GameEngineRenderer::PushRendererToMainCamera();
+	//GameEngineRenderer::PushRendererToMainCamera();
 
 	this->SetTextureRendererSetting();
 }

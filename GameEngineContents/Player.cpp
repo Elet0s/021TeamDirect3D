@@ -2,13 +2,24 @@
 #include "Player.h"
 #include "GlobalContentsValue.h"
 
-std::shared_ptr<Player> Player::mainPlayer_;
+std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
+bool Player::isInitialized_ = false;
 
 Player::Player()
 	: nowLevel_(nullptr),
 	playerRenderer_(nullptr),
 	speed_(200.0f)
 {
+	if (true == isInitialized_ && nullptr == mainPlayer_)
+	{
+		//플레이어 정상 생성.
+	}
+	else
+	{
+		MsgBoxAssert("플레이어 생성자를 직접 호출하지 마세요.");
+		return;
+	}
+
 }
 
 Player::~Player()
@@ -17,7 +28,8 @@ Player::~Player()
 
 void Player::Start()
 {
-	
+
+
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistChildDirectory("ContentsResources");
 		Dir.MoveToChild("ContentsResources");
@@ -143,12 +155,20 @@ void Player::SetLevel(GameEngineLevel* _NowLevel)
 	nowLevel_ = _NowLevel;
 }
 
-void Player::MakeMainPlayer(
+void Player::CreatePlayer(
 	GameEngineLevel* _thisLevel,
 	const float4& _initPosition,
 	const std::string_view& _playerName /*= "MainPlayer"*/
 )
 {
+	if (nullptr != mainPlayer_)
+	{
+		MsgBoxAssert("플레이어를 이미 생성했습니다.");
+		return;
+	}
+
+	isInitialized_ = true;
+
 	mainPlayer_ = _thisLevel->CreateActor<Player>(ObjectOrder::Player, _playerName);
 
 	mainPlayer_->SetLevel(_thisLevel);

@@ -96,4 +96,12 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	newContentsMaterial0->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial1
+		= GameEngineMaterial::Create("TextureShadow");
+	newContentsMaterial1->SetVertexShader("TextureShadow.hlsl");
+	newContentsMaterial1->SetPixelShader("TextureShadow.hlsl");
+	newContentsMaterial1->SetRasterizer("EngineRasterizer");
+	newContentsMaterial1->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial1->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
 }

@@ -10,9 +10,6 @@ class GameEngineDefaultRenderer: public GameEngineRenderer
 	// 렌더링 파이프라인을 통해 윈도우 범위 내의 픽셀별 색상값으로 바꿔 렌더타겟에 전달하는 컴포넌트.
 	//실질적인 렌더링을 수행하는 컴포넌트이다.
 
-	//렌더러들은 반드시 렌더링 파이프라인이 포함된 렌더유닛을 들고 있다. 렌더링 파이프라인은 다이렉트X와 직접적으로 연결되어 있다.
-	//하나의 렌더링 파이프라인은 하나의 메쉬, 하나의 메테리얼, 하나의 렌더타겟을 가진다.
-
 
 public:
 	GameEngineDefaultRenderer();

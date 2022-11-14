@@ -31,6 +31,7 @@ public:
 	std::string GetStem() const;
 	std::string GetExtention() const;
 	std::string ReplaceFileName(const std::string_view& _newFileName);
+	std::string ReplaceExtention(const std::string_view& _newExtention);
 
 	static std::string GetFileName(const std::string_view& _path);
 	static std::string GetStem(const std::string_view& _path);

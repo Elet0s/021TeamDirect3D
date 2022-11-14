@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <FxCompile Include="Test.hlsl" />
+    <FxCompile Include="TextureShadow.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RenderOption.hlsli" />
