@@ -11,9 +11,10 @@ ContentsTextureShadowRenderer::~ContentsTextureShadowRenderer()
 
 void ContentsTextureShadowRenderer::Start()
 {
-	//SetMesh("Rect");
-	//SetMaterial("TextureShadow");
-	//GetRenderUnit().GetShaderResourceHelper().SetConstantBuffer_Link("ShadowColor", shadowColor_);
+	SetMesh("Rect");
+	SetMaterial("TextureShadow");
+	GetRenderUnit().GetShaderResourceHelper().SetConstantBuffer_Link("ShadowColor", shadowColor_);
+	PushRendererToMainCamera();
 	//GetRenderUnit().GetShaderResourceHelper().SetSampler("LINEARCLAMP", "LINEARCLAMP");
 }
 

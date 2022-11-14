@@ -37,6 +37,9 @@
     <Filter Include="Actor\02. Play\Player">
       <UniqueIdentifier>{439cf48d-d902-482e-8f90-b697aca15416}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Global\ContentsSupport">
+      <UniqueIdentifier>{a41ccc3f-24c4-41b8-b718-89a3d9fc90dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -117,7 +120,7 @@
       <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
     <ClCompile Include="ContentsTextureShadowRenderer.cpp">
-      <Filter>Global</Filter>
+      <Filter>Global\ContentsSupport</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,7 +206,7 @@
       <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
     <ClInclude Include="ContentsTextureShadowRenderer.h">
-      <Filter>Global</Filter>
+      <Filter>Global\ContentsSupport</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
