@@ -471,9 +471,6 @@ public:
 		return DirectX::XMVector3Normalize(_vector.directXVector_);
 	}
 
-	// 외적을 쓸수 있는곳
-	// 마우스 클릭시 회전방향 알아낼때.
-
 	//벡터곱(Vector Product), 가위곱(Cross Product)
 	static float4 Cross3D(const float4& _vectorA, const float4& _vectorB)
 	{

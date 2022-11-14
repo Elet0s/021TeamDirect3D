@@ -19,11 +19,12 @@ private:
 
 public:
 	virtual void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName);
+	virtual void SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName, size_t _meshIndex);
 	virtual GameEngineRenderUnit* SetFBXMesh(
 		const std::string& _fbxMeshName,
 		const std::string& _materialName,
 		size_t _meshIndex,
-		size_t _subsetIndex = 0
+		size_t _subsetIndex
 	);	// SetFbxMesh를 해서 만들어진 랜더 유니트를 사용하게 하기 위해서 리턴해준다.
 
 	void Render(float _deltaTime) override;

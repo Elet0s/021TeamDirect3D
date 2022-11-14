@@ -169,10 +169,27 @@ Bone* GameEngineFBXMesh::FindBone(size_t MeshIndex, const std::string& _Name)
 
 void GameEngineFBXMesh::LoadMesh(const std::string& _Path, const std::string& _Name)
 {
-	FBXInit(_Path);
+	GameEngineFile SaveFile = GameEngineFile(_Path.c_str());
 
+	SaveFile.ReplaceExtension(".UserFBX");
+	SaveFile.GetExtension();
+
+
+	if (SaveFile.IsExist())
+	{
+		// UserLoad();
+		return;
+	}
+
+	FBXInit(_Path);
 	// 버텍스 정보를 가진 노드를 조사한다.
 	MeshLoad();
+	// Bone을 조사한다.
+
+	if (false == SaveFile.IsExist())
+	{
+		UserSave(SaveFile.GetFullPath());
+	}
 }
 
 void GameEngineFBXMesh::MeshLoad()
@@ -1596,4 +1613,16 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineFBXMesh::GetAnimationStruc
 	}
 
 	return AllBoneStructuredBuffers[_Index];
+}
+
+void GameEngineFBXMesh::UserLoad(const std::string_view& _Path)
+{
+}
+
+void GameEngineFBXMesh::UserSave(const std::string_view& _Path)
+{
+	GameEngineFile File = _Path.data();
+	File.Open(OpenMode::Write, FileMode::Binary);
+	//File.Write(RenderUnitInfos);
+	//File.Write(AllBones);
 }

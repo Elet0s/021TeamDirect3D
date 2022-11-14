@@ -141,6 +141,12 @@ public:
 		order_ = _order;
 	}
 
+	template<typename ObjectType>
+	std::shared_ptr<ObjectType> CastThis()
+	{
+		return std::dynamic_pointer_cast<ObjectType>(shared_from_this());
+	}
+
 	//형변환 부모 받기.
 	template<typename ParentType>
 	std::shared_ptr<ParentType> GetParent()

@@ -23,11 +23,23 @@ void GameEngineFBXRenderer::SetFBXMesh(const std::string& _fbxMeshName, const st
 	}
 }
 
+void GameEngineFBXRenderer::SetFBXMesh(const std::string& _fbxMeshName, const std::string& _materialName, size_t _meshIndex)
+{
+	std::shared_ptr<GameEngineFBXMesh> FindFBXMesh = GameEngineFBXMesh::Find(_fbxMeshName);
+
+	for (size_t SubSetCount = 0; SubSetCount < FindFBXMesh->GetSubSetCount(_meshIndex); SubSetCount++)
+	{
+		size_t SubSet = FindFBXMesh->GetSubSetCount(_meshIndex);
+
+		SetFBXMesh(_fbxMeshName, _materialName, _meshIndex);
+	}
+}
+
 GameEngineRenderUnit* GameEngineFBXRenderer::SetFBXMesh(
 	const std::string& _fbxMeshName,
 	const std::string& _materialName,
 	size_t _meshIndex,
-	size_t _subsetIndex /*= 0*/
+	size_t _subsetIndex
 )
 {
 	std::shared_ptr<GameEngineFBXMesh> FindFBXMesh = GameEngineFBXMesh::Find(_fbxMeshName);
@@ -76,7 +88,6 @@ GameEngineRenderUnit* GameEngineFBXRenderer::SetFBXMesh(
 
 	return &RenderUnit;
 }
-
 void GameEngineFBXRenderer::Render(float _deltaTime)
 {
 	for (size_t UnitIndex = 0; UnitIndex < Unit.size(); UnitIndex++)

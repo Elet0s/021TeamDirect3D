@@ -51,7 +51,7 @@ std::string GameEnginePath::GetStem() const
 	return path_.stem().string();
 }
 
-std::string GameEnginePath::GetExtention() const
+std::string GameEnginePath::GetExtension() const
 {
 	return path_.extension().string();
 }
@@ -61,7 +61,7 @@ std::string GameEnginePath::ReplaceFileName(const std::string_view& _newFileName
 	return path_.replace_filename(_newFileName).string();
 }
 
-std::string GameEnginePath::ReplaceExtention(const std::string_view& _newExtention)
+std::string GameEnginePath::ReplaceExtension(const std::string_view& _newExtention)
 {
 	return path_.replace_extension(_newExtention).string();
 }

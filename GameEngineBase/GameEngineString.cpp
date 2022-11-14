@@ -48,6 +48,40 @@ std::string GameEngineString::ToUpperReturn(const std::string_view& _text)
 	return returnText;
 }
 
+std::string GameEngineString::Replace(
+	const std::string_view& _text,
+	const std::string_view& _prevText,
+	const std::string_view& _newText
+)
+{
+	size_t findIndex = _text.find(_prevText);
+
+	if (std::string::npos == findIndex)
+	{
+		return _text.data();
+	}
+
+	std::string resultString = _text.data();
+	resultString.replace(findIndex, _prevText.size(), _newText);
+	return resultString;
+}
+
+void GameEngineString::Replace(
+	std::string& _text,
+	const std::string_view& _prevText,
+	const std::string_view& _newText
+)
+{
+	size_t findIndex = _text.find(_prevText);
+
+	if (std::string::npos == findIndex)
+	{
+		return;
+	}
+
+	_text.replace(findIndex, _prevText.size(), _newText);
+}
+
 bool GameEngineString::AnsiToUnicode(const std::string_view& _inText, std::wstring& _outText)
 {
 	int outSize = MultiByteToWideChar(		//

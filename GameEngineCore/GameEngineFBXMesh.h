@@ -124,7 +124,7 @@ struct FBXExMeshInfo
 };
 
 
-struct FBXRenderUnitInfo
+struct FBXRenderUnitInfo : public Serializer
 {
 public:
 	int VectorIndex;
@@ -172,6 +172,46 @@ public:
 	~FBXRenderUnitInfo()
 	{
 	}
+
+	void Write(GameEngineFile& _File) override
+	{
+		//int VectorIndex;
+		//int IsLodLv;
+		//bool IsLod;
+		//float4 MinBoundBox;
+		//float4 MaxBoundBox;
+		//float4 BoundScaleBox;
+		//std::map<FbxMesh*, std::vector<GameEngineVertex>*> FbxVertexMap;
+		//std::map<FbxMesh*, std::map<int, std::vector<FbxExIW>>> MapWI;
+		//std::vector<GameEngineVertex> Vertexs;
+		//std::vector<std::vector<unsigned int>> Indexs;
+		//std::vector<FbxExMaterialSettingData> MaterialData;
+		//std::shared_ptr<GameEngineVertexBuffer> VertexBuffer;
+		//std::vector< std::shared_ptr<GameEngineIndexBuffer>> IndexBuffers;
+		//std::vector<std::shared_ptr<GameEngineMesh>> Meshs;
+
+		//_File.Write(VectorIndex);
+		//_File.Write(IsLodLv);
+		//_File.Write(IsLod);
+		//_File.Write(MinBoundBox);
+		//_File.Write(MaxBoundBox);
+		//_File.Write(BoundScaleBox);
+		//_File.Write(Vertexs);
+		//_File.Write(Indexs);
+
+	}
+
+	void Read(GameEngineFile& _File) override
+	{
+		_File.Read(VectorIndex);
+		_File.Read(IsLodLv);
+		_File.Read(IsLod);
+		_File.Read(MinBoundBox);
+		_File.Read(MaxBoundBox);
+		_File.Read(BoundScaleBox);
+
+	}
+
 };
 
 struct JointPos
@@ -541,6 +581,9 @@ public:
 	Bone* FindBone(size_t MeshIndex, const std::string& _Name);
 
 	std::shared_ptr<GameEngineStructuredBuffer> GetAnimationStructuredBuffer(size_t _Index);
+
+	void UserLoad(const std::string_view& _Path);
+	void UserSave(const std::string_view& _Path);
 
 public:
 	size_t GetRenderUnitCount()

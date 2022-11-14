@@ -2,6 +2,16 @@
 #include "GameEnginePath.h"
 #include "GameEngineMath.h"
 
+class GameEngineFile;
+class Serializer
+{
+	//직렬화(Serialization): 프로세스 밖에서는 이해할 수 없는 형태의 객체 등의 정보를 
+	// 파일로 읽고 쓰거나 네트워크를 통해 송수신 하기 쉬운 형태로 바꾸는 작업. 
+public:
+	virtual void Write(GameEngineFile& _File) = 0;
+	virtual void Read(GameEngineFile& _File) = 0;
+};
+
 enum class OpenMode
 {
 	Read,
@@ -67,6 +77,35 @@ public:
 	void Write(const Struct& _data)
 	{
 		Write(reinterpret_cast<const void*>(&_data), sizeof(Struct));
+	}
+
+	template<typename Value>
+	void Write(std::vector<Value>& _Data)
+	{
+		int Size = static_cast<int>(_Data.size());
+		Write(&Size, sizeof(int));
+
+		if (Size <= 0)
+		{
+			return;
+		}
+
+		Value* Check = &_Data[0];
+
+		Serializer* Ser = dynamic_cast<Serializer*>(Check);
+
+		for (size_t i = 0; i < _Data.size(); i++)
+		{
+			if (nullptr == Ser)
+			{
+				Write(&_Data[i], sizeof(Value));
+			}
+			else
+			{
+				_Data[i].Write(*this);
+			}
+
+		}
 	}
 
 	template<typename Struct>

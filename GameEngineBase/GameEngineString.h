@@ -42,6 +42,19 @@ public:
 	//주어진 문자들을 전부 대문자로 변경하는 함수. 바꿔진 텍스트를 반환한다.
 	static std::string ToUpperReturn(const std::string_view& _text);
 
+	//문자열 부분 교체. 스트링 반환.
+	static std::string Replace(
+		const std::string_view& _text,
+		const std::string_view& _prevText,
+		const std::string_view& _newText
+	);
+
+	//문자열 부분 교체.
+	static void Replace(
+		std::string& _text,
+		const std::string_view& _prevText,
+		const std::string_view& _newText
+	);
 
 	static bool AnsiToUnicode(const std::string_view& _inText, std::wstring& _outText);
 	static std::wstring AnsiToUnicodeReturn(const std::string_view& _inText);

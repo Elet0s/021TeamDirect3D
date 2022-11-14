@@ -174,7 +174,7 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFiles(const std::string_v
 		if (extension != "")
 		{
 			GameEnginePath newPath = entry.path();
-			std::string otherExtension = GameEngineString::ToUpperReturn(newPath.GetExtention());
+			std::string otherExtension = GameEngineString::ToUpperReturn(newPath.GetExtension());
 
 			if (otherExtension != extension)
 			{
