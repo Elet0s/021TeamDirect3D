@@ -125,12 +125,12 @@ void MyWorldMapRenderer::Render(float _deltaTime)
 		{
 			float4 tilePos = this->GetTransform().GetWorldPosition();
 			tilePos.x += x * tilescale_.x;
-			tilePos.y += -tilescale_.y * sinf(30.f * GameEngineMath::DegreeToRadian) * y;
-			tilePos.z += -tilescale_.y * cosf(30.f * GameEngineMath::DegreeToRadian) * y;
+			tilePos.y += -tilescale_.y * sinf(10.f * GameEngineMath::DegreeToRadian) * y;
+			tilePos.z += -tilescale_.y * cosf(10.f * GameEngineMath::DegreeToRadian) * y;
 
 			tileTransform.SetLocalScale(alltiles_[y][x].tileImage_->GetScale());
 			tileTransform.SetLocalPosition(tilePos);
-			tileTransform.SetLocalRotation( float4(60.f,0.f,0.f));
+			tileTransform.SetLocalRotation( float4(80.f,0.f,0.f));
 			tileTransform.CalculateWorldViewProjection();
 			this->GetShaderResourceHelper().SetConstantBuffer_Link("TransformData", tileTransform.GetTransformData());
 			this->GetShaderResourceHelper().SetTexture("Tex", alltiles_[y][x].tileImage_);

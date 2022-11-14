@@ -16,28 +16,35 @@ void WorldMapActor::Start()
 {
 	worldmaprenderer_ = CreateComponent<MyWorldMapRenderer>();
 
-	/*for (size_t i = 0; i < 100; i++)
-	{
-		float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(0, 80));
-		float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(0, 80));
-		X *= 32.0f;
-		Y *= 32.0f;
-		GameEngineTextureRenderer* TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
-		TextureRenderer->SetFolderTextureToIndex("Grass", GameEngineRandom::mainRandom_.RandomInt(0,2));
-		TextureRenderer->ScaleToTexture();
-		TextureRenderer->GetTransform().SetWorldPosition(float4{ X,-Y, -500.f});
-	}*/
 	if (nullptr == GameEngineFolderTexture::Find("Grass"))
 	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("Texture");
-		Dir.MoveToChild("Map");
-		Dir.MoveToChild("Grass");
+		{
+			GameEngineDirectory Dir;
+			Dir.MoveParentToExistChildDirectory("ContentsResources");
+			Dir.MoveToChild("ContentsResources");
+			Dir.MoveToChild("Texture");
+			Dir.MoveToChild("Map");
+			Dir.MoveToChild("Grass");
 
 
-		GameEngineFolderTexture::Load(Dir.GetFullPath());
+			GameEngineFolderTexture::Load(Dir.GetFullPath());
+		}
+		
+		{
+			GameEngineDirectory Dir;
+			Dir.MoveParentToExistChildDirectory("ContentsResources");
+			Dir.MoveToChild("ContentsResources");
+			Dir.MoveToChild("Texture");
+			//Dir.MoveToChild("Map");
+
+
+			std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
+			for (size_t i = 0; i < Shaders.size(); i++)
+			{
+				GameEngineTexture::Load(Shaders[i].GetFullPath());
+			}
+		}
+		
 	}
 
 	for (size_t y = 0; y < 20; y++)
@@ -46,12 +53,12 @@ void WorldMapActor::Start()
 		{
 			float4 tilePos = this->GetTransform().GetWorldPosition();
 			tilePos.x += x * 128.f;
-			tilePos.y += -128.f * sinf(30.f * GameEngineMath::DegreeToRadian) * y;
-			tilePos.z += -128.f * cosf(30.f * GameEngineMath::DegreeToRadian) * y;
+			tilePos.y += -128.f * sinf(10.f * GameEngineMath::DegreeToRadian) * y;
+			tilePos.z += -128.f * cosf(10.f * GameEngineMath::DegreeToRadian) * y;
 			
 			std::shared_ptr<GameEngineTextureRenderer> TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
 			TextureRenderer->SetPivot(PivotMode::Bot);
-			TextureRenderer->SetFolderTextureToIndex("Grass", 0);
+			TextureRenderer->SetTexture("tree_Group_A.png");
 			TextureRenderer->ScaleToTexture();
 			TextureRenderer->GetTransform().SetWorldPosition(tilePos);
 
@@ -60,7 +67,15 @@ void WorldMapActor::Start()
 		}
 	}
 
+	{
+		std::shared_ptr<GameEngineTextureRenderer> TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
+		TextureRenderer->SetPivot(PivotMode::LeftTop);
+		TextureRenderer->SetTexture("TestWall.png");
+		TextureRenderer->GetTransform().SetWorldScale(float4{ 2560, 2560 });
+		TextureRenderer->GetTransform().SetWorldPosition(float4{ 0,1280 });
+	}
 
+	
 }
 
 void WorldMapActor::Update(float _deltaTime)
