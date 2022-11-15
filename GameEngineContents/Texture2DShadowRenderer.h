@@ -20,7 +20,7 @@ public:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-	//void SetTextureRenderer(std::shared_ptr<GameEngineTextureRenderer> _textureRenderer);
+	void SetTextureRenderer(std::shared_ptr<GameEngineTextureRenderer> _textureRenderer);
 
 private:
 

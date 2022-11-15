@@ -3,6 +3,7 @@
 #include <string>
 #include <GameEngineBase/GameEngineRandom.h>
 #include "MyTileMapRenderer.h"
+#include "Texture2DShadowRenderer.h"
 
 TileMapActor::TileMapActor(): tileRenderer_(nullptr)
 {
@@ -27,6 +28,9 @@ void TileMapActor::Start()
 		TextureRenderer->SetRenderingOrder(42-static_cast<int>(Y));
 		X *= 32.0f;
 		Y *= 16.0f;
+
+		std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
+
 		if (i < 70)
 		{
 			TextureRenderer->SetFolderTextureToIndex("Grass", GameEngineRandom::mainRandom_.RandomInt(0, 2));
@@ -53,6 +57,8 @@ void TileMapActor::Start()
 			TextureRenderer->GetTransform().SetWorldPosition(float4{ X,-Y, -300.f });
 			Count++;
 		}
+
+		shadowRenderer->SetTextureRenderer(TextureRenderer);
 	}
 	Count;
 }
