@@ -38,7 +38,7 @@ void Texture2DShadowRenderer::SetTextureRenderer(std::shared_ptr<GameEngineTextu
 	this->GetTransform().SetWorldPosition(_textureRenderer->GetTransform().GetWorldPosition());
 	this->GetTransform().SetLocalScale(_textureRenderer->GetTransform().GetLocalScale());
 	GetRenderUnit().GetShaderResourceHelper().SetTexture("Tex",_textureRenderer->GetCurrentTexture());
-	SetRenderingOrder(_textureRenderer->GetRenderingOrder());
+	SetRenderingOrder(_textureRenderer->GetRenderingOrder() + 2);
 }
 
 // 리인터프리터캐스트의 단점: 주소값을 단순 정수로 바꾸는 형변환이므로 널포인터여도 널포인터로 감지되지 않는다.

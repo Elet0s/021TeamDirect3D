@@ -26,9 +26,9 @@ Output TextureShadow_VS(Input _input)
 
     float4 vertexPos = _input.pos_;
     
-    vertexPos.x = -sin(radians(45.f)) * (vertexPos.y + 0.5f) + vertexPos.x;
+    vertexPos.x = -sin(radians(30.f)) * (vertexPos.y + 0.5f) + vertexPos.x;
 
-    vertexPos.y = cos(radians(45.f)) * (vertexPos.y + 0.5f) - 0.5f;
+    vertexPos.y = cos(radians(30.f)) * (vertexPos.y + 0.5f) - 0.5f;
     
     //_input.pos_ += pivotPos_;
     

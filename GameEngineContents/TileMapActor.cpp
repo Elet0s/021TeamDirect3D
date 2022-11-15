@@ -29,7 +29,8 @@ void TileMapActor::Start()
 		X *= 32.0f;
 		Y *= 16.0f;
 
-		std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
+		std::shared_ptr<Texture2DShadowRenderer> shadowRenderer 
+			= CreateComponent<Texture2DShadowRenderer>();
 
 		if (i < 70)
 		{
