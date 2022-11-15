@@ -49,7 +49,7 @@ public:
     // 부모 렌더러가 등록된 카메라의 렌더타겟에 옮기는 함수.
     void Render(float _deltaTime);
 
-    std::shared_ptr<GameEngineMaterial>& GetMaterial();
+    std::shared_ptr<GameEngineMaterial> GetMaterial();
 
     std::shared_ptr<GameEngineMaterial> GetClonePipeLine();
 

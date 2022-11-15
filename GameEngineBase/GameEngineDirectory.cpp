@@ -8,9 +8,8 @@ GameEngineDirectory::GameEngineDirectory()
 {
 }
 
-GameEngineDirectory::GameEngineDirectory(const char* _path)
+GameEngineDirectory::GameEngineDirectory(const char* _path): GameEnginePath(_path)
 {
-	path_ = _path;
 	if (false == std::filesystem::exists(path_))
 	{
 		MsgBoxAssert("존재하지 않는 경로입니다.");
@@ -18,9 +17,8 @@ GameEngineDirectory::GameEngineDirectory(const char* _path)
 	}
 }
 
-GameEngineDirectory::GameEngineDirectory(const std::string& _path)
+GameEngineDirectory::GameEngineDirectory(const std::string& _path): GameEnginePath(_path)
 {
-	path_ = _path;
 	if (false == std::filesystem::exists(path_))
 	{
 		MsgBoxAssert("존재하지 않는 경로입니다.");
@@ -28,9 +26,8 @@ GameEngineDirectory::GameEngineDirectory(const std::string& _path)
 	}
 }
 
-GameEngineDirectory::GameEngineDirectory(const std::string_view& _path)
+GameEngineDirectory::GameEngineDirectory(const std::string_view& _path): GameEnginePath(_path)
 {
-	path_ = _path;
 	if (false == std::filesystem::exists(path_))
 	{
 		MsgBoxAssert("존재하지 않는 경로입니다.");
@@ -38,9 +35,8 @@ GameEngineDirectory::GameEngineDirectory(const std::string_view& _path)
 	}
 }
 
-GameEngineDirectory::GameEngineDirectory(const std::filesystem::path& _path)
+GameEngineDirectory::GameEngineDirectory(const std::filesystem::path& _path): GameEnginePath(_path)
 {
-	path_ = _path;
 	if (false == std::filesystem::exists(path_))
 	{
 		MsgBoxAssert("존재하지 않는 경로입니다.");
@@ -48,9 +44,8 @@ GameEngineDirectory::GameEngineDirectory(const std::filesystem::path& _path)
 	}
 }
 
-GameEngineDirectory::GameEngineDirectory(const GameEngineDirectory& _other)
+GameEngineDirectory::GameEngineDirectory(const GameEngineDirectory& _other): GameEnginePath(_other.path_)
 {
-	path_ = _other.path_;
 	if (false == std::filesystem::exists(path_))
 	{
 		MsgBoxAssert("존재하지 않는 경로입니다.");
@@ -58,9 +53,8 @@ GameEngineDirectory::GameEngineDirectory(const GameEngineDirectory& _other)
 	}
 }
 
-GameEngineDirectory::GameEngineDirectory(GameEngineDirectory&& _other) noexcept
+GameEngineDirectory::GameEngineDirectory(GameEngineDirectory&& _other) noexcept : GameEnginePath(_other.path_)
 {
-	path_ = _other.path_;
 	if (false == std::filesystem::exists(path_))
 	{
 		MsgBoxAssert("존재하지 않는 경로입니다.");

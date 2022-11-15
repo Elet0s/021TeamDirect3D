@@ -23,7 +23,7 @@ public:
 	//void SetTextureRenderer(std::shared_ptr<GameEngineTextureRenderer> _textureRenderer);
 
 private:
-	//const float4 shadowColor_;
+
 
 };
 

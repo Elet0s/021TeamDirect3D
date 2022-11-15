@@ -6,34 +6,28 @@ GameEngineFile::GameEngineFile() : filePtr_(nullptr)
 {
 }
 
-GameEngineFile::GameEngineFile(const char* _path) : filePtr_(nullptr)
+GameEngineFile::GameEngineFile(const char* _path) : GameEnginePath(_path), filePtr_(nullptr) 
 {
-	path_ = _path;
 }
 
-GameEngineFile::GameEngineFile(const std::string& _path) : filePtr_(nullptr)
+GameEngineFile::GameEngineFile(const std::string& _path) : GameEnginePath(_path), filePtr_(nullptr)
 {
-	path_ = _path;
 }
 
-GameEngineFile::GameEngineFile(const std::string_view& _path): filePtr_(nullptr)
+GameEngineFile::GameEngineFile(const std::string_view& _path) : GameEnginePath(_path), filePtr_(nullptr)
 {
-	path_ = _path;
 }
 
-GameEngineFile::GameEngineFile(const std::filesystem::path& _path) : filePtr_(nullptr)
+GameEngineFile::GameEngineFile(const std::filesystem::path& _path) : GameEnginePath(_path), filePtr_(nullptr)
 {
-	path_ = _path;
 }
 
-GameEngineFile::GameEngineFile(const GameEngineFile& _other) : filePtr_(nullptr)
+GameEngineFile::GameEngineFile(const GameEngineFile& _other) : GameEnginePath(_other.path_), filePtr_(nullptr)
 {
-	path_ = _other.path_;
 }
 
-GameEngineFile::GameEngineFile(GameEngineFile&& _other) noexcept : filePtr_(nullptr)
+GameEngineFile::GameEngineFile(GameEngineFile&& _other) noexcept : GameEnginePath(_other.path_), filePtr_(nullptr)
 {
-	path_ = _other.path_;
 }
 
 GameEngineFile::~GameEngineFile()
@@ -121,8 +115,8 @@ void GameEngineFile::Read(void* _readData, size_t _dataSize, size_t _readSize)
 
 void GameEngineFile::Read(std::string& _text)
 {
-	int size = 0;
-	Read(&size, sizeof(int), sizeof(int));
+	size_t size = 0;
+	Read(&size, sizeof(size_t), sizeof(size_t));
 	_text.resize(size);
 	Read(&_text[0], size, size);
 }
@@ -147,6 +141,11 @@ void GameEngineFile::Read(double& _data)
 	Read(&_data, sizeof(double), sizeof(double));
 }
 
+void GameEngineFile::Read(unsigned int& _data)
+{
+	Read(&_data, sizeof(unsigned int), sizeof(unsigned int));
+}
+
 void GameEngineFile::Write(const void* _writeData, size_t _writeSize)
 {
 	fwrite(
@@ -157,12 +156,12 @@ void GameEngineFile::Write(const void* _writeData, size_t _writeSize)
 	);
 }
 
-void GameEngineFile::Write(const std::string_view& _text)
+void GameEngineFile::Write(const std::string& _text)
 {
 	// 크기를 저장해줘야 합니다.
 	// string은? 크기가 일정한 데이터를 가지고 있나요?
-	int size = static_cast<int>(_text.size());
-	Write(&size, sizeof(int));
+	size_t size = _text.size();
+	Write(&size, sizeof(size_t));
 	Write(_text.data(), _text.size());
 }
 
@@ -186,6 +185,11 @@ void GameEngineFile::Write(const double& _data)
 	Write(&_data, sizeof(double));
 }
 
+void GameEngineFile::Write(const unsigned int& _data)
+{
+	Write(&_data, sizeof(unsigned int));
+}
+
 std::string GameEngineFile::GetString()
 {
 	std::string allString;
@@ -204,7 +208,7 @@ uintmax_t GameEngineFile::GetFileSize() const
 	return std::filesystem::file_size(this->path_);
 }
 
-/*static*/ uintmax_t GameEngineFile::GetFileSize(const std::filesystem::path& _path)
+uintmax_t GameEngineFile::GetFileSize(const std::filesystem::path& _path)
 {
 	return std::filesystem::file_size(_path);
 }

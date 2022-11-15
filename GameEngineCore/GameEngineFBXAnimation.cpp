@@ -19,6 +19,20 @@ std::shared_ptr<GameEngineFBXAnimation> GameEngineFBXAnimation::Load(const std::
 	return NewRes;
 }
 
+void GameEngineFBXAnimation::UserLoad(const std::string_view& _Path)
+{
+	GameEngineFile File = _Path;
+	File.Open(OpenMode::Read, FileMode::Binary);
+	File.Read(AnimationDatas);
+}
+
+void GameEngineFBXAnimation::UserSave(const std::string_view& _Path)
+{
+	GameEngineFile File = _Path;
+	File.Open(OpenMode::Write, FileMode::Binary);
+	File.Write(AnimationDatas);
+}
+
 void GameEngineFBXAnimation::LoadMesh(const std::string& _Path, const std::string& _Name)
 {
 	FBXInit(_Path);
@@ -295,6 +309,15 @@ void GameEngineFBXAnimation::ProcessAnimationLoad(std::shared_ptr<GameEngineFBXM
 // 본을 가진 GameEngineFBXMesh기반으로 애니메이션 행렬을 만들어낸다.
 void GameEngineFBXAnimation::AnimationMatrixLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, std::shared_ptr<GameEngineFBXAnimationRenderer> _Renderer, int _AnimationIndex)
 {
+	GameEngineFile SaveFile = GetPath();
+	SaveFile.ReplaceExtension(".AnimationFBX");
+	SaveFile.GetExtension();
+	if (SaveFile.IsExist())
+	{
+		UserLoad(SaveFile.GetFullPath());
+		return;
+	}
+
 	if (0 == AnimationDatas.size())
 	{
 		MsgBoxAssert("애니메이션 데이터가 존재하지 않는 매쉬로 애니메이션을 만들려고 했습니다.");
@@ -328,6 +351,11 @@ void GameEngineFBXAnimation::AnimationMatrixLoad(std::shared_ptr <GameEngineFBXM
 	ProcessAnimationLoad(_Mesh, _Mesh->rootNode_, _AnimationIndex);
 
 	ProcessAnimationCheckState(_Mesh, _AnimationIndex);
+
+	if (false == SaveFile.IsExist())
+	{
+		UserSave(SaveFile.GetFullPath());
+	}
 
 	AnimationDatas;
 }

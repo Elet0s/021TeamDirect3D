@@ -3,7 +3,7 @@
 #include "GameEngineMath.h"
 
 class GameEngineFile;
-class Serializer
+class GameEngineSerializer
 {
 	//직렬화(Serialization): 프로세스 밖에서는 이해할 수 없는 형태의 객체 등의 정보를 
 	// 파일로 읽고 쓰거나 네트워크를 통해 송수신 하기 쉬운 형태로 바꾸는 작업. 
@@ -53,13 +53,15 @@ public:
 	void Read(float4& _data);
 	void Read(float& _data);
 	void Read(double& _data);
+	void Read(unsigned int& _data);
 
 	void Write(const void* _writeData, size_t _writeSize);
-	void Write(const std::string_view& _text);
+	void Write(const std::string& _text);
 	void Write(const float4x4& _data);
 	void Write(const float4& _data);
 	void Write(const float& _data);
 	void Write(const double& _data);
+	void Write(const unsigned int& _data);
 
 	std::string GetString();
 	uintmax_t GetFileSize() const;
@@ -80,31 +82,66 @@ public:
 	}
 
 	template<typename Value>
-	void Write(std::vector<Value>& _Data)
+	void Write(std::vector<Value>& _data)
 	{
-		int Size = static_cast<int>(_Data.size());
-		Write(&Size, sizeof(int));
+		size_t dataSize = _data.size();
+		Write(dataSize);
 
-		if (Size <= 0)
+		if (dataSize <= 0)
+		{
+			return;
+		}
+		std::size_t temp = 0;
+		for (size_t i = 0; i < _data.size(); i++)
+		{
+			if (false == std::is_base_of<GameEngineSerializer, Value>::value)
+				//template< class Base, class Derived > struct std::is_base_of;
+				//Derived 클래스가 Base 클래스를 상속받았는지 아닌지 판정하는 구조체.
+			{
+				Write(_data[i]);
+			}
+			else
+			{
+				GameEngineSerializer* serializer = reinterpret_cast<GameEngineSerializer*>(&_data[i]);
+				serializer->Write(*this);
+			}
+		}
+	}
+
+	template<typename Key, typename  Value>
+	void Write(std::map<Key, Value>& _Data)
+	{
+		size_t dataSize = _Data.size();
+		Write(dataSize);
+
+		if (dataSize <= 0)
 		{
 			return;
 		}
 
-		Value* Check = &_Data[0];
-
-		Serializer* Ser = dynamic_cast<Serializer*>(Check);
-
-		for (size_t i = 0; i < _Data.size(); i++)
+		for (std::pair<Key, Value> writePair : _Data)
 		{
-			if (nullptr == Ser)
+			if (false == std::is_base_of<GameEngineSerializer, Key>::value)
+				//template< class Base, class Derived > struct std::is_base_of;
+				//Derived 클래스가 Base 클래스를 상속받았는지 아닌지 판정하는 구조체.
 			{
-				Write(&_Data[i], sizeof(Value));
+				Write(writePair.first);
 			}
 			else
 			{
-				_Data[i].Write(*this);
+				GameEngineSerializer* serializer = reinterpret_cast<GameEngineSerializer*>(&writePair.first);
+				serializer->Write(*this);
 			}
 
+			if (false == std::is_base_of<GameEngineSerializer, Value>::value)
+			{
+				Write(writePair.second);
+			}
+			else
+			{
+				GameEngineSerializer* serializer = reinterpret_cast<GameEngineSerializer*>(&writePair.second);
+				serializer->Write(*this);
+			}
 		}
 	}
 
@@ -112,6 +149,79 @@ public:
 	void Read(Struct& _data)
 	{
 		Read(reinterpret_cast<void*>(&_data), sizeof(Struct), sizeof(Struct));
+	}
+
+	template<typename Value>
+	void Read(std::vector<Value>& _data)
+	{
+		size_t dataSize = 0;
+		Read(dataSize);
+
+		if (dataSize <= 0)
+		{
+			return;
+		}
+
+		_data.resize(dataSize);
+
+		for (size_t i = 0; i < dataSize; i++)
+		{
+			if (false == std::is_base_of<GameEngineSerializer, Value>::value)
+				//template< class Base, class Derived > struct std::is_base_of;
+				//Derived 클래스가 Base 클래스를 상속받았는지 아닌지 판정하는 구조체.
+			{
+				Read(_data[i]);
+			}
+			else
+			{
+				GameEngineSerializer* serializer = reinterpret_cast<GameEngineSerializer*>(&_data[i]);
+				serializer->Read(*this);
+			}
+		}
+	}
+
+	template<typename Key, typename  Value>
+	void Read(std::map<Key, Value>& _data)
+	{
+		size_t dataSize = 0;
+		Read(dataSize);
+
+		if (dataSize <= 0)
+		{
+			return;
+		}
+
+		for (size_t i = 0; i < dataSize; ++i)
+		{
+			std::pair<Key, Value> readPair;
+
+			if (false == std::is_base_of<GameEngineSerializer, Key>::value)
+				//template< class Base, class Derived > struct std::is_base_of;
+				//Derived 클래스가 Base 클래스를 상속받았는지 아닌지 판정하는 구조체.
+			{
+				Read(readPair.first);
+			}
+			else
+			{
+				GameEngineSerializer* serializer = reinterpret_cast<GameEngineSerializer*>(&readPair.first);
+				serializer->Read(*this);
+			}
+
+
+			if (false == std::is_base_of<GameEngineSerializer, Value>::value)
+				//template< class Base, class Derived > struct std::is_base_of;
+				//Derived 클래스가 Base 클래스를 상속받았는지 아닌지 판정하는 구조체.
+			{
+				Read(readPair.second);
+			}
+			else
+			{
+				GameEngineSerializer* serializer = reinterpret_cast<GameEngineSerializer*>(&readPair.second);
+				serializer->Read(*this);
+			}
+
+			_data.insert(readPair);
+		}
 	}
 
 private:

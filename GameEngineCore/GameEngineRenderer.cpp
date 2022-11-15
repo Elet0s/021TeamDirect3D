@@ -159,7 +159,7 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 	shaderResourceHelper_.AllResourcesReset();
 }
 
-std::shared_ptr<GameEngineMaterial>& GameEngineRenderUnit::GetMaterial()
+std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()
 {
 	return this->material_;
 }
