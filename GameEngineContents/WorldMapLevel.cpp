@@ -18,7 +18,7 @@ void WorldMapLevel::Start()
 
 	WorldMap->worldmaprenderer_->CreateTileMap(50, 20, {128,128}, "grassTexture.png");
 	
-	GetMainCameraActorTransform().SetWorldPosition(float4(640.f, -2560.f * sinf(10.f * GameEngineMath::DegreeToRadian) + 100.f, -2560.f * cosf(10.f * GameEngineMath::DegreeToRadian)));
+	GetMainCameraActorTransform().SetWorldPosition(float4(640.f, -2560.f * sinf(10.f * GameEngineMath::DegreeToRadian) + 70.f, -2560.f * cosf(10.f * GameEngineMath::DegreeToRadian)));
 	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
 }
 void WorldMapLevel::Update(float _deltaTime)
@@ -42,15 +42,21 @@ void WorldMapLevel::Update(float _deltaTime)
 		GetMainCameraActorTransform().SetLocalMove(
 			GetMainCameraActorTransform().GetRightVector() * cameraSpeed * _deltaTime);
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("CamUp"))
+	if (true == GameEngineInput::GetInst()->IsDown("CamUp"))
 	{
-		GetMainCameraActorTransform().SetWorldRotation(float4(60.f, 0.f, 0.f));
-		GetMainCameraActorTransform().SetWorldPosition(float4(640.f,50.f, -128.f * cosf(10.f * GameEngineMath::DegreeToRadian) * 20));
+		if (GetMainCameraActorTransform().GetWorldRotation().IX() != 45)
+		{
+			GetMainCameraActorTransform().SetWorldRotation(float4(45.f, 0.f, 0.f));
+			GetMainCameraActorTransform().SetWorldPosition(GetMainCameraActorTransform().GetWorldPosition().x, GetMainCameraActorTransform().GetWorldPosition().y + 300.f, GetMainCameraActorTransform().GetWorldPosition().z);
+		}
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("CamDown"))
+	if (true == GameEngineInput::GetInst()->IsDown("CamDown"))
 	{
-		GetMainCameraActorTransform().SetLocalMove(
-			GetMainCameraActorTransform().GetDownVector() * cameraSpeed * _deltaTime);
+		if (GetMainCameraActorTransform().GetWorldRotation().IX() != 0)
+		{
+			GetMainCameraActorTransform().SetWorldRotation(float4(0.f, 0.f, 0.f));
+			GetMainCameraActorTransform().SetWorldPosition(GetMainCameraActorTransform().GetWorldPosition().x, GetMainCameraActorTransform().GetWorldPosition().y - 300.f, GetMainCameraActorTransform().GetWorldPosition().z);
+		}
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPressed("CamForward"))
