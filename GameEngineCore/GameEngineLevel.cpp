@@ -74,25 +74,6 @@ GameEngineTransform& GameEngineLevel::GetUICameraActorTransform()
 
 void GameEngineLevel::AllClear()
 {
-	//for (const std::pair<int, std::list<GameEngineActor*>>& actorListPair : allActors_)
-	//{
-	//	for (GameEngineActor* const actor : actorListPair.second)
-	//	{
-	//		delete actor;
-	//	}
-	//}
-
-	//for (std::map<int, std::list<GameEngineActor*>>::iterator actorGroupIter = allActors_.begin();
-	//	actorGroupIter != allActors_.end(); actorGroupIter++)
-	//{
-	//	for (std::list<GameEngineActor*>::iterator actorIter = actorGroupIter->second.begin();
-	//		actorIter != actorGroupIter->second.end(); actorIter++)
-	//	{
-	//		delete *actorIter;
-	//	}
-	//}
-	//위 코드로 삭제가 제대로 안된다면 이 코드로 대체.
-
 	allActors_.clear();
 	cameras_.clear();
 	allCollisions_.clear();
@@ -389,8 +370,6 @@ void GameEngineLevel::ActorLevelStartEvent()
 {
 	for (const std::pair<int, std::list<std::shared_ptr<GameEngineActor>>>& actorListPair : allActors_)
 	{
-		//float scaleTime = GameEngineTime::GetDeltaTime(actorListPair.first);
-
 		for (std::shared_ptr<GameEngineActor> const actor : actorListPair.second)
 			//이 위치의 const는 actor가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 			//하지만 actor가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
@@ -407,8 +386,6 @@ void GameEngineLevel::ActorLevelEndEvent()
 {
 	for (const std::pair<int, std::list<std::shared_ptr<GameEngineActor>>>& actorListPair : allActors_)
 	{
-		//float scaleTime = GameEngineTime::GetDeltaTime(actorListPair.first);
-
 		for (std::shared_ptr<GameEngineActor> const actor : actorListPair.second)
 			//이 위치의 const는 actor가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 			//하지만 actor가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.

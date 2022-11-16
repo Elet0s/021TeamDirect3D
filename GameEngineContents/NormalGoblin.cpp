@@ -1,6 +1,8 @@
 #include"PreCompile.h"
 #include"NormalGoblin.h"
 #include "GlobalContentsValue.h"
+#include "Texture2DShadowRenderer.h"
+
 NormalGoblin::NormalGoblin()
 {
 
@@ -29,6 +31,9 @@ void NormalGoblin::Start()
 	monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
 	monRenderer_->CreateFrameAnimation_CutTexture("NormalGoblin", FrameAnimation_Desc("NormalGoblin.png", 0, 7, 0.1f));
 	monRenderer_->ChangeFrameAnimation("NormalGoblin");
+
+	shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+	shadowRenderer_->SetTextureRenderer(monRenderer_);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });

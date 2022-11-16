@@ -26,4 +26,5 @@ protected:
 
 	std::shared_ptr<GameEngineTextureRenderer> monRenderer_;
 	std::shared_ptr<GameEngineCollision> monCollision_;
+	std::shared_ptr<class Texture2DShadowRenderer> shadowRenderer_;
 };

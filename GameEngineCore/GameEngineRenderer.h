@@ -10,7 +10,7 @@ struct RenderOption
     float deltaTime_ = 0.f;
     float sumDeltaTime_ = 0.f;
     int isAnimation_ = 0;
-    int temp02_ = 0;
+    int vertexInversion_ = 1;
 };
 
 class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>

@@ -1,6 +1,7 @@
 #include"PreCompile.h"
 #include"BlackEyes.h"
 #include "GlobalContentsValue.h"
+#include "Texture2DShadowRenderer.h"
 
 BlackEyes::BlackEyes()
 {
@@ -28,6 +29,9 @@ void BlackEyes::Start()
 	monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
 	monRenderer_->CreateFrameAnimation_CutTexture("BlackEyes", FrameAnimation_Desc("BlackEyes.png", 0, 5, 0.1f));
 	monRenderer_->ChangeFrameAnimation("BlackEyes");
+
+	shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+	shadowRenderer_->SetTextureRenderer(monRenderer_);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });

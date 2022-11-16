@@ -27,11 +27,11 @@ public:
 public:
 	static std::shared_ptr<Player>& GetPlayerInst()
 	{
-		if (nullptr == mainPlayer_)
-		{
-			MsgBoxAssert("아직 플레이어 생성을 하지 않았습니다.");
-		}
+		return mainPlayer_;
+	}
 
+	static std::weak_ptr<Player> GetPlayerWeakPtr()
+	{
 		return mainPlayer_;
 	}
 

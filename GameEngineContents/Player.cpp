@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "GlobalContentsValue.h"
+#include "Texture2DShadowRenderer.h"
 
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
@@ -64,6 +65,10 @@ void Player::Start()
 		playerRenderer_->GetTransform().SetLocalPosition(0,0,-100);
 		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
 		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
+		playerRenderer_->ChangeFrameAnimation("PlayerIdle");
+
+		std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
+		shadowRenderer->SetTextureRenderer(playerRenderer_);
 
 		{
 			stateManager_.CreateState("Idle"
@@ -140,7 +145,6 @@ CollisionReturn Player::MonsterCollision(std::shared_ptr<GameEngineCollision> _T
 
 void Player::Update(float _deltaTime)
 {
-
 	stateManager_.Update(_deltaTime);
 	collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D,
 	std::bind(&Player::MonsterCollision, this, std::placeholders::_1, std::placeholders::_2));

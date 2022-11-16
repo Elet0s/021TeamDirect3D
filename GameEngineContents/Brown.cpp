@@ -1,6 +1,7 @@
 #include"PreCompile.h"
 #include"Brown.h"
 #include "GlobalContentsValue.h"
+#include "Texture2DShadowRenderer.h"
 
 Brown::Brown()
 {
@@ -27,6 +28,9 @@ void Brown::Start()
 		monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
 		monRenderer_->CreateFrameAnimation_CutTexture("Brown", FrameAnimation_Desc("Brown.png", 0, 7, 0.1f));
 		monRenderer_->ChangeFrameAnimation("Brown");
+
+		shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+		shadowRenderer_->SetTextureRenderer(monRenderer_);
 
 		monCollision_ = CreateComponent<GameEngineCollision>();
 		monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });

@@ -84,7 +84,10 @@ void TestLevel::Start()
 		//GetMainCameraActor()->GetTransform().SetWorldPosition(float4(NewPlayer->GetTransform().GetWorldPosition().x , NewPlayer->GetTransform().GetWorldPosition().y, -100.f));
 	//}
 
-	Player::CreatePlayer(this, { 960.f, -960.f });
+	if (true == Player::GetPlayerWeakPtr().expired())
+	{
+		Player::CreatePlayer(this, { 960.f, -960.f });
+	}
 
 	{
 		for (size_t i = 0; i < 10; i++)

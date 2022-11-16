@@ -1,4 +1,5 @@
 #include "TransformHeader.hlsli"
+#include "RenderOption.hlsli"
 
 struct Input
 {
@@ -12,31 +13,37 @@ struct Output
     float4 texcoord_ : TEXCOORD;
 };
 
-//cbuffer AtlasData : register(b1)
-//{
-//    float2 textureFramePos_;
-//    float2 textureFrameSize_;
-//    float4 pivotPos_;
-//}
+cbuffer AtlasData : register(b1)
+{
+    float2 textureFramePos_;
+    float2 textureFrameSize_;
+    float4 pivotPos_;
+}
 
 Output TextureShadow_VS(Input _input)
 {
     Output newOutput = (Output) 0; //Output타입 변수 newOutput을 0으로 초기화.
-    //HLSL의 경우에는 대부분의 상황에서 형변환이 가능하다.
 
     float4 vertexPos = _input.pos_;
-    
-    vertexPos.x = -sin(radians(30.f)) * (vertexPos.y + 0.5f) + vertexPos.x;
+    vertexPos += pivotPos_;        
+    vertexPos.x = (-sin(radians(30.f)) * (vertexPos.y + 0.5f) + vertexPos.x) * vertexInversion_;
 
     vertexPos.y = cos(radians(30.f)) * (vertexPos.y + 0.5f) - 0.5f;
     
-    //_input.pos_ += pivotPos_;
-    
-    
     newOutput.pos_ = mul(vertexPos, worldViewProjectionMatrix_); //WVP행렬 적용.
-    newOutput.texcoord_ = _input.texcoord_;
-    //newOutput.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
-    //newOutput.texcoord_.y = (_input.texcoord_.y * textureFrameSize_.y) + textureFramePos_.y;
+    
+    if (-1 == vertexInversion_)
+    {
+        _input.texcoord_.x = 1.f - _input.texcoord_.x;
+    }
+    
+    newOutput.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
+    newOutput.texcoord_.y = (_input.texcoord_.y * textureFrameSize_.y) + textureFramePos_.y;
+    
+    //if (-1 == vertexInversion_)
+    //{
+    //    newOutput.texcoord_.x = 1.f - newOutput.texcoord_.x;
+    //}
     
     return newOutput;
 }

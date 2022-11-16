@@ -1,6 +1,8 @@
 #include"PreCompile.h"
 #include"RedFlyingEyes.h"
 #include "GlobalContentsValue.h"
+#include "Texture2DShadowRenderer.h"
+
 RedFlyingEyes::RedFlyingEyes()
 {
 
@@ -26,6 +28,9 @@ void RedFlyingEyes::Start()
 	monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
 	monRenderer_->CreateFrameAnimation_CutTexture("RedFlyingEyes", FrameAnimation_Desc("RedFlyingEyes.png", 0, 5, 0.1f));
 	monRenderer_->ChangeFrameAnimation("RedFlyingEyes");
+
+	shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+	shadowRenderer_->SetTextureRenderer(monRenderer_);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });

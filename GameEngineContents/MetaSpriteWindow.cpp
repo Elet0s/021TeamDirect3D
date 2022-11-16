@@ -119,7 +119,7 @@ void MetaSpriteWindow::MetaFileButton(GameEngineLevel* _level)
 
 			renderer_ = newActor->CreateComponent<GameEngineTextureRenderer>();
 			renderer_->SetTexture(targetTexture_, 0);
-			renderer_->SetSamplingMode_Point();
+			//renderer_->SetSamplingMode_Point();
 			renderer_->ScaleToCutTexture(2);
 		}
 	}
