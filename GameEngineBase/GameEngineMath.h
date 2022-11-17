@@ -889,30 +889,14 @@ public:
 		return invertedMatrix;
 	}
 
+	//절두체 컬링 판정.
 	static bool IsInViewSpace(const float4x4& _wvpMatrix)
 	{
-
-		float4 temp = float4(FLT_EPSILON, FLT_EPSILON);
-		float4 result = DirectX::XMVector4Transform(temp.directXVector_, _wvpMatrix.directXMatrix_);
+		float4 result = float4(FLT_EPSILON, FLT_EPSILON);
+		result = DirectX::XMVector4Transform(result.directXVector_, _wvpMatrix.directXMatrix_);
 		result /= result.w;
 
-		//if (1.f < result.x || -1.f > result.x)
-		//{
-		//	return false;
-		//}
-		//else if (1.f < result.y || -1.f > result.y)
-		//{
-		//	return false;
-		//}
-		//else
-		//{
-		//	return true;
-		//}
-
 		return DirectX::XMVector2InBounds(result.directXVector_, DirectX::g_XMOne3);
-
-		//return DirectX::XMVector2InBounds(_wvpMatrix.directXMatrix_.r[3], DirectX::g_XMOne3)
-		//	&& _wvpMatrix.directXMatrix_.r[2].m128_f32[2] <= 1.f;
 	}
 
 	//크기 변환.
