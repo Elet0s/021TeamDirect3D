@@ -32,6 +32,7 @@ void Monster::Start()
 
 		}
 
+
 }
 void Monster::SummonMon()
 {

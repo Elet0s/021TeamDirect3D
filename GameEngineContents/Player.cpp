@@ -56,8 +56,10 @@ void Player::Start()
 		}
 		{
 			collision_ = CreateComponent<GameEngineCollision>();
+			collision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Red);
 			collision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });
 			collision_->ChangeOrder(ObjectOrder::Player);
+	
 		}
 
 		playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
@@ -84,6 +86,7 @@ void Player::Start()
 				});
 			stateManager_.ChangeState("Idle");
 		}
+
 
 }
 

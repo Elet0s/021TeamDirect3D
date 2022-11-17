@@ -22,9 +22,6 @@
     <Filter Include="Actor\00. Global\Gui">
       <UniqueIdentifier>{7292cf92-6206-40f0-b95f-eaf527fee2cf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Global">
-      <UniqueIdentifier>{511b7861-1332-4deb-b12c-bdb89781028c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{cf75bfa8-49ff-4b38-a299-672f96be44d5}</UniqueIdentifier>
     </Filter>
@@ -37,7 +34,10 @@
     <Filter Include="Actor\02. Play\Player">
       <UniqueIdentifier>{439cf48d-d902-482e-8f90-b697aca15416}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Global\ContentsSupport">
+    <Filter Include="Level\Global">
+      <UniqueIdentifier>{511b7861-1332-4deb-b12c-bdb89781028c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Global\ContentsSupport">
       <UniqueIdentifier>{a41ccc3f-24c4-41b8-b718-89a3d9fc90dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -120,7 +120,7 @@
       <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Texture2DShadowRenderer.cpp">
-      <Filter>Global\ContentsSupport</Filter>
+      <Filter>Level\Global\ContentsSupport</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +141,7 @@
       <Filter>Actor\00. Global\Gui</Filter>
     </ClInclude>
     <ClInclude Include="Enums.h">
-      <Filter>Global</Filter>
+      <Filter>Level\Global</Filter>
     </ClInclude>
     <ClInclude Include="TileMapRenderer.h">
       <Filter>Renderer</Filter>
@@ -206,7 +206,7 @@
       <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Texture2DShadowRenderer.h">
-      <Filter>Global\ContentsSupport</Filter>
+      <Filter>Level\Global\ContentsSupport</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

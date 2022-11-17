@@ -32,7 +32,8 @@ void Mouse::Start()
 
 	{
 		mouseCollision_ = CreateComponent<GameEngineCollision>();
-		mouseCollision_->GetTransform().SetLocalScale({ 64.0f, 64.0f, 64.0f });
+		mouseCollision_->SetDebugSetting(CollisionType::CT_OBB, float4::Black);
+		mouseCollision_->GetTransform().SetLocalScale({ 64.0f, 64.0f, 1.0f });
 		mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
 	}
 
@@ -45,7 +46,7 @@ void Mouse::Update(float _DeltaTime)
 {
 	GetCurPos();
 	mouseRenderer->GetTransform().SetLocalPosition(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x+10.0f, GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,-100.0f);
-
+	mouseCollision_->GetTransform().SetLocalPosition(GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().x + 10.0f, GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().y, -100.0f);
 }
 void Mouse::End()
 {

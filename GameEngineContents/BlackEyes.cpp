@@ -34,7 +34,8 @@ void BlackEyes::Start()
 	shadowRenderer_->SetTextureRenderer(monRenderer_);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
-	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });
+	monCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Red);
+	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 	SummonMon();
 
