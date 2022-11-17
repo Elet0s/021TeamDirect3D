@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class GameEngineMath
 {
@@ -6,8 +6,8 @@ public:
 	static const float PI;
 	static const float PI2;
 	static const float HalfPI;
-	static const float DegreeToRadian;	//60ºĞ¹ı->È£µµ¹ı(0.017453...)
-	static const float RadianToDegree;	//È£µµ¹ı->60ºĞ¹ı(57.29577...)
+	static const float DegreeToRadian;	//60ë¶„ë²•->í˜¸ë„ë²•(0.017453...)
+	static const float RadianToDegree;	//í˜¸ë„ë²•->60ë¶„ë²•(57.29577...)
 
 
 private:
@@ -43,7 +43,7 @@ class float4
 {
 public:
 
-	//ÀÚÁÖ »ç¿ëÇÏ´Â ¼ıÀÚ Á¶ÇÕÀ» ¹Ì¸® ¸¸µé¾î³õÀ¸¸é »ı¼ºÀÚ È£ÃâÇÏ´Â ¿¬»êºñ¿ëÀ» ¾Æ³¥ ¼ö ÀÖ´Ù.
+	//ìì£¼ ì‚¬ìš©í•˜ëŠ” ìˆ«ì ì¡°í•©ì„ ë¯¸ë¦¬ ë§Œë“¤ì–´ë†“ìœ¼ë©´ ìƒì„±ì í˜¸ì¶œí•˜ëŠ” ì—°ì‚°ë¹„ìš©ì„ ì•„ë‚„ ìˆ˜ ìˆë‹¤.
 
 	static const float4 Zero;	//0000
 	static const float4 One;	//1111
@@ -65,7 +65,7 @@ public:
 	static const float4 Black;	//0001
 	static const float4 White;	//1111
 
-	//¹«¸íÀ¯´Ï¿ÂÀÇ ÀåÁ¡??
+	//ë¬´ëª…ìœ ë‹ˆì˜¨ì˜ ì¥ì ??
 	union
 	{
 		struct
@@ -100,9 +100,9 @@ public:
 			int intValueW;
 		};
 
-		//µ¿Â÷ÁÂÇ¥°è(Homogeneous Coordinates): nÂ÷¿øÀÇ °ø°£À» n+1°³ÀÇ ÁÂÇ¥·Î ³ªÅ¸³»´Â ÁÂÇ¥°è¶ó°í ÇÑ´Ù.
-		//½ÇÁúÀûÀ¸·Î´Â Åõ¿µº¯È¯, ±×Áß¿¡¼­µµ ¿ø±ÙÅõ¿µº¯È¯ÀÇ °á°ú°ª == Ä«¸Ş¶óÀ§Ä¡·ÎºÎÅÍÀÇ ¹æÇâÀÌ Àû¿ëµÈ °ªÀ» ÀúÀåÇÏ±â À§ÇÑ 
-		// ¿ø¼Ò w¸¦ ÀúÀåÇÏ±â À§ÇÑ ¸ñÀûÀ¸·Î »ç¿ëÇÑ´Ù.
+		//ë™ì°¨ì¢Œí‘œê³„(Homogeneous Coordinates): nì°¨ì›ì˜ ê³µê°„ì„ n+1ê°œì˜ ì¢Œí‘œë¡œ ë‚˜íƒ€ë‚´ëŠ” ì¢Œí‘œê³„ë¼ê³  í•œë‹¤.
+		//ì‹¤ì§ˆì ìœ¼ë¡œëŠ” íˆ¬ì˜ë³€í™˜, ê·¸ì¤‘ì—ì„œë„ ì›ê·¼íˆ¬ì˜ë³€í™˜ì˜ ê²°ê³¼ê°’ == ì¹´ë©”ë¼ìœ„ì¹˜ë¡œë¶€í„°ì˜ ë°©í–¥ì´ ì ìš©ëœ ê°’ì„ ì €ì¥í•˜ê¸° ìœ„í•œ 
+		// ì›ì†Œ wë¥¼ ì €ì¥í•˜ê¸° ìœ„í•œ ëª©ì ìœ¼ë¡œ ì‚¬ìš©í•œë‹¤.
 
 		float arr1D[4];
 		DirectX::XMFLOAT3 directXFloat3_;
@@ -179,7 +179,7 @@ public:
 	}
 
 public:
-	//¸¶ÀÌ³Ê½º ¿¬»êÀÚ.
+	//ë§ˆì´ë„ˆìŠ¤ ì—°ì‚°ì.
 	float4 operator-() const
 	{
 		return DirectX::XMVectorNegate(this->directXVector_);
@@ -287,9 +287,9 @@ public:
 		return fabsf(this->x - _other.x) <= FLT_EPSILON
 			&& fabsf(this->y - _other.y) <= FLT_EPSILON
 			&& fabsf(this->z - _other.z) <= FLT_EPSILON;
-		//FLT_EPSILON: 1.192092896e-07F. floatÀ¸·Î Ç¥ÇöÇÒ ¼ö ÀÖ´Â °¡Àå ÀÛÀº ¼ö + 1.0f.
-		//½Ç¼ö´Â ºÎµ¿¼Ò¼öÁ¡ ½Ã½ºÅÛ ¶§¹®¿¡ Ç×»ó ¾à°£ÀÇ ¿ÀÂ÷°¡ ¹ß»ıÇÏ°í, ±×·¡¼­ ÀÏ¹İÀûÀÎ ¹æ½ÄÀ¸·Î ´ë¼Ò¸¦ ºñ±³ÇØ¼± ¾ÈµÇ°í,
-		//µÎ ¼ıÀÚ°£ Â÷ÀÌ°¡ ±âÁØÀÌ µÇ´Â ÀÏÁ¤ ¼öÄ¡ ÀÌÇÏÀÏ ¶§ °°´Ù°í Ç¥ÇöÇÏ°í, ±×º¸´Ù Å©´Ù¸é ´Ù¸£´Ù°í Ç¥ÇöÇÏ´Â ¹æ½ÄÀ» ½á¾ß ÇÑ´Ù.
+		//FLT_EPSILON: 1.192092896e-07F. floatìœ¼ë¡œ í‘œí˜„í•  ìˆ˜ ìˆëŠ” ê°€ì¥ ì‘ì€ ìˆ˜ + 1.0f.
+		//ì‹¤ìˆ˜ëŠ” ë¶€ë™ì†Œìˆ˜ì  ì‹œìŠ¤í…œ ë•Œë¬¸ì— í•­ìƒ ì•½ê°„ì˜ ì˜¤ì°¨ê°€ ë°œìƒí•˜ê³ , ê·¸ë˜ì„œ ì¼ë°˜ì ì¸ ë°©ì‹ìœ¼ë¡œ ëŒ€ì†Œë¥¼ ë¹„êµí•´ì„  ì•ˆë˜ê³ ,
+		//ë‘ ìˆ«ìê°„ ì°¨ì´ê°€ ê¸°ì¤€ì´ ë˜ëŠ” ì¼ì • ìˆ˜ì¹˜ ì´í•˜ì¼ ë•Œ ê°™ë‹¤ê³  í‘œí˜„í•˜ê³ , ê·¸ë³´ë‹¤ í¬ë‹¤ë©´ ë‹¤ë¥´ë‹¤ê³  í‘œí˜„í•˜ëŠ” ë°©ì‹ì„ ì¨ì•¼ í•œë‹¤.
 	}
 
 	bool operator!=(const float4& _other) const
@@ -297,9 +297,9 @@ public:
 		return fabsf(this->x - _other.x) > FLT_EPSILON 
 			|| fabsf(this->y - _other.y) > FLT_EPSILON 
 			|| fabsf(this->z - _other.z) > FLT_EPSILON;
-		//FLT_EPSILON: 1.192092896e-07F. floatÀ¸·Î Ç¥ÇöÇÒ ¼ö ÀÖ´Â °¡Àå ÀÛÀº ¼ö + 1.0f.
-		//½Ç¼ö´Â ºÎµ¿¼Ò¼öÁ¡ ½Ã½ºÅÛ ¶§¹®¿¡ Ç×»ó ¾à°£ÀÇ ¿ÀÂ÷°¡ ¹ß»ıÇÏ°í, ±×·¡¼­ ÀÏ¹İÀûÀÎ ¹æ½ÄÀ¸·Î ´ë¼Ò¸¦ ºñ±³ÇØ¼± ¾ÈµÇ°í,
-		//µÎ ¼ıÀÚ°£ Â÷ÀÌ°¡ ±âÁØÀÌ µÇ´Â ÀÏÁ¤ ¼öÄ¡ ÀÌÇÏÀÏ ¶§ °°´Ù°í Ç¥ÇöÇÏ°í, ±×º¸´Ù Å©´Ù¸é ´Ù¸£´Ù°í Ç¥ÇöÇÏ´Â ¹æ½ÄÀ» ½á¾ß ÇÑ´Ù.
+		//FLT_EPSILON: 1.192092896e-07F. floatìœ¼ë¡œ í‘œí˜„í•  ìˆ˜ ìˆëŠ” ê°€ì¥ ì‘ì€ ìˆ˜ + 1.0f.
+		//ì‹¤ìˆ˜ëŠ” ë¶€ë™ì†Œìˆ˜ì  ì‹œìŠ¤í…œ ë•Œë¬¸ì— í•­ìƒ ì•½ê°„ì˜ ì˜¤ì°¨ê°€ ë°œìƒí•˜ê³ , ê·¸ë˜ì„œ ì¼ë°˜ì ì¸ ë°©ì‹ìœ¼ë¡œ ëŒ€ì†Œë¥¼ ë¹„êµí•´ì„  ì•ˆë˜ê³ ,
+		//ë‘ ìˆ«ìê°„ ì°¨ì´ê°€ ê¸°ì¤€ì´ ë˜ëŠ” ì¼ì • ìˆ˜ì¹˜ ì´í•˜ì¼ ë•Œ ê°™ë‹¤ê³  í‘œí˜„í•˜ê³ , ê·¸ë³´ë‹¤ í¬ë‹¤ë©´ ë‹¤ë¥´ë‹¤ê³  í‘œí˜„í•˜ëŠ” ë°©ì‹ì„ ì¨ì•¼ í•œë‹¤.
 	}
 
 	float& operator[](int _index)
@@ -400,13 +400,13 @@ public:
 
 
 public:
-	//¼±Çü º¸°£(Linear Interpolation)
+	//ì„ í˜• ë³´ê°„(Linear Interpolation)
 	static float4 Lerp(const float4& p1, const float4& p2, float _time)
 	{
 		return p1 * (1.0f - _time) + p2 * _time;
 	}
 
-	//±¸¸é ¼±Çü º¸°£(Spherical Linear Interpolation) 
+	//êµ¬ë©´ ì„ í˜• ë³´ê°„(Spherical Linear Interpolation) 
 	static float4 SLerpQuaternion(const float4& _left, const float4& _right, float _ratio)
 	{
 		if (1.0f <= _ratio)
@@ -425,8 +425,8 @@ public:
 	static float4 RadianToDirection2D(float _radian)
 	{
 		return float4(
-			cosf(_radian),	//ºøº¯(°Å¸®)°¡ 1ÀÏ¶§ÀÇ ¹Øº¯ ±æÀÌ ºñÀ².
-			sinf(_radian)	//ºøº¯(°Å¸®)°¡ 1ÀÏ¶§ÀÇ ³ôÀÌ ±æÀÌ ºñÀ².
+			cosf(_radian),	//ë¹—ë³€(ê±°ë¦¬)ê°€ 1ì¼ë•Œì˜ ë°‘ë³€ ê¸¸ì´ ë¹„ìœ¨.
+			sinf(_radian)	//ë¹—ë³€(ê±°ë¦¬)ê°€ 1ì¼ë•Œì˜ ë†’ì´ ê¸¸ì´ ë¹„ìœ¨.
 		);
 	}
 
@@ -452,39 +452,39 @@ public:
 		return sqrtf((x * x) + (y * y) + (z * z));
 	}
 
-	//Àı´ë°ª ¹İÈ¯.
+	//ì ˆëŒ€ê°’ ë°˜í™˜.
 	float4 ABS3DReturn() const
 	{
 		return float4(fabsf(x), fabsf(y), fabsf(z));
 	}
 
-	//Á¤±ÔÈ­: º¤ÅÍÀÇ ¹æÇâÀº ±×´ë·Î À¯ÁöÇÏ¸é¼­ ±æÀÌ¸¸ 1·Î ÁÙÀÌ´Â °Í.
+	//ì •ê·œí™”: ë²¡í„°ì˜ ë°©í–¥ì€ ê·¸ëŒ€ë¡œ ìœ ì§€í•˜ë©´ì„œ ê¸¸ì´ë§Œ 1ë¡œ ì¤„ì´ëŠ” ê²ƒ.
 	const float4& Normalize3D()
 	{
 		this->directXVector_ = DirectX::XMVector3Normalize(this->directXVector_);
 		return *this;
 	}
 
-	//Á¤±ÔÈ­: º¤ÅÍÀÇ ¹æÇâÀº ±×´ë·Î À¯ÁöÇÏ¸é¼­ ±æÀÌ¸¸ 1·Î ÁÙÀÌ´Â °Í.
+	//ì •ê·œí™”: ë²¡í„°ì˜ ë°©í–¥ì€ ê·¸ëŒ€ë¡œ ìœ ì§€í•˜ë©´ì„œ ê¸¸ì´ë§Œ 1ë¡œ ì¤„ì´ëŠ” ê²ƒ.
 	static float4 Normalize3DReturn(const float4& _vector)
 	{
 		return DirectX::XMVector3Normalize(_vector.directXVector_);
 	}
 
-	//º¤ÅÍ°ö(Vector Product), °¡À§°ö(Cross Product)
+	//ë²¡í„°ê³±(Vector Product), ê°€ìœ„ê³±(Cross Product)
 	static float4 Cross3D(const float4& _vectorA, const float4& _vectorB)
 	{
 		return DirectX::XMVector3Cross(_vectorA.directXVector_, _vectorB.directXVector_);
 	}
 
-	//º¤ÅÍ°ö(Vector Product), °¡À§°ö(Cross Product)
+	//ë²¡í„°ê³±(Vector Product), ê°€ìœ„ê³±(Cross Product)
 	const float4& Cross3D(const float4& _other)
 	{
 		this->directXVector_ = DirectX::XMVector3Cross(this->directXVector_, _other.directXVector_);
 		return *this;
 	}
 
-	//½ºÄ®¶ó°ö(Scalar Product), Á¡°ö(Dot Product)
+	//ìŠ¤ì¹¼ë¼ê³±(Scalar Product), ì ê³±(Dot Product)
 	static float DotProduct3D(const float4& _vectorA, const float4& _vectorB)
 	{
 		return DirectX::XMVector3Dot(
@@ -493,19 +493,19 @@ public:
 		).m128_f32[0];
 	}
 
-	//Àı´ë°ª ¹İÈ¯.
+	//ì ˆëŒ€ê°’ ë°˜í™˜.
 	static float4 ABS3DReturn(const float4& _position)
 	{
 		return _position.ABS3DReturn();
 	}
 
 
-	//Pitching: ÁÂ¿ì¼öÆòÃà Áß½É È¸Àü. ¿©±â¼­´Â XÃàÈ¸Àü.
-	//Yawing: ¼öÁ÷Ãà Áß½É È¸Àü. ¿©±â¼­´Â YÃàÈ¸Àü. 
-	//Rolling: ¾ÕµÚ¼öÆòÃà Áß½É È¸Àü. ¿©±â¼­´Â ZÃàÈ¸Àü.
-	//°¢ ÃàÀÌ ÇâÇÏ´Â ¹æÇâÀº ¿£Áø¸¶´Ù, ¾÷°è¸¶´Ù ¾ó¸¶µçÁö ´Ş¶ó Áú ¼ö ÀÖÀ¸¹Ç·Î °¢ È¸ÀüÀÌ ¹«½¼ Ãà Áß½ÉÀÎÁö ¾Ë¾Æ µÑ °Í.
+	//Pitching: ì¢Œìš°ìˆ˜í‰ì¶• ì¤‘ì‹¬ íšŒì „. ì—¬ê¸°ì„œëŠ” Xì¶•íšŒì „.
+	//Yawing: ìˆ˜ì§ì¶• ì¤‘ì‹¬ íšŒì „. ì—¬ê¸°ì„œëŠ” Yì¶•íšŒì „. 
+	//Rolling: ì•ë’¤ìˆ˜í‰ì¶• ì¤‘ì‹¬ íšŒì „. ì—¬ê¸°ì„œëŠ” Zì¶•íšŒì „.
+	//ê° ì¶•ì´ í–¥í•˜ëŠ” ë°©í–¥ì€ ì—”ì§„ë§ˆë‹¤, ì—…ê³„ë§ˆë‹¤ ì–¼ë§ˆë“ ì§€ ë‹¬ë¼ ì§ˆ ìˆ˜ ìˆìœ¼ë¯€ë¡œ ê° íšŒì „ì´ ë¬´ìŠ¨ ì¶• ì¤‘ì‹¬ì¸ì§€ ì•Œì•„ ë‘˜ ê²ƒ.
 
-	//¶óµğ¾È 3Ãà È¸Àü.
+	//ë¼ë””ì•ˆ 3ì¶• íšŒì „.
 	const float4& RotateByRadians(float _radianX, float _radianY, float _radianZ)
 	{
 		this->directXVector_ = DirectX::XMVector3Rotate(
@@ -515,7 +515,7 @@ public:
 		);
 		return *this;
 	}
-	//¶óµğ¾È º¤ÅÍ È¸Àü.
+	//ë¼ë””ì•ˆ ë²¡í„° íšŒì „.
 	const float4& RotateByRadians(const float4& _radianVector)
 	{
 		this->directXVector_ = DirectX::XMVector3Rotate(
@@ -525,7 +525,7 @@ public:
 		);
 		return *this;
 	}
-	//¶óµğ¾È 3Ãà È¸Àü.
+	//ë¼ë””ì•ˆ 3ì¶• íšŒì „.
 	static float4 VectorRotationToRadian3Axis(const float4& _originVector, float _radianX, float _radianY, float _radianZ)
 	{
 		return DirectX::XMVector3Rotate(
@@ -534,7 +534,7 @@ public:
 				_radianX, _radianY, _radianZ)
 		);
 	}
-	//¶óµğ¾È º¤ÅÍ È¸Àü.
+	//ë¼ë””ì•ˆ ë²¡í„° íšŒì „.
 	static float4 VectorRotationToRadian3Axis(const float4& _originVector, const float4& _radianVector)
 	{
 		return DirectX::XMVector3Rotate(
@@ -545,7 +545,7 @@ public:
 	}
 	
 	
-	//60µµ¹ı 3Ãà È¸Àü.
+	//60ë„ë²• 3ì¶• íšŒì „.
 	const float4& RotateByDegreees(float _degreeX, float _degreeY, float _degreeZ)
 	{
 		this->directXVector_ = DirectX::XMVector3Rotate(
@@ -557,7 +557,7 @@ public:
 		);
 		return *this;
 	}
-	//60µµ¹ı º¤ÅÍ È¸Àü.
+	//60ë„ë²• ë²¡í„° íšŒì „.
 	const float4& RotateByDegrees(const float4& _degreeVector)
 	{
 		this->directXVector_ = DirectX::XMVector3Rotate(
@@ -568,7 +568,7 @@ public:
 		return *this;
 	}
 
-	//60µµ¹ı 3Ãà È¸Àü.
+	//60ë„ë²• 3ì¶• íšŒì „.
 	static float4 VectorRotationToDegree3Axis(
 		const float4& _originVector,
 		float _degreeX, 
@@ -584,7 +584,7 @@ public:
 				_degreeZ * GameEngineMath::DegreeToRadian)
 		);
 	}
-	//60µµ¹ı º¤ÅÍ È¸Àü.
+	//60ë„ë²• ë²¡í„° íšŒì „.
 	static float4 VectorRotationToDegree3Axis(const float4& _originVector, const float4& _degreeVector)
 	{
 		return DirectX::XMVector3Rotate(
@@ -610,19 +610,19 @@ public:
 		);
 	}
 
-	//ÀÌ º¤ÅÍ¿Í Àú º¤ÅÍ¸¦ ÀÕ´Â º¤ÅÍ »ı¼º.
+	//ì´ ë²¡í„°ì™€ ì € ë²¡í„°ë¥¼ ì‡ëŠ” ë²¡í„° ìƒì„±.
 	float4 DegreeVectorBetweenVectors(const float4& _targetVector)
 	{
 		return RadianVectorBetweenVectors(_targetVector) * GameEngineMath::RadianToDegree;
 	}
 
-	//µÎ º¤ÅÍ¸¦ ÀÕ´Â º¤ÅÍ »ı¼º.
+	//ë‘ ë²¡í„°ë¥¼ ì‡ëŠ” ë²¡í„° ìƒì„±.
 	static float4 DegreeVectorBetweenVectors(const float4& _originVector, const float4& _targetVector)
 	{
 		return RadianVectorBetweenVectors(_originVector, _targetVector) * GameEngineMath::RadianToDegree;
 	}
 
-	//60ºĞ¹ı È¸Àü º¤ÅÍ¸¦ ÄõÅÍ´Ï¿ÂÀ¸·Î ÀüÈ¯ÇÏ´Â ÇÔ¼ö. 
+	//60ë¶„ë²• íšŒì „ ë²¡í„°ë¥¼ ì¿¼í„°ë‹ˆì˜¨ìœ¼ë¡œ ì „í™˜í•˜ëŠ” í•¨ìˆ˜. 
 	float4 DegreeRotationToQuarternionReturn() const
 	{
 		return DirectX::XMQuaternionRotationRollPitchYawFromVector(
@@ -630,10 +630,10 @@ public:
 		);
 	}
 
-	//È¸ÀüÇà·Ä->ÄõÅÍ´Ï¿Âº¤ÅÍ.
+	//íšŒì „í–‰ë ¬->ì¿¼í„°ë‹ˆì˜¨ë²¡í„°.
 	static float4 MatrixToQuarternion(const class float4x4& _matrix);
 
-	//Á¦°ö±ÙÀÇ ¿ª¼ö(1/_value^(1/2))
+	//ì œê³±ê·¼ì˜ ì—­ìˆ˜(1/_value^(1/2))
 	static float InvSqrt(float _value)
 	{
 		const __m128 fOneHalf = _mm_set_ss(0.5f);
@@ -711,8 +711,8 @@ public:
 class float4x4
 {
 public:
-	//°¢°¢ÀÇ ¹°Ã¼°¡ °¢°¢ÀÇ Å©±â¿Í È¸Àü°ªÀ» °¡Áø ¼¼»ó: ·ÎÄÃ½ºÆäÀÌ½º.
-	//·ÎÄÃ½ºÆäÀÌ½º¿¡ ÀÖ´Â ¹°Ã¼¸¦ ¿ì¸®°¡ ¿øÇÏ´Â ´ë·Î º¯ÇüÇÏ°í À§Ä¡½ÃÅ°°í ÀÎ½ÄÇÑ´Ù: ¿ùµå½ºÆäÀÌ½º.
+	//ê°ê°ì˜ ë¬¼ì²´ê°€ ê°ê°ì˜ í¬ê¸°ì™€ íšŒì „ê°’ì„ ê°€ì§„ ì„¸ìƒ: ë¡œì»¬ìŠ¤í˜ì´ìŠ¤.
+	//ë¡œì»¬ìŠ¤í˜ì´ìŠ¤ì— ìˆëŠ” ë¬¼ì²´ë¥¼ ìš°ë¦¬ê°€ ì›í•˜ëŠ” ëŒ€ë¡œ ë³€í˜•í•˜ê³  ìœ„ì¹˜ì‹œí‚¤ê³  ì¸ì‹í•œë‹¤: ì›”ë“œìŠ¤í˜ì´ìŠ¤.
 	union
 	{
 		struct
@@ -731,7 +731,7 @@ public:
 		DirectX::XMFLOAT4X4 directXFloat4x4_;
 	};
 
-	static const float4x4 ZeroMatrix;	//¿µÇà·Ä.
+	static const float4x4 ZeroMatrix;	//ì˜í–‰ë ¬.
 
 public:
 	float4x4(): directXMatrix_(DirectX::XMMatrixIdentity())
@@ -795,26 +795,26 @@ public:
 		}
 	}
 
-	//Ç×µîÇà·Ä(Identity Matrix) ¸¸µé±â == Çà·Ä ÃÊ±âÈ­.
+	//í•­ë“±í–‰ë ¬(Identity Matrix) ë§Œë“¤ê¸° == í–‰ë ¬ ì´ˆê¸°í™”.
 	void Identity()
 	{
 		this->directXMatrix_ = DirectX::XMMatrixIdentity();
 	}
 
-	//ÀüÄ¡Çà·Ä ¸¸µé±â: Çà·ÄÀÇ Çà°ú ¿­À» ¹Ù²Ù´Â ÀÛ¾÷.
+	//ì „ì¹˜í–‰ë ¬ ë§Œë“¤ê¸°: í–‰ë ¬ì˜ í–‰ê³¼ ì—´ì„ ë°”ê¾¸ëŠ” ì‘ì—….
 	static float4x4 Transpose(const float4x4& _matrix)
 	{
 		return DirectX::XMMatrixTranspose(_matrix.directXMatrix_);
 	}
 
-	//ÀüÄ¡Çà·Ä ¸¸µé±â: Çà·ÄÀÇ Çà°ú ¿­À» ¹Ù²Ù´Â ÀÛ¾÷.
+	//ì „ì¹˜í–‰ë ¬ ë§Œë“¤ê¸°: í–‰ë ¬ì˜ í–‰ê³¼ ì—´ì„ ë°”ê¾¸ëŠ” ì‘ì—….
 	const float4x4& Transpose()
 	{
 		this->directXMatrix_ = DirectX::XMMatrixTranspose(this->directXMatrix_);
 		return *this;
 	}
 
-	//Å©±â, È¸Àü, ÀÌµ¿ ÇÑ¹ø¿¡ º¯È¯.
+	//í¬ê¸°, íšŒì „, ì´ë™ í•œë²ˆì— ë³€í™˜.
 	static float4x4 Transformation(
 		const float4& _scale,
 		const float4& _rotationQuarternion,
@@ -822,18 +822,18 @@ public:
 	)
 	{
 		return DirectX::XMMatrixTransformation(
-			float4::Zero.directXVector_,	//Å©±â Á¶Á¤ Áß½É.
-			float4::Zero.directXVector_,	//Å©±â Á¶Á¤ ¹æÇâ??
-			_scale.directXVector_,			//Å©±â º¯È­·®.
-			float4::Zero.directXVector_,	//È¸Àü Á¶Á¤ Áß½É.
-			_rotationQuarternion.directXVector_,	//È¸Àü·®.
+			float4::Zero.directXVector_,	//í¬ê¸° ì¡°ì • ì¤‘ì‹¬.
+			float4::Zero.directXVector_,	//í¬ê¸° ì¡°ì • ë°©í–¥??
+			_scale.directXVector_,			//í¬ê¸° ë³€í™”ëŸ‰.
+			float4::Zero.directXVector_,	//íšŒì „ ì¡°ì • ì¤‘ì‹¬.
+			_rotationQuarternion.directXVector_,	//íšŒì „ëŸ‰.
 			_position.directXVector_		//
 		);
 	}
 
 	static float4x4 Affine(const float4& _scale, const float4& _rotationQuarternion, const float4& _position)
 	{
-		// _Rot.DirectVector ÄõÅÍ´Ï¿Â ÀÔ´Ï´Ù.
+		// _Rot.DirectVector ì¿¼í„°ë‹ˆì˜¨ ì…ë‹ˆë‹¤.
 		return DirectX::XMMatrixAffineTransformation(
 			_scale.directXVector_,
 			float4::Zero.directXVector_,
@@ -842,74 +842,100 @@ public:
 		);
 	}
 
-	//Çà·Ä½Ä ±¸ÇÏ±â.
+	//í–‰ë ¬ì‹ êµ¬í•˜ê¸°.
 	float Determinant() const
 	{
 		return DirectX::XMMatrixDeterminant(this->directXMatrix_).m128_f32[0];
 	}
 
-	//Çà·Ä½Ä ±¸ÇÏ±â.
+	//í–‰ë ¬ì‹ êµ¬í•˜ê¸°.
 	static float Determinant(const float4x4& _matrix)
 	{
 		return DirectX::XMMatrixDeterminant(_matrix.directXMatrix_).m128_f32[0];
 	}
 
-	//ÀÚ±âÀÚ½Å ¿ªÇà·Ä ¿¬»ê.
+	//ìê¸°ìì‹  ì—­í–‰ë ¬ ì—°ì‚°.
 	void Inverse()
 	{
 		float4 determinantVector = DirectX::XMMatrixDeterminant(this->directXMatrix_);
 
-		this->directXMatrix_ = DirectX::XMMatrixInverse(	//¿ªÇà·Ä ±¸ÇÏ´Â ÇÔ¼ö. 
-			&determinantVector.directXVector_,	//´ë»ó Çà·ÄÀÇ Çà·Ä½Ä.
-			this->directXMatrix_							//¿ªÇà·ÄÀ» ±¸ÇÒ ´ë»ó Çà·Ä.
-		);								//Çà·Ä½ÄÀÌ 0ÀÌ¶ó¼­ ¿ªÇà·ÄÀÌ ¾ø°Å³ª ¹«ÇÑ°³¶ó¸é ¹«ÇÑÇà·ÄÀ» ¹İÈ¯ÇÑ´Ù.
+		this->directXMatrix_ = DirectX::XMMatrixInverse(	//ì—­í–‰ë ¬ êµ¬í•˜ëŠ” í•¨ìˆ˜. 
+			&determinantVector.directXVector_,	//ëŒ€ìƒ í–‰ë ¬ì˜ í–‰ë ¬ì‹.
+			this->directXMatrix_							//ì—­í–‰ë ¬ì„ êµ¬í•  ëŒ€ìƒ í–‰ë ¬.
+		);								//í–‰ë ¬ì‹ì´ 0ì´ë¼ì„œ ì—­í–‰ë ¬ì´ ì—†ê±°ë‚˜ ë¬´í•œê°œë¼ë©´ ë¬´í•œí–‰ë ¬ì„ ë°˜í™˜í•œë‹¤.
 	}
 
-	//ÀÔ·ÂµÈ Çà·ÄÀÇ ¿ªÇà·Ä ¹İÈ¯.
+	//ì…ë ¥ëœ í–‰ë ¬ì˜ ì—­í–‰ë ¬ ë°˜í™˜.
 	static float4x4 InverseReturn(const float4x4& _matrix)
 	{
 		float4 determinantVector = DirectX::XMMatrixDeterminant(_matrix.directXMatrix_);
 
 		float4x4 invertedMatrix = DirectX::XMMatrixInverse(
-			&determinantVector.directXVector_,	//´ë»ó Çà·ÄÀÇ Çà·Ä½Ä.
-			_matrix.directXMatrix_					//¿ªÇà·ÄÀ» ±¸ÇÒ ´ë»ó Çà·Ä.
-		);								//Çà·Ä½ÄÀÌ 0ÀÌ¶ó¼­ ¿ªÇà·ÄÀÌ ¾ø°Å³ª ¹«ÇÑ°³¶ó¸é ¹«ÇÑÇà·ÄÀ» ¹İÈ¯ÇÑ´Ù.
+			&determinantVector.directXVector_,	//ëŒ€ìƒ í–‰ë ¬ì˜ í–‰ë ¬ì‹.
+			_matrix.directXMatrix_					//ì—­í–‰ë ¬ì„ êµ¬í•  ëŒ€ìƒ í–‰ë ¬.
+		);								//í–‰ë ¬ì‹ì´ 0ì´ë¼ì„œ ì—­í–‰ë ¬ì´ ì—†ê±°ë‚˜ ë¬´í•œê°œë¼ë©´ ë¬´í•œí–‰ë ¬ì„ ë°˜í™˜í•œë‹¤.
 		return invertedMatrix;
 	}
 
-	//ÀÚ±â ÀÚ½ÅÀÇ ¿ªÇà·Ä ¹İÈ¯.
+	//ìê¸° ìì‹ ì˜ ì—­í–‰ë ¬ ë°˜í™˜.
 	float4x4 InverseReturn()
 	{
 		float4 determinantVector = DirectX::XMMatrixDeterminant(this->directXMatrix_);
 
 		float4x4 invertedMatrix = DirectX::XMMatrixInverse(
-			&determinantVector.directXVector_,	//´ë»ó Çà·ÄÀÇ Çà·Ä½Ä.
-			this->directXMatrix_					//¿ªÇà·ÄÀ» ±¸ÇÒ ´ë»ó Çà·Ä.
-		);								//Çà·Ä½ÄÀÌ 0ÀÌ¶ó¼­ ¿ªÇà·ÄÀÌ ¾ø°Å³ª ¹«ÇÑ°³¶ó¸é ¹«ÇÑÇà·ÄÀ» ¹İÈ¯ÇÑ´Ù.
+			&determinantVector.directXVector_,	//ëŒ€ìƒ í–‰ë ¬ì˜ í–‰ë ¬ì‹.
+			this->directXMatrix_					//ì—­í–‰ë ¬ì„ êµ¬í•  ëŒ€ìƒ í–‰ë ¬.
+		);								//í–‰ë ¬ì‹ì´ 0ì´ë¼ì„œ ì—­í–‰ë ¬ì´ ì—†ê±°ë‚˜ ë¬´í•œê°œë¼ë©´ ë¬´í•œí–‰ë ¬ì„ ë°˜í™˜í•œë‹¤.
 		return invertedMatrix;
 	}
 
-	//Å©±â º¯È¯.
+	static bool IsInViewSpace(const float4x4& _wvpMatrix)
+	{
+
+		float4 temp = float4(FLT_EPSILON, FLT_EPSILON);
+		float4 result = DirectX::XMVector4Transform(temp.directXVector_, _wvpMatrix.directXMatrix_);
+		result /= result.w;
+
+		//if (1.f < result.x || -1.f > result.x)
+		//{
+		//	return false;
+		//}
+		//else if (1.f < result.y || -1.f > result.y)
+		//{
+		//	return false;
+		//}
+		//else
+		//{
+		//	return true;
+		//}
+
+		return DirectX::XMVector2InBounds(result.directXVector_, DirectX::g_XMOne3);
+
+		//return DirectX::XMVector2InBounds(_wvpMatrix.directXMatrix_.r[3], DirectX::g_XMOne3)
+		//	&& _wvpMatrix.directXMatrix_.r[2].m128_f32[2] <= 1.f;
+	}
+
+	//í¬ê¸° ë³€í™˜.
 	const float4x4& Scale(const float4& _scaleVector)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixScalingFromVector(_scaleVector.directXVector_);
 		return *this;
 	}
-	//Å©±â º¯È¯.
+	//í¬ê¸° ë³€í™˜.
 	const float4x4& Scale(float _scaleX, float _scaleY, float _scaleZ)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixScaling(_scaleX, _scaleY, _scaleZ);
 		return *this;
 	}
 
-	//¶óµğ¾È º¤ÅÍ È¸Àü.
+	//ë¼ë””ì•ˆ ë²¡í„° íšŒì „.
 	const float4x4& Rotate3AxisByRadian(const float4& _radianVector)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixRotationRollPitchYawFromVector(
 			_radianVector.directXVector_);
 		return *this;
 	}
-	//¶óµğ¾È 3Ãà È¸Àü.
+	//ë¼ë””ì•ˆ 3ì¶• íšŒì „.
 	const float4x4& Rotate3AxisByRadian(float _radianX, float _radianY, float _radianZ)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixRotationRollPitchYaw(
@@ -920,7 +946,7 @@ public:
 		return *this;
 	}
 
-	//60µµ¹ı º¤ÅÍ È¸Àü.
+	//60ë„ë²• ë²¡í„° íšŒì „.
 	const float4x4& Rotate3AxisByDegree(const float4& _degreeVector)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixRotationRollPitchYawFromVector(
@@ -928,7 +954,7 @@ public:
 		);
 		return *this;
 	}
-	//60µµ¹ı 3Ãà È¸Àü.
+	//60ë„ë²• 3ì¶• íšŒì „.
 	const float4x4& Rotate3AxisByDegree(float _degreeX, float _degreeY, float _degreeZ)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixRotationRollPitchYaw(
@@ -939,7 +965,7 @@ public:
 		return *this;
 	}
 
-	//À§Ä¡ ÀÌµ¿.
+	//ìœ„ì¹˜ ì´ë™.
 	const float4x4& Position(const float4& _position)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixTranslationFromVector(
@@ -947,7 +973,7 @@ public:
 		);
 		return *this;
 	}
-	//À§Ä¡ ÀÌµ¿.
+	//ìœ„ì¹˜ ì´ë™.
 	const float4x4& Position(float _positionX, float _positionY, float _positionZ)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixTranslation(
@@ -958,13 +984,13 @@ public:
 		return *this;
 	}
 
-	//Çà·Ä¿¡¼­ Å©±â¸¸ º¤ÅÍ·Î ÃßÃâ.
-	//ÃßÃâµÈ Çà·ÄÀÇ Å©±â´Â 1ÀÌ µÈ´Ù.
+	//í–‰ë ¬ì—ì„œ í¬ê¸°ë§Œ ë²¡í„°ë¡œ ì¶”ì¶œ.
+	//ì¶”ì¶œëœ í–‰ë ¬ì˜ í¬ê¸°ëŠ” 1ì´ ëœë‹¤.
 	float4 ExtractScaling()
 	{
 		float4 returnVector = float4::Zero;
 
-		float Tolerance = 1.e-8f;	//Çã¿ë ¿ÀÂ÷ ¹üÀ§.
+		float Tolerance = 1.e-8f;	//í—ˆìš© ì˜¤ì°¨ ë²”ìœ„.
 
 		const float SquareSum0 = (arr2D[0][0] * arr2D[0][0]) + (arr2D[0][1] * arr2D[0][1]) + (arr2D[0][2] * arr2D[0][2]);
 		const float SquareSum1 = (arr2D[1][0] * arr2D[1][0]) + (arr2D[1][1] * arr2D[1][1]) + (arr2D[1][2] * arr2D[1][2]);
@@ -1017,31 +1043,31 @@ public:
 
 	const float4x4& LookAtLH(const float4& _eyePosition, const float4& _focusPosition, const float4& _upDirection)
 	{
-		this->directXMatrix_ = DirectX::XMMatrixLookAtLH(	//Æ¯Á¤ 'ÁöÁ¡'À» ¹Ù¶óº¸´Â ºäÇà·ÄÀ» °è»êÇØ ¹İÈ¯ÇÏ´Â ÇÔ¼ö. 
+		this->directXMatrix_ = DirectX::XMMatrixLookAtLH(	//íŠ¹ì • 'ì§€ì 'ì„ ë°”ë¼ë³´ëŠ” ë·°í–‰ë ¬ì„ ê³„ì‚°í•´ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜. 
 			_eyePosition.directXVector_,
 			_focusPosition.directXVector_,
 			_upDirection.directXVector_
 		);
 		return *this;
-		//¿Ş¼ÕÁÂÇ¥°è(Left-Handed Coordinate System): ++Z ¹æÇâÀÌ ³»°Ô¼­ ¸Ö¾îÁ®¼­ È­¸é ¾ÈÀ¸·Î ´õ ±íÀÌ µé¾î°¡´Â °ÍÃ³·³ º¸ÀÌ´Â ÁÂÇ¥°è.
-		//¿Ş¼ÕÁÂÇ¥°è È¸Àü¹æÇâÀº °¢ Ãà ±âÁØ ½Ã°è¹æÇâÀÌ´Ù.
-		//¿À¸¥¼ÕÁÂÇ¥°è(Right-Handed Coordinate System): ++Z ¹æÇâÀÌ ³»°Ô·Î ´õ °¡±î¿öÁ®¼­ È­¸é ¹ÛÀ¸·Î ³ª¿À·Á´Â °ÍÃ³·³ º¸ÀÌ´Â ÁÂÇ¥°è.
-		//¿À¸¥¼ÕÁÂÇ¥°è È¸Àü¹æÇâÀº °¢ Ãà±âÁØ ¹İ½Ã°è¹æÇâÀÌ´Ù.
+		//ì™¼ì†ì¢Œí‘œê³„(Left-Handed Coordinate System): ++Z ë°©í–¥ì´ ë‚´ê²Œì„œ ë©€ì–´ì ¸ì„œ í™”ë©´ ì•ˆìœ¼ë¡œ ë” ê¹Šì´ ë“¤ì–´ê°€ëŠ” ê²ƒì²˜ëŸ¼ ë³´ì´ëŠ” ì¢Œí‘œê³„.
+		//ì™¼ì†ì¢Œí‘œê³„ íšŒì „ë°©í–¥ì€ ê° ì¶• ê¸°ì¤€ ì‹œê³„ë°©í–¥ì´ë‹¤.
+		//ì˜¤ë¥¸ì†ì¢Œí‘œê³„(Right-Handed Coordinate System): ++Z ë°©í–¥ì´ ë‚´ê²Œë¡œ ë” ê°€ê¹Œì›Œì ¸ì„œ í™”ë©´ ë°–ìœ¼ë¡œ ë‚˜ì˜¤ë ¤ëŠ” ê²ƒì²˜ëŸ¼ ë³´ì´ëŠ” ì¢Œí‘œê³„.
+		//ì˜¤ë¥¸ì†ì¢Œí‘œê³„ íšŒì „ë°©í–¥ì€ ê° ì¶•ê¸°ì¤€ ë°˜ì‹œê³„ë°©í–¥ì´ë‹¤.
 	}
 
 	const float4x4& LookToLH(const float4& _eyePosition, const float4& _eyeDirection, const float4& _upDirection)
 	{
-		this->directXMatrix_ = DirectX::XMMatrixLookToLH(	//Æ¯Á¤ '¹æÇâ'À» ¹Ù¶óº¸´Â ºäÇà·ÄÀ» °è»êÇØ ¹İÈ¯ÇÏ´Â ÇÔ¼ö. 
+		this->directXMatrix_ = DirectX::XMMatrixLookToLH(	//íŠ¹ì • 'ë°©í–¥'ì„ ë°”ë¼ë³´ëŠ” ë·°í–‰ë ¬ì„ ê³„ì‚°í•´ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜. 
 			_eyePosition.directXVector_,
 			_eyeDirection.directXVector_,
 			_upDirection.directXVector_
 		);
 		return *this;
 
-		// ±æÀÌ°¡ 1ÀÎ º¤ÅÍ 2°³¸¦ ¿ÜÀûÇÏ¸é ¹«Á¶°Ç ±æÀÌ 1Â¥¸® º¤ÅÍ°¡ ³ª¿Â´Ù.
+		// ê¸¸ì´ê°€ 1ì¸ ë²¡í„° 2ê°œë¥¼ ì™¸ì í•˜ë©´ ë¬´ì¡°ê±´ ê¸¸ì´ 1ì§œë¦¬ ë²¡í„°ê°€ ë‚˜ì˜¨ë‹¤.
 		//float4 R1 = float4::Cross(R2, R0);
 
-		// 90 => ~90µµ ÇÏ·Á¸é È¸ÀüÇà·ÄÀ» ÀüÄ¡ÇÏ¸é µÈ´Ù.
+		// 90 => ~90ë„ í•˜ë ¤ë©´ íšŒì „í–‰ë ¬ì„ ì „ì¹˜í•˜ë©´ ëœë‹¤.
 	}
 
 	void ProjectOrthographicLH(
@@ -1052,12 +1078,12 @@ public:
 	)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixOrthographicLH(
-			_width,		//ºä½ºÆäÀÌ½ºÀÇ °¡·Î±æÀÌ. Á÷±³Åõ¿µÀÌ¹Ç·Î ¿øÆò¸éÀÌµç ±ÙÆò¸éÀÌµç ¶È°°Àº °ªÀÌ´Ù.
-			_height,	//ºä½ºÆäÀÌ½ºÀÇ ¼¼·Î±æÀÌ. Á÷±³Åõ¿µÀÌ¹Ç·Î ¿øÆò¸éÀÌµç ±ÙÆò¸éÀÌµç ¶È°°Àº °ªÀÌ´Ù.
+			_width,		//ë·°ìŠ¤í˜ì´ìŠ¤ì˜ ê°€ë¡œê¸¸ì´. ì§êµíˆ¬ì˜ì´ë¯€ë¡œ ì›í‰ë©´ì´ë“  ê·¼í‰ë©´ì´ë“  ë˜‘ê°™ì€ ê°’ì´ë‹¤.
+			_height,	//ë·°ìŠ¤í˜ì´ìŠ¤ì˜ ì„¸ë¡œê¸¸ì´. ì§êµíˆ¬ì˜ì´ë¯€ë¡œ ì›í‰ë©´ì´ë“  ê·¼í‰ë©´ì´ë“  ë˜‘ê°™ì€ ê°’ì´ë‹¤.
 			_nearZ, 
-			//Ä«¸Ş¶ó°¡ ÀÖ´Â ÁöÁ¡(¿ø±Ù Áß½É)¿¡¼­ºÎÅÍ ¸ğ´ÏÅÍ°¡ ÀÖ´Â °¡»óÀÇ ÁöÁ¡(near clipping plane, ±ÙÆò¸é)±îÁöÀÇ zÃà ±æÀÌ.
+			//ì¹´ë©”ë¼ê°€ ìˆëŠ” ì§€ì (ì›ê·¼ ì¤‘ì‹¬)ì—ì„œë¶€í„° ëª¨ë‹ˆí„°ê°€ ìˆëŠ” ê°€ìƒì˜ ì§€ì (near clipping plane, ê·¼í‰ë©´)ê¹Œì§€ì˜ zì¶• ê¸¸ì´.
 			_farZ
-			//Ä«¸Ş¶ó°¡ ÀÖ´Â ÁöÁ¡(¿ø±Ù Áß½É)¿¡¼­ºÎÅÍ ºä ÇÁ·¯½ºÅÒ ¹Ø¹Ù´Ú(far clipping plane, ¿øÆò¸é)±îÁöÀÇ zÃà ±æÀÌ.
+			//ì¹´ë©”ë¼ê°€ ìˆëŠ” ì§€ì (ì›ê·¼ ì¤‘ì‹¬)ì—ì„œë¶€í„° ë·° í”„ëŸ¬ìŠ¤í…€ ë°‘ë°”ë‹¥(far clipping plane, ì›í‰ë©´)ê¹Œì§€ì˜ zì¶• ê¸¸ì´.
 		);
 	}
 
@@ -1069,20 +1095,20 @@ public:
 	)
 	{
 		this->directXMatrix_ = DirectX::XMMatrixPerspectiveFovLH(
-			_fovRadianY,	//FoV(Field of View): È­°¢, ½Ã¾ß ¹üÀ§. YÀÌ¹Ç·Î ¼¼·Î±æÀÌ¸¦ Çü¼ºÇÏ´Â °¢µµ.
-			_aspectRatio,	//AspectRatio: ºä ÇÁ·¯½ºÅÒÀÇ Àı´Ü¸é Á¾È¾ºñ. ¼¼·Î±æÀÌ / °¡·Î±æÀÌ. 
+			_fovRadianY,	//FoV(Field of View): í™”ê°, ì‹œì•¼ ë²”ìœ„. Yì´ë¯€ë¡œ ì„¸ë¡œê¸¸ì´ë¥¼ í˜•ì„±í•˜ëŠ” ê°ë„.
+			_aspectRatio,	//AspectRatio: ë·° í”„ëŸ¬ìŠ¤í…€ì˜ ì ˆë‹¨ë©´ ì¢…íš¡ë¹„. ì„¸ë¡œê¸¸ì´ / ê°€ë¡œê¸¸ì´. 
 			_nearZ,			
-			//Ä«¸Ş¶ó°¡ ÀÖ´Â ÁöÁ¡(¿ø±Ù Áß½É)¿¡¼­ºÎÅÍ ¸ğ´ÏÅÍ°¡ ÀÖ´Â °¡»óÀÇ ÁöÁ¡(near clipping plane, ±ÙÆò¸é)±îÁöÀÇ zÃà ±æÀÌ.
+			//ì¹´ë©”ë¼ê°€ ìˆëŠ” ì§€ì (ì›ê·¼ ì¤‘ì‹¬)ì—ì„œë¶€í„° ëª¨ë‹ˆí„°ê°€ ìˆëŠ” ê°€ìƒì˜ ì§€ì (near clipping plane, ê·¼í‰ë©´)ê¹Œì§€ì˜ zì¶• ê¸¸ì´.
 			_farZ
-			//Ä«¸Ş¶ó°¡ ÀÖ´Â ÁöÁ¡(¿ø±Ù Áß½É)¿¡¼­ºÎÅÍ ºä ÇÁ·¯½ºÅÒ ¹Ø¹Ù´Ú(far clipping plane, ¿øÆò¸é)±îÁöÀÇ zÃà ±æÀÌ.
+			//ì¹´ë©”ë¼ê°€ ìˆëŠ” ì§€ì (ì›ê·¼ ì¤‘ì‹¬)ì—ì„œë¶€í„° ë·° í”„ëŸ¬ìŠ¤í…€ ë°‘ë°”ë‹¥(far clipping plane, ì›í‰ë©´)ê¹Œì§€ì˜ zì¶• ê¸¸ì´.
 		);
 
 		//float    SinFov;
 		//float    CosFov;
 		//DirectX::XMScalarSinCos(&SinFov, &CosFov, 0.5f * _fovRadianY);
 
-		//float Height = CosFov / SinFov;	// == (1 / TanFov). z°ªÀÌ 1ÀÎ ÁöÁ¡ÀÇ ºä ÇÁ·¯½ºÅÒ ¼¼·Î±æÀÌÀÇ Àı¹İ. 
-		//float Width = Height / _aspectRatio;	//Á¾È¾ºñ·Î °è»êÇÑ z°ªÀÌ 1ÀÎ ÁöÁ¡ÀÇ ºä ÇÁ·¯½ºÅÒ °¡·Î±æÀÌÀÇ Àı¹İ. 
+		//float Height = CosFov / SinFov;	// == (1 / TanFov). zê°’ì´ 1ì¸ ì§€ì ì˜ ë·° í”„ëŸ¬ìŠ¤í…€ ì„¸ë¡œê¸¸ì´ì˜ ì ˆë°˜. 
+		//float Width = Height / _aspectRatio;	//ì¢…íš¡ë¹„ë¡œ ê³„ì‚°í•œ zê°’ì´ 1ì¸ ì§€ì ì˜ ë·° í”„ëŸ¬ìŠ¤í…€ ê°€ë¡œê¸¸ì´ì˜ ì ˆë°˜. 
 		//float fRange = _farZ / (_farZ - _nearZ);
 
 
@@ -1099,15 +1125,15 @@ public:
 		//this->arr2D[2][0] = 0.0f;
 		//this->arr2D[2][1] = 0.0f;
 		//this->arr2D[2][2] = fRange;
-		//this->arr2D[2][3] = 1.0f;	<-Åõ¿µÇà·ÄÀÇ °á°ú°ªÀÌ º¤ÅÍÀÇ w¿¡ ÀúÀåµÇ¼­ wvpÇà·Ä °è»êÇÒ ¶§ Àû¿ëµÇ´Âµ¥, 
-		// ÀÌ ¿ø¼Ò°¡ 1ÀÌ ¾Æ´Ï¸é ÀÌ»óÇÑ°ªÀÌ ÀúÀåµÇ°í, 0ÀÌ¶ó¸é ¾Æ¿¹ ÀúÀåµÇÁö ¾ÊÀº »óÅÂ·Î wvpÇà·ÄÀ» °ÅÄ¡°Ô µÇ¾î
-		// ÀûÀıÇÏ°Ô Ãà¼ÒµÇÁö ¾ÊÀº »óÅÂ·Î ºäÆ÷Æ® Çà·ÄÀ» °ÅÃÄ È­¸éÀ» µÚµ¤´Â Å©±â·Î °Å´ëÇØÁø´Ù.
-		//±×·¯¹Ç·Î Àú °ªÀº ¹İµå½Ã 1ÀÌ¾î¾ß ÇÑ´Ù.
+		//this->arr2D[2][3] = 1.0f;	<-íˆ¬ì˜í–‰ë ¬ì˜ ê²°ê³¼ê°’ì´ ë²¡í„°ì˜ wì— ì €ì¥ë˜ì„œ wvpí–‰ë ¬ ê³„ì‚°í•  ë•Œ ì ìš©ë˜ëŠ”ë°, 
+		// ì´ ì›ì†Œê°€ 1ì´ ì•„ë‹ˆë©´ ì´ìƒí•œê°’ì´ ì €ì¥ë˜ê³ , 0ì´ë¼ë©´ ì•„ì˜ˆ ì €ì¥ë˜ì§€ ì•Šì€ ìƒíƒœë¡œ wvpí–‰ë ¬ì„ ê±°ì¹˜ê²Œ ë˜ì–´
+		// ì ì ˆí•˜ê²Œ ì¶•ì†Œë˜ì§€ ì•Šì€ ìƒíƒœë¡œ ë·°í¬íŠ¸ í–‰ë ¬ì„ ê±°ì³ í™”ë©´ì„ ë’¤ë®ëŠ” í¬ê¸°ë¡œ ê±°ëŒ€í•´ì§„ë‹¤.
+		//ê·¸ëŸ¬ë¯€ë¡œ ì € ê°’ì€ ë°˜ë“œì‹œ 1ì´ì–´ì•¼ í•œë‹¤.
 
 		//this->arr2D[3][0] = 0.0f;
 		//this->arr2D[3][1] = 0.0f;
 		//this->arr2D[3][2] = -fRange * _nearZ;
-		//this->arr2D[3][3] = 0.0f;	<-Åõ¿µÇà·ÄÀº ÀÌµ¿Çà·ÄÀÌ ¾Æ´Ï¶ó Å©±âº¯È¯Çà·ÄÀÇ ÀÏÁ¾ÀÌ¹Ç·Î ¿©±â¿¡ 0ÀÌ µé¾î°£´Ù.
+		//this->arr2D[3][3] = 0.0f;	<-íˆ¬ì˜í–‰ë ¬ì€ ì´ë™í–‰ë ¬ì´ ì•„ë‹ˆë¼ í¬ê¸°ë³€í™˜í–‰ë ¬ì˜ ì¼ì¢…ì´ë¯€ë¡œ ì—¬ê¸°ì— 0ì´ ë“¤ì–´ê°„ë‹¤.
 
 
 	}
@@ -1122,40 +1148,40 @@ public:
 	{
 
 		this->directXMatrix_ = DirectX::XMMatrixPerspectiveLH(
-			_nearZWidth,		//±ÙÆò¸éÀÇ xÃà ±æÀÌ.
-			_nearZHeight,	//±ÙÆò¸éÀÇ yÃà ±æÀÌ.
+			_nearZWidth,		//ê·¼í‰ë©´ì˜ xì¶• ê¸¸ì´.
+			_nearZHeight,	//ê·¼í‰ë©´ì˜ yì¶• ê¸¸ì´.
 			_nearZ,				
-			//Ä«¸Ş¶ó°¡ ÀÖ´Â ÁöÁ¡(¿ø±Ù Áß½É)¿¡¼­ºÎÅÍ ¸ğ´ÏÅÍ°¡ ÀÖ´Â °¡»óÀÇ ÁöÁ¡(near clipping plane, ±ÙÆò¸é)±îÁöÀÇ zÃà ±æÀÌ.
+			//ì¹´ë©”ë¼ê°€ ìˆëŠ” ì§€ì (ì›ê·¼ ì¤‘ì‹¬)ì—ì„œë¶€í„° ëª¨ë‹ˆí„°ê°€ ìˆëŠ” ê°€ìƒì˜ ì§€ì (near clipping plane, ê·¼í‰ë©´)ê¹Œì§€ì˜ zì¶• ê¸¸ì´.
 			_farZ				
-			//Ä«¸Ş¶ó°¡ ÀÖ´Â ÁöÁ¡(¿ø±Ù Áß½É)¿¡¼­ºÎÅÍ ºä ÇÁ·¯½ºÅÒ ¹Ø¹Ù´Ú(far clipping plane, ¿øÆò¸é)±îÁöÀÇ zÃà ±æÀÌ.
+			//ì¹´ë©”ë¼ê°€ ìˆëŠ” ì§€ì (ì›ê·¼ ì¤‘ì‹¬)ì—ì„œë¶€í„° ë·° í”„ëŸ¬ìŠ¤í…€ ë°‘ë°”ë‹¥(far clipping plane, ì›í‰ë©´)ê¹Œì§€ì˜ zì¶• ê¸¸ì´.
 		);
 
-		//float TwoNearZ = _nearZ + _nearZ;	//ViewWidth³ª ViewHeight´Â Àı¹İÀÌ ÇÊ¿äÇÏ¹Ç·Î 2·Î ³ª´©¾î¾ß ÇÏÁö¸¸
-		//// ±× ´ë½Å ºĞÀÚ·Î ¿Ã¶ó°¡´Â _nearZ¸¦ µÎ¹èÇØ¼­ °è»êÀÇ È¿À²¼ºÀ» Áõ°¡½ÃÅ²´Ù.
+		//float TwoNearZ = _nearZ + _nearZ;	//ViewWidthë‚˜ ViewHeightëŠ” ì ˆë°˜ì´ í•„ìš”í•˜ë¯€ë¡œ 2ë¡œ ë‚˜ëˆ„ì–´ì•¼ í•˜ì§€ë§Œ
+		//// ê·¸ ëŒ€ì‹  ë¶„ìë¡œ ì˜¬ë¼ê°€ëŠ” _nearZë¥¼ ë‘ë°°í•´ì„œ ê³„ì‚°ì˜ íš¨ìœ¨ì„±ì„ ì¦ê°€ì‹œí‚¨ë‹¤.
 		//float fRange = _farZ / (_farZ - _nearZ);
 		//
-		//this->arr2D[0][0] = TwoNearZ / _nearWidth;	//z°ªÀÌ 1ÀÏ¶§ÀÇ ºä ÇÁ·¯½ºÅÒ °¡·Î±æÀÌÀÇ Àı¹İÀ» ±¸ÇØ ³Ö´Â´Ù.
+		//this->arr2D[0][0] = TwoNearZ / _nearWidth;	//zê°’ì´ 1ì¼ë•Œì˜ ë·° í”„ëŸ¬ìŠ¤í…€ ê°€ë¡œê¸¸ì´ì˜ ì ˆë°˜ì„ êµ¬í•´ ë„£ëŠ”ë‹¤.
 		//this->arr2D[0][1] = 0.0f;
 		//this->arr2D[0][2] = 0.0f;
 		//this->arr2D[0][3] = 0.0f;
 		//
 		//this->arr2D[1][0] = 0.0f;
-		//this->arr2D[1][1] = TwoNearZ / _nearHeight;	//z°ªÀÌ 1ÀÏ¶§ÀÇ ºä ÇÁ·¯½ºÅÒ ¼¼·Î±æÀÌÀÇ Àı¹İÀ» ±¸ÇØ ³Ö´Â´Ù.
+		//this->arr2D[1][1] = TwoNearZ / _nearHeight;	//zê°’ì´ 1ì¼ë•Œì˜ ë·° í”„ëŸ¬ìŠ¤í…€ ì„¸ë¡œê¸¸ì´ì˜ ì ˆë°˜ì„ êµ¬í•´ ë„£ëŠ”ë‹¤.
 		//this->arr2D[1][2] = 0.0f;
 		//this->arr2D[1][3] = 0.0f;
 		//
 		//this->arr2D[2][0] = 0.0f;
 		//this->arr2D[2][1] = 0.0f;
 		//this->arr2D[2][2] = fRange;
-		//this->arr2D[2][3] = 1.0f;	<-Åõ¿µÇà·ÄÀÇ °á°ú°ªÀÌ º¤ÅÍÀÇ w¿¡ ÀúÀåµÇ¼­ wvpÇà·Ä °è»êÇÒ ¶§ Àû¿ëµÇ´Âµ¥, 
-		// ÀÌ ¿ø¼Ò°¡ 1ÀÌ ¾Æ´Ï¸é ÀÌ»óÇÑ°ªÀÌ ÀúÀåµÇ°í, 0ÀÌ¶ó¸é ¾Æ¿¹ ÀúÀåµÇÁö ¾ÊÀº »óÅÂ·Î wvpÇà·ÄÀ» °ÅÄ¡°Ô µÇ¾î
-		// ÀûÀıÇÏ°Ô Ãà¼ÒµÇÁö ¾ÊÀº »óÅÂ·Î ºäÆ÷Æ® Çà·ÄÀ» °ÅÃÄ È­¸éÀ» µÚµ¤´Â Å©±â·Î °Å´ëÇØÁø´Ù.
-		//±×·¯¹Ç·Î Àú °ªÀº ¹İµå½Ã 1ÀÌ¾î¾ß ÇÑ´Ù.
+		//this->arr2D[2][3] = 1.0f;	<-íˆ¬ì˜í–‰ë ¬ì˜ ê²°ê³¼ê°’ì´ ë²¡í„°ì˜ wì— ì €ì¥ë˜ì„œ wvpí–‰ë ¬ ê³„ì‚°í•  ë•Œ ì ìš©ë˜ëŠ”ë°, 
+		// ì´ ì›ì†Œê°€ 1ì´ ì•„ë‹ˆë©´ ì´ìƒí•œê°’ì´ ì €ì¥ë˜ê³ , 0ì´ë¼ë©´ ì•„ì˜ˆ ì €ì¥ë˜ì§€ ì•Šì€ ìƒíƒœë¡œ wvpí–‰ë ¬ì„ ê±°ì¹˜ê²Œ ë˜ì–´
+		// ì ì ˆí•˜ê²Œ ì¶•ì†Œë˜ì§€ ì•Šì€ ìƒíƒœë¡œ ë·°í¬íŠ¸ í–‰ë ¬ì„ ê±°ì³ í™”ë©´ì„ ë’¤ë®ëŠ” í¬ê¸°ë¡œ ê±°ëŒ€í•´ì§„ë‹¤.
+		//ê·¸ëŸ¬ë¯€ë¡œ ì € ê°’ì€ ë°˜ë“œì‹œ 1ì´ì–´ì•¼ í•œë‹¤.
 
 		//this->arr2D[3][0] = 0.0f;
 		//this->arr2D[3][1] = 0.0f;
 		//this->arr2D[3][2] = -fRange * _nearZ;
-		//this->arr2D[3][3] = 0.0f; <-Åõ¿µÇà·ÄÀº ÀÌµ¿Çà·ÄÀÌ ¾Æ´Ï¶ó Å©±âº¯È¯Çà·ÄÀÇ ÀÏÁ¾ÀÌ¹Ç·Î ¿©±â¿¡ 0ÀÌ µé¾î°£´Ù.
+		//this->arr2D[3][3] = 0.0f; <-íˆ¬ì˜í–‰ë ¬ì€ ì´ë™í–‰ë ¬ì´ ì•„ë‹ˆë¼ í¬ê¸°ë³€í™˜í–‰ë ¬ì˜ ì¼ì¢…ì´ë¯€ë¡œ ì—¬ê¸°ì— 0ì´ ë“¤ì–´ê°„ë‹¤.
 	}
 
 	void Viewport(
@@ -1167,9 +1193,9 @@ public:
 		float _maxZ
 	)
 	{
-		//´ÙÀÌ·ºÆ®X¿¡¼­´Â µû·Î ºäÆ÷Æ®¸¦ °è»êÇØÁÖ´Â ÇÔ¼ö´Â ¾ø°í,
-		// D3D11_VIEWPORT ±¸Á¶Ã¼·Î ID3D11DeviceContext::RSSetViewports()ÇÔ¼ö¸¦ ÅëÇØ 
-		// ¿øÇÏ´Â ·»´õÅ¸°Ù¿¡ ºäÆ÷Æ®°ª ¼¼ÆÃÀ» ÇØÁÖ¸é ·¡½ºÅÍ¶óÀÌÀú ´Ü°è¿¡¼­ Àû¿ëµÈ´Ù.
+		//ë‹¤ì´ë ‰íŠ¸Xì—ì„œëŠ” ë”°ë¡œ ë·°í¬íŠ¸ë¥¼ ê³„ì‚°í•´ì£¼ëŠ” í•¨ìˆ˜ëŠ” ì—†ê³ ,
+		// D3D11_VIEWPORT êµ¬ì¡°ì²´ë¡œ ID3D11DeviceContext::RSSetViewports()í•¨ìˆ˜ë¥¼ í†µí•´ 
+		// ì›í•˜ëŠ” ë Œë”íƒ€ê²Ÿì— ë·°í¬íŠ¸ê°’ ì„¸íŒ…ì„ í•´ì£¼ë©´ ë˜ìŠ¤í„°ë¼ì´ì € ë‹¨ê³„ì—ì„œ ì ìš©ëœë‹¤.
 
 		this->arr2D[0][0] = _width * 0.5f;
 		this->arr2D[0][1] = 0.f;
@@ -1195,7 +1221,7 @@ public:
 
 float4 operator*(const float4& _vector, const float4x4& _matrix);
 float4& operator*=(float4& _vector, const float4x4& _matrix);
-//float4 Å¬·¡½º¿¡ float4x4 Å¬·¡½º¸¦ Àü¹æ¼±¾ğÇÏ´Â°Ô ±ÍÂú¾Æ¼­ Àü¿ª¿¬»êÀÚ °ãÁöÁ¤À¸·Î Ã³¸®.
+//float4 í´ë˜ìŠ¤ì— float4x4 í´ë˜ìŠ¤ë¥¼ ì „ë°©ì„ ì–¸í•˜ëŠ”ê²Œ ê·€ì°®ì•„ì„œ ì „ì—­ì—°ì‚°ì ê²¹ì§€ì •ìœ¼ë¡œ ì²˜ë¦¬.
 
 
 struct GameEngineRect

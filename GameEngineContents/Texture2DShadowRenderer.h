@@ -13,11 +13,8 @@ class Texture2DShadowRenderer: public GameEngineDefaultRenderer
 
 
 	//추가할 것.
-	// 1. 애니메이션 그림자 렌더링.
-	// 2. 조명 위치에 따른 그림자 각도변화.
-	// 3. 그림자 경계선에 블러.
-
-	//액터가 살아 있는데 텍스처렌더러만 파괴하는 경우 대비 안됨.
+	// 1. 조명 위치에 따른 그림자 각도변화.
+	// 2. 그림자 경계선에 블러.
 
 public:
 	Texture2DShadowRenderer();

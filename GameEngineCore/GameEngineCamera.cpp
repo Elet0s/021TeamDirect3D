@@ -321,8 +321,8 @@ void GameEngineCamera::Render(float _deltaTime)
 			nearZ_,
 			farZ_
 		);
-
 		break;
+
 	case CameraProjectionMode::Orthographic:
 		projectionMatrix_.ProjectOrthographicLH(
 			size_.x,
@@ -367,8 +367,17 @@ void GameEngineCamera::Render(float _deltaTime)
 				renderer->GetTransform().CalculateWorldViewProjection();
 				//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
 
-				renderer->Render(scaleTime);
-				//뷰포트행렬을 포함한 모든 행렬 계산을 거친 결과대로 메쉬를 화면에 그린다.
+				if (true == float4x4::IsInViewSpace(
+					renderer->GetTransformData().worldViewProjectionMatrix_))
+				{
+					renderer->Render(scaleTime);
+					//뷰포트행렬을 포함한 모든 행렬 계산을 거친 결과대로 메쉬를 화면에 그린다.
+				}
+
+
+
+				
+
 			}
 		}
 	}

@@ -44,6 +44,7 @@ Output TextureShadow_VS(Input _input)
     //{
     //    newOutput.texcoord_.x = 1.f - newOutput.texcoord_.x;
     //}
+    //그림자가 한박자 늦게 움직이므로 사용 금지.
     
     return newOutput;
 }
