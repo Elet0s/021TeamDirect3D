@@ -32,7 +32,7 @@ void Mouse::Start()
 
 	{
 		mouseCollision_ = CreateComponent<GameEngineCollision>();
-		mouseCollision_->SetDebugSetting(CollisionType::CT_OBB, float4::Black);
+		mouseCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Black);
 		mouseCollision_->GetTransform().SetLocalScale({ 64.0f, 64.0f, 1.0f });
 		mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
 	}

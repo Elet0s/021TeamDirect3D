@@ -14,6 +14,8 @@ enum class ObjectOrder
 	Player,
 	Monster,
 	Mouse,
+	Camera,
+	Sector,
 	UI = 1000
 };
 

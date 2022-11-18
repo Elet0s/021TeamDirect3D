@@ -1,4 +1,5 @@
 #include "PreCompile.h"
+#include "GlobalContentsValue.h"
 #include "TileMapActor.h"
 #include <string>
 #include <GameEngineBase/GameEngineRandom.h>
@@ -17,6 +18,11 @@ void TileMapActor::Start()
 {
 	int Count = 0;
 	tileRenderer_ = CreateComponent<MyTileMapRenderer>();
+	col_ = CreateComponent<GameEngineCollision>();
+	col_->GetTransform().SetWorldScale(float4{ 100,100,1 });
+	col_->SetDebugSetting(CollisionType::CT_OBB2D, float4(0.f,0.f,0.f,0.8f));
+	col_->ChangeOrder(ObjectOrder::Sector);
+	col_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
 
 	ResourceLoad();
 
@@ -73,7 +79,14 @@ void TileMapActor::Start()
 
 void TileMapActor::Update(float _deltaTime)
 {
-	
+	if (true == col_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Mouse, CollisionType::CT_OBB2D))
+	{
+		Off();
+	}
+	if (false == col_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Mouse, CollisionType::CT_OBB2D))
+	{
+		On();
+	}
 }
 
 void TileMapActor::End()
@@ -95,4 +108,11 @@ void TileMapActor::ResourceLoad()
 
 		GameEngineFolderTexture::Load(Dir.GetFullPath());
 	}
+}
+
+CollisionReturn TileMapActor::CameraCheck(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+{
+	_This->GetRoot()->Off();
+
+	return CollisionReturn::Stop;
 }

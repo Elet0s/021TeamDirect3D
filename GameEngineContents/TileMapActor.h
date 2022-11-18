@@ -19,6 +19,7 @@ private:
 
 public:	
 	std::shared_ptr<MyTileMapRenderer> tileRenderer_;
+	std::shared_ptr<GameEngineCollision> col_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -26,5 +27,6 @@ protected:
 
 private:
 	void ResourceLoad();
+	CollisionReturn CameraCheck(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 };
 
