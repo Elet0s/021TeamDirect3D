@@ -9,7 +9,14 @@ bool Player::isInitialized_ = false;
 Player::Player()
 	: nowLevel_(nullptr),
 	playerRenderer_(nullptr),
-	speed_(150.0f)
+	speed_(150.0f),
+	maxHp_(30),
+	hp_(30),
+	maxExp_(100),
+	exp_(0),
+	atk_(10),
+	def_(10),
+	range_(10)
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{

@@ -57,8 +57,16 @@ protected:
 	void MoveDirectionUpdate(float _deltaTime);
 
 private:
-	float speed_;
+
 	float4 moveDirection_;
+	float speed_;
+	float maxHp_;
+	float hp_;
+	float maxExp_;
+	float exp_;
+	float atk_;
+	float def_;
+	float range_;
 
 	GameEngineLevel* nowLevel_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
