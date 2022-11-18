@@ -48,20 +48,21 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void IdleStart(const StateInfo& _info);
-	void IdleUpdate(float _deltaTime, const StateInfo& _info);
+	//void IdleStart(const StateInfo& _info);
+	//void IdleUpdate(float _deltaTime, const StateInfo& _info);
 
 	//void MoveStart(const StateInfo& _info);
-	void MoveUpdate(float _deltaTime, const StateInfo& _info);
+	//void MoveUpdate(float _deltaTime, const StateInfo& _info);
 
 
 private:
 	float speed_;
+	float4 moveDirection_;
 
 	GameEngineLevel* nowLevel_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
 	std::shared_ptr<GameEngineCollision> collision_;
-	GameEngineStateManager stateManager_;
+	//GameEngineStateManager stateManager_;
 
 };
 

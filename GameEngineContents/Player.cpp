@@ -9,7 +9,7 @@ bool Player::isInitialized_ = false;
 Player::Player()
 	: nowLevel_(nullptr),
 	playerRenderer_(nullptr),
-	speed_(200.0f)
+	speed_(150.0f)
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{
@@ -72,73 +72,73 @@ void Player::Start()
 		std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
 		shadowRenderer->SetTextureRenderer(playerRenderer_);
 
-		{
-			stateManager_.CreateState("Idle"
-				, std::bind(&Player::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
-				, std::bind(&Player::IdleStart, this, std::placeholders::_1)
-			);
+//	{
+//		stateManager_.CreateState("Idle"
+//			, std::bind(&Player::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+//			, std::bind(&Player::IdleStart, this, std::placeholders::_1)
+//		);
+//
+//		stateManager_.CreateState("Move"
+//			, std::bind(&Player::MoveUpdate, this, std::placeholders::_1, std::placeholders::_2)
+//			, [/*&*/=](const StateInfo& _Info)
+//			{
+//				playerRenderer_->ChangeFrameAnimation("PlayerRun");
+//			});
+//		stateManager_.ChangeState("Idle");
+//	}
 
-			stateManager_.CreateState("Move"
-				, std::bind(&Player::MoveUpdate, this, std::placeholders::_1, std::placeholders::_2)
-				, [/*&*/=](const StateInfo& _Info)
-				{
-					playerRenderer_->ChangeFrameAnimation("PlayerRun");
-				});
-			stateManager_.ChangeState("Idle");
-		}
-
-
-}
-
-void Player::IdleStart(const StateInfo& _Info)
-{
-	playerRenderer_->ChangeFrameAnimation("PlayerIdle");
-}
-
-void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft") ||
-		true == GameEngineInput::GetInst()->IsPressed("PlayerRight") ||
-		true == GameEngineInput::GetInst()->IsPressed("PlayerUp") ||
-		true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
-	{
-		stateManager_.ChangeState("Move");
-	}
-}
-
-void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	if (false == GameEngineInput::GetInst()->IsPressed("PlayerLeft") &&
-		false == GameEngineInput::GetInst()->IsPressed("PlayerRight") &&
-		false == GameEngineInput::GetInst()->IsPressed("PlayerUp") &&
-		false == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
-	{
-		stateManager_.ChangeState("Idle");
-		return;
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * speed_ * _DeltaTime);
-		playerRenderer_->GetTransform().PixLocalNegativeX();
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetRightVector() * speed_ * _DeltaTime);
-		playerRenderer_->GetTransform().PixLocalPositiveX();
-	}
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerUp"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetUpVector() * speed_ * _DeltaTime);
-	}
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetDownVector() * speed_ * _DeltaTime);
-	}
 
 }
+
+//void Player::IdleStart(const StateInfo& _Info)
+//{
+//	playerRenderer_->ChangeFrameAnimation("PlayerIdle");
+//}
+//
+//void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
+//{
+//
+//	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft") ||
+//		true == GameEngineInput::GetInst()->IsPressed("PlayerRight") ||
+//		true == GameEngineInput::GetInst()->IsPressed("PlayerUp") ||
+//		true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+//	{
+//		stateManager_.ChangeState("Move");
+//	}
+//}
+//
+//void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
+//{
+//	if (false == GameEngineInput::GetInst()->IsPressed("PlayerLeft") &&
+//		false == GameEngineInput::GetInst()->IsPressed("PlayerRight") &&
+//		false == GameEngineInput::GetInst()->IsPressed("PlayerUp") &&
+//		false == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+//	{
+//		stateManager_.ChangeState("Idle");
+//		return;
+//	}
+//
+//	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
+//	{
+//		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * speed_ * _DeltaTime);
+//		playerRenderer_->GetTransform().PixLocalNegativeX();
+//	}
+//
+//	if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
+//	{
+//		GetTransform().SetWorldMove(GetTransform().GetRightVector() * speed_ * _DeltaTime);
+//		playerRenderer_->GetTransform().PixLocalPositiveX();
+//	}
+//	if (true == GameEngineInput::GetInst()->IsPressed("PlayerUp"))
+//	{
+//		GetTransform().SetWorldMove(GetTransform().GetUpVector() * speed_ * _DeltaTime);
+//	}
+//	if (true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+//	{
+//		GetTransform().SetWorldMove(GetTransform().GetDownVector() * speed_ * _DeltaTime);
+//	}
+//
+//}
 
 CollisionReturn Player::MonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
@@ -148,9 +148,84 @@ CollisionReturn Player::MonsterCollision(std::shared_ptr<GameEngineCollision> _T
 
 void Player::Update(float _deltaTime)
 {
-	stateManager_.Update(_deltaTime);
-	collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D,
-	std::bind(&Player::MonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+	//stateManager_.Update(_deltaTime);
+	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
+	{
+		if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
+		{
+			moveDirection_.x = 0;
+		}
+		else
+		{
+			playerRenderer_->GetTransform().PixLocalNegativeX();
+			moveDirection_ += moveDirection_.Left;
+		}
+	}
+	else if (true == GameEngineInput::GetInst()->IsUp("PlayerLeft"))
+	{
+		moveDirection_.x = 0;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
+	{
+		if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
+		{
+			moveDirection_.x = 0;
+		}
+		else
+		{
+			playerRenderer_->GetTransform().PixLocalPositiveX();
+			moveDirection_ += moveDirection_.Right;
+		}
+	}
+	else if (true == GameEngineInput::GetInst()->IsUp("PlayerRight"))
+	{
+		moveDirection_.x = 0;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPressed("PlayerUp"))
+	{
+		if (true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+		{
+			moveDirection_.y = 0;
+		}
+		else
+		{
+			moveDirection_ += moveDirection_.Up;
+		}
+	}
+	else if (true == GameEngineInput::GetInst()->IsUp("PlayerUp"))
+	{
+		moveDirection_.y = 0;
+	}
+	if (true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+	{
+		if (true == GameEngineInput::GetInst()->IsPressed("PlayerUp"))
+		{
+			moveDirection_.y = 0;
+		}
+		else
+		{
+			moveDirection_ += moveDirection_.Down;
+		}
+	}
+	else if (true == GameEngineInput::GetInst()->IsUp("PlayerDown"))
+	{
+		moveDirection_.y = 0;
+	}
+
+	if (moveDirection_ != 0)
+	{
+		playerRenderer_->ChangeFrameAnimation("PlayerRun");
+		GetTransform().SetWorldMove(moveDirection_.Normalize3D() * speed_ * _deltaTime);
+	}
+	else
+	{
+		playerRenderer_->ChangeFrameAnimation("PlayerIdle");
+	}
+
+
+	collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D, std::bind(&Player::MonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 void Player::End()
