@@ -54,6 +54,7 @@ protected:
 	//void MoveStart(const StateInfo& _info);
 	//void MoveUpdate(float _deltaTime, const StateInfo& _info);
 
+	void MoveDirectionUpdate(float _deltaTime);
 
 private:
 	float speed_;

@@ -146,9 +146,8 @@ CollisionReturn Player::MonsterCollision(std::shared_ptr<GameEngineCollision> _T
 	return CollisionReturn::Stop;
 }
 
-void Player::Update(float _deltaTime)
+void Player::MoveDirectionUpdate(float _deltaTime)
 {
-	//stateManager_.Update(_deltaTime);
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
 	{
 		if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
@@ -223,8 +222,13 @@ void Player::Update(float _deltaTime)
 	{
 		playerRenderer_->ChangeFrameAnimation("PlayerIdle");
 	}
+}
 
+void Player::Update(float _deltaTime)
+{
+	//stateManager_.Update(_deltaTime);
 
+	MoveDirectionUpdate(_deltaTime);
 	collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D, std::bind(&Player::MonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 
