@@ -201,6 +201,10 @@
     <ClInclude Include="GameEngineRasterizer.h" />
     <ClInclude Include="GameEngineRenderer.h" />
     <ClInclude Include="GameEngineMaterial.h" />
+    <ClInclude Include="GameEngineRenderingEvent.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineRenderTarget.h" />
     <ClInclude Include="GameEngineRes.h" />
     <ClInclude Include="GameEngineSampler.h" />
@@ -286,6 +290,10 @@
     <ClCompile Include="GameEngineRasterizer.cpp" />
     <ClCompile Include="GameEngineRenderer.cpp" />
     <ClCompile Include="GameEngineMaterial.cpp" />
+    <ClCompile Include="GameEngineRenderingEvent.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineRenderTarget.cpp" />
     <ClCompile Include="GameEngineRes.cpp" />
     <ClCompile Include="GameEngineSampler.cpp" />

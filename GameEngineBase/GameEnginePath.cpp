@@ -56,36 +56,50 @@ std::string GameEnginePath::GetExtension() const
 	return path_.extension().string();
 }
 
-std::string GameEnginePath::ReplaceFileName(const std::string_view& _newFileName)
+std::string GameEnginePath::GetFolderPath() const
+{
+	return path_.parent_path().string();
+}
+
+std::string GameEnginePath::ReplaceFileName(const std::filesystem::path& _newFileName)
 {
 	return path_.replace_filename(_newFileName).string();
 }
 
-std::string GameEnginePath::ReplaceExtension(const std::string_view& _newExtention)
+std::string GameEnginePath::ReplaceExtension(const std::filesystem::path& _newExtention)
 {
 	return path_.replace_extension(_newExtention).string();
 }
 
-std::string GameEnginePath::GetFileName(const std::string_view& _path)
+bool GameEnginePath::IsExist(const std::filesystem::path& _path)
 {
-	std::filesystem::path returnFileName = _path;
-	return returnFileName.filename().string();
+	return std::filesystem::exists(_path);
 }
 
-std::string GameEnginePath::GetStem(const std::string_view& _path)
+std::string GameEnginePath::GetFileName(const std::filesystem::path& _path)
 {
-	std::filesystem::path returnStem = _path;
-	return returnStem.stem().string();
+	//std::filesystem::path returnFileName = _path;
+	//return returnFileName.filename().string();
+	return _path.filename().string();
 }
 
-std::string GameEnginePath::GetExtension(const std::string_view& _path)
+std::string GameEnginePath::GetStem(const std::filesystem::path& _path)
 {
-	std::filesystem::path returnExtention = _path;
-	return returnExtention.extension().string();
+	//std::filesystem::path returnStem = _path;
+	//return returnStem.stem().string();
+	return _path.stem().string();
 }
 
-std::string GameEnginePath::GetFolderPath(const std::string_view& _path)
+std::string GameEnginePath::GetExtension(const std::filesystem::path& _path)
 {
-	std::filesystem::path returnFolderPath = _path;
-	return returnFolderPath.remove_filename().string();
+	//std::filesystem::path returnExtention = _path;
+	//return returnExtention.extension().string();
+	return _path.extension().string();
+}
+
+std::string GameEnginePath::GetFolderPath(const std::filesystem::path& _path)
+{
+	//std::filesystem::path returnFolderPath = _path;
+	//return returnFolderPath.parent_path().string();
+	return _path.parent_path().string();
 }

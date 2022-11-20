@@ -78,7 +78,7 @@ public:
 	fbxsdk::FbxTime			StartTime; // 설정된 애니메이션 시간
 	fbxsdk::FbxTime			EndTime; // 
 	fbxsdk::FbxLongLong		TimeStartCount;
-	fbxsdk::FbxLongLong		TimeEndCount;
+	fbxsdk::FbxLongLong		TimeEndCount; // 1414
 	fbxsdk::FbxLongLong		FrameCount;
 	fbxsdk::FbxTime::EMode	TimeMode;
 	__int64					FbxModeCount;
@@ -118,6 +118,7 @@ public:
 		_File.Read(AniFrameData);
 	}
 
+
 public:
 	float FrameTime(int _Frame)
 	{
@@ -149,22 +150,20 @@ public:
 	~FbxExAniData() {}
 };
 
-class GameEngineFBXAnimationRenderer;
+// 설명 :
 class GameEngineFBXMesh;
-class GameEngineFBXAnimation : public GameEngineRes<GameEngineFBXAnimation>, public GameEngineFBX
+class GameEngineFBXAnimationRenderer;
+class GameEngineFBXAnimation : public GameEngineFBX, public GameEngineRes<GameEngineFBXAnimation>
 {
-
 public:
 	GameEngineFBXAnimation();
 	~GameEngineFBXAnimation();
 
 private:
-
-	GameEngineFBXAnimation(const GameEngineFBXAnimation& _other) = delete;
-	GameEngineFBXAnimation(GameEngineFBXAnimation&& _other) noexcept = delete;
-	GameEngineFBXAnimation& operator=(const GameEngineFBXAnimation& _other) = delete;
-	GameEngineFBXAnimation& operator=(const GameEngineFBXAnimation&& _other) = delete;
-
+	GameEngineFBXAnimation(const GameEngineFBXAnimation& _Other) = delete;
+	GameEngineFBXAnimation(GameEngineFBXAnimation&& _Other) noexcept = delete;
+	GameEngineFBXAnimation& operator=(const GameEngineFBXAnimation& _Other) = delete;
+	GameEngineFBXAnimation& operator=(GameEngineFBXAnimation&& _Other) noexcept = delete;
 
 public:
 	static std::shared_ptr<GameEngineFBXAnimation> Load(const std::string& _Path)
@@ -174,10 +173,9 @@ public:
 
 	static std::shared_ptr<GameEngineFBXAnimation> Load(const std::string& _Path, const std::string& _Name);
 
-
 	// 애니메이션 프레임 행렬계산.
 	// 여기서 프레임의 의미는 Animation TimeEndCount - TimeStartCount
-	void AnimationMatrixLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, std::shared_ptr<GameEngineFBXAnimationRenderer> _Renderer, int _AnimationIndex);
+	void AnimationMatrixLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, const std::string_view& _Name, int _AnimationIndex);
 
 	FbxExAniData* GetAnimationData(int _Index)
 	{
@@ -196,9 +194,9 @@ protected:
 	void LoadMesh(const std::string& _Path, const std::string& _Name);
 
 	// 애니메이션은 노드의 어트리뷰트가 다 eMesh인 녀석에게 들어있으므로 그녀석에게서 애니메이션 로드 함수를 실행시키는 역할을 한다.
-	void ProcessAnimationLoad(std::shared_ptr<GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* pNode, int _index);
-	bool AnimationLoad(std::shared_ptr<GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* _Node, int AnimationIndex);
-	void ProcessAnimationCheckState(std::shared_ptr<GameEngineFBXMesh> _Fbx, int userAniDataIndex);
+	void ProcessAnimationLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* pNode, int _index);
+	bool AnimationLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* _Node, int AnimationIndex);
+	void ProcessAnimationCheckState(std::shared_ptr <GameEngineFBXMesh> _Fbx, int userAniDataIndex);
 	fbxsdk::FbxAMatrix GetGeometryTransformation(fbxsdk::FbxNode* pNode);
 
 	// 런
@@ -208,5 +206,5 @@ protected:
 
 private:
 	bool CheckAnimation();
-};
 
+};

@@ -1,12 +1,13 @@
 #include "PreCompile.h"
 #include "GameEngineFile.h"
 #include "GameEngineDebug.h"
+#include "GameEngineDirectory.h"
 
 GameEngineFile::GameEngineFile() : filePtr_(nullptr)
 {
 }
 
-GameEngineFile::GameEngineFile(const char* _path) : GameEnginePath(_path), filePtr_(nullptr) 
+GameEngineFile::GameEngineFile(const char* _path) : GameEnginePath(_path), filePtr_(nullptr)
 {
 }
 
@@ -86,7 +87,12 @@ void GameEngineFile::Open(OpenMode _openMode, FileMode _fileMode)
 		mode.c_str()			//파일 오픈 모드. 
 	);
 
-	if (0 != openResult)
+	if (2 == openResult)
+	{
+		MsgBoxAssertString(path_.string() + "\n존재하지 않는 경로입니다.");
+		return;
+	}
+	else if (0 != openResult)
 	{
 		MsgBoxAssert("파일을 정상적으로 여는데 실패했습니다.");
 		return;
@@ -104,13 +110,26 @@ void GameEngineFile::Close()
 
 void GameEngineFile::Read(void* _readData, size_t _dataSize, size_t _readSize)
 {
-	fread_s(
+	size_t readResult = fread_s(
 		_readData,
 		_dataSize,
 		_readSize,
 		1,			//읽는 횟수.
 		filePtr_
 	);
+
+	if (0 != ferror(filePtr_))
+	{
+		MsgBoxAssert("파일을 읽는데 실패했습니다.");
+		return;
+	}
+	//if (0 != feof(filePtr_))
+	//{
+	//	MsgBoxAssert("파일 끝을 넘어섰습니다.");
+	//	return;
+	//}
+	//알 수 없는 이유로 셰이더파일 크기와 셰이더코드 문자열 길이가 다르므로 feof()같은 파일 끝 검사 하지 말 것.
+	//->아마 한글 주석 등의 2바이트 이상 크기의 글자들 때문에 글자 수보다 실제 파일 크기가 더 커진것으로 예상됨.
 }
 
 void GameEngineFile::Read(std::string& _text)
@@ -148,12 +167,18 @@ void GameEngineFile::Read(unsigned int& _data)
 
 void GameEngineFile::Write(const void* _writeData, size_t _writeSize)
 {
-	fwrite(
+	size_t writeResult = fwrite(
 		_writeData,
 		_writeSize,
 		1,			//쓰는 횟수.
 		filePtr_
 	);
+
+	if (1 != writeResult)
+	{
+		MsgBoxAssert("파일 쓰기 실패.");
+		return;
+	}
 }
 
 void GameEngineFile::Write(const std::string& _text)
@@ -192,11 +217,11 @@ void GameEngineFile::Write(const unsigned int& _data)
 
 std::string GameEngineFile::GetString()
 {
-	std::string allString;
+	uintmax_t fileSize = GetFileSize();	//unsigned long long == uintmax_t == size_t.
 
-	uintmax_t fileSize = GetFileSize();
+	std::string allString = std::string(fileSize, '0');
 
-	allString.resize(fileSize);	//unsigned long long == uintmax_t == size_t.
+	//allString.resize(fileSize);	
 
 	Read(&allString[0], fileSize, fileSize);
 
@@ -206,9 +231,15 @@ std::string GameEngineFile::GetString()
 uintmax_t GameEngineFile::GetFileSize() const
 {
 	return std::filesystem::file_size(this->path_);
+	//파일크기를 읽는데 실패하면 -1 반환.
 }
 
 uintmax_t GameEngineFile::GetFileSize(const std::filesystem::path& _path)
 {
 	return std::filesystem::file_size(_path);
+}
+
+GameEngineDirectory GameEngineFile::GetDirectory()
+{
+	return GameEngineDirectory(path_.parent_path());
 }

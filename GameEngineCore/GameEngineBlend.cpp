@@ -12,11 +12,11 @@ GameEngineBlend::GameEngineBlend()
 
 GameEngineBlend::~GameEngineBlend()
 {
-    //if (nullptr != blendState_)
-    //{
-    //    blendState_->Release();
-    //    blendState_ = nullptr;
-    //}
+    if (nullptr != blendState_)
+    {
+        blendState_->Release();
+        blendState_ = nullptr;
+    }
 }
 
 std::shared_ptr<GameEngineBlend> GameEngineBlend::Create(
@@ -25,7 +25,7 @@ std::shared_ptr<GameEngineBlend> GameEngineBlend::Create(
 )
 {
     std::shared_ptr<GameEngineBlend> newRes = CreateNamedRes(_name);
-    newRes->Create(_desc);
+    newRes->CreateBlendState(_desc);
     return newRes;
 }
 
@@ -41,7 +41,7 @@ void GameEngineBlend::Setting()
 
 }
 
-void GameEngineBlend::Create(const D3D11_BLEND_DESC& _desc)
+void GameEngineBlend::CreateBlendState(const D3D11_BLEND_DESC& _desc)
 {
     blendDesc_ = _desc;
 

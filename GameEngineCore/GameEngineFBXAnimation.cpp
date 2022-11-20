@@ -19,25 +19,12 @@ std::shared_ptr<GameEngineFBXAnimation> GameEngineFBXAnimation::Load(const std::
 	return NewRes;
 }
 
-void GameEngineFBXAnimation::UserLoad(const std::string_view& _Path)
-{
-	GameEngineFile File = _Path;
-	File.Open(OpenMode::Read, FileMode::Binary);
-	File.Read(AnimationDatas);
-}
-
-void GameEngineFBXAnimation::UserSave(const std::string_view& _Path)
-{
-	GameEngineFile File = _Path;
-	File.Open(OpenMode::Write, FileMode::Binary);
-	File.Write(AnimationDatas);
-}
-
 void GameEngineFBXAnimation::LoadMesh(const std::string& _Path, const std::string& _Name)
 {
 	FBXInit(_Path);
 
 	CheckAnimation();
+	// 애니메이션이 존재한다 => 그걸로 아직 뭔가를 하지 않는다.
 
 	AnimationDatas;
 }
@@ -97,7 +84,7 @@ fbxsdk::FbxAMatrix GameEngineFBXAnimation::GetGeometryTransformation(fbxsdk::Fbx
 }
 
 
-bool GameEngineFBXAnimation::AnimationLoad(std::shared_ptr<GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* _Node, int AnimationIndex)
+bool GameEngineFBXAnimation::AnimationLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* _Node, int AnimationIndex)
 {
 	FbxAnimStack* stack = scene_->GetSrcObject<FbxAnimStack>(AnimationIndex);
 	// 이 씬의 애니메이션을 이 스택의 애니메이션으로 지정해준다.
@@ -213,7 +200,7 @@ bool GameEngineFBXAnimation::AnimationLoad(std::shared_ptr<GameEngineFBXMesh> _M
 }
 
 
-void GameEngineFBXAnimation::ProcessAnimationCheckState(std::shared_ptr<GameEngineFBXMesh> _Fbx, int userAniDataIndex)
+void GameEngineFBXAnimation::ProcessAnimationCheckState(std::shared_ptr <GameEngineFBXMesh> _Fbx, int userAniDataIndex)
 {
 	// 뛴다
 	FbxExAniData& userAniData = AnimationDatas.at(userAniDataIndex);
@@ -268,9 +255,8 @@ void GameEngineFBXAnimation::ProcessAnimationCheckState(std::shared_ptr<GameEngi
 	}
 }
 
-
 // 애니메이션은 노드의 어트리뷰트가 다 eMesh인 녀석에게 들어있으므로 그녀석에게서 애니메이션 로드 함수를 실행시키는 역할을 한다.
-void GameEngineFBXAnimation::ProcessAnimationLoad(std::shared_ptr<GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* pNode, int _index)
+void GameEngineFBXAnimation::ProcessAnimationLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, fbxsdk::FbxNode* pNode, int _index)
 {
 	// 모든 노드를 다 훑기 위해서
 
@@ -307,11 +293,15 @@ void GameEngineFBXAnimation::ProcessAnimationLoad(std::shared_ptr<GameEngineFBXM
 
 
 // 본을 가진 GameEngineFBXMesh기반으로 애니메이션 행렬을 만들어낸다.
-void GameEngineFBXAnimation::AnimationMatrixLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, std::shared_ptr<GameEngineFBXAnimationRenderer> _Renderer, int _AnimationIndex)
+void GameEngineFBXAnimation::AnimationMatrixLoad(std::shared_ptr <GameEngineFBXMesh> _Mesh, const std::string_view& _Name, int _AnimationIndex)
 {
-	GameEngineFile SaveFile = GetPath();
-	SaveFile.ReplaceExtension(".AnimationFBX");
-	SaveFile.GetExtension();
+	GameEngineFile DirFile = GetPath();
+
+	GameEngineDirectory Dir = DirFile.GetDirectory();
+	std::string FileName = _Name.data();
+	FileName += ".AnimationFBX";
+
+	GameEngineFile SaveFile = GameEngineFile(Dir.PlusFilePath(FileName));
 	if (SaveFile.IsExist())
 	{
 		UserLoad(SaveFile.GetFullPath());
@@ -358,4 +348,18 @@ void GameEngineFBXAnimation::AnimationMatrixLoad(std::shared_ptr <GameEngineFBXM
 	}
 
 	AnimationDatas;
+}
+
+void GameEngineFBXAnimation::UserLoad(const std::string_view& _Path)
+{
+	GameEngineFile File = _Path.data();
+	File.Open(OpenMode::Read, FileMode::Binary);
+	File.Read(AnimationDatas);
+}
+
+void GameEngineFBXAnimation::UserSave(const std::string_view& _Path)
+{
+	GameEngineFile File = _Path.data();
+	File.Open(OpenMode::Write, FileMode::Binary);
+	File.Write(AnimationDatas);
 }

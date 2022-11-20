@@ -19,7 +19,12 @@ GameEngineRenderTarget::~GameEngineRenderTarget()
 	//	effect = nullptr;
 	//}
 
-	allEffects_.clear();
+	//if (nullptr != depthStencilView_)
+	//{
+	//	depthStencilView_->Release();
+	//	depthStencilView_ = nullptr;
+	//}
+	//이건 왜 터지지?
 }
 
 std::shared_ptr<GameEngineRenderTarget> GameEngineRenderTarget::Create(const std::string_view& _name)

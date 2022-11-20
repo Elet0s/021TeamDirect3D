@@ -8,10 +8,6 @@ GameEngineFBXMesh::GameEngineFBXMesh()
 
 GameEngineFBXMesh::~GameEngineFBXMesh()
 {
-	//for (size_t i = 0; i < AllBoneStructuredBuffers.size(); i++)
-	//{
-	//	delete AllBoneStructuredBuffers[i];
-	//} 
 	AllBoneStructuredBuffers.clear();
 }
 
@@ -170,19 +166,27 @@ Bone* GameEngineFBXMesh::FindBone(size_t MeshIndex, const std::string& _Name)
 void GameEngineFBXMesh::LoadMesh(const std::string& _Path, const std::string& _Name)
 {
 	GameEngineFile SaveFile = _Path;
-
 	SaveFile.ReplaceExtension(".MeshFBX");
-	SaveFile.GetExtension();
 
-	FBXInit(_Path);
+	GameEngineFile FBXFile = GameEngineFile(_Path.c_str());
+	FBXFile.ReplaceExtension(".FBX");
+
+
 	// 버텍스 정보를 가진 노드를 조사한다.
 	if (SaveFile.IsExist())
 	{
+		GameEngineDirectory Dir = SaveFile.GetDirectory();
 		UserLoad(SaveFile.GetFullPath());
+		FBXInit(Dir.PlusFilePath(FBXMeshName));
 		CreateGameEngineStructuredBuffer();
 		return;
 	}
 
+	FBXMeshName = FBXFile.GetFileName();
+	// 이 fbx로 애니메이션을 로드하려면 필요하다.
+	// 이유 => 우리는 스켈레탈을 따로 빼지 않았다.
+	// 버텍스 정보를 가진 노드를 조사한다.
+	FBXInit(_Path);
 	MeshLoad();
 	CreateGameEngineStructuredBuffer();
 
@@ -191,7 +195,7 @@ void GameEngineFBXMesh::LoadMesh(const std::string& _Path, const std::string& _N
 		UserSave(SaveFile.GetFullPath());
 	}
 
-	ImportBone();
+	//ImportBone();	//이거 필요해??
 }
 
 void GameEngineFBXMesh::MeshLoad()
@@ -202,7 +206,7 @@ void GameEngineFBXMesh::MeshLoad()
 
 	ImportBone();
 
-	CreateGameEngineStructuredBuffer();
+	//CreateGameEngineStructuredBuffer();
 
 	AllBones; // 본정보체
 	AllBoneStructuredBuffers;
@@ -1000,11 +1004,23 @@ bool GameEngineFBXMesh::ImportBone()
 			fbxManager_->CreateMissingBindPoses(scene_);
 			if (RetrievePoseFromBindPose(scene_, MeshNodeArray, PoseArray) == false)
 			{
-				MsgBoxAssert("Recreating bind pose failed.");
+				// MsgBoxAssert("Recreating bind pose failed.");
 			}
 		}
 
 		BuildSkeletonSystem(scene_, ClusterArray[Clusterindex], SortedLinks);
+
+		std::map<fbxsdk::FbxNode*, std::set<fbxsdk::FbxCluster*>> ClusterSet;
+
+		for (int ClusterIndex = 0; ClusterIndex < ClusterArray.size(); ClusterIndex++)
+		{
+			for (size_t i = 0; i < ClusterArray[ClusterIndex].size(); i++)
+			{
+				fbxsdk::FbxCluster* Cluster = ClusterArray[ClusterIndex][i];
+				ClusterSet[Cluster->GetLink()].insert(ClusterArray[ClusterIndex][i]);;
+			}
+		}
+
 
 		// 본이 없다는 이야기.
 		if (SortedLinks.size() == 0)
@@ -1133,16 +1149,40 @@ bool GameEngineFBXMesh::ImportBone()
 
 				if (!GlobalLinkFoundFlag)
 				{
-					for (int ClusterIndex = 0; ClusterIndex < ClusterArray.size(); ClusterIndex++)
+
+					std::map<fbxsdk::FbxNode*, std::set<fbxsdk::FbxCluster*>>::iterator FindIter = ClusterSet.find(Link);
+
+					if (FindIter != ClusterSet.end())
 					{
-						fbxsdk::FbxCluster* Cluster = ClusterArray[0][ClusterIndex];
-						if (Link == Cluster->GetLink())
+						for (fbxsdk::FbxCluster* Cluster : FindIter->second)
 						{
 							Cluster->GetTransformLinkMatrix(GlobalsPerLink[static_cast<int>(LinkIndex)]);
 							GlobalLinkFoundFlag = true;
 							break;
 						}
 					}
+
+					//for (int ClusterIndex = 0; ClusterIndex < ClusterArray.size(); ClusterIndex++)
+					//{
+					//	//fbxsdk::FbxCluster* Cluster = ClusterArray[0][ClusterIndex];
+					//	//if (Link == Cluster->GetLink())
+					//	//{
+					//	//	Cluster->GetTransformLinkMatrix(GlobalsPerLink[static_cast<int>(LinkIndex)]);
+					//	//	GlobalLinkFoundFlag = true;
+					//	//	break;
+					//	//}
+
+					//	for (size_t i = 0; i < ClusterArray[ClusterIndex].size(); i++)
+					//	{
+					//		fbxsdk::FbxCluster* Cluster = ClusterArray[ClusterIndex][i];
+					//		if (Link == Cluster->GetLink())
+					//		{
+					//			Cluster->GetTransformLinkMatrix(GlobalsPerLink[static_cast<int>(LinkIndex)]);
+					//			GlobalLinkFoundFlag = true;
+					//			break;
+					//		}
+					//	}
+					//}
 				}
 			}
 
@@ -1308,7 +1348,8 @@ bool GameEngineFBXMesh::RetrievePoseFromBindPose(fbxsdk::FbxScene* pScene, const
 							std::string ErrorString = Status.GetErrorString();
 							std::string CurrentName = Current->GetName();
 
-							MsgBoxAssertString(ErrorString + "_" + CurrentName);
+							break;
+							//MsgBoxAssertString(ErrorString + "_" + CurrentName);
 						}
 					}
 				}
@@ -1619,10 +1660,10 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineFBXMesh::GetAnimationStruc
 
 void GameEngineFBXMesh::UserLoad(const std::string_view& _Path)
 {
-
 	GameEngineFile File = _Path;
 	File.Open(OpenMode::Read, FileMode::Binary);
 
+	File.Read(FBXMeshName);
 	File.Read(MeshInfos);
 	File.Read(RenderUnitInfos);
 	File.Read(AllBones);
@@ -1643,7 +1684,45 @@ void GameEngineFBXMesh::UserSave(const std::string_view& _Path)
 	GameEngineFile File = _Path;
 	File.Open(OpenMode::Write, FileMode::Binary);
 
+	File.Write(FBXMeshName);
 	File.Write(MeshInfos);
 	File.Write(RenderUnitInfos);
+	File.Write(AllBones);
+}
+
+void GameEngineFBXMesh::UserSave(const std::string_view& _Path, size_t Index)
+{
+	GameEngineFile File = _Path.data();
+	File.Open(OpenMode::Write, FileMode::Binary);
+
+	std::vector<FBXExMeshInfo> SaveMeshInfos;
+	std::vector<FBXRenderUnitInfo> SaveRenderUnitInfos;
+
+	SaveMeshInfos.push_back(MeshInfos[Index]);
+	SaveRenderUnitInfos.push_back(RenderUnitInfos[Index]);
+
+	File.Write(FBXMeshName);
+	File.Write(SaveMeshInfos);
+	File.Write(SaveRenderUnitInfos);
+	File.Write(AllBones);
+}
+
+void GameEngineFBXMesh::UserSave(const std::string_view& _Path, std::vector<size_t> _Indexs)
+{
+	GameEngineFile File = _Path.data();
+	File.Open(OpenMode::Write, FileMode::Binary);
+
+	std::vector<FBXExMeshInfo> SaveMeshInfos;
+	std::vector<FBXRenderUnitInfo> SaveRenderUnitInfos;
+
+	for (size_t i = 0; i < _Indexs.size(); i++)
+	{
+		SaveMeshInfos.push_back(MeshInfos[_Indexs[i]]);
+		SaveRenderUnitInfos.push_back(RenderUnitInfos[_Indexs[i]]);
+	}
+
+	File.Write(FBXMeshName);
+	File.Write(SaveMeshInfos);
+	File.Write(SaveRenderUnitInfos);
 	File.Write(AllBones);
 }

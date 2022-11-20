@@ -30,13 +30,15 @@ public:
 	std::string GetFileName() const;
 	std::string GetStem() const;
 	std::string GetExtension() const;
-	std::string ReplaceFileName(const std::string_view& _newFileName);
-	std::string ReplaceExtension(const std::string_view& _newExtention);
+	std::string GetFolderPath() const;
+	std::string ReplaceFileName(const std::filesystem::path& _newFileName);
+	std::string ReplaceExtension(const std::filesystem::path& _newExtention);
 
-	static std::string GetFileName(const std::string_view& _path);
-	static std::string GetStem(const std::string_view& _path);
-	static std::string GetExtension(const std::string_view& _path);
-	static std::string GetFolderPath(const std::string_view& _path);
+	static bool IsExist(const std::filesystem::path& _path);
+	static std::string GetFileName(const std::filesystem::path& _path);
+	static std::string GetStem(const std::filesystem::path& _path);
+	static std::string GetExtension(const std::filesystem::path& _path);
+	static std::string GetFolderPath(const std::filesystem::path& _path);
 
 
 };

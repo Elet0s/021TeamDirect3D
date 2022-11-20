@@ -24,7 +24,7 @@ public:
 	void Setting();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
 
 private:
-	void Create(const D3D11_DEPTH_STENCIL_DESC& _desc);
+	void CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC& _desc);
 
 private:
 	ID3D11DepthStencilState* depthStencilState_;	//렌더링 파이프라인에 연결할 깊이스텐실 스테이트

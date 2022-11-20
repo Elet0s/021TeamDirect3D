@@ -185,11 +185,11 @@ std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::ClonePipeLine(std::sha
 void GameEngineRenderUnit::SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer)
 {
 	parentRenderer_ = _parentRenderer;
-	//if (nullptr == parentRenderer_)
-	//{
-	//	MsgBoxAssert("존재하지 않는 렌더러입니다.");
-	//	return;
-	//}
+	if (true == parentRenderer_.expired())
+	{
+		MsgBoxAssert("존재하지 않는 렌더러입니다.");
+		return;
+	}
 
 	EngineShaderResourceSetting(_parentRenderer);
 }

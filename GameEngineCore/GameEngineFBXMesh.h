@@ -605,6 +605,10 @@ public:
 	void UserLoad(const std::string_view& _Path);
 	void UserSave(const std::string_view& _Path);
 
+	void UserSave(const std::string_view& _Path, size_t Index);
+
+	void UserSave(const std::string_view& _Path, std::vector<size_t> _Indexs);
+
 public:
 	size_t GetRenderUnitCount()
 	{
@@ -628,6 +632,8 @@ public:
 	}
 
 protected:
+	std::string FBXMeshName;
+
 	// 매쉬가 있어
 	std::vector<FBXExMeshInfo> MeshInfos;
 	// 매쉬의 버텍스가 이렇이렇게 되어있어.

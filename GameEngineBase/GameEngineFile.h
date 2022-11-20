@@ -66,6 +66,7 @@ public:
 	std::string GetString();
 	uintmax_t GetFileSize() const;
 	static uintmax_t GetFileSize(const std::filesystem::path& _path);
+	class GameEngineDirectory GetDirectory();
 
 
 public:

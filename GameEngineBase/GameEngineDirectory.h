@@ -24,6 +24,7 @@ public:
 	void MoveToParent(const std::string_view& _parentName);
 	bool MoveParentToExistChildDirectory(const std::string_view& _childName);
 	bool IsRoot() const;
+	bool IsFileExist(const std::string_view& _fileName);
 	void MoveToChild(const std::string_view& _childName);
 	std::string PlusFilePath(const std::string_view& _fileName);
 

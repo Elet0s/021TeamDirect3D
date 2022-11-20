@@ -117,9 +117,16 @@ bool GameEngineDirectory::MoveParentToExistChildDirectory(const std::string_view
 
 bool GameEngineDirectory::IsRoot() const
 {
-	//return "\\" == this->path_.parent_path().string();
 	return this->path_.root_path() == this->path_;
 	//std::filesystem::path::root_path() 현재 주어진 경로의 루트 경로를 반환하는 함수.
+}
+
+bool GameEngineDirectory::IsFileExist(const std::string_view& _fileName)
+{
+	std::filesystem::path checkPath = this->path_;
+	checkPath += _fileName;
+
+	return std::filesystem::exists(checkPath);
 }
 
 void GameEngineDirectory::MoveToChild(const std::string_view& _childName)

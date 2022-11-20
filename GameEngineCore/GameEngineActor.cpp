@@ -9,27 +9,6 @@ GameEngineActor::GameEngineActor() : parentLevel_(), isLevelOver_(false)
 
 GameEngineActor::~GameEngineActor()
 {
-	//for (GameEngineComponent* component : allComponents_)
-	//{
-	//	if (nullptr != component)
-	//	{
-	//		delete component;
-	//		component = nullptr;
-	//	}
-	//}
-
-	//for (GameEngineTransformComponent* transformComponent : allTransformComponents_)
-	//{
-	//	if (nullptr != transformComponent)
-	//	{
-	//		delete transformComponent;
-	//		transformComponent = nullptr;
-	//	}
-	//}
-	//왜 더이상 소멸자에서 삭제하지 않지??
-	//->액터가 컴포넌트들을 더이상 직접 가지지 않고 GameEngineUpdateObject클래스의 children_을 통해 간접적으로 가지기 
-	// 때문에 컴포넌트 삭제도 직접 삭제할 수 없고, 삭제 대상인 컴포넌트가 직접 Death()함수를 호출해야 여러 절차를 거쳐 
-	// 제대로 삭제할 수 있다.
 }
 
 void GameEngineActor::DetachObject()

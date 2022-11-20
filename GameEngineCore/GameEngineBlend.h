@@ -27,7 +27,7 @@ public:
 	void Setting();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
 
 private:
-	void Create(const D3D11_BLEND_DESC& _desc);
+	void CreateBlendState(const D3D11_BLEND_DESC& _desc);
 
 private:
 	ID3D11BlendState* blendState_;	//렌더링 파이프라인 아웃풋머져 단계에 연결할 블렌드스테이트.

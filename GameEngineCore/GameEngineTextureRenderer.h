@@ -293,10 +293,6 @@ public:
 
 	bool IsCurAnimation()
 	{
-		//if (nullptr == currentAnimation_)
-		//{
-		//	return false;
-		//}
 		return nullptr != currentAnimation_;
 	}
 
