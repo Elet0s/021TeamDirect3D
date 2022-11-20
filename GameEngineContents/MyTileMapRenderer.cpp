@@ -129,6 +129,7 @@ void MyTileMapRenderer::Render(float _deltaTime)
 			tileTransform.SetLocalScale(alltiles_[y][x].tileImage_->GetScale());
 			tileTransform.SetLocalPosition(tilePos);
 			tileTransform.CalculateWorldViewProjection();
+
 			this->GetShaderResourceHelper().SetConstantBuffer_Link("TransformData", tileTransform.GetTransformData());
 			this->GetShaderResourceHelper().SetTexture("Tex", alltiles_[y][x].tileImage_);
 			GameEngineDefaultRenderer::Render(_deltaTime);

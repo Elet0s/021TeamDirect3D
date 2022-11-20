@@ -178,12 +178,6 @@ public:
 	void SetPivot(PivotMode _pivot);
 	void SetPivotToVector(const float4& _localPos);
 
-	//void SetSamplingMode_Point();
-	////필터가 D3D11_FILTER_MIN_MAG_MIP_POINT로 세팅된 샘플러 사용.
-
-	//void SetSamplingMode_Linear();
-	////필터가 D3D11_FILTER_MIN_MAG_MIP_LINEAR로 세팅된 샘플러 사용.
-
 
 	void CreateFrameAnimation_CutTexture(const std::string_view& _animationName, const FrameAnimation_Desc& _desc);
 	void CreateFrameAnimation_FolderTexture(const std::string_view& _animationName, const FrameAnimation_Desc& _desc);

@@ -88,6 +88,8 @@ void TestLevel::Start()
 		Player::CreatePlayer(this, { 960.f, -960.f });
 	}
 
+	Monster_.reserve(60);
+
 	{
 		for (size_t i = 0; i < 10; i++)
 		{

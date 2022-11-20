@@ -367,17 +367,16 @@ void GameEngineCamera::Render(float _deltaTime)
 				renderer->GetTransform().CalculateWorldViewProjection();
 				//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
 
+				
 				if (true == float4x4::IsInViewSpace(
-					renderer->GetTransformData().worldViewProjectionMatrix_))
+					renderer->GetTransformData().worldViewProjectionMatrix_, 
+					float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
+				)
+					//뷰스페이스 안에 조금이라도 들어오는 것들만 그린다.
 				{
 					renderer->Render(scaleTime);
 					//뷰포트행렬을 포함한 모든 행렬 계산을 거친 결과대로 메쉬를 화면에 그린다.
 				}
-
-
-
-				
-
 			}
 		}
 	}

@@ -70,6 +70,5 @@ private:
 	//} 	D3D11_RASTERIZER_DESC;
 
 	D3D11_RASTERIZER_DESC rasterizerDesc_;		//래스터라이저 생성 명세서.
-
 };
 

@@ -16,11 +16,8 @@ struct Output
     //시맨틱(semantic). GPU에게 알려주는, 해당 값의 종류. GPU가 자동으로 처리할 수 있는 종류의 값이면 자동으로 처리해준다.
     float4 pos_ : SV_Position; //SV_Position: 이 시맨틱을 통해서만 버텍스 셰이더에서 변경된 정점 위치를 래스터라이저로 전달할 수 있다.
     //SV는 System-Value semantic의 약자로, DirectX10에서부터 도입된, 용도가 정해져 있어서 GPU가 자동으로 처리하는 시맨틱 키워드이다.
-    
-    float4 posLocal_ : POSITION;    //최초 정점좌표(-0.5~0.5 사이 좌표). 
 
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-
 };
 
 cbuffer AtlasData : register(b1)
@@ -40,7 +37,6 @@ Output TextureAtlas_VS(Input _input)
     
     newOutput.pos_ = mul(_input.pos_, worldViewProjectionMatrix_); //WVP행렬 적용.
     
-    newOutput.posLocal_ = _input.pos_; //WVP행렬 비적용. 최초 정점좌표(-0.5~0.5 사이 좌표) 유지??
     
     newOutput.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
     newOutput.texcoord_.y = (_input.texcoord_.y * textureFrameSize_.y) + textureFramePos_.y;
@@ -72,6 +68,7 @@ SamplerState POINTCLAMP : register(s0);
 
 float4 TextureAtlas_PS(Output _input) : SV_Target0 //SV_Target[n]: n번 렌더타겟에 결과값을 저장한다.
 {
+    
     if (_input.texcoord_.x < slice_.x)
     {
         clip(-1);
@@ -92,6 +89,8 @@ float4 TextureAtlas_PS(Output _input) : SV_Target0 //SV_Target[n]: n번 렌더타겟�
     {
         resultColor.a = 1.f;
     }
+    
+
     
     return resultColor;
 }

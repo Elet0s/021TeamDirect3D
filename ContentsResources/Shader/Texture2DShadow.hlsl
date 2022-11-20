@@ -27,6 +27,7 @@ Output TextureShadow_VS(Input _input)
     float4 vertexPos = _input.pos_;
     vertexPos += pivotPos_;        
     vertexPos.x = (-sin(radians(30.f)) * (vertexPos.y + 0.5f) + vertexPos.x) * vertexInversion_;
+    //오브젝트가 좌우반전되면 -1을 곱해서 그림자는 다시한번 좌우반전시킨다.
 
     vertexPos.y = cos(radians(30.f)) * (vertexPos.y + 0.5f) - 0.5f;
     
@@ -35,6 +36,7 @@ Output TextureShadow_VS(Input _input)
     if (-1 == vertexInversion_)
     {
         _input.texcoord_.x = 1.f - _input.texcoord_.x;
+        //오브젝트가 좌우반전되면 texcoord도 좌우반전해서 그려지게 한다.
     }
     
     newOutput.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
