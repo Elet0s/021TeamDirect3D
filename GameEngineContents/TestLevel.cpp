@@ -76,7 +76,6 @@ void TestLevel::Start()
 
 	//if (nullptr == Player::GetMainPlayer())
 	//{
-
 		//Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
 		//NewPlayer->SetLevelOverOn();
 		//NewPlayer->SetLevel(this);

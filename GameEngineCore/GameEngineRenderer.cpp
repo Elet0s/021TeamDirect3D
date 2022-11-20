@@ -128,7 +128,7 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 {
 	if (nullptr == this->material_)
 	{
-		MsgBoxAssert("렌더링 파이프라인이 없습니다. 렌더링을 할 수 없습니다.");
+		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
 		return;
 	}
 
