@@ -26,10 +26,10 @@ Output TextureShadow_VS(Input _input)
 
     float4 vertexPos = _input.pos_;
     vertexPos += pivotPos_;        
-    vertexPos.x = (-sin(radians(30.f)) * (vertexPos.y + 0.5f) + vertexPos.x) * vertexInversion_;
+    vertexPos.x = (-sin(radians(shadowAngle_)) * (vertexPos.y + 0.5f) + vertexPos.x) * vertexInversion_;
     //오브젝트가 좌우반전되면 -1을 곱해서 그림자는 다시한번 좌우반전시킨다.
 
-    vertexPos.y = cos(radians(30.f)) * (vertexPos.y + 0.5f) - 0.5f;
+    vertexPos.y = cos(radians(shadowAngle_)) * (vertexPos.y + 0.5f) - 0.5f;
     
     newOutput.pos_ = mul(vertexPos, worldViewProjectionMatrix_); //WVP행렬 적용.
     
@@ -52,11 +52,11 @@ Output TextureShadow_VS(Input _input)
 }
 
 Texture2D Tex : register(t0);
-SamplerState POINTCLAMP : register(s0);
+SamplerState LINEARWRAP : register(s0);
 
 float4 TextureShadow_PS(Output _input) : SV_Target0
 {  
-    float4 sampledColor = Tex.Sample(POINTCLAMP, _input.texcoord_.xy);
+    float4 sampledColor = Tex.Sample(LINEARWRAP, _input.texcoord_.xy);
     float4 shadowColor = (float4) 0;
     
     if (sampledColor.a <= 0.f)

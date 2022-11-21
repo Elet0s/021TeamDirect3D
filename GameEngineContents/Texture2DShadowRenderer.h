@@ -31,6 +31,7 @@ private:
 
 public:	
 	void SetTextureRenderer(std::shared_ptr<GameEngineTextureRenderer> _textureRenderer);
+	void SetShadowAngle(float _angle = 30.f);
 
 private:
 	void Start() override;

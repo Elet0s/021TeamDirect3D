@@ -23,7 +23,8 @@ public:
 		GameEngineLevel* _thisLevel,
 		const float4& _initPosition,
 		const std::string_view& _playerName = "MainPlayer"
-	);
+	);	//플레이어 공식 생성 함수.
+	//플레이어 전역과 std::shared_ptr<Player>을 유지하기 위해서 만든 함수.
 
 
 
