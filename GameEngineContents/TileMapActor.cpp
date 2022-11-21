@@ -49,7 +49,7 @@ void TileMapActor::Start()
 				Y *= 16.0f;
 				renderers_[i]->SetFolderTextureToIndex("Grass", GameEngineRandom::mainRandom_.RandomInt(0, 2));
 				renderers_[i]->ScaleToTexture();
-				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -500.f });
+				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -10.f });
 			}
 			else if (i < 80)
 			{
@@ -57,7 +57,7 @@ void TileMapActor::Start()
 				Y *= 16.0f;
 				renderers_[i]->SetFolderTextureToIndex("Grass", 3);
 				renderers_[i]->ScaleToTexture();
-				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -500.f });
+				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -10.f });
 			}
 
 			else if (i < 117)
@@ -66,7 +66,7 @@ void TileMapActor::Start()
 				Y *= 16.0f;
 				renderers_[i]->SetFolderTextureToIndex("Rock", GameEngineRandom::mainRandom_.RandomInt(0, 2));
 				renderers_[i]->ScaleToTexture();
-				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
+				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -10.f });
 			}
 			else if (i < 120)
 			{
@@ -75,7 +75,7 @@ void TileMapActor::Start()
 				Y *= 64.0f;
 				renderers_[i]->SetFolderTextureToIndex("Rock", 3);
 				renderers_[i]->ScaleToTexture();
-				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
+				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -10.f });
 				Count++;
 			}
 
@@ -102,13 +102,13 @@ void TileMapActor::Update(float _deltaTime)
 {
 	if (true == renderOn)
 	{
-		float4 CameraPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition() - float4(750.f, -500.f);
+		float4 CameraPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition() - float4(750.f, -400.f);
 		for (size_t i = 0; i < 120; ++i)
 		{
 			float4 Pos = renderers_[i]->GetTransform().GetWorldPosition();
 
-			if ((Pos.IX() >= CameraPos.IX() && Pos.IX() <= CameraPos.IX() + 3000.f)
-				&& (Pos.IY() <= CameraPos.IY() + 200.f && Pos.IY() >= CameraPos.IY() -1000.f))
+			if ((Pos.IX() >= CameraPos.IX() && Pos.IX() <= CameraPos.IX() + 1500.f)
+				&& (Pos.IY() <= CameraPos.IY() + 200.f && Pos.IY() >= CameraPos.IY() -800.f))
 			
 			{
 				renderers_[i]->On();
@@ -124,6 +124,33 @@ void TileMapActor::Update(float _deltaTime)
 
 			{
 				trees_[i]->On();
+			}
+		}
+	}
+
+	{
+		float4 CameraPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition() - float4(750.f, -400.f);
+		for (size_t i = 0; i < 120; ++i)
+		{
+			float4 Pos = renderers_[i]->GetTransform().GetWorldPosition();
+
+			if ((Pos.IX() < CameraPos.IX() || Pos.IX() > CameraPos.IX() + 1500.f)
+				|| (Pos.IY() > CameraPos.IY() || Pos.IY() < CameraPos.IY() - 800.f))
+
+			{
+				renderers_[i]->Off();
+				shadowRenderers_[i]->Off();
+			}
+		}
+
+		for (size_t i = 0; i < trees_.size(); ++i)
+		{
+			float4 Pos = trees_[i]->GetTransform().GetWorldPosition();
+			if ((Pos.IX() < CameraPos.IX() || Pos.IX() > CameraPos.IX() + 1500.f)
+				|| (Pos.IY() > CameraPos.IY() || Pos.IY() < CameraPos.IY() - 800.f))
+
+			{
+				trees_[i]->Off();
 			}
 		}
 	}

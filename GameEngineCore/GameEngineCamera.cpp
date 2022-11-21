@@ -281,6 +281,12 @@ bool ZSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameE
 	return _rendererA->GetTransform().GetWorldPosition().z > _rendererB->GetTransform().GetWorldPosition().z;
 }
 
+bool YSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameEngineRenderer> _rendererB)
+{
+	//
+	return _rendererA->GetTransform().GetWorldPosition().y > _rendererB->GetTransform().GetWorldPosition().y;
+}
+
 void GameEngineCamera::Render(float _deltaTime)
 {
 	cameraRenderTarget_->Clear();
