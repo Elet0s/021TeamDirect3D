@@ -287,6 +287,11 @@ public:
 	{
 		return pixelDataInst_;
 	}
+	
+	AtlasData& GetAtlasData()
+	{
+		return atlasDataInst_;
+	}
 
 	bool IsCurAnimation()
 	{
