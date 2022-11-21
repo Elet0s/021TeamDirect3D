@@ -297,7 +297,7 @@ void TestLevel::PlayerMoveCamera()
 		MoveVector.y = 0.f;
 	}
 
-	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x) * Time, (MoveVector.y) * Time));
+	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MoveVector.x) * Time, (MoveVector.y) *1.5f * Time));
 
 }
 

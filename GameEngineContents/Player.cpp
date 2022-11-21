@@ -9,7 +9,7 @@ bool Player::isInitialized_ = false;
 Player::Player()
 	: nowLevel_(nullptr),
 	playerRenderer_(nullptr),
-	speed_(150.0f),
+	speed_(200.0f),
 	maxHp_(30),
 	hp_(30),
 	maxExp_(100),
@@ -77,8 +77,8 @@ void Player::Start()
 		playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		playerRenderer_->GetTransform().SetLocalScale(100, 100, 100);
 		playerRenderer_->GetTransform().SetLocalPosition(0,0,-100);
-		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
-		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
+		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.1f));
+		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.1f));
 		playerRenderer_->ChangeFrameAnimation("PlayerIdle");
 
 		std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
