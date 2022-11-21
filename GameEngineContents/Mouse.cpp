@@ -20,8 +20,8 @@ void Mouse::Start()
 	GameEngineDirectory Dir;
 	Dir.MoveParentToExistChildDirectory("ContentsResources");
 	Dir.MoveToChild("ContentsResources");
-	Dir.MoveToChild("Actor");
-	Dir.MoveToChild("Mouse");
+	Dir.MoveToChild("UI");
+	Dir.MoveToChild("MouseUI");
 
 	std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
 	for (size_t i = 0; i < Shaders.size(); i++)
@@ -40,7 +40,7 @@ void Mouse::Start()
 	mouseRenderer = CreateComponent<GameEngineTextureRenderer>();
 	mouseRenderer->GetTransform().SetLocalScale(64, 64, 100);
 	mouseRenderer->ChangeCamera(CameraOrder::UICamera);
-	mouseRenderer->SetTexture("Cursor.png");
+	mouseRenderer->SetTexture("CursorSprite.png");
 }
 void Mouse::Update(float _DeltaTime)
 {

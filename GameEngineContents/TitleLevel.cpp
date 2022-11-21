@@ -1,6 +1,5 @@
 #include"PreCompile.h"
 #include"TitleLevel.h"
-#include "Enums.h"
 TitleLevel::TitleLevel()
 {
 

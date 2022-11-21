@@ -20,6 +20,10 @@ enum class ObjectOrder
 	UI = 1000
 };
 
+enum class Skill
+{
+
+};
 
 class GlobalContentsValue
 {

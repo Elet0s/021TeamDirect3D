@@ -1,5 +1,33 @@
 #pragma once
 
+
+struct PlayerInst
+{
+public:
+	PlayerInst()
+		: 
+		speed_(200.0f),
+		maxHp_(30),
+		hp_(30),
+		maxExp_(100),
+		exp_(0),
+		atk_(10),
+		def_(10),
+		range_(10)
+	{
+
+	}
+public:
+	float speed_;
+	float maxHp_;
+	float hp_;
+	float maxExp_;
+	float exp_;
+	float atk_;
+	float def_;
+	float range_;
+};
+class PlayerUI;
 class GameEngineDefaultRenderer;
 class Player: public GameEngineActor
 {
@@ -23,12 +51,12 @@ public:
 		GameEngineLevel* _thisLevel,
 		const float4& _initPosition,
 		const std::string_view& _playerName = "MainPlayer"
-	);	//플레이어 공식 생성 함수.
+	);//플레이어 공식 생성 함수.
 	//플레이어 전역과 std::shared_ptr<Player>을 유지하기 위해서 만든 함수.
 
 
 
-public:
+
 	static std::shared_ptr<Player>& GetPlayerInst()
 	{
 		return mainPlayer_;
@@ -41,7 +69,7 @@ public:
 
 	inline float GetPlayerSpeed()
 	{
-		return speed_;
+		return playerInst_->speed_;
 	}
 
 	CollisionReturn MonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
@@ -52,30 +80,14 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	//void IdleStart(const StateInfo& _info);
-	//void IdleUpdate(float _deltaTime, const StateInfo& _info);
-
-	//void MoveStart(const StateInfo& _info);
-	//void MoveUpdate(float _deltaTime, const StateInfo& _info);
-
 	void MoveDirectionUpdate(float _deltaTime);
 
 private:
-
+	std::shared_ptr<PlayerUI> playerUi_;
 	float4 moveDirection_;
-	float speed_;
-	float maxHp_;
-	float hp_;
-	float maxExp_;
-	float exp_;
-	float atk_;
-	float def_;
-	float range_;
-
+	std::shared_ptr<PlayerInst> playerInst_;
 	GameEngineLevel* nowLevel_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
 	std::shared_ptr<GameEngineCollision> collision_;
-	//GameEngineStateManager stateManager_;
-
 };
 

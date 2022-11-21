@@ -7,6 +7,7 @@
 #include "GlobalContentsValue.h"
 #include "Mouse.h"
 #include "Player.h"
+#include "PlayerUI.h"
 
 TestLevel::TestLevel() //: tileCameraActor_(nullptr)
 {
@@ -92,8 +93,11 @@ void TestLevel::Start()
 		Player::CreatePlayer(this, { 960.f, -960.f });
 	}
 
-	Monster_.reserve(60);
+	{
+		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
+	}
 
+	Monster_.reserve(60);
 	{
 		for (size_t i = 0; i < 10; i++)
 		{
@@ -133,6 +137,7 @@ void TestLevel::Start()
 	ShowCursor(false);
 	CreateActor<TimeActor>();
 	CreateActor<StageUI>()->SoulCoinRenderersOff();
+
 }
 
 void TestLevel::Update(float _DeltaTime)

@@ -1,6 +1,5 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
-#include "Enums.h"
 
 class StageLevel : public GameEngineLevel
 {
