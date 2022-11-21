@@ -158,11 +158,11 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="Texture2DShadowRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Enums.h" />
     <ClInclude Include="FlyingEyes.h">
       <SubType>
       </SubType>
@@ -234,6 +234,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="Texture2DShadowRenderer.cpp">
       <SubType>
       </SubType>

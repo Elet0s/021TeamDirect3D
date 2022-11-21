@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include <GameEngineBase/GameEngineRandom.h>
 #include "MyTileMapRenderer.h"
-#include "Enums.h"
 
 MyTileMapRenderer::MyTileMapRenderer() 
 	:pivotmode_(PivotMode::Center)

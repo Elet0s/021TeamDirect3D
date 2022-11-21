@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "MyWorldMapRenderer.h"
 #include <GameEngineBase/GameEngineRandom.h>
-#include "Enums.h"
 
 MyWorldMapRenderer::MyWorldMapRenderer()
 	:pivotmode_(PivotMode::Center)

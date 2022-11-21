@@ -40,6 +40,9 @@
     <Filter Include="Level\Global\ContentsSupport">
       <UniqueIdentifier>{a41ccc3f-24c4-41b8-b718-89a3d9fc90dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\00. Global\UI">
+      <UniqueIdentifier>{225ab8d9-c46e-4642-8d1d-2b7af4400a48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -82,10 +85,6 @@
     <ClCompile Include="TimeActor.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="StageUI.cpp">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="LoginUI.cpp" />
     <ClCompile Include="BlackEyes.cpp">
       <Filter>Actor\02. Play\Monster</Filter>
     </ClCompile>
@@ -122,6 +121,15 @@
     <ClCompile Include="Texture2DShadowRenderer.cpp">
       <Filter>Level\Global\ContentsSupport</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StageUI.cpp">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginUI.cpp">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -139,9 +147,6 @@
     </ClInclude>
     <ClInclude Include="MapEditorWindow.h">
       <Filter>Actor\00. Global\Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="Enums.h">
-      <Filter>Level\Global</Filter>
     </ClInclude>
     <ClInclude Include="TileMapRenderer.h">
       <Filter>Renderer</Filter>
@@ -167,10 +172,6 @@
     <ClInclude Include="TimeActor.h">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="StageUI.h">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="LoginUI.h" />
     <ClInclude Include="BlackEyes.h">
       <Filter>Actor\02. Play\Monster</Filter>
     </ClInclude>
@@ -207,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="Texture2DShadowRenderer.h">
       <Filter>Level\Global\ContentsSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StageUI.h">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginUI.h">
+      <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
