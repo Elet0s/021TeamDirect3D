@@ -1,5 +1,6 @@
 #pragma once
 
+class TreeObject;
 class GameEngineTextureRenderer;
 class Texture2DShadowRenderer;
 class MyTileMapRenderer;
@@ -24,6 +25,7 @@ public:
 	std::shared_ptr<GameEngineCollision> col_;
 	std::vector<std::shared_ptr<GameEngineTextureRenderer>> renderers_;
 	std::vector<std::shared_ptr<Texture2DShadowRenderer>> shadowRenderers_;
+	std::vector<std::shared_ptr<TreeObject>> trees_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

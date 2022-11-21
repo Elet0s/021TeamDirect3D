@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "GlobalContentsValue.h"
 #include "TileMapActor.h"
+#include "TreeObject.h"
 #include <string>
 #include <GameEngineCore/GameEngineTextureRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
@@ -19,67 +20,82 @@ void TileMapActor::Start()
 {
 	int Count = 0;
 	renderers_.resize(120);
+	trees_.resize(3);
 	shadowRenderers_.resize(120);
 	tileRenderer_ = CreateComponent<MyTileMapRenderer>();
 	col_ = CreateComponent<GameEngineCollision>();
 	col_->GetTransform().SetWorldScale(float4{ 1280,640,1 });
 	col_->GetTransform().SetWorldMove(float4{ 640,-320,1 });
-	col_->SetDebugSetting(CollisionType::CT_OBB2D, float4(0.f,0.f,0.f,0.3f));
-
+	col_->SetDebugSetting(CollisionType::CT_OBB2D, float4(0.f,0.f,0.f,0.0f));
 	col_->ChangeOrder(ObjectOrder::Sector);
 	//col_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
 
 	ResourceLoad();
 
-	for (size_t i = 0; i < 120; i++)
 	{
-		float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 40));
-		float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 40));
-		renderers_[i] = CreateComponent<GameEngineTextureRenderer>();
-		renderers_[i]->SetRenderingOrder(42 - static_cast<int>(Y));
-		renderers_[i]->SetScaleRatio(0.8f);
-
-		shadowRenderers_[i] = CreateComponent<Texture2DShadowRenderer>();
-
-		if (i < 70)
+		for (size_t i = 0; i < 120; i++)
 		{
-			X *= 32.0f;
-			Y *= 16.0f;
-			renderers_[i]->SetFolderTextureToIndex("Grass", GameEngineRandom::mainRandom_.RandomInt(0, 2));
-			renderers_[i]->ScaleToTexture();
-			renderers_[i]->GetTransform().SetWorldPosition(float4{ X,-Y, -500.f });
-		}
-		else if (i < 80)
-		{
-			X *= 32.0f;
-			Y *= 16.0f;
-			renderers_[i]->SetFolderTextureToIndex("Grass", 3);
-			renderers_[i]->ScaleToTexture();
-			renderers_[i]->GetTransform().SetWorldPosition(float4{ X,-Y, -500.f });
-		}
+			float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 40));
+			float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 40));
+			renderers_[i] = CreateComponent<GameEngineTextureRenderer>();
+			renderers_[i]->SetRenderingOrder(42 - static_cast<int>(Y));
+			renderers_[i]->SetScaleRatio(0.8f);
 
-		else if (i < 117)
-		{
-			X *= 32.0f;
-			Y *= 16.0f;
-			renderers_[i]->SetFolderTextureToIndex("Rock", GameEngineRandom::mainRandom_.RandomInt(0, 2));
-			renderers_[i]->ScaleToTexture();
-			renderers_[i]->GetTransform().SetWorldPosition(float4{ X,-Y, -300.f });
-		}
-		else if (i < 120)
-		{
-			Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 10));
-			X *= 32.0f;
-			Y *= 64.0f;
-			renderers_[i]->SetFolderTextureToIndex("Rock", 3);
-			renderers_[i]->ScaleToTexture();
-			renderers_[i]->GetTransform().SetWorldPosition(float4{ X,-Y, -300.f });
-			Count++;
-		}
+			shadowRenderers_[i] = CreateComponent<Texture2DShadowRenderer>();
 
-		shadowRenderers_[i]->SetTextureRenderer(renderers_[i]);
+			if (i < 70)
+			{
+				X *= 32.0f;
+				Y *= 16.0f;
+				renderers_[i]->SetFolderTextureToIndex("Grass", GameEngineRandom::mainRandom_.RandomInt(0, 2));
+				renderers_[i]->ScaleToTexture();
+				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -500.f });
+			}
+			else if (i < 80)
+			{
+				X *= 32.0f;
+				Y *= 16.0f;
+				renderers_[i]->SetFolderTextureToIndex("Grass", 3);
+				renderers_[i]->ScaleToTexture();
+				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -500.f });
+			}
+
+			else if (i < 117)
+			{
+				X *= 32.0f;
+				Y *= 16.0f;
+				renderers_[i]->SetFolderTextureToIndex("Rock", GameEngineRandom::mainRandom_.RandomInt(0, 2));
+				renderers_[i]->ScaleToTexture();
+				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
+			}
+			else if (i < 120)
+			{
+				Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 10));
+				X *= 32.0f;
+				Y *= 64.0f;
+				renderers_[i]->SetFolderTextureToIndex("Rock", 3);
+				renderers_[i]->ScaleToTexture();
+				renderers_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
+				Count++;
+			}
+
+			shadowRenderers_[i]->SetTextureRenderer(renderers_[i]);
+		}
 	}
-	Count;
+	
+	{
+		for (size_t i = 0; i < trees_.size(); ++i)
+		{
+			float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 20));
+			float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 10));
+			X *= 64;
+			Y *= 64;
+			trees_[i] = GetLevel()->CreateActor<TreeObject>();
+			trees_[i]->GetRenderer()->SetRenderingOrder(42 - static_cast<int>(Y));
+			trees_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
+			trees_[i]->SetParent(shared_from_this());
+		}
+	}
 }
 
 void TileMapActor::Update(float _deltaTime)
@@ -99,6 +115,17 @@ void TileMapActor::Update(float _deltaTime)
 				shadowRenderers_[i]->On();
 			}
 		}
+
+		for (size_t i = 0; i < trees_.size(); ++i)
+		{
+			float4 Pos = trees_[i]->GetTransform().GetWorldPosition();
+			if ((Pos.IX() >= CameraPos.IX() && Pos.IX() <= CameraPos.IX() + 3000.f)
+				&& (Pos.IY() <= CameraPos.IY() + 200.f && Pos.IY() >= CameraPos.IY() - 1000.f))
+
+			{
+				trees_[i]->On();
+			}
+		}
 	}
 
 	if (true == renderOn &&
@@ -109,6 +136,11 @@ void TileMapActor::Update(float _deltaTime)
 		{
 			renderers_[i]->Off();
 			shadowRenderers_[i]->Off();
+		}
+
+		for (size_t i = 0; i < trees_.size(); ++i)
+		{
+			trees_[i]->Off();
 		}
 		tileRenderer_->Off();
 	}

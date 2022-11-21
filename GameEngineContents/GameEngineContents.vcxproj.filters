@@ -40,6 +40,9 @@
     <Filter Include="Level\Global\ContentsSupport">
       <UniqueIdentifier>{a41ccc3f-24c4-41b8-b718-89a3d9fc90dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\01. MapObject">
+      <UniqueIdentifier>{636c1011-855a-4abe-8f80-049319fbe7cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -121,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="Texture2DShadowRenderer.cpp">
       <Filter>Level\Global\ContentsSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeObject.cpp">
+      <Filter>Actor\01. MapObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +213,9 @@
     </ClInclude>
     <ClInclude Include="Texture2DShadowRenderer.h">
       <Filter>Level\Global\ContentsSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeObject.h">
+      <Filter>Actor\01. MapObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
