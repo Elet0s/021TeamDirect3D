@@ -40,6 +40,9 @@
     <Filter Include="Level\Global\ContentsSupport">
       <UniqueIdentifier>{a41ccc3f-24c4-41b8-b718-89a3d9fc90dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\01. MapObject">
+      <UniqueIdentifier>{636c1011-855a-4abe-8f80-049319fbe7cc}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Actor\00. Global\UI">
       <UniqueIdentifier>{225ab8d9-c46e-4642-8d1d-2b7af4400a48}</UniqueIdentifier>
     </Filter>
@@ -130,6 +133,9 @@
     <ClCompile Include="LoginUI.cpp">
       <Filter>Actor\00. Global\UI</Filter>
     </ClCompile>
+    <ClCompile Include="TreeObject.cpp">
+      <Filter>Actor\01. MapObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -208,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="Texture2DShadowRenderer.h">
       <Filter>Level\Global\ContentsSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeObject.h">
+      <Filter>Actor\01. MapObject</Filter>
     </ClInclude>
     <ClInclude Include="PlayerUI.h">
       <Filter>Actor\00. Global\UI</Filter>

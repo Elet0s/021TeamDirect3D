@@ -77,7 +77,7 @@ void TestLevel::Start()
 	std::shared_ptr< GameEngineCollision> col = GetMainCameraActor()->CreateComponent<GameEngineCollision>();
 	col->GetTransform().SetWorldScale(float4{ 1280,720 });
 	col->ChangeOrder(ObjectOrder::Camera);
-	col->SetDebugSetting(CollisionType::CT_OBB2D, float4::Green);
+	col->SetDebugSetting(CollisionType::CT_OBB2D, float4::Zero);
 
 	//if (nullptr == Player::GetMainPlayer())
 	//{
@@ -134,6 +134,7 @@ void TestLevel::Start()
 		std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
 
 	}
+	ShowCursor(false);
 	CreateActor<TimeActor>();
 	CreateActor<StageUI>()->SoulCoinRenderersOff();
 

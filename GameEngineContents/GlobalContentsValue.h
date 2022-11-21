@@ -15,6 +15,7 @@ enum class ObjectOrder
 	Monster,
 	Mouse,
 	Camera,
+	MapObject,
 	Sector,
 	UI = 1000
 };

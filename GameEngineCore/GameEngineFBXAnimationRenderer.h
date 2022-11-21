@@ -12,7 +12,7 @@ public:
 	// SetFBX 본을 가지고 있는 매쉬
 	std::shared_ptr<GameEngineFBXMesh> Mesh;
 	// 애니메이션을 가지고 있는 FBX
-	std::shared_ptr<GameEngineFBXAnimation> Aniamtion;
+	std::shared_ptr<GameEngineFBXAnimation> Animation;
 	FbxExAniData* FBXAnimationData;
 
 	UINT Start;

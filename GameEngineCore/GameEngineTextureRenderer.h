@@ -43,60 +43,68 @@ class FrameAnimation_Desc
 {
 	//프레임 애니메이션 생성에 필요한 각종 상세정보들을 모아서 저장, 관리하는 클래스.
 public:
+	class GameEngineTextureRenderer* parentRenderer_;
+
 	std::string textureName_;
 
-	bool isLoop_;		//true == 애니메이션 무한반복. false == 1회반복 후 마지막프레임에서 정지.
-	float interval_;	//프레임간 시간간격. 기본값 0.1f
+	std::vector<UINT> frames_;	//재생할 프레임 번호 순서.
 
 	UINT curFrame_;	//현재 프레임 인덱스.
 
-	float frameTime_;//현재프레임 지난 시간.
+	float curframeTime_;//현재프레임 지난 시간.
 
-	std::vector<UINT> frames_;
+	float interval_;	//프레임간 시간간격.
 
-	class GameEngineTextureRenderer* renderer_;
+	bool isLoop_;		//true == 애니메이션 무한반복. false == 1회반복 후 마지막프레임에서 정지.
+
+	float playTime_;	//여태까지 애니메이션이 재생된 시간.
 
 	FrameAnimation_Desc()
-		: isLoop_(false),
+		: parentRenderer_(nullptr),
+		curFrame_(0),
+		curframeTime_(0.f),
 		interval_(1.f),
-		curFrame_(-1),
-		frameTime_(0.f),
-		renderer_(nullptr)
+		isLoop_(false),
+		playTime_(0.f)
 	{
 	}
 
-	FrameAnimation_Desc(const std::string& _textureName, UINT _start, UINT _end, float _interval, bool _isLoop = true)
-		: textureName_(_textureName),
-		isLoop_(_isLoop),
-		interval_(_interval),
+	FrameAnimation_Desc(const std::string_view& _textureName, UINT _start, UINT _end, float _interval, bool _isLoop = true)
+		: parentRenderer_(nullptr),
+		textureName_(_textureName),
 		curFrame_(_start),
-		frameTime_(0.f),
-		renderer_(nullptr)
+		curframeTime_(0.f),
+		interval_(_interval),
+		isLoop_(_isLoop),
+		playTime_(0.f)
 	{
-		for (UINT frameIndex = _start; frameIndex <= _end; frameIndex++)
+		frames_.reserve(static_cast<size_t>(_end - _start + 1));
+		for (UINT frameIndex = _start; frameIndex <= _end; ++frameIndex)
 		{
 			frames_.push_back(frameIndex);
 		}
 	}
 
-	FrameAnimation_Desc(const std::string& _textureName, const std::vector<UINT>& _frames, float _interval, bool _isLoop = true)
-		: textureName_(_textureName),
-		isLoop_(_isLoop),
-		interval_(_interval),
-		curFrame_(0),
+	FrameAnimation_Desc(const std::string_view& _textureName, const std::vector<UINT>& _frames, float _interval, bool _isLoop = true)
+		: parentRenderer_(nullptr),
+		textureName_(_textureName),
 		frames_(_frames),
-		frameTime_(0.f),
-		renderer_(nullptr)
+		curFrame_(0),
+		curframeTime_(0.f),
+		interval_(_interval),
+		isLoop_(_isLoop),
+		playTime_(0.f)
 	{
 	}
 
 	FrameAnimation_Desc(const std::string& _textureName, float _interval, bool _isLoop = true)
-		: textureName_(_textureName),
-		isLoop_(_isLoop),
-		interval_(_interval),
+		: parentRenderer_(nullptr),
+		textureName_(_textureName),
 		curFrame_(0),
-		frameTime_(0.f),
-		renderer_(nullptr)
+		curframeTime_(0.f),
+		interval_(_interval),
+		isLoop_(_isLoop),
+		playTime_(0.f)
 	{
 	}
 };
@@ -279,7 +287,7 @@ public:
 	{
 		return pixelDataInst_;
 	}
-
+	
 	AtlasData& GetAtlasData()
 	{
 		return atlasDataInst_;

@@ -5,16 +5,17 @@
 
 void FrameAnimation::Reset()
 {
-	info_.frameTime_ = 0.f;
+	info_.curframeTime_ = 0.f;
 	info_.curFrame_ = 0;
+	info_.playTime_ = 0.f;
 }
 
 void FrameAnimation::Update(float _deltaTime)
 {
-
 	if (false == isPaused_)
 	{
-		info_.frameTime_ += _deltaTime;
+		info_.curframeTime_ += _deltaTime;
+		info_.playTime_ += _deltaTime;
 
 		if (nullptr != time_)
 		{
@@ -33,7 +34,7 @@ void FrameAnimation::Update(float _deltaTime)
 			bOnceEnd_ = false;
 		}
 
-		if (info_.interval_ <= info_.frameTime_)
+		if (info_.interval_ <= info_.curframeTime_)
 		{
 			if (info_.curFrame_ == info_.frames_.size() - 1
 				&& false == bOnceEnd_)
@@ -64,7 +65,7 @@ void FrameAnimation::Update(float _deltaTime)
 					info_.curFrame_ = static_cast<UINT>(info_.frames_.size() - 1);
 				}
 			}
-			info_.frameTime_ -= info_.interval_;
+			info_.curframeTime_ -= info_.interval_;
 		}
 	}
 
@@ -216,7 +217,7 @@ void GameEngineTextureRenderer::SetPivot(PivotMode _pivot)
 	case PivotMode::Left:
 		atlasDataInst_.pivotPos_ = float4(0.5f, 0.f, 0.f, 0.f);
 		renderOptionInst_.pivotPosX_ = 0.5f;
-		renderOptionInst_.pivotPosY_ = 0.f;
+		renderOptionInst_.pivotPosY_ = 0.0f;
 		break;
 	case PivotMode::Right:
 		atlasDataInst_.pivotPos_ = float4(-0.5f, 0.f, 0.f, 0.f);
@@ -272,7 +273,7 @@ void GameEngineTextureRenderer::CreateFrameAnimation_CutTexture(const std::strin
 
 	FrameAnimation& newAnimation = allAnimations_[uppercaseAnimationName];	//생성과 동시에 삽입.
 	newAnimation.info_ = _desc;
-	newAnimation.info_.renderer_ = this;
+	newAnimation.info_.parentRenderer_ = this;
 	newAnimation.parentRenderer_ = this;
 	newAnimation.cutTexture_ = GameEngineTexture::Find(newAnimation.info_.textureName_);
 	newAnimation.folderTexture_ = nullptr;
@@ -290,7 +291,7 @@ void GameEngineTextureRenderer::CreateFrameAnimation_FolderTexture(const std::st
 
 	FrameAnimation& newAnimation = allAnimations_[uppercaseAnimationName];	//생성과 동시에 삽입.
 	newAnimation.info_ = _desc;
-	newAnimation.info_.renderer_ = this;
+	newAnimation.info_.parentRenderer_ = this;
 	newAnimation.parentRenderer_ = this;
 	newAnimation.cutTexture_ = nullptr;
 	newAnimation.folderTexture_ = GameEngineFolderTexture::Find(newAnimation.info_.textureName_);
@@ -422,6 +423,8 @@ std::shared_ptr<GameEngineTexture> GameEngineTextureRenderer::GetCurrentTexture(
 void GameEngineTextureRenderer::Start()
 {
 	GameEngineDefaultRenderer::Start();
+
+	GameEngineRenderer::PushRendererToMainCamera();
 
 	this->SetTextureRendererSetting();
 }

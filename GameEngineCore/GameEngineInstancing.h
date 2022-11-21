@@ -39,10 +39,19 @@ public:
 
 
 private:
+	// 렌더유닛이 키의 역할도 해야 합니다.
+	// 완전히 동일하다는건
+	// 똑같은 쉐이더
+	// 똑같은 매쉬
+	// 똑같은 상수버퍼
+	// 똑같은 텍스처를 쓴다는 것.
+
+	std::shared_ptr<class GameEngineRenderUnit> renderUnit_;
+
+	GameEngineInstancingBuffer* instancingBuffer_;
+
 	std::vector<char> dataBuffer_;
 	GameEngineShaderResourceHelper shaderResourceHelper_;
-	GameEngineMaterial* instancingPipeLine_;
-	GameEngineInstancingBuffer* instancingBuffer_;
 
 	int dataInsert_;
 	size_t size_;
