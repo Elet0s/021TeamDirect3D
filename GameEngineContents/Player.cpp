@@ -12,12 +12,12 @@ Player::Player()
 	: nowLevel_(nullptr),
 	playerRenderer_(nullptr),
 	collision_(nullptr),
-	playerInst_()
+	playerInfo_()
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{
 		//플레이어 정상 생성.
-		playerInst_ = std::make_shared<PlayerInst>();
+		playerInfo_ = std::make_shared<PlayerInfo>();
 	}
 	else
 	{
@@ -82,6 +82,10 @@ void Player::Start()
 CollisionReturn Player::MonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	_Other->GetRoot()->Off();
+	if (playerInfo_->hp_ > 0)
+	{
+		playerInfo_->hp_ -= 5;
+	}
 	return CollisionReturn::Stop;
 }
 
@@ -155,7 +159,7 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	if (moveDirection_ != 0)
 	{
 		playerRenderer_->ChangeFrameAnimation("PlayerRun");
-		GetTransform().SetWorldMove(moveDirection_.Normalize3D() * playerInst_->speed_ * _deltaTime);
+		GetTransform().SetWorldMove(moveDirection_.Normalize3D() * playerInfo_->speed_ * _deltaTime);
 	}
 	else
 	{

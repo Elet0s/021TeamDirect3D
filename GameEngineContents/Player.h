@@ -1,14 +1,14 @@
 #pragma once
 
 
-struct PlayerInst
+struct PlayerInfo
 {
 public:
-	PlayerInst()
+	PlayerInfo()
 		: 
 		speed_(200.0f),
-		maxHp_(30),
-		hp_(30),
+		maxHp_(100),
+		hp_(100),
 		maxExp_(100),
 		exp_(0),
 		atk_(10),
@@ -47,15 +47,10 @@ public:
 	Player& operator=(Player&& _other) = delete;
 
 public:
-	static void CreatePlayer(
-		GameEngineLevel* _thisLevel,
-		const float4& _initPosition,
-		const std::string_view& _playerName = "MainPlayer"
-	);//플레이어 공식 생성 함수.
+	static void CreatePlayer(GameEngineLevel* _thisLevel,const float4& _initPosition,const std::string_view& _playerName = "MainPlayer");
+	//플레이어 공식 생성 함수.
 	//플레이어 전역과 std::shared_ptr<Player>을 유지하기 위해서 만든 함수.
-
-
-
+	std::shared_ptr<GameEngineCollision> collision_;
 
 	static std::shared_ptr<Player>& GetPlayerInst()
 	{
@@ -67,9 +62,9 @@ public:
 		return mainPlayer_;
 	}
 
-	inline float GetPlayerSpeed()
+	PlayerInfo& GetPlayerInfo()
 	{
-		return playerInst_->speed_;
+		return *CastThis<Player>()->playerInfo_;
 	}
 
 	CollisionReturn MonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
@@ -85,9 +80,9 @@ protected:
 private:
 	std::shared_ptr<PlayerUI> playerUi_;
 	float4 moveDirection_;
-	std::shared_ptr<PlayerInst> playerInst_;
+	std::shared_ptr<PlayerInfo> playerInfo_;
 	GameEngineLevel* nowLevel_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
-	std::shared_ptr<GameEngineCollision> collision_;
+
 };
 
