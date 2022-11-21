@@ -67,12 +67,16 @@ void TestLevel::Start()
 		for (size_t j = 0; j < 3; j++)
 		{
 			tilemaps_[i][j] = CreateActor<TileMapActor>();
-			tilemaps_[i][j]->GetTransform().SetWorldPosition(float4(640.f * static_cast<float>(j), -(640.f * static_cast<float>(i))));
+			tilemaps_[i][j]->GetTransform().SetWorldPosition(float4(1280.f * static_cast<float>(j), -(640.f * static_cast<float>(i))));
 			tilemaps_[i][j]->tileRenderer_->CreateTileMap(10, 5, { 128, 128 }, "grassTexture.png");
 			tilemaps_[i][j]->tileRenderer_->SetPivot(PivotMode::LeftTop);
 		}
 	}
 
+	std::shared_ptr< GameEngineCollision> col = GetMainCameraActor()->CreateComponent<GameEngineCollision>();
+	col->GetTransform().SetWorldScale(float4{ 1280,720 });
+	col->ChangeOrder(ObjectOrder::Camera);
+	col->SetDebugSetting(CollisionType::CT_OBB2D, float4::Green);
 
 	//if (nullptr == Player::GetMainPlayer())
 	//{

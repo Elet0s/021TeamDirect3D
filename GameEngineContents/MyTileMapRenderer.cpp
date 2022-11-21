@@ -132,6 +132,9 @@ void MyTileMapRenderer::Render(float _deltaTime)
 
 			this->GetShaderResourceHelper().SetConstantBuffer_Link("TransformData", tileTransform.GetTransformData());
 			this->GetShaderResourceHelper().SetTexture("Tex", alltiles_[y][x].tileImage_);
+
+
+			
 			GameEngineDefaultRenderer::Render(_deltaTime);
 		}
 	}
@@ -147,7 +150,7 @@ void MyTileMapRenderer::Start()
 		GameEngineInput::GetInst()->CreateKey("MoveMap_Down", VK_DOWN);
 	}*/
 
-	//this->GetActor()->GetLevel()->PushRenderer(this, CameraOrder::TileCamera);
+	GetTransform().SetWorldScale(float4(1280, 640));
 
 	ChangeCamera(CameraOrder::MainCamera);
 
@@ -181,30 +184,48 @@ void MyTileMapRenderer::SetPivot(PivotMode _pivot)
 	{
 	case PivotMode::Top:
 		atlasdatainst_.pivotPos_ = float4(0.f, -0.5f, 0.f, 0.f);
+		renderOptionInst_.pivotPosX_ = 0.f;
+		renderOptionInst_.pivotPosY_ = -0.5f;
 		break;
 	case PivotMode::Center:
 		atlasdatainst_.pivotPos_ = float4::Zero;
+		renderOptionInst_.pivotPosX_ = 0.f;
+		renderOptionInst_.pivotPosY_ = 0.f;
 		break;
 	case PivotMode::Bot:
 		atlasdatainst_.pivotPos_ = float4(0.f, 0.5f, 0.f, 0.f);
+		renderOptionInst_.pivotPosX_ = 0.f;
+		renderOptionInst_.pivotPosY_ = 0.5f;
 		break;
 	case PivotMode::Left:
 		atlasdatainst_.pivotPos_ = float4(0.5f, 0.f, 0.f, 0.f);
+		renderOptionInst_.pivotPosX_ = 0.5f;
+		renderOptionInst_.pivotPosY_ = 0.f;
 		break;
 	case PivotMode::Right:
 		atlasdatainst_.pivotPos_ = float4(-0.5f, 0.f, 0.f, 0.f);
+		renderOptionInst_.pivotPosX_ = -0.5f;
+		renderOptionInst_.pivotPosY_ = 0.f;
 		break;
 	case PivotMode::LeftTop:
 		atlasdatainst_.pivotPos_ = float4(0.5f, -0.5f, 0.f, 0.f);
+		renderOptionInst_.pivotPosX_ = 0.5f;
+		renderOptionInst_.pivotPosY_ = -0.5f;
 		break;
 	case PivotMode::RightTop:
 		atlasdatainst_.pivotPos_ = float4(-0.5f, -0.5f, 0.f, 0.f);
+		renderOptionInst_.pivotPosX_ = -0.5f;
+		renderOptionInst_.pivotPosY_ = -0.5f;
 		break;
 	case PivotMode::LeftBot:
 		atlasdatainst_.pivotPos_ = float4(0.5f, 0.5f, 0.f, 0.f);
+		renderOptionInst_.pivotPosX_ = 0.5f;
+		renderOptionInst_.pivotPosY_ = 0.5f;
 		break;
 	case PivotMode::RightBot:
 		atlasdatainst_.pivotPos_ = float4(-0.5f, 0.5f, 0.f, 0.f);
+		renderOptionInst_.pivotPosX_ = -0.5f;
+		renderOptionInst_.pivotPosY_ = 0.5f;
 		break;
 	case PivotMode::Custom:
 		//_pivot == Custom일때는 아무것도 하지 않는다.

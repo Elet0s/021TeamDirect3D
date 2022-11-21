@@ -68,6 +68,11 @@ void Player::Start()
 			collision_->ChangeOrder(ObjectOrder::Player);
 	
 		}
+		std::shared_ptr< GameEngineCollision> col = CreateComponent<GameEngineCollision>();
+		col->GetTransform().SetWorldScale(float4{ 1280,720 });
+		col->ChangeOrder(ObjectOrder::Camera);
+		col->SetDebugSetting(CollisionType::CT_OBB2D, float4::Green);
+
 
 		playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		playerRenderer_->GetTransform().SetLocalScale(100, 100, 100);

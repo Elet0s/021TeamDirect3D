@@ -18,9 +18,6 @@ GameEngineCameraActor::~GameEngineCameraActor()
 void GameEngineCameraActor::Start()
 {
 	cameraComponent_ = CreateComponent<GameEngineCamera>();
-	std::shared_ptr< GameEngineCollision> col = CreateComponent<GameEngineCollision>();
-	col->GetTransform().SetWorldScale(float4{ 640,360 });
-	col->SetDebugSetting(CollisionType::CT_OBB2D, float4::Green);
 	
 	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))
 	{
