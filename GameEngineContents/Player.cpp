@@ -32,7 +32,7 @@ Player::~Player()
 
 void Player::Start()
 {
-	mainPlayer_ = GetLevel()->CreateActor<Player>(ObjectOrder::Player);
+	//mainPlayer_ = GetLevel()->CreateActor<Player>(ObjectOrder::Player);
 
 	GameEngineDirectory Dir;
 	Dir.MoveParentToExistChildDirectory("ContentsResources");
@@ -184,12 +184,12 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel,const float4& _initPositio
 
 	isInitialized_ = true;
 
-	//mainPlayer_->SetLevel(_thisLevel);
-	//mainPlayer_->SetLevelOverOn();
-	//mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
-	//_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(
-	//	mainPlayer_->GetTransform().GetWorldPosition().x,
-	//	mainPlayer_->GetTransform().GetWorldPosition().y,
-	//	-100.f
-	//);
+	mainPlayer_ = _thisLevel->CreateActor<Player>(ObjectOrder::Player);
+	mainPlayer_->SetLevelOverOn();
+	mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
+	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(
+		mainPlayer_->GetTransform().GetWorldPosition().x,
+		mainPlayer_->GetTransform().GetWorldPosition().y,
+		-100.f
+	);
 }

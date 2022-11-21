@@ -73,7 +73,7 @@ public:
 	}
 
 	CollisionReturn MonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
-	void SetLevel(GameEngineLevel* _NowLevel);
+	//void SetLevel(GameEngineLevel* _NowLevel);
 
 protected:
 	void Start() override;
