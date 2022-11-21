@@ -88,6 +88,7 @@ private:
 	HANDLE iocpHandle_;		//IOCP 객체와 연결된 핸들. 이 클래스의 핵심. 스레드풀도 이 핸들과 연결된 IOCP 객체가 관리한다.
 	//특별히 막아두지는 않았지만 IOCP 객체가 관리하는 스레드풀을 한개만 쓸 게 거의 확실하므로 GameEngineThreadPool 객체도 
 	//GameEngineCore에서 정적 멤버변수로 한개만 가지게 한다.
+	//IOCP 자체는 직접 통제할 수 없다.
 
 	//IOCP(Input/Output Completion Port: 입출력 완료 포트): 윈도우즈에서 제공하는
 	// 스레드 관리 전문 커널 오브젝트(프로세스가 아닌, 운영체제 수준에서 생성한 프로세스, 스레드, 파일 등의 리소스 관리용 구조체).

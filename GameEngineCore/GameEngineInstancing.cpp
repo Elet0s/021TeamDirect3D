@@ -2,6 +2,7 @@
 #include "GameEngineInstancing.h"
 #include "GameEngineInstancingBuffer.h"
 #include "GameEngineMaterial.h"
+#include "GameEngineRenderer.h"
 
 // 최소 2개이상이 모여야 인스턴싱을 시작하겠다.
 unsigned int GameEngineInstancing::minInstancingCount_ = 2;
@@ -10,7 +11,7 @@ unsigned int GameEngineInstancing::minInstancingCount_ = 2;
 unsigned int GameEngineInstancing::startInstancingCount_ = 100;
 
 GameEngineInstancing::GameEngineInstancing()
-	: instancingPipeLine_(nullptr),
+	: renderUnit_(nullptr),
 	instancingBuffer_(nullptr),
 	dataInsert_(0),
 	size_(0),

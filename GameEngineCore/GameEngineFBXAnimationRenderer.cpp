@@ -23,8 +23,8 @@ void FBXRendererAnimation::Init(const std::string_view& _Name, int _Index)
 	// GameENgineFBXAnimation의 행렬 정보가 완전해지는것은 
 	// CalFbxExBoneFrameTransMatrix가 호출되고 난 후입니다.
 	// 애니메이션의 행렬이 계산되는겁니다.
-	Aniamtion->AnimationMatrixLoad(Mesh, _Name, _Index);
-	FBXAnimationData = Aniamtion->GetAnimationData(_Index);
+	Animation->AnimationMatrixLoad(Mesh, _Name, _Index);
+	FBXAnimationData = Animation->GetAnimationData(_Index);
 	Start = 0;
 	End = static_cast<unsigned int>(FBXAnimationData->TimeEndCount);
 }
@@ -39,46 +39,32 @@ void FBXRendererAnimation::Update(float _DeltaTime)
 	// 0~24진행이죠?
 	if (false == Pause)
 	{
-		Info.CurFrameTime += _DeltaTime;
-		//                      0.1
-		// 1
-		//while (Info.CurFrameTime >= Info.Inter)
-		//{
-		//	// 여분의 시간이 남게되죠?
-		//	// 여분의 시간이 중요합니다.
-		//	Info.CurFrameTime -= Info.Inter;
-		//	++Info.CurFrame;
-		//
-		//	if (Info.CurFrame >= End)
-		//	{
-		//		Info.CurFrame = Start;
-		//	}
-		//}
+		Info.curFrameTime_ += _DeltaTime;
+		Info.playTime_ += _DeltaTime;
 
-
-		///////////////////////////////////////////////////////////////////////////////////
-
-		// Info.CurFrameTime += _DeltaTime;
-
-		if (nullptr != TimeEvent)
+		while (Info.curFrameTime_ >= Info.interval_)
 		{
-			TimeEvent(Info, _DeltaTime);
-		}
+			// 여분의 시간이 남게되죠?
+			// 여분의 시간이 중요합니다.
+			Info.curFrameTime_ -= Info.interval_;
 
-		if (false == bOnceStart
-			&& Info.CurFrame == 0)
-		{
-			if (nullptr != StartEvent)
+			if (Info.curFrame_ >= End)
 			{
-				StartEvent(Info);
+				Info.curFrame_ = Start;
 			}
-			bOnceStart = true;
-			bOnceEnd = false;
-		}
 
-		if (Info.Inter <= Info.CurFrameTime)
-		{
-			if (Info.CurFrame == (Info.Frames.size() - 1)
+			if (false == bOnceStart
+				&& Info.curFrame_ == 0)
+			{
+				if (nullptr != StartEvent)
+				{
+					StartEvent(Info);
+				}
+				bOnceStart = true;
+				bOnceEnd = false;
+			}
+
+			if (Info.curFrame_ == static_cast<UINT>(Info.frames_.size() - 1)
 				&& false == bOnceEnd)
 			{
 				if (nullptr != EndEvent)
@@ -87,32 +73,35 @@ void FBXRendererAnimation::Update(float _DeltaTime)
 				}
 				bOnceEnd = true;
 				bOnceStart = false;
-				return;
+				break;
 			}
 
-			++Info.CurFrame;
+			++Info.curFrame_;
 			if (nullptr != FrameEvent)
 			{
 				FrameEvent(Info);
 			}
 
-			if (Info.CurFrame >= Info.Frames.size())
+			if (nullptr != TimeEvent)
 			{
-				if (true == Info.Loop)
+				TimeEvent(Info, _DeltaTime);
+			}
+
+			if (Info.curFrame_ >= Info.frames_.size())
+			{
+				if (true == Info.isLoop_)
 				{
-					Info.CurFrame = 0;
+					Info.curFrame_ = 0;
 				}
 				else
 				{
-					Info.CurFrame = static_cast<unsigned int>(Info.Frames.size()) - 1;
+					Info.curFrame_ = static_cast<unsigned int>(Info.frames_.size()) - 1;
 				}
 			}
-
-			Info.CurFrameTime -= Info.Inter;
 		}
 	}
 
-	unsigned int NextFrame = Info.CurFrame;
+	unsigned int NextFrame = Info.curFrame_;
 
 	++NextFrame;
 
@@ -167,17 +156,17 @@ void FBXRendererAnimation::Update(float _DeltaTime)
 				}
 
 				// 현재프레임과 
-				FbxExBoneFrameData& CurData = FBXAnimationData->AniFrameData[MeshIndex][i].BoneMatData[Info.CurFrame];
+				FbxExBoneFrameData& CurData = FBXAnimationData->AniFrameData[MeshIndex][i].BoneMatData[Info.curFrame_];
 				// 다음프레임의 정보가 필요한데
 				FbxExBoneFrameData& NextData = FBXAnimationData->AniFrameData[MeshIndex][i].BoneMatData[NextFrame];
 
 				// 애니메이션이 바뀌는 순간 한번은 저장해야 한다.
 				// 로컬 스케일
-				AnimationBoneData[i].Scale = float4::Lerp(CurData.S, NextData.S, Info.CurFrameTime);
+				AnimationBoneData[i].Scale = float4::Lerp(CurData.S, NextData.S, Info.curFrameTime_);
 				// 로컬 쿼터니온
-				AnimationBoneData[i].RotQuaternion = float4::SLerpQuaternion(CurData.Q, NextData.Q, Info.CurFrameTime);
+				AnimationBoneData[i].RotQuaternion = float4::SLerpQuaternion(CurData.Q, NextData.Q, Info.curFrameTime_);
 				// 로컬 포지션
-				AnimationBoneData[i].Pos = float4::Lerp(CurData.T, NextData.T, Info.CurFrameTime);
+				AnimationBoneData[i].Pos = float4::Lerp(CurData.T, NextData.T, Info.curFrameTime_);
 				// 새롭게 바뀐 애니메이션
 
 				// 애니메이션이 바뀌는 순간 한번은 저장해야 한다.
@@ -207,14 +196,13 @@ void FBXRendererAnimation::Update(float _DeltaTime)
 				//AnimationBoneMatrix[i].Transpose();
 			}
 		}
-
 	}
 }
 
 void FBXRendererAnimation::Reset()
 {
-	Info.CurFrameTime = 0.0f;
-	Info.CurFrame = 0;
+	Info.curFrameTime_ = 0.0f;
+	Info.curFrame_ = 0;
 	// Start = 0;
 }
 
@@ -336,20 +324,20 @@ void GameEngineFBXAnimationRenderer::CreateFBXAnimation(const std::string& _Anim
 		return;
 	}
 
-	std::shared_ptr<GameEngineFBXAnimation> Animation = GameEngineFBXAnimation::Find(_Desc.ResourcesName);
+	std::shared_ptr<GameEngineFBXAnimation> Animation = GameEngineFBXAnimation::Find(_Desc.resourceName_);
 
 	if (nullptr == Animation)
 	{
-		MsgBoxAssertString("GameEngineFBXAnimation이 존재하지 않습니다. " + _Desc.ResourcesName);
+		MsgBoxAssertString("GameEngineFBXAnimation이 존재하지 않습니다. " + _Desc.resourceName_);
 		return;
 	}
 
 	std::shared_ptr<FBXRendererAnimation> NewAnimation = std::make_shared<FBXRendererAnimation>();
 
 	NewAnimation->Info = _Desc;
-	NewAnimation->Info.Renderer = this;
+	NewAnimation->Info.parentRenderer_ = this;
 	NewAnimation->Mesh = GetFBXMesh();
-	NewAnimation->Aniamtion = Animation;
+	NewAnimation->Animation = Animation;
 	NewAnimation->ParentRenderer = this;
 	NewAnimation->Reset();
 
@@ -357,7 +345,7 @@ void GameEngineFBXAnimationRenderer::CreateFBXAnimation(const std::string& _Anim
 
 	for (UINT i = 0; i < NewAnimation->End - NewAnimation->Start; i++)
 	{
-		NewAnimation->Info.Frames.push_back(i);
+		NewAnimation->Info.frames_.push_back(i);
 	}
 
 	// 이순간 애니메이션 프레임 행렬에 대한 계산이 이때 이뤄지는데.
