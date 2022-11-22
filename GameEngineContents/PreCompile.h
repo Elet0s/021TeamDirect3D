@@ -30,6 +30,8 @@
 #include <GameEngineCore\GameEngineStatusWindow.h>
 #include <GameEngineCore\GameEngineBlur.h>
 
+#include <GameEngineCore\GameEngineInstancing.h>
+
 #include <GameEngineCore\GameEngineStateManager.h>
 
 #include <GameEngineCore\GameEngineCollision.h>

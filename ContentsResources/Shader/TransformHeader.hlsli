@@ -67,4 +67,4 @@ struct InstTransformData
     float4x4 worldViewProjectionMatrix_; //월드행렬에 뷰행렬 + 투영행렬까지 적용된 행렬.
 };
 
-StructuredBuffer<InstTransformData> allInstancingTransformDataBuffer : register(t12);
+//StructuredBuffer<InstTransformData> allInstancingTransformDataBuffer : register(t12);

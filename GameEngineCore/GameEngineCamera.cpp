@@ -117,150 +117,9 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 	GetActor()->GetLevel()->PushCamera(std::dynamic_pointer_cast<GameEngineCamera>(shared_from_this()), _order);
 }
 
-GameEngineInstancing* GameEngineCamera::GetInstancing(const std::string& _name)
+GameEngineInstancing& GameEngineCamera::GetInstancing(const std::string& _name)
 {
-	std::shared_ptr<GameEngineMaterial> instancingPipeLine = GameEngineMaterial::Find(_name);
-	return GetInstancing(instancingPipeLine);
-}
-
-GameEngineInstancing* GameEngineCamera::GetInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine)
-{
-	if (nullptr == _pipeLine)
-	{
-		MsgBoxAssert("렌더링 파이프라인이 존재하지 않습니다.");
-		return nullptr;
-	}
-
-	std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator findIter
-		= instancingMap_.find(_pipeLine.get());
-
-	//if (instancingMap_.end() == findIter)	//인스턴싱이 없다면 생성 후 반환.
-	//{
-	//	GameEngineInstancing& instancing = instancingMap_[_pipeLine];
-	//	GameEngineVertexBuffer* vertexBuffer = _pipeLine->GetVertexBuffer();
-
-	//	instancing.instancingPipeLine_ = GameEngineRenderingPipeLine::Create();
-	//	instancing.instancingPipeLine_->Copy(_pipeLine);
-	//	instancing.instancingPipeLine_->SetVertexShader(_pipeLine->GetVertexShader()->GetInstancingShader());
-
-	//	instancing.shaderResourceHelper_.ResourceCheck(instancing.instancingPipeLine_);
-	//	instancing.shaderResourceHelper_.AllConstantBufferNew();
-
-	//	instancing.size_ = vertexBuffer->GetInputLayoutInfo()->instancingSize_;
-	//	instancing.instancingBuffer_
-	//		= GameEngineInstancingBuffer::Create(
-	//			GameEngineInstancing::startInstancingCount_,
-	//			vertexBuffer->GetInputLayoutInfo()->instancingSize_
-	//		);
-	//	instancing.dataBuffer_.resize(
-	//		static_cast<size_t>(GameEngineInstancing::startInstancingCount_ * instancing.size_));
-
-	//	instancing.maxDataCount_ = GameEngineInstancing::startInstancingCount_;
-
-	//	if (true == instancing.shaderResourceHelper_.IsStructuredBuffer("allInstancingTransfomrDatas"))
-	//	{
-	//		GameEngineStructuredBufferSetter* sBufferSetter 
-	//			= instancing.shaderResourceHelper_.GetStructuredBufferSetter("allInstancingTransfomrDatas");
-
-	//		if (nullptr != sBufferSetter->structuredBuffer_)
-	//		{
-	//			sBufferSetter->Resize(instancing.maxDataCount_);
-	//		}
-	//		else
-	//		{
-	//			MsgBoxAssert("인스턴싱용 구조화버퍼가 준비되지 않았습니다.");
-	//			return nullptr;
-	//		}
-	//	}
-	//	findIter = instancingMap_.find(_pipeLine);
-	//}
-
-	return &findIter->second;
-}
-
-void GameEngineCamera::PushInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine, int _count)
-{
-	if (false == _pipeLine->GetVertexShader()->IsInstancing())
-	{
-		MsgBoxAssertString(_pipeLine->GetNameCopy() + ": 인스턴싱이 불가능한 렌더러입니다.");
-	}
-
-	GameEngineInstancing& instancing = instancingMap_[_pipeLine.get()];
-
-	instancing.count_ += _count;
-
-	//if (GameEngineInstancing::minInstancingCount_ <= instancing.count_ && nullptr == instancing.instancingBuffer_)
-	//{
-	//	GameEngineVertexBuffer* vertexBuffer = _pipeLine->GetVertexBuffer();
-
-	//	instancing.instancingPipeLine_ = GameEngineRenderingPipeLine::Create();
-	//	instancing.instancingPipeLine_->Copy(_pipeLine);
-	//	instancing.instancingPipeLine_->SetVertexShader(_pipeLine->GetVertexShader()->GetInstancingShader());
-
-	//	// 스트럭처드 버퍼가 만들어졌을뿐
-	//	instancing.shaderResourceHelper_.ResourceCheck(instancing.instancingPipeLine_);
-	//	instancing.shaderResourceHelper_.AllConstantBufferNew();
-
-
-	//	// 이 단계 다음에 어떤 상수버퍼를 가지고있고 그걸 세팅해야한다는 정보가 만들어진다.
-	//	// 세팅을 해줘야.
-	//	instancing.size_ = vertexBuffer->GetInputLayoutInfo()->instancingSize_;
-
-	//	instancing.instancingBuffer_ = GameEngineInstancingBuffer::Create(
-	//		GameEngineInstancing::startInstancingCount_, static_cast<UINT>(instancing.size_));
-
-	//	instancing.dataBuffer_.resize(
-	//		static_cast<size_t>(GameEngineInstancing::startInstancingCount_) * instancing.size_);
-	//}
-	//else if(instancing.instancingBuffer_->GetBufferCount() < instancing.count_ 
-	//	&& nullptr != instancing.instancingBuffer_)
-	//{
-	//	GameEngineVertexBuffer* vertexBuffer = _pipeLine->GetVertexBuffer();
-
-	//	size_t nextBufferCount = static_cast<size_t>(instancing.count_ * 1.5);
-
-	//	instancing.instancingBuffer_->CreateInstancingBuffer(
-	//		static_cast<UINT>(nextBufferCount), vertexBuffer->GetInputLayoutInfo()->instancingSize_);
-
-	//	instancing.dataBuffer_.resize(nextBufferCount * instancing.size_);
-
-	//	if (true == instancing.shaderResourceHelper_.IsStructuredBuffer("allInstancingTransformDataBuffer"))
-	//	{
-	//		GameEngineStructuredBufferSetter* sBufferSetter 
-	//			= instancing.shaderResourceHelper_.GetStructuredBufferSetter("allInstancingTransformDataBuffer");
-
-	//		if (nullptr != sBufferSetter->structuredBuffer_)
-	//		{
-	//			sBufferSetter->Resize(instancing.maxDataCount_);
-	//		}
-	//		else
-	//		{
-	//			MsgBoxAssert("인스턴싱용 구조화버퍼가 준비되지 않았습니다.");
-	//			return;
-	//		}
-	//	}
-	//}
-}
-
-int GameEngineCamera::PushInstancingData(std::shared_ptr<GameEngineMaterial> _pipeLine, void* _data, int _dataSize)
-{
-	int dataOffset = instancingMap_[_pipeLine.get()].dataInsert_ * _dataSize;
-
-	// PushInstancing에서 이미 버퍼는 충분한 사이즈만큼 늘어나 있어야 한다.
-
-	char* dataPtr = &instancingMap_[_pipeLine.get()].dataBuffer_[dataOffset];
-	memcpy_s(dataPtr, instancingMap_[_pipeLine.get()].dataBuffer_.size() - dataOffset, _data, _dataSize);
-	dataOffset += _dataSize;
-	int insertResultIndex = instancingMap_[_pipeLine.get()].dataInsert_;
-	++instancingMap_[_pipeLine.get()].dataInsert_;
-	return insertResultIndex;
-}
-
-int GameEngineCamera::PushInstancingIndex(std::shared_ptr<GameEngineMaterial> _pipeLine)
-{
-	int insertCount = instancingMap_[_pipeLine.get()].dataInsert_;
-
-	return PushInstancingData(_pipeLine, &insertCount, sizeof(int));
+	return instancingMap_[_name];
 }
 
 void GameEngineCamera::Start()
@@ -343,13 +202,6 @@ void GameEngineCamera::Render(float _deltaTime)
 		break;
 	}
 
-	for (std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator iter = instancingMap_.begin();
-		iter != instancingMap_.end(); iter++)
-	{
-		iter->second.dataInsert_ = 0;
-		//인스턴싱 정보 초기화.
-	}
-
 	for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
 	{
 		float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
@@ -361,48 +213,40 @@ void GameEngineCamera::Render(float _deltaTime)
 			//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 			//하지만 renderer가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
 		{
-			if (true == renderer->IsUpdate())
+			if (false == renderer->IsUpdate())
 			{
-				renderer->renderOptionInst_.deltaTime_ = _deltaTime;
-				renderer->renderOptionInst_.sumDeltaTime_ += _deltaTime;
-
-				renderer->GetTransform().SetViewMatrix(viewMatrix_);
-				renderer->GetTransform().SetProjectionMatrix(projectionMatrix_);
-				//카메라에 저장된 뷰행렬과 투영행렬을 렌더러의 트랜스폼에 저장한다.
-
-				renderer->GetTransform().CalculateWorldViewProjection();
-				//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
-
-				
-				if (true == float4x4::IsInViewSpace(
-					renderer->GetTransformData().worldViewProjectionMatrix_, 
-					float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
-				)
-					//뷰스페이스 안에 조금이라도 들어오는 것들만 그린다.
-				{
-					renderer->Render(scaleTime);
-					//뷰포트행렬을 포함한 모든 행렬 계산을 거친 결과대로 메쉬를 화면에 그린다.
-				}
+				continue;
 			}
+
+			renderer->renderOptionInst_.deltaTime_ = _deltaTime;
+			renderer->renderOptionInst_.sumDeltaTime_ += _deltaTime;
+
+			renderer->GetTransform().SetViewMatrix(viewMatrix_);
+			renderer->GetTransform().SetProjectionMatrix(projectionMatrix_);
+			//카메라에 저장된 뷰행렬과 투영행렬을 렌더러의 트랜스폼에 저장한다.
+
+			renderer->GetTransform().CalculateWorldViewProjection();
+			//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
+			
+			if (false == float4x4::IsInViewSpace(
+				renderer->GetTransformData().worldViewProjectionMatrix_, 
+				float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
+			)
+			{
+				//뷰스페이스 안에 조금이라도 들어오는 것들만 그린다.
+				continue;
+			}
+
+			renderer->Render(scaleTime);
+			//뷰포트행렬을 포함한 모든 행렬 계산을 거친 결과대로 메쉬를 화면에 그린다.
 		}
 	}
 
-	//for (std::unordered_map<GameEngineRenderingPipeLine*, GameEngineInstancing>::iterator iter = instancingMap_.begin();
-	//	iter != instancingMap_.end(); iter++)
-	//{
-	//	if (GameEngineInstancing::minInstancingCount_ > iter->second.count_)
-	//	{
-	//		continue;
-	//	}
-	//
-	//	GameEngineRenderingPipeLine* pipeLine = iter->first;
-	//	GameEngineInstancing& instancing = iter->second;
-	//
-	//	instancing.InstancingBufferChangeData();
-	//	instancing.shaderResourceHelper_.AllResourcesSetting();
-	//	instancing.instancingPipeLine_->RenderInstancing(instancing.dataInsert_, instancing.instancingBuffer_);
-	//	instancing.shaderResourceHelper_.AllResourcesReset();
-	//}
+	for (std::unordered_map<std::string, GameEngineInstancing>::iterator iter = instancingMap_.begin();
+		iter != instancingMap_.end(); ++iter)
+	{
+
+	}
 }
 
 void GameEngineCamera::PushRenderer(std::shared_ptr<GameEngineRenderer> _renderer)

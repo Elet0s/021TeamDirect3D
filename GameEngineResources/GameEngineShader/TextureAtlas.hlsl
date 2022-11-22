@@ -44,18 +44,6 @@ Output TextureAtlas_VS(Input _input)
     return newOutput;
 }
 
-Output TextureAtlas_VSINST(Input _input)
-{
-    // _Input.Index => 인스턴싱 버퍼를 통해서 전달.
-    // 인스턴싱 버퍼를 통해서 행렬을 전달하지 않은 이유는 인스턴싱 버퍼를 매번 새롭게 정의해야 하기 때문이다.
-    
-    Output result = (Output) 0;
-    result.pos_ = _input.pos_;  //아래 코드 때문에 이 코드는 없어도 되지 않나??
-    result.pos_ = mul(_input.pos_, allInstancingTransformDataBuffer[_input.index_].worldViewProjectionMatrix_);
-    result.texcoord_ = _input.texcoord_;
-    return result;
-}
-
 cbuffer PixelData: register(b0)
 {
     float4 mulColor_;
@@ -90,7 +78,33 @@ float4 TextureAtlas_PS(Output _input) : SV_Target0 //SV_Target[n]: n번 렌더타겟�
         resultColor.a = 1.f;
     }
     
-
-    
     return resultColor;
+}
+
+struct InstAtlasData     //인스턴싱용 아틀리스데이터.
+{
+    float2 textureFramePos_;
+    float2 textureFrameSize_;
+    float4 pivotPos_;
+};
+
+StructuredBuffer<InstTransformData> Inst_TransformData : register(t12);
+StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t13);
+
+Output TextureAtlas_VSINST(Input _input)
+{
+    // _Input.Index => 인스턴싱 버퍼를 통해서 전달.
+    // 인스턴싱 버퍼를 통해서 행렬을 전달하지 않은 이유는 인스턴싱 버퍼를 매번 새롭게 정의해야 하기 때문이다.
+    
+    Output result = (Output) 0;
+    //result.pos_ = _input.pos_; //아래 코드 때문에 이 코드는 없어도 되지 않나??
+    result.pos_ = mul(_input.pos_, Inst_TransformData[_input.index_].worldViewProjectionMatrix_);
+    
+    
+    result.texcoord_ = (_input.texcoord_.x * Inst_AtlasData[_input.index_].textureFrameSize_.x)
+        + Inst_AtlasData[_input.index_].textureFramePos_.x;
+    result.texcoord_ = (_input.texcoord_.y * Inst_AtlasData[_input.index_].textureFrameSize_.y)
+        + Inst_AtlasData[_input.index_].textureFramePos_.y;
+    
+    return result;
 }

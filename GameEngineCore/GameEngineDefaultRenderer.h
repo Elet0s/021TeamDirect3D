@@ -27,25 +27,21 @@ private:
 public:	
 	virtual void Render(float _deltaTime) override;
 
-	//렌더러에 필요한 마테리얼을 등록하는 함수.
+	//렌더러에 필요한 마테리얼을 등록하고 이 렌더러를 메인 카메라에 등록하는 함수.
 	void SetMaterial(const std::string_view& _materialName);
 
+	//
 	void SetMesh(const std::string_view& _meshName);
 
 
-	virtual void InstancingOn();
-
-
 public:
-	inline GameEngineShaderResourceHelper& GetShaderResourceHelper()	
+	inline GameEngineShaderResourceHelper& GetShaderResourceHelper()
 		//셰이더리소스헬퍼 없는 렌더러란 있을 수 없으므로 레퍼런스 반환.
 	{
-		return this->renderUnit_.GetShaderResourceHelper();
+		return this->renderUnit_->GetShaderResourceHelper();
 	}
 
-
-	inline GameEngineRenderUnit& GetRenderUnit()	
-		//렌더유닛 없는 렌더러란 있을 수 없으므로 레퍼런스 반환.
+	inline std::shared_ptr<GameEngineRenderUnit> GetRenderUnit()
 	{
 		return this->renderUnit_;
 	}
@@ -59,7 +55,7 @@ protected:
 	
 
 private:
-	GameEngineRenderUnit renderUnit_;
+	std::shared_ptr<GameEngineRenderUnit> renderUnit_;
 	//한개의 디폴트렌더러마다 최소 한개의 렌더유닛을 가진다.
 };
 

@@ -14,7 +14,7 @@ struct RenderOption
     float pivotPosX_ = 0.f;     //피봇포스 X
     float pivotPosY_ = 0.f;     //피봇포스 Y
     float shadowAngle_ = 30.f;  //그림자 각도. 기본값 30도.
-    int bytePad1_ = 0;
+    int bytePad1_ = 0;          //바이트패드.
 };
 
 class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>
@@ -55,9 +55,9 @@ public:
 
     std::shared_ptr<GameEngineMaterial> GetMaterial();
 
-    std::shared_ptr<GameEngineMaterial> GetClonePipeLine();
+    std::shared_ptr<GameEngineMaterial> GetCloneMaterial();
 
-    std::shared_ptr<GameEngineMaterial> ClonePipeLine(std::shared_ptr<GameEngineMaterial> _original);
+    std::shared_ptr<GameEngineMaterial> CloneMaterial(std::shared_ptr<GameEngineMaterial> _original);
 
     //렌더유닛에 부모 렌더러를 지정하고 EngineShaderResourceSetting() 함수를 호출해서 엔진 기본 상수버퍼를 등록하는 함수.
     void SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer);
@@ -69,8 +69,20 @@ public:
         return this->shaderResourceHelper_;
     }
 
+    inline void On()
+    {
+        isOn_ = true;
+    }
+
+    inline void Off()
+    {
+        isOn_ = false;
+    }
+
 
 private:
+    bool isOn_;     //true: 일반 렌더링 모드, false: 인스턴스 렌더링 모드.
+
     std::weak_ptr<GameEngineRenderer> parentRenderer_;    //이 렌더유닛을 가진 부모 렌더러.
 
     std::shared_ptr<GameEngineMesh> mesh_;                  //
@@ -109,8 +121,6 @@ public:
 public:
     void ChangeCamera(CameraOrder _order);
     void SetRenderingOrder(int _renderingOrder);
-    bool IsInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine);
-    void InstancingDataSetting(std::shared_ptr<GameEngineMaterial> _pipeLine);
 
 public:
     inline int GetRenderingOrder()

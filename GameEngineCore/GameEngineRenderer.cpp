@@ -6,7 +6,8 @@
 #include "GameEngineDevice.h"
 
 GameEngineRenderUnit::GameEngineRenderUnit()
-	: parentRenderer_(),
+	: isOn_(true),
+	parentRenderer_(),
 	mesh_(nullptr),
 	inputLayout_(nullptr),
 	material_(nullptr),
@@ -32,7 +33,7 @@ GameEngineRenderUnit::GameEngineRenderUnit(const GameEngineRenderUnit& _other)
 
 void GameEngineRenderUnit::SetMaterial(const std::string_view& _materialName)
 {
-	material_ = GameEngineMaterial::Find(_materialName);
+	this->material_ = GameEngineMaterial::Find(_materialName);
 
 	if (nullptr == material_)
 	{
@@ -111,7 +112,7 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngin
 		shaderResourceHelper_.SetConstantBuffer_Link(
 			"TRANSFORMDATA",
 			&this->parentRenderer_.lock()->GetTransformData(),
-			sizeof(parentRenderer_.lock()->GetTransformData())
+			sizeof(TransformData)
 		);
 	}
 	if (true == this->shaderResourceHelper_.IsConstantBuffer("RENDEROPTION"))
@@ -164,18 +165,18 @@ std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()
 	return this->material_;
 }
 
-std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetClonePipeLine()
+std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetCloneMaterial()
 {
 	if (false == material_->IsOriginal())
 	{
 		return material_;
 	}
 
-	material_ = ClonePipeLine(material_);
+	material_ = CloneMaterial(material_);
 	return material_;
 }
 
-std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::ClonePipeLine(std::shared_ptr<GameEngineMaterial> _original)
+std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::CloneMaterial(std::shared_ptr<GameEngineMaterial> _original)
 {
 	std::shared_ptr<GameEngineMaterial> clone = GameEngineMaterial::Create();
 	clone->Copy(_original);
@@ -217,40 +218,6 @@ void GameEngineRenderer::SetRenderingOrder(int _renderingOrder)
 {
 	camera_.lock()->ChangeRenderingOrder(
 		std::dynamic_pointer_cast<GameEngineRenderer>(shared_from_this()), _renderingOrder);
-}
-
-bool GameEngineRenderer::IsInstancing(std::shared_ptr<GameEngineMaterial> _pipeLine)
-{
-	std::unordered_map<GameEngineMaterial*, GameEngineInstancing>::iterator instancingIter
-		= this->camera_.lock()->instancingMap_.find(_pipeLine.get());
-
-	if (this->camera_.lock()->instancingMap_.end() == instancingIter)
-	{
-		return false;
-	}
-
-	return true == isInstancing_ && GameEngineInstancing::minInstancingCount_ <= instancingIter->second.count_;
-}
-
-void GameEngineRenderer::InstancingDataSetting(std::shared_ptr<GameEngineMaterial> _pipeLine)
-{
-	int instancingIndex = this->camera_.lock()->PushInstancingIndex(_pipeLine);
-
-	GameEngineInstancing* instancing = camera_.lock()->GetInstancing(_pipeLine);
-
-	if (nullptr == instancing)
-	{
-		MsgBoxAssert("인스턴싱은 켜져 있지만 인스턴싱 준비는 되어있지 않습니다.");
-		return;
-	}
-
-	if (true == instancing->shaderResourceHelper_.IsStructuredBuffer("allInstancingTransformDatas"))
-	{
-		GameEngineStructuredBufferSetter* sBufferSetter
-			= instancing->shaderResourceHelper_.GetStructuredBufferSetter("allInstancingTransformDatas");
-
-		sBufferSetter->Push(this->GetTransformData(), instancingIndex);
-	}
 }
 
 void GameEngineRenderer::Start()

@@ -88,6 +88,7 @@ GameEngineRenderUnit* GameEngineFBXRenderer::SetFBXMesh(
 
 	return &RenderUnit;
 }
+
 void GameEngineFBXRenderer::Render(float _deltaTime)
 {
 	for (size_t UnitIndex = 0; UnitIndex < Unit.size(); UnitIndex++)

@@ -24,7 +24,7 @@ void Texture2DShadowRenderer::Update(float _deltaTime)
 	{
 		GetShaderResourceHelper().SetConstantBuffer_Link(
 			"AtlasData", parentTextureRenderer_.lock()->GetAtlasData());
-		GetRenderUnit().GetShaderResourceHelper().SetTexture(
+		GetShaderResourceHelper().SetTexture(
 			"Tex", parentTextureRenderer_.lock()->GetCurrentTexture());
 
 		if (0.f >= parentTextureRenderer_.lock()->GetTransform().GetWorldScale().x)
@@ -63,7 +63,7 @@ void Texture2DShadowRenderer::SetTextureRenderer(std::shared_ptr<GameEngineTextu
 
 	GetShaderResourceHelper().SetConstantBuffer_Link(
 		"AtlasData", parentTextureRenderer_.lock()->GetAtlasData());
-	GetRenderUnit().GetShaderResourceHelper().SetTexture(
+	GetShaderResourceHelper().SetTexture(
 		"Tex", parentTextureRenderer_.lock()->GetCurrentTexture());
 
 	if (true == parentTextureRenderer_.lock()->IsCurAnimation())
