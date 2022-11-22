@@ -9,8 +9,7 @@ std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
 
 Player::Player()
-	: nowLevel_(nullptr),
-	playerRenderer_(nullptr),
+	:playerRenderer_(nullptr),
 	collision_(nullptr),
 	playerInfo_()
 {
@@ -82,9 +81,12 @@ void Player::Start()
 CollisionReturn Player::MonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	_Other->GetRoot()->Off();
+	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
+
 	if (playerInfo_->hp_ > 0)
 	{
-		playerInfo_->hp_ -= 5;
+		playerInfo_->hp_ -= A->GetMonsterInfo().atk_;
+		playerInfo_->exp_ += 5;
 	}
 	return CollisionReturn::Stop;
 }
@@ -178,7 +180,7 @@ void Player::End()
 
 }
 
-void Player::CreatePlayer(GameEngineLevel* _thisLevel,const float4& _initPosition,const std::string_view& _playerName /*= "MainPlayer"*/)
+void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPosition, const std::string_view& _playerName /*= "MainPlayer"*/)
 {
 	if (nullptr != mainPlayer_)
 	{
@@ -191,9 +193,5 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel,const float4& _initPositio
 	mainPlayer_ = _thisLevel->CreateActor<Player>(ObjectOrder::Player);
 	mainPlayer_->SetLevelOverOn();
 	mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
-	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(
-		mainPlayer_->GetTransform().GetWorldPosition().x,
-		mainPlayer_->GetTransform().GetWorldPosition().y,
-		-100.f
-	);
+	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(mainPlayer_->GetTransform().GetWorldPosition().x,mainPlayer_->GetTransform().GetWorldPosition().y,-100.f);
 }

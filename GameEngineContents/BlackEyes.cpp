@@ -37,8 +37,13 @@ void BlackEyes::Start()
 	monCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Red);
 	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
-	SummonMon();
 
+	monsterInfo_->atk_ = 5;
+	monsterInfo_->hp_ = 10;
+	monsterInfo_->maxHp_ = 10;
+	monsterInfo_->speed_ = 150;
+
+	SummonMon();
 }
 void BlackEyes::Update(float _deltaTime)
 {

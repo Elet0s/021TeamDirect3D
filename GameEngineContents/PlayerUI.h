@@ -15,13 +15,24 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
+
 	void HitEffect();
 	void ReduceHP(float _deltaTime);
+
+	void GainExp(float _deltaTime);
 private:
 	std::weak_ptr<Player> player_;
 	std::shared_ptr<GameEngineTextureRenderer> playerHpMax_;
 	std::shared_ptr<GameEngineTextureRenderer> playerHpUi_;
 	std::shared_ptr<GameEngineTextureRenderer> playerHpRed_;
+
+	std::shared_ptr<GameEngineTextureRenderer> playerExpMax_;
+	std::shared_ptr<GameEngineTextureRenderer> playerExpUi_;
+	std::shared_ptr<GameEngineTextureRenderer> playerExpBlue_;
+
 	float hpRedBar_;
 	bool hpRedBarTregar_;
+
+	float ExpBlueBar_;
+	float ExpBlueBarTimer_;
 };

@@ -20,7 +20,17 @@ enum class ObjectOrder
 	UI = 1000
 };
 
-enum class Skill
+enum class MonterOrder
+{
+	BlackEyes,
+	Brown,
+	FlyingEyes,
+	Green,
+	NormalGoblin,
+	RedFlyingEyes
+};
+
+enum class SkilOrder
 {
 
 };

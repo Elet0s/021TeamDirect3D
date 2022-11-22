@@ -4,12 +4,12 @@
 #include "Player.h"
 
 Monster::Monster()
-	:speed_(100.0f)
-	, mxMove_(0)	
+	: mxMove_(0)	
 	, myMove_(0)
-	, monRenderer_(0)
-	, monCollision_(0)
+	, monRenderer_(nullptr)
+	, monCollision_(nullptr)
 {
+	monsterInfo_ = std::make_shared<MonsterInfo>();
 }
 
 Monster::~Monster()
@@ -76,22 +76,22 @@ void Monster::Chaseplayer(float _deltaTime)
 	float RangeY = abs(my - py) / (abs(mx - px) + abs(my - py));
 	if (mx -px < 0)
 	{
-		mxMove_ = mx + (speed_ * RangeX * _deltaTime);
+		mxMove_ = mx + (monsterInfo_->speed_ * RangeX * _deltaTime);
 		this->GetTransform().PixLocalPositiveX();
 
 	}
 	else if (mx - px >=0)
 	{
-		mxMove_ = mx - (speed_ * RangeX * _deltaTime);
+		mxMove_ = mx - (monsterInfo_->speed_ * RangeX * _deltaTime);
 		this->GetTransform().PixLocalNegativeX();
 	}
 	if (my -py < 0)
 	{
-		myMove_ = my + (speed_ * RangeY * _deltaTime);
+		myMove_ = my + (monsterInfo_->speed_ * RangeY * _deltaTime);
 	}
 	else if (my - py >= 0)
 	{
-		myMove_ = my - (speed_ * RangeY * _deltaTime);
+		myMove_ = my - (monsterInfo_->speed_ * RangeY * _deltaTime);
 	}
 	GetTransform().SetWorldPosition(mxMove_, myMove_, 0.0f);
 }

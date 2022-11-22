@@ -37,6 +37,12 @@ void Green::Start()
 	monCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Red);
 	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
+
+	monsterInfo_->atk_ = 0;
+	monsterInfo_->hp_ = 10;
+	monsterInfo_->maxHp_ = 10;
+	monsterInfo_->speed_ = 150;
+
 	SummonMon();
 
 }
