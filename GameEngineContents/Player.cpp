@@ -11,7 +11,8 @@ bool Player::isInitialized_ = false;
 Player::Player()
 	:playerRenderer_(nullptr),
 	collision_(nullptr),
-	playerInfo_()
+	playerInfo_(nullptr),
+	dashTimer_(0)
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{
@@ -55,6 +56,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("PlayerRight", VK_RIGHT);
 		GameEngineInput::GetInst()->CreateKey("PlayerUp", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("PlayerDown", VK_DOWN);
+		GameEngineInput::GetInst()->CreateKey("PlayerDash", VK_LSHIFT);
 	}
 	{
 		collision_ = CreateComponent<GameEngineCollision>();
@@ -101,9 +103,12 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 		}
 		else
 		{
+			playerInfo_->RLDirection_ = true;
 			playerRenderer_->GetTransform().PixLocalNegativeX();
 			moveDirection_ += moveDirection_.Left;
 		}
+
+
 	}
 	else if (true == GameEngineInput::GetInst()->IsUp("PlayerLeft"))
 	{
@@ -118,6 +123,7 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 		}
 		else
 		{
+			playerInfo_->RLDirection_ = false;
 			playerRenderer_->GetTransform().PixLocalPositiveX();
 			moveDirection_ += moveDirection_.Right;
 		}
@@ -169,10 +175,49 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	}
 }
 
+void Player::PlayerDash(float _deltaTime)
+{
+	if (true == GameEngineInput::GetInst()->IsDown("PlayerDash"))
+	{
+		dashState_ = true;
+	}
+	if (dashState_ == true)
+	{
+		dashTimer_ += _deltaTime;
+		if (dashTimer_ < 0.2f)
+		{
+
+			if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft") || true == GameEngineInput::GetInst()->IsPressed("PlayerRight") || true == GameEngineInput::GetInst()->IsPressed("PlayerUp") || true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+			{
+				GetTransform().SetWorldMove(moveDirection_.Normalize3D() * 1000.0f * _deltaTime);
+			}
+			else
+			{
+				if (playerInfo_->RLDirection_ == false)
+				{
+					GetTransform().SetWorldMove(float4{ 1000.0f,0.f,0.f,1.f }*_deltaTime);
+				}
+				else if (playerInfo_->RLDirection_ == true)
+				{
+					GetTransform().SetWorldMove(float4{ -1000.f,0.f,0.f,1.f }*_deltaTime);
+				}
+			}
+		}
+		else if (dashTimer_> 0.2f)
+		{
+			dashState_ = false;
+			dashTimer_ = 0;
+		}
+	}
+
+}
+
 void Player::Update(float _deltaTime)
 {
 	MoveDirectionUpdate(_deltaTime);
 	collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D, std::bind(&Player::MonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+
+	PlayerDash(_deltaTime);
 }
 
 void Player::End()

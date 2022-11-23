@@ -14,7 +14,8 @@ public:
 		exp_(0),
 		atk_(10),
 		def_(10),
-		range_(10)
+		range_(10),
+		RLDirection_(false)
 	{
 
 	}
@@ -28,6 +29,7 @@ public:
 	float atk_;
 	float def_;
 	float range_;
+	bool RLDirection_;
 };
 class PlayerUI;
 class GameEngineDefaultRenderer;
@@ -78,13 +80,15 @@ protected:
 	void End() override;
 
 	void MoveDirectionUpdate(float _deltaTime);
-
+	void PlayerDash(float _deltaTime);
 
 private:
+	float dashTimer_;
+	bool dashState_;
 	std::shared_ptr<PlayerInfo> playerInfo_;
 	std::shared_ptr<PlayerUI> playerUi_;
 	float4 moveDirection_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
-
+	
 };
 
