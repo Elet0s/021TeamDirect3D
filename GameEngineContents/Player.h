@@ -72,7 +72,7 @@ public:
 		return *CastThis<Player>()->playerInfo_;
 	}
 
-	CollisionReturn MonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 	//void SetLevel(GameEngineLevel* _NowLevel);
 protected:
 	void Start() override;
@@ -85,10 +85,11 @@ protected:
 private:
 	float dashTimer_;
 	bool dashState_;
+	float4 moveDirection_;
 	std::shared_ptr<PlayerInfo> playerInfo_;
 	std::shared_ptr<PlayerUI> playerUi_;
-	float4 moveDirection_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
+
 	
 };
 

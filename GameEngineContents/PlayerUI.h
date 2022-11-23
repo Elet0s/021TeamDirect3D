@@ -32,6 +32,9 @@ private:
 
 	std::shared_ptr<GameEngineFontRenderer>playerLevelUi_;
 
+	float playerXindex_;
+	float playerYindex_;
+	
 	float hpRedBar_;
 	bool hpRedBarTregar_;
 

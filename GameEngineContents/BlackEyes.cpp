@@ -34,19 +34,22 @@ void BlackEyes::Start()
 	shadowRenderer_->SetTextureRenderer(monRenderer_);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
-	monCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Red);
-	monCollision_->GetTransform().SetLocalScale({ 100.0f, 100.0f, 1.0f });
+	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
+	monCollision_->GetTransform().SetLocalScale({ 100.0f, 50.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 5;
 	monsterInfo_->hp_ = 10;
 	monsterInfo_->maxHp_ = 10;
-	monsterInfo_->speed_ = 150;
+	monsterInfo_->baseSpeed_ = 150;
+	monsterInfo_->giveExp_ = 5;
 
 	SummonMon();
 }
 void BlackEyes::Update(float _deltaTime)
 {
+
+	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	Chaseplayer(_deltaTime);
 }
 void BlackEyes::End()

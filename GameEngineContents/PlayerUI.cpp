@@ -9,7 +9,9 @@ PlayerUI::PlayerUI()
 	hpRedBar_(0),
 	hpRedBarTregar_(false),
 	ExpBlueBarTimer_(0),
-	playerLevelUi_(nullptr)
+	playerLevelUi_(nullptr),
+	playerXindex_(0),
+	playerYindex_(0)
 {
 
 }
@@ -64,6 +66,7 @@ void PlayerUI::Start()
 	playerLevelUi_->SetSize(30.f);
 	playerLevelUi_->SetLeftAndRightSort(LeftAndRightSort::Left);
 	playerLevelUi_->SetText( "0", "Free Pixel");
+	playerLevelUi_->SetPositionMode(FontPositionMode::World);
 	playerLevelUi_->ChangeCamera(CameraOrder::MainCamera);
 
 }
@@ -128,15 +131,18 @@ void PlayerUI::GainExp(float _deltaTime)
 }
 void PlayerUI::Update(float _deltaTime)
 {
-	playerHpUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x, player_.lock()->GetTransform().GetWorldPosition().y + 100.0f, -100);
-	playerHpMax_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x, player_.lock()->GetTransform().GetWorldPosition().y + 100.0f, -98);
-	playerHpRed_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x, player_.lock()->GetTransform().GetWorldPosition().y + 100.0f, -99);
+	playerXindex_ = player_.lock()->GetTransform().GetWorldPosition().x;
+	playerYindex_ = player_.lock()->GetTransform().GetWorldPosition().y;
 
-	playerExpMax_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 5.0f, player_.lock()->GetTransform().GetWorldPosition().y + 90.0f, -100);
-	playerExpUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 5.0f, player_.lock()->GetTransform().GetWorldPosition().y + 90.0f, -99);
-	playerExpBlue_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 5.0f, player_.lock()->GetTransform().GetWorldPosition().y + 90.0f, -98);
+	playerHpUi_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -100);
+	playerHpMax_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -98);
+	playerHpRed_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -99);
 
-	playerLevelUi_->SetTextPosition(float4{ 50.f,50.f ,-100.f});
+	playerExpMax_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -100);
+	playerExpUi_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -99);
+	playerExpBlue_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -98);
+
+	playerLevelUi_->GetTransform().SetWorldPosition(float4{ playerXindex_ -70.f,playerYindex_+115.0f ,-100.f});
 
 	HitEffect();
 	ReduceHP(_deltaTime);

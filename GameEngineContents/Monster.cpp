@@ -4,10 +4,14 @@
 #include "Player.h"
 
 Monster::Monster()
-	: mxMove_(0)	
+	: mxMove_(0)
 	, myMove_(0)
 	, monRenderer_(nullptr)
 	, monCollision_(nullptr)
+	, colCheak_(false)
+	, playerRange_(0)
+	,mx_(0)
+	,my_(0)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
 }
@@ -66,35 +70,52 @@ void Monster::SummonMon()
 		}
 	}
 }
+
+CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+{
+	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
+	if (colCheak_ == false)
+	{
+		colCheak_ = true;
+	}
+	
+	if (A->playerRange_ > playerRange_)
+	{
+		A->GetMonsterInfo().colSpeed_ = -((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
+		GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 4);
+	}
+	if (A->playerRange_ <= playerRange_)
+	{
+		GetMonsterInfo().colSpeed_ = -((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
+		A->GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 4);
+	}
+	return CollisionReturn::Continue;
+}
+
 void Monster::Chaseplayer(float _deltaTime)
 {
-	float mx = GetTransform().GetWorldPosition().x;
-	float my = GetTransform().GetWorldPosition().y;
-	float px	= Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
+	 mx_ = GetTransform().GetWorldPosition().x;
+	 my_ = GetTransform().GetWorldPosition().y;
+	float px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
 	float py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
-	float RangeX = abs(mx - px) / (abs(mx - px)+ abs(my - py)); //대각선이동을 위한 보정값
-	float RangeY = abs(my - py) / (abs(mx - px) + abs(my - py));
-	if (mx -px < 0)
+	range_.x = px -mx_;
+	range_.y = py -my_;
+	playerRange_ = abs(range_.x) + abs(range_.y);
+	if (false == monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
 	{
-		mxMove_ = mx + (monsterInfo_->speed_ * RangeX * _deltaTime);
-		this->GetTransform().PixLocalPositiveX();
+		monsterInfo_->ResultSpeed_ = monsterInfo_->baseSpeed_;
+		colCheak_ = false;
+		monsterInfo_->colSpeed_ = 0;
+		GetTransform().SetWorldMove(range_.Normalize3D() * monsterInfo_->ResultSpeed_ * _deltaTime);
+	}
+	if (colCheak_ == true)
+	{
+			monsterInfo_->ResultSpeed_ = monsterInfo_->colSpeed_;
+			GetTransform().SetWorldMove(range_.Normalize3D() * monsterInfo_->ResultSpeed_ * _deltaTime);
+	}
 
-	}
-	else if (mx - px >=0)
-	{
-		mxMove_ = mx - (monsterInfo_->speed_ * RangeX * _deltaTime);
-		this->GetTransform().PixLocalNegativeX();
-	}
-	if (my -py < 0)
-	{
-		myMove_ = my + (monsterInfo_->speed_ * RangeY * _deltaTime);
-	}
-	else if (my - py >= 0)
-	{
-		myMove_ = my - (monsterInfo_->speed_ * RangeY * _deltaTime);
-	}
-	GetTransform().SetWorldPosition(mxMove_, myMove_, 0.0f);
 }
+
 
 void Monster::Update(float _deltaTime)
 {
