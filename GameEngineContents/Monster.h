@@ -43,6 +43,7 @@ public:
 		return *CastThis<Monster>()->monsterInfo_;
 	}
 	CollisionReturn MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 	float mxMove_;
 	float myMove_;
 protected:

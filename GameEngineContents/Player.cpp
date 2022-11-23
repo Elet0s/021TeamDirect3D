@@ -91,6 +91,10 @@ CollisionReturn Player::PlayerToMonsterCollision(std::shared_ptr<GameEngineColli
 
 void Player::MoveDirectionUpdate(float _deltaTime)
 {
+	if (false == collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
+	{
+		playerInfo_->pushSpeed_ = 0;
+	}
 	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
 	{
 		if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
@@ -163,7 +167,7 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	if (moveDirection_ != 0)
 	{
 		playerRenderer_->ChangeFrameAnimation("PlayerRun");
-		GetTransform().SetWorldMove(moveDirection_.Normalize3D() * playerInfo_->speed_ * _deltaTime);
+		GetTransform().SetWorldMove(moveDirection_.Normalize3D() * (playerInfo_->speed_- playerInfo_->pushSpeed_) * _deltaTime);
 	}
 	else
 	{

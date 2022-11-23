@@ -15,7 +15,8 @@ public:
 		atk_(10),
 		def_(10),
 		range_(10),
-		RLDirection_(false)
+		RLDirection_(false),
+		pushSpeed_(0)
 	{
 
 	}
@@ -29,6 +30,7 @@ public:
 	float atk_;
 	float def_;
 	float range_;
+	float pushSpeed_;
 	bool RLDirection_;
 };
 class PlayerUI;

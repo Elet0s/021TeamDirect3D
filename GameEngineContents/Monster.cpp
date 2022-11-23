@@ -91,7 +91,16 @@ CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCol
 	}
 	return CollisionReturn::Continue;
 }
+CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+{
+	std::shared_ptr<Player> A = std::dynamic_pointer_cast<Player>(_Other->GetActor());
 
+
+		A->GetPlayerInfo().pushSpeed_ = ((monsterInfo_->baseSpeed_ + A->GetPlayerInfo().speed_) / 5);
+		GetMonsterInfo().colSpeed_ = -((monsterInfo_->baseSpeed_ + A->GetPlayerInfo().speed_) / 2);
+	
+	return CollisionReturn::Continue;
+}
 void Monster::Chaseplayer(float _deltaTime)
 {
 	 mx_ = GetTransform().GetWorldPosition().x;
