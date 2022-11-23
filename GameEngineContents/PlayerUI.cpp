@@ -8,7 +8,8 @@ PlayerUI::PlayerUI()
 	playerHpUi_(0),
 	hpRedBar_(0),
 	hpRedBarTregar_(false),
-	ExpBlueBarTimer_(0)
+	ExpBlueBarTimer_(0),
+	playerLevelUi_(nullptr)
 {
 
 }
@@ -58,7 +59,13 @@ void PlayerUI::Start()
 	playerExpBlue_->SetTexture("DefaultUi.png");
 	playerExpBlue_->GetPixelData().mulColor_ = float4(0.3f, 0.3f, 1.0f, 1.0f); //ÆÄ¶õ»ö
 	playerExpBlue_->GetTransform().SetWorldScale(90, 5, 1);
-	
+
+	playerLevelUi_ = CreateComponent<GameEngineFontRenderer>();
+	playerLevelUi_->SetSize(30.f);
+	playerLevelUi_->SetLeftAndRightSort(LeftAndRightSort::Left);
+	playerLevelUi_->SetText( "0", "Free Pixel");
+	playerLevelUi_->ChangeCamera(CameraOrder::MainCamera);
+
 }
 void PlayerUI::HitEffect()
 {
@@ -128,6 +135,9 @@ void PlayerUI::Update(float _deltaTime)
 	playerExpMax_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 5.0f, player_.lock()->GetTransform().GetWorldPosition().y + 90.0f, -100);
 	playerExpUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 5.0f, player_.lock()->GetTransform().GetWorldPosition().y + 90.0f, -99);
 	playerExpBlue_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 5.0f, player_.lock()->GetTransform().GetWorldPosition().y + 90.0f, -98);
+
+	playerLevelUi_->SetTextPosition(float4{ 50.f,50.f ,-100.f});
+
 	HitEffect();
 	ReduceHP(_deltaTime);
 	GainExp(_deltaTime);

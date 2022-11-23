@@ -30,6 +30,8 @@ private:
 	std::shared_ptr<GameEngineTextureRenderer> playerExpUi_;
 	std::shared_ptr<GameEngineTextureRenderer> playerExpBlue_;
 
+	std::shared_ptr<GameEngineFontRenderer>playerLevelUi_;
+
 	float hpRedBar_;
 	bool hpRedBarTregar_;
 

@@ -15,7 +15,7 @@ TimeActor::~TimeActor()
 void TimeActor::Start()
 {
 
-	GameEngineFont::Load("Free Pixel");
+
 
 	{
 		UIRenderer_ = CreateComponent<GameEngineTextureRenderer>();
