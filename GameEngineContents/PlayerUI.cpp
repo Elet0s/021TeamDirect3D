@@ -142,7 +142,8 @@ void PlayerUI::Update(float _deltaTime)
 	playerExpUi_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -99);
 	playerExpBlue_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -98);
 
-	playerLevelUi_->GetTransform().SetWorldPosition(float4{ playerXindex_ -70.f,playerYindex_+115.0f ,-100.f});
+	playerLevelUi_->SetPositionMode(FontPositionMode::World);
+	playerLevelUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 5.0f, player_.lock()->GetTransform().GetWorldPosition().y + 90.0f, -100);
 
 	HitEffect();
 	ReduceHP(_deltaTime);
