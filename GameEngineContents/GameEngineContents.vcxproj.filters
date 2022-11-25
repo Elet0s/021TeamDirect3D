@@ -136,6 +136,9 @@
     <ClCompile Include="TreeObject.cpp">
       <Filter>Actor\01. MapObject</Filter>
     </ClCompile>
+    <ClCompile Include="SoulCardUI.cpp">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -225,6 +228,9 @@
       <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
     <ClInclude Include="LoginUI.h">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SoulCardUI.h">
       <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
   </ItemGroup>
