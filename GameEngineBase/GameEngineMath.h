@@ -890,9 +890,9 @@ public:
 	}
 
 	//뷰스페이스 컬링 판정.
-	static bool IsInViewSpace(const float4x4& _wvpMatrix, const float4& _pivotPos)
+	static bool IsInViewFrustum(const float4x4& _wvpMatrix, const float4& _pivotPos)
 	{
-		//너비높이 1.f씩인 기본 Rect만 고려하였음.
+		//너비높이 1씩인 기본 Rect만 고려하였음.
 		//Fullrect처럼 너비높이나 모양이 다르면 다시 만들 것. 
 		float4 leftTop = float4(-0.5f + _pivotPos.x, -0.5f + _pivotPos.y);
 		float4 rightTop = float4(0.5f + _pivotPos.x, -0.5f + _pivotPos.y);

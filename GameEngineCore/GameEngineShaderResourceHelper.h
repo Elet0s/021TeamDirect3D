@@ -9,29 +9,20 @@ class GameEngineShaderResourceHelper
 	// 
 	//같은 셰이더가 다른 리소스, 다른 세팅을 사용하는 경우를 대비.
 
-
-	//일반적인 상용 엔진들은 렌더링 속도 개선을 위해, 한가지 색상값 정도의 사소한 데이터 하나만 달라져도, 
-	// 그 달라진 데이터를 바뀔 일 없는 상수로 가진, 완전히 새로운 메테리얼을 만들게 한 후 한꺼번에 렌더링하게 한다. 
-	// 그렇게 해서 Map(), Unmap() 함수 호출 빈도를 최대한 줄인다. 이렇게 안한다.
-	//->winapi에서 HPEN, HBRUSH 같은 오브젝트 핸들들을, SelectObject()같은 함수를 통해 일일히 쓸 때마다 교체해주지 않으면 
-	// 그 오브젝트 핸들을 쓰는 함수로 출력하는 모든 문자, 그림들이 같은 색, 같은 굵기로 통일되버리는것과 같은 원리인가??
-	//->선생님은 속도저하를 감수해서라도 이미 생성한 HPEN같은 오브젝트들의 색이나 굵기를 중간에 바꿀 수 있게 해준다는 건가??
-
 	friend class GameEngineRenderUnit;
 	//AllResourcesSetting(), AllResourcesReset() 함수를 호출할 수 있게 하기 위해 프렌드. 
 
+	friend class GameEngineInstancing;
+	//인스턴싱 버텍스셰이더로 ShaderCheck()함수를 써야해서 프렌드. 
 
 public:
 	GameEngineShaderResourceHelper();
 	~GameEngineShaderResourceHelper();
 
-protected:
-	GameEngineShaderResourceHelper(const GameEngineShaderResourceHelper& _other) = delete;
-	GameEngineShaderResourceHelper(GameEngineShaderResourceHelper&& _other) noexcept = delete;
-
-private:
-	GameEngineShaderResourceHelper& operator=(const GameEngineShaderResourceHelper& _other) = delete;
-	GameEngineShaderResourceHelper& operator=(const GameEngineShaderResourceHelper&& _other) = delete;
+	//GameEngineShaderResourceHelper(const GameEngineShaderResourceHelper& _other) = delete;
+	//GameEngineShaderResourceHelper(GameEngineShaderResourceHelper&& _other) noexcept = delete;
+	//GameEngineShaderResourceHelper& operator=(const GameEngineShaderResourceHelper& _other) = delete;
+	//GameEngineShaderResourceHelper& operator=(const GameEngineShaderResourceHelper&& _other) = delete;
 
 
 public:
@@ -63,10 +54,13 @@ public:
 	std::shared_ptr<GameEngineSampler> SetSampler(const std::string_view& _samplerSetterName, const std::string_view& _samplerName);
 
 	// 인스턴싱을 하려고 하는데 그 쉐이더에서 상수버퍼를 사용했을때.
-	void AllConstantBufferNew();
+	//void AllConstantBufferNew();
 
 
 	GameEngineStructuredBufferSetter* GetStructuredBufferSetter(const std::string_view& _sBufferName);
+
+	//이 셰이더리소스헬퍼가 가진 모든 구조화버퍼를 통째로 넘기는 함수.
+	std::multimap<std::string, GameEngineStructuredBufferSetter>& GetStructuredBufferSetterMap();
 
 
 public:
@@ -83,8 +77,8 @@ public:
 	}
 
 protected:
-	//리소스 준비시점에, 짝으로 배치된 렌더링 파이프라인의 셰이더가 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하고, 
-	// 매 렌더링마다 갱신된 셰이더리소스들을 렌더링 파이프라인에 각 셰이더들이 요구했던대로 렌더링 파이프라인에 연결하는 함수. 
+	//리소스 준비시점에, 짝으로 배치된 마테리얼의 셰이더가 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하고, 
+	// 매 렌더링마다 갱신된 셰이더리소스들을 각 셰이더들이 요구했던대로 디바이스 컨텍스트에 연결하는 함수. 
 	void ShaderCheck(std::shared_ptr<GameEngineShader> _shader);
 
 

@@ -32,12 +32,12 @@ public:
 public:
 	inline bool IsInstancing()
 	{
-		return nullptr != instancingVertexShader_->vertexShader_;
+		return nullptr != inst_VertexShader_->vertexShader_;
 	}
 
-	inline std::shared_ptr<GameEngineVertexShader> GetInstancingShader()
+	inline std::shared_ptr<GameEngineVertexShader> GetInst_VertexShader()
 	{
-		return instancingVertexShader_;
+		return inst_VertexShader_;
 	}
 
 private:
@@ -68,7 +68,8 @@ private:
 private:
 	ID3D11VertexShader* vertexShader_;
 
+	std::shared_ptr<GameEngineVertexShader> inst_VertexShader_;
 
-	std::shared_ptr<GameEngineVertexShader> instancingVertexShader_;
+
 };
 

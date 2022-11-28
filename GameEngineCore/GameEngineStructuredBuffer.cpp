@@ -10,9 +10,9 @@ GameEngineStructuredBuffer::GameEngineStructuredBuffer()
 	shaderBufferDesc_(),
 	destMemoryPtrInGPU_(),
 	shaderResourceView_(nullptr),
-	dataCount_(0),
+	count_(0),
 	dataUnitSize_(0),
-	isInit_(false)
+	isInitialized_(false)
 {
 }
 
@@ -31,14 +31,14 @@ GameEngineStructuredBuffer::~GameEngineStructuredBuffer()
 	}
 }
 
-std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateStructuredBuffer(
+std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::Create(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
-	int _dataCount
+	size_t _count
 )
 {
 	std::shared_ptr<GameEngineStructuredBuffer> newRes = CreateNamedRes(_name, _desc.Size);
-	newRes->CreateOrResize(_desc, _dataCount, nullptr);
+	newRes->CreateOrResize(_desc, _count, nullptr);
 	return newRes;
 }
 
@@ -65,7 +65,7 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::Find(con
 std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateAndFind(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
-	int _dataCount
+	size_t _count
 )
 {
 	std::shared_ptr<GameEngineStructuredBuffer> findBuffer = Find(_name, _desc.Size);
@@ -77,12 +77,12 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateAn
 
 	std::shared_ptr<GameEngineStructuredBuffer> newBuffer = CreateNamedRes(_name, _desc.Size);
 
-	newBuffer->CreateOrResize(_desc, _dataCount);
+	newBuffer->CreateOrResize(_desc, _count);
 
 	return newBuffer;
 }
 
-void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _size)
+void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth)
 {
 	// 512 라이트 데이터를 세팅해줄수 있는 버퍼를 만들었다고 하더라도
 	// 진짜 512개의 라이트를 세팅하는것은 아닐수가 있으므로
@@ -95,7 +95,7 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _size)
 		return;
 	}
 
-	if (structuredBufferDesc_.ByteWidth != _size)
+	if (structuredBufferDesc_.ByteWidth != _byteWidth)
 	{
 		MsgBoxAssertString(this->GetNameCopy() + ": 데이터의 전체 크기가 서로 맞지 않습니다.");
 		return;
@@ -121,7 +121,7 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _size)
 		destMemoryPtrInGPU_.pData,
 		structuredBufferDesc_.ByteWidth,
 		_data,
-		_size
+		_byteWidth
 	);
 
 
@@ -215,45 +215,47 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateNa
 
 void GameEngineStructuredBuffer::CreateOrResize(
 	const D3D11_SHADER_BUFFER_DESC& _desc,
-	unsigned int _count,
+	size_t _count,
 	void* _initialData /*= nullptr*/
 )
 {
 	this->shaderBufferDesc_ = _desc;
 
-	CreateOrResize(shaderBufferDesc_.Size, _count, _initialData);
+	CreateStructuredBuffer(shaderBufferDesc_.Size, _count, _initialData);
 }
 
-void GameEngineStructuredBuffer::CreateOrResize(unsigned int _dataUnitSize, unsigned int _count, void* _initialData /*= nullptr*/)
+void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataUnitSize, size_t _count, void* _initialData /*= nullptr*/)
 {
 	if (0 >= _dataUnitSize)
 	{
 		MsgBoxAssert("데이터 사이즈가 0인 구조화 버퍼를 만들수는 없습니다.");
+		return;
 	}
+
+	this->dataUnitSize_ = _dataUnitSize;
 
 	if (0 == _count)
 	{
 		return;
 	}
 
-	if (dataCount_ >= _count)	//새 데이터 개수가 이전 데이타 개수보다 작거나 같으면 그냥 넘어간다.
+	if (count_ >= _count)	//새 데이터 개수가 이전 데이타 개수보다 작거나 같으면 그냥 넘어간다.
 	{
 		return;
 	}
 
 	this->Release();	//더 크다면 std::vector처럼 지우고 다시 만든다.
 
-	if (false == isInit_)
+	if (false == isInitialized_)
 	{
-		isInit_ = true;
+		isInitialized_ = true;
 	}
 
-	this->dataUnitSize_ = _dataUnitSize;
-	this->dataCount_ = _count;
+	this->count_ = _count;
 
 
 
-	structuredBufferDesc_.ByteWidth = dataUnitSize_ * dataCount_;
+	structuredBufferDesc_.ByteWidth = static_cast<UINT>(dataUnitSize_ * count_);
 	//GPU에 생성할 구조화 버퍼 메모리의 전체 크기
 
 	structuredBufferDesc_.Usage = D3D11_USAGE_DYNAMIC;	//버퍼의 사용 방식.
@@ -271,7 +273,7 @@ void GameEngineStructuredBuffer::CreateOrResize(unsigned int _dataUnitSize, unsi
 	structuredBufferDesc_.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;	//버퍼에 관련된 부가 옵션 설정.
 	//D3D11_RESOURCE_MISC_BUFFER_STRUCTURED: 이 버퍼를 구조화 버퍼로 설정.
 
-	structuredBufferDesc_.StructureByteStride = dataUnitSize_;	//구조화 버퍼 데이터의 단위 크기.
+	structuredBufferDesc_.StructureByteStride = static_cast<UINT>(dataUnitSize_);	//구조화 버퍼 데이터의 단위 크기.
 	//사실상 구조화버퍼 전용 기능이므로 반드시 넣어준다.
 
 	D3D11_SUBRESOURCE_DATA initialData = { 0 };
@@ -310,10 +312,10 @@ void GameEngineStructuredBuffer::CreateOrResize(unsigned int _dataUnitSize, unsi
 	// 정점버퍼나 인덱스버퍼 등으로 가공되지 않은 형식의 버퍼이다.
 
 	shaderResourceViewDesc.BufferEx.FirstElement = 0;
-	//??
+	//버퍼의 첫 원소 인덱스.
 
-	shaderResourceViewDesc.BufferEx.NumElements = dataCount_;
-	//??
+	shaderResourceViewDesc.BufferEx.NumElements = static_cast<UINT>(count_);
+	//버퍼의 원소 숫자.
 
 	shaderResourceViewDesc.BufferEx.Flags = 0;
 	//??
@@ -330,9 +332,9 @@ void GameEngineStructuredBuffer::CreateOrResize(unsigned int _dataUnitSize, unsi
 	}
 }
 
-void GameEngineStructuredBuffer::CreateOrResize(unsigned int _count, void* _initialData /*= nullptr*/)
+void GameEngineStructuredBuffer::CreateOrResize(size_t _count, void* _initialData /*= nullptr*/)
 {
-	CreateOrResize(this->dataUnitSize_, _count, _initialData);
+	CreateStructuredBuffer(this->dataUnitSize_, _count, _initialData);
 }
 
 void GameEngineStructuredBuffer::Release()

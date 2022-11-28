@@ -224,7 +224,7 @@ void GameEngineRenderTarget::EffectProcess()
 	{
 		if (true == effect->IsUpdate())
 		{
-			//effect->Effect(std::dynamic_pointer_cast<GameEngineRenderTarget>(shared_from_this()));
+			effect->Effect(std::dynamic_pointer_cast<GameEngineRenderTarget>(shared_from_this()));
 		}
 	}
 }

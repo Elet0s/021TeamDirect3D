@@ -54,13 +54,17 @@ void GameEngineVertexBuffer::Setting()
 
 	//나눠서 그릴 수 있는 기능을 지원하긴 하지만, 쓸 일은 없을 것 같다.
 	GameEngineDevice::GetContext()->IASetVertexBuffers(	//인풋 어셈블러 과정에서 버텍스버퍼들을 파이프라인에 연결하는 함수. 
-		0,				//버텍스버퍼 배열을 세팅할 렌더링파이프라인의 슬롯 번호. 후속 원소들은 암시적으로 다음 번호 슬롯에 연결된다고 한다.
+		0,				//버텍스버퍼 배열을 세팅할 디바이스 컨텍스트의 슬롯 번호. 후속 원소들은 암시적으로 다음 번호 슬롯에 연결된다고 한다.
 		//D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT개까지 동시 세팅이 가능하다고 한다. 하지만 쓸 일은 없을 것 같다. 
-		1,				//렌더링 파이프라인에 세팅할 버텍스 버퍼 배열의 원소 개수.
-		//D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT - 첫번째 원소로 넣어준 값
-		&vertexBuffer_,		//파이프라인에 세팅할 버퍼 배열의 주소값. 
+
+		1,				//디바이스 컨텍스트에 세팅할 버텍스 버퍼 배열의 원소 개수.
+		//D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT - 첫번째 원소로 넣어준 값.
+
+		&vertexBuffer_,		//디바이스 컨텍스트에 세팅할 버퍼 배열의 주소값. 
 		//생성할때 바인드플래그를 D3D11_BIND_VERTEX_BUFFER로 설정해준 버퍼여야 여기에 연결할 수 있다.
+
 		&vertexSize_,	//버퍼 배열의 원소간 간격 == 버텍스버퍼 한개의 크기.
+
 		&offset_		//세팅을 시작할 배열 내 버퍼의 원소 번호 * 버퍼 크기.
 	);
 }

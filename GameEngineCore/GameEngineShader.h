@@ -127,13 +127,15 @@ class GameEngineStructuredBufferSetter : public ShaderResSetter
 public:
 	void Setting() const;
 	void Bind();
-	void Resize(UINT _count);
+	void Resize(size_t _count);
 	size_t GetDataSize();
 
 	// 상수버퍼와 완전히 동일하게 동일하게 생각하면 됩니다.
+
 	std::shared_ptr<GameEngineStructuredBuffer> structuredBuffer_;
 	const void* settingDataToGPU_;
 	size_t size_;
+	size_t count_;
 	std::vector<char> originalData_;
 
 public:
@@ -154,7 +156,8 @@ public:
 	GameEngineStructuredBufferSetter()
 		: structuredBuffer_(),
 		settingDataToGPU_(nullptr),
-		size_(-1)
+		size_(-1),
+		count_(-1)
 	{
 	}
 

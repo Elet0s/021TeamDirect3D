@@ -1640,7 +1640,7 @@ void GameEngineFBXMesh::CreateGameEngineStructuredBuffer()
 	for (size_t i = 0; i < AllBones.size(); i++)
 	{
 		std::shared_ptr<GameEngineStructuredBuffer> NewStructuredBuffer = AllBoneStructuredBuffers.emplace_back(new GameEngineStructuredBuffer());
-		NewStructuredBuffer->CreateOrResize(
+		NewStructuredBuffer->CreateStructuredBuffer(
 			sizeof(float4x4),
 			static_cast<unsigned int>(AllBones[i].size()),
 			nullptr

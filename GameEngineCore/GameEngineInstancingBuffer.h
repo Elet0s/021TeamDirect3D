@@ -21,14 +21,14 @@ private:
 
 
 public:
-	static std::shared_ptr<GameEngineInstancingBuffer> Create(unsigned int _count, unsigned int _size);
+	static std::shared_ptr<GameEngineInstancingBuffer> Create(size_t _count, size_t _size);
 
-	void CreateInstancingBuffer(unsigned int _count, unsigned int _size);
+	void CreateInstancingBuffer(size_t _count, size_t _size);
 
-	void ChangeData(const void* _data, size_t _dataSize);
+	void ChangeData(const void* _data, size_t _byteWidth);
 
 public:
-	unsigned int GetBufferCount()
+	size_t GetBufferCount()
 	{
 		return bufferCount_;
 	}
@@ -38,7 +38,7 @@ public:
 		return instancingBuffer_;
 	}
 
-	unsigned int GetDataSize()
+	size_t GetDataSize()
 	{
 		return dataSize_;
 	}
@@ -50,7 +50,7 @@ private:
 private:
 	ID3D11Buffer* instancingBuffer_;
 	D3D11_BUFFER_DESC instancingBufferDesc_;
-	unsigned int bufferCount_;	//버퍼에 저장된 데이터 갯수.
-	unsigned int dataSize_;		//데이터 한개 크기.
+	size_t bufferCount_;	//버퍼에 저장된 데이터 갯수.
+	size_t dataSize_;		//데이터 한개 크기.
 };
 

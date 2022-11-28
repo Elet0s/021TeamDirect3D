@@ -1,5 +1,5 @@
 #pragma once
-
+#include "GameEngineMath.h"
 
 class GameEngineRandom
 {
@@ -36,6 +36,18 @@ public:
 	{
 		std::uniform_real_distribution<float> floatDistribution(_min, _max);
 		return floatDistribution(mt_);
+	}
+
+	float4 RandomFloat4(float _min, float _max)
+	{
+		std::uniform_real_distribution<float> floatDistribution(_min, _max);
+		return float4(floatDistribution(mt_), floatDistribution(mt_), floatDistribution(mt_));
+	}
+
+	float4 RandomFloat4(int _min, int _max)
+	{
+		std::uniform_int_distribution<int> intDistribution(_min, _max);
+		return float4(intDistribution(mt_), intDistribution(mt_), intDistribution(mt_));
 	}
 
 

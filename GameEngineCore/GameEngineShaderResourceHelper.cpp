@@ -126,7 +126,7 @@ void GameEngineShaderResourceHelper::SetConstantBuffer_Link(
 void GameEngineShaderResourceHelper::SetConstantBuffer_New(
 	const std::string_view& _name,
 	const void* _data,
-	unsigned int _dataSize
+	unsigned int _byteWidth
 )
 {
 	if (false == IsConstantBuffer(_name))
@@ -135,7 +135,7 @@ void GameEngineShaderResourceHelper::SetConstantBuffer_New(
 		return;
 	}
 
-	if (16 > _dataSize)
+	if (16 > _byteWidth)
 	{
 		MsgBoxAssert("상수버퍼는 최소 16바이트 이상의 크기를 가져야 합니다.");
 		return;
@@ -153,21 +153,21 @@ void GameEngineShaderResourceHelper::SetConstantBuffer_New(
 		iter != nameUpperBound; ++iter)
 	{
 		if (0 == iter->second.originalData_.size()
-			|| iter->second.originalData_.size() != _dataSize)
+			|| iter->second.originalData_.size() != _byteWidth)
 		{
-			iter->second.originalData_.resize(_dataSize);
+			iter->second.originalData_.resize(_byteWidth);
 		}
 
 		iter->second.settingDataToGPU_ = &iter->second.originalData_[0];
 
 		memcpy_s(
 			&iter->second.originalData_[0],
-			_dataSize,
+			_byteWidth,
 			_data,
-			_dataSize
+			_byteWidth
 		);	//깊은복사.
 
-		iter->second.size_ = _dataSize;
+		iter->second.size_ = _byteWidth;
 	}
 
 }
@@ -177,8 +177,6 @@ std::shared_ptr<GameEngineTexture> GameEngineShaderResourceHelper::SetTexture(
 	const std::string_view& _textureName
 )
 {
-	//std::string uppercaseTextureSetterName = GameEngineString::ToUpperReturn(_textureSetterName);
-
 	if (false == IsTexture(_textureSetterName))
 	{
 		MsgBoxAssertString(std::string(_textureSetterName) + ": 그런 이름의 텍스쳐 세터가 존재하지 않습니다.");
@@ -277,18 +275,18 @@ std::shared_ptr<GameEngineSampler> GameEngineShaderResourceHelper::SetSampler(
 	return SetSampler(_samplerSetterName, GameEngineSampler::Find(_samplerName));
 }
 
-void GameEngineShaderResourceHelper::AllConstantBufferNew()
-{
-	for (std::multimap<std::string, GameEngineConstantBufferSetter>::iterator iter = constantBufferSetterMap_.begin();
-		iter != constantBufferSetterMap_.end(); iter++)
-	{
-		unsigned int cBufferByteWidth = iter->second.constantBuffer_->GetBufferDesc().ByteWidth;
-
-		iter->second.originalData_.resize(cBufferByteWidth);
-		iter->second.settingDataToGPU_ = &iter->second.originalData_[0];
-		iter->second.size_ = cBufferByteWidth;
-	}
-}
+//void GameEngineShaderResourceHelper::AllConstantBufferNew()
+//{
+//	for (std::multimap<std::string, GameEngineConstantBufferSetter>::iterator iter = constantBufferSetterMap_.begin();
+//		iter != constantBufferSetterMap_.end(); iter++)
+//	{
+//		unsigned int cBufferByteWidth = iter->second.constantBuffer_->GetBufferDesc().ByteWidth;
+//
+//		iter->second.originalData_.resize(cBufferByteWidth);
+//		iter->second.settingDataToGPU_ = &iter->second.originalData_[0];
+//		iter->second.size_ = cBufferByteWidth;
+//	}
+//}
 
 GameEngineStructuredBufferSetter* GameEngineShaderResourceHelper::GetStructuredBufferSetter(const std::string_view& _sBufferName)
 {
@@ -305,6 +303,11 @@ GameEngineStructuredBufferSetter* GameEngineShaderResourceHelper::GetStructuredB
 	{
 		return &findIter->second;
 	}
+}
+
+std::multimap<std::string, GameEngineStructuredBufferSetter>& GameEngineShaderResourceHelper::GetStructuredBufferSetterMap()
+{
+	return structuredBufferSetterMap_;
 }
 
 void GameEngineShaderResourceHelper::ShaderCheck(std::shared_ptr<GameEngineShader> _shader)

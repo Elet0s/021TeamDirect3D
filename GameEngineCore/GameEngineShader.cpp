@@ -153,7 +153,7 @@ void GameEngineSamplerSetter::Bind()
 
 void GameEngineStructuredBufferSetter::Setting() const
 {
-	structuredBuffer_->ChangeData(settingDataToGPU_, size_);
+	structuredBuffer_->ChangeData(settingDataToGPU_, size_ * count_);
 	settingFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
 }
 
@@ -193,11 +193,13 @@ void GameEngineStructuredBufferSetter::Bind()
 	}
 }
 
-void GameEngineStructuredBufferSetter::Resize(UINT _count)
+void GameEngineStructuredBufferSetter::Resize(size_t _count)
 {
-	structuredBuffer_->CreateOrResize(_count);
-	originalData_.resize(
-		structuredBuffer_->GetDataSize() * _count);
+	this->structuredBuffer_->CreateOrResize(_count);
+	this->size_ = structuredBuffer_->GetDataSize();
+	this->count_ = _count;
+	this->originalData_.resize(size_ * count_);
+	this->settingDataToGPU_ = &originalData_[0];
 }
 
 size_t GameEngineStructuredBufferSetter::GetDataSize()
@@ -260,6 +262,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 			size_t vsInstEntryIndex = allHLSLCode.find("_VSINST(");
 			if (std::string::npos != vsInstEntryIndex)
 			{
+				//allHLSLCode안에 "_VSINST(" 문자열이 있다면 인스턴스 버텍스셰이더 컴파일 시작.
 				size_t instFirstIndex = allHLSLCode.find_last_of(" ", vsInstEntryIndex);
 				std::string vsInstEntryPoint = allHLSLCode.substr(
 					instFirstIndex + 1,
@@ -268,10 +271,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 				vsInstEntryPoint += "_VSINST";
 				vertexShader->InstancingShaderCompile(_path, vsInstEntryPoint);
 			}
-
 		}
-
-
 	}
 	//else
 	//{
