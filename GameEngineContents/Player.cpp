@@ -4,7 +4,7 @@
 #include "Texture2DShadowRenderer.h"
 #include "PlayerUI.h"
 #include "Monster.h"
-
+#include "SkillManager.h"
 
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
@@ -15,6 +15,8 @@ Player::Player()
 	playerInfo_(nullptr),
 	dashTimer_(0),
 	dashState_(false)
+	//playerSkillManager_()
+
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{
@@ -85,7 +87,7 @@ CollisionReturn Player::PlayerToMonsterCollision(std::shared_ptr<GameEngineColli
 		playerInfo_->hp_ -= A->GetMonsterInfo().atk_;
 		playerInfo_->exp_ += A->GetMonsterInfo().giveExp_;
 	}
-	return CollisionReturn::Continue;
+	return CollisionReturn::Stop;
 }
 
 void Player::MoveDirectionUpdate(float _deltaTime)
@@ -166,12 +168,12 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	if (moveDirection_ != 0)
 	{
 		playerRenderer_->ChangeFrameAnimation("PlayerRun");
-		resultDirection_ = moveDirection_.Normalize3D() * (playerInfo_->speed_ - playerInfo_->pushSpeed_);
-		GetTransform().SetWorldMove(resultDirection_ * _deltaTime);
+		playerResultDirection_ = moveDirection_.Normalize3D() * (playerInfo_->speed_ - playerInfo_->pushSpeed_);
+		GetTransform().SetWorldMove(playerResultDirection_ * _deltaTime);
 	}
 	else
 	{
-		resultDirection_ = 0;
+		playerResultDirection_ = 0;
 		playerRenderer_->ChangeFrameAnimation("PlayerIdle");
 	}
 

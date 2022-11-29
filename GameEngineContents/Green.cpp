@@ -39,8 +39,6 @@ void Green::Start()
 	monsterInfo_->baseSpeed_ = 50;
 	monsterInfo_->giveExp_ = 5;
 
-	//SummonMon();
-
 }
 void Green::Update(float _deltaTime)
 {

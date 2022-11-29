@@ -8,7 +8,6 @@ struct MonsterInfo
 public:
 	MonsterInfo()
 		:baseSpeed_(0),
-		colSpeed_(),
 		ResultSpeed_(0),
 		maxHp_(0),
 		hp_(0),
@@ -19,8 +18,7 @@ public:
 
 	}
 public:
-	float baseSpeed_;
-	float4 colSpeed_;
+	float baseSpeed_; //몬스터 기본속도
 	float ResultSpeed_;
 	float maxHp_;
 	float hp_;
@@ -140,7 +138,7 @@ protected:
 	void SummonMon();
 
 protected:
-	bool colCheak_;
+	bool colCheakToPlayer_;
 
 	float mx_;//자신의 좌표
 	float my_;
@@ -151,7 +149,8 @@ protected:
 
 	float4 pushVector_;
 	float4 range_; // 몬스터에서 플레이어까지의 벡터
-	float4 resultRange_;// 최종 무브벡터
+	float4 monsterResultVector_;// 최종 무브벡터
+	float4 reactionVector_;// 반작용벡터\
 
 	std::shared_ptr<GameEngineCollision> monCollision_;
 	std::shared_ptr <MonsterInfo> monsterInfo_;
