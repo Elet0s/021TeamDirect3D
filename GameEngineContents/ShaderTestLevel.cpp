@@ -2,7 +2,6 @@
 #include "ShaderTestLevel.h"
 #include "Player.h"
 #include "Texture2DShadowRenderer.h"
-#include "InstancingTextures.h"
 
 ShaderTestLevel::ShaderTestLevel(): shaderTestActor_(nullptr), shaderTestRenderer_(nullptr)
 {

@@ -304,6 +304,9 @@
     <ClCompile Include="GameEngineRenderingEvent.cpp">
       <Filter>Object\Component\Rendering\Contents</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineInstancingTextures.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -497,6 +500,9 @@
     <ClInclude Include="GameEngineRenderingEvent.h">
       <Filter>Object\Component\Rendering\Contents</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineInstancingTextures.h">
+      <Filter>Resource\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\Include\DirectXTex.inl">
@@ -627,9 +633,6 @@
     <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.pdb">
       <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
     <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.pdb">
       <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
     </CopyFileToFolders>
@@ -640,6 +643,9 @@
       <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\alembic-mt.pdb">
+      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.lib">
       <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
     </CopyFileToFolders>
   </ItemGroup>

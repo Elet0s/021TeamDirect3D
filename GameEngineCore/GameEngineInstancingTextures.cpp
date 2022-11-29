@@ -1,11 +1,13 @@
 #include "PreCompile.h"
-#include "InstancingTextures.h"
+#include "GameEngineInstancingTextures.h"
+#include "GameEngineDevice.h"
 
-InstancingTextures::InstancingTextures()
+
+GameEngineInstancingTextures::GameEngineInstancingTextures()
 {
 }
 
-InstancingTextures::~InstancingTextures()
+GameEngineInstancingTextures::~GameEngineInstancingTextures()
 {
     for (ID3D11ShaderResourceView* shaderResourceView : instancingShaderResourceViews_)
     {
@@ -14,24 +16,24 @@ InstancingTextures::~InstancingTextures()
     }
 }
 
-std::shared_ptr<InstancingTextures> InstancingTextures::Load(
+std::shared_ptr<GameEngineInstancingTextures> GameEngineInstancingTextures::Load(
     const std::string_view& _path
  )
 {
     return Load(_path, GameEnginePath::GetFileName(_path));
 }
 
-std::shared_ptr<InstancingTextures> InstancingTextures::Load(
+std::shared_ptr<GameEngineInstancingTextures> GameEngineInstancingTextures::Load(
     const std::string_view& _path,
     const std::string_view& _name
 )
 {
-    std::shared_ptr<InstancingTextures> newRes = CreateNamedRes(_name);
+    std::shared_ptr<GameEngineInstancingTextures> newRes = CreateNamedRes(_name);
     newRes->LoadFolderTextures(_path);
     return newRes;
 }
 
-void InstancingTextures::LoadFolderTextures(const std::string_view& _path)
+void GameEngineInstancingTextures::LoadFolderTextures(const std::string_view& _path)
 {
     GameEngineDirectory folderDir = _path;
     std::vector<GameEngineFile> allFilesInFolder = folderDir.GetAllFiles();
@@ -91,4 +93,34 @@ void InstancingTextures::LoadFolderTextures(const std::string_view& _path)
 			return;
 		}
     }
+}
+
+void GameEngineInstancingTextures::VSSetting(int _bindPoint)
+{
+	if (true == this->instancingShaderResourceViews_.empty())
+	{
+		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetContext()->VSSetShaderResources(
+		_bindPoint,
+		static_cast<UINT>(instancingShaderResourceViews_.size()),
+		&instancingShaderResourceViews_[0]
+	);
+}
+
+void GameEngineInstancingTextures::PSSetting(int _bindPoint)
+{
+	if (true == this->instancingShaderResourceViews_.empty())
+	{
+		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetContext()->PSSetShaderResources(
+		_bindPoint,
+		static_cast<UINT>(instancingShaderResourceViews_.size()),
+		&instancingShaderResourceViews_[0]
+	);
 }

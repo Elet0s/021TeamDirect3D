@@ -41,6 +41,9 @@ public:
 	//이 셰이더 리소스 헬퍼가 주어진 이름의 구조화버퍼세터를 가지고 있는가를 외부에서 확인하는 함수.
 	bool IsStructuredBuffer(const std::string_view& _name);
 
+	//이 셰이더 리소스 헬퍼가 주어진 이름의 인스턴싱텍스처세터를 가지고 있는가를 외부에서 확인하는 함수.
+	bool IsInstancingTextures(const std::string_view& _name);
+
 
 	void SetConstantBuffer_Link(const std::string_view& _name, const void* _data, unsigned int _dataSize);	//참조로 연결??
 	void SetConstantBuffer_New(const std::string_view& _name, const void* _data, unsigned int _dataSize);	//깊은 복사??
@@ -52,6 +55,9 @@ public:
 
 	std::shared_ptr<GameEngineSampler> SetSampler(const std::string_view& _samplerSetterName, std::shared_ptr<GameEngineSampler> _sampler);
 	std::shared_ptr<GameEngineSampler> SetSampler(const std::string_view& _samplerSetterName, const std::string_view& _samplerName);
+	
+	std::shared_ptr<GameEngineInstancingTextures> SetInstancingTextures(const std::string_view& _texturesSetterName, const std::string_view& _texturesName);
+	std::shared_ptr<GameEngineInstancingTextures> SetInstancingTextures(const std::string_view& _texturesSetterName, std::shared_ptr<GameEngineInstancingTextures> _textures);
 
 	// 인스턴싱을 하려고 하는데 그 쉐이더에서 상수버퍼를 사용했을때.
 	//void AllConstantBufferNew();
@@ -95,6 +101,7 @@ private:
 	std::multimap<std::string, GameEngineTextureSetter> textureSetterMap_;
 	std::multimap<std::string, GameEngineSamplerSetter> samplerSetterMap_;
 	std::multimap<std::string, GameEngineStructuredBufferSetter> structuredBufferSetterMap_;	//구조화버퍼도 결국 텍스처.
+	std::multimap<std::string, GameEngineInstancingTexturesSetter> instancingTexturesSetterMap_;
 
 	//셰이더 리소스 세터들의 저장, 관리를 멀티맵으로 한 이유:
 	//그냥 std::map으로는 중복되는 리소스 이름을 키값으로 쓸 수 없지만 std::multimap으로는 저장할 수 있다는 특성을 이용해,
