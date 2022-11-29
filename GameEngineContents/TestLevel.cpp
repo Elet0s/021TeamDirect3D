@@ -103,7 +103,7 @@ void TestLevel::Start()
 	}
 
 
-	Monster::ReserveMonsters(60);
+	/*Monster::ReserveMonsters(60);
 
 	Monster::CreateMonster<BlackEyes>(this, 1);
 	Monster::SummonMonster<BlackEyes>(this, 1);

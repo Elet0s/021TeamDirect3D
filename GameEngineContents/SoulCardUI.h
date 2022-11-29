@@ -1,5 +1,11 @@
 #pragma once
 
+enum class Appear
+{
+	True,
+	False,
+};
+
 // Ό³Έν :
 class SoulCardUI : public GameEngineActor
 {
@@ -25,9 +31,19 @@ private:
 	std::shared_ptr<GameEngineFontRenderer> Level_;
 	std::shared_ptr<GameEngineFontRenderer> Rank_;
 	std::shared_ptr<GameEngineCollision> cardColision_;
+	
+	float alphaTexture_;
+	float4 TextColor_;
+	int Count;
+	Appear ColorCheck_;
 
 	void Start() override;
 	void Update(float _deltaTime);
 	void End() override {};
+
+	void ColorChange(Appear _Value);
+
+
+	
 };
 

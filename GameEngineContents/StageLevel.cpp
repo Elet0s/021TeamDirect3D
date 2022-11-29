@@ -1,6 +1,7 @@
 #include"PreCompile.h"
 #include"StageLevel.h"
-#include "SoulCardUI.h"
+#include "SoulCardSelectBox.h"
+#include "Mouse.h"
 
 StageLevel::StageLevel()
 	:PlayerRenderer()
@@ -27,8 +28,8 @@ void StageLevel::Start()
 ////////////Cut//////////
 //GameEngineTexture::Cut("Player_Idle.png", 11, 1);
 
-	CreateActor<SoulCardUI>();
-
+	CreateActor<SoulCardSelectBox>();
+	CreateActor<Mouse>();
 }
 void StageLevel::Update(float _deltaTime)
 {

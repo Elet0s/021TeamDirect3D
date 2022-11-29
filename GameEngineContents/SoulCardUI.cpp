@@ -1,7 +1,12 @@
 #include "PreCompile.h"
 #include "SoulCardUI.h"
+#include "GlobalContentsValue.h"
 
 SoulCardUI::SoulCardUI() 
+	: alphaTexture_(0.7f)
+	, TextColor_(float4(1.f,1.f,1.f,0.9f))
+	, Count(0)
+	, ColorCheck_(Appear::False)
 {
 }
 
@@ -11,7 +16,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	if (nullptr == GameEngineTexture::Find("SoulCardCommon.png"))
+	if (nullptr == GameEngineTexture::Find("SoulCardNormal.png"))
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistChildDirectory("ContentsResources");
@@ -35,7 +40,7 @@ void SoulCardUI::Start()
 		template_->SetTexture("SoulCardNormal.png");
 		template_->GetTransform().SetWorldScale(float4{ 188.f,282.f,1.f });
 		template_->ChangeCamera(CameraOrder::UICamera);
-		template_->GetPixelData().mulColor_.a = 0.7f;
+		template_->GetPixelData().mulColor_.a = alphaTexture_;
 	}
 
 	{
@@ -44,7 +49,7 @@ void SoulCardUI::Start()
 		linerenderer_->GetTransform().SetWorldScale(float4{ 110.f,16.f,1.f });
 		linerenderer_->GetTransform().SetLocalMove(float4(0.f, 170.f, -1.f));
 		linerenderer_->ChangeCamera(CameraOrder::UICamera);
-		linerenderer_->GetPixelData().mulColor_.a = 0.7f;
+		linerenderer_->GetPixelData().mulColor_.a = alphaTexture_;
 	}
 
 
@@ -54,7 +59,7 @@ void SoulCardUI::Start()
 		icon_->GetTransform().SetLocalMove(float4(0.f, 228.f, -1.f));
 		icon_->GetTransform().SetWorldScale(float4{ 100.f,100.f,1.f });
 		icon_->ChangeCamera(CameraOrder::UICamera);
-		icon_->GetPixelData().mulColor_.a = 0.7f;
+		icon_->GetPixelData().mulColor_.a = alphaTexture_;
 	}
 
 	{
@@ -65,7 +70,7 @@ void SoulCardUI::Start()
 		skillName_->SetLeftAndRightSort(LeftAndRightSort::Center);
 		skillName_->GetTransform().SetLocalMove(float4(0.f, 164.f, -10.f));
 		skillName_->ChangeCamera(CameraOrder::UICamera);
-		skillName_->SetColor(float4(1.f,1.f,1.f, 0.8f));
+		skillName_->SetColor(TextColor_);
 	}
 
 	
@@ -85,8 +90,8 @@ void SoulCardUI::Start()
 			etc_[i]->SetLeftAndRightSort(LeftAndRightSort::Center);
 			etc_[i]->GetTransform().SetLocalMove(float4(0.f, 144.f - 16.f * i, -10.f));
 			etc_[i]->ChangeCamera(CameraOrder::UICamera);
-			etc_[i]->SetColor(float4(1.f, 1.f, 1.f, 0.8f));
-
+			etc_[i]->SetColor(TextColor_);
+			Count++;
 			if (Text.npos ==EntryIndex)
 			{	
 				break;
@@ -103,7 +108,7 @@ void SoulCardUI::Start()
 		font->SetSize(18.f);
 		font->SetText("레벨 : ", "Free Pixel");
 		font->GetTransform().SetLocalMove(float4(-84.f, 40.f, -10.f));
-		font->SetColor(float4(1.f, 1.f, 1.f, 0.9f));
+		font->SetColor(TextColor_);
 		font->ChangeCamera(CameraOrder::UICamera);
 	}
 
@@ -112,8 +117,9 @@ void SoulCardUI::Start()
 		Level_->SetPositionMode(FontPositionMode::World);
 		Level_->SetSize(14.f);
 		Level_-> GetTransform().SetLocalMove(float4(-26.f, 35.f, -10.f));
-		Level_->SetText("0-> 1 / 7");
-		Level_->SetColor(float4(1.f, 1.f, 1.f, 0.9f));
+		Level_->SetText("0-> 1 / 7", "Free Pixel");
+		Level_->SetColor(TextColor_);
+		Level_->ChangeCamera(CameraOrder::UICamera);
 	}
 
 	{
@@ -121,12 +127,60 @@ void SoulCardUI::Start()
 		Rank_->SetPositionMode(FontPositionMode::World);
 		Rank_->SetSize(16.f);
 		Rank_->GetTransform().SetLocalMove(float4(-84.f, 20.f, -10.f));
-		Rank_->SetText("더럽혀진");
-		Rank_->SetColor(float4(1.f, 1.f, 1.f, 0.9f));
+		Rank_->SetText("더럽혀진","Free Pixel");
+		Rank_->SetColor(TextColor_);
+		Rank_->ChangeCamera(CameraOrder::UICamera);
+	}
+
+	{
+		cardColision_ = CreateComponent<GameEngineCollision>();
+		cardColision_->GetTransform().SetLocalMove(float4(0.f, 141.f));
+		cardColision_->GetTransform().SetWorldScale(float4{ 188.f,282.f,1.f });
+		cardColision_->SetDebugSetting(CollisionType::CT_AABB, float4::Red);
 	}
 }
 
 void SoulCardUI::Update(float _deltaTime)
 {
+	if(true == cardColision_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::Mouse, CollisionType::CT_AABB2D))
+	{
+		ColorChange(Appear::True);
+	}
+	else
+	{	
+		if (ColorCheck_ == Appear::True)
+		{
+			ColorChange(Appear::False);
+		}
+	}
 }
 
+void SoulCardUI::ColorChange(Appear _Value)
+{
+	if (Appear::True == _Value)
+	{
+		alphaTexture_ = 1.f;
+		TextColor_ = float4::White;
+		ColorCheck_ = Appear::True;
+	
+	}
+
+	if (Appear::False == _Value)
+	{
+		alphaTexture_ = 0.7f;
+		TextColor_ = float4(1.f,1.f,1.f,0.9f);
+		ColorCheck_ = Appear::False;
+	}
+
+	template_->GetPixelData().mulColor_.a = alphaTexture_;
+	linerenderer_->GetPixelData().mulColor_.a = alphaTexture_;
+	icon_->GetPixelData().mulColor_.a = alphaTexture_;
+	skillName_->SetColor(TextColor_);
+	for (size_t i = 0; i < Count; i++)
+	{
+		etc_[i]->SetColor(TextColor_);
+	}
+	Level_->SetColor(TextColor_);
+	Rank_->SetColor(TextColor_);
+	
+}
