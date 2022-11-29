@@ -79,6 +79,8 @@ public:
 	std::shared_ptr<GameEngineCollision> collision_;
 
 
+	//void SetLevel(GameEngineLevel* _NowLevel);
+	float4 resultDirection_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -90,6 +92,7 @@ protected:
 private:
 	float dashTimer_;
 	bool dashState_;
+
 	float4 moveDirection_;
 	std::shared_ptr<PlayerInfo> playerInfo_;
 	std::shared_ptr<PlayerUI> playerUi_;

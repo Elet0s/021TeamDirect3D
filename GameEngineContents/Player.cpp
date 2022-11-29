@@ -166,12 +166,15 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	if (moveDirection_ != 0)
 	{
 		playerRenderer_->ChangeFrameAnimation("PlayerRun");
-		GetTransform().SetWorldMove(moveDirection_.Normalize3D() * (playerInfo_->speed_- playerInfo_->pushSpeed_) * _deltaTime);
+		resultDirection_ = moveDirection_.Normalize3D() * (playerInfo_->speed_ - playerInfo_->pushSpeed_);
+		GetTransform().SetWorldMove(resultDirection_ * _deltaTime);
 	}
 	else
 	{
+		resultDirection_ = 0;
 		playerRenderer_->ChangeFrameAnimation("PlayerIdle");
 	}
+
 }
 
 void Player::PlayerDash(float _deltaTime)

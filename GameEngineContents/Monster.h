@@ -8,7 +8,7 @@ struct MonsterInfo
 public:
 	MonsterInfo()
 		:baseSpeed_(0),
-		colSpeed_(0),
+		colSpeed_(),
 		ResultSpeed_(0),
 		maxHp_(0),
 		hp_(0),
@@ -20,7 +20,7 @@ public:
 	}
 public:
 	float baseSpeed_;
-	float colSpeed_;
+	float4 colSpeed_;
 	float ResultSpeed_;
 	float maxHp_;
 	float hp_;
@@ -59,15 +59,20 @@ public:
 	static void ReserveMonsters(size_t _allMonsterCount);
 
 	//사망한 몬스터는 풀로 복귀, 대기.
-	void Unsummon();
+	void Unsummon(); // 게임 중간에 지우는 용도
 
 	//몬스터 생성 및 대기.
 	template <typename MonsterType>
-	static void CreateMonster(std::shared_ptr<GameEngineLevel> _thisLevel, size_t _monsterCount)
+	static void CreateMonster(GameEngineLevel* _thisLevel, size_t _monsterCount)
 	{
 		for (size_t i = 0; i < _monsterCount; ++i)
 		{
 			std::shared_ptr<Monster> newMonster = _thisLevel->CreateActor<MonsterType>(ObjectOrder::Monster);
+			newMonster->isSummoned_ = false;
+			newMonster->monCollision_->Off();
+			newMonster->monRenderer_->Off();
+			newMonster->shadowRenderer_->Off();
+			newMonster->GetTransform().SetWorldPosition(float4::Zero);
 
 			allMonsters_.push_back(newMonster);
 		}
@@ -75,7 +80,7 @@ public:
 
 	//레벨에 몬스터 배치.
 	template <typename MonsterType>
-	static void SummonMonster(std::shared_ptr<GameEngineLevel> _thisLevel, UINT _summonCount)
+	static void SummonMonster(GameEngineLevel* _thisLevel, UINT _summonCount)
 	{
 		UINT count = _summonCount;
 		for (size_t i = 0; i < allMonsters_.size(); ++i)
@@ -100,15 +105,11 @@ public:
 			
 			float cameraX = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().x;
 			float cameraY = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().y;
-			float4 monsterPosition = GameEngineRandom::mainRandom_.RandomFloat4(
-				float4(cameraX - 640, cameraY - 360),
-				float4(cameraX + 640, cameraY + 360)
-			);
-			monsterPosition.z = 0.f;
-			allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition);
-			--count;
-			//소환 대기중인 몬스터라면 소환하고 카운트 감소.
+			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 640, cameraY - 360),float4(cameraX + 640, cameraY + 360));
+			monsterPosition_.z = 0.f;
 
+			allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
+			--count;//소환 대기중인 몬스터라면 소환하고 카운트 감소.
 			if (0 == count)
 			{
 				//다 소환했다면 종료.
@@ -140,11 +141,18 @@ protected:
 
 protected:
 	bool colCheak_;
-	int playerRange_;
-	float mx_;
+
+	float mx_;//자신의 좌표
 	float my_;
-	float4 range_;
-	float4 resultRange_;
+	float px_;
+	float py_;
+
+	float playerRange_; // 플레이어와의 거리
+
+	float4 pushVector_;
+	float4 range_; // 몬스터에서 플레이어까지의 벡터
+	float4 resultRange_;// 최종 무브벡터
+
 	std::shared_ptr<GameEngineCollision> monCollision_;
 	std::shared_ptr <MonsterInfo> monsterInfo_;
 	std::shared_ptr<GameEngineTextureRenderer> monRenderer_;
