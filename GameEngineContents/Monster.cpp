@@ -11,10 +11,13 @@ Monster::Monster()
 	, monCollision_(nullptr)
 	, colCheakToPlayer_(false)
 	, playerRange_(0)
-	,mx_(0)
-	,my_(0)
+	, mx_(0)
+	, my_(0)
 	, isSummoned_(false)
 	, atkDeltaTime_(0)
+	, colCheakToMonster_(false)
+	, test_(0)
+	, range_(0)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
 }
@@ -78,9 +81,21 @@ void Monster::Attack()
 }
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
+	if (colCheakToMonster_ == false)
+	{
+		colCheakToMonster_ = true;
+	}
 	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
+	 test_.x =mx_ - A->mx_;// 콜리전 받는 쪽에서 사용
+	 test_.y = my_ - A->my_;
 
 
+	//CC /= 2;
+
+		monsterReactionVector_ += (A->monsterResultVector_ + monsterResultVector_) / 2;
+		//A->monsterReactionVector_ += (A->monsterResultVector_ + monsterResultVector_) / 2;
+		monsterReactionVector_ += test_;
+	
 	return CollisionReturn::Stop;
 }
 
@@ -223,18 +238,24 @@ void Monster::Chaseplayer(float _deltaTime)
 	range_.y = py_ - my_;
 	playerRange_ = static_cast<float>(sqrt(pow(range_.x,2) + pow(range_.y,2))); // 몬스터와 플레이어 사이의 거리의 절대값
 
-	monsterResultVector_ = (range_.Normalize3D() * monsterInfo_->baseSpeed_); //충돌 안했을 때 기본 방향,힘 합치는 부분
+	monsterBaseVector_ = (range_.Normalize3D() * monsterInfo_->baseSpeed_); //충돌 안했을 때 기본 방향,힘 합치는 부분
+	monsterResultVector_ = monsterBaseVector_;
 
 	if (colCheakToPlayer_ == true)//플레이어와 충돌시 벡터 합산하는부분
 	{
-		reactionVector_ = -(monsterResultVector_);// 몬스터가 플레이어에 접촉했으니 힘의 반작용 
-		monsterResultVector_ +=  reactionVector_;
-
+		reactionVector_ = -(monsterBaseVector_);// 몬스터가 플레이어에 접촉했으니 힘의 반작용 
+		monsterResultVector_ = monsterBaseVector_ + (reactionVector_ *1.5 ) + test_;
 		monsterResultVector_ += pushVector_; // 플레이어의 움직임으로 밀리는 힘
 		colCheakToPlayer_ = false;
 	}
+	else if (colCheakToMonster_ == true)//몬스터와 충돌시 벡터 합산하는부분
+	{
+		monsterResultVector_ = monsterReactionVector_;
+		colCheakToMonster_ = false;
+	}
 
 	GetTransform().SetWorldMove(monsterResultVector_ * _deltaTime); //이동
+	monsterReactionVector_ = 0;
 }
 
 void Monster::Update(float _deltaTime)

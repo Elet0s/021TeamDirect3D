@@ -140,6 +140,7 @@ protected:
 
 protected:
 	bool colCheakToPlayer_;
+	bool colCheakToMonster_;
 
 	float mx_;//자신의 좌표
 	float my_;
@@ -149,10 +150,16 @@ protected:
 	float playerRange_; // 플레이어와의 거리
 	float atkDeltaTime_;
 
+	float4 test_;
+	float4 test2_;
+
 	float4 pushVector_;
+	float4 reactionVector_;
 	float4 range_; // 몬스터에서 플레이어까지의 벡터
+	float4 monsterBaseVector_;//충돌값적용안된 가장 기본적인 몬스터 벡터
 	float4 monsterResultVector_;// 최종 무브벡터
-	float4 reactionVector_;// 반작용벡터\
+	float4 playerReactionVector_;// 플레이어 반작용벡터
+	float4 monsterReactionVector_;// 몬스터 반작용벡터
 
 	std::shared_ptr<GameEngineCollision> monCollision_;
 	std::shared_ptr <MonsterInfo> monsterInfo_;
