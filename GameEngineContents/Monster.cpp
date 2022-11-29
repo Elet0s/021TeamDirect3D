@@ -14,6 +14,7 @@ Monster::Monster()
 	,mx_(0)
 	,my_(0)
 	, isSummoned_(false)
+	, atkDeltaTime_(0)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
 }
@@ -72,7 +73,9 @@ void Monster::SummonMon()
 		}
 	}
 }
-
+void Monster::Attack()
+{
+}
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
@@ -87,8 +90,17 @@ CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineColl
 	{
 		colCheakToPlayer_ = true;
 	}
-
 	std::shared_ptr<Player> A = std::dynamic_pointer_cast<Player>(_Other->GetActor());
+	if (atkDeltaTime_ >= 1.5f)
+	{
+		A->GetPlayerInfo().hp_ -= this->monsterInfo_->atk_;
+		if (A->hitOnoff_ == false)
+		{
+			A->hitOnoff_ = true;
+		}
+		atkDeltaTime_ = 0;
+	}
+
 	pushVector_ = A->playerResultDirection_;
 	float PX = abs(pushVector_.x);
 	float PY = abs(pushVector_.y);
@@ -227,6 +239,7 @@ void Monster::Chaseplayer(float _deltaTime)
 
 void Monster::Update(float _deltaTime)
 {
+	atkDeltaTime_ += _deltaTime;
 }
 
 void Monster::End()

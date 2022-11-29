@@ -136,6 +136,7 @@ protected:
 	void End() override;
 	void Chaseplayer(float _deltaTime);
 	void SummonMon();
+	void Attack();
 
 protected:
 	bool colCheakToPlayer_;
@@ -146,6 +147,7 @@ protected:
 	float py_;
 
 	float playerRange_; // 플레이어와의 거리
+	float atkDeltaTime_;
 
 	float4 pushVector_;
 	float4 range_; // 몬스터에서 플레이어까지의 벡터

@@ -14,7 +14,8 @@ Player::Player()
 	collision_(nullptr),
 	playerInfo_(nullptr),
 	dashTimer_(0),
-	dashState_(false)
+	dashState_(false),
+	hitOnoff_(false)
 	//playerSkillManager_()
 
 {
@@ -80,13 +81,13 @@ void Player::Start()
 
 CollisionReturn Player::PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
-	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
-
-	if (playerInfo_->hp_ > 0)
-	{
-		playerInfo_->hp_ -= A->GetMonsterInfo().atk_;
-		playerInfo_->exp_ += A->GetMonsterInfo().giveExp_;
-	}
+	//td::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
+	//
+	//f (playerInfo_->hp_ > 0)
+	//
+	//	playerInfo_->hp_ -= A->GetMonsterInfo().atk_;
+	//	playerInfo_->exp_ += A->GetMonsterInfo().giveExp_;
+	//
 	return CollisionReturn::Stop;
 }
 
@@ -219,8 +220,9 @@ void Player::PlayerDash(float _deltaTime)
 void Player::Update(float _deltaTime)
 {
 	MoveDirectionUpdate(_deltaTime);
-	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	PlayerDash(_deltaTime);
+	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+
 }
 
 void Player::End()

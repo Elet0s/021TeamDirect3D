@@ -81,6 +81,7 @@ public:
 
 	//void SetLevel(GameEngineLevel* _NowLevel);
 	float4 playerResultDirection_;
+	bool hitOnoff_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

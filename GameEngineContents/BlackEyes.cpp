@@ -32,7 +32,7 @@ void BlackEyes::Start()
 	monCollision_->GetTransform().SetLocalScale({ 50.0f, 50.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
-	monsterInfo_->atk_ = 5;
+	monsterInfo_->atk_ = 0.5;
 	monsterInfo_->hp_ = 10;
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
@@ -42,7 +42,7 @@ void BlackEyes::Start()
 }
 void BlackEyes::Update(float _deltaTime)
 {
-
+	Monster::Update(_deltaTime);
 	Chaseplayer(_deltaTime);
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));

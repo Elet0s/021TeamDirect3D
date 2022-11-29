@@ -105,8 +105,8 @@ void TestLevel::Start()
 	
 	Monster::ReserveMonsters(60);
 
-	Monster::CreateMonster<BlackEyes>(this, 1);
-	Monster::SummonMonster<BlackEyes>(this, 1);
+	Monster::CreateMonster<BlackEyes>(this, 5);
+	Monster::SummonMonster<BlackEyes>(this, 5);
 	//Monster::CreateMonster<Brown>(this, 10);
 	//Monster::CreateMonster<Green>(this, 10);
 	//Monster::CreateMonster<NormalGoblin>(this, 10);
