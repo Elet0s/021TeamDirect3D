@@ -63,7 +63,7 @@ public:
 
 	//몬스터 생성 및 대기.
 	template <typename MonsterType>
-	static void CreateMonster(GameEngineLevel* _thisLevel, size_t _monsterCount)
+	static void CreateMonster(std::shared_ptr<GameEngineLevel> _thisLevel, size_t _monsterCount)
 	{
 		for (size_t i = 0; i < _monsterCount; ++i)
 		{
@@ -75,7 +75,7 @@ public:
 
 	//레벨에 몬스터 배치.
 	template <typename MonsterType>
-	static void SummonMonster(GameEngineLevel* _thisLevel, UINT _summonCount)
+	static void SummonMonster(std::shared_ptr<GameEngineLevel> _thisLevel, UINT _summonCount)
 	{
 		UINT count = _summonCount;
 		for (size_t i = 0; i < allMonsters_.size(); ++i)
