@@ -103,16 +103,16 @@ void TestLevel::Start()
 	}
 
 
-	Monster::ReserveMonsters(60);
+	//Monster::ReserveMonsters(60);
 
-	Monster::CreateMonster<BlackEyes>(CastThis<GameEngineLevel>(), 10);
-	Monster::CreateMonster<Brown>(CastThis<GameEngineLevel>(), 10);
-	Monster::CreateMonster<Green>(CastThis<GameEngineLevel>(), 10);
-	Monster::CreateMonster<NormalGoblin>(CastThis<GameEngineLevel>(), 10);
-	Monster::CreateMonster<RedFlyingEyes>(CastThis<GameEngineLevel>(), 10);
-	Monster::CreateMonster<FlyingEyes>(CastThis<GameEngineLevel>(), 10);
+	//Monster::CreateMonster<BlackEyes>(CastThis<GameEngineLevel>(), 10);
+	//Monster::CreateMonster<Brown>(CastThis<GameEngineLevel>(), 10);
+	//Monster::CreateMonster<Green>(CastThis<GameEngineLevel>(), 10);
+	//Monster::CreateMonster<NormalGoblin>(CastThis<GameEngineLevel>(), 10);
+	//Monster::CreateMonster<RedFlyingEyes>(CastThis<GameEngineLevel>(), 10);
+	//Monster::CreateMonster<FlyingEyes>(CastThis<GameEngineLevel>(), 10);
 
-	Monster::SummonMonster<FlyingEyes>(CastThis<GameEngineLevel>(), 8);
+	//Monster::SummonMonster<FlyingEyes>(CastThis<GameEngineLevel>(), 8);
 	//Monster::SummonMonster<FlyingEyes>(this, 11);
 
 

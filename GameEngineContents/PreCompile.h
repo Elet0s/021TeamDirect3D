@@ -30,6 +30,7 @@
 #include <GameEngineCore\GameEngineBlur.h>
 
 #include <GameEngineCore\GameEngineInstancing.h>
+#include <GameEngineCore\GameEngineInstancingBuffer.h>
 
 #include <GameEngineCore\GameEngineStateManager.h>
 
