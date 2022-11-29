@@ -32,7 +32,7 @@ void BlackEyes::Start()
 	monCollision_->GetTransform().SetLocalScale({ 50.0f, 50.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
-	monsterInfo_->atk_ = 0.5;
+	monsterInfo_->atk_ = 5;
 	monsterInfo_->hp_ = 10;
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
