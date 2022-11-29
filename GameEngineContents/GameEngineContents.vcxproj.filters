@@ -46,6 +46,9 @@
     <Filter Include="Actor\00. Global\UI">
       <UniqueIdentifier>{225ab8d9-c46e-4642-8d1d-2b7af4400a48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill">
+      <UniqueIdentifier>{54e11fdb-2a53-46d4-bf11-b85e1e45c699}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -144,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="SoulCardSelectBox.cpp">
       <Filter>Actor\00. Global\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillManager.cpp">
+      <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="SoulCardSelectBox.h">
       <Filter>Actor\00. Global\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillManager.h">
+      <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

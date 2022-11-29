@@ -4,7 +4,7 @@
 #include "Texture2DShadowRenderer.h"
 #include "PlayerUI.h"
 #include "Monster.h"
-
+#include "SkillManager.h"
 
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
@@ -14,7 +14,10 @@ Player::Player()
 	collision_(nullptr),
 	playerInfo_(nullptr),
 	dashTimer_(0),
-	dashState_(false)
+	dashState_(false),
+	hitOnoff_(false)
+	//playerSkillManager_()
+
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{
@@ -78,14 +81,14 @@ void Player::Start()
 
 CollisionReturn Player::PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
-	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
-
-	if (playerInfo_->hp_ > 0)
-	{
-		playerInfo_->hp_ -= A->GetMonsterInfo().atk_;
-		playerInfo_->exp_ += A->GetMonsterInfo().giveExp_;
-	}
-	return CollisionReturn::Continue;
+	//td::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
+	//
+	//f (playerInfo_->hp_ > 0)
+	//
+	//	playerInfo_->hp_ -= A->GetMonsterInfo().atk_;
+	//	playerInfo_->exp_ += A->GetMonsterInfo().giveExp_;
+	//
+	return CollisionReturn::Stop;
 }
 
 void Player::MoveDirectionUpdate(float _deltaTime)
@@ -166,12 +169,12 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	if (moveDirection_ != 0)
 	{
 		playerRenderer_->ChangeFrameAnimation("PlayerRun");
-		resultDirection_ = moveDirection_.Normalize3D() * (playerInfo_->speed_ - playerInfo_->pushSpeed_);
-		GetTransform().SetWorldMove(resultDirection_ * _deltaTime);
+		playerResultDirection_ = moveDirection_.Normalize3D() * (playerInfo_->speed_ - playerInfo_->pushSpeed_);
+		GetTransform().SetWorldMove(playerResultDirection_ * _deltaTime);
 	}
 	else
 	{
-		resultDirection_ = 0;
+		playerResultDirection_ = 0;
 		playerRenderer_->ChangeFrameAnimation("PlayerIdle");
 	}
 
@@ -217,8 +220,9 @@ void Player::PlayerDash(float _deltaTime)
 void Player::Update(float _deltaTime)
 {
 	MoveDirectionUpdate(_deltaTime);
-	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	PlayerDash(_deltaTime);
+	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+
 }
 
 void Player::End()

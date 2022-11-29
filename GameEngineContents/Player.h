@@ -80,7 +80,8 @@ public:
 
 
 	//void SetLevel(GameEngineLevel* _NowLevel);
-	float4 resultDirection_;
+	float4 playerResultDirection_;
+	bool hitOnoff_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -94,6 +95,7 @@ private:
 	bool dashState_;
 
 	float4 moveDirection_;
+	//std::shared_ptr<SkillManager> playerSkillManager_;
 	std::shared_ptr<PlayerInfo> playerInfo_;
 	std::shared_ptr<PlayerUI> playerUi_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;

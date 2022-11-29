@@ -12,7 +12,8 @@ PlayerUI::PlayerUI()
 	ExpBlueBarTimer_(0),
 	playerLevelUi_(nullptr),
 	playerXindex_(0),
-	playerYindex_(0)
+	playerYindex_(0),
+	HitDleta_(0.f)
 {
 
 }
@@ -71,15 +72,22 @@ void PlayerUI::Start()
 	playerLevelUi_->ChangeCamera(CameraOrder::MainCamera);
 
 }
-void PlayerUI::HitEffect()
+void PlayerUI::HitEffect(float _deltaTime)
 {
-	if (true == player_.lock()->collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D))
+	if (player_.lock()->hitOnoff_ == true && playerHpUi_->GetPixelData().mulColor_ == float4::Green)
 	{
 		playerHpUi_->GetPixelData().mulColor_ = float4::White;//Èò»ö
+		player_.lock()->hitOnoff_ = false;
 	}
-	else
+	else if (player_.lock()->hitOnoff_ == true && playerHpUi_->GetPixelData().mulColor_ == float4::White)
 	{
-		playerHpUi_->GetPixelData().mulColor_ = float4::Green;	//³ì»ö
+		HitDleta_ = 0;
+		player_.lock()->hitOnoff_ = false;
+	}
+	 if(HitDleta_ >= 0.3f && playerHpUi_->GetPixelData().mulColor_ == float4::White)
+	{
+		playerHpUi_->GetPixelData().mulColor_ = float4::Green;//³ì»ö
+		HitDleta_ = 0;
 	}
 }
 void PlayerUI::ReduceHP(float _deltaTime)
@@ -144,9 +152,10 @@ void PlayerUI::Update(float _deltaTime)
 	playerExpBlue_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -98);
 
 	playerLevelUi_->SetPositionMode(FontPositionMode::World);
-	playerLevelUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 5.0f, player_.lock()->GetTransform().GetWorldPosition().y + 90.0f, -100);
+	playerLevelUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 70.0f, player_.lock()->GetTransform().GetWorldPosition().y + 115.0f, -100);
 
-	HitEffect();
+	HitDleta_ += _deltaTime;
+	HitEffect(_deltaTime);
 	ReduceHP(_deltaTime);
 	GainExp(_deltaTime);
 }

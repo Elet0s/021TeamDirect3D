@@ -102,11 +102,11 @@ void TestLevel::Start()
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
 
-
+	
 	Monster::ReserveMonsters(60);
 
-	Monster::CreateMonster<BlackEyes>(this, 1);
-	Monster::SummonMonster<BlackEyes>(this, 1);
+	Monster::CreateMonster<BlackEyes>(this, 5);
+	Monster::SummonMonster<BlackEyes>(this, 5);
 	//Monster::CreateMonster<Brown>(this, 10);
 	//Monster::CreateMonster<Green>(this, 10);
 	//Monster::CreateMonster<NormalGoblin>(this, 10);
@@ -157,7 +157,7 @@ void TestLevel::Start()
 	std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
 
 	
-	ShowCursor(false);
+	//ShowCursor(false);
 	CreateActor<TimeActor>();
 	CreateActor<StageUI>()->SoulCoinRenderersOff();
 

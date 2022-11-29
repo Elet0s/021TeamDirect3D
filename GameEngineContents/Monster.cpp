@@ -9,11 +9,12 @@ Monster::Monster()
 	, myMove_(0)
 	, monRenderer_(nullptr)
 	, monCollision_(nullptr)
-	, colCheak_(false)
+	, colCheakToPlayer_(false)
 	, playerRange_(0)
 	,mx_(0)
 	,my_(0)
 	, isSummoned_(false)
+	, atkDeltaTime_(0)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
 }
@@ -72,23 +73,35 @@ void Monster::SummonMon()
 		}
 	}
 }
-
+void Monster::Attack()
+{
+}
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
+
 
 	return CollisionReturn::Stop;
 }
 
 CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
-	if (colCheak_ == false)
+	if (colCheakToPlayer_ == false)
 	{
-		colCheak_ = true;
+		colCheakToPlayer_ = true;
+	}
+	std::shared_ptr<Player> A = std::dynamic_pointer_cast<Player>(_Other->GetActor());
+	if (atkDeltaTime_ >= 1.5f)
+	{
+		A->GetPlayerInfo().hp_ -= this->monsterInfo_->atk_;
+		if (A->hitOnoff_ == false)
+		{
+			A->hitOnoff_ = true;
+		}
+		atkDeltaTime_ = 0;
 	}
 
-	std::shared_ptr<Player> A = std::dynamic_pointer_cast<Player>(_Other->GetActor());
-	pushVector_ = A->resultDirection_;
+	pushVector_ = A->playerResultDirection_;
 	float PX = abs(pushVector_.x);
 	float PY = abs(pushVector_.y);
 	if (mx_ < px_)
@@ -210,23 +223,23 @@ void Monster::Chaseplayer(float _deltaTime)
 	range_.y = py_ - my_;
 	playerRange_ = static_cast<float>(sqrt(pow(range_.x,2) + pow(range_.y,2))); // 몬스터와 플레이어 사이의 거리의 절대값
 
+	monsterResultVector_ = (range_.Normalize3D() * monsterInfo_->baseSpeed_); //충돌 안했을 때 기본 방향,힘 합치는 부분
 
-	resultRange_ = (range_.Normalize3D() * monsterInfo_->baseSpeed_); //충돌 안했을 때 기본 방향,힘 합치는 부분
-
-	if (colCheak_ == true)//충돌시 벡터 합산하는부분
+	if (colCheakToPlayer_ == true)//플레이어와 충돌시 벡터 합산하는부분
 	{
-		monsterInfo_->colSpeed_ = -(resultRange_);// 미는 힘 반작용 
-		resultRange_ += monsterInfo_->colSpeed_; 
+		reactionVector_ = -(monsterResultVector_);// 몬스터가 플레이어에 접촉했으니 힘의 반작용 
+		monsterResultVector_ +=  reactionVector_;
 
-		resultRange_ += pushVector_; // 플레이어에게 밀리는 힘
-		colCheak_ = false;
+		monsterResultVector_ += pushVector_; // 플레이어의 움직임으로 밀리는 힘
+		colCheakToPlayer_ = false;
 	}
 
-	GetTransform().SetWorldMove(resultRange_ * _deltaTime); //이동
+	GetTransform().SetWorldMove(monsterResultVector_ * _deltaTime); //이동
 }
 
 void Monster::Update(float _deltaTime)
 {
+	atkDeltaTime_ += _deltaTime;
 }
 
 void Monster::End()
