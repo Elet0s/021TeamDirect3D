@@ -142,6 +142,9 @@
     <ClCompile Include="GameEngineStatusWindow.cpp">
       <Filter>Actor\00. Global\Gui</Filter>
     </ClCompile>
+    <ClCompile Include="SoulCardSelectBox.cpp">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClCompile>
     <ClCompile Include="InstancingTextures.cpp">
       <Filter>Level\Global\ContentsSupport</Filter>
     </ClCompile>
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineStatusWindow.h">
       <Filter>Actor\00. Global\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="SoulCardSelectBox.h">
+      <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
     <ClInclude Include="InstancingTextures.h">
       <Filter>Level\Global\ContentsSupport</Filter>

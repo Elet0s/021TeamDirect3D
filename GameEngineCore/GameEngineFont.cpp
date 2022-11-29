@@ -62,6 +62,7 @@ void GameEngineFont::FontDraw(
 {
 	std::wstring wText = GameEngineString::AnsiToUnicodeReturn(_text);
 
+
 	fontWrapper_->DrawString(
 		GameEngineDevice::GetContext(),
 		wText.c_str(),

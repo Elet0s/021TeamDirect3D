@@ -30,7 +30,7 @@ void TestLevel::Start()
 	//tileCameraActor_->GetCameraComponent()->SetCameraOrder(CameraOrder::TileCamera);
 	//tileCameraActor_->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	//this->PushCamera(tileCameraActor_->GetCameraComponent(), CameraOrder::TileCamera);
-	GameEngineFont::Load("Free Pixel");
+	
 
 
 
@@ -103,16 +103,17 @@ void TestLevel::Start()
 	}
 
 
-	//Monster::ReserveMonsters(60);
+	/*Monster::ReserveMonsters(60);
 
-	//Monster::CreateMonster<BlackEyes>(CastThis<GameEngineLevel>(), 10);
-	//Monster::CreateMonster<Brown>(CastThis<GameEngineLevel>(), 10);
-	//Monster::CreateMonster<Green>(CastThis<GameEngineLevel>(), 10);
-	//Monster::CreateMonster<NormalGoblin>(CastThis<GameEngineLevel>(), 10);
-	//Monster::CreateMonster<RedFlyingEyes>(CastThis<GameEngineLevel>(), 10);
-	//Monster::CreateMonster<FlyingEyes>(CastThis<GameEngineLevel>(), 10);
-
-	//Monster::SummonMonster<FlyingEyes>(CastThis<GameEngineLevel>(), 8);
+	Monster::CreateMonster<BlackEyes>(this, 1);
+	Monster::SummonMonster<BlackEyes>(this, 1);
+	//Monster::CreateMonster<Brown>(this, 10);
+	//Monster::CreateMonster<Green>(this, 10);
+	//Monster::CreateMonster<NormalGoblin>(this, 10);
+	//Monster::CreateMonster<RedFlyingEyes>(this, 10);
+	//Monster::CreateMonster<FlyingEyes>(this, 10);
+	//
+	//Monster::SummonMonster<FlyingEyes>(this, 8);
 	//Monster::SummonMonster<FlyingEyes>(this, 11);
 
 

@@ -17,18 +17,22 @@ Mouse::~Mouse()
 
 void Mouse::Start()
 {
-	GameEngineDirectory Dir;
-	Dir.MoveParentToExistChildDirectory("ContentsResources");
-	Dir.MoveToChild("ContentsResources");
-	Dir.MoveToChild("UI");
-	Dir.MoveToChild("MouseUI");
-
-	std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
-	for (size_t i = 0; i < Shaders.size(); i++)
+	if (nullptr == GameEngineTexture::Find("Cursor.png"))
 	{
-		GameEngineTexture::Load(Shaders[i].GetFullPath());
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("UI");
+		Dir.MoveToChild("MouseUI");
 
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+
+		}
 	}
+	
 
 	{
 		mouseCollision_ = CreateComponent<GameEngineCollision>();

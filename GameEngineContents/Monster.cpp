@@ -76,112 +76,153 @@ void Monster::SummonMon()
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
-	resultRange_ = range_;
-	A->resultRange_ = A->range_;
+
+	return CollisionReturn::Stop;
+}
+
+CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+{
 	if (colCheak_ == false)
 	{
 		colCheak_ = true;
 	}
-	if (A->playerRange_ - 25 > playerRange_)
-	{
-		A->GetMonsterInfo().colSpeed_ = -(A->monsterInfo_->baseSpeed_);
-		GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
-	}
-	else if (A->playerRange_ - 25 < playerRange_)
-	{
-		GetMonsterInfo().colSpeed_ = -(monsterInfo_->baseSpeed_);
-		A->GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
-	}
-	else
-	{
-		if (range_.x >A->range_.x)
-		{
-			
-		}
-		else if (range_.x < A->range_.x)
-		{
 
-		}
-		else
-		{
-		}
-
-		if (playerRange_ > A->playerRange_)
-		{
-			GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
-			if ((range_.x<0 && range_.y < 0) || (range_.x >= 0 && range_.y >= 0))
-			{
-
-				resultRange_.x = range_.x * -100;
-			}			
-			else if((range_.x >= 0 && range_.y >= 0) || (range_.x < 0 && range_.y < 0))
-			{
-				resultRange_.y = range_.y * -100;
-			}
-			if ((A->range_.x < 0 && A->range_.y < 0) || (A->range_.x >= 0 && A->range_.y >= 0))
-			{
-				A->resultRange_.y = A->range_.y * -100;
-			}
-			else if ((A->range_.x >= 0 && A->range_.y >= 0) || (A->range_.x < 0 && A->range_.y < 0))
-			{
-				A->resultRange_.x = A->range_.x * -100;
-			}
-		}
-		else if (playerRange_ < A->playerRange_)
-		{
-			A->GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
-			if ((range_.x < 0 && range_.y < 0) || (range_.x >= 0 && range_.y >= 0))
-			{
-				resultRange_.y = range_.y * -100;
-			}
-			else if ((range_.x >= 0 && range_.y >= 0) || (range_.x < 0 && range_.y < 0))
-			{
-				resultRange_.x = range_.x * -100;
-			}
-			if ((A->range_.x < 0 && A->range_.y < 0) || (A->range_.x >= 0 && A->range_.y >= 0))
-			{
-				A->resultRange_.x = A->range_.x * -100;
-			}
-			else if ((A->range_.x >= 0 && A->range_.y >= 0) || (A->range_.x < 0 && A->range_.y < 0))
-			{
-				A->resultRange_.y = A->range_.y * -100;
-			}
-		}
-	}
-	return CollisionReturn::Stop;
-}
-CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
-{
 	std::shared_ptr<Player> A = std::dynamic_pointer_cast<Player>(_Other->GetActor());
+	pushVector_ = A->resultDirection_;
+	float PX = abs(pushVector_.x);
+	float PY = abs(pushVector_.y);
+	if (mx_ < px_)
+	{
+		if (my_ < py_) // 몬스터가 3사분면
+		{
+			if ( PX > PY)// 플레이어가 x축이동
+			{
+				pushVector_.y -= 100.f;
+			}
+			else if (PX < PY)//플레이어가 y축이동
+			{
+				pushVector_.x -= 100.f;
+			}
+			else if (PX == PY && PX != 0)//플레이어가 대각선 이동
+			{
+				float PC = abs(range_.x) / abs(range_.y);
+				if (PC > 1)
+				{
+				
+					pushVector_.x -= 200.f;
+				}
+				else if (PC < 1)
+				
+				{
+					pushVector_.y -= 200.f;
+				}
+			}
+		}
+		else if (my_ > py_)// 몬스터가 1사분면 
+		{
+			if (PX > PY)// 플레이어가 x축이동
+			{
+				pushVector_.y += 100.f;
+			}
+			else if (PX < PY)//플레이어가 y축이동
+			{
+				pushVector_.x -= 100.f;
+			}
+			else if (PX == PY && PX !=0)//플레이어가 대각선 이동
+			{
+				float PC = abs(range_.x) / abs(range_.y);
+				if (PC > 1)
+				{
+					pushVector_.x -= 200.f;
+				}
+				else if (PC < 1)
+				
+				{
+					pushVector_.y += 200.f;
+				}
+			}
+		}
+	}
+	else if (mx_ > px_)
+	{
+		if (my_ > py_)// 몬스터가 2사분면 
+		{
+			if (PX > PY)// 플레이어가 x축이동
+			{
+				pushVector_.y += 100.f;
+			}
+			else if (PX < PY)//플레이어가 y축이동
+			{
+				pushVector_.x += 100.f;
+			}
+			else if (PX == PY && PX != 0)//플레이어가 대각선 이동
+			{
+				float PC = abs(range_.x) / abs(range_.y);
+				if (PC > 1)
+				{
+					pushVector_.x += 200.f;
+				}
+				else if (PC < 1)
+				
+				{
+					pushVector_.y += 200.f;
+				}
+			}
+		}
+		else if (my_ < py_)// 몬스터가 4사분면 
+		{
+			if (PX > PY)// 플레이어가 x축이동
+			{
+				pushVector_.y -= 100.f;
+			}
+			else if (PX < PY)//플레이어가 y축이동
+			{
+				pushVector_.x += 100.f;
+			}
+			else if (PX == PY && PX != 0)//플레이어가 대각선 이동
+			{
+				float PC = abs(range_.x) / abs(range_.y);
+				if (PC > 1)
+				{
+					pushVector_.x += 200.f;
+				}
+				else if (PC < 1)
+			
+				{
+					pushVector_.y -= 200.f;
+				}
+			}
+		}
+	}
 
-
-		A->GetPlayerInfo().pushSpeed_ = ((monsterInfo_->baseSpeed_ + A->GetPlayerInfo().speed_) / 5);
-		GetMonsterInfo().colSpeed_ = -((monsterInfo_->baseSpeed_ + A->GetPlayerInfo().speed_) / 2);
+ // 몬스터는 뒤로
 	
 	return CollisionReturn::Stop;
 }
+
 void Monster::Chaseplayer(float _deltaTime)
 {
-	 mx_ = GetTransform().GetWorldPosition().x;
+	 mx_ = GetTransform().GetWorldPosition().x;//몬스터 좌표
 	 my_ = GetTransform().GetWorldPosition().y;
-	float px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-	float py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
-	range_.x = px -mx_;
-	range_.y = py -my_;
-	playerRange_ = static_cast<int>(abs(range_.x) + abs(range_.y));
-	if (false == monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
+	 px_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x; //플레이어 좌표
+	 py_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
+	range_.x = px_ - mx_;//플레이어와 몬스터 x거리차이
+	range_.y = py_ - my_;
+	playerRange_ = static_cast<float>(sqrt(pow(range_.x,2) + pow(range_.y,2))); // 몬스터와 플레이어 사이의 거리의 절대값
+
+
+	resultRange_ = (range_.Normalize3D() * monsterInfo_->baseSpeed_); //충돌 안했을 때 기본 방향,힘 합치는 부분
+
+	if (colCheak_ == true)//충돌시 벡터 합산하는부분
 	{
-		monsterInfo_->ResultSpeed_ = monsterInfo_->baseSpeed_;
+		monsterInfo_->colSpeed_ = -(resultRange_);// 미는 힘 반작용 
+		resultRange_ += monsterInfo_->colSpeed_; 
+
+		resultRange_ += pushVector_; // 플레이어에게 밀리는 힘
 		colCheak_ = false;
-		monsterInfo_->colSpeed_ = 0;
-		GetTransform().SetWorldMove(range_.Normalize3D() * monsterInfo_->ResultSpeed_ * _deltaTime);
-	}
-	if (colCheak_ == true)
-	{
-			monsterInfo_->ResultSpeed_ = monsterInfo_->colSpeed_;
-			GetTransform().SetWorldMove(resultRange_.Normalize3D() * monsterInfo_->ResultSpeed_ * _deltaTime);
 	}
 
+	GetTransform().SetWorldMove(resultRange_ * _deltaTime); //이동
 }
 
 void Monster::Update(float _deltaTime)
