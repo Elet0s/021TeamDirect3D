@@ -119,7 +119,7 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 
 GameEngineInstancing& GameEngineCamera::GetInstancing(const std::string& _name)
 {
-	return instancingMap_[_name];
+	return instancingMap_[_name];	//없으면 생성 삽입 반환, 있으면 찾아서 반환.
 }
 
 void GameEngineCamera::Start()

@@ -27,7 +27,6 @@
 #include <GameEngineCore\GameEngineConstantBuffer.h>
 #include <GameEngineCore\GameEngineFolderTexture.h>
 #include <GameEngineCore\GameEngineGUI.h>
-#include <GameEngineCore\GameEngineStatusWindow.h>
 #include <GameEngineCore\GameEngineBlur.h>
 
 #include <GameEngineCore\GameEngineInstancing.h>

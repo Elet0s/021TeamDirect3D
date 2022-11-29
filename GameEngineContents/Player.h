@@ -53,11 +53,10 @@ public:
 	Player& operator=(Player&& _other) = delete;
 
 public:
-	static void CreatePlayer(GameEngineLevel* _thisLevel,const float4& _initPosition,const std::string_view& _playerName = "MainPlayer");
 	//플레이어 공식 생성 함수.
+	static void CreatePlayer(GameEngineLevel* _thisLevel,const float4& _initPosition,const std::string_view& _playerName = "MainPlayer");
 	//플레이어 전역과 std::shared_ptr<Player>을 유지하기 위해서 만든 함수.
 
-	std::shared_ptr<GameEngineCollision> collision_;
 
 	static std::shared_ptr<Player>& GetPlayerInst()
 	{
@@ -75,7 +74,11 @@ public:
 	}
 
 	CollisionReturn PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
-	//void SetLevel(GameEngineLevel* _NowLevel);
+
+public:
+	std::shared_ptr<GameEngineCollision> collision_;
+
+
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

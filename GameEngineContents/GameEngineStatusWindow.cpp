@@ -1,9 +1,9 @@
 ﻿#include "PreCompile.h"
 #include "GameEngineStatusWindow.h"
-#include "GameEngineRenderTarget.h"
-#include "GameEngineLevel.h"
-#include "GameEngineCameraActor.h"
-#include "GEngine.h"
+//#include "GameEngineRenderTarget.h"
+//#include "GameEngineLevel.h"
+//#include "GameEngineCameraActor.h"
+//#include "GEngine.h"
 
 void GameEngineImageShotWindow::RenderTextureSetting(ImTextureID _renderTexture, ImVec2 _size)
 {

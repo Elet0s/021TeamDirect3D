@@ -13,12 +13,6 @@ FlyingEyes::~FlyingEyes()
 }
 void FlyingEyes::Start()
 {
-	////////////Load////////////
-	if (nullptr == GameEngineTexture::Find("BlackEyes.png"))
-	{
-		Monster::Start();
-		
-	}
 	////////////Cut////////////
 	GameEngineTexture::Cut("flyingEyes.png", 6, 1);
 	
@@ -45,7 +39,7 @@ void FlyingEyes::Start()
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
 
-	SummonMon();
+	//SummonMon();
 
 }
 void FlyingEyes::Update(float _deltaTime)

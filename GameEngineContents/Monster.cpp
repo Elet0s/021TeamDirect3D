@@ -1,7 +1,8 @@
 #include "PreCompile.h"
 #include "Monster.h"
-#include "GlobalContentsValue.h"
 #include "Player.h"
+
+std::vector<std::shared_ptr<Monster>> Monster::allMonsters_;
 
 Monster::Monster()
 	: mxMove_(0)
@@ -12,6 +13,7 @@ Monster::Monster()
 	, playerRange_(0)
 	,mx_(0)
 	,my_(0)
+	, isSummoned_(false)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
 }
@@ -20,24 +22,24 @@ Monster::~Monster()
 {
 }
 
+void Monster::ReserveMonsters(size_t _allMonsterCount)
+{
+	allMonsters_.reserve(_allMonsterCount);
+}
+
+void Monster::Unsummon()
+{
+	isSummoned_ = false;
+	this->monCollision_->Off();
+	this->monRenderer_->Off();
+	this->shadowRenderer_->Off();
+	this->GetTransform().SetWorldPosition(float4::Zero);
+}
+
 void Monster::Start()
 {
-
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("Actor");
-		Dir.MoveToChild("Monster");
-
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
-		for (size_t i = 0; i < Shaders.size(); i++)
-		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
-
-		}
-
-
 }
+
 void Monster::SummonMon()
 {
 
@@ -181,7 +183,6 @@ void Monster::Chaseplayer(float _deltaTime)
 	}
 
 }
-
 
 void Monster::Update(float _deltaTime)
 {

@@ -14,12 +14,6 @@ BlackEyes::~BlackEyes()
 
 void BlackEyes::Start()
 {
-
-	////////////Load////////////
-	if (nullptr == GameEngineTexture::Find("BlackEyes.png"))
-	{
-		Monster::Start();
-	}
 	////////////Cut////////////
 	GameEngineTexture::Cut("BlackEyes.png", 6, 1);
 
@@ -44,7 +38,7 @@ void BlackEyes::Start()
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
 
-	SummonMon();
+	//SummonMon();
 }
 void BlackEyes::Update(float _deltaTime)
 {

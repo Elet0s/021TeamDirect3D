@@ -211,7 +211,6 @@
     <ClInclude Include="GameEngineShader.h" />
     <ClInclude Include="GameEngineShaderResourceHelper.h" />
     <ClInclude Include="GameEngineStateManager.h" />
-    <ClInclude Include="GameEngineStatusWindow.h" />
     <ClInclude Include="GameEngineStructuredBuffer.h" />
     <ClInclude Include="GameEngineTexture.h" />
     <ClInclude Include="GameEngineTextureRenderer.h" />
@@ -300,7 +299,6 @@
     <ClCompile Include="GameEngineShader.cpp" />
     <ClCompile Include="GameEngineShaderResourceHelper.cpp" />
     <ClCompile Include="GameEngineStateManager.cpp" />
-    <ClCompile Include="GameEngineStatusWindow.cpp" />
     <ClCompile Include="GameEngineStructuredBuffer.cpp" />
     <ClCompile Include="GameEngineTexture.cpp" />
     <ClCompile Include="GameEngineTextureRenderer.cpp" />

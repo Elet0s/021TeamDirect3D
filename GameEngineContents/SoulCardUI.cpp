@@ -29,7 +29,7 @@ void SoulCardUI::Start()
 	{
 		template_ = CreateComponent<GameEngineTextureRenderer>();
 		template_->SetPivot(PivotMode::Bot);
-		template_->SetTexture("SoulCardCommon.png");
+		template_->SetTexture("SoulCardNormal.png");
 		template_->ScaleToTexture();
 	}
 

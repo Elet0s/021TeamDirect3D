@@ -47,7 +47,7 @@ public:
 	void SetCameraOrder(CameraOrder _order);
 	//할 일이 있을지는 모르겠지만, 카메라 오더 런타임에 변경 금지.
 
-
+	//인스턴싱 반환. 없다면 빈 인스턴싱을 만들어서 반환한다.
 	GameEngineInstancing& GetInstancing(const std::string& _name);
 
 public:

@@ -13,11 +13,6 @@ Green::~Green()
 }
 void Green::Start()
 {
-	////////////Load////////////
-	if (nullptr == GameEngineTexture::Find("BlackEyes.png"))
-	{
-		Monster::Start();
-	}
 	////////////Cut////////////
 	GameEngineTexture::Cut("Green.png", 8, 1);
 
@@ -44,7 +39,7 @@ void Green::Start()
 	monsterInfo_->baseSpeed_ = 50;
 	monsterInfo_->giveExp_ = 5;
 
-	SummonMon();
+	//SummonMon();
 
 }
 void Green::Update(float _deltaTime)

@@ -3,6 +3,7 @@
 #include "GlobalContentsValue.h"
 #include "Texture2DShadowRenderer.h"
 #include "PlayerUI.h"
+#include "Monster.h"
 
 
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
@@ -33,18 +34,16 @@ Player::~Player()
 
 void Player::Start()
 {
-	//mainPlayer_ = GetLevel()->CreateActor<Player>(ObjectOrder::Player);
-
 	GameEngineDirectory Dir;
 	Dir.MoveParentToExistChildDirectory("ContentsResources");
 	Dir.MoveToChild("ContentsResources");
 	Dir.MoveToChild("Actor");
 	Dir.MoveToChild("Player");
 
-	std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
-	for (size_t i = 0; i < Shaders.size(); i++)
+	std::vector<GameEngineFile> playerTexture = Dir.GetAllFiles();
+	for (size_t i = 0; i < playerTexture.size(); i++)
 	{
-		GameEngineTexture::Load(Shaders[i].GetFullPath());
+		GameEngineTexture::Load(playerTexture[i].GetFullPath());
 	}
 	///////////////텍스처로드///////////////
 

@@ -55,9 +55,6 @@
     <Filter Include="ThirdParty\FW1FontWrapper\Bin%28Library%29\Release">
       <UniqueIdentifier>{0031f6c1-d4ce-4c84-a387-56842d83f00e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\EngineGui">
-      <UniqueIdentifier>{e50d4082-141c-40c5-ab96-3a26994d1609}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI\ImGUI">
       <UniqueIdentifier>{4a2e1255-5237-401b-9897-de4eb0412d8b}</UniqueIdentifier>
     </Filter>
@@ -152,9 +149,6 @@
     </ClCompile>
     <ClCompile Include="GameEngineGUI.cpp">
       <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineStatusWindow.cpp">
-      <Filter>GUI\EngineGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_dx11.cpp">
       <Filter>GUI\ImGUI</Filter>
@@ -335,9 +329,6 @@
     </ClInclude>
     <ClInclude Include="GameEngineGUI.h">
       <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineStatusWindow.h">
-      <Filter>GUI\EngineGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_dx11.h">
       <Filter>GUI\ImGUI</Filter>

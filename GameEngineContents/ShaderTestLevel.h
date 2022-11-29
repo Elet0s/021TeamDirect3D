@@ -24,8 +24,8 @@ protected:
 
 private:
 	std::shared_ptr<GameEngineActor> shaderTestActor_;
-	std::shared_ptr<Texture2DShadowRenderer> shaderTestRenderer_;
-	std::weak_ptr<class Player> tempPlayer_;
+	std::shared_ptr<GameEngineTextureRenderer> shaderTestRenderer_;
+
 
 };
 

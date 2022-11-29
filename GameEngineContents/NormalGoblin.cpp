@@ -13,11 +13,6 @@ NormalGoblin::~NormalGoblin()
 }
 void NormalGoblin::Start()
 {
-	////////////Load////////////
-	if (nullptr == GameEngineTexture::Find("BlackEyes.png"))
-	{
-		Monster::Start();
-	}
 	////////////Cut////////////
 	GameEngineTexture::Cut("NormalGoblin.png", 8, 1);
 
@@ -46,7 +41,7 @@ void NormalGoblin::Start()
 	monsterInfo_->baseSpeed_ = 50;
 	monsterInfo_->giveExp_ = 5;
 
-	SummonMon();
+	//SummonMon();
 
 }
 void NormalGoblin::Update(float _deltaTime)

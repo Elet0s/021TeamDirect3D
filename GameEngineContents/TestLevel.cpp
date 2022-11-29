@@ -8,6 +8,13 @@
 #include "Mouse.h"
 #include "Player.h"
 #include "PlayerUI.h"
+#include "Monster.h"
+#include "BlackEyes.h"
+#include "Brown.h"
+#include "Green.h"
+#include "NormalGoblin.h"
+#include "RedFlyingEyes.h"
+#include "FlyingEyes.h"
 
 TestLevel::TestLevel() //: tileCameraActor_(nullptr)
 {
@@ -26,39 +33,37 @@ void TestLevel::Start()
 	GameEngineFont::Load("Free Pixel");
 
 
-	if (true)
+
+
+	GameEngineDirectory monsterDir;
+	monsterDir.MoveParentToExistChildDirectory("ContentsResources");
+	monsterDir.MoveToChild("ContentsResources");
+	monsterDir.MoveToChild("Actor");
+	monsterDir.MoveToChild("Monster");
+
+	std::vector<GameEngineFile> monsterTexture = monsterDir.GetAllFiles();
+	for (size_t i = 0; i < monsterTexture.size(); i++)
 	{
-		/*{
-			GameEngineDirectory Dir;
-			Dir.MoveParentToExistChildDirectory("ContentsResources");
-			Dir.MoveToChild("ContentsResources");
-			Dir.MoveToChild("Texture");
-			Dir.MoveToChild("Map");
+		GameEngineTexture::Load(monsterTexture[i].GetFullPath());
+	}
 
-			std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
 
-			for (size_t i = 0; i < Shaders.size(); i++)
-			{
-				GameEngineTexture::Load(Shaders[i].GetFullPath());
-			}
-		}*/
-
-		{
-			GameEngineDirectory Dir;
-			Dir.MoveParentToExistChildDirectory("ContentsResources");
-			Dir.MoveToChild("ContentsResources");
-			Dir.MoveToChild("Texture");
-			Dir.MoveToChild("UI");
-			std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
-
-			for (size_t i = 0; i < Shaders.size(); i++)
-			{
-				GameEngineTexture::Load(Shaders[i].GetFullPath());
-			}
-		}
 
 		
+	GameEngineDirectory uiTextureDir;
+	uiTextureDir.MoveParentToExistChildDirectory("ContentsResources");
+	uiTextureDir.MoveToChild("ContentsResources");
+	uiTextureDir.MoveToChild("Texture");
+	uiTextureDir.MoveToChild("UI");
+	std::vector<GameEngineFile> uiTexture = uiTextureDir.GetAllFiles();
+
+	for (size_t i = 0; i < uiTexture.size(); i++)
+	{
+		GameEngineTexture::Load(uiTexture[i].GetFullPath());
 	}
+		
+
+		
 
 	tilemaps_.resize(3);
 
@@ -97,43 +102,60 @@ void TestLevel::Start()
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
 
-	Monster_.reserve(60);
-	{
-		for (size_t i = 0; i < 10; i++)
-		{
-			std::shared_ptr<BlackEyes> NewMonster = CreateActor<BlackEyes>(ObjectOrder::Monster);
-			Monster_.push_back(NewMonster);
-		}
-		for (size_t i = 0; i < 10; i++)
-		{
-			std::shared_ptr<Brown> NewMonster = CreateActor<Brown>(ObjectOrder::Monster);
-			Monster_.push_back(NewMonster);
-		}
-		for (size_t i = 0; i < 10; i++)
-		{
-			std::shared_ptr<Green> NewMonster = CreateActor<Green>(ObjectOrder::Monster);
-			Monster_.push_back(NewMonster);
-		}
-		for (size_t i = 0; i < 10; i++)
-		{
-			std::shared_ptr<NormalGoblin> NewMonster = CreateActor<NormalGoblin>(ObjectOrder::Monster);
-			Monster_.push_back(NewMonster);
-		}
-		for (size_t i = 0; i < 10; i++)
-		{
-			std::shared_ptr<RedFlyingEyes> NewMonster = CreateActor<RedFlyingEyes>(ObjectOrder::Monster);
-			Monster_.push_back(NewMonster);
-		}
-		for (size_t i = 0; i < 10; i++)
-		{
-			std::shared_ptr<FlyingEyes> NewMonster = CreateActor<FlyingEyes>(ObjectOrder::Monster);
-			Monster_.push_back(NewMonster);
-		}
-	}
-	{
-		std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
 
-	}
+	Monster::ReserveMonsters(60);
+
+	Monster::CreateMonster<BlackEyes>(this, 10);
+	Monster::CreateMonster<Brown>(this, 10);
+	Monster::CreateMonster<Green>(this, 10);
+	Monster::CreateMonster<NormalGoblin>(this, 10);
+	Monster::CreateMonster<RedFlyingEyes>(this, 10);
+	Monster::CreateMonster<FlyingEyes>(this, 10);
+
+	Monster::SummonMonster<FlyingEyes>(this, 8);
+	//Monster::SummonMonster<FlyingEyes>(this, 11);
+
+
+
+
+
+	//Monster_.reserve(60);
+	//{
+	//	for (size_t i = 0; i < 10; i++)
+	//	{
+	//		std::shared_ptr<BlackEyes> NewMonster = CreateActor<BlackEyes>(ObjectOrder::Monster);
+	//		Monster_.push_back(NewMonster);
+	//	}
+	//	for (size_t i = 0; i < 10; i++)
+	//	{
+	//		std::shared_ptr<Brown> NewMonster = CreateActor<Brown>(ObjectOrder::Monster);
+	//		Monster_.push_back(NewMonster);
+	//	}
+	//	for (size_t i = 0; i < 10; i++)
+	//	{
+	//		std::shared_ptr<Green> NewMonster = CreateActor<Green>(ObjectOrder::Monster);
+	//		Monster_.push_back(NewMonster);
+	//	}
+	//	for (size_t i = 0; i < 10; i++)
+	//	{
+	//		std::shared_ptr<NormalGoblin> NewMonster = CreateActor<NormalGoblin>(ObjectOrder::Monster);
+	//		Monster_.push_back(NewMonster);
+	//	}
+	//	for (size_t i = 0; i < 10; i++)
+	//	{
+	//		std::shared_ptr<RedFlyingEyes> NewMonster = CreateActor<RedFlyingEyes>(ObjectOrder::Monster);
+	//		Monster_.push_back(NewMonster);
+	//	}
+	//	for (size_t i = 0; i < 10; i++)
+	//	{
+	//		std::shared_ptr<FlyingEyes> NewMonster = CreateActor<FlyingEyes>(ObjectOrder::Monster);
+	//		Monster_.push_back(NewMonster);
+	//	}
+	//}
+	
+	std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
+
+	
 	ShowCursor(false);
 	CreateActor<TimeActor>();
 	CreateActor<StageUI>()->SoulCoinRenderersOff();

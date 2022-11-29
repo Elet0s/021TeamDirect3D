@@ -139,6 +139,9 @@
     <ClCompile Include="SoulCardUI.cpp">
       <Filter>Actor\00. Global\UI</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineStatusWindow.cpp">
+      <Filter>Actor\00. Global\Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -232,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="SoulCardUI.h">
       <Filter>Actor\00. Global\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineStatusWindow.h">
+      <Filter>Actor\00. Global\Gui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

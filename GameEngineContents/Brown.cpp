@@ -13,11 +13,6 @@ Brown::~Brown()
 }
 void Brown::Start()
 {
-	////////////Load////////////
-	if (nullptr == GameEngineTexture::Find("BlackEyes.png"))
-	{
-		Monster::Start();
-	}
 	////////////Cut////////////
 
 		GameEngineTexture::Cut("Brown.png", 8, 1);
@@ -43,7 +38,7 @@ void Brown::Start()
 		monsterInfo_->baseSpeed_ = 50;
 		monsterInfo_->giveExp_ = 5;
 
-	SummonMon();
+	//SummonMon();
 
 }
 void Brown::Update(float _deltaTime)

@@ -2,7 +2,8 @@
 #include"PlayerUI.h"
 #include"GlobalContentsValue.h"
 #include "Player.h"
-#include <GameEngineBase/GameEngineTime.h>
+//#include <GameEngineBase/GameEngineTime.h>
+
 PlayerUI::PlayerUI()
 	:player_(),
 	playerHpUi_(0),
@@ -33,22 +34,22 @@ void PlayerUI::Start()
 
 	playerHpUi_ = CreateComponent<GameEngineTextureRenderer>();
 	playerHpUi_->SetTexture("DefaultUi.png");
-	playerHpUi_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f); //³ì»ö
+	playerHpUi_->GetPixelData().mulColor_ = float4::Green; //³ì»ö
 	playerHpUi_->GetTransform().SetWorldScale(-100.f, 10.f, 1.f);
 
 	playerHpMax_ = CreateComponent<GameEngineTextureRenderer>();
 	playerHpMax_->SetTexture("DefaultUi.png");
-	playerHpMax_->GetPixelData().mulColor_ = float4(0.0f, 0.0f, 0.0f, 1.0f); //°ËÀº»ö
+	playerHpMax_->GetPixelData().mulColor_ = float4::Black; //°ËÀº»ö
 	playerHpMax_->GetTransform().SetLocalScale(100, 10, 1);
 
 	playerHpRed_ = CreateComponent<GameEngineTextureRenderer>();
 	playerHpRed_->SetTexture("DefaultUi.png");
-	playerHpRed_->GetPixelData().mulColor_ = float4(1.0f,0.0f,0.0f,1.0f);	//ºÓÀº»ö
+	playerHpRed_->GetPixelData().mulColor_ = float4::Red;	//ºÓÀº»ö
 	playerHpRed_->GetTransform().SetWorldScale(-100.f, 10.f, 1.f);
 
 	playerExpMax_ = CreateComponent<GameEngineTextureRenderer>();
 	playerExpMax_->SetTexture("DefaultUi.png");
-	playerExpMax_->GetPixelData().mulColor_ = float4(0.0f, 0.0f, 0.0f, 1.0f); //°ËÀº»ö
+	playerExpMax_->GetPixelData().mulColor_ = float4::Black; //°ËÀº»ö
 	playerExpMax_->GetTransform().SetWorldScale(90, 5, 1);
 
 	playerExpUi_ = CreateComponent<GameEngineTextureRenderer>();
@@ -74,11 +75,11 @@ void PlayerUI::HitEffect()
 {
 	if (true == player_.lock()->collision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_OBB2D))
 	{
-		playerHpUi_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 1.0f, 1.0f);//Èò»ö
+		playerHpUi_->GetPixelData().mulColor_ = float4::White;//Èò»ö
 	}
 	else
 	{
-		playerHpUi_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);	//³ì»ö
+		playerHpUi_->GetPixelData().mulColor_ = float4::Green;	//³ì»ö
 	}
 }
 void PlayerUI::ReduceHP(float _deltaTime)

@@ -1,12 +1,4 @@
 #pragma once
-#include "Player.h"
-#include "Monster.h"
-#include "BlackEyes.h"
-#include "Brown.h"
-#include "Green.h"
-#include "NormalGoblin.h"
-#include "RedFlyingEyes.h"
-#include "FlyingEyes.h"
 
 enum class ObjectOrder
 {
@@ -20,7 +12,7 @@ enum class ObjectOrder
 	UI = 1000
 };
 
-enum class MonterOrder
+enum class MonsterOrder
 {
 	BlackEyes,
 	Brown,
@@ -102,6 +94,7 @@ enum class SoulCard
 	Fractal,
 	ThornFirework,
 	Lunatic,
+
 	//이밑으로 방어 패시브
 	Healthy,
 	Durability,
@@ -120,6 +113,7 @@ enum class SoulCard
 	Turtle,
 	Flesh,
 	Martyr,
+
 	//이밑으로 보조 패시브
 	LowPressure,
 	Agility,
@@ -134,6 +128,7 @@ enum class SoulCard
 	Bookworm,
 	VoidSpirit
 };
+
 enum class CardValue
 {
 	Weapon,
@@ -141,6 +136,7 @@ enum class CardValue
 	DefBuff,
 	SubBuff
 };
+
 enum class Artifact
 {
 	HandOfTheCheater,
@@ -178,22 +174,3 @@ enum class Artifact
 	CowardsSaphir,
 	CorruptedCore
 };
-class GlobalContentsValue
-{
-
-public:
-	class Actors
-	{
-	public:
-		static Monster* testMonster_;
-
-	private:
-		Actors() {}
-		~Actors() {}
-	};
-
-private:
-	GlobalContentsValue() {}
-	~GlobalContentsValue() {}
-};
-

@@ -50,6 +50,14 @@ public:
 		return float4(intDistribution(mt_), intDistribution(mt_), intDistribution(mt_));
 	}
 
+	float4 RandomFloat4(const float4& _min, const float4& _max)
+	{
+		std::uniform_real_distribution<float> xDistribution(_min.x, _max.x);
+		std::uniform_real_distribution<float> yDistribution(_min.y, _max.y);
+		std::uniform_real_distribution<float> zDistribution(_min.z, _max.z);
+		return float4(xDistribution(mt_), yDistribution(mt_), zDistribution(mt_));
+	}
+
 
 private:
 	std::mt19937_64 mt_;	//Mersenne Twister 유사난수 생성기.

@@ -5,6 +5,7 @@
 #include "StageLevel.h"
 #include "TestLevel.h"
 #include "ShaderTestLevel.h"
+#include "GameEngineStatusWindow.h"
 
 
 ContentsCore::ContentsCore()
@@ -51,8 +52,8 @@ void ContentsCore::Start()
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<TestLevel>("Test");
 	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
-	ChangeLevel("Test");
-	//ChangeLevel("ShaderTestLevel");
+	//ChangeLevel("Test");
+	ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("WorldMap");
 
 

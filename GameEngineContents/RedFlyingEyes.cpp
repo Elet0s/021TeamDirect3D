@@ -13,11 +13,6 @@ RedFlyingEyes::~RedFlyingEyes()
 }
 void RedFlyingEyes::Start()
 {
-	////////////Load////////////
-	if (nullptr == GameEngineTexture::Find("BlackEyes.png"))
-	{
-		Monster::Start();
-	}
 	////////////Cut////////////
 	GameEngineTexture::Cut("RedFlyingEyes.png", 6, 1);
 
@@ -43,7 +38,7 @@ void RedFlyingEyes::Start()
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
 
-	SummonMon();
+	//SummonMon();
 
 }
 void RedFlyingEyes::Update(float _deltaTime)
