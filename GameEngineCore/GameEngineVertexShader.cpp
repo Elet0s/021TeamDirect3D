@@ -4,7 +4,7 @@
 
 GameEngineVertexShader::GameEngineVertexShader()
     : vertexShader_(nullptr),
-    instancingVertexShader_(nullptr)
+    inst_VertexShader_(nullptr)
 
 {
     shaderType_ = ShaderType::VertexShader;
@@ -75,13 +75,13 @@ void GameEngineVertexShader::InstancingShaderCompile(
     UINT _versionLow /*= 0*/
 )
 {
-    instancingVertexShader_ = std::make_shared<GameEngineVertexShader>(); //GameEngineRes에 등록되지 않는 점 주의.
-    instancingVertexShader_->SetName(_entryPoint);
-    instancingVertexShader_->CreateVersion("vs", _versionHigh, _versionLow);
-    instancingVertexShader_->SetEntrtyPoint(_entryPoint);
-    instancingVertexShader_->CompileHLSLCode(_path);
-    instancingVertexShader_->CreateInstancingShader();
-    instancingVertexShader_->ShaderResCheck(instancingVertexShader_->GetName());
+    inst_VertexShader_ = std::make_shared<GameEngineVertexShader>(); //GameEngineRes에 등록되지 않는 점 주의.
+    inst_VertexShader_->SetName(_entryPoint);
+    inst_VertexShader_->CreateVersion("vs", _versionHigh, _versionLow);
+    inst_VertexShader_->SetEntrtyPoint(_entryPoint);
+    inst_VertexShader_->CompileHLSLCode(_path);
+    inst_VertexShader_->CreateInstancingShader();
+    inst_VertexShader_->ShaderResCheck(inst_VertexShader_->GetName());
 }
 
 void GameEngineVertexShader::CreateVertexShader()
@@ -102,13 +102,13 @@ void GameEngineVertexShader::CreateVertexShader()
 void GameEngineVertexShader::CreateInstancingShader()
 {
     if (S_OK != GameEngineDevice::GetDevice()->CreateVertexShader(  //버텍스셰이더 생성 함수.
-        binaryCode_->GetBufferPointer(), //컴파일된 바이너리 코드.
-        binaryCode_->GetBufferSize(),    //컴파일된 바이너리코드 크기.
+        this->binaryCode_->GetBufferPointer(), //컴파일된 바이너리 코드.
+        this->binaryCode_->GetBufferSize(),    //컴파일된 바이너리코드 크기.
         NULL,                               //??
-        &vertexShader_                   //인스턴싱셰이더 포인터.
+        &this->vertexShader_                   //인스턴스 버텍스셰이더 포인터.
     ))
     {
-        MsgBoxAssert("인스턴싱셰이더 생성 실패.");
+        MsgBoxAssert("인스턴싱 버텍스 셰이더 생성 실패.");
         return;
     }
 }

@@ -4,7 +4,7 @@
 
 class GameEngineCameraActor : public GameEngineActor
 {
-
+	//이 클래스의 존재 이유: 카메라 삼각대.
 public:
 
 	GameEngineCameraActor();

@@ -19,21 +19,22 @@ private:
 	GameEngineStructuredBuffer& operator=(const GameEngineStructuredBuffer& _other) = delete;
 	GameEngineStructuredBuffer& operator=(const GameEngineStructuredBuffer&& _other) = delete;
 
-
 public:
-	static std::shared_ptr<GameEngineStructuredBuffer> CreateStructuredBuffer(
+	//이름규칙: 인스턴싱용 구조화버퍼는 Inst_로 시작.
+
+	static std::shared_ptr<GameEngineStructuredBuffer> Create(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
-		int _dataCount
+		size_t _count
 	);
 	static std::shared_ptr<GameEngineStructuredBuffer> Find(const std::string_view& _name, int _byteWidth);
 	static std::shared_ptr<GameEngineStructuredBuffer> CreateAndFind(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
-		int _dataCount
+		size_t _count
 	);
 
-	void ChangeData(const void* _data, size_t _dataSize);
+	void ChangeData(const void* _data, size_t _byteWidth);
 
 	//구조화 버퍼를 렌더링 파이프라인의 정점셰이더에 연결하는 함수.
 	void VSSetting(int _bindPoint);
@@ -64,11 +65,12 @@ protected:
 private:
 	void CreateOrResize(
 		const D3D11_SHADER_BUFFER_DESC& _desc,
-		unsigned int _count,
+		size_t _count,
 		void* _initialData = nullptr
 	);
-	void CreateOrResize(unsigned int _dataUnitSize, unsigned int _count, void* _initialData = nullptr);
-	void CreateOrResize(unsigned int _count, void* _initialData = nullptr);
+	void CreateStructuredBuffer(size_t _dataUnitSize, size_t _count, void* _initialData = nullptr);
+
+	void CreateOrResize(size_t _count, void* _initialData = nullptr);
 
 	void Release();
 
@@ -86,8 +88,8 @@ private:
 	ID3D11ShaderResourceView* shaderResourceView_;	//셰이더 리소스뷰.
 	//구조화버퍼는 버퍼지만 셰이더 리소스로 분류되므로 셰이더 리소스 뷰가 필요하다.
 
-	unsigned int dataCount_;	//데이터 개수.
-	unsigned int dataUnitSize_;		//데이터 단위 크기.
-	bool isInit_;	//초기화 여부.
+	size_t count_;	//데이터 개수.
+	size_t dataUnitSize_;		//데이터 단위 크기.
+	bool isInitialized_;	//초기화 여부.
 };
 

@@ -45,9 +45,11 @@ public:
 
 	void SetIndexBuffer_InputAssembler2(std::shared_ptr<GameEngineIndexBuffer> _indexBuffer);
 
-	void Setting();	//이 리소스를 렌더링 파이프라인에 연결하는 함수.
+	void Setting();	//이 리소스를 DC에 연결하는 함수.
+	void SettingInstancing(std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer);	//이 리소스를 DC에 연결하는 함수.
 
 	void Render();
+	void RenderInstancing(size_t _instancingCount);
 
 	const class GameEngineInputLayoutDesc& GetInputLayoutDesc() const;
 

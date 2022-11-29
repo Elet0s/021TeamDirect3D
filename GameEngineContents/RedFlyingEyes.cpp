@@ -24,7 +24,7 @@ void RedFlyingEyes::Start()
 
 	monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 
-	monRenderer_->GetTransform().SetLocalScale(100, 100, 100);
+	monRenderer_->GetTransform().SetLocalScale(70, 70,0);
 	monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
 	monRenderer_->CreateFrameAnimation_CutTexture("RedFlyingEyes", FrameAnimation_Desc("RedFlyingEyes.png", 0, 5, 0.1f));
 	monRenderer_->ChangeFrameAnimation("RedFlyingEyes");
@@ -34,7 +34,7 @@ void RedFlyingEyes::Start()
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-	monCollision_->GetTransform().SetLocalScale({ 100.0f, 50.f, 1.0f });
+	monCollision_->GetTransform().SetLocalScale({ 50.0f, 25.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 0;

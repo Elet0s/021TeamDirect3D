@@ -20,7 +20,6 @@ public:
 
 	GameEngineRenderingEvent Info;
 
-	bool Pause;
 	bool bOnceStart;
 	bool bOnceEnd;
 	std::function<void(const GameEngineRenderingEvent&)> FrameEvent;
@@ -30,7 +29,6 @@ public:
 
 	// Event
 
-	void PauseSwtich();
 	void Init(const std::string_view& _Name, int _Index);
 	void Reset();
 	void Update(float _DeltaTime);
@@ -39,7 +37,6 @@ public:
 	FBXRendererAnimation()
 		: Start(0)
 		, End(0)
-		, Pause(false)
 		, bOnceStart(false)
 		, bOnceEnd(false)
 	{
@@ -93,6 +90,8 @@ public:
 	void ChangeAnimation(const std::string& _AnimationName);
 
 	void Update(float _deltaTime) override;
+
+	void PauseSwitch();
 
 	// 애니메이션 바인드
 	// 시작 프레임에 들어온다.
@@ -149,6 +148,8 @@ public:
 	}
 
 private:
+	bool Pause;
+
 	std::map<std::string, std::shared_ptr<FBXRendererAnimation>> Animations;
 	std::shared_ptr<FBXRendererAnimation> CurAnimation;
 

@@ -38,12 +38,12 @@ private:
     GameEngineRenderUnit& operator=(GameEngineRenderUnit&& _other) = delete;
 
 public:
-    //렌더유닛에 마테리얼을 지정하는 함수.
-    void SetMaterial(const std::string_view& _materialName);
-
     //렌더유닛에 메쉬를 지정하는 함수. 
     void SetMesh(const std::string_view& _meshName);
     void SetMesh(std::shared_ptr<GameEngineMesh> _mesh);
+
+    //렌더유닛에 마테리얼을 지정하는 함수.
+    void SetMaterial(const std::string_view& _materialName);
 
     //새 부모 렌더러를 지정하고 렌더유닛이 가진 셰이더리소스헬퍼에
     // 엔진 기본제공 상수버퍼인 "TRANSFORMDATA"와 "RENDEROPTION"을 등록하는 함수.
@@ -53,6 +53,13 @@ public:
     // 부모 렌더러가 등록된 카메라의 렌더타겟에 옮기는 함수.
     void Render(float _deltaTime);
 
+    void RenderInstancing(
+        float _deltaTime,
+        size_t _instancingDataCount,
+        std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
+    );
+
+    std::shared_ptr<GameEngineMesh> GetMesh();
     std::shared_ptr<GameEngineMaterial> GetMaterial();
 
     std::shared_ptr<GameEngineMaterial> GetCloneMaterial();
@@ -69,11 +76,13 @@ public:
         return this->shaderResourceHelper_;
     }
 
+    //이 렌더유닛을 일반 렌더링 모드로 전환하는 함수.
     inline void On()
     {
         isOn_ = true;
     }
 
+    //이 렌더유닛을 인스턴스 렌더링 모드로 전환하는 함수.
     inline void Off()
     {
         isOn_ = false;

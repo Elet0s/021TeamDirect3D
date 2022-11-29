@@ -53,10 +53,11 @@ protected:
 	void Chaseplayer(float _deltaTime);
 	void SummonMon();
 	bool colCheak_;
-	float playerRange_;
+	int playerRange_;
 	float mx_;
 	float my_;
 	float4 range_;
+	float4 resultRange_;
 	std::shared_ptr<GameEngineCollision> monCollision_;
 	std::shared_ptr < MonsterInfo> monsterInfo_;
 	std::shared_ptr<GameEngineTextureRenderer> monRenderer_;

@@ -74,22 +74,79 @@ void Monster::SummonMon()
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
+	resultRange_ = range_;
+	A->resultRange_ = A->range_;
 	if (colCheak_ == false)
 	{
 		colCheak_ = true;
 	}
-	
-	if (A->playerRange_ > playerRange_)
+	if (A->playerRange_ - 25 > playerRange_)
 	{
-		A->GetMonsterInfo().colSpeed_ = -((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
-		GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 4);
+		A->GetMonsterInfo().colSpeed_ = -(A->monsterInfo_->baseSpeed_);
+		GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
 	}
-	if (A->playerRange_ <= playerRange_)
+	else if (A->playerRange_ - 25 < playerRange_)
 	{
-		GetMonsterInfo().colSpeed_ = -((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
-		A->GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 4);
+		GetMonsterInfo().colSpeed_ = -(monsterInfo_->baseSpeed_);
+		A->GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
 	}
-	return CollisionReturn::Continue;
+	else
+	{
+		if (range_.x >A->range_.x)
+		{
+			
+		}
+		else if (range_.x < A->range_.x)
+		{
+
+		}
+		else
+		{
+		}
+
+		if (playerRange_ > A->playerRange_)
+		{
+			GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
+			if ((range_.x<0 && range_.y < 0) || (range_.x >= 0 && range_.y >= 0))
+			{
+
+				resultRange_.x = range_.x * -100;
+			}			
+			else if((range_.x >= 0 && range_.y >= 0) || (range_.x < 0 && range_.y < 0))
+			{
+				resultRange_.y = range_.y * -100;
+			}
+			if ((A->range_.x < 0 && A->range_.y < 0) || (A->range_.x >= 0 && A->range_.y >= 0))
+			{
+				A->resultRange_.y = A->range_.y * -100;
+			}
+			else if ((A->range_.x >= 0 && A->range_.y >= 0) || (A->range_.x < 0 && A->range_.y < 0))
+			{
+				A->resultRange_.x = A->range_.x * -100;
+			}
+		}
+		else if (playerRange_ < A->playerRange_)
+		{
+			A->GetMonsterInfo().colSpeed_ = ((monsterInfo_->baseSpeed_ + A->monsterInfo_->baseSpeed_) / 2);
+			if ((range_.x < 0 && range_.y < 0) || (range_.x >= 0 && range_.y >= 0))
+			{
+				resultRange_.y = range_.y * -100;
+			}
+			else if ((range_.x >= 0 && range_.y >= 0) || (range_.x < 0 && range_.y < 0))
+			{
+				resultRange_.x = range_.x * -100;
+			}
+			if ((A->range_.x < 0 && A->range_.y < 0) || (A->range_.x >= 0 && A->range_.y >= 0))
+			{
+				A->resultRange_.x = A->range_.x * -100;
+			}
+			else if ((A->range_.x >= 0 && A->range_.y >= 0) || (A->range_.x < 0 && A->range_.y < 0))
+			{
+				A->resultRange_.y = A->range_.y * -100;
+			}
+		}
+	}
+	return CollisionReturn::Stop;
 }
 CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
@@ -99,7 +156,7 @@ CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineColl
 		A->GetPlayerInfo().pushSpeed_ = ((monsterInfo_->baseSpeed_ + A->GetPlayerInfo().speed_) / 5);
 		GetMonsterInfo().colSpeed_ = -((monsterInfo_->baseSpeed_ + A->GetPlayerInfo().speed_) / 2);
 	
-	return CollisionReturn::Continue;
+	return CollisionReturn::Stop;
 }
 void Monster::Chaseplayer(float _deltaTime)
 {
@@ -109,7 +166,7 @@ void Monster::Chaseplayer(float _deltaTime)
 	float py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
 	range_.x = px -mx_;
 	range_.y = py -my_;
-	playerRange_ = abs(range_.x) + abs(range_.y);
+	playerRange_ = static_cast<int>(abs(range_.x) + abs(range_.y));
 	if (false == monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
 	{
 		monsterInfo_->ResultSpeed_ = monsterInfo_->baseSpeed_;
@@ -120,7 +177,7 @@ void Monster::Chaseplayer(float _deltaTime)
 	if (colCheak_ == true)
 	{
 			monsterInfo_->ResultSpeed_ = monsterInfo_->colSpeed_;
-			GetTransform().SetWorldMove(range_.Normalize3D() * monsterInfo_->ResultSpeed_ * _deltaTime);
+			GetTransform().SetWorldMove(resultRange_.Normalize3D() * monsterInfo_->ResultSpeed_ * _deltaTime);
 	}
 
 }

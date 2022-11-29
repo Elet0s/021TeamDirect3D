@@ -60,6 +60,11 @@ public:
 		return cameras_[static_cast<int>(CameraOrder::UICamera)];
 	}
 
+	std::shared_ptr<GameEngineCamera> GetCamera(UINT _index)
+	{
+		return cameras_[_index];
+	}
+
 	//액터들 중 특정 종류만 가져오는 함수.
 	template<typename GroupIndexType>
 	std::list<std::shared_ptr<GameEngineActor>> GetGroup(GroupIndexType _objectGroupIndex)

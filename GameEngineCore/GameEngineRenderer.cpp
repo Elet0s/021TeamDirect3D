@@ -31,30 +31,6 @@ GameEngineRenderUnit::GameEngineRenderUnit(const GameEngineRenderUnit& _other)
 	this->shaderResourceHelper_.ResourceCheck(this->material_);
 }
 
-void GameEngineRenderUnit::SetMaterial(const std::string_view& _materialName)
-{
-	this->material_ = GameEngineMaterial::Find(_materialName);
-
-	if (nullptr == material_)
-	{
-		MsgBoxAssertString(std::string(_materialName) + ": 그런 이름의 마테리얼이 존재하지 않습니다.");
-		return;
-	}
-
-	if (nullptr == inputLayout_ && nullptr != mesh_)
-	{
-		inputLayout_ = GameEngineInputLayout::Create(
-			this->mesh_->GetInputLayoutDesc(),
-			this->material_->GetVertexShader()
-		);
-		//메쉬의 버텍스버퍼와 렌더링 파이프라인의 버텍스셰이더가 모두 준비되면 인풋 레이아웃을 생성한다.
-		//어떤게 먼저 준비될 지 모르므로 메쉬가 먼저 준비되는 경우와 렌더링 파이프라인이 먼저 준비되는 경우 
-		// 두가지 모두 대비한다.
-	}
-
-	shaderResourceHelper_.ResourceCheck(this->material_);
-}
-
 void GameEngineRenderUnit::SetMesh(const std::string_view& _meshName)
 {
 	mesh_ = GameEngineMesh::Find(_meshName);
@@ -99,6 +75,30 @@ void GameEngineRenderUnit::SetMesh(std::shared_ptr<GameEngineMesh> _mesh)
 	}
 }
 
+void GameEngineRenderUnit::SetMaterial(const std::string_view& _materialName)
+{
+	material_ = GameEngineMaterial::Find(_materialName);
+
+	if (nullptr == material_)
+	{
+		MsgBoxAssertString(std::string(_materialName) + ": 그런 이름의 마테리얼이 존재하지 않습니다.");
+		return;
+	}
+
+	if (nullptr == inputLayout_ && nullptr != mesh_)
+	{
+		inputLayout_ = GameEngineInputLayout::Create(
+			this->mesh_->GetInputLayoutDesc(),
+			this->material_->GetVertexShader()
+		);
+		//메쉬의 버텍스버퍼와 렌더링 파이프라인의 버텍스셰이더가 모두 준비되면 인풋 레이아웃을 생성한다.
+		//어떤게 먼저 준비될 지 모르므로 메쉬가 먼저 준비되는 경우와 렌더링 파이프라인이 먼저 준비되는 경우 
+		// 두가지 모두 대비한다.
+	}
+
+	shaderResourceHelper_.ResourceCheck(this->material_);
+}
+
 void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngineRenderer> _parentRenderer)
 {
 	if (nullptr == _parentRenderer)
@@ -127,12 +127,6 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngin
 
 void GameEngineRenderUnit::Render(float _deltaTime)
 {
-	if (nullptr == this->material_)
-	{
-		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
-		return;
-	}
-
 	if (nullptr == this->mesh_)
 	{
 		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
@@ -144,6 +138,13 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
 		return;
 	}
+
+	if (nullptr == this->material_)
+	{
+		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
+
 
 	mesh_->Setting();
 
@@ -158,6 +159,45 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 	mesh_->Render();
 
 	shaderResourceHelper_.AllResourcesReset();
+}
+
+void GameEngineRenderUnit::RenderInstancing(
+	float _deltaTime,
+	size_t _instancingDataCount,
+	std::shared_ptr<GameEngineInstancingBuffer> _instancingBuffer
+)
+{
+	if (nullptr == this->mesh_)
+	{
+		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
+
+	if (nullptr == this->inputLayout_)
+	{
+		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
+
+	if (nullptr == this->material_)
+	{
+		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
+
+	this->mesh_->SettingInstancing(_instancingBuffer);
+	this->inputLayout_->Setting();
+	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
+	this->material_->SettingInstancing();
+	this->shaderResourceHelper_.AllResourcesSetting();
+	this->mesh_->RenderInstancing(_instancingDataCount);
+	this->shaderResourceHelper_.AllResourcesReset();
+
+}
+
+std::shared_ptr<GameEngineMesh> GameEngineRenderUnit::GetMesh()
+{
+	return this->mesh_;
 }
 
 std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()

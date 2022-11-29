@@ -132,6 +132,11 @@ void GameEngineCamera::Start()
 	);
 
 	cameraRenderTarget_->SetDepthTexture(GameEngineDevice::GetBackBuffer()->GetDepthTexture());
+
+	GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
+		1,					//설정할 뷰포트 개수.
+		&viewportDesc_		//뷰포트 구조체 배열의 주소값.
+	);
 }
 
 bool ZSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameEngineRenderer> _rendererB)
@@ -154,10 +159,10 @@ void GameEngineCamera::Render(float _deltaTime)
 	cameraRenderTarget_->Setting();
 	//초기화한 렌더타겟뷰를 렌더링 파이프라인에 연결.
 
-	GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
-		1,					//설정할 뷰포트 개수.
-		&viewportDesc_		//뷰포트 구조체 배열의 주소값.
-	);
+	//GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
+	//	1,					//설정할 뷰포트 개수.
+	//	&viewportDesc_		//뷰포트 구조체 배열의 주소값.
+	//);
 
 	//오브젝트들을 재배치할 뷰행렬을 구한다.
 	viewMatrix_.LookToLH(
@@ -228,12 +233,12 @@ void GameEngineCamera::Render(float _deltaTime)
 			renderer->GetTransform().CalculateWorldViewProjection();
 			//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
 			
-			if (false == float4x4::IsInViewSpace(
+			if (false == float4x4::IsInViewFrustum(
 				renderer->GetTransformData().worldViewProjectionMatrix_, 
 				float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
 			)
 			{
-				//뷰스페이스 안에 조금이라도 들어오는 것들만 그린다.
+				//뷰스페이스 안에 4개 정점들 중 한개라도 들어오는 것들만 그린다.
 				continue;
 			}
 

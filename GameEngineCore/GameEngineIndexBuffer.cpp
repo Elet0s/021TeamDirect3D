@@ -49,9 +49,12 @@ void GameEngineIndexBuffer::Setting()
 	}
 
 	GameEngineDevice::GetContext()->IASetIndexBuffer(//인풋 어셈블러 과정에서 인덱스버퍼를 파이프라인에 연결하는 함수.
+
 		indexBuffer_,							//파이프라인에 세팅할 버퍼. 2차원배열 하나만 넣어줌.
 		//생성할때 바인드플래그를 D3D11_BIND_INDEX_BUFFER로 설정해준 버퍼여야 여기에 연결할 수 있다.
+
 		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,		//인덱스버퍼의 데이터 형식. 
+
 		0										//세팅을 시작할 버퍼의 원소 번호 * 각 버퍼의 크기.
 	);
 }

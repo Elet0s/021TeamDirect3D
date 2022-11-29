@@ -19,14 +19,14 @@ GameEngineInstancingBuffer::~GameEngineInstancingBuffer()
     }
 }
 
-std::shared_ptr<GameEngineInstancingBuffer> GameEngineInstancingBuffer::Create(unsigned int _count, unsigned int _size)
+std::shared_ptr<GameEngineInstancingBuffer> GameEngineInstancingBuffer::Create(size_t _count, size_t _size)
 {
     std::shared_ptr<GameEngineInstancingBuffer> newRes = CreateUnnamedRes();
     newRes->CreateInstancingBuffer(_count, _size);
     return newRes;
 }
 
-void GameEngineInstancingBuffer::CreateInstancingBuffer(unsigned int _count, unsigned int _size)
+void GameEngineInstancingBuffer::CreateInstancingBuffer(size_t _count, size_t _size)
 {
     this->Release();
     //기존 인스턴싱버퍼의 데이터는 전부 초기화.
@@ -36,7 +36,7 @@ void GameEngineInstancingBuffer::CreateInstancingBuffer(unsigned int _count, uns
 
     instancingBufferDesc_ = { 0 };
 
-    instancingBufferDesc_.ByteWidth = bufferCount_ * dataSize_;
+    instancingBufferDesc_.ByteWidth = static_cast<UINT>(bufferCount_ * dataSize_);
     //인스턴싱버퍼의 전체 크기 등록.
 
     instancingBufferDesc_.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
@@ -59,7 +59,7 @@ void GameEngineInstancingBuffer::CreateInstancingBuffer(unsigned int _count, uns
     }
 }
 
-void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _dataSize)
+void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _byteWidth)
 {
     if (nullptr == _data)
     {
@@ -67,7 +67,7 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _dataSize)
         return;
     }
 
-    if (instancingBufferDesc_.ByteWidth != _dataSize)
+    if (instancingBufferDesc_.ByteWidth != _byteWidth)
     {
         MsgBoxAssertString(this->GetNameCopy() + ": 상수버퍼 전체 크기가 안 맞습니다.");
         return;
@@ -95,7 +95,7 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _dataSize)
         destMemoryPtrInGPU.pData,
         instancingBufferDesc_.ByteWidth,
         _data,
-        _dataSize
+        _byteWidth
     );
 
     GameEngineDevice::GetContext()->Unmap(this->instancingBuffer_, 0);

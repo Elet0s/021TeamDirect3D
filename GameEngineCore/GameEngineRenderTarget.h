@@ -30,7 +30,9 @@ public:
 };
 
 class GameEngineTexture;
-class GameEngineRenderTarget : public GameEngineRes<GameEngineRenderTarget>
+class GameEngineRenderTarget
+	: public GameEngineRes<GameEngineRenderTarget>,
+	public std::enable_shared_from_this<GameEngineRenderTarget>
 {
 	//렌더타겟뷰와 깊이스텐실뷰를 관리하는 클래스.
 	//렌더타겟: 렌더링 파이프라인을 전부 거친 결과물로서의 색상값 2차원 배열을 받는데 사용되는 그래픽 카드 내 메모리 영역.

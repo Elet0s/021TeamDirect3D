@@ -12,7 +12,7 @@ public:
 	std::vector<D3D11_INPUT_ELEMENT_DESC> descs_;	//
 	std::map<const char*, int> semanticIndexData_;	//
 	unsigned int offset_;							//
-	unsigned int instancingSize_;					//
+	unsigned int instancingSize_;					//인스턴싱 단위 크기.
 
 
 public:

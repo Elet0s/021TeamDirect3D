@@ -276,8 +276,6 @@ void GameEngineLevel::PushCamera(std::shared_ptr<GameEngineCamera> _camera, int 
 		return;
 	}
 
-	cameras_.resize(static_cast<size_t>(_cameraOrder) + 1);
-
 	cameras_[_cameraOrder] = _camera;
 }
 

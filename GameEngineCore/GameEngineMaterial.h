@@ -43,8 +43,7 @@ public:
 	void SetPixelShader(const std::string_view& _name);
 	void SetBlend_OutputMerger(const std::string_view& _name);
 	void SetDepthStencil_OutputMerger(const std::string_view& _name);
-
-	void RenderInstancing(int _renderingCount, std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer);
+	void SettingInstancing();
 	void Copy(std::shared_ptr<GameEngineMaterial> _original);
 
 	void Setting();
@@ -63,17 +62,12 @@ private:
 	//세팅 함수들.
 	//실질적으로 세팅 순서는 그다지 중요하지 않다. DrawIndexed() 함수 호출 이전까지만 모든 세팅이 끝나있으면 된다.
 
-	void InputAssembler1_InstancingBufferSetting(std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer);
 	void VertexShaderSetting();
+	void Inst_VertexShaderSetting();
 	void RasterizerSetting();
 	void PixelShaderSetting();
 	void OutputMerger_DepthStencilSetting();
 	void OutputMerger_BlendSetting();
-
-
-	void InstancingDraw(int _renderingCount);
-
-	void InstancingDataCollect();
 
 
 private:

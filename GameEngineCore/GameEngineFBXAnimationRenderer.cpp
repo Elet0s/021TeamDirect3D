@@ -4,9 +4,8 @@
 #include "GameEngineFBXAnimation.h"	
 #include "GameEngineFBXMesh.h"
 
-GameEngineFBXAnimationRenderer::GameEngineFBXAnimationRenderer()
+GameEngineFBXAnimationRenderer::GameEngineFBXAnimationRenderer() :Pause(false)
 {
-
 }
 
 GameEngineFBXAnimationRenderer::~GameEngineFBXAnimationRenderer()
@@ -29,15 +28,10 @@ void FBXRendererAnimation::Init(const std::string_view& _Name, int _Index)
 	End = static_cast<unsigned int>(FBXAnimationData->TimeEndCount);
 }
 
-void FBXRendererAnimation::PauseSwtich()
-{
-	Pause = !Pause;
-}
-
 void FBXRendererAnimation::Update(float _DeltaTime)
 {
 	// 0~24진행이죠?
-	if (false == Pause)
+	if (false == ParentRenderer->Pause)
 	{
 		Info.curFrameTime_ += _DeltaTime;
 		Info.playTime_ += _DeltaTime;
@@ -48,10 +42,10 @@ void FBXRendererAnimation::Update(float _DeltaTime)
 			// 여분의 시간이 중요합니다.
 			Info.curFrameTime_ -= Info.interval_;
 
-			if (Info.curFrame_ >= End)
-			{
-				Info.curFrame_ = Start;
-			}
+			//if (Info.curFrame_ >= End)
+			//{
+			//	Info.curFrame_ = Start;
+			//}
 
 			if (false == bOnceStart
 				&& Info.curFrame_ == 0)
@@ -87,11 +81,11 @@ void FBXRendererAnimation::Update(float _DeltaTime)
 				TimeEvent(Info, _DeltaTime);
 			}
 
-			if (Info.curFrame_ >= Info.frames_.size())
+			if (Info.curFrame_ >= Info.frames_.size() - 1)
 			{
 				if (true == Info.isLoop_)
 				{
-					Info.curFrame_ = 0;
+					Info.curFrame_ = Start;
 				}
 				else
 				{
@@ -203,6 +197,7 @@ void FBXRendererAnimation::Reset()
 {
 	Info.curFrameTime_ = 0.0f;
 	Info.curFrame_ = 0;
+	Info.playTime_ = 0.0f;
 	// Start = 0;
 }
 
@@ -297,12 +292,18 @@ GameEngineRenderUnit* GameEngineFBXAnimationRenderer::SetFBXMesh(
 
 		// 링크를 걸어준것.
 		AnimationBuffer->settingDataToGPU_ = &AnimationBoneMatrixs[_meshIndex][0];
-		AnimationBuffer->size_ = AnimationBoneMatrixs[_meshIndex].size() * sizeof(float4x4);
+		AnimationBuffer->size_ = sizeof(float4x4);
+		AnimationBuffer->count_ = AnimationBoneMatrixs[_meshIndex].size();
 		AnimationBuffer->Bind();
 
 	}
 
 	return Unit;
+}
+
+void GameEngineFBXAnimationRenderer::PauseSwitch()
+{
+	Pause = !Pause;
 }
 
 void GameEngineFBXAnimationRenderer::CreateFBXAnimation(const std::string& _AnimationName, const GameEngineRenderingEvent& _Desc, int _Index /* = 0*/)
