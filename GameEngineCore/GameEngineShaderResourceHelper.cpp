@@ -85,6 +85,20 @@ bool GameEngineShaderResourceHelper::IsStructuredBuffer(const std::string_view& 
 	}
 }
 
+bool GameEngineShaderResourceHelper::IsInstancingTextures(const std::string_view& _name)
+{
+	std::string uppercaseInstancingTexturesSetterName = GameEngineString::ToUpperReturn(_name);
+
+	if (instancingTexturesSetterMap_.end() == instancingTexturesSetterMap_.find(uppercaseInstancingTexturesSetterName))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
 void GameEngineShaderResourceHelper::SetConstantBuffer_Link(
 	const std::string_view& _name,
 	const void* _data,

@@ -94,7 +94,7 @@ public:
 	// 여기서 외부는 이 리소스를 직접 사용할 GameEngineShader의 자식 클래스들과 셰이더를 사용할 GameEngineRenderingPipeLine,
 	// 렌더링 파이프라인을 사용할 GameEngineDefaultRenderer클래스와 그 자식클래스들을 제외하고는 다 외부이다.
 
-	GameEngineTextureSetter() : texture_()
+	GameEngineTextureSetter() : texture_(nullptr)
 	{
 	}
 };
@@ -116,7 +116,7 @@ public:
 	// 여기서 외부는 이 리소스를 직접 사용할 GameEngineShader의 자식 클래스들과 셰이더를 사용할 GameEngineRenderingPipeLine,
 	// 렌더링 파이프라인을 사용할 GameEngineDefaultRenderer클래스와 그 자식클래스들을 제외하고는 다 외부이다.
 
-	GameEngineSamplerSetter() : sampler_()
+	GameEngineSamplerSetter() : sampler_(nullptr)
 	{
 	}
 };
@@ -161,9 +161,29 @@ public:
 	{
 	}
 
-
 private:
 	void PushData(const void* _data, UINT _count);
+};
+
+class GameEngineInstancingTextures;
+class GameEngineInstancingTexturesSetter: public ShaderResSetter
+{
+public:
+
+
+	void Setting() const;
+	//void Reset() const;
+	void Bind();
+
+
+	GameEngineInstancingTexturesSetter(): instancingTextures_(nullptr)
+	{
+	}
+
+
+private:
+
+	std::shared_ptr<GameEngineInstancingTextures> instancingTextures_;
 };
 
 

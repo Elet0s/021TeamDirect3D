@@ -6,6 +6,7 @@
 #include "GameEngineTexture.h"
 #include "GameEngineSampler.h"
 #include "GameEngineStructuredBuffer.h"
+#include "GameEngineInstancingTextures.h"
 
 
 
@@ -216,6 +217,47 @@ void GameEngineStructuredBufferSetter::PushData(const void* _data, UINT _count)
 		_data,
 		structuredBuffer_->GetDataSize()
 	);
+}
+
+void GameEngineInstancingTexturesSetter::Setting() const
+{
+	settingFunction_();
+}
+
+void GameEngineInstancingTexturesSetter::Bind()
+{
+	if (nullptr == this->instancingTextures_)
+	{
+		MsgBoxAssert("인스턴싱 텍스처들이 존재하지 않습니다.");
+		return;
+	}
+
+	switch (this->parentShaderType_)
+	{
+	case ShaderType::VertexShader:
+	{
+		this->settingFunction_ = std::bind(
+			&GameEngineInstancingTextures::VSSetting,
+			this->instancingTextures_,
+			this->bindPoint_
+		);
+		break;
+	}
+
+	case ShaderType::PixelShader:
+	{
+		this->settingFunction_ = std::bind(
+			&GameEngineInstancingTextures::PSSetting,
+			this->instancingTextures_,
+			this->bindPoint_
+		);
+		break;
+	}
+
+	default:
+		MsgBoxAssert("아직 준비되지 않은 셰이더 타입입니다.");
+		return;
+	}
 }
 
 GameEngineShader::GameEngineShader()

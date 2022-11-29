@@ -159,7 +159,6 @@
     </ClInclude>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="GameEngineStatusWindow.h" />
-    <ClInclude Include="InstancingTextures.h" />
     <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="SoulCardSelectBox.h">
       <SubType>
@@ -249,7 +248,6 @@
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="GameEngineStatusWindow.cpp" />
-    <ClCompile Include="InstancingTextures.cpp" />
     <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="SoulCardSelectBox.cpp">
       <SubType>
