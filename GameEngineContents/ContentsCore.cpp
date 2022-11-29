@@ -34,6 +34,7 @@ void ContentsCore::Start()
 	}
 
 	GameEngineFont::Load("±Ã¼­");
+	GameEngineFont::Load("Free Pixel");
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
 	{

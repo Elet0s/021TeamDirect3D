@@ -30,7 +30,7 @@ void TestLevel::Start()
 	//tileCameraActor_->GetCameraComponent()->SetCameraOrder(CameraOrder::TileCamera);
 	//tileCameraActor_->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	//this->PushCamera(tileCameraActor_->GetCameraComponent(), CameraOrder::TileCamera);
-	GameEngineFont::Load("Free Pixel");
+	
 
 
 
