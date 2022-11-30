@@ -67,10 +67,8 @@ public:
 		{
 			std::shared_ptr<Monster> newMonster = _thisLevel->CreateActor<MonsterType>(ObjectOrder::Monster);
 			newMonster->isSummoned_ = false;
-			newMonster->monCollision_->Off();
-			newMonster->monRenderer_->Off();
-			newMonster->shadowRenderer_->Off();
 			newMonster->GetTransform().SetWorldPosition(float4::Zero);
+			newMonster->Off();
 
 			allMonsters_.push_back(newMonster);
 		}
@@ -95,10 +93,8 @@ public:
 				continue;
 			}
 
+			allMonsters_[i]->On();
 			allMonsters_[i]->isSummoned_ = true;
-			allMonsters_[i]->monCollision_->On();
-			allMonsters_[i]->monRenderer_->On();
-			allMonsters_[i]->shadowRenderer_->On();
 			//콜리전, 렌더러, 그림자렌더러 사용 준비.
 			
 			float cameraX = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().x;
@@ -135,7 +131,7 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 	void Chaseplayer(float _deltaTime);
-	void SummonMon();
+	//void SummonMon();
 	void Attack();
 
 protected:
