@@ -59,13 +59,38 @@ std::shared_ptr<GameEnginePixelShader> GameEnginePixelShader::Load(
     return newRes;
 }
 
+void GameEnginePixelShader::InstancingPixelShaderCompile(const std::string_view& _path, const std::string_view& _entryPoint, UINT _versionHigh, UINT _versionLow)
+{
+    inst_PixelShader_ = std::make_shared<GameEnginePixelShader>();  //GameEngineRes에 등록되지 않는 점 주의.
+    inst_PixelShader_->SetName(_entryPoint);
+    inst_PixelShader_->CreateVersion("ps", _versionHigh, _versionLow);
+    inst_PixelShader_->SetEntrtyPoint(_entryPoint);
+    inst_PixelShader_->CompileHLSLCode(_path);
+    inst_PixelShader_->CreateInstancingPixelShader();
+    inst_PixelShader_->ShaderResCheck(inst_PixelShader_->GetName());
+}
+
 void GameEnginePixelShader::CreatePixelShader()
 {
     if (S_OK != GameEngineDevice::GetDevice()->CreatePixelShader(   //픽셀셰이더 생성 함수.
-        binaryCode_->GetBufferPointer(), //컴파일된 바이너리코드.
-        binaryCode_->GetBufferSize(),    //컴파일된 바이너리코드 크기.
+        binaryCode_->GetBufferPointer(),    //컴파일된 바이너리코드.
+        binaryCode_->GetBufferSize(),       //컴파일된 바이너리코드 크기.
         NULL,                               //??
         &pixelShader_                       //픽셀셰이더 포인터.
+    ))
+    {
+        MsgBoxAssert("픽셀셰이더 생성 실패.");
+        return;
+    }
+}
+
+void GameEnginePixelShader::CreateInstancingPixelShader()
+{
+    if (S_OK != GameEngineDevice::GetDevice()->CreatePixelShader(   //픽셀셰이더 생성 함수.
+        this->binaryCode_->GetBufferPointer(),  //컴파일된 바이너리코드.
+        this->binaryCode_->GetBufferSize(),     //컴파일된 바이너리코드 크기.
+        NULL,                                   //??
+        &this->pixelShader_                     //픽셀셰이더 포인터.
     ))
     {
         MsgBoxAssert("픽셀셰이더 생성 실패.");

@@ -34,34 +34,36 @@ void ShaderTestLevel::Start()
 	//monsterTextureDir.MoveToChild("Monster");
 
 
-	//InstancingTextures::Load(monsterTextureDir.GetFullPath());
+	//GameEngineInstancingTextures::Load(monsterTextureDir.GetFullPath());
 
-	std::shared_ptr<GameEngineCamera> mainCameraComponent = this->GetMainCamera();
-	GameEngineInstancing& textureInst = mainCameraComponent->GetInstancing("TextureInst");
+	//GameEngineTime::SetFrameLimit(70);
 
-	for (size_t i = 0; i < 111; i++)
-	{
-		if (110 == i)
-		{
-			int i = 0;
-		}
+	//std::shared_ptr<GameEngineCamera> mainCameraComponent = this->GetMainCamera();
+	//GameEngineInstancing& textureInst = mainCameraComponent->GetInstancing("TextureInst");
 
-		float4 randomPos = GameEngineRandom::mainRandom_.RandomFloat4(-300.f, 300.f);
-		//randomPos.z = 0.f;
+	//for (size_t i = 0; i < 111; i++)
+	//{
+	//	if (110 == i)
+	//	{
+	//		int i = 0;
+	//	}
 
-		std::shared_ptr<GameEngineTextureRenderer> tempRenderer = shaderTestActor_->CreateComponent<GameEngineTextureRenderer>();
-		tempRenderer->GetTransform().SetWorldScale(25, 25, 25);
-		tempRenderer->GetTransform().SetWorldPosition(randomPos);
+	//	float4 randomPos = GameEngineRandom::mainRandom_.RandomFloat4(-300.f, 300.f);
+	//	//randomPos.z = 0.f;
 
-		textureInst.PushUnit(
-			tempRenderer->GetRenderUnit(),
-			[=](GameEngineInstancing::InstancingData& _instData)
-			{
-				_instData.Link("Inst_TransformData", tempRenderer->GetTransformData());
-				_instData.Link("Inst_AtlasData", tempRenderer->GetAtlasData());
-			}
-		);
-	}
+	//	std::shared_ptr<GameEngineTextureRenderer> tempRenderer = shaderTestActor_->CreateComponent<GameEngineTextureRenderer>();
+	//	tempRenderer->GetTransform().SetWorldScale(25, 25, 25);
+	//	tempRenderer->GetTransform().SetWorldPosition(randomPos);
+
+	//	textureInst.PushUnit(
+	//		tempRenderer->GetRenderUnit(),
+	//		[=](GameEngineInstancing::InstancingData& _instData)
+	//		{
+	//			_instData.Link("Inst_TransformData", tempRenderer->GetTransformData());
+	//			_instData.Link("Inst_AtlasData", tempRenderer->GetAtlasData());
+	//		}
+	//	);
+	//}
 
 
 

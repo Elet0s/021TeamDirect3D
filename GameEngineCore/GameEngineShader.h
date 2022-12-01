@@ -168,7 +168,9 @@ private:
 class GameEngineInstancingTextures;
 class GameEngineInstancingTexturesSetter: public ShaderResSetter
 {
-public:
+
+
+	friend class GameEngineShaderResourceHelper;
 
 
 	void Setting() const;
@@ -176,14 +178,12 @@ public:
 	void Bind();
 
 
-	GameEngineInstancingTexturesSetter(): instancingTextures_(nullptr)
+	std::shared_ptr<GameEngineInstancingTextures> instancingTextures_;
+
+public:
+	GameEngineInstancingTexturesSetter() : instancingTextures_(nullptr)
 	{
 	}
-
-
-private:
-
-	std::shared_ptr<GameEngineInstancingTextures> instancingTextures_;
 };
 
 

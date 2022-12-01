@@ -8,6 +8,7 @@
 #include "GameEngineFolderTexture.h"
 #include "GameEngineSampler.h" 
 #include "GameEngineStructuredBuffer.h"
+#include "GameEngineInstancingTextures.h"
 
 GameEngineShaderResourceHelper::GameEngineShaderResourceHelper()
 {
@@ -278,15 +279,37 @@ std::shared_ptr<GameEngineSampler> GameEngineShaderResourceHelper::SetSampler(
 std::shared_ptr<GameEngineSampler> GameEngineShaderResourceHelper::SetSampler(
 	const std::string_view& _samplerSetterName, const std::string_view& _samplerName)
 {
-	//std::string uppercaseSamplerSetterName = GameEngineString::ToUpperReturn(_samplerSetterName);
+	return SetSampler(_samplerSetterName, GameEngineSampler::Find(_samplerName));
+}
 
-	if (false == IsSampler(_samplerSetterName))
+std::shared_ptr<GameEngineInstancingTextures> GameEngineShaderResourceHelper::SetInstancingTextures(const std::string_view& _texturesSetterName, const std::string_view& _texturesName)
+{
+	return SetInstancingTextures(_texturesSetterName, GameEngineInstancingTextures::Find(_texturesName));
+}
+
+std::shared_ptr<GameEngineInstancingTextures> GameEngineShaderResourceHelper::SetInstancingTextures(const std::string_view& _texturesSetterName, std::shared_ptr<GameEngineInstancingTextures> _textures)
+{
+	std::string uppercaseTexturesSetterName = GameEngineString::ToUpperReturn(_texturesSetterName);
+
+	if (false == IsInstancingTextures(_texturesSetterName))
 	{
-		MsgBoxAssertString(std::string(_samplerSetterName) + ": 그런 이름의 샘플러 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_texturesSetterName) + ": 그런 이름의 인스턴싱텍스처즈 세터가 존재하지 않습니다.");
 		return nullptr;
 	}
 
-	return SetSampler(_samplerSetterName, GameEngineSampler::Find(_samplerName));
+	std::multimap<std::string, GameEngineInstancingTexturesSetter>::iterator nameLowerBound
+		= instancingTexturesSetterMap_.lower_bound(uppercaseTexturesSetterName);
+	std::multimap<std::string, GameEngineInstancingTexturesSetter>::iterator nameUpperBound
+		= instancingTexturesSetterMap_.upper_bound(uppercaseTexturesSetterName);
+
+	for (std::multimap<std::string, GameEngineInstancingTexturesSetter>::iterator iter = nameLowerBound;
+		iter != nameUpperBound; ++iter)
+	{
+		iter->second.instancingTextures_ = _textures;
+		iter->second.Bind();
+	}
+
+	return _textures;
 }
 
 //void GameEngineShaderResourceHelper::AllConstantBufferNew()

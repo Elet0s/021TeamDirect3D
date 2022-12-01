@@ -2,7 +2,6 @@
 #include "GameEngineInstancingTextures.h"
 #include "GameEngineDevice.h"
 
-
 GameEngineInstancingTextures::GameEngineInstancingTextures()
 {
 }
@@ -49,6 +48,11 @@ void GameEngineInstancingTextures::LoadFolderTextures(const std::string_view& _p
 		std::string uppercaseExtension 
 			= GameEngineString::ToUpperReturn(allFilesInFolder[i].GetExtension());
 
+		std::string uppercaseFileName
+			= this->GetNameCopy() + "\\" + GameEngineString::ToUpperReturn(allFilesInFolder[i].GetFileName());
+
+		nameIndexPairs_.insert(std::make_pair(uppercaseFileName, i));
+
 		if (uppercaseExtension == ".TGA")
 		{
 			if (S_OK != DirectX::LoadFromTGAFile(
@@ -81,6 +85,7 @@ void GameEngineInstancingTextures::LoadFolderTextures(const std::string_view& _p
 			}
 		}
 
+		//셰이더리소스뷰까지 여기서 생성.
 		if (S_OK != DirectX::CreateShaderResourceView(//
 			GameEngineDevice::GetDevice(),			  //
 			scratchImages_[i].GetImages(),				  //
@@ -99,7 +104,7 @@ void GameEngineInstancingTextures::VSSetting(int _bindPoint)
 {
 	if (true == this->instancingShaderResourceViews_.empty())
 	{
-		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		MsgBoxAssert("셰이더리소스뷰들이 없습니다.");
 		return;
 	}
 
@@ -114,7 +119,7 @@ void GameEngineInstancingTextures::PSSetting(int _bindPoint)
 {
 	if (true == this->instancingShaderResourceViews_.empty())
 	{
-		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		MsgBoxAssert("셰이더리소스뷰들이 없습니다.");
 		return;
 	}
 
