@@ -1,4 +1,5 @@
 #pragma once
+
 class SkillManager
 {
 public:
@@ -13,5 +14,5 @@ public:
 protected:
 
 private:
-	
+
 };

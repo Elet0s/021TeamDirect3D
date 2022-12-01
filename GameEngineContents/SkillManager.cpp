@@ -3,7 +3,7 @@
 
 SkillManager::SkillManager()
 {
-
+	
 }
 SkillManager::~SkillManager()
 {

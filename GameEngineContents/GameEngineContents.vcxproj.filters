@@ -151,6 +151,12 @@
     <ClCompile Include="SkillManager.cpp">
       <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Actor\02. Play\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathAura.cpp">
+      <Filter>Actor\02. Play\Player\Skill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -252,6 +258,12 @@
       <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
     <ClInclude Include="SkillManager.h">
+      <Filter>Actor\02. Play\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Actor\02. Play\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathAura.h">
       <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClInclude>
   </ItemGroup>

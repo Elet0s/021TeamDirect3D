@@ -158,8 +158,16 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="DeathAura.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineStatusWindow.h" />
     <ClInclude Include="PlayerUI.h" />
+    <ClInclude Include="Skill.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SkillManager.h">
       <SubType>
       </SubType>
@@ -251,8 +259,16 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="DeathAura.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineStatusWindow.cpp" />
     <ClCompile Include="PlayerUI.cpp" />
+    <ClCompile Include="Skill.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SkillManager.cpp">
       <SubType>
       </SubType>

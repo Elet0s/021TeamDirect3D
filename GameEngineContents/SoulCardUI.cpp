@@ -1,21 +1,26 @@
 #include "PreCompile.h"
 #include "SoulCardUI.h"
+#include "DeathAura.h"
 #include "GlobalContentsValue.h"
 
 SoulCardUI::SoulCardUI() 
 	: alphaTexture_(0.7f)
 	, TextColor_(float4(1.f,1.f,1.f,0.9f))
-	, Count(0)
 	, ColorCheck_(Appear::False)
 {
 }
 
 SoulCardUI::~SoulCardUI() 
 {
+	delete mySkill_;
 }
 
 void SoulCardUI::Start()
 {
+	if (false == GameEngineInput::GetInst()->IsKey("click"))
+	{
+		GameEngineInput::GetInst()->CreateKey("Click", VK_LBUTTON);
+	}
 	if (nullptr == GameEngineTexture::Find("SoulCardNormal.png"))
 	{
 		GameEngineDirectory Dir;
@@ -32,7 +37,7 @@ void SoulCardUI::Start()
 		}
 	}
 
-	etc_.resize(8);
+	etc_.reserve(8);
 
 	{
 		template_ = CreateComponent<GameEngineTextureRenderer>();
@@ -74,34 +79,7 @@ void SoulCardUI::Start()
 	}
 
 	
-	{
-		std::string Text = "1.13 -> 1.58 의 피해\n1.00초->0.60초 마다 공격\n투사체 2->3 개 ";
-		size_t EntryIndex = Text.find("\n");
-		size_t firstIndex = 0;
-		std::string Text2 = Text.substr(0, EntryIndex);
-		for (size_t i = 0; i < etc_.size(); i++)
-		{
-			etc_[i] = CreateComponent<GameEngineFontRenderer>();
-			etc_[i]->SetPositionMode(FontPositionMode::World);
-			etc_[i]->SetSize(14.f);
-			Text2 = Text.substr(firstIndex, EntryIndex - firstIndex) + "";
-			etc_[i]->SetText(Text2, "Free Pixel");
-			etc_[i]->SetTopAndBotSort(TopAndBotSort::Top);
-			etc_[i]->SetLeftAndRightSort(LeftAndRightSort::Center);
-			etc_[i]->GetTransform().SetLocalMove(float4(0.f, 144.f - 16.f * i, -10.f));
-			etc_[i]->ChangeCamera(CameraOrder::UICamera);
-			etc_[i]->SetColor(TextColor_);
-			Count++;
-			if (Text.npos ==EntryIndex)
-			{	
-				break;
-			}
-
-			firstIndex = EntryIndex + 1;
-			EntryIndex = Text.find("\n", firstIndex);
-		}
-		
-	}
+	
 	{
 		std::shared_ptr<GameEngineFontRenderer>font = CreateComponent<GameEngineFontRenderer>();
 		font->SetPositionMode(FontPositionMode::World);
@@ -115,7 +93,7 @@ void SoulCardUI::Start()
 	{
 		Level_ = CreateComponent<GameEngineFontRenderer>();
 		Level_->SetPositionMode(FontPositionMode::World);
-		Level_->SetSize(14.f);
+		Level_->SetSize(16.f);
 		Level_-> GetTransform().SetLocalMove(float4(-26.f, 35.f, -10.f));
 		Level_->SetText("0-> 1 / 7", "Free Pixel");
 		Level_->SetColor(TextColor_);
@@ -138,12 +116,19 @@ void SoulCardUI::Start()
 		cardColision_->GetTransform().SetWorldScale(float4{ 188.f,282.f,1.f });
 		cardColision_->SetDebugSetting(CollisionType::CT_AABB, float4::Red);
 	}
+
+	mySkill_ = new DeathAura();
 }
 
 void SoulCardUI::Update(float _deltaTime)
 {
 	if(true == cardColision_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::Mouse, CollisionType::CT_AABB2D))
 	{
+		if (GameEngineInput::GetInst()->IsDown("Click"))
+		{
+			mySkill_->Effect();
+			Setting();
+		}
 		ColorChange(Appear::True);
 	}
 	else
@@ -176,11 +161,55 @@ void SoulCardUI::ColorChange(Appear _Value)
 	linerenderer_->GetPixelData().mulColor_.a = alphaTexture_;
 	icon_->GetPixelData().mulColor_.a = alphaTexture_;
 	skillName_->SetColor(TextColor_);
-	for (size_t i = 0; i < Count; i++)
+	for (size_t i = 0; i < etc_.size(); i++)
 	{
 		etc_[i]->SetColor(TextColor_);
 	}
 	Level_->SetColor(TextColor_);
 	Rank_->SetColor(TextColor_);
 	
+}
+
+void SoulCardUI::Setting()
+{
+	DeathAura Skill = DeathAura();
+
+	
+	for (size_t i = 0; i < etc_.size(); i++)
+	{
+		etc_[i]->Death();
+	}
+
+	etc_.clear();
+
+	{
+		mySkill_->Init();
+		std::string Text = reinterpret_cast<DeathAura*>(mySkill_)->GetEtc();
+		///if(스킬 레벨이 0이 아니면 )
+		//  std::string Text = "범위 내 근처의 적에게 지속\n피해를 입힙니다\n치명타가 발생하지 않습니다\n0.75 -> 다음 레벨 데미지의 피해\n0.25초 다음 레벨 공격속도 마다 공격\n범위2.00m -> 다음레벨 범위";
+		size_t EntryIndex = Text.find("\n");
+		size_t firstIndex = 0;
+		std::string Text2 = Text.substr(0, EntryIndex);
+		for (size_t i = 0; i < 8; i++)
+		{
+			etc_.push_back(CreateComponent<GameEngineFontRenderer>());
+			etc_[i]->SetPositionMode(FontPositionMode::World);
+			etc_[i]->SetSize(14.f);
+			Text2 = Text.substr(firstIndex, EntryIndex - firstIndex) + "";
+			etc_[i]->SetText(Text2, "Free Pixel");
+			etc_[i]->SetTopAndBotSort(TopAndBotSort::Top);
+			etc_[i]->SetLeftAndRightSort(LeftAndRightSort::Center);
+			etc_[i]->GetTransform().SetLocalMove(float4(0.f, 144.f - 16.f * i, -10.f));
+			etc_[i]->ChangeCamera(CameraOrder::UICamera);
+			etc_[i]->SetColor(TextColor_);
+			if (Text.npos == EntryIndex)
+			{
+				break;
+			}
+
+			firstIndex = EntryIndex + 1;
+			EntryIndex = Text.find("\n", firstIndex);
+		}
+
+	}
 }

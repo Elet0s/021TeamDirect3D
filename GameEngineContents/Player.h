@@ -12,9 +12,9 @@ public:
 		hp_(100),
 		maxExp_(100),
 		exp_(0),
-		atk_(10),
+		atk_(1.0f),
 		def_(10),
-		range_(10),
+		range_(1.0f),
 		RLDirection_(false),
 		pushSpeed_(0)
 	{

@@ -7,6 +7,7 @@ enum class Appear
 };
 
 // Ό³Έν :
+class Skill;
 class SoulCardUI : public GameEngineActor
 {
 public:
@@ -20,6 +21,7 @@ public:
 	SoulCardUI& operator=(const SoulCardUI& _Other) = delete;
 	SoulCardUI& operator=(SoulCardUI&& _Other) noexcept = delete;
 
+	void Setting();
 protected:
 
 private:
@@ -32,16 +34,19 @@ private:
 	std::shared_ptr<GameEngineFontRenderer> Rank_;
 	std::shared_ptr<GameEngineCollision> cardColision_;
 	
+	Skill* mySkill_;
+
 	float alphaTexture_;
 	float4 TextColor_;
-	int Count;
 	Appear ColorCheck_;
+
 
 	void Start() override;
 	void Update(float _deltaTime);
 	void End() override {};
 
 	void ColorChange(Appear _Value);
+	
 
 
 	
