@@ -1,6 +1,10 @@
 #include "PreCompile.h"
 #include "SoulCardUI.h"
 #include "DeathAura.h"
+#include "SharpEdge.h"
+#include "Range.h"
+#include "Cardio.h"
+#include "SharpeningStone.h"
 #include "GlobalContentsValue.h"
 
 SoulCardUI::SoulCardUI() 
@@ -17,6 +21,8 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
+	mySkill_ = new Range();
+
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{
 		GameEngineInput::GetInst()->CreateKey("Click", VK_LBUTTON);
@@ -71,7 +77,7 @@ void SoulCardUI::Start()
 		skillName_ = CreateComponent<GameEngineFontRenderer>();
 		skillName_->SetPositionMode(FontPositionMode::World);
 		skillName_->SetSize(18.f);
-		skillName_->SetText("죽음의오라", "Free Pixel");
+		skillName_->SetText(mySkill_->GetName(), "Free Pixel");
 		skillName_->SetLeftAndRightSort(LeftAndRightSort::Center);
 		skillName_->GetTransform().SetLocalMove(float4(0.f, 164.f, -10.f));
 		skillName_->ChangeCamera(CameraOrder::UICamera);
@@ -95,7 +101,7 @@ void SoulCardUI::Start()
 		Level_->SetPositionMode(FontPositionMode::World);
 		Level_->SetSize(16.f);
 		Level_-> GetTransform().SetLocalMove(float4(-26.f, 35.f, -10.f));
-		Level_->SetText("0-> 1 / 7", "Free Pixel");
+		Level_->SetText(std::to_string(mySkill_->Getlevel()) + "-> " + std::to_string(mySkill_->Getlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()));
 		Level_->SetColor(TextColor_);
 		Level_->ChangeCamera(CameraOrder::UICamera);
 	}
@@ -117,7 +123,7 @@ void SoulCardUI::Start()
 		cardColision_->SetDebugSetting(CollisionType::CT_AABB, float4::Red);
 	}
 
-	mySkill_ = new DeathAura();
+	
 }
 
 void SoulCardUI::Update(float _deltaTime)
@@ -172,7 +178,6 @@ void SoulCardUI::ColorChange(Appear _Value)
 
 void SoulCardUI::Setting()
 {
-	DeathAura Skill = DeathAura();
 
 	
 	for (size_t i = 0; i < etc_.size(); i++)
@@ -184,6 +189,7 @@ void SoulCardUI::Setting()
 
 	{
 		mySkill_->Init();
+		Level_->SetText(std::to_string(mySkill_->Getlevel()) + "-> " + std::to_string(mySkill_->Getlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()));
 		std::string Text = reinterpret_cast<DeathAura*>(mySkill_)->GetEtc();
 		///if(스킬 레벨이 0이 아니면 )
 		//  std::string Text = "범위 내 근처의 적에게 지속\n피해를 입힙니다\n치명타가 발생하지 않습니다\n0.75 -> 다음 레벨 데미지의 피해\n0.25초 다음 레벨 공격속도 마다 공격\n범위2.00m -> 다음레벨 범위";

@@ -3,6 +3,7 @@
 
 Skill::Skill() 
 	: level_(0)
+	, maxLevel_(0)
 {
 	
 }

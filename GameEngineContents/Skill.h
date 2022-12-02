@@ -19,11 +19,22 @@ public:
 	virtual void Init() {};
 	virtual void Effect() {};
 
+	int Getlevel()
+	{
+		return level_;
+	}
+
+
+	int GetMaxLevel()
+	{
+		return maxLevel_;
+	}
 protected:
 
 
 	std::string etc_;
 	int level_;
+	int maxLevel_;
 private:
 };
 

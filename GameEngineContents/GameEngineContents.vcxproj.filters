@@ -49,6 +49,12 @@
     <Filter Include="Actor\02. Play\Player\Skill">
       <UniqueIdentifier>{54e11fdb-2a53-46d4-bf11-b85e1e45c699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Passive">
+      <UniqueIdentifier>{3886a939-69e8-41ac-9bb2-9c8da9696efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Passive\Attack">
+      <UniqueIdentifier>{ddcb2366-3b31-4439-a813-1f30eea01fe2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -156,6 +162,18 @@
     </ClCompile>
     <ClCompile Include="DeathAura.cpp">
       <Filter>Actor\02. Play\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="SharpeningStone.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Cardio.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="SharpEdge.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Range.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +283,18 @@
     </ClInclude>
     <ClInclude Include="DeathAura.h">
       <Filter>Actor\02. Play\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="SharpeningStone.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Cardio.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="SharpEdge.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Range.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
