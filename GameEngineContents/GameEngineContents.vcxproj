@@ -157,9 +157,37 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Cardio.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="DeathAura.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineStatusWindow.h" />
     <ClInclude Include="PlayerUI.h" />
+    <ClInclude Include="Range.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SharpEdge.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SharpeningStone.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SkillManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SoulCardSelectBox.h">
       <SubType>
       </SubType>
@@ -246,9 +274,37 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Cardio.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="DeathAura.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineStatusWindow.cpp" />
     <ClCompile Include="PlayerUI.cpp" />
+    <ClCompile Include="Range.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SharpEdge.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SharpeningStone.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SkillManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SoulCardSelectBox.cpp">
       <SubType>
       </SubType>

@@ -11,6 +11,7 @@ std::function<LRESULT(HWND, UINT, WPARAM, LPARAM)> GameEngineWindow::messageHand
 
 GameEngineWindow::GameEngineWindow()
 	: windowOn_(true),
+	isFocused_(true),
 	instanceHandle_(nullptr),
 	windowHandle_(nullptr),
 	hdc_(nullptr)
@@ -242,6 +243,18 @@ LRESULT GameEngineWindow::MessageProcess(HWND _hWnd, UINT _message, WPARAM _wPar
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(_hWnd, &ps);
 		EndPaint(_hWnd, &ps);
+		break;
+	}
+
+	case WM_SETFOCUS:
+	{
+		inst_->isFocused_ = true;
+		break;
+	}
+
+	case WM_KILLFOCUS:
+	{
+		inst_->isFocused_ = false;
 		break;
 	}
 

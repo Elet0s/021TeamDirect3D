@@ -53,4 +53,5 @@ struct GameEngineVertex
 	float4 TANGENT;
 	float4 WEIGHT;		// 애니메이션 가중치
 	int BLENDINDICES[4] = { 0, };		//이 버텍스를 움직이는 모든 본들의 번호.
+	int INSTTEXTUREINDEX;
 };

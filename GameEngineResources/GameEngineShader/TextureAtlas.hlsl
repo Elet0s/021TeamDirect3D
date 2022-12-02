@@ -56,7 +56,7 @@ SamplerState POINTCLAMP : register(s0);
 
 float4 TextureAtlas_PS(Output _input) : SV_Target0 //SV_Target[n]: n번 렌더타겟에 결과값을 저장한다.
 {
-    
+
     if (_input.texcoord_.x < slice_.x)
     {
         clip(-1);
@@ -81,7 +81,7 @@ float4 TextureAtlas_PS(Output _input) : SV_Target0 //SV_Target[n]: n번 렌더타겟�
     return resultColor;
 }
 
-struct InstAtlasData     //인스턴싱용 아틀리스데이터.
+struct InstAtlasData     //인스턴싱용 아틀라스데이터.
 {
     float2 textureFramePos_;
     float2 textureFrameSize_;
@@ -97,7 +97,6 @@ Output TextureAtlas_VSINST(Input _input)
     // 인스턴싱 버퍼를 통해서 행렬을 전달하지 않은 이유는 인스턴싱 버퍼를 매번 새롭게 정의해야 하기 때문이다.
     
     Output result = (Output) 0;
-    //result.pos_ = _input.pos_; //아래 코드 때문에 이 코드는 없어도 되지 않나??
     result.pos_ = mul(_input.pos_, Inst_TransformData[_input.index_].worldViewProjectionMatrix_);
     
     

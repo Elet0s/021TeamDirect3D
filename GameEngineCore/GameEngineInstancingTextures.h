@@ -29,6 +29,9 @@ private:
 	void PSSetting(int _bindPoint);
 
 private:
+
+	std::map<std::string, size_t> nameIndexPairs_;	//텍스처 각각의 이름과, 그 텍스처의 인덱스 모음.
+
 	std::vector<DirectX::ScratchImage> scratchImages_;	//DirectXTex로 불러온 텍스처들
 	std::vector<DirectX::TexMetadata> metaDatas_;		//DirectXTex로 불러온 텍스처의 각종 정보들.
 

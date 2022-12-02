@@ -174,3 +174,26 @@ enum class Artifact
 	CowardsSaphir,
 	CorruptedCore
 };
+
+
+enum class PlayerStatue
+{
+	Damege,										// 데미지   1.50,
+	AttackSpeed,								// 공격 속도  100.0%
+	AddProjectile,								// 추가 투사체  0
+	ThroughProjectile,                          // 투사체 관통 (몇번까지 충돌하는가) 0 
+	ProjectileSize,                             // 투사체 크기 100%
+	ProjectileDuration,							// 투사체 지속시간 100%
+	ProjectileSpeed,                            // 투사체 속도 (날라가는 이동속도) 100%
+	RangeSize,                                  // 범위 크기(오라, 마법진의 크기와 관련) 100%
+	KnockBack,									// 넉백(몬스터가 밀려나는 거리) 100%
+	CriticalChance,                             // 치명타확률 10%
+	CriticalDamege,                             // 치명타 데미지 (치명타시 데미지 비율)  150%
+	GoldMultiple,                               // 골드배수(골드를 얻을 때의 획득 비율) 100%
+	ExpMultiple,								// 경험치배수(경험치를 얻을 때의 획득 비율) 100%
+	Def,                                        // 방어력 0 
+	DashFullCharge,                             // 대쉬최대충전 (대쉬가 충전되는 최대 개수) 0
+	DashReChargeTime,                           // 대쉬 재충전 시간(대쉬가 재충전 되는데 걸리는 시간) 3.0f
+	DashReUseTime,                              // 대쉬 재사용 시간(대쉬를 사용하고 나서 다시 사용할 때 까지 걸리는 시간) 0.3f
+	DashReChargeCount,                          // 재충전 되는 대쉬 수 (재충전 시간이 지나고 대쉬가 충전되는 수) 1
+};

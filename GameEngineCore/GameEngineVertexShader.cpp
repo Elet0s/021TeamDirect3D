@@ -68,7 +68,7 @@ std::shared_ptr<GameEngineVertexShader> GameEngineVertexShader::Load(
     return newRes;
 }
 
-void GameEngineVertexShader::InstancingShaderCompile(
+void GameEngineVertexShader::InstancingVertexShaderCompile(
     const std::string_view& _path,
     const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
@@ -80,7 +80,7 @@ void GameEngineVertexShader::InstancingShaderCompile(
     inst_VertexShader_->CreateVersion("vs", _versionHigh, _versionLow);
     inst_VertexShader_->SetEntrtyPoint(_entryPoint);
     inst_VertexShader_->CompileHLSLCode(_path);
-    inst_VertexShader_->CreateInstancingShader();
+    inst_VertexShader_->CreateInstancingVertexShader();
     inst_VertexShader_->ShaderResCheck(inst_VertexShader_->GetName());
 }
 
@@ -99,12 +99,12 @@ void GameEngineVertexShader::CreateVertexShader()
 }
 
 
-void GameEngineVertexShader::CreateInstancingShader()
+void GameEngineVertexShader::CreateInstancingVertexShader()
 {
     if (S_OK != GameEngineDevice::GetDevice()->CreateVertexShader(  //버텍스셰이더 생성 함수.
         this->binaryCode_->GetBufferPointer(), //컴파일된 바이너리 코드.
         this->binaryCode_->GetBufferSize(),    //컴파일된 바이너리코드 크기.
-        NULL,                               //??
+        NULL,                                   //??
         &this->vertexShader_                   //인스턴스 버텍스셰이더 포인터.
     ))
     {

@@ -7,7 +7,7 @@ class GameEngineWindow
 {
 	static GameEngineWindow* inst_;
 	//값형으로 안 하고 포인터 형식으로 싱글턴을 만드는 이유: 생성과 제거 시점을 내 마음대로 통제하기 위해서. 
-	//하지만 이 경우에는 생성시점은 런타임 시작할때로 고정되어 있고 삭제 시점만 통제할 수 있다.
+	//하지만 이 경우에는 생성시점은 런타임 시작할때로 고정되어 있고 삭제 시점'만' 통제할 수 있다.
 
 private:
 	GameEngineWindow();
@@ -67,9 +67,15 @@ public:
 		messageHandler_ = _messageHandler;
 	}
 
+	bool IsFocused()
+	{
+		return isFocused_;
+	}
+
 
 private:
-	bool windowOn_;
+	bool windowOn_;		//윈도우 온오프.
+	bool isFocused_;	//화면 선택시에만 입력받음/안받음.
 
 	HINSTANCE instanceHandle_;
 	HWND windowHandle_;

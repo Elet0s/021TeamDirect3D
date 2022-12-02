@@ -67,6 +67,15 @@ void EngineInputLayout()
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_SINT
 	);
 
+	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+		"INSTTEXTUREINDEX",
+		DXGI_FORMAT::DXGI_FORMAT_R32_SINT
+	);
+
+
+
+
+
 	GameEngineVertex::inputLayoutInfo_.ResetOffset();
 
 	//인스턴싱 데이터용.
@@ -78,6 +87,12 @@ void EngineInputLayout()
 		1,
 		D3D11_INPUT_PER_INSTANCE_DATA
 	);
+
+
+
+
+
+
 }
 
 void EngineSubSetting()

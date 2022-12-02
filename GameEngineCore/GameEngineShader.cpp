@@ -311,21 +311,24 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 					vsInstEntryIndex - instFirstIndex - 1
 				);
 				vsInstEntryPoint += "_VSINST";
-				vertexShader->InstancingShaderCompile(_path, vsInstEntryPoint);
+				vertexShader->InstancingVertexShaderCompile(_path, vsInstEntryPoint);
 			}
 		}
+		//else
+		//{
+		//	MsgBoxAssert("코드 내에 버텍스셰이더가 없습니다.");
+		//	//셰이더 이름 규칙0: 버텍스셰이더는 “_VS(”, 픽셀셰이더는 “_PS(“가 문자열 내부에 포함되어 있어야 한다.
+		//	return;
+		//}
 	}
-	//else
-	//{
-	//	MsgBoxAssert("코드 내에 버텍스셰이더가 없습니다.");
-	//	//셰이더 이름 규칙0: 버텍스셰이더는 “_VS(”, 픽셀셰이더는 “_PS(“가 문자열 내부에 포함되어 있어야 한다.
-	//	return;
-	//}
+
 
 
 	size_t psEntryIndex = allHLSLCode.find("_PS(");
 	if (std::string::npos != psEntryIndex)
 	{
+		std::shared_ptr<GameEnginePixelShader> pixelShader = nullptr;
+
 		size_t firstIndex = allHLSLCode.find_last_of(" ", psEntryIndex);
 		std::string psEntryName = allHLSLCode.substr(
 			firstIndex + 1,
@@ -333,14 +336,29 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 		);
 		psEntryName += "_PS";
 
-		GameEnginePixelShader::Load(_path, psEntryName);
+		pixelShader = GameEnginePixelShader::Load(_path, psEntryName);
+
+		if (nullptr != pixelShader)
+		{
+			size_t psInstEntryIndex = allHLSLCode.find("_PSINST(");
+			if (std::string::npos != psInstEntryIndex)
+			{
+				size_t instFirstIndex = allHLSLCode.find_last_of(" ", psInstEntryIndex);
+				std::string psInstEntryPoint = allHLSLCode.substr(
+					instFirstIndex + 1,
+					psInstEntryIndex - instFirstIndex - 1
+				);
+				psInstEntryPoint += "_PSINST";
+				pixelShader->InstancingPixelShaderCompile(_path, psInstEntryPoint);
+			}
+		}
+		//else
+		//{
+		//	MsgBoxAssert("코드 내에 픽셀셰이더가 없습니다.");
+		//	//셰이더 이름 규칙 0: 버텍스셰이더는 “_VS(”, 픽셀셰이더는 “_PS(“가 문자열 내부에 포함되어 있어야 한다.
+		//	return;
+		//}
 	}
-	//else
-	//{
-	//	MsgBoxAssert("코드 내에 픽셀셰이더가 없습니다.");
-	//	//셰이더 이름 규칙 0: 버텍스셰이더는 “_VS(”, 픽셀셰이더는 “_PS(“가 문자열 내부에 포함되어 있어야 한다.
-	//	return;
-	//}
 }
 
 GameEngineConstantBufferSetter& GameEngineShader::GetConstantBufferSetter(const std::string& _name)
@@ -499,7 +517,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 	//	UINT                        uFlags;			Input binding flags
 	//	D3D_RESOURCE_RETURN_TYPE    ReturnType;		반환형. 3차원 텍스처에만 사용.
 	//	D3D_SRV_DIMENSION           Dimension;		Dimension (if texture) 3차원 텍스처에만 사용.
-	//	UINT                        NumSamples;		Number of samples (0 if not MS texture) 텍스쳐가 아니라면 0.
+	//	UINT                        NumSamples;		멀티샘플링용 텍스처 수. 텍스쳐가 아니라면 0. 텍스처라도 멀티샘플링하지 않는다면 -1.
 	//} D3D11_SHADER_INPUT_BIND_DESC;
 	D3D11_SHADER_INPUT_BIND_DESC resInfo = { 0 };
 
@@ -571,6 +589,11 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 
 		case D3D_SIT_TEXTURE:
 		{
+			if (1 < resInfo.BindCount)
+			{
+				int i = 0;
+			}
+
 			GameEngineTextureSetter newTextureSetter;
 			//새 텍스처세터를 생성하고, 세터에 셰이더가 텍스처 및 텍스처를 사용하는데 필요한 정보들을 저장한다.
 
@@ -658,7 +681,8 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 			newSBufferSetter.SetName(uppercaseResourceName);
 			newSBufferSetter.parentShaderType_ = this->shaderType_;
 
-			// 아직은 데이터의 사이즈는 알수있어도 이걸로 몇개짜리 버퍼를 만들지는 알수가 없다.
+			//아직은 데이터의 사이즈는 알수있어도 이걸로 몇개짜리 버퍼를 만들지는 알수가 없다.
+			// 그래서 개수 0 으로 일단 만들어둔다.
 
 			newSBufferSetter.structuredBuffer_ = GameEngineStructuredBuffer::CreateAndFind(
 				newSBufferSetter.GetName(),	//
@@ -677,6 +701,14 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 				MsgBoxAssertString(std::string(resInfo.Name) + ": 이미 같은 이름의 구조화 버퍼 세터가 존재합니다.");
 				return;
 			}
+
+			break;
+		}
+
+		case D3D_SIT_TBUFFER:
+		{
+			int i = 0;
+
 
 			break;
 		}

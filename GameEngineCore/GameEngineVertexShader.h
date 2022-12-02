@@ -54,7 +54,7 @@ private:
 		UINT _versionHigh = 5,
 		UINT _versionLow = 0
 	);
-	void InstancingShaderCompile(
+	void InstancingVertexShaderCompile(
 		const std::string_view& _path,
 		const std::string_view& _entryPoint,
 		UINT _versionHigh = 5,
@@ -63,7 +63,7 @@ private:
 
 private:
 	void CreateVertexShader();		//두 함수간 차이는 경고메세지밖에 없는 점 주의.
-	void CreateInstancingShader();	//두 함수간 차이는 경고메세지밖에 없는 점 주의.
+	void CreateInstancingVertexShader();	//두 함수간 차이는 경고메세지밖에 없는 점 주의.
 
 private:
 	ID3D11VertexShader* vertexShader_;

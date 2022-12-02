@@ -28,17 +28,29 @@ private:
 		const std::string_view& _path,
 		const std::string_view& _entryPoint,
 		UINT _versionHigh = 5,
-		UINT _versionLow = 0);
+		UINT _versionLow = 0
+	);
 	static std::shared_ptr<GameEnginePixelShader> Load(
 		const std::string_view& _path,
 		const std::string_view& _name,
 		const std::string_view& _entryPoint,
 		UINT _versionHigh = 5,
-		UINT _versionLow = 0);
+		UINT _versionLow = 0
+	);
+	void InstancingPixelShaderCompile(
+		const std::string_view& _path,
+		const std::string_view& _entryPoint,
+		UINT _versionHigh = 5,
+		UINT _versionLow = 0
+	);
+
 	void CreatePixelShader();
+	void CreateInstancingPixelShader();
 
 private:
 	ID3D11PixelShader* pixelShader_;
+
+	std::shared_ptr<GameEnginePixelShader> inst_PixelShader_;
 
 };
 
