@@ -105,7 +105,7 @@ void PlayerUI::ReduceHP(float _deltaTime)
 	{
 		if (hpRedBar_ > player_.lock()->GetPlayerInfo().hp_)
 		{
-			hpRedBar_ =  GameEngineMath::Lerp(hpRedBar_,player_.lock()->GetPlayerInfo().hp_,0.1F);
+			hpRedBar_ =  GameEngineMath::Lerp(hpRedBar_,player_.lock()->GetPlayerInfo().hp_,_deltaTime);
 			playerHpRed_->GetPixelData().slice_ = float4(1-( hpRedBar_ / player_.lock()->GetPlayerInfo().maxHp_), 0.0f, 0.0f, 0.0f);
 		}
 		else if (hpRedBar_ <= player_.lock()->GetPlayerInfo().hp_)

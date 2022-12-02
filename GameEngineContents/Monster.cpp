@@ -84,15 +84,36 @@ CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCol
 		colCheakToMonster_ = true;
 	}
 	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
-	 test_.x =mx_ - A->mx_;// 콜리전 받는 쪽에서 사용
+	 test_.x = mx_ - A->mx_;// 콜리전 받는 쪽에서 사용
 	 test_.y = my_ - A->my_;
+
+	 
 
 
 	//CC /= 2;
+	 
+		 monsterReactionVector_ = (A->monsterResultVector_ + monsterResultVector_) / 2;//플레이어한테가는 최종벡터
+		 monsterReactionVector_ += test_.Normalize3D()*100;//부딪힌 몬스터가 주는 힘
 
-		monsterReactionVector_ += (A->monsterResultVector_ + monsterResultVector_) / 2;
-		//A->monsterReactionVector_ += (A->monsterResultVector_ + monsterResultVector_) / 2;
-		monsterReactionVector_ += test_;
+
+		// if (monsterReactionVector_.x >= 300.f) 
+		// {
+		//	 monsterReactionVector_.x = 150.f;
+		// }
+		// else if (monsterReactionVector_.x <= -300.f)
+		// {
+		//	 monsterReactionVector_.x = -150.f;
+		// }
+		//
+		// if (monsterReactionVector_.y >= 300.f)
+		// {
+		//	 monsterReactionVector_.y = 150.f;
+		// }
+		// else if (monsterReactionVector_.y <= -300.f)
+		// {
+		//	 monsterReactionVector_.y = -150.f;
+		// }
+
 	
 	return CollisionReturn::Stop;
 }
@@ -242,7 +263,7 @@ void Monster::Chaseplayer(float _deltaTime)
 	if (colCheakToPlayer_ == true)//플레이어와 충돌시 벡터 합산하는부분
 	{
 		reactionVector_ = -(monsterBaseVector_);// 몬스터가 플레이어에 접촉했으니 힘의 반작용 
-		monsterResultVector_ = monsterBaseVector_ + (reactionVector_ *1.5 ) + test_;
+		monsterResultVector_ = monsterBaseVector_ + (reactionVector_ *1.3f ) + test_;
 		monsterResultVector_ += pushVector_; // 플레이어의 움직임으로 밀리는 힘
 		colCheakToPlayer_ = false;
 	}

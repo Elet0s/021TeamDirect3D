@@ -148,9 +148,6 @@
     <ClCompile Include="SoulCardSelectBox.cpp">
       <Filter>Actor\00. Global\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SkillManager.cpp">
-      <Filter>Actor\02. Play\Player\Skill</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -250,9 +247,6 @@
     </ClInclude>
     <ClInclude Include="SoulCardSelectBox.h">
       <Filter>Actor\00. Global\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="SkillManager.h">
-      <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,6 @@
 #include "Texture2DShadowRenderer.h"
 #include "PlayerUI.h"
 #include "Monster.h"
-#include "SkillManager.h"
 
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
