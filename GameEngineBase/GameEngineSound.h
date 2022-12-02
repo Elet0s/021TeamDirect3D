@@ -59,7 +59,7 @@ public:
 
 
 public:
-	bool IsEmpty();
+	bool IsControlHandleEmpty();
 	void Stop();
 	void PlaySpeed(float _speed);
 	void Volume(float _value);

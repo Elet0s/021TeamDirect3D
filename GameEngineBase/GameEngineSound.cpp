@@ -178,7 +178,7 @@ GameEngineSoundPlayer::~GameEngineSoundPlayer()
 {
 }
 
-bool  GameEngineSoundPlayer::IsEmpty()
+bool  GameEngineSoundPlayer::IsControlHandleEmpty()
 {
     return nullptr == controlHandle_;
 }

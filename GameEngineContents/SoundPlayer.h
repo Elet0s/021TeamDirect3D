@@ -33,7 +33,7 @@ public:
 	}
 	void ChangeBgm(std::string _BgmName, float _volume = 1.0f) // 재생음악 변경
 	{
-		if (false == BGMPlayer_.IsEmpty())
+		if (false == BGMPlayer_.IsControlHandleEmpty())
 		{
 			BGMPlayer_.Stop();
 		}
