@@ -1,14 +1,11 @@
 #pragma once
 #include "Skill.h"
-// Ό³Έν :
 class DeathAura : public Skill
 {
 public:
-	// constrcuter destructer
 	DeathAura();
 	~DeathAura();
 
-	// delete Function
 	DeathAura(const DeathAura& _Other) = delete;
 	DeathAura(DeathAura&& _Other) noexcept = delete;
 	DeathAura& operator=(const DeathAura& _Other) = delete;
@@ -22,7 +19,7 @@ public:
 		return etc_;
 	}
 protected:
-
+	std::shared_ptr<GameEngineCollision> Collision_;
 private:
 	float damege;
 	float attackSpeed;

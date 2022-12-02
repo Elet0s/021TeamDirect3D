@@ -6,6 +6,7 @@
 #include "TestLevel.h"
 #include "ShaderTestLevel.h"
 #include "GameEngineStatusWindow.h"
+#include "SoundPlayer.h"
 
 
 ContentsCore::ContentsCore()
@@ -68,6 +69,12 @@ void ContentsCore::Update(float _deltaTime)
 
 void ContentsCore::End()
 {
+	if (SoundPlayer::BGMPlay_ != nullptr)
+	{
+		SoundPlayer::BGMPlay_->Destory();
+	}
+
+	
 }
 
 void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)

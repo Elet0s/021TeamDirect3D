@@ -15,6 +15,7 @@
 #include "NormalGoblin.h"
 #include "RedFlyingEyes.h"
 #include "FlyingEyes.h"
+#include "SoundPlayer.h"
 
 TestLevel::TestLevel() //: tileCameraActor_(nullptr)
 {
@@ -30,9 +31,6 @@ void TestLevel::Start()
 	//tileCameraActor_->GetCameraComponent()->SetCameraOrder(CameraOrder::TileCamera);
 	//tileCameraActor_->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	//this->PushCamera(tileCameraActor_->GetCameraComponent(), CameraOrder::TileCamera);
-	
-
-
 
 
 	GameEngineDirectory monsterDir;
@@ -48,6 +46,17 @@ void TestLevel::Start()
 	}
 
 
+	GameEngineDirectory skillDir;
+	skillDir.MoveParentToExistChildDirectory("ContentsResources");
+	skillDir.MoveToChild("ContentsResources");
+	skillDir.MoveToChild("Actor");
+	skillDir.MoveToChild("Skill");
+
+	std::vector<GameEngineFile> skillTexture = skillDir.GetAllFiles();
+	for (size_t i = 0; i < skillTexture.size(); i++)
+	{
+		GameEngineTexture::Load(skillTexture[i].GetFullPath());
+	}
 
 		
 	GameEngineDirectory uiTextureDir;
@@ -62,8 +71,16 @@ void TestLevel::Start()
 		GameEngineTexture::Load(uiTexture[i].GetFullPath());
 	}
 		
+	GameEngineDirectory soundDir;
+	soundDir.MoveParentToExistChildDirectory("ContentsResources");
+	soundDir.MoveToChild("ContentsResources");
+	soundDir.MoveToChild("Sound");
 
-		
+	std::vector<GameEngineFile> sound = soundDir.GetAllFiles();
+	for (GameEngineFile& soundPlay : sound)
+	{
+		GameEngineSound::LoadResource(soundPlay);
+	}
 
 	tilemaps_.resize(3);
 
@@ -170,6 +187,15 @@ void TestLevel::Update(float _DeltaTime)
 	UpdateWorld();
 }
 
+void TestLevel::LevelStartEvent()
+{
+	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
+}
+void TestLevel::LevelEndEvent()
+{
+	SoundPlayer::BGMPlay_->Stop();
+}
+
 void TestLevel::CreateMapAndCamraMove()
 {																		
 
@@ -201,6 +227,7 @@ void TestLevel::UpdateWorld()
 
 	MoveWorld(Dir);
 }
+
 
 void TestLevel::MoveWorld(int _Dir)
 {

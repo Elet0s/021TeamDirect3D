@@ -55,6 +55,12 @@
     <Filter Include="Actor\02. Play\Player\Skill\Passive\Attack">
       <UniqueIdentifier>{ddcb2366-3b31-4439-a813-1f30eea01fe2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Weapon">
+      <UniqueIdentifier>{69133632-9e0b-4f1f-b383-f229947040c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\00. Global\Com">
+      <UniqueIdentifier>{8bbfbb2a-1b98-4fcc-a2b2-200fb47cce13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -160,9 +166,6 @@
     <ClCompile Include="Skill.cpp">
       <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="DeathAura.cpp">
-      <Filter>Actor\02. Play\Player\Skill</Filter>
-    </ClCompile>
     <ClCompile Include="SharpeningStone.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
@@ -174,6 +177,15 @@
     </ClCompile>
     <ClCompile Include="Range.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathAura.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Spear.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>Actor\00. Global\Com</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,9 +293,6 @@
     <ClInclude Include="Skill.h">
       <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="DeathAura.h">
-      <Filter>Actor\02. Play\Player\Skill</Filter>
-    </ClInclude>
     <ClInclude Include="SharpeningStone.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
@@ -295,6 +304,15 @@
     </ClInclude>
     <ClInclude Include="Range.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathAura.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Spear.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>Actor\00. Global\Com</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

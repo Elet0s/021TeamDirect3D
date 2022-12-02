@@ -160,9 +160,6 @@ bool GameEngineSound::Load(const std::string_view& _path)
 }
 
 
-
-
-
 GameEngineSoundPlayer::GameEngineSoundPlayer(GameEngineSound* _sound, FMOD::Channel* _controlHandle)
     :sound_(_sound), controlHandle_(_controlHandle)
 {
@@ -179,6 +176,11 @@ GameEngineSoundPlayer::GameEngineSoundPlayer(const GameEngineSoundPlayer& _other
 
 GameEngineSoundPlayer::~GameEngineSoundPlayer()
 {
+}
+
+bool  GameEngineSoundPlayer::IsEmpty()
+{
+    return nullptr == controlHandle_;
 }
 
 void GameEngineSoundPlayer::Stop()
