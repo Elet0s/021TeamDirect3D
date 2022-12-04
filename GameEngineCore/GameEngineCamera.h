@@ -8,6 +8,7 @@ enum class CameraProjectionMode
 	Orthographic //직교투영.
 };
 
+class GameEngineInstancingRenderer;
 class GameEngineInstancing;
 class GameEngineMaterial;
 class GameEngineCamera : public GameEngineTransformComponent
@@ -49,6 +50,9 @@ public:
 
 	//인스턴싱 반환. 없다면 빈 인스턴싱을 만들어서 반환한다.
 	GameEngineInstancing& GetInstancing(const std::string& _name);
+
+	//인스턴싱 반환. 없다면 빈 인스턴싱을 만들어서 반환한다.
+	GameEngineInstancingRenderer& GetInstancingRenderer(const std::string& _name);
 
 public:
 	void SetProjectionMode(CameraProjectionMode _mode)
@@ -116,6 +120,8 @@ private:
 
 	std::unordered_map<std::string, GameEngineInstancing> instancingMap_;	//
 	//비정렬 맵으로 한 이유: 순회할 일이 거의 없을거라고 생각한 상황에서 비정렬 맵을 그냥 써보고 싶어서.
+
+	std::map<std::string, GameEngineInstancingRenderer> instancingRenderers_;
 
 	//비정렬 맵(Unordered Map): 들어오는 키값을 해시함수를 거쳐서 나온 숫자로 바꿔서, 
 	// 그 값을 인덱스로 하는 배열 내 원소로 데이터를 저장하는 방식의 컨테이너. 

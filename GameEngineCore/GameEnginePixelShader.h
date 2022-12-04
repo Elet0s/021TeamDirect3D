@@ -23,6 +23,16 @@ private:
 public:
 	void Setting();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
 
+public:
+	bool IsInstancing()
+	{
+		return nullptr != inst_PixelShader_->pixelShader_;
+	}
+	inline std::shared_ptr<GameEnginePixelShader> GetInst_PixelShader()
+	{
+		return inst_PixelShader_;
+	}
+
 private:
 	static std::shared_ptr<GameEnginePixelShader> Load(
 		const std::string_view& _path,

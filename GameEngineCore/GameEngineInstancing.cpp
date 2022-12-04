@@ -8,7 +8,7 @@
 
 size_t GameEngineInstancing::maxInstancingCount_ = 100;
 
-void GameEngineInstancing::InstancingData::Init(const std::multiset<std::string>& _shaderResourceHelperNames)
+void GameEngineInstancing::InstancingData::Init(const std::set<std::string>& _shaderResourceHelperNames)
 {
 	for (const std::string& name : _shaderResourceHelperNames)
 	{
@@ -58,7 +58,7 @@ void GameEngineInstancing::PushUnit(std::shared_ptr<GameEngineRenderUnit> _rende
 	if (nullptr == initRenderUnit_)
 	{
 		initRenderUnit_ = _renderUnit;
-		CreateInstancingUnit();
+		CreateInstancingDataList();
 	}
 
 	_renderUnit->Off();
@@ -89,7 +89,7 @@ void GameEngineInstancing::PushUnit(std::shared_ptr<GameEngineRenderUnit> _rende
 	//renderUnits_의 한개 리스트가 100개 제한을 넘기면 여기로 넘어와서 새 리스트를 생성한다.
 	if (false == isInserted)
 	{
-		std::list<InstancingData>& newInstancingDataList = CreateInstancingUnit();
+		std::list<InstancingData>& newInstancingDataList = CreateInstancingDataList();
 
 		InstancingData newData = _renderUnit;
 
@@ -106,6 +106,8 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 	//데이터 수집 완료.
 	//보내기만 하면 된다.
 
+	//size_t instancingCount = 0;
+
 	for (size_t instancingDataGroupIndex = 0; instancingDataGroupIndex < instancingDatas_.size();
 		++instancingDataGroupIndex)
 	{
@@ -115,7 +117,7 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 		GameEngineShaderResourceHelper& instancingShaderResourceHelper = shaderResourceHelpers_[instancingDataGroupIndex];
 		//instancingDataGroupIndex번째 셰이더리소스헬퍼도 받아 놓는다.
 
-		std::multimap<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetters
+		std::multimap<std::string, GameEngineStructuredBufferSetter>& sBufferSetters
 			= instancingShaderResourceHelper.GetStructuredBufferSetterMap();
 		//위 셰이더리소스헬퍼의 구조화버퍼 세터를 전부 가져온다.
 
@@ -127,7 +129,7 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 		//??
 
 
-		int count = 0;	//??
+		int instancingRowIndex = 0;	//셰이더의 ROWINDEX 시맨틱으로 전달되는 값.
 		int* instancingBufferDataStartPtr = reinterpret_cast<int*>(&instancingBufferData[0]);
 		//??
 
@@ -137,13 +139,13 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 			for (std::map<std::string, const void*>::iterator dataIter = instancingData.data_.begin();
 				dataIter != instancingData.data_.end(); ++dataIter)
 			{
-				for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(dataIter->first);
-					sBufferSetterIter != structuredBufferSetters.upper_bound(dataIter->first); ++sBufferSetterIter)
+				for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = sBufferSetters.lower_bound(dataIter->first);
+					sBufferSetterIter != sBufferSetters.upper_bound(dataIter->first); ++sBufferSetterIter)
 				{
 					size_t originalDataSize = sBufferSetterIter->second.size_;
 					//
 
-					char* originalDataPtr = &sBufferSetterIter->second.originalData_[count * originalDataSize];
+					char* originalDataPtr = &sBufferSetterIter->second.originalData_[instancingRowIndex * originalDataSize];
 					//
 
 					int copyResult = memcpy_s(
@@ -153,10 +155,6 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 						originalDataSize	//
 					);
 
-					instancingData.data_;
-					instancingData.renderUnit_;
-					this->shaderResourceHelpers_;
-
 					if (0 != copyResult)
 					{
 						MsgBoxAssert("메모리 복사 실패!");
@@ -165,8 +163,8 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 				}
 			}
 
-			*instancingBufferDataStartPtr = count;
-			++count;
+			*instancingBufferDataStartPtr = instancingRowIndex;
+			++instancingRowIndex;
 			instancingBufferDataStartPtr += 1;
 
 		}
@@ -174,7 +172,11 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 		instancingBuffer->ChangeData(&instancingBufferData[0], instancingBufferData.size());
 		instancingShaderResourceHelper.AllResourcesSetting();
 		initRenderUnit_->RenderInstancing(_deltaTime, instancingDataList.size(), instancingBuffer);
+		//instancingCount += instancingDataList.size();
 	}
+
+	//shaderResourceHelpers_[0].AllResourcesSetting();
+	//initRenderUnit_->RenderInstancing2(_deltaTime, instancingCount, instancingBuffers_);
 
 	//렌더링이 끝나면 제거작업도 여기서 한다.
 	for (size_t instancingDataGroupIndex = 0; instancingDataGroupIndex < instancingDatas_.size();
@@ -184,7 +186,7 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 	}
 }
 
-std::list<GameEngineInstancing::InstancingData>& GameEngineInstancing::CreateInstancingUnit()
+std::list<GameEngineInstancing::InstancingData>& GameEngineInstancing::CreateInstancingDataList()
 {
 	std::list<InstancingData>& newInstancingDataList = instancingDatas_.emplace_back();
 	//renderUnits_에 크기 100짜리 새 리스트를 생성한다.

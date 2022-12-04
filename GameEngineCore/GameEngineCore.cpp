@@ -105,7 +105,7 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _userCore)
 
 	if (nullptr == currentLevel_)
 	{
-		MsgBoxAssert("currentLevel_이 비었습니다.");
+		MsgBoxAssert("currentLevel_이 없습니다.");
 		return;
 	}
 

@@ -33,7 +33,7 @@ public:
 		return bufferCount_;
 	}
 
-	ID3D11Buffer* GetBuffer()
+	ID3D11Buffer* GetBuffer() const
 	{
 		return instancingBuffer_;
 	}

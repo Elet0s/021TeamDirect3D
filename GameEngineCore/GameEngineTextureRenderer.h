@@ -78,7 +78,7 @@ public:
 		isLoop_(_isLoop),
 		playTime_(0.f)
 	{
-		frames_.reserve(static_cast<size_t>(_end - _start + 1));
+		frames_.reserve(static_cast<size_t>(_end) - static_cast<size_t>(_start) + 1);
 		for (UINT frameIndex = _start; frameIndex <= _end; ++frameIndex)
 		{
 			frames_.push_back(frameIndex);

@@ -109,6 +109,15 @@ void GameEngineMaterial::SettingInstancing()
 	OutputMerger_BlendSetting();
 }
 
+void GameEngineMaterial::SettingInstancing2()
+{
+	Inst_VertexShaderSetting();
+	RasterizerSetting();
+	Inst_PixelShaderSetting();
+	OutputMerger_DepthStencilSetting();
+	OutputMerger_BlendSetting();
+}
+
 void GameEngineMaterial::SetBlend_OutputMerger(const std::string_view& _name)
 {
 	this->blend_ = GameEngineBlend::Find(_name);
@@ -156,6 +165,11 @@ void GameEngineMaterial::RasterizerSetting()
 void GameEngineMaterial::PixelShaderSetting()
 {
 	this->pixelShader_->Setting();
+}
+
+void GameEngineMaterial::Inst_PixelShaderSetting()
+{
+	this->pixelShader_->GetInst_PixelShader()->Setting();
 }
 
 void GameEngineMaterial::OutputMerger_BlendSetting()

@@ -25,7 +25,7 @@ protected:
 private:
 	std::shared_ptr<GameEngineActor> shaderTestActor_;
 	std::shared_ptr<GameEngineTextureRenderer> shaderTestRenderer_;
-
+	PixelData testPixelData_;
 
 };
 

@@ -7,9 +7,6 @@ class GameEngineInstancing
 {
 	//이 클래스의 존재 이유: 인스턴스렌더링할 렌더유닛과 인스턴싱셰이더로 보낼 정보 보관용 클래스.
 
-	//확장, 정리 방법 생각해둘 것.
-	//
-
 	static size_t maxInstancingCount_;
 
 public:
@@ -26,7 +23,7 @@ public:
 		}
 
 		//InstancingData 초기화 함수.
-		void Init(const std::multiset<std::string>& _shaderResourceHelperNames);
+		void Init(const std::set<std::string>& _shaderResourceHelperNames);
 
 		//
 		void Link(const std::string_view& _name, const void* _data);
@@ -63,7 +60,7 @@ public:
 
 private:
 	//renderUnits_에 새 리스트를 생성, 초기화하는 함수.
-	std::list<InstancingData>& CreateInstancingUnit();
+	std::list<InstancingData>& CreateInstancingDataList();
 
 
 private:
@@ -92,7 +89,8 @@ private:
 	std::vector<GameEngineShaderResourceHelper> shaderResourceHelpers_;
 
 
-	std::multiset<std::string> structuredBufferSetterNames_;	//구조화버퍼 세터들의 이름 모음.
+	std::set<std::string> structuredBufferSetterNames_;    //구조화버퍼 세터들의 이름 모음. 
+	//반드시 전부 대문자로 구성할 것.
 	//이거 굳이 멀티셋이어야 하나??
 
 };

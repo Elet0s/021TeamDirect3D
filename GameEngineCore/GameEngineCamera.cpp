@@ -11,6 +11,7 @@
 #include "GameEngineInstancingBuffer.h"
 #include "GameEngineInstancing.h"
 #include "GameEngineStructuredBuffer.h"
+#include "GameEngineInstancingRenderer.h"
 
 GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
@@ -120,6 +121,11 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 GameEngineInstancing& GameEngineCamera::GetInstancing(const std::string& _name)
 {
 	return instancingMap_[_name];	//없으면 생성 삽입 반환, 있으면 찾아서 반환.
+}
+
+GameEngineInstancingRenderer& GameEngineCamera::GetInstancingRenderer(const std::string& _name)
+{
+	return instancingRenderers_[_name];
 }
 
 void GameEngineCamera::Start()
@@ -250,7 +256,13 @@ void GameEngineCamera::Render(float _deltaTime)
 	for (std::unordered_map<std::string, GameEngineInstancing>::iterator iter = instancingMap_.begin();
 		iter != instancingMap_.end(); ++iter)
 	{
+		iter->second.RenderInstancing(_deltaTime);
+	}
 
+	for (std::map<std::string, GameEngineInstancingRenderer>::iterator iter = instancingRenderers_.begin();
+		iter != instancingRenderers_.end(); ++iter)
+	{
+		iter->second.Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 	}
 }
 

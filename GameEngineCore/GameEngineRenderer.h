@@ -19,9 +19,6 @@ struct RenderOption
 
 class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>
 {
-    //이 프레임워크에서 렌더링에 필수적인 두가지 요소인 렌더링 파이프라인과 셰이더리소스헬퍼를 
-    // 한데 모아 렌더러를 통해 관리하기 편하기 위해 만든 클래스.
-    //다양한 종류의 메쉬를 세팅해서 사용하기 좀 더 편해진 체제.
 
     friend class GameEngineRenderer;
     //셰이더리소스헬퍼 가져다 써야해서 프렌드.
@@ -57,6 +54,12 @@ public:
         float _deltaTime,
         size_t _instancingDataCount,
         std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
+    );
+
+    void RenderInstancing2(
+        float _deltaTime,
+        size_t _instancingCount,
+        std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffers
     );
 
     std::shared_ptr<GameEngineMesh> GetMesh();

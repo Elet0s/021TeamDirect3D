@@ -2,85 +2,56 @@
 #include "GameEngineMaterial.h"
 #include "GameEngineShaderResourceHelper.h"
 #include "GameEngineMesh.h"
+#include "GameEngineRenderer.h"
 
-struct RenderOption
-{
-    float deltaTime_ = 0.f;
-    float sumDeltaTime_ = 0.f;
-    int isAnimation_ = 0;
-    int vertexInversion_ = 1;   //그림자용 정점 좌우 뒤집힘 표시 변수. 좌우 뒤집어야 하면 -1 대입.
-    float pivotPosX_ = 0.f;     //피봇포스 X
-    float pivotPosY_ = 0.f;     //피봇포스 Y
-    float shadowAngle_ = 30.f;  //그림자 각도. 기본값 30도.
-    int bytePad1_ = 0;          //바이트패드.
-};
-
-//class GameEngineInstancingRenderUnit : public std::enable_shared_from_this<GameEngineInstancingRenderUnit>
-//{
-//    //이 프레임워크에서 렌더링에 필수적인 두가지 요소인 렌더링 파이프라인과 셰이더리소스헬퍼를 
-//    // 한데 모아 렌더러를 통해 관리하기 편하기 위해 만든 클래스.
-//    //다양한 종류의 메쉬를 세팅해서 사용하기 좀 더 편해진 체제.
-//
-//    friend class GameEngineRenderer;
-//    //셰이더리소스헬퍼 가져다 써야해서 프렌드.
-//
-//public:
-//    GameEngineInstancingRenderUnit();
-//    ~GameEngineInstancingRenderUnit();
-//
-//    GameEngineInstancingRenderUnit(const GameEngineInstancingRenderUnit& _other) = delete;
-//    GameEngineInstancingRenderUnit(GameEngineInstancingRenderUnit&& _other) noexcept = delete;
-//
-//private:
-//    GameEngineInstancingRenderUnit& operator=(const GameEngineInstancingRenderUnit& _other) = delete;
-//    GameEngineInstancingRenderUnit& operator=(GameEngineInstancingRenderUnit&& _other) = delete;
-//
-//public:
-//
-//    void SetMesh(const std::string_view& _meshName);
-//    void SetMesh(std::shared_ptr<GameEngineMesh> _mesh);
-//
-//    void SetMaterial(const std::string_view& _materialName);
-//
-//    //새 부모 렌더러를 지정하고 렌더유닛이 가진 셰이더리소스헬퍼에
-//    // 엔진 기본제공 상수버퍼인 "TRANSFORMDATA"와 "RENDEROPTION"을 등록하는 함수.
-//    //void EngineShaderResourceSetting(std::shared_ptr<GameEngineRenderer> _parentRenderer);
-//
-//    void RenderInstancing(
-//        float _deltaTime,
-//        size_t _instancingDataCount,
-//        std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
-//    );
-//
-//    std::shared_ptr<GameEngineMesh> GetMesh();
-//    std::shared_ptr<GameEngineMaterial> GetMaterial();
-//
-//
-//public:
-//    inline GameEngineShaderResourceHelper& GetShaderResourceHelper()
-//    {
-//        return this->shaderResourceHelper_;
-//    }
-//
-//
-//private:
-//    //std::weak_ptr<GameEngineRenderer> parentRenderer_;    //이 렌더유닛을 가진 부모 렌더러.
-//
-//    std::shared_ptr<GameEngineMesh> mesh_;                  //
-//
-//    std::shared_ptr<GameEngineInputLayout> inputLayout_;    //
-//
-//    std::shared_ptr<GameEngineMaterial> material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
-//
-//    D3D11_PRIMITIVE_TOPOLOGY topology_;     //
-//
-//    GameEngineShaderResourceHelper shaderResourceHelper_;   //셰이더리소스들을 가진 셰이더리소스 헬퍼.
-//    //값형인 이유: 렌더유닛마다 각각의 셰이더리소스헬퍼를 가지게 하기 위해서.
-//};
-
+class GameEngineMaterial;
+class GameEngineInstancingBuffer;
 class GameEngineInstancingRenderer
 {
-	//이 클래스의 존재 이유:
+
+    class InstancingUnit
+    {
+        friend GameEngineInstancingRenderer;
+
+
+        InstancingUnit(
+            const std::set<std::string>& _sreucturedBufferSetterNames,
+            const std::string_view& _meshName,
+            const std::string_view& _materialName
+        );
+    
+        void Link(const std::string_view& _name, const void* _data);
+
+    public:
+        //계산이 끝난 월드행렬이 포함된 트랜스폼데이터만 넣을 것!
+        void SetTransformData(const TransformData& _transformData);
+
+    public:
+        //트랜스폼데이터는 여기에 넣지 말 것!
+        template<typename ValueType>
+        void Link(const std::string_view& _name, ValueType& _data)
+        {
+            Link(_name, reinterpret_cast<const void*>(&_data));
+        }
+
+        RenderOption& GetRenderOption()
+        {
+            this->renderOptionInst_;
+        }
+
+    private:
+
+        std::shared_ptr<GameEngineRenderUnit> renderUnit_;	//렌더유닛.
+
+        TransformData transformData_;
+
+        RenderOption renderOptionInst_;
+
+        std::map<std::string, const void*> data_;  //키값으로 쓰인 이름을 가진 구조화버퍼에 넣어 GPU로 전달할 데이터.
+    };
+
+
+
 public:
 	GameEngineInstancingRenderer();
 	~GameEngineInstancingRenderer();
@@ -95,10 +66,60 @@ private:
 
 
 public:	
+    void Initialize(
+        size_t _renderUnitCount,
+        const std::string_view& _meshName = "Rect",
+        const std::string_view& _materialName = "Test"
+    );
+
+    void Render(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
+
+
+public:
+    InstancingUnit& GetInstancingUnit(int _index)
+    {
+        return instancingUnits_[_index];
+    }
+
+    void SetTexture(
+        const std::string_view& _textureSetterName,
+        const std::string_view& _textureName
+    )
+    {
+        shaderResourceHelper_.SetTexture(_textureSetterName, _textureName);
+    }
+
+    void SetSampler(
+        const std::string_view& _samplerSetterName,
+        const std::string_view& _samplerName
+    )
+    {
+        shaderResourceHelper_.SetSampler(_samplerSetterName, _samplerName);
+    }
+
 
 
 
 private:
+
+    size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
+
+    std::vector<InstancingUnit> instancingUnits_;   //렌더유닛 + 인스턴싱데이터 배열.
+
+    std::shared_ptr<GameEngineInstancingBuffer> instancingBuffer_;  //
+
+
+    std::vector<char> rowIndexBuffer_;  //로우인덱스 저장, 전달용 버퍼.
+
+
+
+    GameEngineShaderResourceHelper shaderResourceHelper_;   //이 렌더러가 쓸 셰이더리소스헬퍼.
+
+
+
+
+    std::set<std::string> structuredBufferSetterNames_;    //셰이더리소스헬퍼가 가진 인스턴스렌더링용 구조화버퍼 세터들의 이름 모음. 
+    //반드시 전부 대문자로 구성할 것.
 
 };
 

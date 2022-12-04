@@ -307,6 +307,9 @@
     <ClCompile Include="GameEngineInstancingTextures.cpp">
       <Filter>Resource\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineInstancingRenderer.cpp">
+      <Filter>Object\Component\Rendering\Instancing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -502,6 +505,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineInstancingTextures.h">
       <Filter>Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineInstancingRenderer.h">
+      <Filter>Object\Component\Rendering\Instancing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

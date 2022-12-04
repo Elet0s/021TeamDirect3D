@@ -67,13 +67,6 @@ void EngineInputLayout()
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_SINT
 	);
 
-	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
-		"INSTTEXTUREINDEX",
-		DXGI_FORMAT::DXGI_FORMAT_R32_SINT
-	);
-
-
-
 
 
 	GameEngineVertex::inputLayoutInfo_.ResetOffset();

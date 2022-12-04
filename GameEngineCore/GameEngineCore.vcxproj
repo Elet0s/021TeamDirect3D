@@ -195,6 +195,7 @@
     <ClInclude Include="GameEngineInputLayout.h" />
     <ClInclude Include="GameEngineInstancing.h" />
     <ClInclude Include="GameEngineInstancingBuffer.h" />
+    <ClInclude Include="GameEngineInstancingRenderer.h" />
     <ClInclude Include="GameEngineLevel.h" />
     <ClInclude Include="GameEngineMesh.h" />
     <ClInclude Include="GameEnginePixelShader.h" />
@@ -284,6 +285,7 @@
     <ClCompile Include="GameEngineInputLayout.cpp" />
     <ClCompile Include="GameEngineInstancing.cpp" />
     <ClCompile Include="GameEngineInstancingBuffer.cpp" />
+    <ClCompile Include="GameEngineInstancingRenderer.cpp" />
     <ClCompile Include="GameEngineLevel.cpp" />
     <ClCompile Include="GameEngineMesh.cpp" />
     <ClCompile Include="GameEnginePixelShader.cpp" />

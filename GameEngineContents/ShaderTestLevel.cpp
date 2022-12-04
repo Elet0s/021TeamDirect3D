@@ -65,6 +65,26 @@ void ShaderTestLevel::Start()
 	//	);
 	//}
 
+	
+	GameEngineInstancingRenderer& testInstancingRenderer = this->GetMainCamera()->GetInstancingRenderer("Test");
+	testInstancingRenderer.Initialize(144);
+	testInstancingRenderer.SetTexture("TEX", "NSet.png");
+	testInstancingRenderer.SetSampler("POINTCLAMP", "POINTCLAMP");
+
+	for (int i = 0; i < 144; i++)
+	{
+		float4 randomPos = GameEngineRandom::mainRandom_.RandomFloat4(-300.f, 300.f);
+		//randomPos.z = 0.f;
+
+		std::shared_ptr<GameEngineTransformComponent> tempComponent = shaderTestActor_->CreateComponent<GameEngineTransformComponent>();
+		tempComponent->GetTransform().SetWorldScale(25.f, 25.f, 1.f);
+		tempComponent->GetTransform().SetWorldPosition(randomPos);
+		testInstancingRenderer.GetInstancingUnit(i).SetTransformData(tempComponent->GetTransformData());
+
+		//testInstancingRenderer.GetInstancingUnit(i).Link("Inst_TransformData", tempComponent->GetTransformData());
+		//testInstancingRenderer.GetInstancingUnit(i).Link("PixelData", testPixelData_);
+	}
+
 
 
 }

@@ -44,6 +44,7 @@ public:
 	void SetBlend_OutputMerger(const std::string_view& _name);
 	void SetDepthStencil_OutputMerger(const std::string_view& _name);
 	void SettingInstancing();
+	void SettingInstancing2();
 	void Copy(std::shared_ptr<GameEngineMaterial> _original);
 
 	void Setting();
@@ -66,6 +67,7 @@ private:
 	void Inst_VertexShaderSetting();
 	void RasterizerSetting();
 	void PixelShaderSetting();
+	void Inst_PixelShaderSetting();
 	void OutputMerger_DepthStencilSetting();
 	void OutputMerger_BlendSetting();
 

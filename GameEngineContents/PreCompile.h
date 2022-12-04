@@ -21,12 +21,16 @@
 #include <GameEngineCore\GameEngineUIRenderer.h>
 #include <GameEngineCore\GameEngineFontRenderer.h>
 
+#include <GameEngineCore\GameEngineInstancingRenderer.h>
+
 #include <GameEngineCore\GameEngineFont.h>
 #include <GameEngineCore\GameEngineTexture.h>
 #include <GameEngineCore\GameEngineSampler.h>
 #include <GameEngineCore\GameEngineConstantBuffer.h>
 #include <GameEngineCore\GameEngineFolderTexture.h>
+
 #include <GameEngineCore\GameEngineInstancingTextures.h>
+
 #include <GameEngineCore\GameEngineGUI.h>
 #include <GameEngineCore\GameEngineBlur.h>
 

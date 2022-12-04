@@ -11,9 +11,15 @@ class GameEngineShaderResourceHelper
 
 	friend class GameEngineRenderUnit;
 	//AllResourcesSetting(), AllResourcesReset() 함수를 호출할 수 있게 하기 위해 프렌드. 
-
+	
 	friend class GameEngineInstancing;
 	//인스턴싱 버텍스셰이더로 ShaderCheck()함수를 써야해서 프렌드. 
+	
+	friend class GameEngineInstancingRenderer;
+	//인스턴싱 버텍스셰이더, 픽셀셰이더로 ShaderCheck()함수를 써야해서 프렌드. 
+
+	friend class GameEngineInstancingRenderUnit;
+	//AllResourcesSetting(), AllResourcesReset() 함수를 호출할 수 있게 하기 위해 프렌드. 
 
 public:
 	GameEngineShaderResourceHelper();
@@ -65,7 +71,8 @@ public:
 
 	GameEngineStructuredBufferSetter* GetStructuredBufferSetter(const std::string_view& _sBufferName);
 
-	//이 셰이더리소스헬퍼가 가진 모든 구조화버퍼를 통째로 넘기는 함수.
+
+	//이 셰이더리소스헬퍼가 가진 구조화버퍼를 전부 넘기는 함수.
 	std::multimap<std::string, GameEngineStructuredBufferSetter>& GetStructuredBufferSetterMap();
 
 
