@@ -158,6 +158,7 @@ void GameEngineInstancingRenderer::Render(
 	//for (InstancingUnit& instancingUnit : instancingUnits_)
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
+	
 		{
 			//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
 			instancingUnits_[index].transformData_.worldViewProjectionMatrix_
@@ -184,26 +185,26 @@ void GameEngineInstancingRenderer::Render(
 			}
 		}
 
-		//{
-		//	//렌더옵션도 기본데이터이므로 따로 처리.
+		{
+			//렌더옵션도 기본데이터이므로 따로 처리.
 
-		//	size_t renderOptionSize = sizeof(RenderOption);
-		//	char* renderOptionPtr
-		//		= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_RenderOption")->originalData_[index * renderOptionSize];
+			size_t renderOptionSize = sizeof(RenderOption);
+			char* renderOptionPtr
+				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_RenderOption")->originalData_[index * renderOptionSize];
 
-		//	int copyResult = memcpy_s(	//
-		//		renderOptionPtr,		//
-		//		renderOptionSize,		//
-		//		&instancingUnits_[index].renderOptionInst_,	//
-		//		renderOptionSize		//
-		//	);
+			int copyResult = memcpy_s(	//
+				renderOptionPtr,		//
+				renderOptionSize,		//
+				&instancingUnits_[index].renderOptionInst_,	//
+				renderOptionSize		//
+			);
 
-		//	if (0 != copyResult)
-		//	{
-		//		MsgBoxAssert("렌더옵션 복사 실패!");
-		//		return;
-		//	}
-		//}
+			if (0 != copyResult)
+			{
+				MsgBoxAssert("렌더옵션 복사 실패!");
+				return;
+			}
+		}
 
 
 		for (std::map<std::string, const void*>::iterator unitDataIter = instancingUnits_[index].data_.begin();

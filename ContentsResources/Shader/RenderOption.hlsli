@@ -7,7 +7,7 @@ cbuffer RenderOption : register(b10)
     float pivotPosX_;      //ÇÇº¿Æ÷½º X.
     float pivotPosY_;      //ÇÇº¿Æ÷½º Y.
     float shadowAngle_;
-    int bytePad1_;
+    uint bytePad1_;
 }
 
 struct InstRenderOption
@@ -19,6 +19,6 @@ struct InstRenderOption
     float pivotPosX_; //ÇÇº¿Æ÷½º X.
     float pivotPosY_; //ÇÇº¿Æ÷½º Y.
     float shadowAngle_;
-    int bytePad1_;
+    uint bytePad1_;
 };
 

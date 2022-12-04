@@ -16,13 +16,6 @@ struct Output
     int index_ : ROWINDEX;
 };
 
-//cbuffer AtlasData : register(b1)
-//{
-//    float2 textureFramePos_;
-//    float2 textureFrameSize_;
-//    float4 pivotPos_;
-//}
-
 //cbuffer PixelData : register(b0)
 //{
 //    float4 mulColor_;
@@ -48,6 +41,7 @@ Output Test_VS(Input _input)
 
 Texture2D Tex : register(t0);
 SamplerState POINTCLAMP : register(s0);
+
 
 float4 Test_PS(Output _input) : SV_Target0
 {
@@ -79,7 +73,6 @@ float4 Test_PS(Output _input) : SV_Target0
 }
 
 
-
 struct InstAtlasData     //인스턴싱용 아틀라스데이터.
 {
     float2 textureFramePos_;
@@ -87,12 +80,12 @@ struct InstAtlasData     //인스턴싱용 아틀라스데이터.
     float4 pivotPos_;
 };
 
-
-
 StructuredBuffer<InstTransformData> Inst_TransformData : register(t12);
-StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t13);
-//Texture2DArray Inst_Textures : register(t14);
-StructuredBuffer<InstRenderOption> Inst_RenderOption : register(t15);
+StructuredBuffer<InstRenderOption> Inst_RenderOption : register(t13);
+//Texture2DArray Inst_Textures : register(t14); Texture2DArray는 반드시 같은 크기, 같은 포맷의 텍스처 여러장이어야 한다. 
+//Texture2D Inst_Textures[36] : register(t14);
+
+StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
 
 Output Test_VSINST(Input _input)
 {
@@ -112,14 +105,18 @@ Output Test_VSINST(Input _input)
 
 float4 Test_PSINST(Output _input) : SV_Target0
 {
-    //float4 resultColor = (1.f, 0.f, 0.f, 1.f);
+    //Texture2D instTexture = Inst_Textures[testIndex]; Texture2DArray는 uvw3차원 좌표 체계를 사용한다.
     
-    //Texture2D instTexture = Inst_Textures[Inst_RenderOption[_input.index_].bytePad1_];
-    //
+    //const uint instancingTextureIndex = Inst_RenderOption[_input.index_].bytePad1_;
+    
+    //Texture2D temp = Inst_Textures[instancingTextureIndex.x]; 상수 외엔 사용불가.
+   
     //resultColor = (instTexture.Sample(POINTCLAMP, _input.texcoord_.xy) * mulColor_) + plusColor_;
     
     float4 resultColor = Tex.Sample(POINTCLAMP, _input.texcoord_.xy);
     
+    resultColor.a = Inst_RenderOption[_input.index_].shadowAngle_; //렌더옵션 전달 테스트용 임시코드. 나중에 반드시 지울 것.
+  
     if (0.f >= resultColor.a)
     {
         clip(-1);

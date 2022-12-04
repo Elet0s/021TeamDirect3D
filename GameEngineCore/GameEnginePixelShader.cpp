@@ -59,7 +59,12 @@ std::shared_ptr<GameEnginePixelShader> GameEnginePixelShader::Load(
     return newRes;
 }
 
-void GameEnginePixelShader::InstancingPixelShaderCompile(const std::string_view& _path, const std::string_view& _entryPoint, UINT _versionHigh, UINT _versionLow)
+void GameEnginePixelShader::InstancingPixelShaderCompile(
+    const std::string_view& _path,
+    const std::string_view& _entryPoint,
+    UINT _versionHigh /*= 5*/,
+    UINT _versionLow /*= 0*/
+)
 {
     inst_PixelShader_ = std::make_shared<GameEnginePixelShader>();  //GameEngineRes에 등록되지 않는 점 주의.
     inst_PixelShader_->SetName(_entryPoint);

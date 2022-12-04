@@ -127,7 +127,7 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngin
 
 void GameEngineRenderUnit::Render(float _deltaTime)
 {
-	if (false == isOn_)
+	if (false == this->isOn_)	//인스턴싱용 렌더유닛은 일반 렌더링을 하지 않는다.
 	{
 		return;
 	}

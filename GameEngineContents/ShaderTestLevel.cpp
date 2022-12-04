@@ -89,7 +89,10 @@ void ShaderTestLevel::Start()
 		tempComponent->GetTransform().SetWorldScale(25.f, 25.f, 1.f);
 		tempComponent->GetTransform().SetWorldPosition(randomPos);
 		testInstancingRenderer.GetInstancingUnit(i).SetTransformData(tempComponent->GetTransformData());
-		//testInstancingRenderer.GetInstancingUnit(i).GetRenderOption().bytePad1_ = 4;
+		
+		//렌더옵션 전달 테스트용 임시코드. 나중에 지울 것.
+		testInstancingRenderer.GetInstancingUnit(i).GetRenderOption().shadowAngle_ = GameEngineRandom::mainRandom_.RandomFloat(0.1f, 0.9f);
+		testInstancingRenderer.GetInstancingUnit(i).GetRenderOption().bytePad1_ = 0;
 
 		testInstancingRenderer.GetInstancingUnit(i).Link("Inst_AtlasData", testAtlasDataVector_[i]);
 	}

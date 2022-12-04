@@ -14,7 +14,7 @@ struct RenderOption
     float pivotPosX_ = 0.f;     //피봇포스 X
     float pivotPosY_ = 0.f;     //피봇포스 Y
     float shadowAngle_ = 30.f;  //그림자 각도. 기본값 30도.
-    int bytePad1_ = 0;          //바이트패드.
+    unsigned int bytePad1_ = 0;          //바이트패드.
 };
 
 class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>
@@ -82,13 +82,18 @@ public:
     //이 렌더유닛을 일반 렌더링 모드로 전환하는 함수.
     inline void On()
     {
-        isOn_ = true;
+        this->isOn_ = true;
     }
 
     //이 렌더유닛을 인스턴스 렌더링 모드로 전환하는 함수.
     inline void Off()
     {
-        isOn_ = false;
+        this->isOn_ = false;
+    }
+
+    inline bool IsInstancing()
+    {
+        return false == isOn_;
     }
 
 

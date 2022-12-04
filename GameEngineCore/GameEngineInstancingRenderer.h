@@ -97,9 +97,6 @@ public:
         shaderResourceHelper_.SetSampler(_samplerSetterName, _samplerName);
     }
 
-
-
-
 private:
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
