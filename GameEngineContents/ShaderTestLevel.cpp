@@ -64,25 +64,34 @@ void ShaderTestLevel::Start()
 	//		}
 	//	);
 	//}
-
+	int testNumber = 144;
 	
 	GameEngineInstancingRenderer& testInstancingRenderer = this->GetMainCamera()->GetInstancingRenderer("Test");
-	testInstancingRenderer.Initialize(144);
+	testInstancingRenderer.Initialize(static_cast<size_t>(testNumber));
 	testInstancingRenderer.SetTexture("TEX", "NSet.png");
 	testInstancingRenderer.SetSampler("POINTCLAMP", "POINTCLAMP");
 
-	for (int i = 0; i < 144; i++)
+	testAtlasDataVector_.reserve(testNumber);
+
+
+	for (int i = 0; i < testNumber; i++)
 	{
 		float4 randomPos = GameEngineRandom::mainRandom_.RandomFloat4(-300.f, 300.f);
-		//randomPos.z = 0.f;
+		testAtlasDataVector_.push_back(AtlasData());
+
+		testAtlasDataVector_[i].frameData_.posX = GameEngineRandom::mainRandom_.RandomFloat(0.f, 0.5f);
+		testAtlasDataVector_[i].frameData_.posY = GameEngineRandom::mainRandom_.RandomFloat(0.f, 0.5f);
+		testAtlasDataVector_[i].frameData_.sizeX = 1.f - testAtlasDataVector_[i].frameData_.posX;
+		testAtlasDataVector_[i].frameData_.sizeY = 1.f - testAtlasDataVector_[i].frameData_.posY;
+		testAtlasDataVector_[i].pivotPos_ = float4::Zero;
 
 		std::shared_ptr<GameEngineTransformComponent> tempComponent = shaderTestActor_->CreateComponent<GameEngineTransformComponent>();
 		tempComponent->GetTransform().SetWorldScale(25.f, 25.f, 1.f);
 		tempComponent->GetTransform().SetWorldPosition(randomPos);
 		testInstancingRenderer.GetInstancingUnit(i).SetTransformData(tempComponent->GetTransformData());
+		//testInstancingRenderer.GetInstancingUnit(i).GetRenderOption().bytePad1_ = 4;
 
-		//testInstancingRenderer.GetInstancingUnit(i).Link("Inst_TransformData", tempComponent->GetTransformData());
-		//testInstancingRenderer.GetInstancingUnit(i).Link("PixelData", testPixelData_);
+		testInstancingRenderer.GetInstancingUnit(i).Link("Inst_AtlasData", testAtlasDataVector_[i]);
 	}
 
 

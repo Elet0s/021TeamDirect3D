@@ -112,8 +112,9 @@ void GameEngineInstancingRenderer::Initialize(
 	for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator iter = structuredBufferSetters.begin();
 		iter != structuredBufferSetters.end(); ++iter)
 	{
-		//트랜스폼데이터는 따로 처리해야하므로 크기 조정만 하고 structuredBufferSetterNames_에 등록하지 않는다.
-		if (std::string::npos != iter->first.find("INST_TRANSFORMDATA"))
+		//트랜스폼데이터와 렌더옵션은 따로 처리해야하므로 크기 조정만 하고 structuredBufferSetterNames_에 등록하지 않는다.
+		if (0 == iter->first.compare("INST_TRANSFORMDATA") 
+			|| 0 == iter->first.compare("INST_RENDEROPTION"))
 		{
 			iter->second.Resize(instancingUnitCount_);
 			continue;
@@ -153,7 +154,6 @@ void GameEngineInstancingRenderer::Render(
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
 
 	int* rowIndexBufferIndex = reinterpret_cast<int*>(&rowIndexBuffer_[0]);
-	int rowIndex = 0;
 
 	//for (InstancingUnit& instancingUnit : instancingUnits_)
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
@@ -166,15 +166,15 @@ void GameEngineInstancingRenderer::Render(
 
 			//뷰프러스텀 컬링 넣는다면 여기에.
 
-
-			size_t transformDataSize = shaderResourceHelper_.GetStructuredBufferSetter("Inst_TransformData")->size_;
-			char* transformDataPtr = &shaderResourceHelper_.GetStructuredBufferSetter("Inst_TransformData")->originalData_[index * transformDataSize];
+			size_t transforDataSize = sizeof(TransformData);
+			char* transformDataPtr 
+				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_TransformData")->originalData_[index * transforDataSize];
 		
 			int copyResult = memcpy_s(	//
 				transformDataPtr,		//
-				transformDataSize,		//
+				transforDataSize,		//
 				&instancingUnits_[index].transformData_,	//
-				transformDataSize		//
+				transforDataSize		//
 			);
 
 			if (0 != copyResult)
@@ -183,6 +183,28 @@ void GameEngineInstancingRenderer::Render(
 				return;
 			}
 		}
+
+		//{
+		//	//렌더옵션도 기본데이터이므로 따로 처리.
+
+		//	size_t renderOptionSize = sizeof(RenderOption);
+		//	char* renderOptionPtr
+		//		= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_RenderOption")->originalData_[index * renderOptionSize];
+
+		//	int copyResult = memcpy_s(	//
+		//		renderOptionPtr,		//
+		//		renderOptionSize,		//
+		//		&instancingUnits_[index].renderOptionInst_,	//
+		//		renderOptionSize		//
+		//	);
+
+		//	if (0 != copyResult)
+		//	{
+		//		MsgBoxAssert("렌더옵션 복사 실패!");
+		//		return;
+		//	}
+		//}
+
 
 		for (std::map<std::string, const void*>::iterator unitDataIter = instancingUnits_[index].data_.begin();
 			unitDataIter != instancingUnits_[index].data_.end(); ++unitDataIter)
@@ -194,7 +216,7 @@ void GameEngineInstancingRenderer::Render(
 					size_t originalDataSize = sBufferSetterIter->second.size_;
 					//구조화버퍼 세터가 들고 있는 originalData_의 단위 크기.
 
-					char* originalDataPtr = &sBufferSetterIter->second.originalData_[rowIndex * originalDataSize];
+					char* originalDataPtr = &sBufferSetterIter->second.originalData_[index * originalDataSize];
 					//구조화버퍼 세터가 들고 있는 originalData_의 포인터.
 
 					int copyResult = memcpy_s(	//
@@ -213,8 +235,7 @@ void GameEngineInstancingRenderer::Render(
 			}
 		}
 
-		*rowIndexBufferIndex = rowIndex;
-		++rowIndex;
+		*rowIndexBufferIndex = static_cast<int>(index);
 		rowIndexBufferIndex += 1;
 		//로우인덱스버퍼에 인덱스를 기록하고 뒤로 넘어간다.
 	}

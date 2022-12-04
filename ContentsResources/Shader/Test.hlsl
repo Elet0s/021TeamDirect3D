@@ -13,7 +13,7 @@ struct Output
 {
     float4 pos_ : SV_Position; 
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    uint index_ : ROWINDEX;
+    int index_ : ROWINDEX;
 };
 
 //cbuffer AtlasData : register(b1)
@@ -90,8 +90,8 @@ struct InstAtlasData     //인스턴싱용 아틀라스데이터.
 
 
 StructuredBuffer<InstTransformData> Inst_TransformData : register(t12);
-//StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t13);
-Texture2DArray Inst_Textures : register(t14);
+StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t13);
+//Texture2DArray Inst_Textures : register(t14);
 StructuredBuffer<InstRenderOption> Inst_RenderOption : register(t15);
 
 Output Test_VSINST(Input _input)
@@ -99,11 +99,13 @@ Output Test_VSINST(Input _input)
     Output result = (Output) 0;
     result.pos_ = mul(_input.pos_, Inst_TransformData[_input.index_].worldViewProjectionMatrix_);
     
-    //result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.vertexIndex_].textureFrameSize_.x)
-    //    + Inst_AtlasData[_input.vertexIndex_].textureFramePos_.x;
-    //result.texcoord_.y = (_input.texcoord_.y * Inst_AtlasData[_input.vertexIndex_].textureFrameSize_.y)
-    //    + Inst_AtlasData[_input.vertexIndex_].textureFramePos_.y;
-    //result.texcoord_.z = 0.f;
+    result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.index_].textureFrameSize_.x)
+        + Inst_AtlasData[_input.index_].textureFramePos_.x;
+    result.texcoord_.y = (_input.texcoord_.y * Inst_AtlasData[_input.index_].textureFrameSize_.y)
+        + Inst_AtlasData[_input.index_].textureFramePos_.y;
+    result.texcoord_.z = 0.f;
+    
+    result.index_ = _input.index_;
     
     return result;
 }

@@ -36,7 +36,7 @@ class GameEngineInstancingRenderer
 
         RenderOption& GetRenderOption()
         {
-            this->renderOptionInst_;
+            return this->renderOptionInst_;
         }
 
     private:
