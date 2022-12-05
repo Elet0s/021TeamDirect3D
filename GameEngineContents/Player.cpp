@@ -5,6 +5,7 @@
 #include "PlayerUI.h"
 #include "Monster.h"
 
+
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
 
@@ -14,8 +15,8 @@ Player::Player()
 	playerInfo_(nullptr),
 	dashTimer_(0),
 	dashState_(false),
-	hitOnoff_(false)
-	//playerSkillManager_()
+	hitOnoff_(false),
+	playerSkillManager_()
 
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
@@ -243,4 +244,25 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 	mainPlayer_->SetLevelOverOn();
 	mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
 	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(mainPlayer_->GetTransform().GetWorldPosition().x,mainPlayer_->GetTransform().GetWorldPosition().y,-100.f);
+}
+
+
+void Player::HpGian()
+{
+
+}
+void Player::HpZero()
+{
+	if (playerInfo_->hp_ <=0)
+	{
+		//Off();
+	}
+}
+void Player::ExpGain()
+{
+
+}
+void Player::ExpMax()
+{
+
 }

@@ -1,6 +1,7 @@
 #pragma once
+#include "Skill.h"
 
-class SkillManager :public GameEngineActor
+class SkillManager
 {
 public:
 	SkillManager();
@@ -11,10 +12,11 @@ public:
 	SkillManager(SkillManager&& _Other) noexcept = delete;
 	SkillManager& operator=(const SkillManager& _Other) = delete;
 	SkillManager& operator=(SkillManager&& _Other) noexcept = delete;
+
+	void CreatePlayerAllSkill();
+
 protected:
-	void Start() override;
-	void Update(float _deltaTime) override;
-	void End() override;
+
 private:
-//	std::vector<std::shared_ptr<Skill>> skillList_;
+	std::vector < std::shared_ptr <Skill>> skillList_;
 };

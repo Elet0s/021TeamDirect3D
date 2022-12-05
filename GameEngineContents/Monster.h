@@ -99,10 +99,33 @@ public:
 			
 			float cameraX = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().x;
 			float cameraY = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().y;
-			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 640, cameraY - 360),float4(cameraX + 640, cameraY + 360));
+			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 1280, cameraY - 720),float4(cameraX + 1280, cameraY + 720));
 			monsterPosition_.z = 0.f;
 
+
+
+		if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
+		{
 			allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
+		}
+		else if (monsterPosition_.x< cameraX + 640 && monsterPosition_.x>cameraX -640)
+		{
+			if (monsterPosition_.y > cameraY + 360 || monsterPosition_.y < cameraY - 360)
+			{
+				allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
+			}
+			else
+			{
+				i--;
+			}
+		}
+		else
+		{
+			i--;
+		}
+
+
+		
 			--count;//소환 대기중인 몬스터라면 소환하고 카운트 감소.
 			if (0 == count)
 			{
@@ -146,8 +169,7 @@ protected:
 	float playerRange_; // 플레이어와의 거리
 	float atkDeltaTime_;
 
-	float4 test_;
-	float4 test2_;
+	float4 pushToMonsterVector;
 
 	float4 pushVector_;
 	float4 reactionVector_;

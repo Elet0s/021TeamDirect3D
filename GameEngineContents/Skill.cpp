@@ -13,11 +13,6 @@ Skill::~Skill()
 
 }
 
-void Skill::CreatSkill()
-{
-
-}
-
 void Skill::Start()
 {
 

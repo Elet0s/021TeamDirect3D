@@ -1,5 +1,5 @@
 #pragma once
-
+#include "SkillManager.h"
 
 struct PlayerInfo
 {
@@ -90,16 +90,21 @@ protected:
 	void MoveDirectionUpdate(float _deltaTime);
 	void PlayerDash(float _deltaTime);
 
+	void HpGian();//hp획득
+	void HpZero();//hp 0이하면 off하고 파티클이벤트
+	void ExpGain(); // 경험치 받는부분
+	void ExpMax();//경험치 받고 전부차면 초기화해주고 레벨업해주는부분
+
+
 private:
 	float dashTimer_;
 	bool dashState_;
 
 	float4 moveDirection_;
-	//std::shared_ptr<SkillManager> playerSkillManager_;
 	std::shared_ptr<PlayerInfo> playerInfo_;
 	std::shared_ptr<PlayerUI> playerUi_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
-
+	std::shared_ptr<SkillManager> playerSkillManager_;
 	
 };
 

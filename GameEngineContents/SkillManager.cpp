@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "SkillManager.h"
-#include "Skill.h"
+
 
 SkillManager::SkillManager()
 {
@@ -11,15 +11,12 @@ SkillManager::~SkillManager()
 
 }
 
-void SkillManager::Start()
+void SkillManager::CreatePlayerAllSkill()
 {
-
-}
-void SkillManager::Update(float _deltaTime)
-{
-
-}
-void SkillManager::End()
-{
+	skillList_.reserve(68);
+	//for (size_t i = 0; i < 68; i++)
+	//{
+	//	skillList_.push_back(i);
+	//}
 
 }

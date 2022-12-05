@@ -25,7 +25,12 @@ public:
 		return maxLevel_;
 	}
 
-	void CreatSkill();
+
+	template <typename SkillValue>
+	void createSkill(UINT _skillCount)
+	{
+	
+	}
 
 protected:
 	void Start() override;
