@@ -9,6 +9,7 @@ enum class ObjectOrder
 	Camera,
 	MapObject,
 	Sector,
+	Skill,
 	UI = 1000
 };
 
@@ -55,10 +56,6 @@ enum class SoulCard
 	//이밑으로 공격 패시브
 	SharpeningStone,
 	Cardio,
-	ForgedIron,
-	BloodPressure,
-	Accuracy,
-	lens,
 	SharpEdge,
 	Range,
 	TenseString,
@@ -67,13 +64,11 @@ enum class SoulCard
 	Compromise,
 	Practice,
 	DamascusSteel,
-	WeakPoint,
 	Aiming,
 	Area,
 	Quick,
 	Clumsy,
 	TradeOff,
-	Analysis,
 	Celerity,
 	GodsWrath,
 	Penetration,
@@ -178,7 +173,7 @@ enum class Artifact
 
 enum class PlayerStatue
 {
-	Damege,										// 데미지   1.50,
+	AtkMutiple,								    // 피해배수   100%,
 	AttackSpeed,								// 공격 속도  100.0%
 	AddProjectile,								// 추가 투사체  0
 	ThroughProjectile,                          // 투사체 관통 (몇번까지 충돌하는가) 0 

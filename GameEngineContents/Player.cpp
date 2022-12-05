@@ -8,6 +8,7 @@
 
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
+std::shared_ptr<SkillManager> Player::playerSkillManager_ = std::shared_ptr<SkillManager>(new SkillManager);
 
 Player::Player()
 	:playerRenderer_(nullptr),
@@ -15,8 +16,7 @@ Player::Player()
 	playerInfo_(nullptr),
 	dashTimer_(0),
 	dashState_(false),
-	hitOnoff_(false),
-	playerSkillManager_()
+	hitOnoff_(false)
 
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
@@ -33,6 +33,10 @@ Player::Player()
 
 Player::~Player()
 {
+	//if (nullptr != Player::playerSkillManager_)
+	//{
+	//	Player::playerSkillManager_ = nullptr;
+	//}
 }
 
 void Player::Start()
@@ -217,10 +221,29 @@ void Player::PlayerDash(float _deltaTime)
 
 }
 
+void Player::PlayerDeathEvent()
+{
+	if (playerInfo_->hp_ <= 0)
+	{
+		//Off();
+	}
+}
+
+void Player::LevelUpEvent()
+{
+	if (playerInfo_->exp_ <= playerInfo_->maxExp_)
+	{
+		playerInfo_->level_ += 1;
+		playerInfo_->exp_ -= playerInfo_->maxExp_;
+	}
+}
+
 void Player::Update(float _deltaTime)
 {
 	MoveDirectionUpdate(_deltaTime);
 	PlayerDash(_deltaTime);
+	LevelUpEvent();
+	PlayerDeathEvent();
 	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 
 }
@@ -244,25 +267,8 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 	mainPlayer_->SetLevelOverOn();
 	mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
 	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(mainPlayer_->GetTransform().GetWorldPosition().x,mainPlayer_->GetTransform().GetWorldPosition().y,-100.f);
+
+	playerSkillManager_->SetLevel(_thisLevel);
+	playerSkillManager_->CreatePlayerAllSkill();
 }
 
-
-void Player::HpGian()
-{
-
-}
-void Player::HpZero()
-{
-	if (playerInfo_->hp_ <=0)
-	{
-		//Off();
-	}
-}
-void Player::ExpGain()
-{
-
-}
-void Player::ExpMax()
-{
-
-}

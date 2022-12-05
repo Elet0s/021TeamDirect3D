@@ -19,16 +19,9 @@ void SharpEdge::Init()
 	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
 
 	std::string sDamege = std::to_string(PlayerInfo_.atk_).substr(0, std::to_string(PlayerInfo_.atk_).find(".") + 3);
-
-	if (currentlevel_ == 0)
-	{
-		etc_ = sDamege + "기본 피해";
-	}
-	else
-	{
-		std::string sDamegeNext = std::to_string(PlayerInfo_.atk_ + 0.25f).substr(0, std::to_string(PlayerInfo_.atk_ + 0.25f).find(".") + 3);
-		etc_ = sDamege + "-> " + sDamegeNext + "기본 피해";
-	}
+	std::string sDamegeNext = std::to_string(PlayerInfo_.atk_ + 0.25f).substr(0, std::to_string(PlayerInfo_.atk_ + 0.25f).find(".") + 3);
+		
+	etc_ = sDamege + "-> " + sDamegeNext + "기본 피해";
 }
 
 void SharpEdge::Effect()

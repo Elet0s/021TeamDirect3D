@@ -4,6 +4,7 @@
 class SkillManager
 {
 public:
+
 	SkillManager();
 	~SkillManager();
 
@@ -13,10 +14,17 @@ public:
 	SkillManager& operator=(const SkillManager& _Other) = delete;
 	SkillManager& operator=(SkillManager&& _Other) noexcept = delete;
 
-	void CreatePlayerAllSkill();
 
+	void SetLevel(GameEngineLevel* _thisLevel)
+	{
+		myLevel_ = _thisLevel;
+	}
+
+	void CreatePlayerAllSkill();
 protected:
 
 private:
+
+	 GameEngineLevel* myLevel_;
 	std::vector < std::shared_ptr <Skill>> skillList_;
 };

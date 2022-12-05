@@ -163,9 +163,6 @@
     <ClCompile Include="SkillManager.cpp">
       <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="Skill.cpp">
-      <Filter>Actor\02. Play\Player\Skill</Filter>
-    </ClCompile>
     <ClCompile Include="SharpeningStone.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
@@ -194,6 +191,36 @@
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
     <ClCompile Include="Muscle.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Compromise.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Practice.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="DamascusSteel.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Aiming.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Area.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Quick.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Clumsy.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="TradeOff.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Celerity.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="GodsWrath.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
   </ItemGroup>
@@ -330,6 +357,36 @@
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
     <ClInclude Include="Muscle.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Compromise.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Practice.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="DamascusSteel.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Aiming.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Area.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Quick.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Clumsy.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="TradeOff.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Celerity.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="GodsWrath.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
   </ItemGroup>
