@@ -3,9 +3,19 @@
 #include "DeathAura.h"
 #include "SharpEdge.h"
 #include "Range.h"
+#include "Celerity.h"
+#include "Quick.h"
+#include "TradeOff.h"
+#include "Area.h"
 #include "Muscle.h"
+#include "Aiming.h"
 #include "Momentum.h"
+#include "Compromise.h"
+#include "Clumsy.h"
+#include "GodsWrath.h"
+#include "Practice.h"
 #include "Cardio.h"
+#include "DamascusSteel.h"
 #include "SharpeningStone.h"
 #include "GlobalContentsValue.h"
 
@@ -24,7 +34,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new Momentum();
+	mySkill_ = new GodsWrath();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{

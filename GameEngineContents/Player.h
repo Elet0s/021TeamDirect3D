@@ -7,16 +7,17 @@ public:
 	PlayerInfo()
 		:
 		level_(0),
-		damege_(1.50f),
-		attackSpeed_(1.0f),
+		atkMultiple_(100.f),
+		attackSpeed_(100.0f),
 		addProjectile_(0),
 		throughProjectile_(0),
-		projectileSize_(1.0f),
-		projectileduration_(1.0f),
-		projectilespeed_(1.0f),
-		knockBack_(1.0f),
-		goldMultiple_(1.0f),
-		expMultiple_(1.0f),
+		projectileSize_(100.0f),
+		projectileduration_(100.0f),
+		projectilespeed_(100.0f),
+		rangeSize_(100.0f),
+		knockBack_(100.0f),
+		goldMultiple_(100.0f),
+		expMultiple_(100.0f),
 		dashFullCharge_(0.f),
 		dashReChargeTime_(3.0f),
 		dashReUseTime_(0.3f),
@@ -26,8 +27,8 @@ public:
 		hp_(100),
 		maxExp_(100),
 		exp_(0),
-		atk_(1.0f),
-		def_(10),
+		atk_(1.50f),
+		def_(0),
 		range_(1.0f),
 		RLDirection_(false),
 		pushSpeed_(0)
@@ -36,7 +37,6 @@ public:
 	}
 public:
 	float level_;
-	float damege_;
 	float attackSpeed_;
 	float addProjectile_;
 	float throughProjectile_;
@@ -58,6 +58,7 @@ public:
 	float maxExp_;
 	float exp_;
 	float atk_;
+	float atkMultiple_;
 	float def_;
 	float range_;
 	float pushSpeed_;
