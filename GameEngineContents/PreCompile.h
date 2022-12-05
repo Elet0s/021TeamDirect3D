@@ -29,7 +29,7 @@
 #include <GameEngineCore\GameEngineConstantBuffer.h>
 #include <GameEngineCore\GameEngineFolderTexture.h>
 
-#include <GameEngineCore\GameEngineInstancingTextures.h>
+#include <GameEngineCore\GameEngineTexture2DArray.h>
 
 #include <GameEngineCore\GameEngineGUI.h>
 #include <GameEngineCore\GameEngineBlur.h>

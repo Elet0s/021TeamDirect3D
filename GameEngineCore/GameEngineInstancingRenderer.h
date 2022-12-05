@@ -97,6 +97,14 @@ public:
         shaderResourceHelper_.SetSampler(_samplerSetterName, _samplerName);
     }
 
+    void SetTexture2DArray(
+        const std::string_view& _textureArraySetterName,
+        const std::string_view& _textureArrayName
+    )
+    {
+        shaderResourceHelper_.SetTexture2DArray(_textureArraySetterName, _textureArrayName);
+    }
+
 private:
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.

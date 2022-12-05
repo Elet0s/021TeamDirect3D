@@ -80,12 +80,13 @@ class GameEngineTextureSetter : public ShaderResSetter
 	//이 클래스의 목적은??
 
 	friend class GameEngineShader;
+	friend class GameEngineShaderResourceHelper;
 
-public:
 	//이 텍스처세터가 가지는 텍스처. 
 	std::shared_ptr<GameEngineTexture> texture_;
 	//추가적인 텍스처를 세팅해주지 않으면 경고 차원에서 "NSet.png"이 그대로 렌더되게 한다. 
 
+public:
 	void Setting() const;
 	void Reset() const;
 	void Bind();
@@ -102,13 +103,14 @@ public:
 class GameEngineSampler;
 class GameEngineSamplerSetter : public ShaderResSetter
 {
+	friend class GameEngineShader;
+	friend class GameEngineShaderResourceHelper;
 
 
-
-public:
 	//이 샘플러세터가 가지는 샘플러.
 	std::shared_ptr<GameEngineSampler> sampler_;
 
+public:
 	void Setting() const;
 	void Bind();
 
@@ -124,12 +126,20 @@ public:
 class GameEngineStructuredBuffer;
 class GameEngineStructuredBufferSetter : public ShaderResSetter
 {
+	friend class GameEngineShader;
+	friend class GameEngineShaderResourceHelper;
+	friend class GameEngineFBXAnimationRenderer;
+	friend class GameEngineInstancing;
+	friend class GameEngineInstancingRenderer;
+
 public:
 	void Setting() const;
 	void Bind();
 	void Resize(size_t _count);
 	size_t GetDataSize();
 
+
+private:
 	// 상수버퍼와 완전히 동일하게 동일하게 생각하면 됩니다.
 
 	std::shared_ptr<GameEngineStructuredBuffer> structuredBuffer_;
@@ -165,11 +175,10 @@ private:
 	void PushData(const void* _data, UINT _count);
 };
 
-class GameEngineInstancingTextures;
-class GameEngineInstancingTexturesSetter: public ShaderResSetter
+class GameEngineTexture2DArray;
+class GameEngineTexture2DArraySetter: public ShaderResSetter
 {
-
-
+	friend class GameEngineShader;
 	friend class GameEngineShaderResourceHelper;
 
 
@@ -178,10 +187,10 @@ class GameEngineInstancingTexturesSetter: public ShaderResSetter
 	void Bind();
 
 
-	std::shared_ptr<GameEngineInstancingTextures> instancingTextures_;
+	std::shared_ptr<GameEngineTexture2DArray> texture2DArray_;
 
 public:
-	GameEngineInstancingTexturesSetter() : instancingTextures_(nullptr)
+	GameEngineTexture2DArraySetter() : texture2DArray_(nullptr)
 	{
 	}
 };
@@ -222,8 +231,11 @@ public:
 	//이 셰이더가 주어진 이름의 샘플러세터를 가지고 있는가를 외부에서 확인하는 함수.
 	bool IsSampler(const std::string_view& _name);
 
-	//이 셰이더가 주어진 이름의 구조화버퍼세턴를 가지고 있는가를 외부에서 확인하는 함수.
+	//이 셰이더가 주어진 이름의 구조화버퍼세터를 가지고 있는가를 외부에서 확인하는 함수.
 	bool IsStructuredBuffer(const std::string_view& _name);
+	
+	//이 셰이더가 주어진 이름의 텍스처2D배열세터를 가지고 있는가를 외부에서 확인하는 함수.
+	bool IsTexture2DArray(const std::string_view& _name);
 
 protected:
 	//읽어들인 HLSL코드를 컴파일하는데 필요한 HLSL 버전을 생성하는 함수.
@@ -248,6 +260,7 @@ protected:
 	std::map<std::string, GameEngineTextureSetter> textureSetterMap_;
 	std::map<std::string, GameEngineSamplerSetter> samplerSetterMap_;
 	std::map<std::string, GameEngineStructuredBufferSetter> structuredBufferSetterMap_;
+	std::map<std::string, GameEngineTexture2DArraySetter> texture2DArraySetterMap_;
 
 	//셰이더리소스세터들을 값형으로 저장한 이유는??
 	//->셰이더 리소스 종류가 다양하지 않아서 값형으로 보관해도 많은 컨테이너들을 만들 필요가 없고, 

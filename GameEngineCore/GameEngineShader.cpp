@@ -6,7 +6,7 @@
 #include "GameEngineTexture.h"
 #include "GameEngineSampler.h"
 #include "GameEngineStructuredBuffer.h"
-#include "GameEngineInstancingTextures.h"
+#include "GameEngineTexture2DArray.h"
 
 
 
@@ -219,14 +219,14 @@ void GameEngineStructuredBufferSetter::PushData(const void* _data, UINT _count)
 	);
 }
 
-void GameEngineInstancingTexturesSetter::Setting() const
+void GameEngineTexture2DArraySetter::Setting() const
 {
 	settingFunction_();
 }
 
-void GameEngineInstancingTexturesSetter::Bind()
+void GameEngineTexture2DArraySetter::Bind()
 {
-	if (nullptr == this->instancingTextures_)
+	if (nullptr == this->texture2DArray_)
 	{
 		MsgBoxAssert("인스턴싱 텍스처들이 존재하지 않습니다.");
 		return;
@@ -237,8 +237,8 @@ void GameEngineInstancingTexturesSetter::Bind()
 	case ShaderType::VertexShader:
 	{
 		this->settingFunction_ = std::bind(
-			&GameEngineInstancingTextures::VSSetting,
-			this->instancingTextures_,
+			&GameEngineTexture2DArray::VSSetting,
+			this->texture2DArray_,
 			this->bindPoint_
 		);
 		break;
@@ -247,8 +247,8 @@ void GameEngineInstancingTexturesSetter::Bind()
 	case ShaderType::PixelShader:
 	{
 		this->settingFunction_ = std::bind(
-			&GameEngineInstancingTextures::PSSetting,
-			this->instancingTextures_,
+			&GameEngineTexture2DArray::PSSetting,
+			this->texture2DArray_,
 			this->bindPoint_
 		);
 		break;
@@ -429,6 +429,20 @@ bool GameEngineShader::IsStructuredBuffer(const std::string_view& _name)
 	}
 }
 
+bool GameEngineShader::IsTexture2DArray(const std::string_view& _name)
+{
+	std::string uppercaseTexture2DArraySetterName = GameEngineString::ToUpperReturn(_name);
+
+	if (texture2DArraySetterMap_.end() == texture2DArraySetterMap_.find(uppercaseTexture2DArraySetterName))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
 void GameEngineShader::CreateVersion(const std::string_view& _shaderType, UINT _versionHigh, UINT _versionLow)
 {
 	shaderVersion_ = "";
@@ -589,42 +603,69 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 
 		case D3D_SIT_TEXTURE:
 		{
-			if (1 < resInfo.BindCount)
+			if (D3D_SRV_DIMENSION::D3D_SRV_DIMENSION_TEXTURE2DARRAY == resInfo.Dimension)
 			{
-				int i = 0;
+				GameEngineTexture2DArraySetter newTexture2DArraySetter;
+
+				newTexture2DArraySetter.parentShader_ = this;
+
+				newTexture2DArraySetter.SetName(uppercaseResourceName);
+
+				newTexture2DArraySetter.parentShaderType_ = this->shaderType_;
+
+				newTexture2DArraySetter.texture2DArray_ = GameEngineTexture2DArray::Find("NSet5Colors");
+
+				newTexture2DArraySetter.bindPoint_ = resInfo.BindPoint;
+
+				std::pair<std::map<std::string, GameEngineTexture2DArraySetter>::iterator, bool> insertResult
+					= texture2DArraySetterMap_.insert(std::make_pair(newTexture2DArraySetter.GetName(), newTexture2DArraySetter));
+
+				if (false == insertResult.second)
+				{
+					MsgBoxAssertString(std::string(resInfo.Name) + ":  이미 같은 이름의 텍스쳐2D배열 세터가 존재합니다.");
+					return;
+				}
+				break;
 			}
-
-			GameEngineTextureSetter newTextureSetter;
-			//새 텍스처세터를 생성하고, 세터에 셰이더가 텍스처 및 텍스처를 사용하는데 필요한 정보들을 저장한다.
-
-			newTextureSetter.parentShader_ = this;
-			//이 텍스처세터를 생성하는 셰이더를 부모 셰이더로 한다.
-
-			newTextureSetter.SetName(uppercaseResourceName);
-			//리소스세터의 이름은 HLSL코드 내에 선언된 자기 리소스타입 변수 이름을 그대로 따라간다.
-
-			newTextureSetter.parentShaderType_ = this->shaderType_;
-			//부모 셰이더가 어떤 셰이더인지 저장한다.
-
-			newTextureSetter.texture_ = GameEngineTexture::Find("NSet.png");//<-텍스쳐가 아예 없다는 경고가 뜨면 여기로.
-			//나중에 지정할 텍스처가 무엇이든 일단 엔진 기본제공 텍스처인 "NSet.png"를 텍스처세터에 저장해서 
-			// 추가적인 텍스처 세팅이 없으면 경고 차원에서 "NSet.png"가 렌더링되게 한다.
-
-			newTextureSetter.bindPoint_ = resInfo.BindPoint;
-
-			std::pair<std::map<std::string, GameEngineTextureSetter>::iterator, bool> insertResult
-				= textureSetterMap_.insert(std::make_pair(newTextureSetter.GetName(), newTextureSetter));
-			//맵에 겹치는 키값을 가진 원소를 삽입하려고 하면 중복된 키값을 가진 원소를 가리키는 
-			//이터레이터와 false가 든 페어를 반환하고 삽입 시도는 무시된다.
-			//삽입이 성공했다면 삽입한 원소를 가리키는 이터레이터와 true를 가진 페어를 반환한다.
-
-			if (false == insertResult.second)
+			else if (D3D_SRV_DIMENSION::D3D_SRV_DIMENSION_TEXTURE2D == resInfo.Dimension)
 			{
-				MsgBoxAssertString(std::string(resInfo.Name) + ":  이미 같은 이름의 텍스쳐 세터가 존재합니다.");
+				GameEngineTextureSetter newTextureSetter;
+				//새 텍스처세터를 생성하고, 세터에 셰이더가 텍스처 및 텍스처를 사용하는데 필요한 정보들을 저장한다.
+
+				newTextureSetter.parentShader_ = this;
+				//이 텍스처세터를 생성하는 셰이더를 부모 셰이더로 한다.
+
+				newTextureSetter.SetName(uppercaseResourceName);
+				//리소스세터의 이름은 HLSL코드 내에 선언된 Texture2D타입 변수 이름을 그대로 따라간다.
+
+				newTextureSetter.parentShaderType_ = this->shaderType_;
+				//부모 셰이더가 어떤 셰이더인지 저장한다.
+
+				newTextureSetter.texture_ = GameEngineTexture::Find("NSet.png");//<-텍스쳐가 아예 없다는 경고가 뜨면 여기로.
+				//나중에 지정할 텍스처가 무엇이든 일단 엔진 기본제공 텍스처인 "NSet.png"를 텍스처세터에 저장해서 
+				// 추가적인 텍스처 세팅이 없으면 경고 차원에서 "NSet.png"가 렌더링되게 한다.
+
+				newTextureSetter.bindPoint_ = resInfo.BindPoint;
+
+				std::pair<std::map<std::string, GameEngineTextureSetter>::iterator, bool> insertResult
+					= textureSetterMap_.insert(std::make_pair(newTextureSetter.GetName(), newTextureSetter));
+				//맵에 겹치는 키값을 가진 원소를 삽입하려고 하면 중복된 키값을 가진 원소를 가리키는 
+				//이터레이터와 false가 든 페어를 반환하고 삽입 시도는 무시된다.
+				//삽입이 성공했다면 삽입한 원소를 가리키는 이터레이터와 true를 가진 페어를 반환한다.
+
+				if (false == insertResult.second)
+				{
+					MsgBoxAssertString(std::string(resInfo.Name) + ":  이미 같은 이름의 텍스쳐 세터가 존재합니다.");
+					return;
+				}
+
+				break;
+			}
+			else
+			{
+				MsgBoxAssert("아직 준비되지 않은 형식의 텍스처입니다.");
 				return;
 			}
-
-			break;
 		}
 
 		case D3D_SIT_SAMPLER:
@@ -701,14 +742,6 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 				MsgBoxAssertString(std::string(resInfo.Name) + ": 이미 같은 이름의 구조화 버퍼 세터가 존재합니다.");
 				return;
 			}
-
-			break;
-		}
-
-		case D3D_SIT_TBUFFER:
-		{
-			int i = 0;
-
 
 			break;
 		}

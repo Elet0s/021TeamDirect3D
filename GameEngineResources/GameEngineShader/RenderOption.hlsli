@@ -7,7 +7,7 @@ cbuffer RenderOption : register(b10)
     float pivotPosX_;       //피봇포스 X
     float pivotPosY_;       //피봇포스 Y
     float shadowAngle_;     //그림자 각도.
-    uint bytePad1_;
+    float bytePad1_;
 }
 
 struct InstRenderOption
@@ -19,5 +19,5 @@ struct InstRenderOption
     float pivotPosX_; //피봇포스 X.
     float pivotPosY_; //피봇포스 Y.
     float shadowAngle_;
-    uint bytePad1_;
+    float bytePad1_;
 };

@@ -304,7 +304,7 @@
     <ClCompile Include="GameEngineRenderingEvent.cpp">
       <Filter>Object\Component\Rendering\Contents</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineInstancingTextures.cpp">
+    <ClCompile Include="GameEngineTexture2DArray.cpp">
       <Filter>Resource\Texture</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineInstancingRenderer.cpp">
@@ -503,7 +503,7 @@
     <ClInclude Include="GameEngineRenderingEvent.h">
       <Filter>Object\Component\Rendering\Contents</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineInstancingTextures.h">
+    <ClInclude Include="GameEngineTexture2DArray.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineInstancingRenderer.h">

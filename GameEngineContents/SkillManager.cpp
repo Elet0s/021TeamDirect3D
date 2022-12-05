@@ -19,4 +19,6 @@ void SkillManager::CreatePlayerAllSkill()
 	//	skillList_.push_back(i);
 	//}
 
+
+
 }

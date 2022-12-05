@@ -2,6 +2,7 @@
 #include "GameEngineCore.h"
 #include "GameEngineDevice.h"
 #include "GameEngineTexture.h"
+#include "GameEngineTexture2DArray.h"
 #include "GameEngineFolderTexture.h"
 #include "GameEngineSampler.h"
 #include "GameEngineRenderTarget.h"
@@ -415,6 +416,13 @@ void EngineTextureLoad()
 	{
 		GameEngineTexture::Load(textures[i].GetFullPath());
 	}
+
+	currentDir.MoveToParent("GameEngineResources");
+	currentDir.MoveToChild("Texture2DArray");
+	currentDir.MoveToChild("NSet5Colors");
+
+
+	GameEngineTexture2DArray::Load(currentDir.GetFullPath());
 }
 
 void EngineMaterial()

@@ -14,7 +14,7 @@ struct RenderOption
     float pivotPosX_ = 0.f;     //피봇포스 X
     float pivotPosY_ = 0.f;     //피봇포스 Y
     float shadowAngle_ = 30.f;  //그림자 각도. 기본값 30도.
-    unsigned int bytePad1_ = 0;          //바이트패드.
+    float bytePad1_ = 0.f;          //바이트패드.
 };
 
 class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>

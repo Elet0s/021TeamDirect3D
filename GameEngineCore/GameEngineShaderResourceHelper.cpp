@@ -8,7 +8,7 @@
 #include "GameEngineFolderTexture.h"
 #include "GameEngineSampler.h" 
 #include "GameEngineStructuredBuffer.h"
-#include "GameEngineInstancingTextures.h"
+#include "GameEngineTexture2DArray.h"
 
 GameEngineShaderResourceHelper::GameEngineShaderResourceHelper()
 {
@@ -86,11 +86,11 @@ bool GameEngineShaderResourceHelper::IsStructuredBuffer(const std::string_view& 
 	}
 }
 
-bool GameEngineShaderResourceHelper::IsInstancingTextures(const std::string_view& _name)
+bool GameEngineShaderResourceHelper::IsTexture2DArray(const std::string_view& _name)
 {
-	std::string uppercaseInstancingTexturesSetterName = GameEngineString::ToUpperReturn(_name);
+	std::string uppercaseTexture2DArraySetterName = GameEngineString::ToUpperReturn(_name);
 
-	if (instancingTexturesSetterMap_.end() == instancingTexturesSetterMap_.find(uppercaseInstancingTexturesSetterName))
+	if (texture2DArraySetterMap_.end() == texture2DArraySetterMap_.find(uppercaseTexture2DArraySetterName))
 	{
 		return false;
 	}
@@ -282,34 +282,34 @@ std::shared_ptr<GameEngineSampler> GameEngineShaderResourceHelper::SetSampler(
 	return SetSampler(_samplerSetterName, GameEngineSampler::Find(_samplerName));
 }
 
-std::shared_ptr<GameEngineInstancingTextures> GameEngineShaderResourceHelper::SetInstancingTextures(const std::string_view& _texturesSetterName, const std::string_view& _texturesName)
+std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTexture2DArray(const std::string_view& _texturesSetterName, const std::string_view& _texturesName)
 {
-	return SetInstancingTextures(_texturesSetterName, GameEngineInstancingTextures::Find(_texturesName));
+	return SetTexture2DArray(_texturesSetterName, GameEngineTexture2DArray::Find(_texturesName));
 }
 
-std::shared_ptr<GameEngineInstancingTextures> GameEngineShaderResourceHelper::SetInstancingTextures(const std::string_view& _texturesSetterName, std::shared_ptr<GameEngineInstancingTextures> _textures)
+std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTexture2DArray(const std::string_view& _textureArraySetterName, std::shared_ptr<GameEngineTexture2DArray> _textureArray)
 {
-	std::string uppercaseTexturesSetterName = GameEngineString::ToUpperReturn(_texturesSetterName);
+	std::string uppercaseTexturesSetterName = GameEngineString::ToUpperReturn(_textureArraySetterName);
 
-	if (false == IsInstancingTextures(_texturesSetterName))
+	if (false == IsTexture2DArray(_textureArraySetterName))
 	{
-		MsgBoxAssertString(std::string(_texturesSetterName) + ": 그런 이름의 인스턴싱텍스처즈 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_textureArraySetterName) + ": 그런 이름의 인스턴싱텍스처즈 세터가 존재하지 않습니다.");
 		return nullptr;
 	}
 
-	std::multimap<std::string, GameEngineInstancingTexturesSetter>::iterator nameLowerBound
-		= instancingTexturesSetterMap_.lower_bound(uppercaseTexturesSetterName);
-	std::multimap<std::string, GameEngineInstancingTexturesSetter>::iterator nameUpperBound
-		= instancingTexturesSetterMap_.upper_bound(uppercaseTexturesSetterName);
+	std::multimap<std::string, GameEngineTexture2DArraySetter>::iterator nameLowerBound
+		= texture2DArraySetterMap_.lower_bound(uppercaseTexturesSetterName);
+	std::multimap<std::string, GameEngineTexture2DArraySetter>::iterator nameUpperBound
+		= texture2DArraySetterMap_.upper_bound(uppercaseTexturesSetterName);
 
-	for (std::multimap<std::string, GameEngineInstancingTexturesSetter>::iterator iter = nameLowerBound;
+	for (std::multimap<std::string, GameEngineTexture2DArraySetter>::iterator iter = nameLowerBound;
 		iter != nameUpperBound; ++iter)
 	{
-		iter->second.instancingTextures_ = _textures;
+		iter->second.texture2DArray_ = _textureArray;
 		iter->second.Bind();
 	}
 
-	return _textures;
+	return _textureArray;
 }
 
 //void GameEngineShaderResourceHelper::AllConstantBufferNew()
@@ -385,6 +385,15 @@ void GameEngineShaderResourceHelper::ShaderCheck(std::shared_ptr<GameEngineShade
 
 		insertIter->second.Bind();
 	}
+
+	for (const std::pair<std::string, GameEngineTexture2DArraySetter>& setterPair
+		: _shader->texture2DArraySetterMap_)
+	{
+		std::multimap<std::string, GameEngineTexture2DArraySetter>::iterator insertIter
+			= texture2DArraySetterMap_.insert(std::make_pair(setterPair.first, setterPair.second));
+
+		insertIter->second.Bind();
+	}
 }
 
 void GameEngineShaderResourceHelper::AllResourcesSetting()
@@ -411,6 +420,12 @@ void GameEngineShaderResourceHelper::AllResourcesSetting()
 		: structuredBufferSetterMap_)
 	{
 		structuredBufferSetterPair.second.Setting();
+	}
+
+	for (const std::pair<std::string, GameEngineTexture2DArraySetter>& texture2DArraySetterPair
+		: texture2DArraySetterMap_)
+	{
+		texture2DArraySetterPair.second.Setting();
 	}
 }
 
