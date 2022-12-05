@@ -163,9 +163,6 @@
     <ClCompile Include="SkillManager.cpp">
       <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="Skill.cpp">
-      <Filter>Actor\02. Play\Player\Skill</Filter>
-    </ClCompile>
     <ClCompile Include="SharpeningStone.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>

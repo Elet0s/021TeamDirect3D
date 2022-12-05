@@ -38,9 +38,8 @@ public:
 
 
 	template <typename SkillValue>
-	void createSkill(UINT _skillCount)
+	void createSkill()
 	{
-	
 	}
 
 protected:

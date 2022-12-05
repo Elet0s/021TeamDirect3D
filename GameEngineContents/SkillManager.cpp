@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "SkillManager.h"
-
+#include "Spear.h"
 
 SkillManager::SkillManager()
 {
@@ -8,15 +8,14 @@ SkillManager::SkillManager()
 }
 SkillManager::~SkillManager()
 {
-
 }
 
 void SkillManager::CreatePlayerAllSkill()
 {
 	skillList_.reserve(68);
-	//for (size_t i = 0; i < 68; i++)
-	//{
-	//	skillList_.push_back(i);
-	//}
+
+		std::shared_ptr<Skill> A = myLevel_->CreateActor<Spear>(ObjectOrder::Skill);
+		skillList_.push_back(A);
+	
 
 }

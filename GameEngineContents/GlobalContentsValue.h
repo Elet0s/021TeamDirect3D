@@ -9,6 +9,7 @@ enum class ObjectOrder
 	Camera,
 	MapObject,
 	Sector,
+	Skill,
 	UI = 1000
 };
 

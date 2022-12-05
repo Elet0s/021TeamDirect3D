@@ -23,11 +23,15 @@ public:
 	}
 
 protected:
-
+	void Start() override;
+	void Update(float _deltaTime) override;
+	void End() override;
+	void Left(float _deltaTime);
 
 private:
 	float damege;
 	float attackSpeed;
 	float rangeSize;
 	std::shared_ptr<GameEngineTextureRenderer> spearRenderer_;
+	std::shared_ptr<GameEngineCollision> spearCol_;
 };
