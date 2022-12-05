@@ -98,8 +98,6 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 		images_[i] = *tempScratchImages_[i].GetImages();
     }
 
-	
-
 	if (S_OK != scratchImage_.InitializeArrayFromImages(
 		&images_[0],
 		images_.size()

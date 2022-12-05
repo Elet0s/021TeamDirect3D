@@ -34,6 +34,7 @@ void ShaderTestLevel::Start()
 	GameEngineTexture2DArray::Load(mapObjectTextureDir.GetFullPath());
 
 	//GameEngineTime::SetFrameLimit(70);
+
 	int testNumber = 144;
 	
 	GameEngineInstancingRenderer& testInstancingRenderer = this->GetMainCamera()->GetInstancingRenderer("Test");
@@ -61,9 +62,7 @@ void ShaderTestLevel::Start()
 		tempComponent->GetTransform().SetWorldPosition(randomPos);
 		testInstancingRenderer.GetInstancingUnit(i).SetTransformData(tempComponent->GetTransformData());
 		
-		//렌더옵션 전달 테스트용 임시코드. 나중에 지울 것.
-		testInstancingRenderer.GetInstancingUnit(i).GetRenderOption().shadowAngle_ = 1.f;
-		testInstancingRenderer.GetInstancingUnit(i).GetRenderOption().bytePad1_ = 2.f;
+		testInstancingRenderer.GetInstancingUnit(i).GetRenderOption().bytePad1_ = GameEngineRandom::mainRandom_.RandomInt(0, 4);
 
 		testInstancingRenderer.GetInstancingUnit(i).Link("Inst_AtlasData", testAtlasDataVector_[i]);
 	}
