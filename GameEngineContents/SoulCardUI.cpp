@@ -3,6 +3,8 @@
 #include "DeathAura.h"
 #include "SharpEdge.h"
 #include "Range.h"
+#include "Muscle.h"
+#include "Momentum.h"
 #include "Cardio.h"
 #include "SharpeningStone.h"
 #include "GlobalContentsValue.h"
@@ -10,6 +12,7 @@
 SoulCardUI::SoulCardUI() 
 	: alphaTexture_(0.7f)
 	, TextColor_(float4(1.f,1.f,1.f,0.9f))
+	, RankColor_(float4::White)
 	, ColorCheck_(Appear::False)
 {
 }
@@ -21,7 +24,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new Range();
+	mySkill_ = new Momentum();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{
@@ -48,7 +51,6 @@ void SoulCardUI::Start()
 	{
 		template_ = CreateComponent<GameEngineTextureRenderer>();
 		template_->SetPivot(PivotMode::Bot);
-		template_->SetTexture("SoulCardNormal.png");
 		template_->GetTransform().SetWorldScale(float4{ 188.f,282.f,1.f });
 		template_->ChangeCamera(CameraOrder::UICamera);
 		template_->GetPixelData().mulColor_.a = alphaTexture_;
@@ -66,7 +68,6 @@ void SoulCardUI::Start()
 
 	{
 		icon_ = CreateComponent<GameEngineTextureRenderer>();
-		icon_->SetTexture("죽음의오라.png");
 		icon_->GetTransform().SetLocalMove(float4(0.f, 228.f, -1.f));
 		icon_->GetTransform().SetWorldScale(float4{ 100.f,100.f,1.f });
 		icon_->ChangeCamera(CameraOrder::UICamera);
@@ -77,7 +78,7 @@ void SoulCardUI::Start()
 		skillName_ = CreateComponent<GameEngineFontRenderer>();
 		skillName_->SetPositionMode(FontPositionMode::World);
 		skillName_->SetSize(18.f);
-		skillName_->SetText(mySkill_->GetName(), "Free Pixel");
+		skillName_->SetText(mySkill_->GetSkillName(), "Free Pixel");
 		skillName_->SetLeftAndRightSort(LeftAndRightSort::Center);
 		skillName_->GetTransform().SetLocalMove(float4(0.f, 164.f, -10.f));
 		skillName_->ChangeCamera(CameraOrder::UICamera);
@@ -101,7 +102,7 @@ void SoulCardUI::Start()
 		Level_->SetPositionMode(FontPositionMode::World);
 		Level_->SetSize(16.f);
 		Level_-> GetTransform().SetLocalMove(float4(-26.f, 35.f, -10.f));
-		Level_->SetText(std::to_string(mySkill_->Getlevel()) + "-> " + std::to_string(mySkill_->Getlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()));
+		Level_->SetText(std::to_string(mySkill_->GetCurrentlevel()) + "-> " + std::to_string(mySkill_->GetCurrentlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()));
 		Level_->SetColor(TextColor_);
 		Level_->ChangeCamera(CameraOrder::UICamera);
 	}
@@ -109,10 +110,10 @@ void SoulCardUI::Start()
 	{
 		Rank_ = CreateComponent<GameEngineFontRenderer>();
 		Rank_->SetPositionMode(FontPositionMode::World);
+		Rank_->SetText("일반", "Free Pixel");
 		Rank_->SetSize(16.f);
 		Rank_->GetTransform().SetLocalMove(float4(-84.f, 20.f, -10.f));
-		Rank_->SetText("더럽혀진","Free Pixel");
-		Rank_->SetColor(TextColor_);
+		Rank_->SetColor(RankColor_);
 		Rank_->ChangeCamera(CameraOrder::UICamera);
 	}
 
@@ -151,7 +152,8 @@ void SoulCardUI::ColorChange(Appear _Value)
 	if (Appear::True == _Value)
 	{
 		alphaTexture_ = 1.f;
-		TextColor_ = float4::White;
+		TextColor_.a = 1.0f;
+		RankColor_.a = 1.0f;
 		ColorCheck_ = Appear::True;
 	
 	}
@@ -159,7 +161,8 @@ void SoulCardUI::ColorChange(Appear _Value)
 	if (Appear::False == _Value)
 	{
 		alphaTexture_ = 0.7f;
-		TextColor_ = float4(1.f,1.f,1.f,0.9f);
+		TextColor_.a = 0.9f;
+		RankColor_.a = 0.9f;
 		ColorCheck_ = Appear::False;
 	}
 
@@ -172,7 +175,7 @@ void SoulCardUI::ColorChange(Appear _Value)
 		etc_[i]->SetColor(TextColor_);
 	}
 	Level_->SetColor(TextColor_);
-	Rank_->SetColor(TextColor_);
+	Rank_->SetColor(RankColor_);
 	
 }
 
@@ -186,13 +189,52 @@ void SoulCardUI::Setting()
 	}
 
 	etc_.clear();
+	{
+		skillName_->SetText(mySkill_->GetSkillName(), "Free Pixel");
+		icon_->SetTexture(mySkill_->GetName().data() + std::string(".png"));
+	}
+	{
+		switch (mySkill_->GetRank())
+		{
+			case Rank::Spotted:
+				template_->SetTexture("SoulCardSpotted.png");
+				Rank_->SetText("더럽혀진", "Free Pixel");
+				Rank_->SetColor(float4::White);
+				RankColor_ = float4::White;
+				break;
+			case Rank::Normal:
+				template_->SetTexture("SoulCardNormal.png");
+				Rank_->SetText("일반", "Free Pixel");
+				Rank_->SetColor(float4::White);
+				RankColor_ = float4::White;
+				break;
+			case Rank::UnCommon:
+				template_->SetTexture("SoulCardUnCommon.png");
+				Rank_->SetText("언커먼", "Free Pixel");
+				Rank_->SetColor(float4(0.f, 1.f, 0.f));
+				RankColor_ = float4(0.f, 1.f, 0.f);
+				break;
+			case Rank::Rare:
+				template_->SetTexture("SoulCardRare.png");
+				Rank_->SetText("레어", "Free Pixel");
+				Rank_->SetColor(float4(0.f, 0.f, 1.f));
+				RankColor_ = float4(0.f, 0.f, 1.f);
+				break;
+			case Rank::Epic:
+				template_->SetTexture("SoulCardEpic.png");
+				Rank_->SetText("에픽", "Free Pixel");
+				Rank_->SetColor(float4(1.0f, 0.0f, 1.f));
+				RankColor_ = float4(1.0f, 0.0f, 1.f);
+				break;
+			default:
+				break;
+		}
+	}
 
 	{
 		mySkill_->Init();
-		Level_->SetText(std::to_string(mySkill_->Getlevel()) + "-> " + std::to_string(mySkill_->Getlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()));
+		Level_->SetText(std::to_string(mySkill_->GetCurrentlevel()) + "-> " + std::to_string(mySkill_->GetCurrentlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()), "Free Pixel");
 		std::string Text = reinterpret_cast<DeathAura*>(mySkill_)->GetEtc();
-		///if(스킬 레벨이 0이 아니면 )
-		//  std::string Text = "범위 내 근처의 적에게 지속\n피해를 입힙니다\n치명타가 발생하지 않습니다\n0.75 -> 다음 레벨 데미지의 피해\n0.25초 다음 레벨 공격속도 마다 공격\n범위2.00m -> 다음레벨 범위";
 		size_t EntryIndex = Text.find("\n");
 		size_t firstIndex = 0;
 		std::string Text2 = Text.substr(0, EntryIndex);
@@ -216,6 +258,5 @@ void SoulCardUI::Setting()
 			firstIndex = EntryIndex + 1;
 			EntryIndex = Text.find("\n", firstIndex);
 		}
-
 	}
 }

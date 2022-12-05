@@ -1,4 +1,5 @@
 #pragma once
+#include "GlobalContentsValue.h"
 
 class Skill : public GameEngineActor
 {
@@ -15,9 +16,19 @@ public:
 	virtual void Init() {};
 	virtual void Effect() {};
 
-	int Getlevel()
+	std::string_view GetSkillName()
 	{
-		return level_;
+		return name_;
+	}
+
+	Rank GetRank()
+	{
+		return myRank_;
+	}
+
+	int GetCurrentlevel()
+	{
+		return currentlevel_;
 	}
 
 	int GetMaxLevel()
@@ -37,9 +48,11 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
+	std::string name_;
 	std::string etc_;
-	int level_;
+	int currentlevel_;
 	int maxLevel_;
+	Rank myRank_;
 private:
 };
 

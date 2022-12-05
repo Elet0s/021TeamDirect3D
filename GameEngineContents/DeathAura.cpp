@@ -31,20 +31,20 @@ void DeathAura::Init()
 
 void DeathAura::Effect()
 {
-	level_ += 1;
-	if(level_ >= 5)
+	currentlevel_ += 1;
+	if(currentlevel_ >= 5)
 	{
 		damege += 0.75f;
 		rangeSize += 0.25f;
 	}
 
-	else if (level_ % 2 == 0)
+	else if (currentlevel_ % 2 == 0)
 	{
 		damege += 0.38f;
 		rangeSize += 0.5f;
 	}
 
-	else if (level_ % 2 == 1)
+	else if (currentlevel_ % 2 == 1)
 	{
 		damege += 0.37f;
 		rangeSize += 0.5f;

@@ -197,3 +197,12 @@ enum class PlayerStatue
 	DashReUseTime,                              // 대쉬 재사용 시간(대쉬를 사용하고 나서 다시 사용할 때 까지 걸리는 시간) 0.3f
 	DashReChargeCount,                          // 재충전 되는 대쉬 수 (재충전 시간이 지나고 대쉬가 충전되는 수) 1
 };
+
+enum class Rank
+{
+	Spotted,
+	Normal,
+	UnCommon,
+	Rare,
+	Epic,
+};

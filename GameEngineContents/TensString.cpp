@@ -1,20 +1,20 @@
 #include "PreCompile.h"
-#include "SharpEdge.h"
+#include "TensString.h"
 #include "Player.h"
 
-SharpEdge::SharpEdge() 
+TensString::TensString() 
 {
-	name_ = "날카로운 칼날";
-	SetName(std::string_view("SharpEdge"));
-	maxLevel_ = 6;
-	myRank_ = Rank::Normal;
+	name_ = "장력";
+	SetName(std::string_view("TenseString"));
+	maxLevel_ = 3;
+	myRank_ = Rank::UnCommon;
 }
 
-SharpEdge::~SharpEdge() 
+TensString::~TensString() 
 {
 }
 
-void SharpEdge::Init()
+void TensString::Init()
 {
 	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
 
@@ -26,16 +26,16 @@ void SharpEdge::Init()
 	}
 	else
 	{
-		std::string sDamegeNext = std::to_string(PlayerInfo_.atk_ + 0.25f).substr(0, std::to_string(PlayerInfo_.atk_ + 0.25f).find(".") + 3);
+		std::string sDamegeNext = std::to_string(PlayerInfo_.atk_ + 0.1f).substr(0, std::to_string(PlayerInfo_.atk_ + 0.1f).find(".") + 3);
 		etc_ = sDamege + "-> " + sDamegeNext + "기본 피해";
 	}
 }
 
-void SharpEdge::Effect()
+void TensString::Effect()
 {
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->atk_ = floor(PlayerInfo_->atk_ * 100) / 100;
-	PlayerInfo_->atk_ += 0.25f;
+	PlayerInfo_->atk_ = round(PlayerInfo_->atk_ * 10) / 10;
+	PlayerInfo_->atk_ += 0.1f;
 
 }

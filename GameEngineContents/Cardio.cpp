@@ -5,8 +5,10 @@
 
 Cardio::Cardio() 
 {
-	SetName(std::string_view("유산소 운동"));
+	name_ = "유산소운동";
+	SetName(std::string_view("Cardio"));
 	maxLevel_ = 999;
+	myRank_ = Rank::Spotted;
 }
 
 Cardio::~Cardio() 
@@ -19,7 +21,7 @@ void Cardio::Init()
 
 	std::string sAttackSpeed = std::to_string(PlayerInfo_.speed_).substr(0, std::to_string(PlayerInfo_.speed_).find(".") + 3);
 
-	if (level_ == 0)
+	if (currentlevel_ == 0)
 	{
 		etc_ = sAttackSpeed + "공격 속도";
 	}
@@ -32,7 +34,7 @@ void Cardio::Init()
 
 void Cardio::Effect()
 {
-	level_ += 1;
+	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
 	PlayerInfo_->speed_ = round(PlayerInfo_->speed_ * 10) / 10;
 	PlayerInfo_->speed_ += 0.01f;

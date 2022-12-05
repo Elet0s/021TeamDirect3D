@@ -38,6 +38,7 @@ private:
 
 	float alphaTexture_;
 	float4 TextColor_;
+	float4 RankColor_;
 	Appear ColorCheck_;
 
 

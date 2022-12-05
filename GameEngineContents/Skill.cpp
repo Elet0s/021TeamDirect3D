@@ -3,7 +3,7 @@
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <string>
 Skill::Skill() 
-	: level_(0)
+	: currentlevel_(0)
 	, maxLevel_(0)
 {
 	

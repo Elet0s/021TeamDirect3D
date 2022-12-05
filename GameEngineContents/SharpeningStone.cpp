@@ -4,7 +4,9 @@
 
 SharpeningStone::SharpeningStone() 
 {
-	SetName(std::string_view("숫돌"));
+	name_ = "숫돌";
+	SetName(std::string_view("SharpeningStone"));
+	myRank_ = Rank::Normal;
 }
 
 SharpeningStone::~SharpeningStone() 
@@ -17,7 +19,7 @@ void SharpeningStone::Init()
 
 	std::string sDamege = std::to_string(PlayerInfo_.atk_).substr(0, std::to_string(PlayerInfo_.atk_).find(".") + 3);
 
-	if (level_ == 0)
+	if (currentlevel_ == 0)
 	{
 		etc_ = sDamege + "기본 피해";
 	}
@@ -30,7 +32,7 @@ void SharpeningStone::Init()
 
 void SharpeningStone::Effect()
 {
-	level_ += 1;
+	currentlevel_ += 1;
 	PlayerInfo *PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
 	PlayerInfo_->atk_ = round(PlayerInfo_->atk_ * 10) / 10;
 	PlayerInfo_->atk_ += 0.1f;		

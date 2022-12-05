@@ -4,8 +4,10 @@
 
 Range::Range() 
 {
-	SetName(std::string_view("사정거리"));
+	name_ = "사정거리";
+	SetName(std::string_view("Range"));
 	maxLevel_ = 6;
+	myRank_ = Rank::Epic;
 }
 
 Range::~Range() 
@@ -18,7 +20,7 @@ void Range::Init()
 
 	std::string sAttackSpeed = std::to_string(PlayerInfo_.speed_).substr(0, std::to_string(PlayerInfo_.speed_).find(".") ) + "%";
 
-	if (level_ == 0)
+	if (currentlevel_ == 0)
 	{
 		etc_ = sAttackSpeed + "투사체 지속 시간";
 	}
@@ -31,7 +33,7 @@ void Range::Init()
 
 void Range::Effect()
 {
-	level_ += 1;
+	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
 	PlayerInfo_->speed_ = round(PlayerInfo_->speed_ * 10) / 10;
 	PlayerInfo_->speed_ += 20;

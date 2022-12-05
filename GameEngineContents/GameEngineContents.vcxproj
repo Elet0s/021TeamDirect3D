@@ -167,6 +167,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineStatusWindow.h" />
+    <ClInclude Include="Momentum.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Muscle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="Range.h">
       <SubType>
@@ -201,6 +209,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Spear.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TensString.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -292,6 +304,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineStatusWindow.cpp" />
+    <ClCompile Include="Momentum.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Muscle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="Range.cpp">
       <SubType>
@@ -326,6 +346,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Spear.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TensString.cpp">
       <SubType>
       </SubType>
     </ClCompile>

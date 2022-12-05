@@ -187,6 +187,15 @@
     <ClCompile Include="SoundPlayer.cpp">
       <Filter>Actor\00. Global\Com</Filter>
     </ClCompile>
+    <ClCompile Include="TensString.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Momentum.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Muscle.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -313,6 +322,15 @@
     </ClInclude>
     <ClInclude Include="SoundPlayer.h">
       <Filter>Actor\00. Global\Com</Filter>
+    </ClInclude>
+    <ClInclude Include="TensString.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Momentum.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Muscle.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
