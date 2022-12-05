@@ -46,6 +46,9 @@
     <Filter Include="Thread">
       <UniqueIdentifier>{8135bedc-3e1d-4591-9825-93a9f3727900}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MagicEnum">
+      <UniqueIdentifier>{5bbd9970-d7c1-4ae7-a09b-d99151696057}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineDebug.h">
@@ -122,6 +125,15 @@
     </ClInclude>
     <ClInclude Include="GameEngineThreadPool.h">
       <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="magic_enum_fuse.hpp">
+      <Filter>MagicEnum</Filter>
+    </ClInclude>
+    <ClInclude Include="magic_enum.hpp">
+      <Filter>MagicEnum</Filter>
+    </ClInclude>
+    <ClInclude Include="magic_enum_format.hpp">
+      <Filter>MagicEnum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -25,3 +25,5 @@
 #include <GameEngineBase\GameEngineThreadPool.h>
 
 #include <GameEngineBase\GameEngineWindow.h>
+
+#include <GameEngineBase\magic_enum.hpp>
