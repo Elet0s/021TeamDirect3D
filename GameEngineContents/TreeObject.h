@@ -19,6 +19,12 @@ public:
 	{
 		return renderer_;
 	}
+
+
+	std::shared_ptr<GameEngineCollision> GetCheckCol()
+	{
+		return checkCol_;
+	}
 protected:
 
 private:
@@ -29,5 +35,6 @@ private:
 
 	std::shared_ptr<GameEngineTextureRenderer> renderer_;
 	std::shared_ptr<GameEngineCollision> col_;
+	std::shared_ptr<GameEngineCollision> checkCol_;
 };
 

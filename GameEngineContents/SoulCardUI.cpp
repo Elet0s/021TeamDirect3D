@@ -5,6 +5,7 @@
 #include "Range.h"
 #include "Celerity.h"
 #include "Quick.h"
+#include "Penetration.h"
 #include "TradeOff.h"
 #include "Area.h"
 #include "Muscle.h"
@@ -34,7 +35,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new GodsWrath();
+	mySkill_ = new Penetration();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{

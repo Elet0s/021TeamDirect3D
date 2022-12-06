@@ -84,16 +84,19 @@ void TileMapActor::Start()
 	}
 	
 	{
-		for (size_t i = 0; i < trees_.size(); ++i)
+		for (size_t i = 0; i < trees_.size();i++)
 		{
-			float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 20));
-			float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 10));
-			X *= 64;
-			Y *= 64;
 			trees_[i] = GetLevel()->CreateActor<TreeObject>();
-			trees_[i]->GetRenderer()->SetRenderingOrder(42 - static_cast<int>(Y));
-			trees_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
 			trees_[i]->SetParent(shared_from_this());
+			while (true == trees_[i]->GetCheckCol()->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::TreeObject, CollisionType::CT_OBB2D))
+			{
+				float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 20));
+				float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 10));
+				X *= 64;
+				Y *= 64;
+				trees_[i]->GetRenderer()->SetRenderingOrder(42 - static_cast<int>(Y));
+				trees_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
+			}
 		}
 	}
 }
@@ -115,17 +118,6 @@ void TileMapActor::Update(float _deltaTime)
 				shadowRenderers_[i]->On();
 			}
 		}
-
-		for (size_t i = 0; i < trees_.size(); ++i)
-		{
-			float4 Pos = trees_[i]->GetTransform().GetWorldPosition();
-			if ((Pos.IX() >= CameraPos.IX() && Pos.IX() <= CameraPos.IX() + 3000.f)
-				&& (Pos.IY() <= CameraPos.IY() + 200.f && Pos.IY() >= CameraPos.IY() - 1000.f))
-
-			{
-				trees_[i]->On();
-			}
-		}
 	}
 
 	{
@@ -143,16 +135,6 @@ void TileMapActor::Update(float _deltaTime)
 			}
 		}
 
-		for (size_t i = 0; i < trees_.size(); ++i)
-		{
-			float4 Pos = trees_[i]->GetTransform().GetWorldPosition();
-			if ((Pos.IX() < CameraPos.IX() || Pos.IX() > CameraPos.IX() + 1500.f)
-				|| (Pos.IY() > CameraPos.IY() || Pos.IY() < CameraPos.IY() - 800.f))
-
-			{
-				trees_[i]->Off();
-			}
-		}
 	}
 
 	if (true == renderOn &&
@@ -165,10 +147,6 @@ void TileMapActor::Update(float _deltaTime)
 			shadowRenderers_[i]->Off();
 		}
 
-		for (size_t i = 0; i < trees_.size(); ++i)
-		{
-			trees_[i]->Off();
-		}
 		tileRenderer_->Off();
 	}
 	else if (false == renderOn 

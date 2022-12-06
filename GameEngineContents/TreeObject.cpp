@@ -24,11 +24,24 @@ void TreeObject::Start()
 	col_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Green);
 	col_->ChangeOrder(ObjectOrder::MapObject);
 	col_->DebugOff();
+
+	checkCol_ = CreateComponent<GameEngineCollision>();
+	checkCol_->GetTransform().SetWorldScale(renderer_->GetTransform().GetWorldScale());
+	checkCol_->SetDebugSetting(CollisionType::CT_AABB2D, float4::Red);
+	checkCol_->ChangeOrder(ObjectOrder::TreeObject);
+	//checkCol_->DebugOff();
 }
 
 void TreeObject::Update(float _deltaTime)
 {
-
+	if (true == checkCol_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Camera, CollisionType::CT_OBB2D))
+	{
+		renderer_->On();
+	}
+	else
+	{
+		renderer_->Off();
+	}
 }
 
 void TreeObject::End()

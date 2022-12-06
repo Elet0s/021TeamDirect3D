@@ -223,6 +223,9 @@
     <ClCompile Include="GodsWrath.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
+    <ClCompile Include="Penetration.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -387,6 +390,9 @@
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
     <ClInclude Include="GodsWrath.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Penetration.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
   </ItemGroup>
