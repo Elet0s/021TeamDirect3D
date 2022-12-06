@@ -4,10 +4,13 @@
 #include "SharpEdge.h"
 #include "Range.h"
 #include "Celerity.h"
+#include "Hypersonic.h"
 #include "Quick.h"
 #include "Penetration.h"
 #include "TradeOff.h"
+#include "LightHand.h"
 #include "Area.h"
+#include "SingleHanded.h"
 #include "Muscle.h"
 #include "Aiming.h"
 #include "Momentum.h"
@@ -35,7 +38,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new Penetration();
+	mySkill_ = new Hypersonic();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{
@@ -255,7 +258,7 @@ void SoulCardUI::Setting()
 			etc_[i]->SetPositionMode(FontPositionMode::World);
 			etc_[i]->SetSize(14.f);
 			Text2 = Text.substr(firstIndex, EntryIndex - firstIndex) + "";
-			etc_[i]->SetText(Text2, "Free Pixel");
+			etc_[i]->SetText(Text2);
 			etc_[i]->SetTopAndBotSort(TopAndBotSort::Top);
 			etc_[i]->SetLeftAndRightSort(LeftAndRightSort::Center);
 			etc_[i]->GetTransform().SetLocalMove(float4(0.f, 144.f - 16.f * i, -10.f));

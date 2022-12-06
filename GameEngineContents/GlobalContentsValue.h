@@ -2,7 +2,6 @@
 
 enum class ObjectOrder
 {
-	TileMap,
 	Player,
 	Monster,
 	Mouse,
@@ -11,6 +10,7 @@ enum class ObjectOrder
 	MapObject,
 	Sector,
 	Skill,
+	TileMap,
 	UI = 1000
 };
 

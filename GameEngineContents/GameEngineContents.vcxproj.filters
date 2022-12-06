@@ -226,6 +226,16 @@
     <ClCompile Include="Penetration.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
+    <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="SingleHanded.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="LightHand.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Hypersonic.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -393,6 +403,15 @@
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
     <ClInclude Include="Penetration.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleHanded.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="LightHand.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Hypersonic.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
   </ItemGroup>

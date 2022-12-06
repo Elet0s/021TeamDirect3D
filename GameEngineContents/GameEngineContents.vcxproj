@@ -195,6 +195,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Hypersonic.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="LightHand.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Momentum.h">
       <SubType>
       </SubType>
@@ -225,6 +233,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="SharpeningStone.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SingleHanded.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -376,6 +388,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Hypersonic.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="LightHand.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Momentum.cpp">
       <SubType>
       </SubType>
@@ -406,6 +426,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="SharpeningStone.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SingleHanded.cpp">
       <SubType>
       </SubType>
     </ClCompile>
