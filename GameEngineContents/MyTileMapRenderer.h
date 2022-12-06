@@ -28,6 +28,10 @@ public:
 	MyTileMapRenderer& operator=(const MyTileMapRenderer& _Other) = delete;
 	MyTileMapRenderer& operator=(MyTileMapRenderer&& _Other) noexcept = delete;
 
+	void SetLevel(GameEngineLevel* _level)
+	{
+		curlevel_ = _level;
+	}
 
 
 public:
@@ -58,6 +62,7 @@ private:
 
 	std::shared_ptr<GameEngineTexture> tileTextures_;
 
+	GameEngineLevel* curlevel_;
 	float4 tilescale_;
 	float4 tilescalehalf_;
 	float4 tilerotate_;

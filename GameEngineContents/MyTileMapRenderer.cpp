@@ -115,7 +115,7 @@ void MyTileMapRenderer::Render(float _deltaTime)
 	//tileTransform.SetLocalScale(this->tileScale_);
 	tileTransform.SetViewMatrix(this->GetTransformData().viewMatrix_);
 	tileTransform.SetProjectionMatrix(this->GetTransformData().projectionMatrix_);
-
+	float4 CameraPos = curlevel_->GetMainCameraActorTransform().GetWorldPosition() - float4(640.f, -360.f);
 	for (size_t y = 0; y < alltiles_.size(); y++)
 	{
 		for (size_t x = 0; x < alltiles_[y].size(); x++)
@@ -124,17 +124,29 @@ void MyTileMapRenderer::Render(float _deltaTime)
 			tilePos.x += x * tilescale_.x;
 			tilePos.y += y * -tilescale_.y;
 			//tilePos.z = tilePos.y;
-
-			tileTransform.SetLocalScale(alltiles_[y][x].tileImage_->GetScale());
-			tileTransform.SetLocalPosition(tilePos);
-			tileTransform.CalculateWorldViewProjection();
-
-			this->GetShaderResourceHelper().SetConstantBuffer_Link("TransformData", tileTransform.GetTransformData());
-			this->GetShaderResourceHelper().SetTexture("Tex", alltiles_[y][x].tileImage_);
-
-
+			float4 LeftTop = float4(tilePos.x, tilePos.y);
+			float4 LeftBot = float4(tilePos.x, tilePos.y - 128.f);
+			float4 RightTop = float4(tilePos.x + 128.f, tilePos.y);
+			float4 RightBot = float4(tilePos.x + 128.f, tilePos.y - 128.f);
 			
-			GameEngineDefaultRenderer::Render(_deltaTime);
+			if ((RightTop.IX() >= CameraPos.IX() && RightTop.IX() <= CameraPos.IX() + 1300
+			&& RightTop.IY() <= CameraPos.IY() && RightTop.IY() >= CameraPos.IY() - 720)
+			|| (RightBot.IX() >= CameraPos.IX() && RightBot.IX() <= CameraPos.IX() + 1300
+			&& RightBot.IY() <= CameraPos.IY() && RightBot.IY() >= CameraPos.IY() - 720)
+			|| (LeftTop.IX() >= CameraPos.IX() && LeftTop.IX() <= CameraPos.IX() + 1300
+			&& LeftTop.IY() <= CameraPos.IY() && LeftTop.IY() >= CameraPos.IY() - 720)
+			|| (LeftBot.IX() >= CameraPos.IX() && LeftBot.IX() <= CameraPos.IX() + 1300
+			&& LeftBot.IY() <= CameraPos.IY() && LeftBot.IY() >= CameraPos.IY() - 720))
+			{
+				tileTransform.SetLocalScale(float4(alltiles_[y][x].tileImage_->GetScale()));
+				tileTransform.SetLocalPosition(tilePos);
+				tileTransform.CalculateWorldViewProjection();
+
+				this->GetShaderResourceHelper().SetConstantBuffer_Link("TransformData", tileTransform.GetTransformData());
+				this->GetShaderResourceHelper().SetTexture("Tex", alltiles_[y][x].tileImage_);
+				GameEngineDefaultRenderer::Render(_deltaTime);
+			}	
+		
 		}
 	}
 }

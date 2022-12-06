@@ -91,7 +91,7 @@ void TestLevel::Start()
 		{
 			tilemaps_[i][j] = CreateActor<TileMapActor>();
 			tilemaps_[i][j]->GetTransform().SetWorldPosition(float4(1280.f * static_cast<float>(j), -(640.f * static_cast<float>(i))));
-			tilemaps_[i][j]->tileRenderer_->CreateTileMap(10, 5, { 128, 128 }, "grassTexture.png");
+			tilemaps_[i][j]->tileRenderer_->CreateTileMap(10, 5, { 128, 128 }, "GrassTexture.png");
 			tilemaps_[i][j]->tileRenderer_->SetPivot(PivotMode::LeftTop);
 		}
 	}

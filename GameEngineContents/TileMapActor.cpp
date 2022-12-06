@@ -23,6 +23,7 @@ void TileMapActor::Start()
 	trees_.resize(3);
 	shadowRenderers_.resize(120);
 	tileRenderer_ = CreateComponent<MyTileMapRenderer>();
+	tileRenderer_->SetLevel(GetLevel());
 	col_ = CreateComponent<GameEngineCollision>();
 	col_->GetTransform().SetWorldScale(float4{ 1280,640,1 });
 	col_->GetTransform().SetWorldMove(float4{ 640,-320,1 });
