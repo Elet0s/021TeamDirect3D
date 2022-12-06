@@ -23,9 +23,9 @@ protected:
 
 
 private:
-	std::shared_ptr<GameEngineActor> shaderTestActor_;
+	std::shared_ptr<class FieldRenderingActor> shaderTestActor_;
 	std::shared_ptr<GameEngineTextureRenderer> shaderTestRenderer_;
-	std::vector<AtlasData> testAtlasDataVector_;
+	std::vector<RenderOption> testRenderOptionVector_;
 
 };
 

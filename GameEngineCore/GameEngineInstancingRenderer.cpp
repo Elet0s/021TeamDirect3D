@@ -41,9 +41,26 @@ void GameEngineInstancingRenderer::InstancingUnit::Link(const std::string_view& 
 	}
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::SetTransformData(const TransformData& _transformData)
+void GameEngineInstancingRenderer::InstancingUnit::SetWorldRotation(const float4& _worldRotationVector)
 {
-	this->transformData_ = _transformData;
+	this->transformData_.worldRotationVector_ = _worldRotationVector;
+	this->transformData_.localRotationMatrix_.Rotate3AxisByDegree(_worldRotationVector);
+	CalWorldWorldMatrix();
+}
+
+void GameEngineInstancingRenderer::InstancingUnit::SetWorldPosition(const float4& _worldPositionVector)
+{
+	this->transformData_.worldPositionVector_ = _worldPositionVector;
+	this->transformData_.localPositionMatrix_.Position(_worldPositionVector);
+	CalWorldWorldMatrix();
+}
+
+void GameEngineInstancingRenderer::InstancingUnit::CalWorldWorldMatrix()
+{
+	this->transformData_.worldWorldMatrix_
+		= this->transformData_.localScaleMatrix_ 
+		* this->transformData_.localRotationMatrix_ 
+		* this->transformData_.localPositionMatrix_;
 }
 
 GameEngineInstancingRenderer::GameEngineInstancingRenderer(): instancingUnitCount_(0)
@@ -56,8 +73,8 @@ GameEngineInstancingRenderer::~GameEngineInstancingRenderer()
 
 void GameEngineInstancingRenderer::Initialize(
 	size_t _instancingUnitCount,
-	const std::string_view& _meshName /*= "Rect"*/,
-	const std::string_view& _materialName /*= "Test"*/
+	const std::string_view& _meshName,
+	const std::string_view& _materialName
 )
 {
 	if (0 == _instancingUnitCount)
@@ -87,7 +104,7 @@ void GameEngineInstancingRenderer::Initialize(
 	this->instancingBuffer_ = GameEngineInstancingBuffer::Create(instancingUnitCount_, instancingSize);
 	//instancingUnitCount_ * instancingSize크기의 인스턴싱버퍼 생성.
 
-	rowIndexBuffer_.resize(static_cast<size_t>(instancingSize) * instancingUnitCount_);
+	instancingIndexBuffer_.resize(static_cast<size_t>(instancingSize) * instancingUnitCount_);
 	//instancingUnitCount_ * instancingSize크기로 로우인덱스 버퍼 크기 조정.
 
 
@@ -112,9 +129,9 @@ void GameEngineInstancingRenderer::Initialize(
 	for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator iter = structuredBufferSetters.begin();
 		iter != structuredBufferSetters.end(); ++iter)
 	{
-		//트랜스폼데이터와 렌더옵션은 따로 처리해야하므로 크기 조정만 하고 structuredBufferSetterNames_에 등록하지 않는다.
-		if (0 == iter->first.compare("INST_TRANSFORMDATA") 
-			|| 0 == iter->first.compare("INST_RENDEROPTION"))
+		//트랜스폼데이터, 아틀라스데이터는 따로 처리해야하므로 크기 조정만 하고 structuredBufferSetterNames_에는 등록하지 않는다.
+		if (0 == iter->first.compare("INST_TRANSFORMDATA")
+			|| 0 == iter->first.compare("INST_ATLASDATA"))
 		{
 			iter->second.Resize(instancingUnitCount_);
 			continue;
@@ -131,10 +148,10 @@ void GameEngineInstancingRenderer::Initialize(
 		}
 	}
 
-	this->instancingUnits_.reserve(instancingUnitCount_);
+	this->allInstancingUnits_.reserve(instancingUnitCount_);
 	for (size_t i = 0; i < instancingUnitCount_; ++i)
 	{
-		instancingUnits_.push_back(
+		allInstancingUnits_.push_back(
 			GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
 				this->structuredBufferSetterNames_,
 				_meshName,
@@ -153,19 +170,24 @@ void GameEngineInstancingRenderer::Render(
 	std::multimap<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetters
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
 
-	int* rowIndexBufferIndex = reinterpret_cast<int*>(&rowIndexBuffer_[0]);
+	int* instancingIndexBufferPtr = reinterpret_cast<int*>(&instancingIndexBuffer_[0]);
 
-	//for (InstancingUnit& instancingUnit : instancingUnits_)
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
-	
 		{
 			//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
-			instancingUnits_[index].transformData_.worldViewProjectionMatrix_
-				= instancingUnits_[index].transformData_.worldWorldMatrix_ * _viewMatrix * _projectionMatrix;
+			allInstancingUnits_[index].transformData_.worldViewMatrix_
+				= allInstancingUnits_[index].transformData_.worldWorldMatrix_ * _viewMatrix;
 
+			allInstancingUnits_[index].transformData_.worldViewProjectionMatrix_
+				= allInstancingUnits_[index].transformData_.worldViewMatrix_ * _projectionMatrix;
 
-			//뷰프러스텀 컬링 넣는다면 여기에.
+			if (false == float4x4::IsInViewFrustum(
+				allInstancingUnits_[index].transformData_.worldViewProjectionMatrix_,
+				float4::Zero))
+			{
+				continue;
+			}
 
 			size_t transforDataSize = sizeof(TransformData);
 			char* transformDataPtr 
@@ -174,7 +196,7 @@ void GameEngineInstancingRenderer::Render(
 			int copyResult = memcpy_s(	//
 				transformDataPtr,		//
 				transforDataSize,		//
-				&instancingUnits_[index].transformData_,	//
+				&allInstancingUnits_[index].transformData_,	//
 				transforDataSize		//
 			);
 
@@ -186,30 +208,34 @@ void GameEngineInstancingRenderer::Render(
 		}
 
 		{
-			//렌더옵션도 기본데이터이므로 따로 처리.
-
-			size_t renderOptionSize = sizeof(RenderOption);
-			char* renderOptionPtr
-				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_RenderOption")->originalData_[index * renderOptionSize];
+			//아틀라스데이터도 따로 처리.
+			size_t atlasDataSize = sizeof(AtlasData);
+			char* atlasDataPtr
+				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_AtlasData")->originalData_[index * atlasDataSize];
 
 			int copyResult = memcpy_s(	//
-				renderOptionPtr,		//
-				renderOptionSize,		//
-				&instancingUnits_[index].renderOptionInst_,	//
-				renderOptionSize		//
+				atlasDataPtr,		//
+				atlasDataSize,		//
+				&allInstancingUnits_[index].atlasData_,	//
+				atlasDataSize		//
 			);
 
 			if (0 != copyResult)
 			{
-				MsgBoxAssert("렌더옵션 복사 실패!");
+				MsgBoxAssert("아틀라스데이터 복사 실패!");
 				return;
 			}
 		}
 
-
-		for (std::map<std::string, const void*>::iterator unitDataIter = instancingUnits_[index].data_.begin();
-			unitDataIter != instancingUnits_[index].data_.end(); ++unitDataIter)
+		for (std::map<std::string, const void*>::iterator unitDataIter = allInstancingUnits_[index].data_.begin();
+			unitDataIter != allInstancingUnits_[index].data_.end(); ++unitDataIter)
 		{
+			if (nullptr == unitDataIter->second)
+			{
+				MsgBoxAssertString(unitDataIter->first + ": 셰이더로 보내기로 한 데이터가 인스턴싱 유닛에 없습니다.");
+				return;
+			}
+
 			//구조화버퍼세터로 각 유닛별 데이터 전달.
 			for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(unitDataIter->first);
 				sBufferSetterIter != structuredBufferSetters.upper_bound(unitDataIter->first); ++sBufferSetterIter) {
@@ -236,15 +262,24 @@ void GameEngineInstancingRenderer::Render(
 			}
 		}
 
-		*rowIndexBufferIndex = static_cast<int>(index);
-		rowIndexBufferIndex += 1;
-		//로우인덱스버퍼에 인덱스를 기록하고 뒤로 넘어간다.
+		*instancingIndexBufferPtr = static_cast<int>(index);
+		instancingIndexBufferPtr += 1;
+		//인스턴싱인덱스버퍼에 인덱스를 기록하고 뒤로 넘어간다.
 	}
 
-	instancingBuffer_->ChangeData(&rowIndexBuffer_[0], rowIndexBuffer_.size());
+	instancingBuffer_->ChangeData(&instancingIndexBuffer_[0], instancingIndexBuffer_.size());
 	shaderResourceHelper_.AllResourcesSetting();
 
-	instancingUnits_[0].renderUnit_->RenderInstancing2(_deltaTime, instancingUnitCount_, instancingBuffer_);
+	allInstancingUnits_[0].renderUnit_->RenderInstancing2(_deltaTime, instancingUnitCount_, instancingBuffer_);
 
 
+}
+
+void GameEngineInstancingRenderer::SetAllUnitsWorldScale(const float4& _worldScaleVector)
+{
+	for (InstancingUnit& singleInstancingUnit : allInstancingUnits_)
+	{
+		singleInstancingUnit.transformData_.localScaleMatrix_.Scale(_worldScaleVector);
+		singleInstancingUnit.CalWorldWorldMatrix();
+	}
 }

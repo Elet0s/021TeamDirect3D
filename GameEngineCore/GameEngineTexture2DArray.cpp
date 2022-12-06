@@ -81,11 +81,6 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 			}
 		}
 
-		//const DirectX::Image* tempImage = tempScratchImage.GetImages();
-
-		//uint8_t tempPixelColor = *tempImage->pixels;
-
-
 		if (0 < i 
 			&& (metaDatas_[i].width != metaDatas_[0].width 
 				|| metaDatas_[i].height != metaDatas_[0].height
@@ -103,7 +98,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 		images_.size()
 	))
 	{
-		MsgBoxAssert("생성 실패.");
+		MsgBoxAssert("텍스처 배열 생성 실패.");
 		return;
 	}
 

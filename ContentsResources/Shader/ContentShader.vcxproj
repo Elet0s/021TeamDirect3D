@@ -168,6 +168,9 @@
     <None Include="RenderOption.hlsli" />
     <None Include="TransformHeader.hlsli" />
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="TileTextureInstancing.hlsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

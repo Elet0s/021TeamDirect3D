@@ -51,8 +51,9 @@ public:
 	//인스턴싱 반환. 없다면 빈 인스턴싱을 만들어서 반환한다.
 	GameEngineInstancing& GetInstancing(const std::string& _name);
 
-	//인스턴싱 반환. 없다면 빈 인스턴싱을 만들어서 반환한다.
+	//인스턴싱렌더러 반환. 없다면 빈 인스턴싱렌더러를 만들어서 반환한다.
 	GameEngineInstancingRenderer& GetInstancingRenderer(const std::string& _name);
+	//카메라에서 생성하면서 받아오지 말고 생성한 렌더러를 카메라에 넣는게 더 낫지 않을까?
 
 public:
 	void SetProjectionMode(CameraProjectionMode _mode)

@@ -61,6 +61,12 @@
     <Filter Include="Actor\00. Global\Com">
       <UniqueIdentifier>{8bbfbb2a-1b98-4fcc-a2b2-200fb47cce13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\Global\ContentsSupport\Renderer">
+      <UniqueIdentifier>{2140f890-01ea-4e48-b4d1-7fe2d7a62e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Global\ContentsSupport\Actor">
+      <UniqueIdentifier>{8784af60-8bcf-4147-afe5-2288f25621ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -135,9 +141,6 @@
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture2DShadowRenderer.cpp">
-      <Filter>Level\Global\ContentsSupport</Filter>
     </ClCompile>
     <ClCompile Include="PlayerUI.cpp">
       <Filter>Actor\00. Global\UI</Filter>
@@ -236,6 +239,12 @@
     <ClCompile Include="Hypersonic.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
+    <ClCompile Include="Texture2DShadowRenderer.cpp">
+      <Filter>Level\Global\ContentsSupport\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldRenderingActor.cpp">
+      <Filter>Level\Global\ContentsSupport\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -311,9 +320,6 @@
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>Actor\00. Global\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture2DShadowRenderer.h">
-      <Filter>Level\Global\ContentsSupport</Filter>
     </ClInclude>
     <ClInclude Include="TreeObject.h">
       <Filter>Actor\01. MapObject</Filter>
@@ -413,6 +419,12 @@
     </ClInclude>
     <ClInclude Include="Hypersonic.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2DShadowRenderer.h">
+      <Filter>Level\Global\ContentsSupport\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldRenderingActor.h">
+      <Filter>Level\Global\ContentsSupport\Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

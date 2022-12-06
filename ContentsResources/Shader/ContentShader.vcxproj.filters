@@ -6,4 +6,7 @@
     <None Include="Test.hlsl" />
     <None Include="Texture2DShadow.hlsl" />
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="TileTextureInstancing.hlsl" />
+  </ItemGroup>
 </Project>

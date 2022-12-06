@@ -115,4 +115,12 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	newContentsMaterial1->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial1->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial2
+		= GameEngineMaterial::Create("TileTextureInstancing");
+	newContentsMaterial2->SetVertexShader("TileTextureInstancing.hlsl");
+	newContentsMaterial2->SetPixelShader("TileTextureInstancing.hlsl");
+	newContentsMaterial2->SetRasterizer("EngineRasterizer");
+	newContentsMaterial2->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial2->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
 }
