@@ -1,4 +1,5 @@
 #include "PreCompile.h"
+#include "Player.h"
 #include "GlobalContentsValue.h"
 #include "TreeObject.h"
 
@@ -34,6 +35,30 @@ void TreeObject::Start()
 
 void TreeObject::Update(float _deltaTime)
 {
+	if (checkCol_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::TreeObject, CollisionType::CT_AABB2D))
+	{
+		float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 20));
+		float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 10));
+		X *= 64;
+		Y *= 64;
+		//trees_[i]->GetRenderer()->SetRenderingOrder(42 - static_cast<int>(Y));
+		GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
+	}
+
+	if (true == checkCol_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Player, CollisionType::CT_OBB2D))
+	{
+		if (GetTransform().GetWorldPosition().IY() - 50 > Player::GetPlayerInst()->GetTransform().GetWorldPosition().IY())
+		{
+			renderer_->SetRenderingOrder(static_cast<int>(ObjectOrder::TreeObject));
+		}
+		else
+		{
+			renderer_->SetRenderingOrder(-1);
+		}
+	}
+
+
+
 	if (true == checkCol_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Camera, CollisionType::CT_OBB2D))
 	{
 		renderer_->On();

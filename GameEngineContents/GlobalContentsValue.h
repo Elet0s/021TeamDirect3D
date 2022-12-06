@@ -7,8 +7,8 @@ enum class ObjectOrder
 	Monster,
 	Mouse,
 	Camera,
-	MapObject,
 	TreeObject,
+	MapObject,
 	Sector,
 	Skill,
 	UI = 1000
