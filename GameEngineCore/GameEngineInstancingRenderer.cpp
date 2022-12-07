@@ -116,7 +116,7 @@ void GameEngineInstancingRenderer::Initialize(
 	//	GameEngineMaterial::Find(_materialName)->GetPixelShader());
 	this->shaderResourceHelper_.ShaderCheck(
 		GameEngineMaterial::Find(_materialName)->GetPixelShader()->GetInst_PixelShader());
-	//_materialName의 이름을 가진 마테리얼의 모든 렌더링 데이터를 맞는 셰이더에 연결시킨다.
+	//_materialName의 이름을 가진 마테리얼의 모든 렌더링 데이터들을, 셰이더에 연결시킨다.
 
 
 	
@@ -186,6 +186,7 @@ void GameEngineInstancingRenderer::Render(
 				allInstancingUnits_[index].transformData_.worldViewProjectionMatrix_,
 				float4::Zero))
 			{
+				//이게 의미가 있나?
 				continue;
 			}
 

@@ -80,7 +80,7 @@ class GameEngineInstancingRenderer
 
         AtlasData atlasData_;
 
-        std::map<std::string, const void*> data_;  //키값으로 쓰인 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
+        std::map<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
     };
 
 
