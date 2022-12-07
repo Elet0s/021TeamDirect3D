@@ -396,13 +396,22 @@ public:
 		return -(float4::Normalize3DReturn(data_.worldWorldMatrix_.arrVector[0]));
 	}
 
-	void SetViewMatrix(const float4x4& _viewMatrix)
+	inline void SetViewMatrix(const float4x4& _viewMatrix)
 	{
 		data_.viewMatrix_ = _viewMatrix;
 	}
-	void SetProjectionMatrix(const float4x4& _projectionMatrix)
+	inline void SetProjectionMatrix(const float4x4& _projectionMatrix)
 	{
 		data_.projectionMatrix_ = _projectionMatrix;
+	}
+
+	inline const float4x4& GetViewMatrix() const
+	{
+		return data_.viewMatrix_;
+	}
+	inline const float4x4& GetProjectionMatrix() const
+	{
+		return data_.projectionMatrix_;
 	}
 	
 

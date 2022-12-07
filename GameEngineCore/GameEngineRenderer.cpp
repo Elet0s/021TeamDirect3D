@@ -4,6 +4,7 @@
 #include "GameEngineInstancing.h"
 #include "GameEngineInputLayout.h"
 #include "GameEngineDevice.h"
+#include "GameEngineCamera.h"
 
 GameEngineRenderUnit::GameEngineRenderUnit()
 	: isOn_(true),
@@ -107,6 +108,14 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngin
 	}
 	parentRenderer_ = _parentRenderer;
 
+	if (true == this->shaderResourceHelper_.IsConstantBuffer("LIGHTINGDATAS"))
+	{
+		shaderResourceHelper_.SetConstantBuffer_Link(
+			"LIGHTINGDATAS",
+			&this->parentRenderer_.lock()->GetCamera().lock()->GetLightingDatas(),
+			sizeof(LightingDatas)
+		);
+	}
 	if (true == this->shaderResourceHelper_.IsConstantBuffer("TRANSFORMDATA"))
 	{
 		shaderResourceHelper_.SetConstantBuffer_Link(
@@ -275,8 +284,7 @@ GameEngineRenderer::GameEngineRenderer()
 	: camera_(),
 	renderOptionInst_(),
 	cameraOrder_(CameraOrder::MainCamera),
-	renderingOrder_(0),
-	isInstancing_(false)
+	renderingOrder_(0)
 {
 }
 

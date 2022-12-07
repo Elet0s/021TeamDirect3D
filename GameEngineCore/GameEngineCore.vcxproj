@@ -197,6 +197,10 @@
     <ClInclude Include="GameEngineInstancingBuffer.h" />
     <ClInclude Include="GameEngineInstancingRenderer.h" />
     <ClInclude Include="GameEngineLevel.h" />
+    <ClInclude Include="GameEngineLighting.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineMesh.h" />
     <ClInclude Include="GameEnginePixelShader.h" />
     <ClInclude Include="GameEngineRasterizer.h" />
@@ -287,6 +291,10 @@
     <ClCompile Include="GameEngineInstancingBuffer.cpp" />
     <ClCompile Include="GameEngineInstancingRenderer.cpp" />
     <ClCompile Include="GameEngineLevel.cpp" />
+    <ClCompile Include="GameEngineLighting.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineMesh.cpp" />
     <ClCompile Include="GameEnginePixelShader.cpp" />
     <ClCompile Include="GameEngineRasterizer.cpp" />

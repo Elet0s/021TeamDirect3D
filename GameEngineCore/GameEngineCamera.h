@@ -1,6 +1,7 @@
 #pragma once
 #include "GameEngineLevel.h"
 #include "GameEngineTransformComponent.h"
+#include "GameEngineLighting.h"
 
 enum class CameraProjectionMode
 {
@@ -55,6 +56,9 @@ public:
 	GameEngineInstancingRenderer& GetInstancingRenderer(const std::string& _name);
 	//카메라에서 생성하면서 받아오지 말고 생성한 렌더러를 카메라에 넣는게 더 낫지 않을까?
 
+	//카메라에 조명 추가.
+	void PushLighting(std::shared_ptr<GameEngineLighting> _newLighting);
+
 public:
 	void SetProjectionMode(CameraProjectionMode _mode)
 	{
@@ -91,6 +95,11 @@ public:
 	inline std::shared_ptr<class GameEngineRenderTarget> GetCameraRenderTarget()
 	{
 		return cameraRenderTarget_;
+	}
+
+	inline LightingDatas& GetLightingDatas()
+	{
+		return lightingDatasInst_;
 	}
 
 
@@ -196,5 +205,9 @@ private:
 	float4 mouseDirection_;		//마우스포인터가 이동한 방향.
 
 	std::shared_ptr<GameEngineRenderTarget> cameraRenderTarget_;	//이 카메라가 가진 렌더타겟.
+
+	std::set<std::shared_ptr<GameEngineLighting>> allLightings_;
+
+	LightingDatas lightingDatasInst_;
 };
 

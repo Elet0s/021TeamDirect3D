@@ -91,11 +91,6 @@ public:
         this->isOn_ = false;
     }
 
-    inline bool IsInstancing()
-    {
-        return false == isOn_;
-    }
-
 
 private:
     bool isOn_;     //true: 일반 렌더링 모드, false: 인스턴스 렌더링 모드.
@@ -145,9 +140,9 @@ public:
         return renderingOrder_;
     }
 
-    virtual void InstancingOn()
+    inline std::weak_ptr<class GameEngineCamera> GetCamera()
     {
-        isInstancing_ = true;
+        return camera_;
     }
 
 public:
@@ -167,6 +162,5 @@ protected:
 private:
     CameraOrder cameraOrder_;
     int renderingOrder_;
-    bool isInstancing_;
 };
 

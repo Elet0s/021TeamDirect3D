@@ -45,10 +45,10 @@ struct GameEngineVertex
 	static GameEngineInputLayoutDesc inputLayoutInfo_;
 	//버텍스 하나마다 inputLayoutInfo_ 한개씩만 가진다. 
 
-	float4 POSITION;
-	float4 COLOR;
-	float4 TEXCOORD;
-	float4 NORMAL;
+	float4 POSITION;	//위치.
+	float4 COLOR;		//색상.
+	float4 TEXCOORD;	//UV좌표.
+	float4 NORMAL;		//법선벡터.
 	float4 BINORMAL;
 	float4 TANGENT;
 	float4 WEIGHT;		// 애니메이션 가중치

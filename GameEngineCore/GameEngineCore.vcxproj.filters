@@ -310,6 +310,9 @@
     <ClCompile Include="GameEngineInstancingRenderer.cpp">
       <Filter>Object\Component\Rendering\Instancing</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineLighting.cpp">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -508,6 +511,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineInstancingRenderer.h">
       <Filter>Object\Component\Rendering\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineLighting.h">
+      <Filter>Object\Component\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

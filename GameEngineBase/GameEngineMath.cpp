@@ -10,12 +10,12 @@ const float GameEngineMath::RadianToDegree = 180.0f / GameEngineMath::PI;	//È£µµ
 const float4 float4::Zero = { 0, 0, 0, 0 };
 const float4 float4::One = { 1, 1, 1, 1 };
 
-const float4 float4::Left = { -1, 0, 0, 1};
-const float4 float4::Right = { 1, 0, 0, 1 };
-const float4 float4::Up = { 0, 1, 0, 1 };
-const float4 float4::Down = { 0, -1, 0, 1 };
-const float4 float4::Forward = { 0, 0, 1, 1 };
-const float4 float4::Back = { 0, 0, -1, 1 };
+const float4 float4::Left = { -1, 0, 0, 0 };
+const float4 float4::Right = { 1, 0, 0, 0 };
+const float4 float4::Up = { 0, 1, 0, 0 };
+const float4 float4::Down = { 0, -1, 0, 0 };
+const float4 float4::Forward = { 0, 0, 1, 0 };
+const float4 float4::Back = { 0, 0, -1, 0 };
 
 const float4 float4::Red = { 1, 0, 0, 1 };
 const float4 float4::Green = { 0, 1, 0, 1 };

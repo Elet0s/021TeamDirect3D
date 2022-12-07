@@ -498,6 +498,15 @@ void EngineMaterial()
 	newMaterial8->SetRasterizer("EngineRasterizer");
 	newMaterial8->SetBlend_OutputMerger("AlphaBlend");
 	newMaterial8->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+	std::shared_ptr<GameEngineMaterial> newMaterial9
+		= GameEngineMaterial::Create("LightTest");
+	newMaterial9->SetVertexShader("LightTest.hlsl");
+	newMaterial9->SetPixelShader("LightTest.hlsl");
+	newMaterial9->SetRasterizer("EngineRasterizer");
+	newMaterial9->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial9->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
 }
 
 void EngineMesh()
@@ -505,10 +514,10 @@ void EngineMesh()
 	//기본 사각형.
 	std::vector<GameEngineVertex> rectVertex;
 	rectVertex.reserve(4);
-	rectVertex.push_back({ float4(-0.5f, 0.5f), float4(), float4(0, 0) });	//0번 점.
-	rectVertex.push_back({ float4(0.5f, 0.5f), float4(), float4(1, 0) });	//1번 점.
-	rectVertex.push_back({ float4(0.5f, -0.5f), float4(), float4(1, 1) });	//2번 점.
-	rectVertex.push_back({ float4(-0.5f, -0.5f), float4(), float4(0, 1) });	//3번 점.
+	rectVertex.push_back({ float4(-0.5f, 0.5f), float4::Black, float4(0, 0), float4::Back });	//0번 점.
+	rectVertex.push_back({ float4(0.5f, 0.5f), float4::Black, float4(1, 0), float4::Back });	//1번 점.
+	rectVertex.push_back({ float4(0.5f, -0.5f), float4::Black, float4(1, 1), float4::Back });	//2번 점.
+	rectVertex.push_back({ float4(-0.5f, -0.5f), float4::Black, float4(0, 1), float4::Back });	//3번 점.
 	GameEngineVertexBuffer::Create("RectVertex", rectVertex);
 
 	std::vector<int> rectIndex;
@@ -532,10 +541,10 @@ void EngineMesh()
 	//윈도우 전체 크기 사각형.
 	std::vector<GameEngineVertex> fullrectVertex;
 	fullrectVertex.reserve(4);
-	fullrectVertex.push_back({ float4(-1.f, 1.f), float4(), float4(0, 0) });	//0번 점.
-	fullrectVertex.push_back({ float4(1.f, 1.f), float4(), float4(1, 0) });		//1번 점.
-	fullrectVertex.push_back({ float4(1.f, -1.f), float4(), float4(1, 1) });	//2번 점.
-	fullrectVertex.push_back({ float4(-1.f, -1.f), float4(), float4(0, 1) });	//3번 점.
+	fullrectVertex.push_back({ float4(-1.f, 1.f), float4::Black, float4(0, 0), float4::Back });	//0번 점.
+	fullrectVertex.push_back({ float4(1.f, 1.f), float4::Black, float4(1, 0), float4::Back });		//1번 점.
+	fullrectVertex.push_back({ float4(1.f, -1.f), float4::Black, float4(1, 1), float4::Back });	//2번 점.
+	fullrectVertex.push_back({ float4(-1.f, -1.f), float4::Black, float4(0, 1), float4::Back });	//3번 점.
 	GameEngineVertexBuffer::Create("FullrectVertex", fullrectVertex);
 
 	std::vector<int> fullrectIndex;
@@ -552,21 +561,18 @@ void EngineMesh()
 
 	GameEngineMesh::Create("Fullrect", "FullrectVertex", "FullrectIndex");
 
-
-
-
 	//기본 육면체.
 	std::vector<GameEngineVertex> boxVertex;
 	boxVertex.reserve(8);
-	boxVertex.push_back({ float4(-0.5f, 0.5f, -0.5f), float4(), float4(0, 0) });		//0번 점.
-	boxVertex.push_back({ float4(0.5f, 0.5f, -0.5f), float4(), float4(1, 0) });		//1번 점.
-	boxVertex.push_back({ float4(0.5f, -0.5f, -0.5f), float4(), float4(1, 1) });		//2번 점.
-	boxVertex.push_back({ float4(-0.5f, -0.5f, -0.5f), float4(), float4(0, 1) });	//3번 점.
+	boxVertex.push_back({ float4(-0.5f, 0.5f, -0.5f), float4::Black, float4(0, 0), float4(-0.5773f, 0.5773f, -0.5773f) });		//0번 점.
+	boxVertex.push_back({ float4(0.5f, 0.5f, -0.5f), float4::Black, float4(1, 0),  float4(0.5773f, 0.5773f, -0.5773f) });		//1번 점.
+	boxVertex.push_back({ float4(0.5f, -0.5f, -0.5f), float4::Black, float4(1, 1), float4(0.5773f, -0.5773f, -0.5773f) });		//2번 점.
+	boxVertex.push_back({ float4(-0.5f, -0.5f, -0.5f), float4::Black, float4(0, 1), float4(-0.5773f, -0.5773f, -0.5773f) });	//3번 점.
 
-	boxVertex.push_back({ float4(0.5f, 0.5f, 0.5f), float4(), float4(0, 1) });		//4번 점.
-	boxVertex.push_back({ float4(-0.5f, 0.5f, 0.5f), float4(), float4(1, 1) });		//5번 점.
-	boxVertex.push_back({ float4(-0.5f, -0.5f, 0.5f), float4(), float4(1, 0) });		//6번 점.
-	boxVertex.push_back({ float4(0.5f, -0.5f, 0.5f), float4(), float4(0, 0) });		//7번 점.
+	boxVertex.push_back({ float4(0.5f, 0.5f, 0.5f), float4::Black, float4(0, 1), float4(0.5773f, 0.5773f, 0.5773f) });		//4번 점.
+	boxVertex.push_back({ float4(-0.5f, 0.5f, 0.5f), float4::Black, float4(1, 1), float4(-0.5773f, 0.5773f, 0.5773f) });		//5번 점.
+	boxVertex.push_back({ float4(-0.5f, -0.5f, 0.5f), float4::Black, float4(1, 0), float4(-0.5773f, -0.5776f, 0.5776f) });		//6번 점.
+	boxVertex.push_back({ float4(0.5f, -0.5f, 0.5f), float4::Black, float4(0, 0), float4(0.5773f, -0.5773f, 0.5773f) });		//7번 점.
 	GameEngineVertexBuffer::Create("BoxVertex", boxVertex);
 
 	std::vector<int> boxIndex;
@@ -626,6 +632,126 @@ void EngineMesh()
 	GameEngineIndexBuffer::Create("BoxIndex", boxIndex);
 
 	GameEngineMesh::Create("Box", "BoxVertex", "BoxIndex");
+
+
+
+
+	{
+		GameEngineVertex V;
+		std::vector<GameEngineVertex> VBVector;
+		std::vector<UINT> IBVector;
+
+		float Radius = 0.5f;
+		// 북극점부터 시작합니다.
+		V.POSITION = float4(0.0f, Radius, 0.0f, 1.0f);
+		V.TEXCOORD = float4(0.5f, 0.0f);
+		// 노말 백터 혹은 법선백터라고 불리며
+		// 면에 수직인 벡터를 의미하게 된다.
+		// 빛을 반사할때 필수.
+		V.NORMAL = float4(0.0f, Radius, 0.0f, 1.0f);
+		V.NORMAL.Normalize3D();
+		V.NORMAL.w = 0.0f;
+		V.TANGENT = float4(1.0f, 0.0f, 0.0f, 0.0f);
+		V.BINORMAL = float4(0.0f, 0.0f, 1.0f, 0.0f);
+
+		VBVector.push_back(V);
+
+		UINT iStackCount = 40; // 가로 분할 개수입니다.
+		UINT iSliceCount = 40; // 세로분할 개수
+
+		float yRotAngle = GameEngineMath::PI / (float)iStackCount;
+		float zRotAngle = (GameEngineMath::PI * 2) / (float)iSliceCount;
+
+		// UV의 가로세로 간격값을 구한다.
+		float yUvRatio = 1.0f / (float)iStackCount;
+		float zUvRatio = 1.0f / (float)iStackCount;
+
+		for (UINT y = 1; y < iStackCount; ++y)
+		{
+			// 각 간격에 대한 각도값
+			float phi = y * yRotAngle;
+			for (UINT z = 0; z < iSliceCount + 1; ++z)
+			{
+				float theta = z * zRotAngle;
+				V.POSITION = float4{
+					Radius * sinf(y * yRotAngle) * cosf(z * zRotAngle),
+					Radius * cosf(y * yRotAngle),
+					Radius * sinf(y * yRotAngle) * sinf(z * zRotAngle),
+					1.0f // 위치 크기 값에 영향을 주기 위해서
+				};
+
+				// V.Pos *= GameEngineRandom::RandomFloat(-0.9f, 0.1f);
+
+				V.TEXCOORD = float4(yUvRatio * z, zUvRatio * y);
+				V.NORMAL = float4::Normalize3DReturn(V.POSITION);
+				V.NORMAL.w = 0.0f;
+
+				V.TANGENT.x = -Radius * sinf(phi) * sinf(theta);
+				V.TANGENT.y = 0.0f;
+				V.TANGENT.z = Radius * sinf(phi) * cosf(theta);
+				V.TANGENT = float4::Normalize3DReturn(V.TANGENT);
+				V.TANGENT.w = 0.0f;
+
+				V.BINORMAL = float4::Cross3D(V.TANGENT, V.NORMAL);
+				V.BINORMAL = float4::Normalize3DReturn(V.BINORMAL);
+				V.BINORMAL.w = 0.0f;
+
+				VBVector.push_back(V);
+			}
+		}
+
+		// 남극점
+		V.POSITION = float4(0.0f, -Radius, 0.0f, 1.0f);
+		V.TEXCOORD = float4(0.5f, 1.0f);
+		V.NORMAL = float4(0.0f, -Radius, 0.0f, 1.0f);
+		V.NORMAL.Normalize3D();
+		V.NORMAL.w = 0.0f;
+		V.TANGENT = float4(-1.0f, 0.0f, 0.0f, 0.0f);
+		V.BINORMAL = float4(0.0f, 0.0f, -1.0f, 0.0f);
+		VBVector.push_back(V);
+
+		// 인덱스 버퍼를 만듭니다.
+		IBVector.clear();
+
+		// 북극점을 이루는 점을 만드는건.
+		for (UINT i = 0; i < iSliceCount; i++)
+		{
+			// 시작은 무조건 북극점
+			IBVector.push_back(0);
+			IBVector.push_back(i + 2);
+			IBVector.push_back(i + 1);
+		}
+
+		for (UINT y = 0; y < iStackCount - 2; y++)
+		{
+			for (UINT z = 0; z < iSliceCount; z++)
+			{
+				IBVector.push_back((iSliceCount + 1) * y + z + 1);
+				IBVector.push_back((iSliceCount + 1) * (y + 1) + (z + 1) + 1);
+				IBVector.push_back((iSliceCount + 1) * (y + 1) + z + 1);
+
+				IBVector.push_back((iSliceCount + 1) * y + z + 1);
+				IBVector.push_back((iSliceCount + 1) * y + (z + 1) + 1);
+				IBVector.push_back((iSliceCount + 1) * (y + 1) + (z + 1) + 1);
+
+			}
+		}
+
+		// 마지막으로 남극점 인덱스
+		UINT iBotIndex = (UINT)VBVector.size() - 1;
+		for (UINT i = 0; i < iSliceCount; i++)
+		{
+			// 시작은 무조건 북극점
+			IBVector.push_back(iBotIndex);
+			IBVector.push_back(iBotIndex - (i + 2));
+			IBVector.push_back(iBotIndex - (i + 1));
+		}
+
+		GameEngineVertexBuffer::Create("Sphere", VBVector);
+		GameEngineIndexBuffer::Create("Sphere", IBVector);
+		GameEngineMesh::Create("Sphere");
+
+	}
 
 
 

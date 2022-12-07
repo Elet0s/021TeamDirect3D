@@ -128,6 +128,17 @@ GameEngineInstancingRenderer& GameEngineCamera::GetInstancingRenderer(const std:
 	return instancingRenderers_[_name];
 }
 
+void GameEngineCamera::PushLighting(std::shared_ptr<GameEngineLighting> _newLighting)
+{
+	if (true == allLightings_.contains(_newLighting))
+	{
+		MsgBoxAssert("이미 있는 조명입니다.");
+		return;
+	}
+
+	allLightings_.insert(_newLighting);
+}
+
 void GameEngineCamera::Start()
 {
 	cameraRenderTarget_ = GameEngineRenderTarget::Create();
@@ -211,6 +222,14 @@ void GameEngineCamera::Render(float _deltaTime)
 
 	default:
 		break;
+	}
+
+	lightingDatasInst_.lightingCount_ = static_cast<int>(allLightings_.size());
+	int lightingIndex = 0;
+	for (std::shared_ptr<GameEngineLighting> singleLighting : allLightings_)
+	{
+		singleLighting->UpdataLightingData(std::dynamic_pointer_cast<GameEngineCamera>(shared_from_this()));
+		lightingDatasInst_.lightings_[lightingIndex++] = singleLighting->GetLightingData();
 	}
 
 	for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)

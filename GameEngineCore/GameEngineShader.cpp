@@ -314,12 +314,6 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 				vertexShader->InstancingVertexShaderCompile(_path, vsInstEntryPoint);
 			}
 		}
-		//else
-		//{
-		//	MsgBoxAssert("코드 내에 버텍스셰이더가 없습니다.");
-		//	//셰이더 이름 규칙0: 버텍스셰이더는 “_VS(”, 픽셀셰이더는 “_PS(“가 문자열 내부에 포함되어 있어야 한다.
-		//	return;
-		//}
 	}
 
 
@@ -352,12 +346,6 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 				pixelShader->InstancingPixelShaderCompile(_path, psInstEntryPoint);
 			}
 		}
-		//else
-		//{
-		//	MsgBoxAssert("코드 내에 픽셀셰이더가 없습니다.");
-		//	//셰이더 이름 규칙 0: 버텍스셰이더는 “_VS(”, 픽셀셰이더는 “_PS(“가 문자열 내부에 포함되어 있어야 한다.
-		//	return;
-		//}
 	}
 }
 

@@ -12,6 +12,7 @@
 
 #include <GameEngineCore\GameEngineCamera.h>
 #include <GameEngineCore\GameEngineCameraActor.h>
+#include <GameEngineCore\GameEngineLighting.h>
 
 #include <GameEngineCore\GameEngineComponent.h>
 #include <GameEngineCore\GameEngineTransformComponent.h>
