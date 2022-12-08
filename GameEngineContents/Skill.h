@@ -1,5 +1,15 @@
 #pragma once
 #include "GlobalContentsValue.h"
+struct WeaponInfo
+{
+	float weaponAtk_;//무기공격력
+	float weaponPassAtk_;//관통력
+	float weaponAtkSpeed_;//공격속도
+	float weaponSize_;//투사체크기
+	float weaponDuration_;//투사체지속시간
+	float weaponSpeed_;// 투사체속력
+	float weaponknockback_;//넉백
+};
 
 class Skill : public GameEngineActor
 {
