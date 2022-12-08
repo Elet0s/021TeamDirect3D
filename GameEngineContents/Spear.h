@@ -1,6 +1,7 @@
 #pragma once
 #include"Skill.h"
 
+//투사체 조준된 방향으로 발사
 class Spear : public Skill
 {
 public:
@@ -29,9 +30,10 @@ protected:
 	void Left(float _deltaTime);
 
 private:
-	float damege;
-	float attackSpeed;
-	float rangeSize;
+	float damege_;
+	float attackSpeed_;
+	float rangeSize_;
+	float4 referenceVector_;//기준벡터 - 랜더러를 던질 각도에 맞게 회전해줘야함 
 	std::shared_ptr<GameEngineTextureRenderer> spearRenderer_;
 	std::shared_ptr<GameEngineCollision> spearCol_;
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include "Skill.h"
+//(범위) 주변의 적에게 피해 치명타가 발생하지 않음
 class DeathAura : public Skill
 {
 public:

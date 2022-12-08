@@ -153,11 +153,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ArcanistStaff.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Area.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ArtificersKatana.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BlackEyes.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Bow.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -173,6 +185,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Cleaver.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Clumsy.h">
       <SubType>
       </SubType>
@@ -182,6 +198,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="Crossbow.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="DamascusSteel.h">
       <SubType>
       </SubType>
@@ -194,6 +214,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Firering.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineStatusWindow.h" />
     <ClInclude Include="GodsWrath.h">
       <SubType>
@@ -203,7 +227,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Katana.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Kunai.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="LightHand.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MagicWand.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MagicWisp.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -216,6 +256,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Penetration.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Pike.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -232,11 +276,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ShamanStaff.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SharpEdge.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="SharpeningStone.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Shuriken.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SilphsBlade.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -265,6 +321,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Spear.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Swordrang.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -318,6 +378,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="ThunderStaf.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TileMapActor.h" />
     <ClInclude Include="TileMapRenderer.h" />
     <ClInclude Include="TimeActor.h">
@@ -336,6 +400,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="VoidWisp.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="WindsBlade.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="WorldMapActor.h">
       <SubType>
       </SubType>
@@ -350,11 +422,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ArcanistStaff.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Area.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ArtificersKatana.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BlackEyes.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Bow.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -370,6 +454,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Cleaver.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Clumsy.cpp">
       <SubType>
       </SubType>
@@ -379,6 +467,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="Crossbow.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="DamascusSteel.cpp">
       <SubType>
       </SubType>
@@ -391,6 +483,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Firering.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineStatusWindow.cpp" />
     <ClCompile Include="GodsWrath.cpp">
       <SubType>
@@ -400,7 +496,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Katana.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Kunai.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="LightHand.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MagicWand.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MagicWisp.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -413,6 +525,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Penetration.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Pike.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -429,11 +545,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ShamanStaff.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SharpEdge.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="SharpeningStone.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Shuriken.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SilphsBlade.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -462,6 +590,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Spear.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Swordrang.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -518,6 +650,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="ThunderStaf.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TileMapActor.cpp" />
     <ClCompile Include="TileMapRenderer.cpp" />
     <ClCompile Include="TimeActor.cpp">
@@ -533,6 +669,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TreeObject.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="VoidWisp.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="WindsBlade.cpp">
       <SubType>
       </SubType>
     </ClCompile>

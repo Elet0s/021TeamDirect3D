@@ -67,6 +67,15 @@
     <Filter Include="Level\Global\ContentsSupport\Actor">
       <UniqueIdentifier>{8784af60-8bcf-4147-afe5-2288f25621ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Weapon\Target">
+      <UniqueIdentifier>{27cf4913-251b-48c0-b8b3-5a1e0d10cca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Weapon\Aim">
+      <UniqueIdentifier>{5ca25ae8-a1dd-46ff-a25f-646c74266d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Weapon\Range">
+      <UniqueIdentifier>{ef4d31da-3578-4210-88a1-269999034a57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -178,12 +187,6 @@
     <ClCompile Include="Range.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClCompile>
-    <ClCompile Include="DeathAura.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Spear.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
-    </ClCompile>
     <ClCompile Include="SoundPlayer.cpp">
       <Filter>Actor\00. Global\Com</Filter>
     </ClCompile>
@@ -244,6 +247,66 @@
     </ClCompile>
     <ClCompile Include="FieldRenderingActor.cpp">
       <Filter>Level\Global\ContentsSupport\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathAura.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicWand.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="Cleaver.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
+    </ClCompile>
+    <ClCompile Include="Spear.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
+    </ClCompile>
+    <ClCompile Include="Shuriken.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="Bow.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="ThunderStaf.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="Pike.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
+    </ClCompile>
+    <ClCompile Include="Kunai.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
+    </ClCompile>
+    <ClCompile Include="Swordrang.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicWisp.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidWisp.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="WindsBlade.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="SilphsBlade.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcanistStaff.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="Katana.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="ArtificersKatana.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="Crossbow.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="Firering.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="ShamanStaff.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -360,12 +423,6 @@
     <ClInclude Include="Range.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="DeathAura.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Spear.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
-    </ClInclude>
     <ClInclude Include="SoundPlayer.h">
       <Filter>Actor\00. Global\Com</Filter>
     </ClInclude>
@@ -425,6 +482,66 @@
     </ClInclude>
     <ClInclude Include="FieldRenderingActor.h">
       <Filter>Level\Global\ContentsSupport\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathAura.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicWand.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Cleaver.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
+    </ClInclude>
+    <ClInclude Include="Spear.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
+    </ClInclude>
+    <ClInclude Include="Shuriken.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Bow.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="ThunderStaf.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="Pike.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
+    </ClInclude>
+    <ClInclude Include="Kunai.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
+    </ClInclude>
+    <ClInclude Include="Swordrang.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicWisp.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidWisp.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="WindsBlade.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="SilphsBlade.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcanistStaff.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="Katana.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="ArtificersKatana.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Crossbow.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Firering.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="ShamanStaff.h">
+      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
