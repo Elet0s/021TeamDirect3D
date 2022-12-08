@@ -65,6 +65,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("PlayerUp", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("PlayerDown", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("PlayerDash", VK_SPACE);
+		GameEngineInput::GetInst()->CreateKey("SkillOn", 'B');
 	}
 	{
 		collision_ = CreateComponent<GameEngineCollision>();
@@ -249,7 +250,19 @@ void Player::Update(float _deltaTime)
 	LevelUpEvent();
 	PlayerDeathEvent();
 	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		if (true == GameEngineInput::GetInst()->IsDown("SkillOn"))
+		{
+			for (size_t i = 0; i < 1; i++)
+			{
+				if (playerSkillManager_->GetSkillList()[i]->GetSoulCardOrder() == SoulCard::Spear)
+				{
+					playerSkillManager_->GetSkillList()[i]->nowLevel_ += 1;
+				}
+				;
+			}
 
+		}
+		playerSkillManager_->SkillLevelCheak();
 }
 
 void Player::End()

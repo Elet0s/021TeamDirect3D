@@ -62,6 +62,7 @@ public:
 	float def_;
 	float range_;
 	float pushSpeed_;
+	float hpRecuvere_;
 	bool RLDirection_;
 };
 class PlayerUI;

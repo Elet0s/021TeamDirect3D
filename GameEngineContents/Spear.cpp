@@ -34,21 +34,21 @@ void Spear::Effect()
 
 void Spear::Start()
 {
+	valueSoulCard_ = SoulCard::Spear;
+	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
 	spearRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	spearRenderer_->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
-	spearRenderer_->GetTransform().SetWorldScale(100, 100, 0);
+	spearRenderer_->GetTransform().SetWorldScale(50, 80, 0);
 	spearRenderer_->SetTexture("Spear.png");
+	//spearRenderer_->GetTransform().SetWorldRotation({30});
 
+	//referenceVector_ = GetTransform().GetUpVector();
 
-	referenceVector_ = GetTransform().GetUpVector();
+	spearCol_ = CreateComponent<GameEngineCollision>();
+	spearCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
+	spearCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+	spearCol_->ChangeOrder(ObjectOrder::Skill);
 
-
-
-	//spearCol_ = CreateComponent<GameEngineCollision>();
-	//spearCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-	//spearCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
-	//spearCol_->ChangeOrder(ObjectOrder::Monster);
-	Death(2.0f);
+	Off();
 }
 void Spear::Update(float _deltaTime)
 {
@@ -60,6 +60,6 @@ void Spear::End()
 }
 void Spear::Left(float _deltaTime)
 {
-	float a = GameEngineRandom::mainRandom_.RandomFloat(100.f,500.f);
-	GetTransform().SetWorldLeftMove(a, _deltaTime);
+	//float a = GameEngineRandom::mainRandom_.RandomFloat(100.f,500.f);
+	GetTransform().SetWorldLeftMove(100.f, _deltaTime);
 }

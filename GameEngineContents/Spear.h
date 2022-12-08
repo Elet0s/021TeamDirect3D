@@ -30,6 +30,7 @@ protected:
 	void Left(float _deltaTime);
 
 private:
+
 	float damege_;
 	float attackSpeed_;
 	float rangeSize_;

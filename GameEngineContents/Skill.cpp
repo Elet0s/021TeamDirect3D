@@ -2,9 +2,12 @@
 #include "Skill.h"
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <string>
-Skill::Skill() 
+Skill::Skill()
 	: currentlevel_(0)
 	, maxLevel_(0)
+	, myRank_()
+	, nowLevel_(0)
+	, valueSoulCard_(SoulCard::None)
 {
 	
 }

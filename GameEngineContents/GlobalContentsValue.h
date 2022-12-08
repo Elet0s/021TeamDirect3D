@@ -26,6 +26,7 @@ enum class MonsterOrder
 
 enum class SoulCard
 {
+	None,
 	Cleaver,
 	MagicWand,
 	Shuriken,

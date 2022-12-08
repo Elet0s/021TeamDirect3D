@@ -12,7 +12,7 @@ public:
 	Skill& operator=(const Skill& _Other) = delete;
 	Skill& operator=(Skill&& _Other) noexcept = delete;
 	
-	
+public:
 	virtual void Init() {};
 	virtual void Effect() {};
 
@@ -36,21 +36,24 @@ public:
 		return maxLevel_;
 	}
 
-
-	template <typename SkillValue>
-	void createSkill()
+	SoulCard& GetSoulCardOrder()
 	{
+		return valueSoulCard_;
 	}
 
+public:
+	int nowLevel_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
 
+	SoulCard valueSoulCard_;
 	std::string name_;
 	std::string etc_;
 	int currentlevel_;
 	int maxLevel_;
+
 	Rank myRank_;
 private:
 };
