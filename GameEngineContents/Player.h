@@ -1,6 +1,27 @@
 #pragma once
 #include "SkillManager.h"
 
+struct PlayerPassiveInfo
+{
+public:
+	PlayerPassiveInfo()
+	{
+
+	}
+
+public:
+	float atkMul_;
+	float defMul_;
+	float pass_;
+	float atkSpeed_;
+	float projectileSize_;
+	float projectileDuration_;
+	float projectileSpeed_;
+	float knockback_;
+	
+};
+
+
 struct PlayerInfo
 {
 public:
@@ -10,7 +31,7 @@ public:
 		atkMultiple_(100.f),
 		attackSpeed_(100.0f),
 		addProjectile_(0),
-		throughProjectile_(0),
+		passProjectile_(0),
 		projectileSize_(100.0f),
 		projectileduration_(100.0f),
 		projectilespeed_(100.0f),
@@ -29,7 +50,8 @@ public:
 		exp_(0),
 		atk_(1.50f),
 		def_(0),
-		range_(1.0f),
+		ruting_Range_(5.0f),
+		atk_Range_(0.0f),
 		RLDirection_(false),
 		pushSpeed_(0)
 	{
@@ -37,9 +59,10 @@ public:
 	}
 public:
 	float level_;
-	float attackSpeed_;
-	float addProjectile_;
-	float throughProjectile_;
+	float atk_;
+	size_t addProjectile_;
+	size_t passProjectile_;
+
 	float projectileSize_;
 	float projectileduration_;
 	float projectilespeed_;
@@ -52,15 +75,17 @@ public:
 	float dashReUseTime_;
 	float dashReChargeCount_;
 
+	float atk_Range_;
 	float speed_;
 	float maxHp_;
 	float hp_;
 	float maxExp_;
 	float exp_;
 	float atk_;
+	float attackSpeed_;
 	float atkMultiple_;
 	float def_;
-	float range_;
+	float ruting_Range_;
 	float pushSpeed_;
 	float hpRecuvere_;
 	bool RLDirection_;
