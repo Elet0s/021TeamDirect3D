@@ -35,7 +35,7 @@ void StoneHanded::Effect()
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
 	//PlayerInfo_->projectileSize_ = round(PlayerInfo_->projectileSize_ * 100) / 100;
-	PlayerInfo_->addProjectile_ += 3.0f;
+	PlayerInfo_->addProjectile_ += 3;
 	PlayerInfo_->projectileduration_ *= 0.7f;
 	PlayerInfo_->attackSpeed_ *= 0.75f;
 

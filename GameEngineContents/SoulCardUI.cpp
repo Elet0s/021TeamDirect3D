@@ -42,7 +42,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new HealingFactor();
+	mySkill_ = new Aiming();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{

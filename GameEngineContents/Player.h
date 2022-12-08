@@ -5,19 +5,26 @@ struct PlayerPassiveInfo
 {
 public:
 	PlayerPassiveInfo()
+		: atkMultiple_(100.f),
+		defMul_(100.f),
+		passMul_(0.f),
+		attackSpeed_(100.f),
+		projectileSpeed_(100.f),
+		projectileDuration_(100.f),
+		projectileSize_(100.f)
 	{
 
 	}
 
 public:
-	float atkMul_;
+	float atkMultiple_;
 	float defMul_;
-	float pass_;
-	float atkSpeed_;
+	float passMul_;
+	float attackSpeed_;
 	float projectileSize_;
 	float projectileDuration_;
 	float projectileSpeed_;
-	float knockback_;
+	
 	
 };
 
@@ -50,8 +57,8 @@ public:
 		exp_(0),
 		atk_(1.50f),
 		def_(0),
-		ruting_Range_(5.0f),
-		atk_Range_(0.0f),
+		ruting_Range_(4.0f),
+		atk_Range_(5.0f),
 		RLDirection_(false),
 		pushSpeed_(0)
 	{
@@ -59,7 +66,6 @@ public:
 	}
 public:
 	float level_;
-	float atk_;
 	size_t addProjectile_;
 	size_t passProjectile_;
 
@@ -75,6 +81,7 @@ public:
 	float dashReUseTime_;
 	float dashReChargeCount_;
 
+	float knockback_;
 	float atk_Range_;
 	float speed_;
 	float maxHp_;
@@ -130,6 +137,11 @@ public:
 		return *CastThis<Player>()->playerInfo_;
 	}
 
+	PlayerPassiveInfo& GetPlayerPassiveInfo()
+	{
+		return *CastThis<Player>()->playerPassiveInfo_;
+	}
+
 	CollisionReturn PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
 public:
@@ -157,6 +169,7 @@ private:
 
 	float4 moveDirection_;
 	std::shared_ptr<PlayerInfo> playerInfo_;
+	std::shared_ptr<PlayerPassiveInfo> playerPassiveInfo_;
 	std::shared_ptr<PlayerUI> playerUi_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
 	static std::shared_ptr<SkillManager> playerSkillManager_;

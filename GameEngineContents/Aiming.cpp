@@ -18,13 +18,16 @@ Aiming::~Aiming()
 void Aiming::Init()
 {
 	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	float PlayerAttackSpeed = PlayerInfo_.attackSpeed_ * (PlayPInfo_.attackSpeed_/100);
+	float PlayerAttackMul = PlayerInfo_.atkMultiple_ * 100 / PlayPInfo_.atkMultiple_;
 
-	std::string sAttackSpeed = std::to_string(PlayerInfo_.attackSpeed_).substr(0, std::to_string(PlayerInfo_.attackSpeed_).find(".")) + "%";
-	std::string sAttackMultiple = std::to_string(PlayerInfo_.atkMultiple_).substr(0, std::to_string(PlayerInfo_.atkMultiple_).find(".")) + "%";
-	std::string sAttackSpeedNext = std::to_string(ceil(PlayerInfo_.attackSpeed_ * 0.95f)).substr(0, std::to_string(PlayerInfo_.attackSpeed_ + 1.0f).find(".")) + "%";
-	std::string sAttackMultipleNext = std::to_string(PlayerInfo_.atkMultiple_ + 18.0f).substr(0, std::to_string(PlayerInfo_.atkMultiple_).find(".")) + "%";
-		
-	etc_ = sAttackMultiple + " -> " + sAttackMultiple + " 피해 배수\n"
+	std::string sAttackMultiple = std::to_string(PlayerAttackMul).substr(0, std::to_string(PlayerAttackMul).find(".")) + "%";
+	std::string sAttackMultipleNext = std::to_string(PlayerAttackMul + 18.0f).substr(0, std::to_string(PlayerAttackMul + 18.f).find(".")) + "%";
+	std::string sAttackSpeed = std::to_string(PlayerAttackSpeed).substr(0, std::to_string(PlayerAttackSpeed).find(".")) + "%";
+	std::string sAttackSpeedNext = std::to_string(ceil(PlayerAttackSpeed * 0.95f)).substr(0, std::to_string(ceil(PlayerAttackSpeed * 0.95f)).find(".")) + "%";
+
+	etc_ = sAttackMultiple + " -> " + sAttackMultipleNext + " 피해 배수\n"
 			+ sAttackSpeed + " -> " + sAttackSpeedNext + " 공격 속도 ";
 	
 }
@@ -33,7 +36,8 @@ void Aiming::Effect()
 {
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->attackSpeed_ *= 0.95f;
-	PlayerInfo_->attackSpeed_ = ceil(PlayerInfo_->attackSpeed_);
+	PlayerPassiveInfo* PlayPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayPInfo_->attackSpeed_ *= 0.95f;
+	PlayPInfo_->attackSpeed_ = ceil(PlayPInfo_->attackSpeed_);
 	PlayerInfo_->atkMultiple_ += 18.0f;
 }

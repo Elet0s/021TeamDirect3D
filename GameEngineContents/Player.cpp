@@ -24,6 +24,7 @@ Player::Player()
 	{
 		//플레이어 정상 생성.
 		playerInfo_ = std::make_shared<PlayerInfo>();
+		playerPassiveInfo_ = std::make_shared<PlayerPassiveInfo>();
 	}
 	else
 	{

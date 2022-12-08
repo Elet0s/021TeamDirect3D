@@ -31,7 +31,7 @@ void SingleHanded::Effect()
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
 	//PlayerInfo_->projectileSize_ = round(PlayerInfo_->projectileSize_ * 100) / 100;
-	PlayerInfo_->addProjectile_ -= 1.0f;
+	PlayerInfo_->addProjectile_ -= 1;
 	//PlayerInfo_->knockBack_ = round(PlayerInfo_->atk_ * 100) / 100;
 	PlayerInfo_->atkMultiple_ *= 1.5f;
 

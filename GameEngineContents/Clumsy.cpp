@@ -33,7 +33,7 @@ void Clumsy::Effect()
 {
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->addProjectile_ += 1.0f;
+	PlayerInfo_->addProjectile_ += 1;
 	PlayerInfo_->def_ -= 2.0f;
 
 }

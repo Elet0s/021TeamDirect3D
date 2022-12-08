@@ -18,8 +18,8 @@ void Area::Init()
 {
 	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
 
-	std::string sRangeSize = std::to_string(PlayerInfo_.rangeSize_).substr(0, std::to_string(PlayerInfo_.attackSpeed_).find(".")) + "%";
-	std::string sRangeSizeNext = std::to_string(PlayerInfo_.rangeSize_ + 15.0f).substr(0, std::to_string(PlayerInfo_.attackSpeed_ + 1.0f).find(".")) + "%";
+	std::string sRangeSize = std::to_string(PlayerInfo_.atk_Range_).substr(0, std::to_string(PlayerInfo_.atk_Range_).find(".")) + "%";
+	std::string sRangeSizeNext = std::to_string(PlayerInfo_.atk_Range_ + 15.0f).substr(0, std::to_string(PlayerInfo_.atk_Range_ + 1.0f).find(".")) + "%";
 
 	etc_ = sRangeSize + " -> " + sRangeSizeNext + " 공격 범위\n크기 ";
 
@@ -29,6 +29,6 @@ void Area::Effect()
 {
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->rangeSize_ += 15.0f;
+	PlayerInfo_->atk_Range_ += 15.0f;
 
 }
