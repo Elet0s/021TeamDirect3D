@@ -16,7 +16,8 @@ Player::Player()
 	playerInfo_(nullptr),
 	dashTimer_(0),
 	dashState_(false),
-	hitOnoff_(false)
+	hitOnoff_(false),
+	serchCloseMonster_()
 
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
@@ -81,6 +82,9 @@ void Player::Start()
 
 	std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
 	shadowRenderer->SetTextureRenderer(playerRenderer_);
+
+	serchCloseMonster_;
+	Monster::GetMonsterList();
 }
 
 CollisionReturn Player::PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)

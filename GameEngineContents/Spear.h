@@ -36,4 +36,5 @@ private:
 	float4 referenceVector_;//기준벡터 - 랜더러를 던질 각도에 맞게 회전해줘야함 
 	std::shared_ptr<GameEngineTextureRenderer> spearRenderer_;
 	std::shared_ptr<GameEngineCollision> spearCol_;
+
 };
