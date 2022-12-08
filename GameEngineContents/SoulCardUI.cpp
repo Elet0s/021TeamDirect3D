@@ -2,7 +2,11 @@
 #include "SoulCardUI.h"
 #include "DeathAura.h"
 #include "SharpEdge.h"
+#include "IronWill.h"
 #include "Range.h"
+#include "HealingFactor.h"
+#include "StoneHanded.h"
+#include "StoneSkin.h"
 #include "Celerity.h"
 #include "Hypersonic.h"
 #include "Quick.h"
@@ -38,7 +42,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new Hypersonic();
+	mySkill_ = new HealingFactor();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{
