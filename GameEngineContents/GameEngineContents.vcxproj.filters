@@ -76,6 +76,9 @@
     <Filter Include="Actor\02. Play\Player\Skill\Weapon\Range">
       <UniqueIdentifier>{ef4d31da-3578-4210-88a1-269999034a57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Passive\Deffence">
+      <UniqueIdentifier>{1e27bf76-41cb-4c89-b27b-1f44b14d69b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -309,6 +312,24 @@
     </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>Actor\02. Play\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="StoneHanded.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Overloaded.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Healthy.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="StoneSkin.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="IronWill.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="HealingFactor.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -544,6 +565,24 @@
     </ClInclude>
     <ClInclude Include="ShamanStaff.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="StoneHanded.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Overloaded.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Healthy.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="StoneSkin.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="IronWill.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="HealingFactor.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

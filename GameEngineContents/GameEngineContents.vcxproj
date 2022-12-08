@@ -223,7 +223,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="HealingFactor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Healthy.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Hypersonic.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="IronWill.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -252,6 +264,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Muscle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Overloaded.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -321,6 +337,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Spear.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="StoneHanded.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="StoneSkin.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -492,7 +516,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="HealingFactor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Healthy.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Hypersonic.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="IronWill.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -521,6 +557,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Muscle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Overloaded.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -590,6 +630,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Spear.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StoneHanded.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StoneSkin.cpp">
       <SubType>
       </SubType>
     </ClCompile>
