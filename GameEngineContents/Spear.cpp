@@ -43,6 +43,7 @@ void Spear::Start()
 	referenceVector_ = GetTransform().GetUpVector();
 
 
+
 	//spearCol_ = CreateComponent<GameEngineCollision>();
 	//spearCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
 	//spearCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });

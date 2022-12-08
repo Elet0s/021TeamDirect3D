@@ -101,15 +101,6 @@ void TestLevel::Start()
 	col->ChangeOrder(ObjectOrder::Camera);
 	col->SetDebugSetting(CollisionType::CT_OBB2D, float4::Zero);
 
-	//if (nullptr == Player::GetMainPlayer())
-	//{
-		//Player* NewPlayer = CreateActor<Player>(ObjectOrder::Player);
-		//NewPlayer->SetLevelOverOn();
-		//NewPlayer->SetLevel(this);
-		//NewPlayer->GetTransform().SetWorldPosition({ 960.f, -960.f });
-		//GetMainCameraActor()->GetTransform().SetWorldPosition(float4(NewPlayer->GetTransform().GetWorldPosition().x , NewPlayer->GetTransform().GetWorldPosition().y, -100.f));
-	//}
-
 	if (true == Player::GetPlayerWeakPtr().expired())
 	{
 		Player::CreatePlayer(this, { 960.f, -960.f });
@@ -118,8 +109,6 @@ void TestLevel::Start()
 	{
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
-
-	
 	Monster::ReserveMonsters(100);
 
 	Monster::CreateMonster<BlackEyes>(this, 10);
@@ -135,48 +124,11 @@ void TestLevel::Start()
 	//Monster::SummonMonster<FlyingEyes>(this, 8);
 	//Monster::SummonMonster<FlyingEyes>(this, 11);
 
-
-
-
-
-	//Monster_.reserve(60);
-	//{
-	//	for (size_t i = 0; i < 10; i++)
-	//	{
-	//		std::shared_ptr<BlackEyes> NewMonster = CreateActor<BlackEyes>(ObjectOrder::Monster);
-	//		Monster_.push_back(NewMonster);
-	//	}
-	//	for (size_t i = 0; i < 10; i++)
-	//	{
-	//		std::shared_ptr<Brown> NewMonster = CreateActor<Brown>(ObjectOrder::Monster);
-	//		Monster_.push_back(NewMonster);
-	//	}
-	//	for (size_t i = 0; i < 10; i++)
-	//	{
-	//		std::shared_ptr<Green> NewMonster = CreateActor<Green>(ObjectOrder::Monster);
-	//		Monster_.push_back(NewMonster);
-	//	}
-	//	for (size_t i = 0; i < 10; i++)
-	//	{
-	//		std::shared_ptr<NormalGoblin> NewMonster = CreateActor<NormalGoblin>(ObjectOrder::Monster);
-	//		Monster_.push_back(NewMonster);
-	//	}
-	//	for (size_t i = 0; i < 10; i++)
-	//	{
-	//		std::shared_ptr<RedFlyingEyes> NewMonster = CreateActor<RedFlyingEyes>(ObjectOrder::Monster);
-	//		Monster_.push_back(NewMonster);
-	//	}
-	//	for (size_t i = 0; i < 10; i++)
-	//	{
-	//		std::shared_ptr<FlyingEyes> NewMonster = CreateActor<FlyingEyes>(ObjectOrder::Monster);
-	//		Monster_.push_back(NewMonster);
-	//	}
-	//}
 	
 	std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
 
 	
-	//ShowCursor(false);
+	//ShowCursor(false); 마우스 감추기
 	CreateActor<TimeActor>();
 	CreateActor<StageUI>()->SoulCoinRenderersOff();
 

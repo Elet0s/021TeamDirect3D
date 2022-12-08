@@ -46,6 +46,11 @@ public:
 
 public:
 
+
+	static  std::vector<std::shared_ptr<Monster>>& GetMonsterList()
+	{
+		return allMonsters_;
+	}
 	MonsterInfo& GetMonsterInfo()
 	{
 		return *CastThis<Monster>()->monsterInfo_;

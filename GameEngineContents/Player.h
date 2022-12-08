@@ -109,7 +109,7 @@ public:
 public:
 	std::shared_ptr<GameEngineCollision> collision_;
 
-
+	std::list<float> serchCloseMonster_;
 	//void SetLevel(GameEngineLevel* _NowLevel);
 	float4 playerResultDirection_;
 	bool hitOnoff_;
@@ -134,6 +134,7 @@ private:
 	std::shared_ptr<PlayerUI> playerUi_;
 	std::shared_ptr<GameEngineTextureRenderer> playerRenderer_;
 	static std::shared_ptr<SkillManager> playerSkillManager_;
-	
+
+
 };
 
