@@ -89,14 +89,20 @@ void TileMapActor::Start()
 		{
 			trees_[i] = GetLevel()->CreateActor<TreeObject>();
 			trees_[i]->SetParent(shared_from_this());
+			float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 10));
+			float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 3));
+			X *= 128;
+			Y *= 256;
+			trees_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
 			while (trees_[i]->GetCheckCol()->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::TreeObject, CollisionType::CT_AABB2D))
 			{
 				float X = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 20));
 				float Y = static_cast<float>(GameEngineRandom::mainRandom_.RandomInt(1, 10));
-				X *= 64;
-				Y *= 64;
-				//trees_[i]->GetRenderer()->SetRenderingOrder(42 - static_cast<int>(Y));
+				X *= 128;
+				Y *= 256;
 				trees_[i]->GetTransform().SetLocalPosition(float4{ X,-Y, -300.f });
+				//trees_[i]->GetRenderer()->SetRenderingOrder(42 - static_cast<int>(Y));
+				
 			}
 		}
 	}
