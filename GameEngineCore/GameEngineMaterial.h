@@ -43,11 +43,11 @@ public:
 	void SetPixelShader(const std::string_view& _name);
 	void SetBlend_OutputMerger(const std::string_view& _name);
 	void SetDepthStencil_OutputMerger(const std::string_view& _name);
-	void SettingInstancing();
-	void SettingInstancing2();
 	void Copy(std::shared_ptr<GameEngineMaterial> _original);
 
 	void Setting();
+	void SettingInstancing();
+	void SettingInstancing2();
 public:
 
 	inline std::shared_ptr<GameEngineVertexShader> GetVertexShader()

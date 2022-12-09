@@ -14,7 +14,6 @@ GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
 	const std::string_view& _materialName
 )
 {
-
 	for (const std::string& name : _structuredBufferSetterNames)
 	{
 		data_.insert(std::make_pair(name, nullptr));

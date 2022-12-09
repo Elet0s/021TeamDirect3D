@@ -4,7 +4,7 @@
 
 class GameEngineTexture2DArray: public GameEngineRes<GameEngineTexture2DArray>
 {
-	//인스턴싱용 텍스처들 관리 클래스.
+	//텍스처2D배열 관리 클래스.
 
 	friend class GameEngineTexture2DArraySetter;
 public:

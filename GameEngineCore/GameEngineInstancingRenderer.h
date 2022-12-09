@@ -99,7 +99,7 @@ private:
 
 public:	
     void Initialize(
-        size_t _renderUnitCount,
+        size_t _instancingUnitCount,
         const std::string_view& _meshName,
         const std::string_view& _materialName
     );

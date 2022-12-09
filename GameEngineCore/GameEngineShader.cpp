@@ -228,7 +228,7 @@ void GameEngineTexture2DArraySetter::Bind()
 {
 	if (nullptr == this->texture2DArray_)
 	{
-		MsgBoxAssert("인스턴싱 텍스처들이 존재하지 않습니다.");
+		MsgBoxAssert("텍스처 배열이 존재하지 않습니다.");
 		return;
 	}
 

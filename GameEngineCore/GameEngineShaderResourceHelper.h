@@ -65,9 +65,6 @@ public:
 	std::shared_ptr<GameEngineTexture2DArray> SetTexture2DArray(const std::string_view& _textureArraySetterName, const std::string_view& _textureArrayName);
 	std::shared_ptr<GameEngineTexture2DArray> SetTexture2DArray(const std::string_view& _textureArraySetterName, std::shared_ptr<GameEngineTexture2DArray> _textureArray);
 
-	// 인스턴싱을 하려고 하는데 그 쉐이더에서 상수버퍼를 사용했을때.
-	//void AllConstantBufferNew();
-
 
 	GameEngineStructuredBufferSetter* GetStructuredBufferSetter(const std::string_view& _sBufferName);
 

@@ -2,8 +2,8 @@
 #include "GameEngineCore.h"
 #include "GameEngineDevice.h"
 #include "GameEngineTexture.h"
-#include "GameEngineTexture2DArray.h"
 #include "GameEngineFolderTexture.h"
+#include "GameEngineTexture2DArray.h"
 #include "GameEngineSampler.h"
 #include "GameEngineRenderTarget.h"
 #include "GameEngineVertexes.h"
@@ -810,6 +810,7 @@ void GameEngineCore::EngineResourceDestroy()
 	GameEngineRenderTarget::ResourceDestroy();
 	GameEngineTexture::ResourceDestroy();
 	GameEngineFolderTexture::ResourceDestroy();
+	GameEngineTexture2DArray::ResourceDestroy();
 	GameEngineSampler::ResourceDestroy();
 	GameEngineSound::ResourceDestroy();
 	GameEngineFont::ResourceDestroy();

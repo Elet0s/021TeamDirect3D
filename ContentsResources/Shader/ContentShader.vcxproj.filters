@@ -5,8 +5,7 @@
     <None Include="RenderOption.hlsli" />
     <None Include="Test.hlsl" />
     <None Include="Texture2DShadow.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="TileTextureInstancing.hlsl" />
+    <None Include="TileTextureInstancing.hlsl" />
+    <None Include="LightHeader.hlsli" />
   </ItemGroup>
 </Project>
