@@ -25,7 +25,7 @@ Output LightTest_VS(Input _input)
     
     newOutput.viewSpacePos_ = mul(_input.pos_, worldViewMatrix_); //정점좌표에 월드행렬과 뷰행렬만 적용.
     
-    _input.normal_.w = 0.f; //아래 계산에 예상하지 못한 영향을 주지 않기 위해 w를 0으로 만든다.
+    _input.normal_.w = 0.f; //아래 계산에 예상하지 못한 영향을 주는것을 막기 위해 w를 0으로 만든다.
     
     newOutput.viewSpaceNormal_ = mul(_input.normal_, worldViewMatrix_); //법선벡터에 월드행렬과 뷰행렬만 적용.
     
@@ -41,11 +41,23 @@ cbuffer ResultColor : register(b8)
 
 float4 LightTest_PS(Output _input) : SV_Target0
 {
+    float4 specularLight = 0.f;
+   
     float4 diffuseLight = CalAllDiffuseLight(_input.viewSpaceNormal_);
-    //각 픽셀에 그려지는 오브젝트 표면의 뷰공간 법선벡터로 난반사광 벡터를 구한다.
     
-    float4 result = color_ * diffuseLight; //오브젝트의 원래 색상에 난반사광을 적용한다.
+    if (diffuseLight.r > 0.f || diffuseLight.g > 0.f || diffuseLight.b > 0.f)
+    {
+        specularLight = CalAllSpecularLight(_input.viewSpacePos_, _input.viewSpaceNormal_);
+        //난반사광의 rgb값중 하나라도 0을 넘을때만 정반사광을 계산한다.
+        //안그러면 조명이 뒷면으로 돌아가서 카메라에 빛이 비치지 않는데도 정반사광이 비친다.
+    }
+   
+    float4 ambientLight = CalAllAmbientLight();
     
+    float4 resultLight = color_ * (diffuseLight + specularLight) + ambientLight;
+    //float4 resultLight = color_ * diffuseLight + specularLight + ambientLight;
     
-    return result;
+    resultLight.a = 1.f;
+    
+    return resultLight;
 }
