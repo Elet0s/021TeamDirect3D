@@ -35,7 +35,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 
 	metaDatas_.resize(allFilesInFolder.size());
 	images_.resize(allFilesInFolder.size());
-	tempScratchImages_.resize(allFilesInFolder.size());
+	loadedScratchImages_.resize(allFilesInFolder.size());
 
     for (size_t i = 0; i < allFilesInFolder.size(); i++)
     {
@@ -45,9 +45,9 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 			= GameEngineString::ToUpperReturn(allFilesInFolder[i].GetExtension());
 
 		std::string uppercaseFileName
-			= this->GetNameCopy() + "\\" + GameEngineString::ToUpperReturn(allFilesInFolder[i].GetFileName());
+			= GameEngineString::ToUpperReturn(allFilesInFolder[i].GetFileName());
 
-		nameIndexPairs_.insert(std::make_pair(uppercaseFileName, i));
+		nameIndexPairs_.insert(std::make_pair(uppercaseFileName, static_cast<UINT>(i)));
 
 		if (uppercaseExtension == ".TGA")
 		{
@@ -55,7 +55,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 				unicodePath.c_str(),
 				DirectX::TGA_FLAGS_NONE,
 				&metaDatas_[i],
-				tempScratchImages_[i]
+				loadedScratchImages_[i]
 			))
 			{
 				MsgBoxAssertString(allFilesInFolder[i].GetFullPath() + ": 텍스쳐 로드 실패.");
@@ -73,7 +73,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 				unicodePath.c_str(),				  //
 				DirectX::WIC_FLAGS_NONE,			  //
 				&metaDatas_[i],
-				tempScratchImages_[i]					  //
+				loadedScratchImages_[i]					  //
 			))
 			{
 				MsgBoxAssertString(allFilesInFolder[i].GetFullPath() + ": 텍스쳐 로드 실패.");
@@ -90,7 +90,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 			return;
 		}
 
-		images_[i] = *tempScratchImages_[i].GetImages();
+		images_[i] = *loadedScratchImages_[i].GetImages();
     }
 
 	if (S_OK != scratchImage_.InitializeArrayFromImages(

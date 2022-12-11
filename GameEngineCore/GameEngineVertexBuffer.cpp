@@ -24,7 +24,7 @@ GameEngineVertexBuffer::~GameEngineVertexBuffer()
 
 std::shared_ptr<GameEngineVertexBuffer> GameEngineVertexBuffer::Create(
 	const std::string_view& _name,
-	const void* _data,
+	const void* _initialData,
 	UINT _vertexSize,
 	UINT _vertexCount,
 	const GameEngineInputLayoutDesc& _info
@@ -32,15 +32,15 @@ std::shared_ptr<GameEngineVertexBuffer> GameEngineVertexBuffer::Create(
 {
 	std::shared_ptr<GameEngineVertexBuffer> newRes = CreateNamedRes(_name);
 	newRes->inputLayoutDesc_ = &_info;	//const 자료형* 변수에 const 자료형&의 주소값을 넣어주므로 복사하는데 아무 문제 없다.
-	newRes->CreateVertexBuffer(_data, _vertexSize, _vertexCount);
+	newRes->CreateVertexBuffer(_initialData, _vertexSize, _vertexCount);
 	return newRes;
 }
 
-std::shared_ptr<GameEngineVertexBuffer> GameEngineVertexBuffer::Create(const void* _data, UINT _vertexSize, UINT _vertexCount, const GameEngineInputLayoutDesc& _info)
+std::shared_ptr<GameEngineVertexBuffer> GameEngineVertexBuffer::Create(const void* _initialData, UINT _vertexSize, UINT _vertexCount, const GameEngineInputLayoutDesc& _info)
 {
 	std::shared_ptr<GameEngineVertexBuffer> newRes = CreateUnnamedRes();
 	newRes->inputLayoutDesc_ = &_info;	//const 자료형* 변수에 const 자료형&의 주소값을 넣어주므로 복사하는데 아무 문제 없다.
-	newRes->CreateVertexBuffer(_data, _vertexSize, _vertexCount);
+	newRes->CreateVertexBuffer(_initialData, _vertexSize, _vertexCount);
 	return newRes;
 }
 
@@ -78,9 +78,20 @@ void GameEngineVertexBuffer::CreateVertexBuffer(
 	vertexSize_ = _vertexSize;
 	vertexCount_ = _vertexCount;
 
+	if (0 > vertexSize_)
+	{
+		MsgBoxAssert("정점 한개 크기가 0입니다.");
+		return;
+	}
+
+	if (0 > vertexCount_)
+	{
+		MsgBoxAssert("정점 개수가 0입니다.");
+		return;
+	}
 
 	resData_.pSysMem = _initialData;	//버퍼 초기데이터 설정.
-	//GPU가 n바이트만큼 자기 메모리에 할당하는데 필요하므로 버퍼에 대한 정보를 줘야 한다.
+	//GPU가 버텍스버퍼 전체 크기만큼 자기 메모리에 할당하는데 필요하므로 버텍스버퍼에 대한 정보를 줘야 한다.
 
 	vertexBufferDesc_.ByteWidth = vertexSize_ * vertexCount_;	//버퍼 구조체의 바이트크기 등록.
 

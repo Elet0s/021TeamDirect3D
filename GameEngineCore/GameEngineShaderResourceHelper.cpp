@@ -282,9 +282,9 @@ std::shared_ptr<GameEngineSampler> GameEngineShaderResourceHelper::SetSampler(
 	return SetSampler(_samplerSetterName, GameEngineSampler::Find(_samplerName));
 }
 
-std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTexture2DArray(const std::string_view& _texturesSetterName, const std::string_view& _texturesName)
+std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTexture2DArray(const std::string_view& _textureArraySetterName, const std::string_view& _texturesName)
 {
-	return SetTexture2DArray(_texturesSetterName, GameEngineTexture2DArray::Find(_texturesName));
+	return SetTexture2DArray(_textureArraySetterName, GameEngineTexture2DArray::Find(_texturesName));
 }
 
 std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTexture2DArray(const std::string_view& _textureArraySetterName, std::shared_ptr<GameEngineTexture2DArray> _textureArray)
@@ -293,7 +293,7 @@ std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTex
 
 	if (false == IsTexture2DArray(_textureArraySetterName))
 	{
-		MsgBoxAssertString(std::string(_textureArraySetterName) + ": 그런 이름의 인스턴싱텍스처즈 세터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_textureArraySetterName) + ": 그런 이름의 텍스처배열 세터가 존재하지 않습니다.");
 		return nullptr;
 	}
 

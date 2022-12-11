@@ -54,7 +54,8 @@ void GameEngineInputLayoutDesc::AddInputLayout(
 
 	if (D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_INSTANCE_DATA == inputLayoutDesc.InputSlotClass)
 	{
-		instancingSize_ += formatSize;
+		//instancingFormatSizeMap_.insert(std::make_pair(_semanticName, formatSize));
+		instanceSize_ += formatSize;
 	}
 
 	descs_.push_back(inputLayoutDesc);

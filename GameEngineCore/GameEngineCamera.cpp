@@ -263,7 +263,7 @@ void GameEngineCamera::Render(float _deltaTime)
 				float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
 			)
 			{
-				//뷰스페이스 안에 4개 정점들 중 한개라도 들어오는 것들만 그린다.
+				//뷰프러스텀 안에 4개 정점들 중 한개라도 들어오는 것들만 그린다.
 				continue;
 			}
 

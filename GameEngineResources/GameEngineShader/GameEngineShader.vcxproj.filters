@@ -26,9 +26,6 @@
     <FxCompile Include="TextureAnimation.hlsl">
       <Filter>Object</Filter>
     </FxCompile>
-    <FxCompile Include="LightTest.hlsl">
-      <Filter>Object</Filter>
-    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -46,5 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="LightHeader.hlsli" />
+    <None Include="LightTest.hlsl">
+      <Filter>Object</Filter>
+    </None>
   </ItemGroup>
 </Project>

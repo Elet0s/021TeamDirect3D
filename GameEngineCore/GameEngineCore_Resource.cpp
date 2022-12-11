@@ -2,8 +2,8 @@
 #include "GameEngineCore.h"
 #include "GameEngineDevice.h"
 #include "GameEngineTexture.h"
-#include "GameEngineTexture2DArray.h"
 #include "GameEngineFolderTexture.h"
+#include "GameEngineTexture2DArray.h"
 #include "GameEngineSampler.h"
 #include "GameEngineRenderTarget.h"
 #include "GameEngineVertexes.h"
@@ -84,8 +84,15 @@ void EngineInputLayout()
 
 
 
-
-
+	//텍스처인덱스 정보.
+	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+		"TEXTUREINDEX",
+		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,
+		-1,
+		1,
+		1,
+		D3D11_INPUT_PER_INSTANCE_DATA
+	);
 
 }
 
@@ -810,6 +817,7 @@ void GameEngineCore::EngineResourceDestroy()
 	GameEngineRenderTarget::ResourceDestroy();
 	GameEngineTexture::ResourceDestroy();
 	GameEngineFolderTexture::ResourceDestroy();
+	GameEngineTexture2DArray::ResourceDestroy();
 	GameEngineSampler::ResourceDestroy();
 	GameEngineSound::ResourceDestroy();
 	GameEngineFont::ResourceDestroy();

@@ -27,14 +27,14 @@ private:
 public:
 	static std::shared_ptr<GameEngineVertexBuffer> Create(
 		const std::string_view& _name,
-		const void* _data,
+		const void* _initialData,
 		UINT _vertexSize,
 		UINT _vertexCount,
 		const GameEngineInputLayoutDesc& _info
 	);
 
 	static std::shared_ptr<GameEngineVertexBuffer> Create(
-		const void* _data,
+		const void* _initialData,
 		UINT _vertexSize,
 		UINT _vertexCount,
 		const GameEngineInputLayoutDesc& _info

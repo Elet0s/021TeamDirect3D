@@ -100,6 +100,15 @@ void GameEngineMaterial::SetDepthStencil_OutputMerger(const std::string_view& _n
 	}
 }
 
+void GameEngineMaterial::Setting()
+{
+	VertexShaderSetting();
+	RasterizerSetting();
+	PixelShaderSetting();
+	OutputMerger_DepthStencilSetting();
+	OutputMerger_BlendSetting();
+}
+
 void GameEngineMaterial::SettingInstancing()
 {
 	Inst_VertexShaderSetting();
@@ -136,15 +145,6 @@ void GameEngineMaterial::Copy(std::shared_ptr<GameEngineMaterial> _original)
 	this->pixelShader_ = _original->pixelShader_;
 	this->depthStencil_ = _original->depthStencil_;
 	this->blend_ = _original->blend_;
-}
-
-void GameEngineMaterial::Setting()
-{
-	VertexShaderSetting();
-	RasterizerSetting();
-	PixelShaderSetting();
-	OutputMerger_DepthStencilSetting();
-	OutputMerger_BlendSetting();
 }
 
 void GameEngineMaterial::VertexShaderSetting()

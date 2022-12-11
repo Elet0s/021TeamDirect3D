@@ -22,7 +22,7 @@ struct Output
 //    float4 slice_;
 //};
 
-Output TileTextureInstancing_VS(Input _input)
+Output SingleTextureInstancing_VS(Input _input)
 {
     Output result = (Output) 0;
 
@@ -41,7 +41,7 @@ Output TileTextureInstancing_VS(Input _input)
 Texture2D Tex : register(t0);
 SamplerState POINTCLAMP : register(s0);
 
-float4 TileTextureInstancing_PS(Output _input) : SV_Target0
+float4 SingleTextureInstancing_PS(Output _input) : SV_Target0
 {
     float4 resultColor = (float4)0;
     
@@ -89,7 +89,7 @@ StructuredBuffer<InstRenderOption> Inst_RenderOption : register(t13);
 StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
 //StructuredBuffer<InstPixelData> Inst_PixelData : register(t16);
 
-Output TileTextureInstancing_VSINST(Input _input)
+Output SingleTextureInstancing_VSINST(Input _input)
 {
     Output result = (Output) 0;
     result.pos_ = mul(_input.pos_, Inst_TransformData[_input.instancingIndex_].worldViewProjectionMatrix_);
@@ -105,7 +105,7 @@ Output TileTextureInstancing_VSINST(Input _input)
     return result;
 }
 
-float4 TileTextureInstancing_PSINST(Output _input) : SV_Target0
+float4 SingleTextureInstancing_PSINST(Output _input) : SV_Target0
 {
     //if (_input.texcoord_.x < Inst_PixelData[_input.instancingIndex_].slice_.x)
     //{

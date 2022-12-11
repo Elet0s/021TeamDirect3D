@@ -59,7 +59,7 @@ public:
     void RenderInstancing2(
         float _deltaTime,
         size_t _instancingCount,
-        std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffers
+        std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
     );
 
     std::shared_ptr<GameEngineMesh> GetMesh();
