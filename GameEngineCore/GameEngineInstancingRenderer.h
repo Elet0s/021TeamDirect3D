@@ -78,6 +78,15 @@ class GameEngineInstancingRenderer
             SetWorldPosition(float4(_worldPositionX, _worldPositionY, _worldPositionZ));
         }
 
+        //void SetRenderingOn()
+        //{
+        //    isRendering_ = true;
+        //}
+
+        //void SetRenderingOff()
+        //{
+        //    isRendering_ = false;
+        //}
 
     private:
         void CalWorldWorldMatrix();
@@ -93,6 +102,8 @@ class GameEngineInstancingRenderer
         std::map<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
 
         unsigned int textureIndex_;
+
+        //bool isRendering_;  //true: 렌더링 한다. false: 안 한다.
     };
 
 
@@ -180,10 +191,9 @@ private:
 
     std::vector<InstancingUnit> allInstancingUnits_;   //렌더유닛 + 인스턴싱데이터 벡터.
 
-    std::shared_ptr<GameEngineInstancingBuffer> instancingBuffer_;  //
+    std::shared_ptr<GameEngineInstancingBuffer> instancingBuffer_;  //인스턴스별로 달라지는 정보들을 셰이더로 전달하는 버퍼
 
-
-    std::vector<char> instanceIndexBuffer_;  //인스턴스의 인덱스 저장, 전달용 버퍼.
+    std::vector<char> instanceIndexBuffer_;  //인스턴스 인덱스와 텍스처인덱스를 저장하는 버퍼.
 
     GameEngineShaderResourceHelper shaderResourceHelper_;   //이 렌더러가 쓸 셰이더리소스헬퍼.
 

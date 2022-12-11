@@ -23,7 +23,8 @@ GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
 	this->renderUnit_->SetMesh(_meshName);
 	this->renderUnit_->SetMaterial(_materialName);
 	this->renderUnit_->Off();
-	this->textureIndex_ = -1;
+	this->textureIndex_ = 0;
+	//this->isRendering_ = true;
 }
 
 void GameEngineInstancingRenderer::InstancingUnit::Link(const std::string_view& _name, const void* _data)
@@ -196,10 +197,10 @@ void GameEngineInstancingRenderer::Render(
 
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
-
-
-
-
+		//if (false == allInstancingUnits_[index].isRendering_)
+		//{
+		//	continue;
+		//}
 
 		{
 			//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.

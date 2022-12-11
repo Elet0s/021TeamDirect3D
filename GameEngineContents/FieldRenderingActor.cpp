@@ -85,6 +85,7 @@ void FieldRenderingActor::InitializeFieldObjects(
 				-4.f
 			);
 			//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
+			//나중에 고칠 것.
 
 			int randomIndex = GameEngineRandom::mainRandom_.RandomInt(0, 7);
 
@@ -123,7 +124,8 @@ void FieldRenderingActor::InitializeFieldRenderer()
 	);
 	fieldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	fieldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
-	fieldRenderer_->SetAllUnitsWorldScale(256, 256, 1);
+	//fieldRenderer_->SetAllUnitsWorldScale(256, 256, 1);
+	//그려질 필요없는 렌더유닛들이 그려지는 버그 발생.
 
 	int unitIndex = 0;
 	for (int y = 0; y < tileCountXY_.IY(); ++y)
@@ -136,11 +138,14 @@ void FieldRenderingActor::InitializeFieldRenderer()
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(1);
 			//NewGrassTexture.png는 1번으로 삽입되어 있다.
 
+			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(256, 256, 1);
+			//타일을 그리는 인스턴싱유닛들만 크기 설정을 해준다.
+
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
 				(tileSize_ * static_cast<float>(x)) - (tileSize_ * 7.5f),
 				(tileSize_ * static_cast<float>(y)) - (tileSize_ * 5.f),
 				0.f
-			);	//타일 렌더하는 인스턴싱유닛들의 위치 배정.
+			);	//타일 렌더하는 인스턴싱유닛들의 위치 설정.
 
 			++unitIndex;
 		}
@@ -233,6 +238,10 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		{
 			//윈도우 안에 들어온 오브젝트들보다 인스턴싱유닛의 숫자가 많으면 그냥 무시하고 진행한다.
 			//인스턴싱유닛도 온오프기능 만들어서 꺼야 하나?? 그게 최적화에 큰 도움이 되나??
+			//fieldRenderer_->GetInstancingUnit(unitIndex).SetRenderingOff();
+			//continue;
+			//->렌더링오프된 인스턴싱유닛들이 이전에 그렸던 텍스처들이 윈도우에 그대로 남아서 
+			// 카메라를 따라다니는것 같은 현상이 발생한다.
 			break;
 		}
 
@@ -254,6 +263,7 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(0);
 		//MapObjects.png는 0번으로 삽입되어 있음.
 
+		//fieldRenderer_->GetInstancingUnit(unitIndex).SetRenderingOn();
 
 		++objectIndex;
 	}
