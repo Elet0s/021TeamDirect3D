@@ -79,6 +79,9 @@
     <Filter Include="Actor\02. Play\Player\Skill\Passive\Deffence">
       <UniqueIdentifier>{1e27bf76-41cb-4c89-b27b-1f44b14d69b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Bullet">
+      <UniqueIdentifier>{34cf25c1-f295-4855-a121-fb8eab15a9c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -330,6 +333,9 @@
     </ClCompile>
     <ClCompile Include="HealingFactor.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -583,6 +589,9 @@
     </ClInclude>
     <ClInclude Include="HealingFactor.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Actor\02. Play\Player\Skill\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

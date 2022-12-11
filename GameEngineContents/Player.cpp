@@ -251,19 +251,12 @@ void Player::Update(float _deltaTime)
 	LevelUpEvent();
 	PlayerDeathEvent();
 	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		if (true == GameEngineInput::GetInst()->IsDown("SkillOn"))
-		{
-			for (size_t i = 0; i < 1; i++)
-			{
-				if (playerSkillManager_->GetSkillList()[i]->GetSoulCardOrder() == SoulCard::Spear)
-				{
-					playerSkillManager_->GetSkillList()[i]->nowLevel_ += 1;
-				}
-				;
-			}
 
-		}
-		playerSkillManager_->SkillLevelCheak();
+	if (true == GameEngineInput::GetInst()->IsDown("SkillOn"))
+	{
+		playerSkillManager_->GetSkillList()[0]->nowLevel_ += 1;
+	}
+	playerSkillManager_->SkillLevelCheak();
 }
 
 void Player::End()

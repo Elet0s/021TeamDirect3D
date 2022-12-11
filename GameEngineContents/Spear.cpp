@@ -1,13 +1,13 @@
 #include"PreCompile.h"
 #include"Spear.h"
-#include "Player.h"
-
+#include"Player.h"
 
 Spear::Spear()
-	: damege_(0.75f)
-	, attackSpeed_(0.25f)
-	, rangeSize_(2.0f)
-	, spearCol_()
+	:
+	referenceVector_(),
+	spearRenderer_(),
+	spearCol_(),
+	spearWeaponInfo_()
 {
 
 }
@@ -18,14 +18,7 @@ Spear::~Spear()
 
 void Spear::Init()
 {
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-
-	std::string sDamege = std::to_string(damege_ * PlayerInfo_->atk_).substr(0, std::to_string(damege_ * PlayerInfo_->atk_).find(".") + 3);
-	std::string sAttackSpeed = std::to_string(attackSpeed_ * PlayerInfo_->pushSpeed_).substr(0, std::to_string(attackSpeed_ * PlayerInfo_->pushSpeed_).find(".") + 3);
-	std::string sRange = std::to_string(rangeSize_* PlayerInfo_->atk_Range_).substr(0, std::to_string(rangeSize_ * PlayerInfo_->atk_Range_).find(".") + 3);
-
-	etc_ = "범위 내의 근처 적에게 지속\n피해를 입힙니다\n치명타가 발생하지 않습니다\n" + sDamege + " 의 피해\n" + sAttackSpeed + "초 마다 공격\n범위 "
-		+ sRange + "m ";
+;
 }
 void Spear::Effect()
 {
@@ -46,20 +39,23 @@ void Spear::Start()
 	spearCol_ = CreateComponent<GameEngineCollision>();
 	spearCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
 	spearCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
-	spearCol_->ChangeOrder(ObjectOrder::Skill);
+	spearCol_->ChangeOrder(ObjectOrder::Projectile);
 
 	Off();
+
+	spearWeaponInfo_.weaponAtkSpeed_= 100.f;
+	spearWeaponInfo_.weaponAtk_= 1;
+	spearWeaponInfo_.weaponDuration_= 100;
+	spearWeaponInfo_.weaponknockback_= 100;
+	spearWeaponInfo_.weaponPassAtk_=1;
+	spearWeaponInfo_.weaponSize_=100;
+	spearWeaponInfo_.weaponSpeed_=100;
 }
 void Spear::Update(float _deltaTime)
 {
-	Left(_deltaTime);
+
 }
 void Spear::End()
 {
 
-}
-void Spear::Left(float _deltaTime)
-{
-	//float a = GameEngineRandom::mainRandom_.RandomFloat(100.f,500.f);
-	GetTransform().SetWorldLeftMove(100.f, _deltaTime);
 }

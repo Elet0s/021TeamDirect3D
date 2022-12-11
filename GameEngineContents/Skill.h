@@ -9,6 +9,20 @@ struct WeaponInfo
 	float weaponDuration_;//투사체지속시간
 	float weaponSpeed_;// 투사체속력
 	float weaponknockback_;//넉백
+	float weaponAddAtk_;
+	WeaponInfo()
+		:weaponAtk_(0),
+		weaponPassAtk_(0),
+		weaponAtkSpeed_(0),
+		weaponSize_(0),
+		weaponDuration_(0),
+		weaponSpeed_(0),
+		weaponknockback_(0),
+		weaponAddAtk_(0)
+	{
+
+	}
+
 };
 
 class Skill : public GameEngineActor

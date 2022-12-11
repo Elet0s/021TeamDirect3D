@@ -10,6 +10,8 @@ enum class ObjectOrder
 	MapObject,
 	Sector,
 	Skill,
+	SkillSerchBoad,
+	Projectile,
 	TileMap,
 	UI = 1000
 };

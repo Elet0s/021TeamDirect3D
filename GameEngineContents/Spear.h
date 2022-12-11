@@ -1,6 +1,5 @@
 #pragma once
 #include"Skill.h"
-
 //투사체 조준된 방향으로 발사
 class Spear : public Skill
 {
@@ -13,7 +12,6 @@ public:
 	Spear& operator=(const Spear& _Other) = delete;
 	Spear& operator=(Spear&& _Other) noexcept = delete;
 public:
-	std::shared_ptr<GameEngineCollision> Collision_;
 
 	void Init() override;
 	void Effect() override;
@@ -27,15 +25,11 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-	void Left(float _deltaTime);
-
+	void renderRotate(float _deltaTime);
 private:
-
-	float damege_;
-	float attackSpeed_;
-	float rangeSize_;
 	float4 referenceVector_;//기준벡터 - 랜더러를 던질 각도에 맞게 회전해줘야함 
 	std::shared_ptr<GameEngineTextureRenderer> spearRenderer_;
 	std::shared_ptr<GameEngineCollision> spearCol_;
-
+	WeaponInfo spearWeaponInfo_;
+	
 };
