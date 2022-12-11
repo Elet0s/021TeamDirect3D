@@ -44,7 +44,7 @@ void GameEngineLighting::UpdataLightingData(std::weak_ptr<GameEngineCamera> _cam
 	this->lightingData_.viewLightingReverseDirection_.w = 0.f;
 	//조명의 뷰공간 방향벡터와 역방향벡터도 방향벡터이므로 w를 0으로 만든다.
 
-	this->lightingData_.viewSpaceCameraPosition_
-		= _camera.lock()->GetTransform().GetWorldPosition() * _camera.lock()->GetViewMatrix();
-	//뷰공간 카메라위치는 (0, 0, 0) 고정 아닌가? 굳이 계산할 필요가 있나?
+	//this->lightingData_.viewSpaceCameraPosition_
+	//	= _camera.lock()->GetTransform().GetWorldPosition() * _camera.lock()->GetViewMatrix();
+	//뷰공간 카메라위치는 (0, 0, 0) 고정 아닌가?? 굳이 계산할 필요가 있나??
 }

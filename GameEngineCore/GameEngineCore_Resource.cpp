@@ -84,8 +84,15 @@ void EngineInputLayout()
 
 
 
-
-
+	//텍스처인덱스 정보.
+	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+		"TEXTUREINDEX",
+		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,
+		-1,
+		1,
+		1,
+		D3D11_INPUT_PER_INSTANCE_DATA
+	);
 
 }
 

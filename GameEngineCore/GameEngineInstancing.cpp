@@ -206,7 +206,7 @@ std::list<GameEngineInstancing::InstancingData>& GameEngineInstancing::CreateIns
 	std::shared_ptr<GameEngineInstancingBuffer>& newInstancingBufferPtr = instancingBuffers_.emplace_back();
 	//새 인스턴싱버퍼 생성, 삽입.
 
-	size_t instancingSize = static_cast<size_t>(initRenderUnit_->GetMesh()->GetInputLayoutDesc().instancingSize_);
+	size_t instancingSize = static_cast<size_t>(initRenderUnit_->GetMesh()->GetInputLayoutDesc().instanceSize_);
 	//인스턴싱 단위 크기 == UINT 4byte.
 
 	newInstancingBufferPtr = GameEngineInstancingBuffer::Create(maxInstancingCount_, instancingSize);

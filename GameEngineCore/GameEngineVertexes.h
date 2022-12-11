@@ -12,11 +12,12 @@ public:
 	std::vector<D3D11_INPUT_ELEMENT_DESC> descs_;	//
 	std::map<const char*, int> semanticIndexData_;	//
 	unsigned int offset_;							//
-	unsigned int instancingSize_;					//인스턴싱 단위 크기.
+	//std::map<std::string, unsigned int> instancingFormatSizeMap_;							
+	unsigned int instanceSize_;					//인스턴싱 단위 크기.
 
 
 public:
-	GameEngineInputLayoutDesc(): offset_(0), instancingSize_(0)
+	GameEngineInputLayoutDesc(): offset_(0), instanceSize_(0)
 	{
 	}
 
@@ -48,7 +49,7 @@ struct GameEngineVertex
 	float4 POSITION;	//위치.
 	float4 COLOR;		//색상.
 	float4 TEXCOORD;	//UV좌표.
-	float4 NORMAL;		//법선벡터.
+	float4 NORMAL;		//정점 법선벡터.
 	float4 BINORMAL;
 	float4 TANGENT;
 	float4 WEIGHT;		// 애니메이션 가중치

@@ -14,7 +14,19 @@ ShaderTestLevel::~ShaderTestLevel()
 
 void ShaderTestLevel::Start()
 {
+	GameEngineDirectory tempDir;
+	tempDir.MoveParentToExistChildDirectory("ContentsResources");
+	tempDir.MoveToChild("ContentsResources");
+	tempDir.MoveToChild("InstancingTest");
+	tempDir.MoveToChild("Field");
+
+	GameEngineTexture2DArray::Load(tempDir.GetFullPath());
+
+
+
+
 	shaderTestActor_ = CreateActor<FieldRenderingActor>(0, "ShaderTestActor");
+	//shaderTestActor_->InitializeFieldObject();
 	shaderTestActor_->GetTransform().SetLocalScale(float4::White);
 	shaderTestActor_->GetTransform().SetWorldScale(float4::White);
 	shaderTestActor_->GetTransform().SetWorldPosition(float4::Zero);

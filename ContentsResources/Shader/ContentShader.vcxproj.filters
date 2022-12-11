@@ -5,7 +5,8 @@
     <None Include="RenderOption.hlsli" />
     <None Include="Test.hlsl" />
     <None Include="Texture2DShadow.hlsl" />
-    <None Include="TileTextureInstancing.hlsl" />
+    <None Include="SingleTextureInstancing.hlsl" />
     <None Include="LightHeader.hlsli" />
+    <None Include="MultiTexturesInstancing.hlsl" />
   </ItemGroup>
 </Project>
