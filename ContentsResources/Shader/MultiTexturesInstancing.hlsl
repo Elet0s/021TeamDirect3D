@@ -5,8 +5,8 @@ struct Input
 {
     float4 pos_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    uint instancingIndex_ : ROWINDEX; //인스턴싱 인덱스. unsigned int 한개만 사용.
-    uint textureIndex_ : TEXTUREINDEX;
+    uint instancingIndex_ : ROWINDEX;   //인스턴싱 인덱스. unsigned int 한개만 사용.
+    uint textureIndex_ : TEXTUREINDEX;  //텍스처 인덱스.
 };
 
 struct Output
