@@ -16,8 +16,9 @@
 #include "RedFlyingEyes.h"
 #include "FlyingEyes.h"
 #include "SoundPlayer.h"
+#include "FieldRenderingActor.h"
 
-TestLevel::TestLevel() //: tileCameraActor_(nullptr)
+TestLevel::TestLevel(): fieldRenderingActor_(nullptr)
 {
 }
 
@@ -94,19 +95,25 @@ void TestLevel::Start()
 		GameEngineSound::LoadResource(soundPlay);
 	}
 
-	tilemaps_.resize(3);
+	//tilemaps_.resize(3);
 
-	for (size_t i = 0; i < 3; i++)
-	{
-		tilemaps_[i].resize(3);
-		for (size_t j = 0; j < 3; j++)
-		{
-			tilemaps_[i][j] = CreateActor<TileMapActor>();
-			tilemaps_[i][j]->GetTransform().SetWorldPosition(float4(1280.f * static_cast<float>(j), -(640.f * static_cast<float>(i))));
-			tilemaps_[i][j]->tileRenderer_->CreateTileMap(10, 5, { 128, 128 }, "GrassTexture.png");
-			tilemaps_[i][j]->tileRenderer_->SetPivot(PivotMode::LeftTop);
-		}
-	}
+	//for (size_t i = 0; i < 3; i++)
+	//{
+	//	tilemaps_[i].resize(3);
+	//	for (size_t j = 0; j < 3; j++)
+	//	{
+	//		tilemaps_[i][j] = CreateActor<TileMapActor>();
+	//		tilemaps_[i][j]->GetTransform().SetWorldPosition(float4(1280.f * static_cast<float>(j), -(640.f * static_cast<float>(i))));
+	//		tilemaps_[i][j]->tileRenderer_->CreateTileMap(10, 5, { 128, 128 }, "GrassTexture.png");
+	//		tilemaps_[i][j]->tileRenderer_->SetPivot(PivotMode::LeftTop);
+	//	}
+	//}
+
+	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
+	fieldRenderingActor_->GetTransform().SetLocalScale(float4::White);
+	fieldRenderingActor_->GetTransform().SetWorldScale(float4::White);
+	fieldRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
+
 
 	std::shared_ptr< GameEngineCollision> col = GetMainCameraActor()->CreateComponent<GameEngineCollision>();
 	col->GetTransform().SetWorldScale(float4{ 1280,720 });
@@ -121,10 +128,10 @@ void TestLevel::Start()
 	{
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
-	//Monster::ReserveMonsters(100);
-
-	//Monster::CreateMonster<BlackEyes>(this, 1);
-	//Monster::SummonMonster<BlackEyes>(this, 1);
+	Monster::ReserveMonsters(this, 100);
+	
+	Monster::CreateMonster<BlackEyes>(this, 1);
+	Monster::SummonMonster<BlackEyes>(this, 1);
 	
 
 	//Monster::CreateMonster<Brown>(this, 10);
@@ -150,7 +157,11 @@ void TestLevel::Update(float _DeltaTime)
 {						
 	//tileCameraActor_->GetTransform().SetWorldPosition(GetMainCameraActorTransform().GetWorldPosition());
 	//GameEngineCore::engineThreadPool_.Work(std::bind(&TestLevel::UpdateWorld, this));
-	UpdateWorld();
+	//UpdateWorld();
+
+	PlayerMoveCamera();
+
+	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
 }
 
 void TestLevel::LevelStartEvent()
@@ -167,142 +178,142 @@ void TestLevel::CreateMapAndCamraMove()
 
 }
 
-void TestLevel::UpdateWorld()
-{
-	float4 CenterPos = tilemaps_[1][1]->GetTransform().GetWorldPosition() + float4(640.f, -320.f);
-	float4 PlayerPos = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
-
-	int Dir = -1;
-
-	if (CenterPos.x + 640.f < PlayerPos.x)
-	{
-		Dir = 0;
-	}
-	else if (CenterPos.x - 640.f > PlayerPos.x)
-	{
-		Dir = 1;
-	}
-	else if (CenterPos.y + 320.f < PlayerPos.y)
-	{
-		Dir = 2;
-	}
-	else if (CenterPos.y - 320.f > PlayerPos.y)
-	{
-		Dir = 3;
-	}
-
-	MoveWorld(Dir);
-}
-
-
-void TestLevel::MoveWorld(int _Dir)
-{
-	PlayerMoveCamera();
-	MouseMoveCamera();
-	std::vector<std::vector<std::shared_ptr<TileMapActor>>> CopyTiles_;
-	CopyTiles_.resize(3);
-	for (size_t y = 0; y < CopyTiles_.size(); y++)
-	{
-		CopyTiles_[y].resize(3);
-	}
-
-
-	switch (_Dir)
-	{
-	case 0:   // ¿À¸¥ÂÊÀ¸·Î °¬À»¶§
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			tilemaps_[y][0]->GetTransform().SetWorldPosition(float4(tilemaps_[y][2]->GetTransform().GetWorldPosition().x + 1280, tilemaps_[y][2]->GetTransform().GetWorldPosition().y));
-		}
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CX = x + 1;
-				if (CX == 3)
-				{
-					CopyTiles_[y][x] = tilemaps_[y][CX - 3];
-				}
-				else
-				{
-					CopyTiles_[y][x] = tilemaps_[y][CX];
-				}
-			}
-		}
-		break;
-	case 1:
-		// ¿ÞÂÊÀ¸·Î °¬À»¶§
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			tilemaps_[y][2]->GetTransform().SetWorldPosition(float4(tilemaps_[y][0]->GetTransform().GetWorldPosition().x - 1280, tilemaps_[y][2]->GetTransform().GetWorldPosition().y));
-		}
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CX = x - 1;
-				if (CX < 0)
-				{
-					CopyTiles_[y][x] = tilemaps_[y][2];
-				}
-				else
-				{
-					CopyTiles_[y][x] = tilemaps_[y][CX];
-				}
-			}
-		}
-		break;
-	case 2: // À§·Î °¬À» ¶§
-		for (int x = 0; x < CopyTiles_.size(); x++)
-		{
-			tilemaps_[2][x]->GetTransform().SetWorldPosition(float4(tilemaps_[0][x]->GetTransform().GetWorldPosition().x, tilemaps_[0][x]->GetTransform().GetWorldPosition().y + 640));
-		}
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CY = y - 1;
-				if (CY < 0)
-				{
-					CopyTiles_[y][x] = tilemaps_[2][x];
-				}
-				else
-				{
-					CopyTiles_[y][x] = tilemaps_[CY][x];
-				}
-			}
-		}
-		
-		break;
-	case 3: // ¾Æ·¡·Î °¬À» ¶§
-		for (int x = 0; x < CopyTiles_.size(); x++)
-		{
-			tilemaps_[0][x]->GetTransform().SetWorldPosition(float4(tilemaps_[2][x]->GetTransform().GetWorldPosition().x, tilemaps_[2][x]->GetTransform().GetWorldPosition().y - 640));
-		}
-		for (int y = 0; y < CopyTiles_.size(); y++)
-		{
-			for (int x = 0; x < CopyTiles_[y].size(); x++)
-			{
-				int CY = y + 1;
-				if (CY == 3)
-				{
-					CopyTiles_[y][x] = tilemaps_[CY - 3][x];
-				}
-				else
-				{
-					CopyTiles_[y][x] = tilemaps_[CY][x];
-				}
-			}
-		}
-		break;
-	default:
-		return;
-	}
-
-	tilemaps_.swap(CopyTiles_);
-
-	
-}
+//void TestLevel::UpdateWorld()
+//{
+//	float4 CenterPos = tilemaps_[1][1]->GetTransform().GetWorldPosition() + float4(640.f, -320.f);
+//	float4 PlayerPos = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+//
+//	int Dir = -1;
+//
+//	if (CenterPos.x + 640.f < PlayerPos.x)
+//	{
+//		Dir = 0;
+//	}
+//	else if (CenterPos.x - 640.f > PlayerPos.x)
+//	{
+//		Dir = 1;
+//	}
+//	else if (CenterPos.y + 320.f < PlayerPos.y)
+//	{
+//		Dir = 2;
+//	}
+//	else if (CenterPos.y - 320.f > PlayerPos.y)
+//	{
+//		Dir = 3;
+//	}
+//
+//	MoveWorld(Dir);
+//}
+//
+//
+//void TestLevel::MoveWorld(int _Dir)
+//{
+//	PlayerMoveCamera();
+//	MouseMoveCamera();
+//	std::vector<std::vector<std::shared_ptr<TileMapActor>>> CopyTiles_;
+//	CopyTiles_.resize(3);
+//	for (size_t y = 0; y < CopyTiles_.size(); y++)
+//	{
+//		CopyTiles_[y].resize(3);
+//	}
+//
+//
+//	switch (_Dir)
+//	{
+//	case 0:   // ¿À¸¥ÂÊÀ¸·Î °¬À»¶§
+//		for (int y = 0; y < CopyTiles_.size(); y++)
+//		{
+//			tilemaps_[y][0]->GetTransform().SetWorldPosition(float4(tilemaps_[y][2]->GetTransform().GetWorldPosition().x + 1280, tilemaps_[y][2]->GetTransform().GetWorldPosition().y));
+//		}
+//		for (int y = 0; y < CopyTiles_.size(); y++)
+//		{
+//			for (int x = 0; x < CopyTiles_[y].size(); x++)
+//			{
+//				int CX = x + 1;
+//				if (CX == 3)
+//				{
+//					CopyTiles_[y][x] = tilemaps_[y][CX - 3];
+//				}
+//				else
+//				{
+//					CopyTiles_[y][x] = tilemaps_[y][CX];
+//				}
+//			}
+//		}
+//		break;
+//	case 1:
+//		// ¿ÞÂÊÀ¸·Î °¬À»¶§
+//		for (int y = 0; y < CopyTiles_.size(); y++)
+//		{
+//			tilemaps_[y][2]->GetTransform().SetWorldPosition(float4(tilemaps_[y][0]->GetTransform().GetWorldPosition().x - 1280, tilemaps_[y][2]->GetTransform().GetWorldPosition().y));
+//		}
+//		for (int y = 0; y < CopyTiles_.size(); y++)
+//		{
+//			for (int x = 0; x < CopyTiles_[y].size(); x++)
+//			{
+//				int CX = x - 1;
+//				if (CX < 0)
+//				{
+//					CopyTiles_[y][x] = tilemaps_[y][2];
+//				}
+//				else
+//				{
+//					CopyTiles_[y][x] = tilemaps_[y][CX];
+//				}
+//			}
+//		}
+//		break;
+//	case 2: // À§·Î °¬À» ¶§
+//		for (int x = 0; x < CopyTiles_.size(); x++)
+//		{
+//			tilemaps_[2][x]->GetTransform().SetWorldPosition(float4(tilemaps_[0][x]->GetTransform().GetWorldPosition().x, tilemaps_[0][x]->GetTransform().GetWorldPosition().y + 640));
+//		}
+//		for (int y = 0; y < CopyTiles_.size(); y++)
+//		{
+//			for (int x = 0; x < CopyTiles_[y].size(); x++)
+//			{
+//				int CY = y - 1;
+//				if (CY < 0)
+//				{
+//					CopyTiles_[y][x] = tilemaps_[2][x];
+//				}
+//				else
+//				{
+//					CopyTiles_[y][x] = tilemaps_[CY][x];
+//				}
+//			}
+//		}
+//		
+//		break;
+//	case 3: // ¾Æ·¡·Î °¬À» ¶§
+//		for (int x = 0; x < CopyTiles_.size(); x++)
+//		{
+//			tilemaps_[0][x]->GetTransform().SetWorldPosition(float4(tilemaps_[2][x]->GetTransform().GetWorldPosition().x, tilemaps_[2][x]->GetTransform().GetWorldPosition().y - 640));
+//		}
+//		for (int y = 0; y < CopyTiles_.size(); y++)
+//		{
+//			for (int x = 0; x < CopyTiles_[y].size(); x++)
+//			{
+//				int CY = y + 1;
+//				if (CY == 3)
+//				{
+//					CopyTiles_[y][x] = tilemaps_[CY - 3][x];
+//				}
+//				else
+//				{
+//					CopyTiles_[y][x] = tilemaps_[CY][x];
+//				}
+//			}
+//		}
+//		break;
+//	default:
+//		return;
+//	}
+//
+//	tilemaps_.swap(CopyTiles_);
+//
+//	
+//}
 
 void TestLevel::PlayerMoveCamera()
 {

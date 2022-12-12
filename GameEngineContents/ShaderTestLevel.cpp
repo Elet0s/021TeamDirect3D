@@ -42,20 +42,20 @@ void ShaderTestLevel::Start()
 	shaderTestActor_->GetTransform().SetWorldPosition(float4::Zero);
 
 
-	Monster::ReserveMonsters(this, 50);
+	//Monster::ReserveMonsters(this, 50);
 
 
-	Monster::CreateMonster<Brown>(this, 10);
-	Monster::CreateMonster<Green>(this, 10);
-	Monster::CreateMonster<NormalGoblin>(this, 10);
-	Monster::CreateMonster<RedFlyingEyes>(this, 10);
-	Monster::CreateMonster<FlyingEyes>(this, 10);
+	//Monster::CreateMonster<Brown>(this, 10);
+	//Monster::CreateMonster<Green>(this, 10);
+	//Monster::CreateMonster<NormalGoblin>(this, 10);
+	//Monster::CreateMonster<RedFlyingEyes>(this, 10);
+	//Monster::CreateMonster<FlyingEyes>(this, 10);
 
-	Monster::SummonMonster<Brown>(this, 10);
-	Monster::SummonMonster<Green>(this, 10);
-	Monster::SummonMonster<NormalGoblin>(this, 10);
-	Monster::SummonMonster<RedFlyingEyes>(this, 10);
-	Monster::SummonMonster<FlyingEyes>(this, 10);
+	//Monster::SummonMonster<Brown>(this, 10);
+	//Monster::SummonMonster<Green>(this, 10);
+	//Monster::SummonMonster<NormalGoblin>(this, 10);
+	//Monster::SummonMonster<RedFlyingEyes>(this, 10);
+	//Monster::SummonMonster<FlyingEyes>(this, 10);
 	
 
 }
