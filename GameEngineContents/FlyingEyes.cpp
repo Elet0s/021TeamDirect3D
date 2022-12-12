@@ -14,19 +14,21 @@ FlyingEyes::~FlyingEyes()
 void FlyingEyes::Start()
 {
 	////////////Cut////////////
-	GameEngineTexture::Cut("flyingEyes.png", 6, 1);
+	//GameEngineTexture::Cut("flyingEyes.png", 10, 1);
 	
 
 
-	monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	//monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 
-	monRenderer_->GetTransform().SetLocalScale(70, 70, 0);
-	monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-	monRenderer_->CreateFrameAnimation_CutTexture("flyingEyes", FrameAnimation_Desc("flyingEyes.png", 0, 5, 0.1f));
-	monRenderer_->ChangeFrameAnimation("flyingEyes");
+	//monRenderer_->GetTransform().SetLocalScale(70, 70, 0);
+	//monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
+	//monRenderer_->CreateFrameAnimation_CutTexture("flyingEyes", FrameAnimation_Desc("flyingEyes.png", 0, 5, 0.1f));
+	//monRenderer_->ChangeFrameAnimation("flyingEyes");
 
-	shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
-	shadowRenderer_->SetTextureRenderer(monRenderer_);
+	//shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+	//shadowRenderer_->SetTextureRenderer(monRenderer_);
+
+	monsterScale_ = float4(70, 70, 1);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);

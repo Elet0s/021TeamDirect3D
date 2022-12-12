@@ -32,6 +32,11 @@ class GameEngineRandom;
 class Monster: public GameEngineActor
 {
 	static std::vector<std::shared_ptr<Monster>> allMonsters_;
+
+protected:
+	static GameEngineInstancingRenderer* allMonstersRenderer_;
+
+	static int monsterCreationIndex_;
 public:
 	Monster();
 	~Monster();
@@ -47,7 +52,7 @@ public:
 public:
 
 
-	static  std::vector<std::shared_ptr<Monster>>& GetMonsterList()
+	static std::vector<std::shared_ptr<Monster>>& GetMonsterList()
 	{
 		return allMonsters_;
 	}
@@ -59,7 +64,7 @@ public:
 	CollisionReturn MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
 	//몬스터풀 사이즈 예약.
-	static void ReserveMonsters(size_t _allMonsterCount);
+	static void ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCount);
 
 	//사망한 몬스터는 풀로 복귀, 대기.
 	void Unsummon(); // 게임 중간에 지우는 용도
@@ -76,6 +81,14 @@ public:
 			newMonster->Off();
 
 			allMonsters_.push_back(newMonster);
+
+
+			std::string myTextureName = &typeid(MonsterType).name()[6];
+			myTextureName += ".png";
+			newMonster->instancingUnitIndex_ = monsterCreationIndex_++;
+			allMonstersRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetTextureIndex(
+				GameEngineTexture2DArray::Find("Monster")->GetIndex(myTextureName)
+			);
 		}
 	}
 
@@ -105,19 +118,33 @@ public:
 			float cameraX = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().x;
 			float cameraY = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().y;
 			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 1280, cameraY - 720),float4(cameraX + 1280, cameraY + 720));
-			monsterPosition_.z = 0.f;
+			monsterPosition_.z = -6.f;
 
 
 
 		if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
 		{
 			allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
+
+			allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
+				allMonsters_[i]->monsterScale_
+			);
+			allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_
+			);
 		}
 		else if (monsterPosition_.x< cameraX + 640 && monsterPosition_.x>cameraX -640)
 		{
 			if (monsterPosition_.y > cameraY + 360 || monsterPosition_.y < cameraY - 360)
 			{
 				allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
+
+				allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
+					allMonsters_[i]->monsterScale_
+				);
+				allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
+					monsterPosition_
+				);
 			}
 			else
 			{
@@ -159,7 +186,6 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 	void Chaseplayer(float _deltaTime);
-	//void SummonMon();
 	void Attack();
 
 protected:
@@ -186,8 +212,12 @@ protected:
 
 	std::shared_ptr<GameEngineCollision> monCollision_;
 	std::shared_ptr <MonsterInfo> monsterInfo_;
-	std::shared_ptr<GameEngineTextureRenderer> monRenderer_;
-	std::shared_ptr<class Texture2DShadowRenderer> shadowRenderer_;
+	//std::shared_ptr<GameEngineTextureRenderer> monRenderer_;
+	//std::shared_ptr<class Texture2DShadowRenderer> shadowRenderer_;
+
+	int instancingUnitIndex_;	//이 몬스터를 담당해서 그리고 있는 인스턴싱유닛의 번호.
+
+	float4 monsterScale_;		//몬스터 크기.
 
 private:
 	bool isSummoned_;	//true: 소환되서 필드에서 활동하고 있음.

@@ -15,28 +15,30 @@ void Brown::Start()
 {
 	////////////Cut////////////
 
-		GameEngineTexture::Cut("Brown.png", 8, 1);
+		//GameEngineTexture::Cut("Brown.png", 10, 1);
 	
-		monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+		//monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 
-		monRenderer_->GetTransform().SetLocalScale(80, 80, 0);
-		monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-		monRenderer_->CreateFrameAnimation_CutTexture("Brown", FrameAnimation_Desc("Brown.png", 0, 7, 0.1f));
-		monRenderer_->ChangeFrameAnimation("Brown");
+		//monRenderer_->GetTransform().SetLocalScale(80, 80, 0);
+		//monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
+		//monRenderer_->CreateFrameAnimation_CutTexture("Brown", FrameAnimation_Desc("Brown.png", 0, 7, 0.1f));
+		//monRenderer_->ChangeFrameAnimation("Brown");
 
-		shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
-		shadowRenderer_->SetTextureRenderer(monRenderer_);
+		//shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+		//shadowRenderer_->SetTextureRenderer(monRenderer_);
 
-		monCollision_ = CreateComponent<GameEngineCollision>();
-		monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-		monCollision_->GetTransform().SetLocalScale({ 35.f, 35.f, 1.0f });
-		monCollision_->ChangeOrder(ObjectOrder::Monster);
+	monsterScale_ = float4(80, 80, 1);
 
-		monsterInfo_->atk_ = 0;
-		monsterInfo_->hp_ = 10;
-		monsterInfo_->maxHp_ = 10;
-		monsterInfo_->baseSpeed_ = 50;
-		monsterInfo_->giveExp_ = 5;
+	monCollision_ = CreateComponent<GameEngineCollision>();
+	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
+	monCollision_->GetTransform().SetLocalScale({ 35.f, 35.f, 1.0f });
+	monCollision_->ChangeOrder(ObjectOrder::Monster);
+
+	monsterInfo_->atk_ = 0;
+	monsterInfo_->hp_ = 10;
+	monsterInfo_->maxHp_ = 10;
+	monsterInfo_->baseSpeed_ = 50;
+	monsterInfo_->giveExp_ = 5;
 
 	//SummonMon();
 

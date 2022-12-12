@@ -4,10 +4,14 @@
 
 std::vector<std::shared_ptr<Monster>> Monster::allMonsters_;
 
+GameEngineInstancingRenderer* Monster::allMonstersRenderer_ = nullptr;
+
+int Monster::monsterCreationIndex_ = 0;
+
 Monster::Monster()
 	: mxMove_(0)
 	, myMove_(0)
-	, monRenderer_(nullptr)
+	//, monRenderer_(nullptr)
 	, monCollision_(nullptr)
 	, colCheakToPlayer_(false)
 	, playerRange_(0)
@@ -18,6 +22,8 @@ Monster::Monster()
 	, colCheakToMonster_(false)
 	, pushToMonsterVector(0)
 	, range_(0)
+	, instancingUnitIndex_(0)
+	, monsterScale_(float4::Zero)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
 }
@@ -26,9 +32,18 @@ Monster::~Monster()
 {
 }
 
-void Monster::ReserveMonsters(size_t _allMonsterCount)
+void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCount)
 {
 	allMonsters_.reserve(_allMonsterCount);
+
+	allMonstersRenderer_ = &_thisLevel->GetMainCamera()->GetInstancingRenderer("AllMonstersRenderer");
+	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "MultiTexturesInstancing");
+	allMonstersRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
+	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
+	for (size_t i = 0; i < _allMonsterCount; ++i)
+	{
+		allMonstersRenderer_->GetInstancingUnit(i).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.f);
+	}
 }
 
 void Monster::Unsummon()
@@ -36,6 +51,9 @@ void Monster::Unsummon()
 	isSummoned_ = false;
 	this->GetTransform().SetWorldPosition(float4::Zero);
 	this->Off();
+
+	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldScale(float4::Zero);
+	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(float4::Zero);
 }
 
 void Monster::Start()
@@ -220,6 +238,13 @@ void Monster::Chaseplayer(float _deltaTime)
 
 	GetTransform().SetWorldMove(monsterResultVector_ * _deltaTime); //ÀÌµ¿
 	monsterReactionVector_ = 0;
+
+	if (true == this->isSummoned_)
+	{
+		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+			this->GetTransform().GetWorldPosition()
+		);
+	}
 }
 
 void Monster::Update(float _deltaTime)

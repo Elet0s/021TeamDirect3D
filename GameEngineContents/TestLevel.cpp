@@ -121,10 +121,10 @@ void TestLevel::Start()
 	{
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
-	Monster::ReserveMonsters(100);
+	//Monster::ReserveMonsters(100);
 
-	Monster::CreateMonster<BlackEyes>(this, 1);
-	Monster::SummonMonster<BlackEyes>(this, 1);
+	//Monster::CreateMonster<BlackEyes>(this, 1);
+	//Monster::SummonMonster<BlackEyes>(this, 1);
 	
 
 	//Monster::CreateMonster<Brown>(this, 10);

@@ -77,7 +77,9 @@ void GameEngineInstancingRenderer::InstancingUnit::CalWorldWorldMatrix()
 		* this->transformData_.localPositionMatrix_;
 }
 
-GameEngineInstancingRenderer::GameEngineInstancingRenderer(): instancingUnitCount_(0)
+GameEngineInstancingRenderer::GameEngineInstancingRenderer()
+	: instancingUnitCount_(0),
+	topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 {
 }
 
@@ -112,8 +114,10 @@ void GameEngineInstancingRenderer::Initialize(
 	this->instancingUnitCount_ = _instancingUnitCount;
 
 
+	this->mesh_ = GameEngineMesh::Find(_meshName);
+
 	//인스턴스 단위 크기.
-	UINT instancingSize = GameEngineMesh::Find(_meshName)->GetInputLayoutDesc().instanceSize_;
+	UINT instancingSize = this->mesh_->GetInputLayoutDesc().instanceSize_;
 	
 	this->instancingBuffer_ = GameEngineInstancingBuffer::Create(instancingUnitCount_, instancingSize);
 	//instancingUnitCount_ * instancingSize크기의 인스턴싱버퍼 생성.
@@ -122,15 +126,16 @@ void GameEngineInstancingRenderer::Initialize(
 	//instancingUnitCount_ * instancingSize크기로 로우인덱스 버퍼 크기 조정.
 
 
+	this->material_ = GameEngineMaterial::Create();
+	this->material_->Copy(GameEngineMaterial::Find(_materialName));
 
 	this->shaderResourceHelper_ = GameEngineShaderResourceHelper();
 	this->shaderResourceHelper_.ShaderCheck(
-		GameEngineMaterial::Find(_materialName)->GetVertexShader()->GetInst_VertexShader());
+		this->material_->GetVertexShader()->GetInst_VertexShader());
 	//this->shaderResourceHelper_.ShaderCheck(
 	//	GameEngineMaterial::Find(_materialName)->GetPixelShader());
 	this->shaderResourceHelper_.ShaderCheck(
-		GameEngineMaterial::Find(_materialName)->GetPixelShader()->GetInst_PixelShader());
-	//_materialName의 이름을 가진 마테리얼의 모든 렌더링 데이터들을, 셰이더에 연결시킨다.
+		this->material_->GetPixelShader()->GetInst_PixelShader());
 
 
 	
@@ -300,9 +305,14 @@ void GameEngineInstancingRenderer::Render(
 		//인스턴싱인덱스버퍼에 텍스처배열 인덱스를 기록하고 뒤로 넘어간다.
 	}
 
+
+
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
 	shaderResourceHelper_.AllResourcesSetting();
 
+	
+	
+	
 	allInstancingUnits_[0].renderUnit_->RenderInstancing2(_deltaTime, instancingUnitCount_, instancingBuffer_);
 
 

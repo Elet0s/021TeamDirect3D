@@ -79,6 +79,24 @@ void ContentsCore::End()
 
 void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 {
+	GameEngineDirectory testDir;
+	testDir.MoveParentToExistChildDirectory("ContentsResources");
+	testDir.MoveToChild("ContentsResources");
+	testDir.MoveToChild("InstancingTest");
+	testDir.MoveToChild("Field");
+
+	GameEngineTexture2DArray::Load(testDir.GetFullPath());
+
+	testDir.MoveToParent("InstancingTest");
+	testDir.MoveToChild("Monster");
+
+	
+
+
+
+
+	GameEngineTexture2DArray::Load(testDir.GetFullPath());
+
 	GameEngineDirectory contentsShaderDir;
 	if (true == contentsShaderDir.MoveParentToExistChildDirectory(_dirName))
 	{

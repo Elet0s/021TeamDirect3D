@@ -15,17 +15,21 @@ BlackEyes::~BlackEyes()
 void BlackEyes::Start()
 {
 	////////////Cut////////////
-	GameEngineTexture::Cut("BlackEyes.png", 10, 1);
+	//GameEngineTexture::Cut("BlackEyes.png", 10, 1);
 
-	monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	//monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 
-	monRenderer_->GetTransform().SetLocalScale(70, 70, 0);
-	monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-	monRenderer_->CreateFrameAnimation_CutTexture("BlackEyes", FrameAnimation_Desc("BlackEyes.png", 0, 5, 0.1f));
-	monRenderer_->ChangeFrameAnimation("BlackEyes");
+	//monRenderer_->GetTransform().SetLocalScale(70, 70, 0);
+	//monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
+	//monRenderer_->CreateFrameAnimation_CutTexture("BlackEyes", FrameAnimation_Desc("BlackEyes.png", 0, 5, 0.1f));
+	//monRenderer_->ChangeFrameAnimation("BlackEyes");
 
-	shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
-	shadowRenderer_->SetTextureRenderer(monRenderer_);
+	//shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+	//shadowRenderer_->SetTextureRenderer(monRenderer_);
+
+
+	monsterScale_  = float4(70, 70, 1);
+
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);

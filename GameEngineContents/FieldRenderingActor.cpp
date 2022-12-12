@@ -125,7 +125,7 @@ void FieldRenderingActor::InitializeFieldRenderer()
 	fieldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	fieldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 	//fieldRenderer_->SetAllUnitsWorldScale(256, 256, 1);
-	//그려질 필요없는 렌더유닛들이 그려지는 버그 발생.
+	//그려질 필요없는 렌더유닛들이 256, 256 크기로 그려지는 버그 발생.
 
 	int unitIndex = 0;
 	for (int y = 0; y < tileCountXY_.IY(); ++y)
@@ -169,7 +169,7 @@ void FieldRenderingActor::UpdateTilePosition(const float4& _thisWorldPosition)
 				);
 			}
 			else if (fieldRenderer_->GetInstancingUnit(unitIndex).GetWorldPosition().x
-				>= _thisWorldPosition.x + (tileSize_ * (tileCountXY_.x * 0.5f)))
+				> _thisWorldPosition.x + (tileSize_ * (tileCountXY_.x * 0.5f)))
 			{
 				fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
 					fieldRenderer_->GetInstancingUnit(unitIndex).GetWorldPosition().x - (tileSize_ * tileCountXY_.x),
@@ -188,7 +188,7 @@ void FieldRenderingActor::UpdateTilePosition(const float4& _thisWorldPosition)
 				);
 			}
 			else if (fieldRenderer_->GetInstancingUnit(unitIndex).GetWorldPosition().y
-				>= _thisWorldPosition.y + (tileSize_ * (tileCountXY_.y * 0.5f)))
+				> _thisWorldPosition.y + (tileSize_ * (tileCountXY_.y * 0.5f)))
 			{
 				fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
 					fieldRenderer_->GetInstancingUnit(unitIndex).GetWorldPosition().x,

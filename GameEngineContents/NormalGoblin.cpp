@@ -14,21 +14,23 @@ NormalGoblin::~NormalGoblin()
 void NormalGoblin::Start()
 {
 	////////////Cut////////////
-	GameEngineTexture::Cut("NormalGoblin.png", 8, 1);
+	//GameEngineTexture::Cut("NormalGoblin.png", 10, 1);
 
 
 
 
 
-	monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	//monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 
-	monRenderer_->GetTransform().SetLocalScale(80, 80, 0);
-	monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-	monRenderer_->CreateFrameAnimation_CutTexture("NormalGoblin", FrameAnimation_Desc("NormalGoblin.png", 0, 7, 0.1f));
-	monRenderer_->ChangeFrameAnimation("NormalGoblin");
+	//monRenderer_->GetTransform().SetLocalScale(80, 80, 0);
+	//monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
+	//monRenderer_->CreateFrameAnimation_CutTexture("NormalGoblin", FrameAnimation_Desc("NormalGoblin.png", 0, 7, 0.1f));
+	//monRenderer_->ChangeFrameAnimation("NormalGoblin");
 
-	shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
-	shadowRenderer_->SetTextureRenderer(monRenderer_);
+	//shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+	//shadowRenderer_->SetTextureRenderer(monRenderer_);
+
+	monsterScale_ = float4(80, 80, 1);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
