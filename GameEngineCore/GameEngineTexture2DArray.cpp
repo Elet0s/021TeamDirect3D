@@ -30,8 +30,8 @@ std::shared_ptr<GameEngineTexture2DArray> GameEngineTexture2DArray::Load(
 
 void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 {
-    GameEngineDirectory folderDir = _folderPath;
-    std::vector<GameEngineFile> allFilesInFolder = folderDir.GetAllFiles();
+    GameEngineDirectory folderPath = _folderPath;
+    std::vector<GameEngineFile> allFilesInFolder = folderPath.GetAllFiles();
 
 	metaDatas_.resize(allFilesInFolder.size());
 	images_.resize(allFilesInFolder.size());

@@ -74,12 +74,14 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateAn
 	{
 		return findBuffer;
 	}
+	else
+	{
+		std::shared_ptr<GameEngineStructuredBuffer> newBuffer = CreateNamedRes(_name, _desc.Size);
 
-	std::shared_ptr<GameEngineStructuredBuffer> newBuffer = CreateNamedRes(_name, _desc.Size);
+		newBuffer->CreateOrResize(_desc, _count);
 
-	newBuffer->CreateOrResize(_desc, _count);
-
-	return newBuffer;
+		return newBuffer;
+	}
 }
 
 void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth)
@@ -95,11 +97,11 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth
 		return;
 	}
 
-	if (structuredBufferDesc_.ByteWidth != _byteWidth)
-	{
-		MsgBoxAssertString(this->GetNameCopy() + ": 데이터의 전체 크기가 서로 맞지 않습니다.");
-		return;
-	}
+	//if (this->structuredBufferDesc_.ByteWidth != _byteWidth)
+	//{
+	//	MsgBoxAssertString(this->GetNameCopy() + ": 데이터의 전체 크기가 서로 맞지 않습니다.");
+	//	return;
+	//}
 
 	destMemoryPtrInGPU_.pData = nullptr;
 
