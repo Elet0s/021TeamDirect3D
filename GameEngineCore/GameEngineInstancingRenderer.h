@@ -16,9 +16,9 @@ class GameEngineInstancingRenderer
 
 
         InstancingUnit(
-            const std::set<std::string>& _structuredBufferSetterNames,
-            const std::string_view& _meshName,
-            const std::string_view& _materialName
+            const std::set<std::string>& _structuredBufferSetterNames
+            //const std::string_view& _meshName,
+            //const std::string_view& _materialName
         );
     
         void Link(const std::string_view& _name, const void* _data);
@@ -78,22 +78,12 @@ class GameEngineInstancingRenderer
             SetWorldPosition(float4(_worldPositionX, _worldPositionY, _worldPositionZ));
         }
 
-        //void SetRenderingOn()
-        //{
-        //    isRendering_ = true;
-        //}
-
-        //void SetRenderingOff()
-        //{
-        //    isRendering_ = false;
-        //}
-
     private:
         void CalWorldWorldMatrix();
 
     private:
 
-        std::shared_ptr<GameEngineRenderUnit> renderUnit_;	//렌더유닛.
+        //std::shared_ptr<GameEngineRenderUnit> renderUnit_;	//렌더유닛.
 
         TransformData transformData_;
 
@@ -102,8 +92,6 @@ class GameEngineInstancingRenderer
         std::map<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
 
         unsigned int textureIndex_;
-
-        //bool isRendering_;  //true: 렌더링 한다. false: 안 한다.
     };
 
 

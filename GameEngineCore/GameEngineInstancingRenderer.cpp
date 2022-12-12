@@ -9,9 +9,9 @@
 
 
 GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
-	const std::set<std::string>& _structuredBufferSetterNames,
-	const std::string_view& _meshName,
-	const std::string_view& _materialName
+	const std::set<std::string>& _structuredBufferSetterNames
+	//const std::string_view& _meshName,
+	//const std::string_view& _materialName
 )
 {
 	for (const std::string& name : _structuredBufferSetterNames)
@@ -19,12 +19,11 @@ GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
 		data_.insert(std::make_pair(name, nullptr));
 	}
 
-	this->renderUnit_ = std::make_shared<GameEngineRenderUnit>();
-	this->renderUnit_->SetMesh(_meshName);
-	this->renderUnit_->SetMaterial(_materialName);
-	this->renderUnit_->Off();
+	//this->renderUnit_ = std::make_shared<GameEngineRenderUnit>();
+	//this->renderUnit_->SetMesh(_meshName);
+	//this->renderUnit_->SetMaterial(_materialName);
+	//this->renderUnit_->Off();
 	this->textureIndex_ = 0;
-	//this->isRendering_ = true;
 }
 
 void GameEngineInstancingRenderer::InstancingUnit::Link(const std::string_view& _name, const void* _data)
@@ -116,6 +115,13 @@ void GameEngineInstancingRenderer::Initialize(
 
 	this->mesh_ = GameEngineMesh::Find(_meshName);
 
+	this->material_ = GameEngineMaterial::Find(_materialName);
+
+	this->inputLayout_ = GameEngineInputLayout::Create(
+		this->mesh_->GetInputLayoutDesc(),
+		this->material_->GetVertexShader()
+	);
+
 	//인스턴스 단위 크기.
 	UINT instancingSize = this->mesh_->GetInputLayoutDesc().instanceSize_;
 	
@@ -124,10 +130,6 @@ void GameEngineInstancingRenderer::Initialize(
 
 	instanceIndexBuffer_.resize(static_cast<size_t>(instancingSize) * instancingUnitCount_);
 	//instancingUnitCount_ * instancingSize크기로 로우인덱스 버퍼 크기 조정.
-
-
-	this->material_ = GameEngineMaterial::Create();
-	this->material_->Copy(GameEngineMaterial::Find(_materialName));
 
 	this->shaderResourceHelper_ = GameEngineShaderResourceHelper();
 	this->shaderResourceHelper_.ShaderCheck(
@@ -172,9 +174,9 @@ void GameEngineInstancingRenderer::Initialize(
 	{
 		allInstancingUnits_.push_back(
 			GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
-				this->structuredBufferSetterNames_,
-				_meshName,
-				_materialName
+				this->structuredBufferSetterNames_
+				//_meshName,
+				//_materialName
 			)
 		);
 	}
@@ -202,11 +204,6 @@ void GameEngineInstancingRenderer::Render(
 
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
-		//if (false == allInstancingUnits_[index].isRendering_)
-		//{
-		//	continue;
-		//}
-
 		{
 			//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
 			allInstancingUnits_[index].transformData_.worldViewMatrix_
@@ -214,14 +211,6 @@ void GameEngineInstancingRenderer::Render(
 
 			allInstancingUnits_[index].transformData_.worldViewProjectionMatrix_
 				= allInstancingUnits_[index].transformData_.worldViewMatrix_ * _projectionMatrix;
-
-			//if (false == float4x4::IsInViewFrustum(
-			//	allInstancingUnits_[index].transformData_.worldViewProjectionMatrix_,
-			//	float4::Zero))
-			//{
-			//	//이게 의미가 있나?
-			//	continue;
-			//}
 
 			size_t transforDataSize = sizeof(TransformData);
 			char* transformDataPtr
@@ -309,12 +298,30 @@ void GameEngineInstancingRenderer::Render(
 
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
 	shaderResourceHelper_.AllResourcesSetting();
+	//allInstancingUnits_[0].renderUnit_->RenderInstancing2(_deltaTime, instancingUnitCount_, instancingBuffer_);
 
-	
-	
-	
-	allInstancingUnits_[0].renderUnit_->RenderInstancing2(_deltaTime, instancingUnitCount_, instancingBuffer_);
+	if (nullptr == this->mesh_)
+	{
+		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
 
+	if (nullptr == this->inputLayout_)
+	{
+		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
 
+	if (nullptr == this->material_)
+	{
+		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
+
+	this->mesh_->SettingInstancing(this->instancingBuffer_);
+	this->inputLayout_->Setting();
+	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
+	this->material_->SettingInstancing2();
+	this->mesh_->RenderInstancing(this->instancingUnitCount_);
 }
 

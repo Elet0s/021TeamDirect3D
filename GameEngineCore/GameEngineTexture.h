@@ -90,7 +90,7 @@ public:
 
 		if (cutData_.size() <= _index)
 		{
-			MsgBoxAssertString(this->GetNameCopy() + ": 프레임 범위를 넘어섰습니다.");
+			MsgBoxAssertString(this->GetNameCopy() + ": 인덱스 범위를 넘어섰습니다.");
 			return float4();
 		}
 

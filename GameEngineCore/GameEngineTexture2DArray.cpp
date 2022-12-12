@@ -28,6 +28,39 @@ std::shared_ptr<GameEngineTexture2DArray> GameEngineTexture2DArray::Load(
     return newRes;
 }
 
+void GameEngineTexture2DArray::Cut(const std::string_view& _textureName, int _x, int _y)
+{
+	Cut(this->GetIndex(_textureName), _x, _y);
+}
+
+void GameEngineTexture2DArray::Cut(int _textureIndex, int _x, int _y)
+{
+	cutData_[_textureIndex].reserve(static_cast<size_t>(_x * _y));
+
+	float sizeX = 1.f / _x;
+	float sizeY = 1.f / _y;
+
+	float4 cuttingStart = float4::Zero;
+
+	for (int y = 0; y < _y; ++y)
+	{
+		for (int x = 0; x < _x; ++x)
+		{
+			float4 frameData;
+			frameData.posX = cuttingStart.x;
+			frameData.posY = cuttingStart.y;
+			frameData.sizeX = sizeX;
+			frameData.sizeY = sizeY;
+			cutData_[_textureIndex].push_back(frameData);
+
+			cuttingStart.x += sizeX;
+		}
+
+		cuttingStart.x = 0.f;
+		cuttingStart.y += sizeY;
+	}
+}
+
 void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 {
     GameEngineDirectory folderPath = _folderPath;
@@ -36,6 +69,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 	metaDatas_.resize(allFilesInFolder.size());
 	images_.resize(allFilesInFolder.size());
 	loadedScratchImages_.resize(allFilesInFolder.size());
+	cutData_.resize(allFilesInFolder.size());
 
     for (size_t i = 0; i < allFilesInFolder.size(); i++)
     {

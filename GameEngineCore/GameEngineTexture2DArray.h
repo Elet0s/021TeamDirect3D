@@ -21,9 +21,11 @@ public:
 	static std::shared_ptr<GameEngineTexture2DArray> Load(const std::string_view& _path);
 	static std::shared_ptr<GameEngineTexture2DArray> Load(const std::string_view& _path, const std::string_view& _name);
 
+	void Cut(const std::string_view& _textureName, int _x, int _y);
+	void Cut(int _textureIndex, int _x, int _y);
 
 public:
-	unsigned int GetIndex(const std::string_view& _textureFileName)
+	int GetIndex(const std::string_view& _textureFileName)
 	{
 		if (nameIndexPairs_.end() != nameIndexPairs_.find(GameEngineString::ToUpperReturn(_textureFileName)))
 		{
@@ -36,6 +38,28 @@ public:
 		}
 	}
 
+	size_t GetCutCount(int _textureIndex)
+	{
+		return cutData_[_textureIndex].size();
+	}
+
+	const float4& GetFrameData(int _textureIndex, int _cutDataIndex)
+	{
+		if (true == this->cutData_[_textureIndex].empty())
+		{
+			MsgBoxAssertString(this->GetNameCopy() + ": 아직 자르지 않은 텍스쳐입니다.");
+			return float4();
+		}
+
+		if (cutData_[_textureIndex].size() <= _cutDataIndex)
+		{
+			MsgBoxAssertString(this->GetNameCopy() + ": 인덱스 범위를 넘어섰습니다.");
+			return float4();
+		}
+
+		return cutData_[_textureIndex][_cutDataIndex];
+	}
+
 
 private:
 	void LoadTextures(const std::string_view& _folderPath);
@@ -43,19 +67,21 @@ private:
 	void PSSetting(int _bindPoint);
 
 private:
+	std::map<std::string, int> nameIndexPairs_;	//텍스처 각각의 이름과, 그 텍스처의 인덱스 모음.
 
-	DirectX::ScratchImage scratchImage_;
-	
-	std::vector<DirectX::ScratchImage> loadedScratchImages_;
 
-	std::vector<DirectX::Image> images_;
-
-	std::map<std::string, unsigned int> nameIndexPairs_;	//텍스처 각각의 이름과, 그 텍스처의 인덱스 모음.
+	std::vector<DirectX::ScratchImage> loadedScratchImages_;	//DirectXTex로 불러온 텍스처들.
 
 	std::vector<DirectX::TexMetadata> metaDatas_;		//DirectXTex로 불러온 텍스처의 각종 정보들.
 
-	ID3D11ShaderResourceView* shaderResourceView_;
+	std::vector<DirectX::Image> images_;		//loadedScratchImages_에서 추출한 이미지들.
 
-	std::vector<std::vector<float4>> cutData_;	//프레임 애니메이션 만들 때 필요한 아틀라스텍스처 분할 정보.
+	DirectX::ScratchImage scratchImage_;		//images_를 하나로 모아서 만든 텍스처 모음.
+
+	ID3D11ShaderResourceView* shaderResourceView_;		//scratchImage_로 만든 셰이더리소스뷰.
+
+
+
+	std::vector<std::vector<float4>> cutData_;	//프레임 애니메이션 만들 때 필요한 텍스처별 분할 정보.
 };
 
