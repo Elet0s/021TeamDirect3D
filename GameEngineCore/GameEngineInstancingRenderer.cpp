@@ -196,6 +196,24 @@ void GameEngineInstancingRenderer::Render(
 	const float4x4& _projectionMatrix
 )
 {
+	if (nullptr == this->mesh_)
+	{
+		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
+
+	if (nullptr == this->inputLayout_)
+	{
+		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
+
+	if (nullptr == this->material_)
+	{
+		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
+		return;
+	}
+
 	std::multimap<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetters
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
 
@@ -295,25 +313,6 @@ void GameEngineInstancingRenderer::Render(
 
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
 	shaderResourceHelper_.AllResourcesSetting();
-	//allInstancingUnits_[0].renderUnit_->RenderInstancing2(_deltaTime, instancingUnitCount_, instancingBuffer_);
-
-	if (nullptr == this->mesh_)
-	{
-		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
-		return;
-	}
-
-	if (nullptr == this->inputLayout_)
-	{
-		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
-		return;
-	}
-
-	if (nullptr == this->material_)
-	{
-		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
-		return;
-	}
 
 	this->mesh_->SettingInstancing(this->instancingBuffer_);
 	this->inputLayout_->Setting();
