@@ -3,22 +3,29 @@
 struct WeaponInfo
 {
 	float weaponAtk_;//무기공격력
-	float weaponPassAtk_;//관통력
 	float weaponAtkSpeed_;//공격속도
+	int weaponPassAtk_;//관통력
+	int weaponPassNum_;//관통횟수
 	float weaponSize_;//투사체크기
 	float weaponDuration_;//투사체지속시간
-	float weaponSpeed_;// 투사체속력
+	float weaponThrowingSpeed_;//던지는 주기속도
+	float weaponSpeed_;// 투사체속도 
 	float weaponknockback_;//넉백
-	float weaponAddAtk_;
+	int weponConsecutiveAtkNum_;//투사체 연속공격횟수(한 공격 주기에 몇번 던지는지)
+	int weaponProjectileNum_; //투사체추가갯수(한번에 던지는 발사체 횟수)
 	WeaponInfo()
-		:weaponAtk_(0),
+		:weaponAtk_(0), 
 		weaponPassAtk_(0),
 		weaponAtkSpeed_(0),
 		weaponSize_(0),
 		weaponDuration_(0),
 		weaponSpeed_(0),
 		weaponknockback_(0),
-		weaponAddAtk_(0)
+		weaponProjectileNum_(0),
+		weponConsecutiveAtkNum_(0),
+		weaponPassNum_(0),
+		weaponThrowingSpeed_(0)
+
 	{
 
 	}
@@ -68,6 +75,7 @@ public:
 public:
 	int nowLevel_;
 protected:
+	virtual void  StateSet() ;
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;

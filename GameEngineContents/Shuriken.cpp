@@ -8,8 +8,6 @@ Shuriken::Shuriken()
 	shuriKenRenderer_(),
 	shuriKenCol_(),
 	shuriKenWeaponInfo_(),
-	shuriKenSerchCol_(),
-	TargetMonsters_(),
 	minHpPair_()
 {
 
@@ -19,6 +17,51 @@ Shuriken::~Shuriken()
 
 
 }
+void  Shuriken::StateSet()
+{
+	if (nowLevel_ > 1)
+	{
+		shuriKenWeaponInfo_.weaponAtk_ = 1.13f;
+		shuriKenWeaponInfo_.weaponAtkSpeed_ = 100.f;//1초마다
+
+		shuriKenWeaponInfo_.weaponPassAtk_ = 0;
+		shuriKenWeaponInfo_.weaponPassNum_ = 0;
+
+		shuriKenWeaponInfo_.weaponSize_ = 100;
+		shuriKenWeaponInfo_.weaponDuration_ = 100;
+		shuriKenWeaponInfo_.weaponThrowingSpeed_ = 1.0f;
+		shuriKenWeaponInfo_.weaponSpeed_ = 100;
+
+		shuriKenWeaponInfo_.weaponknockback_ = 100;
+
+		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 2;
+
+	}
+	else if (nowLevel_ > 2)
+	{
+		shuriKenWeaponInfo_.weaponAtk_ = 1.58f;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 3;
+		shuriKenWeaponInfo_.weaponThrowingSpeed_ = 0.6f;
+	}
+	else if (nowLevel_ > 3)
+	{
+
+	}
+	else if (nowLevel_ > 4)
+	{
+
+	}
+	else if (nowLevel_ > 5)
+	{
+
+	}
+	else if (nowLevel_ > 6)
+	{
+
+	}
+}
+
 void Shuriken::Start()
 {
 	valueSoulCard_ = SoulCard::Shuriken;
@@ -26,40 +69,28 @@ void Shuriken::Start()
 	shuriKenRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	shuriKenRenderer_->GetTransform().SetWorldScale(50, 80, 0);
 	shuriKenRenderer_->SetTexture("Spear.png");
-	//spearRenderer_->GetTransform().SetWorldRotation({30});
-
-	//referenceVector_ = GetTransform().GetUpVector();
 
 	shuriKenCol_ = CreateComponent<GameEngineCollision>();
 	shuriKenCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
 	shuriKenCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
 	shuriKenCol_->ChangeOrder(ObjectOrder::Projectile);
 
-	shuriKenCol_ = CreateComponent<GameEngineCollision>();
-	shuriKenCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::White);
-	shuriKenCol_->GetTransform().SetLocalScale({ 350.0f, 350.0f, 1.0f });
-	shuriKenCol_->ChangeOrder(ObjectOrder::SkillSerchBoad);
-
-	Off();
-
-	shuriKenWeaponInfo_.weaponAtkSpeed_ = 100.f;
-	shuriKenWeaponInfo_.weaponAtk_ = 1;
-	shuriKenWeaponInfo_.weaponDuration_ = 100;
-	shuriKenWeaponInfo_.weaponknockback_ = 100;
-	shuriKenWeaponInfo_.weaponPassAtk_ = 1;
-	shuriKenWeaponInfo_.weaponSize_ = 100;
-	shuriKenWeaponInfo_.weaponSpeed_ = 100;
+	//Off();
+	StateSet();
 }
 
 void Shuriken::RangeCheak(float _deltaTime)
 {
-	shuriKenCol_->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
+	//shuriKenCol_->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
+	shuriKenRenderer_->GetTransform().SetWorldMove(referenceVector_* _deltaTime*100.f);
+	shuriKenCol_->GetTransform().SetWorldMove(referenceVector_ * _deltaTime * 100.f);
 }
 void Shuriken::Update(float _deltaTime)
 {
-	RangeCheak(_deltaTime);
-	shuriKenCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	renderRotate(_deltaTime);
+	RangeCheak(_deltaTime);
+	//shuriKenCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+
 }
 void Shuriken::End()
 {
@@ -67,40 +98,41 @@ void Shuriken::End()
 }
 void Shuriken::renderRotate(float _deltaTime)
 {
-	referenceVector_ = Player::GetPlayerInst()->GetTransform().GetUpVector();
-
-	for (size_t i = 0; i < TargetMonsters_.size(); i++)//범위안에 들어와있는 친구들 중에
+	//체력이 다 같을 경우 제일 가까운 녀석을 추적하는 기능
+	monsterList_ = Monster::GetMonsterList();
+	for (size_t i = 0; i < monsterList_.size(); i++)
 	{
-		if (TargetMonsters_[i]->GetMonsterInfo().hp_ > 0)
+		if (monsterList_[i]->GetMonsterInfo().hp_ > 0&& i == 0)//hp0이상, 첫번째 순번일경우
 		{
-
-			if (i == 0)//첫번째
-			{
-				minHpPair_ = std::make_pair(i, TargetMonsters_[i]->GetMonsterInfo().hp_);
-			}
-			else if (minHpPair_.second > TargetMonsters_[i]->GetMonsterInfo().hp_)//이전보다 현제검사중인 친구의 체력이 더 낮으면
-			{
-				minHpPair_ = std::make_pair(i, TargetMonsters_[i]->GetMonsterInfo().hp_);
-			}
+			minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+		}
+		else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮으면
+		{
+			minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 		}
 	}
 	if (minHpPair_.second > 0)
 	{
-		float Mx = TargetMonsters_[minHpPair_.first]->GetTransform().GetWorldPosition().x;
-		float My = TargetMonsters_[minHpPair_.first]->GetTransform().GetWorldPosition().y;
+		float Mx = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().x;
+		float My = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().y;
 		float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-		float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
-		float4 RangeVector = (Px - Mx, Py - My);
-		RangeVector = RangeVector.Normalize3D();
+		float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+		referenceVector_ = (Mx - Px, My - Py); //방향 구하는 공식
+		referenceVector_ = referenceVector_.Normalize3D();
 
-		float Cos = (referenceVector_.x * RangeVector.x) + (referenceVector_.y * RangeVector.y);
-		float A = acos(Cos);
+		float Cos = atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree;
+		shuriKenRenderer_->GetTransform().SetWorldRotation(Cos);
+		//float A = acos(Cos);
 	}
 }
 
-CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other) // 발사체 부딪히면
 {
 	
-	TargetMonsters_.push_back(dynamic_pointer_cast<Monster>(_Other->GetActor()));
+	//TargetMonsters_.push_back(dynamic_pointer_cast<Monster>(_Other->GetActor()));
+
+	//여기서 데미지 갱신해줘야함
+	_Other->GetActor()->Off();
+	//off한 몬스터 부활 시켜주는 자료구조에 넣어주는 부분 필요함 자료구조는 계속 업데이트 돌면서 죽은 애들 위치갱신해줌
 	return CollisionReturn::Stop;
 }

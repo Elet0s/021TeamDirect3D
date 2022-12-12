@@ -24,8 +24,8 @@ public:
 		return skillList_;
 	}
 
-	void CreatePlayerAllSkill();
-	void SkillLevelCheak();
+	void CreatePlayerAllSkill();// 스킬별로 엑터하나씩만들고 자료구조안에 집어넣어주는 함수 1회만 실행
+	void SkillLevelCheak(); //스킬 레벨0보다 크면 업데이트 시켜주는 함수
 private:
 
 	 GameEngineLevel* myLevel_;

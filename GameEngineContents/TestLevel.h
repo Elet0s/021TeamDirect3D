@@ -29,7 +29,5 @@ private:
 	void MouseMoveCamera();
 	void PlayerMoveCamera();
 	std::vector<std::vector<std::shared_ptr<TileMapActor>>> tilemaps_;
-
-
 	//GameEngineCameraActor* tileCameraActor_;
 };

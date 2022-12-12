@@ -27,13 +27,14 @@ protected:
 	void End() override;
 	void renderRotate(float _deltaTime);
 	void RangeCheak(float _deltaTime);
+	void  StateSet() override;
 
 private:
 	float4 referenceVector_;//기준벡터 - 랜더러를 던질 각도에 맞게 회전해줘야함 
 	std::shared_ptr<GameEngineTextureRenderer>  shuriKenRenderer_;
-	std::shared_ptr<GameEngineCollision>  shuriKenSerchCol_;
 	std::shared_ptr<GameEngineCollision>  shuriKenCol_;
 	WeaponInfo shuriKenWeaponInfo_;
-	std::vector<std::shared_ptr<Monster>> TargetMonsters_;
+	std::vector<std::shared_ptr<Monster>> monsterList_;
 	std::pair<size_t, float> minHpPair_;
 };
+

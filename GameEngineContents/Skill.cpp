@@ -28,3 +28,8 @@ void Skill::End()
 {
 
 }
+
+void  Skill::StateSet()
+{
+
+ }

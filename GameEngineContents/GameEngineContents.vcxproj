@@ -153,15 +153,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ArcanistStaff.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Area.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="ArtificersKatana.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -312,10 +304,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="SilphsBlade.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="SingleHanded.h">
       <SubType>
       </SubType>
@@ -428,10 +416,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="VoidWisp.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="WindsBlade.h">
       <SubType>
       </SubType>
@@ -450,15 +434,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ArcanistStaff.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Area.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="ArtificersKatana.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -609,10 +585,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="SilphsBlade.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="SingleHanded.cpp">
       <SubType>
       </SubType>
@@ -725,10 +697,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TreeObject.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="VoidWisp.cpp">
       <SubType>
       </SubType>
     </ClCompile>

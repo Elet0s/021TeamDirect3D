@@ -252,7 +252,7 @@ void Player::Update(float _deltaTime)
 	PlayerDeathEvent();
 	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 
-	if (true == GameEngineInput::GetInst()->IsDown("SkillOn"))
+	if (true == GameEngineInput::GetInst()->IsDown("SkillOn")) 
 	{
 		playerSkillManager_->GetSkillList()[0]->nowLevel_ += 1;
 	}

@@ -82,6 +82,15 @@
     <Filter Include="Actor\02. Play\Player\Skill\Bullet">
       <UniqueIdentifier>{34cf25c1-f295-4855-a121-fb8eab15a9c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\Monster\Boss">
+      <UniqueIdentifier>{6e1ca960-0262-44d8-90bd-1422f2c73558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02. Play\Monster\Nomal">
+      <UniqueIdentifier>{98b7e95d-8a94-41cb-8aee-222b8bde439e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02. Play\Monster\Elite">
+      <UniqueIdentifier>{dc5e78d5-911d-4c3f-b4c6-5c9f2a37e1ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -124,29 +133,11 @@
     <ClCompile Include="TimeActor.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="BlackEyes.cpp">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\02. Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor\02. Play\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="FlyingEyes.cpp">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Brown.cpp">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Green.cpp">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalGoblin.cpp">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="RedFlyingEyes.cpp">
-      <Filter>Actor\02. Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="WorldMapActor.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
@@ -286,22 +277,10 @@
     <ClCompile Include="MagicWisp.cpp">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
     </ClCompile>
-    <ClCompile Include="VoidWisp.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClCompile>
     <ClCompile Include="WindsBlade.cpp">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
     </ClCompile>
-    <ClCompile Include="SilphsBlade.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClCompile>
-    <ClCompile Include="ArcanistStaff.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClCompile>
     <ClCompile Include="Katana.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
-    </ClCompile>
-    <ClCompile Include="ArtificersKatana.cpp">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
     </ClCompile>
     <ClCompile Include="Crossbow.cpp">
@@ -336,6 +315,24 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Actor\02. Play\Player\Skill\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackEyes.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClCompile>
+    <ClCompile Include="Brown.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingEyes.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClCompile>
+    <ClCompile Include="Green.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalGoblin.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClCompile>
+    <ClCompile Include="RedFlyingEyes.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -379,29 +376,11 @@
     <ClInclude Include="TimeActor.h">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="BlackEyes.h">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Actor\02. Play\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor\02. Play\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="FlyingEyes.h">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Brown.h">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Green.h">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalGoblin.h">
-      <Filter>Actor\02. Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="RedFlyingEyes.h">
-      <Filter>Actor\02. Play\Monster</Filter>
     </ClInclude>
     <ClInclude Include="LoginUI.h" />
     <ClInclude Include="MyWorldMapRenderer.h">
@@ -545,22 +524,10 @@
     <ClInclude Include="MagicWisp.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
     </ClInclude>
-    <ClInclude Include="VoidWisp.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClInclude>
     <ClInclude Include="WindsBlade.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
     </ClInclude>
-    <ClInclude Include="SilphsBlade.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClInclude>
-    <ClInclude Include="ArcanistStaff.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClInclude>
     <ClInclude Include="Katana.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
-    </ClInclude>
-    <ClInclude Include="ArtificersKatana.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
     </ClInclude>
     <ClInclude Include="Crossbow.h">
@@ -592,6 +559,24 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Actor\02. Play\Player\Skill\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackEyes.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="Brown.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingEyes.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="Green.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalGoblin.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="RedFlyingEyes.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
