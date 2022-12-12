@@ -40,6 +40,12 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "MultiTexturesInstancing");
 	allMonstersRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
+
+	for (size_t i = 0; i < GameEngineTexture2DArray::Find("Monster")->GetCount(); ++i)
+	{
+		GameEngineTexture2DArray::Find("Monster")->Cut(static_cast<int>(i), 10, 1);
+	}
+
 	for (size_t i = 0; i < _allMonsterCount; ++i)
 	{
 		allMonstersRenderer_->GetInstancingUnit(i).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.f);
@@ -71,12 +77,12 @@ CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCol
 		colCheakToMonster_ = true;
 	}
 	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
-	 pushToMonsterVector.x = mx_ - A->mx_;// 콜리전 대상몬스터가 this 몬스터에게 오는 방향벡터
-	 pushToMonsterVector.y = my_ - A->my_;
+	pushToMonsterVector.x = mx_ - A->mx_;// 콜리전 대상몬스터가 this 몬스터에게 오는 방향벡터
+	pushToMonsterVector.y = my_ - A->my_;
 
-		 monsterReactionVector_ = (A->monsterResultVector_ + monsterResultVector_) / 2;//플레이어한테가는 최종벡터
+	monsterReactionVector_ = (A->monsterResultVector_ + monsterResultVector_) / 2;//플레이어한테가는 최종벡터
 
-		 monsterReactionVector_ += pushToMonsterVector.Normalize3D()*120;// 몬스터끼리 부딪혔을때 몬스터끼리 밀어내는 힘
+	monsterReactionVector_ += pushToMonsterVector.Normalize3D()*120;// 몬스터끼리 부딪혔을때 몬스터끼리 밀어내는 힘
 	
 	return CollisionReturn::Stop;
 }
@@ -212,10 +218,10 @@ CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineColl
 
 void Monster::Chaseplayer(float _deltaTime)
 {
-	 mx_ = GetTransform().GetWorldPosition().x;//몬스터 좌표
-	 my_ = GetTransform().GetWorldPosition().y;
-	 px_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x; //플레이어 좌표
-	 py_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
+	mx_ = GetTransform().GetWorldPosition().x;//몬스터 좌표
+	my_ = GetTransform().GetWorldPosition().y;
+	px_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x; //플레이어 좌표
+	py_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
 	range_.x = px_ - mx_;//플레이어와 몬스터 x거리차이
 	range_.y = py_ - my_;
 	playerRange_ = static_cast<float>(sqrt(pow(range_.x,2) + pow(range_.y,2))); // 몬스터와 플레이어 사이의 거리의 절대값
@@ -238,13 +244,6 @@ void Monster::Chaseplayer(float _deltaTime)
 
 	GetTransform().SetWorldMove(monsterResultVector_ * _deltaTime); //이동
 	monsterReactionVector_ = 0;
-
-	if (true == this->isSummoned_)
-	{
-		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
-			this->GetTransform().GetWorldPosition()
-		);
-	}
 }
 
 void Monster::Update(float _deltaTime)

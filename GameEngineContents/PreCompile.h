@@ -31,6 +31,7 @@
 #include <GameEngineCore\GameEngineFolderTexture.h>
 
 #include <GameEngineCore\GameEngineTexture2DArray.h>
+#include <GameEngineCore\GameEngineAnimation.h>
 
 #include <GameEngineCore\GameEngineGUI.h>
 #include <GameEngineCore\GameEngineBlur.h>

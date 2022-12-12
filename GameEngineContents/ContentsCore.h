@@ -1,5 +1,7 @@
 #pragma once
-#include <GameEngineCore\CoreMinimal.h>
+//#include <GameEngineCore\CoreMinimal.h>
+#include "PreCompile.h"
+#include <GameEngineCore\GameEngineCore.h>
 
 class ContentsCore: public GameEngineCore
 {

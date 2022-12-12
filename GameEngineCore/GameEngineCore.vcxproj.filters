@@ -313,6 +313,9 @@
     <ClCompile Include="GameEngineLighting.cpp">
       <Filter>Object\Component\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineAnimation.cpp">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -513,6 +516,9 @@
       <Filter>Object\Component\Rendering\Instancing</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineLighting.h">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineAnimation.h">
       <Filter>Object\Component\Rendering</Filter>
     </ClInclude>
   </ItemGroup>

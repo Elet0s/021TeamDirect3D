@@ -68,6 +68,12 @@ struct AtlasData
 		this->pivotPos_ = _data.pivotPos_;
 	}
 
+	void SetData(const float4& _frameData, const float4& _pivotPos)
+	{
+		this->frameData_ = _frameData;
+		this->pivotPos_ = _pivotPos;
+	}
+
 	void SetData(float _posX, float _posY, float _sizeX, float _sizeY, float _pivotPosX, float _pivotPosY)
 	{
 		this->frameData_.posX = _posX;

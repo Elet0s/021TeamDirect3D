@@ -1,5 +1,5 @@
 #pragma once
-#include <GameEngineCore\CoreMinimal.h>
+//#include <GameEngineCore\CoreMinimal.h>
 #include "GlobalContentsValue.h"
 #include "Texture2DShadowRenderer.h"
 
@@ -113,7 +113,6 @@ public:
 
 			allMonsters_[i]->On();
 			allMonsters_[i]->isSummoned_ = true;
-			//콜리전, 렌더러, 그림자렌더러 사용 준비.
 			
 			float cameraX = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().x;
 			float cameraY = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().y;
@@ -219,7 +218,9 @@ protected:
 
 	float4 monsterScale_;		//몬스터 크기.
 
-private:
+	GameEngineAnimation monsterAnimation_;
+
 	bool isSummoned_;	//true: 소환되서 필드에서 활동하고 있음.
+private:
 
 };

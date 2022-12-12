@@ -43,21 +43,45 @@ public:
 		return cutData_[_textureIndex].size();
 	}
 
-	const float4& GetFrameData(int _textureIndex, int _cutDataIndex)
+	size_t GetCutCount(const std::string_view& _textureName)
+	{
+		return cutData_[this->GetIndex(_textureName)].size();
+	}
+
+	const float4& GetCutData(const std::string_view& _textureName, int _cutDataIndex)
+	{
+		std::map<std::string, int>::iterator findIter 
+			= nameIndexPairs_.find(GameEngineString::ToUpperReturn(_textureName));
+
+		if (nameIndexPairs_.end() == findIter)
+		{
+			MsgBoxAssertString(std::string(_textureName) + ": 그런 이름의 텍스처가 없습니다.");
+			return float4::Zero;
+		}
+
+		return GetCutData(findIter->second, _cutDataIndex);
+	}
+
+	const float4& GetCutData(int _textureIndex, int _cutDataIndex)
 	{
 		if (true == this->cutData_[_textureIndex].empty())
 		{
-			MsgBoxAssertString(this->GetNameCopy() + ": 아직 자르지 않은 텍스쳐입니다.");
-			return float4();
+			MsgBoxAssertString(this->GetNameCopy()+ "-" + std::to_string(_textureIndex) + ": 아직 자르지 않은 텍스쳐입니다.");
+			return float4::Zero;
 		}
 
 		if (cutData_[_textureIndex].size() <= _cutDataIndex)
 		{
-			MsgBoxAssertString(this->GetNameCopy() + ": 인덱스 범위를 넘어섰습니다.");
-			return float4();
+			MsgBoxAssertString(this->GetNameCopy() + "-" + std::to_string(_textureIndex) + ": 인덱스 범위를 넘어섰습니다.");
+			return float4::Zero;
 		}
 
 		return cutData_[_textureIndex][_cutDataIndex];
+	}
+
+	size_t GetCount()
+	{
+		return this->scratchImage_.GetImageCount();
 	}
 
 

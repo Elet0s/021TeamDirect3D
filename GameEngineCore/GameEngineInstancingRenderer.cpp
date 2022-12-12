@@ -114,13 +114,12 @@ void GameEngineInstancingRenderer::Initialize(
 
 
 	this->mesh_ = GameEngineMesh::Find(_meshName);
-
 	this->material_ = GameEngineMaterial::Find(_materialName);
-
 	this->inputLayout_ = GameEngineInputLayout::Create(
 		this->mesh_->GetInputLayoutDesc(),
 		this->material_->GetVertexShader()
 	);
+	//메쉬, 마테리얼, 인풋 레이아웃 세팅.
 
 	//인스턴스 단위 크기.
 	UINT instancingSize = this->mesh_->GetInputLayoutDesc().instanceSize_;
@@ -293,8 +292,6 @@ void GameEngineInstancingRenderer::Render(
 		instanceIndexBufferPtr += 1;
 		//인스턴싱인덱스버퍼에 텍스처배열 인덱스를 기록하고 뒤로 넘어간다.
 	}
-
-
 
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
 	shaderResourceHelper_.AllResourcesSetting();

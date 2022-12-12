@@ -30,6 +30,8 @@ void Green::Start()
 
 	monsterScale_ = float4(80, 80, 1);
 
+	monsterAnimation_.Initialize(0, 7, 0.1f, true);
+
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
 	monCollision_->GetTransform().SetLocalScale({ 35.f, 35.f, 1.0f });
@@ -41,6 +43,7 @@ void Green::Start()
 	monsterInfo_->baseSpeed_ = 50;
 	monsterInfo_->giveExp_ = 5;
 
+
 }
 void Green::Update(float _deltaTime)
 {
@@ -48,6 +51,17 @@ void Green::Update(float _deltaTime)
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
 
+	if (true == this->isSummoned_)
+	{
+		monsterAnimation_.Update(_deltaTime);
+		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+			this->GetTransform().GetWorldPosition()
+		);
+		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).GetAtlasData().SetData(
+			GameEngineTexture2DArray::Find("Monster")->GetCutData("Green.png", monsterAnimation_.GetCurrentIndex()),
+			float4::Zero
+		);
+	}
 }
 void Green::End()
 {
