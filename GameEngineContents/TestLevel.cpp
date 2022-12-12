@@ -58,6 +58,18 @@ void TestLevel::Start()
 		GameEngineTexture::Load(skillTexture[i].GetFullPath());
 	}
 
+	GameEngineDirectory WeaponDir;
+	WeaponDir.MoveParentToExistChildDirectory("ContentsResources");
+	WeaponDir.MoveToChild("ContentsResources");
+	WeaponDir.MoveToChild("Actor");
+	WeaponDir.MoveToChild("Skill");
+	WeaponDir.MoveToChild("Weapon");
+
+	std::vector<GameEngineFile> WeaponTexture = WeaponDir.GetAllFiles();
+	for (size_t i = 0; i < WeaponTexture.size(); i++)
+	{
+		GameEngineTexture::Load(WeaponTexture[i].GetFullPath());
+	}
 		
 	GameEngineDirectory uiTextureDir;
 	uiTextureDir.MoveParentToExistChildDirectory("ContentsResources");

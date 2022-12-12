@@ -255,6 +255,7 @@ void Player::Update(float _deltaTime)
 	if (true == GameEngineInput::GetInst()->IsDown("SkillOn")) 
 	{
 		playerSkillManager_->GetSkillList()[0]->nowLevel_ += 1;
+		//playerSkillManager_->GetSkillList()[0]->Shooting = true;
 	}
 	playerSkillManager_->SkillLevelCheak();
 }

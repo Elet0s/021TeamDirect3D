@@ -15,7 +15,7 @@ BlackEyes::~BlackEyes()
 void BlackEyes::Start()
 {
 	////////////Cut////////////
-	GameEngineTexture::Cut("BlackEyes.png", 6, 1);
+	GameEngineTexture::Cut("BlackEyes.png", 10, 1);
 
 	monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 

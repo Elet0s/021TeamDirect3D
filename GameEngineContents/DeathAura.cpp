@@ -50,3 +50,47 @@ void DeathAura::Effect()
 		rangeSize += 0.5f;
 	}
 }
+
+
+void DeathAura::Start()
+{
+	 circleRendererA_ = CreateComponent<GameEngineTextureRenderer>();
+	 circleRendererA_->SetTexture("Death_Circle_A.png");
+	 circleRendererA_->GetTransform().SetWorldScale(500,250,0);
+
+	 circleRendererB_ = CreateComponent<GameEngineTextureRenderer>();
+	 circleRendererB_->SetTexture("Death_Circle_B.png");
+	 circleRendererB_->GetTransform().SetWorldScale(500, 250, 0);
+
+	 circleRendererC_ = CreateComponent<GameEngineTextureRenderer>();
+	 circleRendererC_->SetTexture("Death_Circle_C.png");
+	 circleRendererC_->GetTransform().SetWorldScale(500, 250, 0);
+
+	 circleRendererD_ = CreateComponent<GameEngineTextureRenderer>();
+	 circleRendererD_->SetTexture("Death_Circle_D.png");
+	 circleRendererD_->GetTransform().SetWorldScale(500, 250, 0);
+
+	 circleCenterRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	 circleCenterRenderer_->SetTexture("Death_Circle_Center.png");
+	 circleCenterRenderer_->GetTransform().SetWorldScale(500, 250, 0);
+	 Off();
+}
+void DeathAura::Update(float _deltaTime)
+{
+	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y-40, -80);
+}
+void DeathAura::End()
+{
+
+}
+
+CollisionReturn DeathAura::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other) // 발사체 부딪히면
+{
+
+	//TargetMonsters_.push_back(dynamic_pointer_cast<Monster>(_Other->GetActor()));
+
+	//여기서 데미지 갱신해줘야함
+	_Other->GetActor()->Off();
+	//off한 몬스터 부활 시켜주는 자료구조에 넣어주는 부분 필요함 자료구조는 계속 업데이트 돌면서 죽은 애들 위치갱신해줌
+	return CollisionReturn::Stop;
+}

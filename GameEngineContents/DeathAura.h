@@ -19,9 +19,21 @@ public:
 	{
 		return etc_;
 	}
+
+	CollisionReturn ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+
 protected:
-	std::shared_ptr<GameEngineCollision> Collision_;
+	void Start() override;
+	void Update(float _deltaTime) override;
+	void End() override;
+
 private:
+	std::shared_ptr<GameEngineTextureRenderer> circleRendererA_;
+	std::shared_ptr<GameEngineTextureRenderer> circleRendererB_;
+	std::shared_ptr<GameEngineTextureRenderer> circleRendererC_;
+	std::shared_ptr<GameEngineTextureRenderer> circleRendererD_;
+	std::shared_ptr<GameEngineTextureRenderer> circleCenterRenderer_;
+	std::shared_ptr<GameEngineCollision> deathAuraCollision_;
 	float damege;
 	float attackSpeed;
 	float rangeSize;

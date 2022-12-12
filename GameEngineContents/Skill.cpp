@@ -8,6 +8,7 @@ Skill::Skill()
 	, myRank_()
 	, nowLevel_(0)
 	, valueSoulCard_(SoulCard::None)
+	, Shooting(false)
 {
 	
 }

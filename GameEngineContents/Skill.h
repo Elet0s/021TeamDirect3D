@@ -74,6 +74,7 @@ public:
 
 public:
 	int nowLevel_;
+	bool Shooting;
 protected:
 	virtual void  StateSet() ;
 	void Start() override;

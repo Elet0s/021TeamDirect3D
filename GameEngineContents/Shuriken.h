@@ -27,7 +27,7 @@ protected:
 	void End() override;
 	void renderRotate(float _deltaTime);
 	void RangeCheak(float _deltaTime);
-	void  StateSet() override;
+	void StateSet() override;
 
 private:
 	float4 referenceVector_;//기준벡터 - 랜더러를 던질 각도에 맞게 회전해줘야함 
@@ -36,5 +36,6 @@ private:
 	WeaponInfo shuriKenWeaponInfo_;
 	std::vector<std::shared_ptr<Monster>> monsterList_;
 	std::pair<size_t, float> minHpPair_;
+
 };
 
