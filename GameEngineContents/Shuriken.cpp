@@ -73,8 +73,7 @@ void Shuriken::Start()
 	shuriKenCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
 	shuriKenCol_->ChangeOrder(ObjectOrder::Projectile);
 
-
-	//Off();
+	Off();
 
 }
 
@@ -106,13 +105,16 @@ void Shuriken::renderRotate(float _deltaTime)
 
 		for (size_t i = 0; i < monsterList_.size(); i++)
 		{
-			if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && i == 0)//hp0이상, 첫번째 순번일경우
+			if (monsterList_[i]->isSummoned_ == true)
 			{
-				minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
-			}
-			else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮으면
-			{
-				minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+				if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && i == 0)//hp0이상, 첫번째 순번일경우
+				{
+					minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+				}
+				else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮으면
+				{
+					minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+				}
 			}
 		}
 		if (minHpPair_.second > 0)
@@ -121,8 +123,8 @@ void Shuriken::renderRotate(float _deltaTime)
 			float My = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().y;
 			float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
 			float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
-			referenceVector_ = (Mx - Px, My - Py); //방향 구하는 공식
-
+			referenceVector_.x = (Mx - Px); //방향 구하는 공식
+			referenceVector_.y = (My - Py);
 			float Cos = atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree;
 			shuriKenRenderer_->GetTransform().SetWorldRotation(-Cos);
 			//float A = acos(Cos);

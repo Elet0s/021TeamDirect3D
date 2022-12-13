@@ -178,14 +178,14 @@ public:
 public:
 	float mxMove_;
 	float myMove_;
-
-
+	bool isSummoned_;	//true: 소환되서 필드에서 활동하고 있음.
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
 	void Chaseplayer(float _deltaTime);
 	void Attack();
+
 
 protected:
 	bool colCheakToPlayer_;
@@ -220,7 +220,7 @@ protected:
 
 	GameEngineAnimation monsterAnimation_;
 
-	bool isSummoned_;	//true: 소환되서 필드에서 활동하고 있음.
+
 private:
 
 };

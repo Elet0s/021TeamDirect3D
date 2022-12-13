@@ -15,7 +15,7 @@ SkillManager::~SkillManager()
 void SkillManager::CreatePlayerAllSkill()
 {
 	skillList_.reserve(68);  
-	std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<DeathAura>(ObjectOrder::Skill); //胶懦 积己
+	std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Shuriken>(ObjectOrder::Skill); //胶懦 积己
 	skillList_.push_back(Skill00);
 
 
