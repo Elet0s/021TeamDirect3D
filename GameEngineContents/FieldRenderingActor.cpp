@@ -16,7 +16,7 @@ FieldRenderingActor::~FieldRenderingActor()
 
 void FieldRenderingActor::Start()
 {
-	InitializeFieldObjects(50000, float4(60000, 60000));
+	InitializeFieldObjects(1000, float4(80, 80));
 	InitializeFieldRenderer();
 
 
@@ -80,8 +80,8 @@ void FieldRenderingActor::InitializeFieldObjects(
 		for (size_t i = 0; i < _fieldObjectCount; ++i)
 		{
 			float4 randomWorldPosition = float4(
-				GameEngineRandom::mainRandom_.RandomFloat(-_fieldSize.HX(), _fieldSize.HX()),
-				GameEngineRandom::mainRandom_.RandomFloat(-_fieldSize.HY(), _fieldSize.HY()),
+				GameEngineRandom::mainRandom_.RandomFloat(-_fieldSize.HX(), _fieldSize.HX()) * 64,
+				GameEngineRandom::mainRandom_.RandomFloat(-_fieldSize.HY(), _fieldSize.HY()) * 64,
 				-4.f
 			);
 			//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
@@ -118,7 +118,7 @@ void FieldRenderingActor::InitializeFieldRenderer()
 {
 	fieldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("FieldRenderer");
 	fieldRenderer_->Initialize(
-		static_cast<size_t>(tileCountXY_.IX() * tileCountXY_.IY() + 50),
+		static_cast<size_t>(tileCountXY_.IX() * tileCountXY_.IY() + 250),
 		"Rect",
 		"MultiTexturesInstancing"
 	);

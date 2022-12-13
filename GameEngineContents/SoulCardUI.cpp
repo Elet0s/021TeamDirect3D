@@ -42,7 +42,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new Aiming();
+	mySkill_ = new Celerity();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{

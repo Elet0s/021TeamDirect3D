@@ -1,23 +1,46 @@
 #pragma once
 #include "SkillManager.h"
 
+// 플레이어가 가진 구조체이나 패시브가 가지고 있는 스텟 모음
 struct PlayerPassiveInfo
 {
 public:
 	PlayerPassiveInfo()
-		: atkMultiple_(100.f),
-		defMul_(100.f),
-		passMul_(0.f),
-		attackSpeed_(100.f),
-		projectileSpeed_(100.f),
-		projectileDuration_(100.f),
-		projectileSize_(100.f)
+		: atkMultiple_Per(100.f),
+		defMul_Per(100.f),
+		passMul_Per(0.f),
+		attackSpeed_Per(100.f),
+		projectileSpeed_Per(100.f),
+		projectileDuration_Per(100.f),
+		projectileSize_Per(100.f),
+		atkMultiple_(1.f),
+		defMul_(1.f),
+		passMul_(1.f),
+		attackSpeed_(1.f),
+		projectileSize_(1.f),
+		projectileDuration_(1.f),
+		projectileSpeed_(1.f),
+		atkMultiple_Result(0.0f),
+		defMul_Result(0.f),
+		passMul_Result(0.f),
+		projectileDuration_Result(0.f),
+		projectileSize_Result(0.f),
+		projectileSpeed_Result(0.f)
+
 	{
 
 	}
 
 public:
-	float atkMultiple_;
+	float atkMultiple_Per; // 130 
+	float defMul_Per;   
+	float passMul_Per;
+	float attackSpeed_Per;
+	float projectileSize_Per;
+	float projectileDuration_Per;
+	float projectileSpeed_Per;
+
+	float atkMultiple_;  // 0.95
 	float defMul_;
 	float passMul_;
 	float attackSpeed_;
@@ -25,7 +48,13 @@ public:
 	float projectileDuration_;
 	float projectileSpeed_;
 	
-	
+	float atkMultiple_Result;	// atkMultiple_Per * atkMultiple_
+	float defMul_Result;
+	float passMul_Result;
+	float attackSpeed_Result;
+	float projectileSize_Result;
+	float projectileDuration_Result;
+	float projectileSpeed_Result;
 };
 
 
@@ -35,7 +64,6 @@ public:
 	PlayerInfo()
 		:
 		level_(0),
-		atkMultiple_(100.f),
 		attackSpeed_(100.0f),
 		addProjectile_(0),
 		passProjectile_(0),
@@ -58,7 +86,7 @@ public:
 		atk_(1.50f),
 		def_(0),
 		ruting_Range_(4.0f),
-		atk_Range_(5.0f),
+		atk_Range_(100.0f),
 		RLDirection_(false),
 		pushSpeed_(0)
 	{
