@@ -32,7 +32,7 @@ public:
 	}
 
 public:
-	float atkMultiple_Per; // 130 
+	float atkMultiple_Per; // 퍼센트 곱
 	float defMul_Per;   
 	float passMul_Per;
 	float attackSpeed_Per;
@@ -40,7 +40,7 @@ public:
 	float projectileDuration_Per;
 	float projectileSpeed_Per;
 
-	float atkMultiple_;  // 0.95
+	float atkMultiple_;  // 퍼센트 합 
 	float defMul_;
 	float passMul_;
 	float attackSpeed_;
@@ -48,7 +48,7 @@ public:
 	float projectileDuration_;
 	float projectileSpeed_;
 	
-	float atkMultiple_Result;	// atkMultiple_Per * atkMultiple_
+	float atkMultiple_Result;	// 두게 곱한값 (베이스스탯에 곱한다음 무기값 더해서 쓸것임)
 	float defMul_Result;
 	float passMul_Result;
 	float attackSpeed_Result;

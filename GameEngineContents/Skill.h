@@ -8,7 +8,6 @@ struct WeaponInfo
 	int weaponPassNum_;//관통횟수
 	float weaponSize_;//투사체크기
 	float weaponDuration_;//투사체지속시간
-	float weaponThrowingSpeed_;//던지는 주기속도
 	float weaponSpeed_;// 투사체속도 
 	float weaponknockback_;//넉백
 	int weponConsecutiveAtkNum_;//투사체 연속공격횟수(한 공격 주기에 몇번 던지는지)
@@ -23,8 +22,7 @@ struct WeaponInfo
 		weaponknockback_(0),
 		weaponProjectileNum_(0),
 		weponConsecutiveAtkNum_(0),
-		weaponPassNum_(0),
-		weaponThrowingSpeed_(0)
+		weaponPassNum_(0)
 
 	{
 

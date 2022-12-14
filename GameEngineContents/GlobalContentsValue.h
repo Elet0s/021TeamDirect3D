@@ -11,6 +11,7 @@ enum class ObjectOrder
 	Sector,
 	Skill,
 	SkillSerchBoad,
+	Range,
 	Projectile,
 	TileMap,
 	UI = 1000
