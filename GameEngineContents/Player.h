@@ -37,7 +37,7 @@ public:
 
 public:
 	float hpMax_Per;
-	float atkMultiple_Per; // 130 
+	float atkMultiple_Per; // 퍼센트 합
 	float defMul_Per;   
 	float passMul_Per;
 	float attackSpeed_Per;
@@ -47,7 +47,7 @@ public:
 	float speed_Per;
 
 	float hpMax_;
-	float atkMultiple_;  // 0.95
+	float atkMultiple_;  // 퍼센트 곱
 	float defMul_;
 	float passMul_;
 	float attackSpeed_;
@@ -56,7 +56,7 @@ public:
 	float projectileSpeed_;
 	
 	float hpMax_Result;
-	float atkMultiple_Result;	// atkMultiple_Per * atkMultiple_
+	float atkMultiple_Result;	// 합과 곱을 곱한 값 무기데미지에 곱해서 사용
 	float defMul_Result;
 	float passMul_Result;
 	float attackSpeed_Result;
