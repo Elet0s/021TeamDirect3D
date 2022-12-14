@@ -98,7 +98,7 @@ void GameEnginePixelShader::CreateInstancingPixelShader()
         &this->pixelShader_                     //픽셀셰이더 포인터.
     ))
     {
-        MsgBoxAssert("픽셀셰이더 생성 실패.");
+        MsgBoxAssert("인스턴싱 픽셀셰이더 생성 실패.");
         return;
     }
 }

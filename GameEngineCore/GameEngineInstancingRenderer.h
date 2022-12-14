@@ -177,7 +177,7 @@ private:
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
 
-    std::vector<InstancingUnit> allInstancingUnits_;   //렌더유닛 + 인스턴싱데이터 벡터.
+    std::vector<InstancingUnit> allInstancingUnits_;   //인스턴싱데이터 벡터.
 
 
 
