@@ -84,12 +84,9 @@ void Shuriken::Start()
 
 void Shuriken::RangeCheak(float _deltaTime)
 {
-	float4 A;
-	float4 B;
-	A = referenceVector_;
-	B = A.Normalize3D() * _deltaTime * 100.f;
-		shuriKenRenderer_->GetTransform().SetWorldMove(A.Normalize3D() * _deltaTime * 100.f);
-		shuriKenCol_->GetTransform().SetWorldMove(A.Normalize3D() * _deltaTime * 100.f);
+
+		shuriKenRenderer_->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
+		shuriKenCol_->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
 }
 void Shuriken::Update(float _deltaTime)
 {

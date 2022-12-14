@@ -3,6 +3,7 @@
 #include "Spear.h"
 #include "Shuriken.h"
 #include"DeathAura.h"
+#include "Player.h"
 
 SkillManager::SkillManager()
 {
@@ -25,6 +26,8 @@ void SkillManager::SkillLevelCheak()
 {
 	if (skillList_[0]->nowLevel_ > 0 && skillList_[0]->IsUpdate() == false) 
 	{
+		std::dynamic_pointer_cast<Shuriken>(skillList_[0])->shuriKenRenderer_->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
+		std::dynamic_pointer_cast<Shuriken>(skillList_[0])->shuriKenCol_->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
 		skillList_[0]->On();
 	}
 }
