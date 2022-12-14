@@ -318,6 +318,7 @@ void GameEngineInstancingRenderer::Render(
 	this->inputLayout_->Setting();
 	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
 	this->material_->SettingInstancing2();
+
 	this->mesh_->RenderInstancing(this->instancingUnitCount_);
 }
 

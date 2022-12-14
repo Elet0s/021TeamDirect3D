@@ -108,7 +108,7 @@ void GameEngineVertexShader::CreateInstancingVertexShader()
         &this->vertexShader_                   //인스턴스 버텍스셰이더 포인터.
     ))
     {
-        MsgBoxAssert("인스턴싱 버텍스 셰이더 생성 실패.");
+        MsgBoxAssert("인스턴싱 버텍스셰이더 생성 실패.");
         return;
     }
 }
