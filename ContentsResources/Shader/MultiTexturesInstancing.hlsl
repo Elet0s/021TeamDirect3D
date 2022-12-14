@@ -103,7 +103,7 @@ float4 MultiTexturesInstancing_PSINST(Output _input) : SV_Target0
         float3(_input.texcoord_.xy, _input.textureIndex_)
     );
   
-    if (0.f >= resultColor.a)
+    if (0.01f >= resultColor.a)
     {
         clip(-1);
     }
