@@ -20,22 +20,27 @@ public:
 	}
 
 	CollisionReturn ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
-
+	CollisionReturn RangeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-	void renderRotate(float _deltaTime);
+	void SerchTarget();
+	void RenderRotate( );
 	void RangeCheak(float _deltaTime);
 	void StateSet() override;
 
 private:
+	float resultCos_;
 	float4 referenceVector_;//기준벡터 - 랜더러를 던질 각도에 맞게 회전해줘야함 
 	std::shared_ptr<GameEngineTextureRenderer>  shuriKenRenderer_;
 	std::shared_ptr<GameEngineCollision>  shuriKenCol_;
+	std::shared_ptr<GameEngineCollision>  shuriKenRangeCol_;
 	WeaponInfo shuriKenWeaponInfo_;
 	std::vector<std::shared_ptr<Monster>> monsterList_;
 	std::pair<size_t, float> minHpPair_;
+	std::vector<std::pair<size_t, float>> targetInst_;
+
 
 };
 
