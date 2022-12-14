@@ -68,6 +68,13 @@ void GameEngineInstancingRenderer::InstancingUnit::SetTextureIndex(unsigned int 
 	textureIndex_ = _textureIndex;
 }
 
+void GameEngineInstancingRenderer::InstancingUnit::SwitchLeftToRight()
+{
+	this->transformData_.worldScaleVector_.x = -this->transformData_.worldScaleVector_.x;
+	this->transformData_.localScaleMatrix_.Scale(this->transformData_.worldScaleVector_);
+	CalWorldWorldMatrix();
+}
+
 void GameEngineInstancingRenderer::InstancingUnit::CalWorldWorldMatrix()
 {
 	this->transformData_.worldWorldMatrix_

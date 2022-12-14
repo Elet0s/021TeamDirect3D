@@ -5,7 +5,7 @@
 
 BlackEyes::BlackEyes()
 {
-
+	monsterScale_ = float4(70, 70, 1);
 }
 BlackEyes::~BlackEyes()
 {
@@ -26,8 +26,6 @@ void BlackEyes::Start()
 
 	//shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
 	//shadowRenderer_->SetTextureRenderer(monRenderer_);
-
-	monsterScale_  = float4(70, 70, 1);
 
 	monsterAnimation_.Initialize(0, 5, 0.1f, true);
 
@@ -51,18 +49,6 @@ void BlackEyes::Update(float _deltaTime)
 	Chaseplayer(_deltaTime);
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
-
-	if (true == this->isSummoned_)
-	{
-		monsterAnimation_.Update(_deltaTime);
-		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
-			this->GetTransform().GetWorldPosition()
-		);
-		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).GetAtlasData().SetData(
-			GameEngineTexture2DArray::Find("Monster")->GetCutData("BlackEyes.png", monsterAnimation_.GetCurrentIndex()),
-			float4::Zero
-		);
-	}
 }
 void BlackEyes::End()
 {

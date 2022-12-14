@@ -57,19 +57,24 @@ SamplerState LINEARWRAP : register(s0);
 float4 TextureShadow_PS(Output _input) : SV_Target0
 {  
     float4 sampledColor = Tex.Sample(LINEARWRAP, _input.texcoord_.xy);
-    float4 shadowColor = (float4) 0;
+    float4 shadowColor = float4(0.f, 0.f, 0.f, 1.f);
     
-    if (sampledColor.a <= 0.f)
+    //if (sampledColor.a <= 0.f)
+    //{
+    //    clip(-1);
+    //}
+    //else if (sampledColor.a >= 0.75f)
+    //{
+    //    shadowColor.a = 0.75f;
+    //}
+    //else
+    //{
+    //    shadowColor.a = sampledColor.a;
+    //}
+    
+    if (sampledColor.a <= 0.01f)
     {
         clip(-1);
-    }
-    else if (sampledColor.a >= 0.75f)
-    {
-        shadowColor.a = 0.75f;
-    }
-    else
-    {
-        shadowColor.a = sampledColor.a;
     }
     
 

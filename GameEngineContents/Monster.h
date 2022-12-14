@@ -83,11 +83,11 @@ public:
 			allMonsters_.push_back(newMonster);
 
 
-			std::string myTextureName = &typeid(MonsterType).name()[6];
-			myTextureName += ".png";
+			newMonster->monsterTextureName_ = &typeid(MonsterType).name()[6];
+			newMonster->monsterTextureName_ += ".png";
 			newMonster->instancingUnitIndex_ = monsterCreationIndex_++;
 			allMonstersRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetTextureIndex(
-				GameEngineTexture2DArray::Find("Monster")->GetIndex(myTextureName)
+				GameEngineTexture2DArray::Find("Monster")->GetIndex(newMonster->monsterTextureName_)
 			);
 		}
 	}
@@ -173,18 +173,22 @@ public:
 		}
 	}
 
+	inline bool IsSummoned() const
+	{
+		return this->isSummoned_;
+	}
 
 
 public:
 	float mxMove_;
 	float myMove_;
-	bool isSummoned_;	//true: 소환되서 필드에서 활동하고 있음.
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
 	void Chaseplayer(float _deltaTime);
 	void Attack();
+
 
 
 protected:
@@ -216,11 +220,15 @@ protected:
 
 	int instancingUnitIndex_;	//이 몬스터를 담당해서 그리고 있는 인스턴싱유닛의 번호.
 
-	float4 monsterScale_;		//몬스터 크기.
+	float4 monsterScale_;		//각 몬스터 종류별 크기.
 
-	GameEngineAnimation monsterAnimation_;
+	GameEngineAnimation monsterAnimation_;	//시간 지날때마다 인덱스만 바꿔주는 애니메이션 모듈.
 
 
 private:
+	std::string monsterTextureName_;	//몬스터 자기 자신의 텍스처 이름. 
+	//클래스 이름과 동일하다는 전제로 저장되게 함.
+
+	bool isSummoned_;	//true: 소환되서 필드에서 활동하고 있음.
 
 };

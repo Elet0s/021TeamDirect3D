@@ -217,7 +217,7 @@ CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineColl
 }
 
 void Monster::Chaseplayer(float _deltaTime)
-{
+{ 
 	mx_ = GetTransform().GetWorldPosition().x;//몬스터 좌표
 	my_ = GetTransform().GetWorldPosition().y;
 	px_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x; //플레이어 좌표
@@ -249,6 +249,15 @@ void Monster::Chaseplayer(float _deltaTime)
 void Monster::Update(float _deltaTime)
 {
 	atkDeltaTime_ += _deltaTime;
+	
+	monsterAnimation_.Update(_deltaTime);
+	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+		this->GetTransform().GetWorldPosition()
+	);
+	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).GetAtlasData().SetData(
+		GameEngineTexture2DArray::Find("Monster")->GetCutData(monsterTextureName_, monsterAnimation_.GetCurrentIndex()),
+		float4::Zero
+	);
 }
 
 void Monster::End()

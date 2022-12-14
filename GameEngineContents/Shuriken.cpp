@@ -107,7 +107,7 @@ void Shuriken::SerchTarget()
 	{
 		for (size_t i = 0; i < monsterList_.size(); i++)
 		{
-			if (monsterList_[i]->isSummoned_ == true)
+			if (monsterList_[i]->IsSummoned() == true)
 			{
 				if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && i == 0)//hp0이상, 첫번째 순번일경우
 				{

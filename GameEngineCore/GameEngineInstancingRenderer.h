@@ -30,6 +30,9 @@ class GameEngineInstancingRenderer
 
         void SetTextureIndex(unsigned int _textureIndex);
 
+        //이 인스턴싱 유닛이 그리는 텍스처를 좌우반전하는 함수.
+        void SwitchLeftToRight();
+
     public:
         //트랜스폼데이터, 아틀라스데이터는 여기에 넣지 말 것!
         template<typename ValueType>
