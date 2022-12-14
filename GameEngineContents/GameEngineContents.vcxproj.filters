@@ -328,6 +328,36 @@
     <ClCompile Include="RedFlyingEyes.cpp">
       <Filter>Actor\02. Play\Monster\Nomal</Filter>
     </ClCompile>
+    <ClCompile Include="Durability.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackBlood.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="LightArmor.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="IronSkin.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="SlipperySkin.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="Impenetrable.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="SteelSkin.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="Thorn.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="Castle.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -568,6 +598,36 @@
     </ClInclude>
     <ClInclude Include="RedFlyingEyes.h">
       <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="Durability.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackBlood.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="LightArmor.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="IronSkin.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="SlipperySkin.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="Impenetrable.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="SteelSkin.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="Thorn.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="Castle.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

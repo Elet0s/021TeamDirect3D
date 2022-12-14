@@ -16,12 +16,12 @@ LightHand::~LightHand()
 
 void LightHand::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 
-	std::string sAttackSpeed = std::to_string(PlayerInfo_.attackSpeed_).substr(0, std::to_string(PlayerInfo_.attackSpeed_).find(".")) + "%";
-	std::string sAttackSpeedNext = std::to_string(PlayerInfo_.attackSpeed_ * 1.33f).substr(0, std::to_string(PlayerInfo_.attackSpeed_ * 1.33f).find(".")) + "%";
-	std::string sAttackMul = std::to_string(PlayerInfo_.atkMultiple_).substr(0, std::to_string(PlayerInfo_.atkMultiple_).find(".") + 3) + "%";
-	std::string sAttackMulNext = std::to_string(PlayerInfo_.atkMultiple_ * 0.8f).substr(0, std::to_string(PlayerInfo_.atkMultiple_ * 0.8f).find(".") + 3) + "%";
+	std::string sAttackSpeed = std::to_string(PlayerPInfo_.attackSpeed_Result).substr(0, std::to_string(PlayerPInfo_.attackSpeed_Result).find(".")) + "%";
+	std::string sAttackSpeedNext = std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.33f)).substr(0, std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.33f)).find(".")) + "%";
+	std::string sAttackMul = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
+	std::string sAttackMulNext = std::to_string(ceil(PlayerPInfo_.atkMultiple_Result * 0.8f)).substr(0, std::to_string(ceil(PlayerPInfo_.atkMultiple_Result * 0.8f)).find(".")) + "%";
 
 	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " 공격속도\n"
 		+ sAttackMul + " -> " + sAttackMulNext + " 피해\n배수 ";
@@ -30,7 +30,12 @@ void LightHand::Init()
 void LightHand::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->attackSpeed_ *= 1.33f;
-	PlayerInfo_->atkMultiple_ *= 0.8f;
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPInfo_->attackSpeed_ *= 1.33f;
+	PlayerPInfo_->atkMultiple_ *= 0.8f;
+
+	PlayerPInfo_->attackSpeed_Result *= 1.33f;
+	PlayerPInfo_->atkMultiple_Result *= 0.8f;
+	PlayerPInfo_->attackSpeed_Result = ceil(PlayerPInfo_->attackSpeed_Result);
+	PlayerPInfo_->atkMultiple_Result = ceil(PlayerPInfo_->atkMultiple_Result);
 }

@@ -17,10 +17,10 @@ Muscle::~Muscle()
 
 void Muscle::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 
-	std::string sProjectileSize = std::to_string(PlayerInfo_.projectileSize_).substr(0, std::to_string(PlayerInfo_.projectileSize_).find(".") + 3);
-	std::string sProjectileSizeNext = std::to_string(PlayerInfo_.projectileSize_ + 0.15f).substr(0, std::to_string(PlayerInfo_.projectileSize_ + 0.15f).find(".") + 3);
+	std::string sProjectileSize = std::to_string(PlayerPInfo_.projectileSize_Result).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result).find("."));
+	std::string sProjectileSizeNext = std::to_string(PlayerPInfo_.projectileSize_Result + 15.f).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result + 15.f).find(".") );
 	
 	etc_ = sProjectileSize + "% -> " + sProjectileSizeNext + "% 투사체\n크기 ";
 }
@@ -28,6 +28,7 @@ void Muscle::Init()
 void Muscle::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->projectileSize_ += 0.15f;
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPInfo_->projectileSize_Per += 15.f;
+	PlayerPInfo_->projectileSize_Result += 15.f;
 }

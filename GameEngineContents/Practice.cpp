@@ -16,12 +16,12 @@ Practice::~Practice()
 
 void Practice::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 
-	std::string sAttackSpeed = std::to_string(PlayerInfo_.attackSpeed_).substr(0, std::to_string(PlayerInfo_.attackSpeed_).find(".")) + "%";
-	std::string sAttackMultiple = std::to_string(PlayerInfo_.atkMultiple_).substr(0, std::to_string(PlayerInfo_.atkMultiple_).find(".")) + "%";
-	std::string sAttackSpeedNext = std::to_string(PlayerInfo_.attackSpeed_ + 1.0f).substr(0, std::to_string(PlayerInfo_.attackSpeed_ + 1.0f).find(".")) + "%";
-	std::string sAttackMultipleNext = std::to_string(PlayerInfo_.atkMultiple_ + 3.0f).substr(0, std::to_string(PlayerInfo_.atkMultiple_).find(".")) + "%";
+	std::string sAttackSpeed = std::to_string(PlayerPInfo_.attackSpeed_Result).substr(0, std::to_string(PlayerPInfo_.attackSpeed_Result).find(".")) + "%";
+	std::string sAttackMultiple = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
+	std::string sAttackSpeedNext = std::to_string(PlayerPInfo_.attackSpeed_Result + 1.0f).substr(0, std::to_string(PlayerPInfo_.attackSpeed_Result + 1.0f).find(".")) + "%";
+	std::string sAttackMultipleNext = std::to_string(PlayerPInfo_.atkMultiple_Result + 3.0f).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result + 3.f).find(".")) + "%";
 	
 	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " 공격 속도\n"
 			+ sAttackMultiple + " -> " + sAttackMultipleNext + " 피해 배수 ";
@@ -31,7 +31,9 @@ void Practice::Init()
 void Practice::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->attackSpeed_ += 1.0f;
-	PlayerInfo_->atkMultiple_ += 3.0f;
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPInfo_->attackSpeed_Per += 1.0f;
+	PlayerPInfo_->atkMultiple_Per += 3.0f;
+	PlayerPInfo_->attackSpeed_Result += 1.0f;
+	PlayerPInfo_->atkMultiple_Result += 3.0f;
 }

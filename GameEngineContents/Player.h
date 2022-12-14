@@ -6,7 +6,7 @@ struct PlayerPassiveInfo
 {
 public:
 	PlayerPassiveInfo()
-		: atkMultiple_Per(100.f),
+	: atkMultiple_Per(100.f),
 		defMul_Per(100.f),
 		passMul_Per(0.f),
 		attackSpeed_Per(100.f),
@@ -20,27 +20,34 @@ public:
 		projectileSize_(1.f),
 		projectileDuration_(1.f),
 		projectileSpeed_(1.f),
-		atkMultiple_Result(0.0f),
-		defMul_Result(0.f),
-		passMul_Result(0.f),
-		projectileDuration_Result(0.f),
-		projectileSize_Result(0.f),
-		projectileSpeed_Result(0.f)
-
+		atkMultiple_Result(100.0f),
+		attackSpeed_Result(100.0f),
+		defMul_Result(100.f),
+		passMul_Result(100.f),
+		projectileDuration_Result(100.f),
+		projectileSize_Result(100.f),
+		projectileSpeed_Result(100.f),
+		hpMax_Per(100.0f),
+		hpMax_(1.0f),
+		hpMax_Result(100.f),
+		speed_Per(100.f)
 	{
 
 	}
 
 public:
-	float atkMultiple_Per; // 퍼센트 곱
+	float hpMax_Per;
+	float atkMultiple_Per; // 130 
 	float defMul_Per;   
 	float passMul_Per;
 	float attackSpeed_Per;
 	float projectileSize_Per;
 	float projectileDuration_Per;
 	float projectileSpeed_Per;
+	float speed_Per;
 
-	float atkMultiple_;  // 퍼센트 합 
+	float hpMax_;
+	float atkMultiple_;  // 0.95
 	float defMul_;
 	float passMul_;
 	float attackSpeed_;
@@ -48,7 +55,8 @@ public:
 	float projectileDuration_;
 	float projectileSpeed_;
 	
-	float atkMultiple_Result;	// 두게 곱한값 (베이스스탯에 곱한다음 무기값 더해서 쓸것임)
+	float hpMax_Result;
+	float atkMultiple_Result;	// atkMultiple_Per * atkMultiple_
 	float defMul_Result;
 	float passMul_Result;
 	float attackSpeed_Result;
@@ -81,21 +89,23 @@ public:
 		speed_(200.0f),
 		maxHp_(100),
 		hp_(100),
+		hpRecuvere_(0.25f),
 		maxExp_(100),
 		exp_(0),
-		atk_(1.50f),
+		atk_(1.0f),
 		def_(0),
 		ruting_Range_(4.0f),
 		atk_Range_(100.0f),
 		RLDirection_(false),
-		pushSpeed_(0)
+		pushSpeed_(0),
+		damageMitigation_(0.0f)
 	{
 
 	}
 public:
 	float level_;
-	size_t addProjectile_;
-	size_t passProjectile_;
+	int addProjectile_;
+	int passProjectile_;
 
 	float projectileSize_;
 	float projectileduration_;
@@ -123,6 +133,7 @@ public:
 	float ruting_Range_;
 	float pushSpeed_;
 	float hpRecuvere_;
+	float damageMitigation_;
 	bool RLDirection_;
 };
 class PlayerUI;

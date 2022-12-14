@@ -28,7 +28,7 @@ void SharpEdge::Effect()
 {
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->atk_ = floor(PlayerInfo_->atk_ * 100) / 100;
+	PlayerInfo_->atk_ = ceil(PlayerInfo_->atk_ * 100) / 100;
 	PlayerInfo_->atk_ += 0.25f;
 
 }

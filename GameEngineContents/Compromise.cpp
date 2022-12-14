@@ -17,11 +17,12 @@ Compromise::~Compromise()
 void Compromise::Init()
 {
 	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 
 	std::string sAddProjectile = std::to_string(PlayerInfo_.addProjectile_).substr(0, std::to_string(PlayerInfo_.addProjectile_).find("."));
-	std::string sAttack = std::to_string(PlayerInfo_.atk_).substr(0, std::to_string(PlayerInfo_.atk_).find(".") + 3);
+	std::string sAttack = std::to_string((PlayerInfo_.atk_ * PlayerPInfo_.atkMultiple_Result / 100)).substr(0, std::to_string((PlayerInfo_.atk_ * PlayerPInfo_.atkMultiple_Result / 100)).find(".") + 3);
 	std::string sAddProjectileNext = std::to_string(PlayerInfo_.addProjectile_ + 1.0f).substr(0, std::to_string(PlayerInfo_.addProjectile_ + 1.0f).find("."));
-	std::string sAttackNext = std::to_string(PlayerInfo_.atk_ -0.35f).substr(0, std::to_string(PlayerInfo_.atk_ -0.35f).find(".") + 3);
+	std::string sAttackNext = std::to_string((PlayerInfo_.atk_ -0.35f) * PlayerPInfo_.atkMultiple_Result / 100).substr(0, std::to_string(((PlayerInfo_.atk_ - 0.35f) * PlayerPInfo_.atkMultiple_Result / 100) -0.35f).find(".") + 3);
 
 
 	etc_ = sAddProjectile + " -> " + sAddProjectileNext + " 추가 투사체\n"

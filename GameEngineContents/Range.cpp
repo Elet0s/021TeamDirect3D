@@ -16,19 +16,19 @@ Range::~Range()
 
 void Range::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 
-	std::string sAttackSpeed = std::to_string(PlayerInfo_.projectileduration_).substr(0, std::to_string(PlayerInfo_.projectileduration_).find(".") ) + "%";
-	std::string sDamegeNext = std::to_string(PlayerInfo_.projectileduration_ + 20).substr(0, std::to_string(PlayerInfo_.projectileduration_ + 20).find(".") ) + "%";
+	std::string sProjectileDuration = std::to_string(PlayerPInfo_.projectileDuration_Result).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result).find(".") ) + "%";
+	std::string sProjectileDurationNext = std::to_string(PlayerPInfo_.projectileDuration_Result + 20).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result + 20).find(".") ) + "%";
 	
-	etc_ = sAttackSpeed + "-> " + sDamegeNext + " 투사체\n 지속 시간 ";
+	etc_ = sProjectileDuration + "-> " + sProjectileDurationNext + " 투사체\n 지속 시간 ";
 }
 
 void Range::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	//PlayerInfo_->attackSpeed_ = round(PlayerInfo_->attackSpeed_ * 10) / 10;
-	PlayerInfo_->projectileduration_ += 20;
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPInfo_->projectileDuration_Per += 20.f;
+	PlayerPInfo_->projectileDuration_Result += 20.f;
 
 }

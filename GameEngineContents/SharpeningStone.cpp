@@ -27,7 +27,7 @@ void SharpeningStone::Effect()
 {
 	currentlevel_ += 1;
 	PlayerInfo *PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->atk_ = round(PlayerInfo_->atk_ * 10) / 10;
+	PlayerInfo_->atk_ = round(PlayerInfo_->atk_ * 100) / 100;
 	PlayerInfo_->atk_ += 0.1f;		
 
 }

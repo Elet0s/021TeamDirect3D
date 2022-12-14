@@ -16,12 +16,12 @@ Hypersonic::~Hypersonic()
 
 void Hypersonic::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 
-	std::string sProjectileSpeed = std::to_string(PlayerInfo_.projectilespeed_).substr(0, std::to_string(PlayerInfo_.projectilespeed_).find(".")) + "%";
-	std::string sProjectileSpeedNext = std::to_string(PlayerInfo_.projectilespeed_ + 70.0f).substr(0, std::to_string(PlayerInfo_.projectilespeed_ + 70.0f).find(".")) + "%";
-	std::string sProjectileDuration = std::to_string(PlayerInfo_.projectileduration_).substr(0, std::to_string(PlayerInfo_.projectileduration_).find(".")) + "%";
-	std::string sAProjectileDurationNext = std::to_string(PlayerInfo_.projectileduration_ * 0.7f).substr(0, std::to_string(PlayerInfo_.projectileduration_ * 0.7f).find(".")) + "%";
+	std::string sProjectileSpeed = std::to_string(PlayerPInfo_.projectileSpeed_Result).substr(0, std::to_string(PlayerPInfo_.projectileSpeed_Result).find(".")) + "%";
+	std::string sProjectileSpeedNext = std::to_string(PlayerPInfo_.projectileSpeed_Result + 70.0f).substr(0, std::to_string(PlayerPInfo_.projectileSpeed_Result + 70.0f).find(".")) + "%";
+	std::string sProjectileDuration = std::to_string(PlayerPInfo_.projectileDuration_Result).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result).find(".")) + "%";
+	std::string sAProjectileDurationNext = std::to_string(ceil(PlayerPInfo_.projectileDuration_Result * 0.7f)).substr(0, std::to_string(ceil(PlayerPInfo_.projectileDuration_Result * 0.7f)).find(".")) + "%";
 
 	etc_ = sProjectileSpeed + " -> " + sProjectileSpeedNext + " 투사체\n속도\n"
 		+ sProjectileDuration + " -> " + sAProjectileDurationNext + " 투사체\n지속시간 ";
@@ -30,7 +30,10 @@ void Hypersonic::Init()
 void Hypersonic::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->projectilespeed_ += 70.f;
-	PlayerInfo_->projectileduration_ *= 0.7f;
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPInfo_->projectileSpeed_Per += 70.f;
+	PlayerPInfo_->projectileDuration_ *= 0.7f;
+	PlayerPInfo_->projectileSpeed_Result += 70.0f;
+	PlayerPInfo_->projectileDuration_Result *= 0.7f;
+	PlayerPInfo_->projectileDuration_Result = ceil(PlayerPInfo_->projectileDuration_Result);
 }

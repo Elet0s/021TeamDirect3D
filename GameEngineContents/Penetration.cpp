@@ -17,13 +17,14 @@ Penetration::~Penetration()
 void Penetration::Init()
 {
 	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 
-	std::string sAddProjectile = std::to_string(PlayerInfo_.addProjectile_).substr(0, std::to_string(PlayerInfo_.addProjectile_).find("."));
-	std::string sAddProjectileNext = std::to_string(PlayerInfo_.addProjectile_ + 1.0f).substr(0, std::to_string(PlayerInfo_.addProjectile_ + 1.0f).find("."));
-	std::string sAttackMultiple = std::to_string(PlayerInfo_.atkMultiple_).substr(0, std::to_string(PlayerInfo_.atkMultiple_).find(".")) + "%";
-	std::string sAttackMultipleNext = std::to_string(PlayerInfo_.atkMultiple_ + 4.0f).substr(0, std::to_string(PlayerInfo_.atkMultiple_ + 4.0f).find(".")) + "%";
+	std::string sPassProjectile_ = std::to_string(PlayerInfo_.passProjectile_).substr(0, std::to_string(PlayerInfo_.passProjectile_).find("."));
+	std::string sPassProjectile_Next = std::to_string(PlayerInfo_.passProjectile_ + 1.0f).substr(0, std::to_string(PlayerInfo_.passProjectile_ + 1.0f).find("."));
+	std::string sAttackMultiple = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
+	std::string sAttackMultipleNext = std::to_string(PlayerPInfo_.atkMultiple_Result + 4.0f).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result + 4.0f).find(".")) + "%";
 
-	etc_ = sAddProjectile + " -> " + sAddProjectileNext + " 추가 투사체\n"
+	etc_ = sPassProjectile_ + " -> " + sPassProjectile_Next + " 투사체\n관통\n"
 		+ sAttackMultiple + " -> " + sAttackMultipleNext + " 피해 배수 ";
 
 }
@@ -32,6 +33,8 @@ void Penetration::Effect()
 {
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->addProjectile_ += 1;
-	PlayerInfo_->atkMultiple_ += 4.0f;
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo_->passProjectile_ += 1;
+	PlayerPInfo_->atkMultiple_Per += 4.0f;
+	PlayerPInfo_->atkMultiple_Result += 4.0f;
 }

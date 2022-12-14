@@ -18,15 +18,16 @@ void Healthy::Init()
 {
 	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
 
-	std::string sProjectileSize = std::to_string(PlayerInfo_.projectileSize_).substr(0, std::to_string(PlayerInfo_.projectileSize_).find(".") + 3);
-	std::string sProjectileSizeNext = std::to_string(PlayerInfo_.projectileSize_ + 0.15f).substr(0, std::to_string(PlayerInfo_.projectileSize_ + 0.15f).find(".") + 3);
+	std::string sHealing = std::to_string(PlayerInfo_.hpRecuvere_).substr(0, std::to_string(PlayerInfo_.hpRecuvere_).find(".") + 3);
+	std::string sHealingNext = std::to_string(PlayerInfo_.hpRecuvere_ + 0.1f).substr(0, std::to_string(PlayerInfo_.hpRecuvere_ + 0.1f).find(".") + 3);
 
-	etc_ = sProjectileSize + "% -> " + sProjectileSizeNext + "% 투사체\n크기 ";
+	etc_ = sHealing + " -> " + sHealingNext + " 체력 재생 ";
 }
 
 void Healthy::Effect()
 {
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerInfo_->projectileSize_ += 0.15f;
+	PlayerInfo_->hpRecuvere_ += 0.1f;
+	PlayerInfo_->hpRecuvere_ = ceil(PlayerInfo_->hpRecuvere_ * 100) / 100;
 }

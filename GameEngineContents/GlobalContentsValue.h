@@ -38,32 +38,32 @@ enum class SoulCard
 	ThunderStaff,
 	Pike,
 	Kunai,
-	
+
 	WindsBlade,
 	SilphsBlade, //(진화)
-	
+
 	Swordrang,
-	
+
 	MagicWisp,
 	VoidWisp,//(진화)
-	
+
 	DeathAura,
 
 	ShamanStaff,
 	ArcanistStaff,//(진화)
-	
+
 	Katana,
 	ArtificersKatana,//(진화)
 
 	Crossbow,
 	FireRing,
-	
+
 	//이밑으로 공격 패시브
 	SharpeningStone,
 	Cardio,
 	SharpEdge,
 	Range,
-	TenseString,
+	TenseString, // 미완성
 	Momentum,
 	Muscle,
 	Compromise,
@@ -82,9 +82,9 @@ enum class SoulCard
 	LightHand,
 	Hypersonic,
 	StoneHanded,
-	Overworked,
-	Average,
-	Overloaded,
+	Overworked,   // 미완성
+	Average,	  // 미완성 
+	Overloaded,	  // 미완성
 	MultiHanded,
 	Recursion,
 	Accumulation,
@@ -108,7 +108,7 @@ enum class SoulCard
 	Impenetrable,
 	Tower,
 	SteelSkin,
-	Thorn,
+	Thorn,  // 보류
 	Castle,
 	Turtle,
 	Flesh,

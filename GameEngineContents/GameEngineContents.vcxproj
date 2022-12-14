@@ -157,6 +157,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BlackBlood.h" />
     <ClInclude Include="BlackEyes.h">
       <SubType>
       </SubType>
@@ -170,6 +171,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Cardio.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Castle.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -202,6 +207,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Durability.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="FieldRenderingActor.h">
       <SubType>
       </SubType>
@@ -227,6 +236,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Impenetrable.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="IronSkin.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="IronWill.h">
       <SubType>
       </SubType>
@@ -239,6 +256,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LightArmor.h" />
     <ClInclude Include="LightHand.h">
       <SubType>
       </SubType>
@@ -312,6 +330,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SlipperySkin.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SoulCardSelectBox.h">
       <SubType>
       </SubType>
@@ -325,6 +347,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Spear.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SteelSkin.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -390,6 +416,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="Thorn.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ThunderStaf.h">
       <SubType>
       </SubType>
@@ -401,6 +431,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -434,6 +468,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="BlackBlood.cpp" />
     <ClCompile Include="BlackEyes.cpp">
       <SubType>
       </SubType>
@@ -447,6 +482,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Cardio.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Castle.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -479,6 +518,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Durability.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="FieldRenderingActor.cpp">
       <SubType>
       </SubType>
@@ -504,6 +547,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Impenetrable.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="IronSkin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="IronWill.cpp">
       <SubType>
       </SubType>
@@ -516,6 +567,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="LightArmor.cpp" />
     <ClCompile Include="LightHand.cpp">
       <SubType>
       </SubType>
@@ -589,6 +641,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="SlipperySkin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SoulCardSelectBox.cpp">
       <SubType>
       </SubType>
@@ -602,6 +658,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Spear.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SteelSkin.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -670,6 +730,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="Thorn.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ThunderStaf.cpp">
       <SubType>
       </SubType>
@@ -681,6 +745,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
       <SubType>
       </SubType>
     </ClCompile>

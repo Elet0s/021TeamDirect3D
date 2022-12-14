@@ -16,13 +16,10 @@ Celerity::~Celerity()
 
 void Celerity::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
 	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 
-	float AttackSpeed = PlayerPInfo_.attackSpeed_Per * PlayerPInfo_.attackSpeed_ ;
-
-	std::string sAttackSpeed = std::to_string(AttackSpeed).substr(0, std::to_string(AttackSpeed).find(".")) + "%";
-	std::string sAttackSpeedNext = std::to_string(AttackSpeed * 1.08f).substr(0, std::to_string(AttackSpeed * 1.08f).find(".")) + "%";
+	std::string sAttackSpeed = std::to_string(PlayerPInfo_.attackSpeed_Result).substr(0, std::to_string(PlayerPInfo_.attackSpeed_Result).find(".")) + "%";
+	std::string sAttackSpeedNext = std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.08f)).substr(0, std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.08f)).find(".")) + "%";
 
 
 	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " 공격 속도 ";
@@ -33,4 +30,6 @@ void Celerity::Effect()
 	currentlevel_ += 1;
 	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 	PlayerPInfo_->attackSpeed_ *= 1.08f;
+	PlayerPInfo_->attackSpeed_Result *= 1.08f;
+	PlayerPInfo_->attackSpeed_Result = ceil(PlayerPInfo_->attackSpeed_Result);
 }

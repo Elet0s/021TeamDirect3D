@@ -7,6 +7,7 @@
 #include "HealingFactor.h"
 #include "StoneHanded.h"
 #include "StoneSkin.h"
+#include "TensString.h"
 #include "Celerity.h"
 #include "Hypersonic.h"
 #include "Quick.h"
@@ -17,14 +18,23 @@
 #include "SingleHanded.h"
 #include "Muscle.h"
 #include "Aiming.h"
+#include "Durability.h"
 #include "Momentum.h"
 #include "Compromise.h"
 #include "Clumsy.h"
 #include "GodsWrath.h"
 #include "Practice.h"
 #include "Cardio.h"
+#include "IronSkin.h"
+#include "LightArmor.h"
 #include "DamascusSteel.h"
 #include "SharpeningStone.h"
+#include "SlipperySkin.h"
+#include "Impenetrable.h"
+#include "Tower.h"
+#include "Castle.h"
+#include "SteelSkin.h"
+#include "BlackBlood.h"
 #include "GlobalContentsValue.h"
 
 SoulCardUI::SoulCardUI() 
@@ -42,7 +52,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new Celerity();
+	mySkill_ = new Castle();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{
