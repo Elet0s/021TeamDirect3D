@@ -4,7 +4,7 @@
 
 std::vector<std::shared_ptr<Monster>> Monster::allMonsters_;
 
-GameEngineInstancingRenderer* Monster::allMonstersRenderer_ = nullptr;
+std::shared_ptr<GameEngineInstancingRenderer> Monster::allMonstersRenderer_ = nullptr;
 
 int Monster::monsterCreationIndex_ = 0;
 
@@ -36,7 +36,7 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 {
 	allMonsters_.reserve(_allMonsterCount);
 
-	allMonstersRenderer_ = &_thisLevel->GetMainCamera()->GetInstancingRenderer("AllMonstersRenderer");
+	allMonstersRenderer_ = _thisLevel->GetMainCamera()->GetInstancingRenderer("AllMonstersRenderer");
 	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "MultiTexturesInstancing");
 	allMonstersRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");

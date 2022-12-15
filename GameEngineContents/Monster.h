@@ -34,7 +34,7 @@ class Monster: public GameEngineActor
 	static std::vector<std::shared_ptr<Monster>> allMonsters_;
 
 protected:
-	static GameEngineInstancingRenderer* allMonstersRenderer_;
+	static std::shared_ptr<GameEngineInstancingRenderer> allMonstersRenderer_;
 
 	static int monsterCreationIndex_;
 public:

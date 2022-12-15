@@ -123,8 +123,14 @@ GameEngineInstancing& GameEngineCamera::GetInstancing(const std::string& _name)
 	return instancingMap_[_name];	//없으면 생성 삽입 반환, 있으면 찾아서 반환.
 }
 
-GameEngineInstancingRenderer& GameEngineCamera::GetInstancingRenderer(const std::string& _name)
+std::shared_ptr<GameEngineInstancingRenderer> GameEngineCamera::GetInstancingRenderer(const std::string& _name)
 {
+	if (false == instancingRenderers_.contains(_name))
+	{
+		std::pair<std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator, bool> insertResult 
+			= instancingRenderers_.insert(std::make_pair(_name, std::make_shared<GameEngineInstancingRenderer>()));
+	}
+
 	return instancingRenderers_[_name];
 }
 
@@ -278,10 +284,10 @@ void GameEngineCamera::Render(float _deltaTime)
 		iter->second.RenderInstancing(_deltaTime);
 	}
 
-	for (std::map<std::string, GameEngineInstancingRenderer>::iterator iter = instancingRenderers_.begin();
+	for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = instancingRenderers_.begin();
 		iter != instancingRenderers_.end(); ++iter)
 	{
-		iter->second.Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+		iter->second->Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 	}
 }
 

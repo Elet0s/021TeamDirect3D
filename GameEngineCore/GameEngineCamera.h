@@ -53,8 +53,7 @@ public:
 	GameEngineInstancing& GetInstancing(const std::string& _name);
 
 	//인스턴싱렌더러 반환. 없다면 빈 인스턴싱렌더러를 만들어서 반환한다.
-	GameEngineInstancingRenderer& GetInstancingRenderer(const std::string& _name);
-	//카메라에서 생성하면서 받아오지 말고 생성한 렌더러를 카메라에 넣는게 더 낫지 않을까?
+	std::shared_ptr<GameEngineInstancingRenderer> GetInstancingRenderer(const std::string& _name);
 
 	//카메라에 조명 추가.
 	void PushLighting(std::shared_ptr<GameEngineLighting> _newLighting);
@@ -131,7 +130,7 @@ private:
 	std::unordered_map<std::string, GameEngineInstancing> instancingMap_;	//
 	//비정렬 맵으로 한 이유: 순회할 일이 거의 없을거라고 생각한 상황에서 비정렬 맵을 그냥 써보고 싶어서.
 
-	std::map<std::string, GameEngineInstancingRenderer> instancingRenderers_;
+	std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>> instancingRenderers_;
 
 	//비정렬 맵(Unordered Map): 들어오는 키값을 해시함수를 거쳐서 나온 숫자로 바꿔서, 
 	// 그 값을 인덱스로 하는 배열 내 원소로 데이터를 저장하는 방식의 컨테이너. 

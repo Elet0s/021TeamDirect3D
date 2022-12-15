@@ -16,10 +16,7 @@ FieldRenderingActor::~FieldRenderingActor()
 
 void FieldRenderingActor::Start()
 {
-	InitializeFieldObjects(1000, float4(80, 80));
-	InitializeFieldRenderer();
-
-
+	//Initialize() 함수에서 진짜 초기화를 하므로 여기서 할 게 없다.
 }
 
 void FieldRenderingActor::Update(float _deltaTime)
@@ -29,18 +26,28 @@ void FieldRenderingActor::Update(float _deltaTime)
 	UpdateTilePosition(thisWorldPosition);
 
 	UpdateFieldObjectInfos(thisWorldPosition);
-
-
 }
 
 void FieldRenderingActor::End()
 {
 }
 
+void FieldRenderingActor::Initialize(
+	size_t _totalFieldObjectCount,
+	size_t _objectInWindowCount,
+	const float4& _totalFieldSize,
+	float _diffusionDegree /*= 1.f*/
+)
+{
+	InitializeFieldObjects(_totalFieldObjectCount, _objectInWindowCount, _totalFieldSize, _diffusionDegree);
+	InitializeFieldRenderer(_objectInWindowCount);
+}
+
 void FieldRenderingActor::InitializeFieldObjects(
-	size_t _fieldObjectCount,
-	const float4& _fieldSize,
-	std::function<void(const std::vector<FieldObjectData>& _fieldObjects)> _objectPlacementFunc /*= nullptr*/
+	size_t _totalFieldObjectCount,
+	size_t _objectInWindowCount,
+	const float4& _totalFieldSize,
+	float _diffusionDegree /*= 1.f*/
 )
 {
 	fieldObjectAtlasDatas_.resize(8);
@@ -69,56 +76,48 @@ void FieldRenderingActor::InitializeFieldObjects(
 	//돌 2.
 	fieldObjectAtlasDatas_[7].SetData(AtlasData(0.25f, 0.75f, 0.25f, 0.25f, 0.f, 0.f));
 
+	allFieldObjectDataVector_.reserve(_totalFieldObjectCount);
 
+	renderingFieldObjectDataVector_.reserve(_objectInWindowCount);
 
-	allFieldObjectDataVector_.reserve(_fieldObjectCount);
-
-	renderingFieldObjectDataVector_.reserve(_fieldObjectCount / 5);
-
-	if (nullptr == _objectPlacementFunc)
+	for (size_t i = 0; i < _totalFieldObjectCount; ++i)
 	{
-		for (size_t i = 0; i < _fieldObjectCount; ++i)
+		//필드오브젝트 배치 구간.
+		float4 randomWorldPosition = float4(
+			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HX(), _totalFieldSize.HX()) * _diffusionDegree,
+			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HY(), _totalFieldSize.HY()) * _diffusionDegree,
+			-4.f
+		);
+		//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
+		//나중에 고칠 것.
+
+		int randomIndex = GameEngineRandom::mainRandom_.RandomInt(0, 7);
+
+		float4 worldScale = float4::Zero;
+		if (1 >= randomIndex)
 		{
-			float4 randomWorldPosition = float4(
-				GameEngineRandom::mainRandom_.RandomFloat(-_fieldSize.HX(), _fieldSize.HX()) * 64,
-				GameEngineRandom::mainRandom_.RandomFloat(-_fieldSize.HY(), _fieldSize.HY()) * 64,
-				-4.f
-			);
-			//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
-			//나중에 고칠 것.
-
-			int randomIndex = GameEngineRandom::mainRandom_.RandomInt(0, 7);
-
-			float4 worldScale = float4::Zero;
-			if (1 >= randomIndex)
-			{
-				worldScale = float4(256, 64);
-			}
-			else
-			{
-				worldScale = float4(64, 64);
-			}
-
-			allFieldObjectDataVector_.push_back(
-				FieldObjectData(
-					randomWorldPosition,
-					worldScale,
-					randomIndex
-				)
-			);
+			worldScale = float4(256, 64);
 		}
-	}
-	else
-	{
-		_objectPlacementFunc(this->allFieldObjectDataVector_);
+		else
+		{
+			worldScale = float4(64, 64);
+		}
+
+		allFieldObjectDataVector_.push_back(
+			FieldObjectData(
+				randomWorldPosition,
+				worldScale,
+				randomIndex
+			)
+		);
 	}
 }
 
-void FieldRenderingActor::InitializeFieldRenderer()
+void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 {
-	fieldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("FieldRenderer");
+	fieldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("FieldRenderer");
 	fieldRenderer_->Initialize(
-		static_cast<size_t>(tileCountXY_.IX() * tileCountXY_.IY() + 250),
+		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
 		"MultiTexturesInstancing"
 	);
@@ -138,7 +137,7 @@ void FieldRenderingActor::InitializeFieldRenderer()
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(1);
 			//NewGrassTexture.png는 1번으로 삽입되어 있다.
 
-			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(256, 256, 1);
+			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(tileSize_, tileSize_, 1.f);
 			//타일을 그리는 인스턴싱유닛들만 크기 설정을 해준다.
 
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
@@ -259,11 +258,8 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		);
 		//renderingFieldObjectDataVector_가 가진 아틀라스데이터를 인스턴싱유닛들에게 입력한다.
 
-
 		fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(0);
 		//MapObjects.png는 0번으로 삽입되어 있음.
-
-		//fieldRenderer_->GetInstancingUnit(unitIndex).SetRenderingOn();
 
 		++objectIndex;
 	}

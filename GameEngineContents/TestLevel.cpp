@@ -110,6 +110,12 @@ void TestLevel::Start()
 	//}
 
 	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
+	fieldRenderingActor_->Initialize(
+		1000,
+		75,
+		float4(100, 100),
+		64.f
+	);
 	fieldRenderingActor_->GetTransform().SetLocalScale(float4::White);
 	fieldRenderingActor_->GetTransform().SetWorldScale(float4::White);
 	fieldRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);

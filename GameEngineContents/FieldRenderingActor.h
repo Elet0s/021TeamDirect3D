@@ -21,9 +21,6 @@ class FieldRenderingActor: public GameEngineActor
 {
 	//이 클래스의 존재 이유: 모든 필드 오브젝트들을 그리기만 하는 액터.
 
-	friend class TestLevel;
-	friend class ShaderTestLevel;
-
 public:
 	FieldRenderingActor();
 	~FieldRenderingActor();
@@ -42,15 +39,31 @@ public:
 	void Update(float _deltaTime) override;
 	void End() override;
 
+	//필드렌더링액터 초기화 함수.
+	void Initialize(
+		size_t _totalFieldObjectCount,	//전체 필드오브젝트 개수.
+		size_t _objectInWindowCount,	//윈도우 안에 배치될 최대 필드오브젝트 개수.
+		const float4& _totalFieldSize,		//전체 필드 크기.
+		float _diffusionDegree = 1.f	//필드오브젝트 확산도.
+		//필드오브젝트 배치 함수.
+	);
 
 private:
 	//
-	void InitializeFieldRenderer();
+	void InitializeFieldRenderer(size_t _objectInWindowCount);
+
+	//
 	void InitializeFieldObjects(
-		size_t _fieldObjectCount,
+		size_t _totalFieldObjectCount,
+		size_t _objectInWindowCount,
 		const float4& _fieldSize,
-		std::function<void(const std::vector<FieldObjectData>& _fieldObjects)> _objectPlacementFunc = nullptr);
+		float _diffusionDegree = 1.f
+	);
+
+	//
 	void UpdateTilePosition(const float4& _thisWorldPosition);
+
+	//
 	void UpdateFieldObjectInfos(const float4& _thisWorldPosition);
 
 private:
@@ -63,7 +76,7 @@ private:
 
 	const int tileCount_;	//사용된 타일텍스처 전체 개수.
 
-	GameEngineInstancingRenderer* fieldRenderer_;	//인스턴싱 렌더러.
+	std::shared_ptr<GameEngineInstancingRenderer> fieldRenderer_;	//인스턴싱 렌더러.
 
 
 
