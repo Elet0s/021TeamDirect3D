@@ -71,7 +71,7 @@ void ContentsCore::End()
 {
 	if (SoundPlayer::BGMPlay_ != nullptr)
 	{
-		SoundPlayer::BGMPlay_->Destory();
+		SoundPlayer::BGMPlay_->Destroy();
 	}
 
 	
@@ -84,18 +84,16 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	testDir.MoveToChild("ContentsResources");
 	testDir.MoveToChild("InstancingTest");
 	testDir.MoveToChild("Field");
-
 	GameEngineTexture2DArray::Load(testDir.GetFullPath());
 
 	testDir.MoveToParent("InstancingTest");
 	testDir.MoveToChild("Monster");
-
-	
-
-
-
-
 	GameEngineTexture2DArray::Load(testDir.GetFullPath());
+
+
+
+
+
 
 	GameEngineDirectory contentsShaderDir;
 	if (true == contentsShaderDir.MoveParentToExistChildDirectory(_dirName))
@@ -114,6 +112,9 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 		MsgBoxAssertString(std::string(_dirName) + "그런 이름의 디렉토리가 없습니다. 디렉토리명을 확인하세요.");
 		return;
 	}
+
+
+
 
 
 	std::shared_ptr<GameEngineMaterial> newContentsMaterial0
@@ -149,5 +150,13 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	newContentsMaterial3->SetRasterizer("EngineRasterizer");
 	newContentsMaterial3->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial3->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial4
+		= GameEngineMaterial::Create("MultiTexturesInstShadow");
+	newContentsMaterial4->SetVertexShader("MultiTexturesInstShadow.hlsl");
+	newContentsMaterial4->SetPixelShader("MultiTexturesInstShadow.hlsl");
+	newContentsMaterial4->SetRasterizer("EngineRasterizer");
+	newContentsMaterial4->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial4->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 }

@@ -72,7 +72,7 @@ float4 TextureShadow_PS(Output _input) : SV_Target0
     //    shadowColor.a = sampledColor.a;
     //}
     
-    if (sampledColor.a <= 0.01f)
+    if (0.01f >= sampledColor.a)
     {
         clip(-1);
     }

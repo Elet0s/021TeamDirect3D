@@ -41,7 +41,7 @@ public:
 		BGMPlayer_ = GameEngineSound::SoundPlayControl(_BgmName);
 	}
 
-	void Destory() // 종료할때 호출해줄것
+	void Destroy() // 종료할때 호출해줄것
 	{
 		if (BGMPlay_ != nullptr)
 		{

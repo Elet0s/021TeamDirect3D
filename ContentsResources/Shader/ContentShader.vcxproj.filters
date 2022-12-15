@@ -9,4 +9,7 @@
     <None Include="LightHeader.hlsli" />
     <None Include="MultiTexturesInstancing.hlsl" />
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="MultiTexturesInstShadow.hlsl" />
+  </ItemGroup>
 </Project>

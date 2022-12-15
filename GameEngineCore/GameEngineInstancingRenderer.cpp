@@ -274,13 +274,18 @@ void GameEngineInstancingRenderer::Render(
 			}
 		}
 
-		for (std::map<std::string, const void*>::iterator unitDataIter = allInstancingUnits_[index].data_.begin();
-			unitDataIter != allInstancingUnits_[index].data_.end(); ++unitDataIter)
+		for (std::map<std::string, const void*>::iterator unitDataIter = this->allInstancingUnits_[index].data_.begin();
+			unitDataIter != this->allInstancingUnits_[index].data_.end(); ++unitDataIter)
 		{
+			//if (nullptr == unitDataIter->second)
+			//{
+			//	MsgBoxAssertString(unitDataIter->first + ": 셰이더로 보내기로 한 데이터가 인스턴싱 유닛에 없습니다.");
+			//	return;
+			//}
+
 			if (nullptr == unitDataIter->second)
 			{
-				MsgBoxAssertString(unitDataIter->first + ": 셰이더로 보내기로 한 데이터가 인스턴싱 유닛에 없습니다.");
-				return;
+				continue;
 			}
 
 			//구조화버퍼세터로 각 유닛별 데이터 전달.
@@ -300,12 +305,6 @@ void GameEngineInstancingRenderer::Render(
 					unitDataIter->second,	//인스턴싱유닛이 들고있는 데이터를 복사한다.
 					originalDataSize		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼.
 				);
-
-				if (0 != copyResult)
-				{
-					MsgBoxAssert("메모리 복사 실패!");
-					return;
-				}
 			}
 		}
 

@@ -34,9 +34,9 @@ class Monster: public GameEngineActor
 	static std::vector<std::shared_ptr<Monster>> allMonsters_;
 
 protected:
-	static std::shared_ptr<GameEngineInstancingRenderer> allMonstersRenderer_;
-
-	static int monsterCreationIndex_;
+	static std::shared_ptr<GameEngineInstancingRenderer> allMonstersRenderer_;	//모든 몬스터 렌더러.
+	static std::shared_ptr<GameEngineInstancingRenderer> allShadowsRenderer_;	//모든 몬스터 그림자 렌더러.
+	static int monsterCreationIndex_;	
 public:
 	Monster();
 	~Monster();
@@ -80,15 +80,28 @@ public:
 			newMonster->GetTransform().SetWorldPosition(float4::Zero);
 			newMonster->Off();
 
-			allMonsters_.push_back(newMonster);
-
-
 			newMonster->monsterTextureName_ = &typeid(MonsterType).name()[6];
 			newMonster->monsterTextureName_ += ".png";
 			newMonster->instancingUnitIndex_ = monsterCreationIndex_++;
+
 			allMonstersRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetTextureIndex(
 				GameEngineTexture2DArray::Find("Monster")->GetIndex(newMonster->monsterTextureName_)
 			);
+			allMonstersRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetWorldScale(
+				newMonster->monsterScale_
+			);
+
+			allShadowsRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetTextureIndex(
+				GameEngineTexture2DArray::Find("Monster")->GetIndex(newMonster->monsterTextureName_)
+			);
+			allShadowsRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetWorldScale(
+				newMonster->monsterScale_
+			);
+			allShadowsRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).Link(
+				"Inst_RenderOption", newMonster->renderOption_
+			);
+
+			allMonsters_.push_back(newMonster);
 		}
 	}
 
@@ -131,6 +144,16 @@ public:
 			allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
 				monsterPosition_
 			);
+
+			allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
+				allMonsters_[i]->monsterScale_
+			);
+			allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_
+			);
+			//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
+			//	"Inst_RenderOption", allMonsters_[i]->renderOption_
+			//);
 		}
 		else if (monsterPosition_.x< cameraX + 640 && monsterPosition_.x>cameraX -640)
 		{
@@ -144,6 +167,16 @@ public:
 				allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
 					monsterPosition_
 				);
+
+				allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
+					allMonsters_[i]->monsterScale_
+				);
+				allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
+					monsterPosition_
+				);
+				//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
+				//	"Inst_RenderOption", allMonsters_[i]->renderOption_
+				//);
 			}
 			else
 			{
@@ -187,7 +220,7 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 	void Chaseplayer(float _deltaTime);
-	void Attack();
+	//void Attack();
 
 
 
@@ -224,6 +257,7 @@ protected:
 
 	GameEngineAnimation monsterAnimation_;	//시간 지날때마다 인덱스만 바꿔주는 애니메이션 모듈.
 
+	RenderOption renderOption_;
 
 private:
 	std::string monsterTextureName_;	//몬스터 자기 자신의 텍스처 이름. 

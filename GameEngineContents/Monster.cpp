@@ -5,6 +5,7 @@
 std::vector<std::shared_ptr<Monster>> Monster::allMonsters_;
 
 std::shared_ptr<GameEngineInstancingRenderer> Monster::allMonstersRenderer_ = nullptr;
+std::shared_ptr<GameEngineInstancingRenderer> Monster::allShadowsRenderer_ = nullptr;
 
 int Monster::monsterCreationIndex_ = 0;
 
@@ -41,6 +42,11 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 	allMonstersRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 
+	allShadowsRenderer_ = _thisLevel->GetMainCamera()->GetInstancingRenderer("AllShadowsRenderer");
+	allShadowsRenderer_->Initialize(_allMonsterCount, "Rect", "MultiTexturesInstShadow");
+	allShadowsRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
+	allShadowsRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
+
 	for (size_t i = 0; i < GameEngineTexture2DArray::Find("Monster")->GetCount(); ++i)
 	{
 		GameEngineTexture2DArray::Find("Monster")->Cut(static_cast<int>(i), 10, 1);
@@ -49,6 +55,7 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 	for (size_t i = 0; i < _allMonsterCount; ++i)
 	{
 		allMonstersRenderer_->GetInstancingUnit(i).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.f);
+		allShadowsRenderer_->GetInstancingUnit(i).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.f);
 	}
 }
 
@@ -60,16 +67,20 @@ void Monster::Unsummon()
 
 	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldScale(float4::Zero);
 	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(float4::Zero);
+
+	allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldScale(float4::Zero);
+	allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(float4::Zero);
 }
 
 void Monster::Start()
 {
 }
 
+//void Monster::Attack()
+//{
+//	int i = 0;
+//}
 
-void Monster::Attack()
-{
-}
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	if (colCheakToMonster_ == false)
@@ -258,6 +269,15 @@ void Monster::Update(float _deltaTime)
 		GameEngineTexture2DArray::Find("Monster")->GetCutData(monsterTextureName_, monsterAnimation_.GetCurrentIndex()),
 		float4::Zero
 	);
+
+	allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+		this->GetTransform().GetWorldPosition()
+	);
+	allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).GetAtlasData().SetData(
+		GameEngineTexture2DArray::Find("Monster")->GetCutData(monsterTextureName_, monsterAnimation_.GetCurrentIndex()),
+		float4::Zero
+	);
+	//allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).Link("Inst_RenderOption", this->renderOption_);
 }
 
 void Monster::End()
