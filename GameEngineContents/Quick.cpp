@@ -38,7 +38,6 @@ void Quick::Effect()
 	currentlevel_ += 1;
 	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 	PlayerPInfo_->speed_Per += 25.f;
-	PlayerPInfo_->speed_Per;
 	PlayerPInfo_->projectileSpeed_Per += 25.0f;
 	PlayerPInfo_->projectileSize_Per -= 25.0f;
 	PlayerPInfo_->projectileSpeed_Result += 25.0f;

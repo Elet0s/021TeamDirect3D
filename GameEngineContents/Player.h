@@ -82,10 +82,10 @@ public:
 		knockBack_(100.0f),
 		goldMultiple_(100.0f),
 		expMultiple_(100.0f),
-		dashFullCharge_(0.f),
-		dashReChargeTime_(3.0f),
+		dashFullCharge_(0),
+		dashReChargeTime_(3.00f),
 		dashReUseTime_(0.3f),
-		dashReChargeCount_(1.0f),
+		dashReChargeCount_(1),
 		speed_(200.0f),
 		maxHp_(100),
 		hp_(100),
@@ -114,10 +114,10 @@ public:
 	float knockBack_;
 	float goldMultiple_;
 	float expMultiple_;
-	float dashFullCharge_;
+	int dashFullCharge_;
 	float dashReChargeTime_;
 	float dashReUseTime_;
-	float dashReChargeCount_;
+	int dashReChargeCount_;
 
 	float knockback_;
 	float atk_Range_;

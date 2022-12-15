@@ -82,6 +82,7 @@ enum class SoulCard
 	LightHand,
 	Hypersonic,
 	StoneHanded,
+
 	Overworked,   // 미완성
 	Average,	  // 미완성 
 	Overloaded,	  // 미완성
@@ -108,6 +109,7 @@ enum class SoulCard
 	Impenetrable,
 	Tower,
 	SteelSkin,
+
 	Thorn,  // 보류
 	Castle,
 	Turtle,
@@ -120,13 +122,14 @@ enum class SoulCard
 	Void,
 	Student,
 	Dash,
-	IceSpirit,
+	IceSpirit, // 일단 보류
 	DashCooldown,
+
 	FireSpirit,
 	Evasion,
 	Oil,
 	Bookworm,
-	VoidSpirit
+	VoidSpirit // 보류
 };
 
 enum class CardValue

@@ -88,6 +88,9 @@
     <Filter Include="Actor\02. Play\Monster\Elite">
       <UniqueIdentifier>{dc5e78d5-911d-4c3f-b4c6-5c9f2a37e1ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\Player\Skill\Passive\Sub">
+      <UniqueIdentifier>{e7f05a6a-28bb-41d3-aa74-843df1ec610c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -357,6 +360,24 @@
     </ClCompile>
     <ClCompile Include="Castle.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClCompile>
+    <ClCompile Include="LowPressure.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="Agility.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="Void.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="Student.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="Dash.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="DashCooldown.cpp">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -628,6 +649,24 @@
     </ClInclude>
     <ClInclude Include="Castle.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
+    </ClInclude>
+    <ClInclude Include="LowPressure.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="Agility.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="Void.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="Student.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="Dash.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="DashCooldown.h">
+      <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -33,6 +33,12 @@
 #include "Impenetrable.h"
 #include "Tower.h"
 #include "Castle.h"
+#include "Dash.h"
+#include "LowPressure.h"
+#include "Void.h"
+#include "Agility.h"
+#include "DashCooldown.h"
+#include "Student.h"
 #include "SteelSkin.h"
 #include "BlackBlood.h"
 #include "GlobalContentsValue.h"
@@ -52,7 +58,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new Castle();
+	mySkill_ = new DashCooldown();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{
