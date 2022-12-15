@@ -35,7 +35,7 @@ void GameEngineTexture2DArray::Cut(const std::string_view& _textureName, int _x,
 
 void GameEngineTexture2DArray::Cut(int _textureIndex, int _x, int _y)
 {
-	cutData_[_textureIndex].reserve(static_cast<size_t>(_x * _y));
+	cutData_[_textureIndex].reserve(static_cast<size_t>(_x) * static_cast<size_t>(_y));
 
 	float sizeX = 1.f / _x;
 	float sizeY = 1.f / _y;
