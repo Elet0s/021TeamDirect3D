@@ -10,19 +10,12 @@
 
 GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
 	const std::set<std::string>& _structuredBufferSetterNames
-	//const std::string_view& _meshName,
-	//const std::string_view& _materialName
 )
 {
 	for (const std::string& name : _structuredBufferSetterNames)
 	{
 		data_.insert(std::make_pair(name, nullptr));
 	}
-
-	//this->renderUnit_ = std::make_shared<GameEngineRenderUnit>();
-	//this->renderUnit_->SetMesh(_meshName);
-	//this->renderUnit_->SetMaterial(_materialName);
-	//this->renderUnit_->Off();
 	this->textureIndex_ = 0;
 }
 
@@ -140,8 +133,6 @@ void GameEngineInstancingRenderer::Initialize(
 	this->shaderResourceHelper_ = GameEngineShaderResourceHelper();
 	this->shaderResourceHelper_.ShaderCheck(
 		this->material_->GetVertexShader()->GetInst_VertexShader());
-	//this->shaderResourceHelper_.ShaderCheck(
-	//	GameEngineMaterial::Find(_materialName)->GetPixelShader());
 	this->shaderResourceHelper_.ShaderCheck(
 		this->material_->GetPixelShader()->GetInst_PixelShader());
 
@@ -181,8 +172,6 @@ void GameEngineInstancingRenderer::Initialize(
 		allInstancingUnits_.push_back(
 			GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
 				this->structuredBufferSetterNames_
-				//_meshName,
-				//_materialName
 			)
 		);
 	}
@@ -246,12 +235,6 @@ void GameEngineInstancingRenderer::Render(
 				&allInstancingUnits_[index].transformData_,	//
 				transforDataSize		//
 			);
-
-			if (0 != copyResult)
-			{
-				MsgBoxAssert("트랜스폼데이터 복사 실패!");
-				return;
-			}
 		}
 
 		{
@@ -266,12 +249,6 @@ void GameEngineInstancingRenderer::Render(
 				&allInstancingUnits_[index].atlasData_,	//
 				atlasDataSize		//
 			);
-
-			if (0 != copyResult)
-			{
-				MsgBoxAssert("아틀라스데이터 복사 실패!");
-				return;
-			}
 		}
 
 		for (std::map<std::string, const void*>::iterator unitDataIter = this->allInstancingUnits_[index].data_.begin();
@@ -288,7 +265,7 @@ void GameEngineInstancingRenderer::Render(
 				continue;
 			}
 
-			//구조화버퍼세터로 각 유닛별 데이터 전달.
+			//구조화버퍼세터로 각 인스턴싱유닛별 데이터 전달.
 			for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(unitDataIter->first);
 				sBufferSetterIter != structuredBufferSetters.upper_bound(unitDataIter->first); ++sBufferSetterIter) 
 			{
@@ -299,10 +276,10 @@ void GameEngineInstancingRenderer::Render(
 				char* originalDataPtr = &sBufferSetterIter->second.originalData_[index * originalDataSize];
 				//구조화버퍼 세터가 들고 있는 originalData_의 포인터.
 
-				int copyResult = memcpy_s(	//
+				int copyResult = memcpy_s(
 					originalDataPtr,		//구조화버퍼 세터의 originalData_로 
 					originalDataSize,		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼
-					unitDataIter->second,	//인스턴싱유닛이 들고있는 데이터를 복사한다.
+					unitDataIter->second,	//인스턴싱유닛이 들고있는 데이터의 포인터를 복사한다.
 					originalDataSize		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼.
 				);
 			}

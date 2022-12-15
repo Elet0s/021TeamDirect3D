@@ -12,7 +12,6 @@ int Monster::monsterCreationIndex_ = 0;
 Monster::Monster()
 	: mxMove_(0)
 	, myMove_(0)
-	//, monRenderer_(nullptr)
 	, monCollision_(nullptr)
 	, colCheakToPlayer_(false)
 	, playerRange_(0)
