@@ -19,6 +19,44 @@ Shuriken::~Shuriken()
 
 
 }
+
+void Shuriken::Start()
+{
+	valueSoulCard_ = SoulCard::Shuriken;
+	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
+	shuriKenRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	shuriKenRenderer_->GetTransform().SetWorldScale(50, 80, 0);
+	shuriKenRenderer_->SetTexture("Arrow.png");
+
+	shuriKenCol_ = CreateComponent<GameEngineCollision>();
+	shuriKenCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
+	shuriKenCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+	shuriKenCol_->ChangeOrder(ObjectOrder::Projectile);
+
+	shuriKenRangeCol_ = CreateComponent<GameEngineCollision>();
+	shuriKenRangeCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::White);
+	shuriKenRangeCol_->GetTransform().SetLocalScale({ 350.0f, 350.0f, 1.0f });
+	shuriKenRangeCol_->ChangeOrder(ObjectOrder::Range);
+
+	projectileGroupList_.reserve(11);
+	
+	Off();
+}
+
+void Shuriken::Update(float _deltaTime)
+{
+	StateSet();
+	SerchTarget();
+	RenderRotate();
+	RangeCheak(_deltaTime);
+	shuriKenCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+}
+void Shuriken::End()
+{
+
+}
+
+
 void  Shuriken::StateSet()
 {
 	if (nowLevel_ < 2)
@@ -38,7 +76,7 @@ void  Shuriken::StateSet()
 		shuriKenWeaponInfo_.weaponProjectileNum_ = 2;
 		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 
-}
+	}
 	else if (nowLevel_ < 3)
 	{
 		shuriKenWeaponInfo_.weaponAtk_ = 1.58f;
@@ -61,45 +99,6 @@ void  Shuriken::StateSet()
 	}
 }
 
-void Shuriken::Start()
-{
-	valueSoulCard_ = SoulCard::Shuriken;
-	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
-	shuriKenRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	shuriKenRenderer_->GetTransform().SetWorldScale(50, 80, 0);
-	shuriKenRenderer_->SetTexture("Arrow.png");
-
-	shuriKenCol_ = CreateComponent<GameEngineCollision>();
-	shuriKenCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-	shuriKenCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
-	shuriKenCol_->ChangeOrder(ObjectOrder::Projectile);
-
-	shuriKenRangeCol_ = CreateComponent<GameEngineCollision>();
-	shuriKenRangeCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::White);
-	shuriKenRangeCol_->GetTransform().SetLocalScale({ 350.0f, 350.0f, 1.0f });
-	shuriKenRangeCol_->ChangeOrder(ObjectOrder::Range);
-
-	Off();
-}
-
-void Shuriken::RangeCheak(float _deltaTime)
-{
-
-		shuriKenRenderer_->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
-		shuriKenCol_->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
-}
-void Shuriken::Update(float _deltaTime)
-{
-	StateSet();
-	SerchTarget();
-	RenderRotate();
-	RangeCheak(_deltaTime);
-	shuriKenCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-}
-void Shuriken::End()
-{
-
-}
 void Shuriken::SerchTarget()
 {
 	monsterList_ = Monster::GetMonsterList();
@@ -121,6 +120,20 @@ void Shuriken::SerchTarget()
 		}
 	}
 }
+
+void Shuriken::ProjectileSort()
+{
+	for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
+	{
+
+		std::shared_ptr<ProjectileGroup> myProjecttileGroup_;
+		projectileGroupList_.push_back(myProjecttileGroup_);
+	}
+
+}
+
+
+
 void Shuriken::RenderRotate()
 {
 	//체력이 다 같을 경우 제일 가까운 녀석을 추적하는 기능
@@ -143,6 +156,14 @@ void Shuriken::RenderRotate()
 		}
 	}
 }
+
+void Shuriken::RangeCheak(float _deltaTime)
+{
+
+	shuriKenRenderer_->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
+	shuriKenCol_->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
+}
+
 CollisionReturn Shuriken::RangeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 
