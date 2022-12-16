@@ -13,18 +13,6 @@ GameEngineRenderTarget::GameEngineRenderTarget()
 
 GameEngineRenderTarget::~GameEngineRenderTarget()
 {
-	//for (GameEnginePostEffect* effect: allEffects_)
-	//{
-	//	delete effect;
-	//	effect = nullptr;
-	//}
-
-	//if (nullptr != depthStencilView_)
-	//{
-	//	depthStencilView_->Release();
-	//	depthStencilView_ = nullptr;
-	//}
-	//ÀÌ°Ç ¿Ö ÅÍÁöÁö?
 }
 
 std::shared_ptr<GameEngineRenderTarget> GameEngineRenderTarget::Create(const std::string_view& _name)
@@ -163,7 +151,7 @@ void GameEngineRenderTarget::SetDepthTexture(std::shared_ptr<GameEngineTexture> 
 	depthStencilView_ = depthTexture_->CreateDepthStencilView();
 }
 
-void GameEngineRenderTarget::Clear()
+void GameEngineRenderTarget::Clear(bool _clearDepthStencilView /*= true*/)
 {
 	for (size_t i = 0; i < renderTargetViews_.size(); i++)
 	{
@@ -171,6 +159,11 @@ void GameEngineRenderTarget::Clear()
 			renderTargetViews_[i],		//´ë»ó ·»´õÅ¸°Ùºä.
 			clearColors_[i].arr1D		//´ë»ó ·»´õÅ¸°Ùºä¸¦ Ä¥ÇÒ »ö.
 		);
+	}
+
+	if (false == _clearDepthStencilView)
+	{
+		return;
 	}
 
 	if (nullptr != depthStencilView_)

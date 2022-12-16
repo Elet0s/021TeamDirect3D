@@ -85,7 +85,7 @@ public:
 	void SetDepthTexture(std::shared_ptr<GameEngineTexture> _depthTexture);
 
 	//이 렌더타겟이 가진 렌더타겟뷰와 깊이스텐실뷰를 한 가지 값으로 전부 덮어서 초기화하는 함수.
-	void Clear();
+	void Clear(bool _clearDepthStencilView = true);
 
 	//이 렌더타겟뷰를 디바이스 컨텍스트에 세팅해 렌더링 파이프라인을 거친 결과물을 받을 수 있게 하는 함수.
 	void Setting();

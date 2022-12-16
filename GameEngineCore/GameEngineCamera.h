@@ -3,6 +3,13 @@
 #include "GameEngineTransformComponent.h"
 #include "GameEngineLighting.h"
 
+enum class RenderingPath
+{
+	ForwardRendering,	//일반 렌더링.
+	DeferredRendering,	//지연 렌더링.
+	None
+};
+
 enum class CameraProjectionMode
 {
 	Perspective, //원근투영.
