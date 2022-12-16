@@ -9,3 +9,23 @@ ThunderStaf::~ThunderStaf()
 {
 
 }
+void ThunderStaf::Init()
+{
+
+}
+void ThunderStaf::Effect()
+{
+
+}
+void ThunderStaf::Start()
+{
+
+}
+void ThunderStaf::Update(float _deltaTime)
+{
+
+}
+void ThunderStaf::End()
+{
+
+}

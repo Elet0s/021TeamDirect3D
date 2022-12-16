@@ -252,9 +252,9 @@ void Player::Update(float _deltaTime)
 	PlayerDeathEvent();
 	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 
-	if (true == GameEngineInput::GetInst()->IsDown("SkillOn")) 
+	if (true == GameEngineInput::GetInst()->IsDown("SkillOn")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		playerSkillManager_->GetSkillList()[0]->nowLevel_ += 1;
+		playerSkillManager_->GetSkillList()[15]->nowLevel_ += 1;
 		//playerSkillManager_->GetSkillList()[0]->Shooting = true;
 	}
 	playerSkillManager_->SkillLevelCheak();

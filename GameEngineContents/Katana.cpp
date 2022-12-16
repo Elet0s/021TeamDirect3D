@@ -9,3 +9,23 @@ Katana::~Katana()
 {
 
 }
+void Katana::Init()
+{
+
+}
+void Katana::Effect()
+{
+
+}
+void Katana::Start()
+{
+
+}
+void Katana::Update(float _deltaTime)
+{
+
+}
+void Katana::End()
+{
+
+}
