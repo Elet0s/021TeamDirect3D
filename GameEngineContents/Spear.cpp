@@ -12,7 +12,14 @@ Spear::~Spear()
 {
 
 }
+void Spear::Init()
+{
 
+}
+void Spear::Effect()
+{
+
+}
 
 void Spear::Start()
 {

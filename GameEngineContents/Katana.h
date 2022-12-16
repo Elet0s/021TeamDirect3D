@@ -4,7 +4,7 @@
 //근처범위내에서 제일 가까운 적을 공격
 class Katana :public Skill
 {
-private:
+public:
 	Katana();
 	~Katana();
 
@@ -12,7 +12,9 @@ private:
 	Katana(Katana&& _Other) noexcept = delete;
 	Katana& operator=(const Katana& _Other) = delete;
 	Katana& operator=(Katana&& _Other) noexcept = delete;
-public:
+
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{

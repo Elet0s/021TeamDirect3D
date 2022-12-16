@@ -12,7 +12,9 @@ public:
 	Shuriken(Shuriken&& _Other) noexcept = delete;
 	Shuriken& operator=(const Shuriken& _Other) = delete;
 	Shuriken& operator=(Shuriken&& _Other) noexcept = delete;
-public:
+
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{

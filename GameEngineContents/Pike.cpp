@@ -9,7 +9,14 @@ Pike::~Pike()
 {
 
 }
+void Pike::Init()
+{
 
+}
+void Pike::Effect()
+{
+
+}
 void Pike::Start()
 {
 

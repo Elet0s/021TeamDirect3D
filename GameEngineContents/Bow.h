@@ -4,7 +4,7 @@
 //가장 가까운 적에게 발사
 class Bow:public Skill
 {
-private:
+public:
 	Bow();
 	~Bow();
 
@@ -12,7 +12,9 @@ private:
 	Bow(Bow&& _Other) noexcept = delete;
 	Bow& operator=(const Bow& _Other) = delete;
 	Bow& operator=(Bow&& _Other) noexcept = delete;
-public:
+
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{

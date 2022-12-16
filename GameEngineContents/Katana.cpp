@@ -9,7 +9,14 @@ Katana::~Katana()
 {
 
 }
+void Katana::Init()
+{
 
+}
+void Katana::Effect()
+{
+
+}
 void Katana::Start()
 {
 

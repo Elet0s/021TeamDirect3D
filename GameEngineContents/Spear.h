@@ -12,7 +12,10 @@ public:
 	Spear(Spear&& _Other) noexcept = delete;
 	Spear& operator=(const Spear& _Other) = delete;
 	Spear& operator=(Spear&& _Other) noexcept = delete;
-public:
+
+
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{

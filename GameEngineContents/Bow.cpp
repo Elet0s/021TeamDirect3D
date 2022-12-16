@@ -11,17 +11,24 @@ Bow::~Bow()
 {
 
 }
-
-
-void Start()
+void Bow::Init()
 {
 
 }
-void Update(float _deltaTime)
+void Bow::Effect()
 {
 
 }
-void End()
+
+void Bow::Start()
+{
+
+}
+void Bow::Update(float _deltaTime)
+{
+
+}
+void Bow::End()
 {
 
 }

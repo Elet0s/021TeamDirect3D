@@ -11,7 +11,14 @@ Crossbow::~Crossbow()
 {
 
 }
+void Crossbow::Init()
+{
 
+}
+void Crossbow::Effect()
+{
+
+}
 void Crossbow::Start()
 {
 

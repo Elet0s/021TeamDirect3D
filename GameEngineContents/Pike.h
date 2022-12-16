@@ -4,7 +4,7 @@
 //조준된 방향으로 빠르게 찌름
 class Pike:public Skill
 {
-private:
+public:
 	Pike();
 	~Pike();
 
@@ -13,7 +13,8 @@ private:
 	Pike& operator=(const Pike& _Other) = delete;
 	Pike& operator=(Pike&& _Other) noexcept = delete;
 
-public:
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{
@@ -42,10 +43,6 @@ private:
 	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
 
 	WeaponInfo crossbowWeaponInfo_;//무기 스탯
-
-	std::vector<std::shared_ptr<Monster>> monsterList_; //전체 몬스터 리스트
-	std::pair<size_t, float> minHpPair_;//타겟 대상
-	std::vector<std::pair<size_t, float>> targetInst_;//타겟 모음
 
 
 	std::vector<std::shared_ptr<ProjectileGroup>> projectileGroupList_;

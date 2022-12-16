@@ -10,6 +10,17 @@ Cleaver::~Cleaver()
 {
 
 }
+
+
+void Cleaver::Init()
+{
+
+}
+void Cleaver::Effect()
+{
+
+}
+
 void Cleaver::Start()
 {
 

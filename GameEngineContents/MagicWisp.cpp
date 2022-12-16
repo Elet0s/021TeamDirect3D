@@ -9,6 +9,14 @@ MagicWisp::~MagicWisp()
 {
 
 }
+void MagicWisp::Init()
+{
+
+}
+void MagicWisp::Effect()
+{
+
+}
 void MagicWisp::Start()
 {
 

@@ -10,6 +10,15 @@ Kunai::~Kunai()
 
 }
 
+void Kunai::Init()
+{
+
+}
+void Kunai::Effect()
+{
+
+}
+
 void Kunai::Start()
 {
 

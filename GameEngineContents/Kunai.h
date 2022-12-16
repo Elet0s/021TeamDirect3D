@@ -4,7 +4,7 @@
 // 자신의 주변으로 쿠나이를 던집니다.
 class Kunai:public Skill
 {
-private:
+public:
 	Kunai();
 	~Kunai();
 
@@ -12,7 +12,9 @@ private:
 	Kunai(Kunai&& _Other) noexcept = delete;
 	Kunai& operator=(const Kunai& _Other) = delete;
 	Kunai& operator=(Kunai&& _Other) noexcept = delete;
-public:
+
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{

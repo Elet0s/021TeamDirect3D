@@ -4,7 +4,7 @@
 //가장 체력이 많은 적에게 발사
 class Crossbow :public Skill
 {
-private:
+public:
 	Crossbow();
 	~Crossbow();
 
@@ -12,7 +12,9 @@ private:
 	Crossbow(Crossbow&& _Other) noexcept = delete;
 	Crossbow& operator=(const Crossbow& _Other) = delete;
 	Crossbow& operator=(Crossbow&& _Other) noexcept = delete;
-public:
+
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{

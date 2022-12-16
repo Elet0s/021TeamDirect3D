@@ -9,6 +9,14 @@ MagicWand::~MagicWand()
 {
 
 }
+void MagicWand::Init()
+{
+
+}
+void MagicWand::Effect()
+{
+
+}
 void MagicWand::Start()
 {
 

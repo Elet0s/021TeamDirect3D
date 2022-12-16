@@ -20,6 +20,15 @@ Shuriken::~Shuriken()
 
 }
 
+void Shuriken::Init()
+{
+
+}
+void Shuriken::Effect()
+{
+
+}
+
 void Shuriken::Start()
 {
 	valueSoulCard_ = SoulCard::Shuriken;

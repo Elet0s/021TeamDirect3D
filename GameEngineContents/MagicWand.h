@@ -4,7 +4,7 @@
 //가장 가까운 적에게 고정되는 마법 투사체를 발사
 class MagicWand :public Skill
 {
-private:
+public:
 	MagicWand();
 	~MagicWand();
 
@@ -12,7 +12,9 @@ private:
 	MagicWand(MagicWand&& _Other) noexcept = delete;
 	MagicWand& operator=(const MagicWand& _Other) = delete;
 	MagicWand& operator=(MagicWand&& _Other) noexcept = delete;
-public:
+
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{

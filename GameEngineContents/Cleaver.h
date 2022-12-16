@@ -5,7 +5,7 @@
 //적을 조준 방향으로 밀어내는 약하지만 큰 투사체를 발사
 class Cleaver : public Skill
 {
-private:
+public:
 	Cleaver();
 	~Cleaver();
 
@@ -13,7 +13,9 @@ private:
 	Cleaver(Cleaver&& _Other) noexcept = delete;
 	Cleaver& operator=(const Cleaver& _Other) = delete;
 	Cleaver& operator=(Cleaver&& _Other) noexcept = delete;
-public:
+
+	void Init() override;
+	void Effect() override;
 
 	std::string& GetEtc()
 	{
@@ -38,8 +40,8 @@ protected:
 
 private:
 
-	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
-	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
+	float resultCos_;//마우스 좌표, 플레이어 좌표 x축 기준 각도 
+	float4 referenceVector_;//플레이어 에서 마우스로 가는 벡터 
 
 	WeaponInfo crossbowWeaponInfo_;//무기 스탯
 

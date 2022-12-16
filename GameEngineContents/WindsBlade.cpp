@@ -9,3 +9,23 @@ WindsBlade::~WindsBlade()
 {
 
 }
+void WindsBlade::Init()
+{
+
+}
+void WindsBlade::Effect()
+{
+
+}
+void WindsBlade::Start()
+{
+
+}
+void WindsBlade::Update(float _deltaTime)
+{
+
+}
+void WindsBlade::End()
+{
+
+}
