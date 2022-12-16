@@ -6,7 +6,9 @@ FieldRenderingActor::FieldRenderingActor()
 	windowSize_(GameEngineWindow::GetScale()),
 	tileCountXY_((GameEngineWindow::GetScale().IX() / 256) + 4, (GameEngineWindow::GetScale().IY() / 256) + 4),
 	tileCount_(tileCountXY_.IX() * tileCountXY_.IY()),
-	fieldRenderer_(nullptr)
+	fieldRenderer_(nullptr),
+	moveDir_(float4::Zero),
+	curPos_(float4::Zero)
 {
 }
 
@@ -17,15 +19,24 @@ FieldRenderingActor::~FieldRenderingActor()
 void FieldRenderingActor::Start()
 {
 	//Initialize() 함수에서 진짜 초기화를 하므로 여기서 할 게 없다.
+	//moveDir_ += {-960.f, 960.f };
 }
 
 void FieldRenderingActor::Update(float _deltaTime)
 {
+	if (false == curPos_.CompareInt2D(GetTransform().GetWorldPosition()))
+	{
+		moveDir_ +=GetTransform().GetWorldPosition() - curPos_;
+		curPos_ = GetTransform().GetWorldPosition();
+	}
+
 	float4 thisWorldPosition = this->GetTransform().GetWorldPosition();
 
 	UpdateTilePosition(thisWorldPosition);
 
 	UpdateFieldObjectInfos(thisWorldPosition);
+
+	LoopFieldObject(thisWorldPosition);
 }
 
 void FieldRenderingActor::End()
@@ -84,8 +95,8 @@ void FieldRenderingActor::InitializeFieldObjects(
 	{
 		//필드오브젝트 배치 구간.
 		float4 randomWorldPosition = float4(
-			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HX(), _totalFieldSize.HX()) * _diffusionDegree,
-			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HY(), _totalFieldSize.HY()) * _diffusionDegree,
+			GameEngineRandom::mainRandom_.RandomFloat(-64, 64) * 30,
+			GameEngineRandom::mainRandom_.RandomFloat(-36, 36) * 30,
 			-4.f
 		);
 		//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
@@ -274,4 +285,54 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 	//릴리즈모드에서 이런 일이 생기면 그냥 무시하고 진행한다.
 #endif // DEBUG
 
+}
+
+
+void FieldRenderingActor::LoopFieldObject(const float4& _thisWorldPosition)
+{
+	for (auto iter = allFieldObjectDataVector_.begin(); iter != allFieldObjectDataVector_.end(); iter++)
+	{
+		if ((*iter).worldPosition_.x > _thisWorldPosition.x + (windowSize_.HX() * 1.2f)
+			|| (*iter).worldPosition_.x < _thisWorldPosition.x - (windowSize_.HX() * 1.2f)
+			|| (*iter).worldPosition_.y > _thisWorldPosition.y + (windowSize_.HY() * 1.2f)
+			|| (*iter).worldPosition_.y < _thisWorldPosition.y - (windowSize_.HY() * 1.2f))
+		{
+			if (moveDir_.IX() > 1280.f && (*iter).worldPosition_.x < _thisWorldPosition.x - (windowSize_.HX()))
+			{
+  				(*iter).worldPosition_.x += 3840.f;	
+ 			}
+
+			else if (moveDir_.IX() < -1280.f && (*iter).worldPosition_.x > _thisWorldPosition.x + (windowSize_.HX()))
+			{
+				(*iter).worldPosition_.x -= 3840.f;
+			}
+
+			 if (moveDir_.IY() < -720.f && (*iter).worldPosition_.y > _thisWorldPosition.y + (windowSize_.HY()))
+			{
+				(*iter).worldPosition_.y -= 2160.f;
+			}
+
+			 else if (moveDir_.IY() > 720.f && (*iter).worldPosition_.y < _thisWorldPosition.y - (windowSize_.HY() * 1.2f))
+			 {
+				 (*iter).worldPosition_.y += 2160.f;
+			 }
+		}
+	}
+
+	if (moveDir_.IX() > 1280.f)
+	{
+		moveDir_.x = 0.f;
+	}
+	else if (moveDir_.IX() < -1280.f)
+	{
+		moveDir_.x = 0.f;
+	}
+	if (moveDir_.IY() > 720.f)
+	{
+		moveDir_.y = 0.f;
+	}
+	else if (moveDir_.IY() < -720.f)
+	{
+		moveDir_.y = 0.f;
+	}
 }

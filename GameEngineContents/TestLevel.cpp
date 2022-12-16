@@ -111,10 +111,10 @@ void TestLevel::Start()
 
 	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
 	fieldRenderingActor_->Initialize(
-		1000,
-		75,
+		300,
+		750,
 		float4(100, 100),
-		64.f
+		60.f
 	);
 	fieldRenderingActor_->GetTransform().SetLocalScale(float4::White);
 	fieldRenderingActor_->GetTransform().SetWorldScale(float4::White);
@@ -128,7 +128,7 @@ void TestLevel::Start()
 
 	if (true == Player::GetPlayerWeakPtr().expired())
 	{
-		Player::CreatePlayer(this, { 960.f, -960.f });
+		Player::CreatePlayer(this, { 0, 0 });
 	}
 
 	{

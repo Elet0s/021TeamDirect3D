@@ -4,11 +4,11 @@ class FieldObjectData
 {
 	friend class FieldRenderingActor;
 
-	const float4 worldPosition_;	//오브젝트 월드좌표.
+	float4 worldPosition_;	//오브젝트 월드좌표.
 	const float4 worldScale_;	//오브젝트 월드좌표.
 	const int atlasDataIndex_;	//오브젝트의 아틀라스데이터 번호.
 
-	FieldObjectData(const float4& _worldPosition,const float4& _worldScale, int _atlasDataIndex)
+	FieldObjectData(float4& _worldPosition,const float4& _worldScale, int _atlasDataIndex)
 		: worldPosition_(_worldPosition),
 		worldScale_(_worldScale),
 		atlasDataIndex_(_atlasDataIndex)
@@ -66,6 +66,8 @@ private:
 	//
 	void UpdateFieldObjectInfos(const float4& _thisWorldPosition);
 
+
+	void LoopFieldObject(const float4& _thisWorldPosition);
 private:
 	const float tileSize_;		//타일텍스처 가로길이. 
 	//정사각형이므로 한개로 충분하다.
@@ -78,7 +80,8 @@ private:
 
 	std::shared_ptr<GameEngineInstancingRenderer> fieldRenderer_;	//인스턴싱 렌더러.
 
-
+	float4 curPos_;
+	float4 moveDir_;
 
 
 	std::vector<AtlasData> fieldObjectAtlasDatas_;	//필드 오브젝트별 아틀라스데이터 모음.
