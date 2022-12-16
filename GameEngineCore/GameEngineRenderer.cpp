@@ -12,7 +12,8 @@ GameEngineRenderUnit::GameEngineRenderUnit()
 	mesh_(nullptr),
 	inputLayout_(nullptr),
 	material_(nullptr),
-	topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST),
+	specialRenderingFunction_(nullptr)
 {
 	SetMesh("Rect");
 }
@@ -245,21 +246,21 @@ std::shared_ptr<GameEngineMesh> GameEngineRenderUnit::GetMesh()
 	return this->mesh_;
 }
 
-std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()
-{
-	return this->material_;
-}
-
-std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetCloneMaterial()
-{
-	if (false == material_->IsOriginal())
-	{
-		return material_;
-	}
-
-	material_ = CloneMaterial(material_);
-	return material_;
-}
+//std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()
+//{
+//	return this->material_;
+//}
+//
+//std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetCloneMaterial()
+//{
+//	if (false == material_->IsOriginal())
+//	{
+//		return material_;
+//	}
+//
+//	material_ = CloneMaterial(material_);
+//	return material_;
+//}
 
 std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::CloneMaterial(std::shared_ptr<GameEngineMaterial> _original)
 {

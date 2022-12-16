@@ -26,6 +26,7 @@ private:
 
 public:	
 	virtual void Render(float _deltaTime) override;
+	virtual void RenderDeferred(float _deltaTime) override;
 
 	//렌더러에 필요한 마테리얼을 등록하고 이 렌더러를 메인 카메라에 등록하는 함수.
 	void SetMaterial(const std::string_view& _materialName);
@@ -35,15 +36,20 @@ public:
 
 
 public:
-	inline GameEngineShaderResourceHelper& GetShaderResourceHelper()
-		//셰이더리소스헬퍼 없는 렌더러란 있을 수 없으므로 레퍼런스 반환.
+	//inline GameEngineShaderResourceHelper& GetShaderResourceHelper()	
+	//	//셰이더리소스헬퍼 없는 렌더러란 있을 수 없으므로 레퍼런스 반환.
+	//{
+	//	return this->renderUnit_->GetShaderResourceHelper();
+	//}
+
+	inline std::vector<std::shared_ptr<GameEngineRenderUnit>> GetForwardRenderUnitVector()
 	{
-		return this->renderUnit_->GetShaderResourceHelper();
+		return this->allRenderUnits_[RenderingPath::ForwardRendering];
 	}
 
-	inline std::shared_ptr<GameEngineRenderUnit> GetRenderUnit()
+	inline std::vector<std::shared_ptr<GameEngineRenderUnit>> GetDeferredRenderUnitVector()
 	{
-		return this->renderUnit_;
+		return this->allRenderUnits_[RenderingPath::DeferredRendering];
 	}
 
 protected:
@@ -52,10 +58,19 @@ protected:
 	virtual void End();
 
 
-	
+	std::shared_ptr<GameEngineRenderUnit> AddRenderUnit();
+	std::shared_ptr<GameEngineRenderUnit> AddDeferredRenderUnit();
 
 private:
-	std::shared_ptr<GameEngineRenderUnit> renderUnit_;
+	//std::shared_ptr<GameEngineRenderUnit> renderUnit_;
 	//한개의 디폴트렌더러마다 최소 한개의 렌더유닛을 가진다.
+
+	//이 렌더러가 가진 모든 렌더유닛들.
+	std::map<RenderingPath, std::vector<std::shared_ptr<GameEngineRenderUnit>>> allRenderUnits_;
+	//렌더링패스 순서대로 정렬.
+
+	//마테리얼이나 셰이더리소스헬퍼는 렌더유닛당 한개씩이 아니라 렌더러당 한개씩 가져도 되지 않을까.
+	//만약 이게 맞다면 렌더유닛이 아니라 렌더러가 마테리얼과 셰이더리소스헬퍼를 가지게 하자.
+
 };
 

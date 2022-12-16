@@ -63,9 +63,9 @@ public:
     //);
 
     std::shared_ptr<GameEngineMesh> GetMesh();
-    std::shared_ptr<GameEngineMaterial> GetMaterial();
+    //std::shared_ptr<GameEngineMaterial> GetMaterial();
 
-    std::shared_ptr<GameEngineMaterial> GetCloneMaterial();
+    //std::shared_ptr<GameEngineMaterial> GetCloneMaterial();
 
     std::shared_ptr<GameEngineMaterial> CloneMaterial(std::shared_ptr<GameEngineMaterial> _original);
 
@@ -91,19 +91,24 @@ public:
         this->isOn_ = false;
     }
 
+public:
+    //Render()함수의 기본적인 렌더링 기능에 추가적으로 필요한 것이 있거나, 아예 렌더링 기능을 대체해야 하는 경우 사용하는 함수포인터.
+    std::function<bool(float)> specialRenderingFunction_;
+    //true: 이 함수가 끝난 후에도 나머지 렌더링 기능을 마저 실행한다.
+    //false: 이 함수가 끝나면 Render()함수를 바로 끝낸다.
 
 private:
     bool isOn_;     //true: 일반 렌더링 모드, false: 인스턴스 렌더링 모드.
 
     std::weak_ptr<GameEngineRenderer> parentRenderer_;    //이 렌더유닛을 가진 부모 렌더러.
 
-    std::shared_ptr<GameEngineMesh> mesh_;                  //
+    std::shared_ptr<GameEngineMesh> mesh_;                  //메쉬.
 
-    std::shared_ptr<GameEngineInputLayout> inputLayout_;    //
+    std::shared_ptr<GameEngineInputLayout> inputLayout_;    //인풋 레이아웃.
 
     std::shared_ptr<GameEngineMaterial> material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
 
-    D3D11_PRIMITIVE_TOPOLOGY topology_;     //
+    D3D11_PRIMITIVE_TOPOLOGY topology_;     //토폴로지.
 
     GameEngineShaderResourceHelper shaderResourceHelper_;   //셰이더리소스들을 가진 셰이더리소스 헬퍼.
     //값형인 이유: 렌더유닛마다 각각의 셰이더리소스헬퍼를 가지게 하기 위해서.
@@ -152,6 +157,7 @@ public:
 protected:
     virtual void Start();
     virtual void Render(float _deltaTime) = 0;
+    virtual void RenderDeferred(float _deltaTime) = 0;
 
     void PushRendererToMainCamera();	//렌더러가 메인카메라에 등록하는 함수.
     void PushRendererToUICamera();		//렌더러가 UI카메라에 등록하는 함수.
