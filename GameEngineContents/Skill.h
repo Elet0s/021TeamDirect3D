@@ -23,11 +23,18 @@ struct WeaponInfo
 		weaponProjectileNum_(0),
 		weponConsecutiveAtkNum_(0),
 		weaponPassNum_(0)
-
 	{
-
 	}
-
+};
+struct ProjectileGroup
+{
+	std::shared_ptr<GameEngineTextureRenderer>  projectileRenderer_;
+	std::shared_ptr<GameEngineCollision>  projectileCol_;
+	ProjectileGroup()
+		:projectileRenderer_(),
+		projectileCol_()
+	{
+	}
 };
 
 class Skill : public GameEngineActor

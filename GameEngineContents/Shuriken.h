@@ -36,13 +36,17 @@ protected:
 	void StateSet() override;
 
 private:
-	float resultCos_;
-	float4 referenceVector_;//기준벡터 - 랜더러를 던질 각도에 맞게 회전해줘야함 
 
-	WeaponInfo shuriKenWeaponInfo_;
-	std::vector<std::shared_ptr<Monster>> monsterList_;
-	std::pair<size_t, float> minHpPair_;
-	std::vector<std::pair<size_t, float>> targetInst_;
+	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
+	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
+
+	WeaponInfo shuriKenWeaponInfo_;//무기 스탯
+
+	std::vector<std::shared_ptr<Monster>> monsterList_; //전체 몬스터 리스트
+	std::pair<size_t, float> minHpPair_;//타겟 대상
+	std::vector<std::pair<size_t, float>> targetInst_;//타겟 모음
+	
+
 
 
 };
