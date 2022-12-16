@@ -10,3 +10,15 @@ Cleaver::~Cleaver()
 {
 
 }
+void Cleaver::Start()
+{
+
+}
+void Cleaver::Update(float _deltaTime)
+{
+
+}
+void Cleaver::End()
+{
+
+}

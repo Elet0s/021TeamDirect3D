@@ -9,3 +9,16 @@ Kunai::~Kunai()
 {
 
 }
+
+void Kunai::Start()
+{
+
+}
+void Kunai::Update(float _deltaTime)
+{
+
+}
+void Kunai::End()
+{
+
+}

@@ -9,3 +9,16 @@ Pike::~Pike()
 {
 
 }
+
+void Pike::Start()
+{
+
+}
+void Pike::Update(float _deltaTime)
+{
+
+}
+void Pike::End()
+{
+
+}

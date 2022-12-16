@@ -9,3 +9,16 @@ Katana::~Katana()
 {
 
 }
+
+void Katana::Start()
+{
+
+}
+void Katana::Update(float _deltaTime)
+{
+
+}
+void Katana::End()
+{
+
+}
