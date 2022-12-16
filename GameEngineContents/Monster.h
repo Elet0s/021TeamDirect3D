@@ -132,8 +132,6 @@ public:
 			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 1280, cameraY - 720),float4(cameraX + 1280, cameraY + 720));
 			monsterPosition_.z = -6.f;
 
-
-
 		if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
 		{
 			allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
@@ -187,9 +185,6 @@ public:
 		{
 			i--;
 		}
-
-
-		
 			--count;//소환 대기중인 몬스터라면 소환하고 카운트 감소.
 			if (0 == count)
 			{
@@ -197,7 +192,6 @@ public:
 				break;
 			}
 		}
-
 		if (0 != count)
 		{
 			//소환하기에 충분한 몬스터가 없었다면 경고.
@@ -205,13 +199,10 @@ public:
 			return;
 		}
 	}
-
 	inline bool IsSummoned() const
 	{
 		return this->isSummoned_;
 	}
-
-
 public:
 	float mxMove_;
 	float myMove_;

@@ -31,11 +31,11 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void SerchTarget();//공격 대상 탐색'
-	void ProjectileSort();//발사체 생성및 플레이어 위치로 정렬
-	void RenderRotate();// 발사체 회전
-	void RangeCheak(float _deltaTime);//발사체 사출
-	void StateSet() override;//레벨에 따른 스탯 적용
+	//void SerchTarget();//공격 대상 탐색'
+	//void ProjectileSort();//발사체 생성및 플레이어 위치로 정렬
+	//void RenderRotate();// 발사체 회전
+	//void RangeCheak(float _deltaTime);//발사체 사출
+	//void StateSet() override;//레벨에 따른 스탯 적용
 
 private:
 
