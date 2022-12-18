@@ -135,7 +135,7 @@ void GameEngineTextureRenderer::SetTexture(const std::string_view& _textureName)
 		return;
 	}
 
-	this->currentTexture_ = this->GetShaderResourceHelper().SetTexture("Tex", _textureName);
+	this->currentTexture_ = this->GetFirstShaderResourceHelper().SetTexture("Tex", _textureName);
 }
 
 void GameEngineTextureRenderer::SetTexture(std::shared_ptr<GameEngineTexture> _texture)
@@ -147,7 +147,7 @@ void GameEngineTextureRenderer::SetTexture(std::shared_ptr<GameEngineTexture> _t
 	}
 
 	currentTexture_ = _texture;
-	this->GetShaderResourceHelper().SetTexture("Tex", _texture);
+	this->GetFirstShaderResourceHelper().SetTexture("Tex", _texture);
 }
 
 void GameEngineTextureRenderer::SetFolderTextureToIndex(const std::string_view& _textureName, UINT _index)
@@ -447,8 +447,8 @@ void GameEngineTextureRenderer::SetTextureRendererSetting()
 	atlasDataInst_.frameData_.sizeY = 1.f;
 	atlasDataInst_.pivotPos_ = float4::Zero;
 
-	this->GetShaderResourceHelper().SetConstantBuffer_Link("AtlasData", atlasDataInst_);
-	this->GetShaderResourceHelper().SetConstantBuffer_Link("PixelData", pixelDataInst_);
+	this->GetFirstShaderResourceHelper().SetConstantBuffer_Link("AtlasData", atlasDataInst_);
+	this->GetFirstShaderResourceHelper().SetConstantBuffer_Link("PixelData", pixelDataInst_);
 }
 
 void GameEngineTextureRenderer::FrameDataReset()

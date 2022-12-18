@@ -36,11 +36,12 @@ public:
 
 
 public:
-	//inline GameEngineShaderResourceHelper& GetShaderResourceHelper()	
-	//	//셰이더리소스헬퍼 없는 렌더러란 있을 수 없으므로 레퍼런스 반환.
-	//{
-	//	return this->renderUnit_->GetShaderResourceHelper();
-	//}
+	inline GameEngineShaderResourceHelper& GetFirstShaderResourceHelper()	
+		//셰이더리소스헬퍼 없는 렌더러란 있을 수 없으므로 레퍼런스 반환.
+	{
+		//return this->renderUnit_->GetShaderResourceHelper();
+		return this->allRenderUnits_[RenderingPath::ForwardRendering][0]->GetShaderResourceHelper();
+	}
 
 	inline std::vector<std::shared_ptr<GameEngineRenderUnit>> GetForwardRenderUnitVector()
 	{
@@ -68,6 +69,7 @@ private:
 	//이 렌더러가 가진 모든 렌더유닛들.
 	std::map<RenderingPath, std::vector<std::shared_ptr<GameEngineRenderUnit>>> allRenderUnits_;
 	//렌더링패스 순서대로 정렬.
+	//맵과 벡터라고 만드시 많은 숫자를 저장한다는 보장은 없음.
 
 	//마테리얼이나 셰이더리소스헬퍼는 렌더유닛당 한개씩이 아니라 렌더러당 한개씩 가져도 되지 않을까.
 	//만약 이게 맞다면 렌더유닛이 아니라 렌더러가 마테리얼과 셰이더리소스헬퍼를 가지게 하자.

@@ -151,7 +151,7 @@ void GameEngineLevel::Render(float _deltaTime)
 	{
 		if (nullptr != cameras_[i])
 		{
-			GameEngineDevice::GetBackBuffer()->Merge(cameras_[i]->cameraRenderTarget_, 0);
+			GameEngineDevice::GetBackBuffer()->Merge(cameras_[i]->conclusionRenderTarget_, 0);
 			//다른 카메라들이 가진 렌더타겟의 렌더링 정보들을 백버퍼 렌더타겟으로 합친다.
 		}
 	}

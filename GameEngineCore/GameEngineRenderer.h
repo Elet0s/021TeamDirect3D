@@ -63,7 +63,7 @@ public:
     //);
 
     std::shared_ptr<GameEngineMesh> GetMesh();
-    //std::shared_ptr<GameEngineMaterial> GetMaterial();
+    std::shared_ptr<GameEngineMaterial> GetMaterial();
 
     //std::shared_ptr<GameEngineMaterial> GetCloneMaterial();
 
@@ -159,8 +159,8 @@ protected:
     virtual void Render(float _deltaTime) = 0;
     virtual void RenderDeferred(float _deltaTime) = 0;
 
-    void PushRendererToMainCamera();	//렌더러가 메인카메라에 등록하는 함수.
-    void PushRendererToUICamera();		//렌더러가 UI카메라에 등록하는 함수.
+    void PushRendererToMainCamera();	//렌더러가 자기 자신을 메인카메라에 등록하는 함수.
+    void PushRendererToUICamera();		//렌더러가 자기 자신을 UI카메라에 등록하는 함수.
 
 protected:
     std::weak_ptr<class GameEngineCamera> camera_;    //렌더러가 등록된 카메라.

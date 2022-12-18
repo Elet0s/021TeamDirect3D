@@ -246,11 +246,11 @@ std::shared_ptr<GameEngineMesh> GameEngineRenderUnit::GetMesh()
 	return this->mesh_;
 }
 
-//std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()
-//{
-//	return this->material_;
-//}
-//
+std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()
+{
+	return this->material_;
+}
+
 //std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetCloneMaterial()
 //{
 //	if (false == material_->IsOriginal())

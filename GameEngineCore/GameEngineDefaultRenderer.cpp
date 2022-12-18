@@ -6,7 +6,7 @@
 GameEngineDefaultRenderer::GameEngineDefaultRenderer()
 {
 	allRenderUnits_[RenderingPath::ForwardRendering].push_back(std::make_shared<GameEngineRenderUnit>());
-	//기본적으로 최소 한개의 렌더유닛을 가지게 한다.
+	//모든 디폴트 렌더러들은 기본적으로 최소 한개의 포워드 렌더유닛을 가지게 한다.
 }
 
 GameEngineDefaultRenderer::~GameEngineDefaultRenderer()
@@ -65,7 +65,7 @@ void GameEngineDefaultRenderer::SetMesh(const std::string_view& _meshName)
 
 void GameEngineDefaultRenderer::Start()
 {
-	GameEngineRenderer::Start();	//딱히 대단한 기능은 없지만 습관 형성을 위해서 부모 클래스의 함수를 한번 호출.
+	GameEngineRenderer::Start();	//딱히 대단한 기능은 없지만 혹시 몰라서 부모 클래스의 함수를 한번 호출.
 }
 
 void GameEngineDefaultRenderer::Update(float _deltaTime)

@@ -345,6 +345,18 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 				psInstEntryPoint += "_PSINST";
 				pixelShader->InstancingPixelShaderCompile(_path, psInstEntryPoint);
 			}
+
+			size_t psReturnTypeEntry = allHLSLCode.rfind("\n", psEntryIndex);
+			std::string psReturnType = allHLSLCode.substr(
+				psReturnTypeEntry + 1,
+				psEntryIndex - psReturnTypeEntry
+			);
+
+			if (std::string::npos != psReturnType.find("DeferredOutput"))
+			{
+				//ÇÈ¼¿¼ÎÀÌ´õ ¹İÈ¯ÇüÀÌ float4°¡ ¾Æ´Ï¶ó "DeferredOutput"¶ó¸é gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ¶ó´Â ¶æ.
+				pixelShader->isDeferredRendering_ = true;
+			}
 		}
 	}
 }

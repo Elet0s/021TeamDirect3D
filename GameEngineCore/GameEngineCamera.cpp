@@ -19,7 +19,12 @@ GameEngineCamera::GameEngineCamera()
 	nearZ_(0.1f),
 	farZ_(1000000.f),
 	fovAngleY_(60.f),
-	cameraRenderTarget_(nullptr)
+	conclusionRenderTarget_(nullptr),
+	forwardRenderTarget_(nullptr),
+	deferredRenderTarget_(nullptr),
+	geometryBufferRenderTarget_(nullptr),
+	lightDataRenderUnit_(std::make_shared<GameEngineRenderUnit>()),
+	mergerRenderUnit_(std::make_shared<GameEngineRenderUnit>())
 {
 	viewportDesc_.TopLeftX = 0;
 	viewportDesc_.TopLeftY = 0;
@@ -29,6 +34,13 @@ GameEngineCamera::GameEngineCamera()
 	viewportDesc_.MaxDepth = 1.f;	//<-1.f이 대입되어 MinDepth와 격차가 생겨야 깊이테스트를 제대로 할 수 있다.
 
 	viewportMatrix_.Viewport(size_.x, size_.y, 0, 0, 0, 1);
+
+	lightDataRenderUnit_->SetMesh("Fullrect");
+	lightDataRenderUnit_->SetMaterial("CalDeferredLight");
+	lightDataRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("LightingDatas", this->lightingDatasInst_);
+
+	mergerRenderUnit_->SetMesh("Fullrect");
+	mergerRenderUnit_->SetMaterial("CalDeferredMerger");
 }
 
 GameEngineCamera::~GameEngineCamera()
@@ -147,14 +159,87 @@ void GameEngineCamera::PushLighting(std::shared_ptr<GameEngineLighting> _newLigh
 
 void GameEngineCamera::Start()
 {
-	cameraRenderTarget_ = GameEngineRenderTarget::Create();
-	cameraRenderTarget_->CreateRenderTargetTexture(
+	conclusionRenderTarget_ = GameEngineRenderTarget::Create();
+	conclusionRenderTarget_->CreateRenderTargetTexture(
 		GameEngineWindow::GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero	//float4::Black
 	);
+	conclusionRenderTarget_->SetDepthTexture(GameEngineDevice::GetBackBuffer()->GetDepthTexture());
+	//최종 렌더타겟 생성 및 초기화. 깊이스텐실뷰는 백버퍼 렌더타겟의 것을 가져온다.
 
-	cameraRenderTarget_->SetDepthTexture(GameEngineDevice::GetBackBuffer()->GetDepthTexture());
+	forwardRenderTarget_ = GameEngineRenderTarget::Create();
+	forwardRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
+		float4::Zero
+	);
+	forwardRenderTarget_->SetDepthTexture(GameEngineDevice::GetBackBuffer()->GetDepthTexture());
+	//포워드렌더링용 렌더타겟 생성 및 초기화. 깊이스텐실뷰는 백버퍼 렌더타겟의 것을 가져온다.
+
+	deferredRenderTarget_ = GameEngineRenderTarget::Create();
+	deferredRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
+		float4::Zero
+	);
+	deferredRenderTarget_->SetDepthTexture(GameEngineDevice::GetBackBuffer()->GetDepthTexture());
+	//디퍼드렌더링용 렌더타겟 생성 및 초기화. 깊이스텐실뷰는 백버퍼 렌더타겟의 것을 가져온다.
+
+
+	geometryBufferRenderTarget_ = GameEngineRenderTarget::Create();
+	//지오메트리 버퍼 렌더타겟 생성.
+
+	geometryBufferRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
+		float4::Zero
+	);
+	//지오메트리 버퍼 렌더타겟에 각 픽셀마다의 색상값 정보를 저장할 텍스처 생성.
+
+	geometryBufferRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
+		float4::Zero
+	);
+	//지오메트리 버퍼 렌더타겟에 윈도우 내 오브젝트 표면의 뷰공간 좌표정보를 저장할 텍스처 생성.
+
+	geometryBufferRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
+		float4::Zero
+	);
+	//지오메트리 버퍼 렌더타겟에 윈도우 내 오브젝트들의 표면 법선벡터 정보를 저장할 텍스처 생성.
+
+	geometryBufferRenderTarget_->SetDepthTexture(GameEngineDevice::GetBackBuffer()->GetDepthTexture());
+	//지오메트리 버퍼 렌더타겟의 깊이스텐실뷰는 백버퍼 렌더타겟의 것을 가져온다.
+
+
+	lightDataBufferRenderTarget_ = GameEngineRenderTarget::Create();
+	//빛정보 저장 버퍼 렌더타겟 생성.
+
+	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
+		float4::Zero
+	);
+	//빛정보 저장 버퍼 렌더타겟에 난반사광(Diffuse Light) 정보를 저장할 텍스처 생성. 
+
+	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
+		float4::Zero
+	);
+	//빛정보 저장 버퍼 렌더타겟에 정반사광(Specular Light) 정보를 저장할 텍스처 생성. 
+
+	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
+		float4::Zero
+	);
+	//빛정보 저장 버퍼 렌더타겟에 환경광(Ambient Light) 정보를 저장할 텍스처 생성. 
+	//빛은 z값 관계없이 적용되므로 깊이스텐실뷰를 가져올 필요가 없다.
+
 
 	GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
 		1,					//설정할 뷰포트 개수.
@@ -176,11 +261,11 @@ bool YSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameE
 
 void GameEngineCamera::Render(float _deltaTime)
 {
-	cameraRenderTarget_->Clear();
-	//이 카메라의 렌더타겟뷰, 깊이스텐실뷰 초기화.
+	conclusionRenderTarget_->Clear();
+	//최종 렌더타겟의 렌더타겟뷰, 깊이스텐실뷰 초기화.
 
-	cameraRenderTarget_->Setting();
-	//초기화한 렌더타겟뷰를 렌더링 파이프라인에 연결.
+	conclusionRenderTarget_->Setting();
+	//초기화한 최종 렌더타겟의 렌더타겟뷰를 렌더링 파이프라인에 연결.
 
 	//GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
 	//	1,					//설정할 뷰포트 개수.

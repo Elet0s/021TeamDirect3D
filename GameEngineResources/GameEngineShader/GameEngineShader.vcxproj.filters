@@ -37,6 +37,12 @@
     <Filter Include="RenderTargetEffect">
       <UniqueIdentifier>{85bee332-ab17-40db-a76f-aeb4c633ac25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RenderTargetEffect\DeferredRendering">
+      <UniqueIdentifier>{0b790113-2d70-4343-b52f-4eff46955e86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\DeferredRendering">
+      <UniqueIdentifier>{4dad87dc-a7e2-460d-be20-f5eb4f05740a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TransformHeader.hlsli" />
@@ -45,6 +51,16 @@
     <None Include="LightHeader.hlsli" />
     <None Include="LightTest.hlsl">
       <Filter>Object</Filter>
+    </None>
+    <None Include="DeferredHeader.hlsli" />
+    <None Include="CalDeferredLight.hlsl">
+      <Filter>RenderTargetEffect\DeferredRendering</Filter>
+    </None>
+    <None Include="CalDeferredMerger.hlsl">
+      <Filter>RenderTargetEffect\DeferredRendering</Filter>
+    </None>
+    <None Include="DeferredColor.hlsl">
+      <Filter>Object\DeferredRendering</Filter>
     </None>
   </ItemGroup>
 </Project>

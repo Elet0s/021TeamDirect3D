@@ -62,5 +62,6 @@ private:
 
 	std::shared_ptr<GameEnginePixelShader> inst_PixelShader_;
 
+	bool isDeferredRendering_;	//true: gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ.
 };
 

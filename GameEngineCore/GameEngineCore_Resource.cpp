@@ -434,7 +434,6 @@ void EngineTextureLoad()
 
 void EngineMaterial()
 {
-
 	std::shared_ptr<GameEngineMaterial> newMaterial1
 		= GameEngineMaterial::Create("Color");
 	newMaterial1->SetVertexShader("Color.hlsl");
@@ -506,6 +505,7 @@ void EngineMaterial()
 	newMaterial8->SetBlend_OutputMerger("AlphaBlend");
 	newMaterial8->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
+
 	std::shared_ptr<GameEngineMaterial> newMaterial9
 		= GameEngineMaterial::Create("LightTest");
 	newMaterial9->SetVertexShader("LightTest.hlsl");
@@ -514,6 +514,32 @@ void EngineMaterial()
 	newMaterial9->SetBlend_OutputMerger("AlphaBlend");
 	newMaterial9->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
+
+	std::shared_ptr<GameEngineMaterial> newMaterial10
+		= GameEngineMaterial::Create("DeferredColor");
+	newMaterial10->SetVertexShader("DeferredColor.hlsl");
+	newMaterial10->SetPixelShader("DeferredColor.hlsl");
+	newMaterial10->SetRasterizer("EngineRasterizer");
+	newMaterial10->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial10->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+
+	std::shared_ptr<GameEngineMaterial> newMaterial11
+		= GameEngineMaterial::Create("CalDeferredLight");
+	newMaterial11->SetVertexShader("CalDeferredLight.hlsl");
+	newMaterial11->SetPixelShader("CalDeferredLight.hlsl");
+	newMaterial11->SetRasterizer("EngineRasterizer");
+	newMaterial11->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial11->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+
+	std::shared_ptr<GameEngineMaterial> newMaterial12
+		= GameEngineMaterial::Create("CalDeferredMerger");
+	newMaterial12->SetVertexShader("CalDeferredMerger.hlsl");
+	newMaterial12->SetPixelShader("CalDeferredMerger.hlsl");
+	newMaterial12->SetRasterizer("EngineRasterizer");
+	newMaterial12->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial12->SetDepthStencil_OutputMerger("EngineBaseDepth");
 }
 
 void EngineMesh()

@@ -100,7 +100,7 @@ public:
 
 	inline std::shared_ptr<class GameEngineRenderTarget> GetCameraRenderTarget()
 	{
-		return cameraRenderTarget_;
+		return conclusionRenderTarget_;
 	}
 
 	inline LightingDatas& GetLightingDatas()
@@ -210,10 +210,33 @@ private:
 	float4 prevMousePosition_;	//이전 마우스포인터 위치.
 	float4 mouseDirection_;		//마우스포인터가 이동한 방향.
 
-	std::shared_ptr<GameEngineRenderTarget> cameraRenderTarget_;	//이 카메라가 가진 렌더타겟.
+	//최종 결과물을 받는 렌더타겟.
+	std::shared_ptr<GameEngineRenderTarget> conclusionRenderTarget_;
 
-	std::set<std::shared_ptr<GameEngineLighting>> allLightings_;
+	//포워드렌더링용 렌더타겟.
+	std::shared_ptr<GameEngineRenderTarget> forwardRenderTarget_;
 
-	LightingDatas lightingDatasInst_;
+	//디퍼드렌더링용 렌더타겟.
+	std::shared_ptr<GameEngineRenderTarget> deferredRenderTarget_;
+
+	//지오메트리버퍼 렌더타겟(이하 g버퍼).
+	std::shared_ptr<GameEngineRenderTarget> geometryBufferRenderTarget_;
+
+	//빛정보 저장용 렌더타겟.
+	std::shared_ptr<GameEngineRenderTarget> lightDataBufferRenderTarget_;
+	//사실 굳이 만들필요 없는데 값을 직접 받아보고 싶어서 추가.
+
+
+	std::shared_ptr<class GameEngineRenderUnit> lightDataRenderUnit_;	//빛 정보 계산용 렌더유닛.
+
+	std::shared_ptr<class GameEngineRenderUnit> mergerRenderUnit_;	//최종 통합 렌더유닛.
+
+
+
+
+
+	std::set<std::shared_ptr<GameEngineLighting>> allLightings_;	//모든 조명 정보.
+
+	LightingDatas lightingDatasInst_;	//모든 
 };
 
