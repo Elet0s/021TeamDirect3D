@@ -43,8 +43,8 @@ public:
 	void Initialize(
 		size_t _totalFieldObjectCount,	//전체 필드오브젝트 개수.
 		size_t _objectInWindowCount,	//윈도우 안에 배치될 최대 필드오브젝트 개수.
-		const float4& _totalFieldSize,		//전체 필드 크기.
-		float _diffusionDegree = 1.f	//필드오브젝트 확산도.
+		const float4& _totalFieldSize		//전체 필드 크기.
+		//float _diffusionDegree = 1.f	//필드오브젝트 확산도.
 		//필드오브젝트 배치 함수.
 	);
 
@@ -56,8 +56,8 @@ private:
 	void InitializeFieldObjects(
 		size_t _totalFieldObjectCount,
 		size_t _objectInWindowCount,
-		const float4& _fieldSize,
-		float _diffusionDegree = 1.f
+		const float4& _fieldSize
+		//float _diffusionDegree = 1.f
 	);
 
 	//

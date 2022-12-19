@@ -34,13 +34,6 @@ GameEngineCamera::GameEngineCamera()
 	viewportDesc_.MaxDepth = 1.f;	//<-1.f이 대입되어 MinDepth와 격차가 생겨야 깊이테스트를 제대로 할 수 있다.
 
 	viewportMatrix_.Viewport(size_.x, size_.y, 0, 0, 0, 1);
-
-	lightDataRenderUnit_->SetMesh("Fullrect");
-	lightDataRenderUnit_->SetMaterial("CalDeferredLight");
-	lightDataRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("LightingDatas", this->lightingDatasInst_);
-
-	mergerRenderUnit_->SetMesh("Fullrect");
-	mergerRenderUnit_->SetMaterial("CalDeferredMerger");
 }
 
 GameEngineCamera::~GameEngineCamera()
@@ -195,7 +188,7 @@ void GameEngineCamera::Start()
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
-	//지오메트리 버퍼 렌더타겟에 각 픽셀마다의 색상값 정보를 저장할 텍스처 생성.
+	//지오메트리 버퍼 렌더타겟에 오브젝트 표면의 기본 색상값 정보를 저장할 텍스처 생성.
 
 	geometryBufferRenderTarget_->CreateRenderTargetTexture(
 		GameEngineWindow::GetScale(),
@@ -240,10 +233,14 @@ void GameEngineCamera::Start()
 	//빛정보 저장 버퍼 렌더타겟에 환경광(Ambient Light) 정보를 저장할 텍스처 생성. 
 	//빛은 z값 관계없이 적용되므로 깊이스텐실뷰를 가져올 필요가 없다.
 
-
+	lightDataRenderUnit_->SetMesh("Fullrect");
+	lightDataRenderUnit_->SetMaterial("CalDeferredLight");
+	lightDataRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("LightingDatas", this->lightingDatasInst_);
 	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("PositionTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(1));
 	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("NormalTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(2));
 
+	mergerRenderUnit_->SetMesh("Fullrect");
+	mergerRenderUnit_->SetMaterial("CalDeferredMerger");
 	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("ColorTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(0));
 	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("DiffuseLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(0));
 	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("SpecularLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(1));
@@ -453,10 +450,10 @@ void GameEngineCamera::Render(float _deltaTime)
 
 
 
-	lightDataBufferRenderTarget_->Clear(false);
+	lightDataBufferRenderTarget_->Clear();
 	lightDataBufferRenderTarget_->Effect(lightDataRenderUnit_);
 
-	deferredRenderTarget_->Clear(false);
+	deferredRenderTarget_->Clear();
 	deferredRenderTarget_->Effect(mergerRenderUnit_);
 
 

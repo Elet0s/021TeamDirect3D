@@ -193,6 +193,15 @@ void GameEngineRenderTarget::Setting()
 	);
 }
 
+void GameEngineRenderTarget::Reset()
+{
+	GameEngineDevice::GetContext()->OMSetRenderTargets(		//지정한 렌더타겟뷰를 렌더링 파이프라인에 연결하는 함수.
+		0,
+		nullptr,
+		nullptr
+	);
+}
+
 void GameEngineRenderTarget::Copy(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index /*= 0*/)
 {
 	this->Clear();

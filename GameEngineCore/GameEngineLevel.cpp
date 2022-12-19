@@ -142,7 +142,7 @@ void GameEngineLevel::Render(float _deltaTime)
 	{
 		if (nullptr != cameras_[i])
 		{
-			cameras_[i]->GetCameraRenderTarget()->EffectProcess();
+			cameras_[i]->GetConclusionRenderTarget()->EffectProcess();
 			//카메라별로 가지고 있는 렌더타겟에, 가지고 있는 블러 등의 후처리 효과가 있다면 적용한다.
 		}
 	}

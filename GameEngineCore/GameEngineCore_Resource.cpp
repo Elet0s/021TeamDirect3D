@@ -574,10 +574,10 @@ void EngineMesh()
 	//윈도우 전체 크기 사각형.
 	std::vector<GameEngineVertex> fullrectVertex;
 	fullrectVertex.reserve(4);
-	fullrectVertex.push_back({ float4(-1.f, 1.f), float4::Black, float4(0, 0), float4::Back });	//0번 점.
-	fullrectVertex.push_back({ float4(1.f, 1.f), float4::Black, float4(1, 0), float4::Back });		//1번 점.
-	fullrectVertex.push_back({ float4(1.f, -1.f), float4::Black, float4(1, 1), float4::Back });	//2번 점.
-	fullrectVertex.push_back({ float4(-1.f, -1.f), float4::Black, float4(0, 1), float4::Back });	//3번 점.
+	fullrectVertex.push_back({ float4(-1.f, 1.f), float4::Black, float4(0, 0) });	//0번 점.
+	fullrectVertex.push_back({ float4(1.f, 1.f), float4::Black, float4(1, 0)});		//1번 점.
+	fullrectVertex.push_back({ float4(1.f, -1.f), float4::Black, float4(1, 1) });	//2번 점.
+	fullrectVertex.push_back({ float4(-1.f, -1.f), float4::Black, float4(0, 1) });	//3번 점.
 	GameEngineVertexBuffer::Create("FullrectVertex", fullrectVertex);
 
 	std::vector<int> fullrectIndex;

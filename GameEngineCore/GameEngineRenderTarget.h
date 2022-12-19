@@ -90,6 +90,9 @@ public:
 	//이 렌더타겟뷰를 디바이스 컨텍스트에 세팅해 렌더링 파이프라인을 거친 결과물을 받을 수 있게 하는 함수.
 	void Setting();
 
+	//이 렌더타겟뷰를 디바이스 컨텍스트에서 빼는 함수.
+	void Reset();
+
 	//이 렌더타겟에 있던 기존 렌더링 정보를 무시하고, 다른 렌더타겟의 렌더링 정보를 가져와서 덮어씌우는 함수.
 	void Copy(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index = 0);
 

@@ -46,19 +46,17 @@ void FieldRenderingActor::End()
 void FieldRenderingActor::Initialize(
 	size_t _totalFieldObjectCount,
 	size_t _objectInWindowCount,
-	const float4& _totalFieldSize,
-	float _diffusionDegree /*= 1.f*/
+	const float4& _totalFieldSize
 )
 {
-	InitializeFieldObjects(_totalFieldObjectCount, _objectInWindowCount, _totalFieldSize, _diffusionDegree);
+	InitializeFieldObjects(_totalFieldObjectCount, _objectInWindowCount, _totalFieldSize);
 	InitializeFieldRenderer(_objectInWindowCount);
 }
 
 void FieldRenderingActor::InitializeFieldObjects(
 	size_t _totalFieldObjectCount,
 	size_t _objectInWindowCount,
-	const float4& _totalFieldSize,
-	float _diffusionDegree /*= 1.f*/
+	const float4& _totalFieldSize
 )
 {
 	fieldObjectAtlasDatas_.resize(8);
@@ -95,8 +93,8 @@ void FieldRenderingActor::InitializeFieldObjects(
 	{
 		//필드오브젝트 배치 구간.
 		float4 randomWorldPosition = float4(
-			GameEngineRandom::mainRandom_.RandomFloat(-64, 64) * 30,
-			GameEngineRandom::mainRandom_.RandomFloat(-36, 36) * 30,
+			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HX(), _totalFieldSize.HX()),
+			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HY(), _totalFieldSize.HY()),
 			-4.f
 		);
 		//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.

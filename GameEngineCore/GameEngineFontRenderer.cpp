@@ -77,5 +77,9 @@ void GameEngineFontRenderer::Render(float _deltaTime)
 		static_cast<int>(lr_) | static_cast<int>(tb_));
 	GameEngineMaterial::AllShaderReset();
 
-	camera_.lock()->GetCameraRenderTarget()->Merge(fontTarget_);
+	//camera_.lock()->GetConclusionRenderTarget()->Merge(fontTarget_);
+	//최종 렌더타겟에 그냥 그리면 폰트렌더러의 결과물과 그 뒤에 그리는 인스턴싱 렌더러의 결과값까지 같이 
+	// 다른 렌더타겟들의 색상값에 덮혀버린다.
+
+	camera_.lock()->GetForwardRenderTarget()->Merge(fontTarget_);
 }

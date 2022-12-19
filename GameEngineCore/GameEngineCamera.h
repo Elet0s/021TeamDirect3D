@@ -98,9 +98,16 @@ public:
 		return projectionMatrix_;
 	}
 
-	inline std::shared_ptr<class GameEngineRenderTarget> GetCameraRenderTarget()
+	//이 카메라의 최종 렌더타겟을 가져오는 함수.
+	inline std::shared_ptr<class GameEngineRenderTarget> GetConclusionRenderTarget()
 	{
 		return conclusionRenderTarget_;
+	}
+
+	//이 카메라의 포워드렌더링용 렌더타겟을 가져오는 함수.
+	inline std::shared_ptr<class GameEngineRenderTarget> GetForwardRenderTarget()
+	{
+		return forwardRenderTarget_;
 	}
 
 	inline LightingDatas& GetLightingDatas()
