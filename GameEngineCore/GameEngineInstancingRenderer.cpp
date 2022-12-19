@@ -303,5 +303,6 @@ void GameEngineInstancingRenderer::Render(
 	this->material_->SettingInstancing2();
 
 	this->mesh_->RenderInstancing(this->instancingUnitCount_);
+	shaderResourceHelper_.AllResourcesReset();
 }
 

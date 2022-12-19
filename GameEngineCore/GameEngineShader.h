@@ -183,7 +183,7 @@ class GameEngineTexture2DArraySetter: public ShaderResSetter
 
 
 	void Setting() const;
-	//void Reset() const;
+	void Reset() const;
 	void Bind();
 
 

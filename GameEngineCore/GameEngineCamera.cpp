@@ -17,7 +17,7 @@ GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
 	projectionMode_(CameraProjectionMode::Perspective),
 	nearZ_(0.1f),
-	farZ_(1000000.f),
+	farZ_(1000.f),
 	fovAngleY_(60.f),
 	conclusionRenderTarget_(nullptr),
 	forwardRenderTarget_(nullptr),
@@ -241,6 +241,14 @@ void GameEngineCamera::Start()
 	//빛은 z값 관계없이 적용되므로 깊이스텐실뷰를 가져올 필요가 없다.
 
 
+	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("PositionTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(1));
+	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("NormalTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(2));
+
+	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("ColorTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(0));
+	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("DiffuseLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(0));
+	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("SpecularLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(1));
+	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("AmbientLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(2));
+
 	GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
 		1,					//설정할 뷰포트 개수.
 		&viewportDesc_		//뷰포트 구조체 배열의 주소값.
@@ -261,16 +269,11 @@ bool YSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameE
 
 void GameEngineCamera::Render(float _deltaTime)
 {
-	conclusionRenderTarget_->Clear();
-	//최종 렌더타겟의 렌더타겟뷰, 깊이스텐실뷰 초기화.
-
-	conclusionRenderTarget_->Setting();
-	//초기화한 최종 렌더타겟의 렌더타겟뷰를 렌더링 파이프라인에 연결.
-
 	//GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
 	//	1,					//설정할 뷰포트 개수.
 	//	&viewportDesc_		//뷰포트 구조체 배열의 주소값.
 	//);
+	//윈도우 크기를 런타임에 바꿀 일이 생기기 전까지는 Start()함수에서 한번만 한다.
 
 	//오브젝트들을 재배치할 뷰행렬을 구한다.
 	viewMatrix_.LookToLH(
@@ -323,6 +326,12 @@ void GameEngineCamera::Render(float _deltaTime)
 		lightingDatasInst_.lightings_[lightingIndex++] = singleLighting->GetLightingData();
 	}
 
+
+
+	forwardRenderTarget_->Clear();
+	forwardRenderTarget_->Setting();
+	//포워드 렌더타겟 세팅 및 초기화.
+
 	for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
 	{
 		float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
@@ -374,6 +383,95 @@ void GameEngineCamera::Render(float _deltaTime)
 	{
 		iter->second->Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 	}
+
+
+
+
+
+	geometryBufferRenderTarget_->Clear(false);
+	//gBuffer 렌더타겟의 텍스처들만 초기화한다. 깊이스텐실 버퍼는 초기화하지 않는다.
+	//깊이스텐실버퍼까지 초기화하면 오브젝트들의 z값 정보가 전부 날아간다.
+
+	geometryBufferRenderTarget_->Setting();
+	//gBuffer 렌더타겟을 DC에 연결.
+
+
+	for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
+	{
+		float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
+
+		//std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
+		//sortingRendererList.sort(ZSort);
+
+		for (std::shared_ptr<GameEngineRenderer> const renderer : rendererGroup.second)
+			//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
+			//하지만 renderer가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
+		{
+			if (false == renderer->IsUpdate())
+			{
+				continue;
+			}
+
+			//renderer->renderOptionInst_.deltaTime_ = _deltaTime;
+			//renderer->renderOptionInst_.sumDeltaTime_ += _deltaTime;
+			//
+			//renderer->GetTransform().SetViewMatrix(viewMatrix_);
+			//renderer->GetTransform().SetProjectionMatrix(projectionMatrix_);
+			////카메라에 저장된 뷰행렬과 투영행렬을 렌더러의 트랜스폼에 저장한다.
+			//
+			//renderer->GetTransform().CalculateWorldViewProjection();
+			////크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
+			//
+			//if (false == float4x4::IsInViewFrustum(
+			//	renderer->GetTransformData().worldViewProjectionMatrix_,
+			//	float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
+			//	)
+			//{
+			//	//뷰프러스텀 안에 4개 정점들 중 한개라도 들어오는 것들만 그린다.
+			//	continue;
+			//}
+			//행렬 변환은 이미 위에서 했으므로 또다시 하지 않는다.
+
+			renderer->DeferredRender(scaleTime);
+			//geometryBufferRenderTarget_의 세 텍스처에 오브젝트의 원래 색상, 오브젝트 표면 모든 점들의 뷰공간 위치, 
+			// 오브젝트 표면 모든 점들의 뷰공간 법선벡터를 렌더링 형식으로 저장한다. 
+		}
+	}
+
+	//for (std::unordered_map<std::string, GameEngineInstancing>::iterator iter = instancingMap_.begin();
+	//	iter != instancingMap_.end(); ++iter)
+	//{
+	//	iter->second.RenderInstancing(_deltaTime);
+	//}
+
+	//for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = instancingRenderers_.begin();
+	//	iter != instancingRenderers_.end(); ++iter)
+	//{
+	//	iter->second->Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+	//}
+	//인스턴싱렌더러에 DeferredRender()함수 추가한 후에 복원할 것.
+
+
+
+	lightDataBufferRenderTarget_->Clear(false);
+	lightDataBufferRenderTarget_->Effect(lightDataRenderUnit_);
+
+	deferredRenderTarget_->Clear(false);
+	deferredRenderTarget_->Effect(mergerRenderUnit_);
+
+
+
+	conclusionRenderTarget_->Clear();
+	//최종 렌더타겟의 렌더타겟뷰, 깊이스텐실뷰 초기화.
+
+	conclusionRenderTarget_->Merge(forwardRenderTarget_);
+	//포워드 렌더타겟에 저장된 색상값들을 최종 렌더타겟뷰로 복사한다.
+
+	conclusionRenderTarget_->Merge(deferredRenderTarget_);
+	//디퍼드 렌더타겟에 저장된 색상값들을 최종 렌더타겟뷰로 복사한다.
+
+
+	//이렇게 합쳐진 색상값 정보들은 게임엔진레벨의 Render()함수에서 백버퍼 렌더타겟에 다시한번 합쳐진다. 
 }
 
 void GameEngineCamera::PushRenderer(std::shared_ptr<GameEngineRenderer> _renderer)

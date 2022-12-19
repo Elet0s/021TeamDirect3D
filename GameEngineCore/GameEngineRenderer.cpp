@@ -262,12 +262,12 @@ std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()
 //	return material_;
 //}
 
-std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::CloneMaterial(std::shared_ptr<GameEngineMaterial> _original)
-{
-	std::shared_ptr<GameEngineMaterial> clone = GameEngineMaterial::Create();
-	clone->Copy(_original);
-	return clone;
-}
+//std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::CloneMaterial(std::shared_ptr<GameEngineMaterial> _original)
+//{
+//	std::shared_ptr<GameEngineMaterial> clone = GameEngineMaterial::Create();
+//	clone->Copy(_original);
+//	return clone;
+//}
 
 void GameEngineRenderUnit::SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer)
 {

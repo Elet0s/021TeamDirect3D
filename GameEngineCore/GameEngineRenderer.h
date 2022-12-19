@@ -67,7 +67,7 @@ public:
 
     //std::shared_ptr<GameEngineMaterial> GetCloneMaterial();
 
-    std::shared_ptr<GameEngineMaterial> CloneMaterial(std::shared_ptr<GameEngineMaterial> _original);
+    //std::shared_ptr<GameEngineMaterial> CloneMaterial(std::shared_ptr<GameEngineMaterial> _original);
 
     //렌더유닛에 부모 렌더러를 지정하고 EngineShaderResourceSetting() 함수를 호출해서 엔진 기본 상수버퍼를 등록하는 함수.
     void SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer);
@@ -157,7 +157,7 @@ public:
 protected:
     virtual void Start();
     virtual void Render(float _deltaTime) = 0;
-    virtual void RenderDeferred(float _deltaTime) = 0;
+    virtual void DeferredRender(float _deltaTime) = 0;
 
     void PushRendererToMainCamera();	//렌더러가 자기 자신을 메인카메라에 등록하는 함수.
     void PushRendererToUICamera();		//렌더러가 자기 자신을 UI카메라에 등록하는 함수.

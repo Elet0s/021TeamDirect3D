@@ -26,7 +26,7 @@ private:
 
 public:	
 	virtual void Render(float _deltaTime) override;
-	virtual void RenderDeferred(float _deltaTime) override;
+	virtual void DeferredRender(float _deltaTime) override;
 
 	//렌더러에 필요한 마테리얼을 등록하고 이 렌더러를 메인 카메라에 등록하는 함수.
 	void SetMaterial(const std::string_view& _materialName);

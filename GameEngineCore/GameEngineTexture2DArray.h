@@ -90,6 +90,9 @@ private:
 	void VSSetting(int _bindPoint);
 	void PSSetting(int _bindPoint);
 
+	void VSReset(int _bindPoint);
+	void PSReset(int _bindPoint);
+
 private:
 	std::map<std::string, int> nameIndexPairs_;	//텍스처 각각의 이름과, 그 텍스처의 인덱스 모음.
 

@@ -5,10 +5,11 @@
 
 GameEngineRenderTarget::GameEngineRenderTarget()
 	: depthTexture_(nullptr),
-	depthStencilView_(nullptr)
+	depthStencilView_(nullptr),
+	mergeUnit_(std::make_shared<GameEngineRenderUnit>())
 {
-	mergeUnit_.SetMesh("Fullrect");
-	mergeUnit_.SetMaterial("TargetMerge");
+	mergeUnit_->SetMesh("Fullrect");
+	mergeUnit_->SetMaterial("TargetMerge");
 }
 
 GameEngineRenderTarget::~GameEngineRenderTarget()
@@ -195,20 +196,20 @@ void GameEngineRenderTarget::Setting()
 void GameEngineRenderTarget::Copy(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index /*= 0*/)
 {
 	this->Clear();
-	mergeUnit_.GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
+	mergeUnit_->GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
 	Effect(mergeUnit_);
 }
 
 void GameEngineRenderTarget::Merge(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index /*= 0*/)
 {
-	mergeUnit_.GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
+	mergeUnit_->GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
 	Effect(mergeUnit_);
 }
 
-void GameEngineRenderTarget::Effect(GameEngineRenderUnit& _renderUnit)
+void GameEngineRenderTarget::Effect(std::shared_ptr<GameEngineRenderUnit> _renderUnit)
 {
 	this->Setting();
-	_renderUnit.Render(GameEngineTime::GetDeltaTime());
+	_renderUnit->Render(GameEngineTime::GetDeltaTime());
 }
 
 void GameEngineRenderTarget::EffectProcess()

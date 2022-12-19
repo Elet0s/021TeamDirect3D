@@ -224,6 +224,11 @@ void GameEngineTexture2DArraySetter::Setting() const
 	settingFunction_();
 }
 
+void GameEngineTexture2DArraySetter::Reset() const
+{
+	resetFunction_();
+}
+
 void GameEngineTexture2DArraySetter::Bind()
 {
 	if (nullptr == this->texture2DArray_)
@@ -241,6 +246,13 @@ void GameEngineTexture2DArraySetter::Bind()
 			this->texture2DArray_,
 			this->bindPoint_
 		);
+
+		this->resetFunction_ = std::bind(
+			&GameEngineTexture2DArray::VSReset,
+			this->texture2DArray_,
+			this->bindPoint_
+		);
+
 		break;
 	}
 
@@ -248,6 +260,12 @@ void GameEngineTexture2DArraySetter::Bind()
 	{
 		this->settingFunction_ = std::bind(
 			&GameEngineTexture2DArray::PSSetting,
+			this->texture2DArray_,
+			this->bindPoint_
+		);
+
+		this->resetFunction_ = std::bind(
+			&GameEngineTexture2DArray::PSReset,
 			this->texture2DArray_,
 			this->bindPoint_
 		);

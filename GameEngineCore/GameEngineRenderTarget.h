@@ -97,7 +97,7 @@ public:
 	void Merge(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index = 0);
 
 	//이 렌더타겟에, 주어진 렌더유닛이 가진 렌더링 정보를 덮어 씌우는 함수. 
-	void Effect(GameEngineRenderUnit& _renderUnit);
+	void Effect(std::shared_ptr<GameEngineRenderUnit> _renderUnit);
 
 	//이 렌더타겟이 가진 모든 후처리효과를 렌더타겟의 기존 렌더링정보에 적용시키는 함수.
 	void EffectProcess();
@@ -136,10 +136,9 @@ private:
 
 	ID3D11DepthStencilView* depthStencilView_;	//위 텍스처로 만든 깊이스텐실뷰.
 
-	GameEngineRenderUnit mergeUnit_;	//Copy(), Merge()등의 함수 실행에 필요한 렌더유닛.
+	std::shared_ptr<GameEngineRenderUnit> mergeUnit_;	//Copy(), Merge()등의 함수 실행에 필요한 렌더유닛.
 
 	std::list<std::shared_ptr<GameEnginePostEffect>> allEffects_;	//이 렌더타겟이 가진 모든 후처리효과들.
-	//여기에 저장되는 
 
 };
 

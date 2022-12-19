@@ -435,4 +435,10 @@ void GameEngineShaderResourceHelper::AllResourcesReset()
 	{
 		textureSetterPair.second.Reset();
 	}
+
+	for (const std::pair<std::string, GameEngineTexture2DArraySetter>& texture2DArraySetterPair
+		: texture2DArraySetterMap_)
+	{
+		texture2DArraySetterPair.second.Reset();
+	}
 }

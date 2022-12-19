@@ -25,7 +25,7 @@ public:
 
 private:
 	std::shared_ptr<GameEngineRenderTarget> copiedRenderTarget_;
-	GameEngineRenderUnit effectUnit_;
+	std::shared_ptr<GameEngineRenderUnit> effectUnit_;
 
 };
 

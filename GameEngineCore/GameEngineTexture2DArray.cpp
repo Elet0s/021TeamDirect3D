@@ -182,3 +182,23 @@ void GameEngineTexture2DArray::PSSetting(int _bindPoint)
 		&shaderResourceView_
 	);
 }
+
+void GameEngineTexture2DArray::VSReset(int _bindPoint)
+{
+	ID3D11ShaderResourceView* emptyResourceView = nullptr;
+	GameEngineDevice::GetContext()->VSSetShaderResources(
+		_bindPoint,
+		1,
+		&emptyResourceView
+	);
+}
+
+void GameEngineTexture2DArray::PSReset(int _bindPoint)
+{
+	ID3D11ShaderResourceView* emptyResourceView = nullptr;
+	GameEngineDevice::GetContext()->PSSetShaderResources(
+		_bindPoint,
+		1,
+		&emptyResourceView
+	);
+}

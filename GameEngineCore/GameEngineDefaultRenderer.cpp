@@ -21,7 +21,7 @@ void GameEngineDefaultRenderer::Render(float _deltaTime)
 	}
 }
 
-void GameEngineDefaultRenderer::RenderDeferred(float _deltaTime)
+void GameEngineDefaultRenderer::DeferredRender(float _deltaTime)
 {
 	for (std::shared_ptr<GameEngineRenderUnit>& singleRenderUnit : allRenderUnits_[RenderingPath::DeferredRendering])
 	{
