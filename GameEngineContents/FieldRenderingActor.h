@@ -78,10 +78,12 @@ private:
 
 	const int tileCount_;	//사용된 타일텍스처 전체 개수.
 
+	float4 totalFieldSize_;
+
 	std::shared_ptr<GameEngineInstancingRenderer> fieldRenderer_;	//인스턴싱 렌더러.
 
-	float4 curPos_;
-	float4 moveDir_;
+	//float4 curPos_;
+	//float4 moveDir_;
 
 
 	std::vector<AtlasData> fieldObjectAtlasDatas_;	//필드 오브젝트별 아틀라스데이터 모음.
