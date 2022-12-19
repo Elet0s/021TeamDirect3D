@@ -111,8 +111,8 @@ void TestLevel::Start()
 
 	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
 	fieldRenderingActor_->Initialize(
-		750,
-		200,
+		550,
+		50,
 		float4(6000, 6000)
 	);
 	//fieldRenderingActor_->Initialize(

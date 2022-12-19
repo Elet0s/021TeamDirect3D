@@ -146,8 +146,8 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 			fieldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.f);
 			//NewGrassTexture.png 전체를 다 그린다.
 
-			fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(1);
-			//NewGrassTexture.png는 1번으로 삽입되어 있다.
+			fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(2);
+			//NewGrassTexture.png는 2번으로 삽입되어 있다.
 
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(tileSize_, tileSize_, 1.f);
 			//타일을 그리는 인스턴싱유닛들만 크기 설정을 해준다.

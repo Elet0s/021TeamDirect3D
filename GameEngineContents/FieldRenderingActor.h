@@ -8,7 +8,7 @@ class FieldObjectData
 	const float4 worldScale_;	//오브젝트 월드좌표.
 	const int atlasDataIndex_;	//오브젝트의 아틀라스데이터 번호.
 
-	FieldObjectData(float4& _worldPosition,const float4& _worldScale, int _atlasDataIndex)
+	FieldObjectData(const float4& _worldPosition, const float4& _worldScale, int _atlasDataIndex)
 		: worldPosition_(_worldPosition),
 		worldScale_(_worldScale),
 		atlasDataIndex_(_atlasDataIndex)
