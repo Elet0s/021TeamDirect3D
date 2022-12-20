@@ -5,12 +5,11 @@
 
 Shuriken::Shuriken()
 	: referenceVector_(),
-	shuriKenRenderer_(),
-	shuriKenCol_(),
 	shuriKenWeaponInfo_(),
 	minHpPair_(),
 	monsterList_(),
-	resultCos_()
+	resultCos_(),
+	firstSort(false)
 {
 
 }
@@ -32,23 +31,22 @@ void Shuriken::Effect()
 void Shuriken::Start()
 {
 	valueSoulCard_ = SoulCard::Shuriken;
-	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
-	shuriKenRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	shuriKenRenderer_->GetTransform().SetWorldScale(50, 80, 0);
-	shuriKenRenderer_->SetTexture("Arrow.png");
 
-	shuriKenCol_ = CreateComponent<GameEngineCollision>();
-	shuriKenCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-	shuriKenCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
-	shuriKenCol_->ChangeOrder(ObjectOrder::Projectile);
+	//shuriKenRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	//shuriKenRenderer_->GetTransform().SetWorldScale(50, 80, 0);
+	//shuriKenRenderer_->SetTexture("Arrow.png");
+	//
+	//shuriKenCol_ = CreateComponent<GameEngineCollision>();
+	//shuriKenCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
+	//shuriKenCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+	//shuriKenCol_->ChangeOrder(ObjectOrder::Projectile);
+	//
+	//shuriKenRangeCol_ = CreateComponent<GameEngineCollision>();
+	//shuriKenRangeCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::White);
+	//shuriKenRangeCol_->GetTransform().SetLocalScale({ 350.0f, 350.0f, 1.0f });
+	//shuriKenRangeCol_->ChangeOrder(ObjectOrder::Range);
 
-	shuriKenRangeCol_ = CreateComponent<GameEngineCollision>();
-	shuriKenRangeCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::White);
-	shuriKenRangeCol_->GetTransform().SetLocalScale({ 350.0f, 350.0f, 1.0f });
-	shuriKenRangeCol_->ChangeOrder(ObjectOrder::Range);
 
-	projectileGroupList_.reserve(11);
-	
 	Off();
 }
 
@@ -56,9 +54,11 @@ void Shuriken::Update(float _deltaTime)
 {
 	StateSet();
 	SerchTarget();
+	ProjectileSort();
 	RenderRotate();
 	RangeCheak(_deltaTime);
-	shuriKenCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+
+
 }
 void Shuriken::End()
 {
@@ -111,66 +111,120 @@ void  Shuriken::StateSet()
 void Shuriken::SerchTarget()
 {
 	monsterList_ = Monster::GetMonsterList();
+	shuriKenWeaponInfo_.weaponProjectileNum_;//이갯수만큼 뽑아야함
 	if (Shooting == false)
 	{
-		for (size_t i = 0; i < monsterList_.size(); i++)
+		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)//한번에 던지는 투사체 갯수만큼 반복할것임
 		{
-			if (monsterList_[i]->IsSummoned() == true)
+			for (size_t i = 0; i < monsterList_.size(); i++)
 			{
-				if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && i == 0)//hp0이상, 첫번째 순번일경우
+				if (monsterList_[i]->IsSummoned() == true)
 				{
-					minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
-				}
-				else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮으면
-				{
-					minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && i == 0)//hp0이상, 첫번째 순번일경우
+					{
+						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+					}
+					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮으면
+					{
+						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+					}
+					monsterList_.erase(monsterList_.begin() + minHpPair_.first); //몬스터 리스트에서 제거
 				}
 			}
+			targetInst_.push_back(minHpPair_);//타겟리스트에 추가
 		}
 	}
 }
 
 void Shuriken::ProjectileSort()
 {
-	for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
+	if (firstSort == false) //처음이면 만들고
 	{
+		projectileGroupList_.reserve(15);
+		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
+		{
 
-		std::shared_ptr<ProjectileGroup> myProjecttileGroup_;
-		projectileGroupList_.push_back(myProjecttileGroup_);
+			projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
+			
+			projectileGroup_.first->GetTransform().SetWorldScale(50, 80, 0);
+			projectileGroup_.first->SetTexture("Shuriken.png");
+
+			projectileGroup_.second = CreateComponent<GameEngineCollision>();
+			projectileGroup_.second->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
+			projectileGroup_.second->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+			projectileGroup_.second->ChangeOrder(ObjectOrder::Projectile);
+
+
+			projectileGroup_.first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+			projectileGroup_.second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+			
+			projectileGroupList_.push_back(projectileGroup_);
+
+		}
+		firstSort = true;
 	}
+	else //아니면 있는걸로 돌려
+	{
+		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
+		{
 
+			projectileGroupList_[i].first->On();
+			projectileGroupList_[i].second->On();
+		}
+	}
 }
 
 
 
 void Shuriken::RenderRotate()
 {
+	monsterList_ = Monster::GetMonsterList();
 	//체력이 다 같을 경우 제일 가까운 녀석을 추적하는 기능
 	if (Shooting == false)
 	{
-
-
-		if (minHpPair_.second > 0)
+		for (size_t i = 0; i < projectileGroupList_.size(); i++)
 		{
-			float Mx = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().x;
-			float My = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().y;
-			float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-			float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
-			referenceVector_.x = (Mx - Px); //방향 구하는 공식
-			referenceVector_.y = (My - Py);
-			referenceVector_.w = 0;
-			shuriKenRenderer_->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
-			Shooting = true;
-			//float A = acos(Cos);
+			for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
+			{
+				float Mx = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().x;
+				float My = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().y;
+				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				referenceVector_.x = (Mx - Px); //방향 구하는 공식
+				referenceVector_.y = (My - Py);
+				referenceVector_.w = 0;
+				projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
+				Shooting = true;
+			}
+
+
+
+			if (minHpPair_.second > 0)
+			{
+
+				float Mx = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().x;
+				float My = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().y;
+				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				referenceVector_.x = (Mx - Px); //방향 구하는 공식
+				referenceVector_.y = (My - Py);
+				referenceVector_.w = 0;
+				projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
+				Shooting = true;
+				//float A = acos(Cos);
+			}
 		}
 	}
 }
 
 void Shuriken::RangeCheak(float _deltaTime)
 {
+	for (size_t i = 0; i < projectileGroupList_.size(); i++)
+	{
+		projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
+		projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
+	}
 
-	shuriKenRenderer_->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
-	shuriKenCol_->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
 }
 
 CollisionReturn Shuriken::RangeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
@@ -193,4 +247,12 @@ CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngin
 	_Other->GetActor()->Off();
 	//off한 몬스터 부활 시켜주는 자료구조에 넣어주는 부분 필요함 자료구조는 계속 업데이트 돌면서 죽은 애들 위치갱신해줌
 	return CollisionReturn::Stop;
+}
+
+void Shuriken::ColCheak()
+{
+	for (size_t i = 0; i < projectileGroupList_.size(); i++)
+	{
+		projectileGroupList_[i].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+	}
 }

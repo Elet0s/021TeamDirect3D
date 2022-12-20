@@ -75,9 +75,13 @@ void SkillManager::SkillLevelCheak()
 {
 	if (skillList_[15]->nowLevel_ > 0 && skillList_[15]->IsUpdate() == false) //스킬 레벨 체크이 0보다크고 업데이트가 돌지 않고있으면
 	{
-		//플레이어 위치로 이동시키고 on
-		std::dynamic_pointer_cast<Shuriken>(skillList_[15])->shuriKenRenderer_->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
-		std::dynamic_pointer_cast<Shuriken>(skillList_[15])->shuriKenCol_->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
 		skillList_[15]->On();
+		//플레이어 위치로 이동시키고 on
+		for (size_t i = 0; i < std::dynamic_pointer_cast<Shuriken>(skillList_[15])->projectileGroupList_.size(); i++)
+		{
+			std::dynamic_pointer_cast<Shuriken>(skillList_[15])->projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
+			std::dynamic_pointer_cast<Shuriken>(skillList_[15])->projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -100);
+		}
+
 	}
 }

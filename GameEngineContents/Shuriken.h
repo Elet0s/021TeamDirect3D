@@ -25,10 +25,8 @@ public:
 	CollisionReturn RangeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);// 범위내 몬스터 탐색(사정거리 비례)
 
 public:
-
-	std::shared_ptr<GameEngineTextureRenderer>  shuriKenRenderer_;
-	std::shared_ptr<GameEngineCollision>  shuriKenCol_;
-	std::shared_ptr<GameEngineCollision>  shuriKenRangeCol_;
+	std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>projectileGroup_;
+	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList_;//발사체 모음
 
 protected:
 	void Start() override;
@@ -40,6 +38,7 @@ protected:
 	void RenderRotate( );// 발사체 회전
 	void RangeCheak(float _deltaTime);//발사체 사출
 	void StateSet() override;//레벨에 따른 스탯 적용
+	void ColCheak();
 
 private:
 
@@ -53,7 +52,8 @@ private:
 	std::vector<std::pair<size_t, float>> targetInst_;//타겟 모음
 	
 
-	std::vector<std::shared_ptr<ProjectileGroup>> projectileGroupList_;
+	bool firstSort;
+
 
 };
 
