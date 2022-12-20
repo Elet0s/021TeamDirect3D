@@ -1,7 +1,7 @@
 #include"PreCompile.h"
 #include"WorldMapLevel.h"
 #include"WorldMapActor.h"
-#include "MyWorldMapRenderer.h"
+#include"WorldMapRanderingActor.h"
 
 WorldMapLevel::WorldMapLevel()
 {
@@ -14,9 +14,19 @@ WorldMapLevel::~WorldMapLevel()
 void WorldMapLevel::Start()
 {
 
-	std::shared_ptr<WorldMapActor> WorldMap = CreateActor<WorldMapActor>();
-
-	WorldMap->worldmaprenderer_->CreateTileMap(50, 20, {128,128}, "grassTexture.png");
+	worldMapRanderingActor_ = CreateActor<WorldMapRanderingActor>();
+	worldMapRanderingActor_->Initialize(
+		1000,
+		50
+	);
+	//fieldRenderingActor_->Initialize(
+	//	750,
+	//	700,
+	//	float4(6000, 6000)
+	//);
+	worldMapRanderingActor_->GetTransform().SetLocalScale(float4::White);
+	worldMapRanderingActor_->GetTransform().SetWorldScale(float4::White);
+	worldMapRanderingActor_->GetTransform().SetWorldPosition(float4::Zero);
 	
 	GetMainCameraActorTransform().SetWorldPosition(float4(640.f, -2560.f * sinf(10.f * GameEngineMath::DegreeToRadian) + 70.f, -2560.f * cosf(10.f * GameEngineMath::DegreeToRadian)));
 	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);

@@ -58,7 +58,7 @@ struct AtlasData
 
 	AtlasData(float _posX, float _posY, float _sizeX, float _sizeY, float _pivotPosX, float _pivotPosY)
 		: frameData_(_posX, _posY, _sizeX, _sizeY),
-		pivotPos_(_pivotPosX, _pivotPosY)
+		pivotPos_(_pivotPosX, _pivotPosY, 0.f, 0.f)
 	{
 	}
 
@@ -80,7 +80,7 @@ struct AtlasData
 		this->frameData_.posY = _posY;
 		this->frameData_.sizeX = _sizeX;
 		this->frameData_.sizeY = _sizeY;
-		this->pivotPos_ = float4(_pivotPosX, _pivotPosY);
+		this->pivotPos_ = float4(_pivotPosX, _pivotPosY, 0.f, 0.f);
 	}
 
 	const AtlasData& GetData() const
