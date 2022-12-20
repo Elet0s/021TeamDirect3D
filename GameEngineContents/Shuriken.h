@@ -50,7 +50,7 @@ private:
 	std::vector<std::shared_ptr<Monster>> monsterList_; //전체 몬스터 리스트
 	std::pair<size_t, float> minHpPair_;//타겟 대상
 	std::vector<std::pair<size_t, float>> targetInst_;//타겟 모음
-	
+	std::vector<float4> referenceVectorList_;
 
 	bool firstSort;
 

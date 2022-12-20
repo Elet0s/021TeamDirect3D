@@ -2,7 +2,6 @@
 #include"Shuriken.h"
 #include"Player.h"
 #include"Monster.h"
-
 Shuriken::Shuriken()
 	: referenceVector_(),
 	shuriKenWeaponInfo_(),
@@ -53,10 +52,11 @@ void Shuriken::Start()
 void Shuriken::Update(float _deltaTime)
 {
 	StateSet();
-	SerchTarget();
-	ProjectileSort();
-	RenderRotate();
-	RangeCheak(_deltaTime);
+	
+	SerchTarget();//찾고
+	ProjectileSort();//발사체 생성,위치 on,off조정
+	RenderRotate();//찾은 타겟위치에 대해 발사체 회전
+	RangeCheak(_deltaTime);// 타겟위치로 이동
 
 
 }
@@ -114,26 +114,34 @@ void Shuriken::SerchTarget()
 	shuriKenWeaponInfo_.weaponProjectileNum_;//이갯수만큼 뽑아야함
 	if (Shooting == false)
 	{
-		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)//한번에 던지는 투사체 갯수만큼 반복할것임
+		for (size_t n = 0; n < shuriKenWeaponInfo_.weaponProjectileNum_; n++)//한번에 던지는 투사체 갯수만큼 반복할것임
 		{
 			for (size_t i = 0; i < monsterList_.size(); i++)
 			{
 				if (monsterList_[i]->IsSummoned() == true)
 				{
+
 					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && i == 0)//hp0이상, 첫번째 순번일경우
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 					}
-					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮으면
+					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮다면
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 					}
-					monsterList_.erase(monsterList_.begin() + minHpPair_.first); //몬스터 리스트에서 제거
+					if (i == monsterList_.size() - 1)
+					{
+						targetInst_.push_back(minHpPair_);//타겟리스트에 추가
+						//monsterList_.erase(monsterList_.begin() + minHpPair_.first); //몬스터 리스트에서 제거
+					}
+
 				}
+			
 			}
-			targetInst_.push_back(minHpPair_);//타겟리스트에 추가
+
 		}
 	}
+
 }
 
 void Shuriken::ProjectileSort()
@@ -182,10 +190,9 @@ void Shuriken::RenderRotate()
 	//체력이 다 같을 경우 제일 가까운 녀석을 추적하는 기능
 	if (Shooting == false)
 	{
-		for (size_t i = 0; i < projectileGroupList_.size(); i++)
+		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
 		{
-			for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
-			{
+
 				float Mx = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().y;
 				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
@@ -193,26 +200,9 @@ void Shuriken::RenderRotate()
 				referenceVector_.x = (Mx - Px); //방향 구하는 공식
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
+				referenceVectorList_.push_back(referenceVector_);
 				projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
 				Shooting = true;
-			}
-
-
-
-			if (minHpPair_.second > 0)
-			{
-
-				float Mx = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().x;
-				float My = monsterList_[minHpPair_.first]->GetTransform().GetWorldPosition().y;
-				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
-				referenceVector_.x = (Mx - Px); //방향 구하는 공식
-				referenceVector_.y = (My - Py);
-				referenceVector_.w = 0;
-				projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
-				Shooting = true;
-				//float A = acos(Cos);
-			}
 		}
 	}
 }
@@ -221,8 +211,8 @@ void Shuriken::RangeCheak(float _deltaTime)
 {
 	for (size_t i = 0; i < projectileGroupList_.size(); i++)
 	{
-		projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
-		projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVector_.Normalize3D() * _deltaTime * 100.f);
+		projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * 100.f);
+		projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * 100.f);
 	}
 
 }
