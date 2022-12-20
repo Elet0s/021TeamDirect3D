@@ -65,6 +65,7 @@ StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
 Output MultiTexturesInstancing_VSINST(Input _input)
 {
     Output result = (Output) 0;
+    
     result.pos_ = mul(_input.pos_, Inst_TransformData[_input.instancingIndex_].worldViewProjectionMatrix_);
     
     result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instancingIndex_].textureFrameSize_.x)

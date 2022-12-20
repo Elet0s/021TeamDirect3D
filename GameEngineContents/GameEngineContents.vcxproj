@@ -482,6 +482,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="WorldMapRanderingActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agility.cpp">
@@ -817,6 +821,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="WorldMapLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="WorldMapRanderingActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>
