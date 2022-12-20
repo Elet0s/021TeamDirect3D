@@ -12,8 +12,6 @@ FieldRenderingActor::FieldRenderingActor()
 	//moveDir_(float4::Zero),
 	//curPos_(float4::Zero)
 {
-	renderOption_.pivotPosX_ = 0.f;
-	renderOption_.pivotPosY_ = 0.f;
 	renderOption_.vertexInversion_ = 1;
 	renderOption_.shadowAngle_ = 30.f;
 }
@@ -115,11 +113,11 @@ void FieldRenderingActor::InitializeFieldObjects(
 		float4 worldScale = float4::Zero;
 		if (1 >= randomIndex)
 		{
-			worldScale = float4(256, 64, 0, 0);
+			worldScale = float4(256, 64, 1, 0);
 		}
 		else
 		{
-			worldScale = float4(64, 64, 0, 0);
+			worldScale = float4(64, 64, 1, 0);
 		}
 
 		allFieldObjectDataVector_.push_back(
@@ -158,8 +156,6 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	{
 		fieldObjectShadowRenderer_->GetInstancingUnit(i).Link("Inst_RenderOption", this->renderOption_);
 	}
-
-
 
 	int unitIndex = 0;
 	for (int y = 0; y < tileCountXY_.IY(); ++y)
@@ -244,22 +240,18 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 	for (FieldObjectData& singleObjectData : allFieldObjectDataVector_)
 	{
 		if (singleObjectData.worldPosition_.x > _thisWorldPosition.x + (windowSize_.HX() * 1.5f))
-		//if (singleObjectData.worldPosition_.x > _thisWorldPosition.x + (windowSize_.HX() * 5.5f))
 		{
 			continue;
 		}
 		else if (singleObjectData.worldPosition_.x < _thisWorldPosition.x - (windowSize_.HX() * 1.5f))
-		//else if (singleObjectData.worldPosition_.x < _thisWorldPosition.x - (windowSize_.HX() * 5.5f))
 		{
 			continue;
 		}
 		else if (singleObjectData.worldPosition_.y > _thisWorldPosition.y + (windowSize_.HY() * 1.5f))
-		//else if (singleObjectData.worldPosition_.y > _thisWorldPosition.y + (windowSize_.HY() * 5.5f))
 		{
 			continue;
 		}
 		else if (singleObjectData.worldPosition_.y < _thisWorldPosition.y - (windowSize_.HY() * 1.5f))
-		//else if (singleObjectData.worldPosition_.y < _thisWorldPosition.y - (windowSize_.HY() * 5.5f))
 		{
 			continue;
 		}
@@ -307,7 +299,10 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		);
 
 		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldPosition(
-			renderingFieldObjectDataVector_[objectIndex]->worldPosition_
+			//renderingFieldObjectDataVector_[objectIndex]->worldPosition_
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.x,
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.y,
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.z + 1.f
 		);
 
 		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).GetAtlasData().SetData(
