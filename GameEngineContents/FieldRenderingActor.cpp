@@ -97,7 +97,7 @@ void FieldRenderingActor::InitializeFieldObjects(
 
 	renderingFieldObjectDataVector_.reserve(_objectInWindowCount);
 
-	totalFieldSize_ = _totalFieldSize;
+	totalFieldSize_ = float4(_totalFieldSize.x * _diffusionDegree, _totalFieldSize.y * _diffusionDegree);
 
 	for (size_t i = 0; i < _totalFieldObjectCount; ++i)
 	{
@@ -335,52 +335,6 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 
 void FieldRenderingActor::LoopFieldObject(const float4& _thisWorldPosition)
 {
-	//for (auto iter = allFieldObjectDataVector_.begin(); iter != allFieldObjectDataVector_.end(); iter++)
-	//{
-	//	if ((*iter).worldPosition_.x > _thisWorldPosition.x + (windowSize_.HX() * 1.2f)
-	//		|| (*iter).worldPosition_.x < _thisWorldPosition.x - (windowSize_.HX() * 1.2f)
-	//		|| (*iter).worldPosition_.y > _thisWorldPosition.y + (windowSize_.HY() * 1.2f)
-	//		|| (*iter).worldPosition_.y < _thisWorldPosition.y - (windowSize_.HY() * 1.2f))
-	//	{
-	//		if (moveDir_.IX() > 1280.f && (*iter).worldPosition_.x < _thisWorldPosition.x - (windowSize_.HX()))
-	//		{
-	// 				(*iter).worldPosition_.x += 3840.f;	
-	//		}
-
-	//		else if (moveDir_.IX() < -1280.f && (*iter).worldPosition_.x > _thisWorldPosition.x + (windowSize_.HX()))
-	//		{
-	//			(*iter).worldPosition_.x -= 3840.f;
-	//		}
-
-	//		 if (moveDir_.IY() < -720.f && (*iter).worldPosition_.y > _thisWorldPosition.y + (windowSize_.HY()))
-	//		{
-	//			(*iter).worldPosition_.y -= 2160.f;
-	//		}
-
-	//		 else if (moveDir_.IY() > 720.f && (*iter).worldPosition_.y < _thisWorldPosition.y - (windowSize_.HY() * 1.2f))
-	//		 {
-	//			 (*iter).worldPosition_.y += 2160.f;
-	//		 }
-	//	}
-	//}
-
-	//if (moveDir_.IX() > 1280.f)
-	//{
-	//	moveDir_.x = 0.f;
-	//}
-	//else if (moveDir_.IX() < -1280.f)
-	//{
-	//	moveDir_.x = 0.f;
-	//}
-	//if (moveDir_.IY() > 720.f)
-	//{
-	//	moveDir_.y = 0.f;
-	//}
-	//else if (moveDir_.IY() < -720.f)
-	//{
-	//	moveDir_.y = 0.f;
-	//}
-
 	for (FieldObjectData& singleFieldObject : allFieldObjectDataVector_)
 	{
 		if (singleFieldObject.worldPosition_.x > _thisWorldPosition.x + totalFieldSize_.HX())

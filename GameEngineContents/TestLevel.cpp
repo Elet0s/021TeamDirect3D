@@ -113,7 +113,8 @@ void TestLevel::Start()
 	fieldRenderingActor_->Initialize(
 		550,
 		50,
-		float4(6000, 6000)
+		float4(100, 100),
+		60.f
 	);
 	//fieldRenderingActor_->Initialize(
 	//	750,
