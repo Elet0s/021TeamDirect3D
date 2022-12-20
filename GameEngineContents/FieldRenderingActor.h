@@ -43,9 +43,8 @@ public:
 	void Initialize(
 		size_t _totalFieldObjectCount,	//전체 필드오브젝트 개수.
 		size_t _objectInWindowCount,	//윈도우 안에 배치될 최대 필드오브젝트 개수.
-		const float4& _totalFieldSize		//전체 필드 크기.
-		//float _diffusionDegree = 1.f	//필드오브젝트 확산도.
-		//필드오브젝트 배치 함수.
+		const float4& _totalFieldSize,		//전체 필드 크기.
+		float _diffusionDegree = 1.f	//필드오브젝트 확산도.
 	);
 
 private:
@@ -56,8 +55,8 @@ private:
 	void InitializeFieldObjects(
 		size_t _totalFieldObjectCount,
 		size_t _objectInWindowCount,
-		const float4& _fieldSize
-		//float _diffusionDegree = 1.f
+		const float4& _fieldSize,
+		float _diffusionDegree = 1.f
 	);
 
 	//
@@ -82,6 +81,8 @@ private:
 
 	std::shared_ptr<GameEngineInstancingRenderer> fieldRenderer_;	//인스턴싱 렌더러.
 
+	std::shared_ptr<GameEngineInstancingRenderer> fieldObjectShadowRenderer_;	//필드오브젝트 그림자 렌더러.
+
 	//float4 curPos_;
 	//float4 moveDir_;
 
@@ -92,6 +93,9 @@ private:
 	//윈도우 안이든 밖이든 상관없이 전부 가지고 있는다.
 
 	std::vector<FieldObjectData*> renderingFieldObjectDataVector_;	//화면 안에 들어온 필드 오브젝트들의 렌더링 정보.
-	//윈도우 안에 들어온 필드 오브젝트들의 정보만 가지고 있다가 인스턴싱유닛들에게 전달한다.
+	//윈도우 안에 들어온 필드 오브젝트들의 정보만 가지고 있다가 인스턴싱유닛들에게 전달한다
+
+
+	RenderOption renderOption_;
 };
 

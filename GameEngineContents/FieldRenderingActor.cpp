@@ -7,10 +7,15 @@ FieldRenderingActor::FieldRenderingActor()
 	tileCountXY_((GameEngineWindow::GetScale().IX() / 256) + 4, (GameEngineWindow::GetScale().IY() / 256) + 4),
 	tileCount_(tileCountXY_.IX() * tileCountXY_.IY()),
 	fieldRenderer_(nullptr),
+	fieldObjectShadowRenderer_(nullptr),
 	totalFieldSize_(float4::Zero)
 	//moveDir_(float4::Zero),
 	//curPos_(float4::Zero)
 {
+	renderOption_.pivotPosX_ = 0.f;
+	renderOption_.pivotPosY_ = 0.f;
+	renderOption_.vertexInversion_ = 1;
+	renderOption_.shadowAngle_ = 30.f;
 }
 
 FieldRenderingActor::~FieldRenderingActor()
@@ -47,17 +52,19 @@ void FieldRenderingActor::End()
 void FieldRenderingActor::Initialize(
 	size_t _totalFieldObjectCount,
 	size_t _objectInWindowCount,
-	const float4& _totalFieldSize
+	const float4& _totalFieldSize,
+	float _diffusionDegree /*= 1.f*/
 )
 {
-	InitializeFieldObjects(_totalFieldObjectCount, _objectInWindowCount, _totalFieldSize);
+	InitializeFieldObjects(_totalFieldObjectCount, _objectInWindowCount, _totalFieldSize, _diffusionDegree);
 	InitializeFieldRenderer(_objectInWindowCount);
 }
 
 void FieldRenderingActor::InitializeFieldObjects(
 	size_t _totalFieldObjectCount,
 	size_t _objectInWindowCount,
-	const float4& _totalFieldSize
+	const float4& _totalFieldSize,
+	float _diffusionDegree /*= 1.f*/
 )
 {
 	fieldObjectAtlasDatas_.resize(8);
@@ -96,8 +103,8 @@ void FieldRenderingActor::InitializeFieldObjects(
 	{
 		//필드오브젝트 배치 구간.
 		float4 randomWorldPosition = float4(
-			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HX(), _totalFieldSize.HX()),
-			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HY(), _totalFieldSize.HY()),
+			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HX(), _totalFieldSize.HX()) * _diffusionDegree,
+			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HY(), _totalFieldSize.HY()) * _diffusionDegree,
 			-4.f
 		);
 		//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
@@ -108,11 +115,11 @@ void FieldRenderingActor::InitializeFieldObjects(
 		float4 worldScale = float4::Zero;
 		if (1 >= randomIndex)
 		{
-			worldScale = float4(256, 64);
+			worldScale = float4(256, 64, 0, 0);
 		}
 		else
 		{
-			worldScale = float4(64, 64);
+			worldScale = float4(64, 64, 0, 0);
 		}
 
 		allFieldObjectDataVector_.push_back(
@@ -137,6 +144,22 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	fieldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 	//fieldRenderer_->SetAllUnitsWorldScale(256, 256, 1);
 	//그려질 필요없는 렌더유닛들이 256, 256 크기로 그려지는 버그 발생.
+
+
+	fieldObjectShadowRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("FieldObjectShadowRenderer");
+	fieldObjectShadowRenderer_->Initialize(
+		_objectInWindowCount,		//타일 그림자까지 그릴 필요는 없으므로 _objectInWindowCount만큼만 그린다.
+		"Rect",
+		"MultiTexturesInstShadow"
+	);
+	fieldObjectShadowRenderer_->SetTexture2DArray("Inst_Textures", "Field");
+	fieldObjectShadowRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
+	for (size_t i = 0; i < fieldObjectShadowRenderer_->GetUnitCount(); ++i)
+	{
+		fieldObjectShadowRenderer_->GetInstancingUnit(i).Link("Inst_RenderOption", this->renderOption_);
+	}
+
+
 
 	int unitIndex = 0;
 	for (int y = 0; y < tileCountXY_.IY(); ++y)
@@ -276,6 +299,23 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 
 		fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(0);
 		//MapObjects.png는 0번으로 삽입되어 있음.
+
+
+
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldScale(
+			renderingFieldObjectDataVector_[objectIndex]->worldScale_
+		);
+
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldPosition(
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_
+		);
+
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).GetAtlasData().SetData(
+			fieldObjectAtlasDatas_[renderingFieldObjectDataVector_[objectIndex]->atlasDataIndex_]
+		);
+
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetTextureIndex(0);
+		//필드오브젝트 그림자 렌더러에도 인덱스만 다른 같은 절차를 반복한다.
 
 		++objectIndex;
 	}
