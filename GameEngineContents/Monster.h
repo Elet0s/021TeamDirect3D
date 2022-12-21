@@ -124,9 +124,7 @@ public:
 				continue;
 			}
 
-			allMonsters_[i]->On();
-			allMonsters_[i]->isSummoned_ = true;
-			
+
 			float cameraX = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().x;
 			float cameraY = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().y;
 			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 1280, cameraY - 720),float4(cameraX + 1280, cameraY + 720));
@@ -134,29 +132,10 @@ public:
 
 		if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
 		{
-			allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
-
-			allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
-				allMonsters_[i]->monsterScale_
-			);
-			allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
-				monsterPosition_
-			);
-
-			allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
-				allMonsters_[i]->monsterScale_
-			);
-			allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
-				monsterPosition_
-			);
-			//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
-			//	"Inst_RenderOption", allMonsters_[i]->renderOption_
-			//);
-		}
-		else if (monsterPosition_.x< cameraX + 640 && monsterPosition_.x>cameraX -640)
-		{
 			if (monsterPosition_.y > cameraY + 360 || monsterPosition_.y < cameraY - 360)
 			{
+
+
 				allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
 
 				allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
@@ -172,6 +151,9 @@ public:
 				allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
 					monsterPosition_
 				);
+	
+				allMonsters_[i]->On();
+				allMonsters_[i]->isSummoned_ = true;
 				//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
 				//	"Inst_RenderOption", allMonsters_[i]->renderOption_
 				//);
@@ -179,11 +161,13 @@ public:
 			else
 			{
 				i--;
+				++count;
 			}
 		}
 		else
 		{
 			i--;
+			++count;
 		}
 			--count;//소환 대기중인 몬스터라면 소환하고 카운트 감소.
 			if (0 == count)

@@ -2,14 +2,16 @@
 #include"Mouse.h"
 #include "GlobalContentsValue.h"
 
+std::shared_ptr<Mouse> Mouse::mainMouse_ = nullptr;
+
 Mouse::Mouse()
 	:mouseRenderer(0)
-	, mouseLevel(0)
 	, mouseCollision_(0)
 	, mousePosition(0)
 {
 
 }
+
 Mouse::~Mouse()
 {
 
@@ -55,4 +57,15 @@ void Mouse::Update(float _DeltaTime)
 void Mouse::End()
 {
 
+}
+
+ void Mouse::CreateMouse(GameEngineLevel* _thisLevel)
+{
+	 if (nullptr != mainMouse_)
+	 {
+		 MsgBoxAssert("마우스가 이미 존재합니다.");
+		 return;
+	 }
+	 mainMouse_ = _thisLevel->CreateActor<Mouse>(ObjectOrder::Mouse);
+	 mainMouse_->SetLevelOverOn();
 }

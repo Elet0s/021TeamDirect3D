@@ -43,8 +43,7 @@ private:
 	float resultCos_;//마우스 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 마우스로 가는 벡터 
 
-	WeaponInfo crossbowWeaponInfo_;//무기 스탯
+	WeaponInfo cleaverWeaponInfo_;//무기 스탯
 
-	std::vector<std::shared_ptr<ProjectileGroup>> projectileGroupList_;
 
 };

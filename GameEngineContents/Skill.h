@@ -26,16 +26,6 @@ struct WeaponInfo
 	{
 	}
 };
-struct ProjectileGroup
-{
-	std::shared_ptr<GameEngineTextureRenderer>  projectileRenderer_;
-	std::shared_ptr<GameEngineCollision>  projectileCol_;
-	ProjectileGroup()
-		:projectileRenderer_(),
-		projectileCol_()
-	{
-	}
-};
 
 class Skill : public GameEngineActor
 {

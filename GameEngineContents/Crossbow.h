@@ -49,6 +49,4 @@ private:
 	std::vector<std::pair<size_t, float>> targetInst_;//Å¸°Ù ¸ðÀ½
 
 
-	std::vector<std::shared_ptr<ProjectileGroup>> projectileGroupList_;
-
 };

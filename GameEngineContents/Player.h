@@ -98,7 +98,9 @@ public:
 		atk_Range_(100.0f),
 		RLDirection_(false),
 		pushSpeed_(0),
-		damageMitigation_(0.0f)
+		damageMitigation_(0.0f),
+		atkMultiple_(),
+		knockback_()
 	{
 
 	}

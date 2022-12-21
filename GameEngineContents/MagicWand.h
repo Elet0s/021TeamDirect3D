@@ -46,7 +46,4 @@ private:
 	std::pair<size_t, float> minHpPair_;//Å¸°Ù ´ë»ó
 	std::vector<std::pair<size_t, float>> targetInst_;//Å¸°Ù ¸ðÀ½
 
-
-	std::vector<std::shared_ptr<ProjectileGroup>> projectileGroupList_;
-
 };

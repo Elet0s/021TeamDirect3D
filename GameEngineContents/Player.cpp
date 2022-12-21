@@ -5,7 +5,6 @@
 #include "PlayerUI.h"
 #include "Monster.h"
 
-
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
 std::shared_ptr<SkillManager> Player::playerSkillManager_ = std::shared_ptr<SkillManager>(new SkillManager);
@@ -269,7 +268,7 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 {
 	if (nullptr != mainPlayer_)
 	{
-		MsgBoxAssert("플레이어를 이미 생성했습니다.");
+		MsgBoxAssert("플레이어가 이미 존재합니다.");
 		return;
 	}
 

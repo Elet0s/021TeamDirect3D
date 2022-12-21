@@ -131,7 +131,11 @@ void TestLevel::Start()
 	//Monster::SummonMonster<FlyingEyes>(this, 10);
 
 	
-	std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
+
+	Mouse::CreateMouse(this);
+	
+
+	//std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
 
 	
 	//ShowCursor(false); 마우스 감추기
@@ -197,7 +201,7 @@ void TestLevel::MouseMoveCamera()
 		{
 			MouseDir.y = 100.f;
 		}
-		else if (CheckPos.x < -180.f)
+		else if (CheckPos.y < -180.f)
 		{
 			MouseDir.y = -100.f;
 		}

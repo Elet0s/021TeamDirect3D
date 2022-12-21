@@ -49,16 +49,21 @@ void Shuriken::Start()
 	Off();
 }
 
+
 void Shuriken::Update(float _deltaTime)
 {
 	StateSet();
-	
-	SerchTarget();//찾고
-	ProjectileSort();//발사체 생성,위치 on,off조정
-	RenderRotate();//찾은 타겟위치에 대해 발사체 회전
-	RangeCheak(_deltaTime);// 타겟위치로 이동
-
-
+	{
+		{//작은반복
+			SerchTarget();//찾고
+			ProjectileSort();//발사체 생성,위치 on,off조정
+			RenderRotate();//찾은 타겟위치에 대해 발사체 회전
+		}
+		{//작은반복
+			RangeCheak(_deltaTime);// 타겟위치로 이동
+			ColCheak();//충돌체크
+		}
+	}//큰반복
 }
 void Shuriken::End()
 {
@@ -153,7 +158,6 @@ void Shuriken::ProjectileSort()
 		{
 
 			projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
-			
 			projectileGroup_.first->GetTransform().SetWorldScale(50, 80, 0);
 			projectileGroup_.first->SetTexture("Shuriken.png");
 
