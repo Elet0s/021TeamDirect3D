@@ -75,11 +75,6 @@ void Monster::Start()
 {
 }
 
-//void Monster::Attack()
-//{
-//	int i = 0;
-//}
-
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	if (colCheakToMonster_ == false)

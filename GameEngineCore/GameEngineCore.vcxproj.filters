@@ -420,7 +420,6 @@
     <ClInclude Include="GameEngineBlur.h">
       <Filter>Object\Component\Rendering\PostEffect</Filter>
     </ClInclude>
-    <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="GEngine.h" />
     <ClInclude Include="GameEngineRes.h">
       <Filter>Resource</Filter>
@@ -521,6 +520,7 @@
     <ClInclude Include="GameEngineAnimation.h">
       <Filter>Object\Component\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="GlobalHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\Include\DirectXTex.inl">

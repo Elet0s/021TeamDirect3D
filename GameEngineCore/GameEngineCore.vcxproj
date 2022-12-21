@@ -149,7 +149,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="GameEngineActor.h" />
     <ClInclude Include="GameEngineAnimation.h">
       <SubType>
@@ -231,6 +230,7 @@
     <ClInclude Include="GameEngineVertexes.h" />
     <ClInclude Include="GameEngineVertexShader.h" />
     <ClInclude Include="GEngine.h" />
+    <ClInclude Include="GlobalHeader.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
     <ClInclude Include="imgui_impl_dx11.h" />

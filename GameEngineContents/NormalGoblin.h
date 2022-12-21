@@ -1,5 +1,4 @@
 #pragma once
-#include <GameEngineCore\CoreMinimal.h>
 #include "Monster.h"
 
 class NormalGoblin :public Monster

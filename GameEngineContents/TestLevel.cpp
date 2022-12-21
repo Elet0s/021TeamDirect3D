@@ -101,12 +101,6 @@ void TestLevel::Start()
 	fieldRenderingActor_->GetTransform().SetWorldScale(float4::White);
 	fieldRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
 
-
-	//std::shared_ptr< GameEngineCollision> col = GetMainCameraActor()->CreateComponent<GameEngineCollision>();
-	//col->GetTransform().SetWorldScale(float4{ 1280,720 });
-	//col->ChangeOrder(ObjectOrder::Camera);
-	//col->SetDebugSetting(CollisionType::CT_OBB2D, float4::Zero);
-
 	if (true == Player::GetPlayerWeakPtr().expired())
 	{
 		Player::CreatePlayer(this, { 0, 0 });
@@ -133,9 +127,6 @@ void TestLevel::Start()
 	
 
 	Mouse::CreateMouse(this);
-	
-
-	//std::shared_ptr<Mouse> NewMouse = CreateActor<Mouse>(ObjectOrder::Mouse);
 
 	
 	//ShowCursor(false); 마우스 감추기

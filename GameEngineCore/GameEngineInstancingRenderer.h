@@ -2,10 +2,8 @@
 #include "GameEngineMaterial.h"
 #include "GameEngineShaderResourceHelper.h"
 #include "GameEngineMesh.h"
-#include "GameEngineRenderer.h"
-#include "GameEngineTextureRenderer.h"
+#include "GlobalHeader.h"
 
-class GameEngineMaterial;
 class GameEngineInstancingBuffer;
 class GameEngineInstancingRenderer
 {

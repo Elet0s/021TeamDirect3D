@@ -17,7 +17,7 @@ GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
 	projectionMode_(CameraProjectionMode::Perspective),
 	nearZ_(0.1f),
-	farZ_(100000.f),
+	farZ_(10000.f),
 	fovAngleY_(60.f),
 	conclusionRenderTarget_(nullptr),
 	forwardRenderTarget_(nullptr),
@@ -379,6 +379,7 @@ void GameEngineCamera::Render(float _deltaTime)
 		iter != instancingRenderers_.end(); ++iter)
 	{
 		iter->second->Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+		//내부에서 자체적으로 트랜스폼 행렬계산을 해야 하므로 뷰행렬, 투영행렬을 넣어준다.
 	}
 
 

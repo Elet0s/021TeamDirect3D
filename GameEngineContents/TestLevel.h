@@ -1,7 +1,6 @@
 #pragma once
 
 class FieldRenderingActor;
-class TileMapActor;
 class Monster;
 class TestLevel : public GameEngineLevel
 {

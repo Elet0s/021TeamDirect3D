@@ -48,4 +48,6 @@
 
 #include <GameEngineCore\GameEngineFBXMesh.h>
 
+#include <GameEngineCore\GlobalHeader.h>
+
 

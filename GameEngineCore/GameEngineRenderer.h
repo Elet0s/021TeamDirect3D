@@ -4,18 +4,7 @@
 #include "GameEngineMaterial.h"
 #include "GameEngineShaderResourceHelper.h"
 #include "GameEngineMesh.h"
-
-struct RenderOption
-{
-    float deltaTime_ = 0.f;
-    float sumDeltaTime_ = 0.f;
-    int isAnimation_ = 0;
-    int vertexInversion_ = 1;   //그림자용 정점 좌우 뒤집힘 표시 변수. 좌우 뒤집어야 하면 -1 대입.
-    float pivotPosX_ = 0.f;     //피봇포스 X
-    float pivotPosY_ = 0.f;     //피봇포스 Y
-    float shadowAngle_ = 30.f;  //그림자 각도. 기본값 30도.
-    unsigned int bytePad1_ = 0;          //바이트패드.
-};
+#include "GlobalHeader.h"
 
 class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>
 {
@@ -56,18 +45,8 @@ public:
         std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
     );
 
-    //void RenderInstancing2(
-    //    float _deltaTime,
-    //    size_t _instancingCount,
-    //    std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
-    //);
-
     std::shared_ptr<GameEngineMesh> GetMesh();
     std::shared_ptr<GameEngineMaterial> GetMaterial();
-
-    //std::shared_ptr<GameEngineMaterial> GetCloneMaterial();
-
-    //std::shared_ptr<GameEngineMaterial> CloneMaterial(std::shared_ptr<GameEngineMaterial> _original);
 
     //렌더유닛에 부모 렌더러를 지정하고 EngineShaderResourceSetting() 함수를 호출해서 엔진 기본 상수버퍼를 등록하는 함수.
     void SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer);

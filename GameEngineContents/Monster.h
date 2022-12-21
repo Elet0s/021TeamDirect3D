@@ -1,5 +1,4 @@
 #pragma once
-//#include <GameEngineCore\CoreMinimal.h>
 #include "GlobalContentsValue.h"
 #include "Texture2DShadowRenderer.h"
 
@@ -130,45 +129,46 @@ public:
 			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 1280, cameraY - 720),float4(cameraX + 1280, cameraY + 720));
 			monsterPosition_.z = -6.f;
 
-		if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
-		{
-			if (monsterPosition_.y > cameraY + 360 || monsterPosition_.y < cameraY - 360)
+			if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
 			{
+				if (monsterPosition_.y > cameraY + 360 || monsterPosition_.y < cameraY - 360)
+				{
 
 
-				allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
+					allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
 
-				allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
-					allMonsters_[i]->monsterScale_
-				);
-				allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
-					monsterPosition_
-				);
+					allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
+						allMonsters_[i]->monsterScale_
+					);
+					allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
+						monsterPosition_
+					);
 
-				allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
-					allMonsters_[i]->monsterScale_
-				);
-				allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
-					monsterPosition_
-				);
+					allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
+						allMonsters_[i]->monsterScale_
+					);
+					allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
+						monsterPosition_
+					);
 	
-				allMonsters_[i]->On();
-				allMonsters_[i]->isSummoned_ = true;
-				//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
-				//	"Inst_RenderOption", allMonsters_[i]->renderOption_
-				//);
+					allMonsters_[i]->On();
+					allMonsters_[i]->isSummoned_ = true;
+					//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
+					//	"Inst_RenderOption", allMonsters_[i]->renderOption_
+					//);
+				}
+				else
+				{
+					i--;
+					++count;
+				}
 			}
 			else
 			{
 				i--;
 				++count;
 			}
-		}
-		else
-		{
-			i--;
-			++count;
-		}
+
 			--count;//소환 대기중인 몬스터라면 소환하고 카운트 감소.
 			if (0 == count)
 			{
@@ -176,6 +176,7 @@ public:
 				break;
 			}
 		}
+
 		if (0 != count)
 		{
 			//소환하기에 충분한 몬스터가 없었다면 경고.
@@ -195,7 +196,6 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 	void Chaseplayer(float _deltaTime);
-	//void Attack();
 
 
 
@@ -223,14 +223,13 @@ protected:
 
 	std::shared_ptr<GameEngineCollision> monCollision_;
 	std::shared_ptr <MonsterInfo> monsterInfo_;
-	//std::shared_ptr<GameEngineTextureRenderer> monRenderer_;
-	//std::shared_ptr<class Texture2DShadowRenderer> shadowRenderer_;
 
 	int instancingUnitIndex_;	//이 몬스터를 담당해서 그리고 있는 인스턴싱유닛의 번호.
 
 	float4 monsterScale_;		//각 몬스터 종류별 크기.
 
 	GameEngineAnimation monsterAnimation_;	//시간 지날때마다 인덱스만 바꿔주는 애니메이션 모듈.
+	//구조와 기능이 그다지 복잡하지 않고, 각각의 몬스터마다 반드시 한개씩 가져야 하므로 값형으로 저장.
 
 	RenderOption renderOption_;
 

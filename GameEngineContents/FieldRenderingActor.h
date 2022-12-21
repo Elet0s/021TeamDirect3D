@@ -19,7 +19,7 @@ class FieldObjectData
 
 class FieldRenderingActor: public GameEngineActor
 {
-	//이 클래스의 존재 이유: 모든 필드 오브젝트들을 그리기만 하는 액터.
+	//이 클래스의 존재 이유: 모든 필드 오브젝트들과 그 그림자들을 그리기만 하는 액터.
 
 public:
 	FieldRenderingActor();
@@ -48,10 +48,10 @@ public:
 	);
 
 private:
-	//
+	//필드렌더러, 필드오브젝트 그림자 렌더러 초기화.
 	void InitializeFieldRenderer(size_t _objectInWindowCount);
 
-	//
+	//모든 필드오브젝트 정보 초기화. 
 	void InitializeFieldObjects(
 		size_t _totalFieldObjectCount,	//전체 필드오브젝트 개수.
 		size_t _objectInWindowCount,	//윈도우 안에 배치될 최대 필드오브젝트 개수.
@@ -70,7 +70,7 @@ private:
 
 private:
 	const float tileSize_;		//타일텍스처 가로길이. 
-	//정사각형이므로 한개로 충분하다.
+	//타일텍스처가 정사각형이므로 한개로 충분하다.
 
 	const float4 windowSize_;
 

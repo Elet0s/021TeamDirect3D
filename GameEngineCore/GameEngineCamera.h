@@ -22,7 +22,7 @@ class GameEngineMaterial;
 class GameEngineCamera : public GameEngineTransformComponent
 {
 	//카메라. 
-	//월드공간의 오브젝트들이 뷰 스페이스라고 하는 가상의 카메라 시야범위 안에 들어 왔을때, 
+	//월드공간의 오브젝트들이 뷰 프러스텀이라고 하는 가상의 카메라 시야범위 안에 들어 왔을때, 
 	// 오브젝트들을 구성하는 정점들을 뷰행렬에 맞춰서 재배치하고 투영행렬에 맞춰서 축소한 후
 	// 뷰포트행렬대로 다시 확대한 만큼의 정점 좌표를 계산해서 변형된 대로 그리는 컴포넌트.
 
@@ -54,7 +54,7 @@ public:
 
 	//카메라의 순서를 변경하는 함수.
 	void SetCameraOrder(CameraOrder _order);
-	//할 일이 있을지는 모르겠지만, 카메라 오더 런타임에 변경 금지.
+	//할 일이 있을지는 모르겠지만, 런타임 중간에 카메라 오더 변경 금지.
 
 	//인스턴싱 반환. 없다면 빈 인스턴싱을 만들어서 반환한다.
 	GameEngineInstancing& GetInstancing(const std::string& _name);

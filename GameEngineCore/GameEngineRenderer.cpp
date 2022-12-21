@@ -209,38 +209,6 @@ void GameEngineRenderUnit::RenderInstancing(
 	this->shaderResourceHelper_.AllResourcesReset();
 }
 
-//void GameEngineRenderUnit::RenderInstancing2(
-//	float _deltaTime,
-//	size_t _instancingCount,
-//	std::shared_ptr<GameEngineInstancingBuffer> _instancingBuffer
-//)
-//{
-//	if (nullptr == this->mesh_)
-//	{
-//		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
-//		return;
-//	}
-//
-//	if (nullptr == this->inputLayout_)
-//	{
-//		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
-//		return;
-//	}
-//
-//	if (nullptr == this->material_)
-//	{
-//		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
-//		return;
-//	}
-//
-//	this->mesh_->SettingInstancing(_instancingBuffer);
-//	this->inputLayout_->Setting();
-//	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
-//
-//	this->material_->SettingInstancing2();
-//	this->mesh_->RenderInstancing(_instancingCount);
-//}
-
 std::shared_ptr<GameEngineMesh> GameEngineRenderUnit::GetMesh()
 {
 	return this->mesh_;
@@ -250,24 +218,6 @@ std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetMaterial()
 {
 	return this->material_;
 }
-
-//std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::GetCloneMaterial()
-//{
-//	if (false == material_->IsOriginal())
-//	{
-//		return material_;
-//	}
-//
-//	material_ = CloneMaterial(material_);
-//	return material_;
-//}
-
-//std::shared_ptr<GameEngineMaterial> GameEngineRenderUnit::CloneMaterial(std::shared_ptr<GameEngineMaterial> _original)
-//{
-//	std::shared_ptr<GameEngineMaterial> clone = GameEngineMaterial::Create();
-//	clone->Copy(_original);
-//	return clone;
-//}
 
 void GameEngineRenderUnit::SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer)
 {

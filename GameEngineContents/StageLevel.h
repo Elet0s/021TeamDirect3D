@@ -1,5 +1,4 @@
 #pragma once
-#include <GameEngineCore/CoreMinimal.h>
 
 class StageLevel : public GameEngineLevel
 {

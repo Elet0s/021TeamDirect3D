@@ -9,8 +9,6 @@ FieldRenderingActor::FieldRenderingActor()
 	fieldRenderer_(nullptr),
 	fieldObjectShadowRenderer_(nullptr),
 	totalFieldSize_(float4::Zero)
-	//moveDir_(float4::Zero),
-	//curPos_(float4::Zero)
 {
 	renderOption_.vertexInversion_ = 1;
 	renderOption_.shadowAngle_ = 30.f;
@@ -28,12 +26,6 @@ void FieldRenderingActor::Start()
 
 void FieldRenderingActor::Update(float _deltaTime)
 {
-	//if (false == curPos_.CompareInt2D(GetTransform().GetWorldPosition()))
-	//{
-	//	moveDir_ +=GetTransform().GetWorldPosition() - curPos_;
-	//	curPos_ = GetTransform().GetWorldPosition();
-	//}
-
 	float4 thisWorldPosition = this->GetTransform().GetWorldPosition();
 
 	UpdateTilePosition(thisWorldPosition);
@@ -155,6 +147,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	for (size_t i = 0; i < fieldObjectShadowRenderer_->GetUnitCount(); ++i)
 	{
 		fieldObjectShadowRenderer_->GetInstancingUnit(i).Link("Inst_RenderOption", this->renderOption_);
+		//필드 오브젝트와 그림자들은 위치정보 외에는 변동사항이 없으므로 한개 렌더옵션을 모든 그림자 인스턴싱유닛에 연결한다.
 	}
 
 	int unitIndex = 0;
@@ -257,7 +250,7 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		}
 
 		renderingFieldObjectDataVector_.push_back(&singleObjectData);
-	}//윈도우크기 1.5배 안에 들어온 오브젝트들만 renderingFieldObjectDataVector_에 삽입한다.
+	}//윈도우크기 1.5배 안에 들어온 오브젝트들의 포인터만 renderingFieldObjectDataVector_에 삽입한다.
 
 
 	int objectIndex = 0;
@@ -299,7 +292,6 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		);
 
 		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldPosition(
-			//renderingFieldObjectDataVector_[objectIndex]->worldPosition_
 			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.x,
 			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.y,
 			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.z + 1.f
