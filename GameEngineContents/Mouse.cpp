@@ -7,7 +7,8 @@ std::shared_ptr<Mouse> Mouse::mainMouse_ = nullptr;
 Mouse::Mouse()
 	:mouseRenderer(0)
 	, mouseCollision_(0)
-	, mousePosition(0)
+	, mousePositionToWindow_(0)
+	,mousePositionToClient_(0)
 {
 
 }
@@ -53,6 +54,7 @@ void Mouse::Update(float _DeltaTime)
 	GetCurPos();
 	mouseRenderer->GetTransform().SetLocalPosition(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x+10.0f, GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,-100.0f);
 	mouseCollision_->GetTransform().SetLocalPosition(GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().x + 10.0f, GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().y, -100.0f);
+
 }
 void Mouse::End()
 {

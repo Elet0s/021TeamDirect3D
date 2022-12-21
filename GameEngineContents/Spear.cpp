@@ -27,7 +27,7 @@ void Spear::Start()
 }
 void Spear::Update(float _deltaTime)
 {
-
+	SerchTarget();
 }
 void Spear::End()
 {
@@ -83,6 +83,7 @@ void Spear::StateSet()
 void Spear::SerchTarget()
 {
 
+ Mouse::GetMouseInfo()->IsCurPosToClient();
 }
 void Spear::ProjectileSort()
 {

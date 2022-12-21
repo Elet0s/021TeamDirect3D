@@ -29,18 +29,32 @@ public:
 	{
 		POINT Pos_;
 		GetCursorPos(&Pos_);
+		mousePositionToClient_.x =(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x);
+		mousePositionToClient_.y =(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y);
 		ScreenToClient(GameEngineWindow::GetHWND(), &Pos_);
-		mousePosition.x = static_cast<float>(Pos_.x);
-		mousePosition.y = static_cast<float>(Pos_.y);
+		mousePositionToWindow_.x = static_cast<float>(Pos_.x);
+		mousePositionToWindow_.y = static_cast<float>(Pos_.y);
 	}
- inline float4  IsCurPos()
+
+	static std::shared_ptr<Mouse> GetMouseInfo()
 	{
-		return mousePosition;
+		return mainMouse_;
 	}
+
+ inline float4  IsCurPosToWindow()
+	{
+		return mousePositionToWindow_;
+	}
+
+ inline float4  IsCurPosToClient()
+ {
+	 return mousePositionToClient_;
+ }
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 	void End() override;
 private:
-	float4 mousePosition;// 현재 Window상의 마우스 위치
+	float4 mousePositionToWindow_;// 현재 Window상의 마우스 위치
+	float4 mousePositionToClient_;//클라이언트상의 마우스 위치
 };
