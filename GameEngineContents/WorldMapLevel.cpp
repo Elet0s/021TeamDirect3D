@@ -19,11 +19,7 @@ void WorldMapLevel::Start()
 		1000,
 		150
 	);
-	//fieldRenderingActor_->Initialize(
-	//	750,
-	//	700,
-	//	float4(6000, 6000)
-	//);
+
 	WorldMapRenderingActor_->GetTransform().SetLocalScale(float4::White);
 	WorldMapRenderingActor_->GetTransform().SetWorldScale(float4::White);
 	WorldMapRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);

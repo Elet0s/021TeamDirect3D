@@ -355,14 +355,14 @@ void GameEngineCamera::Render(float _deltaTime)
 			renderer->GetTransform().CalculateWorldViewProjection();
 			//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
 			
-			if (false == float4x4::IsInViewFrustum(
-				renderer->GetTransformData().worldViewProjectionMatrix_, 
-				float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
-			)
-			{
-				//뷰프러스텀 안에 4개 정점들 중 한개라도 들어오는 것들만 그린다.
-				continue;
-			}
+			//if (false == float4x4::IsInViewFrustum(
+			//	renderer->GetTransformData().worldViewProjectionMatrix_, 
+			//	float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
+			//)
+			//{
+			//	//뷰프러스텀 안에 4개 정점들 중 한개라도 들어오는 것들만 그린다.
+			//	continue;
+			//}
 
 			renderer->Render(scaleTime);
 			//뷰포트행렬을 포함한 모든 행렬 계산을 거친 결과대로 메쉬를 화면에 그린다.

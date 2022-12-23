@@ -16,7 +16,13 @@ WorldMapRenderingActor::~WorldMapRenderingActor()
 
 void WorldMapRenderingActor::Start()
 {
-	
+	{
+		std::shared_ptr<GameEngineTextureRenderer> TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
+		
+		TextureRenderer->SetTexture("FarGround.png");
+		TextureRenderer->GetTransform().SetWorldScale(float4{ 10000, 2560 });
+		TextureRenderer->GetTransform().SetWorldPosition(float4{ 1032,1000, 100 });
+	}
 }
 
 void WorldMapRenderingActor::Update(float _deltaTime)
@@ -204,8 +210,8 @@ void WorldMapRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPosi
 
 void WorldMapRenderingActor::treeObejctSetting()
 {
-	float py = 0.f;
-	for (size_t i = 0; i < 5; i++)
+	float py = -512.f;
+	for (size_t i = 0; i < 4; i++)
 	{
 		for (size_t y = 0; y < 5; y++)
 		{
@@ -268,8 +274,8 @@ void WorldMapRenderingActor::treeObejctSetting()
 	}
 	
 	
-	 py = 0.f;
-	for (size_t i = 0; i < 5; i++)
+	 py = -512.f;
+	for (size_t i = 0; i < 4; i++)
 	{
 		for (size_t y = 0; y < 5; y++)
 		{
