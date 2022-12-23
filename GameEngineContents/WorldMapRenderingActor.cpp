@@ -54,6 +54,8 @@ void WorldMapRenderingActor::InitializeFieldObjects(
 
 	//나무 .
 	worldObjectAtlasDatas_[0].SetData(AtlasData(0.f, 0.f, 1.f, 0.5f, 0.f, 0.0f));
+	// 죽은 나무
+	worldObjectAtlasDatas_[1].SetData(AtlasData(0.f, 0.5f, 1.f, 0.5f, 0.f, 0.0f));
 
 	allWorldObjectDataVector_.reserve(_totalFieldObjectCount);
 
@@ -142,11 +144,6 @@ void WorldMapRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPosi
 			continue;
 		}
 	
-		else if (singleObjectData.worldPosition_.z < CameraPos.z)
-		{
-			continue;
-		}
-
 		if (singleObjectData.worldPosition_.z > CameraPos.z + 1500.f)
 		{
 			continue;
@@ -217,7 +214,6 @@ void WorldMapRenderingActor::treeObejctSetting()
 		{
 			for (size_t x = 0; x < (5 - y); x++)
 			{
-				//필드오브젝트 배치 구간.
 				float4 tilePos = this->GetTransform().GetWorldPosition();
 				float Ranf = GameEngineRandom::mainRandom_.RandomFloat(10.f, 30.f);
 				float RanfX = GameEngineRandom::mainRandom_.RandomFloat(10.f, 50.f);
@@ -246,7 +242,6 @@ void WorldMapRenderingActor::treeObejctSetting()
 		{
 			for (size_t x = 0; x < y + 1; x++)
 			{
-				//필드오브젝트 배치 구간.
 				float4 tilePos = this->GetTransform().GetWorldPosition();
 				float Ranf = GameEngineRandom::mainRandom_.RandomFloat(10.f, 30.f);
 				float RanfX = GameEngineRandom::mainRandom_.RandomFloat(10.f, 50.f);
@@ -281,7 +276,6 @@ void WorldMapRenderingActor::treeObejctSetting()
 		{
 			for (size_t x = 0; x < (5 - y); x++)
 			{
-				//필드오브젝트 배치 구간.
 				float4 tilePos = this->GetTransform().GetWorldPosition();
 				float Ranf = GameEngineRandom::mainRandom_.RandomFloat(10.f, 30.f);
 				float RanfX = GameEngineRandom::mainRandom_.RandomFloat(10.f, 50.f);
@@ -313,7 +307,6 @@ void WorldMapRenderingActor::treeObejctSetting()
 		{
 			for (size_t x = 0; x < y + 1; x++)
 			{
-				//필드오브젝트 배치 구간.
 				float4 tilePos = this->GetTransform().GetWorldPosition();
 				float Ranf = GameEngineRandom::mainRandom_.RandomFloat(10.f, 30.f);
 				float RanfX = GameEngineRandom::mainRandom_.RandomFloat(10.f, 50.f);
@@ -339,6 +332,61 @@ void WorldMapRenderingActor::treeObejctSetting()
 			}
 		}
 		py -= 256.f;
+	}
+
+
+	for (size_t y = 0; y < 7; y++)
+	{
+		for (size_t x = 0; x < 16; x++)
+		{
+
+			if (y % 2 != 0)
+			{
+				float4 tilePos = this->GetTransform().GetWorldPosition();
+				float Ranf = GameEngineRandom::mainRandom_.RandomFloat(10.f, 30.f);
+				float RanfX = GameEngineRandom::mainRandom_.RandomFloat(10.f, 50.f);
+				tilePos.x += -128.f + x * 128.f - RanfX;
+				tilePos.y += (0 - 64.f * y) * sinf(30.f * GameEngineMath::DegreeToRadian) + 64.f + Ranf * sinf(30.f * GameEngineMath::DegreeToRadian);
+				tilePos.z += (0 - 64.f * y) * cosf(30.f * GameEngineMath::DegreeToRadian) + Ranf * cosf(30.f * GameEngineMath::DegreeToRadian);
+
+
+
+				float4 worldScale = float4(256.f, 128.f);
+
+				allWorldObjectDataVector_.push_back(
+					WorldObjectData(
+						tilePos,
+						worldScale,
+						1
+					)
+				);
+			}
+
+			else
+			{
+				if (x > 14)
+				{
+					break;
+				}
+				float4 tilePos = this->GetTransform().GetWorldPosition();
+				float Ranf = GameEngineRandom::mainRandom_.RandomFloat(10.f, 30.f);
+				float RanfX = GameEngineRandom::mainRandom_.RandomFloat(10.f, 50.f);
+				tilePos.x += 0 + x * 128.f + RanfX;
+				tilePos.y += (0 - 64.f * y) * sinf(30.f * GameEngineMath::DegreeToRadian) + 64.f + Ranf * sinf(30.f * GameEngineMath::DegreeToRadian);
+				tilePos.z += (0 - 64.f * y) * cosf(30.f * GameEngineMath::DegreeToRadian) + Ranf * cosf(30.f * GameEngineMath::DegreeToRadian);
+
+				float4 worldScale = float4(256.f, 128.f);
+
+				allWorldObjectDataVector_.push_back(
+					WorldObjectData(
+						tilePos,
+						worldScale,
+						1
+					)
+				);
+
+			}		
+		}
 	}
 
 }
