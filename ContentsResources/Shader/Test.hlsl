@@ -1,11 +1,13 @@
 #include "TransformHeader.hlsli"
 #include "RenderOption.hlsli"
+#include "LightHeader.hlsli"
 
 struct Input
 {
     float4 pos_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
     uint instancingIndex_ : ROWINDEX; //인스턴싱 인덱스. unsigned int 한개만 사용.
+    uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
 struct Output
@@ -13,6 +15,7 @@ struct Output
     float4 pos_ : SV_Position; 
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
     int instancingIndex_ : ROWINDEX;
+    uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
 //cbuffer PixelData : register(b0)
@@ -87,6 +90,7 @@ StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
 Output Test_VSINST(Input _input)
 {
     Output result = (Output) 0;
+    
     result.pos_ = mul(_input.pos_, Inst_TransformData[_input.instancingIndex_].worldViewProjectionMatrix_);
     
     result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instancingIndex_].textureFrameSize_.x)
@@ -97,6 +101,8 @@ Output Test_VSINST(Input _input)
     
     result.instancingIndex_ = _input.instancingIndex_;
     
+    result.textureIndex_ = _input.textureIndex_;
+    
     return result;
 }
 
@@ -106,17 +112,22 @@ float4 Test_PSINST(Output _input) : SV_Target0
     
     float4 resultColor = Inst_Textures.Sample(
         POINTCLAMP,
-        float3(_input.texcoord_.xy, Inst_RenderOption[_input.instancingIndex_].bytePad1_)
+        float3(_input.texcoord_.xy, _input.textureIndex_)
     );
-  
-    if (0.f >= resultColor.a)
-    {
-        clip(-1);
-    }
-    else if (1.f < resultColor.a)
-    {
-        resultColor.a = 1.f;
-    }
     
-    return resultColor;
+    //Texture2D temp = Inst_Textures[_input.textureIndex_];
+    
+    float4 temp2 = Inst_Textures.Load(int4(_input.texcoord_.xy, 1, 0));
+    temp2.a = 1.f;
+    
+    //if (0.01f >= resultColor.a)
+    //{
+    //    clip(-1);
+    //}
+    //else if (1.f < resultColor.a)
+    //{
+    //    resultColor.a = 1.f;
+    //}
+    
+    return temp2;
 }

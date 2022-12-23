@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Texture2DShadowRenderer.h"
 #include "FieldRenderingActor.h"
+#include "TestFieldRenderingActor.h"
 #include "Monster.h"
 #include "BlackEyes.h"
 #include "Brown.h"
@@ -35,8 +36,13 @@ void ShaderTestLevel::Start()
 	//GameEngineTexture2DArray::Load(testDir.GetFullPath());
 
 
-	shaderTestActor_ = CreateActor<FieldRenderingActor>(0, "ShaderTestActor");
-	//shaderTestActor_->InitializeFieldObject();
+	shaderTestActor_ = CreateActor<TestFieldRenderingActor>(0, "ShaderTestActor");
+	shaderTestActor_->Initialize(
+		550,
+		50,
+		float4(100, 100),
+		60.f
+	);
 	shaderTestActor_->GetTransform().SetLocalScale(float4::White);
 	shaderTestActor_->GetTransform().SetWorldScale(float4::White);
 	shaderTestActor_->GetTransform().SetWorldPosition(float4::Zero);

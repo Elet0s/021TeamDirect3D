@@ -91,6 +91,9 @@
     <Filter Include="Actor\02. Play\Player\Skill\Passive\Sub">
       <UniqueIdentifier>{e7f05a6a-28bb-41d3-aa74-843df1ec610c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\Global\Test">
+      <UniqueIdentifier>{a63c77da-3c25-41d8-be54-88b5b563fe84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -381,6 +384,9 @@
     </ClCompile>
     <ClCompile Include="WorldMapRenderingActor.cpp">
       <Filter>Level\Global\ContentsSupport\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFieldRenderingActor.cpp">
+      <Filter>Level\Global\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -673,6 +679,9 @@
     </ClInclude>
     <ClInclude Include="WorldMapRenderingActor.h">
       <Filter>Level\Global\ContentsSupport\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFieldRenderingActor.h">
+      <Filter>Level\Global\Test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

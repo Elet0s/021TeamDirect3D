@@ -120,7 +120,7 @@ float4 CalDiffuseLight(
     //주 조명광 색상값 적용.
     
     diffuseLight.a = 1.f;
-    //어떤 색상값이 나오든 알파값이 0이면 보이지 않으므로 알파값을 1로 강제고정.
+    //어떤 색상값이 나오든 알파값이 0이면 보이지 않으므로 알파값을 1로 고정.
     
     return diffuseLight * _lightingData.diffuseLightRatio_;
 }
@@ -134,7 +134,7 @@ float4 CalAllDiffuseLight(float4 _viewSpaceNormal)
         diffuseLighting += CalDiffuseLight(_viewSpaceNormal, lightings_[i]);
     }
     diffuseLighting.a = 1.f;
-    //어떤 색상값이 나오든 알파값이 0이면 보이지 않으므로 알파값을 1로 강제고정.
+    //어떤 색상값이 나오든 알파값이 0이면 보이지 않으므로 알파값을 1로 고정.
     
     return diffuseLighting;
 }
@@ -155,7 +155,16 @@ float4 CalAllAmbientLight()
     }
     
     ambientLight.a = 1.f;
-    //어떤 색상값이 나오든 알파값이 0이면 보이지 않으므로 알파값을 1로 강제고정.
+    //어떤 색상값이 나오든 알파값이 0이면 보이지 않으므로 알파값을 1로 고정.
     
     return ambientLight;
+}
+
+float4 CalNormalVectorFromTexture()
+{
+    
+    
+    
+    return (float4) 0.f;
+
 }

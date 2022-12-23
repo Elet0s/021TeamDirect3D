@@ -390,6 +390,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TestFieldRenderingActor.h" />
     <ClInclude Include="Texture2DShadowRenderer.h">
       <SubType>
       </SubType>
@@ -729,6 +730,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TestFieldRenderingActor.cpp" />
     <ClCompile Include="Texture2DShadowRenderer.cpp">
       <SubType>
       </SubType>

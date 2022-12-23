@@ -9,5 +9,6 @@
     <None Include="LightHeader.hlsli" />
     <None Include="MultiTexturesInstancing.hlsl" />
     <None Include="MultiTexturesInstShadow.hlsl" />
+    <None Include="DeferredHeader.hlsli" />
   </ItemGroup>
 </Project>

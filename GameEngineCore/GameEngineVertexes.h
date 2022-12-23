@@ -50,8 +50,8 @@ struct GameEngineVertex
 	float4 COLOR;		//색상.
 	float4 TEXCOORD;	//UV좌표.
 	float4 NORMAL;		//정점 법선벡터.
-	float4 BINORMAL;
-	float4 TANGENT;
+	float4 TANGENT;		//접선.
+	float4 BINORMAL;	//종법선.
 	float4 WEIGHT;		// 애니메이션 가중치
 	int BLENDINDICES[4] = { 0, };		//이 버텍스를 움직이는 모든 본들의 번호.
 };
