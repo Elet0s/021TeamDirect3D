@@ -69,7 +69,7 @@ void WorldMapActor::Start()
 			TextureRenderer->GetTransform().SetWorldPosition(tilePos);
 		}
 	}
-
+	
 	//for (size_t y = 0; y < 20; y++)
 	//{
 	//	for (size_t x = 0; x < 20-y; x++)

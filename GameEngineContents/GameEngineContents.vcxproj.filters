@@ -379,7 +379,7 @@
     <ClCompile Include="DashCooldown.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
     </ClCompile>
-    <ClCompile Include="WorldMapRanderingActor.cpp">
+    <ClCompile Include="WorldMapRenderingActor.cpp">
       <Filter>Level\Global\ContentsSupport\Actor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -671,7 +671,7 @@
     <ClInclude Include="DashCooldown.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Sub</Filter>
     </ClInclude>
-    <ClInclude Include="WorldMapRanderingActor.h">
+    <ClInclude Include="WorldMapRenderingActor.h">
       <Filter>Level\Global\ContentsSupport\Actor</Filter>
     </ClInclude>
   </ItemGroup>

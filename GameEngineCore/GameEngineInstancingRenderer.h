@@ -79,6 +79,7 @@ class GameEngineInstancingRenderer
             SetWorldPosition(float4(_worldPositionX, _worldPositionY, _worldPositionZ));
         }
 
+
     private:
         void CalWorldWorldMatrix();
 

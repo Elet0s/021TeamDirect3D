@@ -1,7 +1,7 @@
 #include"PreCompile.h"
 #include"WorldMapLevel.h"
 #include"WorldMapActor.h"
-#include"WorldMapRanderingActor.h"
+#include"WorldMapRenderingActor.h"
 
 WorldMapLevel::WorldMapLevel()
 {
@@ -14,26 +14,26 @@ WorldMapLevel::~WorldMapLevel()
 void WorldMapLevel::Start()
 {
 
-	worldMapRanderingActor_ = CreateActor<WorldMapRanderingActor>();
-	worldMapRanderingActor_->Initialize(
+	WorldMapRenderingActor_ = CreateActor<WorldMapRenderingActor>();
+	WorldMapRenderingActor_->Initialize(
 		1000,
-		50
+		150
 	);
 	//fieldRenderingActor_->Initialize(
 	//	750,
 	//	700,
 	//	float4(6000, 6000)
 	//);
-	worldMapRanderingActor_->GetTransform().SetLocalScale(float4::White);
-	worldMapRanderingActor_->GetTransform().SetWorldScale(float4::White);
-	worldMapRanderingActor_->GetTransform().SetWorldPosition(float4::Zero);
+	WorldMapRenderingActor_->GetTransform().SetLocalScale(float4::White);
+	WorldMapRenderingActor_->GetTransform().SetWorldScale(float4::White);
+	WorldMapRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
 	
 	GetMainCameraActorTransform().SetWorldPosition(float4(640.f, -2560.f * sinf(10.f * GameEngineMath::DegreeToRadian) + 70.f, -2560.f * cosf(10.f * GameEngineMath::DegreeToRadian)));
 	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
 }
 void WorldMapLevel::Update(float _deltaTime)
 {
-	float cameraSpeed = 500.f;
+	/*float cameraSpeed = 500.f;
 
 	float4 Pos = GetMainCameraActorTransform().GetWorldPosition();
 
@@ -78,7 +78,7 @@ void WorldMapLevel::Update(float _deltaTime)
 	{
 		GetMainCameraActorTransform().SetLocalMove(
 			float4(0.f, -sinf(10.f * GameEngineMath::DegreeToRadian), -cosf(10.f * GameEngineMath::DegreeToRadian)) * cameraSpeed * _deltaTime);
-	}
+	}*/
 
 }
 void WorldMapLevel::End()

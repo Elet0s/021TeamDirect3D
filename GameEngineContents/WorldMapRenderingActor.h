@@ -2,7 +2,7 @@
 
 class WorldObjectData
 {
-	friend class WorldMapRanderingActor;
+	friend class WorldMapRenderingActor;
 
 	float4 worldPosition_;	//오브젝트 월드좌표.
 	const float4 worldScale_;	//오브젝트 월드좌표.
@@ -17,18 +17,18 @@ class WorldObjectData
 };
 
 // 설명 :
-class WorldMapRanderingActor : public GameEngineActor
+class WorldMapRenderingActor : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	WorldMapRanderingActor();
-	~WorldMapRanderingActor();
+	WorldMapRenderingActor();
+	~WorldMapRenderingActor();
 
 	// delete Function
-	WorldMapRanderingActor(const WorldMapRanderingActor& _Other) = delete;
-	WorldMapRanderingActor(WorldMapRanderingActor&& _Other) noexcept = delete;
-	WorldMapRanderingActor& operator=(const WorldMapRanderingActor& _Other) = delete;
-	WorldMapRanderingActor& operator=(WorldMapRanderingActor&& _Other) noexcept = delete;
+	WorldMapRenderingActor(const WorldMapRenderingActor& _Other) = delete;
+	WorldMapRenderingActor(WorldMapRenderingActor&& _Other) noexcept = delete;
+	WorldMapRenderingActor& operator=(const WorldMapRenderingActor& _Other) = delete;
+	WorldMapRenderingActor& operator=(WorldMapRenderingActor&& _Other) noexcept = delete;
 
 public:
 	void Start() override;
@@ -55,6 +55,9 @@ private:
 	void UpdateFieldObjectInfos(const float4& _thisWorldPosition);
 
 private:
+	void treeObejctSetting();
+
+
 	const float tileSize_;		//타일텍스처 가로길이. 
 	//정사각형이므로 한개로 충분하다.
 

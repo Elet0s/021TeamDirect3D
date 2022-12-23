@@ -482,7 +482,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="WorldMapRanderingActor.h">
+    <ClInclude Include="WorldMapRenderingActor.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -824,7 +824,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="WorldMapRanderingActor.cpp">
+    <ClCompile Include="WorldMapRenderingActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

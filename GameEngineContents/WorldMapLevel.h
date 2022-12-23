@@ -17,7 +17,7 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 private:
-	std::shared_ptr<class WorldMapRanderingActor> worldMapRanderingActor_;
+	std::shared_ptr<class WorldMapRenderingActor> WorldMapRenderingActor_;
 	void LevelStartEvent() override;
 
 };
