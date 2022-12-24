@@ -1,24 +1,28 @@
 #include "TransformHeader.hlsli"
 #include "RenderOption.hlsli"
+#include "DeferredRenderingHeader.hlsli"
+#include "LightHeader.hlsli"
+
 
 struct Input
 {
     float4 localPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    //uint instanceIndex_ : ROWINDEX; //인스턴스 인덱스. unsigned int 한개만 사용.
-    uint instanceIndex_ : SV_InstanceID; //인스턴스 인덱스. unsigned int 한개만 사용.
+    //uint instancingIndex_ : ROWINDEX; //인스턴싱 인덱스. unsigned int 한개만 사용. 더 이상 필요 없음.
+    uint instanceIndex_ : SV_InstanceID; //인스턴싱 인덱스. unsigned int 한개만 사용.
     uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
 struct Output
 {
     float4 wvpPosition_ : SV_Position;
+    float4 viewPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    //uint instanceIndex_ : ROWINDEX;
+    //uint instancingIndex_ : ROWINDEX; 필요 없음.
     uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
-Output MultiTexturesInstShadow_VS(Input _input)
+Output ExtractionDeferredRenderingData_VS(Input _input)
 {
     Output result = (Output) 0;
     
@@ -27,7 +31,7 @@ Output MultiTexturesInstShadow_VS(Input _input)
 
 SamplerState POINTCLAMP : register(s0);
 
-float4 MultiTexturesInstShadow_PS(Output _input) : SV_Target0
+float4 ExtractionDeferredRenderingData_PS(Output _input) : SV_Target0
 {
     float4 resultColor = (float4) 0;
     
@@ -50,31 +54,28 @@ struct InstAtlasData     //인스턴싱용 아틀라스데이터.
     float4 pivotPos_;
 };
 
+//struct InstPixelData 
+//{
+//    float4 mulColor_;
+//    float4 plusColor_;
+//    float4 slice_;
+//};
+
 StructuredBuffer<InstTransformData> Inst_TransformData : register(t12);
 StructuredBuffer<InstRenderOption> Inst_RenderOption : register(t13);
 Texture2DArray Inst_Textures : register(t14);
 StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
+//StructuredBuffer<InstPixelData> Inst_PixelData : register(t16);
 
-Output MultiTexturesInstShadow_VSINST(Input _input)
+Output ExtractionDeferredRenderingData_VSINST(Input _input)
 {
     Output result = (Output) 0;
     
-    float4 vertexPos = _input.localPosition_;
-    vertexPos += Inst_AtlasData[_input.instanceIndex_].pivotPos_;
+    result.wvpPosition_ = mul(_input.localPosition_, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
+    //정점의 wvp변환 위치 계산.
     
-    
-    vertexPos.x = (-sin(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) + vertexPos.x) * Inst_RenderOption[_input.instanceIndex_].vertexInversion_;
-    //오브젝트가 좌우반전되면 -1을 곱해서 그림자는 다시한번 좌우반전시킨다.
-
-    vertexPos.y = cos(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) - 0.5f;
-    
-    result.wvpPosition_ = mul(vertexPos, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
-    
-    if (-1 == Inst_RenderOption[_input.instanceIndex_].vertexInversion_)
-    {
-        _input.texcoord_.x = 1.f - _input.texcoord_.x;
-        //오브젝트가 좌우반전되면 texcoord도 좌우반전해서 그려지게 한다.
-    }
+    result.viewPosition_ = mul(_input.localPosition_, Inst_TransformData[_input.instanceIndex_].worldViewMatrix_);
+    //정점의 뷰공간에서의 위치 계산 후 전달.
     
     result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.x)
         + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.x;
@@ -82,25 +83,31 @@ Output MultiTexturesInstShadow_VSINST(Input _input)
         + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.y;
     result.texcoord_.z = 0.f;
     
-    //result.instanceIndex_ = _input.instanceIndex_;
+    //result.instancingIndex_ = _input.instancingIndex_;
     
     result.textureIndex_ = _input.textureIndex_;
     
     return result;
 }
 
-float4 MultiTexturesInstShadow_PSINST(Output _input) : SV_Target0
+DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
 {
-    float4 sampledColor = Inst_Textures.Sample(
+    DeferredRenderingOutput result = (DeferredRenderingOutput) 0.f;
+    
+    result.color_ = Inst_Textures.Sample(
         POINTCLAMP,
         float3(_input.texcoord_.xy, _input.textureIndex_)
     );
-    float4 shadowColor = float4(0.f, 0.f, 0.f, 1.f);
-  
-    if (0.01f >= sampledColor.a)
-    {
-        clip(-1);
-    }
     
-    return shadowColor;
+    result.normal_ =
+        Inst_Textures.Sample(POINTCLAMP, float3(_input.texcoord_.xy, 1 /*<-나중에 인풋레이아웃이나 렌더옵션의 변수 인덱스로 변경*/));
+    //노말텍스처에서 노말벡터 추출.
+    
+    result.normal_.w = 1.f;
+    //노말벡터는 방향벡터이므로 w를 0으로 만든다.
+    
+    result.position_ = _input.viewPosition_;
+    
+    
+    return result;
 }

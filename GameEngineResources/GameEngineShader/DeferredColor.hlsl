@@ -1,6 +1,6 @@
 #include "TransformHeader.hlsli"
 #include "LightHeader.hlsli"
-#include "DeferredHeader.hlsli"
+#include "DeferredRenderingHeader.hlsli"
 
 struct Input
 {
@@ -36,9 +36,9 @@ cbuffer ResultColor : register(b8)
     float4 Color;
 }
 
-DeferredOutput DeferredColor_PS(Output _input)
+DeferredRenderingOutput DeferredColor_PS(Output _input)
 {
-    DeferredOutput deferredResult = (DeferredOutput) 0;
+    DeferredRenderingOutput deferredResult = (DeferredRenderingOutput) 0;
 
     deferredResult.color_ = Color;
     deferredResult.position_ = _input.viewPosition_;

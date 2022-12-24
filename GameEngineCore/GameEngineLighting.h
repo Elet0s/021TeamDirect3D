@@ -13,6 +13,7 @@ struct LightingData
 	float ambientLightRatio_ = 1.f;   //주변광 적용 비율. 0~1.
 
 	float specularLightExponent_ = 20.f;   //정반사광 지수. 이 수치가 커지면 정반사광이 반사되는 면적이 제곱반비례로 줄어든다.
+	//반대로 음수가 되면 이 조명이 비추는 모든 영역에 정반사광이 비춘다.
 
 
 private:

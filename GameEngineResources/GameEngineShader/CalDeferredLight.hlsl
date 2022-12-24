@@ -1,5 +1,5 @@
 #include "LightHeader.hlsli"
-#include "DeferredHeader.hlsli"
+#include "DeferredRenderingHeader.hlsli"
 
 struct Input
 {

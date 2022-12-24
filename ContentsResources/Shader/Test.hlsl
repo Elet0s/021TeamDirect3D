@@ -108,26 +108,26 @@ Output Test_VSINST(Input _input)
 
 float4 Test_PSINST(Output _input) : SV_Target0
 {
-    //Texture2D instTexture = Inst_Textures[testIndex]; Texture2D는 인덱스로 상수만 사용할 수 있다.
-    
     float4 resultColor = Inst_Textures.Sample(
         POINTCLAMP,
         float3(_input.texcoord_.xy, _input.textureIndex_)
     );
     
-    //Texture2D temp = Inst_Textures[_input.textureIndex_];
+    float3 sampledNormal = Inst_Textures.Sample(
+        POINTCLAMP,
+        float3(_input.texcoord_.xy, _input.textureIndex_)
+    ).xyz;
     
-    float4 temp2 = Inst_Textures.Load(int4(_input.texcoord_.xy, 1, 0));
-    temp2.a = 1.f;
     
-    //if (0.01f >= resultColor.a)
-    //{
-    //    clip(-1);
-    //}
-    //else if (1.f < resultColor.a)
-    //{
-    //    resultColor.a = 1.f;
-    //}
     
-    return temp2;
+    if (0.01f >= resultColor.a)
+    {
+        clip(-1);
+    }
+    else if (1.f < resultColor.a)
+    {
+        resultColor.a = 1.f;
+    }
+    
+    return resultColor;
 }

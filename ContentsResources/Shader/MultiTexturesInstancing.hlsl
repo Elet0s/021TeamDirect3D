@@ -5,7 +5,8 @@ struct Input
 {
     float4 pos_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    uint instancingIndex_ : ROWINDEX;   //인스턴싱 인덱스. unsigned int 한개만 사용.
+    //uint instancingIndex_ : ROWINDEX;   //인스턴스 인덱스. unsigned int 한개만 사용.
+    uint instanceIndex_ : SV_InstanceID;   //인스턴스 인덱스. unsigned int 한개만 사용.
     uint textureIndex_ : TEXTUREINDEX;  //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
@@ -13,7 +14,8 @@ struct Output
 {
     float4 pos_ : SV_Position;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    uint instancingIndex_ : ROWINDEX;
+    //uint instancingIndex_ : ROWINDEX;
+    uint instanceIndex_ : SV_InstanceID;
     uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
@@ -66,15 +68,15 @@ Output MultiTexturesInstancing_VSINST(Input _input)
 {
     Output result = (Output) 0;
     
-    result.pos_ = mul(_input.pos_, Inst_TransformData[_input.instancingIndex_].worldViewProjectionMatrix_);
+    result.pos_ = mul(_input.pos_, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
     
-    result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instancingIndex_].textureFrameSize_.x)
-        + Inst_AtlasData[_input.instancingIndex_].textureFramePos_.x;
-    result.texcoord_.y = (_input.texcoord_.y * Inst_AtlasData[_input.instancingIndex_].textureFrameSize_.y)
-        + Inst_AtlasData[_input.instancingIndex_].textureFramePos_.y;
+    result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.x)
+        + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.x;
+    result.texcoord_.y = (_input.texcoord_.y * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.y)
+        + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.y;
     result.texcoord_.z = 0.f;
     
-    result.instancingIndex_ = _input.instancingIndex_;
+    result.instanceIndex_ = _input.instanceIndex_;
     
     result.textureIndex_ = _input.textureIndex_;
     

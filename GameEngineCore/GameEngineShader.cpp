@@ -370,9 +370,9 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 				psEntryIndex - psReturnTypeEntry
 			);
 
-			if (std::string::npos != psReturnType.find("DeferredOutput"))
+			if (std::string::npos != psReturnType.find("DeferredRenderingOutput"))
 			{
-				//ÇÈ¼¿¼ÎÀÌ´õ ¹İÈ¯ÇüÀÌ float4°¡ ¾Æ´Ï¶ó "DeferredOutput"¶ó¸é gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ¶ó´Â ¶æ.
+				//ÇÈ¼¿¼ÎÀÌ´õ ¹İÈ¯ÇüÀÌ float4°¡ ¾Æ´Ï¶ó "DeferredRenderingOutput"¶ó¸é gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ¶ó´Â ¶æ.
 				pixelShader->isDeferredRendering_ = true;
 			}
 		}

@@ -11,6 +11,7 @@
 #include "NormalGoblin.h"
 #include "RedFlyingEyes.h"
 #include "FlyingEyes.h"
+#include "GameEngineStatusWindow.h"
 
 ShaderTestLevel::ShaderTestLevel(): shaderTestActor_(nullptr), shaderTestRenderer_(nullptr)
 {
@@ -22,6 +23,9 @@ ShaderTestLevel::~ShaderTestLevel()
 
 void ShaderTestLevel::Start()
 {
+	GameEngineStatusWindow::AddDebugRenderTarget("GBuffer RenderTarget", this->GetMainCamera()->GetGBufferRenderTarget());
+
+
 	//GameEngineDirectory testDir;
 	//testDir.MoveParentToExistChildDirectory("ContentsResources");
 	//testDir.MoveToChild("ContentsResources");
@@ -38,10 +42,10 @@ void ShaderTestLevel::Start()
 
 	shaderTestActor_ = CreateActor<TestFieldRenderingActor>(0, "ShaderTestActor");
 	shaderTestActor_->Initialize(
-		550,
-		50,
-		float4(100, 100),
-		60.f
+		10,
+		1,
+		float4(10, 10),
+		1.f
 	);
 	shaderTestActor_->GetTransform().SetLocalScale(float4::White);
 	shaderTestActor_->GetTransform().SetWorldScale(float4::White);

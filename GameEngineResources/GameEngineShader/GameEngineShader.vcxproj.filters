@@ -52,7 +52,7 @@
     <None Include="LightTest.hlsl">
       <Filter>Object</Filter>
     </None>
-    <None Include="DeferredHeader.hlsli" />
+    <None Include="DeferredRenderingHeader.hlsli" />
     <None Include="CalDeferredLight.hlsl">
       <Filter>RenderTargetEffect\DeferredRendering</Filter>
     </None>

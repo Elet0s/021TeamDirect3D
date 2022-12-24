@@ -1,4 +1,4 @@
-struct DeferredOutput
+struct DeferredRenderingOutput
 {
     float4 color_ : SV_Target0;
     float4 position_ : SV_Target1;

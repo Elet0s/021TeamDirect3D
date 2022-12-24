@@ -202,7 +202,7 @@ void GameEngineCamera::Start()
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
-	//지오메트리 버퍼 렌더타겟에 윈도우 내 오브젝트들의 표면 법선벡터 정보를 저장할 텍스처 생성.
+	//지오메트리 버퍼 렌더타겟에 윈도우 내 오브젝트들의 뷰공간 표면 법선벡터 정보를 저장할 텍스처 생성.
 
 	geometryBufferRenderTarget_->SetDepthTexture(GameEngineDevice::GetBackBuffer()->GetDepthTexture());
 	//지오메트리 버퍼 렌더타겟의 깊이스텐실뷰는 백버퍼 렌더타겟의 것을 가져온다.
@@ -354,26 +354,17 @@ void GameEngineCamera::Render(float _deltaTime)
 
 			renderer->GetTransform().CalculateWorldViewProjection();
 			//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
-			
-			//if (false == float4x4::IsInViewFrustum(
-			//	renderer->GetTransformData().worldViewProjectionMatrix_, 
-			//	float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
-			//)
-			//{
-			//	//뷰프러스텀 안에 4개 정점들 중 한개라도 들어오는 것들만 그린다.
-			//	continue;
-			//}
 
 			renderer->Render(scaleTime);
 			//뷰포트행렬을 포함한 모든 행렬 계산을 거친 결과대로 메쉬를 화면에 그린다.
 		}
 	}
 
-	for (std::unordered_map<std::string, GameEngineInstancing>::iterator iter = instancingMap_.begin();
-		iter != instancingMap_.end(); ++iter)
-	{
-		iter->second.RenderInstancing(_deltaTime);
-	}
+	//for (std::unordered_map<std::string, GameEngineInstancing>::iterator iter = instancingMap_.begin();
+	//	iter != instancingMap_.end(); ++iter)
+	//{
+	//	iter->second.RenderInstancing(_deltaTime);
+	//}
 
 	for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = instancingRenderers_.begin();
 		iter != instancingRenderers_.end(); ++iter)
@@ -381,7 +372,6 @@ void GameEngineCamera::Render(float _deltaTime)
 		iter->second->Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 		//내부에서 자체적으로 트랜스폼 행렬계산을 해야 하므로 뷰행렬, 투영행렬을 넣어준다.
 	}
-
 
 
 
@@ -442,12 +432,11 @@ void GameEngineCamera::Render(float _deltaTime)
 	//	iter->second.RenderInstancing(_deltaTime);
 	//}
 
-	//for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = instancingRenderers_.begin();
-	//	iter != instancingRenderers_.end(); ++iter)
-	//{
-	//	iter->second->Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
-	//}
-	//인스턴싱렌더러에 DeferredRender()함수 추가한 후에 복원할 것.
+	for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = instancingRenderers_.begin();
+		iter != instancingRenderers_.end(); ++iter)
+	{
+		iter->second->DeferredRender(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+	}
 
 
 

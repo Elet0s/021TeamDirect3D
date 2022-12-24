@@ -110,6 +110,18 @@ public:
 		return forwardRenderTarget_;
 	}
 
+	//이 카메라의 디퍼드렌더링용 렌더타겟을 가져오는 함수.
+	inline std::shared_ptr<class GameEngineRenderTarget> GetDeferredRenderTarget()
+	{
+		return deferredRenderTarget_;
+	}
+
+	//이 카메라의 GBuffer 렌더타겟을 가져오는 함수.
+	inline std::shared_ptr<class GameEngineRenderTarget> GetGBufferRenderTarget()
+	{
+		return geometryBufferRenderTarget_;
+	}
+
 	inline LightingDatas& GetLightingDatas()
 	{
 		return lightingDatasInst_;

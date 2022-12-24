@@ -82,7 +82,7 @@ private:
 
 	std::shared_ptr<GameEngineInstancingRenderer> fieldRenderer_;	//인스턴싱 렌더러.
 
-	std::shared_ptr<GameEngineInstancingRenderer> fieldObjectShadowRenderer_;	//필드오브젝트 그림자 렌더러.
+	//std::shared_ptr<GameEngineInstancingRenderer> fieldObjectShadowRenderer_;	//필드오브젝트 그림자 렌더러.
 
 	std::vector<AtlasData> fieldObjectAtlasDatas_;	//필드 오브젝트별 아틀라스데이터 모음.
 
