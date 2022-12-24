@@ -368,8 +368,6 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 				&allInstancingUnits_[index].transformData_,	//
 				transforDataSize		//
 			);
-
-			int i = 0;
 		}
 
 		{

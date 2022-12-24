@@ -17,11 +17,10 @@ struct LightingData
     
     float specularLightExponent_; //정반사광 지수. 이 수치가 커지면 정반사광이 반사되는 면적이 제곱반비례로 줄어든다.
     
-    float4 lightingPosition_; //조명 위치.
-    float4 lightingDirection_; //조명 방향.
-    float4 lightingReverseDirection_; //조명 역방향.
-    //이 세개 쓸 일이 있나?
-    
+    float4 lightingPosition_; //월드공간 조명 위치.
+    float4 lightingDirection_; //월드공간 조명 방향.
+    float4 lightingReverseDirection_; //월드공간 조명 역방향.
+    //셰이더에서 직접 쓸 일은 없지만 그래도 일단 받아온다.
     
     float4 viewLightingPosition_; //뷰공간에서의 조명 위치.
     float4 viewLightingDirection_; //뷰공간에서의 조명 방향.
@@ -57,8 +56,11 @@ float4 CalSpecularLight(
     float3 reflectionAngle = normalize(2.f * orthogonalProjectionVector - lightingRevDirection);
     //길이를 두배로 늘린 정사영벡터에 조명 방향벡터를 더하면(== 조명 역방향벡터를 빼면) 빛의 반사각벡터를 구할 수 있다.
     
-    float3 negEyeDirection = normalize(_lightingData.viewSpaceCameraPosition_.xyz - _viewSpaceFocusPosition.xyz);
-    //카메라위치벡터에서 내가 보고있는 위치벡터를 빼서 시선 역방향 벡터를 구한다.
+    //float3 negEyeDirection = normalize(_lightingData.viewSpaceCameraPosition_.xyz - _viewSpaceFocusPosition.xyz);
+    //카메라위치벡터에서 내가 보고있는 지점의 위치벡터를 빼서 시선 역방향 벡터를 구한다
+    
+    float3 negEyeDirection = normalize(-_viewSpaceFocusPosition.xyz);
+    //뷰공간에서의 카메라 위치는 (0, 0, 0)이므로 내가 보고있는 위치벡터의 역벡터 == 시선 역방향 벡터.
     
     float brightness = saturate(dot(reflectionAngle, negEyeDirection));
     //시선 역방향벡터와 빛의 반사각벡터를 내적하면 카메라에 들어오는 정반사광의 밝기를 구할 수 있다.

@@ -6,7 +6,7 @@ struct LightingData
 	friend class GameEngineLighting;
 
 	float4 mainLightColor_ = float4::White;     //주 조명광 색상값. 정반사광, 난반사광에 적용.
-	float4 ambientLightColor_ = float4(0.25f, 0.25f, 0.25f, 1.f);  //주변광 색상값.
+	float4 ambientLightColor_ = float4(0.1f, 0.1f, 0.1f, 1.f);  //주변광 색상값.
 
 	float specularLightRatio_ = 1.f;  //정반사광 적용 비율. 0~1.
 	float diffuseLightRatio_ = 1.f;   //난반사광 적용 비율. 0~1.
@@ -17,11 +17,10 @@ struct LightingData
 
 
 private:
-	float4 lightingPosition_;   //조명 위치.
-	float4 lightingDirection_;  //조명 방향.
-	float4 lightingReverseDirection_; //조명 역방향.
-	//이 세개 쓸 일이 있나?
-
+	float4 lightingPosition_;   //월드공간 조명 위치.
+	float4 lightingDirection_;  //월드공간 조명 방향.
+	float4 lightingReverseDirection_; //월드공간 조명 역방향.
+	//셰이더가 이 값을 직접 쓸 일은 없을 것 같지만 그래도 보낸다.
 
 	float4 viewLightingPosition_; //뷰공간에서의 조명 위치.
 	float4 viewLightingDirection_; //뷰공간에서의 조명 방향.

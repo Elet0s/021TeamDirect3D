@@ -13,7 +13,10 @@
 #include "FlyingEyes.h"
 #include "GameEngineStatusWindow.h"
 
-ShaderTestLevel::ShaderTestLevel(): shaderTestActor_(nullptr), shaderTestRenderer_(nullptr)
+ShaderTestLevel::ShaderTestLevel()
+	: shaderTestActor_(nullptr),
+	shaderTestRenderer_(nullptr),
+	testLighting_(nullptr)
 {
 }
 
@@ -23,8 +26,6 @@ ShaderTestLevel::~ShaderTestLevel()
 
 void ShaderTestLevel::Start()
 {
-	GameEngineStatusWindow::AddDebugRenderTarget("GBuffer RenderTarget", this->GetMainCamera()->GetGBufferRenderTarget());
-
 
 	//GameEngineDirectory testDir;
 	//testDir.MoveParentToExistChildDirectory("ContentsResources");
@@ -52,6 +53,16 @@ void ShaderTestLevel::Start()
 	shaderTestActor_->GetTransform().SetWorldPosition(float4::Zero);
 
 
+	testLighting_ = CreateActor<GameEngineLighting>(0, "TestLighting");
+	testLighting_->GetTransform().SetWorldRotation(-30.f, 30.f, 0.f);
+	testLighting_->GetLightingData().mainLightColor_ = float4(0.65f, 0.65f, 0.65f);
+	testLighting_->GetLightingData().ambientLightColor_ = float4(0.15f, 0.15f, 0.15f);
+	testLighting_->GetLightingData().specularLightRatio_ = 0.f;
+	testLighting_->GetLightingData().diffuseLightRatio_ = 2.f;
+
+	this->GetMainCamera()->PushLighting(testLighting_);
+
+
 	//Monster::ReserveMonsters(this, 50);
 
 
@@ -73,6 +84,8 @@ void ShaderTestLevel::Start()
 void ShaderTestLevel::Update(float _deltaTime)
 {
 	shaderTestActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
+
+	testLighting_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
 }
 
 void ShaderTestLevel::End()

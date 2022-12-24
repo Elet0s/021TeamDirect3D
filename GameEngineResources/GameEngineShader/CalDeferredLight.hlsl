@@ -13,8 +13,6 @@ struct Output
     float4 texcoord_ : TEXCOORD;
 };
 
-
-// 그래픽카드에서 이뤄지는것.
 Output CalDeferredLight_VS(Input _input)
 {
     Output result = (Output) 0;

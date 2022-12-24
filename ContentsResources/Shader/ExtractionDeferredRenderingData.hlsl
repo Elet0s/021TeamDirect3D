@@ -99,9 +99,17 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
         float3(_input.texcoord_.xy, _input.textureIndex_)
     );
     
-    result.normal_ =
-        Inst_Textures.Sample(POINTCLAMP, float3(_input.texcoord_.xy, 1 /*<-나중에 인풋레이아웃이나 렌더옵션의 변수 인덱스로 변경*/));
+    result.normal_ = normalize(
+            -CalTrueNormalVector(Inst_Textures.Sample(
+                POINTCLAMP,
+                float3(_input.texcoord_.xy, 1 /*<-나중에 인풋레이아웃이나 렌더옵션의 변수 인덱스로 변경*/)
+            )
+        )
+    );
     //노말텍스처에서 노말벡터 추출.
+    
+    //2D인 로그제네시아 특성상 뷰변환에 필요한 요소들 중에 카메라 방향과 위치Z값은 고정이고 
+    //직교투영으로 보고 있으므로 추출한 노말벡터에 뷰변환은 하지 않아도 될 것 같다.
     
     result.normal_.w = 1.f;
     //노말벡터는 방향벡터이므로 w를 0으로 만든다.
