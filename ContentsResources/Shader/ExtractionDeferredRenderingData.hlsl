@@ -100,16 +100,30 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
     );
     
     result.normal_ = normalize(
-            -CalTrueNormalVector(Inst_Textures.Sample(
+            -CalTrueNormalVector(Inst_Textures.Sample(  //<-
                 POINTCLAMP,
-                float3(_input.texcoord_.xy, 1 /*<-나중에 인풋레이아웃이나 렌더옵션의 변수 인덱스로 변경*/)
+                float3(_input.texcoord_.xy, 1 /*<-나중에 인풋레이아웃이나 렌더옵션으로 전달되는 변수 인덱스로 변경할 것*/)
             )
         )
     );
     //노말텍스처에서 노말벡터 추출.
     
     //2D인 로그제네시아 특성상 뷰변환에 필요한 요소들 중에 카메라 방향과 위치Z값은 고정이고 
-    //직교투영으로 보고 있으므로 추출한 노말벡터에 뷰변환은 하지 않아도 될 것 같다.
+    //카메라와 조명 모두 각도만 다른 직교투영으로 보고 있으므로 추출한 법선벡터에 뷰변환은 하지 않아도 될 것 같다.
+    //뷰변환을 하지 않는 대신 법선벡터의 부호를 바꿔주어야 제대로 된 난반사광 계산이 되는 값들이 노말텍스처에 저장되어 있으므로 뒤집어준다.
+    
+    
+    //result.normal_ = normalize(
+    //        CalTrueNormalVector(Inst_Textures.Sample( //<-
+    //            POINTCLAMP,
+    //            float3(_input.texcoord_.xy, 1 /*<-나중에 인풋레이아웃이나 렌더옵션으로 전달되는 변수 인덱스로 변경할 것*/)
+    //        )
+    //    )
+    //);
+    //result.normal_ *= LightingData.cameraViewMatrix_;
+    
+    
+    
     
     result.normal_.w = 1.f;
     //노말벡터는 방향벡터이므로 w를 0으로 만든다.

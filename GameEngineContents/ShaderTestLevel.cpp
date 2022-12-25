@@ -54,9 +54,9 @@ void ShaderTestLevel::Start()
 
 
 	testLighting_ = CreateActor<GameEngineLighting>(0, "TestLighting");
-	testLighting_->GetTransform().SetWorldRotation(-30.f, 30.f, 0.f);
-	testLighting_->GetLightingData().mainLightColor_ = float4(0.65f, 0.65f, 0.65f);
-	testLighting_->GetLightingData().ambientLightColor_ = float4(0.15f, 0.15f, 0.15f);
+	testLighting_->GetTransform().SetWorldRotation(-45.f, 45.f, 0.f);
+	testLighting_->GetLightingData().mainLightColor_ = float4(0.55f, 0.55f, 0.55f);
+	testLighting_->GetLightingData().ambientLightColor_ = float4(0.1f, 0.1f, 0.1f);
 	testLighting_->GetLightingData().specularLightRatio_ = 0.f;
 	testLighting_->GetLightingData().diffuseLightRatio_ = 2.f;
 

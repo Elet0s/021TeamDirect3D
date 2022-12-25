@@ -111,8 +111,7 @@ public:
     void Initialize(
         size_t _instancingUnitCount,            //인스턴싱 유닛 수.
         const std::string_view& _meshName,      //사용할 메쉬 이름.
-        const std::string_view& _materialName,  //사용할 마테리얼 이름.
-        bool _isDeferredRendering = false       //디퍼드렌더링 여부.
+        const std::string_view& _materialName  //사용할 마테리얼 이름.
     );
 
     //이 렌더러의 모든 월드스케일을 한번에 세팅하는 함수.
@@ -173,7 +172,7 @@ private:
     void DeferredRender(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
 
 private:
-    bool isDeferredRendering_;      //true: 디퍼드렌더링 함. false: 포워드렌더링 함.
+    //bool isDeferredRendering_;      //true: 디퍼드렌더링 함. false: 포워드렌더링 함.
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
 

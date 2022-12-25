@@ -77,8 +77,7 @@ void GameEngineInstancingRenderer::InstancingUnit::CalWorldWorldMatrix()
 }
 
 GameEngineInstancingRenderer::GameEngineInstancingRenderer()
-	: isDeferredRendering_(false),
-	instancingUnitCount_(0),
+	: instancingUnitCount_(0),
 	topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 {
 }
@@ -90,8 +89,7 @@ GameEngineInstancingRenderer::~GameEngineInstancingRenderer()
 void GameEngineInstancingRenderer::Initialize(
 	size_t _instancingUnitCount,
 	const std::string_view& _meshName,
-	const std::string_view& _materialName,
-	bool _isDeferredRendering /*= false*/
+	const std::string_view& _materialName
 )
 {
 	if (0 == _instancingUnitCount)
@@ -115,7 +113,7 @@ void GameEngineInstancingRenderer::Initialize(
 	this->instancingUnitCount_ = _instancingUnitCount;
 
 
-	this->isDeferredRendering_ = _isDeferredRendering;
+	//this->isDeferredRendering_ = _isDeferredRendering;
 
 
 	this->mesh_ = GameEngineMesh::Find(_meshName);
@@ -197,7 +195,7 @@ void GameEngineInstancingRenderer::Render(
 	const float4x4& _projectionMatrix
 )
 {
-	if (true == isDeferredRendering_)
+	if (true == this->material_->GetPixelShader()->GetInst_PixelShader()->IsDeferredRendering())
 	{
 		return;
 		//디퍼드렌더링은 여기서 하지 않는다.
@@ -319,7 +317,7 @@ void GameEngineInstancingRenderer::Render(
 
 void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix)
 {
-	if (false == isDeferredRendering_)
+	if (false == this->material_->GetPixelShader()->GetInst_PixelShader()->IsDeferredRendering())
 	{
 		return;
 		//포워드렌더링은 여기서 하지 않는다.

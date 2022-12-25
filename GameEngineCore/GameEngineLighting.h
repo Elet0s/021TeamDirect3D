@@ -5,6 +5,7 @@ struct LightingData
 {
 	friend class GameEngineLighting;
 
+
 	float4 mainLightColor_ = float4::White;     //주 조명광 색상값. 정반사광, 난반사광에 적용.
 	float4 ambientLightColor_ = float4(0.1f, 0.1f, 0.1f, 1.f);  //주변광 색상값.
 
@@ -17,22 +18,38 @@ struct LightingData
 
 
 private:
+	float4x4 lightingViewMatrix_;			//조명의 뷰행렬.
+	float4x4 inverseLightingViewMatrix_;	//조명의 뷰행렬의 역행렬.
+
+	float4x4 lightingProjectionMatrix_;			//조명의 투영행렬.
+	float4x4 inverseLightingProjectionMatrix_;	//조명의 투영행렬의 역행렬.
+
+	//float4x4 lightingViewProjectionMatrix_;	//조명의 뷰, 투영 통합행렬.
+
+	float4x4 cameraViewMatrix_;			//카메라의 뷰행렬.
+	float4x4 inverseCameraViewMatrix_;	//카메라의 뷰행렬의 역행렬.
+
+	float shadowRenderTargetWidth_;		//그림자 렌더타겟 가로길이.
+	float shadowRenderTargetHeight_;	//그림자 렌더타겟 세로길이.
+	float lightingViewFrustumNearZ_;	//조명의 뷰프러스텀 근평면 z값.
+	float lightingViewFrustumFarZ_;		//조명의 뷰프러스텀 원평면 z값.
+
 	float4 lightingPosition_;   //월드공간 조명 위치.
 	float4 lightingDirection_;  //월드공간 조명 방향.
-	float4 lightingReverseDirection_; //월드공간 조명 역방향.
+	float4 inverseLightingDirection_; //월드공간 조명 역방향.
 	//셰이더가 이 값을 직접 쓸 일은 없을 것 같지만 그래도 보낸다.
 
 	float4 viewLightingPosition_; //뷰공간에서의 조명 위치.
 	float4 viewLightingDirection_; //뷰공간에서의 조명 방향.
-	float4 viewLightingReverseDirection_; //뷰공간에서의 조명 역방향.
+	float4 inverseViewLightingDirection_; //뷰공간에서의 조명 역방향.
 
-	float4 viewSpaceCameraPosition_;  //카메라 위치. 
+	//float4 viewSpaceCameraPosition_;  //카메라 위치. 
 	//뷰공간 카메라위치는 (0, 0, 0) 고정 아닌가?
 };
 
 struct LightingDatas
 {
-	//조명 데이터 모음. 상수 버퍼로 셰이더에게 전달한다.
+	//조명 데이터 모음. 상수 버퍼 형태로 셰이더에게 전달한다.
 	int lightingCount_ = 0;        //조명 개수.
 	LightingData lightings_[16]; //LightingData 모음.
 };
@@ -57,6 +74,7 @@ private:
 
 
 public:
+	void Start() override;
 	void Update(float _deltaTime) override;
 
 public:
@@ -68,9 +86,11 @@ public:
 
 private:
 	void UpdataLightingData(std::weak_ptr<class GameEngineCamera> _camera);
+	void SetShadowRenderTarget();
 
 private:
-	LightingData lightingData_;
-
+	LightingData lightingData_;		//이 조명의 각종 정보.
+	std::shared_ptr<class GameEngineRenderTarget> shadowRenderTarget_;	//그림자를 그릴 렌더타겟.
+	D3D11_VIEWPORT lightViewport_;	//이 조명의 뷰포트.
 };
 

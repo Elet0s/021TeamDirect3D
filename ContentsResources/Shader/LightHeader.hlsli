@@ -10,24 +10,40 @@ struct LightingData
 {
     float4 mainLightColor_; //주 조명광 색상값. 정반사광, 난반사광에 적용.
     float4 ambientLightColor_; //주변광 색상값.
-    
+
     float specularLightRatio_; //정반사광 적용 비율. 0~1.
     float diffuseLightRatio_; //난반사광 적용 비율. 0~1.
     float ambientLightRatio_; //주변광 적용 비율. 0~1.
-    
+
     float specularLightExponent_; //정반사광 지수. 이 수치가 커지면 정반사광이 반사되는 면적이 제곱반비례로 줄어든다.
+	//반대로 음수가 되면 이 조명이 비추는 모든 영역에 정반사광이 비춘다.
     
-    float4 lightingPosition_; //조명 위치.
-    float4 lightingDirection_; //조명 방향.
-    float4 lightingReverseDirection_; //조명 역방향.
-    //이 세개 쓸 일이 있나?
-    
-    
+    float4x4 lightingViewMatrix_; //조명의 뷰행렬.
+    float4x4 inverseLightingViewMatrix_; //조명의 뷰행렬의 역행렬.
+
+    float4x4 lightingProjectionMatrix_; //조명의 투영행렬.
+    float4x4 inverseLightingProjectionMatrix_; //조명의 투영행렬의 역행렬.
+
+	//float4x4 lightingViewProjectionMatrix_;	//조명의 뷰, 투영 통합행렬.
+
+    float4x4 cameraViewMatrix_; //카메라의 뷰행렬.
+    float4x4 inverseCameraViewMatrix_; //카메라의 뷰행렬의 역행렬.
+
+    float shadowRenderTargetWidth_; //그림자 렌더타겟 가로길이.
+    float shadowRenderTargetHeight_; //그림자 렌더타겟 세로길이.
+    float lightingViewFrustumNearZ_; //조명의 뷰프러스텀 근평면 z값.
+    float lightingViewFrustumFarZ_; //조명의 뷰프러스텀 원평면 z값.
+
+    float4 lightingPosition_; //월드공간 조명 위치.
+    float4 lightingDirection_; //월드공간 조명 방향.
+    float4 inverseLightingDirection_; //월드공간 조명 역방향.
+	//셰이더가 이 값을 직접 쓸 일은 없을 것 같지만 그래도 보낸다.
+
     float4 viewLightingPosition_; //뷰공간에서의 조명 위치.
     float4 viewLightingDirection_; //뷰공간에서의 조명 방향.
-    float4 viewLightingReverseDirection_; //뷰공간에서의 조명 역방향.
+    float4 inverseViewLightingDirection_; //뷰공간에서의 조명 역방향.
     
-    float4 viewSpaceCameraPosition_; //카메라 위치. 
+    //float4 viewSpaceCameraPosition_; //카메라 위치. 
     //뷰공간 카메라위치는 (0, 0, 0) 고정 아닌가?
 };
 
@@ -48,17 +64,20 @@ float4 CalSpecularLight(
     float3 normalVector = normalize(_viewSpaceNormalVector.xyz);
     //오브젝트 표면 법선벡터를 다시한번 정규화.
     
-    float3 lightingRevDirection = normalize(_lightingData.viewLightingReverseDirection_.xyz);
+    float3 lightingInvDirection = normalize(_lightingData.inverseViewLightingDirection_.xyz);
     //조명 역방향벡터를 다시한번 정규화.
     
-    float3 orthogonalProjectionVector = normalVector * dot(lightingRevDirection, normalVector);
+    float3 orthogonalProjectionVector = normalVector * dot(lightingInvDirection, normalVector);
     //법선벡터에 조명 역방향벡터의 코사인값(대신 내적값)을 곱해서 정사영벡터를 만든다.
     
-    float3 reflectionAngle = normalize(2.f * orthogonalProjectionVector - lightingRevDirection);
+    float3 reflectionAngle = normalize(2.f * orthogonalProjectionVector - lightingInvDirection);
     //길이를 두배로 늘린 정사영벡터에 조명 방향벡터를 더하면(== 조명 역방향벡터를 빼면) 빛의 반사각벡터를 구할 수 있다.
     
-    float3 negEyeDirection = normalize(_lightingData.viewSpaceCameraPosition_.xyz - _viewSpaceFocusPosition.xyz);
-    //카메라위치벡터에서 내가 보고있는 위치벡터를 빼서 시선 역방향 벡터를 구한다.
+    //float3 negEyeDirection = normalize(_lightingData.viewSpaceCameraPosition_.xyz - _viewSpaceFocusPosition.xyz);
+    //카메라위치벡터에서 내가 보고있는 지점의 위치벡터를 빼서 시선 역방향 벡터를 구한다
+    
+    float3 negEyeDirection = normalize(-_viewSpaceFocusPosition.xyz);
+    //뷰공간에서의 카메라 위치는 (0, 0, 0)이므로 내가 보고있는 위치벡터의 역벡터 == 시선 역방향 벡터.
     
     float brightness = saturate(dot(reflectionAngle, negEyeDirection));
     //시선 역방향벡터와 빛의 반사각벡터를 내적하면 카메라에 들어오는 정반사광의 밝기를 구할 수 있다.
@@ -109,10 +128,10 @@ float4 CalDiffuseLight(
     float4 normalVector = normalize(_viewSpaceNormalVector);
     //오브젝트 표면 법선벡터를 다시한번 정규화.
     
-    float4 lightingRevDirection = normalize(_lightingData.viewLightingReverseDirection_);
+    float4 lightingInvDirection = normalize(_lightingData.inverseViewLightingDirection_);
     //조명 역방향벡터를 다시한번 정규화.
     
-    float4 diffuseLight = max(0.f, dot(normalVector.xyz, lightingRevDirection.xyz));
+    float4 diffuseLight = max(0.f, dot(normalVector.xyz, lightingInvDirection.xyz));
     //내적값은 -1~1 범위로 나오는데 내적값이 음수가 되면 값을 그냥 0으로 바꿔버린다.
     //max(): 주어진 두 값 중 큰 값만 반환하는 함수.
     

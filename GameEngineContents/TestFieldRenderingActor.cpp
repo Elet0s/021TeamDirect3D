@@ -128,8 +128,7 @@ void TestFieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCoun
 	fieldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_)/* + _objectInWindowCount*/,
 		"Rect",
-		"ExtractionDeferredRenderingData",
-		true
+		"ExtractionDeferredRenderingData"
 	);
 	fieldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	fieldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
