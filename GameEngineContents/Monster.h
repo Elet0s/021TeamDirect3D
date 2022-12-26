@@ -131,9 +131,7 @@ public:
 
 			if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
 			{
-				if (monsterPosition_.y > cameraY + 360 || monsterPosition_.y < cameraY - 360)
-				{
-
+		
 
 					allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
 
@@ -156,12 +154,31 @@ public:
 					//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
 					//	"Inst_RenderOption", allMonsters_[i]->renderOption_
 					//);
-				}
-				else
-				{
-					i--;
-					++count;
-				}
+				
+			}
+			else if (monsterPosition_.y > cameraY + 360 || monsterPosition_.y < cameraY - 360)
+			{
+				allMonsters_[i]->GetTransform().SetWorldPosition(monsterPosition_);
+
+				allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
+					allMonsters_[i]->monsterScale_
+				);
+				allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
+					monsterPosition_
+				);
+
+				allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
+					allMonsters_[i]->monsterScale_
+				);
+				allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
+					monsterPosition_
+				);
+
+				allMonsters_[i]->On();
+				allMonsters_[i]->isSummoned_ = true;
+				//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
+				//	"Inst_RenderOption", allMonsters_[i]->renderOption_
+				//);
 			}
 			else
 			{

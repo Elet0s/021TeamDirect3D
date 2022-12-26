@@ -162,7 +162,6 @@ void Shuriken::ProjectileSort()
 		projectileGroupList_.reserve(30);
 		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
 		{
-
 			projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
 			projectileGroup_.first->GetTransform().SetWorldScale(20, 20, 0);
 			projectileGroup_.first->SetTexture("Shuriken.png");
@@ -183,12 +182,12 @@ void Shuriken::ProjectileSort()
 	}
 	else //아니면 있는걸로 돌려
 	{
-		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
-		{
+		//for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
+		//{
 
-			projectileGroupList_[i].first->On();
-			projectileGroupList_[i].second->On();
-		}
+		//projectileGroupList_[i].first->On();
+		//projectileGroupList_[i].second->On();
+		//}
 	}
 }
 
