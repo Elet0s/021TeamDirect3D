@@ -366,6 +366,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="StageCreater.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="StageObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SteelSkin.h">
       <SubType>
       </SubType>
@@ -703,6 +711,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Spear.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StageCreater.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StageObject.cpp">
       <SubType>
       </SubType>
     </ClCompile>
