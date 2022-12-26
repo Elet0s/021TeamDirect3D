@@ -59,7 +59,7 @@ void Shuriken::Update(float _deltaTime)
 	{
 		{//작은반복
 			SerchTarget();//찾고
-			ProjectileSort();//발사체 생성,위치 on,off조정
+			ProjectileSort(_deltaTime);//발사체 생성,위치 on,off조정
 			RenderRotate();//찾은 타겟위치에 대해 발사체 회전
 		}
 		{//작은반복
@@ -79,7 +79,7 @@ void  Shuriken::StateSet()
 	if (nowLevel_ < 2)
 	{
 		shuriKenWeaponInfo_.weaponAtk_ = 1.13f;
-		shuriKenWeaponInfo_.weaponAtkSpeed_ = 100.f;//1초마다
+		shuriKenWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
 
 		shuriKenWeaponInfo_.weaponPassAtk_ = 0;
 		shuriKenWeaponInfo_.weaponPassNum_ = 0;
@@ -120,8 +120,9 @@ void Shuriken::SerchTarget()
 {
 	monsterList_ = Monster::GetMonsterList();
 	shuriKenWeaponInfo_.weaponProjectileNum_;//이갯수만큼 뽑아야함
-	if (Shooting == false)
+	if (Shooting == false||  timeer_ > 3.f)
 	{
+		Shooting = false;
 		for (size_t n = 0; n < shuriKenWeaponInfo_.weaponProjectileNum_; n++)//한번에 던지는 투사체 갯수만큼 반복할것임
 		{
 			for (size_t i = 0; i < monsterList_.size(); i++)
@@ -155,7 +156,7 @@ void Shuriken::SerchTarget()
 
 }
 
-void Shuriken::ProjectileSort()
+void Shuriken::ProjectileSort(float _deltaTime)
 {
 	if (firstSort == false) //처음이면 만들고
 	{
@@ -180,14 +181,18 @@ void Shuriken::ProjectileSort()
 		}
 		firstSort = true;
 	}
-	else //아니면 있는걸로 돌려
+	else if(timeer_ > 3.f)//아니면 있는걸로 돌려
 	{
-		//for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
-		//{
+		timeer_ = 0.f;
 
-		//projectileGroupList_[i].first->On();
-		//projectileGroupList_[i].second->On();
-		//}
+		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
+		{
+		projectileGroupList_[i].first->On();
+		projectileGroupList_[i].second->On();
+		projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -100)));
+		projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+		}
+
 	}
 }
 
@@ -208,9 +213,9 @@ void Shuriken::RenderRotate()
 				referenceVector_.w = 0;
 				referenceVectorList_.push_back(referenceVector_);
 				projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
-				projectileGroupList_[i].first->GetTransform().SetWorldRotation(60, 0, 0);
-				Shooting = true;
+				projectileGroupList_[i].first->GetTransform().SetWorldRotation(60, 0, 0);	
 		}
+		Shooting = true;
 	}
 }
 
@@ -230,16 +235,7 @@ void Shuriken::RangeCheak(float _deltaTime)
 			}
 		}
 	}
-	else
-	{
-		for (size_t i = 0; i < projectileGroupList_.size(); i++)
-		{
-			projectileGroupList_[i].first->Off();
-			projectileGroupList_[i].second->Off();
-		}
-		timeer_ = 0.f;
-		test_ = true;
-	}
+
 }
 
 CollisionReturn Shuriken::RangeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
@@ -259,6 +255,14 @@ CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngin
 	//TargetMonsters_.push_back(dynamic_pointer_cast<Monster>(_Other->GetActor()));
 
 	//여기서 데미지 갱신해줘야함
+	for (size_t i = 0; i < projectileGroupList_.size(); i++)
+	{
+		if (projectileGroupList_[i].second == _This)
+		{
+			projectileGroupList_[i].first->Off();
+			projectileGroupList_[i].second->Off();
+		}
+	}
 	_Other->GetActor()->Off();
 	//off한 몬스터 부활 시켜주는 자료구조에 넣어주는 부분 필요함 자료구조는 계속 업데이트 돌면서 죽은 애들 위치갱신해줌
 	return CollisionReturn::Stop;

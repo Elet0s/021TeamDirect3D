@@ -48,9 +48,11 @@ protected:
 	//void StateSet() override;//레벨에 따른 스탯 적용
 
 private:
-
+	bool firstSort_;
+	float timeer_;
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
+	float4 mouseAimPos_;
 
 	WeaponInfo spearWeaponInfo_;//무기 스탯
 
