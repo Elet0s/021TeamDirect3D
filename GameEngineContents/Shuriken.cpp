@@ -78,7 +78,7 @@ void  Shuriken::StateSet()
 {
 	if (nowLevel_ < 2)
 	{
-		shuriKenWeaponInfo_.weaponAtk_ = 1.13f;
+		shuriKenWeaponInfo_.weaponAtk_ = 10.13f;
 		shuriKenWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
 
 		shuriKenWeaponInfo_.weaponPassAtk_ = 0;
@@ -120,9 +120,8 @@ void Shuriken::SerchTarget()
 {
 	monsterList_ = Monster::GetMonsterList();
 	shuriKenWeaponInfo_.weaponProjectileNum_;//이갯수만큼 뽑아야함
-	if (Shooting == false||  timeer_ > 3.f)
+	if (Shooting == false)
 	{
-		Shooting = false;
 		for (size_t n = 0; n < shuriKenWeaponInfo_.weaponProjectileNum_; n++)//한번에 던지는 투사체 갯수만큼 반복할것임
 		{
 			for (size_t i = 0; i < monsterList_.size(); i++)
@@ -149,6 +148,40 @@ void Shuriken::SerchTarget()
 
 				}
 			
+			}
+
+		}
+	}
+	else if (timeer_ > 3.f)
+	{
+		Shooting = false;
+		targetInst_.clear();
+
+		for (size_t n = 0; n < shuriKenWeaponInfo_.weaponProjectileNum_; n++)//한번에 던지는 투사체 갯수만큼 반복할것임
+		{
+			for (size_t i = 0; i < monsterList_.size(); i++)
+			{
+				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
+				{
+
+					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstCheak_ == false)//hp0이상, 첫번째 순번일경우
+					{
+						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+						firstCheak_ = true;
+					}
+					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮다면
+					{
+						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+					}
+					if (i == monsterList_.size() - 1)
+					{
+						targetInst_.push_back(minHpPair_);//타겟리스트에 추가
+						monsterList_[minHpPair_.first]->isTarget_ = true;
+						firstCheak_ = false;
+					}
+
+				}
+
 			}
 
 		}
@@ -212,6 +245,7 @@ void Shuriken::RenderRotate()
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
 				referenceVectorList_.push_back(referenceVector_);
+
 				projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
 				projectileGroupList_[i].first->GetTransform().SetWorldRotation(60, 0, 0);	
 		}
@@ -225,8 +259,6 @@ void Shuriken::RangeCheak(float _deltaTime)
 	{
 		if (test_ == false)
 		{
-
-
 			timeer_ += _deltaTime;
 			for (size_t i = 0; i < projectileGroupList_.size(); i++)
 			{
@@ -252,7 +284,7 @@ CollisionReturn Shuriken::RangeToMonsterCollision(std::shared_ptr<GameEngineColl
 CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other) 
 {
 	
-	//TargetMonsters_.push_back(dynamic_pointer_cast<Monster>(_Other->GetActor()));
+	//TargetMonsters_.push_back();
 
 	//여기서 데미지 갱신해줘야함
 	for (size_t i = 0; i < projectileGroupList_.size(); i++)
@@ -263,7 +295,7 @@ CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngin
 			projectileGroupList_[i].second->Off();
 		}
 	}
-	_Other->GetActor()->Off();
+	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= shuriKenWeaponInfo_.weaponAtk_;
 	//off한 몬스터 부활 시켜주는 자료구조에 넣어주는 부분 필요함 자료구조는 계속 업데이트 돌면서 죽은 애들 위치갱신해줌
 	return CollisionReturn::Stop;
 }

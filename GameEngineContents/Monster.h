@@ -215,8 +215,6 @@ protected:
 	void End() override;
 	void Chaseplayer(float _deltaTime);
 
-
-
 protected:
 	bool colCheakToPlayer_;
 	bool colCheakToMonster_;

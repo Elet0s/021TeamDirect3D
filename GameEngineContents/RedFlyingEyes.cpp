@@ -45,6 +45,7 @@ void RedFlyingEyes::Start()
 }
 void RedFlyingEyes::Update(float _deltaTime)
 {
+	HpCheak();
 	Monster::Update(_deltaTime);
 	Chaseplayer(_deltaTime);
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
@@ -52,5 +53,18 @@ void RedFlyingEyes::Update(float _deltaTime)
 }
 void RedFlyingEyes::End()
 {
+
+}
+
+void RedFlyingEyes::HpCheak()
+{
+	if (monsterInfo_->hp_ <0)
+	{
+		Relocated();
+	}
+}
+void RedFlyingEyes::Relocated()
+{
+	this->Unsummon();
 
 }
