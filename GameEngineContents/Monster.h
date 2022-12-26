@@ -191,6 +191,7 @@ public:
 public:
 	float mxMove_;
 	float myMove_;
+	bool isTarget_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

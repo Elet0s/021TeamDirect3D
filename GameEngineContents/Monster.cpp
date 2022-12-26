@@ -24,6 +24,7 @@ Monster::Monster()
 	, range_(0)
 	, instancingUnitIndex_(0)
 	, monsterScale_(float4::Zero)
+	, isTarget_(false)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
 }

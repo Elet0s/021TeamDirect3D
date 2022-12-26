@@ -8,7 +8,8 @@ Shuriken::Shuriken()
 	minHpPair_(),
 	monsterList_(),
 	resultCos_(),
-	firstSort(false)
+	firstSort(false),
+	firstCheak_(false)
 {
 
 }
@@ -123,12 +124,13 @@ void Shuriken::SerchTarget()
 		{
 			for (size_t i = 0; i < monsterList_.size(); i++)
 			{
-				if (monsterList_[i]->IsSummoned() == true)
+				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
 				{
 
-					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && i == 0)//hp0이상, 첫번째 순번일경우
+					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstCheak_ == false)//hp0이상, 첫번째 순번일경우
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
+						firstCheak_ = true;
 					}
 					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮다면
 					{
@@ -137,6 +139,8 @@ void Shuriken::SerchTarget()
 					if (i == monsterList_.size() - 1)
 					{
 						targetInst_.push_back(minHpPair_);//타겟리스트에 추가
+						monsterList_[minHpPair_.first]->isTarget_ = true;
+						firstCheak_ = false;
 						//monsterList_.erase(monsterList_.begin() + minHpPair_.first); //몬스터 리스트에서 제거
 					}
 
@@ -153,23 +157,23 @@ void Shuriken::ProjectileSort()
 {
 	if (firstSort == false) //처음이면 만들고
 	{
-		projectileGroupList_.reserve(15);
+		projectileGroupList_.reserve(30);
 		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
 		{
 
 			projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
-			projectileGroup_.first->GetTransform().SetWorldScale(50, 80, 0);
+			projectileGroup_.first->GetTransform().SetWorldScale(20, 20, 0);
 			projectileGroup_.first->SetTexture("Shuriken.png");
 
 			projectileGroup_.second = CreateComponent<GameEngineCollision>();
 			projectileGroup_.second->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-			projectileGroup_.second->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+			projectileGroup_.second->GetTransform().SetWorldScale(20, 20, 0);
 			projectileGroup_.second->ChangeOrder(ObjectOrder::Projectile);
 
 
-			projectileGroup_.first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+			projectileGroup_.first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -100)));
 			projectileGroup_.second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
-			
+
 			projectileGroupList_.push_back(projectileGroup_);
 
 		}
@@ -186,15 +190,13 @@ void Shuriken::ProjectileSort()
 	}
 }
 
-
-
 void Shuriken::RenderRotate()
 {
 	monsterList_ = Monster::GetMonsterList();
 	//체력이 다 같을 경우 제일 가까운 녀석을 추적하는 기능
 	if (Shooting == false)
 	{
-		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)
+		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)  
 		{
 
 				float Mx = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().x;
@@ -206,6 +208,7 @@ void Shuriken::RenderRotate()
 				referenceVector_.w = 0;
 				referenceVectorList_.push_back(referenceVector_);
 				projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
+				projectileGroupList_[i].first->GetTransform().SetWorldRotation(60, 0, 0);
 				Shooting = true;
 		}
 	}
@@ -215,8 +218,8 @@ void Shuriken::RangeCheak(float _deltaTime)
 {
 	for (size_t i = 0; i < projectileGroupList_.size(); i++)
 	{
-		projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * 100.f);
-		projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * 100.f);
+		projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+		projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
 	}
 
 }
