@@ -388,6 +388,12 @@
     <ClCompile Include="TestFieldRenderingActor.cpp">
       <Filter>Level\Global\Test</Filter>
     </ClCompile>
+    <ClCompile Include="StageObject.cpp">
+      <Filter>Actor\01. MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="StageCreater.cpp">
+      <Filter>Actor\01. MapObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -682,6 +688,12 @@
     </ClInclude>
     <ClInclude Include="TestFieldRenderingActor.h">
       <Filter>Level\Global\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="StageObject.h">
+      <Filter>Actor\01. MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="StageCreater.h">
+      <Filter>Actor\01. MapObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

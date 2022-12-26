@@ -1,6 +1,7 @@
 #include"PreCompile.h"
 #include"WorldMapLevel.h"
 #include"WorldMapActor.h"
+#include "StageCreater.h"
 #include"WorldMapRenderingActor.h"
 
 WorldMapLevel::WorldMapLevel()
@@ -15,6 +16,7 @@ void WorldMapLevel::Start()
 {
 
 	WorldMapRenderingActor_ = CreateActor<WorldMapRenderingActor>();
+	CreateActor<StageCreater>();
 	WorldMapRenderingActor_->Initialize(
 		1000,
 		150
