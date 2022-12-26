@@ -9,7 +9,9 @@ Shuriken::Shuriken()
 	monsterList_(),
 	resultCos_(),
 	firstSort(false),
-	firstCheak_(false)
+	firstCheak_(false),
+	timeer_(),
+	test_(false)
 {
 
 }
@@ -198,7 +200,6 @@ void Shuriken::RenderRotate()
 	{
 		for (size_t i = 0; i < shuriKenWeaponInfo_.weaponProjectileNum_; i++)  
 		{
-
 				float Mx = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().y;
 				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
@@ -216,12 +217,30 @@ void Shuriken::RenderRotate()
 
 void Shuriken::RangeCheak(float _deltaTime)
 {
-	for (size_t i = 0; i < projectileGroupList_.size(); i++)
+	if (timeer_ <= 3.0f)
 	{
-		projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
-		projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
-	}
+		if (test_ == false)
+		{
 
+
+			timeer_ += _deltaTime;
+			for (size_t i = 0; i < projectileGroupList_.size(); i++)
+			{
+				projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+			}
+		}
+	}
+	else
+	{
+		for (size_t i = 0; i < projectileGroupList_.size(); i++)
+		{
+			projectileGroupList_[i].first->Off();
+			projectileGroupList_[i].second->Off();
+		}
+		timeer_ = 0.f;
+		test_ = true;
+	}
 }
 
 CollisionReturn Shuriken::RangeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
