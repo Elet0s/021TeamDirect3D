@@ -56,17 +56,23 @@ void Shuriken::Start()
 void Shuriken::Update(float _deltaTime)
 {
 	StateSet();
+
+	SerchTarget();
+	ProjectileSort(_deltaTime);
+	RenderRotate();
+
+	RangeCheak(_deltaTime);
+	ColCheak();
+
+	for (size_t i = 0; i < Monster::GetMonsterList().size() - 1; i++)
 	{
-		{//작은반복
-			SerchTarget();//찾고
-			ProjectileSort(_deltaTime);//발사체 생성,위치 on,off조정
-			RenderRotate();//찾은 타겟위치에 대해 발사체 회전
+		if (Monster::GetMonsterList()[i]->isTarget_ == true)
+		{
+			Monster::GetMonsterList()[i]->isTarget_ = false;
 		}
-		{//작은반복
-			RangeCheak(_deltaTime);// 타겟위치로 이동
-			ColCheak();//충돌체크
-		}
-	}//큰반복
+
+	}
+
 }
 void Shuriken::End()
 {
