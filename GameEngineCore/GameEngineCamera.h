@@ -122,6 +122,7 @@ public:
 		return geometryBufferRenderTarget_;
 	}
 
+	//이 카메라가 가진 모든 조명데이터 반환.
 	inline LightingDatas& GetLightingDatas()
 	{
 		return lightingDatasInst_;

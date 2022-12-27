@@ -29,8 +29,8 @@ private:
 	float4x4 cameraViewMatrix_;			//카메라의 뷰행렬.
 	float4x4 inverseCameraViewMatrix_;	//카메라의 뷰행렬의 역행렬.
 
-	float shadowRenderTargetWidth_;		//그림자 렌더타겟 가로길이.
-	float shadowRenderTargetHeight_;	//그림자 렌더타겟 세로길이.
+	float shadowDepthRenderTargetWidth_;		//그림자 렌더타겟 가로길이.
+	float shadowDepthRenderTargetHeight_;	//그림자 렌더타겟 세로길이.
 	float lightingViewFrustumNearZ_;	//조명의 뷰프러스텀 근평면 z값.
 	float lightingViewFrustumFarZ_;		//조명의 뷰프러스텀 원평면 z값.
 
@@ -56,7 +56,7 @@ struct LightingDatas
 
 class GameEngineLighting : public GameEngineActor
 {
-	//이 클래스의 존재 이유: 조명.
+	//이 클래스의 존재 이유: 조명과 그림자.
 
 	friend class GameEngineCamera;
 
@@ -86,11 +86,11 @@ public:
 
 private:
 	void UpdataLightingData(std::weak_ptr<class GameEngineCamera> _camera);
-	void SetShadowRenderTarget();
+	void SetShadowDepthRenderTarget();
 
 private:
 	LightingData lightingData_;		//이 조명의 각종 정보.
-	std::shared_ptr<class GameEngineRenderTarget> shadowRenderTarget_;	//그림자를 그릴 렌더타겟.
+	std::shared_ptr<class GameEngineRenderTarget> shadowDepthRenderTarget_;	//그림자 깊이정보를 저장할 렌더타겟.
 	D3D11_VIEWPORT lightViewport_;	//이 조명의 뷰포트.
 };
 

@@ -246,10 +246,10 @@ void GameEngineCamera::Start()
 	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("SpecularLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(1));
 	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("AmbientLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(2));
 
-	GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
-		1,					//설정할 뷰포트 개수.
-		&viewportDesc_		//뷰포트 구조체 배열의 주소값.
-	);
+	//GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
+	//	1,					//설정할 뷰포트 개수.
+	//	&viewportDesc_		//뷰포트 구조체 배열의 주소값.
+	//);
 }
 
 bool ZSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameEngineRenderer> _rendererB)
@@ -266,11 +266,6 @@ bool YSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameE
 
 void GameEngineCamera::Render(float _deltaTime)
 {
-	//GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
-	//	1,					//설정할 뷰포트 개수.
-	//	&viewportDesc_		//뷰포트 구조체 배열의 주소값.
-	//);
-	//윈도우 크기를 런타임에 바꿀 일이 생기기 전까지는 Start()함수에서 한번만 한다.
 
 	//오브젝트들을 재배치할 뷰행렬을 구한다.
 	viewMatrix_.LookToLH(
@@ -438,6 +433,17 @@ void GameEngineCamera::Render(float _deltaTime)
 		iter->second->DeferredRender(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 	}
 
+
+
+
+
+
+	GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
+		1,					//설정할 뷰포트 개수.
+		&viewportDesc_		//뷰포트 구조체 배열의 주소값.
+	);
+	//윈도우 크기를 런타임에 바꿀 일이 생기기 전까지는 Start()함수에서 한번만 한다.
+	//->Render() 함수 호출때마다 그림자 렌더타겟의 뷰포트와 교체해가면서 써야 하므로 여기서 뷰포트 설정을 해준다.
 
 
 	lightDataBufferRenderTarget_->Clear();
