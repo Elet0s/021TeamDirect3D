@@ -63,16 +63,7 @@ void Shuriken::Update(float _deltaTime)
 
 	RangeCheak(_deltaTime);
 	ColCheak();
-
-	for (size_t i = 0; i < Monster::GetMonsterList().size() - 1; i++)
-	{
-		if (Monster::GetMonsterList()[i]->isTarget_ == true)
-		{
-			Monster::GetMonsterList()[i]->isTarget_ = false;
-		}
-
-	}
-
+	TarGetInitialization();
 }
 void Shuriken::End()
 {
@@ -311,5 +302,16 @@ void Shuriken::ColCheak()
 	for (size_t i = 0; i < projectileGroupList_.size(); i++)
 	{
 		projectileGroupList_[i].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+	}
+}
+
+void Shuriken::TarGetInitialization()
+{
+	for (size_t i = 0; i < Monster::GetMonsterList().size() - 1; i++)
+	{
+		if (Monster::GetMonsterList()[i]->isTarget_ == true)
+		{
+			Monster::GetMonsterList()[i]->isTarget_ = false;
+		}
 	}
 }

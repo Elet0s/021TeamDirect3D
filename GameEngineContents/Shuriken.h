@@ -38,7 +38,8 @@ protected:
 	void RenderRotate( );// 발사체 회전
 	void RangeCheak(float _deltaTime);//발사체 사출
 	void StateSet() override;//레벨에 따른 스탯 적용
-	void ColCheak();
+	void ColCheak();//콜리전 체크
+	void TarGetInitialization();//타겟초기화
 
 private:
 	bool test_;
