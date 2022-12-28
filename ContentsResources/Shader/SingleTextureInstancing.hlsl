@@ -5,14 +5,13 @@ struct Input
 {
     float4 pos_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    uint instanceIndex_ : SV_InstanceID; //인스턴스 인덱스. unsigned int 한개만 사용.
+    uint instanceIndex_ : SV_InstanceID; //인스턴스 식별번호.
 };
 
 struct Output
 {
     float4 pos_ : SV_Position;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    //int instanceIndex_ : SV_InstanceID;
 };
 
 //cbuffer PixelData : register(b0)

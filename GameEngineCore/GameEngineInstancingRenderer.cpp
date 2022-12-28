@@ -16,7 +16,8 @@ GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
 	{
 		data_.insert(std::make_pair(name, nullptr));
 	}
-	this->textureIndex_ = 0;
+	this->colorTextureIndex_ = 0;
+	this->normalMapTextureIndex_ = -1;
 }
 
 void GameEngineInstancingRenderer::InstancingUnit::Link(const std::string_view& _name, const void* _data)
@@ -56,9 +57,14 @@ void GameEngineInstancingRenderer::InstancingUnit::SetWorldPosition(const float4
 	CalWorldWorldMatrix();
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::SetTextureIndex(unsigned int _textureIndex)
+void GameEngineInstancingRenderer::InstancingUnit::SetColorTextureIndex(unsigned int _colorTextureIndex)
 {
-	textureIndex_ = _textureIndex;
+	colorTextureIndex_ = _colorTextureIndex;
+}
+
+void GameEngineInstancingRenderer::InstancingUnit::SetNormalMapTextureIndex(unsigned int _normalMapTextureIndex)
+{
+	normalMapTextureIndex_ = _normalMapTextureIndex;
 }
 
 void GameEngineInstancingRenderer::InstancingUnit::SwitchLeftToRight()
@@ -294,13 +300,17 @@ void GameEngineInstancingRenderer::Render(
 			}
 		}
 
-		*instanceIndexBufferPtr = static_cast<int>(index);
-		instanceIndexBufferPtr += 1;
-		//인스턴스인덱스버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
+		//*instanceIndexBufferPtr = static_cast<int>(index);
+		//instanceIndexBufferPtr += 1;
+		////인스턴스인덱스버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
 
-		*instanceIndexBufferPtr = allInstancingUnits_[index].textureIndex_;
+		*instanceIndexBufferPtr = allInstancingUnits_[index].colorTextureIndex_;
 		instanceIndexBufferPtr += 1;
-		//인스턴싱인덱스버퍼에 텍스처배열 인덱스를 기록하고 뒤로 넘어간다.
+		//인스턴싱인덱스버퍼에 텍스처배열의 컬러텍스처 인덱스를 기록하고 뒤로 넘어간다.
+
+		*instanceIndexBufferPtr = allInstancingUnits_[index].normalMapTextureIndex_;
+		instanceIndexBufferPtr += 1;
+		//인스턴싱인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
 	}
 
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
@@ -416,13 +426,17 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 			}
 		}
 
-		*instanceIndexBufferPtr = static_cast<int>(index);
-		instanceIndexBufferPtr += 1;
+		//*instanceIndexBufferPtr = static_cast<int>(index);
+		//instanceIndexBufferPtr += 1;
 		//인스턴스인덱스버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
 
-		*instanceIndexBufferPtr = allInstancingUnits_[index].textureIndex_;
+		*instanceIndexBufferPtr = allInstancingUnits_[index].colorTextureIndex_;
 		instanceIndexBufferPtr += 1;
-		//인스턴싱인덱스버퍼에 텍스처배열 인덱스를 기록하고 뒤로 넘어간다.
+		//인스턴스인덱스버퍼에 텍스처배열 인덱스를 기록하고 뒤로 넘어간다.
+
+		*instanceIndexBufferPtr = allInstancingUnits_[index].normalMapTextureIndex_;
+		instanceIndexBufferPtr += 1;
+		//인스턴싱인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
 	}
 
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());

@@ -9,8 +9,9 @@ struct Input
     float4 localPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
     //uint instancingIndex_ : ROWINDEX; //인스턴싱 인덱스. unsigned int 한개만 사용. 더 이상 필요 없음.
-    uint instanceIndex_ : SV_InstanceID; //인스턴싱 인덱스. unsigned int 한개만 사용.
-    uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
+    uint instanceIndex_ : SV_InstanceID; //인스턴스 식별번호.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //인스턴스별로 사용할 컬러텍스처 번호.
+    uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //인스턴스별로 사용할 노말맵텍스처 번호.
 };
 
 struct Output
@@ -19,7 +20,8 @@ struct Output
     float4 viewPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
     //uint instancingIndex_ : ROWINDEX; 필요 없음.
-    uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //인스턴스별로 사용할 컬러텍스처 번호.
+    uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //인스턴스별로 사용할 노말맵텍스처 번호.
 };
 
 Output ExtractionDeferredRenderingData_VS(Input _input)
@@ -83,9 +85,8 @@ Output ExtractionDeferredRenderingData_VSINST(Input _input)
         + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.y;
     result.texcoord_.z = 0.f;
     
-    //result.instancingIndex_ = _input.instancingIndex_;
-    
-    result.textureIndex_ = _input.textureIndex_;
+    result.colorTextureIndex_ = _input.colorTextureIndex_;
+    result.normalMapTextureIndex_ = _input.normalMapTextureIndex_;
     
     return result;
 }
@@ -96,39 +97,27 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
     
     result.color_ = Inst_Textures.Sample(
         POINTCLAMP,
-        float3(_input.texcoord_.xy, _input.textureIndex_)
+        float3(_input.texcoord_.xy, _input.colorTextureIndex_)
     );
     
-    result.normal_ = normalize(
-            -CalTrueNormalVector(Inst_Textures.Sample(  //<-
+    result.viewNormal_ = normalize(
+        -CalTrueNormalVector(Inst_Textures.Sample(
                 POINTCLAMP,
-                float3(_input.texcoord_.xy, 1 /*<-나중에 인풋레이아웃이나 렌더옵션으로 전달되는 변수 인덱스로 변경할 것*/)
+                float3(_input.texcoord_.xy, _input.normalMapTextureIndex_)
             )
         )
     );
     //노말텍스처에서 노말벡터 추출.
     
+    
     //2D인 로그제네시아 특성상 뷰변환에 필요한 요소들 중에 카메라 방향과 위치Z값은 고정이고 
     //카메라와 조명 모두 각도만 다른 직교투영으로 보고 있으므로 추출한 법선벡터에 뷰변환은 하지 않아도 될 것 같다.
     //뷰변환을 하지 않는 대신 법선벡터의 부호를 바꿔주어야 제대로 된 난반사광 계산이 되는 값들이 노말텍스처에 저장되어 있으므로 뒤집어준다.
+      
     
+    result.viewNormal_.w = 1.f;
     
-    //result.normal_ = normalize(
-    //        CalTrueNormalVector(Inst_Textures.Sample( //<-
-    //            POINTCLAMP,
-    //            float3(_input.texcoord_.xy, 1 /*<-나중에 인풋레이아웃이나 렌더옵션으로 전달되는 변수 인덱스로 변경할 것*/)
-    //        )
-    //    )
-    //);
-    //result.normal_ *= LightingData.cameraViewMatrix_;
-    
-    
-    
-    
-    result.normal_.w = 1.f;
-    //노말벡터는 방향벡터이므로 w를 0으로 만든다.
-    
-    result.position_ = _input.viewPosition_;
+    result.viewPosition_ = _input.viewPosition_;
     
     
     return result;

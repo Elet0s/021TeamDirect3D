@@ -43,10 +43,10 @@ void ShaderTestLevel::Start()
 
 	shaderTestActor_ = CreateActor<TestFieldRenderingActor>(0, "ShaderTestActor");
 	shaderTestActor_->Initialize(
-		10,
-		1,
-		float4(10, 10),
-		1.f
+		1000,
+		200,
+		float4(100, 100),
+		50.f
 	);
 	shaderTestActor_->GetTransform().SetLocalScale(float4::White);
 	shaderTestActor_->GetTransform().SetWorldScale(float4::White);
@@ -55,8 +55,8 @@ void ShaderTestLevel::Start()
 
 	testLighting_ = CreateActor<GameEngineLighting>(0, "TestLighting");
 	testLighting_->GetTransform().SetWorldRotation(-45.f, 45.f, 0.f);
-	testLighting_->GetLightingData().mainLightColor_ = float4(0.55f, 0.55f, 0.55f);
-	testLighting_->GetLightingData().ambientLightColor_ = float4(0.1f, 0.1f, 0.1f);
+	testLighting_->GetLightingData().mainLightColor_ = float4(0.75f, 0.75f, 0.75f);
+	testLighting_->GetLightingData().ambientLightColor_ = float4(0.11f, 0.11f, 0.11f);
 	testLighting_->GetLightingData().specularLightRatio_ = 0.f;
 	testLighting_->GetLightingData().diffuseLightRatio_ = 2.f;
 

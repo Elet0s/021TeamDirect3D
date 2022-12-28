@@ -72,9 +72,19 @@ void EngineInputLayout()
 
 	GameEngineVertex::inputLayoutInfo_.ResetOffset();
 
-	//인스턴싱 데이터용.
+	////인스턴싱 데이터용.
+	//GameEngineVertex::inputLayoutInfo_.AddInputLayout(
+	//	"ROWINDEX",
+	//	DXGI_FORMAT::DXGI_FORMAT_R32_UINT,
+	//	-1,
+	//	1,
+	//	1,
+	//	D3D11_INPUT_PER_INSTANCE_DATA
+	//);
+
+	//인스턴스별로 필요한 컬러 텍스처 인덱스 정보.
 	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
-		"ROWINDEX",
+		"COLORTEXTUREINDEX",
 		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,
 		-1,
 		1,
@@ -82,11 +92,9 @@ void EngineInputLayout()
 		D3D11_INPUT_PER_INSTANCE_DATA
 	);
 
-
-
-	//텍스처인덱스 정보.
+	//인스턴스별로 필요한 노말 텍스처 인덱스 정보.
 	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
-		"TEXTUREINDEX",
+		"NORMALTEXTUREINDEX",
 		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,
 		-1,
 		1,

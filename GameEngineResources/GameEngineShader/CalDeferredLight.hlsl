@@ -25,13 +25,6 @@ Texture2D PositionTexture : register(t0);
 Texture2D NormalTexture : register(t1);
 SamplerState POINTCLAMP : register(s0);
 
-struct LightOutput
-{
-    float4 diffuseLight_ : SV_Target0;
-    float4 specularLight_ : SV_Target1;
-    float4 ambientLight_ : SV_Target2;
-};
-
 LightOutput CalDeferredLight_PS(Output _input)
 {
     float4 position = PositionTexture.Sample(POINTCLAMP, _input.texcoord_.xy);

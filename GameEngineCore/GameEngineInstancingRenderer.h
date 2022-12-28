@@ -22,7 +22,8 @@ class GameEngineInstancingRenderer
         void SetWorldRotation(const float4& _worldRotationVector);
         void SetWorldPosition(const float4& _worldPositionVector);
 
-        void SetTextureIndex(unsigned int _textureIndex);
+        void SetColorTextureIndex(unsigned int _colortextureIndex);
+        void SetNormalMapTextureIndex(unsigned int _normalMapTextureIndex);
 
         //이 인스턴싱 유닛이 그리는 텍스처를 좌우반전하는 함수.
         void SwitchLeftToRight();
@@ -87,7 +88,9 @@ class GameEngineInstancingRenderer
 
         std::map<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
 
-        unsigned int textureIndex_; //인스턴스별로 사용할 텍스처 배열의 인덱스.
+        unsigned int colorTextureIndex_; //인스턴스별로 사용할 컬러텍스처 배열의 인덱스.
+
+        unsigned int normalMapTextureIndex_; //인스턴스별로 사용할 컬러텍스처 배열의 인덱스.
     };
 
 
@@ -172,7 +175,6 @@ private:
     void DeferredRender(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
 
 private:
-    //bool isDeferredRendering_;      //true: 디퍼드렌더링 함. false: 포워드렌더링 함.
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
 

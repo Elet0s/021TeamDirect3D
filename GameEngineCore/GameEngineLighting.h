@@ -4,7 +4,7 @@
 struct LightingData
 {
 	friend class GameEngineLighting;
-
+	friend struct LightingDatas;
 
 	float4 mainLightColor_ = float4::White;     //주 조명광 색상값. 정반사광, 난반사광에 적용.
 	float4 ambientLightColor_ = float4(0.1f, 0.1f, 0.1f, 1.f);  //주변광 색상값.
@@ -16,6 +16,15 @@ struct LightingData
 	float specularLightExponent_ = 20.f;   //정반사광 지수. 이 수치가 커지면 정반사광이 반사되는 면적이 제곱반비례로 줄어든다.
 	//반대로 음수가 되면 이 조명이 비추는 모든 영역에 정반사광이 비춘다.
 
+
+private:
+	LightingData()
+		: lightingViewFrustumNearZ_(0.f),
+		lightingViewFrustumFarZ_(1.f),
+		shadowDepthRenderTargetWidth_(0.f),
+		shadowDepthRenderTargetHeight_(0.f)
+	{
+	}
 
 private:
 	float4x4 lightingViewMatrix_;			//조명의 뷰행렬.
@@ -83,6 +92,11 @@ public:
 		return lightingData_;
 	}
 
+	D3D11_VIEWPORT& GetLightViewport()
+	{
+		return lightingViewport_;
+	}
+
 
 private:
 	void UpdataLightingData(std::weak_ptr<class GameEngineCamera> _camera);
@@ -91,6 +105,6 @@ private:
 private:
 	LightingData lightingData_;		//이 조명의 각종 정보.
 	std::shared_ptr<class GameEngineRenderTarget> shadowDepthRenderTarget_;	//그림자 깊이정보를 저장할 렌더타겟.
-	D3D11_VIEWPORT lightViewport_;	//이 조명의 뷰포트.
+	D3D11_VIEWPORT lightingViewport_;	//이 조명의 뷰포트.
 };
 

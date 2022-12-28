@@ -8,7 +8,7 @@ struct Input
     float4 pos_ : POSITION;
     float4 texcoord_ : TEXCOORD;
     
-    uint index_ : ROWINDEX;     //인스턴싱 데이터. unsigned int 한개만 사용.
+    uint index_ : SV_InstanceID; //인스턴스 식별번호.
 };
 
 struct Output

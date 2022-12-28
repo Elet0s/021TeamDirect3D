@@ -6,8 +6,8 @@ struct Input
     float4 localPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
     //uint instanceIndex_ : ROWINDEX; //인스턴스 인덱스. unsigned int 한개만 사용.
-    uint instanceIndex_ : SV_InstanceID; //인스턴스 인덱스. unsigned int 한개만 사용.
-    uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
+    uint instanceIndex_ : SV_InstanceID; //인스턴스 식별번호.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
 struct Output
@@ -15,7 +15,7 @@ struct Output
     float4 wvpPosition_ : SV_Position;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
     //uint instanceIndex_ : ROWINDEX;
-    uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
 Output MultiTexturesInstShadow_VS(Input _input)
@@ -84,7 +84,7 @@ Output MultiTexturesInstShadow_VSINST(Input _input)
     
     //result.instanceIndex_ = _input.instanceIndex_;
     
-    result.textureIndex_ = _input.textureIndex_;
+    result.colorTextureIndex_ = _input.colorTextureIndex_;
     
     return result;
 }
@@ -93,7 +93,7 @@ float4 MultiTexturesInstShadow_PSINST(Output _input) : SV_Target0
 {
     float4 sampledColor = Inst_Textures.Sample(
         POINTCLAMP,
-        float3(_input.texcoord_.xy, _input.textureIndex_)
+        float3(_input.texcoord_.xy, _input.colorTextureIndex_)
     );
     float4 shadowColor = float4(0.f, 0.f, 0.f, 1.f);
   

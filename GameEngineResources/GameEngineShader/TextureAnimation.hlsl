@@ -28,8 +28,6 @@ StructuredBuffer<AnimationMatrix> ArrAnimationMatrix : register(t11);
 void Skinning(inout float4 _Pos, inout float4 _Weight, inout int4 _Index, StructuredBuffer<AnimationMatrix> _ArrMatrix)
 {
     float4 CalPos = (float4) 0.0f;
-    _Pos.w = 1.0f;
-    // 1로 맞추려는 행동.
     // _Weight[3] = 1.0f - _Weight[0] - _Weight[1] - _Weight[2];
 
     for (int i = 0; i < 4; ++i)

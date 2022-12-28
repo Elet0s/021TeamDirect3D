@@ -54,6 +54,13 @@ cbuffer LightingDatas : register(b13)
     //실제로는 3개 이하로 쓸 거라 예상됨.
 };
 
+struct LightOutput
+{
+    float4 diffuseLight_ : SV_Target0;
+    float4 specularLight_ : SV_Target1;
+    float4 ambientLight_ : SV_Target2;
+};
+
 
 float4 CalSpecularLight(
     float4 _viewSpaceFocusPosition, //내가 보고있는 오브젝트 표면의 뷰공간 기준 위치 벡터.

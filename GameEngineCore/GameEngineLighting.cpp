@@ -3,7 +3,7 @@
 #include "GameEngineCamera.h"
 #include "GameEngineRenderTarget.h"
 
-GameEngineLighting::GameEngineLighting(): lightViewport_()
+GameEngineLighting::GameEngineLighting(): lightingViewport_()
 {
 	lightingData_.shadowDepthRenderTargetWidth_ = GameEngineWindow::GetScale().x * 1.5f;
 	lightingData_.shadowDepthRenderTargetHeight_ = GameEngineWindow::GetScale().y * 1.5f;
@@ -18,12 +18,12 @@ GameEngineLighting::~GameEngineLighting()
 
 void GameEngineLighting::Start()
 {
-	lightViewport_.TopLeftX = 0.f;
-	lightViewport_.TopLeftY = 0.f;
-	lightViewport_.Width = lightingData_.shadowDepthRenderTargetWidth_;
-	lightViewport_.Height = lightingData_.shadowDepthRenderTargetHeight_;
-	lightViewport_.MinDepth = 0.f;
-	lightViewport_.MaxDepth = 1.f;
+	lightingViewport_.TopLeftX = 0.f;
+	lightingViewport_.TopLeftY = 0.f;
+	lightingViewport_.Width = lightingData_.shadowDepthRenderTargetWidth_;
+	lightingViewport_.Height = lightingData_.shadowDepthRenderTargetHeight_;
+	lightingViewport_.MinDepth = 0.f;
+	lightingViewport_.MaxDepth = 1.f;
 	//조명 뷰포트 초기화.
 
 	shadowDepthRenderTarget_ = GameEngineRenderTarget::Create("ShadowRenderTarget");

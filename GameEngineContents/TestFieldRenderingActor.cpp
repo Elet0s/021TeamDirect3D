@@ -30,9 +30,9 @@ void TestFieldRenderingActor::Update(float _deltaTime)
 
 	UpdateTilePosition(thisWorldPosition);
 
-	//UpdateFieldObjectInfos(thisWorldPosition);
-	//
-	//LoopFieldObject(thisWorldPosition);
+	UpdateFieldObjectInfos(thisWorldPosition);
+	
+	LoopFieldObject(thisWorldPosition);
 }
 
 void TestFieldRenderingActor::End()
@@ -46,7 +46,7 @@ void TestFieldRenderingActor::Initialize(
 	float _diffusionDegree /*= 1.f*/
 )
 {
-	//InitializeFieldObjects(_totalFieldObjectCount, _objectInWindowCount, _totalFieldSize, _diffusionDegree);
+	InitializeFieldObjects(_totalFieldObjectCount, _objectInWindowCount, _totalFieldSize, _diffusionDegree);
 	InitializeFieldRenderer(_objectInWindowCount);
 }
 
@@ -95,7 +95,7 @@ void TestFieldRenderingActor::InitializeFieldObjects(
 		float4 randomWorldPosition = float4(
 			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HX(), _totalFieldSize.HX()) * _diffusionDegree,
 			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HY(), _totalFieldSize.HY()) * _diffusionDegree,
-			-4.f
+			-10.f
 		);
 		//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
 		//나중에 고칠 것.
@@ -126,7 +126,7 @@ void TestFieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCoun
 {
 	fieldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("TestFieldRenderer");
 	fieldRenderer_->Initialize(
-		static_cast<size_t>(tileCount_)/* + _objectInWindowCount*/,
+		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
 		"ExtractionDeferredRenderingData"
 	);
@@ -158,8 +158,11 @@ void TestFieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCoun
 			fieldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.f);
 			//NewGrassTexture.png 전체를 다 그린다.
 
-			fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(2);
+			fieldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(2);
 			//NewGrassTexture.png는 2번으로 삽입되어 있다.
+			// 
+			fieldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(1);
+			//NewGrassNormal.png는 1번으로 삽입되어 있다.
 
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(tileSize_, tileSize_, 1.f);
 			//타일을 그리는 인스턴싱유닛들만 크기 설정을 해준다.
@@ -167,7 +170,7 @@ void TestFieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCoun
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
 				(tileSize_ * static_cast<float>(x)) - (tileSize_ * 7.5f),
 				(tileSize_ * static_cast<float>(y)) - (tileSize_ * 5.f),
-				0.f
+				10.f
 			);	//타일 렌더하는 인스턴싱유닛들의 위치 설정.
 
 			++unitIndex;
@@ -226,95 +229,98 @@ void TestFieldRenderingActor::UpdateTilePosition(const float4& _thisWorldPositio
 
 void TestFieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPosition)
 {
-	//renderingFieldObjectDataVector_.clear();
+	renderingFieldObjectDataVector_.clear();
 	//뭐가 들어있든지 일단 전부 비운다. 
 	//capacity는 변하면 안된다.
 
-	//for (TestFieldObjectData& singleObjectData : allFieldObjectDataVector_)
-	//{
-	//	if (singleObjectData.worldPosition_.x > _thisWorldPosition.x + (windowSize_.HX() * 1.5f))
-	//	{
-	//		continue;
-	//	}
-	//	else if (singleObjectData.worldPosition_.x < _thisWorldPosition.x - (windowSize_.HX() * 1.5f))
-	//	{
-	//		continue;
-	//	}
-	//	else if (singleObjectData.worldPosition_.y > _thisWorldPosition.y + (windowSize_.HY() * 1.5f))
-	//	{
-	//		continue;
-	//	}
-	//	else if (singleObjectData.worldPosition_.y < _thisWorldPosition.y - (windowSize_.HY() * 1.5f))
-	//	{
-	//		continue;
-	//	}
-	//
-	//	renderingFieldObjectDataVector_.push_back(&singleObjectData);
-	//}//윈도우크기 1.5배 안에 들어온 오브젝트들의 포인터만 renderingFieldObjectDataVector_에 삽입한다.
+	for (TestFieldObjectData& singleObjectData : allFieldObjectDataVector_)
+	{
+		if (singleObjectData.worldPosition_.x > _thisWorldPosition.x + (windowSize_.HX() * 1.5f))
+		{
+			continue;
+		}
+		else if (singleObjectData.worldPosition_.x < _thisWorldPosition.x - (windowSize_.HX() * 1.5f))
+		{
+			continue;
+		}
+		else if (singleObjectData.worldPosition_.y > _thisWorldPosition.y + (windowSize_.HY() * 1.5f))
+		{
+			continue;
+		}
+		else if (singleObjectData.worldPosition_.y < _thisWorldPosition.y - (windowSize_.HY() * 1.5f))
+		{
+			continue;
+		}
+	
+		renderingFieldObjectDataVector_.push_back(&singleObjectData);
+	}//윈도우크기 1.5배 안에 들어온 오브젝트들의 포인터만 renderingFieldObjectDataVector_에 삽입한다.
 
 
-	//int objectIndex = 0;
-	//for (size_t unitIndex = static_cast<size_t>(tileCount_);
-	//	unitIndex < fieldRenderer_->GetUnitCount(); ++unitIndex)
-	//{
-	//	if (objectIndex >= renderingFieldObjectDataVector_.size())
-	//	{
-	//		//윈도우 안에 들어온 오브젝트들보다 인스턴싱유닛의 숫자가 많으면 그냥 무시하고 진행한다.
-	//		//인스턴싱유닛도 온오프기능 만들어서 꺼야 하나?? 그게 최적화에 큰 도움이 되나??
-	//		//fieldRenderer_->GetInstancingUnit(unitIndex).SetRenderingOff();
-	//		//continue;
-	//		//->렌더링오프된 인스턴싱유닛들이 이전에 그렸던 텍스처들이 윈도우에 그대로 남아서 
-	//		// 카메라를 따라다니는것 같은 현상이 발생한다.
-	//		break;
-	//	}
-	//
-	//	fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(
-	//		renderingFieldObjectDataVector_[objectIndex]->worldScale_
-	//	);
-	//
-	//	fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
-	//		renderingFieldObjectDataVector_[objectIndex]->worldPosition_
-	//	);
-	//	//renderingFieldObjectDataVector_가 가진 트랜스폼데이터를 인스턴싱유닛들에게 입력한다.
-	//
-	//	fieldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(
-	//		fieldObjectAtlasDatas_[renderingFieldObjectDataVector_[objectIndex]->atlasDataIndex_]
-	//	);
-	//	//renderingFieldObjectDataVector_가 가진 아틀라스데이터를 인스턴싱유닛들에게 입력한다.
-	//
-	//	fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(0);
-	//	//MapObjects.png는 0번으로 삽입되어 있음.
-	//
-	//
-	//
-	//	//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldScale(
-	//	//	renderingFieldObjectDataVector_[objectIndex]->worldScale_
-	//	//);
-	//	//
-	//	//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldPosition(
-	//	//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.x,
-	//	//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.y,
-	//	//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.z + 1.f
-	//	//);
-	//	//
-	//	//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).GetAtlasData().SetData(
-	//	//	fieldObjectAtlasDatas_[renderingFieldObjectDataVector_[objectIndex]->atlasDataIndex_]
-	//	//);
-	//	//
-	//	//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetTextureIndex(0);
-	//	////필드오브젝트 그림자 렌더러에도 인덱스만 다른 같은 절차를 반복한다.
-	//
-	//	++objectIndex;
-	//}
+	int objectIndex = 0;
+	for (size_t unitIndex = static_cast<size_t>(tileCount_);
+		unitIndex < fieldRenderer_->GetUnitCount(); ++unitIndex)
+	{
+		if (objectIndex >= renderingFieldObjectDataVector_.size())
+		{
+			//윈도우 안에 들어온 오브젝트들보다 인스턴싱유닛의 숫자가 많으면 그냥 무시하고 진행한다.
+			//인스턴싱유닛도 온오프기능 만들어서 꺼야 하나?? 그게 최적화에 큰 도움이 되나??
+			//fieldRenderer_->GetInstancingUnit(unitIndex).SetRenderingOff();
+			//continue;
+			//->렌더링오프된 인스턴싱유닛들이 이전에 그렸던 텍스처들이 윈도우에 그대로 남아서 
+			// 카메라를 따라다니는것 같은 현상이 발생한다.
+			break;
+		}
+	
+		fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(
+			renderingFieldObjectDataVector_[objectIndex]->worldScale_
+		);
+	
+		fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_
+		);
+		//renderingFieldObjectDataVector_가 가진 트랜스폼데이터를 인스턴싱유닛들에게 입력한다.
+	
+		fieldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(
+			fieldObjectAtlasDatas_[renderingFieldObjectDataVector_[objectIndex]->atlasDataIndex_]
+		);
+		//renderingFieldObjectDataVector_가 가진 아틀라스데이터를 인스턴싱유닛들에게 입력한다.
+	
+		fieldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(0);
+		//MapObjects.png는 0번으로 삽입되어 있음.
+
+		fieldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(1);
+		//NewGrassNormal.png는 1번으로 삽입되어 있다.
+	
+	
+	
+		//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldScale(
+		//	renderingFieldObjectDataVector_[objectIndex]->worldScale_
+		//);
+		//
+		//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldPosition(
+		//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.x,
+		//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.y,
+		//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.z + 1.f
+		//);
+		//
+		//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).GetAtlasData().SetData(
+		//	fieldObjectAtlasDatas_[renderingFieldObjectDataVector_[objectIndex]->atlasDataIndex_]
+		//);
+		//
+		//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetTextureIndex(0);
+		////필드오브젝트 그림자 렌더러에도 인덱스만 다른 같은 절차를 반복한다.
+	
+		++objectIndex;
+	}
 
 
 #ifdef _DEBUG
-	//if (objectIndex < renderingFieldObjectDataVector_.size())
-	//{
-	//	MsgBoxAssert("인스턴싱유닛의 숫자가 모자라서 필드 오브젝트들을 다 그리지 못했습니다.");
-	//	return;
-	//}
-	////릴리즈모드에서 이런 일이 생기면 그냥 무시하고 진행한다.
+	if (objectIndex < renderingFieldObjectDataVector_.size())
+	{
+		MsgBoxAssert("인스턴싱유닛의 숫자가 모자라서 필드 오브젝트들을 다 그리지 못했습니다.");
+		return;
+	}
+	//릴리즈모드에서 이런 일이 생기면 그냥 무시하고 진행한다.
 #endif // DEBUG
 
 }
