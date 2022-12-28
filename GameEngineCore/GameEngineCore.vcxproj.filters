@@ -316,6 +316,9 @@
     <ClCompile Include="GameEngineAnimation.cpp">
       <Filter>Object\Component\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineGeometryShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -373,9 +376,6 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineLevel.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineUpdateObject.h">
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineTransformComponent.h">
@@ -521,6 +521,12 @@
       <Filter>Object\Component\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="GlobalHeader.h" />
+    <ClInclude Include="GameEngineUpdateObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineGeometryShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\Include\DirectXTex.inl">

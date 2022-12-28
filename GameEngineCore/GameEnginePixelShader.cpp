@@ -2,7 +2,7 @@
 #include "GameEnginePixelShader.h"
 #include "GameEngineDevice.h"
 
-GameEnginePixelShader::GameEnginePixelShader() : pixelShader_(nullptr)
+GameEnginePixelShader::GameEnginePixelShader() : pixelShader_(nullptr), isDeferredRendering_(false)
 {
     shaderType_ = ShaderType::PixelShader;
 }
@@ -20,7 +20,7 @@ void GameEnginePixelShader::Setting()
 {
     if (nullptr == pixelShader_)
     {
-        MsgBoxAssert("ÇÈ¼¿¼ÎÀÌ´õ°¡ ¾ø½À´Ï´Ù.");
+        MsgBoxAssert("ÇÈ¼¿ ¼ÎÀÌ´õ°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
@@ -84,7 +84,7 @@ void GameEnginePixelShader::CreatePixelShader()
         &pixelShader_                       //ÇÈ¼¿¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
     ))
     {
-        MsgBoxAssert("ÇÈ¼¿¼ÎÀÌ´õ »ý¼º ½ÇÆÐ.");
+        MsgBoxAssert("ÇÈ¼¿ ¼ÎÀÌ´õ »ý¼º ½ÇÆÐ.");
         return;
     }
 }

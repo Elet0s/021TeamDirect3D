@@ -13,7 +13,6 @@ public:
 	~GameEnginePixelShader();
 
 private:
-
 	GameEnginePixelShader(const GameEnginePixelShader& _other) = delete;
 	GameEnginePixelShader(GameEnginePixelShader&& _other) noexcept = delete;
 	GameEnginePixelShader& operator=(const GameEnginePixelShader& _other) = delete;
@@ -28,6 +27,7 @@ public:
 	{
 		return nullptr != inst_PixelShader_->pixelShader_;
 	}
+
 	inline std::shared_ptr<GameEnginePixelShader> GetInst_PixelShader()
 	{
 		return inst_PixelShader_;

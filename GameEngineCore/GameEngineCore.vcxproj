@@ -193,6 +193,10 @@
     <ClInclude Include="GameEngineFolderTexture.h" />
     <ClInclude Include="GameEngineFont.h" />
     <ClInclude Include="GameEngineFontRenderer.h" />
+    <ClInclude Include="GameEngineGeometryShader.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineGUI.h" />
     <ClInclude Include="GameEngineIndexBuffer.h" />
     <ClInclude Include="GameEngineInputLayout.h" />
@@ -292,6 +296,10 @@
     <ClCompile Include="GameEngineFolderTexture.cpp" />
     <ClCompile Include="GameEngineFont.cpp" />
     <ClCompile Include="GameEngineFontRenderer.cpp" />
+    <ClCompile Include="GameEngineGeometryShader.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineGUI.cpp" />
     <ClCompile Include="GameEngineIndexBuffer.cpp" />
     <ClCompile Include="GameEngineInputLayout.cpp" />

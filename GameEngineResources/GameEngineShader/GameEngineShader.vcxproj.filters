@@ -43,6 +43,9 @@
     <Filter Include="Object\DeferredRendering">
       <UniqueIdentifier>{4dad87dc-a7e2-460d-be20-f5eb4f05740a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{6241ec21-748b-4d53-a7da-fc227d6ab455}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TransformHeader.hlsli" />
@@ -61,6 +64,9 @@
     </None>
     <None Include="DeferredColor.hlsl">
       <Filter>Object\DeferredRendering</Filter>
+    </None>
+    <None Include="ParticleTest.hlsl">
+      <Filter>Particle</Filter>
     </None>
   </ItemGroup>
 </Project>

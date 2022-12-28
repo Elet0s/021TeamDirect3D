@@ -12,7 +12,7 @@ class GameEngineVertexShader : public GameEngineRes<GameEngineVertexShader>, pub
 	//
 
 	friend class GameEngineInputLayout;
-	//
+	//인풋레이아웃을 생성할 때 버텍스버퍼와 버텍스셰이더의 정보가 필요하므로 프렌드.
 
 
 public:

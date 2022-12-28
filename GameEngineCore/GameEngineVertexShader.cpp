@@ -29,7 +29,7 @@ void GameEngineVertexShader::Setting()
 {
     if (nullptr == vertexShader_)
     {
-        MsgBoxAssert("버텍스셰이더가 없습니다.");
+        MsgBoxAssert("버텍스 셰이더가 없습니다.");
         return;
     }
 
@@ -93,7 +93,7 @@ void GameEngineVertexShader::CreateVertexShader()
         &vertexShader_                      //버텍스셰이더 포인터.
     ))
     {
-        MsgBoxAssert("버텍스셰이더 생성 실패.");
+        MsgBoxAssert("버텍스 셰이더 생성 실패.");
         return;
     }
 }
