@@ -7,7 +7,7 @@ TestFieldRenderingActor::TestFieldRenderingActor()
 	tileCountXY_((GameEngineWindow::GetScale().IX() / 256) + 4, (GameEngineWindow::GetScale().IY() / 256) + 4),
 	tileCount_(tileCountXY_.IX() * tileCountXY_.IY()),
 	fieldRenderer_(nullptr),
-	//fieldObjectShadowRenderer_(nullptr),
+	fieldObjectShadowRenderer_(nullptr),
 	totalFieldSize_(float4::Zero)
 {
 	renderOption_.vertexInversion_ = 1;
@@ -136,19 +136,20 @@ void TestFieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCoun
 	//그려질 필요없는 렌더유닛들이 256, 256 크기로 그려지는 버그 발생.
 
 
-	//fieldObjectShadowRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("FieldObjectShadowRenderer");
-	//fieldObjectShadowRenderer_->Initialize(
-	//	_objectInWindowCount,		//타일 그림자까지 그릴 필요는 없으므로 _objectInWindowCount만큼만 그린다.
-	//	"Rect",
-	//	"MultiTexturesInstShadow"
-	//);
-	//fieldObjectShadowRenderer_->SetTexture2DArray("Inst_Textures", "Field");
-	//fieldObjectShadowRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
-	//for (size_t i = 0; i < fieldObjectShadowRenderer_->GetUnitCount(); ++i)
-	//{
-	//	fieldObjectShadowRenderer_->GetInstancingUnit(i).Link("Inst_RenderOption", this->renderOption_);
-	//	//필드 오브젝트와 그림자들은 위치정보 외에는 변동사항이 없으므로 한개 렌더옵션을 모든 그림자 인스턴싱유닛에 연결한다.
-	//}
+	fieldObjectShadowRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("TestFieldObjectShadowRenderer");
+	fieldObjectShadowRenderer_->Initialize(
+		_objectInWindowCount,		//타일 그림자까지 그릴 필요는 없으므로 _objectInWindowCount만큼만 그린다.
+		"Rect",
+		"Test",
+		true
+	);
+	fieldObjectShadowRenderer_->SetTexture2DArray("Inst_Textures", "Field");
+	fieldObjectShadowRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
+	for (size_t i = 0; i < fieldObjectShadowRenderer_->GetUnitCount(); ++i)
+	{
+		fieldObjectShadowRenderer_->GetInstancingUnit(i).Link("Inst_RenderOption", this->renderOption_);
+		//필드 오브젝트와 그림자들은 위치정보 외에는 변동사항이 없으므로 한개 렌더옵션을 모든 그림자 인스턴싱유닛에 연결한다.
+	}
 
 	int unitIndex = 0;
 	for (int y = 0; y < tileCountXY_.IY(); ++y)
@@ -256,6 +257,11 @@ void TestFieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPos
 	}//윈도우크기 1.5배 안에 들어온 오브젝트들의 포인터만 renderingFieldObjectDataVector_에 삽입한다.
 
 
+
+
+
+
+
 	int objectIndex = 0;
 	for (size_t unitIndex = static_cast<size_t>(tileCount_);
 		unitIndex < fieldRenderer_->GetUnitCount(); ++unitIndex)
@@ -293,22 +299,22 @@ void TestFieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPos
 	
 	
 	
-		//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldScale(
-		//	renderingFieldObjectDataVector_[objectIndex]->worldScale_
-		//);
-		//
-		//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldPosition(
-		//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.x,
-		//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.y,
-		//	renderingFieldObjectDataVector_[objectIndex]->worldPosition_.z + 1.f
-		//);
-		//
-		//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).GetAtlasData().SetData(
-		//	fieldObjectAtlasDatas_[renderingFieldObjectDataVector_[objectIndex]->atlasDataIndex_]
-		//);
-		//
-		//fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetTextureIndex(0);
-		////필드오브젝트 그림자 렌더러에도 인덱스만 다른 같은 절차를 반복한다.
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldScale(
+			renderingFieldObjectDataVector_[objectIndex]->worldScale_
+		);
+		
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldPosition(
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.x,
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.y,
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.z + 0.01f
+		);
+		
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).GetAtlasData().SetData(
+			fieldObjectAtlasDatas_[renderingFieldObjectDataVector_[objectIndex]->atlasDataIndex_]
+		);
+		
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetColorTextureIndex(0);
+		//필드오브젝트 그림자 렌더러에도 인덱스만 다른 같은 절차를 반복한다.
 	
 		++objectIndex;
 	}

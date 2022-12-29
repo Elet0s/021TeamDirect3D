@@ -4,18 +4,18 @@
 
 struct Input
 {
-    float4 pos_ : POSITION;
+    float4 localPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    uint instancingIndex_ : ROWINDEX; //인스턴싱 인덱스. unsigned int 한개만 사용.
-    uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
+    uint instanceIndex_ : SV_InstanceID; //인스턴스 식별번호.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
 struct Output
 {
-    float4 pos_ : SV_Position; 
+    float4 wvpPosition_ : SV_Position;
+    float4 shadowPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    int instancingIndex_ : ROWINDEX;
-    uint textureIndex_ : TEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //텍스처 인덱스. 인스턴스별로 사용할 텍스처 번호.
 };
 
 //cbuffer PixelData : register(b0)
@@ -28,39 +28,15 @@ struct Output
 Output Test_VS(Input _input)
 {
     Output result = (Output) 0;
-
-    //_input.pos_ += pivotPos_;
-    
-    //result.pos_ = mul(_input.pos_, worldViewProjectionMatrix_); //WVP행렬 적용.
-    
-    
-    //result.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
-    //result.texcoord_.y = (_input.texcoord_.y * textureFrameSize_.y) + textureFramePos_.y;
-    //result.instancingIndex_ = _input.instancingIndex_;
     
     return result;
 }
 
-Texture2D Tex : register(t0);
 SamplerState POINTCLAMP : register(s0);
-
 
 float4 Test_PS(Output _input) : SV_Target0
 {
     float4 resultColor = (1.f, 0.f, 0.f, 1.f);
-    
-    //if (_input.texcoord_.x < slice_.x)
-    //{
-    //    clip(-1);
-    //}
-    
-    //if (_input.texcoord_.y < slice_.y)
-    //{
-    //    clip(-1);
-    //}
-    
-    //float4 resultColor = (Tex.Sample(POINTCLAMP, _input.texcoord_.xy) * mulColor_) + plusColor_;
-    //float4 resultColor = Tex.Sample(POINTCLAMP, _input.texcoord_.xy);
     
     if (0.f >= resultColor.a)
     {
@@ -91,43 +67,44 @@ Output Test_VSINST(Input _input)
 {
     Output result = (Output) 0;
     
-    result.pos_ = mul(_input.pos_, Inst_TransformData[_input.instancingIndex_].worldViewProjectionMatrix_);
     
-    result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instancingIndex_].textureFrameSize_.x)
-        + Inst_AtlasData[_input.instancingIndex_].textureFramePos_.x;
-    result.texcoord_.y = (_input.texcoord_.y * Inst_AtlasData[_input.instancingIndex_].textureFrameSize_.y)
-        + Inst_AtlasData[_input.instancingIndex_].textureFramePos_.y;
+    float4 vertexPos = _input.localPosition_;
+    vertexPos += Inst_AtlasData[_input.instanceIndex_].pivotPos_;
+    vertexPos.x = (-sin(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) + vertexPos.x);
+    vertexPos.y = cos(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) - 0.5f;
+
+    
+    result.wvpPosition_ 
+        = mul(vertexPos, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
+    
+    result.shadowPosition_ = result.wvpPosition_;
+    
+    
+    result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.x)
+        + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.x;
+    result.texcoord_.y = (_input.texcoord_.y * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.y)
+        + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.y;
     result.texcoord_.z = 0.f;
-    
-    result.instancingIndex_ = _input.instancingIndex_;
-    
-    result.textureIndex_ = _input.textureIndex_;
+
+    result.colorTextureIndex_ = _input.colorTextureIndex_;
     
     return result;
 }
 
 float4 Test_PSINST(Output _input) : SV_Target0
 {
-    float4 resultColor = Inst_Textures.Sample(
+    float4 sampledColor = Inst_Textures.Sample(
         POINTCLAMP,
-        float3(_input.texcoord_.xy, _input.textureIndex_)
+        float3(_input.texcoord_.xy, _input.colorTextureIndex_)
     );
     
-    float3 sampledNormal = Inst_Textures.Sample(
-        POINTCLAMP,
-        float3(_input.texcoord_.xy, _input.textureIndex_)
-    ).xyz;
-    
-    
-    
-    if (0.01f >= resultColor.a)
+    float4 shadowDepth = float4(1.f, 0.f, 0.f, 1.f);
+  
+    if (0.0f < sampledColor.a)
     {
-        clip(-1);
-    }
-    else if (1.f < resultColor.a)
-    {
-        resultColor.a = 1.f;
+        shadowDepth = float4(_input.shadowPosition_.z / _input.shadowPosition_.w, 0.f, 0.f, 1.f);
+        //사실 직교투영 특성상 w가 1 고정이므로 별 의미없는 연산이지만 그래도 한다.
     }
     
-    return resultColor;
+    return shadowDepth;
 }

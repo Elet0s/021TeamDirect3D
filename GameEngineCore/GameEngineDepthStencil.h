@@ -4,7 +4,7 @@
 
 class GameEngineDepthStencil : public GameEngineRes<GameEngineDepthStencil>
 {
-	//
+	//깊이스텐실 스테이트 생성 및 관리 클래스.
 
 public:
 	GameEngineDepthStencil();

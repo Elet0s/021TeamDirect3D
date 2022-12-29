@@ -23,12 +23,16 @@ Output CalDeferredLight_VS(Input _input)
 
 Texture2D PositionTexture : register(t0);
 Texture2D NormalTexture : register(t1);
+Texture2D ObjectDepthTexture : register(t2);
+Texture2D ShadowDepthTexture : register(t3);
 SamplerState POINTCLAMP : register(s0);
 
 LightOutput CalDeferredLight_PS(Output _input)
 {
     float4 position = PositionTexture.Sample(POINTCLAMP, _input.texcoord_.xy);
     float4 normal = NormalTexture.Sample(POINTCLAMP, _input.texcoord_.xy);
+    float4 objectDepth = ObjectDepthTexture.Sample(POINTCLAMP, _input.texcoord_.xy);
+    float4 shadowDepth = ShadowDepthTexture.Sample(POINTCLAMP, _input.texcoord_.xy);
     
     if (position.a <= 0.0f)
     {
@@ -39,18 +43,25 @@ LightOutput CalDeferredLight_PS(Output _input)
     
     LightOutput result = (LightOutput) 0.0f;
     
+
     result.diffuseLight_ = CalAllDiffuseLight(normal);
+    if (objectDepth.r > shadowDepth.r)
+    {
+        result.diffuseLight_ *= 0.5f;
+    }
     
     if (result.diffuseLight_.r > 0.f || result.diffuseLight_.g > 0.f || result.diffuseLight_.b > 0.f)
     {
         result.specularLight_ = CalAllSpecularLight(position, normal);
-        //난반사광의 rgb값중 하나라도 0을 넘을때만 정반사광을 계산한다.
-        //안그러면 조명이 뒷면으로 돌아가서 카메라에 빛이 비치지 않는데도 정반사광이 비친다.
+    //난반사광의 rgb값중 하나라도 0을 넘을때만 정반사광을 계산한다.
+    //안그러면 조명이 뒷면으로 돌아가서 카메라에 빛이 비치지 않는데도 정반사광이 비친다.
     }
     else
     {
         result.specularLight_ = 0.f;
     }
+    
+
     
     result.ambientLight_ = CalAllAmbientLight();
 

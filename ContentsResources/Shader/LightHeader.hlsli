@@ -18,21 +18,21 @@ struct LightingData
     float specularLightExponent_; //정반사광 지수. 이 수치가 커지면 정반사광이 반사되는 면적이 제곱반비례로 줄어든다.
 	//반대로 음수가 되면 이 조명이 비추는 모든 영역에 정반사광이 비춘다.
     
-    float4x4 lightingViewMatrix_; //조명의 뷰행렬.
-    float4x4 inverseLightingViewMatrix_; //조명의 뷰행렬의 역행렬.
-
-    float4x4 lightingProjectionMatrix_; //조명의 투영행렬.
-    float4x4 inverseLightingProjectionMatrix_; //조명의 투영행렬의 역행렬.
+    //float4x4 lightingViewMatrix_; //조명의 뷰행렬.
+    //float4x4 inverseLightingViewMatrix_; //조명의 뷰행렬의 역행렬.
+    
+    //float4x4 lightingProjectionMatrix_; //조명의 투영행렬.
+    //float4x4 inverseLightingProjectionMatrix_; //조명의 투영행렬의 역행렬.
 
 	//float4x4 lightingViewProjectionMatrix_;	//조명의 뷰, 투영 통합행렬.
 
     float4x4 cameraViewMatrix_; //카메라의 뷰행렬.
     float4x4 inverseCameraViewMatrix_; //카메라의 뷰행렬의 역행렬.
 
-    float shadowRenderTargetWidth_; //그림자 렌더타겟 가로길이.
-    float shadowRenderTargetHeight_; //그림자 렌더타겟 세로길이.
-    float lightingViewFrustumNearZ_; //조명의 뷰프러스텀 근평면 z값.
-    float lightingViewFrustumFarZ_; //조명의 뷰프러스텀 원평면 z값.
+    //float shadowRenderTargetWidth_; //그림자 렌더타겟 가로길이.
+    //float shadowRenderTargetHeight_; //그림자 렌더타겟 세로길이.
+    //float lightingViewFrustumNearZ_; //조명의 뷰프러스텀 근평면 z값.
+    //float lightingViewFrustumFarZ_; //조명의 뷰프러스텀 원평면 z값.
 
     float4 lightingPosition_; //월드공간 조명 위치.
     float4 lightingDirection_; //월드공간 조명 방향.
@@ -47,7 +47,7 @@ struct LightingData
     //뷰공간 카메라위치는 (0, 0, 0) 고정 아닌가?
 };
 
-cbuffer LightingDatas : register(b13)
+cbuffer AllLightingDatas : register(b13)
 {
     int lightingCount_; //조명 개수.
     LightingData lightings_[16]; //LightingData 모음.
@@ -60,7 +60,6 @@ struct LightOutput
     float4 specularLight_ : SV_Target1;
     float4 ambientLight_ : SV_Target2;
 };
-
 
 float4 CalSpecularLight(
     float4 _viewSpaceFocusPosition, //내가 보고있는 오브젝트 표면의 뷰공간 기준 위치 벡터.

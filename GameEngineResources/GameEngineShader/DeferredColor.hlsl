@@ -41,9 +41,11 @@ DeferredRenderingOutput DeferredColor_PS(Output _input)
     DeferredRenderingOutput deferredResult = (DeferredRenderingOutput) 0;
 
     deferredResult.color_ = Color;
-    deferredResult.position_ = _input.viewPosition_;
-    deferredResult.normal_ = _input.viewNormal_;
-    deferredResult.normal_.w = 1.f;
+    deferredResult.viewPosition_ = _input.viewPosition_;
+    deferredResult.viewNormal_ = _input.viewNormal_;
+    deferredResult.viewNormal_.w = 1.f;
+    
+    deferredResult.objectDepth_ = float4(1.f, 0.f, 0.f, 1.f);
 
     return deferredResult;
 }

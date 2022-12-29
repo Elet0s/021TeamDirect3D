@@ -54,7 +54,7 @@ void ShaderTestLevel::Start()
 
 
 	testLighting_ = CreateActor<GameEngineLighting>(0, "TestLighting");
-	testLighting_->GetTransform().SetWorldRotation(-45.f, 45.f, 0.f);
+	testLighting_->GetTransform().SetWorldRotation(45.f, 45.f, 0.f);
 	testLighting_->GetLightingData().mainLightColor_ = float4(0.75f, 0.75f, 0.75f);
 	testLighting_->GetLightingData().ambientLightColor_ = float4(0.11f, 0.11f, 0.11f);
 	testLighting_->GetLightingData().specularLightRatio_ = 0.f;
@@ -85,7 +85,15 @@ void ShaderTestLevel::Update(float _deltaTime)
 {
 	shaderTestActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
 
-	testLighting_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
+	//testLighting_->GetTransform().SetWorldPosition(
+	//	GetMainCameraActor()->GetTransform().GetWorldPosition().x + GameEngineWindow::GetScale().HY(),
+	//	GetMainCameraActor()->GetTransform().GetWorldPosition().y - GameEngineWindow::GetScale().HY(),
+	//	GetMainCameraActor()->GetTransform().GetWorldPosition().z
+	//);
+
+	testLighting_->GetTransform().SetWorldPosition(
+		GetMainCameraActor()->GetTransform().GetWorldPosition()
+	);
 }
 
 void ShaderTestLevel::End()

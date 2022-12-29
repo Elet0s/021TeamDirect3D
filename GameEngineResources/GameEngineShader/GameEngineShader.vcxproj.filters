@@ -62,8 +62,5 @@
     <None Include="DeferredColor.hlsl">
       <Filter>Object\DeferredRendering</Filter>
     </None>
-    <None Include="TextureShadow.hlsl">
-      <Filter>RenderTargetEffect\DeferredRendering</Filter>
-    </None>
   </ItemGroup>
 </Project>
