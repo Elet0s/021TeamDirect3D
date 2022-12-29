@@ -104,6 +104,11 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
         float3(_input.texcoord_.xy, _input.colorTextureIndex_)
     );
     
+    if (0.0f > result.color_.a)
+    {
+        result.color_ = float4(0.f, 0.f, 0.f, 0.f);
+    }
+    
     result.viewNormal_ = normalize(
         CalTrueNormalVector(Inst_Textures.Sample(
                 POINTCLAMP,
@@ -124,7 +129,7 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
     
     
     result.objectDepth_ = float4(1.f, 0.f, 0.f, 1.f);
-    if (0.f < result.color_.a)
+    if (0.01f < result.color_.a)
     {
         result.objectDepth_ = float4(_input.projSpacePosition_.z / _input.projSpacePosition_.w, 0.f, 0.f, 1.f);
     }

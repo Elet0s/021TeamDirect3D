@@ -548,6 +548,14 @@ void EngineMaterial()
 	newMaterial12->SetRasterizer("EngineRasterizer");
 	newMaterial12->SetBlend_OutputMerger("AlphaBlend");
 	newMaterial12->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+	std::shared_ptr<GameEngineMaterial> newMaterial13
+		= GameEngineMaterial::Create("CalDiffuseLightRatio");
+	newMaterial13->SetVertexShader("CalDiffuseLightRatio.hlsl");
+	newMaterial13->SetPixelShader("CalDiffuseLightRatio.hlsl");
+	newMaterial13->SetRasterizer("EngineRasterizer");
+	newMaterial13->SetBlend_OutputMerger("AlphaBlend");
+	newMaterial13->SetDepthStencil_OutputMerger("EngineBaseDepth");
 }
 
 void EngineMesh()

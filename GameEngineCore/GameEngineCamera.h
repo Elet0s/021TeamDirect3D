@@ -233,22 +233,27 @@ private:
 	//최종 결과물을 받는 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> conclusionRenderTarget_;
 
-	//포워드렌더링용 렌더타겟.
+	//포워드 렌더링용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> forwardRenderTarget_;
 
-	//디퍼드렌더링용 렌더타겟.
+	//디퍼드 렌더링용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> deferredRenderTarget_;
 
-	//지오메트리버퍼 렌더타겟(이하 g버퍼).
+	//지오메트리 버퍼 렌더타겟(이하 g버퍼).
 	std::shared_ptr<GameEngineRenderTarget> geometryBufferRenderTarget_;
 	//오브젝트의 깊이값도 여기에 저장한다.
 
+	//그림자 깊이값 저장용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> shadowDepthRenderTarget_;
 
+	//빛 적용 배율값 저장용 렌더타겟.
+	std::shared_ptr<GameEngineRenderTarget> lightRatioBufferRenderTarget_;
 
 	//빛정보 저장용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> lightDataBufferRenderTarget_;
 
+
+	std::shared_ptr<class GameEngineRenderUnit> lightRatioRenderUnit_;	//빛 배율 저장용 렌더유닛.
 
 	std::shared_ptr<class GameEngineRenderUnit> lightDataRenderUnit_;	//빛 정보 계산용 렌더유닛.
 

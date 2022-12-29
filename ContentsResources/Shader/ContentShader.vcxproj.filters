@@ -11,5 +11,6 @@
     <None Include="MultiTexturesInstShadow.hlsl" />
     <None Include="DeferredRenderingHeader.hlsli" />
     <None Include="ExtractionDeferredRenderingData.hlsl" />
+    <None Include="RenderingShadowDepth.hlsl" />
   </ItemGroup>
 </Project>

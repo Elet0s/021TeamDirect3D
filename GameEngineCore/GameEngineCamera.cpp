@@ -17,14 +17,16 @@ GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
 	projectionMode_(CameraProjectionMode::Perspective),
 	nearZ_(0.1f),
-	farZ_(200.f),
+	farZ_(500.f),
 	fovAngleY_(60.f),
 	conclusionRenderTarget_(nullptr),
 	forwardRenderTarget_(nullptr),
 	deferredRenderTarget_(nullptr),
 	geometryBufferRenderTarget_(nullptr),
 	shadowDepthRenderTarget_(nullptr),
+	lightRatioBufferRenderTarget_(nullptr),
 	lightDataBufferRenderTarget_(nullptr),
+	lightRatioRenderUnit_(std::make_shared<GameEngineRenderUnit>()),
 	lightDataRenderUnit_(std::make_shared<GameEngineRenderUnit>()),
 	mergerRenderUnit_(std::make_shared<GameEngineRenderUnit>())
 {
@@ -208,7 +210,7 @@ void GameEngineCamera::Start()
 
 	geometryBufferRenderTarget_->CreateRenderTargetTexture(
 		GameEngineWindow::GetScale(),
-		DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT,
+		DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT,	//4색이 다 필요한게 아니라 0~1 사이 오브젝트 깊이값만 있으면 충분하므로 이 포맷으로 설정.
 		float4::Red
 	);
 	//지오메트리 버퍼 렌더타겟에 윈도우 내 오브젝트들의 깊이 정보를 저장할 텍스처 생성.
@@ -223,7 +225,16 @@ void GameEngineCamera::Start()
 		DXGI_FORMAT_R32_FLOAT,	//4색이 다 필요한게 아니라 0~1 사이 그림자 깊이값만 있으면 충분하므로 이 포맷으로 설정.
 		float4::Red
 	);
-	//그림자 정보를 받을 렌더타겟뷰겸 셰이더리소스뷰 생성. 깊이스텐실뷰는 생략.
+	//그림자 깊이정보를 받을 렌더타겟뷰겸 셰이더리소스뷰 생성.
+
+
+	lightRatioBufferRenderTarget_ = GameEngineRenderTarget::Create();
+	lightRatioBufferRenderTarget_->CreateRenderTargetTexture(
+		GameEngineWindow::GetScale(),
+		DXGI_FORMAT_R32_FLOAT,	//4색이 다 필요한게 아니라 0~1 사이 빛 적용 배율값만 있으면 충분하므로 이 포맷으로 설정.
+		float4::Red
+	);
+	//픽셀별 빛 적용 배율을 저장할 렌더타겟뷰겸 셰이더리소스뷰 생성.
 
 
 	lightDataBufferRenderTarget_ = GameEngineRenderTarget::Create();
@@ -251,13 +262,23 @@ void GameEngineCamera::Start()
 	//빛정보 저장 버퍼 렌더타겟에 환경광(Ambient Light) 정보를 저장할 텍스처 생성. 
 	//빛은 z값 관계없이 적용되므로 깊이스텐실뷰를 가져올 필요가 없다.
 
+
+	lightRatioRenderUnit_->SetMesh("Fullrect");
+	lightRatioRenderUnit_->SetMaterial("CalDiffuseLightRatio");
+	lightRatioRenderUnit_->GetShaderResourceHelper().SetSampler("POINTCLAMP", "POINTCLAMP");
+	lightRatioRenderUnit_->GetShaderResourceHelper().SetTexture("ObjectDepthTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(3));
+	lightRatioRenderUnit_->GetShaderResourceHelper().SetTexture("ShadowDepthTexture", shadowDepthRenderTarget_->GetRenderTargetTexture(0));
+
+
+
 	lightDataRenderUnit_->SetMesh("Fullrect");
 	lightDataRenderUnit_->SetMaterial("CalDeferredLight");
 	lightDataRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("AllLightingDatas", this->lightingDatasInst_);
 	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("PositionTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(1));
 	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("NormalTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(2));
-	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("ObjectDepthTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(3));
-	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("ShadowDepthTexture", shadowDepthRenderTarget_->GetRenderTargetTexture(0));
+	//lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("ObjectDepthTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(3));
+	//lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("ShadowDepthTexture", shadowDepthRenderTarget_->GetRenderTargetTexture(0));
+	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("LightRatioTexture", lightRatioBufferRenderTarget_->GetRenderTargetTexture(0));
 
 
 
@@ -511,6 +532,9 @@ void GameEngineCamera::Render(float _deltaTime)
 		}
 	}
 
+
+	lightRatioBufferRenderTarget_->Clear();
+	lightRatioBufferRenderTarget_->Effect(lightRatioRenderUnit_);
 
 
 	//렌더링 결과 통합.

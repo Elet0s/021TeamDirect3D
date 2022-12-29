@@ -475,6 +475,7 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 
 	if (true == this->material_->GetPixelShader()->GetInst_PixelShader()->IsDeferredRendering())
 	{
+		MsgBoxAssert("그림자 렌더링에 디퍼드 셰이더는 필요 없습니다.");
 		return;
 		//디퍼드 렌더링은 여기서 하지 않는다.
 	}

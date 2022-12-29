@@ -140,7 +140,7 @@ void TestFieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCoun
 	fieldObjectShadowRenderer_->Initialize(
 		_objectInWindowCount,		//타일 그림자까지 그릴 필요는 없으므로 _objectInWindowCount만큼만 그린다.
 		"Rect",
-		"Test",
+		"RenderingShadowDepth",
 		true
 	);
 	fieldObjectShadowRenderer_->SetTexture2DArray("Inst_Textures", "Field");
@@ -256,11 +256,18 @@ void TestFieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPos
 		renderingFieldObjectDataVector_.push_back(&singleObjectData);
 	}//윈도우크기 1.5배 안에 들어온 오브젝트들의 포인터만 renderingFieldObjectDataVector_에 삽입한다.
 
-
-
-
-
-
+	for (TestFieldObjectData* singleData : renderingFieldObjectDataVector_)
+	{
+		float4 worldPosXYSum = //오브젝트 위치좌표 xy값의 합.
+		{ 
+			_thisWorldPosition.x - singleData->worldPosition_.x,
+			singleData->worldPosition_.y - _thisWorldPosition.y
+		};
+		singleData->worldPosition_.z = (worldPosXYSum.x + worldPosXYSum.y) * 0.01f - 10.f;
+		//화면상 오른쪽 아래 있는 오브젝트의 z값을 작게, 왼쪽 위에 있는 오브젝트의 z값을 크게 해서
+		// 오른쪽 아래에 있는 그림자가 왼쪽 위에 있는 오브젝트를 덮어 씌우게 깊이값을 조정한다
+		// 그래서 오른쪽 아래에서 해가 비치는 것 같은 효과를 준다.
+	}
 
 	int objectIndex = 0;
 	for (size_t unitIndex = static_cast<size_t>(tileCount_);
@@ -306,7 +313,7 @@ void TestFieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPos
 		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldPosition(
 			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.x,
 			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.y,
-			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.z + 0.01f
+			renderingFieldObjectDataVector_[objectIndex]->worldPosition_.z + 1.f
 		);
 		
 		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).GetAtlasData().SetData(
