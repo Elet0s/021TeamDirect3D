@@ -95,7 +95,7 @@ void FieldRenderingActor::InitializeFieldObjects(
 		float4 randomWorldPosition = float4(
 			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HX(), _totalFieldSize.HX()) * _diffusionDegree,
 			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HY(), _totalFieldSize.HY()) * _diffusionDegree,
-			-4.f
+			-10.f
 		);
 		//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
 		//나중에 고칠 것.
@@ -128,7 +128,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	fieldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
-		"MultiTexturesInstancing"
+		"ExtractionDeferredRenderingData"
 	);
 	fieldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	fieldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
@@ -140,7 +140,8 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	fieldObjectShadowRenderer_->Initialize(
 		_objectInWindowCount,		//타일 그림자까지 그릴 필요는 없으므로 _objectInWindowCount만큼만 그린다.
 		"Rect",
-		"MultiTexturesInstShadow"
+		"RenderingShadowDepth",
+		true
 	);
 	fieldObjectShadowRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	fieldObjectShadowRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
@@ -160,6 +161,9 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(2);
 			//NewGrassTexture.png는 2번으로 삽입되어 있다.
+			// 
+			fieldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(1);
+			//NewGrassNormal.png는 1번으로 삽입되어 있다.
 
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(tileSize_, tileSize_, 1.f);
 			//타일을 그리는 인스턴싱유닛들만 크기 설정을 해준다.
@@ -167,7 +171,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
 				(tileSize_ * static_cast<float>(x)) - (tileSize_ * 7.5f),
 				(tileSize_ * static_cast<float>(y)) - (tileSize_ * 5.f),
-				0.f
+				10.f
 			);	//타일 렌더하는 인스턴싱유닛들의 위치 설정.
 
 			++unitIndex;
@@ -252,6 +256,25 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		renderingFieldObjectDataVector_.push_back(&singleObjectData);
 	}//윈도우크기 1.5배 안에 들어온 오브젝트들의 포인터만 renderingFieldObjectDataVector_에 삽입한다.
 
+	for (FieldObjectData* singleData : renderingFieldObjectDataVector_)
+	{
+		float4 worldPosXYSum = //오브젝트 위치좌표 xy값의 합.
+		{
+			_thisWorldPosition.x - singleData->worldPosition_.x,
+			singleData->worldPosition_.y - _thisWorldPosition.y
+		};
+		singleData->worldPosition_.z = (worldPosXYSum.x + worldPosXYSum.y) * 0.01f - 10.f;
+		//화면상 오른쪽 아래 있는 오브젝트의 z값을 작게, 왼쪽 위에 있는 오브젝트의 z값을 크게 해서
+		// 오른쪽 아래에 있는 그림자가 왼쪽 위에 있는 오브젝트를 덮어 씌우게 깊이값을 조정한다
+		// 그래서 오른쪽 아래에서 해가 비치는 것 같은 효과를 준다.
+	}							  
+
+	std::sort(renderingFieldObjectDataVector_.begin(), renderingFieldObjectDataVector_.end(),
+		[](FieldObjectData* a, FieldObjectData* b)->bool
+		{
+			return a->worldPosition_.z > b->worldPosition_.z;
+		}
+	);
 
 	int objectIndex = 0;
 	for (size_t unitIndex = static_cast<size_t>(tileCount_);
@@ -285,7 +308,9 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		fieldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(0);
 		//MapObjects.png는 0번으로 삽입되어 있음.
 
-
+		fieldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(1);
+		//NewGrassNormal.png는 1번으로 삽입되어 있다.
+		//맵 오브젝트가 그려지거나 말거나 노말맵데이터는 샘플링해야 한다.
 
 		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldScale(
 			renderingFieldObjectDataVector_[objectIndex]->worldScale_

@@ -18,7 +18,7 @@
 #include "SoundPlayer.h"
 #include "FieldRenderingActor.h"
 
-TestLevel::TestLevel(): fieldRenderingActor_(nullptr)
+TestLevel::TestLevel(): fieldRenderingActor_(nullptr), testLevelLighting_(nullptr)
 {
 }
 
@@ -132,6 +132,15 @@ void TestLevel::Start()
 	//ShowCursor(false); 마우스 감추기
 	CreateActor<TimeActor>();
 	CreateActor<StageUI>()->SoulCoinRenderersOff();
+
+	testLevelLighting_ = CreateActor<GameEngineLighting>(0, "TestLevelLighting");
+	testLevelLighting_->GetTransform().SetWorldRotation(45.f, 45.f, 0.f);
+	testLevelLighting_->GetLightingData().mainLightColor_ = float4(0.75f, 0.75f, 0.75f);
+	testLevelLighting_->GetLightingData().ambientLightColor_ = float4(0.11f, 0.11f, 0.11f);
+	testLevelLighting_->GetLightingData().specularLightRatio_ = 0.f;
+	testLevelLighting_->GetLightingData().diffuseLightRatio_ = 2.f;
+
+	this->GetMainCamera()->PushLighting(testLevelLighting_);
 
 }
 

@@ -188,6 +188,5 @@ float4 CalAllAmbientLight()
 float4 CalTrueNormalVector(float4 _sampledNormal)
 {
     float4 trueNormalVector = _sampledNormal * 2.f - 1.f;
-    trueNormalVector.w = 0.f;
     return normalize(trueNormalVector);
 }

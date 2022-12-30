@@ -104,7 +104,7 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
         float3(_input.texcoord_.xy, _input.colorTextureIndex_)
     );
     
-    if (0.0f > result.color_.a)
+    if (0.0f >= result.color_.a)
     {
         result.color_ = float4(0.f, 0.f, 0.f, 0.f);
     }

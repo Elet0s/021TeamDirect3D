@@ -26,4 +26,5 @@ private:
 
 private:
 	std::shared_ptr<FieldRenderingActor> fieldRenderingActor_;
+	std::shared_ptr<GameEngineLighting> testLevelLighting_;
 };
