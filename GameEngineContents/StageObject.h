@@ -35,10 +35,29 @@ public:
 	{
 		myLevel_ = _level;
 	}
+	
+	std::list<std::shared_ptr<StageObject>>& GetnextLevelList()
+	{
+		return nextLevels_;
+	}
+
+	bool IsNextLevelEmpty()
+	{
+		if (nextLevels_.size() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	void SetStageType(int _num);
 	void SetComBatType(int _num);
 	void PushNextlevel(std::shared_ptr<StageObject> _nextlevel);
+	
+	float posY_;
 
 protected:
 

@@ -27,7 +27,7 @@ void WorldMapLevel::Start()
 	WorldMapRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
 	
 	GetMainCameraActorTransform().SetWorldPosition(float4(640.f, -2560.f * sinf(10.f * GameEngineMath::DegreeToRadian) + 70.f, -2560.f * cosf(10.f * GameEngineMath::DegreeToRadian)));
-	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
+	//GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
 }
 void WorldMapLevel::Update(float _deltaTime)
 {
