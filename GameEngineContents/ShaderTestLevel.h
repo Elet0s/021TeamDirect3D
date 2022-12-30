@@ -26,6 +26,6 @@ private:
 	std::shared_ptr<class TestFieldRenderingActor> shaderTestActor_;
 	std::shared_ptr<GameEngineTextureRenderer> shaderTestRenderer_;
 	std::vector<RenderOption> testRenderOptionVector_;
-
+	std::shared_ptr<GameEngineLighting> testLighting_;
 };
 

@@ -112,9 +112,9 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngin
 	if (true == this->shaderResourceHelper_.IsConstantBuffer("LIGHTINGDATAS"))
 	{
 		shaderResourceHelper_.SetConstantBuffer_Link(
-			"LIGHTINGDATAS",
+			"ALLLIGHTINGDATAS",
 			&this->parentRenderer_.lock()->GetCamera().lock()->GetLightingDatas(),
-			sizeof(LightingDatas)
+			sizeof(AllLightingDatas)
 		);
 	}
 	if (true == this->shaderResourceHelper_.IsConstantBuffer("TRANSFORMDATA"))

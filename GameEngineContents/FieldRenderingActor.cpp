@@ -158,7 +158,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 			fieldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.f);
 			//NewGrassTexture.png 전체를 다 그린다.
 
-			fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(2);
+			fieldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(2);
 			//NewGrassTexture.png는 2번으로 삽입되어 있다.
 
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(tileSize_, tileSize_, 1.f);
@@ -282,7 +282,7 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		);
 		//renderingFieldObjectDataVector_가 가진 아틀라스데이터를 인스턴싱유닛들에게 입력한다.
 
-		fieldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(0);
+		fieldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(0);
 		//MapObjects.png는 0번으로 삽입되어 있음.
 
 
@@ -301,7 +301,7 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 			fieldObjectAtlasDatas_[renderingFieldObjectDataVector_[objectIndex]->atlasDataIndex_]
 		);
 
-		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetTextureIndex(0);
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetColorTextureIndex(0);
 		//필드오브젝트 그림자 렌더러에도 인덱스만 다른 같은 절차를 반복한다.
 
 		++objectIndex;

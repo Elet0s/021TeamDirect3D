@@ -13,11 +13,7 @@ class GameEngineInstancingRenderer
         friend GameEngineInstancingRenderer;
 
 
-        InstancingUnit(
-            const std::set<std::string>& _structuredBufferSetterNames
-            //const std::string_view& _meshName,
-            //const std::string_view& _materialName
-        );
+        InstancingUnit(const std::set<std::string>& _structuredBufferSetterNames);
     
         void Link(const std::string_view& _name, const void* _data);
 
@@ -26,7 +22,8 @@ class GameEngineInstancingRenderer
         void SetWorldRotation(const float4& _worldRotationVector);
         void SetWorldPosition(const float4& _worldPositionVector);
 
-        void SetTextureIndex(unsigned int _textureIndex);
+        void SetColorTextureIndex(unsigned int _colortextureIndex);
+        void SetNormalMapTextureIndex(unsigned int _normalMapTextureIndex);
 
         //이 인스턴싱 유닛이 그리는 텍스처를 좌우반전하는 함수.
         void SwitchLeftToRight();
@@ -91,7 +88,9 @@ class GameEngineInstancingRenderer
 
         std::map<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
 
-        unsigned int textureIndex_; //인스턴스별로 사용할 텍스처 배열의 인덱스.
+        unsigned int colorTextureIndex_; //인스턴스별로 사용할 컬러텍스처 배열의 인덱스.
+
+        unsigned int normalMapTextureIndex_; //인스턴스별로 사용할 컬러텍스처 배열의 인덱스.
     };
 
 
@@ -111,10 +110,12 @@ private:
 
 
 public:	
+    //초기화.
     void Initialize(
-        size_t _instancingUnitCount,
-        const std::string_view& _meshName,
-        const std::string_view& _materialName
+        size_t _instancingUnitCount,            //인스턴싱 유닛 수.
+        const std::string_view& _meshName,      //사용할 메쉬 이름.
+        const std::string_view& _materialName,  //사용할 마테리얼 이름.
+        bool _isShadowRendering = false
     );
 
     //이 렌더러의 모든 월드스케일을 한번에 세팅하는 함수.
@@ -171,9 +172,17 @@ public:
     }
     
 private:
+    //포워드 렌더링.
     void Render(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
 
+    //디퍼드 렌더링.
+    void DeferredRender(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
+
+    //디퍼드 그림자 렌더링.
+    void RenderShadow(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
+
 private:
+    bool isShadowRendering_;
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
 

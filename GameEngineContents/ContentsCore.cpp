@@ -54,8 +54,8 @@ void ContentsCore::Start()
 	CreateLevel<TestLevel>("Test");
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
-	ChangeLevel("Test");
-	//ChangeLevel("ShaderTestLevel");
+	//ChangeLevel("Test");
+	ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("WorldMap");
 
 
@@ -158,5 +158,21 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	newContentsMaterial4->SetRasterizer("EngineRasterizer");
 	newContentsMaterial4->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial4->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial5
+		= GameEngineMaterial::Create("ExtractionDeferredRenderingData");
+	newContentsMaterial5->SetVertexShader("ExtractionDeferredRenderingData.hlsl");
+	newContentsMaterial5->SetPixelShader("ExtractionDeferredRenderingData.hlsl");
+	newContentsMaterial5->SetRasterizer("EngineRasterizer");
+	newContentsMaterial5->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial5->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial6
+		= GameEngineMaterial::Create("RenderingShadowDepth");
+	newContentsMaterial6->SetVertexShader("RenderingShadowDepth.hlsl");
+	newContentsMaterial6->SetPixelShader("RenderingShadowDepth.hlsl");
+	newContentsMaterial6->SetRasterizer("EngineRasterizer");
+	newContentsMaterial6->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial6->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 }

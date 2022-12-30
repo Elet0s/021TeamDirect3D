@@ -91,7 +91,7 @@ void WorldMapRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount
 			worldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
 			//NewGrassTexture.png 전체를 다 그린다.
 
-			worldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(2);
+			worldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(2);
 			//NewGrassTexture.png는 2번으로 삽입되어 있다.
 
 			worldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(tileSize_, tileSize_, 1.f);
@@ -185,7 +185,7 @@ void WorldMapRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPosi
 		);
 		
 
-		worldRenderer_->GetInstancingUnit(unitIndex).SetTextureIndex(3);
+		worldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(3);
 
 
 		++objectIndex;

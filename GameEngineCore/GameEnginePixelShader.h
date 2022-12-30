@@ -23,9 +23,14 @@ public:
 	void Setting();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
 
 public:
-	bool IsInstancing()
+	bool IsInstancing() const
 	{
 		return nullptr != inst_PixelShader_->pixelShader_;
+	}
+
+	bool IsDeferredRendering() const
+	{
+		return this->isDeferredRendering_;
 	}
 
 	inline std::shared_ptr<GameEnginePixelShader> GetInst_PixelShader()
@@ -62,6 +67,6 @@ private:
 
 	std::shared_ptr<GameEnginePixelShader> inst_PixelShader_;
 
-	bool isDeferredRendering_;	//true: gBuffer 렌더타겟의 텍스처에 렌더링하는 픽셀셰이더.
+	bool isDeferredRendering_;	//true: gBuffer 렌더타겟의 텍스처에 렌더링하는 디퍼드렌더링용 픽셀셰이더.
 };
 

@@ -110,7 +110,20 @@ public:
 		return forwardRenderTarget_;
 	}
 
-	inline LightingDatas& GetLightingDatas()
+	//이 카메라의 디퍼드렌더링용 렌더타겟을 가져오는 함수.
+	inline std::shared_ptr<class GameEngineRenderTarget> GetDeferredRenderTarget()
+	{
+		return deferredRenderTarget_;
+	}
+
+	//이 카메라의 GBuffer 렌더타겟을 가져오는 함수.
+	inline std::shared_ptr<class GameEngineRenderTarget> GetGBufferRenderTarget()
+	{
+		return geometryBufferRenderTarget_;
+	}
+
+	//이 카메라가 가진 모든 조명데이터 반환.
+	inline AllLightingDatas& GetLightingDatas()
 	{
 		return lightingDatasInst_;
 	}
@@ -144,7 +157,7 @@ private:
 	std::unordered_map<std::string, GameEngineInstancing> instancingMap_;	//
 	//비정렬 맵으로 한 이유: 순회할 일이 거의 없을거라고 생각한 상황에서 비정렬 맵을 그냥 써보고 싶어서.
 
-	std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>> instancingRenderers_;
+	std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>> allInstancingRenderers_;
 
 	//비정렬 맵(Unordered Map): 들어오는 키값을 해시함수를 거쳐서 나온 숫자로 바꿔서, 
 	// 그 값을 인덱스로 하는 배열 내 원소로 데이터를 저장하는 방식의 컨테이너. 
@@ -220,19 +233,27 @@ private:
 	//최종 결과물을 받는 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> conclusionRenderTarget_;
 
-	//포워드렌더링용 렌더타겟.
+	//포워드 렌더링용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> forwardRenderTarget_;
 
-	//디퍼드렌더링용 렌더타겟.
+	//디퍼드 렌더링용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> deferredRenderTarget_;
 
-	//지오메트리버퍼 렌더타겟(이하 g버퍼).
+	//지오메트리 버퍼 렌더타겟(이하 g버퍼).
 	std::shared_ptr<GameEngineRenderTarget> geometryBufferRenderTarget_;
+	//오브젝트의 깊이값도 여기에 저장한다.
+
+	//그림자 깊이값 저장용 렌더타겟.
+	std::shared_ptr<GameEngineRenderTarget> shadowDepthRenderTarget_;
+
+	//빛 적용 배율값 저장용 렌더타겟.
+	std::shared_ptr<GameEngineRenderTarget> lightRatioBufferRenderTarget_;
 
 	//빛정보 저장용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> lightDataBufferRenderTarget_;
-	//사실 굳이 만들필요 없는데 값을 직접 받아보고 싶어서 추가.
 
+
+	std::shared_ptr<class GameEngineRenderUnit> lightRatioRenderUnit_;	//빛 배율 저장용 렌더유닛.
 
 	std::shared_ptr<class GameEngineRenderUnit> lightDataRenderUnit_;	//빛 정보 계산용 렌더유닛.
 
@@ -244,6 +265,6 @@ private:
 
 	std::set<std::shared_ptr<GameEngineLighting>> allLightings_;	//모든 조명 정보.
 
-	LightingDatas lightingDatasInst_;	//모든 
+	AllLightingDatas lightingDatasInst_;	//이 카메라의 모든 조명 데이터들. 
 };
 

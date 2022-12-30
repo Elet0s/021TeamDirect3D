@@ -83,14 +83,14 @@ public:
 			newMonster->monsterTextureName_ += ".png";
 			newMonster->instancingUnitIndex_ = monsterCreationIndex_++;
 
-			allMonstersRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetTextureIndex(
+			allMonstersRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetColorTextureIndex(
 				GameEngineTexture2DArray::Find("Monster")->GetIndex(newMonster->monsterTextureName_)
 			);
 			allMonstersRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetWorldScale(
 				newMonster->monsterScale_
 			);
 
-			allShadowsRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetTextureIndex(
+			allShadowsRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetColorTextureIndex(
 				GameEngineTexture2DArray::Find("Monster")->GetIndex(newMonster->monsterTextureName_)
 			);
 			allShadowsRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).SetWorldScale(

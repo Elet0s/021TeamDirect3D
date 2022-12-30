@@ -363,6 +363,18 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 				);
 				psInstEntryPoint += "_PSINST";
 				pixelShader->InstancingPixelShaderCompile(_path, psInstEntryPoint);
+
+
+				size_t psReturnTypeEntry = allHLSLCode.rfind("\n", psInstEntryIndex);
+				std::string psReturnType = allHLSLCode.substr(
+					psReturnTypeEntry + 1,
+					psInstEntryIndex - psReturnTypeEntry
+				);
+				if (std::string::npos != psReturnType.find("DeferredRenderingOutput"))
+				{
+					//ÀÎ½ºÅÏ½Ì ÇÈ¼¿¼ÎÀÌ´õ ¹İÈ¯ÇüÀÌ float4°¡ ¾Æ´Ï¶ó "DeferredRenderingOutput"¶ó¸é gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ¶ó´Â ¶æ.
+					pixelShader->GetInst_PixelShader()->isDeferredRendering_ = true;
+				}
 			}
 
 			size_t psReturnTypeEntry = allHLSLCode.rfind("\n", psEntryIndex);
@@ -371,9 +383,9 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 				psEntryIndex - psReturnTypeEntry
 			);
 
-			if (std::string::npos != psReturnType.find("DeferredOutput"))
+			if (std::string::npos != psReturnType.find("DeferredRenderingOutput"))
 			{
-				//ÇÈ¼¿¼ÎÀÌ´õ ¹İÈ¯ÇüÀÌ float4°¡ ¾Æ´Ï¶ó "DeferredOutput"¶ó¸é gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ¶ó´Â ¶æ.
+				//ÇÈ¼¿¼ÎÀÌ´õ ¹İÈ¯ÇüÀÌ float4°¡ ¾Æ´Ï¶ó "DeferredRenderingOutput"¶ó¸é gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ¶ó´Â ¶æ.
 				pixelShader->isDeferredRendering_ = true;
 			}
 		}

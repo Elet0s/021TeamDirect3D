@@ -1,5 +1,5 @@
 #include "LightHeader.hlsli"
-#include "DeferredHeader.hlsli"
+#include "DeferredRenderingHeader.hlsli"
 
 struct Input
 {
@@ -13,8 +13,6 @@ struct Output
     float4 texcoord_ : TEXCOORD;
 };
 
-
-// 그래픽카드에서 이뤄지는것.
 Output CalDeferredLight_VS(Input _input)
 {
     Output result = (Output) 0;
@@ -25,19 +23,14 @@ Output CalDeferredLight_VS(Input _input)
 
 Texture2D PositionTexture : register(t0);
 Texture2D NormalTexture : register(t1);
+Texture2D LightRatioTexture : register(t2);
 SamplerState POINTCLAMP : register(s0);
-
-struct LightOutput
-{
-    float4 diffuseLight_ : SV_Target0;
-    float4 specularLight_ : SV_Target1;
-    float4 ambientLight_ : SV_Target2;
-};
 
 LightOutput CalDeferredLight_PS(Output _input)
 {
     float4 position = PositionTexture.Sample(POINTCLAMP, _input.texcoord_.xy);
     float4 normal = NormalTexture.Sample(POINTCLAMP, _input.texcoord_.xy);
+    float4 lightRatio = LightRatioTexture.Sample(POINTCLAMP, _input.texcoord_.xy);
     
     if (position.a <= 0.0f)
     {
@@ -47,8 +40,8 @@ LightOutput CalDeferredLight_PS(Output _input)
     normal.w = 0.0f;
     
     LightOutput result = (LightOutput) 0.0f;
-    
-    result.diffuseLight_ = CalAllDiffuseLight(normal);
+
+    result.diffuseLight_ = CalAllDiffuseLight(normal) * lightRatio.r;
     
     if (result.diffuseLight_.r > 0.f || result.diffuseLight_.g > 0.f || result.diffuseLight_.b > 0.f)
     {
