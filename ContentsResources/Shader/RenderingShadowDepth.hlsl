@@ -105,6 +105,10 @@ float4 RenderingShadowDepth_PSINST(Output _input) : SV_Target0
         shadowDepth = float4(_input.shadowPosition_.z / _input.shadowPosition_.w, 0.f, 0.f, 1.f);
         //사실 직교투영 특성상 w가 1 고정이므로 별 의미없는 연산이지만 그래도 한다.
     }
+    else
+    {
+        clip(-1);
+    }
     
     return shadowDepth;
 }

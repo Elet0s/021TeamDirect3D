@@ -134,14 +134,25 @@ void TestLevel::Start()
 	CreateActor<StageUI>()->SoulCoinRenderersOff();
 
 	testLevelLighting_ = CreateActor<GameEngineLighting>(0, "TestLevelLighting");
+	//테스트레벨에 조명 추가.
+
 	testLevelLighting_->GetTransform().SetWorldRotation(45.f, 45.f, 0.f);
-	testLevelLighting_->GetLightingData().mainLightColor_ = float4(0.75f, 0.75f, 0.75f);
-	testLevelLighting_->GetLightingData().ambientLightColor_ = float4(0.11f, 0.11f, 0.11f);
+	//조명 각도 설정.
+
+	testLevelLighting_->GetLightingData().mainLightColor_ = float4(0.7f, 0.7f, 0.7f);
+	//주광 색, 밝기 설정.
+
+	testLevelLighting_->GetLightingData().ambientLightColor_ = float4(0.1f, 0.1f, 0.1f);
+	//환경광 색, 밝기 설정.
+
 	testLevelLighting_->GetLightingData().specularLightRatio_ = 0.f;
+	//정반사광 사용 안함.
+
 	testLevelLighting_->GetLightingData().diffuseLightRatio_ = 2.f;
+	//난반사광을 두배로 적용.
 
 	this->GetMainCamera()->PushLighting(testLevelLighting_);
-
+	//카메라에 조명 등록.
 }
 
 void TestLevel::Update(float _DeltaTime)

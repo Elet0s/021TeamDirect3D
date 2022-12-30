@@ -124,7 +124,7 @@ void FieldRenderingActor::InitializeFieldObjects(
 
 void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 {
-	fieldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("FieldRenderer");
+	fieldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("0-FieldRenderer");
 	fieldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
@@ -136,7 +136,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	//그려질 필요없는 렌더유닛들이 256, 256 크기로 그려지는 버그 발생.
 
 
-	fieldObjectShadowRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("FieldObjectShadowRenderer");
+	fieldObjectShadowRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("0-FieldObjectShadowRenderer");
 	fieldObjectShadowRenderer_->Initialize(
 		_objectInWindowCount,		//타일 그림자까지 그릴 필요는 없으므로 _objectInWindowCount만큼만 그린다.
 		"Rect",
@@ -269,13 +269,6 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 		// 그래서 오른쪽 아래에서 해가 비치는 것 같은 효과를 준다.
 	}							  
 
-	std::sort(renderingFieldObjectDataVector_.begin(), renderingFieldObjectDataVector_.end(),
-		[](FieldObjectData* a, FieldObjectData* b)->bool
-		{
-			return a->worldPosition_.z > b->worldPosition_.z;
-		}
-	);
-
 	int objectIndex = 0;
 	for (size_t unitIndex = static_cast<size_t>(tileCount_);
 		unitIndex < fieldRenderer_->GetUnitCount(); ++unitIndex)
@@ -310,7 +303,6 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 
 		fieldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(1);
 		//NewGrassNormal.png는 1번으로 삽입되어 있다.
-		//맵 오브젝트가 그려지거나 말거나 노말맵데이터는 샘플링해야 한다.
 
 		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetWorldScale(
 			renderingFieldObjectDataVector_[objectIndex]->worldScale_

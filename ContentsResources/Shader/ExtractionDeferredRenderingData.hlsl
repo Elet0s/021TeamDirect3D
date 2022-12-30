@@ -106,18 +106,23 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
     
     if (0.0f >= result.color_.a)
     {
-        result.color_ = float4(0.f, 0.f, 0.f, 0.f);
+        //result.color_ = float4(0.f, 0.f, 0.f, 0.f);
+        clip(-1);
     }
     
-    result.viewNormal_ = normalize(
-        CalTrueNormalVector(Inst_Textures.Sample(
-                POINTCLAMP,
-                float3(_input.texcoord_.xy, _input.normalMapTextureIndex_)
+    result.viewNormal_ = float4(-0.5773f, 0.5773f, -0.5773f, 1.f);
+    if (-1 != _input.normalMapTextureIndex_)
+    {
+        result.viewNormal_ = normalize(
+            CalTrueNormalVector(Inst_Textures.Sample(
+                    POINTCLAMP,
+                    float3(_input.texcoord_.xy, _input.normalMapTextureIndex_)
+                )
             )
-        )
-    );
+        );
     
-    result.viewNormal_ = float4(-result.viewNormal_.x, -result.viewNormal_.y, result.viewNormal_.z, 1.f);
+        result.viewNormal_ = float4(-result.viewNormal_.x, -result.viewNormal_.y, result.viewNormal_.z, 1.f);
+    }
     
     //노말텍스처에서 노말벡터 추출.
     
