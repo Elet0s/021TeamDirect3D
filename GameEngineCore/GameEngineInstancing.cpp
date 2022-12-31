@@ -61,7 +61,7 @@ void GameEngineInstancing::PushUnit(std::shared_ptr<GameEngineRenderUnit> _rende
 		CreateInstancingDataList();
 	}
 
-	_renderUnit->Off();
+	//_renderUnit->Off();
 	//인스턴싱에 등록되면 일반 렌더링 대상에서 제외한다.
 
 	bool isInserted = false;	//새 렌더유닛이 제대로 삽입되었는가 여부.
@@ -171,7 +171,7 @@ void GameEngineInstancing::RenderInstancing(float _deltaTime)
 
 		instancingBuffer->ChangeData(&instancingBufferData[0], instancingBufferData.size());
 		instancingShaderResourceHelper.AllResourcesSetting();
-		initRenderUnit_->RenderInstancing(_deltaTime, instancingDataList.size(), instancingBuffer);
+		//initRenderUnit_->RenderInstancing(_deltaTime, instancingDataList.size(), instancingBuffer);
 		//instancingCount += instancingDataList.size();
 	}
 

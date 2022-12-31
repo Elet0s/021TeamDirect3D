@@ -111,8 +111,8 @@ void TileMapRenderer::Render(float _deltaTime)
 			tileTransform.SetLocalScale(allTiles_[y][x].tileImage_->GetScale());
 			tileTransform.SetLocalPosition(tilePos);
 			tileTransform.CalculateWorldViewProjection();
-			this->GetFirstShaderResourceHelper().SetConstantBuffer_Link("TransformData", tileTransform.GetTransformData());
-			this->GetFirstShaderResourceHelper().SetTexture("Tex", allTiles_[y][x].tileImage_);
+			this->GetShaderResourceHelper().SetConstantBuffer_Link("TransformData", tileTransform.GetTransformData());
+			this->GetShaderResourceHelper().SetTexture("Tex", allTiles_[y][x].tileImage_);
 			GameEngineDefaultRenderer::Render(_deltaTime);
 		}
 	}
@@ -127,8 +127,8 @@ void TileMapRenderer::Start()
 	this->frameData_.sizeX = 1.f;
 	this->frameData_.sizeY = 1.f;
 
-	GetFirstShaderResourceHelper().SetConstantBuffer_Link("AtlasData", this->frameData_);
-	GetFirstShaderResourceHelper().SetConstantBuffer_Link("PixelData", this->pixelData_);
+	GetShaderResourceHelper().SetConstantBuffer_Link("AtlasData", this->frameData_);
+	GetShaderResourceHelper().SetConstantBuffer_Link("PixelData", this->pixelData_);
 	PushRendererToMainCamera();
 }
 

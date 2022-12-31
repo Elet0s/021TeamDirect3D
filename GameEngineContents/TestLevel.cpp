@@ -157,7 +157,6 @@ void TestLevel::Start()
 
 void TestLevel::Update(float _DeltaTime)
 {						
-
 	PlayerMoveCamera();
 
 	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());

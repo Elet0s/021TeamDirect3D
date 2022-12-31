@@ -127,10 +127,10 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 	GetActor()->GetLevel()->PushCamera(std::dynamic_pointer_cast<GameEngineCamera>(shared_from_this()), _order);
 }
 
-GameEngineInstancing& GameEngineCamera::GetInstancing(const std::string& _name)
-{
-	return instancingMap_[_name];	//없으면 생성 삽입 반환, 있으면 찾아서 반환.
-}
+//GameEngineInstancing& GameEngineCamera::GetInstancing(const std::string& _name)
+//{
+//	return instancingMap_[_name];	//없으면 생성 삽입 반환, 있으면 찾아서 반환.
+//}
 
 std::shared_ptr<GameEngineInstancingRenderer> GameEngineCamera::GetInstancingRenderer(const std::string& _name)
 {
@@ -453,24 +453,14 @@ void GameEngineCamera::Render(float _deltaTime)
 				////카메라에 저장된 뷰행렬과 투영행렬을 렌더러의 트랜스폼에 저장한다.
 				//
 				//renderer->GetTransform().CalculateWorldViewProjection();
-				////크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
-				//
-				//if (false == float4x4::IsInViewFrustum(
-				//	renderer->GetTransformData().worldViewProjectionMatrix_,
-				//	float4(renderer->renderOptionInst_.pivotPosX_, renderer->renderOptionInst_.pivotPosY_))
-				//	)
-				//{
-				//	//뷰프러스텀 안에 4개 정점들 중 한개라도 들어오는 것들만 그린다.
-				//	continue;
-				//}
-				//행렬 변환은 이미 위에서 했으므로 또다시 하지 않는다.
+				//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
+				////행렬 변환은 이미 위에서 했으므로 또다시 하지 않는다.
 
 				renderer->DeferredRender(scaleTime);
-				//geometryBufferRenderTarget_의 세 텍스처에 오브젝트의 원래 색상, 오브젝트 표면 모든 점들의 뷰공간 위치, 
-				// 오브젝트 표면 모든 점들의 뷰공간 법선벡터를 렌더링 형식으로 저장한다. 
+				//geometryBufferRenderTarget_의 네 렌더타겟들에 오브젝트의 원래 색상, 오브젝트 표면 모든 점들의 뷰공간 위치, 
+				// 오브젝트 표면 모든 점들의 뷰공간 법선벡터, 오브젝트의 깊이값을 렌더링 형식으로 저장한다. 
 			}
 		}
-
 
 		//for (std::unordered_map<std::string, GameEngineInstancing>::iterator iter = instancingMap_.begin();
 		//	iter != instancingMap_.end(); ++iter)

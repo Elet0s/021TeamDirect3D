@@ -39,11 +39,11 @@ public:
     // 부모 렌더러가 등록된 카메라의 렌더타겟에 옮기는 함수.
     void Render(float _deltaTime);
 
-    void RenderInstancing(
-        float _deltaTime,
-        size_t _instancingDataCount,
-        std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
-    );
+    //void RenderInstancing(
+    //    float _deltaTime,
+    //    size_t _instancingDataCount,
+    //    std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
+    //);
 
     std::shared_ptr<GameEngineMesh> GetMesh();
     std::shared_ptr<GameEngineMaterial> GetMaterial();
@@ -58,18 +58,6 @@ public:
         return this->shaderResourceHelper_;
     }
 
-    //이 렌더유닛을 일반 렌더링 모드로 전환하는 함수.
-    inline void On()
-    {
-        this->isOn_ = true;
-    }
-
-    //이 렌더유닛을 인스턴스 렌더링 모드로 전환하는 함수.
-    inline void Off()
-    {
-        this->isOn_ = false;
-    }
-
 public:
     //Render()함수의 기본적인 렌더링 기능에 추가적으로 필요한 것이 있거나, 아예 렌더링 기능을 대체해야 하는 경우 사용하는 함수포인터.
     std::function<bool(float)> specialRenderingFunction_;
@@ -77,7 +65,6 @@ public:
     //false: 이 함수가 끝나면 Render()함수를 바로 끝낸다.
 
 private:
-    bool isOn_;     //true: 일반 렌더링 모드, false: 인스턴스 렌더링 모드.
 
     std::weak_ptr<GameEngineRenderer> parentRenderer_;    //이 렌더유닛을 가진 부모 렌더러.
 
@@ -137,6 +124,7 @@ protected:
     virtual void Start();
     virtual void Render(float _deltaTime) = 0;
     virtual void DeferredRender(float _deltaTime) = 0;
+    //virtual void RenderShadow(float _deltaTime) = 0;
 
     void PushRendererToMainCamera();	//렌더러가 자기 자신을 메인카메라에 등록하는 함수.
     void PushRendererToUICamera();		//렌더러가 자기 자신을 UI카메라에 등록하는 함수.

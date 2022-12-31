@@ -14,7 +14,7 @@ void Texture2DShadowRenderer::Start()
 	GameEngineRenderer::Start();
 	SetMesh("Rect");
 	SetMaterial("Texture2DShadow");
-	GetFirstShaderResourceHelper().SetSampler("LINEARWRAP", "LINEARWRAP");
+	GetShaderResourceHelper().SetSampler("LINEARWRAP", "LINEARWRAP");
 }
 
 void Texture2DShadowRenderer::Update(float _deltaTime)
@@ -22,9 +22,9 @@ void Texture2DShadowRenderer::Update(float _deltaTime)
 	if (true == isAnimation_)
 		//부모 텍스처렌더러가 애니메이션일때만 업데이트를 한다.
 	{
-		GetFirstShaderResourceHelper().SetConstantBuffer_Link(
+		GetShaderResourceHelper().SetConstantBuffer_Link(
 			"AtlasData", parentTextureRenderer_.lock()->GetAtlasData());
-		GetFirstShaderResourceHelper().SetTexture(
+		GetShaderResourceHelper().SetTexture(
 			"Tex", parentTextureRenderer_.lock()->GetCurrentTexture());
 
 		if (0.f >= parentTextureRenderer_.lock()->GetTransform().GetWorldScale().x)
@@ -61,9 +61,9 @@ void Texture2DShadowRenderer::SetTextureRenderer(std::shared_ptr<GameEngineTextu
 	parentTextureRenderer_ = _textureRenderer;
 	SetRenderingOrder(parentTextureRenderer_.lock()->GetRenderingOrder() + 2);
 
-	GetFirstShaderResourceHelper().SetConstantBuffer_Link(
+	GetShaderResourceHelper().SetConstantBuffer_Link(
 		"AtlasData", parentTextureRenderer_.lock()->GetAtlasData());
-	GetFirstShaderResourceHelper().SetTexture(
+	GetShaderResourceHelper().SetTexture(
 		"Tex", parentTextureRenderer_.lock()->GetCurrentTexture());
 
 	if (true == parentTextureRenderer_.lock()->IsCurAnimation())
@@ -75,7 +75,7 @@ void Texture2DShadowRenderer::SetTextureRenderer(std::shared_ptr<GameEngineTextu
 void Texture2DShadowRenderer::SetShadowAngle(float _angle /*= 30.f*/)
 {
 	renderOptionInst_.shadowAngle_ = _angle;	//그림자 기본값 30도.
-	GetFirstShaderResourceHelper().SetConstantBuffer_Link("RenderOption", renderOptionInst_);
+	GetShaderResourceHelper().SetConstantBuffer_Link("RenderOption", renderOptionInst_);
 }
 
 //리인터프리터캐스트의 단점: 주소값을 단순 정수로 바꾸는 형변환이므로 널포인터여도 널포인터로 감지되지 않는다.

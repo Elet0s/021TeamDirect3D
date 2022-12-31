@@ -89,7 +89,7 @@ public:
 
 protected:
 	virtual void Start() override;
-	virtual void Render(float _deltaTime) override;
+	void Render(float _deltaTime) override;
 
 private:
 	static std::shared_ptr<GameEngineRenderTarget> fontTarget_;

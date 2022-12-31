@@ -161,7 +161,7 @@ private:
 	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.
 	//렌더링오더로 먼저 분류한 후 렌더 직전에 zsort() 함수로 z값 순서대로 정렬한다. 
 
-	std::unordered_map<std::string, GameEngineInstancing> instancingMap_;	//
+	//std::unordered_map<std::string, GameEngineInstancing> instancingMap_;	//
 	//비정렬 맵으로 한 이유: 순회할 일이 거의 없을거라고 생각한 상황에서 비정렬 맵을 그냥 써보고 싶어서.
 
 	std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>> allInstancingRenderers_;

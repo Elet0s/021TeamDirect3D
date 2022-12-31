@@ -84,5 +84,5 @@ void WorldMapLevel::End()
 }
 void WorldMapLevel::LevelStartEvent()
 {
-	this->GetMainCamera()->SetFarZ(100000.f);
+	this->GetMainCamera()->SetFarZ(10000.f);
 }

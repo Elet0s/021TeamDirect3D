@@ -7,8 +7,7 @@
 #include "GameEngineCamera.h"
 
 GameEngineRenderUnit::GameEngineRenderUnit()
-	: isOn_(true),
-	parentRenderer_(),
+	: parentRenderer_(),
 	mesh_(nullptr),
 	inputLayout_(nullptr),
 	material_(nullptr),
@@ -109,7 +108,7 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngin
 	}
 	parentRenderer_ = _parentRenderer;
 
-	if (true == this->shaderResourceHelper_.IsConstantBuffer("LIGHTINGDATAS"))
+	if (true == this->shaderResourceHelper_.IsConstantBuffer("ALLLIGHTINGDATAS"))
 	{
 		shaderResourceHelper_.SetConstantBuffer_Link(
 			"ALLLIGHTINGDATAS",
@@ -137,10 +136,6 @@ void GameEngineRenderUnit::EngineShaderResourceSetting(std::shared_ptr<GameEngin
 
 void GameEngineRenderUnit::Render(float _deltaTime)
 {
-	if (false == this->isOn_)	//인스턴싱용 렌더유닛은 일반 렌더링을 하지 않는다.
-	{
-		return;
-	}
 
 	if (nullptr == this->mesh_)
 	{
@@ -176,38 +171,38 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 	shaderResourceHelper_.AllResourcesReset();
 }
 
-void GameEngineRenderUnit::RenderInstancing(
-	float _deltaTime,
-	size_t _instancingDataCount,
-	std::shared_ptr<GameEngineInstancingBuffer> _instancingBuffer
-)
-{
-	if (nullptr == this->mesh_)
-	{
-		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
-		return;
-	}
-
-	if (nullptr == this->inputLayout_)
-	{
-		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
-		return;
-	}
-
-	if (nullptr == this->material_)
-	{
-		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
-		return;
-	}
-
-	this->mesh_->SettingInstancing(_instancingBuffer);
-	this->inputLayout_->Setting();
-	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
-	this->material_->SettingInstancing();
-	this->shaderResourceHelper_.AllResourcesSetting();
-	this->mesh_->RenderInstancing(_instancingDataCount);
-	this->shaderResourceHelper_.AllResourcesReset();
-}
+//void GameEngineRenderUnit::RenderInstancing(
+//	float _deltaTime,
+//	size_t _instancingDataCount,
+//	std::shared_ptr<GameEngineInstancingBuffer> _instancingBuffer
+//)
+//{
+//	if (nullptr == this->mesh_)
+//	{
+//		MsgBoxAssert("메쉬가 없습니다. 렌더링을 할 수 없습니다.");
+//		return;
+//	}
+//
+//	if (nullptr == this->inputLayout_)
+//	{
+//		MsgBoxAssert("인풋 레이아웃이 없습니다. 렌더링을 할 수 없습니다.");
+//		return;
+//	}
+//
+//	if (nullptr == this->material_)
+//	{
+//		MsgBoxAssert("마테리얼이 없습니다. 렌더링을 할 수 없습니다.");
+//		return;
+//	}
+//
+//	this->mesh_->SettingInstancing(_instancingBuffer);
+//	this->inputLayout_->Setting();
+//	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
+//	this->material_->SettingInstancing();
+//	this->shaderResourceHelper_.AllResourcesSetting();
+//	this->mesh_->RenderInstancing(_instancingDataCount);
+//	this->shaderResourceHelper_.AllResourcesReset();
+//}
 
 std::shared_ptr<GameEngineMesh> GameEngineRenderUnit::GetMesh()
 {
