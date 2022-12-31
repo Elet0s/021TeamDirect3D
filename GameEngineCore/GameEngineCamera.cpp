@@ -17,7 +17,7 @@ GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
 	projectionMode_(CameraProjectionMode::Perspective),
 	nearZ_(0.1f),
-	farZ_(500.f),
+	farZ_(100000.f),
 	fovAngleY_(60.f),
 	conclusionRenderTarget_(nullptr),
 	forwardRenderTarget_(nullptr),

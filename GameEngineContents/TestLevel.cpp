@@ -166,6 +166,7 @@ void TestLevel::Update(float _DeltaTime)
 void TestLevel::LevelStartEvent()
 {
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
+	this->GetMainCamera()->SetFarZ(500.f);
 }
 void TestLevel::LevelEndEvent()
 {

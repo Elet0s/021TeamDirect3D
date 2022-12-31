@@ -14,7 +14,6 @@ WorldMapLevel::~WorldMapLevel()
 }
 void WorldMapLevel::Start()
 {
-
 	WorldMapRenderingActor_ = CreateActor<WorldMapRenderingActor>();
 	CreateActor<StageCreater>();
 	WorldMapRenderingActor_->Initialize(
@@ -85,5 +84,5 @@ void WorldMapLevel::End()
 }
 void WorldMapLevel::LevelStartEvent()
 {
-
+	this->GetMainCamera()->SetFarZ(100000.f);
 }

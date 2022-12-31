@@ -70,10 +70,12 @@ public:
 	{
 		projectionMode_ = _mode;
 	}
+
 	inline const float4& GetMouseWorldDirection()
 	{
 		return mouseDirection_;
 	}
+
 	CameraProjectionMode GetProjectionMode()
 	{
 		return projectionMode_;
@@ -126,6 +128,11 @@ public:
 	inline AllLightingDatas& GetLightingDatas()
 	{
 		return lightingDatasInst_;
+	}
+
+	void SetFarZ(float _farZ)
+	{
+		this->farZ_ = _farZ;
 	}
 
 
