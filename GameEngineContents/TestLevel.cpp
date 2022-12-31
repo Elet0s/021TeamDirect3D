@@ -140,7 +140,7 @@ void TestLevel::Start()
 	//Á¶¸í °¢µµ ¼³Á¤.
 
 	testLevelLighting_->GetLightingData().mainLightColor_ = float4(0.7f, 0.7f, 0.7f);
-	//ÁÖ±¤ »ö, ¹à±â ¼³Á¤.
+	//Á¤¹Ý»ç±¤, ³­¹Ý»ç±¤ »ö, ¹à±â ¼³Á¤.
 
 	testLevelLighting_->GetLightingData().ambientLightColor_ = float4(0.1f, 0.1f, 0.1f);
 	//È¯°æ±¤ »ö, ¹à±â ¼³Á¤.

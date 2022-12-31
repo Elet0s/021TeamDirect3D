@@ -133,13 +133,13 @@ void GameEngineInstancingRenderer::Initialize(
 	//메쉬, 마테리얼, 인풋 레이아웃 세팅.
 
 	//인스턴스 단위 크기.
-	UINT instancingSize = this->mesh_->GetInputLayoutDesc().instanceSize_;
+	UINT instanceSize = this->mesh_->GetInputLayoutDesc().instanceSize_;
 	
-	this->instancingBuffer_ = GameEngineInstancingBuffer::Create(instancingUnitCount_, instancingSize);
+	this->instancingBuffer_ = GameEngineInstancingBuffer::Create(instancingUnitCount_, instanceSize);
 	//instancingUnitCount_ * instancingSize크기의 인스턴싱버퍼 생성.
 
-	instanceIndexBuffer_.resize(static_cast<size_t>(instancingSize) * instancingUnitCount_);
-	//instancingUnitCount_ * instancingSize크기로 로우인덱스 버퍼 크기 조정.
+	instanceIndexBuffer_.resize(static_cast<size_t>(instanceSize) * instancingUnitCount_);
+	//instancingUnitCount_ * instancingSize크기로 인스턴스인덱스 버퍼 크기 조정.
 
 	this->shaderResourceHelper_ = GameEngineShaderResourceHelper();
 	this->shaderResourceHelper_.ShaderCheck(
@@ -314,11 +314,11 @@ void GameEngineInstancingRenderer::Render(
 
 		*instanceIndexBufferPtr = allInstancingUnits_[index].colorTextureIndex_;
 		instanceIndexBufferPtr += 1;
-		//인스턴싱인덱스버퍼에 텍스처배열의 컬러텍스처 인덱스를 기록하고 뒤로 넘어간다.
+		//인스턴스인덱스버퍼에 텍스처배열의 컬러텍스처 인덱스를 기록하고 뒤로 넘어간다.
 
 		*instanceIndexBufferPtr = allInstancingUnits_[index].normalMapTextureIndex_;
 		instanceIndexBufferPtr += 1;
-		//인스턴싱인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
+		//인스턴스인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
 	}
 
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
@@ -450,7 +450,7 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 
 		*instanceIndexBufferPtr = allInstancingUnits_[index].normalMapTextureIndex_;
 		instanceIndexBufferPtr += 1;
-		//인스턴싱인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
+		//인스턴스인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
 	}
 
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());

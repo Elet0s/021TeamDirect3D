@@ -49,7 +49,7 @@ private:
 	float4 inverseViewLightingDirection_; //뷰공간에서의 조명 역방향.
 
 	//float4 viewSpaceCameraPosition_;  //카메라 위치. 
-	//뷰공간 카메라위치는 (0, 0, 0) 고정 아닌가?
+	//뷰공간 카메라위치는 (0, 0, 0) 고정 아닌가??
 };
 
 struct AllLightingDatas

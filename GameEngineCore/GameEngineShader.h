@@ -49,7 +49,7 @@ public:
 	std::shared_ptr<GameEngineConstantBuffer> constantBuffer_;
 	//여러 상수버퍼 세터가 하나의 상수버퍼를 공유할 수 있다.
 
-	//Map()함수를 통해 GPU로 보내질, 각각의 상수버퍼들이 가진 데이터의 주소값. 
+	//GPU로 보내질, 각각의 상수버퍼들이 가진 데이터의 주소값. 
 	const void* settingDataToGPU_;
 
 	size_t size_;	//상수버퍼 전체 크기. 

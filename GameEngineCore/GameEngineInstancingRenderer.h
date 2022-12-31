@@ -90,7 +90,7 @@ class GameEngineInstancingRenderer
 
         unsigned int colorTextureIndex_; //인스턴스별로 사용할 컬러텍스처 배열의 인덱스.
 
-        unsigned int normalMapTextureIndex_; //인스턴스별로 사용할 컬러텍스처 배열의 인덱스.
+        unsigned int normalMapTextureIndex_; //인스턴스별로 사용할 노말맵텍스처 배열의 인덱스.
     };
 
 
@@ -115,7 +115,7 @@ public:
         size_t _instancingUnitCount,            //인스턴싱 유닛 수.
         const std::string_view& _meshName,      //사용할 메쉬 이름.
         const std::string_view& _materialName,  //사용할 마테리얼 이름.
-        bool _isShadowRendering = false
+        bool _isShadowRendering = false         //true: 그림자의 깊이값을 렌더한다.
     );
 
     //이 렌더러의 모든 월드스케일을 한번에 세팅하는 함수.
@@ -182,7 +182,7 @@ private:
     void RenderShadow(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
 
 private:
-    bool isShadowRendering_;
+    bool isShadowRendering_;        //true: 그림자의 깊이값을 렌더한다.
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
 
@@ -198,7 +198,7 @@ private:
 
     std::shared_ptr<GameEngineInstancingBuffer> instancingBuffer_;  //인스턴스별로 달라지는 정보들을 셰이더로 전달하는 버퍼
 
-    std::vector<char> instanceIndexBuffer_;  //인스턴스 인덱스와 텍스처 인덱스를 저장하는 버퍼.
+    std::vector<char> instanceIndexBuffer_;  //컬러텍스처 인덱스와 노말맵텍스처 인덱스를 저장하는 버퍼.
 
     GameEngineShaderResourceHelper shaderResourceHelper_;   //이 렌더러가 쓸 셰이더리소스헬퍼.
 
