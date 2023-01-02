@@ -17,7 +17,7 @@ GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
 	projectionMode_(CameraProjectionMode::Perspective),
 	nearZ_(0.1f),
-	farZ_(100000.f),
+	farZ_(1000.f),
 	fovAngleY_(60.f),
 	conclusionRenderTarget_(nullptr),
 	forwardRenderTarget_(nullptr),
@@ -44,7 +44,7 @@ GameEngineCamera::~GameEngineCamera()
 {
 }
 
-float4 GameEngineCamera::GetMouseScreenPosition()
+float4 GameEngineCamera::GetMouseWindowPosition()
 {
 	POINT pointerPosition;
 	if (false == GetCursorPos(&pointerPosition))
