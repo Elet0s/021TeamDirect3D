@@ -18,7 +18,7 @@ StageObject::~StageObject()
 void StageObject::Start()
 {
 	renderer_ = CreateComponent<GameEngineTextureRenderer>();
-	renderer_->SetTexture("ComBat.png");
+	renderer_->SetTexture("Combat.png");
 	renderer_->ScaleToTexture();
 	renderer_->SetPivot(PivotMode::Bot);
 }

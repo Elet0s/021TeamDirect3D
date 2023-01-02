@@ -75,8 +75,9 @@ void Player::Start()
 	}
 
 	playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	playerRenderer_->GetTransform().SetLocalScale(90, 90, 0);
-	playerRenderer_->GetTransform().SetWorldPosition(0, 0, -100);
+	playerRenderer_->Initialize("DeferredRendering");
+	playerRenderer_->GetTransform().SetLocalScale(90, 90, 1);
+	playerRenderer_->GetTransform().SetWorldPosition(0, 0, -50);
 	playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
 	playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
 	playerRenderer_->ChangeFrameAnimation("PlayerIdle");

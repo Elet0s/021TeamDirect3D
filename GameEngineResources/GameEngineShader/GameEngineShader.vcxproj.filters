@@ -68,7 +68,7 @@
     <None Include="ParticleTest.hlsl">
       <Filter>Particle</Filter>
     </None>
-    <None Include="CalDiffuseLightRatio.hlsl">
+    <None Include="CalLightRatio.hlsl">
       <Filter>RenderTargetEffect\DeferredRendering</Filter>
     </None>
   </ItemGroup>

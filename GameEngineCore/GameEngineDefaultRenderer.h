@@ -27,6 +27,7 @@ private:
 public:	
 	virtual void Render(float _deltaTime) override;
 	virtual void DeferredRender(float _deltaTime) override;
+	virtual void RenderShadow(float _deltaTime) override;
 
 	//렌더러에 필요한 마테리얼을 등록하고 이 렌더러를 메인 카메라에 등록하는 함수.
 	void SetMaterial(const std::string_view& _materialName);
@@ -41,6 +42,17 @@ public:
 	{
 		return this->renderUnit_->GetShaderResourceHelper();
 		//return this->allRenderUnits_[RenderingPath::ForwardRendering][0]->GetShaderResourceHelper();
+	}
+	
+	//이 함수를 호출한 렌더러들은 그림자 렌더러가 되어 shadowDepthRenderTarget_에 그림자 깊이값을 저장한다.
+	inline void SetShadowRendering()
+	{
+		isShadowRendering_ = true;
+	}
+
+	inline bool IsShadowRendering()
+	{
+		return isShadowRendering_;
 	}
 
 	//inline std::vector<std::shared_ptr<GameEngineRenderUnit>> GetForwardRenderUnitVector()
@@ -71,8 +83,6 @@ private:
 	//렌더링패스 순서대로 정렬.
 	//맵과 벡터라고 만드시 많은 숫자를 저장한다는 보장은 없음.
 
-	//마테리얼이나 셰이더리소스헬퍼는 렌더유닛당 한개씩이 아니라 렌더러당 한개씩 가져도 되지 않을까.
-	//만약 이게 맞다면 렌더유닛이 아니라 렌더러가 마테리얼과 셰이더리소스헬퍼를 가지게 하자.
-
+	bool isShadowRendering_;	 //true: 그림자의 깊이값을 렌더타겟에 저장한다.
 };
 

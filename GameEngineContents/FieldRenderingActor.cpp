@@ -128,7 +128,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	fieldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
-		"ExtractionDeferredRenderingData"
+		"DeferredInstanceRendering"
 	);
 	fieldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	fieldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
@@ -140,7 +140,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	fieldObjectShadowRenderer_->Initialize(
 		_objectInWindowCount,		//타일 그림자까지 그릴 필요는 없으므로 _objectInWindowCount만큼만 그린다.
 		"Rect",
-		"RenderingShadowDepth",
+		"DeferredInstanceShadowRendering",
 		true
 	);
 	fieldObjectShadowRenderer_->SetTexture2DArray("Inst_Textures", "Field");

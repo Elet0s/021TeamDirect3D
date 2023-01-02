@@ -115,7 +115,7 @@ public:
         size_t _instancingUnitCount,            //인스턴싱 유닛 수.
         const std::string_view& _meshName,      //사용할 메쉬 이름.
         const std::string_view& _materialName,  //사용할 마테리얼 이름.
-        bool _isShadowRendering = false         //true: 그림자의 깊이값을 렌더한다.
+        bool _isShadowRendering = false         //true: 그림자의 깊이값을 렌더타겟뷰에 저장한다.
     );
 
     //이 렌더러의 모든 월드스케일을 한번에 세팅하는 함수.
@@ -182,7 +182,7 @@ private:
     void RenderShadow(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
 
 private:
-    bool isShadowRendering_;        //true: 그림자의 깊이값을 렌더한다.
+    bool isShadowRendering_;        //true: 그림자의 깊이값을 렌더타겟에 저장한다.
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
 

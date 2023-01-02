@@ -10,7 +10,11 @@
     <None Include="MultiTexturesInstancing.hlsl" />
     <None Include="MultiTexturesInstShadow.hlsl" />
     <None Include="DeferredRenderingHeader.hlsli" />
-    <None Include="ExtractionDeferredRenderingData.hlsl" />
-    <None Include="RenderingShadowDepth.hlsl" />
+    <None Include="DeferredInstanceRendering.hlsl" />
+    <None Include="DeferredInstanceShadowRendering.hlsl" />
+    <None Include="DeferredShadowRendering.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="DeferredRendering.hlsl" />
   </ItemGroup>
 </Project>

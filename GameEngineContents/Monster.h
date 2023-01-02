@@ -127,7 +127,7 @@ public:
 			float cameraX = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().x;
 			float cameraY = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().y;
 			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 1280, cameraY - 720),float4(cameraX + 1280, cameraY + 720));
-			monsterPosition_.z = -25.f;
+			monsterPosition_.z = -30.f;
 
 			if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
 			{

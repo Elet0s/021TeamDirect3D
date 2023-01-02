@@ -13,7 +13,7 @@ struct Output
     float4 texcoord_ : TEXCOORD;
 };
 
-Output CalDiffuseLightRatio_VS(Input _input)
+Output CalLightRatio_VS(Input _input)
 {
     Output result = (Output) 0;
     result.position_ = _input.position_;
@@ -25,7 +25,7 @@ Texture2D ObjectDepthTexture : register(t0);
 Texture2D ShadowDepthTexture : register(t1);
 SamplerState POINTCLAMP : register(s0);
 
-float4 CalDiffuseLightRatio_PS(Output _input) : SV_Target0
+float4 CalLightRatio_PS(Output _input) : SV_Target0
 {
     float4 result = float4(1.f, 0.f, 0.f, 1.f);
     

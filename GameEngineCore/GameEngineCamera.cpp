@@ -264,7 +264,7 @@ void GameEngineCamera::Start()
 
 
 	lightRatioRenderUnit_->SetMesh("Fullrect");
-	lightRatioRenderUnit_->SetMaterial("CalDiffuseLightRatio");
+	lightRatioRenderUnit_->SetMaterial("CalLightRatio");
 	lightRatioRenderUnit_->GetShaderResourceHelper().SetSampler("POINTCLAMP", "POINTCLAMP");
 	lightRatioRenderUnit_->GetShaderResourceHelper().SetTexture("ObjectDepthTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(3));
 	lightRatioRenderUnit_->GetShaderResourceHelper().SetTexture("ShadowDepthTexture", shadowDepthRenderTarget_->GetRenderTargetTexture(0));
@@ -445,9 +445,9 @@ void GameEngineCamera::Render(float _deltaTime)
 					continue;
 				}
 
-				//renderer->renderOptionInst_.deltaTime_ = _deltaTime;
-				//renderer->renderOptionInst_.sumDeltaTime_ += _deltaTime;
-				//
+				renderer->renderOptionInst_.deltaTime_ = _deltaTime;
+				renderer->renderOptionInst_.sumDeltaTime_ += _deltaTime;
+				
 				//renderer->GetTransform().SetViewMatrix(viewMatrix_);
 				//renderer->GetTransform().SetProjectionMatrix(projectionMatrix_);
 				////카메라에 저장된 뷰행렬과 투영행렬을 렌더러의 트랜스폼에 저장한다.
@@ -457,7 +457,7 @@ void GameEngineCamera::Render(float _deltaTime)
 				////행렬 변환은 이미 위에서 했으므로 또다시 하지 않는다.
 
 				renderer->DeferredRender(scaleTime);
-				//geometryBufferRenderTarget_의 네 렌더타겟들에 오브젝트의 원래 색상, 오브젝트 표면 모든 점들의 뷰공간 위치, 
+				//geometryBufferRenderTarget_의 네 렌더타겟뷰들에 오브젝트의 원래 색상, 오브젝트 표면 모든 점들의 뷰공간 위치, 
 				// 오브젝트 표면 모든 점들의 뷰공간 법선벡터, 오브젝트의 깊이값을 렌더링 형식으로 저장한다. 
 			}
 		}
@@ -483,48 +483,51 @@ void GameEngineCamera::Render(float _deltaTime)
 		shadowDepthRenderTarget_->Clear();
 		shadowDepthRenderTarget_->Setting();
 
-		//for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
-		//{
-		//	float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
-
-		//	std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
-		//	sortingRendererList.sort(ZSort);
-
-		//	for (std::shared_ptr<GameEngineRenderer> const renderer : rendererGroup.second)
-		//		//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
-		//		//하지만 renderer가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
-		//	{
-		//		if (false == renderer->IsUpdate())
-		//		{
-		//			continue;
-		//		}
-
-		//		renderer->renderOptionInst_.deltaTime_ = _deltaTime;
-		//		renderer->renderOptionInst_.sumDeltaTime_ += _deltaTime;
-
-		//		renderer->GetTransform().SetViewMatrix(singleLighting->GetLightingData().GetViewMatrix());
-		//		renderer->GetTransform().SetProjectionMatrix(singleLighting->GetLightingData().GetProjectionMatrix());
-		//		//카메라에 저장된 뷰행렬과 투영행렬을 렌더러의 트랜스폼에 저장한다.
-
-		//		renderer->GetTransform().CalculateWorldViewProjection();
-		//		//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
-
-		//		renderer->Render(scaleTime);
-		//		//뷰포트행렬을 포함한 모든 행렬 계산을 거친 결과대로 메쉬를 화면에 그린다.
-		//	}
-		//}
-		// 그림자렌더링 준비 되면 주석 해제.
-
 		for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
-			iter->second->RenderShadow(_deltaTime,	this->viewMatrix_, this->projectionMatrix_);
+			iter->second->RenderShadow(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+		}
+		//플레이어 그림자 가려지는것에 대한 임시 조치.
+
+		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
+		{
+			float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
+
+			std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
+			sortingRendererList.sort(ZSort);
+
+			for (std::shared_ptr<GameEngineRenderer> const renderer : rendererGroup.second)
+				//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
+				//하지만 renderer가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
+			{
+				if (false == renderer->IsUpdate())
+				{
+					continue;
+				}
+
+				renderer->renderOptionInst_.deltaTime_ = _deltaTime;
+				renderer->renderOptionInst_.sumDeltaTime_ += _deltaTime;
+
+				//renderer->GetTransform().SetViewMatrix(this->viewMatrix_);
+				//renderer->GetTransform().SetProjectionMatrix(this->projectionMatrix_);
+				////카메라에 저장된 뷰행렬과 투영행렬을 렌더러의 트랜스폼에 저장한다.
+
+				//renderer->GetTransform().CalculateWorldViewProjection();
+				//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
+				////행렬 변환은 이미 위에서 했으므로 또다시 하지 않는다.
+
+				renderer->RenderShadow(scaleTime);
+				//shadowDepthRenderTarget_의 렌더타겟뷰에 그림자의 깊이값을 저장하게 한다.
+			}
 		}
 	}
 
 
 	lightRatioBufferRenderTarget_->Clear();
 	lightRatioBufferRenderTarget_->Effect(lightRatioRenderUnit_);
+	//그림자의 깊이값과 오브젝트의 깊이값을 비교해서 그림자가 오브젝트보다 더 앞에 나온다면 
+	// 그림자가 그려지는 픽셀에는 난반사광을 절반만 적용되게 한다.
 
 
 	//렌더링 결과 통합.

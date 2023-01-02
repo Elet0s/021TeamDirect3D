@@ -190,6 +190,9 @@ public:
 
 	std::shared_ptr<GameEngineTexture> GetCurrentTexture() const;
 
+	//텍스처렌더러를 초기화하는 함수. 마테리얼 재설정도 여기서 한다.
+	void Initialize(const std::string_view& _materialName);
+
 public:
 
 	void AnimationBindStart(
@@ -286,14 +289,8 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 
-	//텍스처렌더러가 텍스처를 그리는데 필요한 "TextureAtlas"렌더링 파이프라인과 
-	// PixelData, AtlasData 두 상수버퍼를 등록하고 AtlasData를 초기화하는 함수.
-	void SetTextureRendererSetting();
-	//텍스처렌더러를 생성할때, 텍스처렌더러의 Start()함수에서 이 함수가 호출되기 때문에 
-	// 텍스처렌더러를 생성할때 트랜스폼과 텍스처 지정 외의 다른 절차가 필요하지 않다.					 
-
 private:
-	void FrameDataReset();	//CurAnimationReset()함수와 무슨 차이지??
+	void ResetFrameData();
 
 private:
 	PivotMode pivotMode_;				//현재 사용중인 텍스처의 렌더링 기준점.

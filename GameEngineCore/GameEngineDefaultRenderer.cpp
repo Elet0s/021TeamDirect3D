@@ -5,7 +5,9 @@
 #include "GameEnginePixelShader.h"
 #include "GameEngineFontRenderer.h"
 
-GameEngineDefaultRenderer::GameEngineDefaultRenderer(): renderUnit_(std::make_shared<GameEngineRenderUnit>())
+GameEngineDefaultRenderer::GameEngineDefaultRenderer()
+	: renderUnit_(std::make_shared<GameEngineRenderUnit>()),
+	isShadowRendering_(false)
 {
 	//allRenderUnits_[RenderingPath::ForwardRendering].push_back(std::make_shared<GameEngineRenderUnit>());
 	//모든 디폴트 렌더러들은 기본적으로 최소 한개의 포워드 렌더유닛을 가지게 한다.
@@ -22,9 +24,16 @@ void GameEngineDefaultRenderer::Render(float _deltaTime)
 	//	singleRenderUnit->Render(_deltaTime);
 	//}
 
+	if (true == isShadowRendering_)
+	{
+		return;
+		//그림자 렌더러는 여기서 렌더하지 않는다.
+	}
+
 	if (true == renderUnit_->GetMaterial()->GetPixelShader()->IsDeferredRendering())
 	{
 		return;
+		//DeferredRenderingOutput을 가진 픽셀셰이더를 가진 마테리얼을 가진 렌더러는 걸러낸다.
 	}
 
 	renderUnit_->Render(_deltaTime);
@@ -40,12 +49,42 @@ void GameEngineDefaultRenderer::DeferredRender(float _deltaTime)
 	if (nullptr != std::dynamic_pointer_cast<GameEngineFontRenderer>(shared_from_this()))
 	{
 		return;
-		//자체 마테리얼을 따로 가진 폰트렌더러는 여기서 통과시킨다.
+		//자체 마테리얼을 따로 가진 폰트렌더러는 여기서 렌더시키지 않는다.
+	}
+
+	if (true == isShadowRendering_)
+	{
+		return;
+		//그림자 렌더러는 여기서 렌더하지 않는다.
 	}
 
 	if (false == renderUnit_->GetMaterial()->GetPixelShader()->IsDeferredRendering())
 	{
 		return;
+		//DeferredRenderingOutput을 가진 픽셀셰이더를 가진 마테리얼을 가진 렌더러만 통과시킨다.
+	}
+
+	renderUnit_->Render(_deltaTime);
+}
+
+void GameEngineDefaultRenderer::RenderShadow(float _deltaTime)
+{
+	if (nullptr != std::dynamic_pointer_cast<GameEngineFontRenderer>(shared_from_this()))
+	{
+		return;
+		//자체 마테리얼을 따로 가진 폰트렌더러는 여기서 렌더시키지 않는다.
+	}
+
+	if (false == isShadowRendering_)
+	{
+		return;
+		//그림자 렌더러만 여기서 렌더한다.
+	}
+
+	if (true == renderUnit_->GetMaterial()->GetPixelShader()->IsDeferredRendering())
+	{
+		return;
+		//DeferredRenderingOutput을 가진 픽셀셰이더를 가진 마테리얼을 가진 렌더러는 걸러낸다.
 	}
 
 	renderUnit_->Render(_deltaTime);

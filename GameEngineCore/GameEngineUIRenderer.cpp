@@ -13,5 +13,5 @@ void GameEngineUIRenderer::Start()
 {
 	PushRendererToUICamera();
 
-	SetTextureRendererSetting();
+	Initialize("TextureAtlas");
 }

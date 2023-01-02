@@ -160,19 +160,35 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	newContentsMaterial4->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 	std::shared_ptr<GameEngineMaterial> newContentsMaterial5
-		= GameEngineMaterial::Create("ExtractionDeferredRenderingData");
-	newContentsMaterial5->SetVertexShader("ExtractionDeferredRenderingData.hlsl");
-	newContentsMaterial5->SetPixelShader("ExtractionDeferredRenderingData.hlsl");
+		= GameEngineMaterial::Create("DeferredInstanceRendering");
+	newContentsMaterial5->SetVertexShader("DeferredInstanceRendering.hlsl");
+	newContentsMaterial5->SetPixelShader("DeferredInstanceRendering.hlsl");
 	newContentsMaterial5->SetRasterizer("EngineRasterizer");
 	newContentsMaterial5->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial5->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 	std::shared_ptr<GameEngineMaterial> newContentsMaterial6
-		= GameEngineMaterial::Create("RenderingShadowDepth");
-	newContentsMaterial6->SetVertexShader("RenderingShadowDepth.hlsl");
-	newContentsMaterial6->SetPixelShader("RenderingShadowDepth.hlsl");
+		= GameEngineMaterial::Create("DeferredInstanceShadowRendering");
+	newContentsMaterial6->SetVertexShader("DeferredInstanceShadowRendering.hlsl");
+	newContentsMaterial6->SetPixelShader("DeferredInstanceShadowRendering.hlsl");
 	newContentsMaterial6->SetRasterizer("EngineRasterizer");
 	newContentsMaterial6->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial6->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial7
+		= GameEngineMaterial::Create("DeferredShadowRendering");
+	newContentsMaterial7->SetVertexShader("DeferredShadowRendering.hlsl");
+	newContentsMaterial7->SetPixelShader("DeferredShadowRendering.hlsl");
+	newContentsMaterial7->SetRasterizer("EngineRasterizer");
+	newContentsMaterial7->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial7->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial8
+		= GameEngineMaterial::Create("DeferredRendering");
+	newContentsMaterial8->SetVertexShader("DeferredRendering.hlsl");
+	newContentsMaterial8->SetPixelShader("DeferredRendering.hlsl");
+	newContentsMaterial8->SetRasterizer("EngineRasterizer");
+	newContentsMaterial8->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial8->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 }

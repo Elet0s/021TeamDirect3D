@@ -92,7 +92,7 @@ void FrameAnimation::Update(float _deltaTime)
 	}
 	else if (nullptr != folderTexture_)
 	{
-		parentRenderer_->FrameDataReset();
+		parentRenderer_->ResetFrameData();
 		parentRenderer_->currentTexture_ = folderTexture_->GetTexture(info_.frames_[info_.curFrame_]);
 		parentRenderer_->SetTexture(folderTexture_->GetTexture(info_.frames_[info_.curFrame_]));
 		parentRenderer_->SetPivot();
@@ -420,26 +420,9 @@ std::shared_ptr<GameEngineTexture> GameEngineTextureRenderer::GetCurrentTexture(
 	return currentTexture_;
 }
 
-void GameEngineTextureRenderer::Start()
+void GameEngineTextureRenderer::Initialize(const std::string_view& _materialName)
 {
-	GameEngineDefaultRenderer::Start();
-
-	GameEngineRenderer::PushRendererToMainCamera();
-
-	this->SetTextureRendererSetting();
-}
-
-void GameEngineTextureRenderer::Update(float _deltaTime)
-{
-	if (nullptr != this->currentAnimation_)
-	{
-		currentAnimation_->Update(_deltaTime);
-	}
-}
-
-void GameEngineTextureRenderer::SetTextureRendererSetting()
-{
-	this->SetMaterial("TextureAtlas");
+	this->SetMaterial(_materialName);
 
 	atlasDataInst_.frameData_.posX = 0.f;
 	atlasDataInst_.frameData_.posY = 0.f;
@@ -451,7 +434,24 @@ void GameEngineTextureRenderer::SetTextureRendererSetting()
 	this->GetShaderResourceHelper().SetConstantBuffer_Link("PixelData", pixelDataInst_);
 }
 
-void GameEngineTextureRenderer::FrameDataReset()
+void GameEngineTextureRenderer::Start()
+{
+	GameEngineDefaultRenderer::Start();
+
+	GameEngineRenderer::PushRendererToMainCamera();
+
+	this->Initialize("TextureAtlas");
+}
+
+void GameEngineTextureRenderer::Update(float _deltaTime)
+{
+	if (nullptr != this->currentAnimation_)
+	{
+		currentAnimation_->Update(_deltaTime);
+	}
+}
+
+void GameEngineTextureRenderer::ResetFrameData()
 {
 	this->atlasDataInst_.frameData_.posX = 0.f;
 	this->atlasDataInst_.frameData_.posY = 0.f;

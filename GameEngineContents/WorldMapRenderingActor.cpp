@@ -19,6 +19,7 @@ void WorldMapRenderingActor::Start()
 	{
 		std::shared_ptr<GameEngineTextureRenderer> TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
 		
+		TextureRenderer->Initialize("TextureAtlas");
 		TextureRenderer->SetTexture("FarGround.png");
 		TextureRenderer->GetTransform().SetWorldScale(float4{ 10000, 2560 });
 		TextureRenderer->GetTransform().SetWorldPosition(float4{ 1032,1000, 100 });
@@ -71,7 +72,7 @@ void WorldMapRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount
 	worldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
-		"ExtractionDeferredRenderingData"
+		"DeferredInstanceRendering"
 	);
 	worldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	worldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");

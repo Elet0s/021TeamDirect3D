@@ -124,7 +124,7 @@ protected:
     virtual void Start();
     virtual void Render(float _deltaTime) = 0;
     virtual void DeferredRender(float _deltaTime) = 0;
-    //virtual void RenderShadow(float _deltaTime) = 0;
+    virtual void RenderShadow(float _deltaTime) = 0;
 
     void PushRendererToMainCamera();	//렌더러가 자기 자신을 메인카메라에 등록하는 함수.
     void PushRendererToUICamera();		//렌더러가 자기 자신을 UI카메라에 등록하는 함수.

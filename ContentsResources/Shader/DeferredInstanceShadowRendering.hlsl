@@ -25,7 +25,7 @@ struct Output
 //    float4 slice_;
 //};
 
-Output RenderingShadowDepth_VS(Input _input)
+Output DeferredInstanceShadowRendering_VS(Input _input)
 {
     Output result = (Output) 0;
     
@@ -34,7 +34,7 @@ Output RenderingShadowDepth_VS(Input _input)
 
 SamplerState POINTCLAMP : register(s0);
 
-float4 RenderingShadowDepth_PS(Output _input) : SV_Target0
+float4 DeferredInstanceShadowRendering_PS(Output _input) : SV_Target0
 {
     float4 resultColor = (1.f, 0.f, 0.f, 1.f);
     
@@ -63,10 +63,9 @@ StructuredBuffer<InstRenderOption> Inst_RenderOption : register(t13);
 Texture2DArray Inst_Textures : register(t14);  
 StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
 
-Output RenderingShadowDepth_VSINST(Input _input)
+Output DeferredInstanceShadowRendering_VSINST(Input _input)
 {
     Output result = (Output) 0;
-    
     
     float4 vertexPos = _input.localPosition_;
     vertexPos += Inst_AtlasData[_input.instanceIndex_].pivotPos_;
@@ -91,7 +90,7 @@ Output RenderingShadowDepth_VSINST(Input _input)
     return result;
 }
 
-float4 RenderingShadowDepth_PSINST(Output _input) : SV_Target0
+float4 DeferredInstanceShadowRendering_PSINST(Output _input) : SV_Target0
 {
     float4 sampledColor = Inst_Textures.Sample(
         POINTCLAMP,

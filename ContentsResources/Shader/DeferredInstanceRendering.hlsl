@@ -17,15 +17,15 @@ struct Input
 struct Output
 {
     float4 wvpPosition_ : SV_Position;
-    float4 projSpacePosition_ : POSITION1;   //투영변환 이후의 오브젝트 위치. 
-    float4 viewPosition_ : POSITION2;
+    float4 viewPosition_ : POSITION1;
+    float4 projSpacePosition_ : POSITION2;   //투영변환 이후의 오브젝트 위치. 
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
     //uint instancingIndex_ : ROWINDEX; 필요 없음.
     uint colorTextureIndex_ : COLORTEXTUREINDEX; //인스턴스별로 사용할 컬러텍스처 번호.
     uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //인스턴스별로 사용할 노말맵텍스처 번호.
 };
 
-Output ExtractionDeferredRenderingData_VS(Input _input)
+Output DeferredInstanceRendering_VS(Input _input)
 {
     Output result = (Output) 0;
     
@@ -34,7 +34,7 @@ Output ExtractionDeferredRenderingData_VS(Input _input)
 
 SamplerState POINTCLAMP : register(s0);
 
-float4 ExtractionDeferredRenderingData_PS(Output _input) : SV_Target0
+float4 DeferredInstanceRendering_PS(Output _input) : SV_Target0
 {
     float4 resultColor = (float4) 0;
     
@@ -70,7 +70,7 @@ Texture2DArray Inst_Textures : register(t14);
 StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
 //StructuredBuffer<InstPixelData> Inst_PixelData : register(t16);
 
-Output ExtractionDeferredRenderingData_VSINST(Input _input)
+Output DeferredInstanceRendering_VSINST(Input _input)
 {
     Output result = (Output) 0;
     
@@ -95,7 +95,7 @@ Output ExtractionDeferredRenderingData_VSINST(Input _input)
     return result;
 }
 
-DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
+DeferredRenderingOutput DeferredInstanceRendering_PSINST(Output _input)
 {
     DeferredRenderingOutput result = (DeferredRenderingOutput) 0.f;
     
@@ -103,11 +103,20 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
         POINTCLAMP,
         float3(_input.texcoord_.xy, _input.colorTextureIndex_)
     );
+    result.objectDepth_ = float4(1.f, 0.f, 0.f, 1.f);
     
-    if (0.0f >= result.color_.a)
+    if (0.f >= result.color_.a)
     {
-        //result.color_ = float4(0.f, 0.f, 0.f, 0.f);
         clip(-1);
+    }
+    else if (1.f < result.color_.a)
+    {
+        result.color_.a = 1.f;
+        result.objectDepth_ = float4(_input.projSpacePosition_.z / _input.projSpacePosition_.w, 0.f, 0.f, 1.f);
+    }
+    else
+    {
+        result.objectDepth_ = float4(_input.projSpacePosition_.z / _input.projSpacePosition_.w, 0.f, 0.f, 1.f);
     }
     
     result.viewNormal_ = float4(-0.5773f, 0.5773f, -0.5773f, 1.f);
@@ -131,13 +140,6 @@ DeferredRenderingOutput ExtractionDeferredRenderingData_PSINST(Output _input)
     //뷰변환을 하지 않는 대신 법선벡터 x, y의 부호를 바꿔주어야 제대로 된 난반사광 계산이 되는 값들이 노말텍스처에 저장되어 있으므로 뒤집어준다.
     
     result.viewPosition_ = _input.viewPosition_;
-    
-    
-    result.objectDepth_ = float4(1.f, 0.f, 0.f, 1.f);
-    if (0.01f < result.color_.a)
-    {
-        result.objectDepth_ = float4(_input.projSpacePosition_.z / _input.projSpacePosition_.w, 0.f, 0.f, 1.f);
-    }
     
     return result;
 }

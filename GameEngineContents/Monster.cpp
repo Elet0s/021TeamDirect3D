@@ -38,12 +38,12 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 	allMonsters_.reserve(_allMonsterCount);
 
 	allMonstersRenderer_ = _thisLevel->GetMainCamera()->GetInstancingRenderer("1-AllMonstersRenderer");
-	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "ExtractionDeferredRenderingData");
+	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "DeferredInstanceRendering");
 	allMonstersRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 
 	allShadowsRenderer_ = _thisLevel->GetMainCamera()->GetInstancingRenderer("1-AllShadowsRenderer");
-	allShadowsRenderer_->Initialize(_allMonsterCount, "Rect", "RenderingShadowDepth", true);
+	allShadowsRenderer_->Initialize(_allMonsterCount, "Rect", "DeferredInstanceShadowRendering", true);
 	allShadowsRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allShadowsRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 
