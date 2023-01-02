@@ -4,11 +4,9 @@
 class Aiming : public Skill
 {
 public:
-	// constrcuter destructer
 	Aiming();
 	~Aiming();
 
-	// delete Function
 	Aiming(const Aiming& _Other) = delete;
 	Aiming(Aiming&& _Other) noexcept = delete;
 	Aiming& operator=(const Aiming& _Other) = delete;

@@ -87,7 +87,7 @@ void  Shuriken::StateSet()
 
 		shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 3;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 2;
 		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 
 	}

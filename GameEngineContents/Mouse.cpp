@@ -20,7 +20,7 @@ Mouse::~Mouse()
 
 void Mouse::Start()
 {
-	if (nullptr == GameEngineTexture::Find("Cursor.png"))
+	if (nullptr == GameEngineTexture::Find("CursorSprite.png"))
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistChildDirectory("ContentsResources");
