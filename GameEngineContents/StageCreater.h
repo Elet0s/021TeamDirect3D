@@ -1,6 +1,7 @@
 #pragma once
 
 // Ό³Έν :
+class PlayerObject;
 class StageCreater : public GameEngineActor
 {
 public:
@@ -19,9 +20,10 @@ protected:
 private:
 	void Start() override;
 	void Update(float _deltaTime) override;
-	bool CheckPushLevel();
+	CollisionReturn CheckNextLevel(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
-
+	std::shared_ptr<class StageObject> curlevel_;
+	std::shared_ptr<PlayerObject> playerObject_;
 	std::map<int, std::list<std::shared_ptr<class StageObject>>> stageObjects_;
 };
 

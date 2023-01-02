@@ -42,21 +42,25 @@ Player::~Player()
 
 void Player::Start()
 {
-	GameEngineDirectory Dir;
-	Dir.MoveParentToExistChildDirectory("ContentsResources");
-	Dir.MoveToChild("ContentsResources");
-	Dir.MoveToChild("Actor");
-	Dir.MoveToChild("Player");
-
-	std::vector<GameEngineFile> playerTexture = Dir.GetAllFiles();
-	for (size_t i = 0; i < playerTexture.size(); i++)
+	if (nullptr == GameEngineTexture::Find("PlayerIdle.png"))
 	{
-		GameEngineTexture::Load(playerTexture[i].GetFullPath());
-	}
-	///////////////텍스처로드///////////////
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("Actor");
+		Dir.MoveToChild("Player");
 
-	GameEngineTexture::Cut("PlayerIdle.png", 11, 1);
-	GameEngineTexture::Cut("PlayerRun.png", 10, 1);
+		std::vector<GameEngineFile> playerTexture = Dir.GetAllFiles();
+		for (size_t i = 0; i < playerTexture.size(); i++)
+		{
+			GameEngineTexture::Load(playerTexture[i].GetFullPath());
+		}
+		///////////////텍스처로드///////////////
+
+		GameEngineTexture::Cut("PlayerIdle.png", 11, 1);
+		GameEngineTexture::Cut("PlayerRun.png", 10, 1);
+	}
+	
 	///////////////텍스처 cut///////////////
 	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeft"))
 	{

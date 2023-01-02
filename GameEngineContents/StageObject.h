@@ -4,8 +4,9 @@ enum class StageType
 	ComBat,
 	Elite,
 	Chest,
-	Boss,
 	Event,
+	Boss,
+	Empty,
 	Max
 };
 
@@ -53,6 +54,7 @@ public:
 		}
 	}
 
+	bool CheckNextLevel(std::shared_ptr<StageObject> _nextlevel);
 	void SetStageType(int _num);
 	void SetComBatType(int _num);
 	void PushNextlevel(std::shared_ptr<StageObject> _nextlevel);
@@ -71,6 +73,7 @@ private:
 	StageType stageType_;
 	ComBatType comBatType_;
 
+	std::shared_ptr<GameEngineCollision> col_;
 	std::shared_ptr<GameEngineTextureRenderer> renderer_;
 	std::list<std::shared_ptr<StageObject>> nextLevels_;
 };

@@ -1,6 +1,7 @@
 #include"PreCompile.h"
 #include"WorldMapLevel.h"
 #include"WorldMapActor.h"
+#include"Mouse.h"
 #include "StageCreater.h"
 #include"WorldMapRenderingActor.h"
 

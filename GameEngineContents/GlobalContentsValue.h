@@ -14,6 +14,7 @@ enum class ObjectOrder
 	Range,
 	Projectile,
 	TileMap,
+	Road,
 	UI = 1000
 };
 

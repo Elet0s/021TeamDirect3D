@@ -1,0 +1,39 @@
+#pragma once
+
+enum class PlayerObjectMode
+{
+	Idle,
+	Move,
+	Max,
+};
+
+// Ό³Έν :
+class PlayerObject : public GameEngineActor
+{
+public:
+	// constrcuter destructer
+	PlayerObject();
+	~PlayerObject();
+
+	// delete Function
+	PlayerObject(const PlayerObject& _Other) = delete;
+	PlayerObject(PlayerObject&& _Other) noexcept = delete;
+	PlayerObject& operator=(const PlayerObject& _Other) = delete;
+	PlayerObject& operator=(PlayerObject&& _Other) noexcept = delete;
+
+	void SetMoveDir(float4 _dir);
+	
+protected:
+
+private:
+	void Start() override;
+	void Update(float _deltaTime) override;
+	void End() override;
+
+	float4 moveDir_;
+	float4 checkPos_;
+	PlayerObjectMode mode_;
+	std::shared_ptr<GameEngineTextureRenderer> renderer_;
+	std::shared_ptr<GameEngineCollision> col_;
+};
+

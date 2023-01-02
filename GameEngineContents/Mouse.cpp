@@ -52,8 +52,9 @@ void Mouse::Start()
 void Mouse::Update(float _DeltaTime)
 {
 	GetCurPos();
+	//GetTransform().SetWorldPosition(GetLevel()->GetMainCamera()->GetMouseScreenPosition().x, GetLevel()->GetMainCamera()->GetMouseScreenPosition().y, GetLevel()->GetMainCamera()->GetMouseScreenPosition().z + 100);
 	mouseRenderer->GetTransform().SetLocalPosition(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x+10.0f, GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,-100.0f);
-	mouseCollision_->GetTransform().SetLocalPosition(GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().x + 10.0f, GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().y, -100.0f);
+	mouseCollision_->GetTransform().SetLocalPosition(GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().x + 10.0f, GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().y, +100.0f);
 
 }
 void Mouse::End()
