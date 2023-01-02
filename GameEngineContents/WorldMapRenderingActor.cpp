@@ -71,7 +71,7 @@ void WorldMapRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount
 	worldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
-		"MultiTexturesInstancing"
+		"ExtractionDeferredRenderingData"
 	);
 	worldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	worldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
@@ -126,11 +126,11 @@ void WorldMapRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPosi
 		ObjectWorldPosition;
 
 
-		if (ObjectWorldPosition.x > 1.3f)
+		if (ObjectWorldPosition.x > 1.5f)
 		{
 			continue;
 		}
-		else if (ObjectWorldPosition.x < -1.3f)
+		else if (ObjectWorldPosition.x < -1.5f)
 		{
 			continue;
 		}
@@ -144,10 +144,7 @@ void WorldMapRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPosi
 			continue;
 		}
 	
-		if (singleObjectData.worldPosition_.z > CameraPos.z + 1500.f)
-		{
-			continue;
-		}
+	
 		else if (singleObjectData.worldPosition_.z < CameraPos.z)
 		{
 			continue;

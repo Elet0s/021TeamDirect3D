@@ -60,6 +60,11 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 	ImGui::Text(currentDeltaTime.c_str());
 
 
+	std::string currentCameraPos = "CameraPos : " + std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor().get()->GetTransform().GetWorldPosition().IX())
+		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor().get()->GetTransform().GetWorldPosition().IY())
+		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor().get()->GetTransform().GetWorldPosition().IZ());
+	ImGui::Text(currentCameraPos.c_str());
+
 
 
 	if (true == ImGui::Button("Collision Debug Switch"))

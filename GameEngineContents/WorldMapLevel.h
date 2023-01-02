@@ -18,6 +18,7 @@ protected:
 	void End() override;
 private:
 	std::shared_ptr<class WorldMapRenderingActor> WorldMapRenderingActor_;
+	std::shared_ptr<GameEngineLighting> WorldLevelLighting_;
 	void LevelStartEvent() override;
 
 };
