@@ -124,8 +124,11 @@ void TestLevel::Start()
 	Monster::SummonMonster<RedFlyingEyes>(this, 10);
 	//Monster::SummonMonster<FlyingEyes>(this, 10);
 
-	
-
+	for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
+	{
+			Monster::GetMonsterList()[i]->Unsummon();
+	}
+	Monster::SummonMonster<RedFlyingEyes>(this, 10);
 	Mouse::CreateMouse(this);
 
 	

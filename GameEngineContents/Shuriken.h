@@ -22,7 +22,6 @@ public:
 	}
 
 	CollisionReturn ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other); // 발사체 충돌
-	CollisionReturn RangeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);// 범위내 몬스터 탐색(사정거리 비례)
 
 public:
 	std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>projectileGroup_;
@@ -40,23 +39,38 @@ protected:
 	void StateSet() override;//레벨에 따른 스탯 적용
 	void ColCheak();//콜리전 체크
 	void TarGetInitialization();//타겟초기화
+	void TimerUpdater(float _deltaTime);//타이머 업데이트
+
 
 private:
-	bool test_;
-
+	bool shoothingPeojectile_;
 	bool firstCheak_;
-	float timeer_;
+	bool firstSort;
+	bool Istarger;//타겟이 있으면 true
+
+	float targerSerchTimer_;//타겟 검사 주기=공격속도
+	size_t targetserchCounter_;//타겟검사한 몬스터 수 매 업데이트 갱신
+	float timer02_;
+	float timer03_;
+	float timer04_;
+	float timer05_;
+
+
+
+
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
+
+
 
 	WeaponInfo shuriKenWeaponInfo_;//무기 스탯
 
 	std::vector<std::shared_ptr<Monster>> monsterList_; //전체 몬스터 리스트
 	std::pair<size_t, float> minHpPair_;//타겟 대상
 	std::vector<std::pair<size_t, float>> targetInst_;//타겟 모음
-	std::vector<float4> referenceVectorList_;
+	std::vector<float4> referenceVectorList_;//방향 모음
 
-	bool firstSort;
+
 
 
 };

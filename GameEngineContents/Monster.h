@@ -99,7 +99,6 @@ public:
 			allShadowsRenderer_->GetInstancingUnit(newMonster->instancingUnitIndex_).Link(
 				"Inst_RenderOption", newMonster->renderOption_
 			);
-
 			allMonsters_.push_back(newMonster);
 		}
 	}
@@ -123,7 +122,6 @@ public:
 				continue;
 			}
 
-
 			float cameraX = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().x;
 			float cameraY = _thisLevel->GetMainCameraActor()->GetTransform().GetWorldPosition().y;
 			float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(float4(cameraX - 1280, cameraY - 720),float4(cameraX + 1280, cameraY + 720));
@@ -141,7 +139,6 @@ public:
 					allMonstersRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldPosition(
 						monsterPosition_
 					);
-
 					allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).SetWorldScale(
 						allMonsters_[i]->monsterScale_
 					);
