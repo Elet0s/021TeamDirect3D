@@ -41,7 +41,7 @@ public:
 
 public:
 	//마우스 포인터의 위치를 윈도우 스크린 좌표로 받아오는 함수.
-	float4 GetMouseWindowPosition();
+	float4 GetMouseScreenPosition();
 
 	//마우스 포인터의 위치를 월드좌표(고정 카메라 기준)로 받아오는 함수.
 	float4 GetMouseWorldPosition();
