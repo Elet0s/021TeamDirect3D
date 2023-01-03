@@ -42,7 +42,8 @@ void Mouse::Update(float _DeltaTime)
 }
 void Mouse::End()
 {
-
+	//DirectX::XMPlaneIntersectLine();
+	//DirectX::TriangleTests::Intersects();
 }
 
  void Mouse::CreateMouse(GameEngineLevel* _thisLevel)

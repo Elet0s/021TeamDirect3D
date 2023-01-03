@@ -41,7 +41,7 @@ public:
 
 public:
 	//마우스 포인터의 위치를 윈도우 스크린 좌표로 받아오는 함수.
-	float4 GetMouseWindowPosition();
+	float4 GetMouseScreenPosition();
 
 	//마우스 포인터의 위치를 월드좌표(고정 카메라 기준)로 받아오는 함수.
 	float4 GetMouseWorldPosition();
@@ -56,8 +56,8 @@ public:
 	void SetCameraOrder(CameraOrder _order);
 	//할 일이 있을지는 모르겠지만, 런타임 중간에 카메라 오더 변경 금지.
 
-	//인스턴싱 반환. 없다면 빈 인스턴싱을 만들어서 반환한다.
-	GameEngineInstancing& GetInstancing(const std::string& _name);
+	////인스턴싱 반환. 없다면 빈 인스턴싱을 만들어서 반환한다.
+	//GameEngineInstancing& GetInstancing(const std::string& _name);
 
 	//인스턴싱렌더러 반환. 없다면 빈 인스턴싱렌더러를 만들어서 반환한다.
 	std::shared_ptr<GameEngineInstancingRenderer> GetInstancingRenderer(const std::string& _name);

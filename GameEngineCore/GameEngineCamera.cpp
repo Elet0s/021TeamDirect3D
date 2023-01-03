@@ -17,7 +17,7 @@ GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
 	projectionMode_(CameraProjectionMode::Perspective),
 	nearZ_(0.1f),
-	farZ_(1000.f),
+	farZ_(100000.f),
 	fovAngleY_(60.f),
 	conclusionRenderTarget_(nullptr),
 	forwardRenderTarget_(nullptr),
@@ -44,7 +44,7 @@ GameEngineCamera::~GameEngineCamera()
 {
 }
 
-float4 GameEngineCamera::GetMouseWindowPosition()
+float4 GameEngineCamera::GetMouseScreenPosition()
 {
 	POINT pointerPosition;
 	if (false == GetCursorPos(&pointerPosition))
@@ -276,8 +276,6 @@ void GameEngineCamera::Start()
 	lightDataRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("AllLightingDatas", this->lightingDatasInst_);
 	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("PositionTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(1));
 	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("NormalTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(2));
-	//lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("ObjectDepthTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(3));
-	//lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("ShadowDepthTexture", shadowDepthRenderTarget_->GetRenderTargetTexture(0));
 	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("LightRatioTexture", lightRatioBufferRenderTarget_->GetRenderTargetTexture(0));
 
 

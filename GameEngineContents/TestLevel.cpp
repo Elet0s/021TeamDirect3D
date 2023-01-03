@@ -60,14 +60,14 @@ void TestLevel::Start()
 	//Monster::SummonMonster<Brown>(this, 10);
 	//Monster::SummonMonster<Green>(this, 10);
 	//Monster::SummonMonster<NormalGoblin>(this, 10);
-	Monster::SummonMonster<RedFlyingEyes>(this, 10);
+	Monster::SummonMonster<RedFlyingEyes>(this, 5);
 	//Monster::SummonMonster<FlyingEyes>(this, 10);
 
-	for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
-	{
-			Monster::GetMonsterList()[i]->Unsummon();
-	}
-	Monster::SummonMonster<RedFlyingEyes>(this, 10);
+	//for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
+	//{
+	//		Monster::GetMonsterList()[i]->Unsummon();
+	//}
+	//Monster::SummonMonster<RedFlyingEyes>(this, 10);
 	Mouse::CreateMouse(this);
 
 	
