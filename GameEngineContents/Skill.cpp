@@ -9,6 +9,7 @@ Skill::Skill()
 	, nowLevel_(0)
 	, valueSoulCard_(SoulCard::None)
 	, Shooting(false)
+	, isOn_(false)
 {
 	
 }
