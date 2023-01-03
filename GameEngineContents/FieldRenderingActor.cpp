@@ -223,6 +223,7 @@ void FieldRenderingActor::UpdateTilePosition(const float4& _thisWorldPosition)
 					fieldRenderer_->GetInstancingUnit(unitIndex).GetWorldPosition().z
 				);
 			}
+
 			++unitIndex;
 		}
 	}
