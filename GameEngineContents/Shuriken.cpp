@@ -173,7 +173,7 @@ void Shuriken::ProjectileSort()
 			if (targetInst_.size() > i) // 타겟수만큼 필요
 			{
 				projectileGroupList_[i].first->On();
-				projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -100)));
+				projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
 				projectileGroupList_[i].second->On();
 				projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 			}

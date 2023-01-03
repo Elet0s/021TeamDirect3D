@@ -52,6 +52,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("PlayerDash", VK_SPACE);
 		GameEngineInput::GetInst()->CreateKey("Skill15On", 'B');
 		GameEngineInput::GetInst()->CreateKey("Skill04On", 'N');
+		GameEngineInput::GetInst()->CreateKey("Skill05On", 'M');
 	}
 	{
 		collision_ = CreateComponent<GameEngineCollision>();
@@ -249,6 +250,13 @@ void Player::Update(float _deltaTime)
 		if (playerSkillManager_->GetSkillList()[5][4]->nowLevel_ < 1)
 		{
 			playerSkillManager_->GetSkillList()[5][4]->nowLevel_ += 1;
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("Skill05On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
+	{
+		if (playerSkillManager_->GetSkillList()[5][5]->nowLevel_ < 1)
+		{
+			playerSkillManager_->GetSkillList()[5][5]->nowLevel_ += 1;
 		}
 	}
 
