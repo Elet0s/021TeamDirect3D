@@ -1,46 +1,7 @@
 #include "PreCompile.h"
 #include "SoulCardUI.h"
+#include "Player.h"
 #include "DeathAura.h"
-#include "SharpEdge.h"
-#include "IronWill.h"
-#include "Range.h"
-#include "HealingFactor.h"
-#include "StoneHanded.h"
-#include "StoneSkin.h"
-#include "TensString.h"
-#include "Celerity.h"
-#include "Hypersonic.h"
-#include "Quick.h"
-#include "Penetration.h"
-#include "TradeOff.h"
-#include "LightHand.h"
-#include "Area.h"
-#include "SingleHanded.h"
-#include "Muscle.h"
-#include "Aiming.h"
-#include "Durability.h"
-#include "Momentum.h"
-#include "Compromise.h"
-#include "Clumsy.h"
-#include "GodsWrath.h"
-#include "Practice.h"
-#include "Cardio.h"
-#include "IronSkin.h"
-#include "LightArmor.h"
-#include "DamascusSteel.h"
-#include "SharpeningStone.h"
-#include "SlipperySkin.h"
-#include "Impenetrable.h"
-#include "Tower.h"
-#include "Castle.h"
-#include "Dash.h"
-#include "LowPressure.h"
-#include "Void.h"
-#include "Agility.h"
-#include "DashCooldown.h"
-#include "Student.h"
-#include "SteelSkin.h"
-#include "BlackBlood.h"
 #include "GlobalContentsValue.h"
 
 SoulCardUI::SoulCardUI() 
@@ -53,12 +14,12 @@ SoulCardUI::SoulCardUI()
 
 SoulCardUI::~SoulCardUI() 
 {
-	delete mySkill_;
+	
 }
 
 void SoulCardUI::Start()
 {
-	mySkill_ = new DashCooldown();
+	CardDraw();
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{
@@ -165,8 +126,9 @@ void SoulCardUI::Update(float _deltaTime)
 {
 	if(true == cardColision_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::Mouse, CollisionType::CT_AABB2D))
 	{
-		if (GameEngineInput::GetInst()->IsDown("Click"))
+		if (GameEngineInput::GetInst()->IsUp("Click"))
 		{
+			mySkill_->IsOnOff();
 			mySkill_->Effect();
 			Setting();
 		}
@@ -215,7 +177,7 @@ void SoulCardUI::ColorChange(Appear _Value)
 
 void SoulCardUI::Setting()
 {
-
+	CardDraw();
 	
 	for (size_t i = 0; i < etc_.size(); i++)
 	{
@@ -268,7 +230,7 @@ void SoulCardUI::Setting()
 	{
 		mySkill_->Init();
 		Level_->SetText(std::to_string(mySkill_->GetCurrentlevel()) + "-> " + std::to_string(mySkill_->GetCurrentlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()), "Free Pixel");
-		std::string Text = reinterpret_cast<DeathAura*>(mySkill_)->GetEtc();
+		std::string Text = reinterpret_cast<DeathAura*>(mySkill_.get())->GetEtc();
 		size_t EntryIndex = Text.find("\n");
 		size_t firstIndex = 0;
 		std::string Text2 = Text.substr(0, EntryIndex);
@@ -293,4 +255,53 @@ void SoulCardUI::Setting()
 			EntryIndex = Text.find("\n", firstIndex);
 		}
 	}
+}
+
+void SoulCardUI::CardDraw()
+{
+	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+	int RankRandom = 0;
+	int IndexRandom = 0;
+	int Randomnum = GameEngineRandom::mainRandom_.RandomInt(1, 100);
+
+	if (Randomnum <= 30)
+	{
+		RankRandom = 0;
+	}
+
+	else if (Randomnum <= 50)
+	{
+		RankRandom = 1;
+	}
+	else if (Randomnum <= 70)
+	{
+		RankRandom = 2;
+	}
+
+	else if (Randomnum <= 85)
+	{
+		RankRandom = 3;
+	}
+
+	else if (Randomnum <= 95)
+	{
+		RankRandom = 4;
+	}
+
+	else if (Randomnum <= 100)
+	{
+		RankRandom = 4;
+	}
+
+	IndexRandom = GameEngineRandom::mainRandom_.RandomInt(0, static_cast<int>(SkillList[RankRandom].size() - 1));
+
+
+	mySkill_ = SkillList[RankRandom][IndexRandom];
+
+	if (mySkill_->GetCurrentlevel() == mySkill_->GetMaxLevel() || true == mySkill_->GetIsOn())
+	{
+		CardDraw();
+	}
+
+	mySkill_->IsOnOn();
 }

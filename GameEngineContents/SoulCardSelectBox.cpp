@@ -40,11 +40,13 @@ void SoulCardSelectBox::Start()
 		Cards[0]->GetTransform().SetLocalMove(float4(-200.f, -200.f));
 		Cards[0]->Setting();
 
-		/*Cards[1] = GetLevel()->CreateActor<SoulCardUI>();
+		Cards[1] = GetLevel()->CreateActor<SoulCardUI>();
 		Cards[1]->GetTransform().SetLocalMove(float4(10.f, -200.f));
+		Cards[1]->Setting();
 
 		Cards[2] = GetLevel()->CreateActor<SoulCardUI>();
-		Cards[2]->GetTransform().SetLocalMove(float4(220.f, -200.f));*/
+		Cards[2]->GetTransform().SetLocalMove(float4(220.f, -200.f));
+		Cards[2]->Setting();
 	}
 	
 

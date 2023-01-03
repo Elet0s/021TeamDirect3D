@@ -34,7 +34,7 @@ private:
 	std::shared_ptr<GameEngineFontRenderer> Rank_;
 	std::shared_ptr<GameEngineCollision> cardColision_;
 	
-	Skill* mySkill_;
+	std::shared_ptr<Skill> mySkill_;
 
 	float alphaTexture_;
 	float4 TextColor_;
@@ -46,6 +46,7 @@ private:
 	void Update(float _deltaTime);
 	void End() override {};
 
+	void CardDraw();
 	void ColorChange(Appear _Value);
 	
 

@@ -92,117 +92,111 @@ void SkillManager::CreatePlayerAllSkill()
 
 	skillList_[5].reserve(16);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Cleaver>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Cleaver>(ObjectOrder::Skill, "Cleaver");
 		skillList_[5].push_back(Skill00);
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Kunai>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Kunai>(ObjectOrder::Skill, "Kunai");
 		skillList_[5].push_back(Skill01);
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Pike>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Pike>(ObjectOrder::Skill, "Pike");
 		skillList_[5].push_back(Skill02);
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Spear>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Spear>(ObjectOrder::Skill, "Spear");
 		skillList_[5].push_back(Skill03);
 
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<DeathAura>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<DeathAura>(ObjectOrder::Skill, "DeathAura");
 		skillList_[5].push_back(Skill04);
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Firering>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Firering>(ObjectOrder::Skill, "Firering");
 		skillList_[5].push_back(Skill05);
-		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<ShamanStaff>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<ShamanStaff>(ObjectOrder::Skill, "ShamanStaff");
 		skillList_[5].push_back(Skill06);
-		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<Swordrang>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<Swordrang>(ObjectOrder::Skill, "Swordrang");
 		skillList_[5].push_back(Skill07);
-		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<ThunderStaf>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<ThunderStaf>(ObjectOrder::Skill, "ThunderStaf");
 		skillList_[5].push_back(Skill08);
-		std::shared_ptr<Skill> Skill09 = myLevel_->CreateActor<WindsBlade>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill09 = myLevel_->CreateActor<WindsBlade>(ObjectOrder::Skill , "WindsBlade");
 		skillList_[5].push_back(Skill09);
 
-		std::shared_ptr<Skill> Skill10 = myLevel_->CreateActor<Bow>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill10 = myLevel_->CreateActor<Bow>(ObjectOrder::Skill, "Bow");
 		skillList_[5].push_back(Skill10);
-		std::shared_ptr<Skill> Skill11 = myLevel_->CreateActor<Crossbow>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill11 = myLevel_->CreateActor<Crossbow>(ObjectOrder::Skill, "Crossbow");
 		skillList_[5].push_back(Skill11);
-		std::shared_ptr<Skill> Skill12 = myLevel_->CreateActor<Katana>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill12 = myLevel_->CreateActor<Katana>(ObjectOrder::Skill, "Katana");
 		skillList_[5].push_back(Skill12);
-		std::shared_ptr<Skill> Skill13 = myLevel_->CreateActor<MagicWand>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill13 = myLevel_->CreateActor<MagicWand>(ObjectOrder::Skill, "MagicWand");
 		skillList_[5].push_back(Skill13);
-		std::shared_ptr<Skill> Skill14 = myLevel_->CreateActor<MagicWisp>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill14 = myLevel_->CreateActor<MagicWisp>(ObjectOrder::Skill, "MagicWisp");
 		skillList_[5].push_back(Skill14);
-		std::shared_ptr<Skill> Skill15 = myLevel_->CreateActor<Shuriken>(ObjectOrder::Skill);
+		std::shared_ptr<Skill> Skill15 = myLevel_->CreateActor<Shuriken>(ObjectOrder::Skill, "Shuriken");
 		skillList_[5].push_back(Skill15);
 	}
 
 
 	// ´õ·´ÇôÁø ·©Å© 
-	skillList_[0].reserve(7);
+	skillList_[0].reserve(6);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<LowPressure>();
+		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<LowPressure>(ObjectOrder::Skill,"LowPressure");
 		skillList_[0].push_back(Skill00);
 
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Healthy>();
+		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Healthy>(ObjectOrder::Skill, "HealingFactor");
 		skillList_[0].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Durability>();
+		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Durability>(ObjectOrder::Skill, "Durability");
 		skillList_[0].push_back(Skill02);
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Durability>();
-		skillList_[0].push_back(Skill03);
-
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<StoneSkin>();
+		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<StoneSkin>(ObjectOrder::Skill, "StoneSkin");
 		skillList_[0].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<SharpeningStone>();
+		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<SharpeningStone>(ObjectOrder::Skill, "SharpeningStone");
 		skillList_[0].push_back(Skill05);
 
-		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<Cardio>();
+		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<Cardio>(ObjectOrder::Skill, "Cardio");
 		skillList_[0].push_back(Skill06);
 	}
 
 	// ³ë¸» ·©Å©
-	skillList_[1].reserve(17);
+	skillList_[1].reserve(16);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Agility>();
+		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Agility>(ObjectOrder::Skill, "Agility");
 		skillList_[1].push_back(Skill00);
 		
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Void>();
+		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Void>(ObjectOrder::Skill, "Void");
 		skillList_[1].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Student>();
+		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Student>(ObjectOrder::Skill, "Student");
 		skillList_[1].push_back(Skill02);
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<IronWill>();
+		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<IronWill>(ObjectOrder::Skill, "IronWill");
 		skillList_[1].push_back(Skill03);
 
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<HealingFactor>();
+		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<HealingFactor>(ObjectOrder::Skill, "HealingFactor");
 		skillList_[1].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<HealingFactor>();
-		skillList_[1].push_back(Skill05);
-
-		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<BlackBlood>();
+		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<BlackBlood>(ObjectOrder::Skill, "BlackBlood");
 		skillList_[1].push_back(Skill06);
 
-		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<LightArmor>();
+		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<LightArmor>(ObjectOrder::Skill, "LightArmor");
 		skillList_[1].push_back(Skill07);
 
-		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<SharpEdge>();
+		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<SharpEdge>(ObjectOrder::Skill, "SharpEdge");
 		skillList_[1].push_back(Skill08);
 
-		std::shared_ptr<Skill> Skill09 = myLevel_->CreateActor<Range>();
+		std::shared_ptr<Skill> Skill09 = myLevel_->CreateActor<Range>(ObjectOrder::Skill, "Range");
 		skillList_[1].push_back(Skill09);
 
-		std::shared_ptr<Skill> Skill10 = myLevel_->CreateActor<TensString>();
+		std::shared_ptr<Skill> Skill10 = myLevel_->CreateActor<TensString>(ObjectOrder::Skill, "TensString");
 		skillList_[1].push_back(Skill10);
 
-		std::shared_ptr<Skill> Skill11 = myLevel_->CreateActor<Momentum>();
+		std::shared_ptr<Skill> Skill11 = myLevel_->CreateActor<Momentum>(ObjectOrder::Skill, "Momentum");
 		skillList_[1].push_back(Skill11);
 
-		std::shared_ptr<Skill> Skill12 = myLevel_->CreateActor<Muscle>();
+		std::shared_ptr<Skill> Skill12 = myLevel_->CreateActor<Muscle>(ObjectOrder::Skill, "Muscle");
 		skillList_[1].push_back(Skill12);
 
-		std::shared_ptr<Skill> Skill13 = myLevel_->CreateActor<Compromise>();
+		std::shared_ptr<Skill> Skill13 = myLevel_->CreateActor<Compromise>(ObjectOrder::Skill, "Compromise");
 		skillList_[1].push_back(Skill13);
 
-		std::shared_ptr<Skill> Skill15 = myLevel_->CreateActor<Practice>();
+		std::shared_ptr<Skill> Skill15 = myLevel_->CreateActor<Practice>(ObjectOrder::Skill, "Practice");
 		skillList_[1].push_back(Skill15);
 
-		std::shared_ptr<Skill> Skill16 = myLevel_->CreateActor<DamascusSteel>();
+		std::shared_ptr<Skill> Skill16 = myLevel_->CreateActor<DamascusSteel>(ObjectOrder::Skill, "DamascusSteel");
 		skillList_[1].push_back(Skill16);
 	}
 
@@ -210,55 +204,55 @@ void SkillManager::CreatePlayerAllSkill()
 	// ¾ðÄ¿¸Õ ·©Å©
 	skillList_[2].reserve(9);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Dash>();
+		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Dash>(ObjectOrder::Skill, "Dash");
 		skillList_[2].push_back(Skill00);
 
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<IronSkin>();
+		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<IronSkin>(ObjectOrder::Skill, "IronSkin");
 		skillList_[2].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<SlipperySkin>();
+		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<SlipperySkin>(ObjectOrder::Skill, "SlipperySkin");
 		skillList_[2].push_back(Skill02);
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Impenetrable>();
+		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Impenetrable>(ObjectOrder::Skill, "Impenetrable");
 		skillList_[2].push_back(Skill03);
 
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<Aiming>();
+		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<Aiming>(ObjectOrder::Skill, "Aiming");
 		skillList_[2].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Area>();
+		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Area>(ObjectOrder::Skill, "Area");
 		skillList_[2].push_back(Skill05);
 
-		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<Quick>();
+		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<Quick>(ObjectOrder::Skill, "Quick");
 		skillList_[2].push_back(Skill06);
 
-		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<Clumsy>();
+		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<Clumsy>(ObjectOrder::Skill, "Clumsy");
 		skillList_[2].push_back(Skill07);
 
-		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<TradeOff>();
+		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<TradeOff>(ObjectOrder::Skill, "TradeOff");
 		skillList_[2].push_back(Skill08);
 	}
 
 	// ·¹¾î ·©Å©
 	skillList_[3].reserve(6);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<DashCooldown>();
+		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<DashCooldown>(ObjectOrder::Skill, "DashCooldown");
 		skillList_[3].push_back(Skill00);
 
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Tower>();
+		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Tower>(ObjectOrder::Skill, "Tower");
 		skillList_[3].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<SteelSkin>();
+		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<SteelSkin>(ObjectOrder::Skill, "SteelSkin");
 		skillList_[3].push_back(Skill02);
 
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Celerity>();
+		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Celerity>(ObjectOrder::Skill, "Celerity");
 		skillList_[3].push_back(Skill03);
 
 
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<GodsWrath>();
+		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<GodsWrath>(ObjectOrder::Skill, "GodsWrath");
 		skillList_[3].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Penetration>();
+		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Penetration>(ObjectOrder::Skill, "Penetration");
 		skillList_[3].push_back(Skill05);
 
 		
@@ -267,17 +261,17 @@ void SkillManager::CreatePlayerAllSkill()
 	// ¿¡ÇÈ ·©Å©
 	skillList_[4].reserve(4);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<SingleHanded>();
-		skillList_[3].push_back(Skill00);
+		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<SingleHanded>(ObjectOrder::Skill, "SingleHanded");
+		skillList_[4].push_back(Skill00);
 
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<LightHand>();
-		skillList_[3].push_back(Skill01);
+		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<LightHand>(ObjectOrder::Skill, "LightHand");
+		skillList_[4].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Hypersonic>();
-		skillList_[3].push_back(Skill02);
+		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Hypersonic>(ObjectOrder::Skill, "Hypersonic");
+		skillList_[4].push_back(Skill02);
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Castle>();
-		skillList_[3].push_back(Skill03);
+		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Castle>(ObjectOrder::Skill, "Castle");
+		skillList_[4].push_back(Skill03);
 	}
 }
 
