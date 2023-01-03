@@ -98,18 +98,6 @@ void ContentsCore::Start()
 			Dir.MoveToChild("ContentsResources");
 			Dir.MoveToChild("UI");
 			Dir.MoveToChild("Map");
-			Dir.MoveToChild("Grass");
-
-
-			GameEngineFolderTexture::Load(Dir.GetFullPath());
-		}
-
-		{
-			GameEngineDirectory Dir;
-			Dir.MoveParentToExistChildDirectory("ContentsResources");
-			Dir.MoveToChild("ContentsResources");
-			Dir.MoveToChild("UI");
-			Dir.MoveToChild("Map");
 			Dir.MoveToChild("Rock");
 
 
