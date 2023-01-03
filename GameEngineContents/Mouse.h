@@ -22,18 +22,18 @@ public:
 
 	static void CreateMouse(GameEngineLevel* _thisLeve);
 
-	std::shared_ptr<GameEngineTextureRenderer> mouseRenderer;
+	std::shared_ptr<GameEngineTextureRenderer> mouseRenderer_;
 	std::shared_ptr<GameEngineCollision> mouseCollision_;
 
 	inline void GetCurPos()
 	{
 		POINT Pos_;
 		GetCursorPos(&Pos_);
-		mousePositionToClient_.x =(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x);
-		mousePositionToClient_.y =(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y);
+		mousePositionInWorldSpace_.x =(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x);
+		mousePositionInWorldSpace_.y =(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y);
 		ScreenToClient(GameEngineWindow::GetHWND(), &Pos_);
-		mousePositionToWindow_.x = static_cast<float>(Pos_.x);
-		mousePositionToWindow_.y = static_cast<float>(Pos_.y);
+		mousePositionInWindow_.x = static_cast<float>(Pos_.x);
+		mousePositionInWindow_.y = static_cast<float>(Pos_.y);
 	}
 
 	static std::shared_ptr<Mouse> GetMouseInfo()
@@ -41,20 +41,22 @@ public:
 		return mainMouse_;
 	}
 
- inline float4  IsCurPosToWindow()
+	inline float4  IsCurPosToWindow()
 	{
-		return mousePositionToWindow_;
+		return mousePositionInWindow_;
 	}
 
- inline float4  IsCurPosToClient()
- {
-	 return mousePositionToClient_;
- }
+	inline float4  IsCurPosToClient()
+	{
+		 return mousePositionInWorldSpace_;
+	}
+
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 	void End() override;
+
 private:
-	float4 mousePositionToWindow_;// 현재 Window상의 마우스 위치
-	float4 mousePositionToClient_;//클라이언트상의 마우스 위치
+	float4 mousePositionInWindow_;		//윈도우 좌표계 마우스 위치.
+	float4 mousePositionInWorldSpace_;	//월드스페이스 마우스 위치.
 };
