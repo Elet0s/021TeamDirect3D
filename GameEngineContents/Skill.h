@@ -37,7 +37,7 @@ public:
 	Skill(Skill&& _Other) noexcept = delete;
 	Skill& operator=(const Skill& _Other) = delete;
 	Skill& operator=(Skill&& _Other) noexcept = delete;
-	
+
 public:
 	virtual void Init() {};
 	virtual void Effect() {};
@@ -67,6 +67,20 @@ public:
 		return valueSoulCard_;
 	}
 
+	void IsOnOff()
+	{
+		isOn_ = false;
+	}
+
+	void IsOnOn()
+	{
+		isOn_ = true;
+	}
+	
+	bool GetIsOn()
+	{
+		return isOn_;
+	}
 public:
 	int nowLevel_;
 	bool Shooting;
@@ -76,6 +90,7 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
+	bool isOn_;
 	SoulCard valueSoulCard_;
 	std::string name_;
 	std::string etc_;

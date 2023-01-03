@@ -183,6 +183,11 @@ public:
 		return *CastThis<Player>()->playerPassiveInfo_;
 	}
 
+	std::shared_ptr<SkillManager>& GetSkillManager()
+	{
+		return CastThis<Player>()->playerSkillManager_;
+	}
+
 	CollisionReturn PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
 public:
