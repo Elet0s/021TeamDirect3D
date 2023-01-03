@@ -94,6 +94,9 @@
     <Filter Include="Level\Global\Test">
       <UniqueIdentifier>{a63c77da-3c25-41d8-be54-88b5b563fe84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\02. Play\GameObject">
+      <UniqueIdentifier>{6d2a5ff4-cf02-445f-be95-968501907971}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -399,6 +402,12 @@
     </ClCompile>
     <ClCompile Include="PlayerObject.cpp">
       <Filter>Actor\01. MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxObject.cpp">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameItemObject.cpp">
+      <Filter>Actor\02. Play\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -706,6 +715,12 @@
     </ClInclude>
     <ClInclude Include="PlayerObject.h">
       <Filter>Actor\01. MapObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxObject.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameItemObject.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

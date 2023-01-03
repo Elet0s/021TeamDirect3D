@@ -73,6 +73,12 @@ void SkillManager::CreatePlayerAllSkill()
 
 void SkillManager::SkillLevelCheak()
 {
+	if (skillList_[4]->nowLevel_ > 0 && skillList_[4]->IsUpdate() == false) //스킬 레벨 체크이 0보다크고 업데이트가 돌지 않고있으면
+	{
+		skillList_[4]->On();
+		//플레이어 위치로 이동시키고 on
+
+	}
 	if (skillList_[15]->nowLevel_ > 0 && skillList_[15]->IsUpdate() == false) //스킬 레벨 체크이 0보다크고 업데이트가 돌지 않고있으면
 	{
 		skillList_[15]->On();

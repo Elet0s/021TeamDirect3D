@@ -7,6 +7,7 @@ DeathAura::DeathAura()
 	: damege(0.75f)
 	, attackSpeed(0.25f)
 	, rangeSize(2.0f)
+	, addRadian_(0)
 {
 	
 }
@@ -56,28 +57,48 @@ void DeathAura::Start()
 {
 	 circleRendererA_ = CreateComponent<GameEngineTextureRenderer>();
 	 circleRendererA_->SetTexture("Death_Circle_A.png");
-	 circleRendererA_->GetTransform().SetWorldScale(500,250,0);
+	 circleRendererA_->GetTransform().SetWorldScale(500,500,0);
 
 	 circleRendererB_ = CreateComponent<GameEngineTextureRenderer>();
 	 circleRendererB_->SetTexture("Death_Circle_B.png");
-	 circleRendererB_->GetTransform().SetWorldScale(500, 250, 0);
+	 circleRendererB_->GetTransform().SetWorldScale(500, 500,0);
 
 	 circleRendererC_ = CreateComponent<GameEngineTextureRenderer>();
 	 circleRendererC_->SetTexture("Death_Circle_C.png");
-	 circleRendererC_->GetTransform().SetWorldScale(500, 250, 0);
+	 circleRendererC_->GetTransform().SetWorldScale(500, 500, 0);
 
 	 circleRendererD_ = CreateComponent<GameEngineTextureRenderer>();
 	 circleRendererD_->SetTexture("Death_Circle_D.png");
-	 circleRendererD_->GetTransform().SetWorldScale(500, 250, 0);
+	 circleRendererD_->GetTransform().SetWorldScale(500, 500, 0);
 
 	 circleCenterRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	 circleCenterRenderer_->SetTexture("Death_Circle_Center.png");
-	 circleCenterRenderer_->GetTransform().SetWorldScale(500, 250, 0);
+	 circleCenterRenderer_->GetTransform().SetWorldScale(500, 500, 0);
+
 	 Off();
 }
 void DeathAura::Update(float _deltaTime)
 {
-	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y-40, -80);
+	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y-40, -200);
+	RotateRenderer(_deltaTime);
+}
+void DeathAura::RotateRenderer(float _deltaTime)
+{
+	
+	if (addRadian_ <360)
+	{
+		addRadian_ += 10*_deltaTime;
+	}
+	else
+	{
+		addRadian_ = 0;
+	}
+
+	circleRendererA_->GetTransform().SetWorldRotation(60, 0, addRadian_);
+	circleRendererB_->GetTransform().SetWorldRotation(60, 0, addRadian_);
+	circleRendererC_->GetTransform().SetWorldRotation(60, 0, addRadian_);
+	circleRendererD_->GetTransform().SetWorldRotation(60, 0, addRadian_);
+	circleCenterRenderer_->GetTransform().SetWorldRotation(60, 0, addRadian_);
 }
 void DeathAura::End()
 {

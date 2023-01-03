@@ -9,6 +9,7 @@ enum class ObjectOrder
 	TreeObject,
 	MapObject,
 	Sector,
+	Item,
 	Skill,
 	SkillSerchBoad,
 	Range,
@@ -209,4 +210,13 @@ enum class Rank
 	UnCommon,
 	Rare,
 	Epic,
+};
+
+enum class ItemObjectOrder
+{
+	Exp,
+	Meet,
+	Voidbead,
+	Gold,
+	Box
 };

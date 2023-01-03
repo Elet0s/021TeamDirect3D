@@ -26,7 +26,7 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-
+	void RotateRenderer(float _deltaTime);
 private:
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererA_;
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererB_;
@@ -34,6 +34,7 @@ private:
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererD_;
 	std::shared_ptr<GameEngineTextureRenderer> circleCenterRenderer_;
 	std::shared_ptr<GameEngineCollision> deathAuraCollision_;
+	float addRadian_;
 	float damege;
 	float attackSpeed;
 	float rangeSize;

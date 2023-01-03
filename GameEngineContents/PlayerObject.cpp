@@ -12,21 +12,8 @@ PlayerObject::~PlayerObject()
 
 void PlayerObject::Start()
 {
-	GameEngineDirectory Dir;
-	Dir.MoveParentToExistChildDirectory("ContentsResources");
-	Dir.MoveToChild("ContentsResources");
-	Dir.MoveToChild("Actor");
-	Dir.MoveToChild("Player");
+	
 
-	std::vector<GameEngineFile> playerTexture = Dir.GetAllFiles();
-	for (size_t i = 0; i < playerTexture.size(); i++)
-	{
-		GameEngineTexture::Load(playerTexture[i].GetFullPath());
-	}
-	///////////////텍스처로드///////////////
-
-	GameEngineTexture::Cut("PlayerIdle.png", 11, 1);
-	GameEngineTexture::Cut("PlayerRun.png", 10, 1);
 
 	col_ = CreateComponent<GameEngineCollision>();
 	col_->SetDebugSetting(CollisionType::CT_OBB, float4::Red);

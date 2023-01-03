@@ -170,6 +170,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BoxObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Brown.h">
       <SubType>
       </SubType>
@@ -232,6 +236,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineStatusWindow.h" />
+    <ClInclude Include="GameItemObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GodsWrath.h">
       <SubType>
       </SubType>
@@ -526,6 +534,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="BoxObject.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Brown.cpp">
       <SubType>
       </SubType>
@@ -588,6 +600,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineStatusWindow.cpp" />
+    <ClCompile Include="GameItemObject.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GodsWrath.cpp">
       <SubType>
       </SubType>

@@ -16,37 +16,6 @@ void WorldMapActor::Start()
 {
 	worldmaprenderer_ = CreateComponent<MyWorldMapRenderer>();
 
-	if (nullptr == GameEngineFolderTexture::Find("Grass"))
-	{
-		{
-			GameEngineDirectory Dir;
-			Dir.MoveParentToExistChildDirectory("ContentsResources");
-			Dir.MoveToChild("ContentsResources");
-			Dir.MoveToChild("Texture");
-			Dir.MoveToChild("Map");
-			Dir.MoveToChild("Grass");
-
-
-			GameEngineFolderTexture::Load(Dir.GetFullPath());
-		}
-		
-		{
-			GameEngineDirectory Dir;
-			Dir.MoveParentToExistChildDirectory("ContentsResources");
-			Dir.MoveToChild("ContentsResources");
-			Dir.MoveToChild("Texture");
-			//Dir.MoveToChild("Map");
-
-
-			std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
-			for (size_t i = 0; i < Shaders.size(); i++)
-			{
-				GameEngineTexture::Load(Shaders[i].GetFullPath());
-			}
-		}
-		
-	}
-
 	for (size_t y = 0; y < 5; y++)
 	{
 		for (size_t x = 0; x < 2 * y + 1; x++)

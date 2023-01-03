@@ -29,67 +29,6 @@ TestLevel::~TestLevel()
 void TestLevel::Start()
 {
 
-	GameEngineDirectory monsterDir;
-	monsterDir.MoveParentToExistChildDirectory("ContentsResources");
-	monsterDir.MoveToChild("ContentsResources");
-	monsterDir.MoveToChild("Actor");
-	monsterDir.MoveToChild("Monster");
-
-	std::vector<GameEngineFile> monsterTexture = monsterDir.GetAllFiles();
-	for (size_t i = 0; i < monsterTexture.size(); i++)
-	{
-		GameEngineTexture::Load(monsterTexture[i].GetFullPath());
-	}
-
-
-	GameEngineDirectory skillDir;
-	skillDir.MoveParentToExistChildDirectory("ContentsResources");
-	skillDir.MoveToChild("ContentsResources");
-	skillDir.MoveToChild("Actor");
-	skillDir.MoveToChild("Skill");
-
-	std::vector<GameEngineFile> skillTexture = skillDir.GetAllFiles();
-	for (size_t i = 0; i < skillTexture.size(); i++)
-	{
-		GameEngineTexture::Load(skillTexture[i].GetFullPath());
-	}
-
-	GameEngineDirectory WeaponDir;
-	WeaponDir.MoveParentToExistChildDirectory("ContentsResources");
-	WeaponDir.MoveToChild("ContentsResources");
-	WeaponDir.MoveToChild("Actor");
-	WeaponDir.MoveToChild("Skill");
-	WeaponDir.MoveToChild("Weapon");
-
-	std::vector<GameEngineFile> WeaponTexture = WeaponDir.GetAllFiles();
-	for (size_t i = 0; i < WeaponTexture.size(); i++)
-	{
-		GameEngineTexture::Load(WeaponTexture[i].GetFullPath());
-	}
-		
-	GameEngineDirectory uiTextureDir;
-	uiTextureDir.MoveParentToExistChildDirectory("ContentsResources");
-	uiTextureDir.MoveToChild("ContentsResources");
-	uiTextureDir.MoveToChild("Texture");
-	uiTextureDir.MoveToChild("UI");
-	std::vector<GameEngineFile> uiTexture = uiTextureDir.GetAllFiles();
-
-	for (size_t i = 0; i < uiTexture.size(); i++)
-	{
-		GameEngineTexture::Load(uiTexture[i].GetFullPath());
-	}
-		
-	GameEngineDirectory soundDir;
-	soundDir.MoveParentToExistChildDirectory("ContentsResources");
-	soundDir.MoveToChild("ContentsResources");
-	soundDir.MoveToChild("Sound");
-
-	std::vector<GameEngineFile> sound = soundDir.GetAllFiles();
-	for (GameEngineFile& soundPlay : sound)
-	{
-		GameEngineSound::LoadResource(soundPlay);
-	}
-
 	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
 	fieldRenderingActor_->Initialize(
 		550,

@@ -42,26 +42,7 @@ Player::~Player()
 
 void Player::Start()
 {
-	if (nullptr == GameEngineTexture::Find("PlayerIdle.png"))
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("Actor");
-		Dir.MoveToChild("Player");
 
-		std::vector<GameEngineFile> playerTexture = Dir.GetAllFiles();
-		for (size_t i = 0; i < playerTexture.size(); i++)
-		{
-			GameEngineTexture::Load(playerTexture[i].GetFullPath());
-		}
-		///////////////텍스처로드///////////////
-
-		GameEngineTexture::Cut("PlayerIdle.png", 11, 1);
-		GameEngineTexture::Cut("PlayerRun.png", 10, 1);
-	}
-	
-	///////////////텍스처 cut///////////////
 	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeft"))
 	{
 		GameEngineInput::GetInst()->CreateKey("PlayerLeft", VK_LEFT);
@@ -69,7 +50,8 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("PlayerUp", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("PlayerDown", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("PlayerDash", VK_SPACE);
-		GameEngineInput::GetInst()->CreateKey("SkillOn", 'B');
+		GameEngineInput::GetInst()->CreateKey("Skill15On", 'B');
+		GameEngineInput::GetInst()->CreateKey("Skill04On", 'N');
 	}
 	{
 		collision_ = CreateComponent<GameEngineCollision>();
@@ -256,15 +238,21 @@ void Player::Update(float _deltaTime)
 	PlayerDeathEvent();
 	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 
-	if (true == GameEngineInput::GetInst()->IsDown("SkillOn")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
+	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
 		if (playerSkillManager_->GetSkillList()[15]->nowLevel_ < 1)
 		{
 			playerSkillManager_->GetSkillList()[15]->nowLevel_ += 1;
 		}
-
-		//playerSkillManager_->GetSkillList()[0]->Shooting = true;
 	}
+	if (true == GameEngineInput::GetInst()->IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
+	{
+		if (playerSkillManager_->GetSkillList()[4]->nowLevel_ < 1)
+		{
+			playerSkillManager_->GetSkillList()[4]->nowLevel_ += 1;
+		}
+	}
+
 	playerSkillManager_->SkillLevelCheak();
 }
 

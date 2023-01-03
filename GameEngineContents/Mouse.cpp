@@ -20,23 +20,6 @@ Mouse::~Mouse()
 
 void Mouse::Start()
 {
-	if (nullptr == GameEngineTexture::Find("CursorSprite.png"))
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("UI");
-		Dir.MoveToChild("MouseUI");
-
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFiles();
-		for (size_t i = 0; i < Shaders.size(); i++)
-		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
-
-		}
-	}
-	
-
 	{
 		mouseCollision_ = CreateComponent<GameEngineCollision>();
 		mouseCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Black);
@@ -54,7 +37,7 @@ void Mouse::Update(float _DeltaTime)
 	GetCurPos();
 	//GetTransform().SetWorldPosition(GetLevel()->GetMainCamera()->GetMouseScreenPosition().x, GetLevel()->GetMainCamera()->GetMouseScreenPosition().y, GetLevel()->GetMainCamera()->GetMouseScreenPosition().z + 100);
 	mouseRenderer->GetTransform().SetLocalPosition(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x+10.0f, GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,-100.0f);
-	mouseCollision_->GetTransform().SetLocalPosition(GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().x + 10.0f, GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().y, +100.0f);
+	mouseCollision_->GetTransform().SetLocalPosition(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x + 10.0f, GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y, -100.0f);
 
 }
 void Mouse::End()
