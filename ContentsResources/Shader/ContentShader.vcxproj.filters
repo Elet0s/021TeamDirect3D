@@ -13,8 +13,6 @@
     <None Include="DeferredInstanceRendering.hlsl" />
     <None Include="DeferredInstanceShadowRendering.hlsl" />
     <None Include="DeferredShadowRendering.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="DeferredRendering.hlsl" />
+    <None Include="DeferredRendering.hlsl" />
   </ItemGroup>
 </Project>
