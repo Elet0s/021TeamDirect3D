@@ -39,6 +39,7 @@ void RedFlyingEyes::Start()
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
+	monsterInfo_->monsterOrder_ = MonsterOrder::RedFlyingEyes;
 
 	//SummonMon();
 
@@ -60,11 +61,6 @@ void RedFlyingEyes::HpCheak()
 {
 	if (monsterInfo_->hp_ <0)
 	{
-		Relocated();
+		this->Unsummon();
 	}
-}
-void RedFlyingEyes::Relocated()
-{
-	this->Unsummon();
-
 }

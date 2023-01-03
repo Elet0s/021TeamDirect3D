@@ -10,8 +10,8 @@ struct WeaponInfo
 	float weaponDuration_;//투사체지속시간
 	float weaponSpeed_;// 투사체속도 
 	float weaponknockback_;//넉백
-	int weponConsecutiveAtkNum_;//투사체 연속공격횟수(한 공격 주기에 몇번 던지는지)
-	int weaponProjectileNum_; //투사체추가갯수(한번에 던지는 발사체 횟수)
+	size_t weponConsecutiveAtkNum_;//투사체 연속공격횟수(한 공격 주기에 몇번 던지는지)
+	size_t weaponProjectileNum_; //투사체추가갯수(한번에 던지는 발사체 횟수)
 	WeaponInfo()
 		:weaponAtk_(0), 
 		weaponPassAtk_(0),

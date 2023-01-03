@@ -20,6 +20,9 @@ protected:
 	void LevelStartEvent() override;
 	void LevelEndEvent() override;
 
+	void LevelManager();
+
+
 private:
 	void MouseMoveCamera();
 	void PlayerMoveCamera();
