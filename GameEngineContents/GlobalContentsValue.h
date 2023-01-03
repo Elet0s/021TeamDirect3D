@@ -2,20 +2,20 @@
 
 enum class ObjectOrder
 {
-	Player,
-	Monster,
+	Skill,
 	Mouse,
 	Camera,
 	TreeObject,
 	MapObject,
 	Sector,
 	Item,
-	Skill,
 	SkillSerchBoad,
 	Range,
 	Projectile,
 	TileMap,
 	Road,
+	Monster,
+	Player,
 	UI = 1000
 };
 

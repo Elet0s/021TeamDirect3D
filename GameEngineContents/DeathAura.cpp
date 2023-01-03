@@ -79,7 +79,7 @@ void DeathAura::Start()
 }
 void DeathAura::Update(float _deltaTime)
 {
-	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y-40, -200);
+	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y-40, 0);
 	RotateRenderer(_deltaTime);
 }
 void DeathAura::RotateRenderer(float _deltaTime)
@@ -95,9 +95,9 @@ void DeathAura::RotateRenderer(float _deltaTime)
 	}
 
 	circleRendererA_->GetTransform().SetWorldRotation(60, 0, addRadian_);
-	circleRendererB_->GetTransform().SetWorldRotation(60, 0, addRadian_);
+	circleRendererB_->GetTransform().SetWorldRotation(60, 0, -addRadian_);
 	circleRendererC_->GetTransform().SetWorldRotation(60, 0, addRadian_);
-	circleRendererD_->GetTransform().SetWorldRotation(60, 0, addRadian_);
+	circleRendererD_->GetTransform().SetWorldRotation(60, 0, -addRadian_);
 	circleCenterRenderer_->GetTransform().SetWorldRotation(60, 0, addRadian_);
 }
 void DeathAura::End()

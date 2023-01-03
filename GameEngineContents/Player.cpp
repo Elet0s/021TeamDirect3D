@@ -56,18 +56,17 @@ void Player::Start()
 	{
 		collision_ = CreateComponent<GameEngineCollision>();
 		collision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-		collision_->GetTransform().SetLocalScale({ 70.f, 70.f, 100.0f });
+		collision_->GetTransform().SetLocalScale({ 70.f, 70.f, 70.0f });
 		collision_->ChangeOrder(ObjectOrder::Player);
 	}
 
 	playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	playerRenderer_->Initialize("DeferredRendering");
 	playerRenderer_->GetTransform().SetLocalScale(90, 90, 1);
-	playerRenderer_->GetTransform().SetWorldPosition(0, 0, -50);
+	playerRenderer_->GetTransform().SetWorldPosition(0, 0, -219.f);
 	playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
 	playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
 	playerRenderer_->ChangeFrameAnimation("PlayerIdle");
-
 	std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
 	shadowRenderer->SetTextureRenderer(playerRenderer_);
 
@@ -274,7 +273,7 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 	mainPlayer_ = _thisLevel->CreateActor<Player>(ObjectOrder::Player);
 	mainPlayer_->SetLevelOverOn();
 	mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
-	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(mainPlayer_->GetTransform().GetWorldPosition().x,mainPlayer_->GetTransform().GetWorldPosition().y,-100.f);
+	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(mainPlayer_->GetTransform().GetWorldPosition().x,mainPlayer_->GetTransform().GetWorldPosition().y,-220.f);
 
 	playerSkillManager_->SetLevel(_thisLevel);
 	playerSkillManager_->CreatePlayerAllSkill();

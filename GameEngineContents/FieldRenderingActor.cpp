@@ -95,7 +95,7 @@ void FieldRenderingActor::InitializeFieldObjects(
 		float4 randomWorldPosition = float4(
 			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HX(), _totalFieldSize.HX()) * _diffusionDegree,
 			GameEngineRandom::mainRandom_.RandomFloat(-_totalFieldSize.HY(), _totalFieldSize.HY()) * _diffusionDegree,
-			-10.f
+			20.f
 		);
 		//필드 오브젝트들끼리 겹치는건 전혀 신경쓰지 않은 배치 방식.
 		//나중에 고칠 것.
@@ -171,7 +171,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 			fieldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(
 				(tileSize_ * static_cast<float>(x)) - (tileSize_ * 7.5f),
 				(tileSize_ * static_cast<float>(y)) - (tileSize_ * 5.f),
-				10.f
+				270.f
 			);	//타일 렌더하는 인스턴싱유닛들의 위치 설정.
 
 			++unitIndex;
@@ -264,7 +264,7 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 			_thisWorldPosition.x - singleData->worldPosition_.x,
 			singleData->worldPosition_.y - _thisWorldPosition.y
 		};
-		singleData->worldPosition_.z = (worldPosXYSum.x + worldPosXYSum.y) * 0.01f - 10.f;
+		singleData->worldPosition_.z = (worldPosXYSum.x + worldPosXYSum.y) * 0.01f - 200.f;
 		//화면상 오른쪽 아래 있는 오브젝트의 z값을 작게, 왼쪽 위에 있는 오브젝트의 z값을 크게 해서
 		// 오른쪽 아래에 있는 그림자가 왼쪽 위에 있는 오브젝트를 덮어 씌우게 깊이값을 조정한다
 		// 그래서 오른쪽 아래에서 해가 비치는 것 같은 효과를 준다.

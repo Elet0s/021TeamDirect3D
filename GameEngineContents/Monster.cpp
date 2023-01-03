@@ -74,6 +74,7 @@ void Monster::Unsummon()
 
 void Monster::Start()
 {
+
 }
 
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)

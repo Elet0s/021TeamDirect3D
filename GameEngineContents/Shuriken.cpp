@@ -9,7 +9,9 @@ Shuriken::Shuriken()
 	monsterList_(),
 	resultCos_(),
 	firstSerchCheak_(false),
-	targerSerchTimer_(0),
+	targerSerchTimer01_(0),
+	targerSerchTimer02_(0),
+	targerSerchTimer03_(0),
 	targetserchCounter_(0),
 	shoothingPeojectile_(false),
 	istarget_(false)
@@ -61,7 +63,7 @@ void Shuriken::Update(float _deltaTime)
 	StateSet();
 
 	ConsecutiveAtk(3.f, _deltaTime);
-	ConsecutiveAtk(3.1f, _deltaTime);
+	ConsecutiveAtk(3.f, _deltaTime);
 
 	ColCheak();
 	TarGetInitialization();
@@ -124,7 +126,7 @@ void Shuriken::ConsecutiveAtk(float timeSet_, float deltaTime_)
 }
 void Shuriken::SerchTarget()
 {
-	if (targerSerchTimer_ > 3.f)
+	if (targerSerchTimer01_ > 3.f)
 	{
 		targetserchCounter_ = 0;
 		monsterList_ = Monster::GetMonsterList();
@@ -164,7 +166,7 @@ void Shuriken::SerchTarget()
 
 void Shuriken::ProjectileSort()
 {
-	if (targerSerchTimer_ > 3.f)
+	if (targerSerchTimer01_ > 3.f)
 	{
 		for (size_t i = 0; i < projectileGroupList_.size(); i++)
 		{
@@ -186,7 +188,7 @@ void Shuriken::ProjectileSort()
 
 void Shuriken::RenderRotate()
 {
-	if (targerSerchTimer_ > 3.f)
+	if (targerSerchTimer01_ > 3.f)
 	{
 		referenceVectorList_.clear();
 		monsterList_ = Monster::GetMonsterList();
@@ -211,7 +213,7 @@ void Shuriken::RenderRotate()
 
 void Shuriken::RangeCheak(float _deltaTime)
 {
-	if (targerSerchTimer_ <= 3.0f)
+	if (targerSerchTimer01_ <= 3.0f)
 	{
 		if (istarget_ == true)
 		{
@@ -260,13 +262,13 @@ void Shuriken::TarGetInitialization()
 
 void Shuriken::TimerUpdater(float _deltaTime)
 {
-	if (targerSerchTimer_ > 3.f)
+	if (targerSerchTimer01_ > 3.f)
 	{
-		targerSerchTimer_ = 0;
+		targerSerchTimer01_ = 0;
 	}
 	else
 	{
-		targerSerchTimer_ += _deltaTime;
+		targerSerchTimer01_ += _deltaTime;
 	}
 
 }

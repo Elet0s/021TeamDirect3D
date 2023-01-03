@@ -41,13 +41,15 @@ protected:
 	void TarGetInitialization();//타겟초기화
 	void TimerUpdater(float _deltaTime);//타이머 업데이트
 	
-	void  ConsecutiveAtk(float timeSet_ ,float deltaTime_);
+	void  ConsecutiveAtk(float timeSet_ ,float deltaTime_);//연속공격을 위한 함수 묶음
 private:
 	bool shoothingPeojectile_;
 	bool firstSerchCheak_;
 	bool istarget_;//타겟이 있으면 true
 
-	float targerSerchTimer_;//타겟 검사 주기=공격속도
+	float targerSerchTimer01_;//타겟 검사 주기=공격속도
+	float targerSerchTimer02_;
+	float targerSerchTimer03_;
 	size_t targetserchCounter_;//타겟검사한 몬스터 수 매 업데이트 갱신
 
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
