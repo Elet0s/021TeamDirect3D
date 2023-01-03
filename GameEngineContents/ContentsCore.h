@@ -40,7 +40,8 @@ public:
 
 
 private:
-	void PrepareContentsShader(const std::string_view& _dirName);
+	void LoadContentsShader();
+	void LoadContentsResource();
 
 };
 

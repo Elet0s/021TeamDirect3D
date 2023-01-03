@@ -19,179 +19,13 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("Actor");
-		Dir.MoveToChild("BossMonster");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("Actor");
-		Dir.MoveToChild("Player");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("InstancingTest");
-		Dir.MoveToChild("Field");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("InstancingTest");
-		Dir.MoveToChild("Monster");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("UI");
-		Dir.MoveToChild("Map");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("UI");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("UI");
-		Dir.MoveToChild("GameObjectUI");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("UI");
-		Dir.MoveToChild("MouseUI");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("UI");
-		Dir.MoveToChild("PlayerUI");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("UI");
-		Dir.MoveToChild("SoulCardUI");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-
-	GameEngineDirectory soundDir;
-	soundDir.MoveParentToExistChildDirectory("ContentsResources");
-	soundDir.MoveToChild("ContentsResources");
-	soundDir.MoveToChild("Sound");
-
-	std::vector<GameEngineFile> sound = soundDir.GetAllFiles();
-	for (GameEngineFile& SoundPlay : sound)
-	{
-		GameEngineSound::LoadResource(SoundPlay);
-	}
-
-
-	GameEngineTexture::Cut("PlayerIdle.png", 11, 1);
-	GameEngineTexture::Cut("PlayerRun.png", 10, 1);
-
-
-	GameEngineFont::Load("궁서");
-	GameEngineFont::Load("Free Pixel");
-
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
 	{
 		GameEngineInput::GetInst()->CreateKey("LevelChangeKey", 'P');
 	}
 
-	PrepareContentsShader("ContentsResources");
+	LoadContentsResource();
+	LoadContentsShader();
 
 	//GameEngineDebug::ConsoleOpen(); 콘솔창이 필요하면 복원.
 
@@ -226,28 +60,12 @@ void ContentsCore::End()
 	
 }
 
-void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
+void ContentsCore::LoadContentsShader()
 {
-	GameEngineDirectory testDir;
-	testDir.MoveParentToExistChildDirectory("ContentsResources");
-	testDir.MoveToChild("ContentsResources");
-	testDir.MoveToChild("InstancingTest");
-	testDir.MoveToChild("Field");
-	GameEngineTexture2DArray::Load(testDir.GetFullPath());
-
-	testDir.MoveToParent("InstancingTest");
-	testDir.MoveToChild("Monster");
-	GameEngineTexture2DArray::Load(testDir.GetFullPath());
-
-
-
-
-
-
 	GameEngineDirectory contentsShaderDir;
-	if (true == contentsShaderDir.MoveParentToExistChildDirectory(_dirName))
+	if (true == contentsShaderDir.MoveParentToExistChildDirectory("ContentsResources"))
 	{
-		contentsShaderDir.MoveToChild(_dirName);
+		contentsShaderDir.MoveToChild("ContentsResources");
 		contentsShaderDir.MoveToChild("Shader");
 		std::vector<GameEngineFile> contentsShaderPath = contentsShaderDir.GetAllFiles(".hlsl");
 
@@ -258,13 +76,9 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	}
 	else
 	{
-		MsgBoxAssertString(std::string(_dirName) + "그런 이름의 디렉토리가 없습니다. 디렉토리명을 확인하세요.");
+		MsgBoxAssertString(std::string("ContentsResources") + "그런 이름의 디렉토리가 없습니다. 디렉토리명을 확인하세요.");
 		return;
 	}
-
-
-
-
 
 	std::shared_ptr<GameEngineMaterial> newContentsMaterial0
 		= GameEngineMaterial::Create("Test");
@@ -340,4 +154,161 @@ void ContentsCore::PrepareContentsShader(const std::string_view& _dirName)
 	newContentsMaterial8->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial8->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
+}
+
+void ContentsCore::LoadContentsResource()
+{
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("Actor");
+		Dir.MoveToChild("BossMonster");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("Actor");
+		Dir.MoveToChild("Player");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("InstancingTest");
+		Dir.MoveToChild("Field");
+		GameEngineTexture2DArray::Load(Dir.GetFullPath());
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("InstancingTest");
+		Dir.MoveToChild("Monster");
+		GameEngineTexture2DArray::Load(Dir.GetFullPath());
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("UI");
+		Dir.MoveToChild("Map");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("UI");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("UI");
+		Dir.MoveToChild("GameObjectUI");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("UI");
+		Dir.MoveToChild("MouseUI");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("UI");
+		Dir.MoveToChild("PlayerUI");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("UI");
+		Dir.MoveToChild("SoulCardUI");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	GameEngineDirectory soundDir;
+	soundDir.MoveParentToExistChildDirectory("ContentsResources");
+	soundDir.MoveToChild("ContentsResources");
+	soundDir.MoveToChild("Sound");
+
+	std::vector<GameEngineFile> sound = soundDir.GetAllFiles();
+	for (GameEngineFile& SoundPlay : sound)
+	{
+		GameEngineSound::LoadResource(SoundPlay);
+	}
+
+	GameEngineTexture::Cut("PlayerIdle.png", 11, 1);
+	GameEngineTexture::Cut("PlayerRun.png", 10, 1);
+
+	GameEngineFont::Load("궁서");
+	GameEngineFont::Load("Free Pixel");
 }
