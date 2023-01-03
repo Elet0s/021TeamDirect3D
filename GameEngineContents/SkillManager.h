@@ -19,7 +19,7 @@ public:
 	{
 		myLevel_ = _thisLevel;
 	}
-	std::vector < std::shared_ptr <Skill>>& GetSkillList()
+	std::vector <std::vector<std::shared_ptr <Skill>>>& GetSkillList()
 	{
 		return skillList_;
 	}
@@ -29,5 +29,5 @@ public:
 private:
 
 	 GameEngineLevel* myLevel_;
-	std::vector < std::shared_ptr <Skill>> skillList_;
+	std::vector <std::vector<std::shared_ptr <Skill>>> skillList_;
 };

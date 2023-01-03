@@ -124,14 +124,9 @@ enum class SoulCard
 	Void,
 	Student,
 	Dash,
-	IceSpirit, // 일단 보류
 	DashCooldown,
-
-	FireSpirit,
-	Evasion,
 	Oil,
 	Bookworm,
-	VoidSpirit // 보류
 };
 
 enum class CardValue

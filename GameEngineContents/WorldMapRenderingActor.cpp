@@ -68,7 +68,7 @@ void WorldMapRenderingActor::InitializeFieldObjects(
 
 void WorldMapRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 {
-	worldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("WorldRenderer");
+	worldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("0-WorldRenderer");
 	worldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
@@ -93,6 +93,9 @@ void WorldMapRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount
 			//NewGrassTexture.png 전체를 다 그린다.
 
 			worldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(2);
+
+			worldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(1);
+
 			//NewGrassTexture.png는 2번으로 삽입되어 있다.
 
 			worldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(tileSize_, tileSize_, 1.f);

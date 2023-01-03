@@ -201,48 +201,30 @@ void GameEngineTextureRenderer::SetPivot(PivotMode _pivot)
 	{
 	case PivotMode::Top:
 		atlasDataInst_.pivotPos_ = float4(0.f, -0.5f, 0.f, 0.f);
-		renderOptionInst_.pivotPosX_ = 0.f;
-		renderOptionInst_.pivotPosY_ = -0.5f;
 		break;
 	case PivotMode::Center:
 		atlasDataInst_.pivotPos_ = float4::Zero;
-		renderOptionInst_.pivotPosX_ = 0.f;
-		renderOptionInst_.pivotPosY_ = 0.f;
 		break;
 	case PivotMode::Bot:
 		atlasDataInst_.pivotPos_ = float4(0.f, 0.5f, 0.f, 0.f);
-		renderOptionInst_.pivotPosX_ = 0.f;
-		renderOptionInst_.pivotPosY_ = 0.5f;
 		break;
 	case PivotMode::Left:
 		atlasDataInst_.pivotPos_ = float4(0.5f, 0.f, 0.f, 0.f);
-		renderOptionInst_.pivotPosX_ = 0.5f;
-		renderOptionInst_.pivotPosY_ = 0.0f;
 		break;
 	case PivotMode::Right:
 		atlasDataInst_.pivotPos_ = float4(-0.5f, 0.f, 0.f, 0.f);
-		renderOptionInst_.pivotPosX_ = -0.5f;
-		renderOptionInst_.pivotPosY_ = 0.f;
 		break;
 	case PivotMode::LeftTop:
 		atlasDataInst_.pivotPos_ = float4(0.5f, -0.5f, 0.f, 0.f);
-		renderOptionInst_.pivotPosX_ = 0.5f;
-		renderOptionInst_.pivotPosY_ = -0.5f;
 		break;
 	case PivotMode::RightTop:
 		atlasDataInst_.pivotPos_ = float4(-0.5f, -0.5f, 0.f, 0.f);
-		renderOptionInst_.pivotPosX_ = -0.5f;
-		renderOptionInst_.pivotPosY_ = -0.5f;
 		break;
 	case PivotMode::LeftBot:
 		atlasDataInst_.pivotPos_ = float4(0.5f, 0.5f, 0.f, 0.f);
-		renderOptionInst_.pivotPosX_ = 0.5f;
-		renderOptionInst_.pivotPosY_ = 0.5f;
 		break;
 	case PivotMode::RightBot:
 		atlasDataInst_.pivotPos_ = float4(-0.5f, 0.5f, 0.f, 0.f);
-		renderOptionInst_.pivotPosX_ = -0.5f;
-		renderOptionInst_.pivotPosY_ = 0.5f;
 		break;
 	case PivotMode::Custom:
 		//_pivot == Custom일때는 아무것도 하지 않는다.

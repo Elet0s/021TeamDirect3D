@@ -16,11 +16,11 @@ WorldMapLevel::~WorldMapLevel()
 void WorldMapLevel::Start()
 {
 	WorldMapRenderingActor_ = CreateActor<WorldMapRenderingActor>();
-	CreateActor<StageCreater>();
 	WorldMapRenderingActor_->Initialize(
 		1000,
 		300
 	);
+	CreateActor<StageCreater>();
 
 	WorldMapRenderingActor_->GetTransform().SetLocalScale(float4::White);
 	WorldMapRenderingActor_->GetTransform().SetWorldScale(float4::White);
@@ -29,7 +29,7 @@ void WorldMapLevel::Start()
 	WorldLevelLighting_ = CreateActor<GameEngineLighting>(0, "TestLevelLighting");
 	//테스트레벨에 조명 추가.
 
-	WorldLevelLighting_->GetTransform().SetWorldRotation(100.f, 0.f, 0.f);
+	WorldLevelLighting_->GetTransform().SetWorldRotation(-30.f, 45.f, 0.f);
 	//조명 각도 설정.
 
 	WorldLevelLighting_->GetLightingData().mainLightColor_ = float4(0.7f, 0.7f, 0.7f);
@@ -49,7 +49,7 @@ void WorldMapLevel::Start()
 	
 	GetMainCameraActorTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
 	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
-
+	//GetUICamera()->GetTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
 
 	if (false == GameEngineInput::GetInst()->IsKey("WorldCameraLeft"))
 	{

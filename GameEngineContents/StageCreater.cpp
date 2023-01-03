@@ -16,18 +16,31 @@ StageCreater::~StageCreater()
 
 void StageCreater::Start()
 {
+	std::shared_ptr<GameEngineInstancingRenderer> worldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("1-DirtPatch");
+	{
+		worldRenderer_->Initialize(
+			100,
+			"Rect",
+			"DeferredInstanceRendering"
+		);
+		worldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
+		worldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
+		//fieldRenderer_->SetAllUnitsWorldScale(256, 256, 1);
+		//그려질 필요없는 렌더유닛들이 256, 256 크기로 그려지는 버그 발생.
+	}
+
 	{
 		std::list<std::shared_ptr<StageObject>>& GroupActor = stageObjects_[7];
 		std::shared_ptr<StageObject> object = GetLevel()->CreateActor<StageObject>();
 		object->SetMyLevel(0);
 		object->SetStageType(static_cast<int>(StageType::Boss));
 		object->posY_ = -650;
-
-		std::shared_ptr<GameEngineTextureRenderer> renderer_ = CreateComponent<GameEngineTextureRenderer>();
-		renderer_->SetTexture("DirtPatch.png");
-		renderer_->ScaleToTexture();
-		renderer_->GetTransform().SetWorldRotation(float4(60.f, 0.f, 0.f));
-		renderer_->GetTransform().SetWorldPosition(1024 - 128.f, -650 * sinf(30.f * GameEngineMath::DegreeToRadian), -651 * cosf(30.f * GameEngineMath::DegreeToRadian));
+		worldRenderer_->GetInstancingUnit(0).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
+		worldRenderer_->GetInstancingUnit(0).SetColorTextureIndex(4);
+		worldRenderer_->GetInstancingUnit(0).SetNormalMapTextureIndex(5);
+		worldRenderer_->GetInstancingUnit(0).SetWorldScale(256.f, 256.f, 1.f);
+		worldRenderer_->GetInstancingUnit(0).SetWorldRotation(float4(60.f, 0.f, 0.f));
+		worldRenderer_->GetInstancingUnit(0).SetWorldPosition(1024 - 128.f, -650 * sinf(30.f * GameEngineMath::DegreeToRadian), -651 * cosf(30.f * GameEngineMath::DegreeToRadian));
 		object->GetTransform().SetWorldPosition(1024 - 128.f, -650 * sinf(30.f * GameEngineMath::DegreeToRadian), -650 * cosf(30.f * GameEngineMath::DegreeToRadian));
 		GroupActor.push_back(object);
 	}
@@ -40,19 +53,26 @@ void StageCreater::Start()
 		object->posY_ = -2400;
 		object->GetTransform().SetWorldPosition(1024 - 128.f, -2400 * sinf(30.f * GameEngineMath::DegreeToRadian), -2400 * cosf(30.f * GameEngineMath::DegreeToRadian));
 		GroupActor.push_back(object);
-		std::shared_ptr<GameEngineTextureRenderer> renderer_ = CreateComponent<GameEngineTextureRenderer>();
-		renderer_->SetTexture("DirtPatch.png");
-		renderer_->ScaleToTexture();
-		renderer_->GetTransform().SetWorldRotation(float4(60.f, 0.f, 0.f));
-		renderer_->GetTransform().SetWorldPosition(1024 - 128.f, -2400 * sinf(30.f * GameEngineMath::DegreeToRadian), -2401 * cosf(30.f * GameEngineMath::DegreeToRadian));
+		worldRenderer_->GetInstancingUnit(1).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
+		worldRenderer_->GetInstancingUnit(1).SetColorTextureIndex(4);
+		worldRenderer_->GetInstancingUnit(1).SetNormalMapTextureIndex(5);
+		worldRenderer_->GetInstancingUnit(1).SetWorldScale(256.f, 256.f, 1.f);
+		worldRenderer_->GetInstancingUnit(1).SetWorldRotation(float4(60.f, 0.f, 0.f));
+		worldRenderer_->GetInstancingUnit(1).SetWorldPosition(1024 - 128.f, -2400 * sinf(30.f * GameEngineMath::DegreeToRadian), -2401 * cosf(30.f * GameEngineMath::DegreeToRadian));
 		curlevel_ = object;
 		playerObject_ = GetLevel()->CreateActor<PlayerObject>(ObjectOrder::Player);
 		playerObject_->GetTransform().SetWorldPosition(1024 - 128.f, -2400 * sinf(30.f * GameEngineMath::DegreeToRadian), -2400 * cosf(30.f * GameEngineMath::DegreeToRadian));
 	}
 
+
+	
+
+
+
 	{
 		int PrevMaxCount = 0;
-
+		int unitIndex = 2;
+		std::shared_ptr<GameEngineInstancingRenderer> worldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("1-DirtPatch");
 		for (int level = 1; level < 7; level++)
 		{
 			int maxCount = GameEngineRandom::mainRandom_.RandomInt(2, 5);
@@ -120,15 +140,25 @@ void StageCreater::Start()
 				}
 				x = 400 + xInterval + GameEngineRandom().mainRandom_.RandomFloat(-100.f, 50.f);
 				object->GetTransform().SetWorldPosition(x, (-2400 + 250.f * level) * sinf(30.f * GameEngineMath::DegreeToRadian), (-2400 + 250.f * level) * cosf(30.f * GameEngineMath::DegreeToRadian));
-				std::shared_ptr<GameEngineTextureRenderer> renderer_ = CreateComponent<GameEngineTextureRenderer>();
-				renderer_->SetTexture("DirtPatch.png");
-				renderer_->ScaleToTexture();
-				renderer_->GetTransform().SetWorldRotation(float4(60.f, 0.f, 0.f));
-				renderer_->GetTransform().SetWorldPosition(x, (-2400 + 250.f * level)* sinf(30.f * GameEngineMath::DegreeToRadian), (-2401 + 250.f * level)* cosf(30.f * GameEngineMath::DegreeToRadian));
+				worldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
+				//NewGrassTexture.png 전체를 다 그린다.
 
+				worldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(4);
+				//NewGrassTexture.png는 2번으로 삽입되어 있다.
+				worldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(5);
+				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(256.f, 256.f, 1.f);
+				//타일을 그리는 인스턴싱유닛들만 크기 설정을 해준다.
+
+				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(x, (-2400 + 250.f * level)* sinf(30.f * GameEngineMath::DegreeToRadian), (-2401 + 250.f * level)* cosf(30.f * GameEngineMath::DegreeToRadian));	//타일 렌더하는 인스턴싱유닛들의 위치 설정.
+
+				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldRotation(float4(60.f, 0.f, 0.f));
+
+				++unitIndex;
+				//worldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(x, (-2400 + 250.f * level)* sinf(30.f * GameEngineMath::DegreeToRadian), (-2401 + 250.f * level)* cosf(30.f * GameEngineMath::DegreeToRadian));	//타일 렌더하는 인스턴싱유닛들의 위치 설정.
 				float c = -2400.f + (250.f * static_cast<float>(level));
 				object->posY_ = c;
 				GroupActor.push_back(object);
+				++unitIndex;
 			}
 			PrevMaxCount = maxCount;
 		}
@@ -180,6 +210,7 @@ void StageCreater::Start()
 			}
 		}
 	}
+
 
 }
 
