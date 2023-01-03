@@ -92,21 +92,6 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
-		{
-			GameEngineDirectory Dir;
-			Dir.MoveParentToExistChildDirectory("ContentsResources");
-			Dir.MoveToChild("ContentsResources");
-			Dir.MoveToChild("UI");
-			Dir.MoveToChild("Map");
-			Dir.MoveToChild("Rock");
-
-
-			std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-			for (size_t i = 0; i < Texture.size(); i++)
-			{
-				GameEngineTexture::Load(Texture[i].GetFullPath());
-			}
-		}
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistChildDirectory("ContentsResources");
