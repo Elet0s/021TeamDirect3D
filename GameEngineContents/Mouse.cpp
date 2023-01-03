@@ -5,10 +5,10 @@
 std::shared_ptr<Mouse> Mouse::mainMouse_ = nullptr;
 
 Mouse::Mouse()
-	:mouseRenderer(0)
-	, mouseCollision_(0)
-	, mousePositionToWindow_(0)
-	,mousePositionToClient_(0)
+	: mouseRenderer_(nullptr),
+	mouseCollision_(nullptr),
+	mousePositionInWindow_(float4::Zero),
+	mousePositionInWorldSpace_(float4::Zero)
 {
 
 }
@@ -20,24 +20,29 @@ Mouse::~Mouse()
 
 void Mouse::Start()
 {
-	{
-		mouseCollision_ = CreateComponent<GameEngineCollision>();
-		mouseCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Black);
-		mouseCollision_->GetTransform().SetLocalScale({ 64.0f, 64.0f, 1.0f });
-		mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
-	}
+	mouseCollision_ = CreateComponent<GameEngineCollision>();
+	mouseCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Black);
+	mouseCollision_->GetTransform().SetWorldScale( 10, 10, 10 );
+	mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
 
-	mouseRenderer = CreateComponent<GameEngineTextureRenderer>();
-	mouseRenderer->GetTransform().SetLocalScale(64, 64, 100);
-	mouseRenderer->ChangeCamera(CameraOrder::UICamera);
-	mouseRenderer->SetTexture("CursorSprite.png");
+	mouseRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	mouseRenderer_->GetTransform().SetWorldScale(64, 64, 100);
+	mouseRenderer_->ChangeCamera(CameraOrder::UICamera);
+	mouseRenderer_->SetTexture("CursorSprite.png");
 }
 void Mouse::Update(float _DeltaTime)
 {
 	GetCurPos();
-	//GetTransform().SetWorldPosition(GetLevel()->GetMainCamera()->GetMouseScreenPosition().x, GetLevel()->GetMainCamera()->GetMouseScreenPosition().y, GetLevel()->GetMainCamera()->GetMouseScreenPosition().z + 100);
-	mouseRenderer->GetTransform().SetLocalPosition(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x+10.0f, GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,-100.0f);
-	mouseCollision_->GetTransform().SetLocalPosition(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x + 10.0f, GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y, -100.0f);
+	mouseRenderer_->GetTransform().SetLocalPosition(
+		GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x+10.0f,
+		GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,
+		-100.0f
+	);
+	mouseCollision_->GetTransform().SetLocalPosition(
+		GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x + 10.0f,
+		GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y, 
+		-100.0f
+	);
 
 }
 void Mouse::End()
