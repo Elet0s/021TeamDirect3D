@@ -2,8 +2,6 @@
 
 class Mouse : public GameEngineActor
 {
-	//static std::shared_ptr<Mouse> mainMouse_;
-
 
 public:
 	Mouse();
@@ -15,10 +13,7 @@ public:
 	Mouse& operator=(Mouse&& _Other) noexcept = delete;
 
 public:
-
-	//static void CreateMouse(GameEngineLevel* _thisLeve);
-
-
+	//void Initialize();
 
 	//inline void GetCurPos()
 	//{
@@ -58,9 +53,13 @@ protected:
 	void End() override;
 
 private:
-	std::shared_ptr<GameEngineTextureRenderer> mouseRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> mouseDefaultRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> mouseCrossHairRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> mouseAimLineRenderer_;
 	std::shared_ptr<GameEngineCollision> mouseCollision_;
 
 	float4 mousePositionInWindow_;		//윈도우 좌표계 마우스 위치.
 	float4 mousePositionInWorldSpace_;	//월드스페이스 마우스 위치.
+	float4 playerWorldPosition_;	//플레이어 월드 포지션.
+	bool isAimLine_;
 };

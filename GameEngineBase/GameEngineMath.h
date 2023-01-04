@@ -610,6 +610,11 @@ public:
 		);
 	}
 
+	//static float4 Unproject()
+	//{
+	//	return DirectX::XMVector3Unproject();
+	//}
+
 	//이 벡터와 저 벡터를 잇는 벡터 생성.
 	float4 DegreeVectorBetweenVectors(const float4& _targetVector)
 	{

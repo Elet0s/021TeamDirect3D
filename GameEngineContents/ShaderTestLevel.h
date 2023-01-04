@@ -14,6 +14,8 @@ public:
 	ShaderTestLevel& operator=(const ShaderTestLevel& _other) = delete;
 	ShaderTestLevel& operator=(ShaderTestLevel&& _other) = delete;
 
+public:
+
 
 public:
 	std::shared_ptr<Mouse> GetMouse()

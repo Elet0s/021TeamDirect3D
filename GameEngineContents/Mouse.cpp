@@ -2,13 +2,15 @@
 #include"Mouse.h"
 #include "GlobalContentsValue.h"
 
-//std::shared_ptr<Mouse> Mouse::mainMouse_ = nullptr;
-
 Mouse::Mouse()
-	: mouseRenderer_(nullptr),
+	: mouseDefaultRenderer_(nullptr),
+	mouseCrossHairRenderer_(nullptr),
+	mouseAimLineRenderer_(nullptr),
 	mouseCollision_(nullptr),
 	mousePositionInWindow_(float4::Zero),
-	mousePositionInWorldSpace_(float4::Zero)
+	mousePositionInWorldSpace_(float4::Zero),
+	playerWorldPosition_(float4::Zero),
+	isAimLine_(true)
 {
 
 }
@@ -39,10 +41,24 @@ void Mouse::Start()
 	mouseCollision_->GetTransform().SetLocalPosition( 20, -28, 0 );
 	mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
 
-	mouseRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	mouseRenderer_->GetTransform().SetWorldScale(40, 56, 1);
-	mouseRenderer_->GetTransform().SetLocalPosition( 20, -28, 0 );
-	mouseRenderer_->SetTexture("CursorSprite.png");
+	mouseDefaultRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	mouseDefaultRenderer_->GetTransform().SetWorldScale(40, 56, 1);
+	mouseDefaultRenderer_->GetTransform().SetLocalPosition( 20, -28, 0 );
+	mouseDefaultRenderer_->SetTexture("CursorSprite.png");
+	mouseDefaultRenderer_->Off();
+
+	mouseCrossHairRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	mouseCrossHairRenderer_->GetTransform().SetWorldScale(32, 32, 1);
+	mouseCrossHairRenderer_->SetTexture("CrossHair.png");
+	mouseCrossHairRenderer_->Off();
+
+
+	mouseAimLineRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	mouseAimLineRenderer_->GetTransform().SetWorldScale(256, 256, 1);
+	mouseAimLineRenderer_->SetTexture("AimLine.png");
+	//mouseAimLineRenderer_->Off();
+
+
 }
 
 void Mouse::Update(float _DeltaTime)
@@ -64,29 +80,55 @@ void Mouse::Update(float _DeltaTime)
 
 	if (CameraProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
 	{
+		//ÀüÅõ¸Ê¿¡¼­ÀÇ µ¿ÀÛ.
+
 		this->GetTransform().SetWorldPosition(
 			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().x,
 			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().y,
-			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().z + 200.f
+			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().z 
 		);
+
+
+
+		if (true == isAimLine_)
+		{
+			mouseAimLineRenderer_->GetTransform().SetWorldPosition(this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition());
+
+
+			float4 thisPosition = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor();
+
+			float temp = float4::VectorXYToDegree(float4::Green, thisPosition);
+
+			this->GetTransform().SetWorldRotation(
+				temp
+			);
+
+
+			
+		}
 	}
 	else /*if (CameraProjectionMode::Perspective == this->GetLevel()->GetMainCamera()->GetProjectionMode())*/
 	{
+		//¿ùµå¸Ê¿¡¼­ÀÇ µ¿ÀÛ. ¹Ì¿Ï¼º.
 		//this->GetTransform().SetWorldPosition(
 		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().x,
 		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().y,
 		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().z * 500.f
 		//);
 
+		//this->GetTransform().SetWorldPosition(
+		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition()	// ½ÇÁ¦·Î´Â ºä°ø°£ÁÂÇ¥.
+		//);
+		////(1.0264, 0.5773, 1.0000)
+
 		this->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetMainCamera()->GetMouseWorldPosition()	// ½ÇÁ¦·Î´Â ºä°ø°£ÁÂÇ¥.
+			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().x,	// ½ÇÁ¦·Î´Â ºä°ø°£ÁÂÇ¥.
+			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().y,	// ½ÇÁ¦·Î´Â ºä°ø°£ÁÂÇ¥.
+			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().z + 100000.f	// ½ÇÁ¦·Î´Â ºä°ø°£ÁÂÇ¥.
 		);
-		//(1.0264, 0.5773, 1.0000)
+
+
 	}
-
-
-
-	//float4 temp = this->GetTransform().GetWorldPosition();
 }
 
 void Mouse::End()

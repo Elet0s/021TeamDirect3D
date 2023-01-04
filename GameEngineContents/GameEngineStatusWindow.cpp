@@ -66,14 +66,18 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().IZ());
 	ImGui::Text(currentCameraPos.c_str());
 
-	std::string currentMousePos = "MouseWorldPosition : ";
-	currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetCurrentWorldPosition().x);
-	currentMousePos += ", ";
-	currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetCurrentWorldPosition().y);
-	currentMousePos += ", ";
-	currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetCurrentWorldPosition().z);
-		
-	ImGui::Text(currentMousePos.c_str());
+
+	if (nullptr != reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel()))
+	{
+		std::string currentMousePos = "MouseWorldPosition : ";
+		currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetCurrentWorldPosition().x);
+		currentMousePos += ", ";
+		currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetCurrentWorldPosition().y);
+		currentMousePos += ", ";
+		currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetCurrentWorldPosition().z);
+
+		ImGui::Text(currentMousePos.c_str());
+	}
 
 
 
