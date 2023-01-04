@@ -87,11 +87,12 @@ void Shuriken::Update(float _deltaTime)
 	SerchTarget();
 	ProjectileSort();
 	RenderRotate();
+	TimerUpdater(_deltaTime);
 	RangeCheak(_deltaTime);
 
 	ColCheak();
 	TarGetInitialization();
-	TimerUpdater(_deltaTime);
+
 }
 void Shuriken::End()
 {
@@ -200,6 +201,8 @@ void Shuriken::ProjectileSort()
 			{
 				if (targetInst01_.size() > i) // 타겟수만큼 필요
 				{
+					projectileGroupList01_[i].first->On();
+					projectileGroupList01_[i].second->On();
 					projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
 					projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 				}
@@ -216,6 +219,8 @@ void Shuriken::ProjectileSort()
 			{
 				if (targetInst02_.size() > i) // 타겟수만큼 필요
 				{
+					projectileGroupList02_[i].first->On();
+					projectileGroupList02_[i].second->On();
 					projectileGroupList02_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
 					projectileGroupList02_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 				}
@@ -232,6 +237,8 @@ void Shuriken::ProjectileSort()
 			{
 				if (targetInst03_.size() > i) // 타겟수만큼 필요
 				{
+					projectileGroupList03_[i].first->On();
+					projectileGroupList03_[i].second->On();
 					projectileGroupList03_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
 					projectileGroupList03_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 				}
@@ -317,11 +324,6 @@ void Shuriken::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst01_.size(); i++)
 			{
-				if (projectileGroupList01_[i].first->IsUpdate() ==false)
-				{
-					projectileGroupList01_[i].first->On();
-					projectileGroupList01_[i].second->On();
-				}
 				projectileGroupList01_[i].first->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
 				projectileGroupList01_[i].second->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
 			}
@@ -338,11 +340,6 @@ void Shuriken::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst02_.size(); i++)
 			{
-				if (projectileGroupList02_[i].first->IsUpdate() == false)
-				{
-					projectileGroupList02_[i].first->On();
-					projectileGroupList02_[i].second->On();
-				}
 				projectileGroupList02_[i].first->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
 				projectileGroupList02_[i].second->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
 			}
@@ -359,11 +356,6 @@ void Shuriken::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst03_.size(); i++)
 			{
-				if (projectileGroupList03_[i].first->IsUpdate() == false)
-				{
-					projectileGroupList03_[i].first->On();
-					projectileGroupList03_[i].second->On();
-				}
 				projectileGroupList03_[i].first->GetTransform().SetWorldMove(referenceVectorList03_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
 				projectileGroupList03_[i].second->GetTransform().SetWorldMove(referenceVectorList03_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
 			}

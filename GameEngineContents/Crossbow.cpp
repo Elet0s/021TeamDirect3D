@@ -59,11 +59,12 @@ void Crossbow::Update(float _deltaTime)
 	SerchTarget();
 	ProjectileSort();
 	RenderRotate();
+	TimerUpdater(_deltaTime);
 	RangeCheak(_deltaTime);
 
 	ColCheak();
 	TarGetInitialization();
-	TimerUpdater(_deltaTime);
+
 }
 void Crossbow::End()
 {
@@ -202,12 +203,10 @@ void Crossbow::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst_.size(); i++)
 			{
-
 				projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * crossbowWeaponInfo_.weaponAtkSpeed_);
 				projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * crossbowWeaponInfo_.weaponAtkSpeed_);
 			}
 		}
-
 	}
 }
 
