@@ -43,7 +43,6 @@ protected:
 	void TimerUpdater(float _deltaTime);//타이머 업데이트
 
 private:
-	bool shoothingPeojectile_;
 	bool firstSerchCheak_;
 	bool istarget_;//타겟이 있으면 true
 
@@ -54,7 +53,7 @@ private:
 	float targerSerchTimer03_;
 
 
-	size_t targetserchCounter01_;//타겟검사한 몬스터 수 매 업데이트 갱신
+	size_t targetSerchCounter_;//타겟검사한 몬스터 수 매 업데이트 갱신
 
 
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 

@@ -15,13 +15,12 @@ Shuriken::Shuriken()
 	targerSerchTimer03_(0),
 	targerSerchTimer_(0),
 
-	targetserchCounter01_(0),
+	targetSerchCounter_(0),
 
 	targetInst01_(),
 	targetInst02_(),
 	targetInst03_(),
 
-	shoothingPeojectile_(false),
 	istarget_(false)
 {
 
@@ -116,21 +115,21 @@ void  Shuriken::StateSet()
 
 		shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 1;
-		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 2;
+		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 1;
 
 	}
 	else if (nowLevel_ < 3)
 	{
-		//shuriKenWeaponInfo_.weaponAtk_ = 1.58f;
-		//shuriKenWeaponInfo_.weaponAtkSpeed_ = 100.f;//1초마다
-		//shuriKenWeaponInfo_.weaponProjectileNum_ = 3;
-		//shuriKenWeaponInfo_.weaponSpeed_ = 100;
+		shuriKenWeaponInfo_.weaponAtk_ = 1.58f;
+		shuriKenWeaponInfo_.weaponAtkSpeed_ = 100.f;//1초마다
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 3;
+		shuriKenWeaponInfo_.weaponSpeed_ = 100;
 
 	}
 	else if (nowLevel_ < 4)
 	{
-
+		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 	}
 	else if (nowLevel_ < 5)
 	{
@@ -138,7 +137,7 @@ void  Shuriken::StateSet()
 	}
 	else if (nowLevel_ < 6)
 	{
-
+		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 3;
 	}
 }
 
@@ -146,7 +145,7 @@ void Shuriken::SerchTarget()
 {
 	if (targerSerchTimer_ > 3.f)
 	{
-		targetserchCounter01_ = 0;
+		targetSerchCounter_ = 0;
 		monsterList_ = Monster::GetMonsterList();
 		targetInst01_.clear();
 		for (size_t n = 0; n < shuriKenWeaponInfo_.weaponProjectileNum_; n++)//한번에 던지는 투사체 갯수만큼 반복할것임
@@ -155,7 +154,7 @@ void Shuriken::SerchTarget()
 			{
 				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
 				{
-					targetserchCounter01_ += 1;
+					targetSerchCounter_ += 1;
 					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0이상, 첫번째 순번일경우
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
@@ -173,7 +172,7 @@ void Shuriken::SerchTarget()
 					firstSerchCheak_ = false;
 					istarget_ = true;
 				}
-				if (targetserchCounter01_ == 0)
+				if (targetSerchCounter_ == 0)
 				{
 					istarget_ = false;
 				}
