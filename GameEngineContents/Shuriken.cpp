@@ -39,7 +39,7 @@ void Shuriken::Start()
 	for (size_t i = 0; i < 30; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
 	{
 		projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
-		projectileGroup_.first->GetTransform().SetWorldScale(20, 20, 0);
+		projectileGroup_.first->GetTransform().SetWorldScale(200, 200, 0);
 		projectileGroup_.first->SetTexture("Shuriken.png");
 		projectileGroup_.first->Off();
 
@@ -63,7 +63,7 @@ void Shuriken::Update(float _deltaTime)
 	StateSet();
 
 	ConsecutiveAtk(3.f, _deltaTime);
-	ConsecutiveAtk(3.f, _deltaTime);
+
 
 	ColCheak();
 	TarGetInitialization();
@@ -168,19 +168,22 @@ void Shuriken::ProjectileSort()
 {
 	if (targerSerchTimer01_ > 3.f)
 	{
-		for (size_t i = 0; i < projectileGroupList_.size(); i++)
+		if (istarget_ == true)
 		{
-			if (targetInst_.size() > i) // 타겟수만큼 필요
+			for (size_t i = 0; i < projectileGroupList_.size(); i++)
 			{
-				projectileGroupList_[i].first->On();
-				projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
-				projectileGroupList_[i].second->On();
-				projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
-			}
-			else	 if (projectileGroupList_[i].first->IsUpdate() == true)
-			{
-				projectileGroupList_[i].first->Off();
-				projectileGroupList_[i].second->Off();
+				if (targetInst_.size() > i) // 타겟수만큼 필요
+				{
+					projectileGroupList_[i].first->On();
+					projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
+					projectileGroupList_[i].second->On();
+					projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+				}
+				else	 if (projectileGroupList_[i].first->IsUpdate() == true)
+				{
+					projectileGroupList_[i].first->Off();
+					projectileGroupList_[i].second->Off();
+				}
 			}
 		}
 	}
@@ -204,9 +207,7 @@ void Shuriken::RenderRotate()
 			referenceVector_.w = 0;
 			referenceVectorList_.push_back(referenceVector_);
 
-			projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, 0);
-			projectileGroupList_[i].first->GetTransform().SetWorldRotation(0, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
-			projectileGroupList_[i].first->GetTransform().SetWorldRotation(60, 0, 0);
+			projectileGroupList_[i].first->GetTransform().SetWorldRotation(60, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
 		}
 	}
 }
