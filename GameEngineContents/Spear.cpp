@@ -83,7 +83,7 @@ void Spear::StateSet()
 
 void Spear::SerchTarget()
 {
-	mouseAimPos_ = Mouse::GetMouseInfo()->IsCurPosToClient();
+	//mouseAimPos_ = Mouse::GetMouseInfo()->IsCurPosToClient();
 }
 void Spear::ProjectileSort()
 {

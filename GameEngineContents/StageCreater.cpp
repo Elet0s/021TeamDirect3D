@@ -219,8 +219,8 @@ void StageCreater::Start()
 
 void StageCreater::Update(float _deltaTime)
 {
-	Mouse::GetMouseInfo().get()->mouseCollision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::MapObject, CollisionType::CT_OBB2D,
-		std::bind(&StageCreater::CheckNextLevel, this, std::placeholders::_1, std::placeholders::_2));
+	//Mouse::GetMouseInfo().get()->mouseCollision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::MapObject, CollisionType::CT_OBB2D,
+	//	std::bind(&StageCreater::CheckNextLevel, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 CollisionReturn StageCreater::CheckNextLevel(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)

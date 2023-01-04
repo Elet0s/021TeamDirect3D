@@ -890,29 +890,29 @@ public:
 	}
 
 	//뷰스페이스 컬링 판정.
-	static bool IsInViewFrustum(const float4x4& _wvpMatrix, const float4& _pivotPos)
-	{
-		//너비높이 1씩인 기본 Rect만 고려하였음.
-		//Fullrect처럼 너비높이나 모양이 다르면 다시 만들 것. 
-		float4 leftTop = float4(-0.5f + _pivotPos.x, -0.5f + _pivotPos.y);
-		float4 rightTop = float4(0.5f + _pivotPos.x, -0.5f + _pivotPos.y);
-		float4 leftBot = float4(-0.5f + _pivotPos.x, 0.5f + _pivotPos.y);
-		float4 rightBot = float4(0.5f + _pivotPos.x, 0.5f + _pivotPos.y);
-
-		leftTop = DirectX::XMVector4Transform(leftTop.directXVector_, _wvpMatrix.directXMatrix_);
-		leftTop /= leftTop.w;
-		rightTop = DirectX::XMVector4Transform(rightTop.directXVector_, _wvpMatrix.directXMatrix_);
-		rightTop /= rightTop.w;
-		leftBot = DirectX::XMVector4Transform(leftBot.directXVector_, _wvpMatrix.directXMatrix_);
-		leftBot /= leftBot.w;
-		rightBot = DirectX::XMVector4Transform(rightBot.directXVector_, _wvpMatrix.directXMatrix_);
-		rightBot /= rightBot.w;
-
-		return DirectX::XMVector2InBounds(leftTop.directXVector_, DirectX::g_XMOne3)
-			|| DirectX::XMVector2InBounds(rightTop.directXVector_, DirectX::g_XMOne3)
-			|| DirectX::XMVector2InBounds(leftBot.directXVector_, DirectX::g_XMOne3)
-			|| DirectX::XMVector2InBounds(rightBot.directXVector_, DirectX::g_XMOne3);
-	}
+	//static bool IsInViewFrustum(const float4x4& _wvpMatrix, const float4& _pivotPos)
+	//{
+	//	//너비높이 1씩인 기본 Rect만 고려하였음.
+	//	//Fullrect처럼 너비높이나 모양이 다르면 다시 만들 것. 
+	//	float4 leftTop = float4(-0.5f + _pivotPos.x, -0.5f + _pivotPos.y);
+	//	float4 rightTop = float4(0.5f + _pivotPos.x, -0.5f + _pivotPos.y);
+	//	float4 leftBot = float4(-0.5f + _pivotPos.x, 0.5f + _pivotPos.y);
+	//	float4 rightBot = float4(0.5f + _pivotPos.x, 0.5f + _pivotPos.y);
+	//
+	//	leftTop = DirectX::XMVector4Transform(leftTop.directXVector_, _wvpMatrix.directXMatrix_);
+	//	leftTop /= leftTop.w;
+	//	rightTop = DirectX::XMVector4Transform(rightTop.directXVector_, _wvpMatrix.directXMatrix_);
+	//	rightTop /= rightTop.w;
+	//	leftBot = DirectX::XMVector4Transform(leftBot.directXVector_, _wvpMatrix.directXMatrix_);
+	//	leftBot /= leftBot.w;
+	//	rightBot = DirectX::XMVector4Transform(rightBot.directXVector_, _wvpMatrix.directXMatrix_);
+	//	rightBot /= rightBot.w;
+	//
+	//	return DirectX::XMVector2InBounds(leftTop.directXVector_, DirectX::g_XMOne3)
+	//		|| DirectX::XMVector2InBounds(rightTop.directXVector_, DirectX::g_XMOne3)
+	//		|| DirectX::XMVector2InBounds(leftBot.directXVector_, DirectX::g_XMOne3)
+	//		|| DirectX::XMVector2InBounds(rightBot.directXVector_, DirectX::g_XMOne3);
+	//}
 
 	//크기 변환.
 	const float4x4& Scale(const float4& _scaleVector)
