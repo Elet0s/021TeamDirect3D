@@ -9,10 +9,18 @@ Shuriken::Shuriken()
 	monsterList_(),
 	resultCos_(),
 	firstSerchCheak_(false),
+
 	targerSerchTimer01_(0),
 	targerSerchTimer02_(0),
 	targerSerchTimer03_(0),
-	targetserchCounter_(0),
+	targerSerchTimer_(0),
+
+	targetserchCounter01_(0),
+
+	targetInst01_(),
+	targetInst02_(),
+	targetInst03_(),
+
 	shoothingPeojectile_(false),
 	istarget_(false)
 {
@@ -35,11 +43,13 @@ void Shuriken::Effect()
 
 void Shuriken::Start()
 {
-	projectileGroupList_.reserve(30);
+	projectileGroupList01_.reserve(10);
+	projectileGroupList02_.reserve(10);
+	projectileGroupList03_.reserve(10);
 	for (size_t i = 0; i < 30; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
 	{
 		projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
-		projectileGroup_.first->GetTransform().SetWorldScale(200, 200, 0);
+		projectileGroup_.first->GetTransform().SetWorldScale(30, 30, 0);
 		projectileGroup_.first->SetTexture("Shuriken.png");
 		projectileGroup_.first->Off();
 
@@ -49,9 +59,22 @@ void Shuriken::Start()
 		projectileGroup_.second->ChangeOrder(ObjectOrder::Projectile);
 		projectileGroup_.second->Off();
 
-		projectileGroupList_.push_back(projectileGroup_);
+		if (i <10)
+		{
+			projectileGroupList01_.push_back(projectileGroup_);
+		}
+		else if (i <20)
+		{
+			projectileGroupList02_.push_back(projectileGroup_);
+		}
+		else if (i <30)
+		{
+			projectileGroupList03_.push_back(projectileGroup_);
+		}
 	}
-
+	targerSerchTimer01_ = targerSerchTimer_;
+	targerSerchTimer02_ = targerSerchTimer01_ - 0.1f;
+	targerSerchTimer03_ = targerSerchTimer02_ - 0.1f;
 
 	valueSoulCard_ = SoulCard::Shuriken;
 	Off();
@@ -62,8 +85,10 @@ void Shuriken::Update(float _deltaTime)
 {
 	StateSet();
 
-	ConsecutiveAtk(3.f, _deltaTime);
-
+	SerchTarget();
+	ProjectileSort();
+	RenderRotate();
+	RangeCheak(_deltaTime);
 
 	ColCheak();
 	TarGetInitialization();
@@ -91,8 +116,8 @@ void  Shuriken::StateSet()
 
 		shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 2;
-		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 1;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 1;
+		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 
 	}
 	else if (nowLevel_ < 3)
@@ -116,28 +141,21 @@ void  Shuriken::StateSet()
 
 	}
 }
-void Shuriken::ConsecutiveAtk(float timeSet_, float deltaTime_)
-{
-	SerchTarget();
-	ProjectileSort();
-	RenderRotate();
-	RangeCheak(deltaTime_);
 
-}
 void Shuriken::SerchTarget()
 {
-	if (targerSerchTimer01_ > 3.f)
+	if (targerSerchTimer_ > 3.f)
 	{
-		targetserchCounter_ = 0;
+		targetserchCounter01_ = 0;
 		monsterList_ = Monster::GetMonsterList();
-		targetInst_.clear();
+		targetInst01_.clear();
 		for (size_t n = 0; n < shuriKenWeaponInfo_.weaponProjectileNum_; n++)//한번에 던지는 투사체 갯수만큼 반복할것임
 		{
 			for (size_t i = 0; i < monsterList_.size(); i++)
 			{
- 				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
+				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
 				{
-					targetserchCounter_ += 1;
+					targetserchCounter01_ += 1;
 					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0이상, 첫번째 순번일경우
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
@@ -150,78 +168,213 @@ void Shuriken::SerchTarget()
 				}
 				if (i == monsterList_.size() - 1)
 				{
-					targetInst_.push_back(minHpPair_);//타겟리스트에 추가
+					targetInst01_.push_back(minHpPair_);//타겟리스트에 추가
 					monsterList_[minHpPair_.first]->isTarget_ = true;
 					firstSerchCheak_ = false;
 					istarget_ = true;
 				}
-				 if (targetserchCounter_ == 0)
+				if (targetserchCounter01_ == 0)
 				{
 					istarget_ = false;
 				}
 			}
+		}
+
+		if (shuriKenWeaponInfo_.weponConsecutiveAtkNum_ >= 2)
+		{
+			targetInst02_ = targetInst01_;
+		}
+		if (shuriKenWeaponInfo_.weponConsecutiveAtkNum_ >= 3)
+		{
+			targetInst03_ = targetInst01_;
 		}
 	}
 }
 
 void Shuriken::ProjectileSort()
 {
-	if (targerSerchTimer01_ > 3.f)
+	if (istarget_ == true)
 	{
-		if (istarget_ == true)
+		if (targerSerchTimer01_ > 3.f)
 		{
-			for (size_t i = 0; i < projectileGroupList_.size(); i++)
+			for (size_t i = 0; i < projectileGroupList01_.size(); i++)
 			{
-				if (targetInst_.size() > i) // 타겟수만큼 필요
+				if (targetInst01_.size() > i) // 타겟수만큼 필요
 				{
-					projectileGroupList_[i].first->On();
-					projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
-					projectileGroupList_[i].second->On();
-					projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+					projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
+					projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 				}
-				else	 if (projectileGroupList_[i].first->IsUpdate() == true)
+				else	 if (projectileGroupList01_[i].first->IsUpdate() == true)
 				{
-					projectileGroupList_[i].first->Off();
-					projectileGroupList_[i].second->Off();
+					projectileGroupList01_[i].first->Off();
+					projectileGroupList01_[i].second->Off();
+				}
+			}
+		}
+		if (targerSerchTimer02_ > 3.f)
+		{
+			for (size_t i = 0; i < projectileGroupList02_.size(); i++)
+			{
+				if (targetInst02_.size() > i) // 타겟수만큼 필요
+				{
+					projectileGroupList02_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
+					projectileGroupList02_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+				}
+				else	 if (projectileGroupList02_[i].first->IsUpdate() == true)
+				{
+					projectileGroupList02_[i].first->Off();
+					projectileGroupList02_[i].second->Off();
+				}
+			}
+		}
+		if (targerSerchTimer03_ > 3.f)
+		{
+			for (size_t i = 0; i < projectileGroupList03_.size(); i++)
+			{
+				if (targetInst03_.size() > i) // 타겟수만큼 필요
+				{
+					projectileGroupList03_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
+					projectileGroupList03_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+				}
+				else	 if (projectileGroupList03_[i].first->IsUpdate() == true)
+				{
+					projectileGroupList03_[i].first->Off();
+					projectileGroupList03_[i].second->Off();
 				}
 			}
 		}
 	}
 }
-
+	
 void Shuriken::RenderRotate()
 {
-	if (targerSerchTimer01_ > 3.f)
+	if (istarget_ == true)
 	{
-		referenceVectorList_.clear();
-		monsterList_ = Monster::GetMonsterList();
-
-		for (size_t i = 0; i < targetInst_.size(); i++)
+		if (targerSerchTimer01_ > 3.f)
 		{
-			float Mx = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().x;
-			float My = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().y;
-			float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-			float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
-			referenceVector_.x = (Mx - Px); //방향 구하는 공식
-			referenceVector_.y = (My - Py);
-			referenceVector_.w = 0;
-			referenceVectorList_.push_back(referenceVector_);
+			referenceVectorList01_.clear();
+			monsterList_ = Monster::GetMonsterList();
 
-			projectileGroupList_[i].first->GetTransform().SetWorldRotation(60, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
+			for (size_t i = 0; i < targetInst01_.size(); i++)
+			{
+				float Mx = monsterList_[targetInst01_[i].first]->GetTransform().GetWorldPosition().x;
+				float My = monsterList_[targetInst01_[i].first]->GetTransform().GetWorldPosition().y;
+				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				referenceVector_.x = (Mx - Px); //방향 구하는 공식
+				referenceVector_.y = (My - Py);
+				referenceVector_.w = 0;
+				referenceVectorList01_.push_back(referenceVector_);
+
+				projectileGroupList01_[i].first->GetTransform().SetWorldRotation(60, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
+			}
+		}
+		if (targerSerchTimer02_ > 3.f)
+		{
+			referenceVectorList02_.clear();
+			monsterList_ = Monster::GetMonsterList();
+
+			for (size_t i = 0; i < targetInst02_.size(); i++)
+			{
+				float Mx = monsterList_[targetInst02_[i].first]->GetTransform().GetWorldPosition().x;
+				float My = monsterList_[targetInst02_[i].first]->GetTransform().GetWorldPosition().y;
+				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				referenceVector_.x = (Mx - Px); //방향 구하는 공식
+				referenceVector_.y = (My - Py);
+				referenceVector_.w = 0;
+				referenceVectorList02_.push_back(referenceVector_);
+
+				projectileGroupList02_[i].first->GetTransform().SetWorldRotation(60, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
+			}
+		}
+		if (targerSerchTimer03_ > 3.f)
+		{
+			referenceVectorList03_.clear();
+			monsterList_ = Monster::GetMonsterList();
+
+			for (size_t i = 0; i < targetInst03_.size(); i++)
+			{
+				float Mx = monsterList_[targetInst03_[i].first]->GetTransform().GetWorldPosition().x;
+				float My = monsterList_[targetInst03_[i].first]->GetTransform().GetWorldPosition().y;
+				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				referenceVector_.x = (Mx - Px); //방향 구하는 공식
+				referenceVector_.y = (My - Py);
+				referenceVector_.w = 0;
+				referenceVectorList03_.push_back(referenceVector_);
+
+				projectileGroupList03_[i].first->GetTransform().SetWorldRotation(60, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
+			}
 		}
 	}
 }
 
 void Shuriken::RangeCheak(float _deltaTime)
 {
-	if (targerSerchTimer01_ <= 3.0f)
+	if (istarget_ == true)
 	{
-		if (istarget_ == true)
+		if (targerSerchTimer01_ <= 2.8f)
 		{
-			for (size_t i = 0; i < targetInst_.size(); i++)
+			for (size_t i = 0; i < targetInst01_.size(); i++)
 			{
-				projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
-				projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+				if (projectileGroupList01_[i].first->IsUpdate() ==false)
+				{
+					projectileGroupList01_[i].first->On();
+					projectileGroupList01_[i].second->On();
+				}
+				projectileGroupList01_[i].first->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList01_[i].second->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+			}
+		}
+		else 
+		{
+			for (size_t i = 0; i < targetInst01_.size(); i++)
+			{
+				projectileGroupList01_[i].first->Off();
+				projectileGroupList01_[i].second->Off();
+			}
+		}
+		if (targerSerchTimer02_ <= 2.8f)
+		{
+			for (size_t i = 0; i < targetInst02_.size(); i++)
+			{
+				if (projectileGroupList02_[i].first->IsUpdate() == false)
+				{
+					projectileGroupList02_[i].first->On();
+					projectileGroupList02_[i].second->On();
+				}
+				projectileGroupList02_[i].first->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList02_[i].second->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+			}
+		}
+		else
+		{
+			for (size_t i = 0; i < targetInst02_.size(); i++)
+			{
+				projectileGroupList02_[i].first->Off();
+				projectileGroupList02_[i].second->Off();
+			}
+		}
+		if (targerSerchTimer03_ <= 2.8f)
+		{
+			for (size_t i = 0; i < targetInst03_.size(); i++)
+			{
+				if (projectileGroupList03_[i].first->IsUpdate() == false)
+				{
+					projectileGroupList03_[i].first->On();
+					projectileGroupList03_[i].second->On();
+				}
+				projectileGroupList03_[i].first->GetTransform().SetWorldMove(referenceVectorList03_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList03_[i].second->GetTransform().SetWorldMove(referenceVectorList03_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+			}
+		}
+		else
+		{
+			for (size_t i = 0; i < targetInst03_.size(); i++)
+			{
+				projectileGroupList03_[i].first->Off();
+				projectileGroupList03_[i].second->Off();
 			}
 		}
 	}
@@ -230,12 +383,31 @@ void Shuriken::RangeCheak(float _deltaTime)
 
 CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other) 
 {
-	for (size_t i = 0; i < projectileGroupList_.size(); i++) 
+	for (size_t i = 0; i < 30; i++)
 	{
-		if (projectileGroupList_[i].second == _This)//발사체중 부딪힌 발사체 찾아서 지움
+		if (i < 10)
 		{
-			projectileGroupList_[i].first->Off();
-			projectileGroupList_[i].second->Off();
+			if (projectileGroupList01_[i].second == _This)//발사체중 부딪힌 발사체 찾아서 지움
+			{
+				projectileGroupList01_[i].first->Off();
+				projectileGroupList01_[i].second->Off();
+			}
+		}
+		else if (i < 20)
+		{
+			if (projectileGroupList02_[i-10].second == _This)
+			{
+				projectileGroupList02_[i - 10].first->Off();
+				projectileGroupList02_[i - 10].second->Off();
+			}
+		}
+		else if (i < 30)
+		{
+			if (projectileGroupList03_[i - 20].second == _This)
+			{
+				projectileGroupList03_[i - 20].first->Off();
+				projectileGroupList03_[i - 20].second->Off();
+			}
 		}
 	}
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= shuriKenWeaponInfo_.weaponAtk_; //데미지줌
@@ -244,9 +416,21 @@ CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngin
 
 void Shuriken::ColCheak()
 {
-	for (size_t i = 0; i < projectileGroupList_.size(); i++)
+	for (size_t i = 0; i < 30; i++)
 	{
-		projectileGroupList_[i].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		if (i < 10)
+		{
+			projectileGroupList01_[i].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		}
+		else if (i < 20)
+		{
+			projectileGroupList02_[i-10].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		}
+		else if (i < 30)
+		{
+			projectileGroupList03_[i-20].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		}
+
 	}
 }
 
@@ -263,6 +447,15 @@ void Shuriken::TarGetInitialization()
 
 void Shuriken::TimerUpdater(float _deltaTime)
 {
+	if (targerSerchTimer_ > 3.f)
+	{
+		targerSerchTimer_ = 0;
+	}
+	else
+	{
+		targerSerchTimer_ += _deltaTime;
+	}
+
 	if (targerSerchTimer01_ > 3.f)
 	{
 		targerSerchTimer01_ = 0;
@@ -272,4 +465,21 @@ void Shuriken::TimerUpdater(float _deltaTime)
 		targerSerchTimer01_ += _deltaTime;
 	}
 
+	if (targerSerchTimer02_ > 3.f)
+	{
+		targerSerchTimer02_ = 0;
+	}
+	else
+	{
+		targerSerchTimer02_ += _deltaTime;
+	}
+
+	if (targerSerchTimer03_ > 3.f)
+	{
+		targerSerchTimer03_ = 0;
+	}
+	else
+	{
+		targerSerchTimer03_ += _deltaTime;
+	}
 }

@@ -289,11 +289,23 @@ void SkillManager::SkillLevelCheak()
 	{
 		skillList_[5][15]->On();
 		//플레이어 위치로 이동시키고 on
-		for (size_t i = 0; i < std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList_.size(); i++)
+		for (size_t i = 0; i < 30; i++)
 		{
-			std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-			std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+			if (i<10)
+			{
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+			}
+			else if (i<20)
+			{
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList02_[i-10].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList02_[i - 10].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+			}
+			else if (i<30)
+			{
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList03_[i-20].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][15])->projectileGroupList03_[i - 20].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+			}
 		}
-
 	}
 }

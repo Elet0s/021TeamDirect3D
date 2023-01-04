@@ -25,8 +25,9 @@ public:
 
 public:
 	std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>projectileGroup_;
-	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList_;//발사체 모음
-
+	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList01_;//발사체 모음
+	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList02_;
+	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList03_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -40,17 +41,21 @@ protected:
 	void ColCheak();//콜리전 체크
 	void TarGetInitialization();//타겟초기화
 	void TimerUpdater(float _deltaTime);//타이머 업데이트
-	
-	void  ConsecutiveAtk(float timeSet_ ,float deltaTime_);//연속공격을 위한 함수 묶음
+
 private:
 	bool shoothingPeojectile_;
 	bool firstSerchCheak_;
 	bool istarget_;//타겟이 있으면 true
 
+
+	float targerSerchTimer_;
 	float targerSerchTimer01_;//타겟 검사 주기=공격속도
 	float targerSerchTimer02_;
 	float targerSerchTimer03_;
-	size_t targetserchCounter_;//타겟검사한 몬스터 수 매 업데이트 갱신
+
+
+	size_t targetserchCounter01_;//타겟검사한 몬스터 수 매 업데이트 갱신
+
 
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
@@ -61,10 +66,13 @@ private:
 
 	std::pair<size_t, float> minHpPair_;//타겟
 
-	std::vector<std::pair<size_t, float>> targetInst_;//타겟 묶음
-	std::vector<float4> referenceVectorList_;//방향 모음
+	std::vector<std::pair<size_t, float>> targetInst01_;//타겟 묶음
+	std::vector<std::pair<size_t, float>> targetInst02_;
+	std::vector<std::pair<size_t, float>> targetInst03_;
 
-
+	std::vector<float4> referenceVectorList01_;//방향 모음
+	std::vector<float4> referenceVectorList02_;
+	std::vector<float4> referenceVectorList03_;
 
 
 };
