@@ -287,6 +287,23 @@ void SkillManager::SkillLevelCheak()
 		skillList_[5][5]->On();
 	}
 
+	if (skillList_[5][10]->nowLevel_ > 0 && skillList_[5][10]->IsUpdate() == false)//Bow
+	{
+		skillList_[5][10]->On();
+		for (size_t i = 0; i < 20; i++)
+			if (i < 10)
+			{
+				std::dynamic_pointer_cast<Bow>(skillList_[5][10])->projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Bow>(skillList_[5][10])->projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+			}
+			else if (i < 20)
+			{
+				std::dynamic_pointer_cast<Bow>(skillList_[5][10])->projectileGroupList02_[i - 10].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Bow>(skillList_[5][10])->projectileGroupList02_[i - 10].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+			}
+	}
+
+
 	if (skillList_[5][11]->nowLevel_ > 0 && skillList_[5][11]->IsUpdate() == false)//Crossbow
 	{
 		skillList_[5][11]->On();

@@ -4,20 +4,20 @@
 #include"Monster.h"
 
 Crossbow::Crossbow()
-	:crossbowWeaponInfo_()
-	, firstSerchCheak_(false)
-	, istarget_(false)
-	, targerSerchTimer_(0)
-	, resultCos_(0)
-	, referenceVector_()
-	, monsterList_()
-	, minHpPair_()
-	, targetInst_()
-	, referenceVectorList_()
-	, projectileGroup_()
-	, projectileGroupList_()
+	:crossbowWeaponInfo_(),
+	firstSerchCheak_(false),
+	istarget_(false),
+	targerSerchTimer_(0),
+	resultCos_(0),
+	referenceVector_(),
+	monsterList_(),
+	minHpPair_(),
+	targetInst_(),
+	referenceVectorList_(),
+	projectileGroup_(),
+	projectileGroupList_(),
+	targetSerchCounter_(0)
 {
-
 }
 Crossbow::~Crossbow()
 {
