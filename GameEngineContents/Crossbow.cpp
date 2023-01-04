@@ -86,7 +86,7 @@ void Crossbow::StateSet()
 
 		crossbowWeaponInfo_.weaponknockback_ = 100;
 
-		crossbowWeaponInfo_.weaponProjectileNum_ = 2;
+		crossbowWeaponInfo_.weaponProjectileNum_ = 1;
 		crossbowWeaponInfo_.weponConsecutiveAtkNum_ = 1;
 
 	}
@@ -124,7 +124,7 @@ void Crossbow::SerchTarget()
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 						firstSerchCheak_ = true;
 					}
-					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 낮다면
+					else if (minHpPair_.second < monsterList_[i]->GetMonsterInfo().hp_)//현재검사중인 몬스터 체력이 더 높다면
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 					}
@@ -155,6 +155,8 @@ void Crossbow::ProjectileSort()
 			{
 				if (targetInst_.size() > i) // 타겟수만큼 필요
 				{
+						projectileGroupList_[i].first->On();
+						projectileGroupList_[i].second->On();
 					projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
 					projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 				}
@@ -196,27 +198,16 @@ void Crossbow::RangeCheak(float _deltaTime)
 {
 	if (istarget_ == true)
 	{
-		if (targerSerchTimer_ <= 2.8f)
+		if (targerSerchTimer_ <= 3.0f)
 		{
 			for (size_t i = 0; i < targetInst_.size(); i++)
 			{
-				if (projectileGroupList_[i].first->IsUpdate() == false)
-				{
-					projectileGroupList_[i].first->On();
-					projectileGroupList_[i].second->On();
-				}
+
 				projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * crossbowWeaponInfo_.weaponAtkSpeed_);
 				projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * crossbowWeaponInfo_.weaponAtkSpeed_);
 			}
 		}
-		else
-		{
-			for (size_t i = 0; i < targetInst_.size(); i++)
-			{
-				projectileGroupList_[i].first->Off();
-				projectileGroupList_[i].second->Off();
-			}
-		}
+
 	}
 }
 
