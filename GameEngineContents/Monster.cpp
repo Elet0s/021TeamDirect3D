@@ -1,12 +1,13 @@
 #include "PreCompile.h"
 #include "Monster.h"
 #include "Player.h"
+#include "GameItemObjectManager.h"
 
 std::vector<std::shared_ptr<Monster>> Monster::allMonsters_;
 
 std::shared_ptr<GameEngineInstancingRenderer> Monster::allMonstersRenderer_ = nullptr;
 std::shared_ptr<GameEngineInstancingRenderer> Monster::allShadowsRenderer_ = nullptr;
-
+std::shared_ptr<GameItemObjectManager> Monster::deadMonsterItemObject_ = std::shared_ptr<GameItemObjectManager>(new GameItemObjectManager);
 int Monster::monsterCreationIndex_ = 0;
 
 Monster::Monster()
@@ -27,6 +28,7 @@ Monster::Monster()
 	, isTarget_(false)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
+	deadMonsterItemObject_->SetManager();
 }
 
 Monster::~Monster()

@@ -18,7 +18,9 @@
 #include "SoundPlayer.h"
 #include "FieldRenderingActor.h"
 
-TestLevel::TestLevel(): fieldRenderingActor_(nullptr), testLevelLighting_(nullptr)
+TestLevel::TestLevel()
+	: fieldRenderingActor_(nullptr),
+	testLevelLighting_(nullptr)
 {
 }
 
@@ -69,7 +71,6 @@ void TestLevel::Start()
 	//}
 	//Monster::SummonMonster<RedFlyingEyes>(this, 10);
 	Mouse::CreateMouse(this);
-
 	
 	//ShowCursor(false); 마우스 감추기
 	CreateActor<TimeActor>();

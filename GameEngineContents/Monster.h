@@ -1,6 +1,7 @@
 #pragma once
 #include "GlobalContentsValue.h"
 #include "Texture2DShadowRenderer.h"
+#include "GameItemObjectManager.h"
 
 struct MonsterInfo
 {
@@ -26,7 +27,7 @@ public:
 	MonsterOrder monsterOrder_;
 };
 
-
+class GameItemObjectManager;
 class GameEngineRandom;
 class Monster: public GameEngineActor
 {
@@ -35,6 +36,7 @@ class Monster: public GameEngineActor
 protected:
 	static std::shared_ptr<GameEngineInstancingRenderer> allMonstersRenderer_;	//모든 몬스터 렌더러.
 	static std::shared_ptr<GameEngineInstancingRenderer> allShadowsRenderer_;	//모든 몬스터 그림자 렌더러.
+	static std::shared_ptr<GameItemObjectManager> deadMonsterItemObject_;
 	static int monsterCreationIndex_;	
 public:
 	Monster();

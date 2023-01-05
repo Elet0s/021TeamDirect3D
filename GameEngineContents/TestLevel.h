@@ -20,8 +20,6 @@ protected:
 	void LevelStartEvent() override;
 	void LevelEndEvent() override;
 
-	void LevelManager();
-
 
 private:
 	void MouseMoveCamera();
@@ -30,4 +28,5 @@ private:
 private:
 	std::shared_ptr<FieldRenderingActor> fieldRenderingActor_;
 	std::shared_ptr<GameEngineLighting> testLevelLighting_;
+	std::shared_ptr<GameEngineLevel> thisLevel_;
 };

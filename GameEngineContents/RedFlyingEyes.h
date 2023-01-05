@@ -18,5 +18,4 @@ protected:
 	void End() override;
 private:
 	void HpCheak();
-	void Relocated();
 };

@@ -57,9 +57,7 @@ void ContentsCore::End()
 	if (SoundPlayer::BGMPlay_ != nullptr)
 	{
 		SoundPlayer::BGMPlay_->Destroy();
-	}
-
-	
+	}	
 }
 
 void ContentsCore::LoadContentsShader()
