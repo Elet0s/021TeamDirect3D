@@ -186,6 +186,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ClearLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Cleaver.h">
       <SubType>
       </SubType>
@@ -378,6 +382,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="StageClearMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="StageCreater.h">
       <SubType>
       </SubType>
@@ -543,6 +551,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Celerity.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ClearLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -735,6 +747,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Spear.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StageClearMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>
