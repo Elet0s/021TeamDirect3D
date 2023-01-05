@@ -209,7 +209,10 @@ enum class Rank
 
 enum class ItemObjectOrder
 {
-	Exp,
+	None,
+	GreenExp,
+	YellowExp,
+	RedExp,
 	Meet,
 	Voidbead,
 	Gold,

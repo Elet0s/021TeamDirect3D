@@ -400,10 +400,10 @@
     <ClCompile Include="PlayerObject.cpp">
       <Filter>Actor\01. MapObject</Filter>
     </ClCompile>
-    <ClCompile Include="BoxObject.cpp">
+    <ClCompile Include="GameItemObject.cpp">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="GameItemObject.cpp">
+    <ClCompile Include="GameItemObjectManager.cpp">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -710,10 +710,10 @@
     <ClInclude Include="PlayerObject.h">
       <Filter>Actor\01. MapObject</Filter>
     </ClInclude>
-    <ClInclude Include="BoxObject.h">
+    <ClInclude Include="GameItemObject.h">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="GameItemObject.h">
+    <ClInclude Include="GameItemObjectManager.h">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

@@ -170,10 +170,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="BoxObject.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Brown.h">
       <SubType>
       </SubType>
@@ -237,6 +233,10 @@
     </ClInclude>
     <ClInclude Include="GameEngineStatusWindow.h" />
     <ClInclude Include="GameItemObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameItemObjectManager.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -530,10 +530,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="BoxObject.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Brown.cpp">
       <SubType>
       </SubType>
@@ -597,6 +593,10 @@
     </ClCompile>
     <ClCompile Include="GameEngineStatusWindow.cpp" />
     <ClCompile Include="GameItemObject.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameItemObjectManager.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -21,7 +21,8 @@ Shuriken::Shuriken()
 	targetInst02_(),
 	targetInst03_(),
 
-	istarget_(false)
+	istarget_(false),
+	passNum_()
 {
 
 }
@@ -45,8 +46,11 @@ void Shuriken::Start()
 	projectileGroupList01_.reserve(10);
 	projectileGroupList02_.reserve(10);
 	projectileGroupList03_.reserve(10);
+	passNum_.reserve(30);
 	for (size_t i = 0; i < 30; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
 	{
+		passNum_.push_back(0);
+
 		projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
 		projectileGroup_.first->GetTransform().SetWorldScale(30, 30, 0);
 		projectileGroup_.first->SetTexture("Shuriken.png");
@@ -108,7 +112,7 @@ void  Shuriken::StateSet()
 		shuriKenWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
 
 		shuriKenWeaponInfo_.weaponPassAtk_ = 0;
-		shuriKenWeaponInfo_.weaponPassNum_ = 0;
+		shuriKenWeaponInfo_.weaponPassNum_ = 2;
 
 		shuriKenWeaponInfo_.weaponSize_ = 100;
 		shuriKenWeaponInfo_.weaponDuration_ = 100;
@@ -201,6 +205,7 @@ void Shuriken::ProjectileSort()
 			{
 				if (targetInst01_.size() > i) // 타겟수만큼 필요
 				{
+					passNum_[i] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList01_[i].first->On();
 					projectileGroupList01_[i].second->On();
 					projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
@@ -219,6 +224,7 @@ void Shuriken::ProjectileSort()
 			{
 				if (targetInst02_.size() > i) // 타겟수만큼 필요
 				{
+					passNum_[i+10] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList02_[i].first->On();
 					projectileGroupList02_[i].second->On();
 					projectileGroupList02_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
@@ -237,6 +243,7 @@ void Shuriken::ProjectileSort()
 			{
 				if (targetInst03_.size() > i) // 타겟수만큼 필요
 				{
+					passNum_[i + 20] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList03_[i].first->On();
 					projectileGroupList03_[i].second->On();
 					projectileGroupList03_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
@@ -372,7 +379,7 @@ void Shuriken::RangeCheak(float _deltaTime)
 }
 
 
-CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other) 
+CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	for (size_t i = 0; i < 30; i++)
 	{
@@ -380,24 +387,46 @@ CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngin
 		{
 			if (projectileGroupList01_[i].second == _This)//발사체중 부딪힌 발사체 찾아서 지움
 			{
-				projectileGroupList01_[i].first->Off();
-				projectileGroupList01_[i].second->Off();
+				if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] > 0)
+				{
+					dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] -= 1;
+				}
+				 if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] == 0)
+				{
+					projectileGroupList01_[i].first->Off();
+					projectileGroupList01_[i].second->Off();
+				}
 			}
 		}
 		else if (i < 20)
 		{
-			if (projectileGroupList02_[i-10].second == _This)
+			if (projectileGroupList02_[i - 10].second == _This)
 			{
-				projectileGroupList02_[i - 10].first->Off();
-				projectileGroupList02_[i - 10].second->Off();
+				if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] > 0)
+				{
+					dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] -= 1;
+				}
+				 if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] == 0)
+				{
+					projectileGroupList02_[i - 10].first->Off();
+					projectileGroupList02_[i - 10].second->Off();
+				}
 			}
 		}
 		else if (i < 30)
 		{
 			if (projectileGroupList03_[i - 20].second == _This)
 			{
-				projectileGroupList03_[i - 20].first->Off();
-				projectileGroupList03_[i - 20].second->Off();
+
+				if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] > 0)
+				{
+					dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] -= 1;
+				}
+				 if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] == 0)
+				{
+					projectileGroupList03_[i - 20].first->Off();
+					projectileGroupList03_[i - 20].second->Off();
+				}
 			}
 		}
 	}

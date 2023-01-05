@@ -4,21 +4,27 @@
 #include"Player.h"
 
 GameItemObject::GameItemObject()
+	:itemObjectOrder_(ItemObjectOrder::None),
+	chasePlayer_(false)
 {
 	
 }
+
 GameItemObject::~GameItemObject()
 {
 
 }
+
 void GameItemObject::Start()
 {
 
 }
+
 void GameItemObject::Update(float _deltaTime)
 {
 	ColCheak();
 }
+
 void GameItemObject::End()
 {
 
@@ -26,17 +32,10 @@ void GameItemObject::End()
 
 CollisionReturn GameItemObject::ItemToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
-	
-	return CollisionReturn::Stop;
-}
-CollisionReturn GameItemObject::GainRangeToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
-{
-
 	return CollisionReturn::Stop;
 }
 
 void GameItemObject::ColCheak()
 {
-	gainRangeCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&GameItemObject::GainRangeToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
-	itemObjectCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&GameItemObject::GainRangeToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
+	itemObjectCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&GameItemObject::ItemToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
 }

@@ -4,8 +4,8 @@ struct WeaponInfo
 {
 	float weaponAtk_;//무기공격력
 	float weaponAtkSpeed_;//공격속도
-	int weaponPassAtk_;//관통력
-	int weaponPassNum_;//관통횟수
+	size_t weaponPassAtk_;//관통력
+	size_t weaponPassNum_;//관통횟수
 	float weaponSize_;//투사체크기
 	float weaponDuration_;//투사체지속시간
 	float weaponSpeed_;// 투사체속도 

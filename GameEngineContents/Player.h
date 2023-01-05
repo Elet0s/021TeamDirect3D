@@ -100,7 +100,8 @@ public:
 		pushSpeed_(0),
 		damageMitigation_(0.0f),
 		atkMultiple_(),
-		knockback_()
+		knockback_(),
+		gold_(0.f)
 	{
 
 	}
@@ -137,6 +138,8 @@ public:
 	float hpRecuvere_;
 	float damageMitigation_;
 	bool RLDirection_;
+
+	float gold_;
 };
 class PlayerUI;
 class GameEngineDefaultRenderer;

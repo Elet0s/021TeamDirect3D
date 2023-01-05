@@ -52,6 +52,7 @@ private:
 	float targerSerchTimer02_;
 	float targerSerchTimer03_;
 
+	std::vector<size_t> passNum_;
 
 	size_t targetSerchCounter_;//타겟검사한 몬스터 수 매 업데이트 갱신
 

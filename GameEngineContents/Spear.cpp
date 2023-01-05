@@ -1,6 +1,7 @@
 #include"PreCompile.h"
 #include"Spear.h"
 #include"Player.h"
+#include"Monster.h"
 
 Spear::Spear()
 	:
