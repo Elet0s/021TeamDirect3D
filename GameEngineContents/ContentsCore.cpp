@@ -3,6 +3,7 @@
 #include "TitleLevel.h"
 #include "WorldMapLevel.h"
 #include "StageLevel.h"
+#include "ClearLevel.h"
 #include "TestLevel.h"
 #include "ShaderTestLevel.h"
 #include "GameEngineStatusWindow.h"
@@ -37,6 +38,7 @@ void ContentsCore::Start()
 	CreateLevel<TestLevel>("Test");
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
+	CreateLevel<ClearLevel>("Clear");
 	ChangeLevel("Test");
 	//ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("WorldMap");
