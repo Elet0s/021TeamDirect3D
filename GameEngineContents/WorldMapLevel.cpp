@@ -4,6 +4,7 @@
 #include"Mouse.h"
 #include "StageCreater.h"
 #include"WorldMapRenderingActor.h"
+#include"TestActor.h"
 
 WorldMapLevel::WorldMapLevel()
 {
@@ -15,6 +16,8 @@ WorldMapLevel::~WorldMapLevel()
 }
 void WorldMapLevel::Start()
 {
+	//TestActor_ = CreateActor<TestActor>();
+
 	WorldMapRenderingActor_ = CreateActor<WorldMapRenderingActor>();
 	WorldMapRenderingActor_->Initialize(
 		1000,
@@ -59,6 +62,7 @@ void WorldMapLevel::Start()
 		GameEngineInput::GetInst()->CreateKey("WorldCameraBack", VK_DOWN);
 
 	}
+	Mouse::CreateMouse(this);
 }
 void WorldMapLevel::Update(float _deltaTime)
 {

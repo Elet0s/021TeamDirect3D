@@ -412,6 +412,9 @@
     <ClCompile Include="ClearLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="TestActor.cpp">
+      <Filter>Actor\00. Global\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -727,6 +730,9 @@
     </ClInclude>
     <ClInclude Include="ClearLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TestActor.h">
+      <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

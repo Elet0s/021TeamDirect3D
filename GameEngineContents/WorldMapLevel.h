@@ -1,5 +1,6 @@
 #pragma once
 
+class TestActor;
 class MyWorldMapRenderer;
 class WorldMapLevel : public GameEngineLevel
 {
@@ -19,6 +20,8 @@ protected:
 private:
 	std::shared_ptr<class WorldMapRenderingActor> WorldMapRenderingActor_;
 	std::shared_ptr<GameEngineLighting> WorldLevelLighting_;
+	
+	std::shared_ptr<TestActor> TestActor_;
 	void LevelStartEvent() override;
 
 };

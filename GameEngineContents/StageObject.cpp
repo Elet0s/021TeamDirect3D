@@ -32,7 +32,7 @@ void StageObject::Start()
 
 void StageObject::Update(float _deltaTime)
 {
-	if (col_->IsCollision(CollisionType::CT_OBB, ObjectOrder::Player, CollisionType::CT_OBB))
+	if (col_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Player, CollisionType::CT_OBB2D))
 	{
 		SetStageType(5);
 		col_->Off();

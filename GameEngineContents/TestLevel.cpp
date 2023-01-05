@@ -70,7 +70,7 @@ void TestLevel::Start()
 	//		Monster::GetMonsterList()[i]->Unsummon();
 	//}
 	//Monster::SummonMonster<RedFlyingEyes>(this, 10);
-	Mouse::CreateMouse(this);
+	//Mouse::CreateMouse(this);
 	
 	//ShowCursor(false); 마우스 감추기
 	CreateActor<TimeActor>();
