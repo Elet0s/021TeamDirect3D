@@ -13,7 +13,9 @@ public:
 	Mouse& operator=(Mouse&& _Other) noexcept = delete;
 
 public:
-	//void Initialize();
+	void ChangeMousePointerRenderer(bool _isAiming);
+	void UpdateAimingPivot(const float4& _pivot);
+
 
 	//inline void GetCurPos()
 	//{
@@ -53,13 +55,13 @@ protected:
 	void End() override;
 
 private:
-	std::shared_ptr<GameEngineTextureRenderer> mouseDefaultRenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> mouseCrossHairRenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> mouseAimLineRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> defaultPointerRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> crossHairRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> aimLineRenderer_;
 	std::shared_ptr<GameEngineCollision> mouseCollision_;
 
 	float4 mousePositionInWindow_;		//윈도우 좌표계 마우스 위치.
 	float4 mousePositionInWorldSpace_;	//월드스페이스 마우스 위치.
-	float4 playerWorldPosition_;	//플레이어 월드 포지션.
-	bool isAimLine_;
+	float4 pivotWorldPosition_;	//에임라인 피봇의 월드 포지션.
+	bool isAiming_;
 };

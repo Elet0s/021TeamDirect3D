@@ -3,14 +3,14 @@
 #include "GlobalContentsValue.h"
 
 Mouse::Mouse()
-	: mouseDefaultRenderer_(nullptr),
-	mouseCrossHairRenderer_(nullptr),
-	mouseAimLineRenderer_(nullptr),
+	: defaultPointerRenderer_(nullptr),
+	crossHairRenderer_(nullptr),
+	aimLineRenderer_(nullptr),
 	mouseCollision_(nullptr),
 	mousePositionInWindow_(float4::Zero),
 	mousePositionInWorldSpace_(float4::Zero),
-	playerWorldPosition_(float4::Zero),
-	isAimLine_(true)
+	pivotWorldPosition_(float4::Zero),
+	isAiming_(true)
 {
 
 }
@@ -18,6 +18,28 @@ Mouse::Mouse()
 Mouse::~Mouse()
 {
 
+}
+
+void Mouse::ChangeMousePointerRenderer(bool _isAiming)
+{
+	isAiming_ = _isAiming;
+	if (true == isAiming_)
+	{
+		defaultPointerRenderer_->Off();
+		crossHairRenderer_->On();
+		aimLineRenderer_->On();
+	}
+	else
+	{
+		defaultPointerRenderer_->On();
+		crossHairRenderer_->Off();
+		aimLineRenderer_->Off();
+	}
+}
+
+void Mouse::UpdateAimingPivot(const float4& _pivot)
+{
+	pivotWorldPosition_ = _pivot;
 }
 
 void Mouse::Start()
@@ -41,22 +63,21 @@ void Mouse::Start()
 	mouseCollision_->GetTransform().SetLocalPosition( 20, -28, 0 );
 	mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
 
-	mouseDefaultRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	mouseDefaultRenderer_->GetTransform().SetWorldScale(40, 56, 1);
-	mouseDefaultRenderer_->GetTransform().SetLocalPosition( 20, -28, 0 );
-	mouseDefaultRenderer_->SetTexture("CursorSprite.png");
-	mouseDefaultRenderer_->Off();
+	defaultPointerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	defaultPointerRenderer_->GetTransform().SetWorldScale(40, 56, 1);
+	defaultPointerRenderer_->GetTransform().SetLocalPosition( 20, -28, 0 );
+	defaultPointerRenderer_->SetTexture("CursorSprite.png");
+	//defaultPointerRenderer_->Off();
 
-	mouseCrossHairRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	mouseCrossHairRenderer_->GetTransform().SetWorldScale(32, 32, 1);
-	mouseCrossHairRenderer_->SetTexture("CrossHair.png");
-	mouseCrossHairRenderer_->Off();
+	crossHairRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	crossHairRenderer_->GetTransform().SetWorldScale(32, 32, 1);
+	crossHairRenderer_->SetTexture("CrossHair.png");
+	crossHairRenderer_->Off();
 
-
-	mouseAimLineRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	mouseAimLineRenderer_->GetTransform().SetWorldScale(256, 256, 1);
-	mouseAimLineRenderer_->SetTexture("AimLine.png");
-	//mouseAimLineRenderer_->Off();
+	aimLineRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	aimLineRenderer_->GetTransform().SetWorldScale(256, 256, 1);
+	aimLineRenderer_->SetTexture("AimLine.png");
+	aimLineRenderer_->Off();
 
 
 }
@@ -78,29 +99,39 @@ void Mouse::Update(float _DeltaTime)
 
 	///////////////////////////////////////////////////////////////////
 
+	//전투맵에서의 동작.
 	if (CameraProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
 	{
-		//전투맵에서의 동작.
+		float4 thisPosition = this->GetLevel()->GetUICamera()->GetMouseWorldPosition();
+		thisPosition.w = 1.f;
 
-		this->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().x,
-			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().y,
-			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().z 
-		);
+		this->GetTransform().SetWorldPosition(thisPosition);
 
-
-
-		if (true == isAimLine_)
+		if (true == isAiming_)
 		{
-			mouseAimLineRenderer_->GetTransform().SetWorldPosition(this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition());
+			aimLineRenderer_->GetTransform().SetWorldPosition(
+				//this->GetLevel()->GetUICameraActor()->GetTransform().GetWorldPosition()
+				////나중에 플레이어포지션으로 대체.
+				pivotWorldPosition_
+			);
 
 
-			float4 thisPosition = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor();
+			thisPosition.z = 0.f;
+			thisPosition /= thisPosition.Length();
 
-			float temp = float4::VectorXYToDegree(float4::Green, thisPosition);
+			float aimLineAngle = 0;
+			if (0 < thisPosition.x)
+			{
+				aimLineAngle = -acosf(thisPosition.y) * GameEngineMath::RadianToDegree;
+			}
+			else
+			{
+				aimLineAngle = acosf(thisPosition.y) * GameEngineMath::RadianToDegree;
+			}
 
-			this->GetTransform().SetWorldRotation(
-				temp
+
+			aimLineRenderer_->GetTransform().SetWorldRotation(
+				0.f, 0.f, aimLineAngle
 			);
 
 
