@@ -14,9 +14,9 @@ public:
 
 public:
 	void ChangeMousePointerRenderer(bool _isAiming);
-	void UpdateAimingPivot(const float4& _pivot);
+	void UpdateWorldPivot(const float4& _pivot);
 
-
+public:
 	//inline void GetCurPos()
 	//{
 	//	POINT Pos_;
@@ -42,11 +42,6 @@ public:
 	//{
 	//	 return mousePositionInWorldSpace_;
 	//}
-
-	const float4& GetCurrentWorldPosition()
-	{
-		return this->GetTransform().GetWorldPosition();
-	}
 
 
 protected:

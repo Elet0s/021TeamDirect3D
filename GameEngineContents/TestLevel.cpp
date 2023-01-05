@@ -18,7 +18,10 @@
 #include "SoundPlayer.h"
 #include "FieldRenderingActor.h"
 
-TestLevel::TestLevel(): fieldRenderingActor_(nullptr), testLevelLighting_(nullptr)
+TestLevel::TestLevel()
+	: fieldRenderingActor_(nullptr),
+	testLevelLighting_(nullptr), 
+	mousePointer_(nullptr)
 {
 }
 
@@ -68,7 +71,8 @@ void TestLevel::Start()
 	//		Monster::GetMonsterList()[i]->Unsummon();
 	//}
 	//Monster::SummonMonster<RedFlyingEyes>(this, 10);
-	//Mouse::CreateMouse(this);
+
+
 
 	
 	//ShowCursor(false); 마우스 감추기
@@ -102,13 +106,22 @@ void TestLevel::Update(float _DeltaTime)
 	PlayerMoveCamera();
 
 	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
+
+	mousePointer_->UpdateWorldPivot(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 }
 
 void TestLevel::LevelStartEvent()
 {
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
 	this->GetMainCamera()->SetFarZ(500.f);
+
+	if (nullptr == mousePointer_)
+	{
+		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "MousePointer");
+		mousePointer_->ChangeMousePointerRenderer(false);
+	}
 }
+
 void TestLevel::LevelEndEvent()
 {
 	SoundPlayer::BGMPlay_->Stop();

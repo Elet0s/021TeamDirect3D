@@ -10,7 +10,7 @@ Mouse::Mouse()
 	mousePositionInWindow_(float4::Zero),
 	mousePositionInWorldSpace_(float4::Zero),
 	pivotWorldPosition_(float4::Zero),
-	isAiming_(true)
+	isAiming_(false)
 {
 
 }
@@ -37,7 +37,7 @@ void Mouse::ChangeMousePointerRenderer(bool _isAiming)
 	}
 }
 
-void Mouse::UpdateAimingPivot(const float4& _pivot)
+void Mouse::UpdateWorldPivot(const float4& _pivot)
 {
 	pivotWorldPosition_ = _pivot;
 }
@@ -64,20 +64,20 @@ void Mouse::Start()
 	mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
 
 	defaultPointerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	defaultPointerRenderer_->GetTransform().SetWorldScale(40, 56, 1);
-	defaultPointerRenderer_->GetTransform().SetLocalPosition( 20, -28, 0 );
+	defaultPointerRenderer_->GetTransform().SetWorldScale(20, 28, 1);
+	defaultPointerRenderer_->GetTransform().SetLocalPosition( 10, -14, 0 );
 	defaultPointerRenderer_->SetTexture("CursorSprite.png");
-	//defaultPointerRenderer_->Off();
+	defaultPointerRenderer_->Off();
 
 	crossHairRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	crossHairRenderer_->GetTransform().SetWorldScale(32, 32, 1);
 	crossHairRenderer_->SetTexture("CrossHair.png");
-	crossHairRenderer_->Off();
+	//crossHairRenderer_->Off();
 
 	aimLineRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	aimLineRenderer_->GetTransform().SetWorldScale(256, 256, 1);
+	aimLineRenderer_->GetTransform().SetWorldScale(512, 512, 1);
 	aimLineRenderer_->SetTexture("AimLine.png");
-	aimLineRenderer_->Off();
+	//aimLineRenderer_->Off();
 
 
 }
@@ -102,40 +102,34 @@ void Mouse::Update(float _DeltaTime)
 	//전투맵에서의 동작.
 	if (CameraProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
 	{
-		float4 thisPosition = this->GetLevel()->GetUICamera()->GetMouseWorldPosition();
-		thisPosition.w = 1.f;
+		//float4 thisPosition = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor();
+		//thisPosition.w = 1.f;
 
-		this->GetTransform().SetWorldPosition(thisPosition);
+		//this->GetTransform().SetWorldPosition(thisPosition);
+		this->GetTransform().SetWorldPosition(this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor());
 
 		if (true == isAiming_)
 		{
-			aimLineRenderer_->GetTransform().SetWorldPosition(
-				//this->GetLevel()->GetUICameraActor()->GetTransform().GetWorldPosition()
-				////나중에 플레이어포지션으로 대체.
-				pivotWorldPosition_
-			);
-
-
-			thisPosition.z = 0.f;
-			thisPosition /= thisPosition.Length();
+			aimLineRenderer_->GetTransform().SetWorldPosition(pivotWorldPosition_);
+			
+			float4 aimingPoint = this->GetTransform().GetWorldPosition() - pivotWorldPosition_;
+			aimingPoint.z = 0.f;
+			aimingPoint /= aimingPoint.Length();
 
 			float aimLineAngle = 0;
-			if (0 < thisPosition.x)
+			if (0 < aimingPoint.x)
 			{
-				aimLineAngle = -acosf(thisPosition.y) * GameEngineMath::RadianToDegree;
+				aimLineAngle = -acosf(aimingPoint.y) * GameEngineMath::RadianToDegree;
 			}
 			else
 			{
-				aimLineAngle = acosf(thisPosition.y) * GameEngineMath::RadianToDegree;
+				aimLineAngle = acosf(aimingPoint.y) * GameEngineMath::RadianToDegree;
 			}
 
 
 			aimLineRenderer_->GetTransform().SetWorldRotation(
 				0.f, 0.f, aimLineAngle
 			);
-
-
-			
 		}
 	}
 	else /*if (CameraProjectionMode::Perspective == this->GetLevel()->GetMainCamera()->GetProjectionMode())*/
