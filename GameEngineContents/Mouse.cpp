@@ -37,7 +37,7 @@ void Mouse::ChangeMousePointerRenderer(bool _isAiming)
 	}
 }
 
-void Mouse::UpdateWorldPivot(const float4& _pivot)
+void Mouse::UpdatePivotPosition(const float4& _pivot)
 {
 	pivotWorldPosition_ = _pivot;
 }
@@ -67,17 +67,17 @@ void Mouse::Start()
 	defaultPointerRenderer_->GetTransform().SetWorldScale(20, 28, 1);
 	defaultPointerRenderer_->GetTransform().SetLocalPosition( 10, -14, 0 );
 	defaultPointerRenderer_->SetTexture("CursorSprite.png");
-	defaultPointerRenderer_->Off();
+	//defaultPointerRenderer_->Off();
 
 	crossHairRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	crossHairRenderer_->GetTransform().SetWorldScale(32, 32, 1);
 	crossHairRenderer_->SetTexture("CrossHair.png");
-	//crossHairRenderer_->Off();
+	crossHairRenderer_->Off();
 
 	aimLineRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	aimLineRenderer_->GetTransform().SetWorldScale(512, 512, 1);
 	aimLineRenderer_->SetTexture("AimLine.png");
-	//aimLineRenderer_->Off();
+	aimLineRenderer_->Off();
 
 
 }
@@ -102,38 +102,38 @@ void Mouse::Update(float _DeltaTime)
 	//전투맵에서의 동작.
 	if (CameraProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
 	{
-		//float4 thisPosition = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor();
-		//thisPosition.w = 1.f;
-
-		//this->GetTransform().SetWorldPosition(thisPosition);
 		this->GetTransform().SetWorldPosition(this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor());
 
 		if (true == isAiming_)
 		{
 			aimLineRenderer_->GetTransform().SetWorldPosition(pivotWorldPosition_);
 			
-			float4 aimingPoint = this->GetTransform().GetWorldPosition() - pivotWorldPosition_;
-			aimingPoint.z = 0.f;
-			aimingPoint /= aimingPoint.Length();
+			float4 aimingVector = this->GetTransform().GetWorldPosition() - pivotWorldPosition_;
+			aimingVector.z = 0.f;
+			aimingVector /= aimingVector.Length();
 
 			float aimLineAngle = 0;
-			if (0 < aimingPoint.x)
+			if (0 < aimingVector.x)
 			{
-				aimLineAngle = -acosf(aimingPoint.y) * GameEngineMath::RadianToDegree;
+				aimLineAngle = -acosf(aimingVector.y) * GameEngineMath::RadianToDegree;
 			}
 			else
 			{
-				aimLineAngle = acosf(aimingPoint.y) * GameEngineMath::RadianToDegree;
+				aimLineAngle = acosf(aimingVector.y) * GameEngineMath::RadianToDegree;
 			}
 
-
-			aimLineRenderer_->GetTransform().SetWorldRotation(
-				0.f, 0.f, aimLineAngle
-			);
+			aimLineRenderer_->GetTransform().SetWorldRotation(0.f, 0.f, aimLineAngle);
 		}
 	}
+	//월드맵에서의 동작.
 	else /*if (CameraProjectionMode::Perspective == this->GetLevel()->GetMainCamera()->GetProjectionMode())*/
 	{
+		if (true == isAiming_)
+		{
+			MsgBoxAssert("렌더러 전환은 전투맵에서만 의미 있는 기능입니다.");
+			return;
+		}
+
 		//월드맵에서의 동작. 미완성.
 		//this->GetTransform().SetWorldPosition(
 		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().x,
@@ -141,16 +141,16 @@ void Mouse::Update(float _DeltaTime)
 		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().z * 500.f
 		//);
 
-		//this->GetTransform().SetWorldPosition(
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition()	// 실제로는 뷰공간좌표.
-		//);
-		////(1.0264, 0.5773, 1.0000)
-
 		this->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().x,	// 실제로는 뷰공간좌표.
-			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().y,	// 실제로는 뷰공간좌표.
-			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().z + 100000.f	// 실제로는 뷰공간좌표.
+			this->GetLevel()->GetMainCamera()->GetMouseWorldPosition() * 100.f
 		);
+		//(1.0264, 0.5773, 1.0000)
+
+		//this->GetTransform().SetWorldPosition(
+		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().x,	
+		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().y,	
+		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().z + 100.f
+		//);
 
 
 	}
@@ -161,14 +161,3 @@ void Mouse::End()
 	//DirectX::XMPlaneIntersectLine();
 	//DirectX::TriangleTests::Intersects();
 }
-
-//void Mouse::CreateMouse(GameEngineLevel* _thisLevel)
-//{
-//	 if (nullptr != mainMouse_)
-//	 {
-//		 MsgBoxAssert("마우스가 이미 존재합니다.");
-//		 return;
-//	 }
-//	 mainMouse_ = _thisLevel->CreateActor<Mouse>(ObjectOrder::Mouse);
-//	 mainMouse_->SetLevelOverOn();
-//}

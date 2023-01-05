@@ -107,7 +107,7 @@ void TestLevel::Update(float _DeltaTime)
 
 	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
 
-	mousePointer_->UpdateWorldPivot(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+	mousePointer_->UpdatePivotPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 }
 
 void TestLevel::LevelStartEvent()

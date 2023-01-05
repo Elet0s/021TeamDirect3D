@@ -14,7 +14,7 @@ public:
 
 public:
 	void ChangeMousePointerRenderer(bool _isAiming);
-	void UpdateWorldPivot(const float4& _pivot);
+	void UpdatePivotPosition(const float4& _pivot);
 
 public:
 	//inline void GetCurPos()

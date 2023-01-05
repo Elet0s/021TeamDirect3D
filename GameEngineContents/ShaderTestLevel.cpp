@@ -39,8 +39,8 @@ void ShaderTestLevel::Start()
 
 	//GameEngineTexture2DArray::Load(testDir.GetFullPath());
 
-	this->GetMainCamera()->SetProjectionMode(CameraProjectionMode::Orthographic);
-	this->GetMainCamera()->SetFarZ(100.f);
+	this->GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
+	this->GetMainCamera()->SetFarZ(500.f);
 
 
 	shaderTestActor_ = CreateActor<Mouse>(0, "ShaderTestActor");
