@@ -14,7 +14,7 @@ void ClearLevel::Start()
 {
 	CreateActor<StageClearMap>();
 	
-	GetMainCameraActorTransform().SetWorldPosition(float4(360.f, 48.f, -135.f));
+	GetMainCameraActorTransform().SetWorldPosition(float4(192.f, 48.f, -135.f));
 	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
 }
 void ClearLevel::Update(float _deltaTime)
