@@ -38,18 +38,24 @@ void Mouse::Update(float _DeltaTime)
 		GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,
 		-100.0f
 	);
-	float b = (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x);
-	float x_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().x + (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x* 0.3125f);
-	float y_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().y + (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y* 0.3125f);
+	
 
-	float4 Pos = GetLevel()->GetUICamera()->GetMouseScreenPosition();
+	if (GetLevel()->GetMainCamera()->GetProjectionMode() == CameraProjectionMode::Perspective)
+	{
+		float4 Pos = GetLevel()->GetUICamera()->GetMouseScreenPosition();
 
-	Pos;
-
-	mouseCollision_->GetTransform().SetLocalPosition(
-		Pos
-	);
-
+		mouseCollision_->GetTransform().SetLocalPosition(
+			Pos
+		);
+	}
+	else
+	{
+		mouseCollision_->GetTransform().SetLocalPosition(
+			GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x + 10.0f,
+			GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,
+			-100.0f
+		);
+	}
 }
 void Mouse::End()
 {
