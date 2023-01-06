@@ -36,8 +36,6 @@ void TestLevel::Start()
 	//mainCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MousePointerCamera);
 
 
-
-
 	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
 	fieldRenderingActor_->Initialize(
 		550,

@@ -81,7 +81,8 @@ void Mouse::Start()
 	aimLineRenderer_->ChangeCamera(CameraOrder::MousePointerCamera);
 	aimLineRenderer_->Off();
 
-
+	//마우스포인터 위치 문제와 마우스 포인터 알파 렌더링 문제를 한번에 해결하기 위해 마우스포인터 카메라 추가.
+	//->
 }
 
 void Mouse::Update(float _DeltaTime)
@@ -134,27 +135,28 @@ void Mouse::Update(float _DeltaTime)
 	{
 		if (true == isAiming_)
 		{
-			MsgBoxAssert("렌더러 전환은 전투맵에서만 의미 있는 기능입니다.");
+			MsgBoxAssert("마우스포인터 렌더러 전환은 전투맵에서만 의미 있는 기능입니다.");
 			return;
 		}
 
-		//월드맵에서의 동작. 미완성.
 		//this->GetTransform().SetWorldPosition(
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().x,
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().y,
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().z * 500.f
+		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
 		//);
-
-		this->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetMainCamera()->GetMouseWorldPosition() * 100.f
-		);
 		//(1.0264, 0.5773, 1.0000)
 
-		//this->GetTransform().SetWorldPosition(
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().x,	
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().y,	
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPosition().z + 100.f
-		//);
+		defaultPointerRenderer_->GetTransform().SetWorldPosition(
+			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().x + 10.f,	
+			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().y - 14.f,	
+			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().z
+		);
+
+
+		//float4 temp1 = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
+		//	* this->GetLevel()->GetMainCamera()->GetViewMatrix();
+
+		//float4 temp2 = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition()
+		//	* this->GetLevel()->GetMainCamera()->GetViewMatrix();
+
 
 
 	}

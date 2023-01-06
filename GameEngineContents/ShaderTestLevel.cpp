@@ -25,22 +25,9 @@ ShaderTestLevel::~ShaderTestLevel()
 
 void ShaderTestLevel::Start()
 {
-
-	//GameEngineDirectory testDir;
-	//testDir.MoveParentToExistChildDirectory("ContentsResources");
-	//testDir.MoveToChild("ContentsResources");
-	//testDir.MoveToChild("InstancingTest");
-	//testDir.MoveToChild("Field");
-
-	//GameEngineTexture2DArray::Load(testDir.GetFullPath());
-
-	//testDir.MoveToParent("InstancingTest");
-	//testDir.MoveToChild("Monster");
-
-	//GameEngineTexture2DArray::Load(testDir.GetFullPath());
-
 	this->GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
 	this->GetMainCamera()->SetFarZ(500.f);
+	//this->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->SetProjectionMode(CameraProjectionMode::Perspective);
 
 
 	shaderTestActor_ = CreateActor<Mouse>(0, "ShaderTestActor");
@@ -54,7 +41,6 @@ void ShaderTestLevel::Start()
 void ShaderTestLevel::Update(float _deltaTime)
 {
 	//shaderTestActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
-	float4 temp = shaderTestActor_->GetTransform().GetWorldPosition();
 
 
 }

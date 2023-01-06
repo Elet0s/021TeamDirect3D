@@ -870,17 +870,17 @@ public:
 		);								//행렬식이 0이라서 역행렬이 없거나 무한개라면 무한행렬을 반환한다.
 	}
 
-	//입력된 행렬의 역행렬 반환.
-	static float4x4 InverseReturn(const float4x4& _matrix)
-	{
-		float4 determinantVector = DirectX::XMMatrixDeterminant(_matrix.directXMatrix_);
+	////입력된 행렬의 역행렬 반환.
+	//static float4x4 InverseReturn(const float4x4& _matrix)
+	//{
+	//	float4 determinantVector = DirectX::XMMatrixDeterminant(_matrix.directXMatrix_);
 
-		float4x4 invertedMatrix = DirectX::XMMatrixInverse(
-			&determinantVector.directXVector_,	//대상 행렬의 행렬식.
-			_matrix.directXMatrix_					//역행렬을 구할 대상 행렬.
-		);								//행렬식이 0이라서 역행렬이 없거나 무한개라면 무한행렬을 반환한다.
-		return invertedMatrix;
-	}
+	//	float4x4 invertedMatrix = DirectX::XMMatrixInverse(
+	//		&determinantVector.directXVector_,	//대상 행렬의 행렬식.
+	//		_matrix.directXMatrix_					//역행렬을 구할 대상 행렬.
+	//	);								//행렬식이 0이라서 역행렬이 없거나 무한개라면 무한행렬을 반환한다.
+	//	return invertedMatrix;
+	//}
 
 	//자기 자신의 역행렬 반환.
 	float4x4 InverseReturn()

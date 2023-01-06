@@ -90,7 +90,7 @@ public:
 		return size_;
 	}
 
-	inline const float4x4& GetViewMatrix()
+	inline float4x4 GetViewMatrix()
 	{
 		return viewMatrix_;
 	}
