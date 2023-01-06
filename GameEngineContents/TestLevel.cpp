@@ -31,6 +31,12 @@ TestLevel::~TestLevel()
 
 void TestLevel::Start()
 {
+	//mainCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
+	//mainCameraActor->GetCameraComponent()->SetProjectionMode(CameraProjectionMode::Orthographic);
+	//mainCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MousePointerCamera);
+
+
+
 
 	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
 	fieldRenderingActor_->Initialize(
@@ -105,6 +111,10 @@ void TestLevel::Update(float _DeltaTime)
 {						
 	PlayerMoveCamera();
 
+	this->GetCameraActor(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetTransform().SetWorldPosition(
+		GetMainCameraActor()->GetTransform().GetWorldPosition()
+	);
+
 	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
 
 	mousePointer_->UpdatePivotPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
@@ -112,13 +122,13 @@ void TestLevel::Update(float _DeltaTime)
 
 void TestLevel::LevelStartEvent()
 {
-	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
+	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
 
 	if (nullptr == mousePointer_)
 	{
 		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "MousePointer");
-		mousePointer_->ChangeMousePointerRenderer(false);
+		mousePointer_->ChangeMousePointerRenderer(true);
 	}
 }
 

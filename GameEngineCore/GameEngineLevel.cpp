@@ -19,6 +19,11 @@ GameEngineLevel::GameEngineLevel()
 	mainCameraActor->GetCameraComponent()->SetProjectionMode(CameraProjectionMode::Orthographic);
 	mainCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MainCamera);
 
+	std::shared_ptr<GameEngineCameraActor> mousePointerCameraActor = CreateActor<GameEngineCameraActor>();
+	mousePointerCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
+	mousePointerCameraActor->GetCameraComponent()->SetProjectionMode(CameraProjectionMode::Orthographic);
+	mousePointerCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MousePointerCamera);
+	//마우스포인터 위치 문제와 알파 렌더링 문제를 한번에 해결하기 위해 마우스포인터 카메라 추가.
 
 	std::shared_ptr<GameEngineCameraActor> UICameraActor = CreateActor<GameEngineCameraActor>();
 	UICameraActor->GetTransform().SetLocalPosition(0, 0, -100);
@@ -70,6 +75,11 @@ std::shared_ptr<GameEngineCameraActor> GameEngineLevel::GetUICameraActor()
 GameEngineTransform& GameEngineLevel::GetUICameraActorTransform()
 {
 	return cameras_[static_cast<int>(CameraOrder::UICamera)]->GetActor()->GetTransform();
+}
+
+std::shared_ptr<GameEngineCameraActor> GameEngineLevel::GetCameraActor(UINT _index)
+{
+	return cameras_[_index]->GetActor<GameEngineCameraActor>();
 }
 
 void GameEngineLevel::AllClear()

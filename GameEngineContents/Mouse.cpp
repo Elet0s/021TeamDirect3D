@@ -67,16 +67,18 @@ void Mouse::Start()
 	defaultPointerRenderer_->GetTransform().SetWorldScale(20, 28, 1);
 	defaultPointerRenderer_->GetTransform().SetLocalPosition( 10, -14, 0 );
 	defaultPointerRenderer_->SetTexture("CursorSprite.png");
-	//defaultPointerRenderer_->Off();
+	defaultPointerRenderer_->ChangeCamera(CameraOrder::MousePointerCamera);
 
 	crossHairRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	crossHairRenderer_->GetTransform().SetWorldScale(32, 32, 1);
 	crossHairRenderer_->SetTexture("CrossHair.png");
+	crossHairRenderer_->ChangeCamera(CameraOrder::MousePointerCamera);
 	crossHairRenderer_->Off();
 
 	aimLineRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	aimLineRenderer_->GetTransform().SetWorldScale(512, 512, 1);
 	aimLineRenderer_->SetTexture("AimLine.png");
+	aimLineRenderer_->ChangeCamera(CameraOrder::MousePointerCamera);
 	aimLineRenderer_->Off();
 
 
@@ -102,7 +104,9 @@ void Mouse::Update(float _DeltaTime)
 	//전투맵에서의 동작.
 	if (CameraProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
 	{
-		this->GetTransform().SetWorldPosition(this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor());
+		this->GetTransform().SetWorldPosition(
+			this->GetLevel()->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetMouseWorldPositionToActor()
+		);
 
 		if (true == isAiming_)
 		{
