@@ -12,7 +12,10 @@ Mouse::Mouse()
 	pivotWorldPosition_(float4::Zero),
 	isAiming_(false)
 {
-
+	localVertexPosition_[0] = float4(-0.5f, 0.5f);
+	localVertexPosition_[1] = float4(0.5f, 0.5f);
+	localVertexPosition_[2] = float4(0.5f, -0.5f);
+	localVertexPosition_[3] = float4(-0.5f, -0.5f);
 }
 
 Mouse::~Mouse()
@@ -40,6 +43,52 @@ void Mouse::ChangeMousePointerRenderer(bool _isAiming)
 void Mouse::UpdatePivotPosition(const float4& _pivot)
 {
 	pivotWorldPosition_ = _pivot;
+}
+
+bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot)
+{
+	float4 origin = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
+	float4 direction = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor() - origin;
+	direction.Normalize3D();
+
+	DirectX::FXMVECTOR worldVertexPositionVector0 
+		= ((localVertexPosition_[0] + _pivot) * _worldWorldMatrix).directXVector_;
+	DirectX::FXMVECTOR worldVertexPositionVector1 
+		= ((localVertexPosition_[1] + _pivot) * _worldWorldMatrix).directXVector_;
+	DirectX::FXMVECTOR worldVertexPositionVector2 
+		= ((localVertexPosition_[2] + _pivot) * _worldWorldMatrix).directXVector_;
+	DirectX::FXMVECTOR worldVertexPositionVector3
+		= ((localVertexPosition_[3] + _pivot) * _worldWorldMatrix).directXVector_;
+
+	float distance1 = 0.f;
+	float distance2 = 0.f;
+
+	bool result1 = DirectX::TriangleTests::Intersects(
+		origin.directXVector_,
+		direction.directXVector_,
+		worldVertexPositionVector0,
+		worldVertexPositionVector1,
+		worldVertexPositionVector2,
+		distance1
+	);
+
+	bool result2 = DirectX::TriangleTests::Intersects(
+		origin.directXVector_,
+		direction.directXVector_,
+		worldVertexPositionVector0,
+		worldVertexPositionVector2,
+		worldVertexPositionVector3,
+		distance2
+	);
+
+	if (true == result1 || true == result2)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Mouse::Start()
@@ -142,7 +191,10 @@ void Mouse::Update(float _DeltaTime)
 		this->GetTransform().SetWorldPosition(
 			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
 		);
-		//(1.0264, 0.5773, 1.0000)
+		//(1.0264, 0.5773, -99.0000)
+
+
+
 
 		defaultPointerRenderer_->GetTransform().SetWorldPosition(
 			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().x + 10.f,	
@@ -150,46 +202,32 @@ void Mouse::Update(float _DeltaTime)
 			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().z
 		);
 
-		float4 rayVector = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
-			- this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
 
-		//DirectX::XMVECTOR temp = DirectX::XMPlaneIntersectLine(
-		//	(-float4::Blue).directXVector_,
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().directXVector_,
-		//	this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().directXVector_
+		//float4 origin = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
+		//float4 direction = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor() - origin;
+		//direction.Normalize3D();
+
+		//DirectX::FXMVECTOR temp0 = (float4(200, 0, 100)).directXVector_;
+		//DirectX::GXMVECTOR temp1 = float4(100, 0, 100).directXVector_;
+		//DirectX::HXMVECTOR temp2 = (float4(100, 100, 100)).directXVector_;
+
+		//float value = 0.f;
+
+		////DirectX::Internal::XMVector3IsUnit(this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().directXVector_);
+
+		//bool result = DirectX::TriangleTests::Intersects(
+		//	origin.directXVector_,
+		//	direction.directXVector_,
+		//	temp0,
+		//	temp1,
+		//	temp2,
+		//	value
 		//);
 
-
-
-
-		float4 origin = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
-		float4 direction = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor() - origin;
-		direction.Normalize3D();
-
-		DirectX::FXMVECTOR temp0 = (float4(200, 0, 0)).directXVector_;
-		DirectX::GXMVECTOR temp1 = float4(100, 0, 0).directXVector_;
-		DirectX::HXMVECTOR temp2 = (float4(100, 100, 0)).directXVector_;
-
-
-
-
-		float value = 0.f;
-
-		//DirectX::Internal::XMVector3IsUnit(this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().directXVector_);
-
-		bool result = DirectX::TriangleTests::Intersects(
-			origin.directXVector_,
-			direction.directXVector_,
-			temp0,
-			temp1,
-			temp2,
-			value
-		);
-
-		if (true == result)
-		{
-			int i = 0;
-		}
+		//if (true == result)
+		//{
+		//	int i = 0;
+		//}
 
 
 	}

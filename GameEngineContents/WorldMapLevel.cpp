@@ -1,18 +1,23 @@
-#include"PreCompile.h"
-#include"WorldMapLevel.h"
-#include"WorldMapActor.h"
-#include"Mouse.h"
+#include "PreCompile.h"
+#include "WorldMapLevel.h"
+#include "WorldMapActor.h"
+#include "Mouse.h"
 #include "StageCreater.h"
-#include"WorldMapRenderingActor.h"
+#include "StageObject.h"
+#include "WorldMapRenderingActor.h"
+#include "GlobalContentsValue.h"
 
 WorldMapLevel::WorldMapLevel()
+	: WorldMapRenderingActor_(nullptr),
+	WorldLevelLighting_(nullptr),
+	stageCreater_(nullptr)
 {
-
 }
+
 WorldMapLevel::~WorldMapLevel()
 {
-
 }
+
 void WorldMapLevel::Start()
 {
 	WorldMapRenderingActor_ = CreateActor<WorldMapRenderingActor>();
@@ -20,7 +25,8 @@ void WorldMapLevel::Start()
 		1000,
 		300
 	);
-	CreateActor<StageCreater>();
+
+	stageCreater_ = CreateActor<StageCreater>();
 
 	WorldMapRenderingActor_->GetTransform().SetLocalScale(float4::White);
 	WorldMapRenderingActor_->GetTransform().SetWorldScale(float4::White);
@@ -59,7 +65,13 @@ void WorldMapLevel::Start()
 		GameEngineInput::GetInst()->CreateKey("WorldCameraBack", VK_DOWN);
 
 	}
+
+	if (nullptr == mousePointer_)
+	{
+		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "WorldMapMousePointer");
+	}
 }
+
 void WorldMapLevel::Update(float _deltaTime)
 {
 	float cameraSpeed = 500.f;
@@ -105,6 +117,7 @@ void WorldMapLevel::Update(float _deltaTime)
 		GetMainCameraActorTransform().SetLocalMove(
 		float4(0.f, sinf(30.f * GameEngineMath::DegreeToRadian), cosf(30.f * GameEngineMath::DegreeToRadian)) * cameraSpeed * _deltaTime);
 	}
+
 	if (true == GameEngineInput::GetInst()->IsPressed("WorldCameraBack"))
 	{
 		Pos += float4(0.f, -sinf(30.f * GameEngineMath::DegreeToRadian), -cosf(30.f * GameEngineMath::DegreeToRadian)) * cameraSpeed * _deltaTime;
@@ -120,10 +133,11 @@ void WorldMapLevel::Update(float _deltaTime)
 	}
 
 }
+
 void WorldMapLevel::End()
 {
-
 }
+
 void WorldMapLevel::LevelStartEvent()
 {
 	this->GetMainCamera()->SetFarZ(10000.f);

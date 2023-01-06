@@ -103,6 +103,12 @@ void TestLevel::Start()
 
 	this->GetMainCamera()->PushLighting(testLevelLighting_);
 	//카메라에 조명 등록.
+
+	if (nullptr == mousePointer_)
+	{
+		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "TestLevelMousePointer");
+		//mousePointer_->ChangeMousePointerRenderer(true);
+	}
 }
 
 void TestLevel::Update(float _DeltaTime)
@@ -123,11 +129,11 @@ void TestLevel::LevelStartEvent()
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
 
-	if (nullptr == mousePointer_)
-	{
-		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "MousePointer");
-		mousePointer_->ChangeMousePointerRenderer(true);
-	}
+	//if (nullptr == mousePointer_)
+	//{
+	//	mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "MousePointer");
+	//	mousePointer_->ChangeMousePointerRenderer(true);
+	//}
 }
 
 void TestLevel::LevelEndEvent()

@@ -15,6 +15,7 @@ public:
 public:
 	void ChangeMousePointerRenderer(bool _isAiming);
 	void UpdatePivotPosition(const float4& _pivot);
+	bool IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot);
 
 public:
 	//inline void GetCurPos()
@@ -59,4 +60,6 @@ private:
 	float4 mousePositionInWorldSpace_;	//월드스페이스 마우스 위치.
 	float4 pivotWorldPosition_;	//에임라인 피봇의 월드 포지션.
 	bool isAiming_;	//true: 방향지정 투사체용 마우스포인터로 변경. false: 기본 마우스포인터 사용.
+
+	float4 localVertexPosition_[4];
 };
