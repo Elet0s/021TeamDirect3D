@@ -22,7 +22,7 @@ void Mouse::Start()
 {
 	mouseCollision_ = CreateComponent<GameEngineCollision>();
 	mouseCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Black);
-	mouseCollision_->GetTransform().SetWorldScale( 100, 100, 100 );
+	mouseCollision_->GetTransform().SetWorldScale( 10, 10, 10 );
 	mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
 
 	mouseRenderer_ = CreateComponent<GameEngineTextureRenderer>();
@@ -38,21 +38,24 @@ void Mouse::Update(float _DeltaTime)
 		GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,
 		-100.0f
 	);
-
-
-	float y_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().y + (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y * sinf(60.f * GameEngineMath::DegreeToRadian));
-	float z_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().z + 240.f+ (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y * cosf(30.f * GameEngineMath::DegreeToRadian));//+(y_* cosf(30.f * GameEngineMath::DegreeToRadian));
-	float b = y_ / z_;
-
-
-	float x_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().x + (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x)+ (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y);
 	
-	mouseCollision_->GetTransform().SetLocalPosition(
-		x_,
-		y_,
-		z_
-	);
 
+	if (GetLevel()->GetMainCamera()->GetProjectionMode() == CameraProjectionMode::Perspective)
+	{
+		float4 Pos = GetLevel()->GetUICamera()->GetMouseScreenPosition();
+
+		mouseCollision_->GetTransform().SetLocalPosition(
+			Pos
+		);
+	}
+	else
+	{
+		mouseCollision_->GetTransform().SetLocalPosition(
+			GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x + 10.0f,
+			GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,
+			-100.0f
+		);
+	}
 }
 void Mouse::End()
 {
