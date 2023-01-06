@@ -58,5 +58,5 @@ private:
 	float4 mousePositionInWindow_;		//윈도우 좌표계 마우스 위치.
 	float4 mousePositionInWorldSpace_;	//월드스페이스 마우스 위치.
 	float4 pivotWorldPosition_;	//에임라인 피봇의 월드 포지션.
-	bool isAiming_;
+	bool isAiming_;	//true: 방향지정 투사체용 마우스포인터로 변경. false: 기본 마우스포인터 사용.
 };

@@ -139,9 +139,9 @@ void Mouse::Update(float _DeltaTime)
 			return;
 		}
 
-		//this->GetTransform().SetWorldPosition(
-		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
-		//);
+		this->GetTransform().SetWorldPosition(
+			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
+		);
 		//(1.0264, 0.5773, 1.0000)
 
 		defaultPointerRenderer_->GetTransform().SetWorldPosition(
@@ -150,13 +150,46 @@ void Mouse::Update(float _DeltaTime)
 			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().z
 		);
 
+		float4 rayVector = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
+			- this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
 
-		//float4 temp1 = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
-		//	* this->GetLevel()->GetMainCamera()->GetViewMatrix();
+		//DirectX::XMVECTOR temp = DirectX::XMPlaneIntersectLine(
+		//	(-float4::Blue).directXVector_,
+		//	this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().directXVector_,
+		//	this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().directXVector_
+		//);
 
-		//float4 temp2 = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition()
-		//	* this->GetLevel()->GetMainCamera()->GetViewMatrix();
 
+
+
+		float4 origin = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
+		float4 direction = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor() - origin;
+		direction.Normalize3D();
+
+		DirectX::FXMVECTOR temp0 = (float4(200, 0, 0)).directXVector_;
+		DirectX::GXMVECTOR temp1 = float4(100, 0, 0).directXVector_;
+		DirectX::HXMVECTOR temp2 = (float4(100, 100, 0)).directXVector_;
+
+
+
+
+		float value = 0.f;
+
+		//DirectX::Internal::XMVector3IsUnit(this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().directXVector_);
+
+		bool result = DirectX::TriangleTests::Intersects(
+			origin.directXVector_,
+			direction.directXVector_,
+			temp0,
+			temp1,
+			temp2,
+			value
+		);
+
+		if (true == result)
+		{
+			int i = 0;
+		}
 
 
 	}
