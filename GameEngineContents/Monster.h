@@ -248,6 +248,7 @@ protected:
 	//구조와 기능이 그다지 복잡하지 않고, 각각의 몬스터마다 반드시 한개씩 가져야 하므로 값형으로 저장.
 
 	RenderOption renderOption_;
+	PixelData pixelData_;
 
 private:
 	std::string monsterTextureName_;	//몬스터 자기 자신의 텍스처 이름. 

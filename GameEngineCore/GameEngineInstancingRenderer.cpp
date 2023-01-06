@@ -415,10 +415,10 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 				return;
 			}
 
-			if (nullptr == unitDataIter->second)
-			{
-				continue;
-			}
+			//if (nullptr == unitDataIter->second)
+			//{
+			//	continue;
+			//}
 
 			//구조화버퍼세터로 각 인스턴싱유닛별 데이터 전달.
 			for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(unitDataIter->first);

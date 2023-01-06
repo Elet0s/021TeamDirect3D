@@ -154,6 +154,14 @@ void ContentsCore::LoadContentsShader()
 	newContentsMaterial8->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial8->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
+	std::shared_ptr<GameEngineMaterial> newContentsMaterial9
+		= GameEngineMaterial::Create("MonsterInstanceRendering");
+	newContentsMaterial9->SetVertexShader("MonsterInstanceRendering.hlsl");
+	newContentsMaterial9->SetPixelShader("MonsterInstanceRendering.hlsl");
+	newContentsMaterial9->SetRasterizer("EngineRasterizer");
+	newContentsMaterial9->SetBlend_OutputMerger("AlphaBlend");
+	newContentsMaterial9->SetDepthStencil_OutputMerger("EngineBaseDepth");
+
 }
 
 void ContentsCore::LoadContentsResource()

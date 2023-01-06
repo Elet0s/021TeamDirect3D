@@ -40,7 +40,7 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 	allMonsters_.reserve(_allMonsterCount);
 
 	allMonstersRenderer_ = _thisLevel->GetMainCamera()->GetInstancingRenderer("1-AllMonstersRenderer");
-	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "DeferredInstanceRendering");
+	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "MonsterInstanceRendering");
 	allMonstersRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 
@@ -267,6 +267,7 @@ void Monster::Update(float _deltaTime)
 		GameEngineTexture2DArray::Find("Monster")->GetCutData(monsterTextureName_, monsterAnimation_.GetCurrentIndex()),
 		float4::Zero
 	);
+	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).Link("Inst_PixelData", this->pixelData_);
 
 	allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
 		this->GetTransform().GetWorldPosition()

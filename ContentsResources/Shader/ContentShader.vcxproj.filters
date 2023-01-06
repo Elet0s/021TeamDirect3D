@@ -15,4 +15,7 @@
     <None Include="DeferredShadowRendering.hlsl" />
     <None Include="DeferredRendering.hlsl" />
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="MonsterInstanceRendering.hlsl" />
+  </ItemGroup>
 </Project>
