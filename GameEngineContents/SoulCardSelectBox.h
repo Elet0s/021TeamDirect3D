@@ -14,7 +14,7 @@ public:
 	SoulCardSelectBox(SoulCardSelectBox&& _Other) noexcept = delete;
 	SoulCardSelectBox& operator=(const SoulCardSelectBox& _Other) = delete;
 	SoulCardSelectBox& operator=(SoulCardSelectBox&& _Other) noexcept = delete;
-
+	
 protected:
 
 private:

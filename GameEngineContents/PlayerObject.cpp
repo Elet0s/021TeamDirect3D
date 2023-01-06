@@ -3,6 +3,9 @@
 #include "PlayerObject.h"
 
 PlayerObject::PlayerObject() 
+	:	mode_(PlayerObjectMode::Idle),
+	col_(nullptr),
+	renderer_(nullptr)
 {
 }
 
@@ -29,6 +32,10 @@ void PlayerObject::Start()
 
 void PlayerObject::Update(float _deltaTime)
 {
+	float4 PosK = GetTransform().GetWorldPosition();
+	PosK = GetLevel()->GetMainCamera()->GetWorldPositionToScreenPosition(PosK);
+	col_->GetTransform().SetWorldPosition(PosK);
+
 	if (mode_ == PlayerObjectMode::Move)
 	{
 		GetTransform().SetLocalMove(moveDir_.Normalize3D() * 100.f * _deltaTime);
@@ -53,6 +60,10 @@ void PlayerObject::SetMoveDir(float4 _dir)
 	if (moveDir_.x < 0.f)
 	{
 		renderer_->GetTransform().PixLocalNegativeX();
+	}
+	else
+	{
+		renderer_->GetTransform().PixLocalPositiveX();
 	}
 	checkPos_ = _dir + GetTransform().GetWorldPosition();
 	mode_ = PlayerObjectMode::Move;

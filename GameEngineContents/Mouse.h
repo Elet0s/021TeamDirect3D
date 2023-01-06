@@ -25,6 +25,8 @@ public:
 	std::shared_ptr<GameEngineTextureRenderer> mouseRenderer_;
 	std::shared_ptr<GameEngineCollision> mouseCollision_;
 
+	bool isWorldMap;
+
 	inline void GetCurPos()
 	{
 		POINT Pos_;

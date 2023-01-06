@@ -24,7 +24,6 @@ void WorldMapLevel::Start()
 		300
 	);
 	CreateActor<StageCreater>();
-
 	WorldMapRenderingActor_->GetTransform().SetLocalScale(float4::White);
 	WorldMapRenderingActor_->GetTransform().SetWorldScale(float4::White);
 	WorldMapRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
@@ -130,5 +129,11 @@ void WorldMapLevel::End()
 }
 void WorldMapLevel::LevelStartEvent()
 {
+	Mouse::GetMouseInfo()->isWorldMap = true;
 	this->GetMainCamera()->SetFarZ(10000.f);
+}
+
+void WorldMapLevel::LevelEndEvent()
+{
+	Mouse::GetMouseInfo()->isWorldMap = false;
 }

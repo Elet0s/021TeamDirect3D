@@ -19,7 +19,8 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	CardDraw();
+	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+	mySkill_ = SkillList[0][0];
 
 	if (false == GameEngineInput::GetInst()->IsKey("click"))
 	{
@@ -47,6 +48,7 @@ void SoulCardUI::Start()
 		template_ = CreateComponent<GameEngineTextureRenderer>();
 		template_->SetPivot(PivotMode::Bot);
 		template_->GetTransform().SetWorldScale(float4{ 188.f,282.f,1.f });
+		template_->GetTransform().SetLocalMove(float4(0.f, 0.f, 0.f));
 		template_->ChangeCamera(CameraOrder::UICamera);
 		template_->GetPixelData().mulColor_.a = alphaTexture_;
 	}
@@ -55,7 +57,7 @@ void SoulCardUI::Start()
 		linerenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		linerenderer_->SetTexture("SoulCardLine.png");
 		linerenderer_->GetTransform().SetWorldScale(float4{ 110.f,16.f,1.f });
-		linerenderer_->GetTransform().SetLocalMove(float4(0.f, 170.f, -1.f));
+		linerenderer_->GetTransform().SetLocalMove(float4(0.f, 170.f, -10.f));
 		linerenderer_->ChangeCamera(CameraOrder::UICamera);
 		linerenderer_->GetPixelData().mulColor_.a = alphaTexture_;
 	}
@@ -63,7 +65,7 @@ void SoulCardUI::Start()
 
 	{
 		icon_ = CreateComponent<GameEngineTextureRenderer>();
-		icon_->GetTransform().SetLocalMove(float4(0.f, 228.f, -1.f));
+		icon_->GetTransform().SetLocalMove(float4(0.f, 228.f, -10.f));
 		icon_->GetTransform().SetWorldScale(float4{ 100.f,100.f,1.f });
 		icon_->ChangeCamera(CameraOrder::UICamera);
 		icon_->GetPixelData().mulColor_.a = alphaTexture_;
@@ -130,7 +132,7 @@ void SoulCardUI::Update(float _deltaTime)
 		{
 			mySkill_->IsOnOff();
 			mySkill_->Effect();
-			Setting();
+			Death();
 		}
 		ColorChange(Appear::True);
 	}
@@ -259,6 +261,11 @@ void SoulCardUI::Setting()
 
 void SoulCardUI::CardDraw()
 {
+	if (mySkill_ != nullptr)
+	{
+		mySkill_->IsOnOff();
+	}
+
 	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
 	int RankRandom = 0;
 	int IndexRandom = 0;
@@ -298,10 +305,56 @@ void SoulCardUI::CardDraw()
 
 	mySkill_ = SkillList[RankRandom][IndexRandom];
 
-	if (mySkill_->GetCurrentlevel() == mySkill_->GetMaxLevel() || true == mySkill_->GetIsOn())
+	while (mySkill_->GetCurrentlevel() == mySkill_->GetMaxLevel() || true == mySkill_->GetIsOn())
 	{
-		CardDraw();
+		std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+		int RankRandom = 0;
+		int IndexRandom = 0;
+		int Randomnum = GameEngineRandom::mainRandom_.RandomInt(1, 100);
+
+		if (Randomnum <= 30)
+		{
+			RankRandom = 0;
+		}
+
+		else if (Randomnum <= 50)
+		{
+			RankRandom = 1;
+		}
+		else if (Randomnum <= 70)
+		{
+			RankRandom = 2;
+		}
+
+		else if (Randomnum <= 85)
+		{
+			RankRandom = 3;
+		}
+
+		else if (Randomnum <= 95)
+		{
+			RankRandom = 4;
+		}
+
+		else if (Randomnum <= 100)
+		{
+			RankRandom = 4;
+		}
+
+		IndexRandom = GameEngineRandom::mainRandom_.RandomInt(0, static_cast<int>(SkillList[RankRandom].size() - 1));
+
+
+		mySkill_ = SkillList[RankRandom][IndexRandom];
 	}
 
 	mySkill_->IsOnOn();
+}
+
+
+void SoulCardUI::CardRelease()
+{
+	if (mySkill_ != nullptr)
+	{
+		mySkill_->IsOnOff();
+	}
 }

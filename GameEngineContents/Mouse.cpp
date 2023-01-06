@@ -8,7 +8,8 @@ Mouse::Mouse()
 	: mouseRenderer_(nullptr),
 	mouseCollision_(nullptr),
 	mousePositionInWindow_(float4::Zero),
-	mousePositionInWorldSpace_(float4::Zero)
+	mousePositionInWorldSpace_(float4::Zero),
+	isWorldMap(false)
 {
 
 }
@@ -40,7 +41,7 @@ void Mouse::Update(float _DeltaTime)
 	);
 	
 
-	if (GetLevel()->GetMainCamera()->GetProjectionMode() == CameraProjectionMode::Perspective)
+	if (isWorldMap == true)
 	{
 		float4 Pos = GetLevel()->GetUICamera()->GetMouseScreenPosition();
 

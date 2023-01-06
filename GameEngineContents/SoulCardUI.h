@@ -22,6 +22,8 @@ public:
 	SoulCardUI& operator=(SoulCardUI&& _Other) noexcept = delete;
 
 	void Setting();
+
+	void CardRelease();
 protected:
 
 private:

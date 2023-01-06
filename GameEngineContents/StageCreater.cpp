@@ -225,20 +225,25 @@ void StageCreater::Update(float _deltaTime)
 
 CollisionReturn StageCreater::CheckNextLevel(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("Click"))
+	if (true == GameEngineInput::GetInst()->IsDown("Click") && playerObject_->IsObjectIdle() == true)
 	{
-		if (true == curlevel_->CheckNextLevel(_Other->GetActor<StageObject>()))
+		std::shared_ptr<StageObject> Other = _Other->GetActor<StageObject>();
+		if (true == curlevel_->CheckNextLevel(Other))
 		{
 			float4 Pos = playerObject_->GetTransform().GetWorldPosition();
 			float4 NPos = _Other->GetActor()->GetTransform().GetWorldPosition();
 
 			float4 dir = NPos - Pos;
-			
 			playerObject_->SetMoveDir(dir);
 			curlevel_ = _Other->GetActor<StageObject>();
+
 		}
 	
 	}
 	return CollisionReturn::Stop;
 }
 
+void StageCreater::LevelStartEvent()
+{
+	curlevel_->Off();
+}

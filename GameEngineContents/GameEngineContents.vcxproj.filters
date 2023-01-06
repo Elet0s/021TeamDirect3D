@@ -415,6 +415,9 @@
     <ClCompile Include="TestActor.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="ClearUIBox.cpp">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -733,6 +736,9 @@
     </ClInclude>
     <ClInclude Include="TestActor.h">
       <Filter>Actor\00. Global\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearUIBox.h">
+      <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

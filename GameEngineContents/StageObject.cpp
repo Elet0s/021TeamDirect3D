@@ -33,16 +33,10 @@ void StageObject::Start()
 void StageObject::Update(float _deltaTime)
 {
 	float4 PosK = GetTransform().GetWorldPosition();
-	float4x4 ViewPortMatrix;
 	PosK = GetLevel()->GetMainCamera()->GetWorldPositionToScreenPosition(PosK);
 	//Pos *= GetViewProject
 	col_->GetTransform().SetWorldPosition(PosK);
 
-	if (col_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Player, CollisionType::CT_OBB2D))
-	{
-		SetStageType(5);
-		col_->Off();
-	}
 }
 
 void StageObject::SetStageType(int _num)

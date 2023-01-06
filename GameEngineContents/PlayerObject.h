@@ -23,6 +23,17 @@ public:
 
 	void SetMoveDir(float4 _dir);
 	
+	bool IsObjectIdle()
+	{
+		if (mode_ == PlayerObjectMode::Idle)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 protected:
 
 private:

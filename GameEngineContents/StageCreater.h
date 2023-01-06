@@ -18,6 +18,7 @@ public:
 protected:
 
 private:
+	void LevelStartEvent() override;
 	void Start() override;
 	void Update(float _deltaTime) override;
 	CollisionReturn CheckNextLevel(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);

@@ -18,10 +18,11 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 private:
+
 	std::shared_ptr<class WorldMapRenderingActor> WorldMapRenderingActor_;
 	std::shared_ptr<GameEngineLighting> WorldLevelLighting_;
 	
 	std::shared_ptr<TestActor> TestActor_;
 	void LevelStartEvent() override;
-
+	void LevelEndEvent() override;
 };
