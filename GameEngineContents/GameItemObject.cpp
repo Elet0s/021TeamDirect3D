@@ -5,7 +5,8 @@
 
 GameItemObject::GameItemObject()
 	:itemObjectOrder_(ItemObjectOrder::None),
-	chasePlayer_(false)
+	chasePlayer_(false),
+	objectOrder_(ObjectOrder::Item)
 {
 	
 }
@@ -22,7 +23,6 @@ void GameItemObject::Start()
 
 void GameItemObject::Update(float _deltaTime)
 {
-	ColCheak();
 }
 
 void GameItemObject::End()
@@ -30,12 +30,11 @@ void GameItemObject::End()
 
 }
 
-CollisionReturn GameItemObject::ItemToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
-{
-	return CollisionReturn::Stop;
-}
 
-void GameItemObject::ColCheak()
+void GameItemObject::ChasePlayer(float _deltaTime)
 {
-	itemObjectCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&GameItemObject::ItemToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
+	if (chasePlayer_ == true)
+	{
+
+	}
 }

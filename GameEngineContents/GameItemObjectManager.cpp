@@ -3,6 +3,9 @@
 #include"GameEngineBase/GameEngineRandom.h"
 
 GameItemObjectManager::GameItemObjectManager()
+	:	isFullContainer_(false),
+	ItemUpdateNum_(0)
+
 {
 }
 GameItemObjectManager::~GameItemObjectManager()
@@ -48,186 +51,389 @@ ItemObjectOrder GameItemObjectManager::RandomObjectOrder()
 
 void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemObjectOrder _itemObjectOrder, float4 _itemObjectPos)
 {
+	if (isFullContainer_ == false)
+	{
+		ItemUpdateNum_ += 1;
+		if (ItemUpdateNum_ == 300)
+		{
+			isFullContainer_ = true;
+		}
+		if (_itemObjectOrder == ItemObjectOrder::GreenExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::YellowExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::RedExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::Gold)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::Meet)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::Voidbead)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("Void.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+	}
+	else if (isFullContainer_ == true)
+	{
+		allObjectContainer_[0]->itemObjectRenderer_->Off();
+		allObjectContainer_[0]->itemObjectCol_->Off();
+		allObjectContainer_.erase(allObjectContainer_.begin());
 
-	if (_itemObjectOrder == ItemObjectOrder::GreenExp)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = _itemObjectOrder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
-		newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (_itemObjectOrder == ItemObjectOrder::YellowExp)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = _itemObjectOrder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
-		newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (_itemObjectOrder == ItemObjectOrder::RedExp)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = _itemObjectOrder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
-		newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (_itemObjectOrder == ItemObjectOrder::Gold)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = _itemObjectOrder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (_itemObjectOrder == ItemObjectOrder::Meet)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = _itemObjectOrder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (_itemObjectOrder == ItemObjectOrder::Voidbead)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = _itemObjectOrder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("Void.png");
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
+		if (_itemObjectOrder == ItemObjectOrder::GreenExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::YellowExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::RedExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::Gold)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::Meet)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (_itemObjectOrder == ItemObjectOrder::Voidbead)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = _itemObjectOrder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("Void.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
 	}
 }
 
 void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4 _itemObjectPos)
 {
-
-	ItemObjectOrder randomorder = RandomObjectOrder();
-	if (randomorder == ItemObjectOrder::GreenExp)
+	//ItemObjectOrder randomorder = RandomObjectOrder();
+	ItemObjectOrder randomorder = ItemObjectOrder::GreenExp;
+	if (isFullContainer_ == false)
 	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = randomorder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
-		newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
+		ItemUpdateNum_ += 1;
+		if (ItemUpdateNum_ == 300)
+		{
+			isFullContainer_ = true;
+		}
+		if (randomorder == ItemObjectOrder::GreenExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::YellowExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::RedExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::Gold)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::Meet)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::Voidbead)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("Void.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
 	}
-	else if (randomorder == ItemObjectOrder::YellowExp)
+	else if (isFullContainer_ == true)
 	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = randomorder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
-		newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (randomorder == ItemObjectOrder::RedExp)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = randomorder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
-		newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (randomorder == ItemObjectOrder::Gold)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = randomorder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (randomorder == ItemObjectOrder::Meet)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = randomorder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
-	}
-	else if (randomorder == ItemObjectOrder::Voidbead)
-	{
-		std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
-		newItemObject->itemObjectOrder_ = randomorder;
-		newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
-		newItemObject->itemObjectRenderer_->SetTexture("Void.png");
-		newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
-		newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
-		newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
-		newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-		newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
-		allObjectContainer_.push_back(newItemObject);
+		allObjectContainer_[0]->itemObjectRenderer_->Off();
+		allObjectContainer_[0]->itemObjectCol_->Off();
+		allObjectContainer_.erase(allObjectContainer_.begin());
+		if (randomorder == ItemObjectOrder::GreenExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::YellowExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::RedExp)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
+			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::Gold)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::Meet)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
+		else if (randomorder == ItemObjectOrder::Voidbead)
+		{
+			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			newItemObject->itemObjectOrder_ = randomorder;
+			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
+			newItemObject->itemObjectRenderer_->SetTexture("Void.png");
+			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
+			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
+			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			allObjectContainer_.push_back(newItemObject);
+		}
 	}
 }

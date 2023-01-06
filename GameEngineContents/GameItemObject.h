@@ -16,19 +16,18 @@ public:
 	GameItemObject& operator=(GameItemObject&& _Other) noexcept = delete;
 
 public:
-
+	bool chasePlayer_;
 protected:
-	CollisionReturn ItemToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-	void ColCheak();
+
+	void ChasePlayer(float _deltaTime);
 
 private:
 	ItemObjectOrder itemObjectOrder_;
+	ObjectOrder objectOrder_;
 	std::shared_ptr<GameEngineTextureRenderer> itemObjectRenderer_;
 	std::shared_ptr<GameEngineCollision>itemObjectCol_;//닿으면 효과발생
-	bool chasePlayer_;
-
 
 };

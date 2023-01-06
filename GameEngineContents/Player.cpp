@@ -56,7 +56,7 @@ void Player::Start()
 	}
 	{
 		collision_ = CreateComponent<GameEngineCollision>();
-		collision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
+		collision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
 		collision_->GetTransform().SetLocalScale({ 70.f, 70.f, 70.0f });
 		collision_->ChangeOrder(ObjectOrder::Player);
 	}
@@ -84,6 +84,19 @@ CollisionReturn Player::PlayerToMonsterCollision(std::shared_ptr<GameEngineColli
 	//	playerInfo_->hp_ -= A->GetMonsterInfo().atk_;
 	//	playerInfo_->exp_ += A->GetMonsterInfo().giveExp_;
 	//
+	return CollisionReturn::Stop;
+}
+
+CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+{
+	std::shared_ptr<GameItemObject> A = std::dynamic_pointer_cast<GameItemObject>(_Other->GetActor());
+	A->Off();
+	return CollisionReturn::Stop;
+}
+
+CollisionReturn Player::ItemRangeToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+{
+
 	return CollisionReturn::Stop;
 }
 
@@ -230,14 +243,20 @@ void Player::LevelUpEvent()
 	}
 }
 
+void Player::ColCkeak()
+{
+//	itemRangeCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+//	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+}
+
 void Player::Update(float _deltaTime)
 {
 	MoveDirectionUpdate(_deltaTime);
 	PlayerDash(_deltaTime);
 	LevelUpEvent();
 	PlayerDeathEvent();
-	//collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-
+	ColCkeak();
+	
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
 		if (playerSkillManager_->GetSkillList()[5][15]->nowLevel_ < 1)

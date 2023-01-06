@@ -38,14 +38,19 @@ void Mouse::Update(float _DeltaTime)
 		GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,
 		-100.0f
 	);
-	float b = (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x);
-	float x_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().x + (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x* 0.3125f);
-	float y_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().y + (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y* 0.3125f);
 
+
+	float y_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().y + (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y * sinf(60.f * GameEngineMath::DegreeToRadian));
+	float z_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().z + 240.f+ (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y * cosf(30.f * GameEngineMath::DegreeToRadian));//+(y_* cosf(30.f * GameEngineMath::DegreeToRadian));
+	float b = y_ / z_;
+
+
+	float x_ = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().x + (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x)+ (GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y);
+	
 	mouseCollision_->GetTransform().SetLocalPosition(
 		x_,
 		y_,
-		GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition().z+ 240.f
+		z_
 	);
 
 }

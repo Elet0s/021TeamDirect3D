@@ -192,9 +192,13 @@ public:
 	}
 
 	CollisionReturn PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn PlayerToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn ItemRangeToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
 public:
 	std::shared_ptr<GameEngineCollision> collision_;
+
+	std::shared_ptr<GameEngineCollision> itemRangeCollision_;
 
 	std::list<float> serchCloseMonster_;
 	float4 playerResultDirection_;
@@ -210,6 +214,7 @@ protected:
 	void PlayerDeathEvent();//hp 0이하면 off하고 파티클이벤트
 	void LevelUpEvent();//경험치 받고 전부차면 초기화해주고 레벨업해주는부분
 
+	void ColCkeak();
 
 private:
 	float dashTimer_;

@@ -120,8 +120,8 @@ void  Shuriken::StateSet()
 
 		shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 2;
-		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 1;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 5;
+		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 
 	}
 	else if (nowLevel_ < 3)
@@ -148,7 +148,7 @@ void  Shuriken::StateSet()
 
 void Shuriken::SerchTarget()
 {
-	if (targerSerchTimer_ > 3.f)
+	if (targerSerchTimer_ > 1.5f)
 	{
 		targetSerchCounter_ = 0;
 		monsterList_ = Monster::GetMonsterList();
@@ -199,7 +199,7 @@ void Shuriken::ProjectileSort()
 {
 	if (istarget_ == true)
 	{
-		if (targerSerchTimer01_ > 3.f)
+		if (targerSerchTimer01_ > 1.5f)
 		{
 			for (size_t i = 0; i < projectileGroupList01_.size(); i++)
 			{
@@ -218,7 +218,7 @@ void Shuriken::ProjectileSort()
 				}
 			}
 		}
-		if (targerSerchTimer02_ > 3.f)
+		if (targerSerchTimer02_ > 1.5f)
 		{
 			for (size_t i = 0; i < projectileGroupList02_.size(); i++)
 			{
@@ -237,7 +237,7 @@ void Shuriken::ProjectileSort()
 				}
 			}
 		}
-		if (targerSerchTimer03_ > 3.f)
+		if (targerSerchTimer03_ > 1.5f)
 		{
 			for (size_t i = 0; i < projectileGroupList03_.size(); i++)
 			{
@@ -263,7 +263,7 @@ void Shuriken::RenderRotate()
 {
 	if (istarget_ == true)
 	{
-		if (targerSerchTimer01_ > 3.f)
+		if (targerSerchTimer01_ > 1.5f)
 		{
 			referenceVectorList01_.clear();
 			monsterList_ = Monster::GetMonsterList();
@@ -282,7 +282,7 @@ void Shuriken::RenderRotate()
 				projectileGroupList01_[i].first->GetTransform().SetWorldRotation(60, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
 			}
 		}
-		if (targerSerchTimer02_ > 3.f)
+		if (targerSerchTimer02_ > 1.5f)
 		{
 			referenceVectorList02_.clear();
 			monsterList_ = Monster::GetMonsterList();
@@ -301,7 +301,7 @@ void Shuriken::RenderRotate()
 				projectileGroupList02_[i].first->GetTransform().SetWorldRotation(60, 0, -atan2f(Mx - Px, My - Py) * GameEngineMath::RadianToDegree);
 			}
 		}
-		if (targerSerchTimer03_ > 3.f)
+		if (targerSerchTimer03_ > 1.5f)
 		{
 			referenceVectorList03_.clear();
 			monsterList_ = Monster::GetMonsterList();
@@ -327,7 +327,7 @@ void Shuriken::RangeCheak(float _deltaTime)
 {
 	if (istarget_ == true)
 	{
-		if (targerSerchTimer01_ <= 2.8f)
+		if (targerSerchTimer01_ <= 1.3f)
 		{
 			for (size_t i = 0; i < targetInst01_.size(); i++)
 			{
@@ -343,7 +343,7 @@ void Shuriken::RangeCheak(float _deltaTime)
 				projectileGroupList01_[i].second->Off();
 			}
 		}
-		if (targerSerchTimer02_ <= 2.8f)
+		if (targerSerchTimer02_ <= 1.3f)
 		{
 			for (size_t i = 0; i < targetInst02_.size(); i++)
 			{
@@ -359,7 +359,7 @@ void Shuriken::RangeCheak(float _deltaTime)
 				projectileGroupList02_[i].second->Off();
 			}
 		}
-		if (targerSerchTimer03_ <= 2.8f)
+		if (targerSerchTimer03_ <= 1.3f)
 		{
 			for (size_t i = 0; i < targetInst03_.size(); i++)
 			{
@@ -467,7 +467,7 @@ void Shuriken::TarGetInitialization()
 
 void Shuriken::TimerUpdater(float _deltaTime)
 {
-	if (targerSerchTimer_ > 3.f)
+	if (targerSerchTimer_ > 1.5f)
 	{
 		targerSerchTimer_ = 0;
 	}
@@ -476,7 +476,7 @@ void Shuriken::TimerUpdater(float _deltaTime)
 		targerSerchTimer_ += _deltaTime;
 	}
 
-	if (targerSerchTimer01_ > 3.f)
+	if (targerSerchTimer01_ > 1.5f)
 	{
 		targerSerchTimer01_ = 0;
 	}
@@ -485,7 +485,7 @@ void Shuriken::TimerUpdater(float _deltaTime)
 		targerSerchTimer01_ += _deltaTime;
 	}
 
-	if (targerSerchTimer02_ > 3.f)
+	if (targerSerchTimer02_ > 1.5f)
 	{
 		targerSerchTimer02_ = 0;
 	}
@@ -494,7 +494,7 @@ void Shuriken::TimerUpdater(float _deltaTime)
 		targerSerchTimer02_ += _deltaTime;
 	}
 
-	if (targerSerchTimer03_ > 3.f)
+	if (targerSerchTimer03_ > 1.5f)
 	{
 		targerSerchTimer03_ = 0;
 	}

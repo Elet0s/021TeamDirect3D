@@ -12,15 +12,11 @@ PlayerObject::~PlayerObject()
 
 void PlayerObject::Start()
 {
-	
-
-
 	col_ = CreateComponent<GameEngineCollision>();
 	col_->SetDebugSetting(CollisionType::CT_OBB, float4::Red);
 	col_->GetTransform().SetLocalScale({ 70.f, 70.f, 100.0f });
 	col_->GetTransform().SetLocalPosition({ 0.f, 45.f, 0.0f });
-	col_->ChangeOrder(ObjectOrder::Player);
-	
+	col_->ChangeOrder(ObjectOrder::Player);	
 
 	renderer_ = CreateComponent<GameEngineTextureRenderer>();
 	renderer_->SetPivot(PivotMode::Bot);
@@ -29,7 +25,6 @@ void PlayerObject::Start()
 	renderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
 	renderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
 	renderer_->ChangeFrameAnimation("PlayerIdle");
-
 }
 
 void PlayerObject::Update(float _deltaTime)
