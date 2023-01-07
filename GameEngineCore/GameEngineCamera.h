@@ -52,6 +52,10 @@ public:
 	//주어진 월드좌표를 윈도우좌표로 바꾸는 함수.
 	float4 GetWorldPositionToScreenPosition(const float4& _worldPosition);
 
+
+	float4 GetMouseTrueWorldPosition();
+
+
 	//카메라의 순서를 변경하는 함수.
 	void SetCameraOrder(CameraOrder _order);
 	//할 일이 있을지는 모르겠지만, 런타임 중간에 카메라 오더 변경 금지.

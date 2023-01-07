@@ -32,12 +32,13 @@ public:
 	StageObject& operator=(const StageObject& _Other) = delete;
 	StageObject& operator=(StageObject&& _Other) noexcept = delete;
 
+public:
 	void SetMyLevel(int _level)
 	{
 		myLevel_ = _level;
 	}
 	
-	std::list<std::shared_ptr<StageObject>>& GetnextLevelList()
+	std::list<std::shared_ptr<StageObject>>& GetNextLevelList()
 	{
 		return nextLevels_;
 	}
@@ -54,6 +55,11 @@ public:
 		}
 	}
 
+	const float4x4& GetWorldWorldMatrix() const
+	{
+		return renderer_->GetTransformData().worldWorldMatrix_;
+	}
+
 	bool CheckNextLevel(std::shared_ptr<StageObject> _nextlevel);
 	void SetStageType(int _num);
 	void SetComBatType(int _num);
@@ -61,12 +67,12 @@ public:
 	
 	float posY_;
 
-protected:
 
 private:
 	void Start() override;
 	void Update(float _deltaTime) override;
 
+private:
 	int myLevel_;
 	int killCount_;
 	float time_;

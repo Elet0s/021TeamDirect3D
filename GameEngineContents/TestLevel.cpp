@@ -122,12 +122,16 @@ void TestLevel::Update(float _DeltaTime)
 	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
 
 	mousePointer_->UpdatePivotPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+
+	//mousePointer_->ChangeMousePointerRenderer(true);
+
 }
 
 void TestLevel::LevelStartEvent()
 {
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
+	this->GetCamera(1)->SetFarZ(500.f);
 
 	//if (nullptr == mousePointer_)
 	//{

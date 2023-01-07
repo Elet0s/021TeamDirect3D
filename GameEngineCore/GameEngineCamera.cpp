@@ -37,7 +37,7 @@ GameEngineCamera::GameEngineCamera()
 	viewportDesc_.MinDepth = 0.f;
 	viewportDesc_.MaxDepth = 1.f;	//<-1.f이 대입되어 MinDepth와 격차가 생겨야 깊이테스트를 제대로 할 수 있다.
 
-	viewportMatrix_.Viewport(size_.x, size_.y, 0, 0, 0, 1);
+	viewportMatrix_.Viewport(size_.x, size_.y, 0.f, 0.f, 0.f, 1.f);
 }
 
 GameEngineCamera::~GameEngineCamera()
@@ -98,7 +98,7 @@ float4 GameEngineCamera::GetMouseWorldPosition()
 	//float4x4 invertedProjectionMatrix = projectionMatrix_.InverseReturn();
 	//pointerPos *= invertedProjectionMatrix;
 
-	pointerPos *= pointerPos.w;
+	//pointerPos *= pointerPos.w;
 	pointerPos *= this->projectionMatrix_.InverseReturn();
 	//pointerPos *= this->viewMatrix_.InverseReturn();
 
@@ -121,6 +121,42 @@ float4 GameEngineCamera::GetWorldPositionToScreenPosition(const float4& _worldPo
 	pos *= this->viewportMatrix_;		//pos에 뷰포트행렬 적용.
 
 	return pos;
+}
+
+float4 GameEngineCamera::GetMouseTrueWorldPosition()
+{
+	POINT pointerPosition;
+	if (false == GetCursorPos(&pointerPosition))
+		//화면 전체 기준 마우스 포인터의 좌표를 윈도우 스크린 좌표(좌상단 0, 0)로 반환하는 함수.
+	{
+		MsgBoxAssert("마우스 포인터 좌표를 얻어오는데 실패했습니다.");
+		return float4();
+	}
+
+	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
+		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
+		&pointerPosition)	//변환할 화면 전체기준 마우스 포인터 좌표.
+		)
+	{
+		MsgBoxAssert("마우스 포인터 좌표를 변환하는데 실패했습니다.");
+		return float4();
+	}
+
+	float4 pointerPos = float4(static_cast<float>(pointerPosition.x), static_cast<float>(pointerPosition.y));
+
+	pointerPos *= this->viewportMatrix_.InverseReturn();
+	//마우스 좌표에 뷰포트행렬의 역행렬 적용.
+
+	pointerPos *= this->projectionMatrix_.InverseReturn();
+	//마우스 좌표에 투영행렬의 역행렬 적용.
+
+	pointerPos *= this->viewMatrix_.InverseReturn();
+	//마우스 좌표에 뷰행렬의 역행렬 적용.
+
+	pointerPos /= pointerPos.w;
+	//이렇게 구해진 마우스 좌표를 w값으로 나누어주지 않으면 터무니없는 값이 나온다.
+
+	return pointerPos;
 }
 
 void GameEngineCamera::SetCameraOrder(CameraOrder _order)

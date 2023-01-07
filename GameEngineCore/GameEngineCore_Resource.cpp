@@ -741,7 +741,7 @@ void EngineMesh()
 				V.TANGENT = float4::Normalize3DReturn(V.TANGENT);
 				V.TANGENT.w = 0.0f;
 
-				V.BINORMAL = float4::Cross3D(V.TANGENT, V.NORMAL);
+				V.BINORMAL = float4::CrossProduct3D(V.TANGENT, V.NORMAL);
 				V.BINORMAL = float4::Normalize3DReturn(V.BINORMAL);
 				V.BINORMAL.w = 0.0f;
 

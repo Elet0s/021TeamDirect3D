@@ -1,7 +1,6 @@
 #pragma once
 
 class TestActor;
-class MyWorldMapRenderer;
 class WorldMapLevel : public GameEngineLevel
 {
 public:
@@ -20,7 +19,8 @@ protected:
 
 private:
 	void LevelStartEvent() override;
-	void LevelEndEvent() override;
+	void UpdateCameraMovement(float _deltaTime);
+
 
 private:
 

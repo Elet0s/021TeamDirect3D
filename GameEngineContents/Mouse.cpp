@@ -47,24 +47,26 @@ void Mouse::UpdatePivotPosition(const float4& _pivot)
 
 bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot)
 {
-	float4 origin = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
-	float4 direction = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor() - origin;
+	float4 cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
+	//float4 direction = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor() - origin;
+	float4 mousePointerWorldPosition = this->GetLevel()->GetMainCamera()->GetMouseTrueWorldPosition();
+	float4 direction = mousePointerWorldPosition - cameraWorldPosition;
 	direction.Normalize3D();
 
-	DirectX::FXMVECTOR worldVertexPositionVector0 
+	DirectX::XMVECTOR worldVertexPositionVector0 
 		= ((localVertexPosition_[0] + _pivot) * _worldWorldMatrix).directXVector_;
-	DirectX::FXMVECTOR worldVertexPositionVector1 
+	DirectX::XMVECTOR worldVertexPositionVector1 
 		= ((localVertexPosition_[1] + _pivot) * _worldWorldMatrix).directXVector_;
-	DirectX::FXMVECTOR worldVertexPositionVector2 
+	DirectX::XMVECTOR worldVertexPositionVector2 
 		= ((localVertexPosition_[2] + _pivot) * _worldWorldMatrix).directXVector_;
-	DirectX::FXMVECTOR worldVertexPositionVector3
+	DirectX::XMVECTOR worldVertexPositionVector3
 		= ((localVertexPosition_[3] + _pivot) * _worldWorldMatrix).directXVector_;
 
 	float distance1 = 0.f;
 	float distance2 = 0.f;
 
 	bool result1 = DirectX::TriangleTests::Intersects(
-		origin.directXVector_,
+		cameraWorldPosition.directXVector_,
 		direction.directXVector_,
 		worldVertexPositionVector0,
 		worldVertexPositionVector1,
@@ -73,7 +75,7 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot)
 	);
 
 	bool result2 = DirectX::TriangleTests::Intersects(
-		origin.directXVector_,
+		cameraWorldPosition.directXVector_,
 		direction.directXVector_,
 		worldVertexPositionVector0,
 		worldVertexPositionVector2,

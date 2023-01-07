@@ -472,13 +472,13 @@ public:
 	}
 
 	//벡터곱(Vector Product), 가위곱(Cross Product)
-	static float4 Cross3D(const float4& _vectorA, const float4& _vectorB)
+	static float4 CrossProduct3D(const float4& _vectorA, const float4& _vectorB)
 	{
 		return DirectX::XMVector3Cross(_vectorA.directXVector_, _vectorB.directXVector_);
 	}
 
 	//벡터곱(Vector Product), 가위곱(Cross Product)
-	const float4& Cross3D(const float4& _other)
+	const float4& CrossProduct3D(const float4& _other)
 	{
 		this->directXVector_ = DirectX::XMVector3Cross(this->directXVector_, _other.directXVector_);
 		return *this;
@@ -1196,6 +1196,26 @@ public:
 		// D3D11_VIEWPORT 구조체로 ID3D11DeviceContext::RSSetViewports()함수를 통해 
 		// 원하는 렌더타겟에 뷰포트값 세팅을 해주면 래스터라이저 단계에서 적용된다.
 
+		//this->arr2D[0][0] = _width * 0.5f;
+		//this->arr2D[0][1] = 0.f;
+		//this->arr2D[0][2] = 0.f;
+		//this->arr2D[0][3] = 0.f;
+
+		//this->arr2D[1][0] = 0.f;
+		//this->arr2D[1][1] = -_height * 0.5f;
+		//this->arr2D[1][2] = 0.f;
+		//this->arr2D[1][3] = 0.f;
+
+		//this->arr2D[2][0] = 0.f;
+		//this->arr2D[2][1] = 0.f;
+		//this->arr2D[2][2] = 0.5f;
+		//this->arr2D[2][3] = 0.f;
+
+		//this->arr2D[3][0] = _width * 0.5f + _left;
+		//this->arr2D[3][1] = _height * 0.5f + _right;
+		//this->arr2D[3][2] = 0.5f;
+		//this->arr2D[3][3] = 1.f;
+
 		this->arr2D[0][0] = _width * 0.5f;
 		this->arr2D[0][1] = 0.f;
 		this->arr2D[0][2] = 0.f;
@@ -1208,12 +1228,12 @@ public:
 
 		this->arr2D[2][0] = 0.f;
 		this->arr2D[2][1] = 0.f;
-		this->arr2D[2][2] = 0.5f;
+		this->arr2D[2][2] = _maxZ - _minZ;
 		this->arr2D[2][3] = 0.f;
 
 		this->arr2D[3][0] = _width * 0.5f + _left;
 		this->arr2D[3][1] = _height * 0.5f + _right;
-		this->arr2D[3][2] = 0.5f;
+		this->arr2D[3][2] = _minZ;
 		this->arr2D[3][3] = 1.f;
 	}
 };

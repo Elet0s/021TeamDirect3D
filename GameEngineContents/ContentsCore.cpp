@@ -41,7 +41,7 @@ void ContentsCore::Start()
 	CreateLevel<ClearLevel>("Clear");
 	ChangeLevel("WorldMap");
 	//ChangeLevel("ShaderTestLevel");
-	//ChangeLevel("WorldMap");
+	//ChangeLevel("Test");
 
 
 	//GameEngineTime::SetFrameLimit(60);

@@ -10,7 +10,9 @@
 WorldMapLevel::WorldMapLevel()
 	: WorldMapRenderingActor_(nullptr),
 	WorldLevelLighting_(nullptr),
-	stageCreater_(nullptr)
+	TestActor_(nullptr),
+	stageCreater_(nullptr),
+	mousePointer_(nullptr)
 {
 }
 
@@ -68,16 +70,45 @@ void WorldMapLevel::Start()
 
 	}
 
-	//if (nullptr == mousePointer_)
-	//{
-	//	mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "WorldMapMousePointer");
-	//}
-	//Mouse::CreateMouse(this);
+	if (nullptr == mousePointer_)
+	{
+		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "WorldMapMousePointer");
+	}
 }
 
 void WorldMapLevel::Update(float _deltaTime)
 {
-	float cameraSpeed = 500.f;
+	UpdateCameraMovement(_deltaTime);
+
+
+	static const float4 renderPivot = float4(0.f, 0.5f, 0.f, 0.f);
+
+	std::list<std::shared_ptr<StageObject>> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
+
+	for (std::list<std::shared_ptr<StageObject>>::iterator iter = nextLevelList.begin();
+		 iter != nextLevelList.end();  ++iter)
+	{
+		if (true == mousePointer_->IsPointing((*iter)->GetWorldWorldMatrix(), renderPivot))
+		{
+			int i = 0;
+		}
+	}
+}
+
+void WorldMapLevel::End()
+{
+}
+
+void WorldMapLevel::LevelStartEvent()
+{
+	this->GetMainCamera()->SetFarZ(10000.f);
+	this->GetCamera(1)->SetFarZ(10000.f);
+}
+
+void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
+{
+	static const float cameraSpeed = 500.f;
+	//한번 생성해서 계속 사용하다가 게임 끝날때나 소멸시킬 것이므로 로컬스태틱으로 선언.
 
 	float4 Pos = GetMainCameraActorTransform().GetWorldPosition();
 
@@ -110,7 +141,11 @@ void WorldMapLevel::Update(float _deltaTime)
 	if (true == GameEngineInput::GetInst()->IsPressed("WorldCameraFoward"))
 	{
 
-		Pos += float4(0.f, sinf(30.f * GameEngineMath::DegreeToRadian), cosf(30.f * GameEngineMath::DegreeToRadian)) * cameraSpeed * _deltaTime;
+		Pos += float4(
+			0.f,
+			sinf(30.f * GameEngineMath::DegreeToRadian),
+			cosf(30.f * GameEngineMath::DegreeToRadian)
+		) * cameraSpeed * _deltaTime;
 
 		if (Pos.z >= -810.f)
 		{
@@ -118,12 +153,21 @@ void WorldMapLevel::Update(float _deltaTime)
 		}
 
 		GetMainCameraActorTransform().SetLocalMove(
-		float4(0.f, sinf(30.f * GameEngineMath::DegreeToRadian), cosf(30.f * GameEngineMath::DegreeToRadian)) * cameraSpeed * _deltaTime);
+			float4(
+				0.f,
+				sinf(30.f * GameEngineMath::DegreeToRadian),
+				cosf(30.f * GameEngineMath::DegreeToRadian)
+			) * cameraSpeed * _deltaTime
+		);
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPressed("WorldCameraBack"))
 	{
-		Pos += float4(0.f, -sinf(30.f * GameEngineMath::DegreeToRadian), -cosf(30.f * GameEngineMath::DegreeToRadian)) * cameraSpeed * _deltaTime;
+		Pos += float4(
+			0.f,
+			-sinf(30.f * GameEngineMath::DegreeToRadian),
+			-cosf(30.f * GameEngineMath::DegreeToRadian)
+		) * cameraSpeed * _deltaTime;
 
 		if (Pos.z <= -2226.f)
 		{
@@ -132,21 +176,14 @@ void WorldMapLevel::Update(float _deltaTime)
 
 
 		GetMainCameraActorTransform().SetLocalMove(
-			float4(0.f, -sinf(30.f * GameEngineMath::DegreeToRadian), -cosf(30.f * GameEngineMath::DegreeToRadian)) * cameraSpeed * _deltaTime);
+			float4(0.f,
+				-sinf(30.f * GameEngineMath::DegreeToRadian),
+				-cosf(30.f * GameEngineMath::DegreeToRadian)
+			) * cameraSpeed * _deltaTime
+		);
 	}
 
-}
-
-void WorldMapLevel::End()
-{
-}
-
-void WorldMapLevel::LevelStartEvent()
-{
-	this->GetMainCamera()->SetFarZ(10000.f);
-}
-
-void WorldMapLevel::LevelEndEvent()
-{
-	//Mouse::GetMouseInfo()->isWorldMap = false;
+	this->GetCameraActor(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetTransform().SetWorldPosition(
+		GetMainCameraActor()->GetTransform().GetWorldPosition()
+	);
 }
