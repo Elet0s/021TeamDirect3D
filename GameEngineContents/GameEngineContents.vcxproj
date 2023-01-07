@@ -426,7 +426,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TestFieldRenderingActor.h" />
     <ClInclude Include="Texture2DShadowRenderer.h">
       <SubType>
       </SubType>
@@ -443,17 +442,7 @@
     <ClInclude Include="LoginUI.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="ShaderTestLevel.h" />
-    <ClInclude Include="MapEditorWindow.h" />
-    <ClInclude Include="MetaSpriteWindow.h" />
     <ClInclude Include="Monster.h" />
-    <ClInclude Include="MyTileMapRenderer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="MyWorldMapRenderer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="NormalGoblin.h">
       <SubType>
       </SubType>
@@ -481,8 +470,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TileMapActor.h" />
-    <ClInclude Include="TileMapRenderer.h" />
     <ClInclude Include="TimeActor.h">
       <SubType>
       </SubType>
@@ -508,10 +495,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="WindsBlade.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="WorldMapActor.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -802,7 +785,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TestFieldRenderingActor.cpp" />
     <ClCompile Include="Texture2DShadowRenderer.cpp">
       <SubType>
       </SubType>
@@ -819,17 +801,7 @@
     <ClCompile Include="LoginUI.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="ShaderTestLevel.cpp" />
-    <ClCompile Include="MapEditorWindow.cpp" />
-    <ClCompile Include="MetaSpriteWindow.cpp" />
     <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="MyTileMapRenderer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="MyWorldMapRenderer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="NormalGoblin.cpp">
       <SubType>
       </SubType>
@@ -860,8 +832,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TileMapActor.cpp" />
-    <ClCompile Include="TileMapRenderer.cpp" />
     <ClCompile Include="TimeActor.cpp">
       <SubType>
       </SubType>
@@ -887,10 +857,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="WindsBlade.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="WorldMapActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

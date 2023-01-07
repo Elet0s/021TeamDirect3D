@@ -4,7 +4,6 @@
 #include "Player.h"
 #include "Texture2DShadowRenderer.h"
 #include "FieldRenderingActor.h"
-#include "TestFieldRenderingActor.h"
 #include "Monster.h"
 #include "BlackEyes.h"
 #include "Brown.h"

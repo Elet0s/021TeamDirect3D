@@ -25,9 +25,6 @@
     <Filter Include="Level">
       <UniqueIdentifier>{cf75bfa8-49ff-4b38-a299-672f96be44d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer">
-      <UniqueIdentifier>{49eaa654-7298-49ed-b9f7-9ed69c2a1903}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\02. Play\Monster">
       <UniqueIdentifier>{3a6c1ce7-1d1e-44f8-8cb6-802ff0ac031c}</UniqueIdentifier>
     </Filter>
@@ -106,18 +103,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="GlobalContentsValue.cpp" />
-    <ClCompile Include="TileMapActor.cpp">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="MetaSpriteWindow.cpp">
-      <Filter>Actor\00. Global\Gui</Filter>
-    </ClCompile>
-    <ClCompile Include="MapEditorWindow.cpp">
-      <Filter>Actor\00. Global\Gui</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMapRenderer.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -133,9 +118,6 @@
     <ClCompile Include="ShaderTestLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="MyTileMapRenderer.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="TimeActor.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClCompile>
@@ -144,12 +126,6 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor\02. Play\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldMapActor.cpp">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="MyWorldMapRenderer.cpp">
-      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Actor\00. Global\Actor</Filter>
@@ -385,9 +361,6 @@
     <ClCompile Include="WorldMapRenderingActor.cpp">
       <Filter>Level\Global\ContentsSupport\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="TestFieldRenderingActor.cpp">
-      <Filter>Level\Global\Test</Filter>
-    </ClCompile>
     <ClCompile Include="StageObject.cpp">
       <Filter>Actor\01. MapObject</Filter>
     </ClCompile>
@@ -427,18 +400,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="GlobalContentsValue.h" />
-    <ClInclude Include="TileMapActor.h">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="MetaSpriteWindow.h">
-      <Filter>Actor\00. Global\Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="MapEditorWindow.h">
-      <Filter>Actor\00. Global\Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMapRenderer.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -454,9 +415,6 @@
     <ClInclude Include="ShaderTestLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="MyTileMapRenderer.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="TimeActor.h">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
@@ -467,12 +425,6 @@
       <Filter>Actor\02. Play\Player</Filter>
     </ClInclude>
     <ClInclude Include="LoginUI.h" />
-    <ClInclude Include="MyWorldMapRenderer.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldMapActor.h">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
@@ -706,9 +658,6 @@
     </ClInclude>
     <ClInclude Include="WorldMapRenderingActor.h">
       <Filter>Level\Global\ContentsSupport\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="TestFieldRenderingActor.h">
-      <Filter>Level\Global\Test</Filter>
     </ClInclude>
     <ClInclude Include="StageObject.h">
       <Filter>Actor\01. MapObject</Filter>

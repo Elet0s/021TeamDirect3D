@@ -210,8 +210,6 @@ void StageCreater::Start()
 			}
 		}
 	}
-
-
 }
 
 void StageCreater::Update(float _deltaTime)
