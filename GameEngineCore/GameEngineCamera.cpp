@@ -44,7 +44,20 @@ GameEngineCamera::~GameEngineCamera()
 {
 }
 
-float4 GameEngineCamera::GetMouseScreenPosition()
+float4 GameEngineCamera::ConvertWorldPositionToScreenPosition(const float4& _worldPosition)
+{
+	float4 pos = _worldPosition;
+
+	pos *= this->viewMatrix_;			//pos에 뷰행렬 적용, 뷰스페이스 좌표로 변경.
+	pos *= this->projectionMatrix_;		//pos에 투영행렬 적용, 
+	pos /= pos.w;						//pos.w에 저장된 pos의 상대z값만큼 pos값 축소.
+
+	pos *= this->viewportMatrix_;		//pos에 뷰포트행렬 적용.
+
+	return pos;
+}
+
+float4 GameEngineCamera::GetMousePositionInScreen()
 {
 	POINT pointerPosition;
 	if (false == GetCursorPos(&pointerPosition))
@@ -66,7 +79,51 @@ float4 GameEngineCamera::GetMouseScreenPosition()
 	return float4(static_cast<float>(pointerPosition.x), static_cast<float>(pointerPosition.y));
 }
 
-float4 GameEngineCamera::GetMouseWorldPosition()
+//float4 GameEngineCamera::GetMouseWorldPosition()
+//{
+//	POINT pointerPosition;
+//	if (false == GetCursorPos(&pointerPosition))
+//		//화면 전체 기준 마우스 포인터의 좌표를 윈도우 스크린 좌표(좌상단 0, 0)로 반환하는 함수.
+//	{
+//		MsgBoxAssert("마우스 포인터 좌표를 얻어오는데 실패했습니다.");
+//		return float4();
+//	}
+//
+//	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
+//		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
+//		&pointerPosition)	//변환할 화면 전체기준 마우스 포인터 좌표.
+//	)
+//	{
+//		MsgBoxAssert("마우스 포인터 좌표를 변환하는데 실패했습니다.");
+//		return float4();
+//	}
+//
+//	float4 pointerPos = float4(static_cast<float>(pointerPosition.x), static_cast<float>(pointerPosition.y));
+//
+//	//float4x4 invertedViewportMatrix;
+//	//invertedViewportMatrix.Viewport(size_.x, size_.y, 0.f, 0.f, 0.f, 1.f);
+//	//invertedViewportMatrix.Inverse();
+//
+//	//pointerPos *= invertedViewportMatrix;
+//
+//	pointerPos *= this->viewportMatrix_.InverseReturn();
+//
+//	//float4x4 invertedProjectionMatrix = projectionMatrix_.InverseReturn();
+//	//pointerPos *= invertedProjectionMatrix;
+//
+//	//pointerPos *= pointerPos.w;
+//	pointerPos *= this->projectionMatrix_.InverseReturn();
+//	//pointerPos *= this->viewMatrix_.InverseReturn();
+//
+//	return pointerPos;
+//}
+
+//float4 GameEngineCamera::GetMouseWorldPositionToActor()
+//{
+//	return this->GetTransform().GetWorldPosition() + GetMouseWorldPosition();
+//}
+
+float4 GameEngineCamera::GetMousePositionInViewSpace()
 {
 	POINT pointerPosition;
 	if (false == GetCursorPos(&pointerPosition))
@@ -79,7 +136,7 @@ float4 GameEngineCamera::GetMouseWorldPosition()
 	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
 		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
 		&pointerPosition)	//변환할 화면 전체기준 마우스 포인터 좌표.
-	)
+		)
 	{
 		MsgBoxAssert("마우스 포인터 좌표를 변환하는데 실패했습니다.");
 		return float4();
@@ -87,43 +144,16 @@ float4 GameEngineCamera::GetMouseWorldPosition()
 
 	float4 pointerPos = float4(static_cast<float>(pointerPosition.x), static_cast<float>(pointerPosition.y));
 
-	//float4x4 invertedViewportMatrix;
-	//invertedViewportMatrix.Viewport(size_.x, size_.y, 0.f, 0.f, 0.f, 1.f);
-	//invertedViewportMatrix.Inverse();
-
-	//pointerPos *= invertedViewportMatrix;
-
 	pointerPos *= this->viewportMatrix_.InverseReturn();
+	//마우스 좌표에 뷰포트행렬의 역행렬 적용.
 
-	//float4x4 invertedProjectionMatrix = projectionMatrix_.InverseReturn();
-	//pointerPos *= invertedProjectionMatrix;
-
-	//pointerPos *= pointerPos.w;
 	pointerPos *= this->projectionMatrix_.InverseReturn();
-	//pointerPos *= this->viewMatrix_.InverseReturn();
+	//마우스 좌표에 투영행렬의 역행렬 적용.
 
 	return pointerPos;
 }
 
-float4 GameEngineCamera::GetMouseWorldPositionToActor()
-{
-	return this->GetTransform().GetWorldPosition() + GetMouseWorldPosition();
-}
-
-float4 GameEngineCamera::GetWorldPositionToScreenPosition(const float4& _worldPosition)
-{
-	float4 pos = _worldPosition;
-
-	pos *= this->viewMatrix_;			//pos에 뷰행렬 적용, 뷰스페이스 좌표로 변경.
-	pos *= this->projectionMatrix_;		//pos에 투영행렬 적용, 
-	pos /= pos.w;						//pos.w에 저장된 pos의 상대z값만큼 pos값 축소.
-
-	pos *= this->viewportMatrix_;		//pos에 뷰포트행렬 적용.
-
-	return pos;
-}
-
-float4 GameEngineCamera::GetMouseTrueWorldPosition()
+float4 GameEngineCamera::GetMousePositionInWorldSpace()
 {
 	POINT pointerPosition;
 	if (false == GetCursorPos(&pointerPosition))
@@ -622,17 +652,7 @@ void GameEngineCamera::Release(float _deltaTime)
 
 void GameEngineCamera::Update(float _dletaTime)
 {
-	float4 currentMousePosition = GetMouseWorldPosition();
-	//현재 마우스포인터의 위치를 알아낸다.
-
-	currentMousePosition.w = 0.f;
-	//w는 왜 굳이 0??
-
-	mouseDirection_ = currentMousePosition - prevMousePosition_;
-	//현재 마우스포인터 위치 - 이전 마우스포인터 위치 = 마우스포인터의 이동방향.
-
-	prevMousePosition_ = currentMousePosition;
-	//이전 마우스포인터 위치 갱신.
+	UpdateMouseDirection();
 }
 
 void GameEngineCamera::OverRenderer(std::shared_ptr<GameEngineCamera> _nextCamera)
@@ -677,4 +697,16 @@ void GameEngineCamera::ChangeRenderingOrder(std::shared_ptr<GameEngineRenderer> 
 	_renderer->renderingOrder_ = _newRenderingOrder;
 
 	this->allRenderers_[_renderer->GetRenderingOrder()].push_back(_renderer);
+}
+
+void GameEngineCamera::UpdateMouseDirection()
+{
+	float4 currentMousePosition = GetMousePositionInViewSpace();
+	//현재 마우스포인터의 위치를 알아낸다.
+
+	mouseDirection_ = currentMousePosition - prevMousePosition_;
+	//현재 마우스포인터 위치 - 이전 마우스포인터 위치 = 마우스포인터의 이동방향.
+
+	prevMousePosition_ = currentMousePosition;
+	//이전 마우스포인터 위치 갱신.
 }

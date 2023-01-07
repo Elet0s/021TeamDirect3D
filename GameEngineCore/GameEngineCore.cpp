@@ -101,6 +101,7 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _userCore)
 
 		currentLevel_->ResetAccTime();
 		GameEngineTime::GetInst()->Reset();
+		GameEngineInput::GetInst()->Reset();
 	}
 
 	if (nullptr == currentLevel_)

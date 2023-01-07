@@ -3,7 +3,7 @@
 #include "PlayerObject.h"
 
 PlayerObject::PlayerObject() 
-	:	mode_(PlayerObjectMode::Idle),
+	: mode_(PlayerObjectMode::Idle),
 	col_(nullptr),
 	renderer_(nullptr)
 {
@@ -33,7 +33,7 @@ void PlayerObject::Start()
 void PlayerObject::Update(float _deltaTime)
 {
 	float4 PosK = GetTransform().GetWorldPosition();
-	PosK = GetLevel()->GetMainCamera()->GetWorldPositionToScreenPosition(PosK);
+	PosK = GetLevel()->GetMainCamera()->ConvertWorldPositionToScreenPosition(PosK);
 	col_->GetTransform().SetWorldPosition(PosK);
 
 	if (mode_ == PlayerObjectMode::Move)

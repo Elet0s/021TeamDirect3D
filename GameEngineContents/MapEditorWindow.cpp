@@ -94,7 +94,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
         && selectTile_ < selectFolderTexture->GetTextureCount())
     {
 
-        float4 mousePos = _level->GetMainCamera()->GetMouseWorldPosition();
+        //float4 mousePos = _level->GetMainCamera()->GetMouseWorldPosition();
 
         //tileMap_->tileRenderer_->SetTileIndex(mousePos, selectTile_);
     }

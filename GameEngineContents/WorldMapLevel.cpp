@@ -88,7 +88,12 @@ void WorldMapLevel::Update(float _deltaTime)
 	for (std::list<std::shared_ptr<StageObject>>::iterator iter = nextLevelList.begin();
 		 iter != nextLevelList.end();  ++iter)
 	{
-		if (true == mousePointer_->IsPointing((*iter)->GetWorldWorldMatrix(), renderPivot))
+		if (false == mousePointer_->IsPointing((*iter)->GetWorldWorldMatrix(), renderPivot))
+		{
+			continue;
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("Click"))
 		{
 			int i = 0;
 		}

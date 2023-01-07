@@ -33,7 +33,7 @@ void StageObject::Start()
 void StageObject::Update(float _deltaTime)
 {
 	float4 PosK = GetTransform().GetWorldPosition();
-	PosK = GetLevel()->GetMainCamera()->GetWorldPositionToScreenPosition(PosK);
+	PosK = GetLevel()->GetMainCamera()->ConvertWorldPositionToScreenPosition(PosK);
 	//Pos *= GetViewProject
 	col_->GetTransform().SetWorldPosition(PosK);
 

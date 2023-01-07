@@ -40,20 +40,23 @@ public:
 	GameEngineCamera& operator=(GameEngineCamera&& _other) = delete;
 
 public:
-	//마우스 포인터의 위치를 윈도우 스크린 좌표로 받아오는 함수.
-	float4 GetMouseScreenPosition();
-
-	//마우스 포인터의 위치를 월드좌표(고정 카메라 기준)로 받아오는 함수.
-	float4 GetMouseWorldPosition();
-
-	//마우스 포인터의 위치를 월드좌표(이동 카메라 기준)로 받아오는 함수.
-	float4 GetMouseWorldPositionToActor();
-
 	//주어진 월드좌표를 윈도우좌표로 바꾸는 함수.
-	float4 GetWorldPositionToScreenPosition(const float4& _worldPosition);
+	float4 ConvertWorldPositionToScreenPosition(const float4& _worldPosition);
+
+	//마우스 포인터의 위치를 윈도우 스크린 좌표로 받아오는 함수.
+	float4 GetMousePositionInScreen();
 
 
-	float4 GetMouseTrueWorldPosition();
+	//float4 GetMouseWorldPosition();
+	//float4 GetMouseWorldPositionToActor();
+
+	//마우스 포인터의 위치를 뷰공간 기준으로 받아오는 함수.
+	float4 GetMousePositionInViewSpace();
+
+	//마우스 포인터의 위치를 월드공간 기준으로 받아오는 함수.
+	float4 GetMousePositionInWorldSpace();
+
+
 
 
 	//카메라의 순서를 변경하는 함수.
@@ -75,7 +78,7 @@ public:
 		projectionMode_ = _mode;
 	}
 
-	inline const float4& GetMouseWorldDirection()
+	inline const float4& GetMouseDirection()
 	{
 		return mouseDirection_;
 	}
@@ -160,6 +163,9 @@ private:
 
 	//렌더링 순서 변경.
 	void ChangeRenderingOrder(std::shared_ptr<GameEngineRenderer> _renderer, int _newRenderingOrder);
+
+	//마우스 포인터 이동방향 업데이트 함수.
+	void UpdateMouseDirection();
 
 private:
 	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.

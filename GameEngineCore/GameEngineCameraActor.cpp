@@ -83,11 +83,11 @@ void GameEngineCameraActor::Update(float _deltaTime)
 
 	if (true == GameEngineInput::GetInst()->IsPressed("CamRot"))
 	{
-		float4 mouseDir = this->cameraComponent_->GetMouseWorldDirection();
+		float4 mouseDir = this->cameraComponent_->GetMouseDirection();
 		float4 rotMouseDir;
 		rotMouseDir.x = -mouseDir.y;		//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
 		rotMouseDir.y = mouseDir.x;	//마우스 좌표값 입력을 왜 반대로?? 직접 계산해볼 것.
-		GetTransform().SetAddWorldRotation(rotMouseDir * rotationSpeed_);
+		GetTransform().SetAddWorldRotation(rotMouseDir * rotationSpeed_ /** _deltaTime*/);
 	}
 }
 

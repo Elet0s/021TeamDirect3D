@@ -25,6 +25,11 @@ void ContentsCore::Start()
 		GameEngineInput::GetInst()->CreateKey("LevelChangeKey", 'P');
 	}
 
+	if (false == GameEngineInput::GetInst()->IsKey("Click"))
+	{
+		GameEngineInput::GetInst()->CreateKey("Click", VK_LBUTTON);
+	}
+
 	LoadContentsResource();
 	LoadContentsShader();
 

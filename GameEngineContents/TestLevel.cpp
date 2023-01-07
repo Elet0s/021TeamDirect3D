@@ -131,12 +131,12 @@ void TestLevel::LevelStartEvent()
 {
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
-	this->GetCamera(1)->SetFarZ(500.f);
+	this->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->SetFarZ(500.f);
 
 	//if (nullptr == mousePointer_)
 	//{
 	//	mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "MousePointer");
-	//	mousePointer_->ChangeMousePointerRenderer(true);
+		mousePointer_->ChangeMousePointerRenderer(true);
 	//}
 }
 
@@ -169,7 +169,7 @@ void TestLevel::MouseMoveCamera()
 	float Time = GameEngineTime::GetDeltaTime();
 
 	float4 MouseDir = float4::Zero;
-	float4 CheckPos = GetMainCamera()->GetMouseWorldPositionToActor() - Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+	float4 CheckPos = GetMainCamera()->GetMousePositionInWorldSpace() - Player::GetPlayerInst()->GetTransform().GetWorldPosition();
 
 
 		if (CheckPos.x > 360.f)

@@ -7,17 +7,23 @@ GameEngineInput* GameEngineInput::inst_ = new GameEngineInput();
 
 void GameEngineInput::GameEngineKey::Update(float _deltaTime)
 {
+	if (1 == this->keyValue_)
+	{
+		int i = 0;
+	}
+
 	if (0 != GetAsyncKeyState(this->keyValue_))
 	{
 		if (true == isFree_)
 		{
 			isDown_ = true;
-			isPressed_ = true;
+			isPressed_ = false;
 			isUp_ = false;
 			isFree_ = false;
 			time_ = _deltaTime;
 		}
-		else if (true == isPressed_)
+		//else if (true == isPressed_)
+		else /*if (false == isFree_)*/
 		{
 			isDown_ = false;
 			isPressed_ = true;
@@ -36,7 +42,8 @@ void GameEngineInput::GameEngineKey::Update(float _deltaTime)
 			isFree_ = false;
 			time_ = 0.0f;
 		}
-		else if (true == isUp_)
+		//else if (true == isUp_)
+		else /*if (true == isUp_)*/
 		{
 			isDown_ = false;
 			isPressed_ = false;

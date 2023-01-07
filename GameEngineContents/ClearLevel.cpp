@@ -22,10 +22,10 @@ void ClearLevel::Start()
 	GetMainCameraActorTransform().SetWorldPosition(float4(192.f, 48.f, -135.f));
 	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
 
-	if (false == GameEngineInput::GetInst()->IsKey("click"))
-	{
-		GameEngineInput::GetInst()->CreateKey("Click", VK_LBUTTON);
-	}
+	//if (false == GameEngineInput::GetInst()->IsKey("Click"))
+	//{
+	//	GameEngineInput::GetInst()->CreateKey("Click", VK_LBUTTON);
+	//}
 }
 void ClearLevel::Update(float _deltaTime)
 {

@@ -49,7 +49,7 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot)
 {
 	float4 cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
 	//float4 direction = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor() - origin;
-	float4 mousePointerWorldPosition = this->GetLevel()->GetMainCamera()->GetMouseTrueWorldPosition();
+	float4 mousePointerWorldPosition = this->GetLevel()->GetMainCamera()->GetMousePositionInWorldSpace();
 	float4 direction = mousePointerWorldPosition - cameraWorldPosition;
 	direction.Normalize3D();
 
@@ -95,16 +95,6 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot)
 
 void Mouse::Start()
 {
-	//mouseCollision_ = CreateComponent<GameEngineCollision>();
-	//mouseCollision_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Black);
-	//mouseCollision_->GetTransform().SetWorldScale( 10, 10, 10 );
-	//mouseCollision_->ChangeOrder(ObjectOrder::Mouse);
-
-	//mouseRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	//mouseRenderer_->GetTransform().SetWorldScale(64, 64, 100);
-	//mouseRenderer_->ChangeCamera(CameraOrder::UICamera);
-	//mouseRenderer_->SetTexture("CursorSprite.png");
-
 	this->GetTransform().SetLocalScale(float4::One);
 	this->GetTransform().SetWorldScale(float4::One);
 
@@ -131,34 +121,19 @@ void Mouse::Start()
 	aimLineRenderer_->SetTexture("AimLine.png");
 	aimLineRenderer_->ChangeCamera(CameraOrder::MousePointerCamera);
 	aimLineRenderer_->Off();
-
-	//마우스포인터 위치 문제와 마우스 포인터 알파 렌더링 문제를 한번에 해결하기 위해 마우스포인터 카메라 추가.
-	//->
 }
 
 void Mouse::Update(float _DeltaTime)
 {
-	//GetCurPos();
-	//mouseRenderer_->GetTransform().SetLocalPosition(
-	//	GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x+10.0f,
-	//	GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y,
-	//	-100.0f
-	//);
-	//mouseCollision_->GetTransform().SetLocalPosition(
-	//	GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x + 10.0f,
-	//	GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y, 
-	//	-100.0f
-	//);
-
-
-	///////////////////////////////////////////////////////////////////
 
 	//전투맵에서의 동작.
 	if (CameraProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
 	{
-		this->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetMouseWorldPositionToActor()
-		);
+		//this->GetTransform().SetWorldPosition(
+		//	this->GetLevel()->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetMouseWorldPositionToActor()
+		//);
+
+		this->GetTransform().SetWorldPosition(this->GetLevel()->GetMainCamera()->GetMousePositionInWorldSpace());
 
 		if (true == isAiming_)
 		{
@@ -191,13 +166,13 @@ void Mouse::Update(float _DeltaTime)
 		}
 
 		this->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetMainCamera()->GetMouseTrueWorldPosition()
+			this->GetLevel()->GetMainCamera()->GetMousePositionInWorldSpace()
 		);
 
 		defaultPointerRenderer_->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetCamera(1)->GetMouseTrueWorldPosition().x + 10.f,	
-			this->GetLevel()->GetCamera(1)->GetMouseTrueWorldPosition().y - 14.f,	
-			this->GetLevel()->GetCamera(1)->GetMouseTrueWorldPosition().z
+			this->GetLevel()->GetCamera(1)->GetMousePositionInWorldSpace().x + 10.f,
+			this->GetLevel()->GetCamera(1)->GetMousePositionInWorldSpace().y - 14.f,
+			this->GetLevel()->GetCamera(1)->GetMousePositionInWorldSpace().z
 		);
 
 	}
