@@ -107,7 +107,6 @@ void TestLevel::Start()
 	if (nullptr == mousePointer_)
 	{
 		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "TestLevelMousePointer");
-		//mousePointer_->ChangeMousePointerRenderer(true);
 	}
 }
 
@@ -136,7 +135,7 @@ void TestLevel::LevelStartEvent()
 	//if (nullptr == mousePointer_)
 	//{
 	//	mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "MousePointer");
-		mousePointer_->ChangeMousePointerRenderer(true);
+	//	mousePointer_->ChangeMousePointerRenderer(true);
 	//}
 }
 

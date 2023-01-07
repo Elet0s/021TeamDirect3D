@@ -7,10 +7,6 @@ GameEngineInput* GameEngineInput::inst_ = new GameEngineInput();
 
 void GameEngineInput::GameEngineKey::Update(float _deltaTime)
 {
-	if (1 == this->keyValue_)
-	{
-		int i = 0;
-	}
 
 	if (0 != GetAsyncKeyState(this->keyValue_))
 	{

@@ -4,6 +4,8 @@ class StageObject;
 class PlayerObject;
 class StageCreater : public GameEngineActor
 {
+	friend class WorldMapLevel;
+
 public:
 	// constrcuter destructer
 	StageCreater();
@@ -14,6 +16,8 @@ public:
 	StageCreater(StageCreater&& _Other) noexcept = delete;
 	StageCreater& operator=(const StageCreater& _Other) = delete;
 	StageCreater& operator=(StageCreater&& _Other) noexcept = delete;
+
+
 
 public:
 	std::shared_ptr<StageObject>& GetCurLevel()
@@ -26,6 +30,7 @@ private:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	CollisionReturn CheckNextLevel(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	void SendPlayerToNextStage(std::weak_ptr<StageObject> _nextStageObject);
 
 private:
 	std::shared_ptr<StageObject> curlevel_;
