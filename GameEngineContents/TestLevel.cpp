@@ -20,7 +20,8 @@
 
 TestLevel::TestLevel()
 	: fieldRenderingActor_(nullptr),
-	testLevelLighting_(nullptr)
+	testLevelLighting_(nullptr), 
+	mousePointer_(nullptr)
 {
 }
 
@@ -30,6 +31,10 @@ TestLevel::~TestLevel()
 
 void TestLevel::Start()
 {
+	//mainCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
+	//mainCameraActor->GetCameraComponent()->SetProjectionMode(CameraProjectionMode::Orthographic);
+	//mainCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MousePointerCamera);
+
 
 	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
 	fieldRenderingActor_->Initialize(
@@ -70,7 +75,9 @@ void TestLevel::Start()
 	//		Monster::GetMonsterList()[i]->Unsummon();
 	//}
 	//Monster::SummonMonster<RedFlyingEyes>(this, 10);
-	//Mouse::CreateMouse(this);
+
+
+
 	
 	//ShowCursor(false); 마우스 감추기
 	CreateActor<TimeActor>();
@@ -96,20 +103,39 @@ void TestLevel::Start()
 
 	this->GetMainCamera()->PushLighting(testLevelLighting_);
 	//카메라에 조명 등록.
+
+	if (nullptr == mousePointer_)
+	{
+		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "TestLevelMousePointer");
+		//mousePointer_->ChangeMousePointerRenderer(true);
+	}
 }
 
 void TestLevel::Update(float _DeltaTime)
 {						
 	PlayerMoveCamera();
 
+	this->GetCameraActor(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetTransform().SetWorldPosition(
+		GetMainCameraActor()->GetTransform().GetWorldPosition()
+	);
+
 	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
+
+	mousePointer_->UpdatePivotPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 }
 
 void TestLevel::LevelStartEvent()
 {
-	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
+	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
+
+	//if (nullptr == mousePointer_)
+	//{
+	//	mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "MousePointer");
+	//	mousePointer_->ChangeMousePointerRenderer(true);
+	//}
 }
+
 void TestLevel::LevelEndEvent()
 {
 	SoundPlayer::BGMPlay_->Stop();
@@ -162,7 +188,6 @@ void TestLevel::MouseMoveCamera()
 	
 
 	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MouseDir.x) * Time, (MouseDir.y) * Time));
-
 }
 
 

@@ -5,7 +5,7 @@
 enum class CameraOrder
 {
 	MainCamera,
-	User0,
+	MousePointerCamera,
 	User1,
 	User2,
 	User3,
@@ -45,6 +45,7 @@ public:
 	GameEngineTransform& GetMainCameraActorTransform();
 	std::shared_ptr<GameEngineCameraActor> GetUICameraActor();
 	GameEngineTransform& GetUICameraActorTransform();
+	std::shared_ptr<GameEngineCameraActor> GetCameraActor(UINT _index);
 
 	void AllClear();
 

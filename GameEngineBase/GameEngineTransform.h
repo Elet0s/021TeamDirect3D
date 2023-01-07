@@ -275,7 +275,7 @@ public:
 		float4 newLocalPosition = _worldPosition;
 		if (nullptr != parentTransform_)
 		{
-			newLocalPosition *= float4x4::InverseReturn(parentTransform_->data_.worldWorldMatrix_);
+			newLocalPosition *= parentTransform_->data_.worldWorldMatrix_.InverseReturn();
 		}
 
 		CalculateWorldPosition(newLocalPosition);
@@ -285,7 +285,7 @@ public:
 		float4 newLocalPosition = { _worldPositionX, _worldPositionY, _worldPositionZ };
 		if (nullptr != parentTransform_)
 		{
-			newLocalPosition *= float4x4::InverseReturn(parentTransform_->data_.worldWorldMatrix_);
+			newLocalPosition *= parentTransform_->data_.worldWorldMatrix_.InverseReturn();
 		}
 
 		CalculateWorldPosition(newLocalPosition);

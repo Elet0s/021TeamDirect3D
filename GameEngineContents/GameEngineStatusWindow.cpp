@@ -1,9 +1,7 @@
 ﻿#include "PreCompile.h"
 #include "GameEngineStatusWindow.h"
-//#include "GameEngineRenderTarget.h"
-//#include "GameEngineLevel.h"
-//#include "GameEngineCameraActor.h"
-//#include "GEngine.h"
+#include "ShaderTestLevel.h"
+#include "Mouse.h"
 
 void GameEngineImageShotWindow::RenderTextureSetting(ImTextureID _renderTexture, ImVec2 _size)
 {
@@ -60,10 +58,26 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 	ImGui::Text(currentDeltaTime.c_str());
 
 
-	std::string currentCameraPos = "CameraPos : " + std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor().get()->GetTransform().GetWorldPosition().IX())
-		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor().get()->GetTransform().GetWorldPosition().IY())
-		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor().get()->GetTransform().GetWorldPosition().IZ());
+	std::string currentCameraPos = "CameraPos : " 
+		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().IX())
+		+ ", "
+		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().IY())
+		+ ", "
+		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().IZ());
 	ImGui::Text(currentCameraPos.c_str());
+
+
+	if (nullptr != reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel()))
+	{
+		std::string currentMousePos = "MouseWorldPosition : ";
+		currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetTransform().GetWorldPosition().x);
+		currentMousePos += ", ";
+		currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetTransform().GetWorldPosition().y);
+		currentMousePos += ", ";
+		currentMousePos += std::to_string(reinterpret_cast<ShaderTestLevel*>(GEngine::GetCurrentLevel())->GetMouse()->GetTransform().GetWorldPosition().z);
+
+		ImGui::Text(currentMousePos.c_str());
+	}
 
 
 

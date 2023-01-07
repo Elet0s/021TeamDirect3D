@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "ShaderTestLevel.h"
+#include "Mouse.h"
 #include "Player.h"
 #include "Texture2DShadowRenderer.h"
 #include "FieldRenderingActor.h"
@@ -14,9 +15,7 @@
 #include "GameEngineStatusWindow.h"
 
 ShaderTestLevel::ShaderTestLevel()
-	: shaderTestActor_(nullptr),
-	shaderTestRenderer_(nullptr),
-	testLighting_(nullptr)
+	: shaderTestActor_(nullptr)
 {
 }
 
@@ -26,74 +25,24 @@ ShaderTestLevel::~ShaderTestLevel()
 
 void ShaderTestLevel::Start()
 {
-
-	//GameEngineDirectory testDir;
-	//testDir.MoveParentToExistChildDirectory("ContentsResources");
-	//testDir.MoveToChild("ContentsResources");
-	//testDir.MoveToChild("InstancingTest");
-	//testDir.MoveToChild("Field");
-
-	//GameEngineTexture2DArray::Load(testDir.GetFullPath());
-
-	//testDir.MoveToParent("InstancingTest");
-	//testDir.MoveToChild("Monster");
-
-	//GameEngineTexture2DArray::Load(testDir.GetFullPath());
+	this->GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
+	this->GetMainCamera()->SetFarZ(500.f);
+	//this->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->SetProjectionMode(CameraProjectionMode::Perspective);
 
 
-	shaderTestActor_ = CreateActor<TestFieldRenderingActor>(0, "ShaderTestActor");
-	shaderTestActor_->Initialize(
-		1000,
-		200,
-		float4(100, 100),
-		50.f
-	);
-	shaderTestActor_->GetTransform().SetLocalScale(float4::White);
-	shaderTestActor_->GetTransform().SetWorldScale(float4::White);
-	shaderTestActor_->GetTransform().SetWorldPosition(float4::Zero);
+	shaderTestActor_ = CreateActor<Mouse>(0, "ShaderTestActor");
 
 
-	testLighting_ = CreateActor<GameEngineLighting>(0, "TestLighting");
-	testLighting_->GetTransform().SetWorldRotation(45.f, 45.f, 0.f);
-	testLighting_->GetLightingData().mainLightColor_ = float4(0.75f, 0.75f, 0.75f);
-	testLighting_->GetLightingData().ambientLightColor_ = float4(0.11f, 0.11f, 0.11f);
-	testLighting_->GetLightingData().specularLightRatio_ = 0.f;
-	testLighting_->GetLightingData().diffuseLightRatio_ = 2.f;
-
-	this->GetMainCamera()->PushLighting(testLighting_);
-
-
-	//Monster::ReserveMonsters(this, 50);
-
-
-	//Monster::CreateMonster<Brown>(this, 10);
-	//Monster::CreateMonster<Green>(this, 10);
-	//Monster::CreateMonster<NormalGoblin>(this, 10);
-	//Monster::CreateMonster<RedFlyingEyes>(this, 10);
-	//Monster::CreateMonster<FlyingEyes>(this, 10);
-
-	//Monster::SummonMonster<Brown>(this, 10);
-	//Monster::SummonMonster<Green>(this, 10);
-	//Monster::SummonMonster<NormalGoblin>(this, 10);
-	//Monster::SummonMonster<RedFlyingEyes>(this, 10);
-	//Monster::SummonMonster<FlyingEyes>(this, 10);
 	
-
+	//DirectX::XMPlaneIntersectLine();
+	//DirectX::TriangleTests::Intersects();
 }
 
 void ShaderTestLevel::Update(float _deltaTime)
 {
-	shaderTestActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
+	//shaderTestActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
 
-	//testLighting_->GetTransform().SetWorldPosition(
-	//	GetMainCameraActor()->GetTransform().GetWorldPosition().x + GameEngineWindow::GetScale().HY(),
-	//	GetMainCameraActor()->GetTransform().GetWorldPosition().y - GameEngineWindow::GetScale().HY(),
-	//	GetMainCameraActor()->GetTransform().GetWorldPosition().z
-	//);
 
-	testLighting_->GetTransform().SetWorldPosition(
-		GetMainCameraActor()->GetTransform().GetWorldPosition()
-	);
 }
 
 void ShaderTestLevel::End()

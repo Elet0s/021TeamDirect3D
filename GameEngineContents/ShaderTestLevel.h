@@ -1,10 +1,8 @@
 #pragma once
 
-class Texture2DShadowRenderer;
+class Mouse;
 class ShaderTestLevel: public GameEngineLevel
 {
-
-
 
 public:
 
@@ -16,6 +14,16 @@ public:
 	ShaderTestLevel& operator=(const ShaderTestLevel& _other) = delete;
 	ShaderTestLevel& operator=(ShaderTestLevel&& _other) = delete;
 
+public:
+
+
+public:
+	std::shared_ptr<Mouse> GetMouse()
+	{
+		return shaderTestActor_;
+	}
+
+
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -23,9 +31,9 @@ protected:
 
 
 private:
-	std::shared_ptr<class TestFieldRenderingActor> shaderTestActor_;
-	std::shared_ptr<GameEngineTextureRenderer> shaderTestRenderer_;
-	std::vector<RenderOption> testRenderOptionVector_;
-	std::shared_ptr<GameEngineLighting> testLighting_;
+	std::shared_ptr<Mouse> shaderTestActor_;
+	//std::shared_ptr<GameEngineTextureRenderer> shaderTestRenderer_;
+	//std::vector<RenderOption> testRenderOptionVector_;
+	//std::shared_ptr<GameEngineLighting> testLighting_;
 };
 

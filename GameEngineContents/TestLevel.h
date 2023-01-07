@@ -1,7 +1,7 @@
 #pragma once
 
+class Mouse;
 class FieldRenderingActor;
-class Monster;
 class TestLevel : public GameEngineLevel
 {
 public:
@@ -28,5 +28,5 @@ private:
 private:
 	std::shared_ptr<FieldRenderingActor> fieldRenderingActor_;
 	std::shared_ptr<GameEngineLighting> testLevelLighting_;
-	std::shared_ptr<GameEngineLevel> thisLevel_;
+	std::shared_ptr<Mouse> mousePointer_;
 };
