@@ -39,8 +39,8 @@ void ContentsCore::Start()
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
 	CreateLevel<ClearLevel>("Clear");
-	ChangeLevel("WorldMap");
-	//ChangeLevel("ShaderTestLevel");
+	//ChangeLevel("WorldMap");
+	ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("Test");
 
 

@@ -191,46 +191,14 @@ void Mouse::Update(float _DeltaTime)
 		}
 
 		this->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor()
+			this->GetLevel()->GetMainCamera()->GetMouseTrueWorldPosition()
 		);
-		//(1.0264, 0.5773, -99.0000)
-
-
-
 
 		defaultPointerRenderer_->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().x + 10.f,	
-			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().y - 14.f,	
-			this->GetLevel()->GetUICamera()->GetMouseWorldPosition().z
+			this->GetLevel()->GetCamera(1)->GetMouseTrueWorldPosition().x + 10.f,	
+			this->GetLevel()->GetCamera(1)->GetMouseTrueWorldPosition().y - 14.f,	
+			this->GetLevel()->GetCamera(1)->GetMouseTrueWorldPosition().z
 		);
-
-
-		//float4 origin = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
-		//float4 direction = this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor() - origin;
-		//direction.Normalize3D();
-
-		//DirectX::FXMVECTOR temp0 = (float4(200, 0, 100)).directXVector_;
-		//DirectX::GXMVECTOR temp1 = float4(100, 0, 100).directXVector_;
-		//DirectX::HXMVECTOR temp2 = (float4(100, 100, 100)).directXVector_;
-
-		//float value = 0.f;
-
-		////DirectX::Internal::XMVector3IsUnit(this->GetLevel()->GetMainCamera()->GetMouseWorldPositionToActor().directXVector_);
-
-		//bool result = DirectX::TriangleTests::Intersects(
-		//	origin.directXVector_,
-		//	direction.directXVector_,
-		//	temp0,
-		//	temp1,
-		//	temp2,
-		//	value
-		//);
-
-		//if (true == result)
-		//{
-		//	int i = 0;
-		//}
-
 
 	}
 }

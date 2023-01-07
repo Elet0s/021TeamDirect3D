@@ -40,9 +40,7 @@ void ShaderTestLevel::Start()
 
 void ShaderTestLevel::Update(float _deltaTime)
 {
-	//shaderTestActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
-
-
+	
 }
 
 void ShaderTestLevel::End()

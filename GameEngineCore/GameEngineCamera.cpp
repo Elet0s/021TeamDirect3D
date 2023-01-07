@@ -136,7 +136,7 @@ float4 GameEngineCamera::GetMouseTrueWorldPosition()
 	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
 		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
 		&pointerPosition)	//변환할 화면 전체기준 마우스 포인터 좌표.
-		)
+	)
 	{
 		MsgBoxAssert("마우스 포인터 좌표를 변환하는데 실패했습니다.");
 		return float4();
