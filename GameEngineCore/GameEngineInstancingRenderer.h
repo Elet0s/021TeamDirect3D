@@ -88,9 +88,9 @@ class GameEngineInstancingRenderer
 
         std::map<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
 
-        unsigned int colorTextureIndex_; //인스턴스별로 사용할 컬러텍스처 배열의 인덱스.
+        unsigned int colorTextureIndex_; //인스턴스별로 사용할 컬러텍스처의 인덱스.
 
-        unsigned int normalMapTextureIndex_; //인스턴스별로 사용할 노말맵텍스처 배열의 인덱스.
+        unsigned int normalMapTextureIndex_; //인스턴스별로 사용할 노말맵텍스처의 인덱스.
     };
 
 
@@ -186,7 +186,7 @@ private:
 
     size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
 
-    std::vector<InstancingUnit> allInstancingUnits_;   //인스턴싱데이터 벡터.
+    std::vector<InstancingUnit> allInstancingUnits_;   //인스턴싱유닛 벡터.
 
     std::shared_ptr<GameEngineMesh> mesh_;                  //메쉬.
 

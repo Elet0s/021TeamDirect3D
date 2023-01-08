@@ -471,6 +471,12 @@ public:
 		return DirectX::XMVector3Normalize(_vector.directXVector_);
 	}
 
+	//정규화: 벡터의 방향은 그대로 유지하면서 길이만 1로 줄이는 것.
+	float4 Normalize3DReturn()
+	{
+		return DirectX::XMVector3Normalize(this->directXVector_);
+	}
+
 	//벡터곱(Vector Product), 가위곱(Cross Product)
 	static float4 CrossProduct3D(const float4& _vectorA, const float4& _vectorB)
 	{

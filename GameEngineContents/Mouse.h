@@ -16,10 +16,10 @@ public:
 	//기본 마우스포인터 <-> 에임라인 마우스 포인터 교체 함수. 전투맵에서만 사용할 것.
 	void ChangeMousePointerRenderer(bool _isAiming);
 
-	//에임라인 피봇 위치 업데이트 함수.
+	//에임라인 피봇 위치 업데이트 함수. 전투맵에서만 사용할 것.
 	void UpdatePivotPosition(const float4& _pivot);
 
-	//마우스 포인터가 넣어준 월드좌표의 메쉬를 가리키고 있는지 판정하는 함수.
+	//마우스 포인터가 넣어준 월드좌표의 메쉬를 가리키고 있는지 판정하는 함수. 월드맵에서만 사용할 것.
 	bool IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot);
 	//"Rect"메쉬 기준으로 구현함.
 

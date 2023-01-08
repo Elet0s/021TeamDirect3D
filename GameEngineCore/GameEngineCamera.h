@@ -3,13 +3,6 @@
 #include "GameEngineTransformComponent.h"
 #include "GameEngineLighting.h"
 
-enum class RenderingPath
-{
-	ForwardRendering,	//일반 렌더링.
-	DeferredRendering,	//지연 렌더링.
-	None
-};
-
 enum class CameraProjectionMode
 {
 	Perspective, //원근투영.
@@ -55,6 +48,9 @@ public:
 
 	//마우스 포인터의 위치를 월드공간 기준으로 받아오는 함수.
 	float4 GetMousePositionInWorldSpace();
+
+	//이 카메라에서 마우스 포인터방향으로 뻗는 레이의 월드공간 방향벡터를 받아오는 함수. 
+	float4 GetRayTowardMousePointer();
 
 
 

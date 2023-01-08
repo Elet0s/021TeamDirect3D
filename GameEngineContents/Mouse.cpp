@@ -48,14 +48,8 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot)
 	float4 cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
 	//메인카메라 월드좌표 == 레이 원점.
 
-	float4 mousePointerWorldPosition = this->GetLevel()->GetMainCamera()->GetMousePositionInWorldSpace();
-	//메인카메라 기준으로 한 마우스포인터의 월드좌표 == 레이가 뻗어나가야 할 방향.
-
-	float4 rayDirection = mousePointerWorldPosition - cameraWorldPosition;
-	//마우스포인터 월드좌표 - 메인카메라 월드좌표 -> 레이 방향벡터.
-
-	rayDirection.Normalize3D();
-	//레이 방향벡터 정규화.
+	float4 rayDirection = this->GetLevel()->GetMainCamera()->GetRayTowardMousePointer();
+	//레이 방향벡터.
 
 	DirectX::XMVECTOR rectVertexWorldPosition[4] =
 	{
