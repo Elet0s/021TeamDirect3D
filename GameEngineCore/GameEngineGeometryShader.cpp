@@ -65,7 +65,7 @@ void GameEngineGeometryShader::CreateGeometryShader()
         this->binaryCode_->GetBufferPointer(),  //컴파일된 바이너리코드.
         this->binaryCode_->GetBufferSize(),     //컴파일된 바이너리코드 크기.
         NULL,                                   //??
-        &this->geometryShader_                  //픽셀셰이더 포인터.
+        &this->geometryShader_                  //지오메트리 셰이더 포인터.
     ))
     {
         MsgBoxAssert("지오메트리 셰이더 생성 실패.");

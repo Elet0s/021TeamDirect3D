@@ -7,13 +7,13 @@
     <None Include="Texture2DShadow.hlsl" />
     <None Include="SingleTextureInstancing.hlsl" />
     <None Include="LightHeader.hlsli" />
-    <None Include="MultiTexturesInstancing.hlsl" />
-    <None Include="MultiTexturesInstShadow.hlsl" />
     <None Include="DeferredRenderingHeader.hlsli" />
     <None Include="DeferredInstanceRendering.hlsl" />
     <None Include="DeferredInstanceShadowRendering.hlsl" />
     <None Include="DeferredShadowRendering.hlsl" />
     <None Include="DeferredRendering.hlsl" />
     <None Include="MonsterInstanceRendering.hlsl" />
+    <None Include="MultiTexturesInstancing.hlsl" />
+    <None Include="MultiTexturesInstShadow.hlsl" />
   </ItemGroup>
 </Project>

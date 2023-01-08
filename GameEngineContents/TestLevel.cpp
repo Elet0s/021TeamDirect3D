@@ -1,7 +1,5 @@
 #include "PreCompile.h"
 #include "TestLevel.h"
-#include "MyTileMapRenderer.h"
-#include "TileMapActor.h"
 #include "TimeActor.h"
 #include "StageUI.h"
 #include "GlobalContentsValue.h"

@@ -319,6 +319,9 @@
     <ClCompile Include="GameEngineGeometryShader.cpp">
       <Filter>Resource\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineComputeShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -525,6 +528,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineGeometryShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineComputeShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
   </ItemGroup>

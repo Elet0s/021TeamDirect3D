@@ -3,6 +3,7 @@
 #include "GameEngineVertexShader.h"
 #include "GameEnginePixelShader.h"
 #include "GameEngineGeometryShader.h"
+#include "GameEngineComputeShader.h"
 #include "GameEngineConstantBuffer.h"
 #include "GameEngineTexture.h"
 #include "GameEngineSampler.h"
@@ -404,6 +405,21 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 			);
 		gsEntryName += "_GS";
 		geometryShader = GameEngineGeometryShader::Load(_path, gsEntryName);
+	}
+
+	size_t csEntryIndex = allHLSLCode.find("_CS(");
+	if (std::string::npos != csEntryIndex)
+	{
+		std::shared_ptr<GameEngineComputeShader> computeShader = nullptr;
+
+		size_t firstIndex = allHLSLCode.find_last_of(" ", csEntryIndex);
+		std::string csEntryName
+			= allHLSLCode.substr(	//주어진 문자열의 일부를 복사해서 반환하는 함수.
+				firstIndex + 1,									//복사를 시작할 글자 인덱스.
+				csEntryIndex - firstIndex - 1					//복사 할 글자 수.
+			);
+		csEntryName += "_CS";
+		computeShader = GameEngineComputeShader::Load(_path, csEntryName);
 	}
 }
 

@@ -6,6 +6,7 @@ enum class ShaderType
 	VertexShader,
 	PixelShader,
 	GeometryShader,
+	ComputeShader,
 	Max
 };
 
