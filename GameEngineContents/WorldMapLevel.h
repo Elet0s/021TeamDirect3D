@@ -1,6 +1,6 @@
 #pragma once
 
-class TestActor;
+//class TestActor;
 class WorldMapLevel : public GameEngineLevel
 {
 public:
@@ -20,13 +20,14 @@ protected:
 private:
 	void LevelStartEvent() override;
 	void UpdateCameraMovement(float _deltaTime);
+	void CheckNextStageSelection();
 
 
 private:
 
 	std::shared_ptr<class WorldMapRenderingActor> WorldMapRenderingActor_;
 	std::shared_ptr<GameEngineLighting> WorldLevelLighting_;
-	std::shared_ptr<TestActor> TestActor_;
+	//std::shared_ptr<TestActor> TestActor_;
 	std::shared_ptr<class StageCreater> stageCreater_;
 	std::shared_ptr<class Mouse> mousePointer_;
 };

@@ -9,7 +9,7 @@
 WorldMapLevel::WorldMapLevel()
 	: WorldMapRenderingActor_(nullptr),
 	WorldLevelLighting_(nullptr),
-	TestActor_(nullptr),
+	//TestActor_(nullptr),
 	stageCreater_(nullptr),
 	mousePointer_(nullptr)
 {
@@ -35,8 +35,8 @@ void WorldMapLevel::Start()
 	WorldMapRenderingActor_->GetTransform().SetWorldScale(float4::White);
 	WorldMapRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
 
-	WorldLevelLighting_ = CreateActor<GameEngineLighting>(0, "TestLevelLighting");
-	//테스트레벨에 조명 추가.
+	WorldLevelLighting_ = CreateActor<GameEngineLighting>(0, "WorldMapLighting");
+	//월드맵에 조명 추가.
 
 	WorldLevelLighting_->GetTransform().SetWorldRotation(-30.f, 45.f, 0.f);
 	//조명 각도 설정.
@@ -54,7 +54,7 @@ void WorldMapLevel::Start()
 	//난반사광을 두배로 적용.
 
 	this->GetMainCamera()->PushLighting(WorldLevelLighting_);
-	//카메라에 조명 등록.
+	//메인카메라에 조명 등록.
 	
 	GetMainCameraActorTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
 	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
@@ -66,7 +66,6 @@ void WorldMapLevel::Start()
 		GameEngineInput::GetInst()->CreateKey("WorldCameraRight", VK_RIGHT);
 		GameEngineInput::GetInst()->CreateKey("WorldCameraFoward", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("WorldCameraBack", VK_DOWN);
-
 	}
 
 	if (nullptr == mousePointer_)
@@ -79,24 +78,7 @@ void WorldMapLevel::Update(float _deltaTime)
 {
 	UpdateCameraMovement(_deltaTime);
 
-
-	static const float4 renderPivot = float4(0.f, 0.5f, 0.f, 0.f);
-
-	std::list<std::shared_ptr<StageObject>> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
-
-	for (std::list<std::shared_ptr<StageObject>>::iterator iter = nextLevelList.begin();
-		 iter != nextLevelList.end(); ++iter)
-	{
-		if (false == mousePointer_->IsPointing((*iter)->GetWorldWorldMatrix(), renderPivot))
-		{
-			continue;
-		}
-
-		if (true == GameEngineInput::GetInst()->IsDown("Click"))
-		{
-			stageCreater_->SendPlayerToNextStage(*iter);
-		}
-	}
+	CheckNextStageSelection();
 }
 
 void WorldMapLevel::End()
@@ -112,7 +94,7 @@ void WorldMapLevel::LevelStartEvent()
 void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 {
 	static const float cameraSpeed = 500.f;
-	//한번 생성해서 계속 사용하다가 게임 끝날때나 소멸시킬 것이므로 로컬스태틱으로 선언.
+	//고정값을 한번 생성해서 계속 사용하다가 게임 끝날때나 소멸시킬 것이므로 로컬스태틱으로 선언.
 
 	float4 Pos = GetMainCameraActorTransform().GetWorldPosition();
 
@@ -190,4 +172,27 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 	this->GetCameraActor(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetTransform().SetWorldPosition(
 		GetMainCameraActor()->GetTransform().GetWorldPosition()
 	);
+}
+
+void WorldMapLevel::CheckNextStageSelection()
+{
+	static const float4 renderPivot = float4(0.f, 0.5f, 0.f, 0.f);
+	//고정값을 한번 생성해서 계속 사용하다가 게임 끝날때나 소멸시킬 것이므로 로컬스태틱으로 선언.
+	//다른 렌더피봇이 필요하다면 변경할 것.
+
+	std::list<std::shared_ptr<StageObject>> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
+
+	for (std::list<std::shared_ptr<StageObject>>::iterator iter = nextLevelList.begin();
+		iter != nextLevelList.end(); ++iter)
+	{
+		if (false == mousePointer_->IsPointing((*iter)->GetWorldWorldMatrix(), renderPivot))
+		{
+			continue;
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("Click"))
+		{
+			stageCreater_->SendPlayerToNextStage(*iter);
+		}
+	}
 }

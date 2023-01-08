@@ -13,36 +13,15 @@ public:
 	Mouse& operator=(Mouse&& _Other) noexcept = delete;
 
 public:
+	//기본 마우스포인터 <-> 에임라인 마우스 포인터 교체 함수. 전투맵에서만 사용할 것.
 	void ChangeMousePointerRenderer(bool _isAiming);
+
+	//에임라인 피봇 위치 업데이트 함수.
 	void UpdatePivotPosition(const float4& _pivot);
+
+	//마우스 포인터가 넣어준 월드좌표의 메쉬를 가리키고 있는지 판정하는 함수.
 	bool IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot);
-
-public:
-	//inline void GetCurPos()
-	//{
-	//	POINT Pos_;
-	//	GetCursorPos(&Pos_);
-	//	mousePositionInWorldSpace_.x =(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().x);
-	//	mousePositionInWorldSpace_.y =(GetLevel()->GetUICamera()->GetMouseWorldPositionToActor().y);
-	//	ScreenToClient(GameEngineWindow::GetHWND(), &Pos_);
-	//	mousePositionInWindow_.x = static_cast<float>(Pos_.x);
-	//	mousePositionInWindow_.y = static_cast<float>(Pos_.y);
-	//}
-
-	//static std::shared_ptr<Mouse> GetMouseInfo()
-	//{
-	//	return mainMouse_;
-	//}
-
-	//inline float4  IsCurPosToWindow()
-	//{
-	//	return mousePositionInWindow_;
-	//}
-
-	//inline float4  IsCurPosToClient()
-	//{
-	//	 return mousePositionInWorldSpace_;
-	//}
+	//"Rect"메쉬 기준으로 구현함.
 
 
 protected:
@@ -54,12 +33,10 @@ private:
 	std::shared_ptr<GameEngineTextureRenderer> defaultPointerRenderer_;
 	std::shared_ptr<GameEngineTextureRenderer> crossHairRenderer_;
 	std::shared_ptr<GameEngineTextureRenderer> aimLineRenderer_;
-	std::shared_ptr<GameEngineCollision> mouseCollision_;
 
-	float4 mousePositionInWindow_;		//윈도우 좌표계 마우스 위치.
 	float4 mousePositionInWorldSpace_;	//월드스페이스 마우스 위치.
 	float4 pivotWorldPosition_;	//에임라인 피봇의 월드 포지션.
-	bool isAiming_;	//true: 방향지정 투사체용 마우스포인터로 변경. false: 기본 마우스포인터 사용.
+	bool isAiming_;	//true: 에임라인 마우스포인터로 변경. false: 기본 마우스포인터 사용.
 
-	float4 localVertexPosition_[4];
+	float4 localVertexPosition_[4];	//"Rect"메쉬의 4개 정점의 로컬좌표 모음. 
 };
