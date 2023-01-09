@@ -38,10 +38,11 @@ void PlayerObject::Update(float _deltaTime)
 
 	if (mode_ == PlayerObjectMode::Move)
 	{
-		GetTransform().SetLocalMove(moveDir_.Normalize3D() * 100.f * _deltaTime);
+		GetTransform().SetLocalMove(moveDir_.Normalize3D() * 150.f * _deltaTime);
 
 		if (true == GetTransform().GetWorldPosition().IY() >= checkPos_.IY())
 		{
+			GEngine::ChangeLevel("Test");
 			float4 Pos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
 			mode_ = PlayerObjectMode::Idle;
 			renderer_->ChangeFrameAnimation("PlayerIdle");
@@ -68,7 +69,6 @@ void PlayerObject::Update(float _deltaTime)
 				}
 			}
 			GetLevel()->GetMainCameraActorTransform().SetWorldMove(float4(0.f, 200.f * sinf(30.f * GameEngineMath::DegreeToRadian), 200.f * cosf(30.f * GameEngineMath::DegreeToRadian)));
-			GEngine::ChangeLevel("Test");
 		}
 	}
 }
