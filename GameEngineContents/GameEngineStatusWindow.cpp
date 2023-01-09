@@ -59,11 +59,11 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 
 
 	std::string currentCameraPos = "CameraPos : " 
-		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().IX())
+		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().x)
 		+ ", "
-		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().IY())
+		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().y)
 		+ ", "
-		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().IZ());
+		+ std::to_string(GEngine::GetCurrentLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition().z);
 	ImGui::Text(currentCameraPos.c_str());
 
 
