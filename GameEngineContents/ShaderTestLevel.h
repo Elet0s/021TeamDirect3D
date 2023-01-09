@@ -18,10 +18,10 @@ public:
 
 
 public:
-	std::shared_ptr<Mouse> GetMouse()
-	{
-		return shaderTestActor_;
-	}
+	//std::shared_ptr<Mouse> GetMouse()
+	//{
+	//	return shaderTestActor_;
+	//}
 
 
 protected:

@@ -93,7 +93,8 @@ void ClearUIBox::Start()
 void ClearUIBox::Update(float _deltaTime)
 {
 	if (true == button1renderer_->IsUpdate() &&
-		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button1renderer_->GetTransformData().worldWorldMatrix_, float4::Zero))
+		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button1renderer_->GetTransformData().worldWorldMatrix_, float4::Zero, true)
+	)
 	{
 		button1renderer_->SetTexture("Button_Selected.png");
 		if (GameEngineInput::GetInst()->IsUp("Click"))
@@ -116,8 +117,8 @@ void ClearUIBox::Update(float _deltaTime)
 
 
 	if (true == button2renderer_->IsUpdate() &&
-		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button2renderer_->GetTransformData().worldWorldMatrix_, float4::Zero))
-
+		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button2renderer_->GetTransformData().worldWorldMatrix_, float4::Zero, true)
+	)
 	{
 		button2renderer_->SetTexture("Button_Selected.png");
 		if (GameEngineInput::GetInst()->IsUp("Click"))
@@ -133,8 +134,8 @@ void ClearUIBox::Update(float _deltaTime)
 	}
 
 	if (true == button3renderer_->IsUpdate() &&
-		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button3renderer_->GetTransformData().worldWorldMatrix_, float4::Zero))
-
+		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button3renderer_->GetTransformData().worldWorldMatrix_, float4::Zero, true)
+	)
 	{
 		button3renderer_->SetTexture("Button_Selected_Stage.png");
 		if (GameEngineInput::GetInst()->IsUp("Click"))
