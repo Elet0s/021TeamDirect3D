@@ -4,6 +4,7 @@
 #include "Texture2DShadowRenderer.h"
 #include "PlayerUI.h"
 #include "Monster.h"
+#include "SoulCardSelectBox.h"
 
 std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
@@ -281,17 +282,28 @@ void Player::PlayerDeathEvent()
 
 void Player::LevelUpEvent()
 {
-	if (playerInfo_->exp_ <= playerInfo_->maxExp_)
-	{
-		playerInfo_->level_ += 1;
-		playerInfo_->exp_ -= playerInfo_->maxExp_;
-	}
+	//if (playerInfo_->exp_ <= playerInfo_->maxExp_)
+	//{
+	//	playerInfo_->level_ += 1;
+	//	playerInfo_->exp_ -= playerInfo_->maxExp_;
+	//}
 }
 
-void Player::ColCkeak()
+void Player::ColCheak()
 {
 	itemRangeCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::ItemRangeToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
 	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
+}
+
+void Player::ExpCheak()
+{
+	if (playerInfo_->exp_ >= playerInfo_->maxExp_)
+	{
+		GetLevel()->CreateActor<SoulCardSelectBox>();
+		playerInfo_->exp_ -= playerInfo_->maxExp_;
+
+		GameEngineTime::GetInst()->SetGlobalTimeScale(0);
+	}
 }
 
 void Player::Update(float _deltaTime)
@@ -300,7 +312,8 @@ void Player::Update(float _deltaTime)
 	PlayerDash(_deltaTime);
 	LevelUpEvent();
 	PlayerDeathEvent();
-	ColCkeak();
+	ColCheak();
+	ExpCheak();
 	
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{

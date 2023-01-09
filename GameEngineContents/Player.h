@@ -101,7 +101,9 @@ public:
 		damageMitigation_(0.0f),
 		atkMultiple_(),
 		knockback_(),
-		gold_(0.f)
+		gold_(0.f),
+		stage_(0),
+		targetScore_(0)
 	{
 
 	}
@@ -121,6 +123,8 @@ public:
 	float dashReChargeTime_;
 	float dashReUseTime_;
 	int dashReChargeCount_;
+	size_t stage_;
+	size_t targetScore_;
 
 	float knockback_;
 	float atk_Range_;
@@ -214,7 +218,8 @@ protected:
 	void PlayerDeathEvent();//hp 0이하면 off하고 파티클이벤트
 	void LevelUpEvent();//경험치 받고 전부차면 초기화해주고 레벨업해주는부분
 
-	void ColCkeak();
+	void ColCheak();
+	void ExpCheak();
 
 private:
 	float dashTimer_;
