@@ -2,7 +2,7 @@
 #include"Skill.h"
 #include"Monster.h"
 //가장 가까운 적에게 발사
-class Bow:public Skill
+class Bow :public Skill
 {
 public:
 	Bow();
@@ -48,6 +48,8 @@ private:
 	float targerSerchTimer01_;//타겟 검사 주기=공격속도
 	float targerSerchTimer02_;
 
+	std::vector<size_t> passNum_;
+
 	size_t targetSerchCounter_;//타겟검사한 몬스터 수 매 업데이트 갱신
 
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
@@ -56,9 +58,9 @@ private:
 	WeaponInfo bowWeaponInfo_;//무기 스탯
 
 	std::vector<std::shared_ptr<Monster>> monsterList_; //전체 몬스터 리스트
-	
+
 	std::pair<size_t, float> minHpPair_;//타겟 대상
-	
+
 	std::vector<std::pair<size_t, float>> targetInst01_;//타겟 묶음
 	std::vector<std::pair<size_t, float>> targetInst02_;
 

@@ -156,8 +156,8 @@ void Crossbow::ProjectileSort()
 			{
 				if (targetInst_.size() > i) // 타겟수만큼 필요
 				{
-						projectileGroupList_[i].first->On();
-						projectileGroupList_[i].second->On();
+					projectileGroupList_[i].first->On();
+					projectileGroupList_[i].second->On();
 					projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
 					projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 				}
@@ -212,6 +212,7 @@ void Crossbow::RangeCheak(float _deltaTime)
 
 CollisionReturn Crossbow::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
+	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	for (size_t i = 0; i < 10; i++)
 	{
 		if (projectileGroupList_[i].second == _This)//발사체중 부딪힌 발사체 찾아서 지움
@@ -221,7 +222,7 @@ CollisionReturn Crossbow::ProjectileToMonsterCollision(std::shared_ptr<GameEngin
 		}
 	}
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= crossbowWeaponInfo_.weaponAtk_; //데미지줌
-		return CollisionReturn::Stop;
+	return CollisionReturn::Stop;
 }
 
 

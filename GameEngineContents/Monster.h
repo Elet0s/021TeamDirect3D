@@ -36,7 +36,7 @@ class Monster: public GameEngineActor
 protected:
 	static std::shared_ptr<GameEngineInstancingRenderer> allMonstersRenderer_;	//모든 몬스터 렌더러.
 	static std::shared_ptr<GameEngineInstancingRenderer> allShadowsRenderer_;	//모든 몬스터 그림자 렌더러.
-	static std::shared_ptr<GameItemObjectManager> deadMonsterItemObject_;
+	static std::shared_ptr<GameItemObjectManager> dropMonsterItemObject_;
 	static int monsterCreationIndex_;	
 public:
 	Monster();
@@ -52,6 +52,10 @@ public:
 
 public:
 
+	static std::shared_ptr<GameItemObjectManager> GetItemObjectManager()
+	{
+		return	dropMonsterItemObject_;
+	}
 
 	static std::vector<std::shared_ptr<Monster>>& GetMonsterList()
 	{
@@ -205,10 +209,15 @@ public:
 	{
 		return this->isSummoned_;
 	}
+
+	void FlashMonster(float _deltaTime);
+
 public:
 	float mxMove_;
 	float myMove_;
 	bool isTarget_;
+	bool flash_;
+
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -216,6 +225,10 @@ protected:
 	void Chaseplayer(float _deltaTime);
 
 protected:
+	bool flshloop_;
+	float flashTimer_;
+	float4 flashPixel_;
+
 	bool colCheakToPlayer_;
 	bool colCheakToMonster_;
 

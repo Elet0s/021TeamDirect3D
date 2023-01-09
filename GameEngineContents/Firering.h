@@ -28,13 +28,21 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 	void RotateRenderer(float _deltaTime);
+
+	void  StateSet();
 private:
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererA_;
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererB_;
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererC_;
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererD_;
 	std::shared_ptr<GameEngineTextureRenderer> circleCenterRenderer_;
-	std::shared_ptr<GameEngineCollision> fireringAuraCollision_;
+	std::shared_ptr<GameEngineCollision> fireringAuraCollision01_;
+	std::shared_ptr<GameEngineCollision> fireringAuraCollision02_;
+	std::shared_ptr<GameEngineCollision> fireringAuraCollision03_;
+
+	WeaponInfo fireringAuraWeaponInfo_;//¹«±â ½ºÅÈ
+
+	float atkTimer_;
 	float addRadian_;
 	float damege;
 	float attackSpeed;

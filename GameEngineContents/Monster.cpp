@@ -7,7 +7,7 @@ std::vector<std::shared_ptr<Monster>> Monster::allMonsters_;
 
 std::shared_ptr<GameEngineInstancingRenderer> Monster::allMonstersRenderer_ = nullptr;
 std::shared_ptr<GameEngineInstancingRenderer> Monster::allShadowsRenderer_ = nullptr;
-std::shared_ptr<GameItemObjectManager> Monster::deadMonsterItemObject_ = std::shared_ptr<GameItemObjectManager>(new GameItemObjectManager);
+std::shared_ptr<GameItemObjectManager> Monster::dropMonsterItemObject_ = std::shared_ptr<GameItemObjectManager>(new GameItemObjectManager);
 int Monster::monsterCreationIndex_ = 0;
 
 Monster::Monster()
@@ -26,9 +26,12 @@ Monster::Monster()
 	, instancingUnitIndex_(0)
 	, monsterScale_(float4::Zero)
 	, isTarget_(false)
+	, flash_(false)
+	,flshloop_(false)
+	,flashTimer_(0)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
-	deadMonsterItemObject_->SetManager();
+	dropMonsterItemObject_->SetManager();
 }
 
 Monster::~Monster()
@@ -277,8 +280,33 @@ void Monster::Update(float _deltaTime)
 		float4::Zero
 	);
 	//allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).Link("Inst_RenderOption", this->renderOption_);
+	FlashMonster(_deltaTime);
 }
 
 void Monster::End()
 {
+}
+
+void Monster::FlashMonster(float _deltaTime)
+{
+	if (flash_ == true)
+	{
+		if (flashTimer_ < 0.2f)
+		{
+			flashTimer_ += _deltaTime;
+			pixelData_.mulColor_ = float4{ 10.f, 10.f, 10.f, 1.f };
+		}
+		else
+		{
+			flshloop_ = true;
+		}
+
+		if (flshloop_ == true)
+		{
+			pixelData_.mulColor_ = float4{ 1.f,1.f ,1.f ,1.f };
+			flashTimer_ = 0;
+			flshloop_ = false;
+			flash_ = false;
+		}
+	}
 }

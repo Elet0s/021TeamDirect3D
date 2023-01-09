@@ -12,10 +12,24 @@ GameItemObjectManager::~GameItemObjectManager()
 {
 
 }
+
+void GameItemObjectManager::DelteObject(size_t _Num)
+{
+	if (allObjectContainer_[_Num] == nullptr)
+	{
+		MsgBoxAssert("지우려고 하는 오브젝트가 존재하지 않습니다.");
+	}
+	allObjectContainer_.erase(allObjectContainer_.begin()+ _Num);
+}
 	
 void GameItemObjectManager::SetManager()
 {
 	allObjectContainer_.reserve(300);
+}
+
+std::vector< std::shared_ptr<GameItemObject>> GameItemObjectManager::GetallObjectContainer()
+{
+	return allObjectContainer_;
 }
 
 ItemObjectOrder GameItemObjectManager::RandomObjectOrder()
@@ -69,6 +83,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 
@@ -85,6 +100,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -100,6 +116,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -114,6 +131,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -128,6 +146,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -142,6 +161,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -164,6 +184,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 
@@ -180,6 +201,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -195,6 +217,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -209,6 +232,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -223,6 +247,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -237,6 +262,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -266,6 +292,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -281,6 +308,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -296,6 +324,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -310,6 +339,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -324,6 +354,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -338,6 +369,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -359,6 +391,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -374,6 +407,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -389,6 +423,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -403,6 +438,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -417,6 +453,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
@@ -431,6 +468,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
+			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
 			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);

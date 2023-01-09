@@ -5,8 +5,7 @@
 
 GameItemObject::GameItemObject()
 	:itemObjectOrder_(ItemObjectOrder::None),
-	chasePlayer_(false),
-	objectOrder_(ObjectOrder::Item)
+	chasePlayer_(false)
 {
 	
 }
@@ -37,4 +36,9 @@ void GameItemObject::ChasePlayer(float _deltaTime)
 	{
 
 	}
+}
+
+ItemObjectOrder GameItemObject::GetObjectOrder()
+{
+	return itemObjectOrder_;
 }
