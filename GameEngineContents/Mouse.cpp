@@ -8,7 +8,8 @@ Mouse::Mouse()
 	aimLineRenderer_(nullptr),
 	mousePositionInWorldSpace_(float4::Zero),
 	pivotWorldPosition_(float4::Zero),
-	isAiming_(false)
+	isAiming_(false),
+	projectionMode_(ProjectionMode::Orthographic)
 {
 	localVertexPosition_[0] = float4(-0.5f, 0.5f);
 	localVertexPosition_[1] = float4(0.5f, 0.5f);
@@ -123,7 +124,8 @@ void Mouse::Start()
 void Mouse::Update(float _DeltaTime)
 {
 	//전투맵에서의 동작.
-	if (CameraProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
+	//if (ProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
+	if (ProjectionMode::Orthographic == projectionMode_)
 	{
 		this->GetTransform().SetWorldPosition(this->GetLevel()->GetMainCamera()->GetMousePositionInWorldSpace());
 
@@ -158,7 +160,7 @@ void Mouse::Update(float _DeltaTime)
 		}
 	}
 	//월드맵에서의 동작.
-	else /*if (CameraProjectionMode::Perspective == this->GetLevel()->GetMainCamera()->GetProjectionMode())*/
+	else 
 	{
 		if (true == isAiming_)
 		{

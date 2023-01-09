@@ -61,9 +61,14 @@ public:
 		return cameras_[static_cast<int>(CameraOrder::UICamera)];
 	}
 
-	std::shared_ptr<GameEngineCamera> GetCamera(UINT _index)
+	std::shared_ptr<GameEngineCamera> GetCamera(UINT _cameraIndex)
 	{
-		return cameras_[_index];
+		return cameras_[_cameraIndex];
+	}
+
+	std::shared_ptr<GameEngineCamera> GetCamera(CameraOrder _cameraOrder)
+	{
+		return cameras_[static_cast<int>(_cameraOrder)];
 	}
 
 	//액터들 중 특정 종류만 가져오는 함수.

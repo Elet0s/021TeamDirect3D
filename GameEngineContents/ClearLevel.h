@@ -32,6 +32,7 @@ private:
 
 	std::shared_ptr<class ClearUIBox> clearbox_;
 	std::shared_ptr<class SoulCardSelectBox> SoulSelectbox_;
+	std::shared_ptr<class Mouse> mousePointer_;
 	bool issoulselect_;
 };
 

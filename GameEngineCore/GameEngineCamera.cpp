@@ -15,7 +15,7 @@
 
 GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
-	projectionMode_(CameraProjectionMode::Perspective),
+	projectionMode_(ProjectionMode::Perspective),
 	nearZ_(0.1f),
 	farZ_(100000.f),
 	fovAngleY_(60.f),
@@ -188,7 +188,7 @@ float4 GameEngineCamera::GetMousePositionInWorldSpace()
 	// w에 저장된 거리비례 축소비율만큼 마우스 좌표벡터를 나누어줘야 한다.
 
 	//원래 원근 개념이 없던 마우스의 좌표가 이 과정까지 거치면, 
-	// 이 카메라의 월드좌표에서 뷰공간 z++방향으로 nearZ_만큼, 투영 종횡비를 유지하며 멀어진 지점에 있는 월드좌표가 된다.
+	// 이 카메라의 월드좌표에서 뷰공간 z++방향으로 nearZ_만큼, 종횡비를 유지하며 멀어진 지점에 있는 월드좌표가 된다.
 
 	return pointerPos;
 }
@@ -399,7 +399,7 @@ void GameEngineCamera::Render(float _deltaTime)
 	//투영모드에 맞게 오브젝트들을 축소할 투영행렬을 구한다.
 	switch (projectionMode_)
 	{
-	case CameraProjectionMode::Perspective:
+	case ProjectionMode::Perspective:
 		//projection_.ProjectPerspectiveLH(
 		//	planeSize_.x * 0.0001f,	 //근평면의 가로길이.
 		//	planeSize_.y * 0.0001f,	 //근평면의 세로길이.  
@@ -418,7 +418,7 @@ void GameEngineCamera::Render(float _deltaTime)
 		);
 		break;
 
-	case CameraProjectionMode::Orthographic:
+	case ProjectionMode::Orthographic:
 		projectionMatrix_.ProjectOrthographicLH(
 			size_.x,
 			size_.y,

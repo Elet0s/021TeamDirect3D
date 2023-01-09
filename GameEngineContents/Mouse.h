@@ -19,9 +19,16 @@ public:
 	//에임라인 피봇 위치 업데이트 함수. 전투맵에서만 사용할 것.
 	void UpdatePivotPosition(const float4& _pivot);
 
-	//마우스 포인터가 넣어준 월드좌표의 메쉬를 가리키고 있는지 판정하는 함수. 월드맵에서만 사용할 것.
+	//마우스 포인터가 넣어준 월드좌표의 메쉬를 가리키고 있는지 판정하는 함수.
 	bool IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot);
 	//"Rect"메쉬 기준으로 구현함.
+
+public:
+	void SetProjectionMode(ProjectionMode _mainCameraProjectionMode)
+	{
+		projectionMode_ = _mainCameraProjectionMode;
+	}
+
 
 
 protected:
@@ -37,6 +44,7 @@ private:
 	float4 mousePositionInWorldSpace_;	//월드스페이스 마우스 위치.
 	float4 pivotWorldPosition_;	//에임라인 피봇의 월드 포지션.
 	bool isAiming_;	//true: 에임라인 마우스포인터로 변경. false: 기본 마우스포인터 사용.
+	ProjectionMode projectionMode_;	//true: 직교투영모드, false: 원근투영모드.
 
 	float4 localVertexPosition_[4];	//"Rect"메쉬의 4개 정점의 로컬좌표 모음. 
 };

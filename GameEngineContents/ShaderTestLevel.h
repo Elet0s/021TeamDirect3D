@@ -28,7 +28,7 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-
+	void LevelStartEvent() override;
 
 private:
 	std::shared_ptr<Mouse> shaderTestActor_;

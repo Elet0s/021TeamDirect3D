@@ -57,7 +57,7 @@ void WorldMapLevel::Start()
 	//메인카메라에 조명 등록.
 	
 	GetMainCameraActorTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
-	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
+	GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
 	//GetUICamera()->GetTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
 
 	if (false == GameEngineInput::GetInst()->IsKey("WorldCameraLeft"))
@@ -89,6 +89,7 @@ void WorldMapLevel::LevelStartEvent()
 {
 	this->GetMainCamera()->SetFarZ(10000.f);
 	this->GetCamera(1)->SetFarZ(10000.f);
+	this->mousePointer_->SetProjectionMode(this->GetMainCamera()->GetProjectionMode());
 }
 
 void WorldMapLevel::UpdateCameraMovement(float _deltaTime)

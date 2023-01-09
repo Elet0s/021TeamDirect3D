@@ -3,6 +3,7 @@
 #include "SoulCardSelectBox.h"
 #include "ClearUIBox.h"
 #include "StageClearMap.h"
+#include "Mouse.h"
 
 ClearLevel::ClearLevel() 
 	:clearbox_(nullptr),
@@ -20,7 +21,9 @@ void ClearLevel::Start()
 	CreateActor<StageClearMap>();
 	clearbox_ = CreateActor<ClearUIBox>();
 	GetMainCameraActorTransform().SetWorldPosition(float4(192.f, 48.f, -135.f));
-	GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
+	GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
+	GetCamera(CameraOrder::MousePointerCamera)->SetProjectionMode(ProjectionMode::Perspective);
+	mousePointer_ = CreateActor<Mouse>(0, "ClearLevelMousePointer");
 
 	//if (false == GameEngineInput::GetInst()->IsKey("Click"))
 	//{
@@ -46,5 +49,5 @@ void ClearLevel::End()
 }
 void ClearLevel::LevelStartEvent()
 {
-
+	mousePointer_->SetProjectionMode(this->GetMainCamera()->GetProjectionMode());
 }

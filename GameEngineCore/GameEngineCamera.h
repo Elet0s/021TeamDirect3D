@@ -3,7 +3,7 @@
 #include "GameEngineTransformComponent.h"
 #include "GameEngineLighting.h"
 
-enum class CameraProjectionMode
+enum class ProjectionMode
 {
 	Perspective, //원근투영.
 	Orthographic //직교투영.
@@ -69,7 +69,7 @@ public:
 	void PushLighting(std::shared_ptr<GameEngineLighting> _newLighting);
 
 public:
-	void SetProjectionMode(CameraProjectionMode _mode)
+	void SetProjectionMode(ProjectionMode _mode)
 	{
 		projectionMode_ = _mode;
 	}
@@ -79,7 +79,7 @@ public:
 		return mouseDirection_;
 	}
 
-	CameraProjectionMode GetProjectionMode()
+	ProjectionMode GetProjectionMode()
 	{
 		return projectionMode_;
 	}
@@ -215,7 +215,7 @@ private:
 
 
 
-	CameraProjectionMode projectionMode_;	//직교투영/원근투영 설정. 
+	ProjectionMode projectionMode_;	//직교투영/원근투영 설정. 
 
 	float4 size_;	//투영행렬을 계산할 기준 평면 == 내가 사용중인 윈도우의 크기. 근평면이라는 보장은 없음.
 	float nearZ_;		//원근 중심에서 근평면까지의 거리. 

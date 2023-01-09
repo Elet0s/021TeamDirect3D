@@ -24,7 +24,7 @@ ShaderTestLevel::~ShaderTestLevel()
 
 void ShaderTestLevel::Start()
 {
-	this->GetMainCamera()->SetProjectionMode(CameraProjectionMode::Perspective);
+	this->GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
 	this->GetMainCamera()->SetFarZ(500.f);
 	//this->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->SetProjectionMode(CameraProjectionMode::Perspective);
 
@@ -44,4 +44,9 @@ void ShaderTestLevel::Update(float _deltaTime)
 
 void ShaderTestLevel::End()
 {
+}
+
+void ShaderTestLevel::LevelStartEvent()
+{
+	shaderTestActor_->SetProjectionMode(ProjectionMode::Perspective);
 }

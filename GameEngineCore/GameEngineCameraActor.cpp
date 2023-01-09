@@ -7,7 +7,7 @@ GameEngineCameraActor::GameEngineCameraActor()
 	freeCameraMode_(false),
 	cameraMovingSpeed_(500.f),
 	rotationSpeed_(180.f),
-	prevProjectionMode_(CameraProjectionMode::Orthographic)
+	prevProjectionMode_(ProjectionMode::Orthographic)
 {
 }
 
@@ -102,7 +102,7 @@ void GameEngineCameraActor::FreeCameraModeOnOff()
 	if (true == freeCameraMode_)
 	{
 		prevProjectionMode_ = cameraComponent_->GetProjectionMode();
-		cameraComponent_->SetProjectionMode(CameraProjectionMode::Perspective);
+		cameraComponent_->SetProjectionMode(ProjectionMode::Perspective);
 		originalTransform_.Copy(this->GetTransform());
 	}
 	else
