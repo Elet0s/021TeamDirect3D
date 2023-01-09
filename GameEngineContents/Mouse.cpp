@@ -44,13 +44,33 @@ void Mouse::UpdatePivotPosition(const float4& _pivot)
 	pivotWorldPosition_ = _pivot;
 }
 
-bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderPivot)
+bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderPivot, bool _isUI /*= false*/)
 {
 	float4 cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
 	//메인카메라 월드좌표 == 레이 원점.
 
 	float4 rayDirection = this->GetLevel()->GetMainCamera()->GetRayTowardMousePointer();
 	//레이 방향벡터.
+
+	if (false == _isUI)
+	{
+		cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
+		//메인카메라 월드좌표 == 레이 원점.
+
+		rayDirection = this->GetLevel()->GetMainCamera()->GetRayTowardMousePointer();
+		//레이 방향벡터.
+	}
+	else
+	{
+		cameraWorldPosition = this->GetLevel()->GetUICamera()->GetMousePositionInWorldSpace();
+
+		rayDirection = float4::Blue;
+		//레이 방향벡터.
+
+		rayDirection.w = 0.f;
+	}
+
+
 
 	DirectX::XMVECTOR rectVertexWorldPosition[4] =
 	{
@@ -95,6 +115,7 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderP
 	{
 		return false;
 	}
+	
 }
 
 void Mouse::Start()
@@ -173,7 +194,7 @@ void Mouse::Update(float _DeltaTime)
 		}
 
 		this->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetMainCamera()->GetMousePositionInWorldSpace()
+			this->GetLevel()->GetUICamera()->GetMousePositionInWorldSpace()
 		);
 
 		defaultPointerRenderer_->GetTransform().SetWorldPosition(

@@ -20,7 +20,7 @@ public:
 	void UpdatePivotPosition(const float4& _renderPivot);
 
 	//마우스 포인터가 넣어준 월드좌표의 메쉬를 가리키고 있는지 판정하는 함수.
-	bool IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot);
+	bool IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot, bool _isUI = false);
 	//"Rect"메쉬 기준으로 구현함.
 
 public:
