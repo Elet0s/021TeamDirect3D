@@ -120,7 +120,7 @@ void TestLevel::Update(float _DeltaTime)
 
 	mousePointer_->UpdatePivotPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
 
-	//mousePointer_->ChangeMousePointerRenderer(true);
+	mousePointer_->ChangeMousePointerRenderer(true);
 
 }
 
