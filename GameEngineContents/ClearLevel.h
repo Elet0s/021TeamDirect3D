@@ -14,7 +14,10 @@ public:
 	ClearLevel& operator=(const ClearLevel& _Other) = delete;
 	ClearLevel& operator=(ClearLevel&& _Other) noexcept = delete;
 
-
+	std::shared_ptr<class Mouse> GetMousePointer()
+	{
+		return mousePointer_;
+	}
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

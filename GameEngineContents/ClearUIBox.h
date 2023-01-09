@@ -24,15 +24,11 @@ private:
 	std::shared_ptr<GameEngineTextureRenderer> button2renderer_;
 	std::shared_ptr<GameEngineTextureRenderer> button3renderer_;
 
-
-
 	std::shared_ptr<GameEngineFontRenderer> button1FontRenderer_;
 	std::shared_ptr<GameEngineFontRenderer> button2FontRenderer_;
 	std::shared_ptr<GameEngineFontRenderer> button3FontRenderer_;
 
-	std::shared_ptr<GameEngineCollision> button1Col_;
-	std::shared_ptr<GameEngineCollision> button2Col_;
-	std::shared_ptr<GameEngineCollision> button3Col_;
+	std::shared_ptr<class Mouse> mousePointer_;
 
 	bool button1On_;
 	bool button2On_;
