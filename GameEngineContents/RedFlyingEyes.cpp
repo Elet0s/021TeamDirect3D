@@ -48,7 +48,7 @@ void RedFlyingEyes::HpCheak()
 	if (monsterInfo_->hp_ <0)
 	{
 		dropMonsterItemObject_->CreateItemObject(GetLevel(),this->GetTransform().GetWorldPosition());
-		
+		Player::GetPlayerInst()->GetPlayerInfo().targetScore_ += 1;
 		this->Unsummon();
 	}
 }
