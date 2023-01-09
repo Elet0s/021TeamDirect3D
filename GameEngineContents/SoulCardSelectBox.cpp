@@ -78,18 +78,21 @@ void SoulCardSelectBox::Update(float _deltaTime)
 	if (Cards[0]->IsDead())
 	{
 		Death();
+		GameEngineTime::GetInst()->SetGlobalTimeScale(1.f);
 		Cards[1]->CardRelease();
 		Cards[2]->CardRelease();
 	}
 	else if (Cards[1]->IsDead())
 	{
 		Death();
+		GameEngineTime::GetInst()->SetGlobalTimeScale(1.f);
 		Cards[0]->CardRelease();
 		Cards[2]->CardRelease();
 	}
 	else if (Cards[2]->IsDead())
 	{
 		Death();
+		GameEngineTime::GetInst()->SetGlobalTimeScale(1.f);
 		Cards[0]->CardRelease();
 		Cards[1]->CardRelease();
 	}

@@ -237,6 +237,26 @@ void Monster::Chaseplayer(float _deltaTime)
 	py_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
 	range_.x = px_ - mx_;//플레이어와 몬스터 x거리차이
 	range_.y = py_ - my_;
+
+	if (range_.x < 0)
+	{
+		if (monsterScale_.x > 0)
+		{
+			monsterScale_.x = -monsterScale_.x;
+		}
+	}
+	else if (range_.x > 0)
+	{
+		if (monsterScale_.x < 0)
+		{
+			monsterScale_.x = -monsterScale_.x;
+		}
+	}
+	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldScale(
+		this->monsterScale_
+	);
+
+
 	playerRange_ = static_cast<float>(sqrt(pow(range_.x,2) + pow(range_.y,2))); // 몬스터와 플레이어 사이의 거리의 절대값
 
 	monsterBaseVector_ = (range_.Normalize3D() * monsterInfo_->baseSpeed_); //충돌 안했을 때 기본 방향,힘 합치는 부분
@@ -288,6 +308,7 @@ void Monster::Update(float _deltaTime)
 
 void Monster::End()
 {
+
 }
 
 void Monster::FlashMonster(float _deltaTime)

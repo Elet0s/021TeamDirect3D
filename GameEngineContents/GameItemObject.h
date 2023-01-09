@@ -27,6 +27,14 @@ protected:
 
 	void ChasePlayer(float _deltaTime);
 private:
+	float ox_;
+	float oy_;
+	float px_;
+	float py_;
+
+	float4 range_;
+	float4 resultVector_;
+
 	ItemObjectOrder itemObjectOrder_;
 	std::shared_ptr<GameEngineTextureRenderer> itemObjectRenderer_;
 	std::shared_ptr<GameEngineCollision>itemObjectCol_;//닿으면 효과발생

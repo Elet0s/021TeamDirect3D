@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "SoulCardUI.h"
 #include "Player.h"
+#include "ClearLevel.h"
+#include "TestLevel.h"
+#include "Mouse.h"
 #include "DeathAura.h"
 #include "GlobalContentsValue.h"
 
@@ -126,23 +129,50 @@ void SoulCardUI::Start()
 
 void SoulCardUI::Update(float _deltaTime)
 {
-	if(true == cardColision_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::Mouse, CollisionType::CT_AABB2D))
+
+
+
+	if (GetLevel<TestLevel>() == nullptr)
 	{
-		if (GameEngineInput::GetInst()->IsUp("Click"))
+		if (true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4::Zero, true))
 		{
-			mySkill_->IsOnOff();
-			mySkill_->Effect();
-			Death();
+			if (GameEngineInput::GetInst()->IsUp("Click"))
+			{
+				mySkill_->IsOnOff();
+				mySkill_->Effect();
+				Death();
+			}
+			ColorChange(Appear::True);
 		}
-		ColorChange(Appear::True);
-	}
-	else
-	{	
-		if (ColorCheck_ == Appear::True)
+		else
 		{
-			ColorChange(Appear::False);
+			if (ColorCheck_ == Appear::True)
+			{
+				ColorChange(Appear::False);
+			}
 		}
 	}
+	else if (GetLevel<ClearLevel>() == nullptr)
+	{
+		if (true == GetLevel<TestLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4::Zero, true))
+		{
+			if (GameEngineInput::GetInst()->IsUp("Click"))
+			{
+				mySkill_->IsOnOff();
+				mySkill_->Effect();
+				Death();
+			}
+			ColorChange(Appear::True);
+		}
+		else
+		{
+			if (ColorCheck_ == Appear::True)
+			{
+				ColorChange(Appear::False);
+			}
+		}
+	}
+	
 }
 
 void SoulCardUI::ColorChange(Appear _Value)

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "GlobalContentsValue.h"
 #include "PlayerObject.h"
+#include "Player.h"
 
 PlayerObject::PlayerObject() 
 	: mode_(PlayerObjectMode::Idle),
@@ -38,10 +39,12 @@ void PlayerObject::Update(float _deltaTime)
 
 	if (mode_ == PlayerObjectMode::Move)
 	{
-		GetTransform().SetLocalMove(moveDir_.Normalize3D() * 100.f * _deltaTime);
+		GetTransform().SetLocalMove(moveDir_.Normalize3D() * 150.f * _deltaTime);
 
 		if (true == GetTransform().GetWorldPosition().IY() >= checkPos_.IY())
 		{
+			GEngine::ChangeLevel("Test");
+			Player::GetPlayerInst()->GetPlayerInfo().stage_ += 1;
 			float4 Pos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
 			mode_ = PlayerObjectMode::Idle;
 			renderer_->ChangeFrameAnimation("PlayerIdle");
@@ -68,7 +71,6 @@ void PlayerObject::Update(float _deltaTime)
 				}
 			}
 			GetLevel()->GetMainCameraActorTransform().SetWorldMove(float4(0.f, 200.f * sinf(30.f * GameEngineMath::DegreeToRadian), 200.f * cosf(30.f * GameEngineMath::DegreeToRadian)));
-			GEngine::ChangeLevel("Test");
 		}
 	}
 }
