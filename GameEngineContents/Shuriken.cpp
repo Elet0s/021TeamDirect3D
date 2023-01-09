@@ -3,26 +3,29 @@
 #include"Player.h"
 #include"Monster.h"
 Shuriken::Shuriken()
-	: referenceVector_(),
-	shuriKenWeaponInfo_(),
-	minHpPair_(),
-	monsterList_(),
-	resultCos_(),
+	:projectileGroup_(),
+	projectileGroupList01_(),
+	projectileGroupList02_(),
+	projectileGroupList03_(),
 	firstSerchCheak_(false),
-
+	istarget_(false),
+	targerSerchTimer_(0),
 	targerSerchTimer01_(0),
 	targerSerchTimer02_(0),
 	targerSerchTimer03_(0),
-	targerSerchTimer_(0),
-
 	targetSerchCounter_(0),
-
+	passNum_(),
+	resultCos_(),
+	referenceVector_(),
+	shuriKenWeaponInfo_(),
+	monsterList_(),
+	minHpPair_(),
 	targetInst01_(),
 	targetInst02_(),
 	targetInst03_(),
-
-	istarget_(false),
-	passNum_()
+	referenceVectorList01_(),
+	referenceVectorList02_(),
+	referenceVectorList03_()
 {
 
 }

@@ -46,16 +46,14 @@ private:
 	bool firstSerchCheak_;
 	bool istarget_;//타겟이 있으면 true
 
-
 	float targerSerchTimer_;
 	float targerSerchTimer01_;//타겟 검사 주기=공격속도
 	float targerSerchTimer02_;
 	float targerSerchTimer03_;
 
-	std::vector<size_t> passNum_;
-
 	size_t targetSerchCounter_;//타겟검사한 몬스터 수 매 업데이트 갱신
 
+	std::vector<size_t> passNum_; //각 투사체 관통정보
 
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 

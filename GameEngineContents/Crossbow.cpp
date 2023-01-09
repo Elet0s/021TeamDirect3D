@@ -4,19 +4,21 @@
 #include"Monster.h"
 
 Crossbow::Crossbow()
-	:crossbowWeaponInfo_(),
+
+	: projectileGroup_(),
+	projectileGroupList_(),
 	firstSerchCheak_(false),
 	istarget_(false),
-	targerSerchTimer_(0),
+	targerSerchTimer_(0.f),
+	targetSerchCounter_(0),
+	passNum_(),
 	resultCos_(0),
 	referenceVector_(),
+	crossbowWeaponInfo_(),
 	monsterList_(),
 	minHpPair_(),
 	targetInst_(),
-	referenceVectorList_(),
-	projectileGroup_(),
-	projectileGroupList_(),
-	targetSerchCounter_(0)
+	referenceVectorList_()
 {
 }
 Crossbow::~Crossbow()
@@ -33,8 +35,11 @@ void Crossbow::Effect()
 }
 void Crossbow::Start()
 {
+	passNum_.reserve(10);
 	for (size_t i = 0; i < 10; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
 	{
+		passNum_.push_back(0);
+
 		projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
 		projectileGroup_.first->GetTransform().SetWorldScale(30, 30, 0);
 		projectileGroup_.first->SetTexture("Bolt.png");
@@ -88,7 +93,7 @@ void Crossbow::StateSet()
 		crossbowWeaponInfo_.weaponknockback_ = 100;
 
 		crossbowWeaponInfo_.weaponProjectileNum_ = 1;
-		crossbowWeaponInfo_.weponConsecutiveAtkNum_ = 1;
+		crossbowWeaponInfo_.weponConsecutiveAtkNum_ = 1; //최대연속공격횟수 1개
 
 	}
 	else if (nowLevel_ < 3)

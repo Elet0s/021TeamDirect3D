@@ -726,4 +726,9 @@
       <Filter>Actor\02. Play\Monster\Elite</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\SkillList.txt">
+      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
