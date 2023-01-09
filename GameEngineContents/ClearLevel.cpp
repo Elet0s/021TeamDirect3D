@@ -8,7 +8,8 @@
 ClearLevel::ClearLevel() 
 	:clearbox_(nullptr),
 	SoulSelectbox_(nullptr),
-	issoulselect_(false)
+	issoulselect_(false), 
+	mousePointer_(nullptr)
 {	
 }
 
@@ -22,7 +23,7 @@ void ClearLevel::Start()
 	clearbox_ = CreateActor<ClearUIBox>();
 	GetMainCameraActorTransform().SetWorldPosition(float4(192.f, 48.f, -135.f));
 	GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
-	GetCamera(CameraOrder::MousePointerCamera)->SetProjectionMode(ProjectionMode::Perspective);
+	//GetCamera(CameraOrder::MidCamera)->SetProjectionMode(ProjectionMode::Orthographic);
 	mousePointer_ = CreateActor<Mouse>(0, "ClearLevelMousePointer");
 
 	//if (false == GameEngineInput::GetInst()->IsKey("Click"))
@@ -49,5 +50,5 @@ void ClearLevel::End()
 }
 void ClearLevel::LevelStartEvent()
 {
-	mousePointer_->SetProjectionMode(this->GetMainCamera()->GetProjectionMode());
+	//mousePointer_->SetProjectionMode(this->GetMainCamera()->GetProjectionMode());
 }

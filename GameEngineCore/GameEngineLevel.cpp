@@ -19,11 +19,11 @@ GameEngineLevel::GameEngineLevel()
 	mainCameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	mainCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MainCamera);
 
-	std::shared_ptr<GameEngineCameraActor> mousePointerCameraActor = CreateActor<GameEngineCameraActor>();
-	mousePointerCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
-	mousePointerCameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
-	mousePointerCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MousePointerCamera);
-	//마우스포인터 위치 문제와 알파 렌더링 문제를 한번에 해결하기 위해 마우스포인터 카메라 추가.
+	std::shared_ptr<GameEngineCameraActor> midCameraActor = CreateActor<GameEngineCameraActor>();
+	midCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
+	midCameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
+	midCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MidCamera);
+	//마우스포인터 위치 문제와 알파 렌더링 문제를 한번에 해결하기 위해 중간 카메라 추가.
 
 	std::shared_ptr<GameEngineCameraActor> UICameraActor = CreateActor<GameEngineCameraActor>();
 	UICameraActor->GetTransform().SetLocalPosition(0, 0, -100);

@@ -48,5 +48,5 @@ void ShaderTestLevel::End()
 
 void ShaderTestLevel::LevelStartEvent()
 {
-	shaderTestActor_->SetProjectionMode(ProjectionMode::Perspective);
+	//shaderTestActor_->SetProjectionMode(ProjectionMode::Perspective);
 }

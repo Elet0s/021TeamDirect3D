@@ -112,7 +112,7 @@ void TestLevel::Update(float _DeltaTime)
 {						
 	PlayerMoveCamera();
 
-	this->GetCameraActor(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetTransform().SetWorldPosition(
+	this->GetCameraActor(static_cast<UINT>(CameraOrder::MidCamera))->GetTransform().SetWorldPosition(
 		GetMainCameraActor()->GetTransform().GetWorldPosition()
 	);
 
@@ -128,7 +128,6 @@ void TestLevel::LevelStartEvent()
 {
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
-	this->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->SetFarZ(500.f);
 
 	//if (nullptr == mousePointer_)
 	//{

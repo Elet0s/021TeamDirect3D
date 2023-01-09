@@ -36,6 +36,9 @@ public:
 	//주어진 월드좌표를 윈도우좌표로 바꾸는 함수.
 	float4 ConvertWorldPositionToScreenPosition(const float4& _worldPosition);
 
+	//주어진 월드좌표를 뷰공간좌표로 바꾸는 함수.
+	float4 ConvertWorldPositionToViewPosition(const float4& _worldPosition);
+
 	//마우스 포인터의 위치를 윈도우 스크린 좌표로 받아오는 함수.
 	float4 GetMousePositionInScreen();
 

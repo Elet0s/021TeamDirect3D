@@ -88,8 +88,6 @@ void WorldMapLevel::End()
 void WorldMapLevel::LevelStartEvent()
 {
 	this->GetMainCamera()->SetFarZ(10000.f);
-	this->GetCamera(1)->SetFarZ(10000.f);
-	this->mousePointer_->SetProjectionMode(this->GetMainCamera()->GetProjectionMode());
 }
 
 void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
@@ -169,10 +167,6 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 			) * cameraSpeed * _deltaTime
 		);
 	}
-
-	this->GetCameraActor(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetTransform().SetWorldPosition(
-		GetMainCameraActor()->GetTransform().GetWorldPosition()
-	);
 }
 
 void WorldMapLevel::CheckNextStageSelection()
