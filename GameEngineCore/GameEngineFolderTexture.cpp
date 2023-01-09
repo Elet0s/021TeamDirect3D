@@ -33,7 +33,7 @@ void GameEngineFolderTexture::LoadFolder(const std::string_view& _path)
 	for (size_t i = 0; i < allFolderFiles.size(); i++)
 	{
 		std::shared_ptr<GameEngineTexture> newTexture = std::make_shared<GameEngineTexture>();
-		newTexture->TextureLoad(allFolderFiles[i].GetFullPath());
+		newTexture->LoadTexture(allFolderFiles[i].GetFullPath());
 		textures_.push_back(newTexture);
 	}
 }

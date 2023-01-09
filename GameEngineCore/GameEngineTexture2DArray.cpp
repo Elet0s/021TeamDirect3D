@@ -153,7 +153,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 
 }
 
-void GameEngineTexture2DArray::VSSetting(int _bindPoint)
+void GameEngineTexture2DArray::VSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == this->shaderResourceView_)
 	{
@@ -168,7 +168,7 @@ void GameEngineTexture2DArray::VSSetting(int _bindPoint)
 	);
 }
 
-void GameEngineTexture2DArray::PSSetting(int _bindPoint)
+void GameEngineTexture2DArray::PSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == this->shaderResourceView_)
 	{
@@ -183,7 +183,7 @@ void GameEngineTexture2DArray::PSSetting(int _bindPoint)
 	);
 }
 
-void GameEngineTexture2DArray::VSReset(int _bindPoint)
+void GameEngineTexture2DArray::VSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
 	GameEngineDevice::GetContext()->VSSetShaderResources(
@@ -193,7 +193,7 @@ void GameEngineTexture2DArray::VSReset(int _bindPoint)
 	);
 }
 
-void GameEngineTexture2DArray::PSReset(int _bindPoint)
+void GameEngineTexture2DArray::PSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
 	GameEngineDevice::GetContext()->PSSetShaderResources(

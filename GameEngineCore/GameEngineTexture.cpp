@@ -7,6 +7,7 @@ GameEngineTexture::GameEngineTexture()
 	: texture2D_(nullptr),
 	renderTargetView_(nullptr),
 	shaderResourceView_(nullptr),
+	unorderedAccessView_(nullptr),
 	depthStencilView_(nullptr),
 	desc_(),
 	metaData_()
@@ -24,6 +25,11 @@ GameEngineTexture::~GameEngineTexture()
 	{
 		shaderResourceView_->Release();
 		shaderResourceView_ = nullptr;
+	}
+	if (nullptr != unorderedAccessView_)
+	{
+		unorderedAccessView_->Release();
+		unorderedAccessView_ = nullptr;
 	}
 	if (nullptr != depthStencilView_)
 	{
@@ -57,7 +63,14 @@ std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(ID3D11Texture2D* _t
 std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(const D3D11_TEXTURE2D_DESC& _desc)
 {
 	std::shared_ptr<GameEngineTexture> newRes = CreateUnnamedRes();
-	newRes->TextureCreate(_desc);
+	newRes->CreateTexture(_desc);
+	return newRes;
+}
+
+std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(const std::string_view& _name, const D3D11_TEXTURE2D_DESC& _desc)
+{
+	std::shared_ptr<GameEngineTexture> newRes = CreateNamedRes(_name);
+	newRes->CreateTexture(_desc);
 	return newRes;
 }
 
@@ -69,58 +82,8 @@ std::shared_ptr<GameEngineTexture> GameEngineTexture::Load(const std::string_vie
 std::shared_ptr<GameEngineTexture> GameEngineTexture::Load(const std::string_view& _path, const std::string_view& _name)
 {
 	std::shared_ptr<GameEngineTexture> newRes = CreateNamedRes(_name);
-	newRes->TextureLoad(_path);
+	newRes->LoadTexture(_path);
 	return newRes;
-}
-
-void GameEngineTexture::VSSetting(int _bindPoint)
-{
-	if (nullptr == this->shaderResourceView_)
-	{
-		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
-		return;
-	}
-
-	GameEngineDevice::GetContext()->VSSetShaderResources(
-		_bindPoint,
-		1,
-		&shaderResourceView_
-	);
-}
-
-void GameEngineTexture::PSSetting(int _bindPoint)
-{
-	if (nullptr == this->shaderResourceView_)
-	{
-		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
-		return;
-	}
-
-	GameEngineDevice::GetContext()->PSSetShaderResources(
-		_bindPoint,
-		1,
-		&shaderResourceView_
-	);
-}
-
-void GameEngineTexture::VSReset(int _bindPoint)
-{
-	ID3D11ShaderResourceView* emptyResourceView = nullptr;
-	GameEngineDevice::GetContext()->VSSetShaderResources(
-		_bindPoint,
-		1,
-		&emptyResourceView
-	);
-}
-
-void GameEngineTexture::PSReset(int _bindPoint)
-{
-	ID3D11ShaderResourceView* emptyResourceView = nullptr;
-	GameEngineDevice::GetContext()->PSSetShaderResources(
-		_bindPoint,
-		1,
-		&emptyResourceView
-	);
 }
 
 ID3D11RenderTargetView* GameEngineTexture::CreateRenderTargetView()
@@ -164,6 +127,26 @@ ID3D11ShaderResourceView* GameEngineTexture::CreateShaderResourceView()
 	return shaderResourceView_;
 }
 
+ID3D11UnorderedAccessView* GameEngineTexture::CreateUnorderedAccessView()
+{
+	if (nullptr != unorderedAccessView_)
+	{
+		return unorderedAccessView_;
+	}
+
+	if (S_OK != GameEngineDevice::GetDevice()->CreateUnorderedAccessView(
+		texture2D_,
+		nullptr,
+		&unorderedAccessView_
+	))
+	{
+		MsgBoxAssert("무제한 연결뷰 생성 실패.");
+		return nullptr;
+	}
+
+	return unorderedAccessView_;
+}
+
 ID3D11DepthStencilView* GameEngineTexture::CreateDepthStencilView()
 {
 	if (nullptr != depthStencilView_)
@@ -182,6 +165,87 @@ ID3D11DepthStencilView* GameEngineTexture::CreateDepthStencilView()
 	}
 
 	return depthStencilView_;
+}
+
+void GameEngineTexture::VSSetShaderResource(int _bindPoint)
+{
+	if (nullptr == this->shaderResourceView_)
+	{
+		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetContext()->VSSetShaderResources(
+		_bindPoint,
+		1,
+		&shaderResourceView_
+	);
+}
+
+void GameEngineTexture::CSSetShaderResource(int _bindPoint)
+{
+	if (nullptr == this->shaderResourceView_)
+	{
+		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetContext()->CSSetShaderResources(
+		_bindPoint,
+		1,
+		&shaderResourceView_
+	);
+}
+
+void GameEngineTexture::PSSetShaderResource(int _bindPoint)
+{
+	if (nullptr == this->shaderResourceView_)
+	{
+		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetContext()->PSSetShaderResources(
+		_bindPoint,
+		1,
+		&shaderResourceView_
+	);
+}
+
+void GameEngineTexture::VSResetShaderResource(int _bindPoint)
+{
+	ID3D11ShaderResourceView* emptyResourceView = nullptr;
+	GameEngineDevice::GetContext()->VSSetShaderResources(
+		_bindPoint,
+		1,
+		&emptyResourceView
+	);
+}
+
+void GameEngineTexture::PSResetShaderResource(int _bindPoint)
+{
+	ID3D11ShaderResourceView* emptyResourceView = nullptr;
+	GameEngineDevice::GetContext()->PSSetShaderResources(
+		_bindPoint,
+		1,
+		&emptyResourceView
+	);
+}
+
+void GameEngineTexture::CSSetUnorderedAccessView(int _bindPoint)
+{
+	if (nullptr == this->unorderedAccessView_)
+	{
+		MsgBoxAssert("무제한 연결 뷰가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetContext()->CSSetUnorderedAccessViews(
+		_bindPoint,
+		1,
+		&unorderedAccessView_,
+		0 /*-1*/
+	);
 }
 
 void GameEngineTexture::Cut(const std::string_view& _textureName, int _x, int _y)
@@ -521,7 +585,7 @@ PixelColor GameEngineTexture::GetPixelToPixelColor(int _x, int _y)
 	return returnColor;
 }
 
-void GameEngineTexture::TextureLoad(const std::string_view& _path)
+void GameEngineTexture::LoadTexture(const std::string_view& _path)
 {
 	std::string uppercaseExtension = GameEngineString::ToUpperReturn(GameEnginePath::GetExtension(_path));
 
@@ -580,7 +644,7 @@ void GameEngineTexture::TextureLoad(const std::string_view& _path)
 	desc_.Height = static_cast<UINT>(metaData_.height);
 }
 
-void GameEngineTexture::TextureCreate(const D3D11_TEXTURE2D_DESC& _desc)
+void GameEngineTexture::CreateTexture(const D3D11_TEXTURE2D_DESC& _desc)
 {
 	desc_ = _desc;
 
@@ -593,7 +657,6 @@ void GameEngineTexture::TextureCreate(const D3D11_TEXTURE2D_DESC& _desc)
 		MsgBoxAssert("텍스처 생성 실패.");
 		return;
 	}
-
 }
 
 void GameEngineTexture::Cut(int _x, int _y)
@@ -620,6 +683,4 @@ void GameEngineTexture::Cut(int _x, int _y)
 		cuttingStart.x = 0.f;
 		cuttingStart.y += sizeY;
 	}
-
-
 }

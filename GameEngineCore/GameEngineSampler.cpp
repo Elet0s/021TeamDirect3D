@@ -22,7 +22,7 @@ std::shared_ptr<GameEngineSampler> GameEngineSampler::Create(const std::string_v
     return newSampler;
 }
 
-void GameEngineSampler::VSSetting(int _bindPoint)
+void GameEngineSampler::VSSetSampler(int _bindPoint)
 {
     if (nullptr == samplerState_)
     {
@@ -37,7 +37,7 @@ void GameEngineSampler::VSSetting(int _bindPoint)
     );
 }
 
-void GameEngineSampler::PSSetting(int _bindPoint)
+void GameEngineSampler::PSSetSampler(int _bindPoint)
 {
     if (nullptr == samplerState_)
     {

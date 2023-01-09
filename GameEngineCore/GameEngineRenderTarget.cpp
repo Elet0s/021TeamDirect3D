@@ -178,7 +178,7 @@ void GameEngineRenderTarget::Clear(bool _clearDepthStencilView /*= true*/)
 	}
 }
 
-void GameEngineRenderTarget::Setting()
+void GameEngineRenderTarget::SetRenderTarget()
 {
 	if (true == renderTargetViews_.empty())
 	{
@@ -193,7 +193,7 @@ void GameEngineRenderTarget::Setting()
 	);
 }
 
-void GameEngineRenderTarget::Reset()
+void GameEngineRenderTarget::ResetRenderTarget()
 {
 	GameEngineDevice::GetContext()->OMSetRenderTargets(		//지정한 렌더타겟뷰를 렌더링 파이프라인에 연결하는 함수.
 		0,
@@ -217,7 +217,7 @@ void GameEngineRenderTarget::Merge(std::shared_ptr<GameEngineRenderTarget> _othe
 
 void GameEngineRenderTarget::Effect(std::shared_ptr<GameEngineRenderUnit> _renderUnit)
 {
-	this->Setting();
+	this->SetRenderTarget();
 	_renderUnit->Render(GameEngineTime::GetDeltaTime());
 }
 

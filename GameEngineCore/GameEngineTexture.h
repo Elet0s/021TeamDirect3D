@@ -56,19 +56,24 @@ public:
 	static std::shared_ptr<GameEngineTexture> Create(const std::string_view& _name, ID3D11Texture2D* _texture);
 	static std::shared_ptr<GameEngineTexture> Create(ID3D11Texture2D* _texture);
 	static std::shared_ptr<GameEngineTexture> Create(const D3D11_TEXTURE2D_DESC& _desc);
+	static std::shared_ptr<GameEngineTexture> Create(const std::string_view& _name, const D3D11_TEXTURE2D_DESC& _desc);
 
 	static std::shared_ptr<GameEngineTexture> Load(const std::string_view& _path);
 	static std::shared_ptr<GameEngineTexture> Load(const std::string_view& _path, const std::string_view& _name);
 
-	void VSSetting(int _bindPoint);
-	void PSSetting(int _bindPoint);
-
-	void VSReset(int _bindPoint);
-	void PSReset(int _bindPoint);
-
 	ID3D11RenderTargetView* CreateRenderTargetView();
 	ID3D11ShaderResourceView* CreateShaderResourceView();
+	ID3D11UnorderedAccessView* CreateUnorderedAccessView();
 	ID3D11DepthStencilView* CreateDepthStencilView();
+
+	void VSSetShaderResource(int _bindPoint);
+	void CSSetShaderResource(int _bindPoint);
+	void PSSetShaderResource(int _bindPoint);
+
+	void VSResetShaderResource(int _bindPoint);
+	void PSResetShaderResource(int _bindPoint);
+
+	void CSSetUnorderedAccessView(int _bindPoint);
 
 	//지정한 텍스처를 가로 x등분, 세로 y등분으로 균일 분할.
 	static void Cut(const std::string_view& _textureName, int _x, int _y);
@@ -122,10 +127,12 @@ public:
 	}
 
 private:
-	void TextureLoad(const std::string_view& _path);
-	//지정한 경로에서 텍스처를 불러오는 함수.셰이더리소스뷰 생성 과정까지 포함되어 있음.
+	//지정한 경로에서 텍스처를 불러오는 함수. 셰이더리소스뷰 생성 과정까지 포함되어 있음.
+	void LoadTexture(const std::string_view& _path);
 
-	void TextureCreate(const D3D11_TEXTURE2D_DESC& _desc);	//ID3D11Texture2D* 형 텍스처 생성 함수. 
+	//ID3D11Texture2D* 형 텍스처 생성 함수. 
+	void CreateTexture(const D3D11_TEXTURE2D_DESC& _desc);
+
 	void Cut(int _x, int _y);
 
 private:
@@ -140,6 +147,10 @@ private:
 	ID3D11ShaderResourceView* shaderResourceView_;	//셰이더리소스뷰.
 	//
 	//셰이더리소스뷰: 
+
+	ID3D11UnorderedAccessView* unorderedAccessView_;	//무제한 연결뷰.
+	//
+	//무제한 연결뷰:
 
 	ID3D11DepthStencilView* depthStencilView_;	//깊이스텐실뷰.
 	//

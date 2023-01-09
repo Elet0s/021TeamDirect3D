@@ -12,11 +12,11 @@
 
 
 
-void GameEngineConstantBufferSetter::Setting() const
+void GameEngineConstantBufferSetter::Set() const
 {
 	constantBuffer_->ChangeData(settingDataToGPU_, size_);
 
-	settingFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
+	setResourceFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
 }
 
 void GameEngineConstantBufferSetter::Bind()
@@ -31,8 +31,8 @@ void GameEngineConstantBufferSetter::Bind()
 	{
 	case ShaderType::VertexShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineConstantBuffer::VSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineConstantBuffer::VSSetConstantBuffer,
 			this->constantBuffer_,
 			this->bindPoint_
 		);
@@ -41,8 +41,8 @@ void GameEngineConstantBufferSetter::Bind()
 
 	case ShaderType::PixelShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineConstantBuffer::PSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineConstantBuffer::PSSetConstantBuffer,
 			this->constantBuffer_,
 			this->bindPoint_
 		);
@@ -55,14 +55,14 @@ void GameEngineConstantBufferSetter::Bind()
 	}
 }
 
-void GameEngineTextureSetter::Setting() const
+void GameEngineTextureSetter::Set() const
 {
-	settingFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
+	setResourceFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
 }
 
 void GameEngineTextureSetter::Reset() const
 {
-	resetFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
+	resetResourceFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
 }
 
 void GameEngineTextureSetter::Bind()
@@ -77,14 +77,14 @@ void GameEngineTextureSetter::Bind()
 	{
 	case ShaderType::VertexShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineTexture::VSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineTexture::VSSetShaderResource,
 			this->texture_,
 			this->bindPoint_
 		);
 
-		this->resetFunction_ = std::bind(
-			&GameEngineTexture::VSReset,
+		this->resetResourceFunction_ = std::bind(
+			&GameEngineTexture::VSResetShaderResource,
 			this->texture_,
 			this->bindPoint_
 		);
@@ -93,14 +93,14 @@ void GameEngineTextureSetter::Bind()
 
 	case ShaderType::PixelShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineTexture::PSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineTexture::PSSetShaderResource,
 			this->texture_,
 			this->bindPoint_
 		);
 
-		this->resetFunction_ = std::bind(
-			&GameEngineTexture::PSReset,
+		this->resetResourceFunction_ = std::bind(
+			&GameEngineTexture::PSResetShaderResource,
 			this->texture_,
 			this->bindPoint_
 		);
@@ -113,9 +113,9 @@ void GameEngineTextureSetter::Bind()
 	}
 }
 
-void GameEngineSamplerSetter::Setting() const
+void GameEngineSamplerSetter::Set() const
 {
-	settingFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
+	setResourceFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
 }
 
 void GameEngineSamplerSetter::Bind()
@@ -130,8 +130,8 @@ void GameEngineSamplerSetter::Bind()
 	{
 	case ShaderType::VertexShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineSampler::VSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineSampler::VSSetSampler,
 			this->sampler_,
 			this->bindPoint_
 		);
@@ -140,8 +140,8 @@ void GameEngineSamplerSetter::Bind()
 
 	case ShaderType::PixelShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineSampler::PSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineSampler::PSSetSampler,
 			this->sampler_,
 			this->bindPoint_
 		);
@@ -154,10 +154,10 @@ void GameEngineSamplerSetter::Bind()
 	}
 }
 
-void GameEngineStructuredBufferSetter::Setting() const
+void GameEngineStructuredBufferSetter::Set() const
 {
 	structuredBuffer_->ChangeData(settingDataToGPU_, size_ * count_);
-	settingFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
+	setResourceFunction_();	//스위치문 한번 덜 쓰려고 펑셔널 사용.
 }
 
 void GameEngineStructuredBufferSetter::Bind()
@@ -172,8 +172,8 @@ void GameEngineStructuredBufferSetter::Bind()
 	{
 	case ShaderType::VertexShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineStructuredBuffer::VSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineStructuredBuffer::VSSetShaderResource,
 			this->structuredBuffer_,
 			this->bindPoint_
 		);
@@ -182,8 +182,8 @@ void GameEngineStructuredBufferSetter::Bind()
 
 	case ShaderType::PixelShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineStructuredBuffer::PSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineStructuredBuffer::PSSetShaderResource,
 			this->structuredBuffer_,
 			this->bindPoint_
 		);
@@ -221,14 +221,14 @@ void GameEngineStructuredBufferSetter::PushData(const void* _data, UINT _count)
 	);
 }
 
-void GameEngineTexture2DArraySetter::Setting() const
+void GameEngineTexture2DArraySetter::Set() const
 {
-	settingFunction_();
+	setResourceFunction_();
 }
 
 void GameEngineTexture2DArraySetter::Reset() const
 {
-	resetFunction_();
+	resetResourceFunction_();
 }
 
 void GameEngineTexture2DArraySetter::Bind()
@@ -243,14 +243,14 @@ void GameEngineTexture2DArraySetter::Bind()
 	{
 	case ShaderType::VertexShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineTexture2DArray::VSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineTexture2DArray::VSSetShaderResource,
 			this->texture2DArray_,
 			this->bindPoint_
 		);
 
-		this->resetFunction_ = std::bind(
-			&GameEngineTexture2DArray::VSReset,
+		this->resetResourceFunction_ = std::bind(
+			&GameEngineTexture2DArray::VSResetShaderResource,
 			this->texture2DArray_,
 			this->bindPoint_
 		);
@@ -260,14 +260,14 @@ void GameEngineTexture2DArraySetter::Bind()
 
 	case ShaderType::PixelShader:
 	{
-		this->settingFunction_ = std::bind(
-			&GameEngineTexture2DArray::PSSetting,
+		this->setResourceFunction_ = std::bind(
+			&GameEngineTexture2DArray::PSSetShaderResource,
 			this->texture2DArray_,
 			this->bindPoint_
 		);
 
-		this->resetFunction_ = std::bind(
-			&GameEngineTexture2DArray::PSReset,
+		this->resetResourceFunction_ = std::bind(
+			&GameEngineTexture2DArray::PSResetShaderResource,
 			this->texture2DArray_,
 			this->bindPoint_
 		);
@@ -638,7 +638,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 			newCBufferSetter.parentShaderType_ = this->shaderType_;
 			//부모 셰이더가 어떤 셰이더인지 저장한다.
 
-			newCBufferSetter.constantBuffer_ = GameEngineConstantBuffer::CreateAndFind(
+			newCBufferSetter.constantBuffer_ = GameEngineConstantBuffer::CreateOrFind(
 				newCBufferSetter.GetName(),	//만들려는 상수버퍼가 없으면 만들고, 이미 있으면 공유한다.
 				cBufferDesc			//같은 이름, 같은 크기의 상수 버퍼는 셰이더리소스헬퍼들이 포인터를 공유한다.
 						//그래서 이미 만들어져 있는걸 또 만들어도 터뜨리지 않고 대신 이미 만들어져 있는걸 공유한다.
@@ -787,7 +787,7 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 			//아직은 데이터의 사이즈는 알수있어도 이걸로 몇개짜리 버퍼를 만들지는 알수가 없다.
 			// 그래서 개수 0 으로 일단 만들어둔다.
 
-			newSBufferSetter.structuredBuffer_ = GameEngineStructuredBuffer::CreateAndFind(
+			newSBufferSetter.structuredBuffer_ = GameEngineStructuredBuffer::CreateOrFind(
 				newSBufferSetter.GetName(),	//
 				shaderBufferDesc,		//
 				0						//

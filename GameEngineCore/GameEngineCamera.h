@@ -42,10 +42,6 @@ public:
 	//마우스 포인터의 위치를 윈도우 스크린 좌표로 받아오는 함수.
 	float4 GetMousePositionInScreen();
 
-
-	//float4 GetMouseWorldPosition();
-	//float4 GetMouseWorldPositionToActor();
-
 	//마우스 포인터의 위치를 뷰공간 기준으로 받아오는 함수.
 	float4 GetMousePositionInViewSpace();
 
@@ -56,14 +52,9 @@ public:
 	float4 GetRayTowardMousePointer();
 
 
-
-
 	//카메라의 순서를 변경하는 함수.
 	void SetCameraOrder(CameraOrder _order);
 	//할 일이 있을지는 모르겠지만, 런타임 중간에 카메라 오더 변경 금지.
-
-	
-	//GameEngineInstancing& GetInstancing(const std::string& _name);
 
 	//인스턴싱렌더러 반환. 없다면 빈 인스턴싱렌더러를 만들어서 반환한다.
 	std::shared_ptr<GameEngineInstancingRenderer> GetInstancingRenderer(const std::string& _name);
@@ -170,9 +161,6 @@ private:
 	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.
 	//렌더링오더로 먼저 분류한 후 렌더 직전에 zsort() 함수로 z값 순서대로 정렬한다. 
 
-	//std::unordered_map<std::string, GameEngineInstancing> instancingMap_;	//
-	//비정렬 맵으로 한 이유: 순회할 일이 거의 없을거라고 생각한 상황에서 비정렬 맵을 그냥 써보고 싶어서.
-
 	std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>> allInstancingRenderers_;
 
 	//비정렬 맵(Unordered Map): 들어오는 키값을 해시함수를 거쳐서 나온 숫자로 바꿔서, 
@@ -265,6 +253,8 @@ private:
 
 	//빛 적용 배율값 저장용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> lightRatioBufferRenderTarget_;
+
+	std::shared_ptr<GameEngineTexture> testUAV_;
 
 	//빛정보 저장용 렌더타겟.
 	std::shared_ptr<GameEngineRenderTarget> lightDataBufferRenderTarget_;

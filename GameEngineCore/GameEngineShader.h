@@ -21,16 +21,16 @@ public:
 	GameEngineShader* parentShader_;	//이 리소스세터가 가진 리소스를 사용할 부모 셰이더.
 	int bindPoint_;		//해당 셰이더리소스의 바인드포인트(레지스터 등록 번호).
 	ShaderType parentShaderType_;	//이 리소스세터를 생성하고 가지게 될 부모 셰이더의 종류.
-	std::function<void()> settingFunction_;	//셰이더가 가진 리소스들을 세팅하는 함수.
-	std::function<void()> resetFunction_;	//셰이더가 가진 리소스들을 리셋하는 함수.
+	std::function<void()> setResourceFunction_;	//셰이더가 가진 리소스들을 세팅하는 함수.
+	std::function<void()> resetResourceFunction_;	//셰이더가 가진 리소스들을 리셋하는 함수.
 
 protected:
 	ShaderResSetter()
 		: parentShader_(nullptr),
 		bindPoint_(-1),
 		parentShaderType_(ShaderType::Max),
-		settingFunction_(nullptr),
-		resetFunction_(nullptr)
+		setResourceFunction_(nullptr),
+		resetResourceFunction_(nullptr)
 	{
 	}
 
@@ -60,7 +60,7 @@ public:
 	std::vector<char> originalData_;
 	// 아예 자기 메모리로 만든다??
 
-	void Setting() const;
+	void Set() const;
 	void Bind();
 
 	//private:	<-일일히 다 막기엔 일이 너무 복잡해져서 막지는 않지만 외부에서 사용해선 안된다.
@@ -73,7 +73,6 @@ public:
 		size_(-1)
 	{
 	}
-
 };
 
 class GameEngineTexture;
@@ -89,7 +88,7 @@ class GameEngineTextureSetter : public ShaderResSetter
 	//추가적인 텍스처를 세팅해주지 않으면 경고 차원에서 "NSet.png"이 그대로 렌더되게 한다. 
 
 public:
-	void Setting() const;
+	void Set() const;
 	void Reset() const;
 	void Bind();
 
@@ -113,7 +112,7 @@ class GameEngineSamplerSetter : public ShaderResSetter
 	std::shared_ptr<GameEngineSampler> sampler_;
 
 public:
-	void Setting() const;
+	void Set() const;
 	void Bind();
 
 	//private:	<-일일히 다 막기엔 일이 너무 복잡해져서 막지는 않지만 외부에서 사용해선 안된다.
@@ -135,7 +134,7 @@ class GameEngineStructuredBufferSetter : public ShaderResSetter
 	friend class GameEngineInstancingRenderer;
 
 public:
-	void Setting() const;
+	void Set() const;
 	void Bind();
 	void Resize(size_t _count);
 	size_t GetDataSize();
@@ -184,7 +183,7 @@ class GameEngineTexture2DArraySetter: public ShaderResSetter
 	friend class GameEngineShaderResourceHelper;
 
 
-	void Setting() const;
+	void Set() const;
 	void Reset() const;
 	void Bind();
 

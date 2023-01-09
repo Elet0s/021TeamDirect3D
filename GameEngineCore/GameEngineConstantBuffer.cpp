@@ -52,7 +52,7 @@ std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::Find(const s
 	return sizeIter->second;
 }
 
-std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::CreateAndFind(
+std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::CreateOrFind(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc
 )
@@ -136,7 +136,7 @@ void GameEngineConstantBuffer::ChangeData(const void* _data, size_t _dataSize) c
 
 }
 
-void GameEngineConstantBuffer::VSSetting(int _bindPoint)
+void GameEngineConstantBuffer::VSSetConstantBuffer(int _bindPoint)
 {
 	if (nullptr == constantBuffer_)
 	{
@@ -147,7 +147,7 @@ void GameEngineConstantBuffer::VSSetting(int _bindPoint)
 	GameEngineDevice::GetContext()->VSSetConstantBuffers(_bindPoint, 1, &constantBuffer_);
 }
 
-void GameEngineConstantBuffer::PSSetting(int _bindPoint)
+void GameEngineConstantBuffer::PSSetConstantBuffer(int _bindPoint)
 {
 	if (nullptr == constantBuffer_)
 	{

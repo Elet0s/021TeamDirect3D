@@ -87,11 +87,11 @@ public:
 
 private:
 	void LoadTextures(const std::string_view& _folderPath);
-	void VSSetting(int _bindPoint);
-	void PSSetting(int _bindPoint);
+	void VSSetShaderResource(int _bindPoint);
+	void PSSetShaderResource(int _bindPoint);
 
-	void VSReset(int _bindPoint);
-	void PSReset(int _bindPoint);
+	void VSResetShaderResource(int _bindPoint);
+	void PSResetShaderResource(int _bindPoint);
 
 private:
 	std::map<std::string, int> nameIndexPairs_;	//텍스처 각각의 이름과, 그 텍스처의 인덱스 모음.

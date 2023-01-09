@@ -9,7 +9,6 @@
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineVertexes.h"
 #include "GameEngineInstancingBuffer.h"
-#include "GameEngineInstancing.h"
 #include "GameEngineStructuredBuffer.h"
 #include "GameEngineInstancingRenderer.h"
 
@@ -85,50 +84,6 @@ float4 GameEngineCamera::GetMousePositionInScreen()
 
 	return float4(static_cast<float>(pointerPosition.x), static_cast<float>(pointerPosition.y));
 }
-
-//float4 GameEngineCamera::GetMouseWorldPosition()
-//{
-//	POINT pointerPosition;
-//	if (false == GetCursorPos(&pointerPosition))
-//		//화면 전체 기준 마우스 포인터의 좌표를 윈도우 스크린 좌표(좌상단 0, 0)로 반환하는 함수.
-//	{
-//		MsgBoxAssert("마우스 포인터 좌표를 얻어오는데 실패했습니다.");
-//		return float4();
-//	}
-//
-//	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
-//		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
-//		&pointerPosition)	//변환할 화면 전체기준 마우스 포인터 좌표.
-//	)
-//	{
-//		MsgBoxAssert("마우스 포인터 좌표를 변환하는데 실패했습니다.");
-//		return float4();
-//	}
-//
-//	float4 pointerPos = float4(static_cast<float>(pointerPosition.x), static_cast<float>(pointerPosition.y));
-//
-//	//float4x4 invertedViewportMatrix;
-//	//invertedViewportMatrix.Viewport(size_.x, size_.y, 0.f, 0.f, 0.f, 1.f);
-//	//invertedViewportMatrix.Inverse();
-//
-//	//pointerPos *= invertedViewportMatrix;
-//
-//	pointerPos *= this->viewportMatrix_.InverseReturn();
-//
-//	//float4x4 invertedProjectionMatrix = projectionMatrix_.InverseReturn();
-//	//pointerPos *= invertedProjectionMatrix;
-//
-//	//pointerPos *= pointerPos.w;
-//	pointerPos *= this->projectionMatrix_.InverseReturn();
-//	//pointerPos *= this->viewMatrix_.InverseReturn();
-//
-//	return pointerPos;
-//}
-
-//float4 GameEngineCamera::GetMouseWorldPositionToActor()
-//{
-//	return this->GetTransform().GetWorldPosition() + GetMouseWorldPosition();
-//}
 
 float4 GameEngineCamera::GetMousePositionInViewSpace()
 {
@@ -210,11 +165,6 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 {
 	GetActor()->GetLevel()->PushCamera(std::dynamic_pointer_cast<GameEngineCamera>(shared_from_this()), _order);
 }
-
-//GameEngineInstancing& GameEngineCamera::GetInstancing(const std::string& _name)
-//{
-//	return instancingMap_[_name];	//없으면 생성 삽입 반환, 있으면 찾아서 반환.
-//}
 
 std::shared_ptr<GameEngineInstancingRenderer> GameEngineCamera::GetInstancingRenderer(const std::string& _name)
 {
@@ -452,7 +402,7 @@ void GameEngineCamera::Render(float _deltaTime)
 		//포워드 렌더링.
 
 		forwardRenderTarget_->Clear();
-		forwardRenderTarget_->Setting();
+		forwardRenderTarget_->SetRenderTarget();
 		//포워드 렌더타겟 세팅 및 초기화.
 
 		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
@@ -486,12 +436,6 @@ void GameEngineCamera::Render(float _deltaTime)
 			}
 		}
 
-		//for (std::unordered_map<std::string, GameEngineInstancing>::iterator iter = instancingMap_.begin();
-		//	iter != instancingMap_.end(); ++iter)
-		//{
-		//	iter->second.RenderInstancing(_deltaTime);
-		//}
-
 		for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
@@ -508,7 +452,7 @@ void GameEngineCamera::Render(float _deltaTime)
 		//gBuffer 렌더타겟의 텍스처들만 초기화한다. 깊이스텐실 버퍼는 초기화하지 않는다.
 		//깊이스텐실버퍼까지 초기화하면 오브젝트들의 z값 정보가 전부 날아간다.
 
-		geometryBufferRenderTarget_->Setting();
+		geometryBufferRenderTarget_->SetRenderTarget();
 		//gBuffer 렌더타겟을 DC에 연결.
 
 		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
@@ -544,12 +488,6 @@ void GameEngineCamera::Render(float _deltaTime)
 			}
 		}
 
-		//for (std::unordered_map<std::string, GameEngineInstancing>::iterator iter = instancingMap_.begin();
-		//	iter != instancingMap_.end(); ++iter)
-		//{
-		//	iter->second.RenderInstancing(_deltaTime);
-		//}
-
 		for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
@@ -563,7 +501,7 @@ void GameEngineCamera::Render(float _deltaTime)
 		//디퍼드 그림자 렌더링.
 
 		shadowDepthRenderTarget_->Clear();
-		shadowDepthRenderTarget_->Setting();
+		shadowDepthRenderTarget_->SetRenderTarget();
 
 		for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)

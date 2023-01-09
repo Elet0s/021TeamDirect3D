@@ -28,7 +28,7 @@ public:
 		size_t _count
 	);
 	static std::shared_ptr<GameEngineStructuredBuffer> Find(const std::string_view& _name, int _byteWidth);
-	static std::shared_ptr<GameEngineStructuredBuffer> CreateAndFind(
+	static std::shared_ptr<GameEngineStructuredBuffer> CreateOrFind(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
 		size_t _count
@@ -37,14 +37,14 @@ public:
 	void ChangeData(const void* _data, size_t _byteWidth);
 
 	//구조화 버퍼를 렌더링 파이프라인의 정점셰이더에 연결하는 함수.
-	void VSSetting(int _bindPoint);
+	void VSSetShaderResource(int _bindPoint);
 
 	//구조화 버퍼를 렌더링 파이프라인의 픽셀셰이더에 연결하는 함수.
-	void PSSetting(int _bindPoint);
+	void PSSetShaderResource(int _bindPoint);
 
 
-	void VSReset(int _bindPoint);
-	void PSReset(int _bindPoint);
+	void VSResetShaderResource(int _bindPoint);
+	void PSResetShaderResource(int _bindPoint);
 
 
 	static void ResourceDestroy();

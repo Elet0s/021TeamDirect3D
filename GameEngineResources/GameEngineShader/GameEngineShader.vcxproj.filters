@@ -26,6 +26,9 @@
     <FxCompile Include="TextureAnimation.hlsl">
       <Filter>Object</Filter>
     </FxCompile>
+    <FxCompile Include="TestCalLightRatio.hlsl">
+      <Filter>RenderTargetEffect\DeferredRendering</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">

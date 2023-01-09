@@ -41,6 +41,6 @@ void GameEngineBlur::Effect(std::shared_ptr<GameEngineRenderTarget> _renderTarge
 	effectUnit_->GetShaderResourceHelper().SetTexture("Tex", copiedRenderTarget_->GetRenderTargetTexture(0));
 
 	_renderTarget->Clear();
-	_renderTarget->Setting();
+	_renderTarget->SetRenderTarget();
 	_renderTarget->Effect(this->effectUnit_);
 }

@@ -63,23 +63,50 @@ public:
 	static std::shared_ptr<GameEngineRenderTarget> Create(const std::string_view& _name);
 	static std::shared_ptr<GameEngineRenderTarget> Create();
 
-	void CreateRenderTargetTexture(	//렌더타겟으로 쓸 게임엔진텍스처 객체를 생성, 저장하는 함수.
+	//렌더타겟으로 쓸 게임엔진텍스처 객체를 생성, 저장하는 함수.
+	void CreateRenderTargetTexture(	
 		ID3D11Texture2D* _texture,
-		const float4& _clearColor);
+		const float4& _clearColor
+	);
+
+	//렌더타겟으로 쓸 게임엔진텍스처 객체를 생성, 저장하는 함수.
 	void CreateRenderTargetTexture(
 		const float4& _size,
-		const float4& _color);
+		const float4& _color
+	);
+
+	//렌더타겟으로 쓸 게임엔진텍스처 객체를 생성, 저장하는 함수.
 	void CreateRenderTargetTexture(
 		const float4& _size,
 		DXGI_FORMAT _format,
-		const float4& _color);
+		const float4& _color
+	);
+
+	//렌더타겟으로 쓸 게임엔진텍스처 객체를 생성, 저장하는 함수.
 	void CreateRenderTargetTexture(
 		D3D11_TEXTURE2D_DESC _desc,
-		const float4& _color);
+		const float4& _color
+	);
+
+	//렌더타겟으로 쓸 게임엔진텍스처 객체를 생성, 저장하는 함수.
 	void CreateRenderTargetTexture(
 		std::shared_ptr<GameEngineTexture> _texture,
-		const float4& _color);
+		const float4& _color
+	);
+
 	std::shared_ptr<GameEngineTexture> GetRenderTargetTexture(size_t _index);
+
+
+	//void CreateUnorderedAccessTexture(
+	//	const float4& _size,
+	//	DXGI_FORMAT _format,
+	//	const float4& _color
+	//);
+
+	//void CreateUnorderedAccessTexture(
+	//	D3D11_TEXTURE2D_DESC _desc,
+	//	const float4& _color
+	//);
 
 	void CreateDepthTexture(int _renderTargetIndex);
 	void SetDepthTexture(std::shared_ptr<GameEngineTexture> _depthTexture);
@@ -88,10 +115,10 @@ public:
 	void Clear(bool _clearDepthStencilView = true);
 
 	//이 렌더타겟뷰를 디바이스 컨텍스트에 세팅해 렌더링 파이프라인을 거친 결과물을 받을 수 있게 하는 함수.
-	void Setting();
+	void SetRenderTarget();
 
 	//이 렌더타겟뷰를 디바이스 컨텍스트에서 빼는 함수.
-	void Reset();
+	void ResetRenderTarget();
 
 	//이 렌더타겟에 있던 기존 렌더링 정보를 무시하고, 다른 렌더타겟의 렌더링 정보를 가져와서 덮어씌우는 함수.
 	void Copy(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index = 0);

@@ -38,7 +38,7 @@ public:
 		const D3D11_SHADER_BUFFER_DESC& _desc
 	);
 	static std::shared_ptr<GameEngineConstantBuffer> Find(const std::string_view& _name, int _byteWidth);
-	static std::shared_ptr<GameEngineConstantBuffer> CreateAndFind(
+	static std::shared_ptr<GameEngineConstantBuffer> CreateOrFind(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc
 	);
@@ -51,10 +51,10 @@ public:
 	//맵, 언맵 함수를 호출하므로 최소한으로 사용할 것.
 
 	//상수버퍼를 렌더링 파이프라인의 정점셰이더에 연결하는 함수.
-	void VSSetting(int _bindPoint);
+	void VSSetConstantBuffer(int _bindPoint);
 
 	//상수버퍼를 렌더링 파이프라인의 픽셀셰이더에 연결하는 함수.
-	void PSSetting(int _bindPoint);
+	void PSSetConstantBuffer(int _bindPoint);
 
 	static void ResourceDestroy();
 

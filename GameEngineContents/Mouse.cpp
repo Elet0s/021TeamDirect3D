@@ -63,9 +63,11 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderP
 	else
 	{
 		cameraWorldPosition = this->GetLevel()->GetUICamera()->GetMousePositionInWorldSpace();
+		//UI는 전부 직교투영인 UI카메라에 등록되어 있으므로,
+		// UI카메라 기준 마우스 월드좌표를 받아서 그곳을 관통하고 월드공간 Z축과 평행한 레이를 인위적으로 만든다.
 
 		rayDirection = float4::Blue;
-		//레이 방향벡터.
+		//레이 방향벡터. 그냥 월드공간 Z축과 평행하게 처리한다.
 
 		rayDirection.w = 0.f;
 	}

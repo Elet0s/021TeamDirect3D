@@ -62,7 +62,7 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::Find(con
 	return sizeFindIter->second;
 }
 
-std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateAndFind(
+std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateOrFind(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
 	size_t _count
@@ -130,7 +130,7 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth
 	GameEngineDevice::GetContext()->Unmap(structuredBuffer_, 0);
 }
 
-void GameEngineStructuredBuffer::VSSetting(int _bindPoint)
+void GameEngineStructuredBuffer::VSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == shaderResourceView_)
 	{
@@ -145,7 +145,7 @@ void GameEngineStructuredBuffer::VSSetting(int _bindPoint)
 	);
 }
 
-void GameEngineStructuredBuffer::PSSetting(int _bindPoint)
+void GameEngineStructuredBuffer::PSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == shaderResourceView_)
 	{
@@ -160,7 +160,7 @@ void GameEngineStructuredBuffer::PSSetting(int _bindPoint)
 	);
 }
 
-void GameEngineStructuredBuffer::VSReset(int _bindPoint)
+void GameEngineStructuredBuffer::VSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
 	GameEngineDevice::GetContext()->VSSetShaderResources(
@@ -170,7 +170,7 @@ void GameEngineStructuredBuffer::VSReset(int _bindPoint)
 	);
 }
 
-void GameEngineStructuredBuffer::PSReset(int _bindPoint)
+void GameEngineStructuredBuffer::PSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
 	GameEngineDevice::GetContext()->PSSetShaderResources(

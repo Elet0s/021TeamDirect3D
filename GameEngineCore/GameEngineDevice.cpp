@@ -255,7 +255,7 @@ void GameEngineDevice::RenderStart()
 	backBufferRenderTarget_->Clear();
 	//백버퍼에 남아있던 이전 픽셀정보들은 전부 한 색으로 덮어서 지운다.
 
-	backBufferRenderTarget_->Setting();
+	backBufferRenderTarget_->SetRenderTarget();
 	//다시 렌더링 파이프라인에 연결해 렌더링 할 준비를 한다.
 }
 

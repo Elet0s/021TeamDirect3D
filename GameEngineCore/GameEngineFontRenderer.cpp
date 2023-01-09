@@ -72,7 +72,7 @@ void GameEngineFontRenderer::Render(float _deltaTime)
 	}
 
 	fontTarget_->Clear();
-	fontTarget_->Setting();
+	fontTarget_->SetRenderTarget();
 	font_->FontDraw(text_, fontSize_, position, fontColor_,
 		static_cast<int>(lr_) | static_cast<int>(tb_));
 	GameEngineMaterial::AllShaderReset();
