@@ -8,7 +8,8 @@
 ClearLevel::ClearLevel() 
 	:clearbox_(nullptr),
 	SoulSelectbox_(nullptr),
-	issoulselect_(false)
+	issoulselect_(false), 
+	mousePointer_(nullptr)
 {	
 }
 
