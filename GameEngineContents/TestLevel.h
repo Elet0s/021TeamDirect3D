@@ -13,6 +13,10 @@ public:
 	TestLevel& operator=(const TestLevel& _Other) = delete;
 	TestLevel& operator=(TestLevel&& _Other) noexcept = delete;
 
+	std::shared_ptr<Mouse> GetMousePointer()
+	{
+		return mousePointer_;
+	}
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

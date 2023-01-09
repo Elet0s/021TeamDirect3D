@@ -175,6 +175,14 @@ void StageClearMap::Start()
 		);
 		++unitIndex;
 	}
+
+	{
+		std::shared_ptr<GameEngineTextureRenderer> playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+		playerRenderer_->GetTransform().SetLocalScale(90, 90, 1);
+		playerRenderer_->GetTransform().SetWorldPosition(190, 45.f, 30.f);
+		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
+		playerRenderer_->ChangeFrameAnimation("PlayerIdle");
+	}
 }
 
 void StageClearMap::Update(float _deltaTime)
