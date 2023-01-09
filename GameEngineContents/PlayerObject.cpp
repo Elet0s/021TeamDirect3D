@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "GlobalContentsValue.h"
 #include "PlayerObject.h"
+#include "Player.h"
 
 PlayerObject::PlayerObject() 
 	: mode_(PlayerObjectMode::Idle),
@@ -43,6 +44,7 @@ void PlayerObject::Update(float _deltaTime)
 		if (true == GetTransform().GetWorldPosition().IY() >= checkPos_.IY())
 		{
 			GEngine::ChangeLevel("Test");
+			Player::GetPlayerInst()->GetPlayerInfo().stage_ += 1;
 			float4 Pos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
 			mode_ = PlayerObjectMode::Idle;
 			renderer_->ChangeFrameAnimation("PlayerIdle");

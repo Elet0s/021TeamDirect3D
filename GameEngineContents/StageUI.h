@@ -29,7 +29,6 @@ public:
 		soulfontrenderer_->SetText(_Text, "Free Pixel");
 	}
 
-
 	void SoulCoinRenderersOff();
 
 	void SoulCoinRenderersOn();

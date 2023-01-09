@@ -1,7 +1,9 @@
 #include "PreCompile.h"
 #include "WorldMapLevel.h"
+#include "Player.h"
 #include "Mouse.h"
 #include "StageCreater.h"
+#include "StageUI.h"
 #include "StageObject.h"
 #include "WorldMapRenderingActor.h"
 #include "GlobalContentsValue.h"
@@ -11,7 +13,8 @@ WorldMapLevel::WorldMapLevel()
 	WorldLevelLighting_(nullptr),
 	//TestActor_(nullptr),
 	stageCreater_(nullptr),
-	mousePointer_(nullptr)
+	mousePointer_(nullptr),
+	stageUI_(nullptr)
 {
 }
 
@@ -72,6 +75,8 @@ void WorldMapLevel::Start()
 	{
 		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "WorldMapMousePointer");
 	}
+
+    stageUI_ = CreateActor<StageUI>();
 }
 
 void WorldMapLevel::Update(float _deltaTime)
@@ -88,6 +93,7 @@ void WorldMapLevel::End()
 void WorldMapLevel::LevelStartEvent()
 {
 	this->GetMainCamera()->SetFarZ(10000.f);
+	Player::GetPlayerInst()->Off();
 }
 
 void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
@@ -187,6 +193,7 @@ void WorldMapLevel::CheckNextStageSelection()
 
 		if (true == GameEngineInput::GetInst()->IsDown("Click"))
 		{
+			stageUI_->SetStageText(std::to_string(Player::GetPlayerInst()->GetPlayerInfo().stage_));
 			stageCreater_->SendPlayerToNextStage(*iter);
 		}
 	}

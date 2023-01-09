@@ -68,7 +68,7 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 	ImGui::Text(currentCameraPos.c_str());
 
 
-	if (nullptr != reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel()))
+	if (nullptr != dynamic_cast<ClearLevel*>(GEngine::GetCurrentLevel()))
 	{
 		std::string currentMousePos = "MouseWorldPosition : ";
 		currentMousePos += std::to_string(reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel())->GetMousePointer()->GetTransform().GetWorldPosition().x);
