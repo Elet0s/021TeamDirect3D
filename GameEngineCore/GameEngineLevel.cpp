@@ -82,6 +82,11 @@ std::shared_ptr<GameEngineCameraActor> GameEngineLevel::GetCameraActor(UINT _ind
 	return cameras_[_index]->GetActor<GameEngineCameraActor>();
 }
 
+std::shared_ptr<GameEngineCameraActor> GameEngineLevel::GetCameraActor(CameraOrder _cameraOrder)
+{
+	return cameras_[static_cast<int>(_cameraOrder)]->GetActor<GameEngineCameraActor>();
+}
+
 void GameEngineLevel::AllClear()
 {
 	allActors_.clear();

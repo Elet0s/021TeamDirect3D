@@ -46,6 +46,7 @@ public:
 	std::shared_ptr<GameEngineCameraActor> GetUICameraActor();
 	GameEngineTransform& GetUICameraActorTransform();
 	std::shared_ptr<GameEngineCameraActor> GetCameraActor(UINT _index);
+	std::shared_ptr<GameEngineCameraActor> GetCameraActor(CameraOrder _cameraOrder);
 
 	void AllClear();
 

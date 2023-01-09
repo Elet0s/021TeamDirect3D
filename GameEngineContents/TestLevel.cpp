@@ -54,19 +54,19 @@ void TestLevel::Start()
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
 
-	Monster::ReserveMonsters(this, 310);
+	Monster::ReserveMonsters(this, 10);
 
-	Monster::CreateMonster<Brown>(this, 50);
-	Monster::CreateMonster<Green>(this, 50);
-	Monster::CreateMonster<NormalGoblin>(this, 50);
-	Monster::CreateMonster<RedFlyingEyes>(this, 110);
-	Monster::CreateMonster<FlyingEyes>(this, 50);
+	//Monster::CreateMonster<Brown>(this, 50);
+	//Monster::CreateMonster<Green>(this, 50);
+	//Monster::CreateMonster<NormalGoblin>(this, 50);
+	Monster::CreateMonster<RedFlyingEyes>(this, 10);
+	//Monster::CreateMonster<FlyingEyes>(this, 50);
 
-	Monster::SummonMonster<Brown>(this, 50);
-	Monster::SummonMonster<Green>(this, 50);
-	Monster::SummonMonster<NormalGoblin>(this, 50);
-	Monster::SummonMonster<RedFlyingEyes>(this, 110);
-	Monster::SummonMonster<FlyingEyes>(this, 50);
+	//Monster::SummonMonster<Brown>(this, 50);
+	//Monster::SummonMonster<Green>(this, 50);
+	//Monster::SummonMonster<NormalGoblin>(this, 50);
+	Monster::SummonMonster<RedFlyingEyes>(this, 10);
+	//Monster::SummonMonster<FlyingEyes>(this, 50);
 
 	//for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
 	//{
@@ -100,7 +100,10 @@ void TestLevel::Start()
 	//난반사광을 두배로 적용.
 
 	this->GetMainCamera()->PushLighting(testLevelLighting_);
-	//카메라에 조명 등록.
+	//메인카메라에 조명 등록.
+
+	this->GetCamera(CameraOrder::MidCamera)->PushLighting(testLevelLighting_);
+	//미드카메라에도 조명 등록.
 
 	if (nullptr == mousePointer_)
 	{
@@ -112,7 +115,7 @@ void TestLevel::Update(float _DeltaTime)
 {						
 	PlayerMoveCamera();
 
-	this->GetCameraActor(static_cast<UINT>(CameraOrder::MidCamera))->GetTransform().SetWorldPosition(
+	this->GetCameraActor(CameraOrder::MidCamera)->GetTransform().SetWorldPosition(
 		GetMainCameraActor()->GetTransform().GetWorldPosition()
 	);
 
@@ -128,12 +131,7 @@ void TestLevel::LevelStartEvent()
 {
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
-
-	//if (nullptr == mousePointer_)
-	//{
-	//	mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "MousePointer");
-	//	mousePointer_->ChangeMousePointerRenderer(true);
-	//}
+	this->GetCamera(CameraOrder::MidCamera)->SetFarZ(500.f);
 }
 
 void TestLevel::LevelEndEvent()

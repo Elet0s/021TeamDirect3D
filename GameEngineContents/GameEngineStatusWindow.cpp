@@ -68,17 +68,17 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 	ImGui::Text(currentCameraPos.c_str());
 
 
-	if (nullptr != reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel()))
-	{
-		std::string currentMousePos = "MouseWorldPosition : ";
-		currentMousePos += std::to_string(reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel())->GetMousePointer()->GetTransform().GetWorldPosition().x);
-		currentMousePos += ", ";
-		currentMousePos += std::to_string(reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel())->GetMousePointer()->GetTransform().GetWorldPosition().y);
-		currentMousePos += ", ";
-		currentMousePos += std::to_string(reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel())->GetMousePointer()->GetTransform().GetWorldPosition().z);
+	//if (nullptr != reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel()))
+	//{
+	//	std::string currentMousePos = "MouseWorldPosition : ";
+	//	currentMousePos += std::to_string(reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel())->GetMousePointer()->GetTransform().GetWorldPosition().x);
+	//	currentMousePos += ", ";
+	//	currentMousePos += std::to_string(reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel())->GetMousePointer()->GetTransform().GetWorldPosition().y);
+	//	currentMousePos += ", ";
+	//	currentMousePos += std::to_string(reinterpret_cast<ClearLevel*>(GEngine::GetCurrentLevel())->GetMousePointer()->GetTransform().GetWorldPosition().z);
 
-		ImGui::Text(currentMousePos.c_str());
-	}
+	//	ImGui::Text(currentMousePos.c_str());
+	//}
 
 
 
@@ -90,6 +90,7 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 	if (true == ImGui::Button("FreeCamera On/Off"))
 	{
 		GEngine::GetCurrentLevel()->GetMainCameraActor()->FreeCameraModeOnOff();
+		GEngine::GetCurrentLevel()->GetCameraActor(CameraOrder::MidCamera)->FreeCameraModeOnOff();
 	}
 
 
