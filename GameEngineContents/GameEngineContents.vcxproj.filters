@@ -391,6 +391,24 @@
     <ClCompile Include="ClearUIBox.cpp">
       <Filter>Actor\00. Global\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Boss01.cpp">
+      <Filter>Actor\02. Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalKobold.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalSkeleton.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClCompile>
+    <ClCompile Include="GoblinLivesey.cpp">
+      <Filter>Actor\02. Play\Monster\Elite</Filter>
+    </ClCompile>
+    <ClCompile Include="KoboldLivesey.cpp">
+      <Filter>Actor\02. Play\Monster\Elite</Filter>
+    </ClCompile>
+    <ClCompile Include="Red.cpp">
+      <Filter>Actor\02. Play\Monster\Elite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -688,6 +706,24 @@
     </ClInclude>
     <ClInclude Include="ClearUIBox.h">
       <Filter>Actor\00. Global\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss01.h">
+      <Filter>Actor\02. Play\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalKobold.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalSkeleton.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="GoblinLivesey.h">
+      <Filter>Actor\02. Play\Monster\Elite</Filter>
+    </ClInclude>
+    <ClInclude Include="KoboldLivesey.h">
+      <Filter>Actor\02. Play\Monster\Elite</Filter>
+    </ClInclude>
+    <ClInclude Include="Red.h">
+      <Filter>Actor\02. Play\Monster\Elite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

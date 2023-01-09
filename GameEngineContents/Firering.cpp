@@ -79,7 +79,7 @@ void Firering::StateSet()
 {
 	if (nowLevel_ < 2)
 	{
-		fireringAuraWeaponInfo_.weaponAtk_ = 10.13f;
+		fireringAuraWeaponInfo_.weaponAtk_ = 10.f;
 		fireringAuraWeaponInfo_.weaponAtkSpeed_ = 3.f;
 		fireringAuraWeaponInfo_.weaponPassAtk_ = 0;
 		fireringAuraWeaponInfo_.weaponPassNum_ = 2;

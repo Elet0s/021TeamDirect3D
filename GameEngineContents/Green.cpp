@@ -13,23 +13,6 @@ Green::~Green()
 }
 void Green::Start()
 {
-	////////////Cut////////////
-	//GameEngineTexture::Cut("Green.png", 10, 1);
-
-
-
-	//monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-
-	//monRenderer_->GetTransform().SetLocalScale(80, 80, 0);
-	//monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-	//monRenderer_->CreateFrameAnimation_CutTexture("Green", FrameAnimation_Desc("Green.png", 0, 7, 0.1f));
-	//monRenderer_->ChangeFrameAnimation("Green");
-
-	//shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
-	//shadowRenderer_->SetTextureRenderer(monRenderer_);
-
-	
-
 	monsterAnimation_.Initialize(0, 7, 0.1f, true);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
@@ -38,12 +21,10 @@ void Green::Start()
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 0;
-	monsterInfo_->hp_ = 10;
+	monsterInfo_->hp_ = 10.f;
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 50;
 	monsterInfo_->giveExp_ = 5;
-
-
 }
 void Green::Update(float _deltaTime)
 {
@@ -51,8 +32,18 @@ void Green::Update(float _deltaTime)
 	Chaseplayer(_deltaTime);
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
+	HpCheak();
 }
 void Green::End()
 {
 
+}
+
+void Green::HpCheak()
+{
+	if (monsterInfo_->hp_ < 0)
+	{
+		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
+		this->Unsummon();
+	}
 }

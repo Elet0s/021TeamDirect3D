@@ -13,21 +13,6 @@ FlyingEyes::~FlyingEyes()
 }
 void FlyingEyes::Start()
 {
-	////////////Cut////////////
-	//GameEngineTexture::Cut("flyingEyes.png", 10, 1);
-	
-
-
-	//monRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-
-	//monRenderer_->GetTransform().SetLocalScale(70, 70, 0);
-	//monRenderer_->GetTransform().SetLocalPosition(0, 0, -100);
-	//monRenderer_->CreateFrameAnimation_CutTexture("flyingEyes", FrameAnimation_Desc("flyingEyes.png", 0, 5, 0.1f));
-	//monRenderer_->ChangeFrameAnimation("flyingEyes");
-
-	//shadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
-	//shadowRenderer_->SetTextureRenderer(monRenderer_);
-
 	monsterAnimation_.Initialize(0, 5, 0.1f, true);
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
@@ -36,7 +21,7 @@ void FlyingEyes::Start()
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 0;
-	monsterInfo_->hp_ = 10;
+	monsterInfo_->hp_ = 10.f;
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
@@ -47,8 +32,17 @@ void FlyingEyes::Update(float _deltaTime)
 	Chaseplayer(_deltaTime);
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
+	HpCheak();
 }
 void FlyingEyes::End()
 {
 
+}
+void FlyingEyes::HpCheak()
+{
+	if (monsterInfo_->hp_ < 0)
+	{
+		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
+		this->Unsummon();
+	}
 }
