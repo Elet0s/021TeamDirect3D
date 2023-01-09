@@ -80,12 +80,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 
 			allObjectContainer_.push_back(newItemObject);
 		}
@@ -97,12 +96,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::RedExp)
@@ -113,12 +111,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Gold)
@@ -128,12 +125,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Meet)
@@ -143,12 +139,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Voidbead)
@@ -158,12 +153,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("Void.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 	}
@@ -181,12 +175,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 
 			allObjectContainer_.push_back(newItemObject);
 		}
@@ -198,12 +191,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::RedExp)
@@ -214,12 +206,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Gold)
@@ -229,12 +220,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Meet)
@@ -244,12 +234,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Voidbead)
@@ -259,12 +248,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("Void.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 	}
@@ -289,12 +277,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::YellowExp)
@@ -305,12 +292,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::RedExp)
@@ -321,12 +307,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::Gold)
@@ -336,12 +321,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::Meet)
@@ -351,12 +335,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::Voidbead)
@@ -366,12 +349,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("Void.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 	}
@@ -388,12 +370,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::YellowExp)
@@ -404,12 +385,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::RedExp)
@@ -420,12 +400,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
 			newItemObject->itemObjectRenderer_->GetPixelData().mulColor_ = float4(1.0f, 0.0f, 0.0f, 1.0f);
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::Gold)
@@ -435,12 +414,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("SmallCoin.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::Meet)
@@ -450,12 +428,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("ChickenLeg.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 		else if (randomorder == ItemObjectOrder::Voidbead)
@@ -465,12 +442,11 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
 			newItemObject->itemObjectRenderer_->SetTexture("Void.png");
-			newItemObject->itemObjectRenderer_->GetTransform().SetWorldPosition(_itemObjectPos);
 			newItemObject->itemObjectCol_ = newItemObject->CreateComponent<GameEngineCollision>();
 			newItemObject->itemObjectCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Yellow);
 			newItemObject->itemObjectCol_->ChangeOrder(ObjectOrder::Item);
 			newItemObject->itemObjectCol_->GetTransform().SetWorldScale({ 16,16 });
-			newItemObject->itemObjectCol_->GetTransform().SetWorldPosition(_itemObjectPos);
+			newItemObject->GetTransform().SetWorldPosition(_itemObjectPos);
 			allObjectContainer_.push_back(newItemObject);
 		}
 	}

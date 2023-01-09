@@ -127,6 +127,8 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 		{
 			A->itemObjectRenderer_->Off();
 			A->itemObjectCol_->Off();
+			A->chasePlayer_ = false;
+			A->Off();
 			Monster::GetItemObjectManager()->DelteObject(i);
 		}
 
@@ -138,7 +140,8 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 
 CollisionReturn Player::ItemRangeToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
-	
+	std::shared_ptr<GameItemObject> A = std::dynamic_pointer_cast<GameItemObject>(_Other->GetActor());
+	A->chasePlayer_ = true;
 	return CollisionReturn::Stop;
 }
 

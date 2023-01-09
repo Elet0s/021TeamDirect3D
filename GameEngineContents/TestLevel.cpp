@@ -54,19 +54,19 @@ void TestLevel::Start()
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
 
-	Monster::ReserveMonsters(this, 310);
+	Monster::ReserveMonsters(this, 50);
 
-	Monster::CreateMonster<Brown>(this, 50);
-	Monster::CreateMonster<Green>(this, 50);
-	Monster::CreateMonster<NormalGoblin>(this, 50);
-	Monster::CreateMonster<RedFlyingEyes>(this, 110);
-	Monster::CreateMonster<FlyingEyes>(this, 50);
+	Monster::CreateMonster<Brown>(this, 10);
+	Monster::CreateMonster<Green>(this, 10);
+	Monster::CreateMonster<NormalGoblin>(this, 10);
+	Monster::CreateMonster<RedFlyingEyes>(this, 10);
+	Monster::CreateMonster<FlyingEyes>(this, 10);
 
-	Monster::SummonMonster<Brown>(this, 50);
-	Monster::SummonMonster<Green>(this, 50);
-	Monster::SummonMonster<NormalGoblin>(this, 50);
-	Monster::SummonMonster<RedFlyingEyes>(this, 110);
-	Monster::SummonMonster<FlyingEyes>(this, 50);
+	Monster::SummonMonster<Brown>(this, 10);
+	Monster::SummonMonster<Green>(this, 10);
+	Monster::SummonMonster<NormalGoblin>(this, 10);
+	Monster::SummonMonster<RedFlyingEyes>(this, 10);
+	Monster::SummonMonster<FlyingEyes>(this, 10);
 
 	//for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
 	//{
