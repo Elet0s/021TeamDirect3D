@@ -4,16 +4,17 @@
 #include "Monster.h"
 //#include <memory>
 
-DeathAura::DeathAura() 
+DeathAura::DeathAura()
 	: damege(0.75f)
 	, attackSpeed(0.25f)
 	, rangeSize(2.0f)
 	, addRadian_(0)
+	, atkTimer_(0)
 {
-	
+
 }
 
-DeathAura::~DeathAura() 
+DeathAura::~DeathAura()
 {
 }
 
@@ -26,7 +27,7 @@ void DeathAura::Init()
 	std::string sDamege = std::to_string(damege * PlayerInfo_->atk_).substr(0, std::to_string(damege * PlayerInfo_->atk_).find(".") + 3);
 	std::string sAttackSpeed = std::to_string(attackSpeed * PlayerInfo_->pushSpeed_).substr(0, std::to_string(attackSpeed * PlayerInfo_->pushSpeed_).find(".") + 3);
 	std::string sRange = std::to_string(rangeSize * PlayerInfo_->atk_Range_).substr(0, std::to_string(rangeSize * PlayerInfo_->atk_Range_).find(".") + 3);
-	
+
 	etc_ = "범위 내의 근처 적에게 지속\n피해를 입힙니다\n치명타가 발생하지 않습니다\n" + sDamege + " 의 피해\n" + sAttackSpeed + "초 마다 공격\n범위 "
 		+ sRange + "m ";
 }
@@ -34,7 +35,7 @@ void DeathAura::Init()
 void DeathAura::Effect()
 {
 	currentlevel_ += 1;
-	if(currentlevel_ >= 5)
+	if (currentlevel_ >= 5)
 	{
 		damege += 0.75f;
 		rangeSize += 0.25f;
@@ -57,8 +58,8 @@ void  DeathAura::StateSet()
 {
 	if (nowLevel_ < 2)
 	{
-		deathAuraWeaponInfo_.weaponAtk_ = 10.13f;
-		deathAuraWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
+		deathAuraWeaponInfo_.weaponAtk_ = 0.13f;
+		deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f;//1초마다
 
 		deathAuraWeaponInfo_.weaponPassAtk_ = 0;
 		deathAuraWeaponInfo_.weaponPassNum_ = 2;
@@ -88,7 +89,6 @@ void  DeathAura::StateSet()
 }
 void DeathAura::Start()
 {
-
 	circleRendererA_ = CreateComponent<GameEngineTextureRenderer>();
 	circleRendererA_->SetTexture("Death_Circle_A.png");
 	circleRendererA_->GetTransform().SetWorldScale(515, 515, 0);
@@ -131,7 +131,6 @@ void DeathAura::Start()
 	deathAuraCollision03_ = CreateComponent<GameEngineCollision>();
 	deathAuraCollision03_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	deathAuraCollision03_->ChangeOrder(ObjectOrder::Projectile);
-
 	deathAuraCollision03_->GetTransform().SetWorldScale(200, 200, 0);
 
 	Off();
@@ -139,23 +138,28 @@ void DeathAura::Start()
 void DeathAura::Update(float _deltaTime)
 {
 	StateSet();
-	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y-40, 0);
+	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y - 40, 0);
 	RotateRenderer(_deltaTime);
 
 	deathAuraCollision02_->GetTransform().SetWorldPosition(deathAuraCollision01_->GetTransform().GetWorldPosition().x + 100.f, deathAuraCollision01_->GetTransform().GetWorldPosition().y, 0.f);
-	deathAuraCollision03_->GetTransform().SetWorldPosition(deathAuraCollision01_->GetTransform().GetWorldPosition().x  -100.f, deathAuraCollision01_->GetTransform().GetWorldPosition().y, 0.f);
+	deathAuraCollision03_->GetTransform().SetWorldPosition(deathAuraCollision01_->GetTransform().GetWorldPosition().x - 100.f, deathAuraCollision01_->GetTransform().GetWorldPosition().y, 0.f);
+	atkTimer_ += _deltaTime;
 
-	deathAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-	deathAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-	deathAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+	if (atkTimer_ > deathAuraWeaponInfo_.weaponAtkSpeed_)
+	{
+		atkTimer_ = 0;
+		deathAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		deathAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		deathAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 
+	}
 }
 void DeathAura::RotateRenderer(float _deltaTime)
 {
-	
-	if (addRadian_ <360)
+
+	if (addRadian_ < 360)
 	{
-		addRadian_ += 10*_deltaTime;
+		addRadian_ += 10 * _deltaTime;
 	}
 	else
 	{
@@ -175,6 +179,7 @@ void DeathAura::End()
 
 CollisionReturn DeathAura::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other) // 발사체 부딪히면
 {
+	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= deathAuraWeaponInfo_.weaponAtk_; //데미지줌
-	return CollisionReturn::Stop;
+	return CollisionReturn::Continue;
 }

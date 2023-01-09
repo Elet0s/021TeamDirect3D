@@ -35,11 +35,16 @@ private:
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererC_;
 	std::shared_ptr<GameEngineTextureRenderer> circleRendererD_;
 	std::shared_ptr<GameEngineTextureRenderer> circleCenterRenderer_;
+
 	std::shared_ptr<GameEngineCollision> deathAuraCollision01_;
 	std::shared_ptr<GameEngineCollision> deathAuraCollision02_;
 	std::shared_ptr<GameEngineCollision> deathAuraCollision03_;
 
 	WeaponInfo deathAuraWeaponInfo_;//¹«±â ½ºÅÈ
+
+
+	float atkTimer_;
+
 	float addRadian_;
 	float damege;
 	float attackSpeed;

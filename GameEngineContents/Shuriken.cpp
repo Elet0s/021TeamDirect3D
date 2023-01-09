@@ -108,7 +108,7 @@ void  Shuriken::StateSet()
 {
 	if (nowLevel_ < 2)
 	{
-		shuriKenWeaponInfo_.weaponAtk_ = 10.13f;
+		shuriKenWeaponInfo_.weaponAtk_ = 1.f;
 		shuriKenWeaponInfo_.weaponAtkSpeed_ = 300.f;//1ÃÊ¸¶´Ù
 
 		shuriKenWeaponInfo_.weaponPassAtk_ = 0;
@@ -120,7 +120,7 @@ void  Shuriken::StateSet()
 
 		shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 5;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 3;
 		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 
 	}
@@ -381,6 +381,7 @@ void Shuriken::RangeCheak(float _deltaTime)
 
 CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
+	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	for (size_t i = 0; i < 30; i++)
 	{
 		if (i < 10)

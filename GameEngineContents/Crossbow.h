@@ -47,6 +47,8 @@ private:
 
 	size_t targetSerchCounter_;
 
+	std::vector<size_t> passNum_;
+
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
 

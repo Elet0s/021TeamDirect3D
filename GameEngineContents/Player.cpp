@@ -12,6 +12,7 @@ std::shared_ptr<SkillManager> Player::playerSkillManager_ = std::shared_ptr<Skil
 Player::Player()
 	:playerRenderer_(nullptr),
 	collision_(nullptr),
+	itemRangeCollision_(nullptr),
 	playerInfo_(nullptr),
 	dashTimer_(0),
 	dashState_(false),
@@ -57,8 +58,13 @@ void Player::Start()
 	{
 		collision_ = CreateComponent<GameEngineCollision>();
 		collision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-		collision_->GetTransform().SetLocalScale({ 70.f, 70.f, 70.0f });
+		collision_->GetTransform().SetLocalScale({ 70.f, 70.f, 1.0f });
 		collision_->ChangeOrder(ObjectOrder::Player);
+
+		itemRangeCollision_ = CreateComponent<GameEngineCollision>();
+		itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
+		itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
+		itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
 	}
 
 	playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
@@ -77,26 +83,62 @@ void Player::Start()
 
 CollisionReturn Player::PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
-	//td::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
-	//
-	//f (playerInfo_->hp_ > 0)
-	//
-	//	playerInfo_->hp_ -= A->GetMonsterInfo().atk_;
-	//	playerInfo_->exp_ += A->GetMonsterInfo().giveExp_;
-	//
 	return CollisionReturn::Stop;
 }
 
 CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	std::shared_ptr<GameItemObject> A = std::dynamic_pointer_cast<GameItemObject>(_Other->GetActor());
-	A->Off();
+	if (A->GetObjectOrder() == ItemObjectOrder::GreenExp)
+	{
+		playerInfo_->exp_ += 5;
+	}
+	else if (A->GetObjectOrder() == ItemObjectOrder::YellowExp)
+	{
+		playerInfo_->exp_ += 10;
+	}
+	else if (A->GetObjectOrder() == ItemObjectOrder::RedExp)
+	{
+		playerInfo_->exp_ += 15;
+	}
+	else if (A->GetObjectOrder() == ItemObjectOrder::Meet)
+	{
+		playerInfo_->hp_ += 30;
+	}
+	else if (A->GetObjectOrder() == ItemObjectOrder::Gold)
+	{
+		playerInfo_->gold_ += 10;
+	}
+	else if (A->GetObjectOrder() == ItemObjectOrder::Voidbead)
+	{
+		for (size_t i = 0; i < 300; i++)
+		{
+			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
+			{
+				//순회돌면서 체이스 상태로 변경해줘야함
+			}
+
+		}
+	}
+	// 여기서 오브젝트 끄고 컨테이너에서 빼줘야함
+	for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)
+	{
+		if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
+		{
+			A->itemObjectRenderer_->Off();
+			A->itemObjectCol_->Off();
+			Monster::GetItemObjectManager()->DelteObject(i);
+		}
+
+	}
+
+
 	return CollisionReturn::Stop;
 }
 
 CollisionReturn Player::ItemRangeToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
-
+	
 	return CollisionReturn::Stop;
 }
 
@@ -245,8 +287,8 @@ void Player::LevelUpEvent()
 
 void Player::ColCkeak()
 {
-//	itemRangeCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-//	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+	itemRangeCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::ItemRangeToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
+	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 void Player::Update(float _deltaTime)

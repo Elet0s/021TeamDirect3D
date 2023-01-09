@@ -293,6 +293,7 @@ void Bow::RangeCheak(float _deltaTime)
 
 CollisionReturn Bow::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
+	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	for (size_t i = 0; i < 30; i++)
 	{
 		if (i < 10)
@@ -312,7 +313,7 @@ CollisionReturn Bow::ProjectileToMonsterCollision(std::shared_ptr<GameEngineColl
 			}
 		}
 	}
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -=bowWeaponInfo_.weaponAtk_; //µ•πÃ¡ˆ¡‹
+	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= bowWeaponInfo_.weaponAtk_; //µ•πÃ¡ˆ¡‹
 	return CollisionReturn::Stop;
 }
 
