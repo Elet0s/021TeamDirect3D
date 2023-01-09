@@ -9,7 +9,7 @@ Mouse::Mouse()
 	mousePositionInWorldSpace_(float4::Zero),
 	pivotWorldPosition_(float4::Zero),
 	isAiming_(false),
-	projectionMode_(ProjectionMode::Orthographic)
+	aimLineAngle_(0.f)
 {
 	localVertexPosition_[0] = float4(-0.5f, 0.5f);
 	localVertexPosition_[1] = float4(0.5f, 0.5f);
@@ -44,7 +44,7 @@ void Mouse::UpdatePivotPosition(const float4& _pivot)
 	pivotWorldPosition_ = _pivot;
 }
 
-bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot)
+bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderPivot)
 {
 	float4 cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
 	//메인카메라 월드좌표 == 레이 원점.
@@ -54,10 +54,10 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot)
 
 	DirectX::XMVECTOR rectVertexWorldPosition[4] =
 	{
-		((localVertexPosition_[0] + _pivot) * _worldWorldMatrix).directXVector_,
-		((localVertexPosition_[1] + _pivot) * _worldWorldMatrix).directXVector_,
-		((localVertexPosition_[2] + _pivot) * _worldWorldMatrix).directXVector_,
-		((localVertexPosition_[3] + _pivot) * _worldWorldMatrix).directXVector_
+		((localVertexPosition_[0] + _renderPivot) * _worldWorldMatrix).directXVector_,
+		((localVertexPosition_[1] + _renderPivot) * _worldWorldMatrix).directXVector_,
+		((localVertexPosition_[2] + _renderPivot) * _worldWorldMatrix).directXVector_,
+		((localVertexPosition_[3] + _renderPivot) * _worldWorldMatrix).directXVector_
 	};
 	//매개변수로 받은, 레이와의 교차 여부를 알고싶은 렌더러의 월드행렬을 "Rect"의 네 정점에 적용해서 저장한다.
 	//"Rect"외에 다른 메쉬와의 교차 여부도 확인해야 하거나, 3~4개의 특정 렌더러와 레이의 교차여부만 확인하는 지금 방식에서 
@@ -102,39 +102,43 @@ void Mouse::Start()
 	this->GetTransform().SetLocalScale(float4::One);
 	this->GetTransform().SetWorldScale(float4::One);
 
-	defaultPointerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	defaultPointerRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	defaultPointerRenderer_->SetPivot(PivotMode::LeftTop);
 	defaultPointerRenderer_->GetTransform().SetWorldScale(20, 28, 1);
 	defaultPointerRenderer_->SetTexture("CursorSprite.png");
-	defaultPointerRenderer_->ChangeCamera(CameraOrder::MousePointerCamera);
 
-	crossHairRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	crossHairRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	crossHairRenderer_->GetTransform().SetWorldScale(32, 32, 1);
 	crossHairRenderer_->SetTexture("CrossHair.png");
-	crossHairRenderer_->ChangeCamera(CameraOrder::MousePointerCamera);
 	crossHairRenderer_->Off();
 
-	aimLineRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	aimLineRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	aimLineRenderer_->GetTransform().SetWorldScale(512, 512, 1);
 	aimLineRenderer_->SetTexture("AimLine.png");
-	aimLineRenderer_->ChangeCamera(CameraOrder::MousePointerCamera);
 	aimLineRenderer_->Off();
 }
 
 void Mouse::Update(float _DeltaTime)
 {
 	//전투맵에서의 동작.
-	//if (ProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
-	if (ProjectionMode::Orthographic == projectionMode_)
+	if (ProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
 	{
-		this->GetTransform().SetWorldPosition(this->GetLevel()->GetMainCamera()->GetMousePositionInWorldSpace());
+		this->GetTransform().SetWorldPosition(
+			this->GetLevel()->GetMainCamera()->GetMousePositionInViewSpace()
+		);
+
+		//defaultPointerRenderer_->GetTransform().SetWorldPosition(
+		//	this->GetLevel()->GetUICamera()->GetMousePositionInWorldSpace()
+		//);
 
 		if (true == isAiming_)	//활성화된 플레이어 무기 중에 단창 등의 원하는 방향으로 투사체를 날리는 무기가 있는 경우.
 		{
-			aimLineRenderer_->GetTransform().SetWorldPosition(pivotWorldPosition_);
+			aimLineRenderer_->GetTransform().SetWorldPosition(
+				this->GetLevel()->GetMainCamera()->ConvertWorldPositionToViewPosition(pivotWorldPosition_)
+			);
 			//에임라인 렌더러의 중심축을 잡아준다. 중심축 위치는 외부에서 플레이어 월드좌표를 넣어줄 것.
 			
-			float4 aimingVector = this->GetTransform().GetWorldPosition() - pivotWorldPosition_;
+			float4 aimingVector = this->GetTransform().GetWorldPosition() - aimLineRenderer_->GetTransform().GetWorldPosition();
 			//에임라인이 향해야 할 방향 벡터.
 
 			aimingVector.z = 0.f;
@@ -143,23 +147,23 @@ void Mouse::Update(float _DeltaTime)
 			aimingVector /= aimingVector.Length();
 			//정규화.
 
-			float aimLineAngle = 0;
+			aimLineAngle_ = 0;
 			//에임라인의 각도. 0이면 에임라인이 (0, 1, 0) 방향을 향한다.
 
 			if (0 < aimingVector.x)
 			{
-				aimLineAngle = -acosf(aimingVector.y) * GameEngineMath::RadianToDegree;
+				aimLineAngle_ = -acosf(aimingVector.y) * GameEngineMath::RadianToDegree;
 				//이 부분이 없으면 에임라인이 오른쪽으로 넘어가지 않는다.
 			}
 			else
 			{
-				aimLineAngle = acosf(aimingVector.y) * GameEngineMath::RadianToDegree;
+				aimLineAngle_ = acosf(aimingVector.y) * GameEngineMath::RadianToDegree;
 			}
 
-			aimLineRenderer_->GetTransform().SetWorldRotation(0.f, 0.f, aimLineAngle);
+			aimLineRenderer_->GetTransform().SetWorldRotation(0.f, 0.f, aimLineAngle_);
 		}
 	}
-	//월드맵에서의 동작.
+	//월드맵, 클리어레벨에서의 동작.
 	else 
 	{
 		if (true == isAiming_)
@@ -173,10 +177,10 @@ void Mouse::Update(float _DeltaTime)
 		);
 
 		defaultPointerRenderer_->GetTransform().SetWorldPosition(
-			this->GetLevel()->GetCamera(1)->GetMousePositionInWorldSpace()
+			this->GetLevel()->GetUICamera()->GetMousePositionInWorldSpace()
 		);
 
-		//전투맵에서는 == 메인카메라가 원근투영일때는 마우스포인터 렌더러 위치 잡아주는것 외에 특별히 할 일이 없다.
+		//메인카메라가 원근투영일때는 마우스포인터 액터와 렌더러 위치 잡아주는것 외에 특별히 할 일이 없다.
 	}
 }
 

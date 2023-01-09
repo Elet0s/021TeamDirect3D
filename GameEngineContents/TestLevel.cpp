@@ -54,18 +54,18 @@ void TestLevel::Start()
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
 
-	Monster::ReserveMonsters(this, 310);
+	Monster::ReserveMonsters(this, 10);
 
 	//Monster::CreateMonster<Brown>(this, 10);
 	//Monster::CreateMonster<Green>(this, 10);
 	//Monster::CreateMonster<NormalGoblin>(this, 10);
-	Monster::CreateMonster<RedFlyingEyes>(this, 310);
+	Monster::CreateMonster<RedFlyingEyes>(this, 10);
 	//Monster::CreateMonster<FlyingEyes>(this, 10);
 
 	//Monster::SummonMonster<Brown>(this, 10);
 	//Monster::SummonMonster<Green>(this, 10);
 	//Monster::SummonMonster<NormalGoblin>(this, 10);
-	Monster::SummonMonster<RedFlyingEyes>(this, 310);
+	Monster::SummonMonster<RedFlyingEyes>(this, 10);
 	//Monster::SummonMonster<FlyingEyes>(this, 10);
 
 	//for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
@@ -112,7 +112,7 @@ void TestLevel::Update(float _DeltaTime)
 {						
 	PlayerMoveCamera();
 
-	this->GetCameraActor(static_cast<UINT>(CameraOrder::MousePointerCamera))->GetTransform().SetWorldPosition(
+	this->GetCameraActor(static_cast<UINT>(CameraOrder::MidCamera))->GetTransform().SetWorldPosition(
 		GetMainCameraActor()->GetTransform().GetWorldPosition()
 	);
 
@@ -128,7 +128,6 @@ void TestLevel::LevelStartEvent()
 {
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
-	this->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->SetFarZ(500.f);
 
 	//if (nullptr == mousePointer_)
 	//{

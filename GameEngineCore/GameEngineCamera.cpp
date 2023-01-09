@@ -16,7 +16,7 @@
 GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetScale()),
 	projectionMode_(ProjectionMode::Perspective),
-	nearZ_(0.1f),
+	nearZ_(1.f),
 	farZ_(100000.f),
 	fovAngleY_(60.f),
 	conclusionRenderTarget_(nullptr),
@@ -54,6 +54,13 @@ float4 GameEngineCamera::ConvertWorldPositionToScreenPosition(const float4& _wor
 
 	position *= this->viewportMatrix_;		//position에 뷰포트행렬 적용.
 
+	return position;
+}
+
+float4 GameEngineCamera::ConvertWorldPositionToViewPosition(const float4& _worldPosition)
+{
+	float4 position = _worldPosition;
+	position *= this->viewMatrix_;			//position에 뷰행렬 적용, 뷰공간 좌표로 변경.
 	return position;
 }
 
