@@ -40,14 +40,17 @@ void SoulCardSelectBox::Start()
 
 	{
 		Cards[0] = GetLevel()->CreateActor<SoulCardUI>();
+		Cards[0]->SetParent(shared_from_this());
 		Cards[0]->Setting();
 		Cards[0]->GetTransform().SetLocalMove(float4(-200.f, -200.f));
 
 		Cards[1] = GetLevel()->CreateActor<SoulCardUI>();
+		Cards[1]->SetParent(shared_from_this());
 		Cards[1]->Setting();
 		Cards[1]->GetTransform().SetLocalMove(float4(10.f, -200.f));
 
 		Cards[2] = GetLevel()->CreateActor<SoulCardUI>();
+		Cards[2]->SetParent(shared_from_this());
 		Cards[2]->Setting();
 		Cards[2]->GetTransform().SetLocalMove(float4(220.f, -200.f));
 	}
@@ -74,29 +77,20 @@ void SoulCardSelectBox::Update(float _deltaTime)
 {
 	if (Cards[0]->IsDead())
 	{
-		GetLevel<ClearLevel>()->isSoulselectOff();
 		Death();
 		Cards[1]->CardRelease();
-		Cards[1]->Death();
 		Cards[2]->CardRelease();
-		Cards[2]->Death();
 	}
 	else if (Cards[1]->IsDead())
 	{
-		GetLevel<ClearLevel>()->isSoulselectOff();
 		Death();
 		Cards[0]->CardRelease();
-		Cards[0]->Death();
 		Cards[2]->CardRelease();
-		Cards[2]->Death();
 	}
 	else if (Cards[2]->IsDead())
 	{
-		GetLevel<ClearLevel>()->isSoulselectOff();
 		Death();
 		Cards[0]->CardRelease();
-		Cards[0]->Death();
 		Cards[1]->CardRelease();
-		Cards[1]->Death();
 	}
 }

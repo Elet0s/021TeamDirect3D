@@ -27,10 +27,7 @@ void RoadObject::Start()
 
 void RoadObject::Update(float _deltaTime)
 {
-	if (true == col_->IsCollision(CollisionType::CT_AABB, ObjectOrder::Road, CollisionType::CT_AABB))
-	{
-		Death();
-	}
+	
 }
 
 void RoadObject::End()

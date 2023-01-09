@@ -38,7 +38,7 @@ void StageCreater::Start()
 		worldRenderer_->GetInstancingUnit(0).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
 		worldRenderer_->GetInstancingUnit(0).SetColorTextureIndex(4);
 		worldRenderer_->GetInstancingUnit(0).SetNormalMapTextureIndex(5);
-		worldRenderer_->GetInstancingUnit(0).SetWorldScale(256.f, 256.f, 1.f);
+		worldRenderer_->GetInstancingUnit(0).SetWorldScale(128.f, 128.f, 1.f);
 		worldRenderer_->GetInstancingUnit(0).SetWorldRotation(float4(60.f, 0.f, 0.f));
 		worldRenderer_->GetInstancingUnit(0).SetWorldPosition(1024 - 128.f, -650 * sinf(30.f * GameEngineMath::DegreeToRadian), -651 * cosf(30.f * GameEngineMath::DegreeToRadian));
 		object->GetTransform().SetWorldPosition(1024 - 128.f, -650 * sinf(30.f * GameEngineMath::DegreeToRadian), -650 * cosf(30.f * GameEngineMath::DegreeToRadian));
@@ -56,7 +56,7 @@ void StageCreater::Start()
 		worldRenderer_->GetInstancingUnit(1).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
 		worldRenderer_->GetInstancingUnit(1).SetColorTextureIndex(4);
 		worldRenderer_->GetInstancingUnit(1).SetNormalMapTextureIndex(5);
-		worldRenderer_->GetInstancingUnit(1).SetWorldScale(256.f, 256.f, 1.f);
+		worldRenderer_->GetInstancingUnit(1).SetWorldScale(128.f, 128.f, 1.f);
 		worldRenderer_->GetInstancingUnit(1).SetWorldRotation(float4(60.f, 0.f, 0.f));
 		worldRenderer_->GetInstancingUnit(1).SetWorldPosition(1024 - 128.f, -2400 * sinf(30.f * GameEngineMath::DegreeToRadian), -2401 * cosf(30.f * GameEngineMath::DegreeToRadian));
 		curlevel_ = object;
@@ -146,7 +146,7 @@ void StageCreater::Start()
 				worldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(4);
 				//NewGrassTexture.png는 2번으로 삽입되어 있다.
 				worldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(5);
-				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(256.f, 256.f, 1.f);
+				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(128.f, 128.f, 1.f);
 				//타일을 그리는 인스턴싱유닛들만 크기 설정을 해준다.
 
 				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(x, (-2400 + 250.f * level)* sinf(30.f * GameEngineMath::DegreeToRadian), (-2401 + 250.f * level)* cosf(30.f * GameEngineMath::DegreeToRadian));	//타일 렌더하는 인스턴싱유닛들의 위치 설정.
@@ -206,7 +206,10 @@ void StageCreater::Start()
 
 					}
 				}
-				(*iter)->PushNextlevel(*nextiter);
+				else
+				{
+					(*iter)->PushNextlevel(*nextiter);
+				}
 			}
 		}
 	}

@@ -6,10 +6,7 @@
 #include "Mouse.h"
 
 ClearLevel::ClearLevel() 
-	:clearbox_(nullptr),
-	SoulSelectbox_(nullptr),
-	issoulselect_(false), 
-	mousePointer_(nullptr)
+	:clearbox_(nullptr)
 {	
 }
 
@@ -33,16 +30,7 @@ void ClearLevel::Start()
 }
 void ClearLevel::Update(float _deltaTime)
 {
-	if (true == issoulselect_ && SoulSelectbox_ == nullptr)
-	{
-		SoulSelectbox_ = CreateActor<SoulCardSelectBox>();
-	}
-	else if (issoulselect_ == false && false == clearbox_->IsUpdate())
-	{
-		SoulSelectbox_ = nullptr;
-		clearbox_->On();
-	}
-	int a = 0;
+	
 }
 void ClearLevel::End()
 {
@@ -50,5 +38,14 @@ void ClearLevel::End()
 }
 void ClearLevel::LevelStartEvent()
 {
-	//mousePointer_->SetProjectionMode(this->GetMainCamera()->GetProjectionMode());
+	if (clearbox_ == nullptr)
+	{
+		clearbox_ = CreateActor<ClearUIBox>();
+	}
+}
+
+void ClearLevel::LevelEndEvent()
+{
+	clearbox_->Death();
+	clearbox_ = nullptr;
 }

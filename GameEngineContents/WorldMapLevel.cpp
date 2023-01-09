@@ -56,7 +56,7 @@ void WorldMapLevel::Start()
 	this->GetMainCamera()->PushLighting(WorldLevelLighting_);
 	//메인카메라에 조명 등록.
 	
-	GetMainCameraActorTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
+	GetMainCameraActorTransform().SetWorldPosition(float4(872.f, -1088.f, -2300.f));
 	GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
 	//GetUICamera()->GetTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
 
@@ -101,7 +101,7 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 	{
 		Pos += GetMainCameraActorTransform().GetLeftVector() * cameraSpeed * _deltaTime;
 
-		if (Pos.x <= 200.f)
+		if (Pos.x <= 500.f)
 		{
 			return;
 		}
@@ -113,7 +113,7 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 	{
 		Pos += GetMainCameraActorTransform().GetRightVector() * cameraSpeed * _deltaTime;
 
-		if (Pos.x >= 1500.f)
+		if (Pos.x >= 1250.f)
 		{
 			return;
 		}
@@ -154,7 +154,7 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 			-cosf(30.f * GameEngineMath::DegreeToRadian)
 		) * cameraSpeed * _deltaTime;
 
-		if (Pos.z <= -2226.f)
+		if (Pos.z <= -2300.f)
 		{
 			return;
 		}
