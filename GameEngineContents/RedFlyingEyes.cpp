@@ -3,6 +3,7 @@
 #include "GlobalContentsValue.h"
 #include "Texture2DShadowRenderer.h"
 #include"GameItemObjectManager.h"
+#include"Player.h"
 
 RedFlyingEyes::RedFlyingEyes()
 {
@@ -47,6 +48,7 @@ void RedFlyingEyes::HpCheak()
 	if (monsterInfo_->hp_ <0)
 	{
 		dropMonsterItemObject_->CreateItemObject(GetLevel(),this->GetTransform().GetWorldPosition());
+		
 		this->Unsummon();
 	}
 }

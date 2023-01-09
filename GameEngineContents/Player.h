@@ -101,7 +101,7 @@ public:
 		damageMitigation_(0.0f),
 		atkMultiple_(),
 		knockback_(),
-		gold_(0.f),
+		gold_(0),
 		stage_(0),
 		targetScore_(0)
 	{
@@ -143,7 +143,7 @@ public:
 	float damageMitigation_;
 	bool RLDirection_;
 
-	float gold_;
+	int gold_;
 };
 class PlayerUI;
 class GameEngineDefaultRenderer;
@@ -198,6 +198,8 @@ public:
 	CollisionReturn PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 	CollisionReturn PlayerToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 	CollisionReturn ItemRangeToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+
+	void ResetInfo();
 
 public:
 	std::shared_ptr<GameEngineCollision> collision_;
