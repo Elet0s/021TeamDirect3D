@@ -124,12 +124,6 @@ void PlayerUI::GainExp(float _deltaTime)
 		playerExpMax_->GetPixelData().slice_ = float4(player_.lock()->GetPlayerInfo().exp_ / player_.lock()->GetPlayerInfo().maxExp_, 0.0f, 0.0f, 0.0f);
 		ExpBlueBarTimer_ += _deltaTime;
 	}
-	else if (player_.lock()->GetPlayerInfo().exp_ >= player_.lock()->GetPlayerInfo().maxExp_)
-	{
-		player_.lock()->GetPlayerInfo().level_ += 1;
-		player_.lock()->GetPlayerInfo().exp_ = 0;
-		player_.lock()->GetPlayerInfo().maxExp_ += 100;
-	}
 
 	 if (ExpBlueBarTimer_ >0.3f)
 	{

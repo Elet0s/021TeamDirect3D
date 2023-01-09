@@ -283,11 +283,14 @@ void Player::PlayerDeathEvent()
 
 void Player::LevelUpEvent()
 {
-	//if (playerInfo_->exp_ <= playerInfo_->maxExp_)
-	//{
-	//	playerInfo_->level_ += 1;
-	//	playerInfo_->exp_ -= playerInfo_->maxExp_;
-	//}
+	if (playerInfo_->exp_ >= playerInfo_->maxExp_)
+	{
+		playerInfo_->exp_ -= playerInfo_->maxExp_;
+		playerInfo_->maxExp_ *= 1.5;
+		playerInfo_->level_ += 1;
+		GetLevel()->CreateActor<SoulCardSelectBox>();
+		GameEngineTime::GetInst()->SetGlobalTimeScale(0);
+	}
 }
 
 void Player::ColCheak()
@@ -296,26 +299,14 @@ void Player::ColCheak()
 	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 
-void Player::ExpCheak()
-{
-	if (playerInfo_->exp_ >= playerInfo_->maxExp_)
-	{
-		GetLevel()->CreateActor<SoulCardSelectBox>();
-		playerInfo_->exp_ -= playerInfo_->maxExp_;
-
-		GameEngineTime::GetInst()->SetGlobalTimeScale(0);
-	}
-}
-
 void Player::Update(float _deltaTime)
 {
 	MoveDirectionUpdate(_deltaTime);
 	PlayerDash(_deltaTime);
-	LevelUpEvent();
+
 	PlayerDeathEvent();
 	ColCheak();
-	ExpCheak();
-	
+	LevelUpEvent();
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
 		if (playerSkillManager_->GetSkillList()[5][15]->nowLevel_ < 1)

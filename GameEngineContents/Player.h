@@ -219,7 +219,6 @@ protected:
 	void LevelUpEvent();//경험치 받고 전부차면 초기화해주고 레벨업해주는부분
 
 	void ColCheak();
-	void ExpCheak();
 
 private:
 	float dashTimer_;
