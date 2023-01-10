@@ -44,6 +44,7 @@ void PlayerObject::Update(float _deltaTime)
 		if (true == GetTransform().GetWorldPosition().IY() >= checkPos_.IY())
 		{
 			GEngine::ChangeLevel("Test");
+			
 			Player::GetPlayerInst()->GetPlayerInfo().stage_ += 1;
 			float4 Pos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
 			mode_ = PlayerObjectMode::Idle;

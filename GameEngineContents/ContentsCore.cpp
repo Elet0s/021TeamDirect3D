@@ -39,11 +39,11 @@ void ContentsCore::Start()
 	//프로그램 실행 중간에 데이터 타입을 받아오는 방법. 
 
 	CreateLevel<TitleLevel>("Title");
-	CreateLevel<WorldMapLevel>("WorldMap");
 	CreateLevel<TestLevel>("Test");
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
 	CreateLevel<ClearLevel>("Clear");
+	CreateLevel<WorldMapLevel>("WorldMap");
 	//ChangeLevel("WorldMap");
 	//ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("Test");

@@ -134,7 +134,7 @@ void SoulCardUI::Update(float _deltaTime)
 
 	if (GetLevel<TestLevel>() == nullptr)
 	{
-		if (true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4::Zero, true))
+		if (true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.5f, 0.f, 0.f), true))
 		{
 			if (GameEngineInput::GetInst()->IsUp("Click"))
 			{
@@ -154,7 +154,7 @@ void SoulCardUI::Update(float _deltaTime)
 	}
 	else if (GetLevel<ClearLevel>() == nullptr)
 	{
-		if (true == GetLevel<TestLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4::Zero, true))
+		if (true == GetLevel<TestLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.5f, 0.f, 0.f), true))
 		{
 			if (GameEngineInput::GetInst()->IsUp("Click"))
 			{

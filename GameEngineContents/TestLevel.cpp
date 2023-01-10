@@ -19,7 +19,8 @@
 TestLevel::TestLevel()
 	: fieldRenderingActor_(nullptr),
 	testLevelLighting_(nullptr), 
-	mousePointer_(nullptr)
+	mousePointer_(nullptr),
+	stageUI_(nullptr)
 {
 }
 
@@ -79,7 +80,7 @@ void TestLevel::Start()
 	
 	//ShowCursor(false); 마우스 감추기
 	CreateActor<TimeActor>();
-	CreateActor<StageUI>()->SoulCoinRenderersOff();
+	stageUI_ = CreateActor<StageUI>();
 
 	testLevelLighting_ = CreateActor<GameEngineLighting>(0, "TestLevelLighting");
 	//테스트레벨에 조명 추가.
@@ -130,6 +131,7 @@ void TestLevel::Update(float _DeltaTime)
 void TestLevel::LevelStartEvent()
 {
 	Player::GetPlayerInst()->On();
+	stageUI_->SetUI(UIType::Stage);
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
 	this->GetCamera(CameraOrder::MidCamera)->SetFarZ(500.f);

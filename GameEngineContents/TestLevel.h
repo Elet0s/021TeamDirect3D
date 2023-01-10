@@ -33,4 +33,5 @@ private:
 	std::shared_ptr<FieldRenderingActor> fieldRenderingActor_;
 	std::shared_ptr<GameEngineLighting> testLevelLighting_;
 	std::shared_ptr<Mouse> mousePointer_;
+	std::shared_ptr<class StageUI> stageUI_;
 };

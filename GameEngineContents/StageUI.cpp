@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "StageUI.h"
+#include "Player.h"
 
 
 StageUI::StageUI() 
@@ -13,6 +14,7 @@ StageUI::StageUI()
 	, spaceboxrenderer_(nullptr)
 	, coinboxrenderer_(nullptr)
 	, soulboxrenderer_(nullptr)
+	, goalCount_(0)
 {
 }
 
@@ -30,6 +32,7 @@ void StageUI::Start()
 		spacefontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		coinfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		soulfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
+		killcountfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 
 		float X = 1260.f;
 		float Size = 30.f;
@@ -42,7 +45,7 @@ void StageUI::Start()
 		spacefontrenderer_->SetTextPosition(float4{ X,80.f });
 		spacefontrenderer_->SetSize(Size);
 		spacefontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
-		spacefontrenderer_->SetText("공간 : 1 ", "Free Pixel");
+		spacefontrenderer_->SetText("진영 : 1/1 ", "Free Pixel");
 		spacefontrenderer_->ChangeCamera(CameraOrder::UICamera);
 
 		coinfontrenderer_->SetTextPosition(float4{ X,140.f });
@@ -56,6 +59,14 @@ void StageUI::Start()
 		soulfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
 		soulfontrenderer_->SetText("+ 0", "Free Pixel");
 		soulfontrenderer_->ChangeCamera(CameraOrder::UICamera);
+	}
+
+	{
+		killcountfontrenderer_->SetTextPosition(float4{ 100.f, 400.f });
+		killcountfontrenderer_->SetSize(20.f);
+		killcountfontrenderer_->SetColor(float4::Yellow);
+		killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
+		killcountfontrenderer_->ChangeCamera(CameraOrder::UICamera);
 	}
 	
 	{
@@ -103,12 +114,80 @@ void StageUI::Start()
 
 void StageUI::Update(float _deltaTime)
 {
-
+	UIUpdate();
 }
 
 void StageUI::End()
 {
 
+}
+
+void StageUI::SetUI(UIType _type)
+{
+	AllOff();
+	switch (_type)
+	{
+	case UIType::World:
+		WorldSetting();
+		break;
+	case UIType::Stage:
+		StageSetting();
+		break;
+	case UIType::Claer:
+		break;
+	default:
+		break;
+	}
+	mytype_ = _type;
+}
+
+void StageUI::AllOff()
+{
+	stagefontrenderer_->Off();
+	spacefontrenderer_->Off();
+	coinfontrenderer_->Off();
+	soulfontrenderer_->Off();
+	coinrenderer_->Off();
+	soulrenderer_->Off();
+	stageboxrenderer_->Off();
+	spaceboxrenderer_->Off();
+	coinboxrenderer_->Off();
+	soulboxrenderer_->Off();
+}
+
+void StageUI::WorldSetting()
+{
+	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+	stagefontrenderer_->On();
+	spacefontrenderer_->On();
+	coinfontrenderer_->On();
+	soulfontrenderer_->On();
+	coinrenderer_->On();
+	soulrenderer_->On();
+	stageboxrenderer_->On();
+	spaceboxrenderer_->On();
+	coinboxrenderer_->On();
+	soulboxrenderer_->On();
+
+	SetCoinText(std::to_string(Pinfo.gold_));
+	SetStageText(std::to_string(Pinfo.stage_));
+}
+
+void StageUI::StageSetting()
+{
+	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+
+	stagefontrenderer_->On();
+	spacefontrenderer_->On();
+	coinfontrenderer_->On();
+	coinrenderer_->On();
+	stageboxrenderer_->On();
+	spaceboxrenderer_->On();
+	coinboxrenderer_->On();
+
+	goalCount_ = 150;
+	coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+	stagefontrenderer_->SetText("스테이지 : " + std::to_string(Pinfo.stage_), "Free Pixel");
 }
 
 void StageUI::SoulCoinRenderersOff()
@@ -123,4 +202,23 @@ void StageUI::SoulCoinRenderersOn()
 	soulrenderer_->On();
 	soulboxrenderer_->On();
 	soulfontrenderer_->On();
+}
+
+
+void StageUI::UIUpdate()
+{
+	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+	switch (mytype_)
+	{
+	case UIType::World:
+		break;
+	case UIType::Stage:
+		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+		killcountfontrenderer_->SetText("처치한 몬스터:" + std::to_string(Pinfo.targetScore_) + "/" + std::to_string(goalCount_));
+		break;
+	case UIType::Claer:
+		break;
+	default:
+		break;
+	}
 }

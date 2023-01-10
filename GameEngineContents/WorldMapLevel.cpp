@@ -77,6 +77,7 @@ void WorldMapLevel::Start()
 	}
 
     stageUI_ = CreateActor<StageUI>();
+	stageUI_->SetUI(UIType::World);
 }
 
 void WorldMapLevel::Update(float _deltaTime)
@@ -93,6 +94,7 @@ void WorldMapLevel::End()
 void WorldMapLevel::LevelStartEvent()
 {
 	this->GetMainCamera()->SetFarZ(10000.f);
+	stageUI_->SetUI(UIType::World);
 	Player::GetPlayerInst()->Off();
 }
 
@@ -193,7 +195,6 @@ void WorldMapLevel::CheckNextStageSelection()
 
 		if (true == GameEngineInput::GetInst()->IsDown("Click"))
 		{
-			stageUI_->SetStageText(std::to_string(Player::GetPlayerInst()->GetPlayerInfo().stage_));
 			stageCreater_->SendPlayerToNextStage(*iter);
 		}
 	}

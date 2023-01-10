@@ -1,5 +1,11 @@
 #pragma once
 
+enum class UIType
+{
+	World,
+	Stage,
+	Claer
+};
 // Ό³Έν :
 class StageUI : public GameEngineActor
 {
@@ -30,6 +36,8 @@ public:
 	}
 
 	void SoulCoinRenderersOff();
+	
+	void SetUI(UIType _type);
 
 	void SoulCoinRenderersOn();
 protected:
@@ -40,19 +48,31 @@ private:
 	std::shared_ptr<GameEngineFontRenderer> coinfontrenderer_;
 	std::shared_ptr<GameEngineFontRenderer> soulfontrenderer_;
 
+	std::shared_ptr<GameEngineFontRenderer> killcountfontrenderer_;
+
+
 	std::shared_ptr<GameEngineTextureRenderer> coinrenderer_;
 	std::shared_ptr<GameEngineTextureRenderer> soulrenderer_;
+
 
 	std::shared_ptr<GameEngineTextureRenderer> stageboxrenderer_;
 	std::shared_ptr<GameEngineTextureRenderer> spaceboxrenderer_;
 	std::shared_ptr<GameEngineTextureRenderer> coinboxrenderer_;
 	std::shared_ptr<GameEngineTextureRenderer> soulboxrenderer_;
 
+	std::shared_ptr<GameEngineTextureRenderer> killcountboxrenderer_;
+
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
+	
+	void StageSetting();
+	void WorldSetting();
+	void ClearSetting();
+	void AllOff();
+	void UIUpdate();
 
-
-
+	UIType mytype_;
+	int goalCount_;
 };
 
