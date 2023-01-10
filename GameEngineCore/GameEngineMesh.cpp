@@ -111,7 +111,7 @@ void GameEngineMesh::SettingInstancing(std::shared_ptr<GameEngineInstancingBuffe
     UINT ArrOffset[2] = { 0, 0 };
     //오프셋 바이트.
 
-    GameEngineDevice::GetContext()->IASetVertexBuffers(
+    GameEngineDevice::GetDC()->IASetVertexBuffers(
         0,
         2,
         ArrBuffer,
@@ -124,7 +124,7 @@ void GameEngineMesh::SettingInstancing(std::shared_ptr<GameEngineInstancingBuffe
 
 void GameEngineMesh::Render()
 {
-    GameEngineDevice::GetContext()->DrawIndexed(	//인덱스에 연동된 정점들을 그리는 함수.
+    GameEngineDevice::GetDC()->DrawIndexed(	//인덱스에 연동된 정점들을 그리는 함수.
         this->indexBuffer_->GetIndexCount(),//인덱스 개수.
         0,									//읽기 시작할 인덱스 버퍼의 원소 번호. 
         0									//읽기 시작할 버텍스 버퍼의 원소 번호. 
@@ -137,7 +137,7 @@ void GameEngineMesh::Render()
 
 void GameEngineMesh::RenderInstancing(size_t _instancingCount)
 {
-    GameEngineDevice::GetContext()->DrawIndexedInstanced(   //
+    GameEngineDevice::GetDC()->DrawIndexedInstanced(   //
         this->indexBuffer_->GetIndexCount(),                //인덱스 개수.
         static_cast<UINT>(_instancingCount),                //인스턴스 수.
         0,                                                  //읽기 시작할 인덱스 버퍼의 원소 번호.
@@ -158,10 +158,10 @@ const GameEngineInputLayoutDesc& GameEngineMesh::GetInputLayoutDesc() const
 
 void GameEngineMesh::InputAssembler1_VertexBufferSetting()
 {
-    this->vertexBuffer_->Setting();
+    this->vertexBuffer_->Set();
 }
 
 void GameEngineMesh::InputAssembler2_IndexBufferSetting()
 {
-    this->indexBuffer_->Setting();
+    this->indexBuffer_->Set();
 }

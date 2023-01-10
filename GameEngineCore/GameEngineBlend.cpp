@@ -29,7 +29,7 @@ std::shared_ptr<GameEngineBlend> GameEngineBlend::Create(
     return newRes;
 }
 
-void GameEngineBlend::Setting()
+void GameEngineBlend::Set()
 {
     if (nullptr == blendState_)
     {
@@ -37,7 +37,7 @@ void GameEngineBlend::Setting()
         return;
     }
 
-    GameEngineDevice::GetContext()->OMSetBlendState(blendState_, &factor_.w, mask_);
+    GameEngineDevice::GetDC()->OMSetBlendState(blendState_, &factor_.w, mask_);
 
 }
 

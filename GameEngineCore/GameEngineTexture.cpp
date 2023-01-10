@@ -140,7 +140,7 @@ ID3D11UnorderedAccessView* GameEngineTexture::CreateUnorderedAccessView()
 		&unorderedAccessView_
 	))
 	{
-		MsgBoxAssert("무제한 연결뷰 생성 실패.");
+		MsgBoxAssert("순서없는 연결뷰 생성 실패.");
 		return nullptr;
 	}
 
@@ -175,7 +175,7 @@ void GameEngineTexture::VSSetShaderResource(int _bindPoint)
 		return;
 	}
 
-	GameEngineDevice::GetContext()->VSSetShaderResources(
+	GameEngineDevice::GetDC()->VSSetShaderResources(
 		_bindPoint,
 		1,
 		&shaderResourceView_
@@ -190,7 +190,7 @@ void GameEngineTexture::CSSetShaderResource(int _bindPoint)
 		return;
 	}
 
-	GameEngineDevice::GetContext()->CSSetShaderResources(
+	GameEngineDevice::GetDC()->CSSetShaderResources(
 		_bindPoint,
 		1,
 		&shaderResourceView_
@@ -205,7 +205,7 @@ void GameEngineTexture::PSSetShaderResource(int _bindPoint)
 		return;
 	}
 
-	GameEngineDevice::GetContext()->PSSetShaderResources(
+	GameEngineDevice::GetDC()->PSSetShaderResources(
 		_bindPoint,
 		1,
 		&shaderResourceView_
@@ -215,7 +215,7 @@ void GameEngineTexture::PSSetShaderResource(int _bindPoint)
 void GameEngineTexture::VSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
-	GameEngineDevice::GetContext()->VSSetShaderResources(
+	GameEngineDevice::GetDC()->VSSetShaderResources(
 		_bindPoint,
 		1,
 		&emptyResourceView
@@ -225,7 +225,7 @@ void GameEngineTexture::VSResetShaderResource(int _bindPoint)
 void GameEngineTexture::PSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
-	GameEngineDevice::GetContext()->PSSetShaderResources(
+	GameEngineDevice::GetDC()->PSSetShaderResources(
 		_bindPoint,
 		1,
 		&emptyResourceView
@@ -236,11 +236,11 @@ void GameEngineTexture::CSSetUnorderedAccessView(int _bindPoint)
 {
 	if (nullptr == this->unorderedAccessView_)
 	{
-		MsgBoxAssert("무제한 연결 뷰가 없습니다.");
+		MsgBoxAssert("순서없는 연결 뷰가 없습니다.");
 		return;
 	}
 
-	GameEngineDevice::GetContext()->CSSetUnorderedAccessViews(
+	GameEngineDevice::GetDC()->CSSetUnorderedAccessViews(
 		_bindPoint,
 		1,
 		&unorderedAccessView_,

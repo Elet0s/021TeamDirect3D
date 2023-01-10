@@ -23,7 +23,7 @@ private:
 
 
 public:
-	void Setting();
+	void Set();
 
 private:
 	static std::shared_ptr<GameEngineGeometryShader> Load(

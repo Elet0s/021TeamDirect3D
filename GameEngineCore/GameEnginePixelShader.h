@@ -20,7 +20,7 @@ private:
 
 
 public:
-	void Setting();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
+	void Set();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
 
 public:
 	bool IsInstancing() const

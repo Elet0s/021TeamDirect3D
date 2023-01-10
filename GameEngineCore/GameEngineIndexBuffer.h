@@ -39,7 +39,7 @@ public:
 		UINT _indexCount
 	);
 
-	void Setting();
+	void Set();
 
 public:
 	template<typename IndexType>

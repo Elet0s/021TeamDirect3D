@@ -58,7 +58,7 @@ public:
 		return device_;
 	}
 
-	static ID3D11DeviceContext* GetContext()
+	static ID3D11DeviceContext* GetDC()
 	{
 		return deviceContext_;
 	}

@@ -19,7 +19,7 @@ public:
 
 
 public:	
-	void Setting();	
+	void Set();	
 
 private:
 	static std::shared_ptr<GameEngineComputeShader> Load(

@@ -100,7 +100,7 @@ void GameEngineConstantBuffer::ChangeData(const void* _data, size_t _dataSize) c
 	//GPU가 자기 스스로 돌아가는 과정을 멈추고 그래픽 리소스를 건드리지 못하게 관련 작업을 일시정지시키고 
 	// 그래픽카드의 메모리의 접근 권한을 개방하는 과정.
 	//메모리에 대한 접근이 차단되고 GPU가 일시정지되므로 당연히 속도가 줄어든다. 적절하게 사용해야 한다.
-	GameEngineDevice::GetContext()->Map(	//리소스의 데이터를 그래픽카드로 옮기기 위해, GPU에 메모리에 대한 접근 제한을 거는 함수.
+	GameEngineDevice::GetDC()->Map(	//리소스의 데이터를 그래픽카드로 옮기기 위해, GPU에 메모리에 대한 접근 제한을 거는 함수.
 		this->constantBuffer_,	//??
 		0,					//서브리소스 배열 내 번호. 배열 없이 한개만 단독으로 넣어주므로 0.
 		D3D11_MAP_WRITE_DISCARD,	//CPU의 리소스에 대한 접근권한 설정 플래그.
@@ -129,7 +129,7 @@ void GameEngineConstantBuffer::ChangeData(const void* _data, size_t _dataSize) c
 	);		//램에 있는 상수버퍼 데이터를 그래픽카드로 복사한다.
 
 	//일시정지 해제 과정.
-	GameEngineDevice::GetContext()->Unmap(	//Map()함수로 걸었던, 메모리에 대한 GPU의 접근 제한을 푸는 함수
+	GameEngineDevice::GetDC()->Unmap(	//Map()함수로 걸었던, 메모리에 대한 GPU의 접근 제한을 푸는 함수
 		this->constantBuffer_,			//??
 		0								//서브리소스 배열의 번호. 배열 없이 한개만 단독으로 넣어주므로 0.
 	);
@@ -144,7 +144,18 @@ void GameEngineConstantBuffer::VSSetConstantBuffer(int _bindPoint)
 		return;
 	}
 
-	GameEngineDevice::GetContext()->VSSetConstantBuffers(_bindPoint, 1, &constantBuffer_);
+	GameEngineDevice::GetDC()->VSSetConstantBuffers(_bindPoint, 1, &constantBuffer_);
+}
+
+void GameEngineConstantBuffer::CSSetConstantBuffer(int _bindPoint)
+{
+	if (nullptr == constantBuffer_)
+	{
+		MsgBoxAssert("상수 버퍼가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetDC()->CSSetConstantBuffers(_bindPoint, 1, &constantBuffer_);
 }
 
 void GameEngineConstantBuffer::PSSetConstantBuffer(int _bindPoint)
@@ -155,7 +166,7 @@ void GameEngineConstantBuffer::PSSetConstantBuffer(int _bindPoint)
 		return;
 	}
 
-	GameEngineDevice::GetContext()->PSSetConstantBuffers(_bindPoint, 1, &constantBuffer_);
+	GameEngineDevice::GetDC()->PSSetConstantBuffers(_bindPoint, 1, &constantBuffer_);
 }
 
 void GameEngineConstantBuffer::ResourceDestroy()

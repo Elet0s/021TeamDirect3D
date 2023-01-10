@@ -77,7 +77,7 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _byteWidth
     memset(&destMemoryPtrInGPU, 0, sizeof(destMemoryPtrInGPU));
 
 
-    GameEngineDevice::GetContext()->Map(
+    GameEngineDevice::GetDC()->Map(
         this->instancingBuffer_,
         0,
         D3D11_MAP_WRITE_DISCARD,
@@ -98,7 +98,7 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _byteWidth
         _byteWidth
     );
 
-    GameEngineDevice::GetContext()->Unmap(this->instancingBuffer_, 0);
+    GameEngineDevice::GetDC()->Unmap(this->instancingBuffer_, 0);
 }
 
 void GameEngineInstancingBuffer::Release()

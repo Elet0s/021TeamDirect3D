@@ -86,11 +86,6 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateOr
 
 void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth)
 {
-	// 512 라이트 데이터를 세팅해줄수 있는 버퍼를 만들었다고 하더라도
-	// 진짜 512개의 라이트를 세팅하는것은 아닐수가 있으므로
-	// 기존에 만든 세팅들이 사이드 이펙트가 생기지는 않겠지만
-	// 위험하니까 고려는 해둬야 할겁니다.
-
 	if (nullptr == _data)
 	{
 		MsgBoxAssert("데이터가 없습니다.");
@@ -102,10 +97,11 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth
 	//	MsgBoxAssertString(this->GetNameCopy() + ": 데이터의 전체 크기가 서로 맞지 않습니다.");
 	//	return;
 	//}
+	//최대 크기 구조화 버퍼를 모든 셰이더들이 공유하므로 크기를 정확히 맞출 필요가 없다.
 
 	destMemoryPtrInGPU_.pData = nullptr;
 
-	HRESULT mapResult = GameEngineDevice::GetContext()->Map(
+	HRESULT mapResult = GameEngineDevice::GetDC()->Map(
 		structuredBuffer_,
 		0,
 		D3D11_MAP_WRITE_DISCARD,
@@ -127,7 +123,7 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth
 	);
 
 
-	GameEngineDevice::GetContext()->Unmap(structuredBuffer_, 0);
+	GameEngineDevice::GetDC()->Unmap(structuredBuffer_, 0);
 }
 
 void GameEngineStructuredBuffer::VSSetShaderResource(int _bindPoint)
@@ -138,7 +134,22 @@ void GameEngineStructuredBuffer::VSSetShaderResource(int _bindPoint)
 		return;
 	}
 
-	GameEngineDevice::GetContext()->VSSetShaderResources(
+	GameEngineDevice::GetDC()->VSSetShaderResources(
+		_bindPoint,
+		1,
+		&shaderResourceView_
+	);
+}
+
+void GameEngineStructuredBuffer::CSSetShaderResource(int _bindPoint)
+{
+	if (nullptr == shaderResourceView_)
+	{
+		MsgBoxAssert("구조화 버퍼가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetDC()->CSSetShaderResources(
 		_bindPoint,
 		1,
 		&shaderResourceView_
@@ -149,11 +160,11 @@ void GameEngineStructuredBuffer::PSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == shaderResourceView_)
 	{
-		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		MsgBoxAssert("구조화 버퍼가 없습니다.");
 		return;
 	}
 
-	GameEngineDevice::GetContext()->PSSetShaderResources(
+	GameEngineDevice::GetDC()->PSSetShaderResources(
 		_bindPoint,
 		1,
 		&shaderResourceView_
@@ -163,7 +174,7 @@ void GameEngineStructuredBuffer::PSSetShaderResource(int _bindPoint)
 void GameEngineStructuredBuffer::VSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
-	GameEngineDevice::GetContext()->VSSetShaderResources(
+	GameEngineDevice::GetDC()->VSSetShaderResources(
 		_bindPoint,
 		1,
 		&emptyResourceView
@@ -173,7 +184,7 @@ void GameEngineStructuredBuffer::VSResetShaderResource(int _bindPoint)
 void GameEngineStructuredBuffer::PSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
-	GameEngineDevice::GetContext()->PSSetShaderResources(
+	GameEngineDevice::GetDC()->PSSetShaderResources(
 		_bindPoint,
 		1,
 		&emptyResourceView
@@ -184,12 +195,6 @@ void GameEngineStructuredBuffer::ResourceDestroy()
 {
 	for (std::pair<std::string, std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>> nameSortedBuffer : allStructuredBuffers_)
 	{
-		//for (std::pair<int, std::shared_ptr<GameEngineStructuredBuffer>> sizeSortedBuffer : nameSortedBuffer.second)
-		//{
-		//	delete sizeSortedBuffer.second;
-		//	sizeSortedBuffer.second = nullptr;
-		//}
-
 		nameSortedBuffer.second.clear();
 	}
 

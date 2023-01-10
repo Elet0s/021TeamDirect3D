@@ -64,7 +64,7 @@ void GameEngineFont::FontDraw(
 
 
 	fontWrapper_->DrawString(
-		GameEngineDevice::GetContext(),
+		GameEngineDevice::GetDC(),
 		wText.c_str(),
 		_fontSize,
 		_screenPos.x,

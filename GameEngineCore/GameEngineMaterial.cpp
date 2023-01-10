@@ -38,11 +38,11 @@ std::shared_ptr<GameEngineMaterial> GameEngineMaterial::Create()
 
 void GameEngineMaterial::AllShaderReset()
 {
-	GameEngineDevice::GetContext()->VSSetShader(nullptr, nullptr, 0);
-	GameEngineDevice::GetContext()->HSSetShader(nullptr, nullptr, 0);
-	GameEngineDevice::GetContext()->DSSetShader(nullptr, nullptr, 0);
-	GameEngineDevice::GetContext()->GSSetShader(nullptr, nullptr, 0);
-	GameEngineDevice::GetContext()->PSSetShader(nullptr, nullptr, 0);
+	GameEngineDevice::GetDC()->VSSetShader(nullptr, nullptr, 0);
+	GameEngineDevice::GetDC()->HSSetShader(nullptr, nullptr, 0);
+	GameEngineDevice::GetDC()->DSSetShader(nullptr, nullptr, 0);
+	GameEngineDevice::GetDC()->GSSetShader(nullptr, nullptr, 0);
+	GameEngineDevice::GetDC()->PSSetShader(nullptr, nullptr, 0);
 }
 
 void GameEngineMaterial::SetVertexShader(const std::string_view& _name)
@@ -149,35 +149,35 @@ void GameEngineMaterial::Copy(std::shared_ptr<GameEngineMaterial> _original)
 
 void GameEngineMaterial::VertexShaderSetting()
 {
-	this->vertexShader_->Setting();
+	this->vertexShader_->Set();
 }
 
 void GameEngineMaterial::Inst_VertexShaderSetting()
 {
-	this->vertexShader_->GetInst_VertexShader()->Setting();
+	this->vertexShader_->GetInst_VertexShader()->Set();
 }
 
 void GameEngineMaterial::RasterizerSetting()
 {
-	this->rasterizer_->Setting();
+	this->rasterizer_->Set();
 }
 
 void GameEngineMaterial::PixelShaderSetting()
 {
-	this->pixelShader_->Setting();
+	this->pixelShader_->Set();
 }
 
 void GameEngineMaterial::Inst_PixelShaderSetting()
 {
-	this->pixelShader_->GetInst_PixelShader()->Setting();
+	this->pixelShader_->GetInst_PixelShader()->Set();
 }
 
 void GameEngineMaterial::OutputMerger_BlendSetting()
 {
-	this->blend_->Setting();
+	this->blend_->Set();
 }
 
 void GameEngineMaterial::OutputMerger_DepthStencilSetting()
 {
-	this->depthStencil_->Setting();
+	this->depthStencil_->Set();
 }

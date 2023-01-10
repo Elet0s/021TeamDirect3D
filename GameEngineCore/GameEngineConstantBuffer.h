@@ -53,6 +53,9 @@ public:
 	//상수버퍼를 렌더링 파이프라인의 정점셰이더에 연결하는 함수.
 	void VSSetConstantBuffer(int _bindPoint);
 
+	//상수버퍼를 컴퓨트셰이더에 연결하는 함수.
+	void CSSetConstantBuffer(int _bindPoint);
+
 	//상수버퍼를 렌더링 파이프라인의 픽셀셰이더에 연결하는 함수.
 	void PSSetConstantBuffer(int _bindPoint);
 

@@ -35,7 +35,7 @@ void GameEngineInputLayout::CreateInputLayout(
     }
 }
 
-void GameEngineInputLayout::Setting()
+void GameEngineInputLayout::Set()
 {
     if (nullptr == inputLayout_)
     {
@@ -43,7 +43,7 @@ void GameEngineInputLayout::Setting()
         return;
     }
 
-    GameEngineDevice::GetContext()->IASetInputLayout(inputLayout_);
+    GameEngineDevice::GetDC()->IASetInputLayout(inputLayout_);
 }
 
 std::shared_ptr<GameEngineInputLayout> GameEngineInputLayout::Create(

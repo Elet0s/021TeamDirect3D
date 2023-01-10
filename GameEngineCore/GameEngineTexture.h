@@ -139,18 +139,17 @@ private:
 	ID3D11Texture2D* texture2D_;
 	//픽셀별 색상 정보가 든 2차원 배열이 저장된 그래픽카드 내 메모리 영역을 관리하는 인터페이스 ID3D11Texture2D* 타입 멤버변수.
 
-
 	ID3D11RenderTargetView* renderTargetView_;
-	//렌더타겟으로 사용될 그래픽카드 내 메모리 영역 통제용 인터페이스 ID3D11RenderTargetView*타입 멤버변수.
-	//렌더타겟: 렌더링 파이프라인을 전부 거친 결과물로서의 색상값 2차원 배열을 받는데 사용되는 그래픽 카드 내 메모리 영역.
+	//
+	//렌더타겟뷰: 렌더링 파이프라인을 전부 거친 결과물로서의 색상값 2차원 배열을 받는데 사용되는 그래픽 카드 내 메모리 영역.
 
 	ID3D11ShaderResourceView* shaderResourceView_;	//셰이더리소스뷰.
 	//
 	//셰이더리소스뷰: 
 
-	ID3D11UnorderedAccessView* unorderedAccessView_;	//무제한 연결뷰.
+	ID3D11UnorderedAccessView* unorderedAccessView_;//순서없는 연결뷰.
 	//
-	//무제한 연결뷰:
+	//순서없는 연결뷰:
 
 	ID3D11DepthStencilView* depthStencilView_;	//깊이스텐실뷰.
 	//

@@ -48,7 +48,7 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 void GameEngineRenderTarget::CreateRenderTargetTexture(
 	const float4& _size,
 	DXGI_FORMAT _format,
-	const float4& _color
+	const float4& _clearColor
 )
 {
 	D3D11_TEXTURE2D_DESC newTextureDesc = { 0 };
@@ -62,21 +62,21 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	newTextureDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
 	newTextureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
 
-	CreateRenderTargetTexture(newTextureDesc, _color);
+	CreateRenderTargetTexture(newTextureDesc, _clearColor);
 }
 
 void GameEngineRenderTarget::CreateRenderTargetTexture(
 	D3D11_TEXTURE2D_DESC _desc,
-	const float4& _color
+	const float4& _clearColor
 )
 {
 	std::shared_ptr<GameEngineTexture> newTexture = GameEngineTexture::Create(_desc);
-	CreateRenderTargetTexture(newTexture, _color);
+	CreateRenderTargetTexture(newTexture, _clearColor);
 }
 
 void GameEngineRenderTarget::CreateRenderTargetTexture(
 	std::shared_ptr<GameEngineTexture> _texture,
-	const float4& _color
+	const float4& _clearColor
 )
 {
 	this->renderTargets_.push_back(_texture);
@@ -88,8 +88,8 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	this->shaderResourceViews_.push_back(_texture->CreateShaderResourceView());
 	//newTexture에서 생성한 셰이더리소스뷰를 저장한다.
 
-	this->clearColors_.push_back(_color);
-	//_color도 저장한다.
+	this->clearColors_.push_back(_clearColor);
+	//_clearColor도 저장한다.
 }
 
 std::shared_ptr<GameEngineTexture> GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
@@ -102,6 +102,37 @@ std::shared_ptr<GameEngineTexture> GameEngineRenderTarget::GetRenderTargetTextur
 
 	return renderTargets_[_index];
 }
+
+//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
+//	ID3D11Texture2D* _texture,
+//	const float4& _clearColor
+//)
+//{
+//}
+//
+//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
+//	const float4& _size,
+//	DXGI_FORMAT _format,
+//	const float4& _clearColor
+//)
+//{
+//}
+//
+//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
+//	D3D11_TEXTURE2D_DESC _desc,
+//	const float4& _clearColor
+//)
+//{
+//	std::shared_ptr<GameEngineTexture> newTexture = GameEngineTexture::Create(_desc);
+//	CreateUnorderedAccessTexture(newTexture, _clearColor);
+//}
+//
+//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
+//	std::shared_ptr<GameEngineTexture> _texture,
+//	const float4& _clearColor
+//)
+//{
+//}
 
 void GameEngineRenderTarget::CreateDepthTexture(int _renderTargetIndex)
 {
@@ -156,7 +187,7 @@ void GameEngineRenderTarget::Clear(bool _clearDepthStencilView /*= true*/)
 {
 	for (size_t i = 0; i < renderTargetViews_.size(); i++)
 	{
-		GameEngineDevice::GetContext()->ClearRenderTargetView(	//지정한 렌더타겟뷰를 한 색으로 채우는 함수.
+		GameEngineDevice::GetDC()->ClearRenderTargetView(	//지정한 렌더타겟뷰를 한 색으로 채우는 함수.
 			renderTargetViews_[i],		//대상 렌더타겟뷰.
 			clearColors_[i].arr1D		//대상 렌더타겟뷰를 칠할 색.
 		);
@@ -169,7 +200,7 @@ void GameEngineRenderTarget::Clear(bool _clearDepthStencilView /*= true*/)
 
 	if (nullptr != depthStencilView_)
 	{
-		GameEngineDevice::GetContext()->ClearDepthStencilView(	//깊이 스텐실 뷰 초기화함수.
+		GameEngineDevice::GetDC()->ClearDepthStencilView(	//깊이 스텐실 뷰 초기화함수.
 			depthStencilView_,						//초기화 대상 깊이 스텐실 뷰.
 			D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,//깊이버퍼 | 스텐실버퍼 초기화
 			1.f,									//깊이 초기값.
@@ -186,7 +217,7 @@ void GameEngineRenderTarget::SetRenderTarget()
 		return;
 	}
 
-	GameEngineDevice::GetContext()->OMSetRenderTargets(		//지정한 렌더타겟뷰를 렌더링 파이프라인에 연결하는 함수.
+	GameEngineDevice::GetDC()->OMSetRenderTargets(		//지정한 렌더타겟뷰를 렌더링 파이프라인에 연결하는 함수.
 		static_cast<UINT>(renderTargetViews_.size()),	//연결할	렌더타겟뷰 수. 0~8개 지정 가능.
 		&renderTargetViews_[0],			//렌더타겟뷰 배열 주소.
 		depthStencilView_
@@ -195,7 +226,7 @@ void GameEngineRenderTarget::SetRenderTarget()
 
 void GameEngineRenderTarget::ResetRenderTarget()
 {
-	GameEngineDevice::GetContext()->OMSetRenderTargets(		//지정한 렌더타겟뷰를 렌더링 파이프라인에 연결하는 함수.
+	GameEngineDevice::GetDC()->OMSetRenderTargets(		//지정한 렌더타겟뷰를 렌더링 파이프라인에 연결하는 함수.
 		0,
 		nullptr,
 		nullptr

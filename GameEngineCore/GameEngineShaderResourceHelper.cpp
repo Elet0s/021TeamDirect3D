@@ -401,31 +401,31 @@ void GameEngineShaderResourceHelper::AllResourcesSetting()
 	for (const std::pair<std::string, GameEngineConstantBufferSetter>& cBufferSetterPair
 		: constantBufferSetterMap_)
 	{
-		cBufferSetterPair.second.Setting();
+		cBufferSetterPair.second.Set();
 	}
 
 	for (const std::pair<std::string, GameEngineTextureSetter>& textureSetterPair
 		: textureSetterMap_)
 	{
-		textureSetterPair.second.Setting();
+		textureSetterPair.second.Set();
 	}
 
 	for (const std::pair<std::string, GameEngineSamplerSetter>& samplerSetterPair
 		: samplerSetterMap_)
 	{
-		samplerSetterPair.second.Setting();
+		samplerSetterPair.second.Set();
 	}
 
 	for (const std::pair<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetterPair
 		: structuredBufferSetterMap_)
 	{
-		structuredBufferSetterPair.second.Setting();
+		structuredBufferSetterPair.second.Set();
 	}
 
 	for (const std::pair<std::string, GameEngineTexture2DArraySetter>& texture2DArraySetterPair
 		: texture2DArraySetterMap_)
 	{
-		texture2DArraySetterPair.second.Setting();
+		texture2DArraySetterPair.second.Set();
 	}
 }
 

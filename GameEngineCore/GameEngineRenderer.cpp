@@ -158,9 +158,9 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 
 	mesh_->Setting();
 
-	inputLayout_->Setting();
+	inputLayout_->Set();
 
-	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
+	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
 
 	material_->Setting();
 

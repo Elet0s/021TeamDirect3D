@@ -161,7 +161,22 @@ void GameEngineTexture2DArray::VSSetShaderResource(int _bindPoint)
 		return;
 	}
 
-	GameEngineDevice::GetContext()->VSSetShaderResources(
+	GameEngineDevice::GetDC()->VSSetShaderResources(
+		_bindPoint,
+		1,
+		&shaderResourceView_
+	);
+}
+
+void GameEngineTexture2DArray::CSSetShaderResource(int _bindPoint)
+{
+	if (nullptr == this->shaderResourceView_)
+	{
+		MsgBoxAssert("셰이더리소스뷰가 없습니다.");
+		return;
+	}
+
+	GameEngineDevice::GetDC()->CSSetShaderResources(
 		_bindPoint,
 		1,
 		&shaderResourceView_
@@ -176,7 +191,7 @@ void GameEngineTexture2DArray::PSSetShaderResource(int _bindPoint)
 		return;
 	}
 
-	GameEngineDevice::GetContext()->PSSetShaderResources(
+	GameEngineDevice::GetDC()->PSSetShaderResources(
 		_bindPoint,
 		1,
 		&shaderResourceView_
@@ -186,7 +201,7 @@ void GameEngineTexture2DArray::PSSetShaderResource(int _bindPoint)
 void GameEngineTexture2DArray::VSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
-	GameEngineDevice::GetContext()->VSSetShaderResources(
+	GameEngineDevice::GetDC()->VSSetShaderResources(
 		_bindPoint,
 		1,
 		&emptyResourceView
@@ -196,7 +211,7 @@ void GameEngineTexture2DArray::VSResetShaderResource(int _bindPoint)
 void GameEngineTexture2DArray::PSResetShaderResource(int _bindPoint)
 {
 	ID3D11ShaderResourceView* emptyResourceView = nullptr;
-	GameEngineDevice::GetContext()->PSSetShaderResources(
+	GameEngineDevice::GetDC()->PSSetShaderResources(
 		_bindPoint,
 		1,
 		&emptyResourceView

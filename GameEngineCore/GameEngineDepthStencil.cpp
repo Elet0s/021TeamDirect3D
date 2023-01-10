@@ -25,7 +25,7 @@ std::shared_ptr<GameEngineDepthStencil> GameEngineDepthStencil::Create(
     return newRes;
 }
 
-void GameEngineDepthStencil::Setting()
+void GameEngineDepthStencil::Set()
 {
     if (nullptr == depthStencilState_)
     {
@@ -33,7 +33,7 @@ void GameEngineDepthStencil::Setting()
         return;
     }
 
-    GameEngineDevice::GetContext()->OMSetDepthStencilState(//깊이 스텐실 스테이트를 렌더링 파이프라인에 연결시키는 함수. 
+    GameEngineDevice::GetDC()->OMSetDepthStencilState(//깊이 스텐실 스테이트를 렌더링 파이프라인에 연결시키는 함수. 
         depthStencilState_, //연결할 깊이 스텐실 스테이트.
         0                   //깊이 스텐실 테스트를 수행할 때 필요한 기준 값??
     );

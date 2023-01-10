@@ -22,6 +22,7 @@ public:
 	static std::shared_ptr<GameEngineSampler> Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc);
 
 	void VSSetSampler(int _bindPoint);
+	void CSSetSampler(int _bindPoint);
 	void PSSetSampler(int _bindPoint);
 
 

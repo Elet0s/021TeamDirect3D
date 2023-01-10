@@ -138,7 +138,7 @@ void GameEngineGUI::Initialize()
 
     // Setup Platform/Renderer backends
     ImGui_ImplWin32_Init(GameEngineWindow::GetHWND());
-    ImGui_ImplDX11_Init(GameEngineDevice::GetDevice(), GameEngineDevice::GetContext());
+    ImGui_ImplDX11_Init(GameEngineDevice::GetDevice(), GameEngineDevice::GetDC());
 
     GameEngineWindow::GetInst()->SetMessageHandler(ImGui_ImplWin32_WndProcHandler);
 

@@ -25,7 +25,7 @@ private:
 
 
 public:
-	void Setting();
+	void Set();
 
 	//
 	static std::shared_ptr<GameEngineInputLayout> Create(

@@ -25,7 +25,7 @@ std::shared_ptr<GameEngineRasterizer> GameEngineRasterizer::Create(
     return newRes;
 }
 
-void GameEngineRasterizer::Setting()
+void GameEngineRasterizer::Set()
 {
     if (nullptr == rasterizerState_)
     {
@@ -33,7 +33,7 @@ void GameEngineRasterizer::Setting()
         return;
     }
 
-    GameEngineDevice::GetContext()->RSSetState(rasterizerState_);
+    GameEngineDevice::GetDC()->RSSetState(rasterizerState_);
     //래스터라이저 스테이트 객체를 파이프라인에 연결하는 함수.
 }
 

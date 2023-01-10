@@ -254,8 +254,6 @@ private:
 	//ºû Àû¿ë ¹èÀ²°ª ÀúÀå¿ë ·»´õÅ¸°Ù.
 	std::shared_ptr<GameEngineRenderTarget> lightRatioBufferRenderTarget_;
 
-	std::shared_ptr<GameEngineTexture> testUAV_;
-
 	//ºûÁ¤º¸ ÀúÀå¿ë ·»´õÅ¸°Ù.
 	std::shared_ptr<GameEngineRenderTarget> lightDataBufferRenderTarget_;
 

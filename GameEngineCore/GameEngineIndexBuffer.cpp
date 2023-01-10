@@ -40,7 +40,7 @@ std::shared_ptr<GameEngineIndexBuffer> GameEngineIndexBuffer::Create(const void*
 	return newRes;
 }
 
-void GameEngineIndexBuffer::Setting()
+void GameEngineIndexBuffer::Set()
 {
 	if (nullptr == indexBuffer_)
 	{
@@ -48,7 +48,7 @@ void GameEngineIndexBuffer::Setting()
 		return;
 	}
 
-	GameEngineDevice::GetContext()->IASetIndexBuffer(//인풋 어셈블러 과정에서 인덱스버퍼를 파이프라인에 연결하는 함수.
+	GameEngineDevice::GetDC()->IASetIndexBuffer(//인풋 어셈블러 과정에서 인덱스버퍼를 파이프라인에 연결하는 함수.
 
 		indexBuffer_,							//파이프라인에 세팅할 버퍼. 2차원배열 하나만 넣어줌.
 		//생성할때 바인드플래그를 D3D11_BIND_INDEX_BUFFER로 설정해준 버퍼여야 여기에 연결할 수 있다.

@@ -88,6 +88,7 @@ public:
 private:
 	void LoadTextures(const std::string_view& _folderPath);
 	void VSSetShaderResource(int _bindPoint);
+	void CSSetShaderResource(int _bindPoint);
 	void PSSetShaderResource(int _bindPoint);
 
 	void VSResetShaderResource(int _bindPoint);

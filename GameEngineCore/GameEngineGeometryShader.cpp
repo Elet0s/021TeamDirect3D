@@ -16,7 +16,7 @@ GameEngineGeometryShader::~GameEngineGeometryShader()
     }
 }
 
-void GameEngineGeometryShader::Setting()
+void GameEngineGeometryShader::Set()
 {
     if (nullptr == geometryShader_)
     {
@@ -25,7 +25,7 @@ void GameEngineGeometryShader::Setting()
     }
 
     //두번째 인자는 #include나 #define등 hlsl에서 사용할 헤더나 디파인의 객체를 넣어줄수 있다.
-    GameEngineDevice::GetContext()->GSSetShader(//파이프라인에 지오메트리 셰이더를 세팅하는 함수.
+    GameEngineDevice::GetDC()->GSSetShader(//파이프라인에 지오메트리 셰이더를 세팅하는 함수.
         geometryShader_,                    //지오메트리 셰이더 포인터.
         nullptr,                            //클래스 인스턴스 인터페이스 배열 주소값. 없으면 NULL.
         0                                   //사용할 클래스 인스턴스 인터페이스 배열의 인덱스.

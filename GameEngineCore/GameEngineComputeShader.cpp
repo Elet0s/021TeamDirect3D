@@ -16,7 +16,7 @@ GameEngineComputeShader::~GameEngineComputeShader()
     }
 }
 
-void GameEngineComputeShader::Setting()
+void GameEngineComputeShader::Set()
 {
     if (nullptr == computeShader_)
     {
@@ -24,7 +24,7 @@ void GameEngineComputeShader::Setting()
         return;
     }
 
-    GameEngineDevice::GetContext()->CSSetShader(
+    GameEngineDevice::GetDC()->CSSetShader(
         computeShader_,
         nullptr,
         0

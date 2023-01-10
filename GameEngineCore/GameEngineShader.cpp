@@ -39,6 +39,16 @@ void GameEngineConstantBufferSetter::Bind()
 		break;
 	}
 
+	case ShaderType::ComputeShader:
+	{
+		this->setResourceFunction_ = std::bind(
+			&GameEngineConstantBuffer::CSSetConstantBuffer,
+			this->constantBuffer_,
+			this->bindPoint_
+		);
+		break;
+	}
+
 	case ShaderType::PixelShader:
 	{
 		this->setResourceFunction_ = std::bind(
@@ -91,6 +101,22 @@ void GameEngineTextureSetter::Bind()
 		break;
 	}
 
+	case ShaderType::ComputeShader:
+	{
+		this->setResourceFunction_ = std::bind(
+			&GameEngineTexture::CSSetShaderResource,
+			this->texture_,
+			this->bindPoint_
+		);
+
+		//this->resetResourceFunction_ = std::bind(
+		//	&GameEngineTexture::CSResetShaderResource,
+		//	this->texture_,
+		//	this->bindPoint_
+		//);
+		break;
+	}
+
 	case ShaderType::PixelShader:
 	{
 		this->setResourceFunction_ = std::bind(
@@ -138,6 +164,16 @@ void GameEngineSamplerSetter::Bind()
 		break;
 	}
 
+	case ShaderType::ComputeShader:
+	{
+		this->setResourceFunction_ = std::bind(
+			&GameEngineSampler::CSSetSampler,
+			this->sampler_,
+			this->bindPoint_
+		);
+		break;
+	}
+
 	case ShaderType::PixelShader:
 	{
 		this->setResourceFunction_ = std::bind(
@@ -174,6 +210,16 @@ void GameEngineStructuredBufferSetter::Bind()
 	{
 		this->setResourceFunction_ = std::bind(
 			&GameEngineStructuredBuffer::VSSetShaderResource,
+			this->structuredBuffer_,
+			this->bindPoint_
+		);
+		break;
+	}
+
+	case ShaderType::ComputeShader:
+	{
+		this->setResourceFunction_ = std::bind(
+			&GameEngineStructuredBuffer::CSSetShaderResource,
 			this->structuredBuffer_,
 			this->bindPoint_
 		);
@@ -254,6 +300,23 @@ void GameEngineTexture2DArraySetter::Bind()
 			this->texture2DArray_,
 			this->bindPoint_
 		);
+
+		break;
+	}
+
+	case ShaderType::ComputeShader:
+	{
+		this->setResourceFunction_ = std::bind(
+			&GameEngineTexture2DArray::CSSetShaderResource,
+			this->texture2DArray_,
+			this->bindPoint_
+		);
+
+		//this->resetResourceFunction_ = std::bind(
+		//	&GameEngineTexture2DArray::CSResetShaderResource,
+		//	this->texture2DArray_,
+		//	this->bindPoint_
+		//);
 
 		break;
 	}

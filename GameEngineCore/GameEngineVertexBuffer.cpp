@@ -44,7 +44,7 @@ std::shared_ptr<GameEngineVertexBuffer> GameEngineVertexBuffer::Create(const voi
 	return newRes;
 }
 
-void GameEngineVertexBuffer::Setting()
+void GameEngineVertexBuffer::Set()
 {
 	if (nullptr == vertexBuffer_)
 	{
@@ -53,7 +53,7 @@ void GameEngineVertexBuffer::Setting()
 	}
 
 	//나눠서 그릴 수 있는 기능을 지원하긴 하지만, 쓸 일은 없을 것 같다.
-	GameEngineDevice::GetContext()->IASetVertexBuffers(	//인풋 어셈블러 과정에서 버텍스버퍼들을 파이프라인에 연결하는 함수. 
+	GameEngineDevice::GetDC()->IASetVertexBuffers(	//인풋 어셈블러 과정에서 버텍스버퍼들을 파이프라인에 연결하는 함수. 
 		0,				//버텍스버퍼 배열을 세팅할 디바이스 컨텍스트의 슬롯 번호. 후속 원소들은 암시적으로 다음 번호 슬롯에 연결된다고 한다.
 		//D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT개까지 동시 세팅이 가능하다고 한다. 하지만 쓸 일은 없을 것 같다. 
 

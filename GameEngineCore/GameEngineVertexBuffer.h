@@ -40,7 +40,7 @@ public:
 		const GameEngineInputLayoutDesc& _info
 	);
 
-	void Setting();
+	void Set();
 
 public:
 	template<typename VertexType>

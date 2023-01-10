@@ -39,6 +39,9 @@ public:
 	//구조화 버퍼를 렌더링 파이프라인의 정점셰이더에 연결하는 함수.
 	void VSSetShaderResource(int _bindPoint);
 
+	//구조화 버퍼를 컴퓨트셰이더에 연결하는 함수.
+	void CSSetShaderResource(int _bindPoint);
+
 	//구조화 버퍼를 렌더링 파이프라인의 픽셀셰이더에 연결하는 함수.
 	void PSSetShaderResource(int _bindPoint);
 

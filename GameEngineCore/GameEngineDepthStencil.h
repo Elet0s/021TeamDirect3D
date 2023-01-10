@@ -20,8 +20,9 @@ private:
 public:
 	static std::shared_ptr<GameEngineDepthStencil> Create(
 		const std::string_view& _name,
-		const D3D11_DEPTH_STENCIL_DESC& _desc);
-	void Setting();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
+		const D3D11_DEPTH_STENCIL_DESC& _desc
+	);
+	void Set();	//해당 리소스를 렌더링 파이프라인에 연결하는 함수.
 
 private:
 	void CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC& _desc);

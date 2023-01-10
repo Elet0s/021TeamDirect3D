@@ -325,8 +325,8 @@ void GameEngineInstancingRenderer::Render(
 	shaderResourceHelper_.AllResourcesSetting();
 
 	this->mesh_->SettingInstancing(this->instancingBuffer_);
-	this->inputLayout_->Setting();
-	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
+	this->inputLayout_->Set();
+	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
 	this->material_->SettingInstancing2();
 
 	this->mesh_->RenderInstancing(this->instancingUnitCount_);
@@ -457,8 +457,8 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 	shaderResourceHelper_.AllResourcesSetting();
 
 	this->mesh_->SettingInstancing(this->instancingBuffer_);
-	this->inputLayout_->Setting();
-	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
+	this->inputLayout_->Set();
+	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
 	this->material_->SettingInstancing2();
 
 	this->mesh_->RenderInstancing(this->instancingUnitCount_);
@@ -590,8 +590,8 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 	shaderResourceHelper_.AllResourcesSetting();
 
 	this->mesh_->SettingInstancing(this->instancingBuffer_);
-	this->inputLayout_->Setting();
-	GameEngineDevice::GetContext()->IASetPrimitiveTopology(topology_);
+	this->inputLayout_->Set();
+	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
 	this->material_->SettingInstancing2();
 
 	this->mesh_->RenderInstancing(this->instancingUnitCount_);

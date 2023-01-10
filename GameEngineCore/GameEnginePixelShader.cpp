@@ -16,7 +16,7 @@ GameEnginePixelShader::~GameEnginePixelShader()
     }
 }
 
-void GameEnginePixelShader::Setting()
+void GameEnginePixelShader::Set()
 {
     if (nullptr == pixelShader_)
     {
@@ -25,7 +25,7 @@ void GameEnginePixelShader::Setting()
     }
 
     //두번째 인자는 #include나 #define등 hlsl에서 사용할 헤더나 디파인의 객체를 넣어줄수 있다.
-    GameEngineDevice::GetContext()->PSSetShader(//파이프라인에 픽셀셰이더를 세팅하는 함수.
+    GameEngineDevice::GetDC()->PSSetShader(//파이프라인에 픽셀셰이더를 세팅하는 함수.
         pixelShader_,                      //픽셀셰이더 포인터.
         nullptr,                           //클래스 인스턴스 인터페이스 배열 주소값. 없으면 NULL.
         0                                  //사용할 클래스 인스턴스 인터페이스 배열의 인덱스.

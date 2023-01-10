@@ -321,7 +321,7 @@ void GameEngineCamera::Start()
 	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("SpecularLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(1));
 	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("AmbientLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(2));
 
-	GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
+	GameEngineDevice::GetDC()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
 		1,					//설정할 뷰포트 개수.
 		&viewportDesc_		//뷰포트 구조체 배열의 주소값.
 	);

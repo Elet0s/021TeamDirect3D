@@ -16,16 +16,10 @@ GameEngineVertexShader::~GameEngineVertexShader()
     {
         vertexShader_->Release();
         vertexShader_ = nullptr;
-    }
-
-    //if (nullptr != instancingVertexShader_)
-    //{
-    //    delete instancingVertexShader_;
-    //    instancingVertexShader_ = nullptr;
-    //}   
+    } 
 }
 
-void GameEngineVertexShader::Setting()
+void GameEngineVertexShader::Set()
 {
     if (nullptr == vertexShader_)
     {
@@ -34,7 +28,7 @@ void GameEngineVertexShader::Setting()
     }
 
     //두번째 인자는 #include나 #define등 hlsl에서 사용할 헤더나 디파인의 객체를 넣어줄수 있다.
-    GameEngineDevice::GetContext()->VSSetShader(//파이프라인에 버텍스셰이더를 세팅하는 함수.
+    GameEngineDevice::GetDC()->VSSetShader(//파이프라인에 버텍스셰이더를 세팅하는 함수.
         vertexShader_,                     //버텍스 셰이더 포인터.
         nullptr,                           //클래스 인스턴스 인터페이스 배열 주소값. 없으면 NULL.
         0                                  //사용할 클래스 인스턴스 인터페이스 배열의 인덱스.
