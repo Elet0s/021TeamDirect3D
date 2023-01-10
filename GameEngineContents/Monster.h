@@ -233,7 +233,7 @@ protected:
 	void End() override;
 	void Chaseplayer(float _deltaTime);
 	void HpCheak();
-
+	void ReduceHP();
 protected:
 	bool flshloop_;
 	float flashTimer_;
@@ -272,6 +272,10 @@ protected:
 
 	RenderOption renderOption_;
 	PixelData pixelData_;
+
+		std::shared_ptr<GameEngineTextureRenderer> monsterHpMax_;
+	std::shared_ptr<GameEngineTextureRenderer> monsterHp_;
+	std::shared_ptr<GameEngineFontRenderer>monsterHpScore_;
 
 private:
 	std::string monsterTextureName_;	//몬스터 자기 자신의 텍스처 이름. 

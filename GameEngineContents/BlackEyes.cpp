@@ -27,10 +27,12 @@ void BlackEyes::Start()
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
 
+	/// /////////////////////////////////////////////////////////////////////////////////////////////
+
 	monsterHp_ = CreateComponent<GameEngineTextureRenderer>();
 	monsterHp_->SetTexture("DefaultUi.png");
 	monsterHp_->GetPixelData().mulColor_ = float4::Green; //³ì»ö
-	monsterHp_->GetTransform().SetWorldScale(-100.f, 10.f, 1.f);
+	monsterHp_->GetTransform().SetWorldScale(-130.f, 15.f, 1.f);
 	monsterHp_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHp_->SetRenderingOrder(15);
 	monsterHp_->GetTransform().SetLocalPosition({ 0.f,100.f });
@@ -38,10 +40,19 @@ void BlackEyes::Start()
 	monsterHpMax_ = CreateComponent<GameEngineTextureRenderer>();
 	monsterHpMax_->SetTexture("DefaultUi.png");
 	monsterHpMax_->GetPixelData().mulColor_ = float4::Black; //°ËÀº»ö
-	monsterHpMax_->GetTransform().SetLocalScale(100, 10, 1);
+	monsterHpMax_->GetTransform().SetLocalScale(130, 15, 1);
 	monsterHpMax_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHpMax_->SetRenderingOrder(15);
 	monsterHpMax_->GetTransform().SetLocalPosition({ 0.f,100.f });
+
+
+	monsterHpScore_ = CreateComponent<GameEngineFontRenderer>();
+	monsterHpScore_->SetSize(20.f);
+	monsterHpScore_->SetLeftAndRightSort(LeftAndRightSort::Center);
+	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "¸¼À½");
+	monsterHpScore_->SetPositionMode(FontPositionMode::World);
+	monsterHpScore_->ChangeCamera(CameraOrder::MidCamera);
+	monsterHpScore_->GetTransform().SetLocalPosition({ 0.f,115.f,0.f });
 
 }
 void BlackEyes::Update(float _deltaTime)
@@ -53,15 +64,11 @@ void BlackEyes::Update(float _deltaTime)
 	HpCheak();
 
 	GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
-	//	monsterHpScore_->SetText(std::to_string(monsterInfo_->hp_), "Free Pixel");
-	ReduceHP(_deltaTime);
+	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "¸¼À½");
+	ReduceHP();
 }
 void BlackEyes::End()
 {
 
 }
 
-void BlackEyes::ReduceHP(float _deltaTime)
-{
-
-}

@@ -356,3 +356,11 @@ void Monster::HpCheak()
 		this->Unsummon();
 	}
 }
+
+void Monster::ReduceHP()
+{
+	if (monsterInfo_->maxHp_ > monsterInfo_->hp_)
+	{
+		monsterHp_->GetPixelData().slice_ = float4(1 - (monsterInfo_->hp_ / monsterInfo_->maxHp_), 0.0f, 0.0f, 0.0f);
+	}
+}

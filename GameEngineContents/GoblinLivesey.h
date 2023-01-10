@@ -17,10 +17,5 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void ReduceHP(float _deltaTime);
 private:
-
-	std::shared_ptr<GameEngineTextureRenderer> monsterHpMax_;
-	std::shared_ptr<GameEngineTextureRenderer> monsterHp_;
-	std::shared_ptr<GameEngineFontRenderer>monsterHpScore_;
 };

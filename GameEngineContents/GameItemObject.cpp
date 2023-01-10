@@ -21,7 +21,7 @@ GameItemObject::~GameItemObject()
 
 void GameItemObject::Start()
 {
-
+	
 }
 
 void GameItemObject::Update(float _deltaTime)
