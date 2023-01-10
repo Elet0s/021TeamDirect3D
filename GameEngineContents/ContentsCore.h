@@ -19,7 +19,7 @@ public:
 public:
 	std::string GetWindowTitle() override
 	{
-		return "Rogue  Genesia";
+		return "Rogue Genesia";
 	}
 
 	float4 StartWindowSize() override

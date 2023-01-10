@@ -103,37 +103,6 @@ std::shared_ptr<GameEngineTexture> GameEngineRenderTarget::GetRenderTargetTextur
 	return renderTargets_[_index];
 }
 
-//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
-//	ID3D11Texture2D* _texture,
-//	const float4& _clearColor
-//)
-//{
-//}
-//
-//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
-//	const float4& _size,
-//	DXGI_FORMAT _format,
-//	const float4& _clearColor
-//)
-//{
-//}
-//
-//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
-//	D3D11_TEXTURE2D_DESC _desc,
-//	const float4& _clearColor
-//)
-//{
-//	std::shared_ptr<GameEngineTexture> newTexture = GameEngineTexture::Create(_desc);
-//	CreateUnorderedAccessTexture(newTexture, _clearColor);
-//}
-//
-//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
-//	std::shared_ptr<GameEngineTexture> _texture,
-//	const float4& _clearColor
-//)
-//{
-//}
-
 void GameEngineRenderTarget::CreateDepthTexture(int _renderTargetIndex)
 {
 	D3D11_TEXTURE2D_DESC depthTextureDesc = { 0 };

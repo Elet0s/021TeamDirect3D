@@ -409,16 +409,16 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 		for (std::map<std::string, const void*>::iterator unitDataIter = this->allInstancingUnits_[index].data_.begin();
 			unitDataIter != this->allInstancingUnits_[index].data_.end(); ++unitDataIter)
 		{
-			if (nullptr == unitDataIter->second)
-			{
-				MsgBoxAssertString(unitDataIter->first + ": 셰이더로 보내기로 한 데이터가 인스턴싱 유닛에 없습니다.");
-				return;
-			}
-
 			//if (nullptr == unitDataIter->second)
 			//{
-			//	continue;
+			//	MsgBoxAssertString(unitDataIter->first + ": 셰이더로 보내기로 한 데이터가 인스턴싱 유닛에 없습니다.");
+			//	return;
 			//}
+
+			if (nullptr == unitDataIter->second)
+			{
+				continue;
+			}
 
 			//구조화버퍼세터로 각 인스턴싱유닛별 데이터 전달.
 			for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(unitDataIter->first);
@@ -542,16 +542,16 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 		for (std::map<std::string, const void*>::iterator unitDataIter = this->allInstancingUnits_[index].data_.begin();
 			unitDataIter != this->allInstancingUnits_[index].data_.end(); ++unitDataIter)
 		{
-			if (nullptr == unitDataIter->second)
-			{
-				MsgBoxAssertString(unitDataIter->first + ": 셰이더로 보내기로 한 데이터가 인스턴싱 유닛에 없습니다.");
-				return;
-			}
-
 			//if (nullptr == unitDataIter->second)
 			//{
-			//	continue;
+			//	MsgBoxAssertString(unitDataIter->first + ": 셰이더로 보내기로 한 데이터가 인스턴싱 유닛에 없습니다.");
+			//	return;
 			//}
+
+			if (nullptr == unitDataIter->second)
+			{
+				continue;
+			}
 
 			//구조화버퍼세터로 각 인스턴싱유닛별 데이터 전달.
 			for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(unitDataIter->first);

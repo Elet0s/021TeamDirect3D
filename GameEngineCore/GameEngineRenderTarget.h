@@ -96,28 +96,6 @@ public:
 
 	std::shared_ptr<GameEngineTexture> GetRenderTargetTexture(size_t _index);
 
-
-	//void CreateUnorderedAccessTexture(
-	//	ID3D11Texture2D* _texture,
-	//	const float4& _clearColor
-	//);
-
-	//void CreateUnorderedAccessTexture(
-	//	const float4& _size,
-	//	DXGI_FORMAT _format,
-	//	const float4& _clearColor
-	//);
-
-	//void CreateUnorderedAccessTexture(
-	//	D3D11_TEXTURE2D_DESC _desc,
-	//	const float4& _clearColor
-	//);
-
-	//void CreateUnorderedAccessTexture(
-	//	std::shared_ptr<GameEngineTexture> _texture,
-	//	const float4& _clearColor
-	//);
-
 	void CreateDepthTexture(int _renderTargetIndex);
 	void SetDepthTexture(std::shared_ptr<GameEngineTexture> _depthTexture);
 
