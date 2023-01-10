@@ -292,13 +292,7 @@
     <ClCompile Include="HealingFactor.cpp">
       <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
     </ClCompile>
-    <ClCompile Include="BlackEyes.cpp">
-      <Filter>Actor\02. Play\Monster\Nomal</Filter>
-    </ClCompile>
     <ClCompile Include="Brown.cpp">
-      <Filter>Actor\02. Play\Monster\Nomal</Filter>
-    </ClCompile>
-    <ClCompile Include="FlyingEyes.cpp">
       <Filter>Actor\02. Play\Monster\Nomal</Filter>
     </ClCompile>
     <ClCompile Include="Green.cpp">
@@ -407,6 +401,12 @@
       <Filter>Actor\02. Play\Monster\Elite</Filter>
     </ClCompile>
     <ClCompile Include="Red.cpp">
+      <Filter>Actor\02. Play\Monster\Elite</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingEyes.cpp">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackEyes.cpp">
       <Filter>Actor\02. Play\Monster\Elite</Filter>
     </ClCompile>
   </ItemGroup>
@@ -608,13 +608,7 @@
     <ClInclude Include="HealingFactor.h">
       <Filter>Actor\02. Play\Player\Skill\Passive\Deffence</Filter>
     </ClInclude>
-    <ClInclude Include="BlackEyes.h">
-      <Filter>Actor\02. Play\Monster\Nomal</Filter>
-    </ClInclude>
     <ClInclude Include="Brown.h">
-      <Filter>Actor\02. Play\Monster\Nomal</Filter>
-    </ClInclude>
-    <ClInclude Include="FlyingEyes.h">
       <Filter>Actor\02. Play\Monster\Nomal</Filter>
     </ClInclude>
     <ClInclude Include="Green.h">
@@ -723,6 +717,12 @@
       <Filter>Actor\02. Play\Monster\Elite</Filter>
     </ClInclude>
     <ClInclude Include="Red.h">
+      <Filter>Actor\02. Play\Monster\Elite</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingEyes.h">
+      <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackEyes.h">
       <Filter>Actor\02. Play\Monster\Elite</Filter>
     </ClInclude>
   </ItemGroup>

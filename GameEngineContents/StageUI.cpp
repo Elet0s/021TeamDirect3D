@@ -196,7 +196,7 @@ void StageUI::StageSetting()
 	coinboxrenderer_->On();
 	killcountfontrenderer_->On();
 	killcountboxrenderer_->On();
-	goalCount_ = 10;
+	goalCount_ = 300;
 	coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
 	stagefontrenderer_->SetText("스테이지 : " + std::to_string(Pinfo.stage_), "Free Pixel");
 }

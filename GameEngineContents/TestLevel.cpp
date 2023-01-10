@@ -55,19 +55,14 @@ void TestLevel::Start()
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
 
-	Monster::ReserveMonsters(this, 50);
+	Monster::ReserveMonsters(this, 2);
 
-	Monster::CreateMonster<Brown>(this, 10);
-	Monster::CreateMonster<Green>(this, 10);
-	Monster::CreateMonster<NormalGoblin>(this, 10);
-	Monster::CreateMonster<RedFlyingEyes>(this, 10);
-	Monster::CreateMonster<FlyingEyes>(this, 10);
+	Monster::CreateMonster<RedFlyingEyes>(this, 2);
 
-	Monster::SummonMonster<Brown>(this, 10);
-	Monster::SummonMonster<Green>(this, 10);
-	Monster::SummonMonster<NormalGoblin>(this, 10);
-	Monster::SummonMonster<RedFlyingEyes>(this, 10);
-	Monster::SummonMonster<FlyingEyes>(this, 10);
+
+
+	Monster::SummonMonster<RedFlyingEyes>(this, 2);
+
 
 	//for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
 	//{

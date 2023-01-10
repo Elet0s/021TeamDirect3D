@@ -113,6 +113,7 @@ CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineColl
 		if (A->hitOnoff_ == false)
 		{
 			A->hitOnoff_ = true;
+			A->flash_ =true;
 		}
 		atkDeltaTime_ = 0;
 	}
