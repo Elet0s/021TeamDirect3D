@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "StageUI.h"
+#include "TestLevel.h"
 #include "Player.h"
 
 
@@ -17,7 +18,7 @@ StageUI::StageUI()
 	, coinboxrenderer_(nullptr)
 	, soulboxrenderer_(nullptr)
 	, killcountboxrenderer_(nullptr)
-	, timerboxRenderer_(nullptr)
+	, timerboxrenderer_(nullptr)
 	, IsClear_(false)
 	, time_(6.0f)
 	, goalCount_(0)
@@ -131,11 +132,19 @@ void StageUI::Start()
 	
 
 	{
-		timerfontRenderer_->SetTextPosition(float4{ 1260.f, 80.f });
+		
+
+		timerfontRenderer_->SetTextPosition(float4{ 1260.f, 160.f });
 		timerfontRenderer_->SetSize(24.f);
 		timerfontRenderer_->SetColor(float4::White);
 		timerfontRenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
 		timerfontRenderer_->ChangeCamera(CameraOrder::UICamera);
+
+		timerboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
+		timerboxrenderer_->SetTexture("GradientRightToLeft.png");
+		timerboxrenderer_->GetTransform().SetWorldScale(200.f, 64.f, 1.f);
+		timerboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 170.f });
+		timerboxrenderer_->ChangeCamera(CameraOrder::UICamera);
 	}
 }
 
@@ -207,6 +216,8 @@ void StageUI::AllOff()
 	killcountfontrenderer_->Off();
 	killcountboxrenderer_->Off();
 	elitekillFontrenderer_->Off();
+	timerboxrenderer_->Off();
+	timerfontRenderer_->Off();
 }
 
 void StageUI::WorldSetting()
@@ -254,7 +265,7 @@ void StageUI::StageSetting()
 	killcountfontrenderer_->SetColor(float4::Yellow);
 	killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
 	killcountboxrenderer_->SetTexture("GradientMainMenu.png");
-	if (Pinfo.myCombatType_ == CombatType::EilteKill)
+	if (GetLevel<TestLevel>()->GetCombatType() == CombatType::EilteKill)
 	{
 		elitekillFontrenderer_->On();
 		elitekillFontrenderer_->SetText("엘리트를 잡으세요");
@@ -281,6 +292,7 @@ void StageUI::ClearSetting()
 	killcountfontrenderer_->On();
 	killcountboxrenderer_->On();
 	timerfontRenderer_->On();
+	timerboxrenderer_->On();
 	
 	coinfontrenderer_->SetTextPosition(float4{ 1260.f,20.f });
 	coinrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 320.f , -1.f });
@@ -291,12 +303,12 @@ void StageUI::ClearSetting()
 	killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
 	killcountfontrenderer_->SetSize(24.f);
 	killcountfontrenderer_->SetColor(float4::White);
-	killcountfontrenderer_->SetText("처치한 적:\n" + std::to_string(Pinfo.targetScore_));
+	killcountfontrenderer_->SetText("처치한 적:\n" + std::to_string(Pinfo.targetScore_),"맑음");
 	killcountboxrenderer_->SetTexture("GradientRightToLeft.png");
-	killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 60.f ,1.f });
+	killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 64.f ,1.f });
 	killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 250.f });
 
-	timerfontRenderer_->SetText("생존 시간:\n" + std::to_string(1));
+	TimeSet();
 }
 
 void StageUI::SoulCoinRenderersOff()
@@ -323,7 +335,7 @@ void StageUI::UIUpdate()
 		break;
 	case UIType::Stage:
 		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
-		if (Pinfo.myCombatType_ == CombatType::Kill)
+		if (GetLevel<TestLevel>()->GetCombatType() == CombatType::Kill)
 		{
 			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
 			if (Pinfo.targetScore_ >= goalCount_)
@@ -332,7 +344,7 @@ void StageUI::UIUpdate()
 			}
 		}
 		
-		if (Pinfo.myCombatType_ == CombatType::EilteKill)
+		if (GetLevel<TestLevel>()->GetCombatType() == CombatType::EilteKill)
 		{
 			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
 			
@@ -342,9 +354,30 @@ void StageUI::UIUpdate()
 			}
 		}
 		break;
-	case UIType::Claer:
-		break;
 	default:
 		break;
 	}
+}
+
+void StageUI::TimeSet()
+{
+	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+
+	float Time_all;
+	int Time_s;
+	int Time_m;
+
+	Time_all = Pinfo.stageTimer_; // 현재 스테이지가 시작되고 경과한 시간을 구한다
+
+	Time_m = static_cast<int>(Time_all) / 60;		// 총 시간을 초로 바꾼뒤에 3600으로 나눠서 분을 구한다
+	Time_s = static_cast<int>(Time_all) - (60 * Time_m);
+
+	std::string num_s = std::to_string(Time_s);
+	 // 세자리를 출력하기 위해 초의 자릿수를 구한후 남은 자리를 0으로 채운다.
+
+	std::string num_m = std::to_string(Time_m);
+
+	std::string TimeString = num_m + ":" + num_s;
+
+	timerfontRenderer_->SetText("생존 시간:\n" + TimeString, "맑음");
 }

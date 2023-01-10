@@ -323,5 +323,6 @@ void ContentsCore::LoadContentsResource()
 	GameEngineTexture::Cut("PlayerRun.png", 10, 1);
 
 	GameEngineFont::Load("±Ã¼­");
+	GameEngineFont::Load("¸¼À½");
 	GameEngineFont::Load("Free Pixel");
 }

@@ -18,6 +18,18 @@ public:
 	{
 		return mousePointer_;
 	}
+
+	StageType GetstageType()
+	{
+		return stageType_;
+	}
+
+
+	CombatType GetCombatType()
+	{
+		return combatType_;
+	}
+
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;

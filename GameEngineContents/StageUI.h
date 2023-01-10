@@ -52,7 +52,7 @@ private:
 	std::shared_ptr<GameEngineFontRenderer> elitekillFontrenderer_;
 
 	std::shared_ptr<GameEngineFontRenderer> timerfontRenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> timerboxRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> timerboxrenderer_;
 
 	std::shared_ptr<GameEngineTextureRenderer> coinrenderer_;
 	std::shared_ptr<GameEngineTextureRenderer> soulrenderer_;
@@ -74,6 +74,7 @@ private:
 	void ClearSetting();
 	void AllOff();
 	void UIUpdate();
+	void TimeSet();
 
 	bool IsClear_;
 	float time_;
