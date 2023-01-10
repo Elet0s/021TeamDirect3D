@@ -2,6 +2,7 @@
 #include "GlobalContentsValue.h"
 #include "PlayerObject.h"
 #include "Player.h"
+#include "StageObject.h"
 
 PlayerObject::PlayerObject() 
 	: mode_(PlayerObjectMode::Idle),
@@ -43,7 +44,19 @@ void PlayerObject::Update(float _deltaTime)
 
 		if (true == GetTransform().GetWorldPosition().IY() >= checkPos_.IY())
 		{
-			GEngine::ChangeLevel("Test");
+			if (StageObject::GetNextStageInfo().stageType_ == StageType::Chest)
+			{
+				GEngine::ChangeLevel("Clear");
+			}
+			else if (StageObject::GetNextStageInfo().stageType_ == StageType::Shop)
+			{
+				//GEngine::ChangeLevel("Shop");
+			}
+
+			else
+			{
+				GEngine::ChangeLevel("Test");
+			}
 			
 			Player::GetPlayerInst()->GetPlayerInfo().stage_ += 1;
 			

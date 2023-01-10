@@ -78,9 +78,19 @@ void Monster::Unsummon()
 	allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(float4::Zero);
 }
 
+void Monster::UnsummonAllMonsters()
+{
+	for (std::shared_ptr<Monster>& singleMonster : allMonsters_)
+	{
+		if (true == singleMonster->isSummoned_)
+		{
+			singleMonster->Unsummon();
+		}
+	}
+}
+
 void Monster::Start()
 {
-
 }
 
 CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)

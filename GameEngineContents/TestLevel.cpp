@@ -77,7 +77,7 @@ void TestLevel::Start()
 	Monster::CreateMonster<BlackEyes>(this, 2);
 
 
-
+	
 	Monster::SummonMonster<RedFlyingEyes>(this, 2);
 	Monster::SummonMonster<NormalSkeleton>(this, 2);
 Monster::SummonMonster<NormalKobold>(this, 2);

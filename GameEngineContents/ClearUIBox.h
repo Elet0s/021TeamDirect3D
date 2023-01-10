@@ -33,6 +33,8 @@ private:
 	bool button1On_;
 	bool button2On_;
 
+	int gold_;
+
 	void RendererOn();
 	void RendererOff();
 	void Start()override;

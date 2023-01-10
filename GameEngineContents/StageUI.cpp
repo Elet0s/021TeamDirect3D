@@ -1,5 +1,7 @@
 #include "PreCompile.h"
 #include "StageUI.h"
+#include "StageObject.h"
+#include "Monster.h"
 #include "TestLevel.h"
 #include "Player.h"
 
@@ -8,15 +10,12 @@ StageUI::StageUI()
 	: stagefontrenderer_(nullptr)
 	, spacefontrenderer_(nullptr)
 	, coinfontrenderer_(nullptr)
-	, soulfontrenderer_(nullptr)
 	, killcountfontrenderer_(nullptr)
 	, timerfontRenderer_(nullptr)
 	, coinrenderer_(nullptr)
-	, soulrenderer_(nullptr)
 	, stageboxrenderer_(nullptr)
 	, spaceboxrenderer_(nullptr)
 	, coinboxrenderer_(nullptr)
-	, soulboxrenderer_(nullptr)
 	, killcountboxrenderer_(nullptr)
 	, timerboxrenderer_(nullptr)
 	, IsClear_(false)
@@ -37,7 +36,6 @@ void StageUI::Start()
 		stagefontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		spacefontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		coinfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
-		soulfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		killcountfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		elitekillFontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		timerfontRenderer_ = CreateComponent<GameEngineFontRenderer>();
@@ -61,11 +59,6 @@ void StageUI::Start()
 		coinfontrenderer_->SetText("100", "Free Pixel");
 		coinfontrenderer_->ChangeCamera(CameraOrder::UICamera);
 
-		soulfontrenderer_->SetTextPosition(float4{ X,200.f });
-		soulfontrenderer_->SetSize(Size);
-		soulfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
-		soulfontrenderer_->SetText("+ 0", "Free Pixel");
-		soulfontrenderer_->ChangeCamera(CameraOrder::UICamera);
 	}
 
 	{
@@ -87,11 +80,6 @@ void StageUI::Start()
 		coinboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 200.f });
 		coinboxrenderer_->ChangeCamera(CameraOrder::UICamera);
 
-		soulboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
-		soulboxrenderer_->SetTexture("GradientRightToLeft.png");
-		soulboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 50.f ,1.f });
-		soulboxrenderer_->GetTransform().SetWorldMove(float4{ 540.f, 140.f });
-		soulboxrenderer_->ChangeCamera(CameraOrder::UICamera);
 	}
 
 	{
@@ -100,12 +88,6 @@ void StageUI::Start()
 		coinrenderer_->GetTransform().SetWorldScale(float4{ 32.f, 32.f });
 		coinrenderer_->ChangeCamera(CameraOrder::UICamera);
 		coinrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 200.f , -1.f });
-
-		soulrenderer_ = CreateComponent<GameEngineTextureRenderer>();
-		soulrenderer_->SetTexture("SoulCoin.png");
-		soulrenderer_->GetTransform().SetWorldScale(float4{ 32.f, 32.f });
-		soulrenderer_->ChangeCamera(CameraOrder::UICamera);
-		soulrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 140.f , -1.f });
 	}
 
 	// 스테이지용 랜더러 
@@ -206,13 +188,10 @@ void StageUI::AllOff()
 	stagefontrenderer_->Off();
 	spacefontrenderer_->Off();
 	coinfontrenderer_->Off();
-	soulfontrenderer_->Off();
 	coinrenderer_->Off();
-	soulrenderer_->Off();
 	stageboxrenderer_->Off();
 	spaceboxrenderer_->Off();
 	coinboxrenderer_->Off();
-	soulboxrenderer_->Off();
 	killcountfontrenderer_->Off();
 	killcountboxrenderer_->Off();
 	elitekillFontrenderer_->Off();
@@ -226,13 +205,10 @@ void StageUI::WorldSetting()
 	stagefontrenderer_->On();
 	spacefontrenderer_->On();
 	coinfontrenderer_->On();
-	soulfontrenderer_->On();
 	coinrenderer_->On();
-	soulrenderer_->On();
 	stageboxrenderer_->On();
 	spaceboxrenderer_->On();
 	coinboxrenderer_->On();
-	soulboxrenderer_->On();
 
 	SetCoinText(std::to_string(Pinfo.gold_));
 	SetStageText(std::to_string(Pinfo.stage_));
@@ -284,46 +260,36 @@ void StageUI::ClearSetting()
 {
 	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
 
-	
 	coinfontrenderer_->On();
 	coinrenderer_->On();
 	coinboxrenderer_->On();
 
-	killcountfontrenderer_->On();
-	killcountboxrenderer_->On();
-	timerfontRenderer_->On();
-	timerboxrenderer_->On();
-	
 	coinfontrenderer_->SetTextPosition(float4{ 1260.f,20.f });
 	coinrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 320.f , -1.f });
 	coinboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 320.f });
 	coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+	if (StageObject::GetNextStageInfo().stageType_ != StageType::Chest)
+	{
+		killcountfontrenderer_->On();
+		killcountboxrenderer_->On();
+		timerfontRenderer_->On();
+		timerboxrenderer_->On();
 
-	killcountfontrenderer_->SetTextPosition(float4{ 1260.f, 80.f });
-	killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
-	killcountfontrenderer_->SetSize(24.f);
-	killcountfontrenderer_->SetColor(float4::White);
-	killcountfontrenderer_->SetText("처치한 적:\n" + std::to_string(Pinfo.targetScore_),"맑음");
-	killcountboxrenderer_->SetTexture("GradientRightToLeft.png");
-	killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 64.f ,1.f });
-	killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 250.f });
+		
 
-	TimeSet();
+		killcountfontrenderer_->SetTextPosition(float4{ 1260.f, 80.f });
+		killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
+		killcountfontrenderer_->SetSize(24.f);
+		killcountfontrenderer_->SetColor(float4::White);
+		killcountfontrenderer_->SetText("처치한 적:\n" + std::to_string(Pinfo.targetScore_), "맑음");
+		killcountboxrenderer_->SetTexture("GradientRightToLeft.png");
+		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 64.f ,1.f });
+		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 250.f });
+
+		TimeSet();
+	}
 }
 
-void StageUI::SoulCoinRenderersOff()
-{
-	soulrenderer_->Off();
-	soulboxrenderer_->Off();
-	soulfontrenderer_->Off();
-}
-
-void StageUI::SoulCoinRenderersOn()
-{
-	soulrenderer_->On();
-	soulboxrenderer_->On();
-	soulfontrenderer_->On();
-}
 
 
 void StageUI::UIUpdate()
@@ -341,6 +307,7 @@ void StageUI::UIUpdate()
 			if (Pinfo.targetScore_ >= goalCount_)
 			{
 				IsClear_ = true;
+				Monster::UnsummonAllMonsters();
 			}
 		}
 		
@@ -351,8 +318,12 @@ void StageUI::UIUpdate()
 			if (Pinfo.targetScore_ >= goalCount_)
 			{
 				IsClear_ = true;
+				Monster::UnsummonAllMonsters();
 			}
 		}
+		break;
+	case UIType::Claer:
+		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
 		break;
 	default:
 		break;

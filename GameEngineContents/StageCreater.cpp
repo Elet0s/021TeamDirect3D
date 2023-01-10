@@ -88,7 +88,22 @@ void StageCreater::Start()
 				std::list<std::shared_ptr<StageObject>>& GroupActor = stageObjects_[level];
 				std::shared_ptr<StageObject> object = GetLevel()->CreateActor<StageObject>();
 				object->SetMyLevel(level);
-				object->SetStageType(GameEngineRandom::mainRandom_.RandomInt(0, 3));
+				if (level < 4)
+				{
+					object->SetStageType(GameEngineRandom::mainRandom_.RandomInt(0, 1));
+				}
+				else if (level == 4)
+				{
+					object->SetStageType(3);
+				}
+				else if (level == 5)
+				{
+					object->SetStageType(5);
+				}
+				else if (level == 6)
+				{
+					object->SetStageType(2);
+				}
 
 				if (maxCount == 2)
 				{
@@ -139,7 +154,7 @@ void StageCreater::Start()
 				{
 					xInterval = Count * 250.f;
 				}
-				x = 400 + xInterval + GameEngineRandom().mainRandom_.RandomFloat(-100.f, 50.f);
+				x = 400 + xInterval + GameEngineRandom().mainRandom_.RandomFloat(-50.f, 50.f);
 				object->GetTransform().SetWorldPosition(x, (-2400 + 250.f * level) * sinf(30.f * GameEngineMath::DegreeToRadian), (-2400 + 250.f * level) * cosf(30.f * GameEngineMath::DegreeToRadian));
 				worldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
 				//NewGrassTexture.png 전체를 다 그린다.
@@ -185,8 +200,8 @@ void StageCreater::Start()
 				road->GetTransform().SetWorldPosition(float4((PosNX + PosX) / 2.f, ((PosNY + PosY) / 2.f) * sinf(30.f * GameEngineMath::DegreeToRadian), ((PosNY + PosY) / 2.f - 5.f) * cosf(30.f * GameEngineMath::DegreeToRadian)));
 				road->GetTransform().SetWorldRotation(60.f, 0, -atan2f(PosNX - PosX, PosNY - PosY) * GameEngineMath::RadianToDegree);
 
-				road->GetRenderer().get()->GetTransform().SetWorldScale(float4(128.f, float4(PosX - PosNX, PosY - PosNY, 0.f, 0.f).Length() - 60.f));
-				road->GetCol().get()->GetTransform().SetWorldScale(float4(40.f, float4(PosX - PosNX, PosY - PosNY, 0.f, 0.f).Length() - 60.f));
+				road->GetRenderer()->GetTransform().SetWorldScale(float4(128.f, float4(PosX - PosNX, PosY - PosNY, 0.f, 0.f).Length() - 60.f));
+				road->GetCol()->GetTransform().SetWorldScale(float4(40.f, float4(PosX - PosNX, PosY - PosNY, 0.f, 0.f).Length() - 60.f));
 				
 				if (level != 0 && level != 6)
 				{

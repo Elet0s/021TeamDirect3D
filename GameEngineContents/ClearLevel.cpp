@@ -20,17 +20,12 @@ ClearLevel::~ClearLevel()
 void ClearLevel::Start()
 {
 	CreateActor<StageClearMap>();
-	clearbox_ = CreateActor<ClearUIBox>();
 	stageui_ = CreateActor<StageUI>();
 	GetMainCameraActorTransform().SetWorldPosition(float4(192.f, 48.f, -135.f));
 	GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
-	//GetCamera(CameraOrder::MidCamera)->SetProjectionMode(ProjectionMode::Orthographic);
+	
 	mousePointer_ = CreateActor<Mouse>(0, "ClearLevelMousePointer");
 
-	//if (false == GameEngineInput::GetInst()->IsKey("Click"))
-	//{
-	//	GameEngineInput::GetInst()->CreateKey("Click", VK_LBUTTON);
-	//}
 }
 void ClearLevel::Update(float _deltaTime)
 {

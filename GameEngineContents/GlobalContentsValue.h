@@ -222,10 +222,11 @@ enum class ItemObjectOrder
 enum class StageType
 {
 	Combat,
-	Elite,
 	Chest,
-	Event,
+	Elite,
+	Shop,
 	Boss,
+	Swarm,
 	Empty,
 	Max
 };
