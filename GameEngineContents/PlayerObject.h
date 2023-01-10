@@ -41,7 +41,7 @@ private:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void LevelEndEvent() overrride;
+	void LevelStartEvent() override;
 
 	float4 moveDir_;
 	float4 checkPos_;

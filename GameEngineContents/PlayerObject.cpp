@@ -53,7 +53,7 @@ void PlayerObject::Update(float _deltaTime)
 	}
 }
 
-void PlayerObject::LevelEndEvent()
+void PlayerObject::LevelStartEvent()
 {
 	float4 Pos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
 	if (GetTransform().GetWorldPosition().x <= 500.f)

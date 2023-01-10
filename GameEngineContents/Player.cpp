@@ -348,7 +348,6 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 	isInitialized_ = true;
 
 	mainPlayer_ = _thisLevel->CreateActor<Player>(ObjectOrder::Player);
-	mainPlayer_->SetLevelOverOn();
 	mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
 	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(mainPlayer_->GetTransform().GetWorldPosition().x,mainPlayer_->GetTransform().GetWorldPosition().y,-220.f);
 
