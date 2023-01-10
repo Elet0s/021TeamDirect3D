@@ -44,8 +44,8 @@ class GameEngineRenderTarget
 	friend class GameEngineBlur;
 
 
-	//게임엔진렌더타겟과 게임엔진텍스쳐 클래스를 분리한 이유: 
-	//게임엔진텍스쳐는 자기가 가진 텍스쳐와 그 서브리소스들만 가지고 관리하는 클래스이고,
+	//게임엔진렌더타겟과 게임엔진텍스처 클래스를 분리한 이유: 
+	//게임엔진텍스쳐는 자기가 가진 텍스처와 그 서브리소스들만 가지고 관리하는 클래스이고,
 	//게임엔진렌더타겟은 이 프레임워크내 모든 렌더타겟뷰를 관리하는 클래스이다. 
 
 public:
@@ -96,28 +96,6 @@ public:
 
 	std::shared_ptr<GameEngineTexture> GetRenderTargetTexture(size_t _index);
 
-
-	//void CreateUnorderedAccessTexture(
-	//	ID3D11Texture2D* _texture,
-	//	const float4& _clearColor
-	//);
-
-	//void CreateUnorderedAccessTexture(
-	//	const float4& _size,
-	//	DXGI_FORMAT _format,
-	//	const float4& _clearColor
-	//);
-
-	//void CreateUnorderedAccessTexture(
-	//	D3D11_TEXTURE2D_DESC _desc,
-	//	const float4& _clearColor
-	//);
-
-	//void CreateUnorderedAccessTexture(
-	//	std::shared_ptr<GameEngineTexture> _texture,
-	//	const float4& _clearColor
-	//);
-
 	void CreateDepthTexture(int _renderTargetIndex);
 	void SetDepthTexture(std::shared_ptr<GameEngineTexture> _depthTexture);
 
@@ -159,8 +137,8 @@ public:
 
 
 private:
-	//렌더타겟으로 사용할 텍스쳐들.
-	std::vector<std::shared_ptr<GameEngineTexture>> renderTargets_;
+	//렌더타겟용으로 사용할 텍스쳐들.
+	std::vector<std::shared_ptr<GameEngineTexture>> renderTargetTextures_;
 
 	//위 텍스쳐에서 파생된 렌더타겟뷰들.
 	std::vector<ID3D11RenderTargetView*> renderTargetViews_;

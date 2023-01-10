@@ -79,8 +79,8 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	const float4& _clearColor
 )
 {
-	this->renderTargets_.push_back(_texture);
-	//renderTargets_에 newTexture를 저장한다.
+	this->renderTargetTextures_.push_back(_texture);
+	//renderTargetTextures_에 newTexture를 저장한다.
 
 	this->renderTargetViews_.push_back(_texture->CreateRenderTargetView());
 	//newTexture에서 생성한 렌더타겟뷰를 저장한다.
@@ -94,56 +94,25 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 
 std::shared_ptr<GameEngineTexture> GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
 {
-	if (renderTargets_.size() <= _index)
+	if (renderTargetTextures_.size() <= _index)
 	{
 		MsgBoxAssert("렌더타겟의 개수를 초과한 인덱스를 입력하였습니다.");
 		return nullptr;
 	}
 
-	return renderTargets_[_index];
+	return renderTargetTextures_[_index];
 }
-
-//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
-//	ID3D11Texture2D* _texture,
-//	const float4& _clearColor
-//)
-//{
-//}
-//
-//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
-//	const float4& _size,
-//	DXGI_FORMAT _format,
-//	const float4& _clearColor
-//)
-//{
-//}
-//
-//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
-//	D3D11_TEXTURE2D_DESC _desc,
-//	const float4& _clearColor
-//)
-//{
-//	std::shared_ptr<GameEngineTexture> newTexture = GameEngineTexture::Create(_desc);
-//	CreateUnorderedAccessTexture(newTexture, _clearColor);
-//}
-//
-//void GameEngineRenderTarget::CreateUnorderedAccessTexture(
-//	std::shared_ptr<GameEngineTexture> _texture,
-//	const float4& _clearColor
-//)
-//{
-//}
 
 void GameEngineRenderTarget::CreateDepthTexture(int _renderTargetIndex)
 {
 	D3D11_TEXTURE2D_DESC depthTextureDesc = { 0 };
 	//깊이스텐실뷰 생성에 필요한 desc 초기화.
 
-	depthTextureDesc.Width = renderTargets_[_renderTargetIndex]->GetScale().UIX();
+	depthTextureDesc.Width = renderTargetTextures_[_renderTargetIndex]->GetScale().UIX();
 	//깊이스텐실뷰 가로길이: _renderTargetIndex번 렌더타겟의 가로길이.
 	//웬만해선 0번 하나만 쓸 것이다.
 
-	depthTextureDesc.Height = renderTargets_[_renderTargetIndex]->GetScale().UIY();
+	depthTextureDesc.Height = renderTargetTextures_[_renderTargetIndex]->GetScale().UIY();
 	//깊이스텐실뷰 세로길이: _renderTargetIndex번 렌더타겟의 세로길이.
 	//웬만해선 0번 하나만 쓸 것이다.
 
