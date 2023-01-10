@@ -409,6 +409,9 @@
     <ClCompile Include="Red.cpp">
       <Filter>Actor\02. Play\Monster\Nomal</Filter>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -724,6 +727,9 @@
     </ClInclude>
     <ClInclude Include="Red.h">
       <Filter>Actor\02. Play\Monster\Nomal</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

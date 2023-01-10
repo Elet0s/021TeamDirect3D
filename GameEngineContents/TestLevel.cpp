@@ -62,33 +62,25 @@ void TestLevel::Start()
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
 
-	Monster::ReserveMonsters(this, 22);
+	Monster::ReserveMonsters(this, 1);
 
-	Monster::CreateMonster<RedFlyingEyes>(this, 2);
-	Monster::CreateMonster<NormalSkeleton>(this, 2);
-	Monster::CreateMonster<NormalKobold>(this, 2);
-	Monster::CreateMonster<NormalGoblin>(this, 2);
-	Monster::CreateMonster<Green>(this, 2);
-	Monster::CreateMonster<FlyingEyes>(this, 2);
-	Monster::CreateMonster<Brown>(this, 2);
-	Monster::CreateMonster<Red>(this, 2);
-	Monster::CreateMonster<KoboldLivesey>(this, 2);
-	Monster::CreateMonster<GoblinLivesey>(this, 2);
-	Monster::CreateMonster<BlackEyes>(this, 2);
+	//Monster::CreateMonster<RedFlyingEyes>(this, 299);
+	//Monster::CreateMonster<NormalSkeleton>(this, 2);
+	//Monster::CreateMonster<NormalKobold>(this, 2);
+	//Monster::CreateMonster<NormalGoblin>(this, 2);
+	//Monster::CreateMonster<Green>(this, 2);
+	//Monster::CreateMonster<FlyingEyes>(this, 2);
+	//Monster::CreateMonster<Brown>(this, 2);
+	//Monster::CreateMonster<Red>(this, 2);
+	//Monster::CreateMonster<KoboldLivesey>(this, 2);
+	//Monster::CreateMonster<GoblinLivesey>(this, 2);
+	//Monster::CreateMonster<BlackEyes>(this, 1);
+	Monster::CreateMonster<Boss01>(this, 1);
 
 
-	
-	Monster::SummonMonster<RedFlyingEyes>(this, 2);
-	Monster::SummonMonster<NormalSkeleton>(this, 2);
-Monster::SummonMonster<NormalKobold>(this, 2);
-Monster::SummonMonster<NormalGoblin>(this, 2);
-Monster::SummonMonster<Green>(this, 2);
-Monster::SummonMonster<FlyingEyes>(this, 2);
-Monster::SummonMonster<Brown>(this, 2);
-Monster::SummonMonster<Red>(this, 2);
-Monster::SummonMonster<KoboldLivesey>(this, 2);
-Monster::SummonMonster<GoblinLivesey>(this, 2);
-Monster::SummonMonster<BlackEyes>(this, 2);
+	//Monster::SummonMonster<RedFlyingEyes>(this, 2);
+	//Monster::SummonMonster<BlackEyes>(this, 1);
+		Monster::SummonMonster<Boss01>(this, 1);
 
 
 	//for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)

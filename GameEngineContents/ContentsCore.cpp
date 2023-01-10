@@ -176,21 +176,6 @@ void ContentsCore::LoadContentsResource()
 		Dir.MoveParentToExistChildDirectory("ContentsResources");
 		Dir.MoveToChild("ContentsResources");
 		Dir.MoveToChild("Actor");
-		Dir.MoveToChild("BossMonster");
-
-		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
-
-		for (size_t i = 0; i < Texture.size(); i++)
-		{
-			GameEngineTexture::Load(Texture[i].GetFullPath());
-		}
-	}
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistChildDirectory("ContentsResources");
-		Dir.MoveToChild("ContentsResources");
-		Dir.MoveToChild("Actor");
 		Dir.MoveToChild("Player");
 
 		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();

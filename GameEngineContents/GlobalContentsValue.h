@@ -239,3 +239,10 @@ enum class CombatType
 	BossKill,
 	Max
 };
+
+enum class BossPattern
+{
+	none,
+	Shooting,
+	Dormammu
+};
