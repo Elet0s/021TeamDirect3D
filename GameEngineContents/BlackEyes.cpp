@@ -5,7 +5,7 @@
 
 BlackEyes::BlackEyes()
 {
-	monsterScale_ = float4(70, 70, 1);
+	monsterScale_ = float4(140, 140, 1);
 }
 BlackEyes::~BlackEyes()
 {
@@ -19,7 +19,7 @@ void BlackEyes::Start()
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-	monCollision_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+	monCollision_->GetTransform().SetLocalScale({ 120.f, 70.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 5;

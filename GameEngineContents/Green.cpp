@@ -5,7 +5,7 @@
 
 Green::Green()
 {
-	monsterScale_ = float4(80, 80, 1);
+	monsterScale_ = float4(160, 160, 1);
 }
 Green::~Green()
 {
@@ -17,7 +17,7 @@ void Green::Start()
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-	monCollision_->GetTransform().SetLocalScale({ 35.f, 35.f, 1.0f });
+	monCollision_->GetTransform().SetLocalScale({ 80.f, 100.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 1;

@@ -17,7 +17,7 @@ void Brown::Start()
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-	monCollision_->GetTransform().SetLocalScale({ 35.f, 35.f, 1.0f });
+	monCollision_->GetTransform().SetLocalScale({ 35.f, 50.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 0;
