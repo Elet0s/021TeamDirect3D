@@ -205,6 +205,7 @@ public:
 
 	void ResetScore();
 
+	void FalshPlayer(float _deltaTime);
 public:
 	std::shared_ptr<GameEngineCollision> collision_;
 
@@ -213,6 +214,7 @@ public:
 	std::list<float> serchCloseMonster_;
 	float4 playerResultDirection_;
 	bool hitOnoff_;
+	bool flash_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -227,6 +229,10 @@ protected:
 	void ColCheak();
 
 private:
+
+	bool flshloop_;
+	float flashTimer_;
+
 	float dashTimer_;
 	bool dashState_;
 

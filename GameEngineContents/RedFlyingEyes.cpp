@@ -22,7 +22,7 @@ void RedFlyingEyes::Start()
 	monCollision_->GetTransform().SetLocalScale({ 50.0f, 25.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
-	monsterInfo_->atk_ = 0;
+	monsterInfo_->atk_ = 3.f;
 	monsterInfo_->hp_ = 10.f;
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
