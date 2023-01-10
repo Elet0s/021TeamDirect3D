@@ -2,7 +2,9 @@
 #include "GlobalContentsValue.h"
 #include "ClearLevel.h"
 #include "Mouse.h"
+#include "Player.h"
 #include "SoulCardSelectBox.h"
+#include "StageObject.h"
 #include "ClearUIBox.h"
 
 ClearUIBox::ClearUIBox() 
@@ -15,6 +17,7 @@ ClearUIBox::ClearUIBox()
 	, button3FontRenderer_(nullptr)
 	, button1On_(true)
 	, button2On_(true)
+	, gold_(0)
 {
 }
 
@@ -32,6 +35,14 @@ void ClearUIBox::Start()
 
 	mainrenderer_->GetPixelData().mulColor_.a = 0.85f;
 
+	if (StageObject::GetNextStageInfo().stageType_ == StageType::Chest)
+	{
+		gold_ = 10000;
+	}
+	else
+	{
+		gold_ = 300;
+	}
 
 	{
 		button1renderer_ = CreateComponent<GameEngineTextureRenderer>();
@@ -62,7 +73,8 @@ void ClearUIBox::Start()
 		button1FontRenderer_->ChangeCamera(CameraOrder::UICamera);
 		button1FontRenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
 		button1FontRenderer_->SetSize(28.f);
-		button1FontRenderer_->SetText("300 °ñµå");
+
+		button1FontRenderer_->SetText(std::to_string(gold_) + " °ñµå");
 
 		button2FontRenderer_ = CreateComponent<GameEngineFontRenderer>();
 		button2FontRenderer_->SetTextPosition(float4(90.f, 185.f, -2000.f));
@@ -102,6 +114,8 @@ void ClearUIBox::Update(float _deltaTime)
 			button1renderer_->Off();
 			button1FontRenderer_->Off();
 			button1On_ = false;
+			PlayerInfo* pInfo = &Player::GetPlayerInst()->GetPlayerInfo();
+			pInfo->gold_ += this->gold_;
 			if (button2renderer_->IsUpdate())
 			{
 				button2FontRenderer_->SetTextPosition(float4(90.f, 125.f, -1000.f));

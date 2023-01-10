@@ -51,31 +51,37 @@ void StageObject::SetStageType(int _num)
 		renderer_->ScaleToTexture();
 		break;
 	case 1:
+		stageType_ = StageType::Chest;
+		renderer_->SetTexture("Chest.png");
+		renderer_->ScaleToTexture();
+		break;
+	case 2:
 		stageType_ = StageType::Elite;
 		combatType_ = CombatType::EilteKill;
 		renderer_->SetTexture("Elite.png");
 		renderer_->ScaleToTexture();
 		break;
-	case 2:
-		stageType_ = StageType::Chest;
-		renderer_->SetTexture("Chest.png");
-		renderer_->ScaleToTexture();
-		break;
 	case 3:
-		stageType_ = StageType::Event;
-		renderer_->SetTexture("Event.png");
+		stageType_ = StageType::Shop;
+		renderer_->SetTexture("Shop.png");
 		renderer_->ScaleToTexture();
 		break;
 	case 4:
 		stageType_ = StageType::Boss;
+		combatType_ = CombatType::BossKill;
 		renderer_->SetTexture("Boss.png");
 		renderer_->ScaleToTexture();
 		break;
 	case 5:
+		stageType_ = StageType::Swarm;
+		combatType_ = CombatType::TimeAttack;
+		renderer_->SetTexture("swarm.png");
+		renderer_->ScaleToTexture();
+		break;
+	case 6:
 		stageType_ = StageType::Empty;
 		renderer_->SetTexture("Empty.png");
 		renderer_->ScaleToTexture();
-		//col_->Off();
 		break;
 	default:
 		break;
