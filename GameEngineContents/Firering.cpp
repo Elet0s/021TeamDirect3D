@@ -171,7 +171,7 @@ void Firering::RotateRenderer(float _deltaTime)
 {
 	if (addRadian_ < 360)
 	{
-		addRadian_ += 5 * _deltaTime;
+		addRadian_ += 80 * _deltaTime;
 	}
 	else
 	{

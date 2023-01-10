@@ -40,12 +40,3 @@ void BlackEyes::End()
 {
 
 }
-
-void BlackEyes::HpCheak()
-{
-	if (monsterInfo_->hp_ < 0)
-	{
-		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
-		this->Unsummon();
-	}
-}

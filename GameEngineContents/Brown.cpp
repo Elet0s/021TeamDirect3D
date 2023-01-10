@@ -39,12 +39,3 @@ void Brown::End()
 {
 
 }
-
-void Brown::HpCheak()
-{
-	if (monsterInfo_->hp_ < 0)
-	{
-		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
-		this->Unsummon();
-	}
-}

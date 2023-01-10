@@ -34,17 +34,9 @@ void GoblinLivesey::Update(float _deltaTime)
 	Chaseplayer(_deltaTime);
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
+	HpCheak();
 }
 void GoblinLivesey::End()
 {
 
-}
-
-void GoblinLivesey::HpCheak()
-{
-	if (monsterInfo_->hp_ < 0)
-	{
-		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
-		this->Unsummon();
-	}
 }

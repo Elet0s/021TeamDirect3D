@@ -229,6 +229,7 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 	void Chaseplayer(float _deltaTime);
+	void HpCheak();
 
 protected:
 	bool flshloop_;

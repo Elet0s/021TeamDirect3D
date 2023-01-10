@@ -2,6 +2,7 @@
 #include"NormalSkeleton.h"
 #include "GlobalContentsValue.h"
 #include "Texture2DShadowRenderer.h"
+#include"Player.h"
 
 NormalSkeleton::NormalSkeleton()
 {
@@ -38,13 +39,4 @@ void NormalSkeleton::Update(float _deltaTime)
 void NormalSkeleton::End()
 {
 
-}
-
-void NormalSkeleton::HpCheak()
-{
-	if (monsterInfo_->hp_ < 0)
-	{
-		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
-		this->Unsummon();
-	}
 }
