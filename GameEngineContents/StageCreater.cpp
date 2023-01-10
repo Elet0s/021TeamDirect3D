@@ -2,6 +2,7 @@
 #include "StageCreater.h"
 #include "StageObject.h"
 #include "Mouse.h"
+#include "Player.h"
 #include "PlayerObject.h"
 #include "GlobalContentsValue.h"
 #include "RoadObject.h"

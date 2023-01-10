@@ -16,6 +16,12 @@
 #include "SoundPlayer.h"
 #include "FieldRenderingActor.h"
 #include "StageObject.h"
+#include "NormalSkeleton.h"
+#include "NormalKobold.h"
+#include "Red.h"
+#include "KoboldLivesey.h"
+#include "GoblinLivesey.h"
+#include "Boss01.h"
 
 TestLevel::TestLevel()
 	: fieldRenderingActor_(nullptr),
@@ -56,13 +62,33 @@ void TestLevel::Start()
 		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	}
 
-	Monster::ReserveMonsters(this, 2);
+	Monster::ReserveMonsters(this, 22);
 
 	Monster::CreateMonster<RedFlyingEyes>(this, 2);
+	Monster::CreateMonster<NormalSkeleton>(this, 2);
+	Monster::CreateMonster<NormalKobold>(this, 2);
+	Monster::CreateMonster<NormalGoblin>(this, 2);
+	Monster::CreateMonster<Green>(this, 2);
+	Monster::CreateMonster<FlyingEyes>(this, 2);
+	Monster::CreateMonster<Brown>(this, 2);
+	Monster::CreateMonster<Red>(this, 2);
+	Monster::CreateMonster<KoboldLivesey>(this, 2);
+	Monster::CreateMonster<GoblinLivesey>(this, 2);
+	Monster::CreateMonster<BlackEyes>(this, 2);
 
 
 
 	Monster::SummonMonster<RedFlyingEyes>(this, 2);
+	Monster::SummonMonster<NormalSkeleton>(this, 2);
+Monster::SummonMonster<NormalKobold>(this, 2);
+Monster::SummonMonster<NormalGoblin>(this, 2);
+Monster::SummonMonster<Green>(this, 2);
+Monster::SummonMonster<FlyingEyes>(this, 2);
+Monster::SummonMonster<Brown>(this, 2);
+Monster::SummonMonster<Red>(this, 2);
+Monster::SummonMonster<KoboldLivesey>(this, 2);
+Monster::SummonMonster<GoblinLivesey>(this, 2);
+Monster::SummonMonster<BlackEyes>(this, 2);
 
 
 	//for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)

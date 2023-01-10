@@ -28,7 +28,7 @@ private:
 	void LevelStartEvent() override;
 	void LevelEndEvent() override;
 	std::shared_ptr<class ClearUIBox> clearbox_;
-	
+	std::shared_ptr<class StageUI> stageui_;
 
 };
 

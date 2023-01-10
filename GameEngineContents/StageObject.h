@@ -79,6 +79,11 @@ public:
 		return renderer_->GetTransformData().worldWorldMatrix_;
 	}
 
+	CombatType GetCombatType()
+	{
+		return combatType_;
+	}
+
 	bool CheckNextLevel(std::shared_ptr<StageObject> _nextlevel);
 	void SetStageType(int _num);
 	void SetCombatType(int _num);

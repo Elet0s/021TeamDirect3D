@@ -19,7 +19,7 @@ void Red::Start()
 
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-	monCollision_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+	monCollision_->GetTransform().SetLocalScale({ 40.f, 40.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 5;

@@ -319,7 +319,7 @@ void Monster::FlashMonster(float _deltaTime)
 		if (flashTimer_ < 0.2f)
 		{
 			flashTimer_ += _deltaTime;
-			pixelData_.mulColor_ = float4{ 10.f, 10.f, 10.f, 1.f };
+			pixelData_.mulColor_ = float4{ 1.0f, 0.7f, 0.7f, 0.7f };
 		}
 		else
 		{

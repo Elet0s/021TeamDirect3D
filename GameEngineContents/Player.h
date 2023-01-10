@@ -103,16 +103,18 @@ public:
 		gold_(0),
 		stage_(0),
 		targetScore_(0),
-		myComBatType_(CombatType::Max),
-		eliteTargetScore_(0)
+		myCombatType_(CombatType::Max),
+		eliteTargetScore_(0),
+		stageTimer_(0)
 	{
 
 	}
 public:
-	float level_;
+	int level_;
 	int addProjectile_;
 	int passProjectile_;
 
+	float stageTimer_;
 	float projectileSize_;
 	float projectileduration_;
 	float projectilespeed_;
@@ -127,7 +129,7 @@ public:
 	size_t stage_;
 	size_t targetScore_;
 	size_t eliteTargetScore_;
-	CombatType myComBatType_;
+	CombatType myCombatType_;
 
 	float knockback_;
 	float atk_Range_;
@@ -226,7 +228,6 @@ protected:
 	void LevelUpEvent();//경험치 받고 전부차면 초기화해주고 레벨업해주는부분
 
 	void ColCheak();
-
 private:
 
 	bool flshloop_;

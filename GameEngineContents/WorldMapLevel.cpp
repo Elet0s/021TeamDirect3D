@@ -195,6 +195,8 @@ void WorldMapLevel::CheckNextStageSelection()
 
 		if (true == GameEngineInput::GetInst()->IsDown("Click"))
 		{
+			PlayerInfo* Pinfo = &Player::GetPlayerInst()->GetPlayerInfo();
+			Pinfo->myCombatType_ = (*iter)->GetCombatType();
 			stageCreater_->SendPlayerToNextStage(*iter);
 		}
 	}

@@ -79,7 +79,7 @@ void PlayerUI::Start()
 	playerLevelUi_ = CreateComponent<GameEngineFontRenderer>();
 	playerLevelUi_->SetSize(30.f);
 	playerLevelUi_->SetLeftAndRightSort(LeftAndRightSort::Left);
-	playerLevelUi_->SetText( "0", "Free Pixel");
+	playerLevelUi_->SetText( std::to_string(Player::GetPlayerInst()->GetPlayerInfo().level_), "Free Pixel");
 	playerLevelUi_->SetPositionMode(FontPositionMode::World);
 	playerLevelUi_->ChangeCamera(CameraOrder::MidCamera);
 
@@ -160,6 +160,8 @@ void PlayerUI::Update(float _deltaTime)
 
 	playerLevelUi_->SetPositionMode(FontPositionMode::World);
 	playerLevelUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 70.0f, player_.lock()->GetTransform().GetWorldPosition().y + 115.0f, -100);
+
+	playerLevelUi_->SetText(std::to_string(Player::GetPlayerInst()->GetPlayerInfo().level_), "Free Pixel");
 
 	HitDleta_ += _deltaTime;
 	HitEffect(_deltaTime);
