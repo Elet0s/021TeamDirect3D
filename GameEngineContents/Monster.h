@@ -74,6 +74,9 @@ public:
 	//사망한 몬스터는 풀로 복귀, 대기.
 	void Unsummon(); // 게임 중간에 지우는 용도
 
+	//모든 몬스터 풀로 복귀.
+	static void UnsummonAllMonsters();
+
 	//몬스터 생성 및 대기.
 	template <typename MonsterType>
 	static void CreateMonster(GameEngineLevel* _thisLevel, size_t _monsterCount)
