@@ -2,12 +2,15 @@
 #include "GlobalContentsValue.h"
 #include "StageObject.h"
 
+StageInfo StageObject::nextStageInfo_;
+
 StageObject::StageObject() 
-	: myLevel_(0),
+	: posY_(0.f),
+	myLevel_(0),
 	time_(0.0f),
 	killCount_(0),
 	stageType_(StageType::Max),
-	comBatType_(ComBatType::Max),
+	combatType_(CombatType::Max),
 	renderer_(nullptr)
 {
 }
@@ -18,11 +21,11 @@ StageObject::~StageObject()
 
 void StageObject::Start()
 {
-	col_ = CreateComponent<GameEngineCollision>();
-	col_->GetTransform().SetWorldScale(float4(64.f, 64.f, 1.f));
-	col_->GetTransform().SetLocalPosition(float4(0.f, 32.f, 0.f));
-	col_->SetDebugSetting(CollisionType::CT_OBB, float4::Blue);
-	col_->ChangeOrder(ObjectOrder::MapObject);
+	//col_ = CreateComponent<GameEngineCollision>();
+	//col_->GetTransform().SetWorldScale(float4(64.f, 64.f, 1.f));
+	//col_->GetTransform().SetLocalPosition(float4(0.f, 32.f, 0.f));
+	//col_->SetDebugSetting(CollisionType::CT_OBB, float4::Blue);
+	//col_->ChangeOrder(ObjectOrder::MapObject);
 
 	renderer_ = CreateComponent<GameEngineTextureRenderer>();
 	renderer_->SetTexture("Combat.png");
@@ -32,11 +35,9 @@ void StageObject::Start()
 
 void StageObject::Update(float _deltaTime)
 {
-	float4 PosK = GetTransform().GetWorldPosition();
-	PosK = GetLevel()->GetMainCamera()->ConvertWorldPositionToScreenPosition(PosK);
-	//Pos *= GetViewProject
-	col_->GetTransform().SetWorldPosition(PosK);
-
+	//float4 PosK = GetTransform().GetWorldPosition();
+	//PosK = GetLevel()->GetMainCamera()->ConvertWorldPositionToScreenPosition(PosK);
+	//col_->GetTransform().SetWorldPosition(PosK);
 }
 
 void StageObject::SetStageType(int _num)
@@ -44,8 +45,8 @@ void StageObject::SetStageType(int _num)
 	switch (_num)
 	{
 	case 0:
-		stageType_ = StageType::ComBat;
-		renderer_->SetTexture("ComBat.png");
+		stageType_ = StageType::Combat;
+		renderer_->SetTexture("Combat.png");
 		renderer_->ScaleToTexture();
 		break;
 	case 1:
@@ -72,28 +73,28 @@ void StageObject::SetStageType(int _num)
 		stageType_ = StageType::Empty;
 		renderer_->SetTexture("Empty.png");
 		renderer_->ScaleToTexture();
-		col_->Off();
+		//col_->Off();
 		break;
 	default:
 		break;
 	}
 }
 
-void StageObject::SetComBatType(int _num)
+void StageObject::SetCombatType(int _num)
 {
 	switch (_num)
 	{
 	case 0:
-		comBatType_ = ComBatType::TimeAttack;
+		combatType_ = CombatType::TimeAttack;
 		break;
 	case 1:
-		comBatType_ = ComBatType::Kill;
+		combatType_ = CombatType::Kill;
 		break;
 	case 2:
-		comBatType_ = ComBatType::EilteKill;
+		combatType_ = CombatType::EilteKill;
 		break;
 	case 3:
-		comBatType_ = ComBatType::BossKill;
+		combatType_ = CombatType::BossKill;
 		break;
 	default:
 		break;

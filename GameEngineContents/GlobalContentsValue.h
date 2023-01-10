@@ -221,7 +221,7 @@ enum class ItemObjectOrder
 
 enum class StageType
 {
-	ComBat,
+	Combat,
 	Elite,
 	Chest,
 	Event,
@@ -230,7 +230,7 @@ enum class StageType
 	Max
 };
 
-enum class ComBatType
+enum class CombatType
 {
 	TimeAttack,
 	Kill,

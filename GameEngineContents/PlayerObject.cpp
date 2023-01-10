@@ -5,7 +5,7 @@
 
 PlayerObject::PlayerObject() 
 	: mode_(PlayerObjectMode::Idle),
-	col_(nullptr),
+	//col_(nullptr),
 	renderer_(nullptr)
 {
 }
@@ -16,11 +16,11 @@ PlayerObject::~PlayerObject()
 
 void PlayerObject::Start()
 {
-	col_ = CreateComponent<GameEngineCollision>();
-	col_->SetDebugSetting(CollisionType::CT_OBB, float4::Red);
-	col_->GetTransform().SetLocalScale({ 70.f, 70.f, 100.0f });
-	col_->GetTransform().SetLocalPosition({ 0.f, 45.f, 0.0f });
-	col_->ChangeOrder(ObjectOrder::Player);	
+	//col_ = CreateComponent<GameEngineCollision>();
+	//col_->SetDebugSetting(CollisionType::CT_OBB, float4::Red);
+	//col_->GetTransform().SetLocalScale({ 70.f, 70.f, 100.0f });
+	//col_->GetTransform().SetLocalPosition({ 0.f, 45.f, 0.0f });
+	//col_->ChangeOrder(ObjectOrder::Player);	
 
 	renderer_ = CreateComponent<GameEngineTextureRenderer>();
 	renderer_->SetPivot(PivotMode::Bot);
@@ -33,9 +33,9 @@ void PlayerObject::Start()
 
 void PlayerObject::Update(float _deltaTime)
 {
-	float4 PosK = GetTransform().GetWorldPosition();
-	PosK = GetLevel()->GetMainCamera()->ConvertWorldPositionToScreenPosition(PosK);
-	col_->GetTransform().SetWorldPosition(PosK);
+	//float4 PosK = GetTransform().GetWorldPosition();
+	//PosK = GetLevel()->GetMainCamera()->ConvertWorldPositionToScreenPosition(PosK);
+	//col_->GetTransform().SetWorldPosition(PosK);
 
 	if (mode_ == PlayerObjectMode::Move)
 	{

@@ -1,4 +1,5 @@
 #pragma once
+#include "GlobalContentsValue.h"
 
 class Mouse;
 class FieldRenderingActor;
@@ -34,4 +35,15 @@ private:
 	std::shared_ptr<GameEngineLighting> testLevelLighting_;
 	std::shared_ptr<Mouse> mousePointer_;
 	std::shared_ptr<class StageUI> stageUI_;
+
+
+
+	StageType stageType_;
+	CombatType combatType_;
+
+	int killCount_;
+	float time_;
+
+
+
 };

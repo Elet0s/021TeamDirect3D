@@ -15,6 +15,7 @@
 #include "FlyingEyes.h"
 #include "SoundPlayer.h"
 #include "FieldRenderingActor.h"
+#include "StageObject.h"
 
 TestLevel::TestLevel()
 	: fieldRenderingActor_(nullptr),
@@ -130,6 +131,11 @@ void TestLevel::LevelStartEvent()
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
 	this->GetCamera(CameraOrder::MidCamera)->SetFarZ(500.f);
+
+	this->stageType_ = StageObject::GetNextStageInfo().stageType_;
+	this->combatType_ = StageObject::GetNextStageInfo().combatType_;
+	this->killCount_ = StageObject::GetNextStageInfo().killCount_;
+	this->time_ = StageObject::GetNextStageInfo().time_;
 }
 
 void TestLevel::LevelEndEvent()

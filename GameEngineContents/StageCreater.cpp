@@ -217,28 +217,6 @@ void StageCreater::Start()
 
 void StageCreater::Update(float _deltaTime)
 {
-	//Mouse::GetMouseInfo().get()->mouseCollision_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::MapObject, CollisionType::CT_OBB2D,
-	//	std::bind(&StageCreater::CheckNextLevel, this, std::placeholders::_1, std::placeholders::_2));
-}
-
-CollisionReturn StageCreater::CheckNextLevel(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
-{
-	if (true == GameEngineInput::GetInst()->IsDown("Click") && playerObject_->IsObjectIdle() == true)
-	{
-		std::shared_ptr<StageObject> Other = _Other->GetActor<StageObject>();
-		if (true == curlevel_->CheckNextLevel(Other))
-		{
-			float4 Pos = playerObject_->GetTransform().GetWorldPosition();
-			float4 NPos = _Other->GetActor()->GetTransform().GetWorldPosition();
-
-			float4 dir = NPos - Pos;
-			playerObject_->SetMoveDir(dir);
-			curlevel_ = _Other->GetActor<StageObject>();
-
-		}
-	
-	}
-	return CollisionReturn::Stop;
 }
 
 void StageCreater::SendPlayerToNextStage(std::weak_ptr<StageObject> _nextStageObject)
@@ -251,6 +229,13 @@ void StageCreater::SendPlayerToNextStage(std::weak_ptr<StageObject> _nextStageOb
 		float4 dir = NPos - Pos;
 		playerObject_->SetMoveDir(dir);
 		curlevel_ = _nextStageObject.lock();
+
+		StageObject::nextStageInfo_.SetStageInfo(
+			this->curlevel_->stageType_,
+			this->curlevel_->combatType_,
+			this->curlevel_->killCount_,
+			this->curlevel_->time_
+		);
 	}
 }
 

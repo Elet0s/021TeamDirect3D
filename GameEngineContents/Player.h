@@ -65,7 +65,6 @@ public:
 	float projectileSpeed_Result;
 };
 
-
 struct PlayerInfo
 {
 public:
@@ -104,7 +103,7 @@ public:
 		gold_(0),
 		stage_(0),
 		targetScore_(0),
-		myComBatType_(ComBatType::Max),
+		myComBatType_(CombatType::Max),
 		eliteTargetScore_(0)
 	{
 
@@ -128,7 +127,7 @@ public:
 	size_t stage_;
 	size_t targetScore_;
 	size_t eliteTargetScore_;
-	ComBatType myComBatType_;
+	CombatType myComBatType_;
 
 	float knockback_;
 	float atk_Range_;
@@ -149,8 +148,8 @@ public:
 
 	int gold_;
 };
+
 class PlayerUI;
-class GameEngineDefaultRenderer;
 class Player: public GameEngineActor
 {
 	static std::shared_ptr<Player> mainPlayer_;

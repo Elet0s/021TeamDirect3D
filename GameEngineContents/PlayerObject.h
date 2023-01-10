@@ -47,6 +47,6 @@ private:
 	float4 checkPos_;
 	PlayerObjectMode mode_;
 	std::shared_ptr<GameEngineTextureRenderer> renderer_;
-	std::shared_ptr<GameEngineCollision> col_;
+	//std::shared_ptr<GameEngineCollision> col_;
 };
 
