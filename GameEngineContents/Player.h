@@ -103,7 +103,9 @@ public:
 		knockback_(),
 		gold_(0),
 		stage_(0),
-		targetScore_(0)
+		targetScore_(0),
+		myComBatType_(ComBatType::Max),
+		eliteTargetScore_(0)
 	{
 
 	}
@@ -125,6 +127,8 @@ public:
 	int dashReChargeCount_;
 	size_t stage_;
 	size_t targetScore_;
+	size_t eliteTargetScore_;
+	ComBatType myComBatType_;
 
 	float knockback_;
 	float atk_Range_;
@@ -199,7 +203,7 @@ public:
 	CollisionReturn PlayerToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 	CollisionReturn ItemRangeToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
-	void ResetInfo();
+	void ResetScore();
 
 public:
 	std::shared_ptr<GameEngineCollision> collision_;

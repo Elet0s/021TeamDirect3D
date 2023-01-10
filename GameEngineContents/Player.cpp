@@ -355,7 +355,8 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 	playerSkillManager_->CreatePlayerAllSkill();
 }
 
-void Player::ResetInfo()
+void Player::ResetScore()
 {
 	playerInfo_->targetScore_ = 0;
+	playerInfo_->eliteTargetScore_ = 0;
 }

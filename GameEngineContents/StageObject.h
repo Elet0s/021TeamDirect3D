@@ -1,23 +1,6 @@
 #pragma once
-enum class StageType
-{
-	ComBat,
-	Elite,
-	Chest,
-	Event,
-	Boss,
-	Empty,
-	Max
-};
+#include "GlobalContentsValue.h"
 
-enum class ComBatType
-{
-	TimeAttack,
-	Kill,
-	EilteKill,
-	BossKill,
-	Max
-};
 // Ό³Έν :
 class StageObject : public GameEngineActor
 {

@@ -218,3 +218,23 @@ enum class ItemObjectOrder
 	Gold,
 	Box
 };
+
+enum class StageType
+{
+	ComBat,
+	Elite,
+	Chest,
+	Event,
+	Boss,
+	Empty,
+	Max
+};
+
+enum class ComBatType
+{
+	TimeAttack,
+	Kill,
+	EilteKill,
+	BossKill,
+	Max
+};
