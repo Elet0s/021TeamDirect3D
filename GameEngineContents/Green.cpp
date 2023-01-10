@@ -20,7 +20,7 @@ void Green::Start()
 	monCollision_->GetTransform().SetLocalScale({ 35.f, 35.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
-	monsterInfo_->atk_ = 0;
+	monsterInfo_->atk_ = 1;
 	monsterInfo_->hp_ = 10.f;
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 50;
