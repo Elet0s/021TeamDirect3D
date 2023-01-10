@@ -22,7 +22,7 @@ Player::Player()
 	 flash_(false),
  flshloop_(false),
  flashTimer_(0)
-
+	
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{
@@ -304,6 +304,8 @@ void Player::ColCheak()
 
 void Player::Update(float _deltaTime)
 {
+	playerInfo_->stageTimer_ += _deltaTime;
+
 	MoveDirectionUpdate(_deltaTime);
 	PlayerDash(_deltaTime);
 
@@ -363,6 +365,7 @@ void Player::ResetScore()
 {
 	playerInfo_->targetScore_ = 0;
 	playerInfo_->eliteTargetScore_ = 0;
+	playerInfo_->stageTimer_ = 0.f;
 }
 
 void Player::FalshPlayer(float _deltaTime)
@@ -372,7 +375,7 @@ void Player::FalshPlayer(float _deltaTime)
 		if (flashTimer_ < 0.2f)
 		{
 			flashTimer_ += _deltaTime;
-			playerRenderer_->GetPixelData().mulColor_ = float4{ 1.f, 0.7f, 0.7f, 0.7f };
+			playerRenderer_->GetPixelData().mulColor_ = float4{ 5.0f, 5.0f, 5.0f, 0.7f };
 		}
 		else
 		{

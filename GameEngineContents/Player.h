@@ -105,15 +105,17 @@ public:
 		stage_(0),
 		targetScore_(0),
 		myComBatType_(ComBatType::Max),
-		eliteTargetScore_(0)
+		eliteTargetScore_(0),
+		stageTimer_(0)
 	{
 
 	}
 public:
-	float level_;
+	int level_;
 	int addProjectile_;
 	int passProjectile_;
 
+	float stageTimer_;
 	float projectileSize_;
 	float projectileduration_;
 	float projectilespeed_;
@@ -227,7 +229,6 @@ protected:
 	void LevelUpEvent();//경험치 받고 전부차면 초기화해주고 레벨업해주는부분
 
 	void ColCheak();
-
 private:
 
 	bool flshloop_;
