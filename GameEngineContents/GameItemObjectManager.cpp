@@ -260,8 +260,8 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 
 void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4 _itemObjectPos)
 {
-	//ItemObjectOrder randomorder = RandomObjectOrder();
-	ItemObjectOrder randomorder = ItemObjectOrder::GreenExp;
+	ItemObjectOrder randomorder = RandomObjectOrder();
+	//ItemObjectOrder randomorder = ItemObjectOrder::GreenExp;
 	if (isFullContainer_ == false)
 	{
 		ItemUpdateNum_ += 1;

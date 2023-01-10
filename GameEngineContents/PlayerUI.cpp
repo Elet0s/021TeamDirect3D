@@ -39,6 +39,7 @@ void PlayerUI::Start()
 	playerHpUi_->GetTransform().SetWorldScale(-100.f, 10.f, 1.f);
 	playerHpUi_->ChangeCamera(CameraOrder::MidCamera);
 	playerHpUi_->SetRenderingOrder(15);
+	playerHpUi_->GetTransform().SetLocalPosition({0.f,100.f,-1.f });
 
 	playerHpMax_ = CreateComponent<GameEngineTextureRenderer>();
 	playerHpMax_->SetTexture("DefaultUi.png");
@@ -46,6 +47,7 @@ void PlayerUI::Start()
 	playerHpMax_->GetTransform().SetLocalScale(100, 10, 1);
 	playerHpMax_->ChangeCamera(CameraOrder::MidCamera);
 	playerHpMax_->SetRenderingOrder(15);
+	playerHpMax_->GetTransform().SetLocalPosition({ 0.f,100.f ,-3.f });
 
 	playerHpRed_ = CreateComponent<GameEngineTextureRenderer>();
 	playerHpRed_->SetTexture("DefaultUi.png");
@@ -53,6 +55,7 @@ void PlayerUI::Start()
 	playerHpRed_->GetTransform().SetWorldScale(-100.f, 10.f, 1.f);
 	playerHpRed_->ChangeCamera(CameraOrder::MidCamera);
 	playerHpRed_->SetRenderingOrder(15);
+	playerHpRed_->GetTransform().SetLocalPosition({ 0.f,100.f,-2.f });
 
 	playerExpMax_ = CreateComponent<GameEngineTextureRenderer>();
 	playerExpMax_->SetTexture("DefaultUi.png");
@@ -60,6 +63,8 @@ void PlayerUI::Start()
 	playerExpMax_->GetTransform().SetWorldScale(90, 5, 1);
 	playerExpMax_->ChangeCamera(CameraOrder::MidCamera);
 	playerExpMax_->SetRenderingOrder(15);
+	playerExpMax_->GetTransform().SetLocalPosition({ -5.f,90.f,-1.f });
+
 
 	playerExpUi_ = CreateComponent<GameEngineTextureRenderer>();
 	playerExpUi_->SetTexture("DefaultUi.png");
@@ -68,6 +73,7 @@ void PlayerUI::Start()
 	playerExpUi_->GetPixelData().slice_ = float4(1.0f, 0.0f, 0.0f, 0.0f);
 	playerExpUi_->ChangeCamera(CameraOrder::MidCamera);
 	playerExpUi_->SetRenderingOrder(15);
+	playerExpUi_->GetTransform().SetLocalPosition({ -5.f,90.f ,-3.f });
 
 	playerExpBlue_ = CreateComponent<GameEngineTextureRenderer>();
 	playerExpBlue_->SetTexture("DefaultUi.png");
@@ -75,6 +81,7 @@ void PlayerUI::Start()
 	playerExpBlue_->GetTransform().SetWorldScale(90, 5, 1);
 	playerExpBlue_->ChangeCamera(CameraOrder::MidCamera);
 	playerExpBlue_->SetRenderingOrder(15);
+	playerExpBlue_->GetTransform().SetLocalPosition({ -5.f,90.f ,-2.f });
 
 	playerLevelUi_ = CreateComponent<GameEngineFontRenderer>();
 	playerLevelUi_->SetSize(30.f);
@@ -82,7 +89,7 @@ void PlayerUI::Start()
 	playerLevelUi_->SetText( std::to_string(Player::GetPlayerInst()->GetPlayerInfo().level_), "Free Pixel");
 	playerLevelUi_->SetPositionMode(FontPositionMode::World);
 	playerLevelUi_->ChangeCamera(CameraOrder::MidCamera);
-
+	playerLevelUi_->GetTransform().SetLocalPosition({ -70.f,115.f,0.f });
 
 }
 void PlayerUI::HitEffect(float _deltaTime)
@@ -147,19 +154,19 @@ void PlayerUI::GainExp(float _deltaTime)
 }
 void PlayerUI::Update(float _deltaTime)
 {
-	playerXindex_ = player_.lock()->GetTransform().GetWorldPosition().x;
-	playerYindex_ = player_.lock()->GetTransform().GetWorldPosition().y;
+	float4 A = player_.lock()->GetTransform().GetWorldPosition();
+	GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition());
 
-	playerHpUi_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -203);
-	playerHpMax_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -201);
-	playerHpRed_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -202);
-
-	playerExpMax_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -203);
-	playerExpUi_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -202);
-	playerExpBlue_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -201);
-
-	playerLevelUi_->SetPositionMode(FontPositionMode::World);
-	playerLevelUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 70.0f, player_.lock()->GetTransform().GetWorldPosition().y + 115.0f, -100);
+	//playerHpUi_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.f, -203);
+	//playerHpMax_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -201);
+	//playerHpRed_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -202);
+	//
+	//playerExpMax_->GetTransform().SetWorldPosition(playerXindex_ -5.f, playerYindex_ + 90.f, -203);
+	//playerExpUi_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -202);
+	//playerExpBlue_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -201);
+	//
+	//playerLevelUi_->SetPositionMode(FontPositionMode::World);
+	//playerLevelUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 70.f, player_.lock()->GetTransform().GetWorldPosition().y + 115.0f, -100);
 
 	playerLevelUi_->SetText(std::to_string(Player::GetPlayerInst()->GetPlayerInfo().level_), "Free Pixel");
 

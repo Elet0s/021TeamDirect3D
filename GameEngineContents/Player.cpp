@@ -74,7 +74,6 @@ void Player::Start()
 	playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	playerRenderer_->Initialize("DeferredRendering");
 	playerRenderer_->GetTransform().SetLocalScale(90, 90, 1);
-	playerRenderer_->GetTransform().SetWorldPosition(0, 0, -219.f);
 	playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));
 	playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
 	playerRenderer_->ChangeFrameAnimation("PlayerIdle");
@@ -116,14 +115,14 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 	}
 	else if (A->GetObjectOrder() == ItemObjectOrder::Voidbead)
 	{
-		for (size_t i = 0; i < 300; i++)
-		{
-			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
-			{
-				//순회돌면서 체이스 상태로 변경해줘야함
-			}
-
-		}
+		//for (size_t i = 0; i < 300; i++)
+		//{
+		//	//if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
+		//	{
+		//		//순회돌면서 체이스 상태로 변경해줘야함
+		//	}
+		//
+		//}
 	}
 	// 여기서 오브젝트 끄고 컨테이너에서 빼줘야함
 	for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)

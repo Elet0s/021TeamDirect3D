@@ -55,7 +55,7 @@ void TestLevel::Start()
 
 	if (true == Player::GetPlayerWeakPtr().expired())
 	{
-		Player::CreatePlayer(this, { 0, 0 });
+		Player::CreatePlayer(this, { 0, 0,-219 });
 	}
 
 	{
