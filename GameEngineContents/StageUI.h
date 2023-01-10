@@ -49,7 +49,10 @@ private:
 	std::shared_ptr<GameEngineFontRenderer> soulfontrenderer_;
 
 	std::shared_ptr<GameEngineFontRenderer> killcountfontrenderer_;
+	std::shared_ptr<GameEngineFontRenderer> elitekillFontrenderer_;
 
+	std::shared_ptr<GameEngineFontRenderer> timerfontRenderer_;
+	std::shared_ptr<GameEngineTextureRenderer> timerboxRenderer_;
 
 	std::shared_ptr<GameEngineTextureRenderer> coinrenderer_;
 	std::shared_ptr<GameEngineTextureRenderer> soulrenderer_;
@@ -72,6 +75,8 @@ private:
 	void AllOff();
 	void UIUpdate();
 
+	bool IsClear_;
+	float time_;
 	UIType mytype_;
 	int goalCount_;
 };

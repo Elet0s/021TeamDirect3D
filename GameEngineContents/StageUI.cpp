@@ -3,12 +3,13 @@
 #include "Player.h"
 
 
-StageUI::StageUI() 
+StageUI::StageUI()
 	: stagefontrenderer_(nullptr)
 	, spacefontrenderer_(nullptr)
 	, coinfontrenderer_(nullptr)
 	, soulfontrenderer_(nullptr)
 	, killcountfontrenderer_(nullptr)
+	, timerfontRenderer_(nullptr)
 	, coinrenderer_(nullptr)
 	, soulrenderer_(nullptr)
 	, stageboxrenderer_(nullptr)
@@ -16,6 +17,9 @@ StageUI::StageUI()
 	, coinboxrenderer_(nullptr)
 	, soulboxrenderer_(nullptr)
 	, killcountboxrenderer_(nullptr)
+	, timerboxRenderer_(nullptr)
+	, IsClear_(false)
+	, time_(6.0f)
 	, goalCount_(0)
 {
 }
@@ -27,15 +31,15 @@ StageUI::~StageUI()
 void StageUI::Start()
 {
 
-	
-
+	// 공용 렌더러
 	{
 		stagefontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		spacefontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		coinfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		soulfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		killcountfontrenderer_ = CreateComponent<GameEngineFontRenderer>();
-
+		elitekillFontrenderer_ = CreateComponent<GameEngineFontRenderer>();
+		timerfontRenderer_ = CreateComponent<GameEngineFontRenderer>();
 		float X = 1260.f;
 		float Size = 30.f;
 		stagefontrenderer_->SetTextPosition(float4{ X,20.f });
@@ -64,36 +68,22 @@ void StageUI::Start()
 	}
 
 	{
-		killcountfontrenderer_->SetTextPosition(float4{ 30.f, 20.f });
-		killcountfontrenderer_->SetSize(20.f);
-		killcountfontrenderer_->SetColor(float4::Yellow);
-		killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
-		killcountfontrenderer_->ChangeCamera(CameraOrder::UICamera);
-
-		killcountboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
-		killcountboxrenderer_->SetTexture("GradientMainMenu.png");
-		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 30.f ,1.f });
-		killcountboxrenderer_->GetTransform().SetWorldMove(float4{ -464.f, 328.f });
-		killcountboxrenderer_->ChangeCamera(CameraOrder::UICamera);
-	}
-	
-	{
 		stageboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		stageboxrenderer_->SetTexture("GradientRightToLeft.png");
 		stageboxrenderer_->ChangeCamera(CameraOrder::UICamera);
 		stageboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 50.f ,1.f });
-		stageboxrenderer_->GetTransform().SetWorldMove(float4{ 540.f, 320.f});
+		stageboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 320.f });
 
 		spaceboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		spaceboxrenderer_->SetTexture("GradientRightToLeft.png");
 		spaceboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 50.f ,1.f });
-		spaceboxrenderer_->GetTransform().SetWorldMove(float4{ 540.f, 260.f });
+		spaceboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 260.f });
 		spaceboxrenderer_->ChangeCamera(CameraOrder::UICamera);
 
 		coinboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		coinboxrenderer_->SetTexture("GradientRightToLeft.png");
 		coinboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 50.f ,1.f });
-		coinboxrenderer_->GetTransform().SetWorldMove(float4{ 540.f, 200.f });
+		coinboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 200.f });
 		coinboxrenderer_->ChangeCamera(CameraOrder::UICamera);
 
 		soulboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
@@ -106,23 +96,75 @@ void StageUI::Start()
 	{
 		coinrenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		coinrenderer_->SetTexture("SmallCoin.png");
-		coinrenderer_->GetTransform().SetWorldScale(float4{ 32.f, 32.f});
+		coinrenderer_->GetTransform().SetWorldScale(float4{ 32.f, 32.f });
 		coinrenderer_->ChangeCamera(CameraOrder::UICamera);
-		coinrenderer_->GetTransform().SetWorldMove(float4{ 460.f, 200.f , -1.f});
+		coinrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 200.f , -1.f });
 
 		soulrenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		soulrenderer_->SetTexture("SoulCoin.png");
 		soulrenderer_->GetTransform().SetWorldScale(float4{ 32.f, 32.f });
 		soulrenderer_->ChangeCamera(CameraOrder::UICamera);
-		soulrenderer_->GetTransform().SetWorldMove(float4{ 460.f, 140.f , -1.f });
+		soulrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 140.f , -1.f });
 	}
 
+	// 스테이지용 랜더러 
+	{
+		killcountfontrenderer_->SetTextPosition(float4{ 30.f, 20.f });
+		killcountfontrenderer_->SetSize(20.f);
+		killcountfontrenderer_->SetColor(float4::Yellow);
+		killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
+		killcountfontrenderer_->ChangeCamera(CameraOrder::UICamera);
 
+		elitekillFontrenderer_->SetTextPosition(float4{ 70.f, 44.f });
+		elitekillFontrenderer_->SetSize(18.f);
+		elitekillFontrenderer_->SetColor(float4::Yellow);
+		elitekillFontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
+		elitekillFontrenderer_->ChangeCamera(CameraOrder::UICamera);
+
+		killcountboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
+		killcountboxrenderer_->SetTexture("GradientMainMenu.png");
+		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 30.f ,1.f });
+		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 328.f });
+		killcountboxrenderer_->ChangeCamera(CameraOrder::UICamera);
+	}
+	
+	
+
+	{
+		timerfontRenderer_->SetTextPosition(float4{ 1260.f, 80.f });
+		timerfontRenderer_->SetSize(24.f);
+		timerfontRenderer_->SetColor(float4::White);
+		timerfontRenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
+		timerfontRenderer_->ChangeCamera(CameraOrder::UICamera);
+	}
 }
 
 void StageUI::Update(float _deltaTime)
 {
-	UIUpdate();
+	if (IsClear_ == false)
+	{
+		UIUpdate();
+	}
+	else
+	{
+		time_ -= _deltaTime;
+		if (time_ < 4.5f)
+		{
+			int num = static_cast<int>(time_);
+			elitekillFontrenderer_->Off();
+			killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 30.f ,1.f });
+			killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 328.f });
+			killcountfontrenderer_->SetText("스테이지 종료까지: " + std::to_string(num));
+			killcountfontrenderer_->SetColor(float4::White);
+			if (time_ < 0.f)
+			{
+				time_ = 4.0f;
+				IsClear_ = false;
+				killcountfontrenderer_->SetColor(float4::Yellow);
+				GEngine::ChangeLevel("Clear");
+			}
+		}
+	}
 }
 
 void StageUI::End()
@@ -142,6 +184,7 @@ void StageUI::SetUI(UIType _type)
 		StageSetting();
 		break;
 	case UIType::Claer:
+		ClearSetting();
 		break;
 	default:
 		break;
@@ -163,6 +206,7 @@ void StageUI::AllOff()
 	soulboxrenderer_->Off();
 	killcountfontrenderer_->Off();
 	killcountboxrenderer_->Off();
+	elitekillFontrenderer_->Off();
 }
 
 void StageUI::WorldSetting()
@@ -185,6 +229,7 @@ void StageUI::WorldSetting()
 
 void StageUI::StageSetting()
 {
+	Player::GetPlayerInst()->ResetScore();
 	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
 
 	stagefontrenderer_->On();
@@ -196,9 +241,62 @@ void StageUI::StageSetting()
 	coinboxrenderer_->On();
 	killcountfontrenderer_->On();
 	killcountboxrenderer_->On();
-	goalCount_ = 300;
-	coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+	goalCount_ = 10;
 	stagefontrenderer_->SetText("스테이지 : " + std::to_string(Pinfo.stage_), "Free Pixel");
+	
+	coinfontrenderer_->SetTextPosition(float4{ 1260.f,140.f });
+	coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+	coinrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 200.f , -1.f });
+	coinboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 200.f });
+
+	killcountfontrenderer_->SetTextPosition(float4{ 30.f, 20.f });
+	killcountfontrenderer_->SetSize(20.f);
+	killcountfontrenderer_->SetColor(float4::Yellow);
+	killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
+	killcountboxrenderer_->SetTexture("GradientMainMenu.png");
+	if (Pinfo.myComBatType_ == ComBatType::EilteKill)
+	{
+		elitekillFontrenderer_->On();
+		elitekillFontrenderer_->SetText("엘리트를 잡으세요");
+		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 50.f ,1.f });
+		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 318.f });
+
+	}
+	else
+	{
+		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 30.f ,1.f });
+		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 328.f });
+	}
+}
+
+void StageUI::ClearSetting()
+{
+	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+
+	
+	coinfontrenderer_->On();
+	coinrenderer_->On();
+	coinboxrenderer_->On();
+
+	killcountfontrenderer_->On();
+	killcountboxrenderer_->On();
+	timerfontRenderer_->On();
+	
+	coinfontrenderer_->SetTextPosition(float4{ 1260.f,20.f });
+	coinrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 320.f , -1.f });
+	coinboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 320.f });
+	coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+
+	killcountfontrenderer_->SetTextPosition(float4{ 1260.f, 80.f });
+	killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
+	killcountfontrenderer_->SetSize(24.f);
+	killcountfontrenderer_->SetColor(float4::White);
+	killcountfontrenderer_->SetText("처치한 적:\n" + std::to_string(Pinfo.targetScore_));
+	killcountboxrenderer_->SetTexture("GradientRightToLeft.png");
+	killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 60.f ,1.f });
+	killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 250.f });
+
+	timerfontRenderer_->SetText("생존 시간:\n" + std::to_string(1));
 }
 
 void StageUI::SoulCoinRenderersOff()
@@ -225,10 +323,23 @@ void StageUI::UIUpdate()
 		break;
 	case UIType::Stage:
 		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
-		killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
-		if (Pinfo.targetScore_ >= goalCount_)
+		if (Pinfo.myComBatType_ == ComBatType::Kill)
 		{
-			GEngine::ChangeLevel("Clear");
+			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+			if (Pinfo.targetScore_ >= goalCount_)
+			{
+				IsClear_ = true;
+			}
+		}
+		
+		if (Pinfo.myComBatType_ == ComBatType::EilteKill)
+		{
+			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+			
+			if (Pinfo.targetScore_ >= goalCount_)
+			{
+				IsClear_ = true;
+			}
 		}
 		break;
 	case UIType::Claer:

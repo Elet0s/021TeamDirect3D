@@ -43,9 +43,13 @@ public:
 		return renderer_->GetTransformData().worldWorldMatrix_;
 	}
 
+	ComBatType GetComBatType()
+	{
+		return comBatType_;
+	}
+
 	bool CheckNextLevel(std::shared_ptr<StageObject> _nextlevel);
 	void SetStageType(int _num);
-	void SetComBatType(int _num);
 	void PushNextlevel(std::shared_ptr<StageObject> _nextlevel);
 	
 	float posY_;

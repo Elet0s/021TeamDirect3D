@@ -2,12 +2,14 @@
 #include "ClearLevel.h"
 #include "SoulCardSelectBox.h"
 #include "ClearUIBox.h"
+#include "StageUI.h"
 #include "Player.h"
 #include "StageClearMap.h"
 #include "Mouse.h"
 
 ClearLevel::ClearLevel() 
 	:clearbox_(nullptr)
+	, stageui_(nullptr)
 {	
 }
 
@@ -19,6 +21,7 @@ void ClearLevel::Start()
 {
 	CreateActor<StageClearMap>();
 	clearbox_ = CreateActor<ClearUIBox>();
+	stageui_ = CreateActor<StageUI>();
 	GetMainCameraActorTransform().SetWorldPosition(float4(192.f, 48.f, -135.f));
 	GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
 	//GetCamera(CameraOrder::MidCamera)->SetProjectionMode(ProjectionMode::Orthographic);
@@ -47,6 +50,7 @@ void ClearLevel::LevelStartEvent()
 	{
 		Player::GetPlayerInst()->Off();
 	}
+	stageui_->SetUI(UIType::Claer);
 }
 
 void ClearLevel::LevelEndEvent()

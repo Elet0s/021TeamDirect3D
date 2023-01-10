@@ -2,6 +2,7 @@
 #include "StageCreater.h"
 #include "StageObject.h"
 #include "Mouse.h"
+#include "Player.h"
 #include "PlayerObject.h"
 #include "GlobalContentsValue.h"
 #include "RoadObject.h"
@@ -233,6 +234,8 @@ CollisionReturn StageCreater::CheckNextLevel(std::shared_ptr<GameEngineCollision
 
 			float4 dir = NPos - Pos;
 			playerObject_->SetMoveDir(dir);
+			PlayerInfo* Pinfo = &Player::GetPlayerInst()->GetPlayerInfo();
+			Pinfo->myComBatType_ = Other->GetComBatType();
 			curlevel_ = _Other->GetActor<StageObject>();
 
 		}

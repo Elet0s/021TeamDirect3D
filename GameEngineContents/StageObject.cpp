@@ -45,11 +45,13 @@ void StageObject::SetStageType(int _num)
 	{
 	case 0:
 		stageType_ = StageType::ComBat;
+		comBatType_ = ComBatType::Kill;
 		renderer_->SetTexture("ComBat.png");
 		renderer_->ScaleToTexture();
 		break;
 	case 1:
 		stageType_ = StageType::Elite;
+		comBatType_ = ComBatType::EilteKill;
 		renderer_->SetTexture("Elite.png");
 		renderer_->ScaleToTexture();
 		break;
@@ -79,26 +81,6 @@ void StageObject::SetStageType(int _num)
 	}
 }
 
-void StageObject::SetComBatType(int _num)
-{
-	switch (_num)
-	{
-	case 0:
-		comBatType_ = ComBatType::TimeAttack;
-		break;
-	case 1:
-		comBatType_ = ComBatType::Kill;
-		break;
-	case 2:
-		comBatType_ = ComBatType::EilteKill;
-		break;
-	case 3:
-		comBatType_ = ComBatType::BossKill;
-		break;
-	default:
-		break;
-	}
-}
 
 void StageObject::PushNextlevel(std::shared_ptr<StageObject> _nextlevel)
 {
