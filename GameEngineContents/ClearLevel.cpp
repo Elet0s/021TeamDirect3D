@@ -2,6 +2,7 @@
 #include "ClearLevel.h"
 #include "SoulCardSelectBox.h"
 #include "ClearUIBox.h"
+#include "Player.h"
 #include "StageClearMap.h"
 #include "Mouse.h"
 
@@ -41,6 +42,10 @@ void ClearLevel::LevelStartEvent()
 	if (clearbox_ == nullptr)
 	{
 		clearbox_ = CreateActor<ClearUIBox>();
+	}
+	if (Player::GetPlayerInst() != nullptr)
+	{
+		Player::GetPlayerInst()->Off();
 	}
 }
 

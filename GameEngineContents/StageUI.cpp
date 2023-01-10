@@ -8,12 +8,14 @@ StageUI::StageUI()
 	, spacefontrenderer_(nullptr)
 	, coinfontrenderer_(nullptr)
 	, soulfontrenderer_(nullptr)
+	, killcountfontrenderer_(nullptr)
 	, coinrenderer_(nullptr)
 	, soulrenderer_(nullptr)
 	, stageboxrenderer_(nullptr)
 	, spaceboxrenderer_(nullptr)
 	, coinboxrenderer_(nullptr)
 	, soulboxrenderer_(nullptr)
+	, killcountboxrenderer_(nullptr)
 	, goalCount_(0)
 {
 }
@@ -62,11 +64,17 @@ void StageUI::Start()
 	}
 
 	{
-		killcountfontrenderer_->SetTextPosition(float4{ 100.f, 400.f });
+		killcountfontrenderer_->SetTextPosition(float4{ 30.f, 20.f });
 		killcountfontrenderer_->SetSize(20.f);
 		killcountfontrenderer_->SetColor(float4::Yellow);
 		killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
 		killcountfontrenderer_->ChangeCamera(CameraOrder::UICamera);
+
+		killcountboxrenderer_ = CreateComponent<GameEngineTextureRenderer>();
+		killcountboxrenderer_->SetTexture("GradientMainMenu.png");
+		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 30.f ,1.f });
+		killcountboxrenderer_->GetTransform().SetWorldMove(float4{ -464.f, 328.f });
+		killcountboxrenderer_->ChangeCamera(CameraOrder::UICamera);
 	}
 	
 	{
@@ -153,6 +161,8 @@ void StageUI::AllOff()
 	spaceboxrenderer_->Off();
 	coinboxrenderer_->Off();
 	soulboxrenderer_->Off();
+	killcountfontrenderer_->Off();
+	killcountboxrenderer_->Off();
 }
 
 void StageUI::WorldSetting()
@@ -184,8 +194,9 @@ void StageUI::StageSetting()
 	stageboxrenderer_->On();
 	spaceboxrenderer_->On();
 	coinboxrenderer_->On();
-
-	goalCount_ = 150;
+	killcountfontrenderer_->On();
+	killcountboxrenderer_->On();
+	goalCount_ = 10;
 	coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
 	stagefontrenderer_->SetText("스테이지 : " + std::to_string(Pinfo.stage_), "Free Pixel");
 }
@@ -214,7 +225,11 @@ void StageUI::UIUpdate()
 		break;
 	case UIType::Stage:
 		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
-		killcountfontrenderer_->SetText("처치한 몬스터:" + std::to_string(Pinfo.targetScore_) + "/" + std::to_string(goalCount_));
+		killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+		if (Pinfo.targetScore_ >= goalCount_)
+		{
+			GEngine::ChangeLevel("Clear");
+		}
 		break;
 	case UIType::Claer:
 		break;
