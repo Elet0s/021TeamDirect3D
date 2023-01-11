@@ -156,43 +156,50 @@ void DeathAura::Update(float _deltaTime)
 
 	if (atkTimer_ > deathAuraWeaponInfo_.weaponAtkSpeed_)
 	{
-		atkTimer_ = 0;
-		deathAuraCollision01_->IsCollision(
-			CollisionType::CT_Sphere2D,
-			ObjectOrder::Monster, 
-			CollisionType::CT_Sphere2D,
-			std::bind(
-				&DeathAura::DeatAuraToMonsterCollision,
-				this,
-				std::placeholders::_1,
-				std::placeholders::_2
-			)
-		);
+		if (deathAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
+		{
+			atkTimer_ = 0;
+			deathAuraCollision01_->IsCollision(
+				CollisionType::CT_Sphere2D,
+				ObjectOrder::Monster,
+				CollisionType::CT_Sphere2D,
+				std::bind(
+					&DeathAura::DeatAuraToMonsterCollision,
+					this,
+					std::placeholders::_1,
+					std::placeholders::_2
+				)
+			);
+		}
+		else	 if (deathAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
+		{
 
-		//deathAuraCollision02_->IsCollision(
-		//	CollisionType::CT_Sphere2D,
-		//	ObjectOrder::Monster,
-		//	CollisionType::CT_Sphere2D,
-		//	std::bind(
-		//		&DeathAura::ProjectileToMonsterCollision,
-		//		this,
-		//		std::placeholders::_1,
-		//		std::placeholders::_2
-		//	)
-		//);
-
-		//deathAuraCollision03_->IsCollision(
-		//	CollisionType::CT_Sphere2D,
-		//	ObjectOrder::Monster,
-		//	CollisionType::CT_Sphere2D,
-		//	std::bind(
-		//		&DeathAura::ProjectileToMonsterCollision,
-		//		this,
-		//		std::placeholders::_1,
-		//		std::placeholders::_2
-		//	)
-		//);
-
+			deathAuraCollision02_->IsCollision(
+				CollisionType::CT_Sphere2D,
+				ObjectOrder::Monster,
+				CollisionType::CT_Sphere2D,
+				std::bind(
+					&DeathAura::DeatAuraToMonsterCollision,
+					this,
+					std::placeholders::_1,
+					std::placeholders::_2
+				)
+			);
+		}
+		else if (deathAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
+		{
+			deathAuraCollision03_->IsCollision(
+				CollisionType::CT_Sphere2D,
+				ObjectOrder::Monster,
+				CollisionType::CT_Sphere2D,
+				std::bind(
+					&DeathAura::DeatAuraToMonsterCollision,
+					this,
+					std::placeholders::_1,
+					std::placeholders::_2
+				)
+			);
+		}
 	}
 }
 void DeathAura::RotateRenderer(float _deltaTime)

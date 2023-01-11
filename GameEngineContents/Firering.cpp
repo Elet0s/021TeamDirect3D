@@ -68,16 +68,19 @@ void Firering::Start()
 	fireringAuraCollision01_ = CreateComponent<GameEngineCollision>();
 	fireringAuraCollision01_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	fireringAuraCollision01_->ChangeOrder(ObjectOrder::Projectile);
+	fireringAuraCollision01_->SetCollisionMode(CollisionMode::Multiple);
 	fireringAuraCollision01_->GetTransform().SetWorldScale(230, 230, 0);
 
 	fireringAuraCollision02_ = CreateComponent<GameEngineCollision>();
 	fireringAuraCollision02_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	fireringAuraCollision02_->ChangeOrder(ObjectOrder::Projectile);
+	fireringAuraCollision02_->SetCollisionMode(CollisionMode::Multiple);
 	fireringAuraCollision02_->GetTransform().SetWorldScale(200, 200, 0);
 
 	fireringAuraCollision03_ = CreateComponent<GameEngineCollision>();
 	fireringAuraCollision03_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	fireringAuraCollision03_->ChangeOrder(ObjectOrder::Projectile);
+	fireringAuraCollision03_->SetCollisionMode(CollisionMode::Multiple);
 	fireringAuraCollision03_->GetTransform().SetWorldScale(200, 200, 0);
 
 	Off();
@@ -157,11 +160,20 @@ void Firering::Update(float _deltaTime)
 		circleRendererD_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.f);
 		circleCenterRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.f);
 		atkTimer_ = 0;
-		fireringAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		fireringAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		fireringAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-	}
 
+		if (fireringAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
+		{
+			fireringAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		}
+		else if (fireringAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
+		{
+			fireringAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		}
+		else if (fireringAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D))
+		{
+			fireringAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		}
+	}
 }
 void Firering::End()
 {

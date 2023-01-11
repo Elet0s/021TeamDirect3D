@@ -19,6 +19,7 @@ void NormalGoblin::Start()
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
 	monCollision_->GetTransform().SetLocalScale({ 40.f, 40.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
+	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
 	monsterInfo_->atk_ = 0;
 	monsterInfo_->hp_ = 10.f;

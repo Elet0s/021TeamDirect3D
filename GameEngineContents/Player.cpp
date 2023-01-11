@@ -64,11 +64,13 @@ void Player::Start()
 		collision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
 		collision_->GetTransform().SetLocalScale({ 70.f, 70.f, 1.0f });
 		collision_->ChangeOrder(ObjectOrder::Player);
+		collision_->SetCollisionMode(CollisionMode::Multiple);
 
 		itemRangeCollision_ = CreateComponent<GameEngineCollision>();
 		itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
 		itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
 		itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
+		itemRangeCollision_->SetCollisionMode(CollisionMode::Multiple);
 	}
 
 	playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();

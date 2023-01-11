@@ -169,7 +169,7 @@ CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCol
 
 	monsterReactionVector_ += pushToMonsterVector.Normalize3D() * 120;// ¸ó½ºÅÍ³¢¸® ºÎµúÇûÀ»¶§ ¸ó½ºÅÍ³¢¸® ¹Ð¾î³»´Â Èû
 	
-	return CollisionReturn::Stop;
+	return CollisionReturn::Continue;
 }
 
 CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
@@ -299,7 +299,7 @@ CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineColl
 
  // ¸ó½ºÅÍ´Â µÚ·Î
 	
-	return CollisionReturn::Stop;
+	return CollisionReturn::Continue;
 }
 
 void Monster::Chaseplayer(float _deltaTime)

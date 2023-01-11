@@ -21,6 +21,7 @@ void GoblinLivesey::Start()
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
 	monCollision_->GetTransform().SetLocalScale({ 120.f, 120.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
+	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
 	monsterInfo_->atk_ = 5;
 	monsterInfo_->hp_ = 10;

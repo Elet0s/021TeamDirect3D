@@ -63,6 +63,7 @@ void Shuriken::Start()
 		projectileGroup_.second->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
 		projectileGroup_.second->GetTransform().SetWorldScale(20, 20, 0);
 		projectileGroup_.second->ChangeOrder(ObjectOrder::Projectile);
+		projectileGroup_.second->SetCollisionMode(CollisionMode::Single);
 		projectileGroup_.second->Off();
 
 		if (i <10)

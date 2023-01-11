@@ -21,6 +21,8 @@ void RedFlyingEyes::Start()
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
 	monCollision_->GetTransform().SetLocalScale({ 50.0f, 25.f, 1.0f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
+	monCollision_->SetCollisionMode(CollisionMode::Multiple);
+
 
 	monsterInfo_->atk_ = 3.f;
 	monsterInfo_->hp_ = 10.f;
