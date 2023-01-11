@@ -162,7 +162,7 @@ void DeathAura::Update(float _deltaTime)
 			ObjectOrder::Monster, 
 			CollisionType::CT_Sphere2D,
 			std::bind(
-				&DeathAura::ProjectileToMonsterCollision,
+				&DeathAura::DeatAuraToMonsterCollision,
 				this,
 				std::placeholders::_1,
 				std::placeholders::_2

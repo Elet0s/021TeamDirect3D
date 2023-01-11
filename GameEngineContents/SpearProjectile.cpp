@@ -2,6 +2,7 @@
 #include"SpearProjectile.h"
 #include "GlobalContentsValue.h"
 #include "Player.h"
+#include"TestLevel.h"
 
 SpearProjectile::SpearProjectile()
 	:projectileRen_(),
@@ -55,13 +56,13 @@ void SpearProjectile::TimeOff(float _deltaTime)
 
 void SpearProjectile::Update(float _deltaTime)
 {
-	if (posSet_ == true)
-	{
-		Shoothing(_deltaTime);
-		TimeOff(_deltaTime);
-		projectileCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Projectile::ProjectileToPlayer, this, std::placeholders::_1, std::placeholders::_2));
-
-	}
+//	if (posSet_ == true)
+//	{
+//		Shoothing(_deltaTime);
+//		TimeOff(_deltaTime);
+//		projectileCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Projectile::ProjectileToPlayer, this, std::placeholders::_1, std::placeholders::_2));
+//
+//	}
 }
 
 void SpearProjectile::End()
@@ -76,17 +77,17 @@ void SpearProjectile::ProjectileSet(float _atk)
 }
 void SpearProjectile::Shoothing(float _deltaTime)
 {
-	if (shoothing_ == false)
-		{
-			mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition();
-			playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
-
-			range_.x = playerPos_.x - mouseAimPos_.x;
-			range_.y = playerPos_.y - mouseAimPos_.y;
-			referenceVector_ = range_.Normalize3D() * spearWeaponInfo_.weaponAtkSpeed_ * _deltaTime;
-			GetTransform().SetWorldMove(referenceVector_);
-		}
-	GetTransform().SetWorldMove(resultVector_ * _deltaTime);
+	//if (shoothing_ == false)
+	//	{
+	//		mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition();
+	//		playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+	//
+	//		range_.x = playerPos_.x - mouseAimPos_.x;
+	//		range_.y = playerPos_.y - mouseAimPos_.y;
+	//		referenceVector_ = range_.Normalize3D() * spearWeaponInfo_.weaponAtkSpeed_ * _deltaTime;
+	//		GetTransform().SetWorldMove(referenceVector_);
+	//	}
+	//GetTransform().SetWorldMove(resultVector_ * _deltaTime);
 }
 
 CollisionReturn SpearProjectile::ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
