@@ -25,7 +25,7 @@ void Brown::Start()
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 50;
 	monsterInfo_->giveExp_ = 5;
-	monsterInfo_->monsterOrder_ = MonsterOrder::Brown;
+	monsterInfo_->monsterType_ = MonsterType::Brown;
 }
 void Brown::Update(float _deltaTime)
 {

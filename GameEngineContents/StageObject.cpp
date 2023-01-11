@@ -11,8 +11,15 @@ StageObject::StageObject()
 	killCount_(0),
 	stageType_(StageType::Max),
 	combatType_(CombatType::Max),
-	renderer_(nullptr)
+	renderer_(nullptr),
+	totalMonsterCount_(0)
 {
+	magic_enum::enum_for_each<MonsterType>(
+		[this](MonsterType _monsterType)->void
+		{
+			this->summoningMonsterCountMap_.insert(std::make_pair(_monsterType, 0));
+		}
+	);
 }
 
 StageObject::~StageObject() 
@@ -21,12 +28,6 @@ StageObject::~StageObject()
 
 void StageObject::Start()
 {
-	//col_ = CreateComponent<GameEngineCollision>();
-	//col_->GetTransform().SetWorldScale(float4(64.f, 64.f, 1.f));
-	//col_->GetTransform().SetLocalPosition(float4(0.f, 32.f, 0.f));
-	//col_->SetDebugSetting(CollisionType::CT_OBB, float4::Blue);
-	//col_->ChangeOrder(ObjectOrder::MapObject);
-
 	renderer_ = CreateComponent<GameEngineTextureRenderer>();
 	renderer_->SetTexture("Combat.png");
 	renderer_->ScaleToTexture();
@@ -35,9 +36,6 @@ void StageObject::Start()
 
 void StageObject::Update(float _deltaTime)
 {
-	//float4 PosK = GetTransform().GetWorldPosition();
-	//PosK = GetLevel()->GetMainCamera()->ConvertWorldPositionToScreenPosition(PosK);
-	//col_->GetTransform().SetWorldPosition(PosK);
 }
 
 void StageObject::SetStageType(int _num)
@@ -48,52 +46,124 @@ void StageObject::SetStageType(int _num)
 		stageType_ = StageType::Combat;
 		combatType_ = CombatType::Kill;
 		renderer_->SetTexture("Combat.png");
-		renderer_->ScaleToTexture();
 		break;
 	case 1:
 		stageType_ = StageType::Chest;
+		combatType_ = CombatType::Max;
 		renderer_->SetTexture("Chest.png");
-		renderer_->ScaleToTexture();
 		break;
 	case 2:
 		stageType_ = StageType::Elite;
 		combatType_ = CombatType::EilteKill;
 		renderer_->SetTexture("Elite.png");
-		renderer_->ScaleToTexture();
 		break;
 	case 3:
 		stageType_ = StageType::Shop;
+		combatType_ = CombatType::Max;
 		renderer_->SetTexture("Shop.png");
-		renderer_->ScaleToTexture();
 		break;
 	case 4:
 		stageType_ = StageType::Boss;
 		combatType_ = CombatType::BossKill;
 		renderer_->SetTexture("Boss.png");
-		renderer_->ScaleToTexture();
 		break;
 	case 5:
 		stageType_ = StageType::Swarm;
 		combatType_ = CombatType::TimeAttack;
 		renderer_->SetTexture("swarm.png");
-		renderer_->ScaleToTexture();
 		break;
 	case 6:
 		stageType_ = StageType::Empty;
+		combatType_ = CombatType::Max;
 		renderer_->SetTexture("Empty.png");
-		renderer_->ScaleToTexture();
 		break;
+
 	default:
+		MsgBoxAssert("잘못된 스테이지 타입입니다.");
 		break;
 	}
+
+	renderer_->ScaleToTexture();
 }
 
+void StageObject::SetStageType(StageType _stageType)
+{
+	switch (_stageType)
+	{
+	case StageType::Combat:
+		stageType_ = StageType::Combat;
+		combatType_ = CombatType::Kill;
+		renderer_->SetTexture("Combat.png");
+		break;
+	case StageType::Chest:
+		stageType_ = StageType::Chest;
+		combatType_ = CombatType::Max;
+		renderer_->SetTexture("Chest.png");
+		break;
+	case StageType::Elite:
+		stageType_ = StageType::Elite;
+		combatType_ = CombatType::EilteKill;
+		renderer_->SetTexture("Elite.png");
+		break;
+	case StageType::Shop:
+		stageType_ = StageType::Shop;
+		combatType_ = CombatType::Max;
+		renderer_->SetTexture("Shop.png");
+		break;
+	case StageType::Boss:
+		stageType_ = StageType::Boss;
+		combatType_ = CombatType::BossKill;
+		renderer_->SetTexture("Boss.png");
+		break;
+	case StageType::Swarm:
+		stageType_ = StageType::Swarm;
+		combatType_ = CombatType::TimeAttack;
+		renderer_->SetTexture("swarm.png");
+		break;
+	case StageType::Empty:
+		stageType_ = StageType::Empty;
+		combatType_ = CombatType::Max;
+		renderer_->SetTexture("Empty.png");
+		break;
+
+	default:
+		MsgBoxAssert("잘못된 스테이지 타입입니다.");
+		break;
+	}
+
+	renderer_->ScaleToTexture();
+}
+
+void StageObject::SetMonsterCount(MonsterType _monsterType, size_t _monsterCount)
+{
+	if (CombatType::Max == this->combatType_)
+	{
+		MsgBoxAssert("비전투 스테이지입니다.");
+		return;
+	}
+
+	if (true == summoningMonsterCountMap_.contains(_monsterType))
+	{
+		totalMonsterCount_ -= summoningMonsterCountMap_[_monsterType];
+		//이미 몬스터 소환 숫자를 지정했는데 다시 지정하는 경우를 대비해서 totalMonsterCount_에서 기존값을 뺀다.
+
+		summoningMonsterCountMap_[_monsterType] = _monsterCount;
+		//새 값 저장.
+
+		totalMonsterCount_ += summoningMonsterCountMap_[_monsterType];
+		//전체 몬스터 숫자 합산.
+	}
+	else
+	{
+		MsgBoxAssert("준비되지 않은 몬스터 타입입니다.");
+		return;
+	}
+}
 
 void StageObject::PushNextlevel(std::shared_ptr<StageObject> _nextlevel)
 {
 	nextLevels_.push_back(_nextlevel);
 }
-
 
 bool StageObject::CheckNextLevel(std::shared_ptr<StageObject> _nextlevel)
 {

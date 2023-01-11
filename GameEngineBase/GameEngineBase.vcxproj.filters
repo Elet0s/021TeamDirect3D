@@ -135,6 +135,9 @@
     <ClInclude Include="magic_enum_format.hpp">
       <Filter>MagicEnum</Filter>
     </ClInclude>
+    <ClInclude Include="magic_enum_switch.hpp">
+      <Filter>MagicEnum</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineDebug.cpp">

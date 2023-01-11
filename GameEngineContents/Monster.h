@@ -13,7 +13,7 @@ public:
 		hp_(0),
 		atk_(0),
 		giveExp_(0),
-		monsterOrder_(MonsterOrder::BlackEyes)
+		monsterType_(MonsterType::BlackEyes)
 	{
 
 	}
@@ -24,7 +24,7 @@ public:
 	float hp_;
 	float atk_;
 	float giveExp_;
-	MonsterOrder monsterOrder_;
+	MonsterType monsterType_;
 };
 
 class GameItemObjectManager;
@@ -47,6 +47,8 @@ public:
 	Monster& operator=(const Monster& _other) = delete;
 	Monster& operator=(Monster&& _other) = delete;
 
+
+
 	void Death() = delete;
 	void Death(float _time) = delete;
 
@@ -65,6 +67,7 @@ public:
 	{
 		return *CastThis<Monster>()->monsterInfo_;
 	}
+
 	CollisionReturn MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 	CollisionReturn MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
@@ -78,17 +81,24 @@ public:
 	static void UnsummonAllMonsters();
 
 	//몬스터 생성 및 대기.
-	template <typename MonsterType>
+	static void CreateMonsterWithEnum(
+		GameEngineLevel* _thisLevel,
+		MonsterType _monsterType,
+		size_t _monsterCount
+	);
+
+	//몬스터 생성 및 대기.
+	template <class MonsterClass>
 	static void CreateMonster(GameEngineLevel* _thisLevel, size_t _monsterCount)
 	{
 		for (size_t i = 0; i < _monsterCount; ++i)
 		{
-			std::shared_ptr<Monster> newMonster = _thisLevel->CreateActor<MonsterType>(ObjectOrder::Monster);
+			std::shared_ptr<Monster> newMonster = _thisLevel->CreateActor<MonsterClass>(ObjectOrder::Monster);
 			newMonster->isSummoned_ = false;
 			newMonster->GetTransform().SetWorldPosition(float4::Zero);
 			newMonster->Off();
 
-			newMonster->monsterTextureName_ = &typeid(MonsterType).name()[6];
+			newMonster->monsterTextureName_ = &typeid(MonsterClass).name()[6];
 			newMonster->monsterTextureName_ += ".png";
 			newMonster->instancingUnitIndex_ = monsterCreationIndex_++;
 
@@ -114,14 +124,15 @@ public:
 		}
 	}
 
+
 	//레벨에 몬스터 배치.
-	template <typename MonsterType>
-	static void SummonMonster(GameEngineLevel* _thisLevel, UINT _summonCount)
+	template <typename MonsterClass>
+	static void SummonMonster(GameEngineLevel* _thisLevel, size_t _summonCount)
 	{
-		UINT count = _summonCount;
+		size_t count = _summonCount;
 		for (size_t i = 0; i < allMonsters_.size(); ++i)
 		{
-			if (nullptr == std::dynamic_pointer_cast<MonsterType>(allMonsters_[i]))
+			if (nullptr == std::dynamic_pointer_cast<MonsterClass>(allMonsters_[i]))
 			{
 				//원하는 타입 몬스터가 아니라면 무시.
 				continue;
@@ -235,7 +246,7 @@ protected:
 	void HpCheak();
 	void ReduceHP();
 protected:
-	bool flshloop_;
+	bool flashLoop_;
 	float flashTimer_;
 	float4 flashPixel_;
 
@@ -273,7 +284,7 @@ protected:
 	RenderOption renderOption_;
 	PixelData pixelData_;
 
-		std::shared_ptr<GameEngineTextureRenderer> monsterHpMax_;
+	std::shared_ptr<GameEngineTextureRenderer> monsterHpMax_;
 	std::shared_ptr<GameEngineTextureRenderer> monsterHp_;
 	std::shared_ptr<GameEngineFontRenderer>monsterHpScore_;
 

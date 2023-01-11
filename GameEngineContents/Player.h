@@ -197,9 +197,18 @@ public:
 		return *CastThis<Player>()->playerPassiveInfo_;
 	}
 
-	std::shared_ptr<SkillManager>& GetSkillManager()
+	std::shared_ptr<SkillManager> GetSkillManager()
 	{
-		return CastThis<Player>()->playerSkillManager_;
+		//return CastThis<Player>()->playerSkillManager_;
+		if (nullptr == CastThis<Player>())
+		{
+			MsgBoxAssert("플레이어가 없습니다.");
+			return nullptr;
+		}
+		else
+		{
+			return CastThis<Player>()->playerSkillManager_;
+		}
 	}
 
 	CollisionReturn PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);

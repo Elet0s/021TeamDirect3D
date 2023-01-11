@@ -3,6 +3,21 @@
 #include "Player.h"
 #include "GameItemObjectManager.h"
 
+#include "Brown.h"
+#include "FlyingEyes.h"
+#include "NormalGoblin.h"
+#include "NormalKobold.h"
+#include "NormalSkeleton.h"
+#include "Red.h"
+#include "RedFlyingEyes.h"
+		 
+#include "BlackEyes.h"
+#include "GoblinLivesey.h"
+#include "Green.h"
+#include "KoboldLivesey.h"
+
+#include "Boss01.h"
+
 std::vector<std::shared_ptr<Monster>> Monster::allMonsters_;
 
 std::shared_ptr<GameEngineInstancingRenderer> Monster::allMonstersRenderer_ = nullptr;
@@ -27,8 +42,8 @@ Monster::Monster()
 	, monsterScale_(float4::Zero)
 	, isTarget_(false)
 	, flash_(false)
-	,flshloop_(false)
-	,flashTimer_(0)
+	, flashLoop_(false)
+	, flashTimer_(0)
 {
 	monsterInfo_ = std::make_shared<MonsterInfo>();
 	dropMonsterItemObject_->SetManager();
@@ -89,6 +104,53 @@ void Monster::UnsummonAllMonsters()
 	}
 }
 
+void Monster::CreateMonsterWithEnum(GameEngineLevel* _thisLevel, MonsterType _monsterType, size_t _monsterCount)
+{
+	switch (_monsterType)
+	{
+	case MonsterType::Brown:
+		Monster::CreateMonster<Brown>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::FlyingEyes:
+		Monster::CreateMonster<FlyingEyes>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::NormalGoblin:
+		Monster::CreateMonster<NormalGoblin>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::NormalKobold:
+		Monster::CreateMonster<NormalKobold>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::NormalSkeleton:
+		Monster::CreateMonster<NormalSkeleton>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::Red:
+		Monster::CreateMonster<Red>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::RedFlyingEyes:
+		Monster::CreateMonster<RedFlyingEyes>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::BlackEyes:
+		Monster::CreateMonster<BlackEyes>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::GoblinLivesey:
+		Monster::CreateMonster<GoblinLivesey>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::Green:
+		Monster::CreateMonster<Green>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::KoboldLivesey:
+		Monster::CreateMonster<KoboldLivesey>(_thisLevel, _monsterCount);
+		break;
+	case MonsterType::Boss:
+		Monster::CreateMonster<Boss01>(_thisLevel, _monsterCount);
+		break;
+
+	default:
+		MsgBoxAssert("아직 준비되지 않은 형태의 몬스터입니다.");
+		break;
+	}
+}
+
 void Monster::Start()
 {
 }
@@ -105,7 +167,7 @@ CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCol
 
 	monsterReactionVector_ = (A->monsterResultVector_ + monsterResultVector_) / 2;//플레이어한테가는 최종벡터
 
-	monsterReactionVector_ += pushToMonsterVector.Normalize3D()*120;// 몬스터끼리 부딪혔을때 몬스터끼리 밀어내는 힘
+	monsterReactionVector_ += pushToMonsterVector.Normalize3D() * 120;// 몬스터끼리 부딪혔을때 몬스터끼리 밀어내는 힘
 	
 	return CollisionReturn::Stop;
 }
@@ -333,14 +395,14 @@ void Monster::FlashMonster(float _deltaTime)
 		}
 		else
 		{
-			flshloop_ = true;
+			flashLoop_ = true;
 		}
 
-		if (flshloop_ == true)
+		if (flashLoop_ == true)
 		{
 			pixelData_.mulColor_ = float4{ 1.f,1.f ,1.f ,1.f };
 			flashTimer_ = 0;
-			flshloop_ = false;
+			flashLoop_ = false;
 			flash_ = false;
 		}
 	}

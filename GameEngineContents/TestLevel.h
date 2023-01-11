@@ -42,6 +42,8 @@ private:
 	void MouseMoveCamera();
 	void PlayerMoveCamera();
 
+	void PrepareNewStage();
+
 private:
 	std::shared_ptr<FieldRenderingActor> fieldRenderingActor_;
 	std::shared_ptr<GameEngineLighting> testLevelLighting_;
@@ -54,8 +56,6 @@ private:
 	CombatType combatType_;
 
 	int killCount_;
-	float time_;
-
-
+	float timeLimit_;
 
 };

@@ -154,19 +154,7 @@ void PlayerUI::GainExp(float _deltaTime)
 }
 void PlayerUI::Update(float _deltaTime)
 {
-	float4 A = player_.lock()->GetTransform().GetWorldPosition();
 	GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition());
-
-	//playerHpUi_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.f, -203);
-	//playerHpMax_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -201);
-	//playerHpRed_->GetTransform().SetWorldPosition(playerXindex_, playerYindex_ + 100.0f, -202);
-	//
-	//playerExpMax_->GetTransform().SetWorldPosition(playerXindex_ -5.f, playerYindex_ + 90.f, -203);
-	//playerExpUi_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -202);
-	//playerExpBlue_->GetTransform().SetWorldPosition(playerXindex_ - 5.0f, playerYindex_ + 90.0f, -201);
-	//
-	//playerLevelUi_->SetPositionMode(FontPositionMode::World);
-	//playerLevelUi_->GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition().x - 70.f, player_.lock()->GetTransform().GetWorldPosition().y + 115.0f, -100);
 
 	playerLevelUi_->SetText(std::to_string(Player::GetPlayerInst()->GetPlayerInfo().level_), "Free Pixel");
 

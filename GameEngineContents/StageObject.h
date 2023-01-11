@@ -7,7 +7,10 @@ struct StageInfo
 	CombatType combatType_ = CombatType::Max;
 
 	int killCount_ = 0;
-	float time_ = 0.f;
+	float timeLimit_ = 0.f;
+
+	std::map<MonsterType, size_t> summoningMonsterCountMap_;
+	size_t totalMonsterCount_ = 0;
 
 
 	void SetStageInfo(const StageInfo& _stageInfo)
@@ -16,16 +19,28 @@ struct StageInfo
 		this->combatType_ = _stageInfo.combatType_;
 
 		this->killCount_ = _stageInfo.killCount_;
-		this->time_ = _stageInfo.time_;
+		this->timeLimit_ = _stageInfo.timeLimit_;
+
+		this->summoningMonsterCountMap_ = _stageInfo.summoningMonsterCountMap_;
+		this->totalMonsterCount_ = _stageInfo.totalMonsterCount_;
 	}
 
-	void SetStageInfo(const StageType& _stageType, const CombatType& _combatType, int _killCount, float _time)
+	void SetStageInfo(
+		const StageType& _stageType,
+		const CombatType& _combatType,
+		int _killCount,
+		float _time,
+		const std::map<MonsterType, size_t>& _summoningMonsterCountMap,
+		size_t _totalMonsterCount
+	)
 	{
 		this->stageType_ = _stageType;
 		this->combatType_ = _combatType;
 
 		this->killCount_ = _killCount;
-		this->time_ = _time;
+		this->timeLimit_ = _time;
+		this->summoningMonsterCountMap_ = _summoningMonsterCountMap;
+		this->totalMonsterCount_ = _totalMonsterCount;
 	}
 };
 
@@ -86,7 +101,8 @@ public:
 
 	bool CheckNextLevel(std::shared_ptr<StageObject> _nextlevel);
 	void SetStageType(int _num);
-	void SetCombatType(int _num);
+	void SetStageType(StageType _stageType);
+	void SetMonsterCount(MonsterType _monsterType, size_t _monstercount);
 	void PushNextlevel(std::shared_ptr<StageObject> _nextlevel);
 	
 	float posY_;
@@ -103,8 +119,10 @@ private:
 	StageType stageType_;
 	CombatType combatType_;
 
-	//std::shared_ptr<GameEngineCollision> col_;
 	std::shared_ptr<GameEngineTextureRenderer> renderer_;
 	std::list<std::shared_ptr<StageObject>> nextLevels_;
+
+	std::map<MonsterType, size_t> summoningMonsterCountMap_;
+	size_t totalMonsterCount_;
 };
 

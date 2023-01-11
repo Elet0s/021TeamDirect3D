@@ -19,14 +19,27 @@ enum class ObjectOrder
 	UI = 1000
 };
 
-enum class MonsterOrder
+enum class MonsterType
 {
-	BlackEyes,
+	//일반몬스터
 	Brown,
 	FlyingEyes,
-	Green,
 	NormalGoblin,
-	RedFlyingEyes
+	NormalKobold,
+	NormalSkeleton,
+	Red,
+	RedFlyingEyes,
+
+	//엘리트몬스터
+	BlackEyes,
+	GoblinLivesey,
+	Green,
+	KoboldLivesey,
+
+	//보스
+	Boss,
+
+	None
 };
 
 enum class SoulCard

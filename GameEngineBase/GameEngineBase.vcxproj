@@ -172,6 +172,7 @@
     <ClInclude Include="magic_enum.hpp" />
     <ClInclude Include="magic_enum_format.hpp" />
     <ClInclude Include="magic_enum_fuse.hpp" />
+    <ClInclude Include="magic_enum_switch.hpp" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ThirdParty\FMOD\Include\fmod.h" />
     <ClInclude Include="ThirdParty\FMOD\Include\fmod.hpp" />

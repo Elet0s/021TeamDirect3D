@@ -250,7 +250,9 @@ void StageCreater::SendPlayerToNextStage(std::weak_ptr<StageObject> _nextStageOb
 			this->curlevel_->stageType_,
 			this->curlevel_->combatType_,
 			this->curlevel_->killCount_,
-			this->curlevel_->time_
+			this->curlevel_->time_,
+			this->curlevel_->summoningMonsterCountMap_,
+			this->curlevel_->totalMonsterCount_
 		);
 	}
 }

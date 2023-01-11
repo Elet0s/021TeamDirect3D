@@ -27,7 +27,7 @@ void RedFlyingEyes::Start()
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
-	monsterInfo_->monsterOrder_ = MonsterOrder::RedFlyingEyes;
+	monsterInfo_->monsterType_ = MonsterType::RedFlyingEyes;
 
 }
 void RedFlyingEyes::Update(float _deltaTime)

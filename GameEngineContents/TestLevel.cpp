@@ -28,7 +28,11 @@ TestLevel::TestLevel()
 	: fieldRenderingActor_(nullptr),
 	testLevelLighting_(nullptr), 
 	mousePointer_(nullptr),
-	stageUI_(nullptr)
+	stageUI_(nullptr),
+	stageType_(StageType::Max),
+	combatType_(CombatType::Max),
+	killCount_(0),
+	timeLimit_(0.f)
 {
 }
 
@@ -59,11 +63,9 @@ void TestLevel::Start()
 		Player::CreatePlayer(this, { 0, 0,-219 });
 	}
 
-	{
-		std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
-	}
-
-	Monster::ReserveMonsters(this, 1);
+	std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
+	
+	//Monster::ReserveMonsters(this, 1);
 
 	//Monster::CreateMonster<RedFlyingEyes>(this, 299);
 	//Monster::CreateMonster<NormalSkeleton>(this, 2);
@@ -76,21 +78,12 @@ void TestLevel::Start()
 	//Monster::CreateMonster<KoboldLivesey>(this, 2);
 	//Monster::CreateMonster<GoblinLivesey>(this, 2);
 	//Monster::CreateMonster<BlackEyes>(this, 1);
-	Monster::CreateMonster<Boss01>(this, 1);
+	//Monster::CreateMonster<Boss01>(this, 1);
 
 
 	//Monster::SummonMonster<RedFlyingEyes>(this, 2);
 	//Monster::SummonMonster<BlackEyes>(this, 1);
-		Monster::SummonMonster<Boss01>(this, 1);
-
-
-	//for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
-	//{
-	//		Monster::GetMonsterList()[i]->Unsummon();
-	//}
-	//Monster::SummonMonster<RedFlyingEyes>(this, 10);
-
-
+	//Monster::SummonMonster<Boss01>(this, 1);
 
 	
 	//ShowCursor(false); 마우스 감추기
@@ -153,10 +146,7 @@ void TestLevel::LevelStartEvent()
 	this->GetMainCamera()->SetFarZ(500.f);
 	this->GetCamera(CameraOrder::MidCamera)->SetFarZ(500.f);
 
-	this->stageType_ = StageObject::GetNextStageInfo().stageType_;
-	this->combatType_ = StageObject::GetNextStageInfo().combatType_;
-	this->killCount_ = StageObject::GetNextStageInfo().killCount_;
-	this->time_ = StageObject::GetNextStageInfo().time_;
+	PrepareNewStage();
 }
 
 void TestLevel::LevelEndEvent()
@@ -183,6 +173,31 @@ void TestLevel::PlayerMoveCamera()
 
 }
 
+void TestLevel::PrepareNewStage()
+{
+	this->stageType_ = StageObject::GetNextStageInfo().stageType_;
+	this->combatType_ = StageObject::GetNextStageInfo().combatType_;
+
+	if (CombatType::Max == this->combatType_)
+	{
+		MsgBoxAssert("비 전투맵 오브젝트인데 전투맵으로 넘어왔습니다.");
+		return;
+	}
+
+	this->killCount_ = StageObject::GetNextStageInfo().killCount_;
+	this->timeLimit_ = StageObject::GetNextStageInfo().timeLimit_;
+
+	Monster::ReserveMonsters(this, StageObject::GetNextStageInfo().totalMonsterCount_);
+
+	for (std::pair<MonsterType, size_t> countPerType : StageObject::GetNextStageInfo().summoningMonsterCountMap_)
+	{
+		Monster::CreateMonsterWithEnum(this, countPerType.first, countPerType.second);
+	}
+
+
+
+}
+
 void TestLevel::MouseMoveCamera()
 {
 	float Time = GameEngineTime::GetDeltaTime();
@@ -190,26 +205,24 @@ void TestLevel::MouseMoveCamera()
 	float4 MouseDir = float4::Zero;
 	float4 CheckPos = GetMainCamera()->GetMousePositionInWorldSpace() - Player::GetPlayerInst()->GetTransform().GetWorldPosition();
 
+	if (CheckPos.x > 360.f)
+	{
+		MouseDir.x = 100.f;
+	}
+	else if (CheckPos.x < -360.f)
+	{
+		MouseDir.x = -100.f;
+	}
 
-		if (CheckPos.x > 360.f)
-		{
-			MouseDir.x = 100.f;
-		}
-		else if (CheckPos.x < -360.f)
-		{
-			MouseDir.x = -100.f;
-		}
-
-		if (CheckPos.y > 180.f)
-		{
-			MouseDir.y = 100.f;
-		}
-		else if (CheckPos.y < -180.f)
-		{
-			MouseDir.y = -100.f;
-		}
+	if (CheckPos.y > 180.f)
+	{
+		MouseDir.y = 100.f;
+	}
+	else if (CheckPos.y < -180.f)
+	{
+		MouseDir.y = -100.f;
+	}
 	
-
 	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MouseDir.x) * Time, (MouseDir.y) * Time));
 }
 
