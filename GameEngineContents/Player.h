@@ -81,7 +81,8 @@ public:
 		knockBack_(100.0f),
 		goldMultiple_(100.0f),
 		expMultiple_(100.0f),
-		dashFullCharge_(0),
+		dashFullCharge_(4),
+		dashCount_(3),
 		dashReChargeTime_(3.00f),
 		dashReUseTime_(0.3f),
 		dashReChargeCount_(1),
@@ -123,6 +124,7 @@ public:
 	float goldMultiple_;
 	float expMultiple_;
 	int dashFullCharge_;
+	int dashCount_;  // 현재 충전된 대시 수
 	float dashReChargeTime_;
 	float dashReUseTime_;
 	int dashReChargeCount_;

@@ -412,6 +412,9 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="DashUI.cpp">
+      <Filter>Actor\00. Global\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -730,6 +733,9 @@
     </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Actor\02. Play\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="DashUI.h">
+      <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

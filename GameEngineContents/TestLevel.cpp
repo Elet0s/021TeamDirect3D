@@ -10,6 +10,7 @@
 #include "BlackEyes.h"
 #include "Brown.h"
 #include "Green.h"
+#include "DashUI.h"
 #include "NormalGoblin.h"
 #include "RedFlyingEyes.h"
 #include "FlyingEyes.h"
@@ -124,6 +125,8 @@ void TestLevel::Start()
 	{
 		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "TestLevelMousePointer");
 	}
+
+	CreateActor<DashUI>();
 }
 
 void TestLevel::Update(float _DeltaTime)
