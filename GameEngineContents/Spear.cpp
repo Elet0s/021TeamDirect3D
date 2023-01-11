@@ -41,7 +41,7 @@ void Spear::StateSet()
 {
 	if (nowLevel_ < 2)
 	{
-		spearWeaponInfo_.weaponAtk_ = 1.13f;
+		spearWeaponInfo_.weaponAtk_ = 1.f;
 		spearWeaponInfo_.weaponAtkSpeed_ = 100.f;//1ÃÊ¸¶´Ù
 
 		spearWeaponInfo_.weaponPassAtk_ = 0;

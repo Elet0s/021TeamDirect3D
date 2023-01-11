@@ -28,6 +28,7 @@ protected:
 	float collingTime01_;
 	float collingTime02_;
 	float collingTime03_;
+	float delay_;
 	int telleportCount_;
 	size_t shootingCount_;
 	bool shootingEnd_;

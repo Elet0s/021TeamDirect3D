@@ -12,7 +12,8 @@ Boss01::Boss01()
 	collingTime03_(0.f),
 	telleportCount_(0),
 	shootingCount_(0),
-	shootingEnd_(false)
+	shootingEnd_(false),
+	delay_(0.f)
 {
 	monsterScale_ = float4(300.f, 300.f, 1.f);
 }
@@ -158,12 +159,17 @@ void Boss01::PatternMove(float _deltaTime)
 		if (shootingEnd_ == false)
 		{
 			monsterAnimation_.Initialize(0, 0, 0.f, false);
-			if (shootingCount_ <100)
+			delay_ += _deltaTime;
+			if (shootingCount_ < 100)
 			{
-				std::shared_ptr<Projectile> A = GetLevel()->CreateActor<Projectile>(ObjectOrder::Projectile);
-				A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y });
-				A->ProjectileSet(monsterInfo_->atk_);
-				shootingCount_ += 1;
+				if (delay_ > 0.02f)
+				{
+					std::shared_ptr<Projectile> A = GetLevel()->CreateActor<Projectile>(ObjectOrder::Projectile);
+					A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y });
+					A->ProjectileSet(monsterInfo_->atk_);
+					shootingCount_ += 1;
+					delay_ = 0;
+				}
 			}
 			else if (shootingCount_ == 100)
 			{
