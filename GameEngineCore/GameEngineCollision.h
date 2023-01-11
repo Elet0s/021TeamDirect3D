@@ -11,7 +11,7 @@ enum class CollisionMode	//상대 충돌체별 충돌 횟수.
 enum class CollisionReturn	//충돌 이후 반응
 {
 	Continue,	//계속 충돌 가능한 상태 유지.
-	Stop		//충돌 중단.
+	Stop		//충돌했던 충돌체와의 충돌 중단.
 };
 
 class GameEngineCollision : public GameEngineTransformComponent
@@ -33,13 +33,24 @@ public:
 
 public:
 	void ChangeOrder(int _collisionOrder);
-	bool IsCollision(		//충돌 여부 판정 함수.
+	//bool IsCollision(		//충돌 여부 판정 함수.
+	//	CollisionType _thisType,
+	//	int _collisionGroup,
+	//	CollisionType _otherType,
+	//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update = nullptr,
+	//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter = nullptr,
+	//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit = nullptr
+	//);
+
+	bool IsCollided(		//충돌 여부 판정 함수.
 		CollisionType _thisType,
 		int _collisionGroup,
 		CollisionType _otherType,
 		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update = nullptr,
 		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter = nullptr,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit = nullptr);
+		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit = nullptr
+	);
+	
 	virtual void DebugRender();	//함수 이름과는 다르게, 실제로는 충돌체를 직접 그리지 않고 그리는데 필요한 정보만 저장하는 함수.
 	//이 함수에서 저장된 정보대로 GameEngineCoreDebug의 Debug3DRender()함수에서 진짜 렌더링을 한다.
 
@@ -61,7 +72,7 @@ public:
 			std::shared_ptr<GameEngineCollision> _other)> _function = nullptr
 	)
 	{
-		return IsCollision(_thisType, static_cast<int>(_collisionGroup), _otherType, _function);
+		return IsCollided(_thisType, static_cast<int>(_collisionGroup), _otherType, _function);
 	}
 
 	bool IsCollisionEnterBase(
@@ -73,7 +84,7 @@ public:
 		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit = nullptr
 	)
 	{
-		return IsCollision(_thisType, _groupOrder, _otherType, _update, _enter, _exit);
+		return IsCollided(_thisType, _groupOrder, _otherType, _update, _enter, _exit);
 	}
 
 	bool IsCollisionExitBase(
@@ -85,7 +96,7 @@ public:
 		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit = nullptr
 	)
 	{
-		return IsCollision(_thisType, _groupOrder, _otherType, _update, _enter, _exit);
+		return IsCollided(_thisType, _groupOrder, _otherType, _update, _enter, _exit);
 	}
 
 	inline void SetDebugSetting(CollisionType _debugType, const float4& _color)
@@ -119,7 +130,8 @@ private:
 
 
 private:
-	std::set<std::shared_ptr<GameEngineCollision>> collisionCheck_;
+	//std::set<std::shared_ptr<GameEngineCollision>> collisionCheck_;
+	std::map<std::shared_ptr<GameEngineCollision>, CollisionReturn> collisionCheck_;
 
 	CollisionType debugType_;
 	CollisionMode collisionMode_;

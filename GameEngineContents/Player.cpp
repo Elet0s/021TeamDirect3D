@@ -19,9 +19,9 @@ Player::Player()
 	dashState_(false),
 	hitOnoff_(false),
 	serchCloseMonster_(),
-	 flash_(false),
- flshloop_(false),
- flashTimer_(0)
+	flash_(false),
+	flashLoop_(false),
+	flashTimer_(0)
 	
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
@@ -310,7 +310,7 @@ void Player::Update(float _deltaTime)
 	PlayerDeathEvent();
 	ColCheak();
 	LevelUpEvent();
-	FalshPlayer(_deltaTime);
+	FlashPlayer(_deltaTime);
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
 		if (playerSkillManager_->GetSkillList()[5][15]->nowLevel_ < 1)
@@ -366,7 +366,7 @@ void Player::ResetScore()
 	playerInfo_->stageTimer_ = 0.f;
 }
 
-void Player::FalshPlayer(float _deltaTime)
+void Player::FlashPlayer(float _deltaTime)
 {
 	if (flash_ == true)
 	{
@@ -377,14 +377,14 @@ void Player::FalshPlayer(float _deltaTime)
 		}
 		else
 		{
-			flshloop_ = true;
+			flashLoop_ = true;
 		}
 
-		if (flshloop_ == true)
+		if (flashLoop_ == true)
 		{
 			playerRenderer_->GetPixelData().mulColor_ = float4{ 1.f,1.f ,1.f ,1.f };
 			flashTimer_ = 0;
-			flshloop_ = false;
+			flashLoop_ = false;
 			flash_ = false;
 		}
 	}

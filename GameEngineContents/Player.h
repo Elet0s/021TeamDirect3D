@@ -216,7 +216,7 @@ public:
 
 	void ResetScore();
 
-	void FalshPlayer(float _deltaTime);
+	void FlashPlayer(float _deltaTime);
 public:
 	std::shared_ptr<GameEngineCollision> collision_;
 
@@ -240,7 +240,7 @@ protected:
 	void ColCheak();
 private:
 
-	bool flshloop_;
+	bool flashLoop_;
 	float flashTimer_;
 
 	float dashTimer_;

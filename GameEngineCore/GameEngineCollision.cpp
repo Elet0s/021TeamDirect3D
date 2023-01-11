@@ -52,7 +52,6 @@ GameEngineCollision::GameEngineCollision()
 	collisionMode_(CollisionMode::Single),
 	color_(1.f, 0.f, 0.f, 0.5f),
 	debugCameraOrder_(CameraOrder::MainCamera)	//기본 디버그카메라 세팅: 메인카메라.
-	//메인카메라는 엔진 기본제공 카메라이므로 엔진 수준에서 그런 편의기능을 제공할 수 있다.
 {
 }
 
@@ -66,14 +65,126 @@ void GameEngineCollision::ChangeOrder(int _collisionOrder)
 		std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), _collisionOrder);
 }
 
-bool GameEngineCollision::IsCollision(
-	CollisionType _thisType,
-	int _collisionGroup,
-	CollisionType _otherType,
-	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update /*= nullptr*/,
-	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter /*= nullptr*/,
-	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit /*= nullptr*/
-)
+//bool GameEngineCollision::IsCollision(
+//	CollisionType _thisType,
+//	int _collisionGroup,
+//	CollisionType _otherType,
+//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update /*= nullptr*/,
+//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter /*= nullptr*/,
+//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit /*= nullptr*/
+//)
+//{
+//	if (false == this->IsUpdate())
+//	{
+//		return false;
+//	}
+//
+//	int thisType = static_cast<int>(_thisType);
+//	int otherType = static_cast<int>(_otherType);
+//
+//	if (nullptr == GameEngineCollision::collisionFunctions_[thisType][otherType])
+//	{
+//		MsgBoxAssert("아직 준비되지 않은 충돌 처리입니다.");
+//		return false;
+//	}
+//
+//	std::map<int, std::list<std::shared_ptr<GameEngineCollision>>>& allCollisions
+//		= this->GetActor()->GetLevel()->allCollisions_;
+//
+//	std::list<std::shared_ptr<GameEngineCollision>>& collisionGroup = allCollisions[_collisionGroup];
+//
+//	bool isCollided = false;	//충돌 여부.
+//
+//	for (std::shared_ptr<GameEngineCollision> otherCollision : collisionGroup)
+//	{
+//		if (shared_from_this() == otherCollision)
+//		{
+//			continue;
+//		}
+//
+//		if (false == otherCollision->IsUpdate())
+//		{
+//			continue;
+//		}
+//
+//		if (true == GameEngineCollision::collisionFunctions_[thisType][otherType](this->GetTransform(), otherCollision->GetTransform()))
+//		{
+//			isCollided = true;		//여기까지 들어온 것이 이미 충돌했다는 의미.
+//
+//			if (CollisionMode::Multiple == collisionMode_)
+//			{
+//				if (collisionCheck_.end() == collisionCheck_.find(otherCollision))
+//				{
+//					//첫 충돌.
+//					std::pair<std::set<std::shared_ptr<GameEngineCollision>>::iterator, bool> insertResult
+//						= collisionCheck_.insert(otherCollision);
+//
+//					if (false == insertResult.second)
+//					{
+//						MsgBoxAssertString(otherCollision->GetNameCopy()
+//							+ ": 이미 충돌했던 충돌체가 아직 정리되지 않은 상태에서 다시 충돌했습니다.");
+//						return true;
+//					}
+//
+//					if (nullptr != _enter && CollisionReturn::Stop == _enter(
+//						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+//					{
+//						return true;
+//					}
+//				}
+//				else
+//				{
+//					if (nullptr != _update && CollisionReturn::Stop == _update(
+//						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+//					{
+//						return true;
+//					}
+//				}
+//			}
+//			else if (CollisionMode::Single == collisionMode_)
+//			{
+//				if (nullptr != _update)
+//				{
+//					if (CollisionReturn::Stop == _update(
+//						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+//					{
+//						return true;
+//					}
+//				}
+//				else
+//				{
+//					return true;
+//				}
+//			}
+//		}
+//		else
+//		{
+//			if (CollisionMode::Multiple == collisionMode_)
+//			{
+//				if (collisionCheck_.end() != collisionCheck_.find(otherCollision))
+//				{
+//					if (0 == collisionCheck_.erase(otherCollision))
+//					{
+//						MsgBoxAssertString(otherCollision->GetNameCopy()
+//							+ ": 충돌한 적 없는 충돌체를 제거하려고 했습니다.");
+//						return false;
+//					}
+//
+//					if (nullptr != _exit && CollisionReturn::Stop == _exit(
+//						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+//					{
+//						return false;
+//					}
+//					//collisionCheck_.erase(otherCollision);
+//				}
+//			}
+//		}
+//	}
+//
+//	return isCollided;
+//}
+
+bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGroup, CollisionType _otherType, std::function<CollisionReturn(std::shared_ptr<GameEngineCollision>_this, std::shared_ptr<GameEngineCollision>_other)> _update, std::function<CollisionReturn(std::shared_ptr<GameEngineCollision>_this, std::shared_ptr<GameEngineCollision>_other)> _enter, std::function<CollisionReturn(std::shared_ptr<GameEngineCollision>_this, std::shared_ptr<GameEngineCollision>_other)> _exit)
 {
 	if (false == this->IsUpdate())
 	{
@@ -94,7 +205,7 @@ bool GameEngineCollision::IsCollision(
 
 	std::list<std::shared_ptr<GameEngineCollision>>& collisionGroup = allCollisions[_collisionGroup];
 
-	bool isCollided = false;	//충돌 여부.
+	bool collisionResult = false;
 
 	for (std::shared_ptr<GameEngineCollision> otherCollision : collisionGroup)
 	{
@@ -110,79 +221,128 @@ bool GameEngineCollision::IsCollision(
 
 		if (true == GameEngineCollision::collisionFunctions_[thisType][otherType](this->GetTransform(), otherCollision->GetTransform()))
 		{
-			isCollided = true;		//여기까지 들어온 것이 이미 충돌했다는 의미.
+			collisionResult = true;
 
 			if (CollisionMode::Multiple == collisionMode_)
 			{
-				if (collisionCheck_.end() == collisionCheck_.find(otherCollision))
+				if (false == collisionCheck_.contains(otherCollision))
 				{
 					//첫 충돌.
-					std::pair<std::set<std::shared_ptr<GameEngineCollision>>::iterator, bool> insertResult
-						= collisionCheck_.insert(otherCollision);
+					std::pair<std::map<std::shared_ptr<GameEngineCollision>, CollisionReturn>::iterator, bool> insertResult
+						= collisionCheck_.insert(std::make_pair(otherCollision, CollisionReturn::Continue));
 
 					if (false == insertResult.second)
 					{
 						MsgBoxAssertString(otherCollision->GetNameCopy()
 							+ ": 이미 충돌했던 충돌체가 아직 정리되지 않은 상태에서 다시 충돌했습니다.");
-						return true;
+						break;
 					}
 
-					if (nullptr != _enter && CollisionReturn::Stop == _enter(
-						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+					if (nullptr != _enter)
 					{
-						return true;
+						if (CollisionReturn::Stop == _enter(
+							std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+						{
+							collisionCheck_[otherCollision] = CollisionReturn::Stop;
+						}
 					}
 				}
 				else
 				{
-					if (nullptr != _update && CollisionReturn::Stop == _update(
+					if (nullptr == _update)
+					{
+						continue;
+					}
+
+					if (CollisionReturn::Stop == collisionCheck_[otherCollision])
+					{
+						continue;
+					}
+
+					if (CollisionReturn::Stop == _update(
 						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
 					{
-						return true;
+						collisionCheck_[otherCollision] = CollisionReturn::Stop;
 					}
 				}
 			}
 			else if (CollisionMode::Single == collisionMode_)
 			{
-				if (nullptr != _update)
+				for (std::map<std::shared_ptr<GameEngineCollision>, CollisionReturn>::iterator iter = collisionCheck_.begin();
+					iter != collisionCheck_.end(); ++iter)
 				{
-					if (CollisionReturn::Stop == _update(
-						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+					if (CollisionReturn::Stop == iter->second)
 					{
-						return true;
+						return false;
 					}
 				}
-				else
+
+				if (false == collisionCheck_.contains(otherCollision))
 				{
-					return true;
+					//첫 충돌.
+					std::pair<std::map<std::shared_ptr<GameEngineCollision>, CollisionReturn>::iterator, bool> insertResult
+						= collisionCheck_.insert(std::make_pair(otherCollision, CollisionReturn::Stop));
+
+					if (false == insertResult.second)
+					{
+						MsgBoxAssertString(otherCollision->GetNameCopy()
+							+ ": 이미 충돌했던 충돌체가 아직 정리되지 않은 상태에서 다시 충돌했습니다.");
+						break;
+					}
+
+					if (nullptr == _update)
+					{
+						continue;
+					}
+
+					if (CollisionReturn::Continue == _update(
+						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+					{
+						collisionCheck_[otherCollision] = CollisionReturn::Continue;
+					}
 				}
+				//else
+				//{
+				//	//아무것도 하지 않는다.
+				//}
 			}
 		}
 		else
 		{
 			if (CollisionMode::Multiple == collisionMode_)
 			{
-				if (collisionCheck_.end() != collisionCheck_.find(otherCollision))
+				if (true == collisionCheck_.empty())
 				{
-					if (0 == collisionCheck_.erase(otherCollision))
-					{
-						MsgBoxAssertString(otherCollision->GetNameCopy()
-							+ ": 충돌한 적 없는 충돌체를 제거하려고 했습니다.");
-						return false;
-					}
-
-					if (nullptr != _exit && CollisionReturn::Stop == _exit(
-						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
-					{
-						return false;
-					}
-					//collisionCheck_.erase(otherCollision);
+					continue;
 				}
+
+				if (nullptr == _exit)
+				{
+					collisionCheck_.erase(otherCollision);
+					continue;
+				}
+
+				if (CollisionReturn::Stop == collisionCheck_[otherCollision])
+				{
+					collisionCheck_.erase(otherCollision);
+					continue;
+				}
+
+				_exit(std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision);
+			}
+			else if (CollisionMode::Single == collisionMode_)
+			{
+				if (true == collisionCheck_.empty())
+				{
+					continue;
+				}
+
+				collisionCheck_.erase(otherCollision);
 			}
 		}
 	}
 
-	return isCollided;
+	return collisionResult;
 }
 
 void GameEngineCollision::DebugRender()

@@ -2,7 +2,6 @@
 #include "DeathAura.h"
 #include "Player.h"
 #include "Monster.h"
-//#include <memory>
 
 DeathAura::DeathAura()
 	: damege(0.75f)
@@ -158,9 +157,41 @@ void DeathAura::Update(float _deltaTime)
 	if (atkTimer_ > deathAuraWeaponInfo_.weaponAtkSpeed_)
 	{
 		atkTimer_ = 0;
-		deathAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		//deathAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		//deathAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		deathAuraCollision01_->IsCollision(
+			CollisionType::CT_Sphere2D,
+			ObjectOrder::Monster, 
+			CollisionType::CT_Sphere2D,
+			std::bind(
+				&DeathAura::ProjectileToMonsterCollision,
+				this,
+				std::placeholders::_1,
+				std::placeholders::_2
+			)
+		);
+
+		//deathAuraCollision02_->IsCollision(
+		//	CollisionType::CT_Sphere2D,
+		//	ObjectOrder::Monster,
+		//	CollisionType::CT_Sphere2D,
+		//	std::bind(
+		//		&DeathAura::ProjectileToMonsterCollision,
+		//		this,
+		//		std::placeholders::_1,
+		//		std::placeholders::_2
+		//	)
+		//);
+
+		//deathAuraCollision03_->IsCollision(
+		//	CollisionType::CT_Sphere2D,
+		//	ObjectOrder::Monster,
+		//	CollisionType::CT_Sphere2D,
+		//	std::bind(
+		//		&DeathAura::ProjectileToMonsterCollision,
+		//		this,
+		//		std::placeholders::_1,
+		//		std::placeholders::_2
+		//	)
+		//);
 
 	}
 }
