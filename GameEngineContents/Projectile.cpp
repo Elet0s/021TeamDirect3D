@@ -14,7 +14,8 @@ Projectile::Projectile()
  shoothing_(false),
 	range_(),
 	resultVector_(),
-	posSet_(false)
+	posSet_(false),
+	projectileatk_(0.f)
 {
 
 }
@@ -35,7 +36,7 @@ void Projectile::Start()
 
 	projectileCol_ = CreateComponent<GameEngineCollision>();
 	projectileCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-	projectileCol_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+	projectileCol_->GetTransform().SetLocalScale({ 25.0f, 25.0f, 1.0f });
 	projectileCol_->ChangeOrder(ObjectOrder::Projectile);
 	projectileCol_->Off();
 }
@@ -58,6 +59,8 @@ void Projectile::Update(float _deltaTime)
 	{
 		Shoothing(_deltaTime);
 		TimeOff(_deltaTime);
+		projectileCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Projectile::ProjectileToPlayer, this, std::placeholders::_1, std::placeholders::_2));
+
 	}
 }
 
@@ -66,6 +69,11 @@ void Projectile::End()
 
 }
 
+void Projectile::ProjectileSet(float _atk)
+{
+	projectileatk_ = _atk;
+	posSet_ = true;
+}
 void Projectile::Shoothing(float _deltaTime)
 {
 	if(shoothing_ == false)
@@ -83,4 +91,10 @@ void Projectile::Shoothing(float _deltaTime)
 		resultVector_ = range_.Normalize3D() * 1000.f;
 	}
 	GetTransform().SetWorldMove(resultVector_ * _deltaTime);
+}
+
+CollisionReturn Projectile::ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+{
+	Player::GetPlayerInst()->GetPlayerInfo().hp_ -= projectileatk_;
+	return CollisionReturn::Stop;
 }

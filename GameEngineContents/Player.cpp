@@ -85,10 +85,6 @@ void Player::Start()
 	Monster::GetMonsterList();
 }
 
-CollisionReturn Player::PlayerToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
-{
-	return CollisionReturn::Stop;
-}
 
 CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {

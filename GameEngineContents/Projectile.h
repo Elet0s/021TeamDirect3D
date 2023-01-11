@@ -10,6 +10,8 @@ public:
 	Projectile& operator=(const Projectile& _Other) = delete;
 	Projectile& operator=(Projectile&& _Other) noexcept = delete;
 
+	CollisionReturn ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	void ProjectileSet(float _atk );
 public:
 	bool posSet_;
 protected:
@@ -22,7 +24,7 @@ private:
 	std::shared_ptr < GameEngineTextureRenderer> projectileRen_;
 	std::shared_ptr < GameEngineCollision> projectileCol_;
 	float timer_;
-
+	float projectileatk_;
 	float px_;
 	float py_;
 	float mpx_;

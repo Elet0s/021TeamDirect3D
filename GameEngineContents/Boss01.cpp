@@ -30,7 +30,7 @@ void Boss01::Start()
 	monCollision_->GetTransform().SetLocalScale({ 100.f, 230.f, 1.f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
-	monsterInfo_->atk_ = 5;
+	monsterInfo_->atk_ = 0.3f;
 	monsterInfo_->hp_ = 10;
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
@@ -161,7 +161,7 @@ void Boss01::PatternMove(float _deltaTime)
 			{
 				std::shared_ptr<Projectile> A = GetLevel()->CreateActor<Projectile>(ObjectOrder::Projectile);
 				A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y });
-				A->posSet_ = true;
+				A->ProjectileSet(monsterInfo_->atk_);
 				shootingCount_ += 1;
 			}
 			else if (shootingCount_ == 100)

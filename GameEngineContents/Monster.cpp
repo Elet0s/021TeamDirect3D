@@ -353,7 +353,7 @@ void Monster::Chaseplayer(float _deltaTime)
 
 	if (monsterInfo_->monsterType_ == MonsterType::Boss)
 	{
-		if (playerRange_ < 300.f)
+		if (playerRange_ < 400.f)
 		{
 			monsterInfo_->bossPattern_ = BossPattern::Idle;
 		}
