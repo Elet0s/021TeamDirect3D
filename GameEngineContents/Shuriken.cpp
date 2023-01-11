@@ -113,7 +113,7 @@ void  Shuriken::StateSet()
 	if (nowLevel_ < 2)
 	{
 		shuriKenWeaponInfo_.weaponAtk_ = 1.f;
-		shuriKenWeaponInfo_.weaponAtkSpeed_ = 300.f;//
+		shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//
 
 		shuriKenWeaponInfo_.weaponPassAtk_ = 0;
 		shuriKenWeaponInfo_.weaponPassNum_ = 2;
@@ -124,16 +124,16 @@ void  Shuriken::StateSet()
 
 		shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 1;
-		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 1;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 2;
+		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 3;
 
 	}
 	else if (nowLevel_ < 3)
 	{
 		shuriKenWeaponInfo_.weaponAtk_ = 1.58f;
-		shuriKenWeaponInfo_.weaponAtkSpeed_ = 100.f;//1초마다
+		shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//1초마다
 		shuriKenWeaponInfo_.weaponProjectileNum_ = 3;
-		shuriKenWeaponInfo_.weaponSpeed_ = 100;
+		shuriKenWeaponInfo_.weaponSpeed_ = 100.f;
 
 	}
 	else if (nowLevel_ < 4)

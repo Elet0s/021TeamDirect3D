@@ -277,6 +277,22 @@ void SkillManager::CreatePlayerAllSkill()
 
 void SkillManager::SkillLevelCheak()
 {
+	if (skillList_[5][0]->nowLevel_ > 0 && skillList_[5][0]->IsUpdate() == false) //cleaver
+	{
+		skillList_[5][0]->On();
+	}
+	if (skillList_[5][1]->nowLevel_ > 0 && skillList_[5][1]->IsUpdate() == false) //kunai
+	{
+		skillList_[5][1]->On();
+	}
+	if (skillList_[5][2]->nowLevel_ > 0 && skillList_[5][2]->IsUpdate() == false) //pike
+	{
+		skillList_[5][2]->On();
+	}
+	if (skillList_[5][3]->nowLevel_ > 0 && skillList_[5][3]->IsUpdate() == false) //spear
+	{
+		skillList_[5][3]->On();
+	}
 	if (skillList_[5][4]->nowLevel_ > 0 && skillList_[5][4]->IsUpdate() == false) //DeathAura
 	{
 		skillList_[5][4]->On();
@@ -287,6 +303,23 @@ void SkillManager::SkillLevelCheak()
 		skillList_[5][5]->On();
 	}
 
+	if (skillList_[5][6]->nowLevel_ > 0 && skillList_[5][6]->IsUpdate() == false) //shamanstaff
+	{
+		skillList_[5][6]->On();
+	}
+	if (skillList_[5][7]->nowLevel_ > 0 && skillList_[5][7]->IsUpdate() == false) //swordrang
+	{
+		skillList_[5][7]->On();
+	}
+
+	if (skillList_[5][8]->nowLevel_ > 0 && skillList_[5][8]->IsUpdate() == false) //swordrang
+	{
+		skillList_[5][8]->On();
+	}
+	if (skillList_[5][9]->nowLevel_ > 0 && skillList_[5][9]->IsUpdate() == false) //swordrang
+	{
+		skillList_[5][9]->On();
+	}
 	if (skillList_[5][10]->nowLevel_ > 0 && skillList_[5][10]->IsUpdate() == false)//Bow
 	{
 		skillList_[5][10]->On();
@@ -314,6 +347,18 @@ void SkillManager::SkillLevelCheak()
 		}
 	}
 
+	if (skillList_[5][12]->nowLevel_ > 0 && skillList_[5][12]->IsUpdate() == false) //swordrang
+	{
+		skillList_[5][12]->On();
+	}
+	if (skillList_[5][13]->nowLevel_ > 0 && skillList_[5][13]->IsUpdate() == false) //swordrang
+	{
+		skillList_[5][13]->On();
+	}
+	if (skillList_[5][14]->nowLevel_ > 0 && skillList_[5][14]->IsUpdate() == false) //swordrang
+	{
+		skillList_[5][14]->On();
+	}
 	if (skillList_[5][15]->nowLevel_ > 0 && skillList_[5][15]->IsUpdate() == false) //Shuriken
 	{
 		skillList_[5][15]->On();

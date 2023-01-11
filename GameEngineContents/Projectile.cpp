@@ -88,9 +88,9 @@ void Projectile::Shoothing(float _deltaTime)
 		range_.x = px_ - mpx_;
 		range_.y = py_ - mpy_;
 
-		resultVector_ = range_.Normalize3D() * 1000.f;
+		resultVector_ = range_.Normalize3D() * 1000.f * _deltaTime;
 	}
-	GetTransform().SetWorldMove(resultVector_ * _deltaTime);
+	GetTransform().SetWorldMove(resultVector_);
 }
 
 CollisionReturn Projectile::ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
@@ -99,5 +99,5 @@ CollisionReturn Projectile::ProjectileToPlayer(std::shared_ptr<GameEngineCollisi
 	projectileRen_->Off();
 	projectileCol_->Off();
 	Death();
-	return CollisionReturn::Stop;
+	return CollisionReturn::Continue;
 }

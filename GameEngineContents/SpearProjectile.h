@@ -11,7 +11,7 @@ public:
 	SpearProjectile& operator=(SpearProjectile&& _Other) noexcept = delete;
 
 	CollisionReturn ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
-	void ProjectileSet(float _atk);
+	void ProjectileSet(float _atk, float _speed);
 public:
 	bool posSet_;
 protected:
@@ -25,6 +25,7 @@ private:
 	std::shared_ptr < GameEngineCollision> projectileCol_;
 	float timer_;
 	float projectileatk_;
+	float projectilespeed_;
 	float px_;
 	float py_;
 	float mpx_;
@@ -32,4 +33,7 @@ private:
 	float4 range_;
 	float4 resultVector_;
 	bool shoothing_;
+	float4 mouseAimPos_;
+	float4 playerPos_;
+	float4 referenceVector_;
 };

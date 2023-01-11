@@ -315,9 +315,9 @@ void Player::Update(float _deltaTime)
 	FlashPlayer(_deltaTime);
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		if (playerSkillManager_->GetSkillList()[5][15]->nowLevel_ < 1)
+		if (playerSkillManager_->GetSkillList()[5][3]->nowLevel_ < 1)
 		{
-			playerSkillManager_->GetSkillList()[5][15]->nowLevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][3]->nowLevel_ += 1;
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
