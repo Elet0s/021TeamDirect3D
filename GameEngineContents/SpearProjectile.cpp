@@ -31,8 +31,7 @@ void SpearProjectile::Start()
 {
 	projectileRen_ = CreateComponent<GameEngineTextureRenderer>();
 	projectileRen_->SetTexture("Spear.png");
-	projectileRen_->GetPixelData().mulColor_ = float4::Red; //³ì»ö
-	projectileRen_->GetTransform().SetWorldScale(100.f, 100.f, 1.f);
+	projectileRen_->GetTransform().SetWorldScale(50.f, 50.f, 1.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
 	projectileRen_->Off();
@@ -41,6 +40,7 @@ void SpearProjectile::Start()
 	projectileCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
 	projectileCol_->GetTransform().SetLocalScale({ 25.0f, 25.0f, 1.0f });
 	projectileCol_->ChangeOrder(ObjectOrder::Projectile);
+	projectileCol_->SetCollisionMode(CollisionMode::Single);
 	projectileCol_->Off();
 }
 
@@ -94,9 +94,16 @@ void SpearProjectile::Shoothing(float _deltaTime)
 			range_.x =   mouseAimPos_.x - playerPos_.x;
 			range_.y =  mouseAimPos_.y- playerPos_.y;
 			referenceVector_ = range_.Normalize3D() * _deltaTime * projectilespeed_;
+			Rotate();
 			shoothing_ = true;
 	}
 	GetTransform().SetWorldMove(referenceVector_);
+}
+
+void SpearProjectile::Rotate()
+{
+	GetTransform().SetWorldRotation(60, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle());
+
 }
 
 CollisionReturn SpearProjectile::ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
@@ -105,5 +112,5 @@ CollisionReturn SpearProjectile::ProjectileToPlayer(std::shared_ptr<GameEngineCo
 	projectileRen_->Off();
 	projectileCol_->Off();
 	Death();
-	return CollisionReturn::Stop;
+	return CollisionReturn::Continue;
 }

@@ -36,7 +36,7 @@ void Spear::Update(float _deltaTime)
 {
 	StateSet();
 	AimSet();
-	SerchTarget(_deltaTime);
+	Shoothing(_deltaTime);
 }
 void Spear::End()
 {
@@ -88,15 +88,17 @@ void Spear::StateSet()
 	}
 }
 
-void Spear::SerchTarget(float _deltaTime)
+void Spear::Shoothing(float _deltaTime)
 {
 	if (Shooting_ == false)
 	{
-
-		std::shared_ptr<SpearProjectile> A = GetLevel()->CreateActor<SpearProjectile>(ObjectOrder::Projectile);
-		A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y });
-		A->ProjectileSet(spearWeaponInfo_.weaponAtk_, spearWeaponInfo_.weaponAtkSpeed_);
-		Shooting_ = true;
+		for (size_t i = 0; i < spearWeaponInfo_.weponConsecutiveAtkNum_; i++)
+		{
+			std::shared_ptr<SpearProjectile> A = GetLevel()->CreateActor<SpearProjectile>(ObjectOrder::Projectile);
+			A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y });
+			A->ProjectileSet(spearWeaponInfo_.weaponAtk_, spearWeaponInfo_.weaponAtkSpeed_);
+			Shooting_ = true;
+		}
 	}
 
 
