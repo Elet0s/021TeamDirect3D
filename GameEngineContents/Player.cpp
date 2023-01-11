@@ -242,7 +242,11 @@ void Player::PlayerDash(float _deltaTime)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("PlayerDash"))
 	{
-		dashState_ = true;
+		if (playerInfo_->dashCount_ > 0)
+		{
+			playerInfo_->dashCount_ -= 1;
+			dashState_ = true;
+		}
 	}
 	if (dashState_ == true)
 	{
@@ -266,13 +270,12 @@ void Player::PlayerDash(float _deltaTime)
 				}
 			}
 		}
-		else if (dashTimer_> 0.2f)
+		else if (dashTimer_ > 0.2f)
 		{
 			dashState_ = false;
 			dashTimer_ = 0;
 		}
 	}
-
 }
 
 void Player::PlayerDeathEvent()
