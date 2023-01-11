@@ -382,7 +382,7 @@ void Shuriken::RangeCheak(float _deltaTime)
 }
 
 
-CollisionReturn Shuriken::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	for (size_t i = 0; i < 30; i++)
@@ -444,15 +444,15 @@ void Shuriken::ColCheak()
 	{
 		if (i < 10)
 		{
-			projectileGroupList01_[i].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+			projectileGroupList01_[i].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ShurikenToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 		}
 		else if (i < 20)
 		{
-			projectileGroupList02_[i-10].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+			projectileGroupList02_[i-10].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ShurikenToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 		}
 		else if (i < 30)
 		{
-			projectileGroupList03_[i-20].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+			projectileGroupList03_[i-20].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ShurikenToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 		}
 
 	}

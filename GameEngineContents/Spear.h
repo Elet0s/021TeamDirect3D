@@ -1,6 +1,5 @@
 #pragma once
 #include"Skill.h"
-#include"Mouse.h"
 //투사체 조준된 방향으로 발사
 class Spear : public Skill
 {
@@ -35,7 +34,7 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void SerchTarget();//공격 대상 탐색'
+	void SerchTarget(float _deltaTime);//공격 대상 탐색'
 	void ProjectileSort();//발사체 생성및 플레이어 위치로 정렬
 	void RenderRotate();// 발사체 회전
 	void RangeCheak(float _deltaTime);//발사체 사출
@@ -53,6 +52,9 @@ private:
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
 	float4 mouseAimPos_;
+	
+	float4 range_;
+	float4 playerPos_;
 
 	WeaponInfo spearWeaponInfo_;//무기 스탯
 

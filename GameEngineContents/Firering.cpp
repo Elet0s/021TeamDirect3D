@@ -90,7 +90,7 @@ void Firering::StateSet()
 	if (nowLevel_ < 2)
 	{
 		fireringAuraWeaponInfo_.weaponAtk_ = 10.f;
-		fireringAuraWeaponInfo_.weaponAtkSpeed_ = 3.f;
+		fireringAuraWeaponInfo_.weaponAtkSpeed_ = 1.f;
 		fireringAuraWeaponInfo_.weaponPassAtk_ = 0;
 		fireringAuraWeaponInfo_.weaponPassNum_ = 2;
 
@@ -157,9 +157,9 @@ void Firering::Update(float _deltaTime)
 		circleRendererD_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.f);
 		circleCenterRenderer_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.f);
 		atkTimer_ = 0;
-		fireringAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		fireringAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		fireringAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		fireringAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		fireringAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		fireringAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Firering::FireringToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	}
 
 }
@@ -171,7 +171,7 @@ void Firering::RotateRenderer(float _deltaTime)
 {
 	if (addRadian_ < 360)
 	{
-		addRadian_ += 80 * _deltaTime;
+		addRadian_ += 100 * _deltaTime;
 	}
 	else
 	{
@@ -194,7 +194,7 @@ void Firering::RotateRenderer(float _deltaTime)
 
 }
 
-CollisionReturn Firering::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Firering::FireringToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= fireringAuraWeaponInfo_.weaponAtk_; //µ•πÃ¡ˆ¡‹
