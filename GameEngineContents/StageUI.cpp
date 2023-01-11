@@ -301,7 +301,7 @@ void StageUI::UIUpdate()
 		break;
 	case UIType::Stage:
 		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
-		if (GetLevel<TestLevel>()->GetCombatType() == CombatType::Kill)
+		if (StageObject::GetNextStageInfo().combatType_ == CombatType::Kill)
 		{
 			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
 			if (Pinfo.targetScore_ >= goalCount_)
@@ -311,7 +311,7 @@ void StageUI::UIUpdate()
 			}
 		}
 		
-		if (GetLevel<TestLevel>()->GetCombatType() == CombatType::EilteKill)
+		if (StageObject::GetNextStageInfo().combatType_ == CombatType::EilteKill)
 		{
 			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
 			

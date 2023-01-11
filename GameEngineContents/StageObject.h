@@ -70,6 +70,7 @@ public:
 	void SetMyLevel(int _level)
 	{
 		myLevel_ = _level;
+		killCount_ = _level * 100;
 	}
 	
 	std::list<std::shared_ptr<StageObject>>& GetNextLevelList()

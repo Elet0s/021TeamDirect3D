@@ -86,53 +86,7 @@ void StageObject::SetStageType(int _num)
 	renderer_->ScaleToTexture();
 }
 
-void StageObject::SetStageType(StageType _stageType)
-{
-	switch (_stageType)
-	{
-	case StageType::Combat:
-		stageType_ = StageType::Combat;
-		combatType_ = CombatType::Kill;
-		renderer_->SetTexture("Combat.png");
-		break;
-	case StageType::Chest:
-		stageType_ = StageType::Chest;
-		combatType_ = CombatType::Max;
-		renderer_->SetTexture("Chest.png");
-		break;
-	case StageType::Elite:
-		stageType_ = StageType::Elite;
-		combatType_ = CombatType::EilteKill;
-		renderer_->SetTexture("Elite.png");
-		break;
-	case StageType::Shop:
-		stageType_ = StageType::Shop;
-		combatType_ = CombatType::Max;
-		renderer_->SetTexture("Shop.png");
-		break;
-	case StageType::Boss:
-		stageType_ = StageType::Boss;
-		combatType_ = CombatType::BossKill;
-		renderer_->SetTexture("Boss.png");
-		break;
-	case StageType::Swarm:
-		stageType_ = StageType::Swarm;
-		combatType_ = CombatType::TimeAttack;
-		renderer_->SetTexture("swarm.png");
-		break;
-	case StageType::Empty:
-		stageType_ = StageType::Empty;
-		combatType_ = CombatType::Max;
-		renderer_->SetTexture("Empty.png");
-		break;
 
-	default:
-		MsgBoxAssert("잘못된 스테이지 타입입니다.");
-		break;
-	}
-
-	renderer_->ScaleToTexture();
-}
 
 void StageObject::SetMonsterCount(MonsterType _monsterType, size_t _monsterCount)
 {
