@@ -134,7 +134,7 @@ void Boss01::Relocation()
 			);
 		}
 		std::shared_ptr<MagicCircle> B = GetLevel()->CreateActor<MagicCircle>(ObjectOrder::UI);
-		B->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y - 110.f });
+		B->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y -109.f });
 	}
 }
 

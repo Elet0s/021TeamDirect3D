@@ -96,5 +96,8 @@ void Projectile::Shoothing(float _deltaTime)
 CollisionReturn Projectile::ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	Player::GetPlayerInst()->GetPlayerInfo().hp_ -= projectileatk_;
+	projectileRen_->Off();
+	projectileCol_->Off();
+	Death();
 	return CollisionReturn::Stop;
 }
