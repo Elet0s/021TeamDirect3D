@@ -23,6 +23,7 @@
 #include "KoboldLivesey.h"
 #include "GoblinLivesey.h"
 #include "Boss01.h"
+#include"MagicCircle.h"
 
 TestLevel::TestLevel()
 	: fieldRenderingActor_(nullptr),

@@ -124,7 +124,6 @@ void Crossbow::SerchTarget()
 			{
 				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
 				{
-					targetSerchCounter_ += 1;
 					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0이상, 첫번째 순번일경우
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
@@ -137,6 +136,7 @@ void Crossbow::SerchTarget()
 				}
 				if (i == monsterList_.size() - 1)
 				{
+					targetSerchCounter_ += 1;
 					targetInst_.push_back(minHpPair_);//타겟리스트에 추가
 					monsterList_[minHpPair_.first]->isTarget_ = true;
 					firstSerchCheak_ = false;

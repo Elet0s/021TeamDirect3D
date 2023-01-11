@@ -27,6 +27,7 @@ void GoblinLivesey::Start()
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
+	monsterInfo_->monsterType_ = MonsterType::GoblinLivesey;
 	/// /////////////////////////////////////////////////////////////////////////////////////////////
 
 	monsterHp_ = CreateComponent<GameEngineTextureRenderer>();

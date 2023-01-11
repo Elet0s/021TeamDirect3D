@@ -13,7 +13,8 @@ public:
 		hp_(0),
 		atk_(0),
 		giveExp_(0),
-		monsterType_(MonsterType::BlackEyes)
+		monsterType_(MonsterType::BlackEyes),
+		bossPattern_(BossPattern::none)
 	{
 
 	}
@@ -24,7 +25,9 @@ public:
 	float hp_;
 	float atk_;
 	float giveExp_;
+	BossPattern bossPattern_;
 	MonsterType monsterType_;
+
 };
 
 class GameItemObjectManager;
@@ -231,6 +234,9 @@ public:
 	}
 
 	void FlashMonster(float _deltaTime);
+
+	void RelocationMonster();
+
 
 public:
 	float mxMove_;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Monster.h"
 #include "Projectile.h"
+#include"MagicCircle.h"
 
 class Boss01 :public Monster
 {
@@ -20,9 +21,16 @@ protected:
 	void End() override;
 
 	void PatternMove(float _deltaTime);
-protected:
+	void Relocation();
 
-	
+protected:
+	float idleTime_;
+	float collingTime01_;
+	float collingTime02_;
+	float collingTime03_;
+	int telleportCount_;
+	size_t shootingCount_;
+	bool shootingEnd_;
 private:
-	BossPattern bossPattern_;
+
 };

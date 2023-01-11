@@ -257,5 +257,7 @@ enum class BossPattern
 {
 	none,
 	Shooting,
-	Dormammu
+	Dormammu1,
+	Dormammu2,
+	Idle
 };

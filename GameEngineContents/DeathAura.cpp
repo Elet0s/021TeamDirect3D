@@ -58,7 +58,7 @@ void  DeathAura::StateSet()
 {
 	if (nowLevel_ < 2)
 	{
-		deathAuraWeaponInfo_.weaponAtk_ = 0.13f;
+		deathAuraWeaponInfo_.weaponAtk_ = 4.f;
 		deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f;//1ÃÊ¸¶´Ù
 
 		deathAuraWeaponInfo_.weaponPassAtk_ = 0;
@@ -159,8 +159,8 @@ void DeathAura::Update(float _deltaTime)
 	{
 		atkTimer_ = 0;
 		deathAuraCollision01_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		deathAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-		deathAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		//deathAuraCollision02_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+		//deathAuraCollision03_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&DeathAura::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 
 	}
 }

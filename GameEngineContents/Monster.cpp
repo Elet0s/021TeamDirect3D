@@ -350,6 +350,14 @@ void Monster::Chaseplayer(float _deltaTime)
 
 	GetTransform().SetWorldMove(monsterResultVector_ * _deltaTime); //ÀÌµ¿
 	monsterReactionVector_ = 0;
+
+	if (monsterInfo_->monsterType_ == MonsterType::Boss)
+	{
+		if (playerRange_ < 300.f)
+		{
+			monsterInfo_->bossPattern_ = BossPattern::Idle;
+		}
+	}
 }
 
 void Monster::Update(float _deltaTime)
@@ -411,18 +419,61 @@ void Monster::FlashMonster(float _deltaTime)
 
 void Monster::HpCheak()
 {
-	if (monsterInfo_->hp_ < 0)
+	if (monsterInfo_->hp_ <= 0)
 	{
 		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
 		Player::GetPlayerInst()->GetPlayerInfo().targetScore_ += 1;
-		this->Unsummon();
+		RelocationMonster();
+		monsterInfo_->hp_ = monsterInfo_->maxHp_;
 	}
 }
 
 void Monster::ReduceHP()
 {
-	if (monsterInfo_->maxHp_ > monsterInfo_->hp_)
+	if (monsterInfo_->maxHp_ >= monsterInfo_->hp_)
 	{
 		monsterHp_->GetPixelData().slice_ = float4(1 - (monsterInfo_->hp_ / monsterInfo_->maxHp_), 0.0f, 0.0f, 0.0f);
 	}
+
+}
+
+void Monster::RelocationMonster()
+{
+	float4 CameraPos = GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
+	float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(
+		float4(CameraPos.x - 1280, CameraPos.y - 720),
+		float4(CameraPos.x + 1280, CameraPos.y + 720)
+	);
+	monsterPosition_.z = -199.f;
+
+	if (monsterPosition_.x > CameraPos.x + 640 || monsterPosition_.x < CameraPos.x - 640)
+	{
+		GetTransform().SetWorldPosition(monsterPosition_);
+
+		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+			monsterPosition_
+		);
+
+		allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+			monsterPosition_.x,
+			monsterPosition_.y,
+			monsterPosition_.z + 2.f
+		);
+	}
+	else if (monsterPosition_.y > CameraPos.y + 360 || monsterPosition_.y < CameraPos.y - 360)
+	{
+		GetTransform().SetWorldPosition(monsterPosition_);
+
+		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+			monsterPosition_
+		);
+
+		allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+			monsterPosition_.x,
+			monsterPosition_.y,
+			monsterPosition_.z + 2.f
+		);
+	}
+
+
 }

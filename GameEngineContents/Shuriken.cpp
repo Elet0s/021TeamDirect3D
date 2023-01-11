@@ -112,7 +112,7 @@ void  Shuriken::StateSet()
 	if (nowLevel_ < 2)
 	{
 		shuriKenWeaponInfo_.weaponAtk_ = 1.f;
-		shuriKenWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
+		shuriKenWeaponInfo_.weaponAtkSpeed_ = 300.f;//
 
 		shuriKenWeaponInfo_.weaponPassAtk_ = 0;
 		shuriKenWeaponInfo_.weaponPassNum_ = 2;
@@ -123,8 +123,8 @@ void  Shuriken::StateSet()
 
 		shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 3;
-		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 1;
+		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 1;
 
 	}
 	else if (nowLevel_ < 3)
@@ -162,7 +162,6 @@ void Shuriken::SerchTarget()
 			{
 				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
 				{
-					targetSerchCounter_ += 1;
 					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0이상, 첫번째 순번일경우
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
@@ -175,6 +174,7 @@ void Shuriken::SerchTarget()
 				}
 				if (i == monsterList_.size() - 1)
 				{
+					targetSerchCounter_ += 1;
 					targetInst01_.push_back(minHpPair_);//타겟리스트에 추가
 					monsterList_[minHpPair_.first]->isTarget_ = true;
 					firstSerchCheak_ = false;

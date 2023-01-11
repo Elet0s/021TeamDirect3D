@@ -3,11 +3,16 @@
 #include "GlobalContentsValue.h"
 #include "Texture2DShadowRenderer.h"
 #include "Projectile.h"
-
-std::vector<std::shared_ptr<Projectile>> Boss01::monsterProjectile_;
+#include"MagicCircle.h"
 
 Boss01::Boss01()
-:bossPattern_()
+	:idleTime_(0),
+	collingTime01_(0.f),
+	collingTime02_(0.f),
+	collingTime03_(0.f),
+	telleportCount_(0),
+	shootingCount_(0),
+	shootingEnd_(false)
 {
 	monsterScale_ = float4(300.f, 300.f, 1.f);
 }
@@ -20,10 +25,9 @@ void Boss01::Start()
 {
 	monsterAnimation_.Initialize(0, 5, 0.1f, true);
 
-	bossPattern_ = BossPattern::none;
 	monCollision_ = CreateComponent<GameEngineCollision>();
 	monCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
-	monCollision_->GetTransform().SetLocalScale({ 35.0f, 35.0f, 1.0f });
+	monCollision_->GetTransform().SetLocalScale({ 100.f, 230.f, 1.f });
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 
 	monsterInfo_->atk_ = 5;
@@ -31,7 +35,8 @@ void Boss01::Start()
 	monsterInfo_->maxHp_ = 10;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
-
+	telleportCount_ = 1;
+	monsterInfo_->monsterType_ = MonsterType::Boss;
 	/// /////////////////////////////////////////////////////////////////////////////////////////////
 
 	monsterHp_ = CreateComponent<GameEngineTextureRenderer>();
@@ -58,18 +63,12 @@ void Boss01::Start()
 	monsterHpScore_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHpScore_->GetTransform().SetLocalPosition({ 0.f,115.f,0.f });
 
-	monsterProjectile_.reserve(50);
-	for (size_t i = 0; i < 50; i++)
-	{
-		std::shared_ptr<Projectile> A = GetLevel()->CreateActor<Projectile>(ObjectOrder::Projectile);
-		monsterProjectile_.push_back(A);
-	}
-
 }
 void Boss01::Update(float _deltaTime)
 {
 	Monster::Update(_deltaTime);
-	if (bossPattern_ == BossPattern::none)
+
+	if (monsterInfo_->bossPattern_ == BossPattern::none)
 	{
 		Chaseplayer(_deltaTime);
 	}
@@ -77,11 +76,11 @@ void Boss01::Update(float _deltaTime)
 	{
 		PatternMove(_deltaTime);
 	}
+
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
 	HpCheak();
 
-	GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
 	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "¸¼À½");
 	ReduceHP();
 }
@@ -89,15 +88,127 @@ void Boss01::End()
 {
 
 }
+void Boss01::Relocation()
+{
+	if (telleportCount_ > 0)
+	{
+
+
+		telleportCount_ -= 1;
+		std::shared_ptr<MagicCircle> A = GetLevel()->CreateActor<MagicCircle>(ObjectOrder::UI);
+		A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y - 110.f });
+
+		float4 CameraPos = GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
+		float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(
+			float4(CameraPos.x - 960, CameraPos.y - 540),
+			float4(CameraPos.x + 960, CameraPos.y + 540)
+		);
+		monsterPosition_.z = -199.f;
+
+		if (monsterPosition_.x > CameraPos.x + 480 || monsterPosition_.x < CameraPos.x - 480)
+		{
+			GetTransform().SetWorldPosition(monsterPosition_);
+
+			allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_
+			);
+
+			allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_.x,
+				monsterPosition_.y,
+				monsterPosition_.z + 2.f
+			);
+		}
+		else if (monsterPosition_.y > CameraPos.y + 270 || monsterPosition_.y < CameraPos.y - 270)
+		{
+			GetTransform().SetWorldPosition(monsterPosition_);
+
+			allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_
+			);
+
+			allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_.x,
+				monsterPosition_.y,
+				monsterPosition_.z + 2.f
+			);
+		}
+		std::shared_ptr<MagicCircle> B = GetLevel()->CreateActor<MagicCircle>(ObjectOrder::UI);
+		B->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y - 110.f });
+	}
+}
 
 void Boss01::PatternMove(float _deltaTime)
 {
-	if (bossPattern_ == BossPattern::Dormammu)
+	collingTime01_ += _deltaTime;
+	collingTime02_ += _deltaTime;
+	collingTime03_ += _deltaTime;
+	if (monsterInfo_->bossPattern_ == BossPattern::Dormammu1)
 	{
-
+		Relocation();
+		if (telleportCount_ == 0)
+		{
+			collingTime01_ = 0.f;
+			monsterInfo_->bossPattern_ = BossPattern::none;
+		}
 	}
-	else if (bossPattern_ == BossPattern::Shooting)
+	else if (monsterInfo_->bossPattern_ == BossPattern::Shooting)
 	{
+		if (shootingEnd_ == false)
+		{
+			monsterAnimation_.Initialize(0, 0, 0.f, false);
+			if (shootingCount_ <100)
+			{
+				std::shared_ptr<Projectile> A = GetLevel()->CreateActor<Projectile>(ObjectOrder::Projectile);
+				A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y });
+				A->posSet_ = true;
+				shootingCount_ += 1;
+			}
+			else if (shootingCount_ == 100)
+			{
+				shootingCount_ = 0;
+				shootingEnd_ = true;
+			}
+
+		}
+		else	 if (shootingEnd_ == true)
+		{
+			monsterAnimation_.Initialize(0, 5, 0.1f, true);
+			shootingEnd_ = false;
+			collingTime02_ = 0.f;
+			monsterInfo_->bossPattern_ = BossPattern::none;
+		}
+	}
+	else if ((monsterInfo_->bossPattern_ == BossPattern::Dormammu2))
+	{
+		Relocation();
+		if (telleportCount_ == 0)
+		{
+			collingTime03_ = 0.f;
+			monsterInfo_->bossPattern_ = BossPattern::none;
+		}
+	}
+	else if (monsterInfo_->bossPattern_ == BossPattern::Idle)
+	{
+		monsterAnimation_.Initialize(0, 0, 0.f, false);
+		if (collingTime01_ > 3.f)
+		{
+			monsterAnimation_.Initialize(0, 5, 0.1f, true);
+			monsterInfo_->bossPattern_= BossPattern::Dormammu1;
+			telleportCount_ = 1;
+		}
+		else if (collingTime02_>5.f)
+		{
+			monsterAnimation_.Initialize(0, 5, 0.1f, true);
+			monsterInfo_->bossPattern_ =BossPattern::Shooting;
+
+		}
+		else if (collingTime03_ > 8.f)
+		{
+			monsterAnimation_.Initialize(0, 5, 0.1f, true);
+			monsterInfo_->bossPattern_ = BossPattern::Dormammu2;
+			telleportCount_ = 3;
+		}
 
 	}
 }
