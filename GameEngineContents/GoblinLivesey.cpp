@@ -24,8 +24,8 @@ void GoblinLivesey::Start()
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
 	monsterInfo_->atk_ = 5;
-	monsterInfo_->hp_ = 100.f;
-	monsterInfo_->maxHp_ = 100.f;
+	monsterInfo_->hp_ = 1000.f;
+	monsterInfo_->maxHp_ = 1000.f;
 	monsterInfo_->baseSpeed_ = 100;
 	monsterInfo_->giveExp_ = 5;
 	monsterInfo_->monsterType_ = MonsterType::GoblinLivesey;

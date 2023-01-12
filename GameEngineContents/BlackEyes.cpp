@@ -23,11 +23,12 @@ void BlackEyes::Start()
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
 	monsterInfo_->atk_ = 5;
-	monsterInfo_->hp_ = 75.f;
-	monsterInfo_->maxHp_ = 75;
+	monsterInfo_->hp_ = 1000.f;
+	monsterInfo_->maxHp_ = 1000.f;
 	monsterInfo_->baseSpeed_ = 125;
 	monsterInfo_->giveExp_ = 5;
 	monsterInfo_->monsterType_ = MonsterType::BlackEyes;
+
 	/// /////////////////////////////////////////////////////////////////////////////////////////////
 
 	monsterHp_ = CreateComponent<GameEngineTextureRenderer>();

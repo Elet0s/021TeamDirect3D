@@ -26,6 +26,7 @@ void NormalGoblin::Start()
 	monsterInfo_->maxHp_ = 5.f;
 	monsterInfo_->baseSpeed_ = 75;
 	monsterInfo_->giveExp_ = 5;
+	monsterInfo_->monsterType_ = MonsterType::NormalGoblin;
 
 }
 void NormalGoblin::Update(float _deltaTime)

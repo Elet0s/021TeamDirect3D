@@ -26,6 +26,7 @@ void NormalKobold::Start()
 	monsterInfo_->maxHp_ = 5;
 	monsterInfo_->baseSpeed_ = 75;
 	monsterInfo_->giveExp_ = 5;
+	monsterInfo_->monsterType_ = MonsterType::NormalKobold;
 
 }
 void NormalKobold::Update(float _deltaTime)

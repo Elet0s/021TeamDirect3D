@@ -28,6 +28,7 @@ void Red::Start()
 	monsterInfo_->maxHp_ = 20;
 	monsterInfo_->baseSpeed_ = 75;
 	monsterInfo_->giveExp_ = 5;
+	monsterInfo_->monsterType_ = MonsterType::Red;
 }
 void Red::Update(float _deltaTime)
 {

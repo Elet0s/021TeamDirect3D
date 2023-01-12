@@ -27,6 +27,7 @@ void NormalSkeleton::Start()
 	monsterInfo_->maxHp_ = 25.f;
 	monsterInfo_->baseSpeed_ = 75;
 	monsterInfo_->giveExp_ = 5;
+	monsterInfo_->monsterType_ = MonsterType::NormalSkeleton;
 
 }
 void NormalSkeleton::Update(float _deltaTime)

@@ -26,6 +26,7 @@ void FlyingEyes::Start()
 	monsterInfo_->maxHp_ = 5;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
+	monsterInfo_->monsterType_ = MonsterType::FlyingEyes	;
 }
 void FlyingEyes::Update(float _deltaTime)
 {

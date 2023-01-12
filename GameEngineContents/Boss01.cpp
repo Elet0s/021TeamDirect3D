@@ -33,8 +33,8 @@ void Boss01::Start()
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
 	monsterInfo_->atk_ = 0.3f;
-	monsterInfo_->hp_ = 100.f;
-	monsterInfo_->maxHp_ = 100.f;
+	monsterInfo_->hp_ = 1000.f;
+	monsterInfo_->maxHp_ = 1000.f;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
 	telleportCount_ = 1;
