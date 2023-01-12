@@ -106,9 +106,16 @@ CollisionReturn CleaverProjectile::ProjectileToMonster(std::shared_ptr<GameEngin
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ¥¹ÌÁöÁÜ
-	//projectileRen_->Off();
-	//projectileCol_->Off();
-	//Death();
+	if (passNum_ == 0)
+	{
+		projectileRen_->Off();
+		projectileCol_->Off();
+		Death();
+	}
+	else if (passNum_ > 0)
+	{
+		passNum_ -= 1;
+	}
 	return CollisionReturn::Continue;
 }
 
