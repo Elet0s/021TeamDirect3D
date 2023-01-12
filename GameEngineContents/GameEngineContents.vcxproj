@@ -386,10 +386,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ShamanStaff.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="SharpEdge.h">
       <SubType>
       </SubType>
@@ -806,10 +802,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="RoadObject.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="ShamanStaff.cpp">
       <SubType>
       </SubType>
     </ClCompile>

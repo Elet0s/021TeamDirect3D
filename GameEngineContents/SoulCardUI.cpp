@@ -232,7 +232,8 @@ void SoulCardUI::ColorChange(Appear _Value)
 void SoulCardUI::Setting()
 {
 	//CardDraw();
-	mySkill_ = GetLevel()->CreateActor<Shuriken>(0,"Shuriken");
+	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+	mySkill_  = SkillList[5][2];
 	
 	for (size_t i = 0; i < etc_.size(); i++)
 	{

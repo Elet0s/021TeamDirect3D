@@ -26,4 +26,8 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
+	void StateSet();
+
+private:
+	WeaponInfo WindsBladeWeaponInfo_;//¹«±â ½ºÅÈ
 };

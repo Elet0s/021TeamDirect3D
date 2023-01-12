@@ -17,7 +17,10 @@ Spear::Spear()
 	duringtime_(0),
 	consecutiveCounter_(0)
 {
-
+	name_ = "단창";
+	SetName(std::string_view("Spear"));
+	myRank_ = Rank::UnCommon;
+	maxLevel_ = 7;
 }
 Spear::~Spear()
 {
@@ -25,11 +28,16 @@ Spear::~Spear()
 }
 void Spear::Init()
 {
+	StateSet();
+	std::string sDamege = std::to_string(static_cast<int>(floor(spearWeaponInfo_.weaponAtk_)));
+	std::string sAttackSpeed = std::to_string(spearWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(spearWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 
+
+	etc_ = "투사체를 조준된 방향으로\n발사합니다\n"+ sDamege + "의 피해\n" + sAttackSpeed +"초 마다 공격\n투사체" + std::to_string(spearWeaponInfo_.weaponProjectileNum_)+ " 개\n" + std::to_string(spearWeaponInfo_.weponConsecutiveAtkNum_) + "연속 공격 ";
 }
 void Spear::Effect()
 {
-
+	currentlevel_ += 1;
 }
 
 void Spear::Start()
@@ -49,47 +57,32 @@ void Spear::End()
 
 void Spear::StateSet()
 {
-	if (currentlevel_ < 2)
-	{ 
-		spearWeaponInfo_.weaponAtk_ = 4.f;//Player::GetPlayerInst()->GetPlayerInfo().atk_ * currentlevel_ ;
-		spearWeaponInfo_.weaponAtkSpeed_ = 2.f;//1초마다
+	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
 
-		spearWeaponInfo_.weaponPassAtk_ = 0;
-		spearWeaponInfo_.weaponPassNum_ = 1;
+	spearWeaponInfo_.weaponAtk_ = round((3.f + 2.f * currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
+	spearWeaponInfo_.weaponAtkSpeed_ = (100.f - 7.f * currentlevel_)/ (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+	spearWeaponInfo_.weaponPassAtk_ = 0;
+	spearWeaponInfo_.weaponRange_ = 1.f * Info->projectileSize_;
+	spearWeaponInfo_.weaponProjectileNum_ = 1 + Info->addProjectile_;
+	spearWeaponInfo_.weaponPassNum_ = 2 + Info->passProjectile_;
 
-		spearWeaponInfo_.weaponSize_ = 100;
-		spearWeaponInfo_.weaponDuration_ = 100;
-		spearWeaponInfo_.weaponSpeed_ = 1500.f;
+	spearWeaponInfo_.weaponSize_ = 100 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
+	spearWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100; ;
+	spearWeaponInfo_.weaponSpeed_ = 1500.f * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
 
-		spearWeaponInfo_.weaponknockback_ = 100;
+	spearWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 
-		spearWeaponInfo_.weaponProjectileNum_ = 30;
+	if (currentlevel_ >= 2)
+	{
 		spearWeaponInfo_.weponConsecutiveAtkNum_ = 3;
 	}
-	else if (currentlevel_< 3)
-	{
 
-	}
-	else if (currentlevel_ < 4)
+	if (currentlevel_ >= 4)
 	{
-
+		spearWeaponInfo_.weaponProjectileNum_ = 2  + Info->addProjectile_;
 	}
-	else if (currentlevel_ < 5)
-	{
-
-	}
-	else if (currentlevel_ < 6)
-	{
-
-	}
-	else if (currentlevel_<7)
-	{
-
-	}
-	else if (currentlevel_ < 8)
-	{
-
-	}
+	
 }
 
 void Spear::Shoothing(float _deltaTime)

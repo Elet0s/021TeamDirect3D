@@ -18,7 +18,10 @@ Pike::Pike()
 	duringtime_(0),
 	consecutiveCounter_(0)
 {
-
+	name_ = "창";
+	SetName(std::string_view("Pike"));
+	myRank_ = Rank::Rare;
+	maxLevel_ = 7;
 }
 Pike::~Pike()
 {
@@ -26,11 +29,17 @@ Pike::~Pike()
 }
 void Pike::Init()
 {
+	StateSet();
+	std::string sDamege = std::to_string(pikeWeaponInfo_.weaponAtk_).substr(0, std::to_string(pikeWeaponInfo_.weaponAtk_).find(".") + 3);
+	std::string sAttackSpeed = std::to_string(pikeWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(pikeWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
+	std::string sSize = std::to_string(static_cast<int>(pikeWeaponInfo_.weaponSize_));
 
+	etc_ = "조준된 방향으로\n빠르게 찌릅니다\n" + sDamege + "의 피해\n" + sAttackSpeed + "초 마다 공격\n투사체 " + std::to_string(pikeWeaponInfo_.weaponProjectileNum_) + " 개\n" 
+		+ sSize + "% 투사체 크기 ";
 }
 void Pike::Effect()
 {
-
+	currentlevel_ += 1;
 }
 
 void Pike::Start()
@@ -50,48 +59,33 @@ void Pike::End()
 
 void Pike::StateSet()
 {
-	if (currentlevel_ < 2)
+	PlayerInfo* Info = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	pikeWeaponInfo_.weaponAtk_ = round((5.f + (1.2f * currentlevel_)) * (Info->atk_ * PInfo->atkMultiple_Result / 100.f));
+	pikeWeaponInfo_.weaponAtkSpeed_ = (100.f + 2.f * currentlevel_) / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+
+	pikeWeaponInfo_.weaponPassAtk_ = 0;
+	pikeWeaponInfo_.weaponPassNum_ = 1 + Info->passProjectile_;
+
+	pikeWeaponInfo_.weaponSize_ = 1.f + (0.2f * currentlevel_) * (Info->projectileSize_ * PInfo->projectileSize_Result  / 100);
+	pikeWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100; ;
+	pikeWeaponInfo_.weaponSpeed_ = 100.f * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
+
+	if (currentlevel_ >= 3)
 	{
-		pikeWeaponInfo_.weaponAtk_ = 4.f;//Player::GetPlayerInst()->GetPlayerInfo().atk_ * currentlevel_ ;
-		pikeWeaponInfo_.weaponAtkSpeed_ = 2.f;//1초마다
-
-		pikeWeaponInfo_.weaponPassAtk_ = 0;
-		pikeWeaponInfo_.weaponPassNum_ = 1;
-
-		pikeWeaponInfo_.weaponSize_ = 100;
-		pikeWeaponInfo_.weaponDuration_ = 100;
-		pikeWeaponInfo_.weaponSpeed_ = 1500.f;
-
-		pikeWeaponInfo_.weaponknockback_ = 100;
-
-		pikeWeaponInfo_.weaponProjectileNum_ = 2;
-		pikeWeaponInfo_.weponConsecutiveAtkNum_ = 2;
+		pikeWeaponInfo_.weaponProjectileNum_ = 2 + Info->addProjectile_;
 	}
-	else if (currentlevel_ < 3)
-	{
 
+	if (currentlevel_ < 4)
+	{
+		pikeWeaponInfo_.weaponProjectileNum_ = 2 + currentlevel_ +Info->addProjectile_;
 	}
-	else if (currentlevel_ < 4)
+	else
 	{
-
-	}
-	else if (currentlevel_ < 5)
-	{
-
-	}
-	else if (currentlevel_ < 6)
-	{
-
-	}
-	else if (currentlevel_ < 7)
-	{
-
-	}
-	else if (currentlevel_ < 8)
-	{
-
+		pikeWeaponInfo_.weaponProjectileNum_ = 5 + currentlevel_ + Info->addProjectile_;
 	}
 }
+	
 
 void Pike::Shoothing(float _deltaTime)
 {

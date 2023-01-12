@@ -24,7 +24,7 @@ void Firering::Init()
 	StateSet();
 	std::string sDamege = std::to_string(static_cast<int>(floor(fireringAuraWeaponInfo_.weaponAtk_)));
 	std::string sAttackSpeed = std::to_string(fireringAuraWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(fireringAuraWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
-	std::string sRange = std::to_string(fireringAuraWeaponInfo_.weaponSize_).substr(0, std::to_string(fireringAuraWeaponInfo_.weaponSize_).find(".") + 3);
+	std::string sRange = std::to_string(fireringAuraWeaponInfo_.weaponRange_).substr(0, std::to_string(fireringAuraWeaponInfo_.weaponRange_).find(".") + 3);
 
 	etc_ = "범위 피해를 입힙니다\n치명타가 발생하지 않습니다\n" + sDamege + "의 피해\n" + sAttackSpeed + "초 마다 공격\n범위" + sRange + "m ";
 }
@@ -98,40 +98,26 @@ void Firering::Start()
 
 void Firering::StateSet()
 {
-	if (currentlevel_ < 2)
-	{
-		fireringAuraWeaponInfo_.weaponAtk_ = 10.f;
-		fireringAuraWeaponInfo_.weaponAtkSpeed_ = 3.f;
-		fireringAuraWeaponInfo_.weaponPassAtk_ = 0;
-		fireringAuraWeaponInfo_.weaponPassNum_ = 2;
+	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
 
-		fireringAuraWeaponInfo_.weaponSize_ = 100;
-		fireringAuraWeaponInfo_.weaponDuration_ = 100;
-		fireringAuraWeaponInfo_.weaponSpeed_ = 100;
+	fireringAuraWeaponInfo_.weaponAtk_ = round((3.f + currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
+	fireringAuraWeaponInfo_.weaponAtkSpeed_ = round(200.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result));
+	fireringAuraWeaponInfo_.weaponPassAtk_ = 0;
+	fireringAuraWeaponInfo_.weaponRange_ = 4.6f + (0.2f * currentlevel_) * Info->atk_Range_;
 
+	fireringAuraWeaponInfo_.weaponPassNum_ = 2 + Info->passProjectile_;
 
-	}
-	else if (currentlevel_ < 3)
-	{
-
-
-	}
-	else if (currentlevel_ < 4)
-	{
-
-	}
-	else if (currentlevel_ < 5)
-	{
-
-	}
-	else if (currentlevel_ < 6)
-	{
-	}
+	fireringAuraWeaponInfo_.weaponSize_ = 100 * Info->projectileSize_ * PInfo->projectileSize_Result;
+	fireringAuraWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result;
+	fireringAuraWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
+	
 }
 
 void Firering::Update(float _deltaTime)
 {
 	StateSet();
+	GetTransform().SetWorldScale(fireringAuraWeaponInfo_.weaponRange_);
 	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y - 40, 0);
 	RotateRenderer(_deltaTime);
 
