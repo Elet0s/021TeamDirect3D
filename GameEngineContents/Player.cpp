@@ -368,7 +368,6 @@ void Player::LevelUpEvent()
 		playerInfo_->maxExp_ *= 1.5;
 		playerInfo_->level_ += 1;
 		GetLevel()->CreateActor<SoulCardSelectBox>();
-		GameEngineTime::GetInst()->SetGlobalTimeScale(0);
 	}
 }
 
