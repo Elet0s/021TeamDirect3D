@@ -21,7 +21,8 @@ Bow::Bow()
 	targetInst01_(),
 	targetInst02_(),
 	referenceVectorList01_(),
-	referenceVectorList02_()
+	referenceVectorList02_(),
+	passNum_()
 {
 	name_ = "활";
 	SetName(std::string_view("Bow"));
@@ -48,10 +49,12 @@ void Bow::Effect()
 void Bow::Start()
 {
 	
-	projectileGroupList01_.reserve(10);
-	projectileGroupList02_.reserve(10);
-	for (size_t i = 0; i < 20; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
+	projectileGroupList01_.reserve(20);
+	projectileGroupList02_.reserve(20);
+	passNum_.reserve(40);
+	for (size_t i = 0; i < 40; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
 	{
+		passNum_.push_back(0);
 		projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
 		projectileGroup_.first->GetTransform().SetWorldScale(30, 30, 0);
 		projectileGroup_.first->SetTexture("Arrow.png");
@@ -61,14 +64,14 @@ void Bow::Start()
 		projectileGroup_.second->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
 		projectileGroup_.second->GetTransform().SetWorldScale(20, 20, 0);
 		projectileGroup_.second->ChangeOrder(ObjectOrder::Projectile);
-		projectileGroup_.second->SetCollisionMode(CollisionMode::Single);
+		projectileGroup_.second->SetCollisionMode(CollisionMode::Multiple);
 		projectileGroup_.second->Off();
 
-		if (i < 10)
+		if (i < 20)
 		{
 			projectileGroupList01_.push_back(projectileGroup_);
 		}
-		else if (i < 20)
+		else if (i < 40)
 		{
 			projectileGroupList02_.push_back(projectileGroup_);
 		}
@@ -107,7 +110,7 @@ void Bow::StateSet()
 	bowWeaponInfo_.weaponPassNum_ = 6 + 7 * currentlevel_ + Info->passProjectile_;
 	bowWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
 	bowWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100;
-	bowWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
+	bowWeaponInfo_.weaponSpeed_ = 1000 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
 	bowWeaponInfo_.weaponProjectileNum_ = 1 + Info->addProjectile_;
 	bowWeaponInfo_.weponConsecutiveAtkNum_ = 1;
 
@@ -182,6 +185,7 @@ void Bow::ProjectileSort()
 			{
 				if (targetInst01_.size() > i) // 타겟수만큼 필요
 				{
+					passNum_[i] = bowWeaponInfo_.weaponPassNum_;
 					projectileGroupList01_[i].first->On();
 					projectileGroupList01_[i].second->On();
 					projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
@@ -200,6 +204,7 @@ void Bow::ProjectileSort()
 			{
 				if (targetInst02_.size() > i) // 타겟수만큼 필요
 				{
+					passNum_[i+20] = bowWeaponInfo_.weaponPassNum_;
 					projectileGroupList02_[i].first->On();
 					projectileGroupList02_[i].second->On();
 					projectileGroupList02_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
@@ -266,8 +271,8 @@ void Bow::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst01_.size(); i++)
 			{
-				projectileGroupList01_[i].first->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * bowWeaponInfo_.weaponAtkSpeed_);
-				projectileGroupList01_[i].second->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * bowWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList01_[i].first->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * bowWeaponInfo_.weaponSpeed_);
+				projectileGroupList01_[i].second->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * bowWeaponInfo_.weaponSpeed_);
 			}
 		}
 		else
@@ -282,8 +287,8 @@ void Bow::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst02_.size(); i++)
 			{
-				projectileGroupList02_[i].first->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * bowWeaponInfo_.weaponAtkSpeed_);
-				projectileGroupList02_[i].second->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * bowWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList02_[i].first->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * bowWeaponInfo_.weaponSpeed_);
+				projectileGroupList02_[i].second->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * bowWeaponInfo_.weaponSpeed_);
 			}
 		}
 		else
@@ -300,22 +305,37 @@ void Bow::RangeCheak(float _deltaTime)
 CollisionReturn Bow::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
-	for (size_t i = 0; i < 30; i++)
+	for (size_t i = 0; i < 40; i++)
 	{
-		if (i < 10)
+		if (i < 20)
 		{
-			if (projectileGroupList01_[i].second == _This)//발사체중 부딪힌 발사체 찾아서 지움
+			if (projectileGroupList01_[i].second == _This)
 			{
-				projectileGroupList01_[i].first->Off();
-				projectileGroupList01_[i].second->Off();
+
+				if (dynamic_pointer_cast<Bow>(_This->GetActor())->passNum_[i] > 0)
+				{
+					dynamic_pointer_cast<Bow>(_This->GetActor())->passNum_[i] -= 1;
+				}
+				if (dynamic_pointer_cast<Bow>(_This->GetActor())->passNum_[i] == 0)
+				{
+					projectileGroupList01_[i].first->Off();
+					projectileGroupList01_[i].second->Off();
+				}
 			}
 		}
-		else if (i < 20)
+		else if (i < 40)
 		{
-			if (projectileGroupList02_[i - 10].second == _This)
+			if (projectileGroupList02_[i - 20].second == _This)
 			{
-				projectileGroupList02_[i - 10].first->Off();
-				projectileGroupList02_[i - 10].second->Off();
+				if (dynamic_pointer_cast<Bow>(_This->GetActor())->passNum_[i] > 0)
+				{
+					dynamic_pointer_cast<Bow>(_This->GetActor())->passNum_[i] -= 1;
+				}
+				if (dynamic_pointer_cast<Bow>(_This->GetActor())->passNum_[i] == 0)
+				{
+					projectileGroupList02_[i - 20].first->Off();
+					projectileGroupList02_[i - 20].second->Off();
+				}
 			}
 		}
 	}
@@ -339,11 +359,14 @@ void Bow::ColCheak()
 }
 void Bow::TarGetInitialization()
 {
-	for (size_t i = 0; i < Monster::GetMonsterList().size() - 1; i++)
+	if (Monster::GetMonsterList().size() != 0)
 	{
-		if (Monster::GetMonsterList()[i]->isTarget_ == true)
+		for (size_t i = 0; i < Monster::GetMonsterList().size() - 1; i++)
 		{
-			Monster::GetMonsterList()[i]->isTarget_ = false;
+			if (Monster::GetMonsterList()[i]->isTarget_ == true)
+			{
+				Monster::GetMonsterList()[i]->isTarget_ = false;
+			}
 		}
 	}
 }
