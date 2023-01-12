@@ -421,6 +421,12 @@
     <ClCompile Include="SpearProjectile.cpp">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="ShopButton.cpp" />
+    <ClCompile Include="ShopLevel.cpp" />
+    <ClCompile Include="ShopUIBox.cpp" />
+    <ClCompile Include="KunaiProjectile.cpp">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -747,6 +753,12 @@
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="SpearProjectile.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopButton.h" />
+    <ClInclude Include="ShopLevel.h" />
+    <ClInclude Include="ShopUIBox.h" />
+    <ClInclude Include="KunaiProjectile.h">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

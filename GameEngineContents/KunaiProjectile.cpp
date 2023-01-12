@@ -1,12 +1,12 @@
 #include"PreCompile.h"
-#include"SpearProjectile.h"
+#include"KunaiProjectile.h"
 #include "GlobalContentsValue.h"
 #include "Player.h"
 #include"TestLevel.h"
 #include "Mouse.h"
 #include "Monster.h"
 
-SpearProjectile::SpearProjectile()
+KunaiProjectile::KunaiProjectile()
 	:projectileRen_(),
 	projectileCol_(),
 	timer_(0.f),
@@ -23,15 +23,15 @@ SpearProjectile::SpearProjectile()
 	angle_(0.f)
 {
 }
-SpearProjectile::~SpearProjectile()
+KunaiProjectile::~KunaiProjectile()
 {
 
 }
 
-void SpearProjectile::Start()
+void KunaiProjectile::Start()
 {
 	projectileRen_ = CreateComponent<GameEngineTextureRenderer>();
-	projectileRen_->SetTexture("Spear.png");
+	projectileRen_->SetTexture("Kunai.png");
 	projectileRen_->GetTransform().SetWorldScale(20.f, 40.f, 1.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
@@ -45,7 +45,7 @@ void SpearProjectile::Start()
 	projectileCol_->Off();
 }
 
-void SpearProjectile::TimeOff(float _deltaTime)
+void KunaiProjectile::TimeOff(float _deltaTime)
 {
 	if (timer_ < 3.f)
 	{
@@ -57,22 +57,22 @@ void SpearProjectile::TimeOff(float _deltaTime)
 	}
 }
 
-void SpearProjectile::Update(float _deltaTime)
+void KunaiProjectile::Update(float _deltaTime)
 {
 	if (posSet_ == true)
 	{
 		TimeOff(_deltaTime);
 		Shoothing(_deltaTime);
-		projectileCol_->IsCollision(CollisionType::CT_Sphere2D,ObjectOrder::Monster,	CollisionType::CT_Sphere2D,std::bind(&SpearProjectile::ProjectileToMonster,this,std::placeholders::_1,std::placeholders::_2));
+		projectileCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&KunaiProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
 	}
 }
 
-void SpearProjectile::End()
+void KunaiProjectile::End()
 {
 
 }
 
-void SpearProjectile::ProjectileSet(float _atk, float _speed, float _angle)
+void KunaiProjectile::ProjectileSet(float _atk, float _speed, float _angle)
 {
 	projectileatk_ = _atk;
 	projectilespeed_ = _speed;
@@ -80,7 +80,7 @@ void SpearProjectile::ProjectileSet(float _atk, float _speed, float _angle)
 	posSet_ = true;
 }
 
-void SpearProjectile::Shoothing(float _deltaTime)
+void KunaiProjectile::Shoothing(float _deltaTime)
 {
 	if (shoothing_ == false)
 	{
@@ -90,17 +90,17 @@ void SpearProjectile::Shoothing(float _deltaTime)
 			projectileCol_->On();
 		}
 		Rotate();
-			shoothing_ = true;
+		shoothing_ = true;
 	}
-	GetTransform().SetWorldUpMove(projectilespeed_,_deltaTime);
+	GetTransform().SetWorldUpMove(projectilespeed_, _deltaTime);
 }
 
-void SpearProjectile::Rotate()
+void KunaiProjectile::Rotate()
 {
 	GetTransform().SetWorldRotation(0, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle() + angle_);
 }
 
-CollisionReturn SpearProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn KunaiProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹

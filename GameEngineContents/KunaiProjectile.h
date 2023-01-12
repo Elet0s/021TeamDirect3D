@@ -1,18 +1,18 @@
 #pragma once
-class SpearProjectile : public GameEngineActor
+class KunaiProjectile : public GameEngineActor
 {
 public:
-	SpearProjectile();
-	~SpearProjectile();
+	KunaiProjectile();
+	~KunaiProjectile();
 
-	SpearProjectile(const SpearProjectile& _Other) = delete;
-	SpearProjectile(SpearProjectile&& _Other) noexcept = delete;
-	SpearProjectile& operator=(const SpearProjectile& _Other) = delete;
-	SpearProjectile& operator=(SpearProjectile&& _Other) noexcept = delete;
+	KunaiProjectile(const KunaiProjectile& _Other) = delete;
+	KunaiProjectile(KunaiProjectile&& _Other) noexcept = delete;
+	KunaiProjectile& operator=(const KunaiProjectile& _Other) = delete;
+	KunaiProjectile& operator=(KunaiProjectile&& _Other) noexcept = delete;
 
 	CollisionReturn ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
-	void ProjectileSet(float _atk, float _speed ,float _angle);
+	void ProjectileSet(float _atk, float _speed, float _angle);
 public:
 	bool posSet_;
 protected:
