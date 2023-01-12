@@ -586,7 +586,27 @@ void Monster::HpCheak()
 			}
 		}
 		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
-		Player::GetPlayerInst()->GetPlayerInfo().targetScore_ += 1;
+
+			switch (monsterInfo_->monsterType_)
+			{
+			case MonsterType::BlackEyes:
+				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
+				break;
+			case MonsterType::Red:
+				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
+				break;
+			case MonsterType::GoblinLivesey:
+				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
+				break;
+			case MonsterType::KoboldLivesey:
+				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
+				break;
+			default:
+				Player::GetPlayerInst()->GetPlayerInfo().targetScore_ += 1;
+				break;
+			}
+		
+
 		RelocationMonster();
 		monsterInfo_->hp_ = monsterInfo_->maxHp_;
 	}

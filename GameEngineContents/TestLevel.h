@@ -42,6 +42,7 @@ private:
 	void MouseMoveCamera();
 	void PlayerMoveCamera();
 
+	void StageMonsterManager();
 	//void PrepareNewStage();
 
 private:
@@ -50,12 +51,9 @@ private:
 	std::shared_ptr<Mouse> mousePointer_;
 	std::shared_ptr<class StageUI> stageUI_;
 
-
-
 	StageType stageType_;
 	CombatType combatType_;
-
+	float stageManagerTimer_;
 	int killCount_;
 	float timeLimit_;
-
 };

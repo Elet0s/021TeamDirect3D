@@ -10,7 +10,6 @@
 #include "GameEngineStatusWindow.h"
 #include "SoundPlayer.h"
 
-
 ContentsCore::ContentsCore()
 {
 }
@@ -46,10 +45,9 @@ void ContentsCore::Start()
 	CreateLevel<ClearLevel>("Clear");
 	CreateLevel<ShopLevel>("Shop");
 	CreateLevel<WorldMapLevel>("WorldMap");
-	ChangeLevel("Test");
+	ChangeLevel("WorldMap");
 	//ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("Clear");
-
 
 	//GameEngineTime::SetFrameLimit(60);
 	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);

@@ -78,17 +78,22 @@ void Boss01::Update(float _deltaTime)
 	{
 		PatternMove(_deltaTime);
 	}
-
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	monCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Player, CollisionType::CT_Sphere2D, std::bind(&Monster::MonsterToPlayerCollision, this, std::placeholders::_1, std::placeholders::_2));
-	HpCheak();
-
+	BossHp();
 	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "¸¼À½");
 	ReduceHP();
 }
 void Boss01::End()
 {
 
+}
+void Boss01::BossHp()
+{
+	if (monsterInfo_->hp_ <= 0)
+	{
+		GEngine::ChangeLevel("Clear");
+	}
 }
 void Boss01::Relocation()
 {

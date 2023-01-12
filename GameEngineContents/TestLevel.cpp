@@ -68,25 +68,23 @@ void TestLevel::Start()
 
 	std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	
-	Monster::ReserveMonsters(this, 31);
+	Monster::ReserveMonsters(this, 722);
 
-	Monster::CreateMonster<RedFlyingEyes>(this, 30);
-	//Monster::CreateMonster<NormalSkeleton>(this, 2);
-	//Monster::CreateMonster<NormalKobold>(this, 2);
-	//Monster::CreateMonster<NormalGoblin>(this, 2);
-	//Monster::CreateMonster<Green>(this, 2);
-	//Monster::CreateMonster<FlyingEyes>(this, 2);
-	//Monster::CreateMonster<Brown>(this, 2);
-	//Monster::CreateMonster<Red>(this, 2);
-	//Monster::CreateMonster<KoboldLivesey>(this, 2);
-	//Monster::CreateMonster<GoblinLivesey>(this, 2);
-	//Monster::CreateMonster<BlackEyes>(this, 1);
+	Monster::CreateMonster<RedFlyingEyes>(this, 100);
+	Monster::CreateMonster<NormalSkeleton>(this, 100);
+	Monster::CreateMonster<NormalKobold>(this, 100);
+	Monster::CreateMonster<NormalGoblin>(this, 100);
+	Monster::CreateMonster<Green>(this, 100);
+	Monster::CreateMonster<FlyingEyes>(this, 100);
+	Monster::CreateMonster<Brown>(this, 100);
+
+	Monster::CreateMonster<Red>(this, 5);
+	Monster::CreateMonster<KoboldLivesey>(this, 5);
+	Monster::CreateMonster<GoblinLivesey>(this, 5);
+	Monster::CreateMonster<BlackEyes>(this, 5);
+
 	Monster::CreateMonster<Boss01>(this, 1);
 
-
-	Monster::SummonMonster<RedFlyingEyes>(this, 1);
-	//Monster::SummonMonster<BlackEyes>(this, 1);
-	//Monster::SummonMonster<Boss01>(this, 1);
 
 	
 	//ShowCursor(false); 마우스 감추기
@@ -127,6 +125,7 @@ void TestLevel::Start()
 
 void TestLevel::Update(float _DeltaTime)
 {						
+	stageManagerTimer_ += _DeltaTime;
 	PlayerMoveCamera();
 
 	this->GetCameraActor(CameraOrder::MidCamera)->GetTransform().SetWorldPosition(
@@ -143,7 +142,8 @@ void TestLevel::Update(float _DeltaTime)
 
 void TestLevel::LevelStartEvent()
 {
-	
+
+	StageMonsterManager();
 	Player::GetPlayerInst()->On();
 	stageUI_->SetUI(UIType::Stage);
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
@@ -232,4 +232,29 @@ void TestLevel::MouseMoveCamera()
 	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MouseDir.x) * Time, (MouseDir.y) * Time));
 }
 
+void TestLevel::StageMonsterManager()
+{
+	stageManagerTimer_ = 0.f;
 
+	switch (StageObject::GetNextStageInfo().combatType_)
+	{
+	case CombatType::TimeAttack:
+
+		break;
+	case CombatType::Kill:
+		Monster::SummonMonster<RedFlyingEyes>(this, 100);
+		Monster::SummonMonster<Boss01>(this, 1);
+		break;
+	case CombatType::EilteKill:
+
+		break;
+	case CombatType::BossKill:
+		SoundPlayer::BGMPlay_->ChangeBgm("BossFight.wav");
+		break;
+	case CombatType::Max:
+
+		break;
+	default:
+		break;
+	}
+}

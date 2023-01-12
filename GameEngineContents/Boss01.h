@@ -20,6 +20,8 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
+	void BossHp();
+
 	void PatternMove(float _deltaTime);
 	void Relocation();
 
