@@ -82,18 +82,18 @@ void DashUI::DashRendererChange()
 
 	int EmptyCount = dashMaxCount_ - pInfo.dashCount_;
 
-	for (size_t i = dashMaxCount_; i > dashMaxCount_ - EmptyCount; i--)
+	for (size_t i = dashMaxCount_ - 1; i > dashMaxCount_ - EmptyCount; i--)
 	{
 		dashrenderers_[i]->SetTexture("Dash_Empty.png");
 	}
 
-	for (size_t i = dashMaxCount_ - EmptyCount; i < 0; i--)
+	for (size_t i = 0 ; i < pInfo.dashCount_; i++)
 	{
 		dashrenderers_[i]->SetTexture("Dash_Ready.png");
 	}
 	
 	if (EmptyCount != 0)
 	{
-		dashrenderers_[dashMaxCount_ - EmptyCount]->SetTexture("Dash_Loading.png");
+ 		dashrenderers_[dashMaxCount_ - EmptyCount]->SetTexture("Dash_Loading.png");
 	}
 }
