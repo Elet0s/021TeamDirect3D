@@ -18,7 +18,10 @@ Kunai::Kunai()
 	consecutiveCounter_(0),
 	consecutiveAngle_(0)
 {
-
+	name_ = "쿠나이";
+	SetName(std::string_view("Kunai"));
+	myRank_ = Rank::Rare;
+	maxLevel_ = 7;
 }
 Kunai::~Kunai()
 {
@@ -26,11 +29,16 @@ Kunai::~Kunai()
 }
 void Kunai::Init()
 {
+	StateSet();
+	std::string sDamege = std::to_string(static_cast<int>(floor(kunaiWeaponInfo_.weaponAtk_)));
+	std::string sAttackSpeed = std::to_string(kunaiWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(kunaiWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 
+
+	etc_ = "자신의 주변으로\n쿠나이를 던집니다\n" + sDamege + "의 피해\n" + sAttackSpeed + "초 마다 공격\n투사체 " + std::to_string(kunaiWeaponInfo_.weaponProjectileNum_) + " 개 ";
 }
 void Kunai::Effect()
 {
-
+	currentlevel_ += 1;
 }
 
 void Kunai::Start()
@@ -50,47 +58,24 @@ void Kunai::End()
 
 void Kunai::StateSet()
 {
-	if (currentlevel_ < 2)
-	{
-		kunaiWeaponInfo_.weaponAtk_ = 4.f;//Player::GetPlayerInst()->GetPlayerInfo().atk_ * currentlevel_ ;
-		kunaiWeaponInfo_.weaponAtkSpeed_ = 2.f;//1초마다
+	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
 
-		kunaiWeaponInfo_.weaponPassAtk_ = 0;
-		kunaiWeaponInfo_.weaponPassNum_ = 1;
+	kunaiWeaponInfo_.weaponAtk_ = round((2.f + 3.f * currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
+	kunaiWeaponInfo_.weaponAtkSpeed_ = 100.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+	kunaiWeaponInfo_.weaponPassAtk_ = 0;
+	kunaiWeaponInfo_.weaponRange_ = 1.f * Info->projectileSize_;
+	kunaiWeaponInfo_.weaponProjectileNum_ = 3 + currentlevel_  + Info->addProjectile_;
+	kunaiWeaponInfo_.weaponPassNum_ = 2 + Info->passProjectile_;
 
-		kunaiWeaponInfo_.weaponSize_ = 100;
-		kunaiWeaponInfo_.weaponDuration_ = 100;
-		kunaiWeaponInfo_.weaponSpeed_ = 1500.f;
+	kunaiWeaponInfo_.weaponSize_ = 100 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
+	kunaiWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100; ;
+	kunaiWeaponInfo_.weaponSpeed_ = 1500.f * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
 
-		kunaiWeaponInfo_.weaponknockback_ = 100;
+	kunaiWeaponInfo_.weponConsecutiveAtkNum_ = 1;
 
-		kunaiWeaponInfo_.weaponProjectileNum_ = 4;
-		kunaiWeaponInfo_.weponConsecutiveAtkNum_ = 1;
-	}
-	else if (currentlevel_ < 3)
-	{
-
-	}
-	else if (currentlevel_ < 4)
-	{
-
-	}
-	else if (currentlevel_ < 5)
-	{
-
-	}
-	else if (currentlevel_ < 6)
-	{
-
-	}
-	else if (currentlevel_ < 7)
-	{
-
-	}
-	else if (currentlevel_ < 8)
-	{
-
-	}
+	
+	
 }
 
 void Kunai::Shoothing(float _deltaTime)

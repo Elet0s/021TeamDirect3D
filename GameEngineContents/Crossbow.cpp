@@ -83,37 +83,22 @@ void Crossbow::End()
 
 void Crossbow::StateSet()
 {
-	if (currentlevel_ < 2)
-	{
-		crossbowWeaponInfo_.weaponAtk_ = 10.13f;
-		crossbowWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
 
-		crossbowWeaponInfo_.weaponPassAtk_ = 0;
-		crossbowWeaponInfo_.weaponPassNum_ = 0;
+	crossbowWeaponInfo_.weaponAtk_ = 10.13f;
+	crossbowWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
 
-		crossbowWeaponInfo_.weaponSize_ = 100;
-		crossbowWeaponInfo_.weaponDuration_ = 100;
-		crossbowWeaponInfo_.weaponSpeed_ = 100;
+	crossbowWeaponInfo_.weaponPassAtk_ = 0;
+	crossbowWeaponInfo_.weaponPassNum_ = 0;
 
-		crossbowWeaponInfo_.weaponknockback_ = 100;
+	crossbowWeaponInfo_.weaponSize_ = 100;
+	crossbowWeaponInfo_.weaponDuration_ = 100;
+	crossbowWeaponInfo_.weaponSpeed_ = 100;
 
-		crossbowWeaponInfo_.weaponProjectileNum_ = 1;
-		crossbowWeaponInfo_.weponConsecutiveAtkNum_ = 1; //최대연속공격횟수 1개
+	crossbowWeaponInfo_.weaponknockback_ = 100;
 
-	}
-	else if (currentlevel_ < 3)
-	{
-	}
-	else if (currentlevel_ < 4)
-	{
-	}
-	else if (currentlevel_ < 5)
-	{
-
-	}
-	else if (currentlevel_ < 6)
-	{
-	}
+	crossbowWeaponInfo_.weaponProjectileNum_ = 1;
+	crossbowWeaponInfo_.weponConsecutiveAtkNum_ = 1; //최대연속공격횟수 1개
+	
 }
 
 void Crossbow::SerchTarget()

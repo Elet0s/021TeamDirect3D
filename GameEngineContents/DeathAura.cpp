@@ -47,7 +47,7 @@ void  DeathAura::StateSet()
 	deathAuraWeaponInfo_.weaponPassAtk_ = 0;
 	deathAuraWeaponInfo_.weaponPassNum_ = 2;
 
-	deathAuraWeaponInfo_.weaponSize_ = 100 + (50 * currentlevel_) * (PlayerInfo_.atk_Range_/ 100);
+	deathAuraWeaponInfo_.weaponSize_ = 1.f + (0.5f * currentlevel_) * (PlayerInfo_.atk_Range_/ 100);
 	deathAuraWeaponInfo_.weaponDuration_ = 100;
 	deathAuraWeaponInfo_.weaponSpeed_ = 100;
 

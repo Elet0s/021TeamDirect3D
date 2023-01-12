@@ -230,7 +230,7 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	if (moveDirection_ != 0)
 	{
 		playerRenderer_->ChangeFrameAnimation("PlayerRun");
-		playerResultDirection_ = moveDirection_.Normalize3D() * (playerInfo_->speed_ - playerInfo_->pushSpeed_);
+		playerResultDirection_ = moveDirection_.Normalize3D() * ((playerInfo_->speed_ * playerPassiveInfo_->speed_Per / 100) - playerInfo_->pushSpeed_);
 		GetTransform().SetWorldMove(playerResultDirection_ * _deltaTime);
 	}
 	else

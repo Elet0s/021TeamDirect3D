@@ -49,7 +49,7 @@ void Shuriken::Init()
 }
 void Shuriken::Effect()
 {
-
+	currentlevel_ += 1;
 }
 
 void Shuriken::Start()
@@ -118,44 +118,32 @@ void Shuriken::End()
 
 void  Shuriken::StateSet()
 {
-	
-	shuriKenWeaponInfo_.weaponAtk_ = 1.f;
-	shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//
-	if (currentlevel_ < 2)
-	{
-		shuriKenWeaponInfo_.weaponAtk_ = 1.f;
-		shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//
+	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
 
-	shuriKenWeaponInfo_.weaponPassAtk_ = 0;
-	shuriKenWeaponInfo_.weaponPassNum_ = 2;
-
-	shuriKenWeaponInfo_.weaponSize_ = 100;
+	shuriKenWeaponInfo_.weaponAtk_ = round((0.75f + (0.6f * currentlevel_)) * Info->atk_ * PInfo->atkMultiple_Result / 100);
+	shuriKenWeaponInfo_.weaponAtkSpeed_ = (100.f - (10.f * currentlevel_)) / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+	shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
+	shuriKenWeaponInfo_.weaponPassNum_ = Info->passProjectile_;
+	shuriKenWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
 	shuriKenWeaponInfo_.weaponDuration_ = 100;
-	shuriKenWeaponInfo_.weaponSpeed_ = 100;
-
+	shuriKenWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result;
 	shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 10;
-		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 3;
-
-	}
-	else if (currentlevel_ < 3)
+	if (currentlevel_ < 2)
 	{
-		shuriKenWeaponInfo_.weaponAtk_ = 1.58f;
-		shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//1ÃÊ¸¶´Ù
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 3;
-		shuriKenWeaponInfo_.weaponSpeed_ = 100.f;
-
-	}
-	else if (currentlevel_ < 4)
-	{
-		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 2 + Info->addProjectile_;
 	}
 	else if (currentlevel_ < 5)
 	{
-
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 3 + Info->addProjectile_;
 	}
-	else if (currentlevel_ < 6)
+	else
+	{
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 3 + Info->addProjectile_;
+	}
+
+	if (currentlevel_ == 7)
 	{
 		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 3;
 	}

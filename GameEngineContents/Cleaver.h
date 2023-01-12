@@ -31,7 +31,7 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-
+	void StateSet();
 	//void SerchTarget();//공격 대상 탐색'
 	//void ProjectileSort();//발사체 생성및 플레이어 위치로 정렬
 	//void RenderRotate();// 발사체 회전
@@ -39,7 +39,6 @@ protected:
 	//void StateSet() override;//레벨에 따른 스탯 적용
 
 private:
-
 	float resultCos_;//마우스 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 마우스로 가는 벡터 
 
