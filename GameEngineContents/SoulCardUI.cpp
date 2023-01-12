@@ -231,9 +231,9 @@ void SoulCardUI::ColorChange(Appear _Value)
 
 void SoulCardUI::Setting()
 {
-	//CardDraw();
-	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
-	mySkill_  = SkillList[5][11];
+	CardDraw();
+	//std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+	//mySkill_  = SkillList[5][11];
 	
 	for (size_t i = 0; i < etc_.size(); i++)
 	{
