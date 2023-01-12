@@ -2,7 +2,7 @@
 #include "SoulCardSelectBox.h"
 #include "ClearLevel.h"
 #include "SoulCardUI.h"
-
+#include "SoundPlayer.h"
 
 SoulCardSelectBox::SoulCardSelectBox() 
 {
@@ -15,6 +15,7 @@ SoulCardSelectBox::~SoulCardSelectBox()
 
 void SoulCardSelectBox::Start()
 {
+	
 	if (nullptr == GameEngineTexture::Find("SoulCardNormal.png"))
 	{
 		GameEngineDirectory Dir;
@@ -30,7 +31,9 @@ void SoulCardSelectBox::Start()
 
 		}
 	}
-
+	SoundPlayer::BGMPlay_->VolumeSet(0.2f);
+	SoundPlayer::BGMPlay_->SpeedSet(0.9f);
+	GameEngineTime::GetInst()->SetGlobalTimeScale(0.1f);
 	std::shared_ptr<GameEngineTextureRenderer> Box = CreateComponent<GameEngineTextureRenderer>();
 	Box->SetTexture("SoulCardSelectTemplate - บนป็บป.png");
 	Box->ChangeCamera(CameraOrder::UICamera);
@@ -78,6 +81,9 @@ void SoulCardSelectBox::Update(float _deltaTime)
 	if (Cards[0]->IsDead())
 	{
 		Death();
+		GameEngineTime::GetInst()->SetGlobalTimeScale(1.0f);
+		SoundPlayer::BGMPlay_->VolumeSet(1.f);
+		SoundPlayer::BGMPlay_->SpeedSet(1.f);
 		GameEngineTime::GetInst()->SetGlobalTimeScale(1.f);
 		Cards[1]->CardRelease();
 		Cards[2]->CardRelease();
@@ -85,6 +91,9 @@ void SoulCardSelectBox::Update(float _deltaTime)
 	else if (Cards[1]->IsDead())
 	{
 		Death();
+		GameEngineTime::GetInst()->SetGlobalTimeScale(1.0f);
+		SoundPlayer::BGMPlay_->VolumeSet(1.f);
+		SoundPlayer::BGMPlay_->SpeedSet(1.f);
 		GameEngineTime::GetInst()->SetGlobalTimeScale(1.f);
 		Cards[0]->CardRelease();
 		Cards[2]->CardRelease();
@@ -92,6 +101,9 @@ void SoulCardSelectBox::Update(float _deltaTime)
 	else if (Cards[2]->IsDead())
 	{
 		Death();
+		GameEngineTime::GetInst()->SetGlobalTimeScale(1.0f);
+		SoundPlayer::BGMPlay_->VolumeSet(1.f);
+		SoundPlayer::BGMPlay_->SpeedSet(1.f);
 		GameEngineTime::GetInst()->SetGlobalTimeScale(1.f);
 		Cards[0]->CardRelease();
 		Cards[1]->CardRelease();

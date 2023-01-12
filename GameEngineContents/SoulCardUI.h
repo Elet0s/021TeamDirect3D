@@ -42,6 +42,7 @@ private:
 	float alphaTexture_;
 	float4 TextColor_;
 	float4 RankColor_;
+	bool soundCheck_;
 	Appear ColorCheck_;
 
 

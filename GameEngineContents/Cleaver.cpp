@@ -62,6 +62,7 @@ void Cleaver::StateSet()
 
 void Cleaver::Start()
 {
+
 	Off();
 }
 void Cleaver::Update(float _deltaTime)

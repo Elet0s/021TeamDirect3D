@@ -14,6 +14,7 @@ SoulCardUI::SoulCardUI()
 	, TextColor_(float4(1.f,1.f,1.f,0.9f))
 	, RankColor_(float4::White)
 	, ColorCheck_(Appear::False)
+	, soundCheck_(false)
 {
 }
 
@@ -231,7 +232,15 @@ void SoulCardUI::ColorChange(Appear _Value)
 
 void SoulCardUI::Setting()
 {
-	CardDraw();
+	int num = GameEngineRandom::mainRandom_.RandomInt(1, 10);
+	if (num >= 6)
+	{
+		CardDraw();
+	}
+	else
+	{
+		WeaponDraw();
+	}
 	
 	for (size_t i = 0; i < etc_.size(); i++)
 	{

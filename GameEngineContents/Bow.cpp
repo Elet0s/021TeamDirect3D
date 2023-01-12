@@ -99,6 +99,33 @@ void Bow::End()
 }
 void Bow::StateSet()
 {
+	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+
+	bowWeaponInfo_.weaponAtk_ = round((5.f + (2.f * currentlevel_)) * Info->atk_ * PInfo->atkMultiple_Result / 100);
+	bowWeaponInfo_.weaponAtkSpeed_ = 150.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+	bowWeaponInfo_.weaponPassNum_ = 6 + 7 * currentlevel_ + Info->passProjectile_;
+	bowWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
+	bowWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100;
+	bowWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
+	bowWeaponInfo_.weaponProjectileNum_ = 1 + Info->addProjectile_;
+	bowWeaponInfo_.weponConsecutiveAtkNum_ = 1;
+
+	if (currentlevel_ < 3)
+	{
+		bowWeaponInfo_.weaponAtkSpeed_ = 125.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+		bowWeaponInfo_.weaponProjectileNum_ = 1 + Info->addProjectile_;
+	}
+	else if (currentlevel_ < 5)
+	{
+		bowWeaponInfo_.weaponAtkSpeed_ = 100.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+		bowWeaponInfo_.weaponProjectileNum_ = 2 + Info->addProjectile_;
+	}
+	else
+	{
+		bowWeaponInfo_.weaponAtkSpeed_ = 50.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+		bowWeaponInfo_.weaponProjectileNum_ = 3 + Info->addProjectile_;
+	}
 
 }
 void Bow::SerchTarget()

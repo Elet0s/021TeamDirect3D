@@ -143,14 +143,15 @@ void TestLevel::Update(float _DeltaTime)
 
 void TestLevel::LevelStartEvent()
 {
+	
+	Player::GetPlayerInst()->On();
+	stageUI_->SetUI(UIType::Stage);
+	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	if (Player::GetPlayerInst()->GetPlayerInfo().level_ == 0)
 	{
 		CreateActor<SoulCardSelectBox>()->DrawWeapon();
 
 	}
-	Player::GetPlayerInst()->On();
-	stageUI_->SetUI(UIType::Stage);
-	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	this->GetMainCamera()->SetFarZ(500.f);
 	this->GetCamera(CameraOrder::MidCamera)->SetFarZ(500.f);
 
