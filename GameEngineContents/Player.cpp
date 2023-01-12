@@ -66,11 +66,12 @@ void Player::Start()
 		collision_->ChangeOrder(ObjectOrder::Player);
 		collision_->SetCollisionMode(CollisionMode::Multiple);
 
-		//itemRangeCollision_ = CreateComponent<GameEngineCollision>();
-		//itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-		//itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
-		//itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
-		//itemRangeCollision_->SetCollisionMode(CollisionMode::Multiple);
+		itemRangeCollision_ = CreateComponent<GameEngineCollision>();
+		itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
+		itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
+		itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
+		itemRangeCollision_->SetCollisionMode(CollisionMode::Multiple);
+		itemRangeCollision_->GetTransform().SetLocalMove({ 0.f,-10.f ,0.f});
 	}
 
 	playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
@@ -303,7 +304,7 @@ void Player::LevelUpEvent()
 
 void Player::ColCheak()
 {
-	//itemRangeCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::ItemRangeToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
+	itemRangeCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::ItemRangeToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
 	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 
