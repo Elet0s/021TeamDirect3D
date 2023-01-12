@@ -56,4 +56,5 @@ private:
 	float stageManagerTimer_;
 	int killCount_;
 	float timeLimit_;
+	size_t summonCounter_;
 };

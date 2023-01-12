@@ -21,10 +21,10 @@ void NormalKobold::Start()
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
-	monsterInfo_->atk_ = 0;
-	monsterInfo_->hp_ = 10.f;
-	monsterInfo_->maxHp_ = 10;
-	monsterInfo_->baseSpeed_ = 50;
+	monsterInfo_->atk_ = 3;
+	monsterInfo_->hp_ = 5.f;
+	monsterInfo_->maxHp_ = 5;
+	monsterInfo_->baseSpeed_ = 75;
 	monsterInfo_->giveExp_ = 5;
 
 }

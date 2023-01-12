@@ -26,6 +26,7 @@
 #include "Boss01.h"
 #include "MagicCircle.h"
 #include "SoulCardSelectBox.h"
+#include"GameItemObjectManager.h"
 
 TestLevel::TestLevel()
 	: fieldRenderingActor_(nullptr),
@@ -35,7 +36,8 @@ TestLevel::TestLevel()
 	stageType_(StageType::Max),
 	combatType_(CombatType::Max),
 	killCount_(0),
-	timeLimit_(0.f)
+	timeLimit_(0.f),
+	summonCounter_(0)
 {
 }
 
@@ -126,6 +128,8 @@ void TestLevel::Start()
 void TestLevel::Update(float _DeltaTime)
 {						
 	stageManagerTimer_ += _DeltaTime;
+	StageMonsterManager();
+
 	PlayerMoveCamera();
 
 	this->GetCameraActor(CameraOrder::MidCamera)->GetTransform().SetWorldPosition(
@@ -142,11 +146,11 @@ void TestLevel::Update(float _DeltaTime)
 
 void TestLevel::LevelStartEvent()
 {
+	summonCounter_ = 0;
+		stageManagerTimer_ = 0.f;
 
-	StageMonsterManager();
 	Player::GetPlayerInst()->On();
 	stageUI_->SetUI(UIType::Stage);
-	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	if (Player::GetPlayerInst()->GetPlayerInfo().level_ == 0)
 	{
 	CreateActor<SoulCardSelectBox>()->DrawWeapon();
@@ -160,6 +164,8 @@ void TestLevel::LevelStartEvent()
 
 void TestLevel::LevelEndEvent()
 {
+	Monster::UnsummonAllMonsters();
+	Monster::GetItemObjectManager()->ObjectAllClear();
 	SoundPlayer::BGMPlay_->Stop();
 }
 
@@ -234,27 +240,153 @@ void TestLevel::MouseMoveCamera()
 
 void TestLevel::StageMonsterManager()
 {
-	stageManagerTimer_ = 0.f;
+		switch (StageObject::GetNextStageInfo().combatType_)
+		{
+		case CombatType::TimeAttack:
+			if (summonCounter_ == 0 && stageManagerTimer_ < 1.f)
+			{
+				SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
+				Monster::SummonMonster<Brown>(this, 50);
+				summonCounter_ += 1;
+			}
 
-	switch (StageObject::GetNextStageInfo().combatType_)
-	{
-	case CombatType::TimeAttack:
+			else if (summonCounter_ == 1 && stageManagerTimer_ > 20.f)
+			{
+				Monster::SummonMonster<FlyingEyes>(this, 50);
+				summonCounter_ += 1;
+			}
+			else if (summonCounter_ == 2 && stageManagerTimer_ > 50.f)
+			{
+				Monster::SummonMonster<NormalGoblin>(this, 25);
+				Monster::SummonMonster<NormalKobold>(this, 25);
 
-		break;
-	case CombatType::Kill:
-		Monster::SummonMonster<RedFlyingEyes>(this, 100);
-		Monster::SummonMonster<Boss01>(this, 1);
-		break;
-	case CombatType::EilteKill:
+				summonCounter_ += 1;
+			}
+			else if (summonCounter_ == 3 && stageManagerTimer_ > 100.f)
+			{
 
-		break;
-	case CombatType::BossKill:
-		SoundPlayer::BGMPlay_->ChangeBgm("BossFight.wav");
-		break;
-	case CombatType::Max:
+				for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
+				{
+					if (Monster::GetMonsterList()[i]->GetMonsterInfo().monsterType_ == MonsterType::FlyingEyes)
+					{
+						Monster::GetMonsterList()[i]->Unsummon();
+					}
+					if (Monster::GetMonsterList()[i]->GetMonsterInfo().monsterType_ == MonsterType::Brown)
+					{
+						Monster::GetMonsterList()[i]->Unsummon();
+					}
+				}
+				summonCounter_ += 1;
+			}
+			else if (summonCounter_ == 4 && stageManagerTimer_ > 105.f)
+			{
+				Monster::SummonMonster<NormalSkeleton>(this, 100);
+				Monster::SummonMonster<Red>(this, 100);
+				Monster::SummonMonster<RedFlyingEyes>(this, 100);
+				summonCounter_ += 1;
+			}
+			break;
+		case CombatType::Kill:
+			if (summonCounter_ == 0 && stageManagerTimer_ < 1.f)
+			{
+				SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
+				Monster::SummonMonster<RedFlyingEyes>(this, 20);
+				summonCounter_ += 1;
+			}
 
-		break;
-	default:
-		break;
-	}
+			else if (summonCounter_ == 1 && stageManagerTimer_ > 20.f)
+			{
+				Monster::SummonMonster<FlyingEyes>(this, 10);
+				Monster::SummonMonster<Brown>(this, 10);
+				Monster::SummonMonster<NormalGoblin>(this, 10);
+				summonCounter_ += 1;
+			}
+			else if (summonCounter_ == 2 && stageManagerTimer_ > 50.f)
+			{
+				Monster::SummonMonster<FlyingEyes>(this, 10);
+				Monster::SummonMonster<Brown>(this, 10);
+				Monster::SummonMonster<NormalGoblin>(this, 10);
+
+				summonCounter_ += 1;
+			}
+			else if (summonCounter_ == 3 && stageManagerTimer_ > 100.f)
+			{
+				Monster::SummonMonster<FlyingEyes>(this, 10);
+				Monster::SummonMonster<Brown>(this, 10);
+				Monster::SummonMonster<NormalGoblin>(this, 10);
+				Monster::SummonMonster<NormalKobold>(this, 10);
+				Monster::SummonMonster<Red>(this, 10);
+				summonCounter_ += 1;
+			}
+			
+			break;
+		case CombatType::EilteKill:
+			if (summonCounter_ == 0 && stageManagerTimer_ < 1.f)
+			{
+				SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
+				Monster::SummonMonster<NormalGoblin>(this, 20);
+				Monster::SummonMonster<NormalKobold>(this, 20);
+				Monster::SummonMonster<KoboldLivesey>(this, 2);
+				Monster::SummonMonster<GoblinLivesey>(this, 2);
+				summonCounter_ += 1;
+			}
+
+			else if (summonCounter_ == 1 && stageManagerTimer_ > 20.f)
+			{
+				Monster::SummonMonster<NormalGoblin>(this, 50);
+				summonCounter_ += 1;
+			}
+			else if (summonCounter_ == 2 && stageManagerTimer_ > 50.f)
+			{
+				Monster::SummonMonster<NormalKobold>(this, 50);
+				summonCounter_ += 1;
+			}
+			break;
+		case CombatType::BossKill:
+			SoundPlayer::BGMPlay_->ChangeBgm("BossFight.wav");
+
+			if (summonCounter_ == 0 && stageManagerTimer_ < 1.f)
+			{
+				Monster::SummonMonster<RedFlyingEyes>(this, 30);
+				Monster::SummonMonster<Boss01>(this, 1);
+				summonCounter_ += 1;
+			}
+
+			else if (summonCounter_ == 1 && stageManagerTimer_ > 20.f)
+			{
+				Monster::SummonMonster<RedFlyingEyes>(this, 20);
+				Monster::SummonMonster<BlackEyes>(this, 2);
+				summonCounter_ += 1;
+			}
+			else if (summonCounter_ == 2 && stageManagerTimer_ > 50.f)
+			{
+				Monster::SummonMonster<Red>(this, 50);
+				Monster::SummonMonster<Green>(this, 2);
+
+				summonCounter_ += 1;
+			}
+			else if (summonCounter_ == 3 && stageManagerTimer_ > 100.f)
+			{
+				for (size_t i = 0; i < Monster::GetMonsterList().size(); i++)
+				{
+					if (Monster::GetMonsterList()[i]->GetMonsterInfo().monsterType_ == MonsterType::RedFlyingEyes)
+					{
+						Monster::GetMonsterList()[i]->Unsummon();
+					}
+					if (Monster::GetMonsterList()[i]->GetMonsterInfo().monsterType_ == MonsterType::Red)
+					{
+						Monster::GetMonsterList()[i]->Unsummon();
+					}
+				}
+				Monster::SummonMonster<NormalSkeleton>(this, 100);
+				summonCounter_ += 1;
+			}
+
+			break;
+		case CombatType::Max:
+
+			break;
+		default:
+			break;
+		}
 }

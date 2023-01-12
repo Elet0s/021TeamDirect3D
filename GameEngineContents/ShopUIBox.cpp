@@ -63,13 +63,13 @@ void ShopUIBox::Start()
 
 	std::shared_ptr<ShopButton>button3_ = GetLevel()->CreateActor<ShopButton>();
 	button3_->GetTransform().SetWorldPosition(-300, 40, -1.f);
-	button3_->SetText("으아아아");
+	button3_->SetText("투사체 개수 증가 +5");
 	button3_->SetPrice(1000);
 	button3_->CreateClickEvent(
 		[=]()
 		{
 			PlayerInfo* Pinfo = &Player::GetPlayerInst()->GetPlayerInfo();
-			Pinfo->hp_ = Pinfo->maxHp_;
+	Pinfo->addProjectile_ += 5;
 			
 		}
 	);

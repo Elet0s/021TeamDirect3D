@@ -18,7 +18,7 @@ public:
 	void CreateItemObject(GameEngineLevel* _thisLevel, float4 _itemObjectPos); // 아이템 종류 랜덤으로 생성
 	void SetManager();
 	std::vector< std::shared_ptr<GameItemObject>> GetallObjectContainer();
-
+	void ObjectAllClear();
 	void DelteObject(size_t _Num);
 protected:
 	ItemObjectOrder RandomObjectOrder();
