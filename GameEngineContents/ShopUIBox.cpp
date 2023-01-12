@@ -10,6 +10,9 @@
 
 ShopUIBox::ShopUIBox()
 	: mainrenderer_(nullptr)
+	, soundCheck_(false)
+	, buttonrenderer_(nullptr)
+	, buttonFontRenderer_(nullptr)
 {
 }
 
@@ -108,11 +111,21 @@ void ShopUIBox::Update(float _deltaTime)
 		true == GetLevel<ShopLevel>()->GetMousePointer()->IsPointing(buttonrenderer_->GetTransformData().worldWorldMatrix_, float4::Zero, true)
 		)
 	{
+		if (soundCheck_ == false)
+		{
+			GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
+			soundCheck_ = true;
+		}
 		buttonrenderer_->SetTexture("Button_Selected_Stage.png");
 		if (GameEngineInput::GetInst()->IsUp("Click"))
 		{
 			GEngine::ChangeLevel("WorldMap");
 		}
+	}
+	else
+	{
+		buttonrenderer_->SetTexture("Button_Default_State_Stage.png");
+		soundCheck_ = false;
 	}
 
 	if (nullptr != soulCardSelectBox_ && soulCardSelectBox_->IsDead() == true)

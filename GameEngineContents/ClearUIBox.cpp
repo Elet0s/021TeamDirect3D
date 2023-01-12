@@ -111,6 +111,8 @@ void ClearUIBox::Update(float _deltaTime)
 		button1renderer_->SetTexture("Button_Selected.png");
 		if (GameEngineInput::GetInst()->IsUp("Click"))
 		{
+			GameEngineSound::SoundPlayOneshot("Menu_Confirm.wav");
+			GameEngineSound::SoundPlayOneshot("GoldReward.wav");
 			button1renderer_->Off();
 			button1FontRenderer_->Off();
 			button1On_ = false;
@@ -137,6 +139,8 @@ void ClearUIBox::Update(float _deltaTime)
 		button2renderer_->SetTexture("Button_Selected.png");
 		if (GameEngineInput::GetInst()->IsUp("Click"))
 		{
+			GameEngineSound::SoundPlayOneshot("Menu_Confirm.wav");
+			GameEngineSound::SoundPlayOneshot("Level_Up.wav");
 			RendererOff();
 			button2On_ = false;
 			soulCardSelectBox_ = GetLevel()->CreateActor<SoulCardSelectBox>();

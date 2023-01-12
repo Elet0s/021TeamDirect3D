@@ -4,12 +4,14 @@
 #include "Mouse.h"
 #include "ShopButton.h"
 
+
 ShopButton::ShopButton() 
 	: renderer_(nullptr)
 	, click_(nullptr)
 	, fontRenderer_(nullptr)
 	, price_(0)
 	, IsApper(true)
+	, soundCheck_(false)
 {
 }
 
@@ -51,11 +53,18 @@ void ShopButton::Update(float _deltaTime)
 	PlayerInfo* PInfo = &Player::GetPlayerInst()->GetPlayerInfo();
 	if (true == GetLevel<ShopLevel>()->GetMousePointer()->IsPointing(renderer_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.0f, 0.f, 0.f),true))
 	{
+		if (soundCheck_ == false)
+		{
+			GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
+			soundCheck_ = true;
+		}
 		if (price_ <= PInfo->gold_)
 		{
+
 			renderer_->SetTexture("Button_Selected_Shop.png");
 			if (GameEngineInput::GetInst()->IsDown("Click"))
 			{
+				GameEngineSound::SoundPlayOneshot("Menu_Confirm.wav");
 				Off();
 				PInfo->gold_ -= static_cast<int>(price_);
 				IsApper = false;
@@ -69,6 +78,7 @@ void ShopButton::Update(float _deltaTime)
 	}
 	else
 	{
+		soundCheck_ = false;
 		if (price_ <= PInfo->gold_)
 		{
 			renderer_->SetTexture("Button_Default_State_Shop.png");

@@ -139,8 +139,14 @@ void SoulCardUI::Update(float _deltaTime)
 	{
 		if (true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.5f, 0.f, 0.f), true))
 		{
+			if (soundCheck_ == false)
+			{
+				GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
+				soundCheck_ = true;
+			}
 			if (GameEngineInput::GetInst()->IsUp("Click"))
 			{
+				GameEngineSound::SoundPlayOneshot("Menu_Confirm.wav");
 				mySkill_->IsOnOff();
 				mySkill_->Effect();
 				Death();
@@ -149,6 +155,7 @@ void SoulCardUI::Update(float _deltaTime)
 		}
 		else
 		{
+			soundCheck_ = false;
 			if (ColorCheck_ == Appear::True)
 			{
 				ColorChange(Appear::False);
@@ -159,6 +166,11 @@ void SoulCardUI::Update(float _deltaTime)
 	{
 		if (true == GetLevel<TestLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.5f, 0.f, 0.f), true))
 		{
+			if (soundCheck_ == false)
+			{
+				GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
+				soundCheck_ = true;
+			}
 			if (GameEngineInput::GetInst()->IsUp("Click"))
 			{
 				mySkill_->IsOnOff();
@@ -169,6 +181,7 @@ void SoulCardUI::Update(float _deltaTime)
 		}
 		else
 		{
+			soundCheck_ = false;
 			if (ColorCheck_ == Appear::True)
 			{
 				ColorChange(Appear::False);
@@ -179,6 +192,11 @@ void SoulCardUI::Update(float _deltaTime)
 	{
 		if (true == GetLevel<ShopLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.5f, 0.f, 0.f), true))
 		{
+			if (soundCheck_ == false)
+			{
+				GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
+				soundCheck_ = true;
+			}
 			if (GameEngineInput::GetInst()->IsUp("Click"))
 			{
 				mySkill_->IsOnOff();
@@ -189,6 +207,7 @@ void SoulCardUI::Update(float _deltaTime)
 		}
 		else
 		{
+			soundCheck_ = false;
 			if (ColorCheck_ == Appear::True)
 			{
 				ColorChange(Appear::False);
