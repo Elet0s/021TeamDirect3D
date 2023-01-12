@@ -89,7 +89,7 @@ void SkillManager::CreatePlayerAllSkill()
 {
 	skillList_.resize(6);
 
-	skillList_[5].reserve(16);
+	skillList_[5].reserve(15);
 	{
 		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Cleaver>(ObjectOrder::Skill, "Cleaver");
 		skillList_[5].push_back(Skill00);

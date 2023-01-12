@@ -2,6 +2,7 @@
 #include "WorldMapLevel.h"
 #include "Player.h"
 #include "Mouse.h"
+#include "SoundPlayer.h"
 #include "StageCreater.h"
 #include "StageUI.h"
 #include "StageObject.h"
@@ -14,7 +15,8 @@ WorldMapLevel::WorldMapLevel()
 	//TestActor_(nullptr),
 	stageCreater_(nullptr),
 	mousePointer_(nullptr),
-	stageUI_(nullptr)
+	stageUI_(nullptr),
+	soundCheck_(false)
 {
 }
 
@@ -85,6 +87,8 @@ void WorldMapLevel::Update(float _deltaTime)
 	UpdateCameraMovement(_deltaTime);
 
 	CheckNextStageSelection();
+
+	SoundCheck();
 }
 
 void WorldMapLevel::End()
@@ -96,6 +100,8 @@ void WorldMapLevel::LevelStartEvent()
 	this->GetMainCamera()->SetFarZ(10000.f);
 	stageUI_->SetUI(UIType::World);
 	Player::GetPlayerInst()->Off();
+	
+	SoundPlayer::BGMPlay_->ChangeBgm("MapSelectionForest.wav");
 }
 
 void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
@@ -198,4 +204,27 @@ void WorldMapLevel::CheckNextStageSelection()
 			stageCreater_->SendPlayerToNextStage(*iter);
 		}
 	}
+}
+
+void WorldMapLevel::SoundCheck()
+{
+	float4 renderPivot = float4(0.f, 0.5f, 0.f, 0.f);
+	std::list<std::shared_ptr<StageObject>> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
+
+	for (std::list<std::shared_ptr<StageObject>>::iterator iter = nextLevelList.begin();
+		iter != nextLevelList.end(); ++iter)
+	{
+		if (true == mousePointer_->IsPointing((*iter)->GetWorldWorldMatrix(), renderPivot))
+		{
+			if (soundCheck_ == false)
+			{
+				GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
+			}
+			soundCheck_ = true;
+			return;
+		}
+	
+	}
+
+	soundCheck_ = false;
 }

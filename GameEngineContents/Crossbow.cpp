@@ -45,8 +45,8 @@ void Crossbow::Effect()
 }
 void Crossbow::Start()
 {
-	passNum_.reserve(10);
-	for (size_t i = 0; i < 10; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
+	passNum_.reserve(20);
+	for (size_t i = 0; i < 20; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
 	{
 		passNum_.push_back(0);
 
@@ -59,7 +59,7 @@ void Crossbow::Start()
 		projectileGroup_.second->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
 		projectileGroup_.second->GetTransform().SetWorldScale(20, 20, 0);
 		projectileGroup_.second->ChangeOrder(ObjectOrder::Projectile);
-		projectileGroup_.second->SetCollisionMode(CollisionMode::Single);
+		projectileGroup_.second->SetCollisionMode(CollisionMode::Multiple);
 		projectileGroup_.second->Off();
 
 		projectileGroupList_.push_back(projectileGroup_);
@@ -97,7 +97,7 @@ void Crossbow::StateSet()
 	crossbowWeaponInfo_.weaponPassNum_ = 6 + 7 * currentlevel_ + Info->passProjectile_;
 	crossbowWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
 	crossbowWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100;
-	crossbowWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
+	crossbowWeaponInfo_.weaponSpeed_ = 1000 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
 	crossbowWeaponInfo_.weaponProjectileNum_ = 1 + Info->addProjectile_;
 
 
@@ -169,6 +169,7 @@ void Crossbow::ProjectileSort()
 			{
 				if (targetInst_.size() > i) // 타겟수만큼 필요
 				{
+					passNum_[i] = crossbowWeaponInfo_.weaponPassNum_;
 					projectileGroupList_[i].first->On();
 					projectileGroupList_[i].second->On();
 					projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
@@ -216,8 +217,8 @@ void Crossbow::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst_.size(); i++)
 			{
-				projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * crossbowWeaponInfo_.weaponAtkSpeed_);
-				projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * crossbowWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList_[i].first->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * crossbowWeaponInfo_.weaponSpeed_);
+				projectileGroupList_[i].second->GetTransform().SetWorldMove(referenceVectorList_[i].Normalize3D() * _deltaTime * crossbowWeaponInfo_.weaponSpeed_);
 			}
 		}
 	}
@@ -226,12 +227,20 @@ void Crossbow::RangeCheak(float _deltaTime)
 CollisionReturn Crossbow::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
-	for (size_t i = 0; i < 10; i++)
+	for (size_t i = 0; i < 20; i++)
 	{
-		if (projectileGroupList_[i].second == _This)//발사체중 부딪힌 발사체 찾아서 지움
+		if (projectileGroupList_[i].second == _This)
 		{
-			projectileGroupList_[i].first->Off();
-			projectileGroupList_[i].second->Off();
+
+			if (dynamic_pointer_cast<Crossbow>(_This->GetActor())->passNum_[i] > 0)
+			{
+				dynamic_pointer_cast<Crossbow>(_This->GetActor())->passNum_[i] -= 1;
+			}
+			if (dynamic_pointer_cast<Crossbow>(_This->GetActor())->passNum_[i] == 0)
+			{
+				projectileGroupList_[i].first->Off();
+				projectileGroupList_[i].second->Off();
+			}
 		}
 	}
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= crossbowWeaponInfo_.weaponAtk_; //데미지줌
@@ -246,6 +255,7 @@ void Crossbow::ColCheak()
 		projectileGroupList_[i].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Crossbow::ProjectileToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 	}
 }
+
 void Crossbow::TarGetInitialization()
 {
 	for (size_t i = 0; i < Monster::GetMonsterList().size() - 1; i++)
@@ -256,6 +266,7 @@ void Crossbow::TarGetInitialization()
 		}
 	}
 }
+
 void Crossbow::TimerUpdater(float _deltaTime)
 {
 	if (targerSerchTimer_ > 3.f)

@@ -47,7 +47,7 @@ private:
 
 	size_t price_;
 	bool IsApper;   // 다른 UI를 띄우기 위해 잠시 렌더더를 끄고 킬 때 계속꺼놓을지 킬지를 알기위한 변수
-
+	bool soundCheck_;
 
 	void Start();
 	void Update(float _deltaTime)override;

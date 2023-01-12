@@ -29,6 +29,9 @@ private:
 	std::shared_ptr<GameEngineTextureRenderer> buttonrenderer_;
 	std::shared_ptr<GameEngineFontRenderer> buttonFontRenderer_;
 
+
+	bool soundCheck_;
+
 	void Start()override;
 	void Update(float _deltaTime) override;
 	void End()  override {};

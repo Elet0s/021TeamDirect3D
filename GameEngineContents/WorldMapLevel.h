@@ -21,9 +21,11 @@ private:
 	void LevelStartEvent() override;
 	void UpdateCameraMovement(float _deltaTime);
 	void CheckNextStageSelection();
+	void SoundCheck();
 
 
 private:
+	bool soundCheck_;
 	std::shared_ptr<class WorldMapRenderingActor> WorldMapRenderingActor_;
 	std::shared_ptr<GameEngineLighting> WorldLevelLighting_;
 	//std::shared_ptr<TestActor> TestActor_;

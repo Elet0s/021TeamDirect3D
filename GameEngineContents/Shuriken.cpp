@@ -54,11 +54,11 @@ void Shuriken::Effect()
 
 void Shuriken::Start()
 {
-	projectileGroupList01_.reserve(10);
-	projectileGroupList02_.reserve(10);
-	projectileGroupList03_.reserve(10);
-	passNum_.reserve(30);
-	for (size_t i = 0; i < 30; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
+	projectileGroupList01_.reserve(20);
+	projectileGroupList02_.reserve(20);
+	projectileGroupList03_.reserve(20);
+	passNum_.reserve(60);
+	for (size_t i = 0; i < 60; i++) // 처음부터 최대갯수 모두 만들어서 가지고 있을 것 
 	{
 		passNum_.push_back(0);
 
@@ -74,15 +74,15 @@ void Shuriken::Start()
 		projectileGroup_.second->SetCollisionMode(CollisionMode::Multiple);
 		projectileGroup_.second->Off();
 
-		if (i <10)
+		if (i <20)
 		{
 			projectileGroupList01_.push_back(projectileGroup_);
 		}
-		else if (i <20)
+		else if (i <40)
 		{
 			projectileGroupList02_.push_back(projectileGroup_);
 		}
-		else if (i <30)
+		else if (i <60)
 		{
 			projectileGroupList03_.push_back(projectileGroup_);
 		}
@@ -226,7 +226,7 @@ void Shuriken::ProjectileSort()
 			{
 				if (targetInst02_.size() > i) // 타겟수만큼 필요
 				{
-					passNum_[i+10] = shuriKenWeaponInfo_.weaponPassNum_;
+					passNum_[i+20] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList02_[i].first->On();
 					projectileGroupList02_[i].second->On();
 					projectileGroupList02_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
@@ -245,7 +245,7 @@ void Shuriken::ProjectileSort()
 			{
 				if (targetInst03_.size() > i) // 타겟수만큼 필요
 				{
-					passNum_[i + 20] = shuriKenWeaponInfo_.weaponPassNum_;
+					passNum_[i + 40] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList03_[i].first->On();
 					projectileGroupList03_[i].second->On();
 					projectileGroupList03_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
@@ -387,9 +387,9 @@ void Shuriken::RangeCheak(float _deltaTime)
 CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
-	for (size_t i = 0; i < 30; i++)
+	for (size_t i = 0; i < 60; i++)
 	{
-		if (i < 10)
+		if (i < 20)
 		{
 			if (projectileGroupList01_[i].second == _This)//발사체중 부딪힌 발사체 찾아서 지움
 			{
@@ -404,9 +404,9 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineC
 				}
 			}
 		}
-		else if (i < 20)
+		else if (i < 40)
 		{
-			if (projectileGroupList02_[i - 10].second == _This)
+			if (projectileGroupList02_[i - 20].second == _This)
 			{
 				if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] > 0)
 				{
@@ -414,14 +414,14 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineC
 				}
 				 if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] == 0)
 				{
-					projectileGroupList02_[i - 10].first->Off();
-					projectileGroupList02_[i - 10].second->Off();
+					projectileGroupList02_[i - 20].first->Off();
+					projectileGroupList02_[i - 20].second->Off();
 				}
 			}
 		}
-		else if (i < 30)
+		else if (i < 60)
 		{
-			if (projectileGroupList03_[i - 20].second == _This)
+			if (projectileGroupList03_[i - 40].second == _This)
 			{
 
 				if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] > 0)
@@ -430,8 +430,8 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineC
 				}
 				 if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] == 0)
 				{
-					projectileGroupList03_[i - 20].first->Off();
-					projectileGroupList03_[i - 20].second->Off();
+					projectileGroupList03_[i - 40].first->Off();
+					projectileGroupList03_[i - 40].second->Off();
 				}
 			}
 		}
@@ -442,19 +442,19 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineC
 
 void Shuriken::ColCheak()
 {
-	for (size_t i = 0; i < 30; i++)
+	for (size_t i = 0; i < 60; i++)
 	{
-		if (i < 10)
+		if (i < 20)
 		{
 			projectileGroupList01_[i].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ShurikenToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 		}
-		else if (i < 20)
+		else if (i < 40)
 		{
-			projectileGroupList02_[i-10].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ShurikenToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+			projectileGroupList02_[i-20].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ShurikenToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 		}
-		else if (i < 30)
+		else if (i < 60)
 		{
-			projectileGroupList03_[i-20].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ShurikenToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+			projectileGroupList03_[i-40].second->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&Shuriken::ShurikenToMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 		}
 
 	}
@@ -462,11 +462,14 @@ void Shuriken::ColCheak()
 
 void Shuriken::TarGetInitialization()
 {
-	for (size_t i = 0; i < Monster::GetMonsterList().size() - 1; i++)
+	if (Monster::GetMonsterList().size() != 0)
 	{
-		if (Monster::GetMonsterList()[i]->isTarget_ == true)
+		for (size_t i = 0; i < Monster::GetMonsterList().size() - 1; i++)
 		{
-			Monster::GetMonsterList()[i]->isTarget_ = false;
+			if (Monster::GetMonsterList()[i]->isTarget_ == true)
+			{
+				Monster::GetMonsterList()[i]->isTarget_ = false;
+			}
 		}
 	}
 }
