@@ -1,6 +1,7 @@
 #pragma once
 #include "GameEngineDefaultRenderer.h"
 #include "GlobalHeader.h"
+#include "GameEngineTexture.h"
 
 enum class PivotMode
 {
@@ -90,6 +91,13 @@ public:
 		isLoop_(_isLoop),
 		playTime_(0.f)
 	{
+		size_t cutCount = GameEngineTexture::Find(_textureName)->GetCutCount();
+		playTime_ = interval_ * cutCount;
+		frames_.reserve(cutCount);
+		for (UINT frameIndex = 0; frameIndex < cutCount; ++frameIndex)
+		{
+			frames_.push_back(frameIndex);
+		}
 	}
 };
 

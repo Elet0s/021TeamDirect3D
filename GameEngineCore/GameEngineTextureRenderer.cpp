@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "GameEngineTextureRenderer.h"
-#include "GameEngineTexture.h"
 #include "GameEngineFolderTexture.h"
 
 void FrameAnimation::Reset()

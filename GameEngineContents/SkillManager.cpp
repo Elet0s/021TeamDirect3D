@@ -100,9 +100,9 @@ void SkillManager::CreatePlayerAllSkill()
 		skillList_[5].push_back(Skill02);
 		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Spear>(ObjectOrder::Skill, "Spear");
 		skillList_[5].push_back(Skill03);
-
 		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<DeathAura>(ObjectOrder::Skill, "DeathAura");
 		skillList_[5].push_back(Skill04);
+
 		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Firering>(ObjectOrder::Skill, "Firering");
 		skillList_[5].push_back(Skill05);
 		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<ShamanStaff>(ObjectOrder::Skill, "ShamanStaff");
@@ -124,6 +124,7 @@ void SkillManager::CreatePlayerAllSkill()
 		skillList_[5].push_back(Skill13);
 		std::shared_ptr<Skill> Skill14 = myLevel_->CreateActor<MagicWisp>(ObjectOrder::Skill, "MagicWisp");
 		skillList_[5].push_back(Skill14);
+
 		std::shared_ptr<Skill> Skill15 = myLevel_->CreateActor<Shuriken>(ObjectOrder::Skill, "Shuriken");
 		skillList_[5].push_back(Skill15);
 	}

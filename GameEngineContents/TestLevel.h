@@ -42,7 +42,7 @@ private:
 	void MouseMoveCamera();
 	void PlayerMoveCamera();
 
-	void PrepareNewStage();
+	//void PrepareNewStage();
 
 private:
 	std::shared_ptr<FieldRenderingActor> fieldRenderingActor_;

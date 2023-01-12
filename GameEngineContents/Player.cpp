@@ -83,8 +83,11 @@ void Player::Start()
 	std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
 	shadowRenderer->SetTextureRenderer(playerRenderer_);
 
-	serchCloseMonster_;
-	Monster::GetMonsterList();
+	//serchCloseMonster_;
+	//Monster::GetMonsterList();
+
+	//playerSkillManager_->GetSkillList()[5][12]->currentlevel_++;
+
 }
 
 
@@ -357,10 +360,15 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 
 	mainPlayer_ = _thisLevel->CreateActor<Player>(ObjectOrder::Player);
 	mainPlayer_->GetTransform().SetWorldPosition(_initPosition);
-	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(mainPlayer_->GetTransform().GetWorldPosition().x,mainPlayer_->GetTransform().GetWorldPosition().y,-220.f);
+	_thisLevel->GetMainCameraActor()->GetTransform().SetWorldPosition(
+		mainPlayer_->GetTransform().GetWorldPosition().x,
+		mainPlayer_->GetTransform().GetWorldPosition().y,
+		-220.f
+	);
 
 	playerSkillManager_->SetLevel(_thisLevel);
 	playerSkillManager_->CreatePlayerAllSkill();
+	playerSkillManager_->GetSkillList()[5][12]->currentlevel_++;
 }
 
 void Player::ResetScore()

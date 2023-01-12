@@ -102,7 +102,7 @@ public:
 
 	bool CheckNextLevel(std::shared_ptr<StageObject> _nextlevel);
 	void SetStageType(int _num);
-	void SetStageType(StageType _stageType);
+	//void SetStageType(StageType _stageType);
 	void SetMonsterCount(MonsterType _monsterType, size_t _monstercount);
 	void PushNextlevel(std::shared_ptr<StageObject> _nextlevel);
 	
