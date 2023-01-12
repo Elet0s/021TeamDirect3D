@@ -139,20 +139,6 @@ void Pike::Shoothing(float _deltaTime)
 	}
 }
 
-void Pike::ProjectileSort()
-{
-}
-
-void Pike::RenderRotate()
-{
-
-}
-
-void Pike::RangeCheak(float _deltaTime)
-{
-
-}
-
 void Pike::AimSet()
 {
 	if (setAim_ == false)

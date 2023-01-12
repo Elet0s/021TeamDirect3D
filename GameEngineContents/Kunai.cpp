@@ -128,20 +128,6 @@ void Kunai::Shoothing(float _deltaTime)
 	}
 }
 
-void Kunai::ProjectileSort()
-{
-}
-
-void Kunai::RenderRotate()
-{
-
-}
-
-void Kunai::RangeCheak(float _deltaTime)
-{
-
-}
-
 void Kunai::AimSet()
 {
 	if (setAim_ == false)

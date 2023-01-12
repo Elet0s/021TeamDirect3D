@@ -82,7 +82,6 @@ void Spear::StateSet()
 	{
 		spearWeaponInfo_.weaponProjectileNum_ = 2  + Info->addProjectile_;
 	}
-	
 }
 
 void Spear::Shoothing(float _deltaTime)
@@ -135,19 +134,6 @@ void Spear::Shoothing(float _deltaTime)
 	}
 }
 
-void Spear::ProjectileSort()
-{
-}
-
-void Spear::RenderRotate()
-{
-
-}
-
-void Spear::RangeCheak(float _deltaTime)
-{
-
-}
 
 void Spear::AimSet()
 {

@@ -72,11 +72,10 @@ void WindsBladeProjectile::End()
 
 }
 
-void WindsBladeProjectile::ProjectileSet(float _atk, float _speed, float _angle)
+void WindsBladeProjectile::ProjectileSet(float _atk, float _speed)
 {
 	projectileatk_ = _atk;
 	projectilespeed_ = _speed;
-	angle_ = _angle;
 	posSet_ = true;
 }
 

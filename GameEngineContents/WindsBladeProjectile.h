@@ -12,7 +12,7 @@ public:
 
 	CollisionReturn ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
-	void ProjectileSet(float _atk, float _speed, float _angle);
+	void ProjectileSet(float _atk, float _speed);
 public:
 	bool posSet_;
 protected:

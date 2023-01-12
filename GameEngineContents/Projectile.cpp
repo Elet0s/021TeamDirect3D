@@ -27,9 +27,9 @@ Projectile::~Projectile()
 void Projectile::Start()
 {
 	projectileRen_ = CreateComponent<GameEngineTextureRenderer>();
-	projectileRen_->SetTexture("Particle.png");
-	projectileRen_->GetPixelData().mulColor_ = float4::Red; //³ì»ö
-	projectileRen_->GetTransform().SetWorldScale(50.f, 50.f, 1.f);
+	projectileRen_->SetTexture("EnemyProjectile.png");
+	//projectileRen_->GetPixelData().mulColor_ = float4::Red; //³ì»ö
+	projectileRen_->GetTransform().SetWorldScale(30.f, 30.f, 1.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
 	projectileRen_->Off();

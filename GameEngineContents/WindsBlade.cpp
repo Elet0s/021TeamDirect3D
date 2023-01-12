@@ -1,6 +1,7 @@
 #include"PreCompile.h"
 #include"WindsBlade.h"
-#include "Player.h"
+#include "WindsBladeProjectile.h"
+#include"Player.h"
 
 WindsBlade::WindsBlade()
 {
@@ -9,10 +10,12 @@ WindsBlade::WindsBlade()
 	myRank_ = Rank::Rare;
 	maxLevel_ = 7;
 }
+
 WindsBlade::~WindsBlade()
 {
 
 }
+
 void WindsBlade::Init()
 {
 	StateSet();
@@ -45,14 +48,28 @@ void WindsBlade::Effect()
 }
 void WindsBlade::Start()
 {
-
+	Off();
 }
+
 void WindsBlade::Update(float _deltaTime)
 {
-
+	StateSet();
+	Shoothing(_deltaTime);
 }
+
 void WindsBlade::End()
 {
 
 }
 
+CollisionReturn WindsBlade::WindsBladeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+{
+
+	return CollisionReturn::Continue;
+}
+void WindsBlade::Shoothing(float _deltaTime)
+{
+	std::shared_ptr<WindsBladeProjectile> A = GetLevel()->CreateActor<WindsBladeProjectile>(ObjectOrder::Projectile);
+	A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+	A->ProjectileSet(WindsBladeWeaponInfo_.weaponAtk_, WindsBladeWeaponInfo_.weaponSpeed_);
+}

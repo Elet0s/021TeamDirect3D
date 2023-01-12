@@ -88,20 +88,6 @@ void Cleaver::Shoothing(float _deltaTime)
 	}
 }
 
-void Cleaver::ProjectileSort()
-{
-}
-
-void Cleaver::RenderRotate()
-{
-
-}
-
-void Cleaver::RangeCheak(float _deltaTime)
-{
-
-}
-
 void Cleaver::AimSet()
 {
 	if (setAim_ == false)

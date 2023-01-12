@@ -22,9 +22,6 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other); // 발사체 충돌
-	CollisionReturn RangeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);// 범위내 몬스터 탐색(사정거리 비례)
-
 	std::shared_ptr<GameEngineCollision> spearRangeCol_;
 
 	std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>projectileGroup_;
@@ -35,17 +32,9 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void Shoothing(float _deltaTime);//공격 대상 탐색'
-	void ProjectileSort();//발사체 생성및 플레이어 위치로 정렬
-	void RenderRotate();// 발사체 회전
-	void RangeCheak(float _deltaTime);//발사체 사출
+	void Shoothing(float _deltaTime);//사출패턴
 	void StateSet() override;//레벨에 따른 스탯 적용
-	void AimSet();
-	//void SerchTarget();//공격 대상 탐색'
-	//void ProjectileSort();//발사체 생성및 플레이어 위치로 정렬
-	//void RenderRotate();// 발사체 회전
-	//void RangeCheak(float _deltaTime);//발사체 사출
-	//void StateSet() override;//레벨에 따른 스탯 적용
+	void AimSet();//마우스 켜줌
 
 private:
 	bool Shooting_;

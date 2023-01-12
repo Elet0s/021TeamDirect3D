@@ -66,7 +66,7 @@ void TestLevel::Start()
 
 	std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	
-	Monster::ReserveMonsters(this, 5);
+	Monster::ReserveMonsters(this, 6);
 
 	Monster::CreateMonster<RedFlyingEyes>(this, 5);
 	//Monster::CreateMonster<NormalSkeleton>(this, 2);
@@ -79,12 +79,12 @@ void TestLevel::Start()
 	//Monster::CreateMonster<KoboldLivesey>(this, 2);
 	//Monster::CreateMonster<GoblinLivesey>(this, 2);
 	//Monster::CreateMonster<BlackEyes>(this, 1);
-	//Monster::CreateMonster<Boss01>(this, 1);
+	Monster::CreateMonster<Boss01>(this, 1);
 
 
 	Monster::SummonMonster<RedFlyingEyes>(this, 5);
 	//Monster::SummonMonster<BlackEyes>(this, 1);
-	//Monster::SummonMonster<Boss01>(this, 1);
+	Monster::SummonMonster<Boss01>(this, 1);
 
 	
 	//ShowCursor(false); 마우스 감추기
