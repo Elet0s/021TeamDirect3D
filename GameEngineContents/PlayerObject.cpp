@@ -50,7 +50,7 @@ void PlayerObject::Update(float _deltaTime)
 			}
 			else if (StageObject::GetNextStageInfo().stageType_ == StageType::Shop)
 			{
-				//GEngine::ChangeLevel("Shop");
+				GEngine::ChangeLevel("Shop");
 			}
 
 			else

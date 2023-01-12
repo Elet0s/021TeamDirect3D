@@ -386,6 +386,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ShopButton.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ShopLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ShopUIBox.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Shuriken.h">
       <SubType>
       </SubType>
@@ -782,6 +794,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="SharpeningStone.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ShopButton.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ShopLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ShopUIBox.cpp">
       <SubType>
       </SubType>
     </ClCompile>

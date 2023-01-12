@@ -27,6 +27,6 @@ private:
 	std::shared_ptr<GameEngineTextureRenderer> UIRenderer_;
 	std::string TimeString;
 
-
+	float time_;
 };
 
