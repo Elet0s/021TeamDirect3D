@@ -229,9 +229,6 @@
     <ClCompile Include="DeathAura.cpp">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
     </ClCompile>
-    <ClCompile Include="MagicWand.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
-    </ClCompile>
     <ClCompile Include="Cleaver.cpp">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
     </ClCompile>
@@ -252,12 +249,6 @@
     </ClCompile>
     <ClCompile Include="Kunai.cpp">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
-    </ClCompile>
-    <ClCompile Include="Swordrang.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicWisp.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
     </ClCompile>
     <ClCompile Include="WindsBlade.cpp">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
@@ -581,9 +572,6 @@
     <ClInclude Include="DeathAura.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
     </ClInclude>
-    <ClInclude Include="MagicWand.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
-    </ClInclude>
     <ClInclude Include="Cleaver.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
     </ClInclude>
@@ -604,12 +592,6 @@
     </ClInclude>
     <ClInclude Include="Kunai.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Aim</Filter>
-    </ClInclude>
-    <ClInclude Include="Swordrang.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicWisp.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
     </ClInclude>
     <ClInclude Include="WindsBlade.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>

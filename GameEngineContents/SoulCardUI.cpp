@@ -451,7 +451,7 @@ void SoulCardUI::WeaponDraw()
 
 	while (mySkill_->GetCurrentlevel() == mySkill_->GetMaxLevel() || true == mySkill_->GetIsOn())
 	{
-		IndexRandom = GameEngineRandom::mainRandom_.RandomInt(0, static_cast<int>(9));
+		IndexRandom = GameEngineRandom::mainRandom_.RandomInt(0, static_cast<int>(SkillList[5].size() - 1));
 
 		mySkill_ = SkillList[5][IndexRandom];
 	}

@@ -325,14 +325,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="MagicWand.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="MagicWisp.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Momentum.h">
       <SubType>
       </SubType>
@@ -475,10 +467,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Student.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Swordrang.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -752,14 +740,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="MagicWand.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="MagicWisp.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Momentum.cpp">
       <SubType>
       </SubType>
@@ -902,10 +882,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Student.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Swordrang.cpp">
       <SubType>
       </SubType>
     </ClCompile>
