@@ -62,8 +62,17 @@ void SpearProjectile::Update(float _deltaTime)
 	{
 		Shoothing(_deltaTime);
 		TimeOff(_deltaTime);
-		projectileCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&SpearProjectile::ProjectileToPlayer, this, std::placeholders::_1, std::placeholders::_2));
-
+		projectileCol_->IsCollision(
+			CollisionType::CT_Sphere2D,
+			ObjectOrder::Monster,
+			CollisionType::CT_Sphere2D,
+			std::bind(
+				&SpearProjectile::ProjectileToPlayer,
+				this,
+				std::placeholders::_1,
+				std::placeholders::_2
+			)
+		);
 	}
 }
 
