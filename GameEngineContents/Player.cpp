@@ -95,43 +95,104 @@ void Player::Start()
 CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	std::shared_ptr<GameItemObject> A = std::dynamic_pointer_cast<GameItemObject>(_Other->GetActor());
-	if (A->GetObjectOrder() == ItemObjectOrder::GreenExp)
+	int random_ = GameEngineRandom::mainRandom_.RandomInt(1, 4);
+	switch (A->GetObjectOrder())
 	{
+	case ItemObjectOrder::GreenExp:
 		playerInfo_->exp_ += 5;
-	}
-	else if (A->GetObjectOrder() == ItemObjectOrder::YellowExp)
-	{
-		playerInfo_->exp_ += 10;
-	}
-	else if (A->GetObjectOrder() == ItemObjectOrder::RedExp)
-	{
-		playerInfo_->exp_ += 15;
-	}
-	else if (A->GetObjectOrder() == ItemObjectOrder::Meet)
-	{
+		if (random_==1)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
+		}
+		else if (random_ == 2)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
+		}
+		else if (random_ == 3)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
+		}
+		else if (random_ == 4)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
+		}
 
-			playerInfo_->hp_ += 30;
-			if (playerInfo_->maxHp_ < playerInfo_->hp_)
-			{
-				playerInfo_->hp_ = playerInfo_->maxHp_;
-			}
-	}
-	else if (A->GetObjectOrder() == ItemObjectOrder::Gold)
-	{
+		break;
+	case ItemObjectOrder::YellowExp:
+		playerInfo_->exp_ += 20;
+		if (random_ == 1)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
+		}
+		else if (random_ == 2)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
+		}
+		else if (random_ == 3)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
+		}
+		else if (random_ == 4)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
+		}
+		break;
+	case ItemObjectOrder::RedExp:
+		playerInfo_->exp_ += 40;
+		if (random_ == 1)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
+		}
+		else if (random_ == 2)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
+		}
+		else if (random_ == 3)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
+		}
+		else if (random_ == 4)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
+		}
+		break;
+	case ItemObjectOrder::Meet:
+		playerInfo_->hp_ += 30;
+		GameEngineSound::SoundPlayOneshot("Eat.wav");
+		if (playerInfo_->maxHp_ < playerInfo_->hp_)
+		{
+			playerInfo_->hp_ = playerInfo_->maxHp_;
+		}
+		break;
+	case ItemObjectOrder::Gold:
 		playerInfo_->gold_ += 10;
+		GameEngineSound::SoundPlayOneshot("GoldCoin.wav");
+		break;
+	case ItemObjectOrder::Voidbead:
+		for (size_t i = 0; i < 300; i++)
+		{
+			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] != A)
+			{
+					if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::GreenExp)
+					{
+						Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
+					}
+					else if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::YellowExp)
+					{
+						Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
+					}
+					else if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::RedExp)
+					{
+						Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
+					}
+			}
+			else
+			{
+				break;
+			}
+		}
 	}
-	else if (A->GetObjectOrder() == ItemObjectOrder::Voidbead)
-	{
-		//for (size_t i = 0; i < 300; i++)
-		//{
-		//	//if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
-		//	{
-		//		//순회돌면서 체이스 상태로 변경해줘야함
-		//	}
-		//
-		//}
-	}
-	// 여기서 오브젝트 끄고 컨테이너에서 빼줘야함
+
 	for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)
 	{
 		if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
@@ -248,6 +309,14 @@ void Player::PlayerDash(float _deltaTime)
 	{
 		if (playerInfo_->dashCount_ > 0)
 		{
+			if (playerInfo_->dashCount_ %2 == 0)
+			{
+				GameEngineSound::SoundPlayOneshot("Dash.wav");
+			}
+			else if (playerInfo_->dashCount_ % 2 == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Dash_Old.wav");
+			}
 			playerInfo_->dashCount_ -= 1;
 			dashState_ = true;
 		}
@@ -294,6 +363,7 @@ void Player::LevelUpEvent()
 {
 	if (playerInfo_->exp_ >= playerInfo_->maxExp_)
 	{
+		GameEngineSound::SoundPlayOneshot("Level_Up.wav");
 		playerInfo_->exp_ -= playerInfo_->maxExp_;
 		playerInfo_->maxExp_ *= 1.5;
 		playerInfo_->level_ += 1;
@@ -323,7 +393,13 @@ void Player::Update(float _deltaTime)
 	{
 		if (playerSkillManager_->GetSkillList()[5][2]->currentlevel_ < 1)
 		{
+			playerSkillManager_->GetSkillList()[5][0]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][1]->currentlevel_ += 1;
 			playerSkillManager_->GetSkillList()[5][2]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][3]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][4]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][5]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][14]->currentlevel_ += 1;
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임

@@ -127,7 +127,7 @@ void  Shuriken::StateSet()
 	shuriKenWeaponInfo_.weaponPassNum_ = Info->passProjectile_;
 	shuriKenWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
 	shuriKenWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100;
-	shuriKenWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
+	shuriKenWeaponInfo_.weaponSpeed_ = 1000 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
 
 	if (currentlevel_ < 2)
 	{
@@ -149,7 +149,7 @@ void  Shuriken::StateSet()
 }
 
 void Shuriken::SerchTarget()
-{
+{				
 	if (targerSerchTimer_ > 1.5f)
 	{
 		targetSerchCounter_ = 0;
@@ -267,6 +267,7 @@ void Shuriken::RenderRotate()
 	{
 		if (targerSerchTimer01_ > 1.5f)
 		{
+			GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
 			referenceVectorList01_.clear();
 			monsterList_ = Monster::GetMonsterList();
 
@@ -286,6 +287,7 @@ void Shuriken::RenderRotate()
 		}
 		if (targerSerchTimer02_ > 1.5f)
 		{
+			GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
 			referenceVectorList02_.clear();
 			monsterList_ = Monster::GetMonsterList();
 
@@ -305,6 +307,7 @@ void Shuriken::RenderRotate()
 		}
 		if (targerSerchTimer03_ > 1.5f)
 		{
+			GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
 			referenceVectorList03_.clear();
 			monsterList_ = Monster::GetMonsterList();
 
@@ -333,8 +336,8 @@ void Shuriken::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst01_.size(); i++)
 			{
-				projectileGroupList01_[i].first->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
-				projectileGroupList01_[i].second->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList01_[i].first->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponSpeed_);
+				projectileGroupList01_[i].second->GetTransform().SetWorldMove(referenceVectorList01_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponSpeed_);
 			}
 		}
 		else 
@@ -349,8 +352,8 @@ void Shuriken::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst02_.size(); i++)
 			{
-				projectileGroupList02_[i].first->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
-				projectileGroupList02_[i].second->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList02_[i].first->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponSpeed_);
+				projectileGroupList02_[i].second->GetTransform().SetWorldMove(referenceVectorList02_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponSpeed_);
 			}
 		}
 		else
@@ -365,8 +368,8 @@ void Shuriken::RangeCheak(float _deltaTime)
 		{
 			for (size_t i = 0; i < targetInst03_.size(); i++)
 			{
-				projectileGroupList03_[i].first->GetTransform().SetWorldMove(referenceVectorList03_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
-				projectileGroupList03_[i].second->GetTransform().SetWorldMove(referenceVectorList03_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponAtkSpeed_);
+				projectileGroupList03_[i].first->GetTransform().SetWorldMove(referenceVectorList03_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponSpeed_);
+				projectileGroupList03_[i].second->GetTransform().SetWorldMove(referenceVectorList03_[i].Normalize3D() * _deltaTime * shuriKenWeaponInfo_.weaponSpeed_);
 			}
 		}
 		else

@@ -66,7 +66,7 @@ void TestLevel::Start()
 
 	std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	
-	Monster::ReserveMonsters(this, 30);
+	Monster::ReserveMonsters(this, 31);
 
 	Monster::CreateMonster<RedFlyingEyes>(this, 30);
 	//Monster::CreateMonster<NormalSkeleton>(this, 2);

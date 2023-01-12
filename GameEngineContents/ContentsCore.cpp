@@ -299,13 +299,24 @@ void ContentsCore::LoadContentsResource()
 	soundDir.MoveParentToExistChildDirectory("ContentsResources");
 	soundDir.MoveToChild("ContentsResources");
 	soundDir.MoveToChild("Sound");
-
+	soundDir.MoveToChild("Stage");
 	std::vector<GameEngineFile> sound = soundDir.GetAllFiles();
 	for (GameEngineFile& SoundPlay : sound)
 	{
 		GameEngineSound::LoadResource(SoundPlay);
 	}
 
+	GameEngineDirectory soundDir02;
+	soundDir02.MoveParentToExistChildDirectory("ContentsResources");
+	soundDir02.MoveToChild("ContentsResources");
+	soundDir02.MoveToChild("Sound");
+	soundDir02.MoveToChild("World");
+	std::vector<GameEngineFile> sound02 = soundDir02.GetAllFiles();
+	for (GameEngineFile& SoundPlay02 : sound02)
+	{
+		GameEngineSound::LoadResource(SoundPlay02);
+	}
+	GameEngineTexture::Cut("WindBlade.png", 4, 1);
 	GameEngineTexture::Cut("PlayerIdle.png", 11, 1);
 	GameEngineTexture::Cut("PlayerRun.png", 10, 1);
 

@@ -421,6 +421,166 @@ void Monster::HpCheak()
 {
 	if (monsterInfo_->hp_ <= 0)
 	{
+		int random_ = GameEngineRandom::mainRandom_.RandomInt(1, 3);
+
+		switch (monsterInfo_->monsterType_)
+		{
+		case MonsterType::Brown:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
+			}
+			break;
+		case MonsterType::FlyingEyes:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
+			}
+			break;
+		case MonsterType::NormalGoblin:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Goblin_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Goblin_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Goblin_Hit_C.wav");
+			}
+			break;
+		case MonsterType::NormalKobold:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
+			}
+			else 
+			{
+				GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
+			}
+			break;
+		case MonsterType::NormalSkeleton:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Skeleton_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Skeleton_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Skeleton_Hit_C.wav");
+			}
+			break;
+		case MonsterType::Red:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
+			}
+			break;
+		case MonsterType::RedFlyingEyes:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
+			}
+			break;
+		case MonsterType::BlackEyes:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
+			}
+			break;
+		case MonsterType::GoblinLivesey:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Goblin_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Goblin_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Goblin_Hit_C.wav");
+			}
+			break;
+		case MonsterType::Green:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
+			}
+			else if (random_ == 2)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
+			}
+			else if (random_ == 3)
+			{
+				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
+			}
+			break;
+		case MonsterType::KoboldLivesey:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
+			}
+			else
+			{
+				GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
+			}
+			break;
+		case MonsterType::Boss:
+			if (random_ == 1)
+			{
+				GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
+			}
+			else
+			{
+				GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
+			}
+		}
 		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
 		Player::GetPlayerInst()->GetPlayerInfo().targetScore_ += 1;
 		RelocationMonster();

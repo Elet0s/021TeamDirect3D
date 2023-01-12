@@ -97,6 +97,7 @@ void Pike::Shoothing(float _deltaTime)
 	{
 		if (pikeWeaponInfo_.weponConsecutiveAtkNum_ > consecutiveCounter_)
 		{
+			GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
 			if (duringtime_ > 0.1f)
 			{
 				consecutiveCounter_ += 1;
