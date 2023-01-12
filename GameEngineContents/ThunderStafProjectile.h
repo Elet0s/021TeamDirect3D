@@ -25,7 +25,9 @@ protected:
 	void LevelEndEvent() override;
 private:
 	std::shared_ptr < GameEngineTextureRenderer> projectileRen_;
+	
 	std::shared_ptr < GameEngineCollision> projectileCol_;
+
 	float timer_;
 	float projectileatk_;
 	float projectilespeed_;

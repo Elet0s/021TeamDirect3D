@@ -51,6 +51,11 @@ void GameItemObject::ChasePlayer(float _deltaTime)
 	}
 }
 
+void GameItemObject::LevelEndEvent()
+{
+	Death();
+}
+
 ItemObjectOrder GameItemObject::GetObjectOrder()
 {
 	return itemObjectOrder_;

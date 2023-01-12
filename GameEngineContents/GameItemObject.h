@@ -25,6 +25,7 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
+	void LevelEndEvent() override;
 	void ChasePlayer(float _deltaTime);
 private:
 	float ox_;

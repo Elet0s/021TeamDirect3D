@@ -68,22 +68,12 @@ ItemObjectOrder GameItemObjectManager::RandomObjectOrder()
 }
 void GameItemObjectManager::ObjectAllClear()
 {
-	for (size_t i = 0; i < 300 ; i++)
-	{
-		if (allObjectContainer_[i] == nullptr)
-		{
-			break;
-		}
-		else
-		{
-			allObjectContainer_[i]->itemObjectRenderer_->Death();
-			allObjectContainer_[i]->itemObjectCol_->Death();
-			allObjectContainer_[i]->Death();
-			allObjectContainer_.erase(allObjectContainer_.begin() + i);
-		}
-
-	}
+	allObjectContainer_.clear();
 	ItemUpdateNum_ = 0;
+	if (isFullContainer_ == true)
+	{
+		isFullContainer_ = false;
+	}
 }
 void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemObjectOrder _itemObjectOrder, float4 _itemObjectPos)
 {
