@@ -421,6 +421,12 @@
     <ClCompile Include="SpearProjectile.cpp">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="ShopButton.cpp" />
+    <ClCompile Include="ShopLevel.cpp" />
+    <ClCompile Include="ShopUIBox.cpp" />
+    <ClCompile Include="KunaiProjectile.cpp">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -743,10 +749,17 @@
     <ClInclude Include="DashUI.h">
       <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\..\SkillList.txt">
-      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
-    </Text>
+    <ClInclude Include="MagicCircle.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearProjectile.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopButton.h" />
+    <ClInclude Include="ShopLevel.h" />
+    <ClInclude Include="ShopUIBox.h" />
+    <ClInclude Include="KunaiProjectile.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

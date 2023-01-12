@@ -57,14 +57,14 @@ void DeathAura::Start()
 {
 	circleRendererA_ = CreateComponent<GameEngineTextureRenderer>();
 	circleRendererA_->SetTexture("Death_Circle_A.png");
-	circleRendererA_->GetTransform().SetWorldScale(51.5f, 51.5f, 0);
+	circleRendererA_->GetTransform().SetWorldScale(103.f, 103.f, 0);
 	circleRendererA_->GetPixelData().mulColor_ = float4(0.0f, 1.5f, 0.0f, 0.5f);
 	circleRendererA_->ChangeCamera(CameraOrder::MidCamera);
 	circleRendererA_->Off();
 
 	circleRendererB_ = CreateComponent<GameEngineTextureRenderer>();
 	circleRendererB_->SetTexture("Death_Circle_B.png");
-	circleRendererB_->GetTransform().SetWorldScale(50.f, 50.f, 0);
+	circleRendererB_->GetTransform().SetWorldScale(100.f, 100.f, 0);
 	circleRendererB_->GetTransform().SetWorldPosition(0.f, 0.f, -1.f);
 	circleRendererB_->GetPixelData().mulColor_ = float4(0.0f, 1.5f, 0.0f, 0.5f);
 	circleRendererB_->ChangeCamera(CameraOrder::MidCamera);
@@ -72,7 +72,7 @@ void DeathAura::Start()
 
 	circleRendererC_ = CreateComponent<GameEngineTextureRenderer>();
 	circleRendererC_->SetTexture("Death_Circle_C.png");
-	circleRendererC_->GetTransform().SetWorldScale(47.5f, 47.5f, 0);
+	circleRendererC_->GetTransform().SetWorldScale(95.f, 95.f, 0);
 	circleRendererC_->GetTransform().SetWorldPosition(0.f, 0.f, -2.f);
 	circleRendererC_->GetPixelData().mulColor_ = float4(0.0f, 1.5f, 0.0f, 0.5f);
 	circleRendererC_->ChangeCamera(CameraOrder::MidCamera);
@@ -80,7 +80,7 @@ void DeathAura::Start()
 
 	circleRendererD_ = CreateComponent<GameEngineTextureRenderer>();
 	circleRendererD_->SetTexture("Death_Circle_D.png");
-	circleRendererD_->GetTransform().SetWorldScale(47.5f, 47.5f, 0);
+	circleRendererD_->GetTransform().SetWorldScale(95.f, 95.f, 0);
 	circleRendererD_->GetTransform().SetWorldPosition(0.f, 0.f, -3.f);
 	circleRendererD_->GetPixelData().mulColor_ = float4(0.0f, 1.5f, 0.0f, 0.5f);
 	circleRendererD_->ChangeCamera(CameraOrder::MidCamera);
@@ -88,7 +88,7 @@ void DeathAura::Start()
 
 	circleCenterRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	circleCenterRenderer_->SetTexture("Death_Circle_Center.png");
-	circleCenterRenderer_->GetTransform().SetWorldScale(47.5f, 47.5f, 0);
+	circleCenterRenderer_->GetTransform().SetWorldScale(95.f, 95.f, 0);
 	circleCenterRenderer_->GetTransform().SetWorldPosition(0.f, 0.f, -4.f);
 	circleCenterRenderer_->GetPixelData().mulColor_ = float4(0.0f, 1.5f, 0.0f, 0.5f);
 	circleCenterRenderer_->ChangeCamera(CameraOrder::MidCamera);
@@ -97,17 +97,17 @@ void DeathAura::Start()
 	deathAuraCollision01_ = CreateComponent<GameEngineCollision>();
 	deathAuraCollision01_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	deathAuraCollision01_->ChangeOrder(ObjectOrder::Projectile);
-	deathAuraCollision01_->GetTransform().SetWorldScale(230, 230, 0);
+	deathAuraCollision01_->GetTransform().SetWorldScale(46.f, 46.f, 0);
 
 	deathAuraCollision02_ = CreateComponent<GameEngineCollision>();
 	deathAuraCollision02_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	deathAuraCollision02_->ChangeOrder(ObjectOrder::Projectile);
-	deathAuraCollision02_->GetTransform().SetWorldScale(200, 200, 0);
+	deathAuraCollision02_->GetTransform().SetWorldScale(40.f, 40.f, 0);
 
 	deathAuraCollision03_ = CreateComponent<GameEngineCollision>();
 	deathAuraCollision03_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	deathAuraCollision03_->ChangeOrder(ObjectOrder::Projectile);
-	deathAuraCollision03_->GetTransform().SetWorldScale(200, 200, 0);
+	deathAuraCollision03_->GetTransform().SetWorldScale(40.f, 40.f, 0);
 
 	Off();
 }
