@@ -22,7 +22,8 @@ Player::Player()
 	flash_(false),
 	flashLoop_(false),
 	flashTimer_(0),
-	dashRechargeTimer_(0)
+	dashRechargeTimer_(0),
+	healingTimer_(0)
 	
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
@@ -393,7 +394,12 @@ void Player::ColCheak()
 void Player::Update(float _deltaTime)
 {
 	playerInfo_->stageTimer_ += _deltaTime;
-
+	healingTimer_ += _deltaTime;
+	if (healingTimer_ > 0.3f)
+	{
+		playerInfo_->hp_ += playerInfo_->hpRecuvere_;
+		healingTimer_ = 0.f;
+	}
 	MoveDirectionUpdate(_deltaTime);
 	PlayerDash(_deltaTime);
 	ReChargeDash(_deltaTime);

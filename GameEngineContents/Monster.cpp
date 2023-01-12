@@ -592,10 +592,10 @@ void Monster::HpCheak()
 			case MonsterType::BlackEyes:
 				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
 				break;
-			case MonsterType::Green:
+			case MonsterType::GoblinLivesey:
 				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
 				break;
-			case MonsterType::GoblinLivesey:
+			case MonsterType::Green:
 				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
 				break;
 			case MonsterType::KoboldLivesey:
