@@ -32,7 +32,7 @@ void ThunderStafProjectile::Start()
 {
 	projectileRen_ = CreateComponent<GameEngineTextureRenderer>();
 	projectileRen_->SetTexture("Particle.png");
-	projectileRen_->GetTransform().SetWorldScale(20.f, 40.f, 1.f);
+	projectileRen_->GetTransform().SetWorldScale(40.f, 40.f, 1.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
 	projectileRen_->Off();

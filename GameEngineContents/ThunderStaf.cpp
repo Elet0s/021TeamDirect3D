@@ -76,7 +76,7 @@ void ThunderStaf::End()
 	GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
 	std::shared_ptr<ThunderStafProjectile> A = GetLevel()->CreateActor<ThunderStafProjectile>(ObjectOrder::Projectile);
 	A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
-	A->ProjectileSet(ThunderStafWeaponInfo_.weaponAtk_, ThunderStafWeaponInfo_.weaponSpeed_, ThunderStafWeaponInfo_.weaponProjectileNum_, ThunderStafWeaponInfo_.weaponPassNum_);
+	A->ProjectileSet(ThunderStafWeaponInfo_.weaponAtk_, ThunderStafWeaponInfo_.weaponSpeed_);
 }
 
 void ThunderStaf::Shoothing(float _deltaTime)

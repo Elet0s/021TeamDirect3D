@@ -172,12 +172,8 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 		GameEngineSound::SoundPlayOneshot("GoldCoin.wav");
 		break;
 	case ItemObjectOrder::Voidbead:
-		for (size_t i = 0; i < 300; i++)
+		for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)
 		{
-			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == nullptr)
-			{
-				break;
-			}
 			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] != A)
 			{
 				if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::GreenExp)
@@ -199,12 +195,13 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 			}
 		}
 	}
-
+	
 	for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)
 	{
 		if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
 		{
 			Monster::GetItemObjectManager()->DelteObject(i);
+			break;
 		}
 	}
 	return CollisionReturn::Stop;

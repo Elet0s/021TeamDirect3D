@@ -30,5 +30,6 @@ protected:
 
 private:
 	WeaponInfo ThunderStafWeaponInfo_;//¹«±â ½ºÅÈ
+
 	float timer_;
 };

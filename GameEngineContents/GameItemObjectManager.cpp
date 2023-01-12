@@ -19,8 +19,6 @@ void GameItemObjectManager::DelteObject(size_t _Num)
 	{
 		MsgBoxAssert("지우려고 하는 오브젝트가 존재하지 않습니다.");
 	}
-	allObjectContainer_[_Num]->itemObjectRenderer_->Death();
-	allObjectContainer_[_Num]->itemObjectCol_->Death();
 	allObjectContainer_[_Num]->Death();
 	allObjectContainer_.erase(allObjectContainer_.begin()+ _Num);
 	ItemUpdateNum_ -= 1;
