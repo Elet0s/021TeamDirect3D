@@ -134,6 +134,9 @@ public:
 	static bool AABB2DToAABB2D(const GameEngineTransform& _boxA, const GameEngineTransform& _boxB);
 	static bool OBB2DToOBB2D(const GameEngineTransform& _boxA, const GameEngineTransform& _boxB);
 
+	static bool AABB2DToSphere2D(const GameEngineTransform& _box, const GameEngineTransform& _circle);
+	static bool Sphere2DToAABB2D(const GameEngineTransform& _circle, const GameEngineTransform& _box);
+
 public:
 	//점차적으로 특정 오브젝트의 크기를 변화시키는 함수.
 	inline void AddLocalScale(const float4& _scaleValue)

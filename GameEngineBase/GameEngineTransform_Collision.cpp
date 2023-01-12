@@ -49,6 +49,28 @@ bool GameEngineTransform::OBB2DToOBB2D(const GameEngineTransform& _boxA, const G
 	return boxA.Intersects(boxB);
 }
 
+bool GameEngineTransform::AABB2DToSphere2D(const GameEngineTransform& _box, const GameEngineTransform& _circle)
+{
+	DirectX::BoundingBox box = _box.collisionDataObject_.aabb_;
+	DirectX::BoundingSphere circle = _circle.collisionDataObject_.sphere_;
+
+	box.Center.z = 0.f;
+	circle.Center.z = 0.f;
+
+	return box.Intersects(circle);
+}
+
+bool GameEngineTransform::Sphere2DToAABB2D(const GameEngineTransform& _circle, const GameEngineTransform& _box)
+{
+	DirectX::BoundingSphere circle = _circle.collisionDataObject_.sphere_;
+	DirectX::BoundingBox box = _box.collisionDataObject_.aabb_;
+
+	circle.Center.z = 0.f;
+	box.Center.z = 0.f;
+
+	return circle.Intersects(box);
+}
+
 void GameEngineTransform::CollisionScaleSetting()
 {
 	collisionDataObject_.obb_.Extents = (data_.worldScaleVector_.ABS3DReturn() * 0.5f);

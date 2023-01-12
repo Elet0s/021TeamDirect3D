@@ -32,7 +32,6 @@ protected:
 
 private:
 	void Attack();
-	void ResetRenderers();
 
 private:
 
