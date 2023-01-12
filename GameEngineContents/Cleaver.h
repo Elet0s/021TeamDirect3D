@@ -61,7 +61,7 @@ private:
 	float4 range_;
 	float4 playerPos_;
 
-	WeaponInfo CleaverWeaponInfo_;//¹«±â ½ºÅÈ
+	WeaponInfo cleaverWeaponInfo_;//¹«±â ½ºÅÈ
 
 
 };
