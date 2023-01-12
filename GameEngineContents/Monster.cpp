@@ -419,6 +419,10 @@ void Monster::FlashMonster(float _deltaTime)
 
 void Monster::HpCheak()
 {
+	if (monsterInfo_->hp_ > 0)
+	{
+		return;
+	}
 	if (monsterInfo_->hp_ <= 0)
 	{
 		int random_ = GameEngineRandom::mainRandom_.RandomInt(1, 3);
@@ -600,40 +604,44 @@ void Monster::ReduceHP()
 void Monster::RelocationMonster()
 {
 	float4 CameraPos = GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
-	float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(
-		float4(CameraPos.x - 1280, CameraPos.y - 720),
-		float4(CameraPos.x + 1280, CameraPos.y + 720)
-	);
-	monsterPosition_.z = -199.f;
 
-	if (monsterPosition_.x > CameraPos.x + 640 || monsterPosition_.x < CameraPos.x - 640)
+
+	while (true)
 	{
-		GetTransform().SetWorldPosition(monsterPosition_);
+		float4 monsterPosition_ = GameEngineRandom::mainRandom_.RandomFloat4(
+			float4(CameraPos.x - 1280, CameraPos.y - 720),
+			float4(CameraPos.x + 1280, CameraPos.y + 720));
+		monsterPosition_.z = -199.f;
+		if (monsterPosition_.x > CameraPos.x + 640 || monsterPosition_.x < CameraPos.x - 640)
+		{
+			GetTransform().SetWorldPosition(monsterPosition_);
 
-		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
-			monsterPosition_
-		);
+			allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_
+			);
 
-		allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
-			monsterPosition_.x,
-			monsterPosition_.y,
-			monsterPosition_.z + 2.f
-		);
+			allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_.x,
+				monsterPosition_.y,
+				monsterPosition_.z + 2.f
+			);
+			break;
+		}
+		else if (monsterPosition_.y > CameraPos.y + 360 || monsterPosition_.y < CameraPos.y - 360)
+		{
+			GetTransform().SetWorldPosition(monsterPosition_);
+
+			allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_
+			);
+
+			allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
+				monsterPosition_.x,
+				monsterPosition_.y,
+				monsterPosition_.z + 2.f
+			);
+			break;
+		}
 	}
-	else if (monsterPosition_.y > CameraPos.y + 360 || monsterPosition_.y < CameraPos.y - 360)
-	{
-		GetTransform().SetWorldPosition(monsterPosition_);
-
-		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
-			monsterPosition_
-		);
-
-		allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
-			monsterPosition_.x,
-			monsterPosition_.y,
-			monsterPosition_.z + 2.f
-		);
-	}
-
 
 }

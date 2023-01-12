@@ -121,7 +121,7 @@ void Spear::Shoothing(float _deltaTime)
 					}
 					std::shared_ptr<SpearProjectile> A = GetLevel()->CreateActor<SpearProjectile>(ObjectOrder::Projectile);
 					A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
-					A->ProjectileSet(spearWeaponInfo_.weaponAtk_, spearWeaponInfo_.weaponSpeed_, angle_);
+					A->ProjectileSet(spearWeaponInfo_.weaponAtk_, spearWeaponInfo_.weaponSpeed_, angle_,spearWeaponInfo_.weaponPassNum_);
 				}
 				duringtime_ = 0.f;
 			}

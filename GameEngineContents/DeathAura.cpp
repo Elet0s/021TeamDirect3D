@@ -42,7 +42,7 @@ void  DeathAura::StateSet()
 	PlayerInfo* Info_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
 	PlayerPassiveInfo* PInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
 	deathAuraWeaponInfo_.weaponAtk_ = 4.f + (1.f * currentlevel_) * (Info_->atk_ * PInfo_->atkMultiple_Result / 100.f);
-	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (Info_->attackSpeed_ / 100 * PInfo_->attackSpeed_Result / 100.f);//1초마다
+	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (Info_->attackSpeed_ * PInfo_->attackSpeed_Result / 100.f);//1초마다
 
 	deathAuraWeaponInfo_.weaponPassAtk_ = 0;
 	deathAuraWeaponInfo_.weaponPassNum_ = 2;
@@ -98,16 +98,19 @@ void DeathAura::Start()
 	deathAuraCollision01_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	deathAuraCollision01_->ChangeOrder(ObjectOrder::Projectile);
 	deathAuraCollision01_->GetTransform().SetWorldScale(69.f, 69.f, 0);
+	deathAuraCollision01_->SetCollisionMode(CollisionMode::Multiple);
 
 	deathAuraCollision02_ = CreateComponent<GameEngineCollision>();
 	deathAuraCollision02_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	deathAuraCollision02_->ChangeOrder(ObjectOrder::Projectile);
 	deathAuraCollision02_->GetTransform().SetWorldScale(69.f, 69.f, 0);
+	deathAuraCollision02_->SetCollisionMode(CollisionMode::Multiple);
 
 	deathAuraCollision03_ = CreateComponent<GameEngineCollision>();
 	deathAuraCollision03_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	deathAuraCollision03_->ChangeOrder(ObjectOrder::Projectile);
 	deathAuraCollision03_->GetTransform().SetWorldScale(69.f, 69.f, 0);
+	deathAuraCollision03_->SetCollisionMode(CollisionMode::Multiple);
 
 	Off();
 }

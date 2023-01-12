@@ -76,19 +76,19 @@ void Firering::Start()
 	fireringAuraCollision01_ = CreateComponent<GameEngineCollision>();
 	fireringAuraCollision01_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	fireringAuraCollision01_->ChangeOrder(ObjectOrder::Projectile);
-	fireringAuraCollision01_->SetCollisionMode(CollisionMode::Single);
+	fireringAuraCollision01_->SetCollisionMode(CollisionMode::Multiple);
 	fireringAuraCollision01_->GetTransform().SetWorldScale(46.f, 46.f, 0);
 
 	fireringAuraCollision02_ = CreateComponent<GameEngineCollision>();
 	fireringAuraCollision02_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	fireringAuraCollision02_->ChangeOrder(ObjectOrder::Projectile);
-	fireringAuraCollision02_->SetCollisionMode(CollisionMode::Single);
+	fireringAuraCollision02_->SetCollisionMode(CollisionMode::Multiple);
 	fireringAuraCollision02_->GetTransform().SetWorldScale(40.f, 40.f, 0);
 
 	fireringAuraCollision03_ = CreateComponent<GameEngineCollision>();
 	fireringAuraCollision03_->SetDebugSetting(CollisionType::CT_Sphere, float4::Blue);
 	fireringAuraCollision03_->ChangeOrder(ObjectOrder::Projectile);
-	fireringAuraCollision03_->SetCollisionMode(CollisionMode::Single);
+	fireringAuraCollision03_->SetCollisionMode(CollisionMode::Multiple);
 	fireringAuraCollision03_->GetTransform().SetWorldScale(40.f, 40.f, 0);
 
 	Off();

@@ -68,7 +68,7 @@ void Player::Start()
 
 		itemRangeCollision_ = CreateComponent<GameEngineCollision>();
 		itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-		itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
+		//itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
 		itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
 		itemRangeCollision_->SetCollisionMode(CollisionMode::Multiple);
 		itemRangeCollision_->GetTransform().SetLocalMove({ 0.f,-10.f ,0.f});
@@ -385,14 +385,14 @@ void Player::Update(float _deltaTime)
 	PlayerDash(_deltaTime);
 
 	PlayerDeathEvent();
-	ColCheak();
+//	ColCheak();
 	LevelUpEvent();
 	FlashPlayer(_deltaTime);
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		if (playerSkillManager_->GetSkillList()[5][0]->currentlevel_ < 1)
+		if (playerSkillManager_->GetSkillList()[5][2]->currentlevel_ < 1)
 		{
-			playerSkillManager_->GetSkillList()[5][0]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][2]->currentlevel_ += 1;
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임

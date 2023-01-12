@@ -84,7 +84,7 @@ void Cleaver::Shoothing(float _deltaTime)
 		GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
 		std::shared_ptr<CleaverProjectile> A = GetLevel()->CreateActor<CleaverProjectile>(ObjectOrder::Projectile);
 		A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
-		A->ProjectileSet(cleaverWeaponInfo_.weaponAtk_, cleaverWeaponInfo_.weaponSpeed_, angle_);
+		A->ProjectileSet(cleaverWeaponInfo_.weaponAtk_, cleaverWeaponInfo_.weaponSpeed_, angle_, cleaverWeaponInfo_.weaponPassNum_);
 
 		timer_ = 0.f;
 	}

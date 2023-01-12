@@ -84,9 +84,9 @@ void TestLevel::Start()
 	Monster::CreateMonster<Boss01>(this, 1);
 
 
-	Monster::SummonMonster<RedFlyingEyes>(this, 30);
+	Monster::SummonMonster<RedFlyingEyes>(this, 1);
 	//Monster::SummonMonster<BlackEyes>(this, 1);
-	Monster::SummonMonster<Boss01>(this, 1);
+	//Monster::SummonMonster<Boss01>(this, 1);
 
 	
 	//ShowCursor(false); 마우스 감추기
@@ -149,7 +149,7 @@ void TestLevel::LevelStartEvent()
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	if (Player::GetPlayerInst()->GetPlayerInfo().level_ == 0)
 	{
-		CreateActor<SoulCardSelectBox>()->DrawWeapon();
+	//	CreateActor<SoulCardSelectBox>()->DrawWeapon();
 
 	}
 	this->GetMainCamera()->SetFarZ(500.f);

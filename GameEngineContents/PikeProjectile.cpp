@@ -38,7 +38,7 @@ void PikeProjectile::Start()
 	projectileRen_->Off();
 
 	projectileCol_ = CreateComponent<GameEngineCollision>();
-	projectileCol_->SetDebugSetting(CollisionType::CT_AABB2D, float4::Blue);
+	projectileCol_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Blue);
 	projectileCol_->GetTransform().SetLocalScale({ 50.f, 120.f, 1.0f });
 	projectileCol_->ChangeOrder(ObjectOrder::Projectile);
 	projectileCol_->SetCollisionMode(CollisionMode::Single);
@@ -63,7 +63,7 @@ void PikeProjectile::Update(float _deltaTime)
 	{
 		TimeOff(_deltaTime);
 		Shoothing(_deltaTime);
-		projectileCol_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&PikeProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
+		projectileCol_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&PikeProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
 	}
 }
 

@@ -20,7 +20,8 @@ SpearProjectile::SpearProjectile()
 	posSet_(false),
 	projectileatk_(0.f),
 	projectilespeed_(0.f),
-	angle_(0.f)
+	angle_(0.f),
+	passNum_(0)
 {
 }
 SpearProjectile::~SpearProjectile()
@@ -72,12 +73,13 @@ void SpearProjectile::End()
 
 }
 
-void SpearProjectile::ProjectileSet(float _atk, float _speed, float _angle)
+void SpearProjectile::ProjectileSet(float _atk, float _speed, float _angle, size_t _passNum)
 {
 	projectileatk_ = _atk;
 	projectilespeed_ = _speed;
 	angle_ = _angle;
 	posSet_ = true;
+	passNum_ = _passNum;
 }
 
 void SpearProjectile::Shoothing(float _deltaTime)
