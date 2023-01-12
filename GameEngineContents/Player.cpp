@@ -171,6 +171,10 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 	case ItemObjectOrder::Voidbead:
 		for (size_t i = 0; i < 300; i++)
 		{
+			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == nullptr)
+			{
+				break;
+			}
 			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] != A)
 			{
 					if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::GreenExp)
@@ -197,10 +201,6 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 	{
 		if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
 		{
-			A->itemObjectRenderer_->Off();
-			A->itemObjectCol_->Off();
-			A->chasePlayer_ = false;
-			A->Off();
 			Monster::GetItemObjectManager()->DelteObject(i);
 		}
 	}

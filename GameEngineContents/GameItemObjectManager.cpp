@@ -19,7 +19,11 @@ void GameItemObjectManager::DelteObject(size_t _Num)
 	{
 		MsgBoxAssert("지우려고 하는 오브젝트가 존재하지 않습니다.");
 	}
+	allObjectContainer_[_Num]->itemObjectRenderer_->Death();
+	allObjectContainer_[_Num]->itemObjectCol_->Death();
+	allObjectContainer_[_Num]->Death();
 	allObjectContainer_.erase(allObjectContainer_.begin()+ _Num);
+	ItemUpdateNum_ -= 1;
 }
 	
 void GameItemObjectManager::SetManager()
@@ -68,7 +72,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 	if (isFullContainer_ == false)
 	{
 		ItemUpdateNum_ += 1;
-		if (ItemUpdateNum_ == 300)
+		if (ItemUpdateNum_ == 299)
 		{
 			isFullContainer_ = true;
 		}
@@ -277,7 +281,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 	if (isFullContainer_ == false)
 	{
 		ItemUpdateNum_ += 1;
-		if (ItemUpdateNum_ == 300)
+		if (ItemUpdateNum_ == 299)
 		{
 			isFullContainer_ = true;
 		}
@@ -379,6 +383,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 	{
 		allObjectContainer_[0]->itemObjectRenderer_->Off();
 		allObjectContainer_[0]->itemObjectCol_->Off();
+		allObjectContainer_[0]->Death();
 		allObjectContainer_.erase(allObjectContainer_.begin());
 		if (randomorder == ItemObjectOrder::GreenExp)
 		{
