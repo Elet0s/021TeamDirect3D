@@ -67,7 +67,7 @@ void Pike::StateSet()
 	pikeWeaponInfo_.weaponPassAtk_ = 0;
 	pikeWeaponInfo_.weaponPassNum_ = 1 + Info->passProjectile_;
 
-	pikeWeaponInfo_.weaponSize_ = 1.f + (0.2f * currentlevel_) * (Info->projectileSize_ * PInfo->projectileSize_Result  / 100);
+	pikeWeaponInfo_.weaponSize_ = 1.2f + (0.2f * currentlevel_) * (Info->projectileSize_ * PInfo->projectileSize_Result  / 100);
 	pikeWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100; ;
 	pikeWeaponInfo_.weaponSpeed_ = 1000.f * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100; // 속도 10배 조정함
 	pikeWeaponInfo_.weaponProjectileNum_ = 1;

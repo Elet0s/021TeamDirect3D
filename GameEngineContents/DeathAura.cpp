@@ -24,6 +24,7 @@ DeathAura::~DeathAura()
 
 void DeathAura::Init()
 {
+	StateSet();
 	std::string sDamege = std::to_string(deathAuraWeaponInfo_.weaponAtk_ ).substr(0, std::to_string(deathAuraWeaponInfo_.weaponAtk_).find(".") + 3);
 	std::string sAttackSpeed = std::to_string(deathAuraWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(deathAuraWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 	std::string sRange = std::to_string(deathAuraWeaponInfo_.weaponSize_).substr(0, std::to_string(deathAuraWeaponInfo_.weaponSize_).find(".") + 3);
@@ -41,7 +42,7 @@ void  DeathAura::StateSet()
 {
 	PlayerInfo* Info_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
 	PlayerPassiveInfo* PInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
-	deathAuraWeaponInfo_.weaponAtk_ = 4.f + (1.f * currentlevel_) * (Info_->atk_ * PInfo_->atkMultiple_Result / 100.f);
+	deathAuraWeaponInfo_.weaponAtk_ = 1.f + (1.f * currentlevel_) * (Info_->atk_ * PInfo_->atkMultiple_Result / 100.f);
 	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (Info_->attackSpeed_ * PInfo_->attackSpeed_Result / 100.f);//1√ ∏∂¥Ÿ
 
 	deathAuraWeaponInfo_.weaponPassAtk_ = 0;

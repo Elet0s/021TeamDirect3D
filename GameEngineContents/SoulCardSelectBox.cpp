@@ -31,9 +31,9 @@ void SoulCardSelectBox::Start()
 
 		}
 	}
-	SoundPlayer::BGMPlay_->VolumeSet(0.2f);
+	SoundPlayer::BGMPlay_->VolumeSet(0.5f);
 	SoundPlayer::BGMPlay_->SpeedSet(0.9f);
-	GameEngineTime::GetInst()->SetGlobalTimeScale(0.1f);
+	GameEngineTime::GetInst()->SetGlobalTimeScale(0.01f);
 	std::shared_ptr<GameEngineTextureRenderer> Box = CreateComponent<GameEngineTextureRenderer>();
 	Box->SetTexture("SoulCardSelectTemplate - บนป็บป.png");
 	Box->ChangeCamera(CameraOrder::UICamera);
