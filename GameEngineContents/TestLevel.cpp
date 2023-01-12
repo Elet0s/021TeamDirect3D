@@ -76,11 +76,11 @@ void TestLevel::Start()
 	Monster::CreateMonster<NormalSkeleton>(this, 100);
 	Monster::CreateMonster<NormalKobold>(this, 100);
 	Monster::CreateMonster<NormalGoblin>(this, 100);
-	Monster::CreateMonster<Green>(this, 100);
+	Monster::CreateMonster<Red>(this, 100);
 	Monster::CreateMonster<FlyingEyes>(this, 100);
 	Monster::CreateMonster<Brown>(this, 100);
 
-	Monster::CreateMonster<Red>(this, 5);
+	Monster::CreateMonster<Green>(this, 5);
 	Monster::CreateMonster<KoboldLivesey>(this, 5);
 	Monster::CreateMonster<GoblinLivesey>(this, 5);
 	Monster::CreateMonster<BlackEyes>(this, 5);

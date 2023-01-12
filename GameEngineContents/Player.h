@@ -244,7 +244,7 @@ private:
 
 	bool flashLoop_;
 	float flashTimer_;
-
+	float healingTimer_;
 	float dashTimer_;
 	bool dashState_;
 

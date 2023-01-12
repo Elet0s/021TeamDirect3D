@@ -244,7 +244,7 @@ void StageUI::StageSetting()
 	killcountfontrenderer_->SetColor(float4::Yellow);
 	killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
 	killcountboxrenderer_->SetTexture("GradientMainMenu.png");
-	if (GetLevel<TestLevel>()->GetCombatType() == CombatType::EilteKill)
+	if (StageObject::GetNextStageInfo().combatType_ == CombatType::EilteKill)
 	{
 		elitekillFontrenderer_->On();
 		elitekillFontrenderer_->SetTextPosition(float4{ 30.f, 44.f });
