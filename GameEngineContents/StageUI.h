@@ -4,7 +4,8 @@ enum class UIType
 {
 	World,
 	Stage,
-	Claer
+	Claer,
+	Shop,
 };
 // Ό³Έν :
 class StageUI : public GameEngineActor
@@ -64,6 +65,7 @@ private:
 	void AllOff();
 	void UIUpdate();
 	void TimeSet();
+	void TimeCounter();
 
 	bool IsClear_;
 	float time_;

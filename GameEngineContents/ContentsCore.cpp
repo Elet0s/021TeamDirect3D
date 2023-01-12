@@ -2,6 +2,7 @@
 #include "ContentsCore.h"
 #include "TitleLevel.h"
 #include "WorldMapLevel.h"
+#include "ShopLevel.h"
 #include "StageLevel.h"
 #include "ClearLevel.h"
 #include "TestLevel.h"
@@ -43,6 +44,7 @@ void ContentsCore::Start()
 	CreateLevel<StageLevel>("Stage");
 	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
 	CreateLevel<ClearLevel>("Clear");
+	CreateLevel<ShopLevel>("Shop");
 	CreateLevel<WorldMapLevel>("WorldMap");
 	ChangeLevel("WorldMap");
 	//ChangeLevel("ShaderTestLevel");

@@ -101,7 +101,7 @@ public:
 		damageMitigation_(0.0f),
 		atkMultiple_(),
 		knockback_(),
-		gold_(0),
+		gold_(30000),
 		stage_(0),
 		targetScore_(0),
 		myCombatType_(CombatType::Max),

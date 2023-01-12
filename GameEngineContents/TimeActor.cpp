@@ -5,6 +5,7 @@
 TimeActor::TimeActor() 
 	: TimeRenderer_(nullptr)
 	, UIRenderer_(nullptr)
+	, time_(0)
 {
 }
 
@@ -38,6 +39,7 @@ void TimeActor::Start()
 
 void TimeActor::Update(float _deltaTime)
 {
+	time_ += _deltaTime;
 	SetTimer(TimeString);
 
 	TimeRenderer_->SetText(TimeString,"Free Pixel");
@@ -51,7 +53,7 @@ void TimeActor::SetTimer(std::string& _Text)
 	int Time_s;
 	int Time_m;
 
-	Time_all = GetLevel()->GetAccTime(); // 현재 스테이지가 시작되고 경과한 시간을 구한다
+	Time_all = time_; // 현재 스테이지가 시작되고 경과한 시간을 구한다
 
 	Time_m = static_cast<int>(Time_all) / 60;		// 총 시간을 초로 바꾼뒤에 3600으로 나눠서 분을 구한다
 	Time_s = static_cast<int>(Time_all) - (60 * Time_m);	// 총 시간을 초로 바꾼뒤에 3600 * 분을 하여 초를 구한다.

@@ -177,6 +177,9 @@ void StageUI::SetUI(UIType _type)
 	case UIType::Claer:
 		ClearSetting();
 		break;
+	case UIType::Shop:
+		WorldSetting();
+		break;
 	default:
 		break;
 	}
@@ -228,7 +231,7 @@ void StageUI::StageSetting()
 	coinboxrenderer_->On();
 	killcountfontrenderer_->On();
 	killcountboxrenderer_->On();
-	goalCount_ = 10;
+	goalCount_ = StageObject::GetNextStageInfo().killCount_;
 	stagefontrenderer_->SetText("스테이지 : " + std::to_string(Pinfo.stage_), "Free Pixel");
 	
 	coinfontrenderer_->SetTextPosition(float4{ 1260.f,140.f });
@@ -244,16 +247,27 @@ void StageUI::StageSetting()
 	if (GetLevel<TestLevel>()->GetCombatType() == CombatType::EilteKill)
 	{
 		elitekillFontrenderer_->On();
+		elitekillFontrenderer_->SetTextPosition(float4{ 30.f, 44.f });
+		elitekillFontrenderer_->SetSize(18.f);
 		elitekillFontrenderer_->SetText("엘리트를 잡으세요");
 		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 50.f ,1.f });
 		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 318.f });
 
 	}
-	else
+	else if (StageObject::GetNextStageInfo().combatType_ == CombatType::TimeAttack)
+	{
+		elitekillFontrenderer_->On();
+		elitekillFontrenderer_->SetTextPosition(float4{ 30.f, 44.f });
+		elitekillFontrenderer_->SetSize(20.f);
+		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 50.f ,1.f });
+		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 318.f });
+	}
+	else 
 	{
 		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 30.f ,1.f });
 		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 328.f });
 	}
+
 }
 
 void StageUI::ClearSetting()
@@ -311,7 +325,7 @@ void StageUI::UIUpdate()
 			}
 		}
 		
-		if (StageObject::GetNextStageInfo().combatType_ == CombatType::EilteKill)
+		else if (StageObject::GetNextStageInfo().combatType_ == CombatType::EilteKill)
 		{
 			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
 			
@@ -321,10 +335,22 @@ void StageUI::UIUpdate()
 				Monster::UnsummonAllMonsters();
 			}
 		}
+		else if (StageObject::GetNextStageInfo().combatType_ == CombatType::TimeAttack)
+		{
+			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+			TimeCounter();
+			if (Pinfo.stageTimer_ >= 90.f)
+			{
+				IsClear_ = true;
+				Monster::UnsummonAllMonsters();
+			}
+		}
 		break;
 	case UIType::Claer:
 		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
 		break;
+	case UIType::Shop:
+		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
 	default:
 		break;
 	}
@@ -340,7 +366,7 @@ void StageUI::TimeSet()
 
 	Time_all = Pinfo.stageTimer_; // 현재 스테이지가 시작되고 경과한 시간을 구한다
 
-	Time_m = static_cast<int>(Time_all) / 60;		// 총 시간을 초로 바꾼뒤에 3600으로 나눠서 분을 구한다
+	Time_m = static_cast<int>(Time_all) / 60;		// 총 시간을 초로 바꾼뒤에 60으로 나눠서 분을 구한다
 	Time_s = static_cast<int>(Time_all) - (60 * Time_m);
 
 	std::string num_s = std::to_string(Time_s);
@@ -351,4 +377,29 @@ void StageUI::TimeSet()
 	std::string TimeString = num_m + ":" + num_s;
 
 	timerfontRenderer_->SetText("생존 시간:\n" + TimeString, "맑음");
+}
+
+void StageUI::TimeCounter()
+{
+	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+
+	float Time_all;
+	int Time_s;
+	int Time_m;
+
+	Time_all = Pinfo.stageTimer_; // 현재 스테이지가 시작되고 경과한 시간을 구한다
+
+	Time_m = static_cast<int>(Time_all) / 60;		// 총 시간을 초로 바꾼뒤에 3600으로 나눠서 분을 구한다
+	Time_s = static_cast<int>(Time_all) - (60 * Time_m);
+
+
+	std::string num_s = std::to_string(Time_s);
+	num_s = std::string(2 - std::min<size_t>(2, num_s.length()), '0') + num_s; // 세자리를 출력하기 위해 초의 자릿수를 구한후 남은 자리를 0으로 채운다.
+
+	std::string num_m = std::to_string(Time_m);
+	num_m = std::string(2 - std::min<size_t>(2, num_m.length()), '0') + num_m;
+
+	std::string TimeString = num_m + ":" + num_s;
+
+	elitekillFontrenderer_->SetText("생존:" + TimeString + " / 01:30");
 }

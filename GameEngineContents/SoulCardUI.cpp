@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "SoulCardUI.h"
+#include "ShopLevel.h"
 #include "Player.h"
 #include "ClearLevel.h"
 #include "TestLevel.h"
@@ -132,7 +133,7 @@ void SoulCardUI::Update(float _deltaTime)
 
 
 
-	if (GetLevel<TestLevel>() == nullptr)
+	if (GetLevel<TestLevel>() == nullptr && GetLevel<ShopLevel>() == nullptr)
 	{
 		if (true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.5f, 0.f, 0.f), true))
 		{
@@ -152,9 +153,29 @@ void SoulCardUI::Update(float _deltaTime)
 			}
 		}
 	}
-	else if (GetLevel<ClearLevel>() == nullptr)
+	else if (GetLevel<ClearLevel>() == nullptr && GetLevel<ShopLevel>() == nullptr)
 	{
 		if (true == GetLevel<TestLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.5f, 0.f, 0.f), true))
+		{
+			if (GameEngineInput::GetInst()->IsUp("Click"))
+			{
+				mySkill_->IsOnOff();
+				mySkill_->Effect();
+				Death();
+			}
+			ColorChange(Appear::True);
+		}
+		else
+		{
+			if (ColorCheck_ == Appear::True)
+			{
+				ColorChange(Appear::False);
+			}
+		}
+	}
+	else if (GetLevel<TestLevel>() == nullptr && GetLevel<ClearLevel>() == nullptr)
+	{
+		if (true == GetLevel<ShopLevel>()->GetMousePointer()->IsPointing(template_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.5f, 0.f, 0.f), true))
 		{
 			if (GameEngineInput::GetInst()->IsUp("Click"))
 			{
