@@ -328,9 +328,9 @@ void Player::Update(float _deltaTime)
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		if (playerSkillManager_->GetSkillList()[5][4]->currentlevel_ < 1)
+		if (playerSkillManager_->GetSkillList()[5][3]->currentlevel_ < 1)
 		{
-			playerSkillManager_->GetSkillList()[5][4]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][3]->currentlevel_ += 1;
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill05On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임

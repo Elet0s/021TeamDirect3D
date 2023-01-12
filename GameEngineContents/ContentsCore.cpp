@@ -46,7 +46,7 @@ void ContentsCore::Start()
 	CreateLevel<ClearLevel>("Clear");
 	CreateLevel<ShopLevel>("Shop");
 	CreateLevel<WorldMapLevel>("WorldMap");
-	ChangeLevel("WorldMap");
+	ChangeLevel("Test");
 	//ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("Clear");
 
