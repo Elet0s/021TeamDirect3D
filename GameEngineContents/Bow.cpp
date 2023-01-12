@@ -35,8 +35,6 @@ Bow::~Bow()
 void Bow::Init()
 {
 	StateSet();
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-
 	std::string sDamege = std::to_string(static_cast<int>(floor(bowWeaponInfo_.weaponAtk_)));
 	std::string sAttackSpeed = std::to_string(bowWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(bowWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 
@@ -101,32 +99,7 @@ void Bow::End()
 }
 void Bow::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
 
-	bowWeaponInfo_.weaponAtk_ = round((2.f + currentlevel_ * 0.7f) * Info->atk_ * PInfo->atkMultiple_Result / 100);
-	bowWeaponInfo_.weaponAtkSpeed_ = round((150.f - 40.f * currentlevel_) / (Info->attackSpeed_ * PInfo->attackSpeed_Result));
-	bowWeaponInfo_.weaponPassAtk_ = 0;
-	bowWeaponInfo_.weaponPassNum_ = 0 + Info->passProjectile_;
-	bowWeaponInfo_.weaponProjectileNum_ = 1 + Info->addProjectile_;
-	bowWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
-	bowWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100;
-	bowWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
-	bowWeaponInfo_.weaponknockback_ = 100;
-	bowWeaponInfo_.weponConsecutiveAtkNum_ = 1;
-
-	if (currentlevel_ > 3)
-	{
-		bowWeaponInfo_.weponConsecutiveAtkNum_ = 2;
-	}
-	if (currentlevel_ >= 6)
-	{
-		bowWeaponInfo_.weaponProjectileNum_ = 3 + Info->addProjectile_;;
-	}
-	else if (currentlevel_ >= 2)
-	{
-		bowWeaponInfo_.weaponProjectileNum_ = 2 + Info->addProjectile_;;
-	}
 }
 void Bow::SerchTarget()
 {

@@ -770,8 +770,5 @@
     <ClInclude Include="CleaverProjectile.h">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="WindsBladeProjectile.h">
-      <Filter>Actor\02. Play\GameObject</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

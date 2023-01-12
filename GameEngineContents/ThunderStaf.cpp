@@ -44,7 +44,7 @@ void ThunderStaf::StateSet()
 	ThunderStafWeaponInfo_.weaponProjectileNum_ = 3 + Info->addProjectile_;
 	ThunderStafWeaponInfo_.weaponPassNum_ = 2 + Info->passProjectile_;
 
-	ThunderStafWeaponInfo_.weaponSize_ = 100;
+	ThunderStafWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
 	ThunderStafWeaponInfo_.weaponDuration_ = 250 + (30.f * currentlevel_);
 	ThunderStafWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result;
 

@@ -31,11 +31,17 @@ Crossbow::~Crossbow()
 }
 void Crossbow::Init()
 {
+	StateSet();
 
+	std::string sDamege = std::to_string(crossbowWeaponInfo_.weaponAtk_).substr(0, std::to_string(crossbowWeaponInfo_.weaponAtk_).find(".") + 3);
+	std::string sAttackSpeed = std::to_string(crossbowWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(crossbowWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
+
+	etc_ = "가장 체력이 많은 적에게\n발사합니다\n" + sDamege + "의 피해\n" + sAttackSpeed + "초 마다 공격\n투사체"
+		+ std::to_string(crossbowWeaponInfo_.weaponProjectileNum_) + "개\n" + std::to_string(crossbowWeaponInfo_.weaponPassNum_) + "관통 ";
 }
 void Crossbow::Effect()
 {
-
+	currentlevel_ += 1;
 }
 void Crossbow::Start()
 {
@@ -83,21 +89,33 @@ void Crossbow::End()
 
 void Crossbow::StateSet()
 {
+	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
 
-	crossbowWeaponInfo_.weaponAtk_ = 10.13f;
-	crossbowWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
+	crossbowWeaponInfo_.weaponAtk_ = round((9.f + (5.f * currentlevel_)) * Info->atk_ * PInfo->atkMultiple_Result / 100);
+	crossbowWeaponInfo_.weaponAtkSpeed_ = 150.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+	crossbowWeaponInfo_.weaponPassNum_ = 6 + 7 * currentlevel_ + Info->passProjectile_;
+	crossbowWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
+	crossbowWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100;
+	crossbowWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
+	crossbowWeaponInfo_.weaponProjectileNum_ = 1 + Info->addProjectile_;
 
-	crossbowWeaponInfo_.weaponPassAtk_ = 0;
-	crossbowWeaponInfo_.weaponPassNum_ = 0;
 
-	crossbowWeaponInfo_.weaponSize_ = 100;
-	crossbowWeaponInfo_.weaponDuration_ = 100;
-	crossbowWeaponInfo_.weaponSpeed_ = 100;
-
-	crossbowWeaponInfo_.weaponknockback_ = 100;
-
-	crossbowWeaponInfo_.weaponProjectileNum_ = 1;
-	crossbowWeaponInfo_.weponConsecutiveAtkNum_ = 1; //최대연속공격횟수 1개
+	if (currentlevel_ < 3)
+	{
+		crossbowWeaponInfo_.weaponAtkSpeed_ = 125.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+		crossbowWeaponInfo_.weaponProjectileNum_ = 1 + Info->addProjectile_;
+	}
+	else if (currentlevel_ < 5)
+	{
+		crossbowWeaponInfo_.weaponAtkSpeed_ = 100.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+		crossbowWeaponInfo_.weaponProjectileNum_ = 2 + Info->addProjectile_;
+	}
+	else
+	{
+		crossbowWeaponInfo_.weaponAtkSpeed_ = 75.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
+		crossbowWeaponInfo_.weaponProjectileNum_ = 3 + Info->addProjectile_;
+	}
 	
 }
 

@@ -26,4 +26,7 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
+	void StateSet();
+private:
+	WeaponInfo SwordrangWeaponInfo_;
 };

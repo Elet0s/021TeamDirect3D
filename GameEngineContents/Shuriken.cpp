@@ -126,9 +126,8 @@ void  Shuriken::StateSet()
 	shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 	shuriKenWeaponInfo_.weaponPassNum_ = Info->passProjectile_;
 	shuriKenWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
-	shuriKenWeaponInfo_.weaponDuration_ = 100;
-	shuriKenWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result;
-	shuriKenWeaponInfo_.weaponknockback_ = 100;
+	shuriKenWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100;
+	shuriKenWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
 
 	if (currentlevel_ < 2)
 	{
