@@ -76,6 +76,7 @@ void GameItemObjectManager::ObjectAllClear()
 
 	}
 	allObjectContainer_.clear();
+	ItemUpdateNum_ = 0;
 }
 void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemObjectOrder _itemObjectOrder, float4 _itemObjectPos)
 {
