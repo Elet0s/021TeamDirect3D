@@ -1,6 +1,5 @@
 #pragma once
 #include"Skill.h"
-#include"Mouse.h"
 
 //적을 조준 방향으로 밀어내는 약하지만 큰 투사체를 발사
 class Cleaver : public Skill
