@@ -234,6 +234,8 @@ protected:
 	void MoveDirectionUpdate(float _deltaTime);
 	void PlayerDash(float _deltaTime);
 
+	void ReChargeDash(float _deltaTime);
+
 	void PlayerDeathEvent();//hp 0이하면 off하고 파티클이벤트
 	void LevelUpEvent();//경험치 받고 전부차면 초기화해주고 레벨업해주는부분
 
@@ -245,6 +247,8 @@ private:
 
 	float dashTimer_;
 	bool dashState_;
+
+	float dashRechargeTimer_;
 
 	float4 moveDirection_;
 	std::shared_ptr<PlayerInfo> playerInfo_;

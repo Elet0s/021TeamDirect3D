@@ -21,7 +21,8 @@ Player::Player()
 	serchCloseMonster_(),
 	flash_(false),
 	flashLoop_(false),
-	flashTimer_(0)
+	flashTimer_(0),
+	dashRechargeTimer_(0)
 	
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
@@ -68,7 +69,7 @@ void Player::Start()
 
 		itemRangeCollision_ = CreateComponent<GameEngineCollision>();
 		itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-		//itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
+		itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
 		itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
 		itemRangeCollision_->SetCollisionMode(CollisionMode::Multiple);
 		itemRangeCollision_->GetTransform().SetLocalMove({ 0.f,-10.f ,0.f});
@@ -84,6 +85,7 @@ void Player::Start()
 	std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
 	shadowRenderer->SetTextureRenderer(playerRenderer_);
 
+	dashRechargeTimer_ = playerInfo_->dashReChargeTime_;
 	//serchCloseMonster_;
 	//Monster::GetMonsterList();
 
@@ -100,7 +102,7 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 	{
 	case ItemObjectOrder::GreenExp:
 		playerInfo_->exp_ += 5;
-		if (random_==1)
+		if (random_ == 1)
 		{
 			GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
 		}
@@ -177,18 +179,18 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 			}
 			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] != A)
 			{
-					if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::GreenExp)
-					{
-						Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
-					}
-					else if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::YellowExp)
-					{
-						Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
-					}
-					else if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::RedExp)
-					{
-						Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
-					}
+				if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::GreenExp)
+				{
+					Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
+				}
+				else if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::YellowExp)
+				{
+					Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
+				}
+				else if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::RedExp)
+				{
+					Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
+				}
 			}
 			else
 			{
@@ -302,7 +304,18 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	}
 
 }
-
+void Player::ReChargeDash(float _deltaTime)
+{
+	if (dashRechargeTimer_ <= 0&& playerInfo_->dashCount_< playerInfo_->dashFullCharge_)
+	{
+ 		dashRechargeTimer_ = playerInfo_->dashReChargeTime_;
+		playerInfo_->dashCount_ += 1;
+	}
+	else if (dashRechargeTimer_ > 0)
+	{
+		dashRechargeTimer_ -= _deltaTime;
+	}
+}
 void Player::PlayerDash(float _deltaTime)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("PlayerDash"))
@@ -383,9 +396,10 @@ void Player::Update(float _deltaTime)
 
 	MoveDirectionUpdate(_deltaTime);
 	PlayerDash(_deltaTime);
+	ReChargeDash(_deltaTime);
 
 	PlayerDeathEvent();
-//	ColCheak();
+ 	ColCheak();
 	LevelUpEvent();
 	FlashPlayer(_deltaTime);
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임

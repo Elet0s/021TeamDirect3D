@@ -149,7 +149,7 @@ void TestLevel::LevelStartEvent()
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 
 	if (Player::GetPlayerInst()->GetPlayerInfo().level_ == 0)
 	{
-	//	CreateActor<SoulCardSelectBox>()->DrawWeapon();
+	CreateActor<SoulCardSelectBox>()->DrawWeapon();
 
 	}
 	this->GetMainCamera()->SetFarZ(500.f);

@@ -773,7 +773,6 @@
     <ClInclude Include="CleaverProjectile.h">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="WindsBladeProjectile.h" />
     <ClInclude Include="ShopButton.h">
       <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
@@ -782,6 +781,9 @@
     </ClInclude>
     <ClInclude Include="ShopUIBox.h">
       <Filter>Actor\00. Global\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="WindsBladeProjectile.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
