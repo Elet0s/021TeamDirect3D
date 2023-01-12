@@ -63,7 +63,7 @@ void PikeProjectile::Update(float _deltaTime)
 	{
 		TimeOff(_deltaTime);
 		Shoothing(_deltaTime);
-	//	projectileCol_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&PikeProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
+		projectileCol_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&PikeProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
 	}
 }
 
@@ -104,8 +104,5 @@ CollisionReturn PikeProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCo
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ¥¹ÌÁöÁÜ
-	projectileRen_->Off();
-	projectileCol_->Off();
-	Death();
 	return CollisionReturn::Continue;
 }
