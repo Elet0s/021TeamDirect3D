@@ -108,7 +108,7 @@ void SkillManager::CreatePlayerAllSkill()
 		skillList_[5].push_back(Skill06);
 		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<ThunderStaf>(ObjectOrder::Skill, "ThunderStaf");
 		skillList_[5].push_back(Skill07);
-		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<WindsBlade>(ObjectOrder::Skill, "WindsBlade");
+		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<WindsBlade>(ObjectOrder::Skill, "WindBlade #44160");
 		skillList_[5].push_back(Skill08);
 		std::shared_ptr<Skill> Skill09 = myLevel_->CreateActor<Bow>(ObjectOrder::Skill, "Bow");
 		skillList_[5].push_back(Skill09);

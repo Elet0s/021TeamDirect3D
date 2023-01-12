@@ -15,6 +15,7 @@ public:
 	SoulCardSelectBox& operator=(const SoulCardSelectBox& _Other) = delete;
 	SoulCardSelectBox& operator=(SoulCardSelectBox&& _Other) noexcept = delete;
 	
+	void DrawWeapon();
 protected:
 
 private:
@@ -24,5 +25,6 @@ private:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override {};
+
 };
 

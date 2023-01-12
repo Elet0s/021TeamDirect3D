@@ -10,6 +10,7 @@ enum class Appear
 class Skill;
 class SoulCardUI : public GameEngineActor
 {
+	friend class SoulCardSelectBox;
 public:
 	// constrcuter destructer
 	SoulCardUI();
@@ -49,6 +50,7 @@ private:
 	void End() override {};
 
 	void CardDraw();
+	void WeaponDraw();
 	void ColorChange(Appear _Value);
 	
 
