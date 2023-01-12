@@ -38,11 +38,21 @@ public:
 			= &GameEngineTransform::OBB2DToOBB2D;
 
 
+
 		GameEngineCollision::collisionFunctions_[static_cast<int>(CollisionType::CT_AABB2D)][static_cast<int>(CollisionType::CT_Sphere2D)]
 			= &GameEngineTransform::AABB2DToSphere2D;
 
 		GameEngineCollision::collisionFunctions_[static_cast<int>(CollisionType::CT_Sphere2D)][static_cast<int>(CollisionType::CT_AABB2D)]
 			= &GameEngineTransform::Sphere2DToAABB2D;
+
+
+
+		GameEngineCollision::collisionFunctions_[static_cast<int>(CollisionType::CT_OBB2D)][static_cast<int>(CollisionType::CT_Sphere2D)]
+			= &GameEngineTransform::OBB2DToSphere2D;
+
+		GameEngineCollision::collisionFunctions_[static_cast<int>(CollisionType::CT_Sphere2D)][static_cast<int>(CollisionType::CT_OBB2D)]
+			= &GameEngineTransform::Sphere2DToOBB2D;
+
 
 		//추가 함수가 필요하다면 그때그때 만들어서 추가할 것.
 	}

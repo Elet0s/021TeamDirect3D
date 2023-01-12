@@ -38,10 +38,10 @@ void CleaverProjectile::Start()
 	projectileRen_->Off();
 
 	projectileCol_ = CreateComponent<GameEngineCollision>();
-	projectileCol_->SetDebugSetting(CollisionType::CT_AABB2D, float4::Blue);
+	projectileCol_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Blue);
 	projectileCol_->GetTransform().SetLocalScale({ 640.f, 100.f, 1.0f });
 	projectileCol_->ChangeOrder(ObjectOrder::Projectile);
-	projectileCol_->SetCollisionMode(CollisionMode::Single);
+	projectileCol_->SetCollisionMode(CollisionMode::Multiple);
 	projectileCol_->Off();
 }
 
@@ -63,7 +63,7 @@ void CleaverProjectile::Update(float _deltaTime)
 	{
 		TimeOff(_deltaTime);
 		Shoothing(_deltaTime);
-		projectileCol_->IsCollision(CollisionType::CT_AABB2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&CleaverProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
+		projectileCol_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&CleaverProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
 	}
 }
 
@@ -104,8 +104,8 @@ CollisionReturn CleaverProjectile::ProjectileToMonster(std::shared_ptr<GameEngin
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ¥¹ÌÁöÁÜ
-	projectileRen_->Off();
-	projectileCol_->Off();
-	Death();
+	//projectileRen_->Off();
+	//projectileCol_->Off();
+	//Death();
 	return CollisionReturn::Continue;
 }
