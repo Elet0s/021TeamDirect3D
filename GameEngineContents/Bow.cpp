@@ -90,7 +90,7 @@ void Bow::End()
 }
 void Bow::StateSet()
 {
-	if (nowLevel_ < 2)
+	if (currentlevel_ < 2)
 	{
 		bowWeaponInfo_.weaponAtk_ = 10.13f;
 		bowWeaponInfo_.weaponAtkSpeed_ = 300.f;//1ÃÊ¸¶´Ù
@@ -108,18 +108,18 @@ void Bow::StateSet()
 		bowWeaponInfo_.weponConsecutiveAtkNum_ = 1;
 
 	}
-	else if (nowLevel_ < 3)
+	else if (currentlevel_ < 3)
 	{
 
 	}
-	else if (nowLevel_ < 4)
+	else if (currentlevel_ < 4)
 	{
 	}
-	else if (nowLevel_ < 5)
+	else if (currentlevel_ < 5)
 	{
 
 	}
-	else if (nowLevel_ < 6)
+	else if (currentlevel_ < 6)
 	{
 	}
 }

@@ -11,7 +11,9 @@ Spear::Spear()
 	resultCos_(),
 	Shooting_(false),
 	range_(),
-	setAim_(false)
+	setAim_(false),
+	timeer_(0),
+	angle_()
 {
 
 }
@@ -45,10 +47,10 @@ void Spear::End()
 
 void Spear::StateSet()
 {
-	if (nowLevel_ < 2)
+	if (currentlevel_ < 2)
 	{ 
-		spearWeaponInfo_.weaponAtk_ = 1.f;
-		spearWeaponInfo_.weaponAtkSpeed_ = 100.f;//1초마다
+		spearWeaponInfo_.weaponAtk_ = Player::GetPlayerInst()->GetPlayerInfo().atk_ * currentlevel_ ;
+		spearWeaponInfo_.weaponAtkSpeed_ = 500.f;//1초마다
 
 		spearWeaponInfo_.weaponPassAtk_ = 0;
 		spearWeaponInfo_.weaponPassNum_ = 1;
@@ -62,27 +64,27 @@ void Spear::StateSet()
 		spearWeaponInfo_.weaponProjectileNum_ = 2;
 		spearWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 	}
-	else if (nowLevel_< 3)
+	else if (currentlevel_< 3)
 	{
 
 	}
-	else if (nowLevel_ < 4)
+	else if (currentlevel_ < 4)
 	{
 
 	}
-	else if (nowLevel_ < 5)
+	else if (currentlevel_ < 5)
 	{
 
 	}
-	else if (nowLevel_ < 6)
+	else if (currentlevel_ < 6)
 	{
 
 	}
-	else if (nowLevel_<7)
+	else if (currentlevel_<7)
 	{
 
 	}
-	else if (nowLevel_ < 8)
+	else if (currentlevel_ < 8)
 	{
 
 	}
@@ -90,18 +92,21 @@ void Spear::StateSet()
 
 void Spear::Shoothing(float _deltaTime)
 {
-	if (Shooting_ == false)
+	timeer_ += _deltaTime;
+	if (timeer_>1.f)
 	{
 		for (size_t i = 0; i < spearWeaponInfo_.weponConsecutiveAtkNum_; i++)
 		{
-			std::shared_ptr<SpearProjectile> A = GetLevel()->CreateActor<SpearProjectile>(ObjectOrder::Projectile);
-			A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y });
-			A->ProjectileSet(spearWeaponInfo_.weaponAtk_, spearWeaponInfo_.weaponAtkSpeed_);
-			Shooting_ = true;
+			for (size_t i = 0; i < spearWeaponInfo_.weaponProjectileNum_; i++)
+			{
+				std::shared_ptr<SpearProjectile> A = GetLevel()->CreateActor<SpearProjectile>(ObjectOrder::Projectile);
+				A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y });
+				A->ProjectileSet(spearWeaponInfo_.weaponAtk_, spearWeaponInfo_.weaponAtkSpeed_);
+				A->ProjectileAngleSet(30);
+			}
+			timeer_ = 0;
 		}
 	}
-
-
 }
 
 void Spear::ProjectileSort()

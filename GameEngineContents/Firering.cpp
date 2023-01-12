@@ -90,7 +90,7 @@ void Firering::Start()
 
 void Firering::StateSet()
 {
-	if (nowLevel_ < 2)
+	if (currentlevel_ < 2)
 	{
 		fireringAuraWeaponInfo_.weaponAtk_ = 10.f;
 		fireringAuraWeaponInfo_.weaponAtkSpeed_ = 3.f;
@@ -103,20 +103,20 @@ void Firering::StateSet()
 
 
 	}
-	else if (nowLevel_ < 3)
+	else if (currentlevel_ < 3)
 	{
 
 
 	}
-	else if (nowLevel_ < 4)
+	else if (currentlevel_ < 4)
 	{
 
 	}
-	else if (nowLevel_ < 5)
+	else if (currentlevel_ < 5)
 	{
 
 	}
-	else if (nowLevel_ < 6)
+	else if (currentlevel_ < 6)
 	{
 	}
 }

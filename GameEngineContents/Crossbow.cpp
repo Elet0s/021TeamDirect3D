@@ -79,7 +79,7 @@ void Crossbow::End()
 
 void Crossbow::StateSet()
 {
-	if (nowLevel_ < 2)
+	if (currentlevel_ < 2)
 	{
 		crossbowWeaponInfo_.weaponAtk_ = 10.13f;
 		crossbowWeaponInfo_.weaponAtkSpeed_ = 300.f;//1초마다
@@ -97,17 +97,17 @@ void Crossbow::StateSet()
 		crossbowWeaponInfo_.weponConsecutiveAtkNum_ = 1; //최대연속공격횟수 1개
 
 	}
-	else if (nowLevel_ < 3)
+	else if (currentlevel_ < 3)
 	{
 	}
-	else if (nowLevel_ < 4)
+	else if (currentlevel_ < 4)
 	{
 	}
-	else if (nowLevel_ < 5)
+	else if (currentlevel_ < 5)
 	{
 
 	}
-	else if (nowLevel_ < 6)
+	else if (currentlevel_ < 6)
 	{
 	}
 }

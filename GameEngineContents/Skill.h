@@ -9,6 +9,7 @@ struct WeaponInfo
 	float weaponSize_;//투사체크기
 	float weaponDuration_;//투사체지속시간
 	float weaponSpeed_;// 투사체속도 
+	float weaponRange_;// 무기 범위
 	float weaponknockback_;//넉백
 	size_t weponConsecutiveAtkNum_;//투사체 연속공격횟수(한 공격 주기에 몇번 던지는지)
 	size_t weaponProjectileNum_; //투사체추가갯수(한번에 던지는 발사체 횟수)
@@ -22,7 +23,8 @@ struct WeaponInfo
 		weaponknockback_(0),
 		weaponProjectileNum_(0),
 		weponConsecutiveAtkNum_(0),
-		weaponPassNum_(0)
+		weaponPassNum_(0),
+		weaponRange_(0)
 	{
 	}
 };
@@ -82,7 +84,7 @@ public:
 		return isOn_;
 	}
 public:
-	int nowLevel_;
+	int currentlevel_;
 	bool Shooting;
 protected:
 	virtual void  StateSet() ;
@@ -94,7 +96,6 @@ protected:
 	SoulCard valueSoulCard_;
 	std::string name_;
 	std::string etc_;
-	int currentlevel_;
 	int maxLevel_;
 
 	Rank myRank_;

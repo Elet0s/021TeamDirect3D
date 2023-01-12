@@ -61,9 +61,9 @@ void Shuriken::Start()
 
 		projectileGroup_.second = CreateComponent<GameEngineCollision>();
 		projectileGroup_.second->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-		projectileGroup_.second->GetTransform().SetWorldScale(20, 20, 0);
+		projectileGroup_.second->GetTransform().SetWorldScale(30, 30, 0);
 		projectileGroup_.second->ChangeOrder(ObjectOrder::Projectile);
-		projectileGroup_.second->SetCollisionMode(CollisionMode::Single);
+		projectileGroup_.second->SetCollisionMode(CollisionMode::Multiple);
 		projectileGroup_.second->Off();
 
 		if (i <10)
@@ -110,7 +110,7 @@ void Shuriken::End()
 
 void  Shuriken::StateSet()
 {
-	if (nowLevel_ < 2)
+	if (currentlevel_ < 2)
 	{
 		shuriKenWeaponInfo_.weaponAtk_ = 1.f;
 		shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//
@@ -124,11 +124,11 @@ void  Shuriken::StateSet()
 
 		shuriKenWeaponInfo_.weaponknockback_ = 100;
 
-		shuriKenWeaponInfo_.weaponProjectileNum_ = 2;
+		shuriKenWeaponInfo_.weaponProjectileNum_ = 10;
 		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 3;
 
 	}
-	else if (nowLevel_ < 3)
+	else if (currentlevel_ < 3)
 	{
 		shuriKenWeaponInfo_.weaponAtk_ = 1.58f;
 		shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//1ÃÊ¸¶´Ù
@@ -136,15 +136,15 @@ void  Shuriken::StateSet()
 		shuriKenWeaponInfo_.weaponSpeed_ = 100.f;
 
 	}
-	else if (nowLevel_ < 4)
+	else if (currentlevel_ < 4)
 	{
 		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 	}
-	else if (nowLevel_ < 5)
+	else if (currentlevel_ < 5)
 	{
 
 	}
-	else if (nowLevel_ < 6)
+	else if (currentlevel_ < 6)
 	{
 		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 3;
 	}

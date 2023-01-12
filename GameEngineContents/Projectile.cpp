@@ -38,6 +38,7 @@ void Projectile::Start()
 	projectileCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Red);
 	projectileCol_->GetTransform().SetLocalScale({ 25.0f, 25.0f, 1.0f });
 	projectileCol_->ChangeOrder(ObjectOrder::Projectile);
+	projectileCol_->SetCollisionMode(CollisionMode::Single);
 	projectileCol_->Off();
 }
 

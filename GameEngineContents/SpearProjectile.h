@@ -12,6 +12,7 @@ public:
 
 	CollisionReturn ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 	void ProjectileSet(float _atk, float _speed);
+	void ProjectileAngleSet (float _angle);
 public:
 	bool posSet_;
 protected:
@@ -37,4 +38,5 @@ private:
 	float4 mouseAimPos_;
 	float4 playerPos_;
 	float4 referenceVector_;
+	float angle_;
 };

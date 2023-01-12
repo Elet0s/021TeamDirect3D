@@ -105,7 +105,12 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 	}
 	else if (A->GetObjectOrder() == ItemObjectOrder::Meet)
 	{
-		playerInfo_->hp_ += 30;
+
+			playerInfo_->hp_ += 30;
+			if (playerInfo_->maxHp_ < playerInfo_->hp_)
+			{
+				playerInfo_->hp_ = playerInfo_->maxHp_;
+			}
 	}
 	else if (A->GetObjectOrder() == ItemObjectOrder::Gold)
 	{
@@ -133,10 +138,7 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 			A->Off();
 			Monster::GetItemObjectManager()->DelteObject(i);
 		}
-
 	}
-
-
 	return CollisionReturn::Stop;
 }
 
@@ -315,23 +317,23 @@ void Player::Update(float _deltaTime)
 	FlashPlayer(_deltaTime);
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		if (playerSkillManager_->GetSkillList()[5][3]->nowLevel_ < 1)
+		if (playerSkillManager_->GetSkillList()[5][3]->currentlevel_ < 1)
 		{
-			playerSkillManager_->GetSkillList()[5][3]->nowLevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][3]->currentlevel_ += 1;
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		if (playerSkillManager_->GetSkillList()[5][4]->nowLevel_ < 1)
+		if (playerSkillManager_->GetSkillList()[5][4]->currentlevel_ < 1)
 		{
-			playerSkillManager_->GetSkillList()[5][4]->nowLevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][4]->currentlevel_ += 1;
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill05On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		if (playerSkillManager_->GetSkillList()[5][5]->nowLevel_ < 1)
+		if (playerSkillManager_->GetSkillList()[5][5]->currentlevel_ < 1)
 		{
-			playerSkillManager_->GetSkillList()[5][5]->nowLevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][5]->currentlevel_ += 1;
 		}
 	}
 

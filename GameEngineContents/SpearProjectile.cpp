@@ -18,7 +18,8 @@ SpearProjectile::SpearProjectile()
 	resultVector_(),
 	posSet_(false),
 	projectileatk_(0.f),
-	projectilespeed_(0.f)
+	projectilespeed_(0.f),
+	angle_(0.f)
 {
 
 }
@@ -31,7 +32,7 @@ void SpearProjectile::Start()
 {
 	projectileRen_ = CreateComponent<GameEngineTextureRenderer>();
 	projectileRen_->SetTexture("Spear.png");
-	projectileRen_->GetTransform().SetWorldScale(50.f, 50.f, 1.f);
+	projectileRen_->GetTransform().SetWorldScale(40.f, 40.f, 1.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
 	projectileRen_->Off();
@@ -97,7 +98,7 @@ void SpearProjectile::Shoothing(float _deltaTime)
 			projectileRen_->On();
 			projectileCol_->On();
 		}
-			mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition();
+			mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst()->GetTransform().GetWorldPosition();
 			playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
 
 			range_.x =   mouseAimPos_.x - playerPos_.x;
@@ -109,9 +110,14 @@ void SpearProjectile::Shoothing(float _deltaTime)
 	GetTransform().SetWorldMove(referenceVector_);
 }
 
+void SpearProjectile::ProjectileAngleSet(float _angle)
+{
+	angle_ = _angle;
+}
+
 void SpearProjectile::Rotate()
 {
-	GetTransform().SetWorldRotation(60, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle());
+	GetTransform().SetWorldRotation(0, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle() + angle_);
 
 }
 
