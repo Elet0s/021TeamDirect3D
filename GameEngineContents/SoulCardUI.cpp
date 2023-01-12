@@ -266,77 +266,7 @@ void SoulCardUI::Setting()
 		etc_[i]->Death();
 	}
 
-	etc_.clear();
-	{
-		skillName_->SetText(mySkill_->GetSkillName(), "Free Pixel");
-		icon_->SetTexture(mySkill_->GetName().data() + std::string(".png"));
-	}
-	{
-		switch (mySkill_->GetRank())
-		{
-			case Rank::Spotted:
-				template_->SetTexture("SoulCardSpotted.png");
-				Rank_->SetText("더럽혀진", "Free Pixel");
-				Rank_->SetColor(float4::White);
-				RankColor_ = float4::White;
-				break;
-			case Rank::Normal:
-				template_->SetTexture("SoulCardNormal.png");
-				Rank_->SetText("일반", "Free Pixel");
-				Rank_->SetColor(float4::White);
-				RankColor_ = float4::White;
-				break;
-			case Rank::UnCommon:
-				template_->SetTexture("SoulCardUnCommon.png");
-				Rank_->SetText("언커먼", "Free Pixel");
-				Rank_->SetColor(float4(0.f, 1.f, 0.f));
-				RankColor_ = float4(0.f, 1.f, 0.f);
-				break;
-			case Rank::Rare:
-				template_->SetTexture("SoulCardRare.png");
-				Rank_->SetText("레어", "Free Pixel");
-				Rank_->SetColor(float4(0.f, 0.f, 1.f));
-				RankColor_ = float4(0.f, 0.f, 1.f);
-				break;
-			case Rank::Epic:
-				template_->SetTexture("SoulCardEpic.png");
-				Rank_->SetText("에픽", "Free Pixel");
-				Rank_->SetColor(float4(1.0f, 0.0f, 1.f));
-				RankColor_ = float4(1.0f, 0.0f, 1.f);
-				break;
-			default:
-				break;
-		}
-	}
 
-	{
-		mySkill_->Init();
-		Level_->SetText(std::to_string(mySkill_->GetCurrentlevel()) + "-> " + std::to_string(mySkill_->GetCurrentlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()), "Free Pixel");
-		std::string Text = reinterpret_cast<DeathAura*>(mySkill_.get())->GetEtc();
-		size_t EntryIndex = Text.find("\n");
-		size_t firstIndex = 0;
-		std::string Text2 = Text.substr(0, EntryIndex);
-		for (size_t i = 0; i < 8; i++)
-		{
-			etc_.push_back(CreateComponent<GameEngineFontRenderer>());
-			etc_[i]->SetPositionMode(FontPositionMode::World);
-			etc_[i]->SetSize(14.f);
-			Text2 = Text.substr(firstIndex, EntryIndex - firstIndex) + "";
-			etc_[i]->SetText(Text2);
-			etc_[i]->SetTopAndBotSort(TopAndBotSort::Top);
-			etc_[i]->SetLeftAndRightSort(LeftAndRightSort::Center);
-			etc_[i]->GetTransform().SetLocalMove(float4(0.f, 144.f - 16.f * i, -10.f));
-			etc_[i]->ChangeCamera(CameraOrder::UICamera);
-			etc_[i]->SetColor(TextColor_);
-			if (Text.npos == EntryIndex)
-			{
-				break;
-			}
-
-			firstIndex = EntryIndex + 1;
-			EntryIndex = Text.find("\n", firstIndex);
-		}
-	}
 }
 
 void SoulCardUI::CardDraw()
@@ -453,6 +383,78 @@ void SoulCardUI::WeaponDraw()
 	}
 
 	mySkill_->IsOnOn();
+
+	etc_.clear();
+	{
+		skillName_->SetText(mySkill_->GetSkillName(), "Free Pixel");
+		icon_->SetTexture(mySkill_->GetName().data() + std::string(".png"));
+	}
+	{
+		switch (mySkill_->GetRank())
+		{
+		case Rank::Spotted:
+			template_->SetTexture("SoulCardSpotted.png");
+			Rank_->SetText("더럽혀진", "Free Pixel");
+			Rank_->SetColor(float4::White);
+			RankColor_ = float4::White;
+			break;
+		case Rank::Normal:
+			template_->SetTexture("SoulCardNormal.png");
+			Rank_->SetText("일반", "Free Pixel");
+			Rank_->SetColor(float4::White);
+			RankColor_ = float4::White;
+			break;
+		case Rank::UnCommon:
+			template_->SetTexture("SoulCardUnCommon.png");
+			Rank_->SetText("언커먼", "Free Pixel");
+			Rank_->SetColor(float4(0.f, 1.f, 0.f));
+			RankColor_ = float4(0.f, 1.f, 0.f);
+			break;
+		case Rank::Rare:
+			template_->SetTexture("SoulCardRare.png");
+			Rank_->SetText("레어", "Free Pixel");
+			Rank_->SetColor(float4(0.f, 0.f, 1.f));
+			RankColor_ = float4(0.f, 0.f, 1.f);
+			break;
+		case Rank::Epic:
+			template_->SetTexture("SoulCardEpic.png");
+			Rank_->SetText("에픽", "Free Pixel");
+			Rank_->SetColor(float4(1.0f, 0.0f, 1.f));
+			RankColor_ = float4(1.0f, 0.0f, 1.f);
+			break;
+		default:
+			break;
+		}
+	}
+
+	{
+		mySkill_->Init();
+		Level_->SetText(std::to_string(mySkill_->GetCurrentlevel()) + "-> " + std::to_string(mySkill_->GetCurrentlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()), "Free Pixel");
+		std::string Text = reinterpret_cast<DeathAura*>(mySkill_.get())->GetEtc();
+		size_t EntryIndex = Text.find("\n");
+		size_t firstIndex = 0;
+		std::string Text2 = Text.substr(0, EntryIndex);
+		for (size_t i = 0; i < 8; i++)
+		{
+			etc_.push_back(CreateComponent<GameEngineFontRenderer>());
+			etc_[i]->SetPositionMode(FontPositionMode::World);
+			etc_[i]->SetSize(14.f);
+			Text2 = Text.substr(firstIndex, EntryIndex - firstIndex) + "";
+			etc_[i]->SetText(Text2);
+			etc_[i]->SetTopAndBotSort(TopAndBotSort::Top);
+			etc_[i]->SetLeftAndRightSort(LeftAndRightSort::Center);
+			etc_[i]->GetTransform().SetLocalMove(float4(0.f, 144.f - 16.f * i, -10.f));
+			etc_[i]->ChangeCamera(CameraOrder::UICamera);
+			etc_[i]->SetColor(TextColor_);
+			if (Text.npos == EntryIndex)
+			{
+				break;
+			}
+
+			firstIndex = EntryIndex + 1;
+			EntryIndex = Text.find("\n", firstIndex);
+		}
+	}
 
 }
 
