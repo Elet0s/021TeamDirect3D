@@ -64,12 +64,6 @@ void WindsBlade::End()
 
 }
 
-CollisionReturn WindsBlade::WindsBladeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
-{
-
-	return CollisionReturn::Continue;
-}
-
 void WindsBlade::Shoothing(float _deltaTime)
 {
 	timer_ += _deltaTime;

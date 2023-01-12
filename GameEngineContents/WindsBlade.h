@@ -20,7 +20,6 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn WindsBladeToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
 protected:
 	void Start() override;

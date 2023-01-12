@@ -20,14 +20,15 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
 	void StateSet();
+	void Shoothing(float _deltaTime);//사출패턴
 
 private:
 	WeaponInfo ThunderStafWeaponInfo_;//무기 스탯
+	float timer_;
 };

@@ -329,7 +329,7 @@ void StageUI::UIUpdate()
 		{
 			killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
 			
-			if (Pinfo.targetScore_ >= goalCount_)
+			if (Pinfo.eliteTargetScore_>= 5)
 			{
 				IsClear_ = true;
 				Monster::UnsummonAllMonsters();

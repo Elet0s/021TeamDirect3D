@@ -1,8 +1,10 @@
 #include"PreCompile.h"
 #include"ThunderStaf.h"
+#include"ThunderStafProjectile.h"
 #include "Player.h"
 
 ThunderStaf::ThunderStaf()
+	:timer_(0.f)
 {
 	name_ = "번개 지팡이";
 	SetName(std::string_view("ThunderStaf"));
@@ -67,9 +69,17 @@ void ThunderStaf::StateSet()
 
 void ThunderStaf::Update(float _deltaTime)
 {
-
+	Shoothing(_deltaTime);
 }
 void ThunderStaf::End()
+{
+	GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
+	std::shared_ptr<ThunderStafProjectile> A = GetLevel()->CreateActor<ThunderStafProjectile>(ObjectOrder::Projectile);
+	A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+	A->ProjectileSet(ThunderStafWeaponInfo_.weaponAtk_, ThunderStafWeaponInfo_.weaponSpeed_, ThunderStafWeaponInfo_.weaponProjectileNum_, ThunderStafWeaponInfo_.weaponPassNum_);
+}
+
+void ThunderStaf::Shoothing(float _deltaTime)
 {
 
 }
