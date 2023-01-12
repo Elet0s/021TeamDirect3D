@@ -246,19 +246,19 @@ void TestLevel::StageMonsterManager()
 			if (summonCounter_ == 0 && stageManagerTimer_ < 1.f)
 			{
 				SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1);
-				Monster::SummonMonster<Brown>(this, 50);
+				Monster::SummonMonster<Brown>(this, 100);
 				summonCounter_ += 1;
 			}
 
 			else if (summonCounter_ == 1 && stageManagerTimer_ > 20.f)
 			{
-				Monster::SummonMonster<FlyingEyes>(this, 50);
+				Monster::SummonMonster<FlyingEyes>(this, 100);
 				summonCounter_ += 1;
 			}
 			else if (summonCounter_ == 2 && stageManagerTimer_ > 50.f)
 			{
-				Monster::SummonMonster<NormalGoblin>(this, 25);
-				Monster::SummonMonster<NormalKobold>(this, 25);
+				Monster::SummonMonster<NormalGoblin>(this, 50);
+				Monster::SummonMonster<NormalKobold>(this, 50);
 
 				summonCounter_ += 1;
 			}
@@ -283,6 +283,8 @@ void TestLevel::StageMonsterManager()
 				Monster::SummonMonster<NormalSkeleton>(this, 100);
 				Monster::SummonMonster<Red>(this, 100);
 				Monster::SummonMonster<RedFlyingEyes>(this, 100);
+				Monster::SummonMonster<KoboldLivesey>(this, 5);
+				Monster::SummonMonster<GoblinLivesey>(this, 5);
 				summonCounter_ += 1;
 			}
 			break;

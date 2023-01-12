@@ -40,19 +40,19 @@ ItemObjectOrder GameItemObjectManager::RandomObjectOrder()
 {
 	int randomint = GameEngineRandom::mainRandom_.RandomInt(1,100);
 	ItemObjectOrder randomObjectOrder = ItemObjectOrder::None;
-	if (randomint > 90)
-	{
-		randomObjectOrder = ItemObjectOrder::Meet;
-	}
-	else if (randomint >80)
-	{
-		randomObjectOrder = ItemObjectOrder::Gold;
-	}
-	else if (randomint >70)
+	if (randomint > 99)
 	{
 		randomObjectOrder = ItemObjectOrder::Voidbead;
 	}
-	else if (randomint >50)
+	else if (randomint >96)
+	{
+		randomObjectOrder = ItemObjectOrder::Meet;
+	}
+	else if (randomint >90)
+	{
+		randomObjectOrder = ItemObjectOrder::Gold;
+	}
+	else if (randomint >60)
 	{
 		randomObjectOrder = ItemObjectOrder::RedExp;
 	}
