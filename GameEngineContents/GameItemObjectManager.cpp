@@ -68,14 +68,21 @@ ItemObjectOrder GameItemObjectManager::RandomObjectOrder()
 }
 void GameItemObjectManager::ObjectAllClear()
 {
-	for (size_t i = 0; i < allObjectContainer_.size(); i++)
+	for (size_t i = 0; i < 300 ; i++)
 	{
-		allObjectContainer_[i]->itemObjectRenderer_->Death();
-		allObjectContainer_[i]->itemObjectCol_->Death();
-		allObjectContainer_[i]->Death();
+		if (allObjectContainer_[i] == nullptr)
+		{
+			break;
+		}
+		else
+		{
+			allObjectContainer_[i]->itemObjectRenderer_->Death();
+			allObjectContainer_[i]->itemObjectCol_->Death();
+			allObjectContainer_[i]->Death();
+			allObjectContainer_.erase(allObjectContainer_.begin() + i);
+		}
 
 	}
-	allObjectContainer_.clear();
 	ItemUpdateNum_ = 0;
 }
 void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemObjectOrder _itemObjectOrder, float4 _itemObjectPos)
@@ -288,7 +295,6 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4 _itemObjectPos)
 {
 	ItemObjectOrder randomorder = RandomObjectOrder();
-	//ItemObjectOrder randomorder = ItemObjectOrder::GreenExp;
 	if (isFullContainer_ == false)
 	{
 		ItemUpdateNum_ += 1;

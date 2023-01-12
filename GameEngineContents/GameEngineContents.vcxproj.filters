@@ -442,6 +442,9 @@
     <ClCompile Include="EndActor.cpp">
       <Filter>Actor\03. End and Title</Filter>
     </ClCompile>
+    <ClCompile Include="ThunderStafProjectile.cpp">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -787,6 +790,9 @@
     </ClInclude>
     <ClInclude Include="EndActor.h">
       <Filter>Actor\03. End and Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ThunderStafProjectile.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
