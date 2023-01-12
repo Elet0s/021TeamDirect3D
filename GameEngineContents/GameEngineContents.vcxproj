@@ -243,6 +243,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EndActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EndLevel.h">
       <SubType>
       </SubType>
@@ -526,6 +530,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TitleActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
@@ -655,6 +663,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Durability.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EndActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -941,6 +953,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TimeActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

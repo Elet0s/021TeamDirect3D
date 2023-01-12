@@ -94,6 +94,9 @@
     <Filter Include="Actor\02. Play\GameObject">
       <UniqueIdentifier>{6d2a5ff4-cf02-445f-be95-968501907971}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\03. End and Title">
+      <UniqueIdentifier>{605e1ce8-7d45-4dd1-b633-eb2e0bda5864}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -432,6 +435,12 @@
     </ClCompile>
     <ClCompile Include="EndLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleActor.cpp">
+      <Filter>Actor\03. End and Title</Filter>
+    </ClCompile>
+    <ClCompile Include="EndActor.cpp">
+      <Filter>Actor\03. End and Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -772,6 +781,12 @@
     </ClInclude>
     <ClInclude Include="EndLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleActor.h">
+      <Filter>Actor\03. End and Title</Filter>
+    </ClInclude>
+    <ClInclude Include="EndActor.h">
+      <Filter>Actor\03. End and Title</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
