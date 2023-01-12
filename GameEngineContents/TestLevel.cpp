@@ -1,4 +1,5 @@
 #include "PreCompile.h"
+#include "StageObject.h"
 #include "TestLevel.h"
 #include "TimeActor.h"
 #include "StageUI.h"
@@ -24,6 +25,7 @@
 #include "GoblinLivesey.h"
 #include "Boss01.h"
 #include "MagicCircle.h"
+#include "SoulCardSelectBox.h"
 
 TestLevel::TestLevel()
 	: fieldRenderingActor_(nullptr),
@@ -66,7 +68,7 @@ void TestLevel::Start()
 
 	std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	
-	Monster::ReserveMonsters(this, 30);
+	Monster::ReserveMonsters(this, 303);
 
 	Monster::CreateMonster<RedFlyingEyes>(this, 30);
 	//Monster::CreateMonster<NormalSkeleton>(this, 2);
@@ -141,6 +143,11 @@ void TestLevel::Update(float _DeltaTime)
 
 void TestLevel::LevelStartEvent()
 {
+	if (Player::GetPlayerInst()->GetPlayerInfo().level_ == 0)
+	{
+		CreateActor<SoulCardSelectBox>()->DrawWeapon();
+
+	}
 	Player::GetPlayerInst()->On();
 	stageUI_->SetUI(UIType::Stage);
 	SoundPlayer::BGMPlay_->ChangeBgm("ForestFightMusic.wav", 1); 

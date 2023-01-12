@@ -97,3 +97,11 @@ void SoulCardSelectBox::Update(float _deltaTime)
 		Cards[1]->CardRelease();
 	}
 }
+
+
+void SoulCardSelectBox::DrawWeapon()
+{
+	Cards[0]->WeaponDraw();
+	Cards[1]->WeaponDraw();
+	Cards[2]->WeaponDraw();
+}

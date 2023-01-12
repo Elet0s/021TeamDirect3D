@@ -10,5 +10,7 @@ int APIENTRY wWinMain(
     _In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow)
 {
+    
     GameEngineCore::Start<ContentsCore>();
+    
 }

@@ -232,8 +232,6 @@ void SoulCardUI::ColorChange(Appear _Value)
 void SoulCardUI::Setting()
 {
 	CardDraw();
-	//std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
-	//mySkill_  = SkillList[5][11];
 	
 	for (size_t i = 0; i < etc_.size(); i++)
 	{
@@ -363,7 +361,7 @@ void SoulCardUI::CardDraw()
 	{
 		std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
 		int RankRandom = 0;
-		int IndexRandom = 0;
+		
 		int Randomnum = GameEngineRandom::mainRandom_.RandomInt(1, 100);
 
 		if (Randomnum <= 30)
@@ -404,6 +402,31 @@ void SoulCardUI::CardDraw()
 	mySkill_->IsOnOn();
 }
 
+
+void SoulCardUI::WeaponDraw()
+{
+	if (mySkill_ != nullptr)
+	{
+		mySkill_->IsOnOff();
+	}
+
+	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+	int IndexRandom = 0;
+	IndexRandom = GameEngineRandom::mainRandom_.RandomInt(0, static_cast<int>(SkillList[5].size() - 1));
+	
+	mySkill_ = SkillList[5][IndexRandom];
+
+
+	while (mySkill_->GetCurrentlevel() == mySkill_->GetMaxLevel() || true == mySkill_->GetIsOn())
+	{
+		IndexRandom = GameEngineRandom::mainRandom_.RandomInt(0, static_cast<int>(9));
+
+		mySkill_ = SkillList[5][IndexRandom];
+	}
+
+	mySkill_->IsOnOn();
+
+}
 
 void SoulCardUI::CardRelease()
 {
