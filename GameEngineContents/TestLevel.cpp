@@ -82,9 +82,9 @@ void TestLevel::Start()
 	Monster::CreateMonster<Boss01>(this, 1);
 
 
-	//Monster::SummonMonster<RedFlyingEyes>(this, 30);
+	Monster::SummonMonster<RedFlyingEyes>(this, 30);
 	//Monster::SummonMonster<BlackEyes>(this, 1);
-	//Monster::SummonMonster<Boss01>(this, 1);
+	Monster::SummonMonster<Boss01>(this, 1);
 
 	
 	//ShowCursor(false); 마우스 감추기

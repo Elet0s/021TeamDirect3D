@@ -49,7 +49,9 @@ protected:
 private:
 	bool Shooting_;
 	bool setAim_;
-	float timeer_;
+	float timer_;
+	float duringtime_;
+	size_t consecutiveCounter_;
 	float angle_;
 	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
 	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
