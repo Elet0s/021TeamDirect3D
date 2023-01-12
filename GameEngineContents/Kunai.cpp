@@ -52,20 +52,20 @@ void Kunai::StateSet()
 {
 	if (currentlevel_ < 2)
 	{
-		spearWeaponInfo_.weaponAtk_ = 4.f;//Player::GetPlayerInst()->GetPlayerInfo().atk_ * currentlevel_ ;
-		spearWeaponInfo_.weaponAtkSpeed_ = 2.f;//1초마다
+		kunaiWeaponInfo_.weaponAtk_ = 4.f;//Player::GetPlayerInst()->GetPlayerInfo().atk_ * currentlevel_ ;
+		kunaiWeaponInfo_.weaponAtkSpeed_ = 2.f;//1초마다
 
-		spearWeaponInfo_.weaponPassAtk_ = 0;
-		spearWeaponInfo_.weaponPassNum_ = 1;
+		kunaiWeaponInfo_.weaponPassAtk_ = 0;
+		kunaiWeaponInfo_.weaponPassNum_ = 1;
 
-		spearWeaponInfo_.weaponSize_ = 100;
-		spearWeaponInfo_.weaponDuration_ = 100;
-		spearWeaponInfo_.weaponSpeed_ = 1500.f;
+		kunaiWeaponInfo_.weaponSize_ = 100;
+		kunaiWeaponInfo_.weaponDuration_ = 100;
+		kunaiWeaponInfo_.weaponSpeed_ = 1500.f;
 
-		spearWeaponInfo_.weaponknockback_ = 100;
+		kunaiWeaponInfo_.weaponknockback_ = 100;
 
-		spearWeaponInfo_.weaponProjectileNum_ = 4;
-		spearWeaponInfo_.weponConsecutiveAtkNum_ = 1;
+		kunaiWeaponInfo_.weaponProjectileNum_ = 4;
+		kunaiWeaponInfo_.weponConsecutiveAtkNum_ = 1;
 	}
 	else if (currentlevel_ < 3)
 	{
@@ -97,9 +97,9 @@ void Kunai::Shoothing(float _deltaTime)
 {
 	timer_ += _deltaTime;
 	duringtime_ += _deltaTime;
-	if (timer_ > spearWeaponInfo_.weaponAtkSpeed_)
+	if (timer_ > kunaiWeaponInfo_.weaponAtkSpeed_)
 	{
-		if (spearWeaponInfo_.weponConsecutiveAtkNum_ > consecutiveCounter_)
+		if (kunaiWeaponInfo_.weponConsecutiveAtkNum_ > consecutiveCounter_)
 		{
 			if (duringtime_ > 0.1f)
 			{
@@ -108,8 +108,8 @@ void Kunai::Shoothing(float _deltaTime)
 				playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
 				range_.x = mouseAimPos_.x - playerPos_.x;
 				range_.y = mouseAimPos_.y - playerPos_.y;
-				consecutiveAngle_ = 360.f / spearWeaponInfo_.weaponProjectileNum_;
-				for (size_t i = 0; i < spearWeaponInfo_.weaponProjectileNum_; i++)
+				consecutiveAngle_ = 360.f / kunaiWeaponInfo_.weaponProjectileNum_;
+				for (size_t i = 0; i < kunaiWeaponInfo_.weaponProjectileNum_; i++)
 				{
 					if (i == 0)
 					{
@@ -129,7 +129,7 @@ void Kunai::Shoothing(float _deltaTime)
 					}
 					std::shared_ptr<KunaiProjectile> A = GetLevel()->CreateActor<KunaiProjectile>(ObjectOrder::Projectile);
 					A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
-					A->ProjectileSet(spearWeaponInfo_.weaponAtk_, spearWeaponInfo_.weaponSpeed_, angle_);
+					A->ProjectileSet(kunaiWeaponInfo_.weaponAtk_, kunaiWeaponInfo_.weaponSpeed_, angle_);
 				}
 				duringtime_ = 0.f;
 			}

@@ -348,15 +348,15 @@ void SkillManager::SkillLevelCheak()
 		}
 	}
 
-	if (skillList_[5][12]->currentlevel_ > 0 && skillList_[5][12]->IsUpdate() == false) //swordrang
+	if (skillList_[5][12]->currentlevel_ > 0 && skillList_[5][12]->IsUpdate() == false) //katana
 	{
 		skillList_[5][12]->On();
 	}
-	if (skillList_[5][13]->currentlevel_ > 0 && skillList_[5][13]->IsUpdate() == false) //swordrang
+	if (skillList_[5][13]->currentlevel_ > 0 && skillList_[5][13]->IsUpdate() == false) //magicWand
 	{
 		skillList_[5][13]->On();
 	}
-	if (skillList_[5][14]->currentlevel_ > 0 && skillList_[5][14]->IsUpdate() == false) //swordrang
+	if (skillList_[5][14]->currentlevel_ > 0 && skillList_[5][14]->IsUpdate() == false) //magicWisp
 	{
 		skillList_[5][14]->On();
 	}

@@ -60,7 +60,7 @@ private:
 	float4 range_;
 	float4 playerPos_;
 
-	WeaponInfo spearWeaponInfo_;//¹«±â ½ºÅÈ
+	WeaponInfo kunaiWeaponInfo_;//¹«±â ½ºÅÈ
 
 
 };

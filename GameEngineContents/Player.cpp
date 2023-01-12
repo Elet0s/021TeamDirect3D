@@ -66,11 +66,11 @@ void Player::Start()
 		collision_->ChangeOrder(ObjectOrder::Player);
 		collision_->SetCollisionMode(CollisionMode::Multiple);
 
-		itemRangeCollision_ = CreateComponent<GameEngineCollision>();
-		itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-		itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
-		itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
-		itemRangeCollision_->SetCollisionMode(CollisionMode::Multiple);
+		//itemRangeCollision_ = CreateComponent<GameEngineCollision>();
+		//itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
+		//itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
+		//itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
+		//itemRangeCollision_->SetCollisionMode(CollisionMode::Multiple);
 	}
 
 	playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
@@ -303,7 +303,7 @@ void Player::LevelUpEvent()
 
 void Player::ColCheak()
 {
-	itemRangeCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::ItemRangeToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
+	//itemRangeCollision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::ItemRangeToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
 	collision_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Item, CollisionType::CT_Sphere2D, std::bind(&Player::PlayerToGameItemObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 
@@ -320,9 +320,9 @@ void Player::Update(float _deltaTime)
 	FlashPlayer(_deltaTime);
 	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		if (playerSkillManager_->GetSkillList()[5][1]->currentlevel_ < 1)
+		if (playerSkillManager_->GetSkillList()[5][2]->currentlevel_ < 1)
 		{
-			playerSkillManager_->GetSkillList()[5][1]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][2]->currentlevel_ += 1;
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
@@ -334,9 +334,9 @@ void Player::Update(float _deltaTime)
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Skill05On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
-		if (playerSkillManager_->GetSkillList()[5][5]->currentlevel_ < 1)
+		if (playerSkillManager_->GetSkillList()[5][12]->currentlevel_ < 1)
 		{
-			playerSkillManager_->GetSkillList()[5][5]->currentlevel_ += 1;
+			playerSkillManager_->GetSkillList()[5][12]->currentlevel_ += 1;
 		}
 	}
 
@@ -368,7 +368,6 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 
 	playerSkillManager_->SetLevel(_thisLevel);
 	playerSkillManager_->CreatePlayerAllSkill();
-	playerSkillManager_->GetSkillList()[5][12]->currentlevel_++;
 }
 
 void Player::ResetScore()
