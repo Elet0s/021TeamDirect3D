@@ -12,7 +12,7 @@ public:
 
 	CollisionReturn ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
-	void ProjectileSet(float _atk, float _speed);
+	void ProjectileSet(float _atk, float _speed , size_t _projectileNum,bool _RLSwitch, size_t _passNum);
 public:
 	bool posSet_;
 protected:
@@ -21,13 +21,14 @@ protected:
 	void End() override;
 	void Shoothing(float _deltaTime);
 	void TimeOff(float _deltaTime);
-	void Rotate();
+	void LevelEndEvent() override;
 private:
 	std::shared_ptr < GameEngineTextureRenderer> projectileRen_;
 	std::shared_ptr < GameEngineCollision> projectileCol_;
 	float timer_;
 	float projectileatk_;
 	float projectilespeed_;
+	size_t projectileNum_;
 	float px_;
 	float py_;
 	float mpx_;
@@ -37,5 +38,6 @@ private:
 	bool shoothing_;
 	float4 mouseAimPos_;
 	float4 playerPos_;
-	float angle_;
+	bool RLSwitch_;
+	size_t passNum_;
 };

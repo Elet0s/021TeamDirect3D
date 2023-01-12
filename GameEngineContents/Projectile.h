@@ -20,6 +20,7 @@ protected:
 	void End() override;
 	void Shoothing(float _deltaTime);
 	void TimeOff(float _deltaTime);
+	void LevelEndEvent() override;
 private:
 	std::shared_ptr < GameEngineTextureRenderer> projectileRen_;
 	std::shared_ptr < GameEngineCollision> projectileCol_;

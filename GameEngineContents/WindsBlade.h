@@ -31,4 +31,6 @@ protected:
 
 private:
 	WeaponInfo WindsBladeWeaponInfo_;//¹«±â ½ºÅÈ
+	bool RLSwitch_;
+	float timer_;
 };

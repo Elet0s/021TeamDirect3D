@@ -306,22 +306,22 @@ void SkillManager::SkillLevelCheak()
 	if (skillList_[5][8]->currentlevel_ > 0 && skillList_[5][8]->IsUpdate() == false) //Bow
 	{
 		skillList_[5][8]->On();
-		for (size_t i = 0; i < 20; i++)
-			if (i < 10)
+		for (size_t i = 0; i < 40; i++)
+			if (i < 20)
 			{
 				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
 				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
 			}
-			else if (i < 20)
+			else if (i < 40)
 			{
-				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList02_[i - 10].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList02_[i - 10].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList02_[i - 20].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList02_[i - 20].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
 			}
 	}
 	if (skillList_[5][9]->currentlevel_ > 0 && skillList_[5][9]->IsUpdate() == false)
 	{
 		skillList_[5][9]->On();
-		for (size_t i = 0; i < 10; i++)
+		for (size_t i = 0; i < 20; i++)
 		{
 			std::dynamic_pointer_cast<Crossbow>(skillList_[5][9])->projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
 			std::dynamic_pointer_cast<Crossbow>(skillList_[5][9])->projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
@@ -338,22 +338,22 @@ void SkillManager::SkillLevelCheak()
 	{
 		skillList_[5][11]->On();
 		//플레이어 위치로 이동시키고 on
-		for (size_t i = 0; i < 30; i++)
+		for (size_t i = 0; i < 60; i++)
 		{
-			if (i < 10)
+			if (i < 20)
 			{
 				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
 				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
 			}
-			else if (i < 20)
+			else if (i < 40)
 			{
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList02_[i - 10].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList02_[i - 10].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList02_[i - 20].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList02_[i - 20].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
 			}
-			else if (i < 30)
+			else if (i < 60)
 			{
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList03_[i - 20].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList03_[i - 20].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList03_[i - 40].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList03_[i - 40].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
 			}
 		}
 	}

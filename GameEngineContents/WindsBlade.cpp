@@ -4,6 +4,8 @@
 #include"Player.h"
 
 WindsBlade::WindsBlade()
+	:timer_(0),
+	RLSwitch_(false)
 {
 	name_ = "¹Ù¶÷ÀÇ Ä®³¯";
 	SetName(std::string_view("WindsBlade"));
@@ -40,7 +42,7 @@ void  WindsBlade::StateSet()
 
 	WindsBladeWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
 	WindsBladeWeaponInfo_.weaponDuration_ = 250 + (30.f * currentlevel_);
-	WindsBladeWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result;
+	WindsBladeWeaponInfo_.weaponSpeed_ = 10 * Info->projectilespeed_ * PInfo->projectileSpeed_Result;
 }
 void WindsBlade::Effect()
 {
@@ -67,9 +69,24 @@ CollisionReturn WindsBlade::WindsBladeToMonsterCollision(std::shared_ptr<GameEng
 
 	return CollisionReturn::Continue;
 }
+
 void WindsBlade::Shoothing(float _deltaTime)
 {
-	std::shared_ptr<WindsBladeProjectile> A = GetLevel()->CreateActor<WindsBladeProjectile>(ObjectOrder::Projectile);
-	A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
-	A->ProjectileSet(WindsBladeWeaponInfo_.weaponAtk_, WindsBladeWeaponInfo_.weaponSpeed_);
+	timer_ += _deltaTime;
+	if (timer_ > WindsBladeWeaponInfo_.weaponAtkSpeed_)
+	{
+		GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
+		std::shared_ptr<WindsBladeProjectile> A = GetLevel()->CreateActor<WindsBladeProjectile>(ObjectOrder::Projectile);
+		A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+		A->ProjectileSet(WindsBladeWeaponInfo_.weaponAtk_, WindsBladeWeaponInfo_.weaponSpeed_, WindsBladeWeaponInfo_.weaponProjectileNum_,RLSwitch_, WindsBladeWeaponInfo_.weaponPassNum_);
+		if (RLSwitch_ == false)
+		{
+			RLSwitch_ = true;
+		}
+		else if(RLSwitch_ == true)
+		{
+			RLSwitch_ = false;
+		}
+		timer_ = 0;
+	}
 }

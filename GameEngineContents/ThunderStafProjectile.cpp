@@ -1,12 +1,12 @@
 #include"PreCompile.h"
-#include"CleaverProjectile.h"
+#include"ThunderStafProjectile.h"
 #include "GlobalContentsValue.h"
 #include "Player.h"
 #include"TestLevel.h"
 #include "Mouse.h"
 #include "Monster.h"
 
-CleaverProjectile::CleaverProjectile()
+ThunderStafProjectile::ThunderStafProjectile()
 	:projectileRen_(),
 	projectileCol_(),
 	timer_(0.f),
@@ -20,35 +20,34 @@ CleaverProjectile::CleaverProjectile()
 	posSet_(false),
 	projectileatk_(0.f),
 	projectilespeed_(0.f),
-	angle_(0.f),
-	passNum_(0)
+	angle_(0.f)
 {
 }
-CleaverProjectile::~CleaverProjectile()
+ThunderStafProjectile::~ThunderStafProjectile()
 {
 
 }
 
-void CleaverProjectile::Start()
+void ThunderStafProjectile::Start()
 {
 	projectileRen_ = CreateComponent<GameEngineTextureRenderer>();
-	projectileRen_->SetTexture("Cleave_Attack.png");
-	projectileRen_->GetTransform().SetWorldScale(640.f, 160.f, 1.f);
+	projectileRen_->SetTexture("WindBlade.png");
+	projectileRen_->GetTransform().SetWorldScale(20.f, 40.f, 1.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
 	projectileRen_->Off();
 
 	projectileCol_ = CreateComponent<GameEngineCollision>();
-	projectileCol_->SetDebugSetting(CollisionType::CT_OBB2D, float4::Blue);
-	projectileCol_->GetTransform().SetLocalScale({ 640.f, 100.f, 1.0f });
+	projectileCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
+	projectileCol_->GetTransform().SetLocalScale({ 25.0f, 25.0f, 1.0f });
 	projectileCol_->ChangeOrder(ObjectOrder::Projectile);
-	projectileCol_->SetCollisionMode(CollisionMode::Multiple);
+	projectileCol_->SetCollisionMode(CollisionMode::Single);
 	projectileCol_->Off();
 }
 
-void CleaverProjectile::TimeOff(float _deltaTime)
+void ThunderStafProjectile::TimeOff(float _deltaTime)
 {
-	if (timer_ < 1.f)
+	if (timer_ < 3.f)
 	{
 		timer_ += _deltaTime;
 	}
@@ -58,31 +57,29 @@ void CleaverProjectile::TimeOff(float _deltaTime)
 	}
 }
 
-void CleaverProjectile::Update(float _deltaTime)
+void ThunderStafProjectile::Update(float _deltaTime)
 {
 	if (posSet_ == true)
 	{
 		TimeOff(_deltaTime);
 		Shoothing(_deltaTime);
-		projectileCol_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&CleaverProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
+		projectileCol_->IsCollision(CollisionType::CT_Sphere2D, ObjectOrder::Monster, CollisionType::CT_Sphere2D, std::bind(&ThunderStafProjectile::ProjectileToMonster, this, std::placeholders::_1, std::placeholders::_2));
 	}
 }
 
-void CleaverProjectile::End()
+void ThunderStafProjectile::End()
 {
 
 }
 
-void CleaverProjectile::ProjectileSet(float _atk, float _speed, float _angle, size_t _passNum)
+void ThunderStafProjectile::ProjectileSet(float _atk, float _speed)
 {
 	projectileatk_ = _atk;
 	projectilespeed_ = _speed;
-	angle_ = _angle;
 	posSet_ = true;
-	passNum_ = _passNum;
 }
 
-void CleaverProjectile::Shoothing(float _deltaTime)
+void ThunderStafProjectile::Shoothing(float _deltaTime)
 {
 	if (shoothing_ == false)
 	{
@@ -97,22 +94,22 @@ void CleaverProjectile::Shoothing(float _deltaTime)
 	GetTransform().SetWorldUpMove(projectilespeed_, _deltaTime);
 }
 
-void CleaverProjectile::Rotate()
+void ThunderStafProjectile::Rotate()
 {
 	GetTransform().SetWorldRotation(0, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle() + angle_);
 }
 
-CollisionReturn CleaverProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn ThunderStafProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ¥¹ÌÁöÁÜ
-	//projectileRen_->Off();
-	//projectileCol_->Off();
-	//Death();
+	projectileRen_->Off();
+	projectileCol_->Off();
+	Death();
 	return CollisionReturn::Continue;
 }
 
-void CleaverProjectile::LevelEndEvent()
+void ThunderStafProjectile::LevelEndEvent()
 {
 	Death();
 }

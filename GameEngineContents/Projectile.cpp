@@ -102,3 +102,8 @@ CollisionReturn Projectile::ProjectileToPlayer(std::shared_ptr<GameEngineCollisi
 	Death();
 	return CollisionReturn::Continue;
 }
+
+void Projectile::LevelEndEvent()
+{
+	Death();
+}

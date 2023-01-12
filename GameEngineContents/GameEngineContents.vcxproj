@@ -522,6 +522,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ThunderStafProjectile.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TimeActor.h">
       <SubType>
       </SubType>
@@ -937,6 +941,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ThunderStaf.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ThunderStafProjectile.cpp">
       <SubType>
       </SubType>
     </ClCompile>

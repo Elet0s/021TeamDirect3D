@@ -20,7 +20,7 @@ WindsBladeProjectile::WindsBladeProjectile()
 	posSet_(false),
 	projectileatk_(0.f),
 	projectilespeed_(0.f),
-	angle_(0.f)
+	passNum_(0)
 {
 }
 WindsBladeProjectile::~WindsBladeProjectile()
@@ -32,14 +32,16 @@ void WindsBladeProjectile::Start()
 {
 	projectileRen_ = CreateComponent<GameEngineTextureRenderer>();
 	projectileRen_->SetTexture("WindBlade.png");
-	projectileRen_->GetTransform().SetWorldScale(20.f, 40.f, 1.f);
+	projectileRen_->CreateFrameAnimation_CutTexture("WindBlade", FrameAnimation_Desc("WindBlade.png", 0, 3, 0.1f));
+	projectileRen_->ChangeFrameAnimation("WindBlade");
+	projectileRen_->GetTransform().SetWorldScale(96.f, 96.f, 1.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
 	projectileRen_->Off();
 
 	projectileCol_ = CreateComponent<GameEngineCollision>();
 	projectileCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-	projectileCol_->GetTransform().SetLocalScale({ 25.0f, 25.0f, 1.0f });
+	projectileCol_->GetTransform().SetLocalScale({ 60.f, 60.f, 1.0f });
 	projectileCol_->ChangeOrder(ObjectOrder::Projectile);
 	projectileCol_->SetCollisionMode(CollisionMode::Single);
 	projectileCol_->Off();
@@ -72,11 +74,14 @@ void WindsBladeProjectile::End()
 
 }
 
-void WindsBladeProjectile::ProjectileSet(float _atk, float _speed)
+void WindsBladeProjectile::ProjectileSet(float _atk, float _speed, size_t _projectileNum, bool _RLSwitch ,size_t _passNum)
 {
 	projectileatk_ = _atk;
 	projectilespeed_ = _speed;
 	posSet_ = true;
+	projectileNum_ = _projectileNum;
+	RLSwitch_ = _RLSwitch;
+	passNum_ = _passNum;
 }
 
 void WindsBladeProjectile::Shoothing(float _deltaTime)
@@ -88,15 +93,21 @@ void WindsBladeProjectile::Shoothing(float _deltaTime)
 			projectileRen_->On();
 			projectileCol_->On();
 		}
-		Rotate();
+		if (RLSwitch_ == true)
+		{
+			projectileRen_->GetTransform().PixLocalNegativeX();
+		}
 		shoothing_ = true;
 	}
-	GetTransform().SetWorldUpMove(projectilespeed_, _deltaTime);
-}
+	if (RLSwitch_ == true)
+	{
+		GetTransform().SetWorldLeftMove(projectilespeed_, _deltaTime);
+	}
+	else if (RLSwitch_ == false)
+	{
+		GetTransform().SetWorldRightMove(projectilespeed_, _deltaTime);
+	}
 
-void WindsBladeProjectile::Rotate()
-{
-	GetTransform().SetWorldRotation(0, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle() + angle_);
 }
 
 CollisionReturn WindsBladeProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
@@ -107,4 +118,9 @@ CollisionReturn WindsBladeProjectile::ProjectileToMonster(std::shared_ptr<GameEn
 	projectileCol_->Off();
 	Death();
 	return CollisionReturn::Continue;
+}
+
+void WindsBladeProjectile::LevelEndEvent()
+{
+	Death();
 }

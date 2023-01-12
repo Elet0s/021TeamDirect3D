@@ -111,3 +111,8 @@ CollisionReturn KunaiProjectile::ProjectileToMonster(std::shared_ptr<GameEngineC
 	Death();
 	return CollisionReturn::Continue;
 }
+
+void KunaiProjectile::LevelEndEvent()
+{
+	Death();
+}

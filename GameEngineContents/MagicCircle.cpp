@@ -84,3 +84,8 @@ void MagicCircle::RotateRenderer(float _deltaTime)
 		magicCircle03_->On();
 	}
 }
+
+void MagicCircle::LevelEndEvent()
+{
+	Death();
+}

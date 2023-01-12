@@ -106,3 +106,8 @@ CollisionReturn PikeProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCo
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹
 	return CollisionReturn::Continue;
 }
+
+void PikeProjectile::LevelEndEvent()
+{
+	Death();
+}

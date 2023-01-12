@@ -433,6 +433,9 @@
     <ClCompile Include="EndLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="ThunderStafProjectile.cpp">
+      <Filter>Actor\02. Play\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -772,6 +775,9 @@
     </ClInclude>
     <ClInclude Include="EndLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ThunderStafProjectile.h">
+      <Filter>Actor\02. Play\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

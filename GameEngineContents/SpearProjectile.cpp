@@ -82,6 +82,11 @@ void SpearProjectile::ProjectileSet(float _atk, float _speed, float _angle, size
 	passNum_ = _passNum;
 }
 
+void SpearProjectile::LevelEndEvent()
+{
+	Death();
+}
+
 void SpearProjectile::Shoothing(float _deltaTime)
 {
 	if (shoothing_ == false)

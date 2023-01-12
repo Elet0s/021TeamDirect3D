@@ -16,6 +16,7 @@ protected:
 	void End() override;
 	void RotateRenderer(float _deltaTime);
 	void TimeOff(float _deltaTime);
+	void LevelEndEvent() override;
 
 private:
 	float timer_;
