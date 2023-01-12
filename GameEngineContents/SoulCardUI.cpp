@@ -233,7 +233,7 @@ void SoulCardUI::Setting()
 {
 	//CardDraw();
 	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
-	mySkill_  = SkillList[5][3];
+	mySkill_  = SkillList[5][2];
 	
 	for (size_t i = 0; i < etc_.size(); i++)
 	{

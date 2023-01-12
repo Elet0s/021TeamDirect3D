@@ -271,9 +271,6 @@
     <ClCompile Include="Firering.cpp">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
     </ClCompile>
-    <ClCompile Include="ShamanStaff.cpp">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>Actor\02. Play\Player\Skill</Filter>
     </ClCompile>
@@ -612,9 +609,6 @@
       <Filter>Actor\02. Play\Player\Skill\Weapon\Target</Filter>
     </ClInclude>
     <ClInclude Include="Firering.h">
-      <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
-    </ClInclude>
-    <ClInclude Include="ShamanStaff.h">
       <Filter>Actor\02. Play\Player\Skill\Weapon\Range</Filter>
     </ClInclude>
     <ClInclude Include="StoneHanded.h">

@@ -39,17 +39,17 @@ void DeathAura::Effect()
 
 void  DeathAura::StateSet()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
-	deathAuraWeaponInfo_.weaponAtk_ = 4.f + (1.f * currentlevel_) * (PlayerInfo_.atk_ * PlayerPInfo_.atkMultiple_Result / 100.f);
-	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (PlayerInfo_.attackSpeed_ / 100 * PlayerPInfo_.attackSpeed_Result / 100.f);//1초마다
+	PlayerInfo* Info_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo* PInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	deathAuraWeaponInfo_.weaponAtk_ = 4.f + (1.f * currentlevel_) * (Info_->atk_ * PInfo_->atkMultiple_Result / 100.f);
+	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (Info_->attackSpeed_ / 100 * PInfo_->attackSpeed_Result / 100.f);//1초마다
 
 	deathAuraWeaponInfo_.weaponPassAtk_ = 0;
 	deathAuraWeaponInfo_.weaponPassNum_ = 2;
 
-	deathAuraWeaponInfo_.weaponSize_ = 1.f + (0.5f * currentlevel_) * (PlayerInfo_.atk_Range_/ 100);
-	deathAuraWeaponInfo_.weaponDuration_ = 100;
-	deathAuraWeaponInfo_.weaponSpeed_ = 100;
+	deathAuraWeaponInfo_.weaponRange_ = 1.f + (0.5f * currentlevel_) * (Info_->atk_Range_/ 100);
+	deathAuraWeaponInfo_.weaponDuration_ = 100 * Info_->projectileduration_ * PInfo_->projectileDuration_Result / 100; ;
+	deathAuraWeaponInfo_.weaponSpeed_ = 100.f * Info_->projectilespeed_ * PInfo_->projectileSpeed_Result / 100;
 
 
 }
@@ -116,7 +116,7 @@ void DeathAura::Update(float _deltaTime)
 	StateSet();
 	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y - 40, 0);
 	RotateRenderer(_deltaTime);
-	GetTransform().SetWorldScale({ deathAuraWeaponInfo_.weaponSize_ });
+	GetTransform().SetWorldScale({ deathAuraWeaponInfo_.weaponRange_ });
 	deathAuraCollision02_->GetTransform().SetWorldPosition(deathAuraCollision01_->GetTransform().GetWorldPosition().x + 100.f, deathAuraCollision01_->GetTransform().GetWorldPosition().y, 0.f);
 	deathAuraCollision03_->GetTransform().SetWorldPosition(deathAuraCollision01_->GetTransform().GetWorldPosition().x - 100.f, deathAuraCollision01_->GetTransform().GetWorldPosition().y, 0.f);
 	atkTimer_ += _deltaTime;
