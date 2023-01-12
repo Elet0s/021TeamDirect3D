@@ -1,5 +1,6 @@
 #include"PreCompile.h"
 #include"TitleLevel.h"
+#include "TitleActor.h"
 TitleLevel::TitleLevel()
 {
 
@@ -10,13 +11,11 @@ TitleLevel::~TitleLevel()
 }
 void TitleLevel::Start()
 {
+	CreateActor<TitleActor>();
 }
 void TitleLevel::Update(float _deltaTime)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeKey"))
-	{
-		GEngine::ChangeLevel("WorldMap");
-	}
+	
 }
 void TitleLevel::End()
 {

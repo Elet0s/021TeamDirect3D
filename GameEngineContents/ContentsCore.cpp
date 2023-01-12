@@ -6,6 +6,7 @@
 #include "StageLevel.h"
 #include "ClearLevel.h"
 #include "TestLevel.h"
+#include "EndLevel.h"
 #include "ShaderTestLevel.h"
 #include "GameEngineStatusWindow.h"
 #include "SoundPlayer.h"
@@ -45,6 +46,7 @@ void ContentsCore::Start()
 	CreateLevel<ClearLevel>("Clear");
 	CreateLevel<ShopLevel>("Shop");
 	CreateLevel<WorldMapLevel>("WorldMap");
+	CreateLevel<EndLevel>("End");
 	ChangeLevel("WorldMap");
 	//ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("Clear");
@@ -177,6 +179,21 @@ void ContentsCore::LoadContentsResource()
 		Dir.MoveToChild("ContentsResources");
 		Dir.MoveToChild("Actor");
 		Dir.MoveToChild("Player");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistChildDirectory("ContentsResources");
+		Dir.MoveToChild("ContentsResources");
+		Dir.MoveToChild("Actor");
+		Dir.MoveToChild("EndandTitle");
 
 		std::vector<GameEngineFile> Texture = Dir.GetAllFiles();
 
