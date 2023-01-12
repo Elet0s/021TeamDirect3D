@@ -3,6 +3,7 @@
 #include "ShopLevel.h"
 #include "Player.h"
 #include "ClearLevel.h"
+#include "Shuriken.h"
 #include "TestLevel.h"
 #include "Mouse.h"
 #include "DeathAura.h"
@@ -230,7 +231,8 @@ void SoulCardUI::ColorChange(Appear _Value)
 
 void SoulCardUI::Setting()
 {
-	CardDraw();
+	//CardDraw();
+	mySkill_ = GetLevel()->CreateActor<Shuriken>(0,"Shuriken");
 	
 	for (size_t i = 0; i < etc_.size(); i++)
 	{

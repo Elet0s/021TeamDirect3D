@@ -10,7 +10,10 @@ Firering::Firering()
 	, addRadian_(0)
 	, atkTimer_(0)
 {
-
+	name_ = "화염반지";
+	SetName(std::string_view("Firering"));
+	myRank_ = Rank::Epic;
+	maxLevel_ = 7;
 }
 Firering::~Firering()
 {
@@ -18,11 +21,17 @@ Firering::~Firering()
 }
 void Firering::Init()
 {
+	StateSet();
+	std::string sDamege = std::to_string(static_cast<int>(floor(fireringAuraWeaponInfo_.weaponAtk_)));
+	std::string sAttackSpeed = std::to_string(fireringAuraWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(fireringAuraWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
+	std::string sRange = std::to_string(fireringAuraWeaponInfo_.weaponSize_).substr(0, std::to_string(fireringAuraWeaponInfo_.weaponSize_).find(".") + 3);
 
+	etc_ = "범위 피해를 입힙니다\n치명타가 발생하지 않습니다\n" + sDamege + "의 피해\n" + sAttackSpeed + "초 마다 공격\n범위" + sRange + "m ";
 }
 void Firering::Effect()
 {
-
+	currentlevel_ += 1;
+	nowLevel_ = 1;
 }
 void Firering::Start()
 {

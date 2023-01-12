@@ -20,6 +20,10 @@ Crossbow::Crossbow()
 	targetInst_(),
 	referenceVectorList_()
 {
+	name_ = "¼®±Ã";
+	SetName(std::string_view("CrossBow"));
+	myRank_ = Rank::Epic;
+	maxLevel_ = 7;
 }
 Crossbow::~Crossbow()
 {

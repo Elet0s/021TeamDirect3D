@@ -23,6 +23,10 @@ Bow::Bow()
 	referenceVectorList01_(),
 	referenceVectorList02_()
 {
+	name_ = "활";
+	SetName(std::string_view("Bow"));
+	myRank_ = Rank::UnCommon;
+	maxLevel_ = 7;
 }
 Bow::~Bow()
 {
@@ -30,11 +34,16 @@ Bow::~Bow()
 }
 void Bow::Init()
 {
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
 
+	std::string sDamege = std::to_string(static_cast<int>(floor(bowWeaponInfo_.weaponAtk_)));
+	std::string sAttackSpeed = std::to_string(bowWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(bowWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
+
+	etc_ = "가장가까운적에게발사합니다\n" + sDamege + " 의 피해\n" + sAttackSpeed + "초 마다 공격\n투사체 " + std::to_string(bowWeaponInfo_.weaponProjectileNum_) + "개\n ";
 }
 void Bow::Effect()
 {
-
+	currentlevel_ += 1;
 }
 
 void Bow::Start()

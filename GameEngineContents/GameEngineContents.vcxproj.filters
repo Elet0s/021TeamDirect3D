@@ -743,11 +743,10 @@
     <ClInclude Include="DashUI.h">
       <Filter>Actor\00. Global\UI</Filter>
     </ClInclude>
-    <ClInclude Include="MagicCircle.h">
-      <Filter>Actor\02. Play\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="SpearProjectile.h">
-      <Filter>Actor\02. Play\GameObject</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\SkillList.txt">
+      <Filter>Actor\02. Play\Player\Skill\Weapon</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -10,7 +10,10 @@ DeathAura::DeathAura()
 	, addRadian_(0)
 	, atkTimer_(0)
 {
-
+	name_ = "죽음의 오라";
+	SetName(std::string_view("DeathAura"));
+	myRank_ = Rank::Rare;
+	maxLevel_ = 7;
 }
 
 DeathAura::~DeathAura()
@@ -21,11 +24,9 @@ DeathAura::~DeathAura()
 
 void DeathAura::Init()
 {
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-
-	std::string sDamege = std::to_string(damege * PlayerInfo_->atk_).substr(0, std::to_string(damege * PlayerInfo_->atk_).find(".") + 3);
-	std::string sAttackSpeed = std::to_string(attackSpeed * PlayerInfo_->pushSpeed_).substr(0, std::to_string(attackSpeed * PlayerInfo_->pushSpeed_).find(".") + 3);
-	std::string sRange = std::to_string(rangeSize * PlayerInfo_->atk_Range_).substr(0, std::to_string(rangeSize * PlayerInfo_->atk_Range_).find(".") + 3);
+	std::string sDamege = std::to_string(deathAuraWeaponInfo_.weaponAtk_ ).substr(0, std::to_string(deathAuraWeaponInfo_.weaponAtk_).find(".") + 3);
+	std::string sAttackSpeed = std::to_string(deathAuraWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(deathAuraWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
+	std::string sRange = std::to_string(deathAuraWeaponInfo_.weaponSize_).substr(0, std::to_string(deathAuraWeaponInfo_.weaponSize_).find(".") + 3);
 
 	etc_ = "범위 내의 근처 적에게 지속\n피해를 입힙니다\n치명타가 발생하지 않습니다\n" + sDamege + " 의 피해\n" + sAttackSpeed + "초 마다 공격\n범위 "
 		+ sRange + "m ";
@@ -34,57 +35,23 @@ void DeathAura::Init()
 void DeathAura::Effect()
 {
 	currentlevel_ += 1;
-	if (currentlevel_ >= 5)
-	{
-		damege += 0.75f;
-		rangeSize += 0.25f;
-	}
-
-	else if (currentlevel_ % 2 == 0)
-	{
-		damege += 0.38f;
-		rangeSize += 0.5f;
-	}
-
-	else if (currentlevel_ % 2 == 1)
-	{
-		damege += 0.37f;
-		rangeSize += 0.5f;
-	}
 }
 
 void  DeathAura::StateSet()
 {
-	if (currentlevel_ < 2)
-	{
-		deathAuraWeaponInfo_.weaponAtk_ = 4.f;
-		deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f;
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	deathAuraWeaponInfo_.weaponAtk_ = 4.f + (1.f * currentlevel_) * (PlayerInfo_.atk_ * PlayerPInfo_.atkMultiple_Result / 100.f);
+	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (PlayerInfo_.attackSpeed_ / 100 * PlayerPInfo_.attackSpeed_Result / 100.f);//1초마다
 
-		deathAuraWeaponInfo_.weaponPassAtk_ = 0;
-		deathAuraWeaponInfo_.weaponPassNum_ = 2;
+	deathAuraWeaponInfo_.weaponPassAtk_ = 0;
+	deathAuraWeaponInfo_.weaponPassNum_ = 2;
 
-		deathAuraWeaponInfo_.weaponSize_ = 10.f;
-		deathAuraWeaponInfo_.weaponDuration_ = 100;
-		deathAuraWeaponInfo_.weaponSpeed_ = 100;
-
-
-	}
-	else if (currentlevel_ < 3)
-	{
+	deathAuraWeaponInfo_.weaponSize_ = 100 + (50 * currentlevel_) * (PlayerInfo_.atk_Range_/ 100);
+	deathAuraWeaponInfo_.weaponDuration_ = 100;
+	deathAuraWeaponInfo_.weaponSpeed_ = 100;
 
 
-	}
-	else if (currentlevel_ < 4)
-	{
-
-	}
-	else if (currentlevel_ < 5)
-	{
-
-	}
-	else if (currentlevel_ < 6)
-	{
-	}
 }
 void DeathAura::Start()
 {

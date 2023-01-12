@@ -8,6 +8,7 @@ Skill::Skill()
 	, valueSoulCard_(SoulCard::None)
 	, Shooting(false)
 	, isOn_(false)
+
 {
 	
 }
@@ -18,7 +19,7 @@ Skill::~Skill()
 
 void Skill::Start()
 {
-
+	
 }
 void Skill::Update(float _deltaTime)
 {

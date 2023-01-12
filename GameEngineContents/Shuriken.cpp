@@ -27,7 +27,10 @@ Shuriken::Shuriken()
 	referenceVectorList02_(),
 	referenceVectorList03_()
 {
-
+	name_ = "수리검";
+	SetName(std::string_view("Shuriken"));
+	myRank_ = Rank::UnCommon;
+	maxLevel_ = 7;
 }
 Shuriken::~Shuriken()
 {
@@ -37,7 +40,12 @@ Shuriken::~Shuriken()
 
 void Shuriken::Init()
 {
+	StateSet();
 
+	std::string sDamege = std::to_string(shuriKenWeaponInfo_.weaponAtk_).substr(0, std::to_string(shuriKenWeaponInfo_.weaponAtk_).find(".") + 3);
+	std::string sAttackSpeed = std::to_string(shuriKenWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(shuriKenWeaponInfo_.weaponAtkSpeed_).find(".") + 2);
+
+	etc_ = "가장 낮은 체력의 적을\n공격하는 다수의\n수리검을 던집니다\n" + sDamege + " 의 피해\n" + sAttackSpeed + "초 마다 공격\n투사체 " + std::to_string(shuriKenWeaponInfo_.weaponProjectileNum_) + " 개 ";
 }
 void Shuriken::Effect()
 {
@@ -110,19 +118,22 @@ void Shuriken::End()
 
 void  Shuriken::StateSet()
 {
+	
+	shuriKenWeaponInfo_.weaponAtk_ = 1.f;
+	shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//
 	if (currentlevel_ < 2)
 	{
 		shuriKenWeaponInfo_.weaponAtk_ = 1.f;
 		shuriKenWeaponInfo_.weaponAtkSpeed_ = 1000.f;//
 
-		shuriKenWeaponInfo_.weaponPassAtk_ = 0;
-		shuriKenWeaponInfo_.weaponPassNum_ = 2;
+	shuriKenWeaponInfo_.weaponPassAtk_ = 0;
+	shuriKenWeaponInfo_.weaponPassNum_ = 2;
 
-		shuriKenWeaponInfo_.weaponSize_ = 100;
-		shuriKenWeaponInfo_.weaponDuration_ = 100;
-		shuriKenWeaponInfo_.weaponSpeed_ = 100;
+	shuriKenWeaponInfo_.weaponSize_ = 100;
+	shuriKenWeaponInfo_.weaponDuration_ = 100;
+	shuriKenWeaponInfo_.weaponSpeed_ = 100;
 
-		shuriKenWeaponInfo_.weaponknockback_ = 100;
+	shuriKenWeaponInfo_.weaponknockback_ = 100;
 
 		shuriKenWeaponInfo_.weaponProjectileNum_ = 10;
 		shuriKenWeaponInfo_.weponConsecutiveAtkNum_ = 3;

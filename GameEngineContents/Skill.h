@@ -1,5 +1,7 @@
 #pragma once
 #include "GlobalContentsValue.h"
+
+
 struct WeaponInfo
 {
 	float weaponAtk_;//무기공격력
@@ -91,7 +93,7 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-
+	
 	bool isOn_;
 	SoulCard valueSoulCard_;
 	std::string name_;
