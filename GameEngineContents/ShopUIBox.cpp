@@ -69,7 +69,7 @@ void ShopUIBox::Start()
 		[=]()
 		{
 			PlayerInfo* Pinfo = &Player::GetPlayerInst()->GetPlayerInfo();
-			Pinfo->addProjectile_ +=  5;
+	Pinfo->addProjectile_ += 5;
 			
 		}
 	);
