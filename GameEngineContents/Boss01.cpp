@@ -33,8 +33,8 @@ void Boss01::Start()
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
 	monsterInfo_->atk_ = 0.3f;
-	monsterInfo_->hp_ = 10;
-	monsterInfo_->maxHp_ = 10;
+	monsterInfo_->hp_ = 100.f;
+	monsterInfo_->maxHp_ = 100.f;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
 	telleportCount_ = 1;
@@ -92,7 +92,7 @@ void Boss01::BossHp()
 {
 	if (monsterInfo_->hp_ <= 0)
 	{
-		GEngine::ChangeLevel("Clear");
+		GEngine::ChangeLevel("End");
 	}
 }
 void Boss01::Relocation()

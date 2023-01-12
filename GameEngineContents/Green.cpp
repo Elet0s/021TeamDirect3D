@@ -21,10 +21,10 @@ void Green::Start()
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
-	monsterInfo_->atk_ = 1;
-	monsterInfo_->hp_ = 10.f;
-	monsterInfo_->maxHp_ = 10;
-	monsterInfo_->baseSpeed_ = 50;
+	monsterInfo_->atk_ = 5;
+	monsterInfo_->hp_ = 200.f;
+	monsterInfo_->maxHp_ = 200.f;
+	monsterInfo_->baseSpeed_ = 75;
 	monsterInfo_->giveExp_ = 5;
 	monsterInfo_->monsterType_ = MonsterType::Green;
 	/// /////////////////////////////////////////////////////////////////////////////////////////////

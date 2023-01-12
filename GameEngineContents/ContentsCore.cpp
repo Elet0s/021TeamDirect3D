@@ -40,7 +40,7 @@ void ContentsCore::Start()
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<TestLevel>("Test");
-	CreateLevel<StageLevel>("Stage");
+//	CreateLevel<StageLevel>("Stage");
 	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
 	CreateLevel<ClearLevel>("Clear");
 	CreateLevel<ShopLevel>("Shop");

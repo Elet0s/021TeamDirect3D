@@ -21,9 +21,9 @@ void FlyingEyes::Start()
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
-	monsterInfo_->atk_ = 0;
-	monsterInfo_->hp_ = 10.f;
-	monsterInfo_->maxHp_ = 10;
+	monsterInfo_->atk_ = 2;
+	monsterInfo_->hp_ = 5.f;
+	monsterInfo_->maxHp_ = 5;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
 }

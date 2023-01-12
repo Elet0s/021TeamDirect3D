@@ -25,8 +25,8 @@ void RedFlyingEyes::Start()
 
 
 	monsterInfo_->atk_ = 3.f;
-	monsterInfo_->hp_ = 10.f;
-	monsterInfo_->maxHp_ = 10;
+	monsterInfo_->hp_ = 15.f;
+	monsterInfo_->maxHp_ = 15;
 	monsterInfo_->baseSpeed_ = 150;
 	monsterInfo_->giveExp_ = 5;
 	monsterInfo_->monsterType_ = MonsterType::RedFlyingEyes;

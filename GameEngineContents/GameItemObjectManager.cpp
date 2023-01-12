@@ -66,7 +66,17 @@ ItemObjectOrder GameItemObjectManager::RandomObjectOrder()
 	}
 	return randomObjectOrder;
 }
+void GameItemObjectManager::ObjectAllClear()
+{
+	for (size_t i = 0; i < allObjectContainer_.size(); i++)
+	{
+		allObjectContainer_[i]->itemObjectRenderer_->Death();
+		allObjectContainer_[i]->itemObjectCol_->Death();
+		allObjectContainer_[i]->Death();
 
+	}
+	allObjectContainer_.clear();
+}
 void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemObjectOrder _itemObjectOrder, float4 _itemObjectPos)
 {
 	if (isFullContainer_ == false)

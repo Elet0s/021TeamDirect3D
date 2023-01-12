@@ -24,9 +24,9 @@ void Red::Start()
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
 	monsterInfo_->atk_ = 5;
-	monsterInfo_->hp_ = 10;
-	monsterInfo_->maxHp_ = 10;
-	monsterInfo_->baseSpeed_ = 150;
+	monsterInfo_->hp_ = 20;
+	monsterInfo_->maxHp_ = 20;
+	monsterInfo_->baseSpeed_ = 75;
 	monsterInfo_->giveExp_ = 5;
 }
 void Red::Update(float _deltaTime)

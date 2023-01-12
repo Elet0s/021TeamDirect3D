@@ -439,6 +439,9 @@
     <ClCompile Include="ShopUIBox.cpp">
       <Filter>Actor\00. Global\UI</Filter>
     </ClCompile>
+    <ClCompile Include="EndLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -784,6 +787,9 @@
     </ClInclude>
     <ClInclude Include="WindsBladeProjectile.h">
       <Filter>Actor\02. Play\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EndLevel.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
