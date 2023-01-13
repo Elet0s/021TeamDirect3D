@@ -57,7 +57,7 @@ float4 Color_PS(Output _input) : SV_Target0
     //}
     
     //타원 그리기1.
-    //if (0.5f < length(_input.pos2_.xy - 0.2f))
+    //if (0.5f < length(_input.pos2_.xy - f))
     //{
     //    clip(-1);
     //}

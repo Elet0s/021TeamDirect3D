@@ -91,7 +91,7 @@ void WindsBlade::Shoothing(float _deltaTime)
 	{
 		if (count_ > 0)
 		{
-			if (delayTime_ > 0.02f)
+			if (delayTime_ > 0.1f)
 			{
 				count_ -= 1;
 				delayTime_ = 0.f;

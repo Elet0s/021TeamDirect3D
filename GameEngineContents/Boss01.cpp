@@ -32,7 +32,7 @@ void Boss01::Start()
 	monCollision_->ChangeOrder(ObjectOrder::Monster);
 	monCollision_->SetCollisionMode(CollisionMode::Multiple);
 
-	monsterInfo_->atk_ = 0.3f;
+	monsterInfo_->atk_ = 0.6f;
 	monsterInfo_->hp_ = 1000.f;
 	monsterInfo_->maxHp_ = 1000.f;
 	monsterInfo_->baseSpeed_ = 150;

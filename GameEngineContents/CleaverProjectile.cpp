@@ -116,7 +116,7 @@ CollisionReturn CleaverProjectile::ProjectileToMonster(std::shared_ptr<GameEngin
 	{
 		passNum_ -= 1;
 	}
-	return CollisionReturn::Continue;
+	return CollisionReturn::Stop;
 }
 
 void CleaverProjectile::LevelEndEvent()
