@@ -354,6 +354,10 @@ void StageUI::UIUpdate()
 				IsClear_ = true;
 				Monster::UnsummonAllMonsters();
 			}
+			else if (StageObject::GetNextStageInfo().combatType_ == CombatType::BossKill)
+			{
+				killcountfontrenderer_->SetText("처치한 몬스터: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+			}
 		}
 		break;
 	case UIType::Claer:
