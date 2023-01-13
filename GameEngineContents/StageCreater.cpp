@@ -33,7 +33,7 @@ void StageCreater::Start()
 	{
 		std::list<std::shared_ptr<StageObject>>& GroupActor = stageObjects_[7];
 		std::shared_ptr<StageObject> object = GetLevel()->CreateActor<StageObject>();
-		object->SetMyLevel(0);
+		object->SetMyLevel(7);
 		object->SetStageType(static_cast<int>(StageType::Boss));
 		object->posY_ = -650;
 		worldRenderer_->GetInstancingUnit(0).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
@@ -49,7 +49,7 @@ void StageCreater::Start()
 	{
 		std::list<std::shared_ptr<StageObject>>& GroupActor = stageObjects_[0];
 		std::shared_ptr<StageObject> object = GetLevel()->CreateActor<StageObject>();
-		object->SetMyLevel(7);
+		object->SetMyLevel(0);
 		object->SetStageType(static_cast<int>(StageType::Empty));
 		object->posY_ = -2400;
 		object->GetTransform().SetWorldPosition(1024 - 128.f, -2400 * sinf(30.f * GameEngineMath::DegreeToRadian), -2400 * cosf(30.f * GameEngineMath::DegreeToRadian));
