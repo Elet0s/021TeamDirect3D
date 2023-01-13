@@ -262,6 +262,16 @@ void StageUI::StageSetting()
 		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 50.f ,1.f });
 		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 318.f });
 	}
+	if (StageObject::GetNextStageInfo().combatType_ == CombatType::BossKill)
+	{
+		elitekillFontrenderer_->On();
+		elitekillFontrenderer_->SetTextPosition(float4{ 30.f, 44.f });
+		elitekillFontrenderer_->SetSize(18.f);
+		elitekillFontrenderer_->SetText("보스를 잡으세요");
+		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 50.f ,1.f });
+		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 318.f });
+
+	}
 	else 
 	{
 		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 30.f ,1.f });
