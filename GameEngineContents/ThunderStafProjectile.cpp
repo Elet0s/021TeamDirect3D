@@ -35,16 +35,18 @@ void ThunderStafProjectile::Start()
 	projectileRen_->SetTexture("Particle.png");
 	projectileRen_->GetPixelData().mulColor_=float4::Blue;
 	projectileRen_->GetTransform().SetWorldScale(40.f, 40.f, 1.f);
-	projectileRen_->GetTransform().SetWorldPosition(0.f, 40.f, 0.f);
+	projectileRen_->GetTransform().SetWorldPosition(0.f, 100.f, 0.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
 	projectileRen_->Off();
 
 	projectileCol_ = CreateComponent<GameEngineCollision>();
 	projectileCol_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-	projectileCol_->GetTransform().SetLocalScale({ 25.0f, 25.0f, 1.0f });
+	projectileCol_->SetParent(projectileRen_);
+	projectileCol_->GetTransform().SetWorldScale({ 25.0f, 25.0f, 1.0f });
 	projectileCol_->ChangeOrder(ObjectOrder::Projectile);
-	projectileCol_->SetCollisionMode(CollisionMode::Single);
+	projectileCol_->SetCollisionMode(CollisionMode::Multiple);
+
 	projectileCol_->Off();
 }
 
@@ -96,28 +98,23 @@ void ThunderStafProjectile::Shoothing(float _deltaTime)
 		Rotate();
 		shoothing_ = true;
 	}
+	GetTransform().SetWorldPosition({Player::GetPlayerInst()->GetTransform().GetWorldPosition()});
+	GetTransform().SetAddWorldRotation({0.f,0.f,80.f *_deltaTime });
+
+
 }
 
 void ThunderStafProjectile::Rotate()
 {
-	GetTransform().SetWorldRotation(0, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle() + angle_);
+	GetTransform().SetWorldRotation(60, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle() + angle_);
 }
 
 CollisionReturn ThunderStafProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ¥¹ÌÁöÁÜ
-	if (passNum_ == 0)
-	{
-		projectileRen_->Off();
-		projectileCol_->Off();
-		Death();
-	}
-	else if (passNum_ > 0)
-	{
-		passNum_ -= 1;
-	}
-	return CollisionReturn::Continue;
+
+	return CollisionReturn::Stop;
 }
 
 void ThunderStafProjectile::LevelEndEvent()

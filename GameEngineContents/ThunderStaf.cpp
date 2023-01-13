@@ -1,10 +1,22 @@
 #include"PreCompile.h"
 #include"ThunderStaf.h"
-#include"ThunderStafProjectile.h"
-#include "Player.h"
-
+#include"Player.h"
+#include"Monster.h"
+#include "TestLevel.h"
+#include "ThunderStafProjectile.h"
+#include "Mouse.h"
 ThunderStaf::ThunderStaf()
-	:timer_(0.f)
+	:
+	referenceVector_(),
+	resultCos_(),
+	Shooting_(false),
+	range_(),
+	setAim_(false),
+	timer_(0),
+	angle_(0),
+	duringtime_(0),
+	consecutiveCounter_(0),
+	consecutiveAngle_(0)
 {
 	name_ = "¹ø°³ ÁöÆÎÀÌ";
 	SetName(std::string_view("ThunderStaf"));
@@ -69,17 +81,59 @@ void ThunderStaf::StateSet()
 
 void ThunderStaf::Update(float _deltaTime)
 {
+	StateSet();
+	AimSet();
 	Shoothing(_deltaTime);
 }
 void ThunderStaf::End()
 {
-	GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
-	std::shared_ptr<ThunderStafProjectile> A = GetLevel()->CreateActor<ThunderStafProjectile>(ObjectOrder::Projectile);
-	A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
-	//A->ProjectileSet(ThunderStafWeaponInfo_.weaponAtk_, ThunderStafWeaponInfo_.weaponSpeed_);
+
 }
 
 void ThunderStaf::Shoothing(float _deltaTime)
 {
+	timer_ += _deltaTime;
+	duringtime_ += _deltaTime;
+	if (timer_ > ThunderStafWeaponInfo_.weaponAtkSpeed_)
+	{
+		GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
+		mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+		playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+		range_.x = mouseAimPos_.x - playerPos_.x;
+		range_.y = mouseAimPos_.y - playerPos_.y;
+		consecutiveAngle_ = 360.f / ThunderStafWeaponInfo_.weaponProjectileNum_;
+		for (size_t i = 0; i < ThunderStafWeaponInfo_.weaponProjectileNum_; i++)
+		{
+			if (i == 0)
+			{
+				angle_ = 0;
+			}
+			else if (i % 2 == 0)
+			{
+				angle_ *= -1;
+			}
+			else if (i % 2 == 1)
+			{
+				if (angle_ < 0)
+				{
+					angle_ *= -1;
+				}
+				angle_ += consecutiveAngle_;
+			}
+			std::shared_ptr<ThunderStafProjectile> A = GetLevel()->CreateActor<ThunderStafProjectile>(ObjectOrder::Projectile);
+			A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+			A->ProjectileSet(ThunderStafWeaponInfo_.weaponAtk_, ThunderStafWeaponInfo_.weaponSpeed_, angle_, ThunderStafWeaponInfo_.weaponPassNum_);
+		}
+		timer_ = 0.f;
+	}
+}
+
+void ThunderStaf::AimSet()
+{
+	if (setAim_ == false)
+	{
+		GetLevel<TestLevel>()->GetMousePointer()->ChangeMousePointerRenderer(true);
+		setAim_ = true;
+	}
 
 }
