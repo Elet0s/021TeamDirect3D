@@ -343,6 +343,11 @@ void TestLevel::StageMonsterManager()
 				Monster::SummonMonster<NormalKobold>(this, 50);
 				summonCounter_ += 1;
 			}
+			else if (summonCounter_ == 2 && stageManagerTimer_ > 70.f)
+			{
+				Monster::SummonMonster<NormalSkeleton>(this, 100);
+				summonCounter_ += 1;
+			}
 			break;
 		case CombatType::BossKill:
 			SoundPlayer::BGMPlay_->ChangeBgm("BossFight.wav");
