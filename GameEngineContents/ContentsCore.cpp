@@ -41,13 +41,13 @@ void ContentsCore::Start()
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<TestLevel>("Test");
-//	CreateLevel<StageLevel>("Stage");
-	CreateLevel<ShaderTestLevel>("ShaderTestLevel");
+	//	CreateLevel<StageLevel>("Stage");
+	//CreateLevel<ShaderTestLevel>("ShaderTestLevel");
 	CreateLevel<ClearLevel>("Clear");
 	CreateLevel<ShopLevel>("Shop");
 	CreateLevel<WorldMapLevel>("WorldMap");
 	CreateLevel<EndLevel>("End");
-	ChangeLevel("WorldMap");
+	ChangeLevel("Title");
 	//ChangeLevel("ShaderTestLevel");
 	//ChangeLevel("Clear");
 

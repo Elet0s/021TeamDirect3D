@@ -70,7 +70,7 @@ void Player::Start()
 
 		itemRangeCollision_ = CreateComponent<GameEngineCollision>();
 		itemRangeCollision_->SetDebugSetting(CollisionType::CT_Sphere2D, float4::Blue);
-		//itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
+		itemRangeCollision_->GetTransform().SetLocalScale({ 300.f, 300.f, 1.0f });
 		itemRangeCollision_->ChangeOrder(ObjectOrder::Range);
 		itemRangeCollision_->SetCollisionMode(CollisionMode::Multiple);
 		itemRangeCollision_->GetTransform().SetLocalMove({ 0.f,-10.f ,0.f});
