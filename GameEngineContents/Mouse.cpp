@@ -122,6 +122,8 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderP
 
 void Mouse::Start()
 {
+	ShowCursor(false);
+
 	this->GetTransform().SetLocalScale(float4::One);
 	this->GetTransform().SetWorldScale(float4::One);
 

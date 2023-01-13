@@ -43,7 +43,7 @@ void ThunderStaf::Effect()
 }
 void ThunderStaf::Start()
 {
-
+	Off();
 }
 
 void ThunderStaf::StateSet()
