@@ -27,9 +27,14 @@ protected:
 	void End() override;
 	void Shoothing(float _deltaTime);//사출패턴
 	void StateSet() override;//레벨에 따른 스탯 적용
-
+	void LevelEndEvent() override;
 private:
 	WeaponInfo WindsBladeWeaponInfo_;//무기 스탯
 	bool RLSwitch_;
 	float timer_;
+
+	bool updateStart_;
+	float delayTime_;
+	size_t count_;
+	size_t windPum_;
 };

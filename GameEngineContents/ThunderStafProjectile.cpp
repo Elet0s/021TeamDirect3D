@@ -20,7 +20,8 @@ ThunderStafProjectile::ThunderStafProjectile()
 	posSet_(false),
 	projectileatk_(0.f),
 	projectilespeed_(0.f),
-	angle_(0.f)
+	angle_(0.f),
+	passNum_(0)
 {
 }
 ThunderStafProjectile::~ThunderStafProjectile()
@@ -32,7 +33,9 @@ void ThunderStafProjectile::Start()
 {
 	projectileRen_ = CreateComponent<GameEngineTextureRenderer>();
 	projectileRen_->SetTexture("Particle.png");
+	projectileRen_->GetPixelData().mulColor_=float4::Blue;
 	projectileRen_->GetTransform().SetWorldScale(40.f, 40.f, 1.f);
+	projectileRen_->GetTransform().SetWorldPosition(0.f, 40.f, 0.f);
 	projectileRen_->ChangeCamera(CameraOrder::MidCamera);
 	projectileRen_->SetRenderingOrder(15);
 	projectileRen_->Off();
@@ -72,11 +75,13 @@ void ThunderStafProjectile::End()
 
 }
 
-void ThunderStafProjectile::ProjectileSet(float _atk, float _speed)
+void ThunderStafProjectile::ProjectileSet(float _atk, float _speed, float _angle, size_t _passNum)
 {
 	projectileatk_ = _atk;
 	projectilespeed_ = _speed;
+	angle_ = _angle;
 	posSet_ = true;
+	passNum_ = _passNum;
 }
 
 void ThunderStafProjectile::Shoothing(float _deltaTime)
@@ -91,7 +96,6 @@ void ThunderStafProjectile::Shoothing(float _deltaTime)
 		Rotate();
 		shoothing_ = true;
 	}
-	GetTransform().SetWorldUpMove(projectilespeed_, _deltaTime);
 }
 
 void ThunderStafProjectile::Rotate()
@@ -103,9 +107,16 @@ CollisionReturn ThunderStafProjectile::ProjectileToMonster(std::shared_ptr<GameE
 {
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
 	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ¥¹ÌÁöÁÜ
-	projectileRen_->Off();
-	projectileCol_->Off();
-	Death();
+	if (passNum_ == 0)
+	{
+		projectileRen_->Off();
+		projectileCol_->Off();
+		Death();
+	}
+	else if (passNum_ > 0)
+	{
+		passNum_ -= 1;
+	}
 	return CollisionReturn::Continue;
 }
 

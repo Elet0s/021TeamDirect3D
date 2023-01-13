@@ -1,7 +1,7 @@
 #pragma once
-#include "Skill.h"
-//자신을 중심으로 공전하는 번개구체를 소환
-class ThunderStaf:public Skill
+#include"Skill.h"
+//전방위발사
+class ThunderStaf : public Skill
 {
 public:
 	ThunderStaf();
@@ -12,6 +12,7 @@ public:
 	ThunderStaf& operator=(const ThunderStaf& _Other) = delete;
 	ThunderStaf& operator=(ThunderStaf&& _Other) noexcept = delete;
 
+
 	void Init() override;
 	void Effect() override;
 
@@ -20,16 +21,35 @@ public:
 		return etc_;
 	}
 
+	std::shared_ptr<GameEngineCollision> spearRangeCol_;
+
+	std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>projectileGroup_;
+	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList_;//발사체 모음
 
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-	void StateSet();
+
 	void Shoothing(float _deltaTime);//사출패턴
+	void StateSet() override;//레벨에 따른 스탯 적용
+	void AimSet();//마우스 켜줌
 
 private:
+	bool Shooting_;
+	bool setAim_;
+	float timer_;
+	float duringtime_;
+	size_t consecutiveCounter_;
+	float angle_;
+	float resultCos_;//몬스터 좌표, 플레이어 좌표 x축 기준 각도 
+	float4 referenceVector_;//플레이어 에서 몬스터로 가는 벡터 
+	float4 mouseAimPos_;
+	float consecutiveAngle_;
+	float4 range_;
+	float4 playerPos_;
+
 	WeaponInfo ThunderStafWeaponInfo_;//무기 스탯
 
-	float timer_;
+
 };

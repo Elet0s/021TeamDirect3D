@@ -5,7 +5,11 @@
 
 WindsBlade::WindsBlade()
 	:timer_(0),
-	RLSwitch_(false)
+	RLSwitch_(false),
+	delayTime_(0.f),
+	count_(0),
+	windPum_(0),
+	updateStart_(false)
 {
 	name_ = "¹Ù¶÷ÀÇ Ä®³¯";
 	SetName(std::string_view("WindsBlade"));
@@ -43,6 +47,12 @@ void  WindsBlade::StateSet()
 	WindsBladeWeaponInfo_.weaponSize_ = 1 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
 	WindsBladeWeaponInfo_.weaponDuration_ = 250 + (30.f * currentlevel_);
 	WindsBladeWeaponInfo_.weaponSpeed_ = 10 * Info->projectilespeed_ * PInfo->projectileSpeed_Result;
+
+	if ( WindsBladeWeaponInfo_.weaponProjectileNum_>0&& updateStart_==false)
+	{
+		count_ = WindsBladeWeaponInfo_.weaponProjectileNum_;
+		updateStart_ = true;
+	}
 }
 void WindsBlade::Effect()
 {
@@ -50,6 +60,7 @@ void WindsBlade::Effect()
 }
 void WindsBlade::Start()
 {
+
 	Off();
 }
 
@@ -64,23 +75,44 @@ void WindsBlade::End()
 
 }
 
+void WindsBlade::LevelEndEvent()
+{
+
+
+	
+}
 void WindsBlade::Shoothing(float _deltaTime)
 {
+
 	timer_ += _deltaTime;
+	delayTime_ += _deltaTime;
+
 	if (timer_ > WindsBladeWeaponInfo_.weaponAtkSpeed_)
 	{
-		GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
-		std::shared_ptr<WindsBladeProjectile> A = GetLevel()->CreateActor<WindsBladeProjectile>(ObjectOrder::Projectile);
-		A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
-		A->ProjectileSet(WindsBladeWeaponInfo_.weaponAtk_, WindsBladeWeaponInfo_.weaponSpeed_, WindsBladeWeaponInfo_.weaponProjectileNum_,RLSwitch_, WindsBladeWeaponInfo_.weaponPassNum_);
-		if (RLSwitch_ == false)
+		if (count_ > 0)
 		{
-			RLSwitch_ = true;
+			if (delayTime_ > 0.02f)
+			{
+				count_ -= 1;
+				delayTime_ = 0.f;
+				GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
+				std::shared_ptr<WindsBladeProjectile> A = GetLevel()->CreateActor<WindsBladeProjectile>(ObjectOrder::Projectile);
+				A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+				A->ProjectileSet(WindsBladeWeaponInfo_.weaponAtk_, WindsBladeWeaponInfo_.weaponSpeed_, WindsBladeWeaponInfo_.weaponProjectileNum_, RLSwitch_, WindsBladeWeaponInfo_.weaponPassNum_);
+				if (RLSwitch_ == false)
+				{
+					RLSwitch_ = true;
+				}
+				else if (RLSwitch_ == true)
+				{
+					RLSwitch_ = false;
+				}
+			}
 		}
-		else if(RLSwitch_ == true)
+		else if (count_ <= 0)
 		{
-			RLSwitch_ = false;
+			timer_ = 0;
+			count_ = WindsBladeWeaponInfo_.weaponProjectileNum_;
 		}
-		timer_ = 0;
 	}
 }

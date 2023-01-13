@@ -51,7 +51,7 @@ void Cleaver::StateSet()
 	cleaverWeaponInfo_.weaponPassAtk_ = 0;
 	cleaverWeaponInfo_.weaponRange_ = 1.f * Info->projectileSize_;
 	cleaverWeaponInfo_.weaponProjectileNum_ = 3 + Info->addProjectile_;
-	cleaverWeaponInfo_.weaponPassNum_ = 2 + Info->passProjectile_;
+	cleaverWeaponInfo_.weaponPassNum_ = 20+ (currentlevel_*3) + Info->passProjectile_;
 
 	cleaverWeaponInfo_.weaponSize_ = 100 * Info->projectileSize_ * PInfo->projectileSize_Result / 100;
 	cleaverWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100; ;

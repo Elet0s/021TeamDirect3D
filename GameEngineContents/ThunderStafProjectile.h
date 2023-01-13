@@ -12,7 +12,7 @@ public:
 
 	CollisionReturn ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
 
-	void ProjectileSet(float _atk, float _speed);
+	void ProjectileSet(float _atk, float _speed, float _angle, size_t _passNum);
 public:
 	bool posSet_;
 protected:
@@ -25,9 +25,7 @@ protected:
 	void LevelEndEvent() override;
 private:
 	std::shared_ptr < GameEngineTextureRenderer> projectileRen_;
-	
 	std::shared_ptr < GameEngineCollision> projectileCol_;
-
 	float timer_;
 	float projectileatk_;
 	float projectilespeed_;
@@ -41,4 +39,5 @@ private:
 	float4 mouseAimPos_;
 	float4 playerPos_;
 	float angle_;
+	size_t passNum_;
 };
