@@ -22,6 +22,11 @@ void GameItemObjectManager::DelteObject(size_t _Num)
 	allObjectContainer_[_Num]->Death();
 	allObjectContainer_.erase(allObjectContainer_.begin()+ _Num);
 	ItemUpdateNum_ -= 1;
+
+	if (isFullContainer_==true)
+	{
+		isFullContainer_ = false;
+	}
 }
 	
 void GameItemObjectManager::SetManager()
@@ -78,7 +83,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 	if (isFullContainer_ == false)
 	{
 		ItemUpdateNum_ += 1;
-		if (ItemUpdateNum_ == 299)
+		if (ItemUpdateNum_ == 300)
 		{
 			isFullContainer_ = true;
 		}
@@ -181,6 +186,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 	{
 		allObjectContainer_[0]->itemObjectRenderer_->Off();
 		allObjectContainer_[0]->itemObjectCol_->Off();
+		allObjectContainer_[0]->Death();
 		allObjectContainer_.erase(allObjectContainer_.begin());
 
 		if (_itemObjectOrder == ItemObjectOrder::GreenExp)
