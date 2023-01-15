@@ -226,7 +226,6 @@
     <ClInclude Include="portable-file-dialogs.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ThirdParty\DirectXTex\Include\DirectXTex.h" />
-    <ClInclude Include="ThirdParty\FBX_SDK\Include\fbxsdk.h" />
     <ClInclude Include="ThirdParty\FW1FontWrapper\Include\FW1FontWrapper.h" />
   </ItemGroup>
   <ItemGroup>
@@ -329,122 +328,6 @@
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\alembic-md.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\alembic-mt.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-md.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <None Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-md.zip">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-mt.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <None Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-mt.zip">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk.dll">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libxml2-md.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libxml2-mt.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\zlib-md.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\zlib-mt.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\alembic-md.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\alembic-mt.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <None Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.zip">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <None Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.zip">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.dll">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-md.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-mt.pdb">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectXTex\Bin\Debug\DirectXTex.lib">
@@ -468,78 +351,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-md.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-mt.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libxml2-md.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libxml2-mt.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\zlib-md.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\zlib-mt.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-md.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-mt.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

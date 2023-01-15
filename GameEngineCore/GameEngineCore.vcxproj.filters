@@ -103,27 +103,6 @@
     <Filter Include="Debug">
       <UniqueIdentifier>{888f1880-9925-4638-ba3c-16555ea41837}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThirdParty\FBX_SDK">
-      <UniqueIdentifier>{2da1c9f5-d401-43e0-b580-e72f81a9cab8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThirdParty\FBX_SDK\Inc%28Header%29">
-      <UniqueIdentifier>{eeaf93a7-8348-4c84-93ad-601ac188c5b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29">
-      <UniqueIdentifier>{21034153-d2d9-4174-b576-814e1c9c01fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29\Debug">
-      <UniqueIdentifier>{c423839a-df65-492e-9e64-04fece08c076}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29\Debug\Compressed Library File">
-      <UniqueIdentifier>{ade33347-696d-4358-a348-8be5d6988154}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29\Release">
-      <UniqueIdentifier>{bb30c4a0-2eab-4fa1-b1d0-b2dc2e28918d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThirdParty\FBX_SDK\Bin%28Library%29\Release\Compressed Library File">
-      <UniqueIdentifier>{b9648e85-7548-4986-b75e-66c2478f72a3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource\FBX">
       <UniqueIdentifier>{fcbda458-9d75-4d9b-9391-24d57ba17c1c}</UniqueIdentifier>
     </Filter>
@@ -463,9 +442,6 @@
     <ClInclude Include="GameEngineFolderTexture.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\FBX_SDK\Include\fbxsdk.h">
-      <Filter>ThirdParty\FBX_SDK\Inc%28Header%29</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineRenderingEvent.h">
       <Filter>Object\Component\Rendering\Contents</Filter>
     </ClInclude>
@@ -496,18 +472,6 @@
     <None Include="ThirdParty\DirectXTex\Include\DirectXTex.inl">
       <Filter>ThirdParty\DirectXTex\Inc%28Header%29</Filter>
     </None>
-    <None Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-md.zip">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug\Compressed Library File</Filter>
-    </None>
-    <None Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-mt.zip">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug\Compressed Library File</Filter>
-    </None>
-    <None Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.zip">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release\Compressed Library File</Filter>
-    </None>
-    <None Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.zip">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release\Compressed Library File</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectXTex\Bin\Debug\DirectXTex.lib">
@@ -533,108 +497,6 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="ThirdParty\FW1FontWrapper\Bin\Debug\FW1FontWrapper.lib">
       <Filter>ThirdParty\FW1FontWrapper\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk.dll">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-md.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-mt.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libxml2-md.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libxml2-mt.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\zlib-md.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\zlib-mt.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.dll">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\alembic-md.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\alembic-mt.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-md.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libfbxsdk-mt.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libxml2-md.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\libxml2-mt.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\zlib-md.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Debug\zlib-mt.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\alembic-md.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-md.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libfbxsdk-mt.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-md.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-md.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\libxml2-mt.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-mt.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-mt.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\alembic-mt.pdb">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\FBX_SDK\Bin\Release\zlib-md.lib">
-      <Filter>ThirdParty\FBX_SDK\Bin%28Library%29\Release</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
