@@ -35,7 +35,6 @@ GameEngineWindow::~GameEngineWindow()
 
 void GameEngineWindow::RegClass(HINSTANCE _hInstance)
 {
-
 	//typedef struct tagWNDCLASSEXA {
 	//    UINT        cbSize;			이 구조체 크기.
 	//    /* Win 3.x */
@@ -234,7 +233,7 @@ LRESULT GameEngineWindow::MessageProcess(HWND _hWnd, UINT _message, WPARAM _wPar
 	case WM_DESTROY:
 	case WM_CLOSE:
 	{
-		GameEngineWindow::GetInst()->Off();
+		GameEngineWindow::GetInst().Off();
 		break;
 	}
 
@@ -260,7 +259,7 @@ LRESULT GameEngineWindow::MessageProcess(HWND _hWnd, UINT _message, WPARAM _wPar
 
 	case WM_MOUSEHWHEEL:
 	{
-		GameEngineInput::GetInst()->SetWheelValue(static_cast<int>HIWORD(_wParam));
+		GameEngineInput::GetInst().SetWheelValue(static_cast<int>HIWORD(_wParam));
 		break;
 	}
 

@@ -28,9 +28,9 @@ void SoulCardUI::Start()
 	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
 	mySkill_ = SkillList[0][0];
 
-	if (false == GameEngineInput::GetInst()->IsKey("click"))
+	if (false == GameEngineInput::GetInst().IsExists("click"))
 	{
-		GameEngineInput::GetInst()->CreateKey("Click", VK_LBUTTON);
+		GameEngineInput::GetInst().CreateKey("Click", VK_LBUTTON);
 	}
 	if (nullptr == GameEngineTexture::Find("SoulCardNormal.png"))
 	{
@@ -144,7 +144,7 @@ void SoulCardUI::Update(float _deltaTime)
 				GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
 				soundCheck_ = true;
 			}
-			if (GameEngineInput::GetInst()->IsUp("Click"))
+			if (GameEngineInput::GetInst().IsUp("Click"))
 			{
 				GameEngineSound::SoundPlayOneshot("Menu_Confirm.wav");
 				mySkill_->IsOnOff();
@@ -171,7 +171,7 @@ void SoulCardUI::Update(float _deltaTime)
 				GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
 				soundCheck_ = true;
 			}
-			if (GameEngineInput::GetInst()->IsUp("Click"))
+			if (GameEngineInput::GetInst().IsUp("Click"))
 			{
 				mySkill_->IsOnOff();
 				mySkill_->Effect();
@@ -197,7 +197,7 @@ void SoulCardUI::Update(float _deltaTime)
 				GameEngineSound::SoundPlayOneshot("Menu_Cycle.wav");
 				soundCheck_ = true;
 			}
-			if (GameEngineInput::GetInst()->IsUp("Click"))
+			if (GameEngineInput::GetInst().IsUp("Click"))
 			{
 				mySkill_->IsOnOff();
 				mySkill_->Effect();

@@ -47,11 +47,6 @@ TestLevel::~TestLevel()
 
 void TestLevel::Start()
 {
-	//mainCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
-	//mainCameraActor->GetCameraComponent()->SetProjectionMode(CameraProjectionMode::Orthographic);
-	//mainCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MousePointerCamera);
-
-
 	fieldRenderingActor_ = CreateActor<FieldRenderingActor>();
 	fieldRenderingActor_->Initialize(
 		550,
@@ -89,7 +84,6 @@ void TestLevel::Start()
 
 
 	
-	//ShowCursor(false); 마우스 감추기
 	CreateActor<TimeActor>();
 	stageUI_ = CreateActor<StageUI>();
 
@@ -171,7 +165,7 @@ void TestLevel::LevelEndEvent()
 
 void TestLevel::PlayerMoveCamera()
 {
-	float Time = GameEngineTime::GetDeltaTime();
+	float Time = GameEngineTime::GetInst().GetDeltaTime();
 	float4 MoveVector = Player::GetPlayerInst()->GetTransform().GetWorldPosition() - GetMainCameraActorTransform().GetWorldPosition();
 
 	if (abs(MoveVector.x) < 1.0f)
@@ -188,31 +182,9 @@ void TestLevel::PlayerMoveCamera()
 
 }
 
-//void TestLevel::PrepareNewStage()
-//{
-//	this->stageType_ = StageObject::GetNextStageInfo().stageType_;
-//	this->combatType_ = StageObject::GetNextStageInfo().combatType_;
-//
-//	if (CombatType::Max == this->combatType_)
-//	{
-//		MsgBoxAssert("비 전투맵 오브젝트인데 전투맵으로 넘어왔습니다.");
-//		return;
-//	}
-//
-//	this->killCount_ = StageObject::GetNextStageInfo().killCount_;
-//	this->timeLimit_ = StageObject::GetNextStageInfo().timeLimit_;
-//
-//	Monster::ReserveMonsters(this, StageObject::GetNextStageInfo().totalMonsterCount_);
-//
-//	for (std::pair<MonsterType, size_t> countPerType : StageObject::GetNextStageInfo().summoningMonsterCountMap_)
-//	{
-//		Monster::CreateMonsterWithEnum(this, countPerType.first, countPerType.second);
-//	}
-//}
-
 void TestLevel::MouseMoveCamera()
 {
-	float Time = GameEngineTime::GetDeltaTime();
+	float Time = GameEngineTime::GetInst().GetDeltaTime();
 
 	float4 MouseDir = float4::Zero;
 	float4 CheckPos = GetMainCamera()->GetMousePositionInWorldSpace() - Player::GetPlayerInst()->GetTransform().GetWorldPosition();

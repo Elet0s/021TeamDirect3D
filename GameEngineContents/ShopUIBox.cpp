@@ -117,7 +117,7 @@ void ShopUIBox::Update(float _deltaTime)
 			soundCheck_ = true;
 		}
 		buttonrenderer_->SetTexture("Button_Selected_Stage.png");
-		if (GameEngineInput::GetInst()->IsUp("Click"))
+		if (GameEngineInput::GetInst().IsUp("Click"))
 		{
 			GEngine::ChangeLevel("WorldMap");
 		}

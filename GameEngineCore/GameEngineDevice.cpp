@@ -15,7 +15,7 @@ void GameEngineDevice::Initialize()
 
 void GameEngineDevice::CreateDevice()
 {
-	if (nullptr == GameEngineWindow::GetHWND())
+	if (nullptr == GameEngineWindow::GetInst().GetHWND())
 	{
 		MsgBoxAssert("윈도우가 생성되지 않았는데 디바이스 초기화를 하려고 했습니다..");
 		return;
@@ -89,7 +89,7 @@ void GameEngineDevice::CreateDevice()
 
 void GameEngineDevice::CreateSwapChain()
 {
-	float4 screenSize = GameEngineWindow::GetScale();
+	float4 screenSize = GameEngineWindow::GetInst().GetScale();
 
 	DXGI_SWAP_CHAIN_DESC scInfo = { 0 };
 
@@ -116,7 +116,7 @@ void GameEngineDevice::CreateSwapChain()
 	scInfo.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT | DXGI_USAGE_SHADER_INPUT;
 	//스왑체인이 가진 버퍼 사용 방식: 화면에 출력할 렌더타겟으로 | 셰이더를 거친 결과물을 받는 용도로.
 
-	scInfo.OutputWindow = GameEngineWindow::GetHWND();
+	scInfo.OutputWindow = GameEngineWindow::GetInst().GetHWND();
 	//지정한 렌더타겟을 출력할 윈도우의 핸들.
 
 	scInfo.BufferCount = 2;		//스왑체인이 가진 버퍼 중 사용할 버퍼 개수: 전면 버퍼와 백버퍼 2개.

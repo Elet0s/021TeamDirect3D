@@ -135,10 +135,10 @@ public:
 
 private:
 
-	void LevelUpdate(float _deltaTime);
+	void UpdateLevel(float _deltaTime);
 
 	//이 레벨이 가진 액터들을 업데이트하는 함수.
-	void ActorsUpdate(float _deltaTime);
+	void UpdateActors(float _deltaTime);
 
 	//이 레벨의 카메라들이 가진 렌더러들의 렌더링 정보대로 각각의 카메라들이 가진 렌더타겟에 렌더해서 
 	// 백버퍼 렌더타겟으로 합치고 전면 버퍼와 교체까지 하는 함수.

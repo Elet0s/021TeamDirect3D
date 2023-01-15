@@ -22,7 +22,7 @@ private:
 
 public:
 	//스레드를 생성하고 스레드에게 실행시킬 함수포인터를 연결하는 함수. _callback을 직접 호출하진 않는다.
-	void Start(const std::string& _threadName, std::function<void(GameEngineThread*)> _callback);
+	void Start(const std::string& _threadName, std::function<void(GameEngineThread*)> _callbackFunction);
 
 	//이 스레드의 작업을 종료하고 대기 상태로 만들어서 부모 스레드로 합류시키는 함수. 
 	//이 상태로 다시 스레드를 사용할 수도 있고, 그대로 스레드를 삭제할 수도 있다.
@@ -30,7 +30,7 @@ public:
 
 private:
 	//std::thread 생성자의 매개변수로 들어가 호출되서, 이 스레드에 이름을 붙여주고, 지정해 둔 함수 포인터의 함수를 호출하는 함수.
-	static void GameEngineThreadFunction(GameEngineThread* _thisThread, const std::string& _threadName);
+	static void LinkFunction(GameEngineThread* _thisThread, const std::string& _threadName);
 
 private:
 

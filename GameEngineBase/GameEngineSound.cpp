@@ -47,7 +47,7 @@ GameEngineSound::~GameEngineSound()
 GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string_view& _name, unsigned int _loopCount /*= 0*/)
 {
     std::string uppercaseSoundName = GameEngineString::ToUpperReturn(_name);
-    GameEngineSound* findSound = GameEngineSound::FindResources(uppercaseSoundName);
+    GameEngineSound* findSound = GameEngineSound::FindSingleResource(uppercaseSoundName);
     if (nullptr == findSound)
     {
         MsgBoxAssertString(std::string(_name) + ": 그런 이름의 사운드가 존재하지 않습니다.");
@@ -66,7 +66,7 @@ GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string_view& 
 void GameEngineSound::SoundPlayOneshot(const std::string_view& _name, int _loopCount)
 {
     std::string uppercaseSoundName = GameEngineString::ToUpperReturn(_name);
-    GameEngineSound* findSound = GameEngineSound::FindResources(uppercaseSoundName);
+    GameEngineSound* findSound = GameEngineSound::FindSingleResource(uppercaseSoundName);
     if (nullptr == findSound)
     {
         MsgBoxAssertString(std::string(_name) + ": 그런 이름의 사운드가 존재하지 않습니다.");
@@ -116,7 +116,7 @@ GameEngineSound* GameEngineSound::LoadResource(const std::string_view& _path, co
     return newSound;
 }
 
-GameEngineSound* GameEngineSound::FindResources(const std::string_view& _name)
+GameEngineSound* GameEngineSound::FindSingleResource(const std::string_view& _name)
 {
     std::string uppercaseResourceName = GameEngineString::ToUpperReturn(_name);
     std::map<std::string, GameEngineSound*>::iterator findIter = allResources_.find(uppercaseResourceName);

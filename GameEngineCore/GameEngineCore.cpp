@@ -40,33 +40,33 @@ bool GameEngineCore::ChangeLevel(const std::string& _levelName)
 	}
 }
 
-void GameEngineCore::WindowCreate(const std::string& _title, GameEngineCore* _userCore)
+void GameEngineCore::Initiate(const std::string& _title, GameEngineCore* _userCore)
 {
-	GameEngineWindow::GetInst()->CreateGameWindow(nullptr, _title.c_str());
+	GameEngineWindow::GetInst().CreateGameWindow(nullptr, _title.c_str());
 	//윈도우 핸들 생성.
 
-	GameEngineWindow::GetInst()->SetWindowScaleAndPosition(
+	GameEngineWindow::GetInst().SetWindowScaleAndPosition(
 		_userCore->StartWindowPosition(), _userCore->StartWindowSize());
 	//윈도우 생성 위치와 크기 조정.
 
-	GameEngineWindow::GetInst()->ShowGameWindow();
+	GameEngineWindow::GetInst().ShowGameWindow();
 	//윈도우 생성.
 	
 	GameEngineDevice::Initialize();
 	//다이렉트x 디바이스, DC, 스왑체인 생성.
 
-	GameEngineWindow::GetInst()->MessageLoop(
-		std::bind(&GameEngineCore::CoreStart, _userCore),
-		std::bind(&GameEngineCore::CoreUpdate, _userCore),
-		std::bind(&GameEngineCore::CoreEnd, _userCore)
+	GameEngineWindow::GetInst().MessageLoop(
+		std::bind(&GameEngineCore::StartCore, _userCore),
+		std::bind(&GameEngineCore::UpdateCore, _userCore),
+		std::bind(&GameEngineCore::EndCore, _userCore)
 	);
 	//게임 구동.
 
 }
 
-void GameEngineCore::CoreStart(GameEngineCore* _userCore)
+void GameEngineCore::StartCore(GameEngineCore* _userCore)
 {
-	EngineResourceInitialize();
+	InitializeEngineResource();
 	//엔진코어 초기화 및 각종 엔진 리소스 준비.
 	//유저코어의 스타트 이전에 엔진 리소스 준비가 끝나있어야 한다.
 
@@ -83,7 +83,7 @@ void GameEngineCore::CoreStart(GameEngineCore* _userCore)
 	_userCore->Start();
 }
 
-void GameEngineCore::CoreUpdate(GameEngineCore* _userCore)
+void GameEngineCore::UpdateCore(GameEngineCore* _userCore)
 {
 
 	if (nullptr != nextLevel_)
@@ -100,8 +100,8 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _userCore)
 		currentLevel_->ActorLevelStartEvent();
 
 		currentLevel_->ResetAccTime();
-		GameEngineTime::GetInst()->Reset();
-		GameEngineInput::GetInst()->Reset();
+		GameEngineTime::GetInst().Reset();
+		GameEngineInput::GetInst().Reset();
 	}
 
 	if (nullptr == currentLevel_)
@@ -110,26 +110,26 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _userCore)
 		return;
 	}
 
-	GameEngineTime::GetInst()->Update();
+	GameEngineTime::GetInst().Update();
 
 	GameEngineSound::Update();
 
-	float deltaTime = GameEngineTime::GetDeltaTime();
+	float deltaTime = GameEngineTime::GetInst().GetDeltaTime();
 
-	if (true == GameEngineWindow::GetInst()->IsFocused())
+	if (true == GameEngineWindow::GetInst().IsFocused())
 	{
-		GameEngineInput::GetInst()->Update(deltaTime);
+		GameEngineInput::GetInst().Update(deltaTime);
 	}
 
 	if (true == GameEngineTime::IsUpdateOn())
 	{
 		_userCore->Update(deltaTime);
 
-		currentLevel_->LevelUpdate(deltaTime);
+		currentLevel_->UpdateLevel(deltaTime);
 	}
 }
 
-void GameEngineCore::CoreEnd(GameEngineCore* _userCore)
+void GameEngineCore::EndCore(GameEngineCore* _userCore)
 {
 	_userCore->End();
 
@@ -148,7 +148,7 @@ void GameEngineCore::CoreEnd(GameEngineCore* _userCore)
 	GameEngineDebug::Debug3DDestroy();
 	//동적할당으로 생성한 렌더유닛들을 파괴한다.
 
-	EngineResourceDestroy();
+	DestroyEngineResource();
 
 	GameEngineWindow::Destroy();
 	GameEngineInput::Destroy();

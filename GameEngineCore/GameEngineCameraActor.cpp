@@ -19,17 +19,17 @@ void GameEngineCameraActor::Start()
 {
 	cameraComponent_ = CreateComponent<GameEngineCamera>();
 	
-	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))
+	if (false == GameEngineInput::GetInst().IsExists("CamLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("CamLeft", 'A');
-		GameEngineInput::GetInst()->CreateKey("CamRight", 'D');
-		GameEngineInput::GetInst()->CreateKey("CamUp", 'Q');
-		GameEngineInput::GetInst()->CreateKey("CamDown", 'E');
-		GameEngineInput::GetInst()->CreateKey("CamForward", 'W');
-		GameEngineInput::GetInst()->CreateKey("CamBack", 'S');
-
-		GameEngineInput::GetInst()->CreateKey("CamRot", VK_RBUTTON);
-		GameEngineInput::GetInst()->CreateKey("CamBoost", VK_LSHIFT);
+		GameEngineInput::GetInst().CreateKey("CamLeft", 'A');
+		GameEngineInput::GetInst().CreateKey("CamRight", 'D');
+		GameEngineInput::GetInst().CreateKey("CamUp", 'Q');
+		GameEngineInput::GetInst().CreateKey("CamDown", 'E');
+		GameEngineInput::GetInst().CreateKey("CamForward", 'W');
+		GameEngineInput::GetInst().CreateKey("CamBack", 'S');
+								  
+		GameEngineInput::GetInst().CreateKey("CamRot", VK_RBUTTON);
+		GameEngineInput::GetInst().CreateKey("CamBoost", VK_LSHIFT);
 	}
 }
 
@@ -44,44 +44,44 @@ void GameEngineCameraActor::Update(float _deltaTime)
 	float cameraSpeed = cameraMovingSpeed_;
 
 
-	if (true == GameEngineInput::GetInst()->IsPressed("CamBoost"))
+	if (true == GameEngineInput::GetInst().IsPressed("CamBoost"))
 	{
 		cameraSpeed *= 3.f;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPressed("CamLeft"))
+	if (true == GameEngineInput::GetInst().IsPressed("CamLeft"))
 	{
 		this->GetTransform().SetLocalMove(
 			this->GetTransform().GetLeftVector() * cameraSpeed * _deltaTime);
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("CamRight"))
+	if (true == GameEngineInput::GetInst().IsPressed("CamRight"))
 	{
 		this->GetTransform().SetLocalMove(
 			this->GetTransform().GetRightVector() * cameraSpeed * _deltaTime);
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("CamUp"))
+	if (true == GameEngineInput::GetInst().IsPressed("CamUp"))
 	{
 		this->GetTransform().SetLocalMove(
 			this->GetTransform().GetUpVector() * cameraSpeed * _deltaTime);
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("CamDown"))
+	if (true == GameEngineInput::GetInst().IsPressed("CamDown"))
 	{
 		this->GetTransform().SetLocalMove(
 			this->GetTransform().GetDownVector() * cameraSpeed * _deltaTime);
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPressed("CamForward"))
+	if (true == GameEngineInput::GetInst().IsPressed("CamForward"))
 	{
 		this->GetTransform().SetLocalMove(
 			this->GetTransform().GetForwardVector() * cameraSpeed * _deltaTime);
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("CamBack"))
+	if (true == GameEngineInput::GetInst().IsPressed("CamBack"))
 	{
 		this->GetTransform().SetLocalMove(
 			this->GetTransform().GetBackVector() * cameraSpeed * _deltaTime);
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPressed("CamRot"))
+	if (true == GameEngineInput::GetInst().IsPressed("CamRot"))
 	{
 		float4 mouseDir = this->cameraComponent_->GetMouseDirection();
 		float4 rotMouseDir;

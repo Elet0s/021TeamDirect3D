@@ -3,7 +3,7 @@
 
 WorldMapRenderingActor::WorldMapRenderingActor()
 	: tileSize_(256.f),
-	windowSize_(GameEngineWindow::GetScale()),
+	windowSize_(GameEngineWindow::GetInst().GetScale()),
 	tileCountXY_(8.0f ,10.f),
 	tileCount_(tileCountXY_.IX()* tileCountXY_.IY()),
 	worldRenderer_(nullptr)

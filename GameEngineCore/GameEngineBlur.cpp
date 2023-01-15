@@ -21,7 +21,7 @@ void GameEngineBlur::EffectInit()
 {
 	copiedRenderTarget_ = GameEngineRenderTarget::Create();
 	copiedRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
@@ -30,7 +30,7 @@ void GameEngineBlur::EffectInit()
 	effectUnit_->SetMesh("Fullrect");
 	effectUnit_->GetShaderResourceHelper().SetConstantBuffer_New(
 		"WindowScale",
-		GameEngineWindow::GetInst()->GetScale()
+		GameEngineWindow::GetInst().GetScale()
 	);
 }
 

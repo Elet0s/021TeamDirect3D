@@ -20,9 +20,9 @@ public:
 	void Update();			//델타타임 갱신 함수.
 
 public:
-	static inline GameEngineTime* GetInst()
+	static inline GameEngineTime& GetInst()
 	{
-		return inst_;
+		return *inst_;
 	}
 
 	static void Destroy()
@@ -37,26 +37,26 @@ public:
 
 	}
 
-	static inline float GetDeltaTime()
+	inline float GetDeltaTime()
 	{
-		if (0.05f <= inst_->deltaTimeF_)
+		if (0.05f <= deltaTimeF_)
 		{
-			inst_->deltaTimeF_ = 0.05f;
+			deltaTimeF_ = 0.05f;
 		}
 
-		if (-1 == inst_->frameLimit_)
+		if (-1 == frameLimit_)
 		{
-			return inst_->deltaTimeF_ * inst_->globalTimeScale_;
+			return deltaTimeF_ * globalTimeScale_;
 			//프레임 제한이 없는 상황에서 globalTimeScale_이 곱해진 델타타임 반환.
 		}
 
-		return inst_->sumDeltaTimeF_ * inst_->globalTimeScale_;
+		return sumDeltaTimeF_ * globalTimeScale_;
 		//프레임 제한이 있는 상황에서 globalTimeScale_이 곱해진 누적 델타타임 반환.
 	}
 
-	static inline float GetDeltaTime(int _index)
+	inline float GetDeltaTime(int _index)
 	{
-		return inst_->deltaTimeF_ * inst_->GetTimeScale(_index);
+		return deltaTimeF_ * GetTimeScale(_index);
 	}
 	template <typename EnumType>
 	void GetDeltaTime(EnumType _type)
@@ -92,14 +92,14 @@ public:
 	}
 
 	//프레임 제한을 설정하는 함수. -1은 제한하지 않겠다는 의미.
-	static inline void SetFrameLimit(int _frameLimit)
+	inline void SetFrameLimit(int _frameLimit)
 	{
-		inst_->frameLimit_ = _frameLimit;
+		frameLimit_ = _frameLimit;
 
-		if (-1 != inst_->frameLimit_)
+		if (-1 != frameLimit_)
 		{
-			inst_->frameInterval_ = 1.0 / static_cast<double>(inst_->frameLimit_);
-			inst_->curFrameTime_ = inst_->frameInterval_;
+			frameInterval_ = 1.0 / static_cast<double>(frameLimit_);
+			curFrameTime_ = frameInterval_;
 		}
 	}
 

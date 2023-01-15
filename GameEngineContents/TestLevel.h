@@ -43,7 +43,6 @@ private:
 	void PlayerMoveCamera();
 
 	void StageMonsterManager();
-	//void PrepareNewStage();
 
 private:
 	std::shared_ptr<FieldRenderingActor> fieldRenderingActor_;

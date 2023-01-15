@@ -12,7 +12,6 @@
 WorldMapLevel::WorldMapLevel()
 	: WorldMapRenderingActor_(nullptr),
 	WorldLevelLighting_(nullptr),
-	//TestActor_(nullptr),
 	stageCreater_(nullptr),
 	mousePointer_(nullptr),
 	stageUI_(nullptr),
@@ -26,8 +25,6 @@ WorldMapLevel::~WorldMapLevel()
 
 void WorldMapLevel::Start()
 {
-	//TestActor_ = CreateActor<TestActor>();
-
 	WorldMapRenderingActor_ = CreateActor<WorldMapRenderingActor>();
 	WorldMapRenderingActor_->Initialize(
 		1000,
@@ -65,12 +62,12 @@ void WorldMapLevel::Start()
 	GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
 	//GetUICamera()->GetTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
 
-	if (false == GameEngineInput::GetInst()->IsKey("WorldCameraLeft"))
+	if (false == GameEngineInput::GetInst().IsExists("WorldCameraLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("WorldCameraLeft", VK_LEFT);
-		GameEngineInput::GetInst()->CreateKey("WorldCameraRight", VK_RIGHT);
-		GameEngineInput::GetInst()->CreateKey("WorldCameraFoward", VK_UP);
-		GameEngineInput::GetInst()->CreateKey("WorldCameraBack", VK_DOWN);
+		GameEngineInput::GetInst().CreateKey("WorldCameraLeft", VK_LEFT);
+		GameEngineInput::GetInst().CreateKey("WorldCameraRight", VK_RIGHT);
+		GameEngineInput::GetInst().CreateKey("WorldCameraFoward", VK_UP);
+		GameEngineInput::GetInst().CreateKey("WorldCameraBack", VK_DOWN);
 	}
 
 	if (nullptr == mousePointer_)
@@ -111,7 +108,7 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 
 	float4 Pos = GetMainCameraActorTransform().GetWorldPosition();
 
-	if (true == GameEngineInput::GetInst()->IsPressed("WorldCameraLeft"))
+	if (true == GameEngineInput::GetInst().IsPressed("WorldCameraLeft"))
 	{
 		Pos += GetMainCameraActorTransform().GetLeftVector() * cameraSpeed * _deltaTime;
 
@@ -123,7 +120,7 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 		GetMainCameraActorTransform().SetLocalMove(
 			GetMainCameraActorTransform().GetLeftVector() * cameraSpeed * _deltaTime);
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("WorldCameraRight"))
+	if (true == GameEngineInput::GetInst().IsPressed("WorldCameraRight"))
 	{
 		Pos += GetMainCameraActorTransform().GetRightVector() * cameraSpeed * _deltaTime;
 
@@ -137,7 +134,7 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 	}
 
 
-	if (true == GameEngineInput::GetInst()->IsPressed("WorldCameraFoward"))
+	if (true == GameEngineInput::GetInst().IsPressed("WorldCameraFoward"))
 	{
 
 		Pos += float4(
@@ -160,7 +157,7 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 		);
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPressed("WorldCameraBack"))
+	if (true == GameEngineInput::GetInst().IsPressed("WorldCameraBack"))
 	{
 		Pos += float4(
 			0.f,
@@ -199,7 +196,7 @@ void WorldMapLevel::CheckNextStageSelection()
 			continue;
 		}
 
-		if (true == GameEngineInput::GetInst()->IsDown("Click"))
+		if (true == GameEngineInput::GetInst().IsDown("Click"))
 		{
 			stageCreater_->SendPlayerToNextStage(*iter);
 		}

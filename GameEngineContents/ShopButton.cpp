@@ -62,7 +62,7 @@ void ShopButton::Update(float _deltaTime)
 		{
 
 			renderer_->SetTexture("Button_Selected_Shop.png");
-			if (GameEngineInput::GetInst()->IsDown("Click"))
+			if (GameEngineInput::GetInst().IsDown("Click"))
 			{
 				GameEngineSound::SoundPlayOneshot("Menu_Confirm.wav");
 				Off();

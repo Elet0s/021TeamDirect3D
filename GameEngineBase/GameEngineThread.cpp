@@ -20,12 +20,12 @@ GameEngineThread::~GameEngineThread()
 	this->Join();
 }
 
-void GameEngineThread::Start(const std::string& _threadName, std::function<void(GameEngineThread*)> _callback)
+void GameEngineThread::Start(const std::string& _threadName, std::function<void(GameEngineThread*)> _callbackFunction)
 {
-	this->workFunction_ = _callback;
+	this->workFunction_ = _callbackFunction;
 	//이 스레드가 실행할 함수를 세팅한다.
 
-	this->thread_ = std::thread(GameEngineThreadFunction, this, _threadName);
+	this->thread_ = std::thread(LinkFunction, this, _threadName);
 	//std::thread를 생성하면서 실행할 함수로 GameEngineThreadFunction()을, 넣어줄 매개변수로 
 	// 이 GameEngineThread 객체와 붙여줄 스레드 이름을 넣어준다. 내가 넣어준 함수를 직접 호출하지 않는것에 주의할 것.
 	//이렇게 생성된 스레드는 true == joinable 상태로 생성된다.
@@ -49,7 +49,7 @@ void GameEngineThread::Join()
 	}
 }
 
-void GameEngineThread::GameEngineThreadFunction(GameEngineThread* _thisThread, const std::string& _threadName)
+void GameEngineThread::LinkFunction(GameEngineThread* _thisThread, const std::string& _threadName)
 {
 	SetThreadDescription(		//스레드에 스레드 설명용 문자열을 붙여주는 함수. 여기서는 이름을 붙여준다.
 		GetCurrentThread(),		//현재 스레드의 핸들을 반환하는 함수.

@@ -13,7 +13,7 @@
 #include "GameEngineInstancingRenderer.h"
 
 GameEngineCamera::GameEngineCamera()
-	: size_(GameEngineWindow::GetScale()),
+	: size_(GameEngineWindow::GetInst().GetScale()),
 	projectionMode_(ProjectionMode::Perspective),
 	nearZ_(1.f),
 	farZ_(100000.f),
@@ -74,7 +74,7 @@ float4 GameEngineCamera::GetMousePositionInScreen()
 	}
 
 	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
-		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
+		GameEngineWindow::GetInst().GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
 		&pointerPosition	//변환할 화면 전체기준 마우스 포인터 좌표.
 	))
 	{
@@ -96,7 +96,7 @@ float4 GameEngineCamera::GetMousePositionInViewSpace()
 	}
 
 	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
-		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
+		GameEngineWindow::GetInst().GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
 		&pointerPosition)	//화면 전체기준 마우스 포인터 좌표.
 		)
 	{
@@ -126,7 +126,7 @@ float4 GameEngineCamera::GetMousePositionInWorldSpace()
 	}
 
 	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
-		GameEngineWindow::GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
+		GameEngineWindow::GetInst().GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
 		&pointerPosition)	//화면 전체기준 마우스 포인터 좌표.
 	)
 	{
@@ -192,7 +192,7 @@ void GameEngineCamera::Start()
 {
 	conclusionRenderTarget_ = GameEngineRenderTarget::Create();
 	conclusionRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero	//float4::Black
 	);
@@ -201,7 +201,7 @@ void GameEngineCamera::Start()
 
 	forwardRenderTarget_ = GameEngineRenderTarget::Create();
 	forwardRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
@@ -210,7 +210,7 @@ void GameEngineCamera::Start()
 
 	deferredRenderTarget_ = GameEngineRenderTarget::Create();
 	deferredRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
@@ -222,28 +222,28 @@ void GameEngineCamera::Start()
 	//지오메트리 버퍼 렌더타겟 생성.
 
 	geometryBufferRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
 	//지오메트리 버퍼 렌더타겟에 오브젝트 표면의 기본 색상값 정보를 저장할 텍스처 생성.
 
 	geometryBufferRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
 	//지오메트리 버퍼 렌더타겟에 윈도우 내 오브젝트 표면의 뷰공간 좌표정보를 저장할 텍스처 생성.
 
 	geometryBufferRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
 	//지오메트리 버퍼 렌더타겟에 윈도우 내 오브젝트들의 뷰공간 표면 법선벡터 정보를 저장할 텍스처 생성.
 
 	geometryBufferRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT,	//4색이 다 필요한게 아니라 0~1 사이 오브젝트 깊이값만 있으면 충분하므로 이 포맷으로 설정.
 		float4::Red
 	);
@@ -255,7 +255,7 @@ void GameEngineCamera::Start()
 
 	shadowDepthRenderTarget_ = GameEngineRenderTarget::Create();
 	shadowDepthRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT_R32_FLOAT,	//4색이 다 필요한게 아니라 0~1 사이 그림자 깊이값만 있으면 충분하므로 이 포맷으로 설정.
 		float4::Red
 	);
@@ -264,7 +264,7 @@ void GameEngineCamera::Start()
 
 	lightRatioBufferRenderTarget_ = GameEngineRenderTarget::Create();
 	lightRatioBufferRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT_R32_FLOAT,	//4색이 다 필요한게 아니라 0~1 사이 빛 적용 배율값만 있으면 충분하므로 이 포맷으로 설정.
 		float4::Red
 	);
@@ -275,21 +275,21 @@ void GameEngineCamera::Start()
 	//빛정보 저장 버퍼 렌더타겟 생성.
 
 	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
 	//빛정보 저장 버퍼 렌더타겟에 난반사광(Diffuse Light) 정보를 저장할 텍스처 생성. 
 
 	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
 	//빛정보 저장 버퍼 렌더타겟에 정반사광(Specular Light) 정보를 저장할 텍스처 생성. 
 
 	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
-		GameEngineWindow::GetScale(),
+		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
@@ -407,7 +407,7 @@ void GameEngineCamera::Render(float _deltaTime)
 
 		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
 		{
-			float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
+			float scaleTime = GameEngineTime::GetInst().GetDeltaTime(rendererGroup.first);
 
 			std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
 			sortingRendererList.sort(ZSort);
@@ -457,7 +457,7 @@ void GameEngineCamera::Render(float _deltaTime)
 
 		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
 		{
-			float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
+			float scaleTime = GameEngineTime::GetInst().GetDeltaTime(rendererGroup.first);
 
 			//std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
 			//sortingRendererList.sort(ZSort);
@@ -512,7 +512,7 @@ void GameEngineCamera::Render(float _deltaTime)
 
 		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
 		{
-			float scaleTime = GameEngineTime::GetDeltaTime(rendererGroup.first);
+			float scaleTime = GameEngineTime::GetInst().GetDeltaTime(rendererGroup.first);
 
 			std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
 			sortingRendererList.sort(ZSort);

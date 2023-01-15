@@ -1,6 +1,5 @@
 #pragma once
 
-//class TestActor;
 class WorldMapLevel : public GameEngineLevel
 {
 public:
@@ -28,7 +27,6 @@ private:
 	bool soundCheck_;
 	std::shared_ptr<class WorldMapRenderingActor> WorldMapRenderingActor_;
 	std::shared_ptr<GameEngineLighting> WorldLevelLighting_;
-	//std::shared_ptr<TestActor> TestActor_;
 	std::shared_ptr<class StageCreater> stageCreater_;
 	std::shared_ptr<class Mouse> mousePointer_;
 	std::shared_ptr<class StageUI> stageUI_;

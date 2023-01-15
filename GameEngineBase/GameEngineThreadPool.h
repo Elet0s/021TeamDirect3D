@@ -69,15 +69,15 @@ public:
 	void Initialize(const std::string_view& _threadName, int _threadCount = 0);
 	//코어 수 * 2가 멀티스레딩에 적절한 스레드 개수라고 한다. 
 
-	//Work라는 단어와는 다르게 이 함수를 호출하는 메인스레드가 직접 뭔가를 작업하는 것이 아니라, IO완료큐에 작업을 등록시키는 함수.
+	//메인스레드가 직접 뭔가를 작업하는 것이 아니라, IO완료큐에 작업을 분배, 등록시키는 함수.
 	//IO완료큐에 등록된 작업 함수포인터는 IOCP가 받아서 자기가 가진 스레드풀 안에서 가장 적합한 스레드에게 맡기게 된다. 
-	void Work(std::function<void()> _callback);
+	void DistributeWork(std::function<void()> _callback);
 
 private:
-	//메인 스레드가 직접 호출할 함수가 아닌, 스레드풀에 등록된 스레드들이 생성과 동시에 GameEngineThreadFunction()함수를 통해 호출하게 될 함수. 
+	//메인 스레드가 직접 호출할 함수가 아닌, 스레드풀에 등록된 스레드들이 생성과 동시에 LinkFunction()함수를 통해 호출하게 될 함수. 
 	//GameEngineThreadPool 객체가 파괴되기 전까지 계속 GetQueuedCompletionStatus()함수를 호출하는 구조로 되어 있으므로
 	//IOCP가 GameEngineThread 객체들을 자기 스레드풀에 넣고 관리할 수 있게 된다.
-	static void	ThreadPoolFunction(
+	static void	ExecuteWork(
 		GameEngineThreadPool* _threadPool,
 		GameEngineThread* _thread,
 		HANDLE _iocpHandle

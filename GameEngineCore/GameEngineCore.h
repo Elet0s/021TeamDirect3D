@@ -28,9 +28,7 @@ public:
 #endif							//릴리즈모드에서는 하지 않는다.
 
 		CoreType core{};
-		WindowCreate(core.GetWindowTitle(), &core);
-
-
+		Initiate(core.GetWindowTitle(), &core);
 	}
 
 	static GameEngineLevel* GetCurrentLevel()
@@ -47,18 +45,25 @@ protected:
 	static bool ChangeLevel(const std::string& _levelName);
 
 protected:
-	static void CoreStart(GameEngineCore* _userCore);	//프로그램 시작.
-	static void CoreUpdate(GameEngineCore* _userCore);	//프로그램 갱신.
-	static void CoreEnd(GameEngineCore* _userCore);	//프로그램 종료.
-	static void WindowCreate(const std::string& _title, GameEngineCore* _userCore);
+	//프로세스 시작.
+	static void StartCore(GameEngineCore* _userCore);	
+
+	//프로세스 갱신.
+	static void UpdateCore(GameEngineCore* _userCore);	
+
+	//프로세스 종료.
+	static void EndCore(GameEngineCore* _userCore);		
+
+	//프로세스 개시 함수. 종료까지 담당.
+	static void Initiate(const std::string& _title, GameEngineCore* _userCore);	
 
 	//엔진 기본제공 리소스 초기화 함수.
-	static void EngineResourceInitialize();
+	static void InitializeEngineResource();
 	//사각형, 육면체, 에러텍스쳐, 렌더링 파이프라인, 각종 셰이더 등, 
 	// 엔진 수준에서 기본적으로 지원되어야 하는 리소스를 준비하는 함수.
 
 	//엔진 기본제공 리소스 정리 함수.
-	static void EngineResourceDestroy();
+	static void DestroyEngineResource();
 
 	//헤더 추가하기 싫어서 초기화를 CPP에서 하려고 만든 함수.
 	static void InitializeLevel(GameEngineLevel* _level, const std::string& _levelName);

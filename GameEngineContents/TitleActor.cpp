@@ -12,9 +12,9 @@ TitleActor::~TitleActor()
 
 void TitleActor::Start()
 {
-	if (GameEngineInput::GetInst()->IsKey("SPACE") == false)
+	if (GameEngineInput::GetInst().IsExists("SPACE") == false)
 	{
-		GameEngineInput::GetInst()->CreateKey("SPACE", VK_SPACE);
+		GameEngineInput::GetInst().CreateKey("SPACE", VK_SPACE);
 	}
 
 	std::shared_ptr<GameEngineTextureRenderer> texture = CreateComponent<GameEngineTextureRenderer>();
@@ -24,7 +24,7 @@ void TitleActor::Start()
 
 void TitleActor::Update(float _deltaTime)
 {
-	if (GameEngineInput::GetInst()->IsDown("SPACE") == true)
+	if (GameEngineInput::GetInst().IsDown("SPACE") == true)
 	{
 		GEngine::ChangeLevel("worldMap");
 	}

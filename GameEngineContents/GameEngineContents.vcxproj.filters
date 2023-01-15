@@ -367,9 +367,6 @@
     <ClCompile Include="ClearLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="TestActor.cpp">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="ClearUIBox.cpp">
       <Filter>Actor\00. Global\UI</Filter>
     </ClCompile>
@@ -715,9 +712,6 @@
     </ClInclude>
     <ClInclude Include="ClearLevel.h">
       <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="TestActor.h">
-      <Filter>Actor\00. Global\Actor</Filter>
     </ClInclude>
     <ClInclude Include="ClearUIBox.h">
       <Filter>Actor\00. Global\UI</Filter>

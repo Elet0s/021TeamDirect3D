@@ -31,9 +31,9 @@ public:
 	void Off();
 
 public:
-	static GameEngineWindow* GetInst()
+	static GameEngineWindow& GetInst()
 	{
-		return inst_;	
+		return *inst_;	
 	}
 
 	static void Destroy()
@@ -46,19 +46,19 @@ public:
 		}
 	}
 
-	static HDC GetHDC() 
+	HDC GetHDC() 
 	{
-		return inst_->hdc_;
+		return hdc_;
 	}
 
-	static HWND GetHWND() 
+	HWND GetHWND() 
 	{
-		return inst_->windowHandle_;
+		return windowHandle_;
 	}
 
-	static float4 GetScale() 
+	const float4& GetScale() 
 	{
-		return inst_->windowScale_;
+		return windowScale_;
 	}
 
 	void SetMessageHandler(

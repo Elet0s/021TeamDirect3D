@@ -478,10 +478,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TestActor.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Texture2DShadowRenderer.h">
       <SubType>
       </SubType>
@@ -902,10 +898,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TensString.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TestActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -50,13 +50,13 @@ public:
 	bool IsPressed(const std::string_view& _keyName);
 	bool IsUp(const std::string_view& _keyName);
 	bool IsFree(const std::string_view& _keyName);
-	bool IsKey(const std::string_view& _keyName);
+	bool IsExists(const std::string_view& _keyName);
 
 
 public:
-	static GameEngineInput* GetInst()
+	static GameEngineInput& GetInst()
 	{
-		return inst_;
+		return *inst_;
 	}
 
 	static void Destroy()

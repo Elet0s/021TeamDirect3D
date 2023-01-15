@@ -821,7 +821,7 @@ void ShaderCompile()
 	}
 }
 
-void GameEngineCore::EngineResourceInitialize()
+void GameEngineCore::InitializeEngineResource()
 {
 	EngineTextureLoad();	//샘플러를 생성하고 텍스처를 불러오는 함수.
 	EngineInputLayout();	//엔진 기본제공 인풋 레이아웃을 저장하는 함수.
@@ -832,7 +832,7 @@ void GameEngineCore::EngineResourceInitialize()
 	EngineMaterial();		//엔진 기본제공 마테리얼들을 생성하는 함수.
 }
 
-void GameEngineCore::EngineResourceDestroy()
+void GameEngineCore::DestroyEngineResource()
 {
 	//사각형, 육면체, 에러텍스쳐 등등, 엔진 수준에서 기본적으로 지원되어야 하는 리소스를 삭제하는 함수.
 	GameEngineMaterial::ResourceDestroy();

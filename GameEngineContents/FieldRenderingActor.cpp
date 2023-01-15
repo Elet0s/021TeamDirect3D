@@ -3,8 +3,8 @@
 
 FieldRenderingActor::FieldRenderingActor()
 	: tileSize_(256.f),
-	windowSize_(GameEngineWindow::GetScale()),
-	tileCountXY_((GameEngineWindow::GetScale().IX() / 256) + 4, (GameEngineWindow::GetScale().IY() / 256) + 4),
+	windowSize_(GameEngineWindow::GetInst().GetScale()),
+	tileCountXY_((GameEngineWindow::GetInst().GetScale().IX() / 256) + 4, (GameEngineWindow::GetInst().GetScale().IY() / 256) + 4),
 	tileCount_(tileCountXY_.IX() * tileCountXY_.IY()),
 	fieldRenderer_(nullptr),
 	fieldObjectShadowRenderer_(nullptr),

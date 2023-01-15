@@ -109,7 +109,7 @@ void ClearUIBox::Update(float _deltaTime)
 	)
 	{
 		button1renderer_->SetTexture("Button_Selected.png");
-		if (GameEngineInput::GetInst()->IsUp("Click"))
+		if (GameEngineInput::GetInst().IsUp("Click"))
 		{
 			GameEngineSound::SoundPlayOneshot("Menu_Confirm.wav");
 			GameEngineSound::SoundPlayOneshot("GoldReward.wav");
@@ -137,7 +137,7 @@ void ClearUIBox::Update(float _deltaTime)
 	)
 	{
 		button2renderer_->SetTexture("Button_Selected.png");
-		if (GameEngineInput::GetInst()->IsUp("Click"))
+		if (GameEngineInput::GetInst().IsUp("Click"))
 		{
 			GameEngineSound::SoundPlayOneshot("Menu_Confirm.wav");
 			GameEngineSound::SoundPlayOneshot("Level_Up.wav");
@@ -156,7 +156,7 @@ void ClearUIBox::Update(float _deltaTime)
 	)
 	{
 		button3renderer_->SetTexture("Button_Selected_Stage.png");
-		if (GameEngineInput::GetInst()->IsUp("Click"))
+		if (GameEngineInput::GetInst().IsUp("Click"))
 		{
 			GEngine::ChangeLevel("WorldMap");
 		}

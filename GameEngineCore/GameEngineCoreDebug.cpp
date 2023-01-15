@@ -82,7 +82,7 @@ namespace GameEngineDebug
 				debugRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("TransformData", debugData_[i].data_);
 				debugRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("DebugInfo", debugData_[i].info_);
 
-				debugRenderUnit_->Render(GameEngineTime::GetDeltaTime());
+				debugRenderUnit_->Render(GameEngineTime::GetInst().GetDeltaTime());
 			}
 			else
 			{
@@ -90,7 +90,7 @@ namespace GameEngineDebug
 				debugTextureRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("DebugInfo", debugData_[i].info_);
 				debugTextureRenderUnit_->GetShaderResourceHelper().SetTexture("Tex", debugData_[i].texture_);
 
-				debugTextureRenderUnit_->Render(GameEngineTime::GetDeltaTime());
+				debugTextureRenderUnit_->Render(GameEngineTime::GetInst().GetDeltaTime());
 			}
 		}
 		debugData_.clear();

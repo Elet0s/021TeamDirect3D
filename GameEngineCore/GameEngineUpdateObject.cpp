@@ -44,7 +44,7 @@ void GameEngineUpdateObject::AllUpdate(float _deltaTime)
 {
 	this->AddAccTime(_deltaTime);
 	this->ReleaseUpdate(_deltaTime);	 //deadTime_이 0이 된 오브젝트들에게 사망 판정을 내린다.
-	this->Update(GameEngineTime::GetInst()->GetTimeScale(this->GetOrder()) * _deltaTime);
+	this->Update(GameEngineTime::GetInst().GetTimeScale(this->GetOrder()) * _deltaTime);
 
 	for (std::shared_ptr<GameEngineUpdateObject> child : children_)
 	{

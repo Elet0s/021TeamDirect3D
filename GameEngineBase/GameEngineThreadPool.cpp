@@ -103,13 +103,12 @@ void GameEngineThreadPool::Initialize(const std::string_view& _threadName, int _
 		newThread->SetName(_threadName.data() + std::to_string(i));
 		newThread->Start(
 			_threadName.data() + std::to_string(i),
-			std::bind(ThreadPoolFunction, this, newThread, iocpHandle_)
-			//
+			std::bind(ExecuteWork, this, newThread, iocpHandle_)
 		);
 	}
 }
 
-void GameEngineThreadPool::Work(std::function<void()> _callback)
+void GameEngineThreadPool::DistributeWork(std::function<void()> _callback)
 {
 	if (nullptr == _callback)
 	{
@@ -144,7 +143,7 @@ void GameEngineThreadPool::Work(std::function<void()> _callback)
 	}
 }
 
-void GameEngineThreadPool::ThreadPoolFunction(GameEngineThreadPool* _threadPool, GameEngineThread* _thread, HANDLE _iocpHandle)
+void GameEngineThreadPool::ExecuteWork(GameEngineThreadPool* _threadPool, GameEngineThread* _thread, HANDLE _iocpHandle)
 {
 	DWORD byte = 0;		//지금까지 전달된 누적 바이트 크기. 실제로는 스레드에게 실행시킬 작업의 유형.
 
@@ -183,7 +182,7 @@ void GameEngineThreadPool::ThreadPoolFunction(GameEngineThreadPool* _threadPool,
 
 			INFINITE	//최대 대기시간. 
 			//이 시간동안 IOCP는 이 함수를 호출한 스레드에게 배분할 IO완료 패킷이 생길 때까지 함수의 반환을 미루고 대기하게 한다.
-			//이 시간이 다 지날때까지 새 완료 패킷이 들어오지 않는다면 스레드는 시간초과(TimeOut)된다.
+			//이 시간이 다 지날때까지 새 완료 패킷이 들어오지 않는다면 스레드는 시간초과(TimeOut)되어 하는일 없이 루프를 한번 돈다.
 			// 하지만 여기서는 대기 시간을 INFINITE == 0xffffffff == 사실상 무한대로 설정했으므로 
 			// 작업을 마친 스레드에게 다음 IO완료 패킷 == 새 작업이 들어올 때까지 Waiting Thread List에서 무한정 기다리게 한다.
 		);

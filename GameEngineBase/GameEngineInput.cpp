@@ -18,8 +18,7 @@ void GameEngineInput::GameEngineKey::Update(float _deltaTime)
 			isFree_ = false;
 			time_ = _deltaTime;
 		}
-		//else if (true == isPressed_)
-		else /*if (false == isFree_)*/
+		else
 		{
 			isDown_ = false;
 			isPressed_ = true;
@@ -38,8 +37,7 @@ void GameEngineInput::GameEngineKey::Update(float _deltaTime)
 			isFree_ = false;
 			time_ = 0.0f;
 		}
-		//else if (true == isUp_)
-		else /*if (true == isUp_)*/
+		else 
 		{
 			isDown_ = false;
 			isPressed_ = false;
@@ -182,7 +180,7 @@ bool GameEngineInput::IsFree(const std::string_view& _keyName)
 	return allKeys_[uppercaseKeyName].isFree_;
 }
 
-bool GameEngineInput::IsKey(const std::string_view& _keyName)
+bool GameEngineInput::IsExists(const std::string_view& _keyName)
 {
 	std::string uppercaseKeyName = GameEngineString::ToUpperReturn(_keyName);
 

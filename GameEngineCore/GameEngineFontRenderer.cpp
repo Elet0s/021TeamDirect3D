@@ -39,7 +39,7 @@ void GameEngineFontRenderer::Start()
 	if (nullptr == fontTarget_)
 	{
 		fontTarget_ = GameEngineRenderTarget::Create("Font Target");
-		fontTarget_->CreateRenderTargetTexture(GameEngineWindow::GetScale(), float4::Zero);
+		fontTarget_->CreateRenderTargetTexture(GameEngineWindow::GetInst().GetScale(), float4::Zero);
 	}
 
 	PushRendererToMainCamera();
@@ -59,7 +59,7 @@ void GameEngineFontRenderer::Render(float _deltaTime)
 		position *= camera_.lock()->GetViewMatrix();
 		position *= camera_.lock()->GetProjectionMatrix();
 
-		float4 windowSize = GameEngineWindow::GetScale();
+		float4 windowSize = GameEngineWindow::GetInst().GetScale();
 
 		float4x4 viewPortMatrix;
 		viewPortMatrix.Viewport(windowSize.x, windowSize.y, 0.f, 0.f, 0.f, 1.f);

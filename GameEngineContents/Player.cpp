@@ -50,16 +50,16 @@ Player::~Player()
 void Player::Start()
 {
 
-	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeft"))
+	if (false == GameEngineInput::GetInst().IsExists("PlayerLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("PlayerLeft", VK_LEFT);
-		GameEngineInput::GetInst()->CreateKey("PlayerRight", VK_RIGHT);
-		GameEngineInput::GetInst()->CreateKey("PlayerUp", VK_UP);
-		GameEngineInput::GetInst()->CreateKey("PlayerDown", VK_DOWN);
-		GameEngineInput::GetInst()->CreateKey("PlayerDash", VK_SPACE);
-		GameEngineInput::GetInst()->CreateKey("Skill15On", 'B');
-		GameEngineInput::GetInst()->CreateKey("Skill04On", 'N');
-		GameEngineInput::GetInst()->CreateKey("Skill05On", 'M');
+		GameEngineInput::GetInst().CreateKey("PlayerLeft", VK_LEFT);
+		GameEngineInput::GetInst().CreateKey("PlayerRight", VK_RIGHT);
+		GameEngineInput::GetInst().CreateKey("PlayerUp", VK_UP);
+		GameEngineInput::GetInst().CreateKey("PlayerDown", VK_DOWN);
+		GameEngineInput::GetInst().CreateKey("PlayerDash", VK_SPACE);
+		GameEngineInput::GetInst().CreateKey("Skill15On", 'B');
+		GameEngineInput::GetInst().CreateKey("Skill04On", 'N');
+		GameEngineInput::GetInst().CreateKey("Skill05On", 'M');
 	}
 	{
 		collision_ = CreateComponent<GameEngineCollision>();
@@ -220,9 +220,9 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 	{
 		playerInfo_->pushSpeed_ = 0;
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
+	if (true == GameEngineInput::GetInst().IsPressed("PlayerLeft"))
 	{
-		if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
+		if (true == GameEngineInput::GetInst().IsPressed("PlayerRight"))
 		{
 			moveDirection_.x = 0;
 		}
@@ -235,14 +235,14 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 
 
 	}
-	else if (true == GameEngineInput::GetInst()->IsUp("PlayerLeft"))
+	else if (true == GameEngineInput::GetInst().IsUp("PlayerLeft"))
 	{
 		moveDirection_.x = 0;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerRight"))
+	if (true == GameEngineInput::GetInst().IsPressed("PlayerRight"))
 	{
-		if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft"))
+		if (true == GameEngineInput::GetInst().IsPressed("PlayerLeft"))
 		{
 			moveDirection_.x = 0;
 		}
@@ -253,14 +253,14 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 			moveDirection_ += moveDirection_.Right;
 		}
 	}
-	else if (true == GameEngineInput::GetInst()->IsUp("PlayerRight"))
+	else if (true == GameEngineInput::GetInst().IsUp("PlayerRight"))
 	{
 		moveDirection_.x = 0;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerUp"))
+	if (true == GameEngineInput::GetInst().IsPressed("PlayerUp"))
 	{
-		if (true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+		if (true == GameEngineInput::GetInst().IsPressed("PlayerDown"))
 		{
 			moveDirection_.y = 0;
 		}
@@ -269,13 +269,13 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 			moveDirection_ += moveDirection_.Up;
 		}
 	}
-	else if (true == GameEngineInput::GetInst()->IsUp("PlayerUp"))
+	else if (true == GameEngineInput::GetInst().IsUp("PlayerUp"))
 	{
 		moveDirection_.y = 0;
 	}
-	if (true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+	if (true == GameEngineInput::GetInst().IsPressed("PlayerDown"))
 	{
-		if (true == GameEngineInput::GetInst()->IsPressed("PlayerUp"))
+		if (true == GameEngineInput::GetInst().IsPressed("PlayerUp"))
 		{
 			moveDirection_.y = 0;
 		}
@@ -284,7 +284,7 @@ void Player::MoveDirectionUpdate(float _deltaTime)
 			moveDirection_ += moveDirection_.Down;
 		}
 	}
-	else if (true == GameEngineInput::GetInst()->IsUp("PlayerDown"))
+	else if (true == GameEngineInput::GetInst().IsUp("PlayerDown"))
 	{
 		moveDirection_.y = 0;
 	}
@@ -316,7 +316,7 @@ void Player::ReChargeDash(float _deltaTime)
 }
 void Player::PlayerDash(float _deltaTime)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("PlayerDash"))
+	if (true == GameEngineInput::GetInst().IsDown("PlayerDash"))
 	{
 		if (playerInfo_->dashCount_ > 0)
 		{
@@ -338,7 +338,10 @@ void Player::PlayerDash(float _deltaTime)
 		if (dashTimer_ < 0.2f)
 		{
 
-			if (true == GameEngineInput::GetInst()->IsPressed("PlayerLeft") || true == GameEngineInput::GetInst()->IsPressed("PlayerRight") || true == GameEngineInput::GetInst()->IsPressed("PlayerUp") || true == GameEngineInput::GetInst()->IsPressed("PlayerDown"))
+			if (true == GameEngineInput::GetInst().IsPressed("PlayerLeft") 
+				|| true == GameEngineInput::GetInst().IsPressed("PlayerRight") 
+				|| true == GameEngineInput::GetInst().IsPressed("PlayerUp") 
+				|| true == GameEngineInput::GetInst().IsPressed("PlayerDown"))
 			{
 				GetTransform().SetWorldMove(moveDirection_.Normalize3D() * 1000.0f * _deltaTime);
 			}
@@ -405,21 +408,21 @@ void Player::Update(float _deltaTime)
  	ColCheak();
 	LevelUpEvent();
 	FlashPlayer(_deltaTime);
-	if (true == GameEngineInput::GetInst()->IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
+	if (true == GameEngineInput::GetInst().IsDown("Skill15On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
 		if (playerSkillManager_->GetSkillList()[5][2]->currentlevel_ < 1)
 		{
 			playerSkillManager_->GetSkillList()[5][2]->currentlevel_ += 1;
 		}
 	}
-	if (true == GameEngineInput::GetInst()->IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
+	if (true == GameEngineInput::GetInst().IsDown("Skill04On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
 		if (playerSkillManager_->GetSkillList()[5][7]->currentlevel_ < 1)
 		{
 			playerSkillManager_->GetSkillList()[5][7]->currentlevel_ += 1;
 		}
 	}
-	if (true == GameEngineInput::GetInst()->IsDown("Skill05On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
+	if (true == GameEngineInput::GetInst().IsDown("Skill05On")) //나중에 카드 뽑으면 올려주는걸로 대체할 것임
 	{
 		if (playerSkillManager_->GetSkillList()[5][6]->currentlevel_ < 1)
 		{

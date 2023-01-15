@@ -218,7 +218,7 @@ void GameEngineRenderTarget::Merge(std::shared_ptr<GameEngineRenderTarget> _othe
 void GameEngineRenderTarget::Effect(std::shared_ptr<GameEngineRenderUnit> _renderUnit)
 {
 	this->SetRenderTarget();
-	_renderUnit->Render(GameEngineTime::GetDeltaTime());
+	_renderUnit->Render(GameEngineTime::GetInst().GetDeltaTime());
 }
 
 void GameEngineRenderTarget::EffectProcess()
