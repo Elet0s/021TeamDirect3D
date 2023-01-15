@@ -36,7 +36,6 @@
 #include <GameEngineCore\GameEngineGUI.h>
 #include <GameEngineCore\GameEngineBlur.h>
 
-#include <GameEngineCore\GameEngineInstancing.h>
 #include <GameEngineCore\GameEngineInstancingBuffer.h>
 
 #include <GameEngineCore\GameEngineStateManager.h>
@@ -45,8 +44,6 @@
 #include <GameEngineCore\GameEngineCoreDebug.h>
 
 #include <GameEngineCore\GEngine.h>
-
-#include <GameEngineCore\GameEngineFBXMesh.h>
 
 #include <GameEngineCore\GlobalHeader.h>
 

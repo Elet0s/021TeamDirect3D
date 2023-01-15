@@ -170,30 +170,6 @@
     <ClInclude Include="GameEngineDefaultRenderer.h" />
     <ClInclude Include="GameEngineDepthStencil.h" />
     <ClInclude Include="GameEngineDevice.h" />
-    <ClInclude Include="GameEngineFBX.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXAnimation.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXAnimationRenderer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXMesh.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXRenderer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXStaticRenderer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="GameEngineFolderTexture.h" />
     <ClInclude Include="GameEngineFont.h" />
     <ClInclude Include="GameEngineFontRenderer.h" />
@@ -204,7 +180,6 @@
     <ClInclude Include="GameEngineGUI.h" />
     <ClInclude Include="GameEngineIndexBuffer.h" />
     <ClInclude Include="GameEngineInputLayout.h" />
-    <ClInclude Include="GameEngineInstancing.h" />
     <ClInclude Include="GameEngineInstancingBuffer.h" />
     <ClInclude Include="GameEngineInstancingRenderer.h" />
     <ClInclude Include="GameEngineLevel.h" />
@@ -277,30 +252,6 @@
     <ClCompile Include="GameEngineDefaultRenderer.cpp" />
     <ClCompile Include="GameEngineDepthStencil.cpp" />
     <ClCompile Include="GameEngineDevice.cpp" />
-    <ClCompile Include="GameEngineFBX.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXAnimation.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXAnimationRenderer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXMesh.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXRenderer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXStaticRenderer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="GameEngineFolderTexture.cpp" />
     <ClCompile Include="GameEngineFont.cpp" />
     <ClCompile Include="GameEngineFontRenderer.cpp" />
@@ -311,7 +262,6 @@
     <ClCompile Include="GameEngineGUI.cpp" />
     <ClCompile Include="GameEngineIndexBuffer.cpp" />
     <ClCompile Include="GameEngineInputLayout.cpp" />
-    <ClCompile Include="GameEngineInstancing.cpp" />
     <ClCompile Include="GameEngineInstancingBuffer.cpp" />
     <ClCompile Include="GameEngineInstancingRenderer.cpp" />
     <ClCompile Include="GameEngineLevel.cpp" />

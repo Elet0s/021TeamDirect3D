@@ -213,9 +213,6 @@
     <ClCompile Include="GameEngineTextureRenderer.cpp">
       <Filter>Object\Component\Rendering\Contents</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineInstancing.cpp">
-      <Filter>Object\Component\Rendering\Instancing</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngineBlur.cpp">
       <Filter>Object\Component\Rendering\PostEffect</Filter>
     </ClCompile>
@@ -282,24 +279,6 @@
     </ClCompile>
     <ClCompile Include="GameEngineFolderTexture.cpp">
       <Filter>Resource\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBX.cpp">
-      <Filter>Resource\FBX</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXMesh.cpp">
-      <Filter>Resource\FBX</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXAnimation.cpp">
-      <Filter>Resource\FBX</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXRenderer.cpp">
-      <Filter>Object\Component\Rendering\Contents</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXAnimationRenderer.cpp">
-      <Filter>Object\Component\Rendering\Contents</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineFBXStaticRenderer.cpp">
-      <Filter>Object\Component\Rendering\Contents</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRenderingEvent.cpp">
       <Filter>Object\Component\Rendering\Contents</Filter>
@@ -417,9 +396,6 @@
     <ClInclude Include="GameEngineUIRenderer.h">
       <Filter>Object\Component\Rendering\Contents</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineInstancing.h">
-      <Filter>Object\Component\Rendering\Instancing</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineBlur.h">
       <Filter>Object\Component\Rendering\PostEffect</Filter>
     </ClInclude>
@@ -489,24 +465,6 @@
     </ClInclude>
     <ClInclude Include="ThirdParty\FBX_SDK\Include\fbxsdk.h">
       <Filter>ThirdParty\FBX_SDK\Inc%28Header%29</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBX.h">
-      <Filter>Resource\FBX</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXMesh.h">
-      <Filter>Resource\FBX</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXAnimation.h">
-      <Filter>Resource\FBX</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXRenderer.h">
-      <Filter>Object\Component\Rendering\Contents</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXAnimationRenderer.h">
-      <Filter>Object\Component\Rendering\Contents</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineFBXStaticRenderer.h">
-      <Filter>Object\Component\Rendering\Contents</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRenderingEvent.h">
       <Filter>Object\Component\Rendering\Contents</Filter>

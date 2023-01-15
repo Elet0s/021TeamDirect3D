@@ -23,9 +23,6 @@
 #include "GameEngineBlend.h"
 #include "GameEngineFont.h"
 
-#include "GameEngineFBXMesh.h"
-#include "GameEngineFBXAnimation.h"
-
 void EngineInputLayout()
 {
 	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
@@ -850,8 +847,6 @@ void GameEngineCore::EngineResourceDestroy()
 	GameEngineBlend::ResourceDestroy();
 
 	GameEngineMesh::ResourceDestroy();
-	GameEngineFBXMesh::ResourceDestroy();
-	GameEngineFBXAnimation::ResourceDestroy();
 
 	GameEngineConstantBuffer::ResourceDestroy();
 	GameEngineStructuredBuffer::ResourceDestroy();

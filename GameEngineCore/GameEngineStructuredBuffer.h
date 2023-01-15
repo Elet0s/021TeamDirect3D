@@ -3,10 +3,7 @@
 
 class GameEngineStructuredBuffer : public GameEngineRes<GameEngineStructuredBuffer>
 {
-
 	friend class GameEngineStructuredBufferSetter;
-
-	friend class GameEngineFBXMesh;
 
 public:
 	GameEngineStructuredBuffer();
