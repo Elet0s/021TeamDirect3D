@@ -119,7 +119,7 @@ public:
 		}
 	}
 
-	const std::string& GetCurrentStateName()
+	const std::string_view& GetCurrentStateName()
 	{
 		if (nullptr == currentState_)
 		{

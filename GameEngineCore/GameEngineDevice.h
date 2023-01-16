@@ -27,10 +27,10 @@ public:
 	static void Initialize();
 
 	//한번의 렌더링을 준비하기 위해 백버퍼 렌더타겟을 리셋하는 함수.
-	static void RenderStart();
+	static void StartRendering();
 
 	//모든 렌더링 과정을 거친 백버퍼를 전면 버퍼와 교체하는 함수.
-	static void RenderEnd();
+	static void EndRendering();
 
 public:
 

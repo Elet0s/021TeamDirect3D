@@ -141,7 +141,7 @@ void GameEngineLevel::Render(float _deltaTime)
 		}
 	}
 
-	GameEngineDevice::RenderStart();
+	GameEngineDevice::StartRendering();
 	//RenderStart()와 RenderEnd()사이에 모든 렌더링 과정이 들어가야 한다. 
 
 	for (size_t i = 0; i < cameras_.size(); i++)
@@ -180,7 +180,7 @@ void GameEngineLevel::Render(float _deltaTime)
 	GameEngineGUI::Render(this, _deltaTime);
 
 
-	GameEngineDevice::RenderEnd();
+	GameEngineDevice::EndRendering();
 }
 
 void GameEngineLevel::RemoveActor(std::shared_ptr<GameEngineActor> _rootActor)

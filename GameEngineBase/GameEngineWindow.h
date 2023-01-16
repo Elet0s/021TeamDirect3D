@@ -27,7 +27,7 @@ public:
 		std::function<void()> _init,
 		std::function<void()> _loop,
 		std::function<void()> _end);
-	void SetWindowScaleAndPosition(const float4& _pos, const float4& _scale);
+	void SetWindowScaleAndPosition(const float4& _posisition, const float4& _scale);
 	void Off();
 
 public:

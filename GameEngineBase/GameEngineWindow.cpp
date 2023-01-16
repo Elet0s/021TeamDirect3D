@@ -189,7 +189,7 @@ void GameEngineWindow::MessageLoop(
 
 }
 
-void GameEngineWindow::SetWindowScaleAndPosition(const float4& _pos, const float4& _scale)
+void GameEngineWindow::SetWindowScaleAndPosition(const float4& _position, const float4& _scale)
 {
 	RECT Rc = { 0, 0, _scale.IX(), _scale.IY() };
 
@@ -204,8 +204,8 @@ void GameEngineWindow::SetWindowScaleAndPosition(const float4& _pos, const float
 	SetWindowPos(
 		windowHandle_,		//
 		nullptr,			//
-		_pos.IX(),		//
-		_pos.IY(),		//
+		_position.IX(),		//
+		_position.IY(),		//
 		Rc.right - Rc.left,	//
 		Rc.bottom - Rc.top,	//
 		SWP_NOZORDER		//

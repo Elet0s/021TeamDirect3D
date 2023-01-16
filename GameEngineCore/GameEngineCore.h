@@ -69,7 +69,7 @@ protected:
 	static void InitializeLevel(GameEngineLevel* _level, const std::string& _levelName);
 
 
-protected:	//컨텐츠코어만 사용해야 하는 함수들.
+protected:	//컨텐츠코어만 상속받아서 사용해야 하는 함수들.
 	virtual std::string GetWindowTitle()
 	{
 		return "DefaultWindowTitle";
