@@ -16,8 +16,8 @@ Penetration::~Penetration()
 
 void Penetration::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sPassProjectile_ = std::to_string(PlayerInfo_.passProjectile_).substr(0, std::to_string(PlayerInfo_.passProjectile_).find("."));
 	std::string sPassProjectile_Next = std::to_string(PlayerInfo_.passProjectile_ + 1.0f).substr(0, std::to_string(PlayerInfo_.passProjectile_ + 1.0f).find("."));
@@ -32,8 +32,8 @@ void Penetration::Init()
 void Penetration::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerInfo_->passProjectile_ += 1;
 	PlayerPInfo_->atkMultiple_Per += 4.0f;
 	PlayerPInfo_->atkMultiple_Result += 4.0f;

@@ -16,7 +16,7 @@ TensString::~TensString()
 
 void TensString::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
 
 	std::string sDamege = std::to_string(PlayerInfo_.atk_).substr(0, std::to_string(PlayerInfo_.atk_).find(".") + 3);
 	std::string sDamegeNext = std::to_string(PlayerInfo_.atk_ + 0.1f).substr(0, std::to_string(PlayerInfo_.atk_ + 0.1f).find(".") + 3);
@@ -27,7 +27,7 @@ void TensString::Init()
 void TensString::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->atk_ = round(PlayerInfo_->atk_ * 100) / 100;
 	PlayerInfo_->atk_ += 0.1f;
 

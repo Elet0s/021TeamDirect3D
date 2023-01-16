@@ -40,8 +40,8 @@ void DeathAura::Effect()
 
 void  DeathAura::StateSet()
 {
-	PlayerInfo* Info_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo* Info_ = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	deathAuraWeaponInfo_.weaponAtk_ = 1.f + (1.f * currentlevel_) * (Info_->atk_ * PInfo_->atkMultiple_Result / 100.f);
 	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (Info_->attackSpeed_ * PInfo_->attackSpeed_Result / 100.f);//1초마다
 
@@ -118,7 +118,7 @@ void DeathAura::Start()
 void DeathAura::Update(float _deltaTime)
 {
 	StateSet();
-	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y - 40, 0);
+	GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y - 40, 0);
 	RotateRenderer(_deltaTime);
 	GetTransform().SetWorldScale({ deathAuraWeaponInfo_.weaponRange_ });
 	deathAuraCollision02_->GetTransform().SetWorldPosition(deathAuraCollision01_->GetTransform().GetWorldPosition().x + 100.f, deathAuraCollision01_->GetTransform().GetWorldPosition().y, 0.f);
@@ -204,9 +204,9 @@ void DeathAura::End()
 
 }
 
-CollisionReturn DeathAura::DeatAuraToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other) // 발사체 부딪히면
+CollisionReturn DeathAura::DeatAuraToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other) // 발사체 부딪히면
 {
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= deathAuraWeaponInfo_.weaponAtk_; //데미지줌
+	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= deathAuraWeaponInfo_.weaponAtk_; //데미지줌
 	return CollisionReturn::Continue;
 }

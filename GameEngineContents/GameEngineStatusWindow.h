@@ -11,8 +11,8 @@ public:
 public:
 	void RenderTextureSetting(ImTextureID _renderTexture, ImVec2 _size);
 
-	void Initialize(class GameEngineLevel* _level);
-	void OnGUI(class GameEngineLevel* _level, float _deltaTime) override;
+	void Initialize(GameEngineLevel* _level);
+	void OnGUI(GameEngineLevel* _level, float _deltaTime) override;
 
 private:
 	ImTextureID renderTexture_;
@@ -39,15 +39,15 @@ private:
 public:
 	static void AddDebugRenderTarget(
 		const std::string& _renderTargetName,
-		std::shared_ptr<class GameEngineRenderTarget> _renderTarget);
+		class GameEngineRenderTarget* _renderTarget);
 
 private:
-	void Initialize(class GameEngineLevel* _level) override;
-	void OnGUI(class GameEngineLevel* _level, float _deltaTime) override;
+	void Initialize(GameEngineLevel* _level) override;
+	void OnGUI(GameEngineLevel* _level, float _deltaTime) override;
 
 private:
-	std::list<std::shared_ptr<GameEngineImageShotWindow>> imageshotWindows_;
-	static std::map<std::string, std::shared_ptr<class GameEngineRenderTarget>> debugRenderTargets_;
+	std::list<GameEngineImageShotWindow*> imageshotWindows_;
+	static std::map<std::string, GameEngineRenderTarget*> debugRenderTargets_;
 
 };
 

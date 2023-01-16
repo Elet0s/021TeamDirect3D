@@ -34,7 +34,7 @@ void SoulCardSelectBox::Start()
 	SoundPlayer::BGMPlay_->VolumeSet(0.5f);
 	SoundPlayer::BGMPlay_->SpeedSet(0.9f);
 	GameEngineTime::GetInst().SetGlobalTimeScale(0.01f);
-	std::shared_ptr<GameEngineTextureRenderer> Box = CreateComponent<GameEngineTextureRenderer>();
+	GameEngineTextureRenderer* Box = CreateComponent<GameEngineTextureRenderer>();
 	Box->SetTexture("SoulCardSelectTemplate - 복사본.png");
 	Box->ChangeCamera(CameraOrder::UICamera);
 	Box->GetTransform().SetLocalMove(float4(0,0, 10));
@@ -43,31 +43,31 @@ void SoulCardSelectBox::Start()
 
 	{
 		Cards[0] = GetLevel()->CreateActor<SoulCardUI>();
-		Cards[0]->SetParent(shared_from_this());
+		Cards[0]->SetParent(this);
 		Cards[0]->Setting();
 		Cards[0]->GetTransform().SetLocalMove(float4(-200.f, -200.f));
 
 		Cards[1] = GetLevel()->CreateActor<SoulCardUI>();
-		Cards[1]->SetParent(shared_from_this());
+		Cards[1]->SetParent(this);
 		Cards[1]->Setting();
 		Cards[1]->GetTransform().SetLocalMove(float4(10.f, -200.f));
 
 		Cards[2] = GetLevel()->CreateActor<SoulCardUI>();
-		Cards[2]->SetParent(shared_from_this());
+		Cards[2]->SetParent(this);
 		Cards[2]->Setting();
 		Cards[2]->GetTransform().SetLocalMove(float4(220.f, -200.f));
 	}
 	
 
 	{
-		std::shared_ptr<GameEngineFontRenderer> Font0 = CreateComponent<GameEngineFontRenderer>();
+		GameEngineFontRenderer* Font0 = CreateComponent<GameEngineFontRenderer>();
 		Font0->SetTextPosition(float4(640.f, 120.f,-2000.f)); 
 		Font0->ChangeCamera(CameraOrder::UICamera);
 		Font0->SetLeftAndRightSort(LeftAndRightSort::Center);
 		Font0->SetSize(40.f);
 		Font0->SetText("영혼이 강해지고 있습니다!");
 
-		std::shared_ptr<GameEngineFontRenderer> Font1 = CreateComponent<GameEngineFontRenderer>();
+		GameEngineFontRenderer* Font1 = CreateComponent<GameEngineFontRenderer>();
 		Font1->SetTextPosition(float4(640.f, 160.f, -2000.f));
 		Font1->ChangeCamera(CameraOrder::UICamera);
 		Font1->SetLeftAndRightSort(LeftAndRightSort::Center);

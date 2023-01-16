@@ -102,7 +102,7 @@ void Boss01::Relocation()
 
 
 		telleportCount_ -= 1;
-		std::shared_ptr<MagicCircle> A = GetLevel()->CreateActor<MagicCircle>(ObjectOrder::UI);
+		MagicCircle* A = GetLevel()->CreateActor<MagicCircle>(ObjectOrder::UI);
 		A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y - 110.f });
 
 		float4 CameraPos = GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
@@ -140,7 +140,7 @@ void Boss01::Relocation()
 				monsterPosition_.z + 2.f
 			);
 		}
-		std::shared_ptr<MagicCircle> B = GetLevel()->CreateActor<MagicCircle>(ObjectOrder::UI);
+		MagicCircle* B = GetLevel()->CreateActor<MagicCircle>(ObjectOrder::UI);
 		B->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y -109.f });
 	}
 }
@@ -169,7 +169,7 @@ void Boss01::PatternMove(float _deltaTime)
 			{
 				if (delay_ > 0.02f)
 				{
-					std::shared_ptr<Projectile> A = GetLevel()->CreateActor<Projectile>(ObjectOrder::Projectile);
+					Projectile* A = GetLevel()->CreateActor<Projectile>(ObjectOrder::Projectile);
 					A->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,GetTransform().GetWorldPosition().y });
 					A->ProjectileSet(monsterInfo_->atk_);
 					shootingCount_ += 1;

@@ -98,8 +98,8 @@ void Firering::Start()
 
 void Firering::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	fireringAuraWeaponInfo_.weaponAtk_ = round((3.f + currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
 	fireringAuraWeaponInfo_.weaponAtkSpeed_ = round(200.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result));
@@ -118,7 +118,7 @@ void Firering::Update(float _deltaTime)
 {
 	StateSet();
 	GetTransform().SetWorldScale(fireringAuraWeaponInfo_.weaponRange_);
-	GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y - 40, 0);
+	GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y - 40, 0);
 	RotateRenderer(_deltaTime);
 
 	fireringAuraCollision02_->GetTransform().SetWorldPosition(fireringAuraCollision01_->GetTransform().GetWorldPosition().x + 100.f, fireringAuraCollision01_->GetTransform().GetWorldPosition().y, 0.f);
@@ -197,9 +197,9 @@ void Firering::RotateRenderer(float _deltaTime)
 
 }
 
-CollisionReturn Firering::FireringToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Firering::FireringToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= fireringAuraWeaponInfo_.weaponAtk_; //µ•πÃ¡ˆ¡‹
+	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= fireringAuraWeaponInfo_.weaponAtk_; //µ•πÃ¡ˆ¡‹
 	return CollisionReturn::Continue;
 }

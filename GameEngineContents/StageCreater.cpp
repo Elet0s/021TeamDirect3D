@@ -17,7 +17,7 @@ StageCreater::~StageCreater()
 
 void StageCreater::Start()
 {
-	std::shared_ptr<GameEngineInstancingRenderer> worldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("1-DirtPatch");
+	GameEngineInstancingRenderer* worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("1-DirtPatch");
 	{
 		worldRenderer_->Initialize(
 			100,
@@ -31,8 +31,8 @@ void StageCreater::Start()
 	}
 
 	{
-		std::list<std::shared_ptr<StageObject>>& GroupActor = stageObjects_[7];
-		std::shared_ptr<StageObject> object = GetLevel()->CreateActor<StageObject>();
+		std::list<StageObject*>& GroupActor = stageObjects_[7];
+		StageObject* object = GetLevel()->CreateActor<StageObject>();
 		object->SetMyLevel(7);
 		object->SetStageType(static_cast<int>(StageType::Boss));
 		object->posY_ = -650;
@@ -47,8 +47,8 @@ void StageCreater::Start()
 	}
 
 	{
-		std::list<std::shared_ptr<StageObject>>& GroupActor = stageObjects_[0];
-		std::shared_ptr<StageObject> object = GetLevel()->CreateActor<StageObject>();
+		std::list<StageObject*>& GroupActor = stageObjects_[0];
+		StageObject* object = GetLevel()->CreateActor<StageObject>();
 		object->SetMyLevel(0);
 		object->SetStageType(static_cast<int>(StageType::Empty));
 		object->posY_ = -2400;
@@ -73,7 +73,7 @@ void StageCreater::Start()
 	{
 		int PrevMaxCount = 0;
 		int unitIndex = 2;
-		std::shared_ptr<GameEngineInstancingRenderer> worldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("1-DirtPatch");
+		GameEngineInstancingRenderer* worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("1-DirtPatch");
 		for (int level = 1; level < 7; level++)
 		{
 			int maxCount = GameEngineRandom::mainRandom_.RandomInt(2, 5);
@@ -85,8 +85,8 @@ void StageCreater::Start()
 			float xInterval = 0.f;
 			for (int Count = 0; Count < maxCount; Count++)
 			{
-				std::list<std::shared_ptr<StageObject>>& GroupActor = stageObjects_[level];
-				std::shared_ptr<StageObject> object = GetLevel()->CreateActor<StageObject>();
+				std::list<StageObject*>& GroupActor = stageObjects_[level];
+				StageObject* object = GetLevel()->CreateActor<StageObject>();
 				object->SetMyLevel(level);
 				if (level < 4)
 				{
@@ -183,12 +183,12 @@ void StageCreater::Start()
 	 
 	for (int level = 0; level < 7; level++)
 	{
-		std::list<std::shared_ptr<StageObject>>& GroupActor = stageObjects_[level];
-		for (std::list<std::shared_ptr<StageObject>>::iterator iter = GroupActor.begin();
+		std::list<StageObject*>& GroupActor = stageObjects_[level];
+		for (std::list<StageObject*>::iterator iter = GroupActor.begin();
 			iter != GroupActor.end(); iter++)
 		{
-			std::list<std::shared_ptr<StageObject>>& nextGroupActor = stageObjects_[level + 1];
-			for (std::list<std::shared_ptr<StageObject>>::iterator nextiter = nextGroupActor.begin();
+			std::list<StageObject*>& nextGroupActor = stageObjects_[level + 1];
+			for (std::list<StageObject*>::iterator nextiter = nextGroupActor.begin();
 				nextiter != nextGroupActor.end(); nextiter++)
 			{
 				float PosX = (*iter)->GetTransform().GetWorldPosition().x;
@@ -196,7 +196,7 @@ void StageCreater::Start()
 				float PosNX = (*nextiter)->GetTransform().GetWorldPosition().x;
 				float PosNY = (*nextiter)->posY_;
 
-				std::shared_ptr<RoadObject> road = GetLevel()->CreateActor<RoadObject>(ObjectOrder::Road);
+				RoadObject* road = GetLevel()->CreateActor<RoadObject>(ObjectOrder::Road);
 				road->GetTransform().SetWorldPosition(float4((PosNX + PosX) / 2.f, ((PosNY + PosY) / 2.f) * sinf(30.f * GameEngineMath::DegreeToRadian), ((PosNY + PosY) / 2.f - 5.f) * cosf(30.f * GameEngineMath::DegreeToRadian)));
 				road->GetTransform().SetWorldRotation(60.f, 0, -atan2f(PosNX - PosX, PosNY - PosY) * GameEngineMath::RadianToDegree);
 
@@ -205,7 +205,7 @@ void StageCreater::Start()
 				
 				if (level != 0 && level != 6)
 				{
-					if (true == road->GetCol().get()->IsCollision(CollisionType::CT_AABB, ObjectOrder::Road, CollisionType::CT_AABB))
+					if (true == road->GetCol()->IsCollision(CollisionType::CT_AABB, ObjectOrder::Road, CollisionType::CT_AABB))
 					{
 						road->Death();
 					}
@@ -235,16 +235,16 @@ void StageCreater::Update(float _deltaTime)
 {
 }
 
-void StageCreater::SendPlayerToNextStage(std::weak_ptr<StageObject> _nextStageObject)
+void StageCreater::SendPlayerToNextStage(StageObject* _nextStageObject)
 {
-	if (true == curlevel_->CheckNextLevel(_nextStageObject.lock()))
+	if (true == curlevel_->CheckNextLevel(_nextStageObject))
 	{
 		float4 Pos = playerObject_->GetTransform().GetWorldPosition();
-		float4 NPos = _nextStageObject.lock()->GetTransform().GetWorldPosition();
+		float4 NPos = _nextStageObject->GetTransform().GetWorldPosition();
 
 		float4 dir = NPos - Pos;
 		playerObject_->SetMoveDir(dir);
-		curlevel_ = _nextStageObject.lock();
+		curlevel_ = _nextStageObject;
 
 		StageObject::nextStageInfo_.SetStageInfo(
 			this->curlevel_->stageType_,

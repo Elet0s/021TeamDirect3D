@@ -89,8 +89,8 @@ void Crossbow::End()
 
 void Crossbow::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	crossbowWeaponInfo_.weaponAtk_ = round((9.f + (5.f * currentlevel_)) * Info->atk_ * PInfo->atkMultiple_Result / 100);
 	crossbowWeaponInfo_.weaponAtkSpeed_ = 150.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
@@ -172,8 +172,8 @@ void Crossbow::ProjectileSort()
 					passNum_[i] = crossbowWeaponInfo_.weaponPassNum_;
 					projectileGroupList_[i].first->On();
 					projectileGroupList_[i].second->On();
-					projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
-					projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+					projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
+					projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition());
 				}
 				else	 if (projectileGroupList_[i].first->IsUpdate() == true)
 				{
@@ -197,8 +197,8 @@ void Crossbow::RenderRotate()
 			{
 				float Mx = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().y;
-				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
 				referenceVector_.x = (Mx - Px); //방향 구하는 공식
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
@@ -224,26 +224,26 @@ void Crossbow::RangeCheak(float _deltaTime)
 	}
 }
 
-CollisionReturn Crossbow::ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Crossbow::ProjectileToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
+	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
 	for (size_t i = 0; i < 20; i++)
 	{
 		if (projectileGroupList_[i].second == _This)
 		{
 
-			if (dynamic_pointer_cast<Crossbow>(_This->GetActor())->passNum_[i] > 0)
+			if (dynamic_cast<Crossbow*>(_This->GetActor())->passNum_[i] > 0)
 			{
-				dynamic_pointer_cast<Crossbow>(_This->GetActor())->passNum_[i] -= 1;
+				dynamic_cast<Crossbow*>(_This->GetActor())->passNum_[i] -= 1;
 			}
-			if (dynamic_pointer_cast<Crossbow>(_This->GetActor())->passNum_[i] == 0)
+			if (dynamic_cast<Crossbow*>(_This->GetActor())->passNum_[i] == 0)
 			{
 				projectileGroupList_[i].first->Off();
 				projectileGroupList_[i].second->Off();
 			}
 		}
 	}
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= crossbowWeaponInfo_.weaponAtk_; //데미지줌
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= crossbowWeaponInfo_.weaponAtk_; //데미지줌
 	return CollisionReturn::Stop;
 }
 

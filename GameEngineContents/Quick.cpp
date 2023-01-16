@@ -16,8 +16,8 @@ Quick::~Quick()
 
 void Quick::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sProjectileSpeed = std::to_string(PlayerPInfo_.projectileSpeed_Result).substr(0, std::to_string(PlayerPInfo_.projectileSpeed_Result).find(".")) + "%";
 	std::string sProjectileSpeedNext = std::to_string(PlayerPInfo_.projectileSpeed_Result + 25.0f).substr(0, std::to_string(PlayerPInfo_.projectileSpeed_Result + 25.0f).find(".")) + "%";
@@ -36,7 +36,7 @@ void Quick::Init()
 void Quick::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->speed_Per += 25.f;
 	PlayerPInfo_->projectileSpeed_Per += 25.0f;
 	PlayerPInfo_->projectileSize_Per -= 25.0f;

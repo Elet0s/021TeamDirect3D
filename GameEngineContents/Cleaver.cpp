@@ -43,8 +43,8 @@ void Cleaver::Effect()
 
 void Cleaver::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	cleaverWeaponInfo_.weaponAtk_ = round((1.f + 2.f * currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
 	cleaverWeaponInfo_.weaponAtkSpeed_ = (200.f - (currentlevel_ * 25.f))  / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
@@ -82,8 +82,8 @@ void Cleaver::Shoothing(float _deltaTime)
 	if (timer_ > cleaverWeaponInfo_.weaponAtkSpeed_)
 	{
 		GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
-		std::shared_ptr<CleaverProjectile> A = GetLevel()->CreateActor<CleaverProjectile>(ObjectOrder::Projectile);
-		A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+		CleaverProjectile* A = GetLevel()->CreateActor<CleaverProjectile>(ObjectOrder::Projectile);
+		A->GetTransform().SetWorldPosition({ Player::GetPlayerInst().GetTransform().GetWorldPosition().x,	Player::GetPlayerInst().GetTransform().GetWorldPosition().y,-219.f });
 		A->ProjectileSet(cleaverWeaponInfo_.weaponAtk_, cleaverWeaponInfo_.weaponSpeed_, angle_, cleaverWeaponInfo_.weaponPassNum_);
 
 		timer_ = 0.f;

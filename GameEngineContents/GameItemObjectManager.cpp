@@ -3,7 +3,7 @@
 #include"GameEngineBase/GameEngineRandom.h"
 
 GameItemObjectManager::GameItemObjectManager()
-	:	isFullContainer_(false),
+	: isFullContainer_(false),
 	ItemUpdateNum_(0)
 
 {
@@ -34,7 +34,7 @@ void GameItemObjectManager::SetManager()
 	allObjectContainer_.reserve(300);
 }
 
-std::vector< std::shared_ptr<GameItemObject>> GameItemObjectManager::GetallObjectContainer()
+std::vector< GameItemObject*> GameItemObjectManager::GetallObjectContainer()
 {
 	return allObjectContainer_;
 }
@@ -89,7 +89,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		if (_itemObjectOrder == ItemObjectOrder::GreenExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
@@ -106,7 +106,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::YellowExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -122,7 +122,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::RedExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -138,7 +138,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Gold)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -153,7 +153,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Meet)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -168,7 +168,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Voidbead)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -191,7 +191,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 
 		if (_itemObjectOrder == ItemObjectOrder::GreenExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->SetTexture("XP_Sprite.png");
@@ -208,7 +208,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::YellowExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -224,7 +224,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::RedExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -240,7 +240,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Gold)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -255,7 +255,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Meet)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -270,7 +270,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, ItemOb
 		}
 		else if (_itemObjectOrder == ItemObjectOrder::Voidbead)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = _itemObjectOrder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -298,7 +298,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		if (randomorder == ItemObjectOrder::GreenExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -314,7 +314,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::YellowExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -330,7 +330,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::RedExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -346,7 +346,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::Gold)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -361,7 +361,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::Meet)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -376,7 +376,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::Voidbead)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -398,7 +398,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		allObjectContainer_.erase(allObjectContainer_.begin());
 		if (randomorder == ItemObjectOrder::GreenExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -414,7 +414,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::YellowExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -430,7 +430,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::RedExp)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(16, 16, 0);
@@ -446,7 +446,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::Gold)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -461,7 +461,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::Meet)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);
@@ -476,7 +476,7 @@ void GameItemObjectManager::CreateItemObject(GameEngineLevel* _thisLevel, float4
 		}
 		else if (randomorder == ItemObjectOrder::Voidbead)
 		{
-			std::shared_ptr<GameItemObject> newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
+			GameItemObject* newItemObject = _thisLevel->CreateActor<GameItemObject>(ObjectOrder::Item);
 			newItemObject->itemObjectOrder_ = randomorder;
 			newItemObject->itemObjectRenderer_ = newItemObject->CreateComponent<GameEngineTextureRenderer>();
 			newItemObject->itemObjectRenderer_->GetTransform().SetWorldScale(32, 32, 0);

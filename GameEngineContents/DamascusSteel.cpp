@@ -17,7 +17,7 @@ DamascusSteel::~DamascusSteel()
 
 void DamascusSteel::Init()
 {
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 	
 
 	std::string sAttackMultiple = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
@@ -30,7 +30,7 @@ void DamascusSteel::Init()
 void DamascusSteel::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->atkMultiple_Per += 5.0f;
 	PlayerPInfo_->atkMultiple_Result += 5.0f;;
 

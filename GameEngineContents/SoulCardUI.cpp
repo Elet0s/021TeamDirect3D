@@ -25,7 +25,7 @@ SoulCardUI::~SoulCardUI()
 
 void SoulCardUI::Start()
 {
-	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+	std::vector <std::vector<Skill*>> SkillList = Player::GetPlayerInst().GetSkillManager()->GetSkillList();
 	mySkill_ = SkillList[0][0];
 
 	if (false == GameEngineInput::GetInst().IsExists("click"))
@@ -91,7 +91,7 @@ void SoulCardUI::Start()
 	
 	
 	{
-		std::shared_ptr<GameEngineFontRenderer>font = CreateComponent<GameEngineFontRenderer>();
+		GameEngineFontRenderer* font = CreateComponent<GameEngineFontRenderer>();
 		font->SetPositionMode(FontPositionMode::World);
 		font->SetSize(18.f);
 		font->SetText("·¹º§ : ", "Free Pixel");
@@ -273,7 +273,7 @@ void SoulCardUI::CardDraw()
 		mySkill_->IsOnOff();
 	}
 
-	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+	std::vector <std::vector<Skill*>> SkillList = Player::GetPlayerInst().GetSkillManager()->GetSkillList();
 	int RankRandom = 0;
 	int IndexRandom = 0;
 	int Randomnum = GameEngineRandom::mainRandom_.RandomInt(1, 100);
@@ -314,7 +314,7 @@ void SoulCardUI::CardDraw()
 
 	while (mySkill_->GetCurrentlevel() == mySkill_->GetMaxLevel() || true == mySkill_->GetIsOn())
 	{
-		std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+		std::vector <std::vector<Skill*>> SkillList = Player::GetPlayerInst().GetSkillManager()->GetSkillList();
 		int RankRandom = 0;
 		
 		int Randomnum = GameEngineRandom::mainRandom_.RandomInt(1, 100);
@@ -407,7 +407,7 @@ void SoulCardUI::CardDraw()
 	{
 		mySkill_->Init();
 		Level_->SetText(std::to_string(mySkill_->GetCurrentlevel()) + "-> " + std::to_string(mySkill_->GetCurrentlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()), "Free Pixel");
-		std::string Text = reinterpret_cast<DeathAura*>(mySkill_.get())->GetEtc();
+		std::string Text = reinterpret_cast<DeathAura*>(mySkill_)->GetEtc();
 		size_t EntryIndex = Text.find("\n");
 		size_t firstIndex = 0;
 		std::string Text2 = Text.substr(0, EntryIndex);
@@ -442,7 +442,7 @@ void SoulCardUI::WeaponDraw()
 		mySkill_->IsOnOff();
 	}
 
-	std::vector <std::vector<std::shared_ptr <Skill>>> SkillList = Player::GetPlayerInst()->GetSkillManager()->GetSkillList();
+	std::vector <std::vector<Skill*>> SkillList = Player::GetPlayerInst().GetSkillManager()->GetSkillList();
 	int IndexRandom = 0;
 	IndexRandom = GameEngineRandom::mainRandom_.RandomInt(0, static_cast<int>(SkillList[5].size() - 1));
 	
@@ -509,7 +509,7 @@ void SoulCardUI::WeaponDraw()
 	{
 		mySkill_->Init();
 		Level_->SetText(std::to_string(mySkill_->GetCurrentlevel()) + "-> " + std::to_string(mySkill_->GetCurrentlevel() + 1) + "/ " + std::to_string(mySkill_->GetMaxLevel()), "Free Pixel");
-		std::string Text = reinterpret_cast<DeathAura*>(mySkill_.get())->GetEtc();
+		std::string Text = reinterpret_cast<DeathAura*>(mySkill_)->GetEtc();
 		size_t EntryIndex = Text.find("\n");
 		size_t firstIndex = 0;
 		std::string Text2 = Text.substr(0, EntryIndex);

@@ -59,8 +59,8 @@ void Pike::End()
 
 void Pike::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	pikeWeaponInfo_.weaponAtk_ = round((5.f + (1.2f * currentlevel_)) * (Info->atk_ * PInfo->atkMultiple_Result / 100.f));
 	pikeWeaponInfo_.weaponAtkSpeed_ = (100.f + 2.f * currentlevel_) / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
 
@@ -101,8 +101,8 @@ void Pike::Shoothing(float _deltaTime)
 			if (duringtime_ > 0.1f)
 			{
 				consecutiveCounter_ += 1;
-				mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst()->GetTransform().GetWorldPosition();
-				playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+				mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst().GetTransform().GetWorldPosition();
+				playerPos_ = Player::GetPlayerInst().GetTransform().GetWorldPosition();
 				range_.x = mouseAimPos_.x - playerPos_.x;
 				range_.y = mouseAimPos_.y - playerPos_.y;
 
@@ -124,8 +124,8 @@ void Pike::Shoothing(float _deltaTime)
 						}
 						angle_ += 5;
 					}
-					std::shared_ptr<PikeProjectile> A = GetLevel()->CreateActor<PikeProjectile>(ObjectOrder::Projectile);
-					A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+					PikeProjectile* A = GetLevel()->CreateActor<PikeProjectile>(ObjectOrder::Projectile);
+					A->GetTransform().SetWorldPosition({ Player::GetPlayerInst().GetTransform().GetWorldPosition().x,	Player::GetPlayerInst().GetTransform().GetWorldPosition().y,-219.f });
 					A->ProjectileSet(pikeWeaponInfo_.weaponAtk_, pikeWeaponInfo_.weaponSpeed_, angle_);
 				}
 				duringtime_ = 0.f;

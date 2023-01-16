@@ -3,7 +3,7 @@
 class GameEngineCamera;
 class LoginUI: public GameEngineActor
 {
-	std::shared_ptr<GameEngineTextureRenderer> uiRenderer_;
+	GameEngineTextureRenderer* uiRenderer_;
 
 
 public:

@@ -90,31 +90,31 @@ void SkillManager::CreatePlayerAllSkill()
 
 	skillList_[5].reserve(12);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Cleaver>(ObjectOrder::Skill, "Cleaver");
+		Skill* Skill00 = myLevel_->CreateActor<Cleaver>(ObjectOrder::Skill, "Cleaver");
 		skillList_[5].push_back(Skill00);
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Kunai>(ObjectOrder::Skill, "Kunai");
+		Skill* Skill01 = myLevel_->CreateActor<Kunai>(ObjectOrder::Skill, "Kunai");
 		skillList_[5].push_back(Skill01);
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Pike>(ObjectOrder::Skill, "Pike");
+		Skill* Skill02 = myLevel_->CreateActor<Pike>(ObjectOrder::Skill, "Pike");
 		skillList_[5].push_back(Skill02);
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Spear>(ObjectOrder::Skill, "Spear");
+		Skill* Skill03 = myLevel_->CreateActor<Spear>(ObjectOrder::Skill, "Spear");
 		skillList_[5].push_back(Skill03);
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<DeathAura>(ObjectOrder::Skill, "DeathAura");
+		Skill* Skill04 = myLevel_->CreateActor<DeathAura>(ObjectOrder::Skill, "DeathAura");
 		skillList_[5].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Firering>(ObjectOrder::Skill, "Firering");
+		Skill* Skill05 = myLevel_->CreateActor<Firering>(ObjectOrder::Skill, "Firering");
 		skillList_[5].push_back(Skill05);
-		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<ThunderStaf>(ObjectOrder::Skill, "ThunderStaf");
+		Skill* Skill06 = myLevel_->CreateActor<ThunderStaf>(ObjectOrder::Skill, "ThunderStaf");
 		skillList_[5].push_back(Skill06);
-		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<WindsBlade>(ObjectOrder::Skill, "WindBlade #44160");
+		Skill* Skill07 = myLevel_->CreateActor<WindsBlade>(ObjectOrder::Skill, "WindBlade #44160");
 		skillList_[5].push_back(Skill07);
-		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<Bow>(ObjectOrder::Skill, "Bow");
+		Skill* Skill08 = myLevel_->CreateActor<Bow>(ObjectOrder::Skill, "Bow");
 		skillList_[5].push_back(Skill08);
 
-		std::shared_ptr<Skill> Skill09 = myLevel_->CreateActor<Crossbow>(ObjectOrder::Skill, "Crossbow");
+		Skill* Skill09 = myLevel_->CreateActor<Crossbow>(ObjectOrder::Skill, "Crossbow");
 		skillList_[5].push_back(Skill09);
-		std::shared_ptr<Skill> Skill10 = myLevel_->CreateActor<Katana>(ObjectOrder::Skill, "Katana");
+		Skill* Skill10 = myLevel_->CreateActor<Katana>(ObjectOrder::Skill, "Katana");
 		skillList_[5].push_back(Skill10);
-		std::shared_ptr<Skill> Skill11 = myLevel_->CreateActor<Shuriken>(ObjectOrder::Skill, "Shuriken");
+		Skill* Skill11 = myLevel_->CreateActor<Shuriken>(ObjectOrder::Skill, "Shuriken");
 		skillList_[5].push_back(Skill11);
 	}
 
@@ -122,71 +122,71 @@ void SkillManager::CreatePlayerAllSkill()
 	// ´õ·´ÇôÁø ·©Å© 
 	skillList_[0].reserve(6);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<LowPressure>(ObjectOrder::Skill,"LowPressure");
+		Skill* Skill00 = myLevel_->CreateActor<LowPressure>(ObjectOrder::Skill,"LowPressure");
 		skillList_[0].push_back(Skill00);
 
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Healthy>(ObjectOrder::Skill, "HealingFactor");
+		Skill* Skill01 = myLevel_->CreateActor<Healthy>(ObjectOrder::Skill, "HealingFactor");
 		skillList_[0].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Durability>(ObjectOrder::Skill, "Durability");
+		Skill* Skill02 = myLevel_->CreateActor<Durability>(ObjectOrder::Skill, "Durability");
 		skillList_[0].push_back(Skill02);
 
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<StoneSkin>(ObjectOrder::Skill, "StoneSkin");
+		Skill* Skill04 = myLevel_->CreateActor<StoneSkin>(ObjectOrder::Skill, "StoneSkin");
 		skillList_[0].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<SharpeningStone>(ObjectOrder::Skill, "SharpeningStone");
+		Skill* Skill05 = myLevel_->CreateActor<SharpeningStone>(ObjectOrder::Skill, "SharpeningStone");
 		skillList_[0].push_back(Skill05);
 
-		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<Cardio>(ObjectOrder::Skill, "Cardio");
+		Skill* Skill06 = myLevel_->CreateActor<Cardio>(ObjectOrder::Skill, "Cardio");
 		skillList_[0].push_back(Skill06);
 	}
 
 	// ³ë¸» ·©Å©
 	skillList_[1].reserve(16);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Agility>(ObjectOrder::Skill, "Agility");
+		Skill* Skill00 = myLevel_->CreateActor<Agility>(ObjectOrder::Skill, "Agility");
 		skillList_[1].push_back(Skill00);
 		
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Void>(ObjectOrder::Skill, "Void");
+		Skill* Skill01 = myLevel_->CreateActor<Void>(ObjectOrder::Skill, "Void");
 		skillList_[1].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Student>(ObjectOrder::Skill, "Student");
+		Skill* Skill02 = myLevel_->CreateActor<Student>(ObjectOrder::Skill, "Student");
 		skillList_[1].push_back(Skill02);
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<IronWill>(ObjectOrder::Skill, "IronWill");
+		Skill* Skill03 = myLevel_->CreateActor<IronWill>(ObjectOrder::Skill, "IronWill");
 		skillList_[1].push_back(Skill03);
 
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<HealingFactor>(ObjectOrder::Skill, "HealingFactor");
+		Skill* Skill04 = myLevel_->CreateActor<HealingFactor>(ObjectOrder::Skill, "HealingFactor");
 		skillList_[1].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<BlackBlood>(ObjectOrder::Skill, "BlackBlood");
+		Skill* Skill06 = myLevel_->CreateActor<BlackBlood>(ObjectOrder::Skill, "BlackBlood");
 		skillList_[1].push_back(Skill06);
 
-		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<LightArmor>(ObjectOrder::Skill, "LightArmor");
+		Skill* Skill07 = myLevel_->CreateActor<LightArmor>(ObjectOrder::Skill, "LightArmor");
 		skillList_[1].push_back(Skill07);
 
-		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<SharpEdge>(ObjectOrder::Skill, "SharpEdge");
+		Skill* Skill08 = myLevel_->CreateActor<SharpEdge>(ObjectOrder::Skill, "SharpEdge");
 		skillList_[1].push_back(Skill08);
 
-		std::shared_ptr<Skill> Skill09 = myLevel_->CreateActor<Range>(ObjectOrder::Skill, "Range");
+		Skill* Skill09 = myLevel_->CreateActor<Range>(ObjectOrder::Skill, "Range");
 		skillList_[1].push_back(Skill09);
 
-		std::shared_ptr<Skill> Skill10 = myLevel_->CreateActor<TensString>(ObjectOrder::Skill, "TensString");
+		Skill* Skill10 = myLevel_->CreateActor<TensString>(ObjectOrder::Skill, "TensString");
 		skillList_[1].push_back(Skill10);
 
-		std::shared_ptr<Skill> Skill11 = myLevel_->CreateActor<Momentum>(ObjectOrder::Skill, "Momentum");
+		Skill* Skill11 = myLevel_->CreateActor<Momentum>(ObjectOrder::Skill, "Momentum");
 		skillList_[1].push_back(Skill11);
 
-		std::shared_ptr<Skill> Skill12 = myLevel_->CreateActor<Muscle>(ObjectOrder::Skill, "Muscle");
+		Skill* Skill12 = myLevel_->CreateActor<Muscle>(ObjectOrder::Skill, "Muscle");
 		skillList_[1].push_back(Skill12);
 
-		std::shared_ptr<Skill> Skill13 = myLevel_->CreateActor<Compromise>(ObjectOrder::Skill, "Compromise");
+		Skill* Skill13 = myLevel_->CreateActor<Compromise>(ObjectOrder::Skill, "Compromise");
 		skillList_[1].push_back(Skill13);
 
-		std::shared_ptr<Skill> Skill15 = myLevel_->CreateActor<Practice>(ObjectOrder::Skill, "Practice");
+		Skill* Skill15 = myLevel_->CreateActor<Practice>(ObjectOrder::Skill, "Practice");
 		skillList_[1].push_back(Skill15);
 
-		std::shared_ptr<Skill> Skill16 = myLevel_->CreateActor<DamascusSteel>(ObjectOrder::Skill, "DamascusSteel");
+		Skill* Skill16 = myLevel_->CreateActor<DamascusSteel>(ObjectOrder::Skill, "DamascusSteel");
 		skillList_[1].push_back(Skill16);
 	}
 
@@ -194,55 +194,55 @@ void SkillManager::CreatePlayerAllSkill()
 	// ¾ðÄ¿¸Õ ·©Å©
 	skillList_[2].reserve(9);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<Dash>(ObjectOrder::Skill, "Dash");
+		Skill* Skill00 = myLevel_->CreateActor<Dash>(ObjectOrder::Skill, "Dash");
 		skillList_[2].push_back(Skill00);
 
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<IronSkin>(ObjectOrder::Skill, "IronSkin");
+		Skill* Skill01 = myLevel_->CreateActor<IronSkin>(ObjectOrder::Skill, "IronSkin");
 		skillList_[2].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<SlipperySkin>(ObjectOrder::Skill, "SlipperySkin");
+		Skill* Skill02 = myLevel_->CreateActor<SlipperySkin>(ObjectOrder::Skill, "SlipperySkin");
 		skillList_[2].push_back(Skill02);
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Impenetrable>(ObjectOrder::Skill, "Impenetrable");
+		Skill* Skill03 = myLevel_->CreateActor<Impenetrable>(ObjectOrder::Skill, "Impenetrable");
 		skillList_[2].push_back(Skill03);
 
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<Aiming>(ObjectOrder::Skill, "Aiming");
+		Skill* Skill04 = myLevel_->CreateActor<Aiming>(ObjectOrder::Skill, "Aiming");
 		skillList_[2].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Area>(ObjectOrder::Skill, "Area");
+		Skill* Skill05 = myLevel_->CreateActor<Area>(ObjectOrder::Skill, "Area");
 		skillList_[2].push_back(Skill05);
 
-		std::shared_ptr<Skill> Skill06 = myLevel_->CreateActor<Quick>(ObjectOrder::Skill, "Quick");
+		Skill* Skill06 = myLevel_->CreateActor<Quick>(ObjectOrder::Skill, "Quick");
 		skillList_[2].push_back(Skill06);
 
-		std::shared_ptr<Skill> Skill07 = myLevel_->CreateActor<Clumsy>(ObjectOrder::Skill, "Clumsy");
+		Skill* Skill07 = myLevel_->CreateActor<Clumsy>(ObjectOrder::Skill, "Clumsy");
 		skillList_[2].push_back(Skill07);
 
-		std::shared_ptr<Skill> Skill08 = myLevel_->CreateActor<TradeOff>(ObjectOrder::Skill, "TradeOff");
+		Skill* Skill08 = myLevel_->CreateActor<TradeOff>(ObjectOrder::Skill, "TradeOff");
 		skillList_[2].push_back(Skill08);
 	}
 
 	// ·¹¾î ·©Å©
 	skillList_[3].reserve(6);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<DashCooldown>(ObjectOrder::Skill, "DashCooldown");
+		Skill* Skill00 = myLevel_->CreateActor<DashCooldown>(ObjectOrder::Skill, "DashCooldown");
 		skillList_[3].push_back(Skill00);
 
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<Tower>(ObjectOrder::Skill, "Tower");
+		Skill* Skill01 = myLevel_->CreateActor<Tower>(ObjectOrder::Skill, "Tower");
 		skillList_[3].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<SteelSkin>(ObjectOrder::Skill, "SteelSkin");
+		Skill* Skill02 = myLevel_->CreateActor<SteelSkin>(ObjectOrder::Skill, "SteelSkin");
 		skillList_[3].push_back(Skill02);
 
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Celerity>(ObjectOrder::Skill, "Celerity");
+		Skill* Skill03 = myLevel_->CreateActor<Celerity>(ObjectOrder::Skill, "Celerity");
 		skillList_[3].push_back(Skill03);
 
 
-		std::shared_ptr<Skill> Skill04 = myLevel_->CreateActor<GodsWrath>(ObjectOrder::Skill, "GodsWrath");
+		Skill* Skill04 = myLevel_->CreateActor<GodsWrath>(ObjectOrder::Skill, "GodsWrath");
 		skillList_[3].push_back(Skill04);
 
-		std::shared_ptr<Skill> Skill05 = myLevel_->CreateActor<Penetration>(ObjectOrder::Skill, "Penetration");
+		Skill* Skill05 = myLevel_->CreateActor<Penetration>(ObjectOrder::Skill, "Penetration");
 		skillList_[3].push_back(Skill05);
 
 		
@@ -251,16 +251,16 @@ void SkillManager::CreatePlayerAllSkill()
 	// ¿¡ÇÈ ·©Å©
 	skillList_[4].reserve(4);
 	{
-		std::shared_ptr<Skill> Skill00 = myLevel_->CreateActor<SingleHanded>(ObjectOrder::Skill, "SingleHanded");
+		Skill* Skill00 = myLevel_->CreateActor<SingleHanded>(ObjectOrder::Skill, "SingleHanded");
 		skillList_[4].push_back(Skill00);
 
-		std::shared_ptr<Skill> Skill01 = myLevel_->CreateActor<LightHand>(ObjectOrder::Skill, "LightHand");
+		Skill* Skill01 = myLevel_->CreateActor<LightHand>(ObjectOrder::Skill, "LightHand");
 		skillList_[4].push_back(Skill01);
 
-		std::shared_ptr<Skill> Skill02 = myLevel_->CreateActor<Hypersonic>(ObjectOrder::Skill, "Hypersonic");
+		Skill* Skill02 = myLevel_->CreateActor<Hypersonic>(ObjectOrder::Skill, "Hypersonic");
 		skillList_[4].push_back(Skill02);
 
-		std::shared_ptr<Skill> Skill03 = myLevel_->CreateActor<Castle>(ObjectOrder::Skill, "Castle");
+		Skill* Skill03 = myLevel_->CreateActor<Castle>(ObjectOrder::Skill, "Castle");
 		skillList_[4].push_back(Skill03);
 	}
 }
@@ -309,13 +309,13 @@ void SkillManager::SkillLevelCheak()
 		for (size_t i = 0; i < 40; i++)
 			if (i < 20)
 			{
-				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Bow*>(skillList_[5][8])->projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Bow*>(skillList_[5][8])->projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
 			}
 			else if (i < 40)
 			{
-				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList02_[i - 20].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-				std::dynamic_pointer_cast<Bow>(skillList_[5][8])->projectileGroupList02_[i - 20].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Bow*>(skillList_[5][8])->projectileGroupList02_[i - 20].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Bow*>(skillList_[5][8])->projectileGroupList02_[i - 20].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
 			}
 	}
 	if (skillList_[5][9]->currentlevel_ > 0 && skillList_[5][9]->IsUpdate() == false)
@@ -323,8 +323,8 @@ void SkillManager::SkillLevelCheak()
 		skillList_[5][9]->On();
 		for (size_t i = 0; i < 20; i++)
 		{
-			std::dynamic_pointer_cast<Crossbow>(skillList_[5][9])->projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-			std::dynamic_pointer_cast<Crossbow>(skillList_[5][9])->projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+			dynamic_cast<Crossbow*>(skillList_[5][9])->projectileGroupList_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
+			dynamic_cast<Crossbow*>(skillList_[5][9])->projectileGroupList_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
 		}
 	}
 
@@ -342,18 +342,18 @@ void SkillManager::SkillLevelCheak()
 		{
 			if (i < 20)
 			{
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Shuriken*>(skillList_[5][11])->projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Shuriken*>(skillList_[5][11])->projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
 			}
 			else if (i < 40)
 			{
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList02_[i - 20].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList02_[i - 20].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Shuriken*>(skillList_[5][11])->projectileGroupList02_[i - 20].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Shuriken*>(skillList_[5][11])->projectileGroupList02_[i - 20].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
 			}
 			else if (i < 60)
 			{
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList03_[i - 40].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
-				std::dynamic_pointer_cast<Shuriken>(skillList_[5][11])->projectileGroupList03_[i - 40].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition().x, Player::GetPlayerInst()->GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Shuriken*>(skillList_[5][11])->projectileGroupList03_[i - 40].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
+				dynamic_cast<Shuriken*>(skillList_[5][11])->projectileGroupList03_[i - 40].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition().x, Player::GetPlayerInst().GetTransform().GetWorldPosition().y, -220);
 			}
 		}
 	}

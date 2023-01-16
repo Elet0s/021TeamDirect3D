@@ -21,13 +21,13 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn ShurikenToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other); // 발사체 충돌
+	CollisionReturn ShurikenToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other); // 발사체 충돌
 
 public:
-	std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>projectileGroup_;
-	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList01_;//발사체 모음
-	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList02_;
-	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList03_;
+	std::pair<GameEngineTextureRenderer*, GameEngineCollision*>projectileGroup_;
+	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList01_;//발사체 모음
+	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList02_;
+	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList03_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -60,7 +60,7 @@ private:
 
 	WeaponInfo shuriKenWeaponInfo_;//무기 스탯
 
-	std::vector<std::shared_ptr<Monster>> monsterList_; //전체 몬스터 리스트
+	std::vector<Monster*> monsterList_; //전체 몬스터 리스트
 
 	std::pair<size_t, float> minHpPair_;//타겟
 

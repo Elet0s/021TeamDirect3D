@@ -36,24 +36,24 @@ public:
 protected:
 
 private:
-	std::shared_ptr<GameEngineFontRenderer> stagefontrenderer_;
-	std::shared_ptr<GameEngineFontRenderer> spacefontrenderer_;
-	std::shared_ptr<GameEngineFontRenderer> coinfontrenderer_;
-
-	std::shared_ptr<GameEngineFontRenderer> killcountfontrenderer_;
-	std::shared_ptr<GameEngineFontRenderer> elitekillFontrenderer_;
-
-	std::shared_ptr<GameEngineFontRenderer> timerfontRenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> timerboxrenderer_;
-
-	std::shared_ptr<GameEngineTextureRenderer> coinrenderer_;
-
-
-	std::shared_ptr<GameEngineTextureRenderer> stageboxrenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> spaceboxrenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> coinboxrenderer_;
-
-	std::shared_ptr<GameEngineTextureRenderer> killcountboxrenderer_;
+	GameEngineFontRenderer* stagefontrenderer_;
+	GameEngineFontRenderer* spacefontrenderer_;
+	GameEngineFontRenderer* coinfontrenderer_;
+						  
+	GameEngineFontRenderer* killcountfontrenderer_;
+	GameEngineFontRenderer* elitekillFontrenderer_;
+						  
+	GameEngineFontRenderer* timerfontRenderer_;
+	GameEngineTextureRenderer* timerboxrenderer_;
+							 
+	GameEngineTextureRenderer* coinrenderer_;
+							 
+							 
+	GameEngineTextureRenderer* stageboxrenderer_;
+	GameEngineTextureRenderer* spaceboxrenderer_;
+	GameEngineTextureRenderer* coinboxrenderer_;
+							 
+	GameEngineTextureRenderer* killcountboxrenderer_;
 
 	void Start() override;
 	void Update(float _deltaTime) override;

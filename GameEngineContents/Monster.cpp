@@ -18,11 +18,11 @@
 
 #include "Boss01.h"
 
-std::vector<std::shared_ptr<Monster>> Monster::allMonsters_;
+std::vector<Monster*> Monster::allMonsters_;
 
-std::shared_ptr<GameEngineInstancingRenderer> Monster::allMonstersRenderer_ = nullptr;
-std::shared_ptr<GameEngineInstancingRenderer> Monster::allShadowsRenderer_ = nullptr;
-std::shared_ptr<GameItemObjectManager> Monster::dropMonsterItemObject_ = std::shared_ptr<GameItemObjectManager>(new GameItemObjectManager);
+GameEngineInstancingRenderer* Monster::allMonstersRenderer_ = nullptr;
+GameEngineInstancingRenderer* Monster::allShadowsRenderer_ = nullptr;
+GameItemObjectManager* Monster::dropMonsterItemObject_ = new GameItemObjectManager();
 int Monster::monsterCreationIndex_ = 0;
 
 Monster::Monster()
@@ -45,25 +45,36 @@ Monster::Monster()
 	, flashLoop_(false)
 	, flashTimer_(0)
 {
-	monsterInfo_ = std::make_shared<MonsterInfo>();
+	monsterInfo_ = new MonsterInfo();
 	dropMonsterItemObject_->SetManager();
 }
 
 Monster::~Monster()
 {
+	if (nullptr != monsterInfo_)
+	{
+		delete monsterInfo_;
+		monsterInfo_ = nullptr;
+	}
+
+	if (nullptr != dropMonsterItemObject_)
+	{
+		delete dropMonsterItemObject_;
+		dropMonsterItemObject_ = nullptr;
+	}
 }
 
 void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCount)
 {
 	allMonsters_.reserve(_allMonsterCount);
 
-	allMonstersRenderer_ = _thisLevel->GetCamera(CameraOrder::MidCamera)->GetInstancingRenderer("1-AllMonstersRenderer");
+	allMonstersRenderer_ = &_thisLevel->GetCamera(CameraOrder::MidCamera)->GetInstancingRenderer("1-AllMonstersRenderer");
 	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "MonsterInstanceRendering");
 	allMonstersRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 
 	//allShadowsRenderer_ = _thisLevel->GetCamera(CameraOrder::MidCamera)->GetInstancingRenderer("1-AllShadowsRenderer");
-	allShadowsRenderer_ = _thisLevel->GetMainCamera()->GetInstancingRenderer("1-AllShadowsRenderer");
+	allShadowsRenderer_ = &_thisLevel->GetMainCamera()->GetInstancingRenderer("1-AllShadowsRenderer");
 	allShadowsRenderer_->Initialize(_allMonsterCount, "Rect", "DeferredInstanceShadowRendering", true);
 	allShadowsRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allShadowsRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
@@ -95,7 +106,7 @@ void Monster::Unsummon()
 
 void Monster::UnsummonAllMonsters()
 {
-	for (std::shared_ptr<Monster>& singleMonster : allMonsters_)
+	for (Monster* const singleMonster : allMonsters_)
 	{
 		if (true == singleMonster->isSummoned_)
 		{
@@ -155,13 +166,13 @@ void Monster::Start()
 {
 }
 
-CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Monster::MonsterToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	if (colCheakToMonster_ == false)
 	{
 		colCheakToMonster_ = true;
 	}
-	std::shared_ptr<Monster> A = std::dynamic_pointer_cast<Monster>(_Other->GetActor());
+	Monster* A = dynamic_cast<Monster*>(_Other->GetActor());
 	pushToMonsterVector.x = mx_ - A->mx_;// 콜리전 대상몬스터가 this 몬스터에게 오는 방향벡터
 	pushToMonsterVector.y = my_ - A->my_;
 
@@ -172,13 +183,13 @@ CollisionReturn Monster::MonsterToMonsterCollision(std::shared_ptr<GameEngineCol
 	return CollisionReturn::Continue;
 }
 
-CollisionReturn Monster::MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Monster::MonsterToPlayerCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	if (colCheakToPlayer_ == false)
 	{
 		colCheakToPlayer_ = true;
 	}
-	std::shared_ptr<Player> A = std::dynamic_pointer_cast<Player>(_Other->GetActor());
+	Player* A = dynamic_cast<Player*>(_Other->GetActor());
 	if (atkDeltaTime_ >= 1.5f)
 	{
 		A->GetPlayerInfo().hp_ -= this->monsterInfo_->atk_;
@@ -306,8 +317,8 @@ void Monster::Chaseplayer(float _deltaTime)
 { 
 	mx_ = GetTransform().GetWorldPosition().x;//몬스터 좌표
 	my_ = GetTransform().GetWorldPosition().y;
-	px_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x; //플레이어 좌표
-	py_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
+	px_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().x; //플레이어 좌표
+	py_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;
 	range_.x = px_ - mx_;//플레이어와 몬스터 x거리차이
 	range_.y = py_ - my_;
 
@@ -590,19 +601,19 @@ void Monster::HpCheak()
 			switch (monsterInfo_->monsterType_)
 			{
 			case MonsterType::BlackEyes:
-				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
+				Player::GetPlayerInst().GetPlayerInfo().eliteTargetScore_ += 1;
 				break;
 			case MonsterType::GoblinLivesey:
-				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
+				Player::GetPlayerInst().GetPlayerInfo().eliteTargetScore_ += 1;
 				break;
 			case MonsterType::Green:
-				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
+				Player::GetPlayerInst().GetPlayerInfo().eliteTargetScore_ += 1;
 				break;
 			case MonsterType::KoboldLivesey:
-				Player::GetPlayerInst()->GetPlayerInfo().eliteTargetScore_ += 1;
+				Player::GetPlayerInst().GetPlayerInfo().eliteTargetScore_ += 1;
 				break;
 			default:
-				Player::GetPlayerInst()->GetPlayerInfo().targetScore_ += 1;
+				Player::GetPlayerInst().GetPlayerInfo().targetScore_ += 1;
 				break;
 			}
 		

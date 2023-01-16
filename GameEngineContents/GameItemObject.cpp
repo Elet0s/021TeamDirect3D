@@ -41,8 +41,8 @@ void GameItemObject::ChasePlayer(float _deltaTime)
 	{
 		ox_ = GetTransform().GetWorldPosition().x;
 		oy_ = GetTransform().GetWorldPosition().y;
-		px_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x; 
-		py_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
+		px_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().x; 
+		py_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;
 		range_.x = px_ - ox_;
 		range_.y = py_ - oy_;
 

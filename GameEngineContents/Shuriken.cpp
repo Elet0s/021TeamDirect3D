@@ -118,8 +118,8 @@ void Shuriken::End()
 
 void  Shuriken::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	shuriKenWeaponInfo_.weaponAtk_ = round((0.75f + (0.6f * currentlevel_)) * Info->atk_ * PInfo->atkMultiple_Result / 100);
 	shuriKenWeaponInfo_.weaponAtkSpeed_ = (100.f - (10.f * currentlevel_)) / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
@@ -210,8 +210,8 @@ void Shuriken::ProjectileSort()
 					passNum_[i] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList01_[i].first->On();
 					projectileGroupList01_[i].second->On();
-					projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
-					projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+					projectileGroupList01_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
+					projectileGroupList01_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition());
 				}
 				else	 if (projectileGroupList01_[i].first->IsUpdate() == true)
 				{
@@ -229,8 +229,8 @@ void Shuriken::ProjectileSort()
 					passNum_[i+20] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList02_[i].first->On();
 					projectileGroupList02_[i].second->On();
-					projectileGroupList02_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
-					projectileGroupList02_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+					projectileGroupList02_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
+					projectileGroupList02_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition());
 				}
 				else	 if (projectileGroupList02_[i].first->IsUpdate() == true)
 				{
@@ -248,8 +248,8 @@ void Shuriken::ProjectileSort()
 					passNum_[i + 40] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList03_[i].first->On();
 					projectileGroupList03_[i].second->On();
-					projectileGroupList03_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
-					projectileGroupList03_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+					projectileGroupList03_[i].first->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition() + (float4(0, 0, -219)));
+					projectileGroupList03_[i].second->GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition());
 				}
 				else	 if (projectileGroupList03_[i].first->IsUpdate() == true)
 				{
@@ -275,8 +275,8 @@ void Shuriken::RenderRotate()
 			{
 				float Mx = monsterList_[targetInst01_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst01_[i].first]->GetTransform().GetWorldPosition().y;
-				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
 				referenceVector_.x = (Mx - Px); //방향 구하는 공식
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
@@ -295,8 +295,8 @@ void Shuriken::RenderRotate()
 			{
 				float Mx = monsterList_[targetInst02_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst02_[i].first]->GetTransform().GetWorldPosition().y;
-				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
 				referenceVector_.x = (Mx - Px); //방향 구하는 공식
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
@@ -315,8 +315,8 @@ void Shuriken::RenderRotate()
 			{
 				float Mx = monsterList_[targetInst03_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst03_[i].first]->GetTransform().GetWorldPosition().y;
-				float Px = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
+				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//몬스터 옮겨진 위치로 가야함
 				referenceVector_.x = (Mx - Px); //방향 구하는 공식
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
@@ -384,20 +384,20 @@ void Shuriken::RangeCheak(float _deltaTime)
 }
 
 
-CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Shuriken::ShurikenToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
+	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
 	for (size_t i = 0; i < 60; i++)
 	{
 		if (i < 20)
 		{
 			if (projectileGroupList01_[i].second == _This)//발사체중 부딪힌 발사체 찾아서 지움
 			{
-				if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] > 0)
+				if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] > 0)
 				{
-					dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] -= 1;
+					dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] -= 1;
 				}
-				 if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] == 0)
+				 if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
 				{
 					projectileGroupList01_[i].first->Off();
 					projectileGroupList01_[i].second->Off();
@@ -408,11 +408,11 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineC
 		{
 			if (projectileGroupList02_[i - 20].second == _This)
 			{
-				if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] > 0)
+				if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] > 0)
 				{
-					dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] -= 1;
+					dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] -= 1;
 				}
-				 if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] == 0)
+				 if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
 				{
 					projectileGroupList02_[i - 20].first->Off();
 					projectileGroupList02_[i - 20].second->Off();
@@ -424,11 +424,11 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineC
 			if (projectileGroupList03_[i - 40].second == _This)
 			{
 
-				if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] > 0)
+				if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] > 0)
 				{
-					dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] -= 1;
+					dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] -= 1;
 				}
-				 if (dynamic_pointer_cast<Shuriken>(_This->GetActor())->passNum_[i] == 0)
+				 if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
 				{
 					projectileGroupList03_[i - 40].first->Off();
 					projectileGroupList03_[i - 40].second->Off();
@@ -436,7 +436,7 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(std::shared_ptr<GameEngineC
 			}
 		}
 	}
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= shuriKenWeaponInfo_.weaponAtk_; //데미지줌
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= shuriKenWeaponInfo_.weaponAtk_; //데미지줌
 	return CollisionReturn::Stop;
 }
 

@@ -40,10 +40,10 @@ void ShopLevel::End()
 void ShopLevel::LevelStartEvent()
 {
 	
-	if (Player::GetPlayerInst() != nullptr)
-	{
-		Player::GetPlayerInst()->Off();
-	}
+	//if (Player::GetPlayerInst() != nullptr)
+	//{
+		Player::GetPlayerInst().Off();
+	//}
 	stageui_->SetUI(UIType::Shop);
 }
 

@@ -20,7 +20,7 @@ public:
 
 
 public:
-	std::shared_ptr<StageObject>& GetCurLevel()
+	StageObject* GetCurLevel()
 	{
 		return curlevel_;
 	}
@@ -29,11 +29,11 @@ private:
 	void LevelStartEvent() override;
 	void Start() override;
 	void Update(float _deltaTime) override;
-	void SendPlayerToNextStage(std::weak_ptr<StageObject> _nextStageObject);
+	void SendPlayerToNextStage(StageObject* _nextStageObject);
 
 private:
-	std::shared_ptr<StageObject> curlevel_;
-	std::shared_ptr<PlayerObject> playerObject_;
-	std::map<int, std::list<std::shared_ptr<StageObject>>> stageObjects_;
+	StageObject* curlevel_;
+	PlayerObject* playerObject_;
+	std::map<int, std::list<StageObject*>> stageObjects_;
 };
 

@@ -22,7 +22,7 @@ void GameEngineImageShotWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 	}
 }
 
-std::map<std::string, std::shared_ptr<GameEngineRenderTarget>> GameEngineStatusWindow::debugRenderTargets_;
+std::map<std::string, GameEngineRenderTarget*> GameEngineStatusWindow::debugRenderTargets_;
 
 GameEngineStatusWindow::GameEngineStatusWindow()
 {
@@ -34,7 +34,7 @@ GameEngineStatusWindow::~GameEngineStatusWindow()
 
 void GameEngineStatusWindow::AddDebugRenderTarget(
 	const std::string& _renderTargetName,
-	std::shared_ptr<GameEngineRenderTarget> _renderTarget
+	GameEngineRenderTarget* _renderTarget
 )
 {
 	if (debugRenderTargets_.end() != debugRenderTargets_.find(_renderTargetName))
@@ -109,11 +109,11 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 
 	ImGui::Text("All RenderTargets");
 
-	for (std::pair<std::string, std::shared_ptr<GameEngineRenderTarget>> renderTargetPair : debugRenderTargets_)
+	for (std::pair<std::string, GameEngineRenderTarget*> renderTargetPair : debugRenderTargets_)
 	{
 		if (true == ImGui::TreeNodeEx(renderTargetPair.first.c_str(), 0))
 		{
-			std::shared_ptr<GameEngineRenderTarget> renderTarget = renderTargetPair.second;
+			GameEngineRenderTarget* renderTarget = renderTargetPair.second;
 
 			for (ID3D11ShaderResourceView* shaderResourceView : renderTarget->shaderResourceViews_)
 			{
@@ -123,7 +123,7 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _level, float _deltaTime)
 					{ renderTargetScale.x, renderTargetScale.y })
 					)
 				{
-					std::shared_ptr<GameEngineImageShotWindow> newImageShotWindow
+					GameEngineImageShotWindow* newImageShotWindow
 						= GameEngineGUI::CreateGUIWindow<GameEngineImageShotWindow>("Image Shot", nullptr);
 
 					newImageShotWindow->RenderTextureSetting(static_cast<ImTextureID>(shaderResourceView),

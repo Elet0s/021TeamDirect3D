@@ -16,7 +16,7 @@ LightHand::~LightHand()
 
 void LightHand::Init()
 {
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sAttackSpeed = std::to_string(PlayerPInfo_.attackSpeed_Result).substr(0, std::to_string(PlayerPInfo_.attackSpeed_Result).find(".")) + "%";
 	std::string sAttackSpeedNext = std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.33f)).substr(0, std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.33f)).find(".")) + "%";
@@ -30,7 +30,7 @@ void LightHand::Init()
 void LightHand::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->attackSpeed_ *= 1.33f;
 	PlayerPInfo_->atkMultiple_ *= 0.8f;
 

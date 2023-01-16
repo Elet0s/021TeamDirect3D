@@ -5,7 +5,7 @@
 
 class Boss01 :public Monster
 {
-	static std::vector<std::shared_ptr<Projectile>> monsterProjectile_;
+	static std::vector<Projectile*> monsterProjectile_;
 public:
 	Boss01();
 	~Boss01();

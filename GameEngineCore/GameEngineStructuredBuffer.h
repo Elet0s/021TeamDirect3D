@@ -29,7 +29,7 @@ public:
 		const D3D11_SHADER_BUFFER_DESC& _desc,
 		size_t _count
 	);
-	static GameEngineStructuredBuffer* Find(const std::string_view& _name, int _byteWidth);
+	static GameEngineStructuredBuffer* Find(const std::string_view& _name, size_t _byteWidth);
 	static GameEngineStructuredBuffer* CreateOrFind(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
@@ -64,7 +64,7 @@ public:
 	}
 
 protected:
-	static GameEngineStructuredBuffer* CreateNamedRes(const std::string_view& _name, int _byteWidth);
+	static GameEngineStructuredBuffer* CreateNamedRes(const std::string_view& _name, size_t _byteWidth);
 	//GameEngineRes의 리소스저장 컨테이너를 쓸 수 없으므로 전용 컨테이너를 따로 만들고 리소스 생성과 삭제 절차도 다시 만들어야 한다.
 
 
@@ -82,7 +82,7 @@ private:
 
 
 private:
-	static std::map<std::string, std::map<int, GameEngineStructuredBuffer*>> allStructuredBuffers_;
+	static std::map<std::string, std::map<size_t, GameEngineStructuredBuffer*>> allStructuredBuffers_;
 	//일반적인 GameEngineRes<ResType> 리소스들과는 다르게 이름과 크기를 둘 다 저장하고 대조해봐야 하므로 
 	// 이중맵 구조의 전용 컨테이너에 저장하고 삭제할때도 따로 삭제한다.
 

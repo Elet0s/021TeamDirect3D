@@ -33,21 +33,21 @@ void ShopUIBox::Start()
 	
 	buttons_.reserve(4);
 
-	std::shared_ptr<ShopButton> button1_ = GetLevel()->CreateActor<ShopButton>();
+	ShopButton* button1_ = GetLevel()->CreateActor<ShopButton>();
 	button1_->GetTransform().SetWorldPosition(-300, 200, -1.f);
 	button1_->SetText("HP 회복");
 	button1_->SetPrice(1000);
 	button1_->CreateClickEvent(
 		[=]()
 		{
-			PlayerInfo* Pinfo = &Player::GetPlayerInst()->GetPlayerInfo();
+			PlayerInfo* Pinfo = &Player::GetPlayerInst().GetPlayerInfo();
 			Pinfo->hp_ = Pinfo->maxHp_;
 			
 		}
 	);
 	buttons_.push_back(button1_); //0 
 
-	std::shared_ptr<ShopButton>button2_ = GetLevel()->CreateActor<ShopButton>();
+	ShopButton* button2_ = GetLevel()->CreateActor<ShopButton>();
 	button2_->GetTransform().SetWorldPosition(-300, 120, -1.f);
 	button2_->SetText("카드 뽑기");
 	button2_->SetPrice(3000);
@@ -61,21 +61,21 @@ void ShopUIBox::Start()
 	);
 	buttons_.push_back(button2_); // 1
 
-	std::shared_ptr<ShopButton>button3_ = GetLevel()->CreateActor<ShopButton>();
+	ShopButton* button3_ = GetLevel()->CreateActor<ShopButton>();
 	button3_->GetTransform().SetWorldPosition(-300, 40, -1.f);
 	button3_->SetText("투사체 개수 증가 +5");
 	button3_->SetPrice(1000);
 	button3_->CreateClickEvent(
 		[=]()
 		{
-			PlayerInfo* Pinfo = &Player::GetPlayerInst()->GetPlayerInfo();
+			PlayerInfo* Pinfo = &Player::GetPlayerInst().GetPlayerInfo();
 	Pinfo->addProjectile_ += 5;
 			
 		}
 	);
 	buttons_.push_back(button3_);  //2
 
-	std::shared_ptr<ShopButton> button4_ = GetLevel()->CreateActor<ShopButton>();
+	ShopButton* button4_ = GetLevel()->CreateActor<ShopButton>();
 	button4_->GetTransform().SetWorldPosition(-300, -40, -1.f);
 	button4_->SetText("상점 초기화");
 	button4_->SetPrice(5000);
@@ -146,7 +146,7 @@ void ShopUIBox::RenderOn()
 {
 	mainrenderer_->On();
 
-	for (std::shared_ptr<ShopButton> button : buttons_)
+	for (ShopButton* const button : buttons_)
 	{
 		if (true == button->GetIsApper())
 		{
@@ -159,7 +159,7 @@ void ShopUIBox::RenderOn()
 void ShopUIBox::RenderOff()
 {
 	mainrenderer_->Off();
-	for (std::shared_ptr<ShopButton> button : buttons_)
+	for (ShopButton* const button : buttons_)
 	{
 		button->Off();
 	}
@@ -167,13 +167,13 @@ void ShopUIBox::RenderOff()
 
 void ShopUIBox::ShopReset()
 {
-	for (std::shared_ptr<ShopButton> button : buttons_)
+	for (ShopButton* const button : buttons_)
 	{
 		button->SetIsApper(true);
 	}
 	mainrenderer_->On();
 
-	for (std::shared_ptr<ShopButton> button : buttons_)
+	for (ShopButton* const button : buttons_)
 	{
 		button->On();
 	}

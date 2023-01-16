@@ -16,7 +16,7 @@ Range::~Range()
 
 void Range::Init()
 {
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sProjectileDuration = std::to_string(PlayerPInfo_.projectileDuration_Result).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result).find(".") ) + "%";
 	std::string sProjectileDurationNext = std::to_string(PlayerPInfo_.projectileDuration_Result + 20).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result + 20).find(".") ) + "%";
@@ -27,7 +27,7 @@ void Range::Init()
 void Range::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->projectileDuration_Per += 20.f;
 	PlayerPInfo_->projectileDuration_Result += 20.f;
 

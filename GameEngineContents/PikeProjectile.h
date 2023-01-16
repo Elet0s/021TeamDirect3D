@@ -10,7 +10,7 @@ public:
 	PikeProjectile& operator=(const PikeProjectile& _Other) = delete;
 	PikeProjectile& operator=(PikeProjectile&& _Other) noexcept = delete;
 
-	CollisionReturn ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn ProjectileToMonster(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 	void ProjectileSet(float _atk, float _speed, float _angle);
 public:
@@ -24,8 +24,8 @@ protected:
 	void TimeOff(float _deltaTime);
 	void Rotate();
 private:
-	std::shared_ptr < GameEngineTextureRenderer> projectileRen_;
-	std::shared_ptr < GameEngineCollision> projectileCol_;
+	GameEngineTextureRenderer* projectileRen_;
+	GameEngineCollision* projectileCol_;
 	float timer_;
 	float projectileatk_;
 	float projectilespeed_;

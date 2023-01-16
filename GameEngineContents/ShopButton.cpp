@@ -33,7 +33,7 @@ void ShopButton::Start()
 	fontRenderer_->GetTransform().SetLocalPosition(float4(-270.f, 18.f, -1.f));
 
 	{
-		std::shared_ptr<GameEngineTextureRenderer> renderer = CreateComponent<GameEngineTextureRenderer>();
+		GameEngineTextureRenderer* renderer = CreateComponent<GameEngineTextureRenderer>();
 		renderer->ChangeCamera(CameraOrder::UICamera);
 		renderer->GetTransform().SetWorldScale(float4{ 32.f, 32.f });
 		renderer->GetTransform().SetLocalPosition(float4(160.f, 0.f, -1.f));
@@ -50,7 +50,7 @@ void ShopButton::Start()
 
 void ShopButton::Update(float _deltaTime)
 {
-	PlayerInfo* PInfo = &Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo* PInfo = &Player::GetPlayerInst().GetPlayerInfo();
 	if (true == GetLevel<ShopLevel>()->GetMousePointer()->IsPointing(renderer_->GetTransformData().worldWorldMatrix_, float4(0.f, 0.0f, 0.f, 0.f),true))
 	{
 		if (soundCheck_ == false)

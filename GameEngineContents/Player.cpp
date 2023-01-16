@@ -6,9 +6,9 @@
 #include "Monster.h"
 #include "SoulCardSelectBox.h"
 
-std::shared_ptr<Player> Player::mainPlayer_ = nullptr;
+Player* Player::mainPlayer_ = nullptr;
 bool Player::isInitialized_ = false;
-std::shared_ptr<SkillManager> Player::playerSkillManager_ = std::shared_ptr<SkillManager>(new SkillManager);
+SkillManager* Player::playerSkillManager_ = new SkillManager();
 
 Player::Player()
 	:playerRenderer_(nullptr),
@@ -29,8 +29,8 @@ Player::Player()
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{
 		//플레이어 정상 생성.
-		playerInfo_ = std::make_shared<PlayerInfo>();
-		playerPassiveInfo_ = std::make_shared<PlayerPassiveInfo>();
+		playerInfo_ = new PlayerInfo();
+		playerPassiveInfo_ = new PlayerPassiveInfo();
 	}
 	else
 	{
@@ -41,10 +41,23 @@ Player::Player()
 
 Player::~Player()
 {
-	//if (nullptr != Player::playerSkillManager_)
-	//{
-	//	Player::playerSkillManager_ = nullptr;
-	//}
+	if (nullptr != playerInfo_)
+	{
+		delete playerInfo_;
+		playerInfo_ = nullptr;
+	}
+
+	if (nullptr != playerPassiveInfo_)
+	{
+		delete playerPassiveInfo_;
+		playerPassiveInfo_ = nullptr;
+	}
+
+	if (nullptr != playerSkillManager_)
+	{
+		delete playerSkillManager_;
+		playerSkillManager_ = nullptr;
+	}
 }
 
 void Player::Start()
@@ -83,7 +96,7 @@ void Player::Start()
 	playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
 	playerRenderer_->ChangeFrameAnimation("PlayerIdle");
 	playerRenderer_->ChangeCamera(CameraOrder::MidCamera);
-	std::shared_ptr<Texture2DShadowRenderer> shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
+	Texture2DShadowRenderer* shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
 	shadowRenderer->SetTextureRenderer(playerRenderer_);
 
 	dashRechargeTimer_ = playerInfo_->dashReChargeTime_;
@@ -95,9 +108,9 @@ void Player::Start()
 }
 
 
-CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Player::PlayerToGameItemObjectCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	std::shared_ptr<GameItemObject> A = std::dynamic_pointer_cast<GameItemObject>(_Other->GetActor());
+	GameItemObject* A = dynamic_cast<GameItemObject*>(_Other->GetActor());
 	int random_ = GameEngineRandom::mainRandom_.RandomInt(1, 4);
 	switch (A->GetObjectOrder())
 	{
@@ -207,9 +220,9 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(std::shared_ptr<GameEngi
 	return CollisionReturn::Stop;
 }
 
-CollisionReturn Player::ItemRangeToGameItemObjectCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Player::ItemRangeToGameItemObjectCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	std::shared_ptr<GameItemObject> A = std::dynamic_pointer_cast<GameItemObject>(_Other->GetActor());
+	GameItemObject* A = dynamic_cast<GameItemObject*>(_Other->GetActor());
 	A->chasePlayer_ = true;
 	return CollisionReturn::Stop;
 }

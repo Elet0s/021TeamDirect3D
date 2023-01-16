@@ -34,8 +34,8 @@ void WindsBlade::Init()
 
 void  WindsBlade::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	WindsBladeWeaponInfo_.weaponAtk_ = round((3.f + 2.f * currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
 	WindsBladeWeaponInfo_.weaponAtkSpeed_ = round((100.f - 0.7f *currentlevel_)/ (Info->attackSpeed_ * PInfo->attackSpeed_Result));
@@ -96,8 +96,8 @@ void WindsBlade::Shoothing(float _deltaTime)
 				count_ -= 1;
 				delayTime_ = 0.f;
 				GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
-				std::shared_ptr<WindsBladeProjectile> A = GetLevel()->CreateActor<WindsBladeProjectile>(ObjectOrder::Projectile);
-				A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+				WindsBladeProjectile* A = GetLevel()->CreateActor<WindsBladeProjectile>(ObjectOrder::Projectile);
+				A->GetTransform().SetWorldPosition({ Player::GetPlayerInst().GetTransform().GetWorldPosition().x,	Player::GetPlayerInst().GetTransform().GetWorldPosition().y,-219.f });
 				A->ProjectileSet(WindsBladeWeaponInfo_.weaponAtk_, WindsBladeWeaponInfo_.weaponSpeed_, WindsBladeWeaponInfo_.weaponProjectileNum_, RLSwitch_, WindsBladeWeaponInfo_.weaponPassNum_);
 				if (RLSwitch_ == false)
 				{

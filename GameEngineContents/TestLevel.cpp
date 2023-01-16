@@ -58,12 +58,12 @@ void TestLevel::Start()
 	fieldRenderingActor_->GetTransform().SetWorldScale(float4::White);
 	fieldRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
 
-	if (true == Player::GetPlayerWeakPtr().expired())
-	{
+	//if (true == Player::GetPlayerWeakPtr().expired())
+	//{
 		Player::CreatePlayer(this, { 0, 0,-219 });
-	}
+	//}
 
-	std::shared_ptr<PlayerUI> NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
+	PlayerUI* NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	
 	Monster::ReserveMonsters(this, 722);
 
@@ -132,7 +132,7 @@ void TestLevel::Update(float _DeltaTime)
 
 	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
 
-	mousePointer_->UpdatePivotPosition(Player::GetPlayerInst()->GetTransform().GetWorldPosition());
+	mousePointer_->UpdatePivotPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition());
 
 	//mousePointer_->ChangeMousePointerRenderer(true);
 
@@ -143,9 +143,9 @@ void TestLevel::LevelStartEvent()
 	summonCounter_ = 0;
 		stageManagerTimer_ = 0.f;
 
-	Player::GetPlayerInst()->On();
+	Player::GetPlayerInst().On();
 	stageUI_->SetUI(UIType::Stage);
-	if (Player::GetPlayerInst()->GetPlayerInfo().level_ == 0)
+	if (Player::GetPlayerInst().GetPlayerInfo().level_ == 0)
 	{
 	CreateActor<SoulCardSelectBox>()->DrawWeapon();
 
@@ -166,7 +166,7 @@ void TestLevel::LevelEndEvent()
 void TestLevel::PlayerMoveCamera()
 {
 	float Time = GameEngineTime::GetInst().GetDeltaTime();
-	float4 MoveVector = Player::GetPlayerInst()->GetTransform().GetWorldPosition() - GetMainCameraActorTransform().GetWorldPosition();
+	float4 MoveVector = Player::GetPlayerInst().GetTransform().GetWorldPosition() - GetMainCameraActorTransform().GetWorldPosition();
 
 	if (abs(MoveVector.x) < 1.0f)
 	{
@@ -187,7 +187,7 @@ void TestLevel::MouseMoveCamera()
 	float Time = GameEngineTime::GetInst().GetDeltaTime();
 
 	float4 MouseDir = float4::Zero;
-	float4 CheckPos = GetMainCamera()->GetMousePositionInWorldSpace() - Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+	float4 CheckPos = GetMainCamera()->GetMousePositionInWorldSpace() - Player::GetPlayerInst().GetTransform().GetWorldPosition();
 
 	if (CheckPos.x > 360.f)
 	{

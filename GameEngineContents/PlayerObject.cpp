@@ -58,7 +58,7 @@ void PlayerObject::Update(float _deltaTime)
 				GEngine::ChangeLevel("Test");
 			}
 			
-			Player::GetPlayerInst()->GetPlayerInfo().stage_ += 1;
+			Player::GetPlayerInst().GetPlayerInfo().stage_ += 1;
 			
 			mode_ = PlayerObjectMode::Idle;
 			renderer_->ChangeFrameAnimation("PlayerIdle");
@@ -68,7 +68,7 @@ void PlayerObject::Update(float _deltaTime)
 
 void PlayerObject::LevelStartEvent()
 {
-	if(Player::GetPlayerInst()->GetPlayerInfo().stage_ != 0)
+	if(Player::GetPlayerInst().GetPlayerInfo().stage_ != 0)
 	{
 		float4 Pos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
 		if (GetTransform().GetWorldPosition().x <= 500.f)

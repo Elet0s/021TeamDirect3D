@@ -14,7 +14,7 @@ public:
 	TestLevel& operator=(const TestLevel& _Other) = delete;
 	TestLevel& operator=(TestLevel&& _Other) noexcept = delete;
 
-	std::shared_ptr<Mouse> GetMousePointer()
+	Mouse* GetMousePointer()
 	{
 		return mousePointer_;
 	}
@@ -45,10 +45,10 @@ private:
 	void StageMonsterManager();
 
 private:
-	std::shared_ptr<FieldRenderingActor> fieldRenderingActor_;
-	std::shared_ptr<GameEngineLighting> testLevelLighting_;
-	std::shared_ptr<Mouse> mousePointer_;
-	std::shared_ptr<class StageUI> stageUI_;
+	FieldRenderingActor* fieldRenderingActor_;
+	GameEngineLighting* testLevelLighting_;
+	Mouse* mousePointer_;
+	class StageUI* stageUI_;
 
 	StageType stageType_;
 	CombatType combatType_;

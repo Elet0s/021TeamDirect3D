@@ -16,7 +16,7 @@ LowPressure::~LowPressure()
 
 void LowPressure::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
 
 	std::string sRuting_Range = std::to_string(PlayerInfo_.ruting_Range_).substr(0, std::to_string(PlayerInfo_.ruting_Range_).find(".") + 2);
 	std::string sRuting_RangeNext = std::to_string(PlayerInfo_.ruting_Range_ + 0.5f).substr(0, std::to_string(PlayerInfo_.ruting_Range_ + 0.5f).find(".") + 2);
@@ -29,6 +29,6 @@ void LowPressure::Init()
 void LowPressure::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->ruting_Range_ += 0.5f;
 }

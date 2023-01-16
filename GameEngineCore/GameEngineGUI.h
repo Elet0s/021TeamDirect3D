@@ -52,7 +52,7 @@ public:
 	template<typename GUIWindowType>
 	static GUIWindowType* CreateGUIWindow(const std::string& _name, GameEngineLevel* _level)
 	{
-		GUIWindowType* newWindow = std::make_shared<GUIWindowType>();
+		GUIWindowType* newWindow = new GUIWindowType();
 		GameEngineGUIWindow* initWindow = newWindow;	//
 		initWindow->SetName(_name);
 		initWindow->Initialize(_level);

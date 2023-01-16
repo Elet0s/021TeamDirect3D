@@ -102,10 +102,10 @@ void CleaverProjectile::Rotate()
 	GetTransform().SetWorldRotation(0, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle() + angle_);
 }
 
-CollisionReturn CleaverProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn CleaverProjectile::ProjectileToMonster(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹
+	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹
 	if (passNum_ == 0)
 	{
 		projectileRen_->Off();

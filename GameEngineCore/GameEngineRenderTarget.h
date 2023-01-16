@@ -133,7 +133,7 @@ public:
 	template<typename EffectType>
 	EffectType* AddEffect()
 	{
-		std::shared_ptr<GameEnginePostEffect> newEffect = std::make_shared<EffectType>();
+		GameEnginePostEffect* newEffect = new EffectType();
 		newEffect->EffectInit();
 		allEffects_.push_back(newEffect);
 		return std::dynamic_pointer_cast<EffectType>(newEffect);

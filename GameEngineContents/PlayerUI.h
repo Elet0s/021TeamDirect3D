@@ -24,16 +24,16 @@ protected:
 	void GainExp(float _deltaTime);
 
 private:
-	std::weak_ptr<Player> player_;
-	std::shared_ptr<GameEngineTextureRenderer> playerHpMax_;
-	std::shared_ptr<GameEngineTextureRenderer> playerHpUi_;
-	std::shared_ptr<GameEngineTextureRenderer> playerHpRed_;
+	//Player* player_;
+	GameEngineTextureRenderer* playerHpMax_;
+	GameEngineTextureRenderer* playerHpUi_;
+	GameEngineTextureRenderer* playerHpRed_;
+							 
+	GameEngineTextureRenderer* playerExpMax_;
+	GameEngineTextureRenderer* playerExpUi_;
+	GameEngineTextureRenderer* playerExpBlue_;
 
-	std::shared_ptr<GameEngineTextureRenderer> playerExpMax_;
-	std::shared_ptr<GameEngineTextureRenderer> playerExpUi_;
-	std::shared_ptr<GameEngineTextureRenderer> playerExpBlue_;
-
-	std::shared_ptr<GameEngineFontRenderer>playerLevelUi_;
+	GameEngineFontRenderer* playerLevelUi_;
 
 	float playerXindex_;
 	float playerYindex_;

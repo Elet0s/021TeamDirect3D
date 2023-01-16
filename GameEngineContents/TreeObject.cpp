@@ -39,7 +39,7 @@ void TreeObject::Update(float _deltaTime)
 
 	if (true == checkCol_->IsCollision(CollisionType::CT_OBB2D, ObjectOrder::Player, CollisionType::CT_OBB2D))
 	{
-		if (GetTransform().GetWorldPosition().IY() - 50 > Player::GetPlayerInst()->GetTransform().GetWorldPosition().IY())
+		if (GetTransform().GetWorldPosition().IY() - 50 > Player::GetPlayerInst().GetTransform().GetWorldPosition().IY())
 		{
 			renderer_->SetRenderingOrder(static_cast<int>(ObjectOrder::TreeObject));
 		}

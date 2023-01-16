@@ -16,8 +16,8 @@ StoneHanded::~StoneHanded()
 
 void StoneHanded::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sAddProjectile = std::to_string(PlayerInfo_.addProjectile_).substr(0, std::to_string(PlayerInfo_.addProjectile_).find("."));
 	std::string sAtkSpeed = std::to_string(PlayerPInfo_.attackSpeed_Result).substr(0, std::to_string(PlayerPInfo_.attackSpeed_Result).find("."));
@@ -34,8 +34,8 @@ void StoneHanded::Init()
 void StoneHanded::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerInfo_->addProjectile_ += 3;
 	PlayerPInfo_->projectileDuration_ *= 0.7f;
 	PlayerPInfo_->attackSpeed_ *= 0.75f;

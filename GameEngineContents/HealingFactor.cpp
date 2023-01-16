@@ -17,7 +17,7 @@ HealingFactor::~HealingFactor()
 
 void HealingFactor::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
 
 	std::string sHealing = std::to_string(PlayerInfo_.hpRecuvere_).substr(0, std::to_string(PlayerInfo_.hpRecuvere_).find(".") + 3 );
 	std::string sHealingNext = std::to_string(PlayerInfo_.hpRecuvere_ + 0.5f).substr(0, std::to_string(PlayerInfo_.hpRecuvere_ + 0.15f).find(".") + 3);
@@ -28,7 +28,7 @@ void HealingFactor::Init()
 void HealingFactor::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->hpRecuvere_ += 0.5f;
 	PlayerInfo_->hpRecuvere_ = ceil(PlayerInfo_->hpRecuvere_ * 100) / 100;
 }

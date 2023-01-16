@@ -16,7 +16,7 @@ Durability::~Durability()
 
 void Durability::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
 
 	std::string sHealing = std::to_string(PlayerInfo_.maxHp_).substr(0, std::to_string(PlayerInfo_.maxHp_).find("."));
 	std::string sHealingNext = std::to_string(PlayerInfo_.maxHp_ + 10.f).substr(0, std::to_string(PlayerInfo_.maxHp_ + 10.f).find("."));
@@ -27,6 +27,6 @@ void Durability::Init()
 void Durability::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->maxHp_ += 10.f;
 }

@@ -21,10 +21,10 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn ProjectileToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other); // 발사체 충돌
+	CollisionReturn ProjectileToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other); // 발사체 충돌
 public:
-	std::pair< std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>projectileGroup_;
-	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList_;
+	std::pair< GameEngineTextureRenderer*, GameEngineCollision*>projectileGroup_;
+	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList_;
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
@@ -54,7 +54,7 @@ private:
 
 	WeaponInfo crossbowWeaponInfo_;//무기 스탯
 
-	std::vector<std::shared_ptr<Monster>> monsterList_; //전체 몬스터 리스트
+	std::vector<Monster*> monsterList_; //전체 몬스터 리스트
 
 	std::pair<size_t, float> minHpPair_;//타겟 대상
 

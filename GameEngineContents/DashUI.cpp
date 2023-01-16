@@ -27,7 +27,7 @@ void DashUI::Start()
 void DashUI::Update(float _deltaTime)
 {
 	DashRendererChange();
-	PlayerInfo pInfo = Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo pInfo = Player::GetPlayerInst().GetPlayerInfo();
 	if (dashMaxCount_ != pInfo.dashFullCharge_)
 	{
 		dashMaxCount_ = pInfo.dashFullCharge_;
@@ -45,7 +45,7 @@ void DashUI::End()
 
 void DashUI::TemplateSetting()
 {
-	PlayerInfo pInfo = Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo pInfo = Player::GetPlayerInst().GetPlayerInfo();
 
 	dashMaxCount_ = pInfo.dashFullCharge_;
 
@@ -60,7 +60,7 @@ void DashUI::DashRenderersSetting()
 
 	for (size_t i = 0; i < 8; i++)
 	{
-		std::shared_ptr<GameEngineTextureRenderer> texture = CreateComponent<GameEngineTextureRenderer>();
+		GameEngineTextureRenderer* texture = CreateComponent<GameEngineTextureRenderer>();
 		texture->SetTexture("Dash_Ready.png");
 		texture->ScaleToTexture();
 		texture->SetPivot(PivotMode::Left);
@@ -78,7 +78,7 @@ void DashUI::DashRenderersSetting()
 
 void DashUI::DashRendererChange()
 {
-	PlayerInfo pInfo = Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo pInfo = Player::GetPlayerInst().GetPlayerInfo();
 
 	int EmptyCount = dashMaxCount_ - pInfo.dashCount_;
 

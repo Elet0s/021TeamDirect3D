@@ -16,8 +16,8 @@ Agility::~Agility()
 
 void Agility::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sSpeed = std::to_string(ceil(PlayerInfo_.speed_ * PlayerPInfo_.speed_Per / 100)).substr(0, std::to_string(ceil(PlayerInfo_.speed_ * PlayerPInfo_.speed_Per / 100)).find("."));
 	std::string sSpeedNext = std::to_string(ceil(PlayerInfo_.speed_ * (PlayerPInfo_.speed_Per + 10.f) / 100)).substr(0, std::to_string(ceil(PlayerInfo_.speed_ * (PlayerPInfo_.speed_Per + 25.f) / 100)).find("."));
@@ -30,7 +30,7 @@ void Agility::Init()
 void Agility::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->speed_Per += 10.f;
 	
 }

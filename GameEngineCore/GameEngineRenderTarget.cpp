@@ -13,6 +13,13 @@ GameEngineRenderTarget::GameEngineRenderTarget()
 
 GameEngineRenderTarget::~GameEngineRenderTarget()
 {
+	for (GameEnginePostEffect* effect : allEffects_)
+	{
+		delete effect;
+		effect = nullptr;
+	}
+
+	allEffects_.clear();
 }
 
 GameEngineRenderTarget* GameEngineRenderTarget::Create(const std::string_view& _name)

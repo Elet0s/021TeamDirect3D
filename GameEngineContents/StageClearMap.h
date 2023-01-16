@@ -28,6 +28,6 @@ private:
 
 	const int tileCount_;
 
-	std::shared_ptr<GameEngineInstancingRenderer> mapRenderer_;
+	GameEngineInstancingRenderer* mapRenderer_;
 };
 

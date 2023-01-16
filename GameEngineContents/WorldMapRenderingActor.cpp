@@ -17,7 +17,7 @@ WorldMapRenderingActor::~WorldMapRenderingActor()
 void WorldMapRenderingActor::Start()
 {
 	{
-		std::shared_ptr<GameEngineTextureRenderer> TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
+		GameEngineTextureRenderer* TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
 		
 		TextureRenderer->Initialize("TextureAtlas");
 		TextureRenderer->SetTexture("FarGround.png");
@@ -68,7 +68,7 @@ void WorldMapRenderingActor::InitializeFieldObjects(
 
 void WorldMapRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 {
-	worldRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("0-WorldRenderer");
+	worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("0-WorldRenderer");
 	worldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
@@ -116,14 +116,14 @@ void WorldMapRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPosi
 	renderingFieldObjectDataVector_.clear();
 	//뭐가 들어있든지 일단 전부 비운다. 
 	//capacity는 변하면 안된다.
-	float4 CameraPos = GetLevel()->GetMainCamera().get()->GetTransform().GetWorldPosition() - float4(640.f, -360.f);
+	float4 CameraPos = GetLevel()->GetMainCamera()->GetTransform().GetWorldPosition() - float4(640.f, -360.f);
 
 	for (WorldObjectData& singleObjectData : allWorldObjectDataVector_)
 	{
 		float4 ObjectWorldPosition = singleObjectData.worldPosition_;
 
-		ObjectWorldPosition *= GetLevel()->GetMainCamera().get()->GetViewMatrix();
-		ObjectWorldPosition *= GetLevel()->GetMainCamera().get()->GetProjectionMatrix();
+		ObjectWorldPosition *= GetLevel()->GetMainCamera()->GetViewMatrix();
+		ObjectWorldPosition *= GetLevel()->GetMainCamera()->GetProjectionMatrix();
 
 		ObjectWorldPosition /= ObjectWorldPosition.w;
 

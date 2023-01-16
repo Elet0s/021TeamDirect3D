@@ -25,9 +25,9 @@ private:
 
 private:
 	bool soundCheck_;
-	std::shared_ptr<class WorldMapRenderingActor> WorldMapRenderingActor_;
-	std::shared_ptr<GameEngineLighting> WorldLevelLighting_;
-	std::shared_ptr<class StageCreater> stageCreater_;
-	std::shared_ptr<class Mouse> mousePointer_;
-	std::shared_ptr<class StageUI> stageUI_;
+	class WorldMapRenderingActor* WorldMapRenderingActor_;
+	GameEngineLighting* WorldLevelLighting_;
+	class StageCreater* stageCreater_;
+	class Mouse* mousePointer_;
+	class StageUI* stageUI_;
 };

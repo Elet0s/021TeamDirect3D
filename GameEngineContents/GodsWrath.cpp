@@ -16,7 +16,7 @@ GodsWrath::~GodsWrath()
 
 void GodsWrath::Init()
 {
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sAttackMultiple = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
 	std::string sAttackMultipleNext = std::to_string(PlayerPInfo_.atkMultiple_Result + 15.0f).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result + 15.0f).find(".")) + "%";
@@ -27,7 +27,7 @@ void GodsWrath::Init()
 void GodsWrath::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->atkMultiple_ += 15.0f;
 	PlayerPInfo_->atkMultiple_Result += 15.0f;
 }

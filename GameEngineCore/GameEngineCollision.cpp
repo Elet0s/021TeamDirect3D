@@ -229,7 +229,7 @@ bool GameEngineCollision::IsCollided(
 
 	bool collisionResult = false;
 
-	for (GameEngineCollision*  otherCollision : collisionGroup)
+	for (GameEngineCollision* otherCollision : collisionGroup)
 	{
 		if (this == otherCollision)
 		{
@@ -250,7 +250,7 @@ bool GameEngineCollision::IsCollided(
 				if (false == collisionCheck_.contains(otherCollision))
 				{
 					//ù �浹.
-					std::pair<std::map<GameEngineCollision* , CollisionReturn>::iterator, bool> insertResult
+					std::pair<std::map<GameEngineCollision*, CollisionReturn>::iterator, bool> insertResult
 						= collisionCheck_.insert(std::make_pair(otherCollision, CollisionReturn::Continue));
 
 					if (false == insertResult.second)

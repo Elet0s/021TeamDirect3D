@@ -116,7 +116,7 @@ void ClearUIBox::Update(float _deltaTime)
 			button1renderer_->Off();
 			button1FontRenderer_->Off();
 			button1On_ = false;
-			PlayerInfo* pInfo = &Player::GetPlayerInst()->GetPlayerInfo();
+			PlayerInfo* pInfo = &Player::GetPlayerInst().GetPlayerInfo();
 			pInfo->gold_ += this->gold_;
 			if (button2renderer_->IsUpdate())
 			{

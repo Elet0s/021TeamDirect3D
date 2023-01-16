@@ -110,10 +110,10 @@ void WindsBladeProjectile::Shoothing(float _deltaTime)
 
 }
 
-CollisionReturn WindsBladeProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn WindsBladeProjectile::ProjectileToMonster(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹
+	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹
 	if (passNum_ == 0)
 	{
 		projectileRen_->Off();

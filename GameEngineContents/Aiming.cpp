@@ -17,7 +17,7 @@ Aiming::~Aiming()
 
 void Aiming::Init()
 {
-	PlayerPassiveInfo PlayPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo PlayPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sAttackMultiple = std::to_string(ceil(PlayPInfo_.atkMultiple_Result)).substr(0, std::to_string(ceil(PlayPInfo_.atkMultiple_Result)).find(".")) + "%";
 	std::string sAttackMultipleNext = std::to_string(PlayPInfo_.atkMultiple_Result + 18.0f).substr(0, std::to_string(PlayPInfo_.atkMultiple_Result + 18.f).find(".")) + "%";
@@ -32,8 +32,8 @@ void Aiming::Init()
 void Aiming::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo* PlayPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PlayPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayPInfo_->attackSpeed_ = PlayPInfo_->attackSpeed_  * 0.95f;
 	PlayPInfo_->atkMultiple_Per += 18.0f;
 	PlayPInfo_->attackSpeed_Result *= 0.95f;

@@ -67,7 +67,7 @@ private:
 
 	const int tileCount_;	//사용된 타일텍스처 전체 개수.
 
-	std::shared_ptr<GameEngineInstancingRenderer> worldRenderer_;	//인스턴싱 렌더러.
+	GameEngineInstancingRenderer* worldRenderer_;	//인스턴싱 렌더러.
 
 
 	std::vector<AtlasData> worldObjectAtlasDatas_;	//필드 오브젝트별 아틀라스데이터 모음.

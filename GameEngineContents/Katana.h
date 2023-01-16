@@ -40,12 +40,12 @@ private:
 	size_t targetLimitation_;
 	float attackInterval_;
 	
-	std::list<std::shared_ptr<Monster>> monstersInRange_;	//범위 내 몇몇 몬스터.
+	std::list<Monster*> monstersInRange_;	//범위 내 몇몇 몬스터.
 	//std::pair<size_t, float> minHpPair_;//타겟 대상
 	//std::vector<std::pair<size_t, float>> targetInst_;//타겟 모음
 
 
 
-	std::shared_ptr<GameEngineTextureRenderer> katanaRenderer_[4];
+	GameEngineTextureRenderer* katanaRenderer_[4];
 
 };

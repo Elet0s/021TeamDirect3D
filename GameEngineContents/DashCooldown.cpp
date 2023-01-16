@@ -16,7 +16,7 @@ DashCooldown::~DashCooldown()
 
 void DashCooldown::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
 
 	std::string sDashReChargeTime = std::to_string(PlayerInfo_.dashReChargeTime_).substr(0, std::to_string(PlayerInfo_.dashReChargeTime_).find(".") +3 );
 	std::string sDashReChargeTimeNext = std::to_string(PlayerInfo_.dashReChargeTime_ * 0.8).substr(0, std::to_string(PlayerInfo_.dashReChargeTime_ * 0.8).find(".") + 3);
@@ -29,7 +29,7 @@ void DashCooldown::Init()
 void DashCooldown::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->dashReChargeTime_ *= 0.80f;
 	
 }

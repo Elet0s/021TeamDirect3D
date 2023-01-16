@@ -1,6 +1,6 @@
 #pragma once
 #include "GlobalContentsValue.h"
-//exp, hpmeet, voidbead
+
 class GameItemObjectManager;
 class Player;
 class GameItemObject : public GameEngineActor
@@ -37,7 +37,7 @@ private:
 	float4 resultVector_;
 
 	ItemObjectOrder itemObjectOrder_;
-	std::shared_ptr<GameEngineTextureRenderer> itemObjectRenderer_;
-	std::shared_ptr<GameEngineCollision>itemObjectCol_;//닿으면 효과발생
+	GameEngineTextureRenderer* itemObjectRenderer_;
+	GameEngineCollision* itemObjectCol_;//닿으면 효과발생
 
 };

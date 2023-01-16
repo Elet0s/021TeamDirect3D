@@ -26,7 +26,7 @@ private:
 
 
 public:	
-	void SetTextureRenderer(std::shared_ptr<GameEngineTextureRenderer> _textureRenderer);
+	void SetTextureRenderer(GameEngineTextureRenderer* _textureRenderer);
 	void SetShadowAngle(float _angle = 30.f);
 
 private:
@@ -37,7 +37,7 @@ private:
 
 private:
 	bool isAnimation_;
-	std::weak_ptr<GameEngineTextureRenderer> parentTextureRenderer_;
+	GameEngineTextureRenderer* parentTextureRenderer_;
 
 };
 

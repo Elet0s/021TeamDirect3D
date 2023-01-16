@@ -19,7 +19,7 @@ public:
 protected:
 
 private:
-	std::shared_ptr<SoulCardUI> Cards[3];
+	SoulCardUI* Cards[3];
 	
 
 	void Start() override;

@@ -17,8 +17,8 @@ public:
 protected:
 
 private:
-	std::shared_ptr<GameEngineTextureRenderer> templaterenderer_;
-	std::vector <std::shared_ptr<GameEngineTextureRenderer>> dashrenderers_;
+	GameEngineTextureRenderer* templaterenderer_;
+	std::vector <GameEngineTextureRenderer*> dashrenderers_;
 
 	void Start() override;
 	void Update(float _deltaTime) override;

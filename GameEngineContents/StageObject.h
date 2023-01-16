@@ -73,7 +73,7 @@ public:
 		killCount_ = _level * 100;
 	}
 	
-	std::list<std::shared_ptr<StageObject>>& GetNextLevelList()
+	std::list<StageObject*>& GetNextLevelList()
 	{
 		return nextLevels_;
 	}
@@ -100,11 +100,11 @@ public:
 		return combatType_;
 	}
 
-	bool CheckNextLevel(std::shared_ptr<StageObject> _nextlevel);
+	bool CheckNextLevel(StageObject* _nextlevel);
 	void SetStageType(int _num);
 	//void SetStageType(StageType _stageType);
 	void SetMonsterCount(MonsterType _monsterType, size_t _monstercount);
-	void PushNextlevel(std::shared_ptr<StageObject> _nextlevel);
+	void PushNextlevel(StageObject* _nextlevel);
 	
 	float posY_;
 
@@ -120,8 +120,8 @@ private:
 	StageType stageType_;
 	CombatType combatType_;
 
-	std::shared_ptr<GameEngineTextureRenderer> renderer_;
-	std::list<std::shared_ptr<StageObject>> nextLevels_;
+	GameEngineTextureRenderer* renderer_;
+	std::list<StageObject*> nextLevels_;
 
 	std::map<MonsterType, size_t> summoningMonsterCountMap_;
 	size_t totalMonsterCount_;

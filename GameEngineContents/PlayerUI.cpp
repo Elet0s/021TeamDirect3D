@@ -2,10 +2,9 @@
 #include"PlayerUI.h"
 #include"GlobalContentsValue.h"
 #include "Player.h"
-//#include <GameEngineBase/GameEngineTime.h>
 
 PlayerUI::PlayerUI()
-	:player_(),
+	:/*player_(),*/
 	playerHpUi_(0),
 	hpRedBar_(0),
 	hpRedBarTregar_(false),
@@ -29,9 +28,9 @@ void PlayerUI::Start()
 	Dir.MoveToChild("UI");
 	Dir.MoveToChild("PlayerUI");
 
-	player_ = Player::GetPlayerWeakPtr();
-	hpRedBar_ = player_.lock()->GetPlayerInfo().maxHp_;
-	ExpBlueBar_ = player_.lock()->GetPlayerInfo().maxExp_;
+	//player_ = Player::GetPlayerWeakPtr();
+	hpRedBar_ = Player::GetPlayerInst().GetPlayerInfo().maxHp_;
+	ExpBlueBar_ = Player::GetPlayerInst().GetPlayerInfo().maxExp_;
 
 	playerHpUi_ = CreateComponent<GameEngineTextureRenderer>();
 	playerHpUi_->SetTexture("DefaultUi.png");
@@ -86,7 +85,7 @@ void PlayerUI::Start()
 	playerLevelUi_ = CreateComponent<GameEngineFontRenderer>();
 	playerLevelUi_->SetSize(30.f);
 	playerLevelUi_->SetLeftAndRightSort(LeftAndRightSort::Left);
-	playerLevelUi_->SetText( std::to_string(Player::GetPlayerInst()->GetPlayerInfo().level_), "Free Pixel");
+	playerLevelUi_->SetText( std::to_string(Player::GetPlayerInst().GetPlayerInfo().level_), "Free Pixel");
 	playerLevelUi_->SetPositionMode(FontPositionMode::World);
 	playerLevelUi_->ChangeCamera(CameraOrder::MidCamera);
 	playerLevelUi_->GetTransform().SetLocalPosition({ -70.f,115.f,0.f });
@@ -94,15 +93,15 @@ void PlayerUI::Start()
 }
 void PlayerUI::HitEffect(float _deltaTime)
 {
-	if (player_.lock()->hitOnoff_ == true && playerHpUi_->GetPixelData().mulColor_ == float4::Green)
+	if (Player::GetPlayerInst().hitOnoff_ == true && playerHpUi_->GetPixelData().mulColor_ == float4::Green)
 	{
 		playerHpUi_->GetPixelData().mulColor_ = float4::White;//Èò»ö
-		player_.lock()->hitOnoff_ = false;
+		Player::GetPlayerInst().hitOnoff_ = false;
 	}
-	else if (player_.lock()->hitOnoff_ == true && playerHpUi_->GetPixelData().mulColor_ == float4::White)
+	else if (Player::GetPlayerInst().hitOnoff_ == true && playerHpUi_->GetPixelData().mulColor_ == float4::White)
 	{
 		HitDleta_ = 0;
-		player_.lock()->hitOnoff_ = false;
+		Player::GetPlayerInst().hitOnoff_ = false;
 	}
 	 if(HitDleta_ >= 0.3f && playerHpUi_->GetPixelData().mulColor_ == float4::White)
 	{
@@ -113,24 +112,24 @@ void PlayerUI::HitEffect(float _deltaTime)
 void PlayerUI::ReduceHP(float _deltaTime)
 {
 
-	if (player_.lock()->GetPlayerInfo().maxHp_> player_.lock()->GetPlayerInfo().hp_)
+	if (Player::GetPlayerInst().GetPlayerInfo().maxHp_> Player::GetPlayerInst().GetPlayerInfo().hp_)
 	{
-		playerHpUi_->GetPixelData().slice_ = float4(1-(player_.lock()->GetPlayerInfo().hp_ / player_.lock()->GetPlayerInfo().maxHp_), 0.0f, 0.0f, 0.0f);
+		playerHpUi_->GetPixelData().slice_ = float4(1-(Player::GetPlayerInst().GetPlayerInfo().hp_ / Player::GetPlayerInst().GetPlayerInfo().maxHp_), 0.0f, 0.0f, 0.0f);
 	}
-	if (hpRedBar_ > player_.lock()->GetPlayerInfo().hp_)
+	if (hpRedBar_ > Player::GetPlayerInst().GetPlayerInfo().hp_)
 	{
 		hpRedBarTregar_ = true;
 	}
 	if (hpRedBarTregar_ == true)
 	{
-		if (hpRedBar_ > player_.lock()->GetPlayerInfo().hp_)
+		if (hpRedBar_ > Player::GetPlayerInst().GetPlayerInfo().hp_)
 		{
-			hpRedBar_ =  GameEngineMath::Lerp(hpRedBar_,player_.lock()->GetPlayerInfo().hp_,_deltaTime);
-			playerHpRed_->GetPixelData().slice_ = float4(1-( hpRedBar_ / player_.lock()->GetPlayerInfo().maxHp_), 0.0f, 0.0f, 0.0f);
+			hpRedBar_ =  GameEngineMath::Lerp(hpRedBar_,Player::GetPlayerInst().GetPlayerInfo().hp_,_deltaTime);
+			playerHpRed_->GetPixelData().slice_ = float4(1-( hpRedBar_ / Player::GetPlayerInst().GetPlayerInfo().maxHp_), 0.0f, 0.0f, 0.0f);
 		}
-		else if (hpRedBar_ <= player_.lock()->GetPlayerInfo().hp_)
+		else if (hpRedBar_ <= Player::GetPlayerInst().GetPlayerInfo().hp_)
 		{
-			hpRedBar_ = player_.lock()->GetPlayerInfo().hp_;
+			hpRedBar_ = Player::GetPlayerInst().GetPlayerInfo().hp_;
 			hpRedBarTregar_ = false;
 		}
 
@@ -139,24 +138,24 @@ void PlayerUI::ReduceHP(float _deltaTime)
 
 void PlayerUI::GainExp(float _deltaTime)
 {
-	if (player_.lock()->GetPlayerInfo().maxExp_ > player_.lock()->GetPlayerInfo().exp_)
+	if (Player::GetPlayerInst().GetPlayerInfo().maxExp_ > Player::GetPlayerInst().GetPlayerInfo().exp_)
 	{
-		playerExpMax_->GetPixelData().slice_ = float4(player_.lock()->GetPlayerInfo().exp_ / player_.lock()->GetPlayerInfo().maxExp_, 0.0f, 0.0f, 0.0f);
+		playerExpMax_->GetPixelData().slice_ = float4(Player::GetPlayerInst().GetPlayerInfo().exp_ / Player::GetPlayerInst().GetPlayerInfo().maxExp_, 0.0f, 0.0f, 0.0f);
 		ExpBlueBarTimer_ += _deltaTime;
 	}
 
 	 if (ExpBlueBarTimer_ >0.3f)
 	{
-		playerExpUi_->GetPixelData().slice_ = float4(player_.lock()->GetPlayerInfo().exp_ / player_.lock()->GetPlayerInfo().maxExp_, 0.0f, 0.0f, 0.0f);
+		playerExpUi_->GetPixelData().slice_ = float4(Player::GetPlayerInst().GetPlayerInfo().exp_ / Player::GetPlayerInst().GetPlayerInfo().maxExp_, 0.0f, 0.0f, 0.0f);
 		ExpBlueBarTimer_ = 0;
 	}
 
 }
 void PlayerUI::Update(float _deltaTime)
 {
-	GetTransform().SetWorldPosition(player_.lock()->GetTransform().GetWorldPosition());
+	GetTransform().SetWorldPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition());
 
-	playerLevelUi_->SetText(std::to_string(Player::GetPlayerInst()->GetPlayerInfo().level_), "Free Pixel");
+	playerLevelUi_->SetText(std::to_string(Player::GetPlayerInst().GetPlayerInfo().level_), "Free Pixel");
 
 	HitDleta_ += _deltaTime;
 	HitEffect(_deltaTime);

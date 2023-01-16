@@ -58,6 +58,8 @@ GameEngineCamera::~GameEngineCamera()
 		delete mergeRenderUnit_;
 		mergeRenderUnit_ = nullptr;
 	}
+
+	this;
 }
 
 float4 GameEngineCamera::ConvertWorldPositionToScreenPosition(const float4& _worldPosition)
@@ -183,7 +185,7 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 	GetActor()->GetLevel()->PushCamera(this, _order);
 }
 
-GameEngineInstancingRenderer* GameEngineCamera::GetInstancingRenderer(const std::string& _name)
+GameEngineInstancingRenderer& GameEngineCamera::GetInstancingRenderer(const std::string& _name)
 {
 	return allInstancingRenderers_[_name];
 }
@@ -344,12 +346,6 @@ bool ZSort(GameEngineRenderer* _rendererA, GameEngineRenderer* _rendererB)
 	return _rendererA->GetTransform().GetWorldPosition().z > _rendererB->GetTransform().GetWorldPosition().z;
 }
 
-//bool YSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameEngineRenderer> _rendererB)
-//{
-//	//
-//	return _rendererA->GetTransform().GetWorldPosition().y < _rendererB->GetTransform().GetWorldPosition().y;
-//}
-
 void GameEngineCamera::Render(float _deltaTime)
 {
 	//GameEngineDevice::GetContext()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
@@ -447,10 +443,10 @@ void GameEngineCamera::Render(float _deltaTime)
 			}
 		}
 
-		for (std::map<std::string, GameEngineInstancingRenderer*>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstancingRenderer>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
-			iter->second->Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+			iter->second.Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 			//내부에서 자체적으로 트랜스폼 행렬계산을 해야 하므로 뷰행렬, 투영행렬을 넣어준다.
 		}
 	}
@@ -469,9 +465,6 @@ void GameEngineCamera::Render(float _deltaTime)
 		for (std::pair<const int, std::list<GameEngineRenderer*>>& rendererGroup : allRenderers_)
 		{
 			float scaleTime = GameEngineTime::GetInst().GetDeltaTime(rendererGroup.first);
-
-			//std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
-			//sortingRendererList.sort(ZSort);
 
 			for (GameEngineRenderer* const renderer : rendererGroup.second)
 				//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
@@ -499,10 +492,10 @@ void GameEngineCamera::Render(float _deltaTime)
 			}
 		}
 
-		for (std::map<std::string, GameEngineInstancingRenderer*>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstancingRenderer>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
-			iter->second->DeferredRender(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+			iter->second.DeferredRender(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 		}
 	}
 	
@@ -514,10 +507,10 @@ void GameEngineCamera::Render(float _deltaTime)
 		shadowDepthRenderTarget_->Clear();
 		shadowDepthRenderTarget_->SetRenderTarget();
 
-		for (std::map<std::string, GameEngineInstancingRenderer*>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstancingRenderer>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
-			iter->second->RenderShadow(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+			iter->second.RenderShadow(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 		}
 		//플레이어가 자기 그림자에 가려지는것에 대한 임시 조치.
 

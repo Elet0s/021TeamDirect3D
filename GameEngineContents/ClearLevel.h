@@ -14,7 +14,7 @@ public:
 	ClearLevel& operator=(const ClearLevel& _Other) = delete;
 	ClearLevel& operator=(ClearLevel&& _Other) noexcept = delete;
 
-	std::shared_ptr<class Mouse> GetMousePointer()
+	class Mouse* GetMousePointer()
 	{
 		return mousePointer_;
 	}
@@ -24,11 +24,11 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 private:
-	std::shared_ptr<class Mouse> mousePointer_;
+	class Mouse* mousePointer_;
 	void LevelStartEvent() override;
 	void LevelEndEvent() override;
-	std::shared_ptr<class ClearUIBox> clearbox_;
-	std::shared_ptr<class StageUI> stageui_;
+	class ClearUIBox* clearbox_;
+	class StageUI* stageui_;
 
 };
 

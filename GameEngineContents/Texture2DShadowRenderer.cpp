@@ -24,11 +24,11 @@ void Texture2DShadowRenderer::Update(float _deltaTime)
 		//부모 텍스처렌더러가 애니메이션일때만 업데이트를 한다.
 	{
 		GetShaderResourceHelper().SetConstantBuffer_Link(
-			"AtlasData", parentTextureRenderer_.lock()->GetAtlasData());
+			"AtlasData", parentTextureRenderer_->GetAtlasData());
 		GetShaderResourceHelper().SetTexture(
-			"Tex", parentTextureRenderer_.lock()->GetCurrentTexture());
+			"Tex", parentTextureRenderer_->GetCurrentTexture());
 
-		if (0.f >= parentTextureRenderer_.lock()->GetTransform().GetWorldScale().x)
+		if (0.f >= parentTextureRenderer_->GetTransform().GetWorldScale().x)
 			//부모 텍스처렌더러가 좌우반전되면 vertexInversion_에 -1을 넣어서 버텍스셰이더로 전달한다.
 		{
 			renderOptionInst_.vertexInversion_ = -1;
@@ -50,7 +50,7 @@ void Texture2DShadowRenderer::End()
 {
 }
 
-void Texture2DShadowRenderer::SetTextureRenderer(std::shared_ptr<GameEngineTextureRenderer> _textureRenderer)
+void Texture2DShadowRenderer::SetTextureRenderer(GameEngineTextureRenderer* _textureRenderer)
 {
 	if (nullptr == _textureRenderer)
 	{
@@ -60,14 +60,14 @@ void Texture2DShadowRenderer::SetTextureRenderer(std::shared_ptr<GameEngineTextu
 
 	this->SetParent(_textureRenderer);
 	parentTextureRenderer_ = _textureRenderer;
-	SetRenderingOrder(parentTextureRenderer_.lock()->GetRenderingOrder() + 2);
+	SetRenderingOrder(parentTextureRenderer_->GetRenderingOrder() + 2);
 
 	GetShaderResourceHelper().SetConstantBuffer_Link(
-		"AtlasData", parentTextureRenderer_.lock()->GetAtlasData());
+		"AtlasData", parentTextureRenderer_->GetAtlasData());
 	GetShaderResourceHelper().SetTexture(
-		"Tex", parentTextureRenderer_.lock()->GetCurrentTexture());
+		"Tex", parentTextureRenderer_->GetCurrentTexture());
 
-	if (true == parentTextureRenderer_.lock()->IsCurAnimation())
+	if (true == parentTextureRenderer_->IsCurAnimation())
 	{
 		isAnimation_ = true;
 	}

@@ -17,7 +17,7 @@ Muscle::~Muscle()
 
 void Muscle::Init()
 {
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sProjectileSize = std::to_string(PlayerPInfo_.projectileSize_Result).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result).find("."));
 	std::string sProjectileSizeNext = std::to_string(PlayerPInfo_.projectileSize_Result + 15.f).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result + 15.f).find(".") );
@@ -28,7 +28,7 @@ void Muscle::Init()
 void Muscle::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->projectileSize_Per += 15.f;
 	PlayerPInfo_->projectileSize_Result += 15.f;
 }

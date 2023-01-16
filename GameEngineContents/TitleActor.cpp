@@ -17,7 +17,7 @@ void TitleActor::Start()
 		GameEngineInput::GetInst().CreateKey("SPACE", VK_SPACE);
 	}
 
-	std::shared_ptr<GameEngineTextureRenderer> texture = CreateComponent<GameEngineTextureRenderer>();
+	GameEngineTextureRenderer* texture = CreateComponent<GameEngineTextureRenderer>();
 	texture->SetTexture("Title.png");
 	texture->ScaleToTexture();
 }

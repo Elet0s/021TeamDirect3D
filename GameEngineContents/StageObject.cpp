@@ -114,12 +114,12 @@ void StageObject::SetMonsterCount(MonsterType _monsterType, size_t _monsterCount
 	}
 }
 
-void StageObject::PushNextlevel(std::shared_ptr<StageObject> _nextlevel)
+void StageObject::PushNextlevel(StageObject* _nextlevel)
 {
 	nextLevels_.push_back(_nextlevel);
 }
 
-bool StageObject::CheckNextLevel(std::shared_ptr<StageObject> _nextlevel)
+bool StageObject::CheckNextLevel(StageObject* _nextlevel)
 {
 	if (nextLevels_.end() != std::find(nextLevels_.begin(), nextLevels_.end(), _nextlevel))
 	{

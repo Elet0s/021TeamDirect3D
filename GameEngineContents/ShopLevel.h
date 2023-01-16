@@ -14,7 +14,7 @@ public:
 	ShopLevel& operator=(const ShopLevel& _Other) = delete;
 	ShopLevel& operator=(ShopLevel&& _Other) noexcept = delete;
 
-	std::shared_ptr<class Mouse> GetMousePointer()
+	class Mouse* GetMousePointer()
 	{
 		return mousePointer_;
 	}
@@ -23,10 +23,10 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 private:
-	std::shared_ptr<class Mouse> mousePointer_;
+	class Mouse* mousePointer_;
 	void LevelStartEvent() override;
 	void LevelEndEvent() override;
-	std::shared_ptr<class ShopUIBox> shopUIBox_;
-	std::shared_ptr<class StageUI> stageui_;
+	class ShopUIBox* shopUIBox_;
+	class StageUI* stageui_;
 };
 

@@ -15,13 +15,13 @@ public:
 	TreeObject& operator=(TreeObject&& _Other) noexcept = delete;
 
 
-	std::shared_ptr<GameEngineTextureRenderer> GetRenderer()
+	GameEngineTextureRenderer* GetRenderer()
 	{
 		return renderer_;
 	}
 
 
-	std::shared_ptr<GameEngineCollision> GetCheckCol()
+	GameEngineCollision* GetCheckCol()
 	{
 		return checkCol_;
 	}
@@ -33,8 +33,8 @@ private:
 	void End() override;
 
 
-	std::shared_ptr<GameEngineTextureRenderer> renderer_;
-	std::shared_ptr<GameEngineCollision> col_;
-	std::shared_ptr<GameEngineCollision> checkCol_;
+	GameEngineTextureRenderer* renderer_;
+	GameEngineCollision* col_;
+	GameEngineCollision* checkCol_;
 };
 

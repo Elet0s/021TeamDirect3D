@@ -46,7 +46,7 @@ private:
 	float4 moveDir_;
 	float4 checkPos_;
 	PlayerObjectMode mode_;
-	std::shared_ptr<GameEngineTextureRenderer> renderer_;
-	//std::shared_ptr<GameEngineCollision> col_;
+	GameEngineTextureRenderer* renderer_;
+	//GameEngineCollision* col_;
 };
 

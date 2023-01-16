@@ -16,7 +16,7 @@ Castle::~Castle()
 
 void Castle::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
 
 	std::string sMaxHp = std::to_string(PlayerInfo_.maxHp_).substr(0, std::to_string(PlayerInfo_.maxHp_).find("."));
 	std::string sMaxHpNext = std::to_string(PlayerInfo_.maxHp_ + 25.f).substr(0, std::to_string(PlayerInfo_.maxHp_ + 25.f).find("."));
@@ -30,7 +30,7 @@ void Castle::Init()
 void Castle::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->maxHp_ += 25.f;
 	PlayerInfo_->def_ += 1.f;
 

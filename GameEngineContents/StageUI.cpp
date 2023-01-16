@@ -204,7 +204,7 @@ void StageUI::AllOff()
 
 void StageUI::WorldSetting()
 {
-	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo Pinfo = Player::GetPlayerInst().GetPlayerInfo();
 	stagefontrenderer_->On();
 	spacefontrenderer_->On();
 	coinfontrenderer_->On();
@@ -219,8 +219,8 @@ void StageUI::WorldSetting()
 
 void StageUI::StageSetting()
 {
-	Player::GetPlayerInst()->ResetScore();
-	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+	Player::GetPlayerInst().ResetScore();
+	PlayerInfo Pinfo = Player::GetPlayerInst().GetPlayerInfo();
 
 	stagefontrenderer_->On();
 	spacefontrenderer_->On();
@@ -282,7 +282,7 @@ void StageUI::StageSetting()
 
 void StageUI::ClearSetting()
 {
-	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo Pinfo = Player::GetPlayerInst().GetPlayerInfo();
 
 	coinfontrenderer_->On();
 	coinrenderer_->On();
@@ -318,7 +318,7 @@ void StageUI::ClearSetting()
 
 void StageUI::UIUpdate()
 {
-	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo Pinfo = Player::GetPlayerInst().GetPlayerInfo();
 	switch (mytype_)
 	{
 	case UIType::World:
@@ -372,7 +372,7 @@ void StageUI::UIUpdate()
 
 void StageUI::TimeSet()
 {
-	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo Pinfo = Player::GetPlayerInst().GetPlayerInfo();
 
 	float Time_all;
 	int Time_s;
@@ -395,7 +395,7 @@ void StageUI::TimeSet()
 
 void StageUI::TimeCounter()
 {
-	PlayerInfo Pinfo = Player::GetPlayerInst()->GetPlayerInfo();
+	PlayerInfo Pinfo = Player::GetPlayerInst().GetPlayerInfo();
 
 	float Time_all;
 	int Time_s;

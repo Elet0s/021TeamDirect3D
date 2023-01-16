@@ -8,7 +8,7 @@ namespace GameEngineDebug
 	void LeakCheckOn()
 	{
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-		//_CrtSetBreakAlloc(3311);
+		//_CrtSetBreakAlloc(46491);
 	}
 
 	void ConsoleOpen()

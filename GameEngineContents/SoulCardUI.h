@@ -28,16 +28,16 @@ public:
 protected:
 
 private:
-	std::shared_ptr<GameEngineTextureRenderer> linerenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> template_;
-	std::shared_ptr<GameEngineTextureRenderer> icon_;
-	std::vector<std::shared_ptr<GameEngineFontRenderer>> etc_;
-	std::shared_ptr<GameEngineFontRenderer> skillName_;
-	std::shared_ptr<GameEngineFontRenderer> Level_;
-	std::shared_ptr<GameEngineFontRenderer> Rank_;
-	std::shared_ptr<GameEngineCollision> cardColision_;
+	GameEngineTextureRenderer* linerenderer_;
+	GameEngineTextureRenderer* template_;
+	GameEngineTextureRenderer* icon_;
+	std::vector<GameEngineFontRenderer*> etc_;
+	GameEngineFontRenderer* skillName_;
+	GameEngineFontRenderer* Level_;
+	GameEngineFontRenderer* Rank_;
+	GameEngineCollision* cardColision_;
 	
-	std::shared_ptr<Skill> mySkill_;
+	Skill* mySkill_;
 
 	float alphaTexture_;
 	float4 TextColor_;

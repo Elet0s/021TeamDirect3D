@@ -21,10 +21,10 @@ public:
 		return etc_;
 	}
 
-	std::shared_ptr<GameEngineCollision> spearRangeCol_;
+	GameEngineCollision* spearRangeCol_;
 
-	std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>projectileGroup_;
-	std::vector<std::pair<std::shared_ptr<GameEngineTextureRenderer>, std::shared_ptr<GameEngineCollision>>> projectileGroupList_;//발사체 모음
+	std::pair<GameEngineTextureRenderer*, GameEngineCollision*>projectileGroup_;
+	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList_;//발사체 모음
 
 protected:
 	void Start() override;

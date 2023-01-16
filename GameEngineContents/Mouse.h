@@ -36,9 +36,9 @@ protected:
 	void End() override;
 
 private:
-	std::shared_ptr<GameEngineTextureRenderer> defaultPointerRenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> crossHairRenderer_;
-	std::shared_ptr<GameEngineTextureRenderer> aimLineRenderer_;
+	GameEngineTextureRenderer* defaultPointerRenderer_;
+	GameEngineTextureRenderer* crossHairRenderer_;
+	GameEngineTextureRenderer* aimLineRenderer_;
 
 	float4 mousePositionInWorldSpace_;	//월드스페이스 마우스 위치.
 	float4 pivotWorldPosition_;	//에임라인 피봇의 월드 포지션.

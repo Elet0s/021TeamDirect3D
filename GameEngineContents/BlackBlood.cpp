@@ -16,7 +16,7 @@ BlackBlood::~BlackBlood()
 
 void BlackBlood::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
 
 	std::string sHealing = std::to_string(PlayerInfo_.hpRecuvere_).substr(0, std::to_string(PlayerInfo_.hpRecuvere_).find(".") + 3);
 	std::string sHealingNext = std::to_string(PlayerInfo_.hpRecuvere_ + 1.0f).substr(0, std::to_string(PlayerInfo_.hpRecuvere_ + 1.f).find(".") + 3);
@@ -31,7 +31,7 @@ void BlackBlood::Init()
 void BlackBlood::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->hpRecuvere_ += 1.f;
 	PlayerInfo_->maxHp_ -= 5.f;
 }

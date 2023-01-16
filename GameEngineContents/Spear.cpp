@@ -57,8 +57,8 @@ void Spear::End()
 
 void Spear::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	spearWeaponInfo_.weaponAtk_ = round((3.f + 2.f * currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
 	spearWeaponInfo_.weaponAtkSpeed_ = (100.f - 7.f * currentlevel_)/ (Info->attackSpeed_ * PInfo->attackSpeed_Result);
@@ -96,8 +96,8 @@ void Spear::Shoothing(float _deltaTime)
 			if (duringtime_ > 0.1f)
 			{
 				consecutiveCounter_ += 1;
-				mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst()->GetTransform().GetWorldPosition();
-				playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+				mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst().GetTransform().GetWorldPosition();
+				playerPos_ = Player::GetPlayerInst().GetTransform().GetWorldPosition();
 				range_.x = mouseAimPos_.x - playerPos_.x;
 				range_.y = mouseAimPos_.y - playerPos_.y;
 
@@ -119,8 +119,8 @@ void Spear::Shoothing(float _deltaTime)
 						}
 						angle_ += 15;
 					}
-					std::shared_ptr<SpearProjectile> A = GetLevel()->CreateActor<SpearProjectile>(ObjectOrder::Projectile);
-					A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+					SpearProjectile* A = GetLevel()->CreateActor<SpearProjectile>(ObjectOrder::Projectile);
+					A->GetTransform().SetWorldPosition({ Player::GetPlayerInst().GetTransform().GetWorldPosition().x,	Player::GetPlayerInst().GetTransform().GetWorldPosition().y,-219.f });
 					A->ProjectileSet(spearWeaponInfo_.weaponAtk_, spearWeaponInfo_.weaponSpeed_, angle_,spearWeaponInfo_.weaponPassNum_);
 				}
 				duringtime_ = 0.f;

@@ -73,7 +73,7 @@ void Katana::End()
 
 void Katana::SearchTarget()
 {
-	for (std::list<std::shared_ptr<Monster>>::iterator iter = monstersInRange_.begin();
+	for (std::list<Monster*>::iterator iter = monstersInRange_.begin();
 		iter != monstersInRange_.end(); ++iter)
 	{
 		if (false == (*iter)->IsSummoned())
@@ -84,7 +84,7 @@ void Katana::SearchTarget()
 
 	this->squaredWeaponRange_ = pow(katanaWeaponInfo_.weaponRange_, 2.f) * 10000.f;
 
-	for (std::shared_ptr<Monster>& singleMonster : Monster::GetMonsterList())
+	for (Monster* const singleMonster : Monster::GetMonsterList())
 	{
 		if (monstersInRange_.size() >= targetLimitation_)
 		{
@@ -98,7 +98,7 @@ void Katana::SearchTarget()
 
 		float4 distanceFromPlayer =
 			singleMonster->GetTransform().GetWorldPosition() 
-			- Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+			- Player::GetPlayerInst().GetTransform().GetWorldPosition();
 
 		if (squaredWeaponRange_ < abs(distanceFromPlayer.x * distanceFromPlayer.y))
 		{
@@ -207,7 +207,7 @@ void Katana::StateSet()
 void Katana::Attack()
 {
 	int rendererIndex = 0;
-	for (std::list<std::shared_ptr<Monster>>::iterator iter = monstersInRange_.begin();
+	for (std::list<Monster*>::iterator iter = monstersInRange_.begin();
 		iter != monstersInRange_.end(); ++iter)
 	{
 		(*iter)->GetMonsterInfo().hp_ -= katanaWeaponInfo_.weaponAtk_;

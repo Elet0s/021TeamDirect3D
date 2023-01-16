@@ -10,7 +10,7 @@ public:
 	Projectile& operator=(const Projectile& _Other) = delete;
 	Projectile& operator=(Projectile&& _Other) noexcept = delete;
 
-	CollisionReturn ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn ProjectileToPlayer(GameEngineCollision* _This, GameEngineCollision* _Other);
 	void ProjectileSet(float _atk );
 public:
 	bool posSet_;
@@ -22,8 +22,8 @@ protected:
 	void TimeOff(float _deltaTime);
 	void LevelEndEvent() override;
 private:
-	std::shared_ptr < GameEngineTextureRenderer> projectileRen_;
-	std::shared_ptr < GameEngineCollision> projectileCol_;
+	GameEngineTextureRenderer* projectileRen_;
+	GameEngineCollision* projectileCol_;
 	float timer_;
 	float projectileatk_;
 	float px_;

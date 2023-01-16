@@ -16,6 +16,8 @@
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineInputLayout.h"
 #include "GameEngineVertexShader.h"
+#include "GameEngineGeometryShader.h"
+#include "GameEngineComputeShader.h"
 #include "GameEngineIndexBuffer.h"
 #include "GameEngineRasterizer.h"
 #include "GameEnginePixelShader.h"
@@ -827,6 +829,8 @@ void GameEngineCore::DestroyEngineResource()
 	GameEngineInputLayout::ResourceDestroy();
 	GameEngineVertexBuffer::ResourceDestroy();
 	GameEngineVertexShader::ResourceDestroy();
+	GameEngineGeometryShader::ResourceDestroy();
+	GameEngineComputeShader::ResourceDestroy();
 	GameEngineIndexBuffer::ResourceDestroy();
 	GameEngineRasterizer::ResourceDestroy();
 	GameEnginePixelShader::ResourceDestroy();

@@ -130,7 +130,6 @@ private:
 
 
 private:
-	//std::set<std::shared_ptr<GameEngineCollision>> collisionCheck_;
 	std::map<GameEngineCollision*, CollisionReturn> collisionCheck_;
 
 	CollisionType debugType_;

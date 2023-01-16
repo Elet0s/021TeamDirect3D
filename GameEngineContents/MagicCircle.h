@@ -22,7 +22,7 @@ private:
 	float timer_;
 	float addRadian_;
 
-	std::shared_ptr<GameEngineTextureRenderer> magicCircle01_;
-	std::shared_ptr<GameEngineTextureRenderer> magicCircle02_;
-	std::shared_ptr<GameEngineTextureRenderer> magicCircle03_;
+	GameEngineTextureRenderer* magicCircle01_;
+	GameEngineTextureRenderer* magicCircle02_;
+	GameEngineTextureRenderer* magicCircle03_;
 };

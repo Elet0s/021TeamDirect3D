@@ -16,8 +16,8 @@ Impenetrable::~Impenetrable()
 
 void Impenetrable::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sDefMul = std::to_string(PlayerPInfo_.defMul_Result).substr(0, std::to_string(PlayerPInfo_.defMul_Result).find("."));
 	std::string sDefMulNext = std::to_string(PlayerPInfo_.defMul_Result + 10.f).substr(0, std::to_string(PlayerPInfo_.defMul_Result + 10.f).find("."));
@@ -32,8 +32,8 @@ void Impenetrable::Init()
 void Impenetrable::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerInfo_->damageMitigation_ += 5.f;
 	PlayerPInfo_->defMul_Per += 10.f;
 	PlayerPInfo_->defMul_Result += 10.f;

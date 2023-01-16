@@ -41,10 +41,10 @@ void ClearLevel::LevelStartEvent()
 	{
 		clearbox_ = CreateActor<ClearUIBox>();
 	}
-	if (Player::GetPlayerInst() != nullptr)
-	{
-		Player::GetPlayerInst()->Off();
-	}
+	//if (Player::GetPlayerInst() != nullptr)
+	//{
+		Player::GetPlayerInst().Off();
+	//}
 	stageui_->SetUI(UIType::Claer);
 }
 

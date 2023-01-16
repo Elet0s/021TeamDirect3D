@@ -98,7 +98,7 @@ void ThunderStafProjectile::Shoothing(float _deltaTime)
 		Rotate();
 		shoothing_ = true;
 	}
-	GetTransform().SetWorldPosition({Player::GetPlayerInst()->GetTransform().GetWorldPosition()});
+	GetTransform().SetWorldPosition({Player::GetPlayerInst().GetTransform().GetWorldPosition()});
 	GetTransform().SetAddWorldRotation({0.f,0.f,80.f *_deltaTime });
 
 
@@ -109,10 +109,10 @@ void ThunderStafProjectile::Rotate()
 	GetTransform().SetWorldRotation(60, 0, GetLevel<TestLevel>()->GetMousePointer()->GetAimLineAngle() + angle_);
 }
 
-CollisionReturn ThunderStafProjectile::ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn ThunderStafProjectile::ProjectileToMonster(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->flash_ = true;
-	dynamic_pointer_cast<Monster>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹
+	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹
 
 	return CollisionReturn::Stop;
 }

@@ -58,8 +58,8 @@ void Kunai::End()
 
 void Kunai::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	kunaiWeaponInfo_.weaponAtk_ = round((2.f + 3.f * currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
 	kunaiWeaponInfo_.weaponAtkSpeed_ = 100.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
@@ -90,8 +90,8 @@ void Kunai::Shoothing(float _deltaTime)
 			if (duringtime_ > 0.1f)
 			{
 				consecutiveCounter_ += 1;
-				mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst()->GetTransform().GetWorldPosition();
-				playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+				mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst().GetTransform().GetWorldPosition();
+				playerPos_ = Player::GetPlayerInst().GetTransform().GetWorldPosition();
 				range_.x = mouseAimPos_.x - playerPos_.x;
 				range_.y = mouseAimPos_.y - playerPos_.y;
 				consecutiveAngle_ = 360.f / kunaiWeaponInfo_.weaponProjectileNum_;
@@ -113,8 +113,8 @@ void Kunai::Shoothing(float _deltaTime)
 						}
 						angle_ += consecutiveAngle_;
 					}
-					std::shared_ptr<KunaiProjectile> A = GetLevel()->CreateActor<KunaiProjectile>(ObjectOrder::Projectile);
-					A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+					KunaiProjectile* A = GetLevel()->CreateActor<KunaiProjectile>(ObjectOrder::Projectile);
+					A->GetTransform().SetWorldPosition({ Player::GetPlayerInst().GetTransform().GetWorldPosition().x,	Player::GetPlayerInst().GetTransform().GetWorldPosition().y,-219.f });
 					A->ProjectileSet(kunaiWeaponInfo_.weaponAtk_, kunaiWeaponInfo_.weaponSpeed_, angle_, kunaiWeaponInfo_.weaponPassNum_);
 				}
 				duringtime_ = 0.f;

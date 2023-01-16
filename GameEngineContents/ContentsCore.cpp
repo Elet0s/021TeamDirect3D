@@ -43,7 +43,7 @@ void ContentsCore::Start()
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<TestLevel>("Test");
-	//	CreateLevel<StageLevel>("Stage");
+	//CreateLevel<StageLevel>("Stage");
 	//CreateLevel<ShaderTestLevel>("ShaderTestLevel");
 	CreateLevel<ClearLevel>("Clear");
 	CreateLevel<ShopLevel>("Shop");
@@ -89,8 +89,7 @@ void ContentsCore::LoadContentsShader()
 		return;
 	}
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial0
-		= GameEngineMaterial::Create("Test");
+	GameEngineMaterial* newContentsMaterial0 = GameEngineMaterial::Create("Test");
 	newContentsMaterial0->SetVertexShader("Test.hlsl");
 	newContentsMaterial0->SetPixelShader("Test.hlsl");
 	newContentsMaterial0->SetRasterizer("EngineRasterizer");
@@ -98,16 +97,14 @@ void ContentsCore::LoadContentsShader()
 	newContentsMaterial0->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial1
-		= GameEngineMaterial::Create("Texture2DShadow");
+	GameEngineMaterial* newContentsMaterial1 = GameEngineMaterial::Create("Texture2DShadow");
 	newContentsMaterial1->SetVertexShader("Texture2DShadow.hlsl");
 	newContentsMaterial1->SetPixelShader("Texture2DShadow.hlsl");
 	newContentsMaterial1->SetRasterizer("EngineRasterizer");
 	newContentsMaterial1->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial1->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial2
-		= GameEngineMaterial::Create("SingleTextureInstancing");
+	GameEngineMaterial* newContentsMaterial2 = GameEngineMaterial::Create("SingleTextureInstancing");
 	newContentsMaterial2->SetVertexShader("SingleTextureInstancing.hlsl");
 	newContentsMaterial2->SetPixelShader("SingleTextureInstancing.hlsl");
 	newContentsMaterial2->SetRasterizer("EngineRasterizer");
@@ -115,56 +112,49 @@ void ContentsCore::LoadContentsShader()
 	newContentsMaterial2->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial3
-		= GameEngineMaterial::Create("MultiTexturesInstancing");
+	GameEngineMaterial* newContentsMaterial3 = GameEngineMaterial::Create("MultiTexturesInstancing");
 	newContentsMaterial3->SetVertexShader("MultiTexturesInstancing.hlsl");
 	newContentsMaterial3->SetPixelShader("MultiTexturesInstancing.hlsl");
 	newContentsMaterial3->SetRasterizer("EngineRasterizer");
 	newContentsMaterial3->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial3->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial4
-		= GameEngineMaterial::Create("MultiTexturesInstShadow");
+	GameEngineMaterial* newContentsMaterial4 = GameEngineMaterial::Create("MultiTexturesInstShadow");
 	newContentsMaterial4->SetVertexShader("MultiTexturesInstShadow.hlsl");
 	newContentsMaterial4->SetPixelShader("MultiTexturesInstShadow.hlsl");
 	newContentsMaterial4->SetRasterizer("EngineRasterizer");
 	newContentsMaterial4->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial4->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial5
-		= GameEngineMaterial::Create("DeferredInstanceRendering");
+	GameEngineMaterial* newContentsMaterial5 = GameEngineMaterial::Create("DeferredInstanceRendering");
 	newContentsMaterial5->SetVertexShader("DeferredInstanceRendering.hlsl");
 	newContentsMaterial5->SetPixelShader("DeferredInstanceRendering.hlsl");
 	newContentsMaterial5->SetRasterizer("EngineRasterizer");
 	newContentsMaterial5->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial5->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial6
-		= GameEngineMaterial::Create("DeferredInstanceShadowRendering");
+	GameEngineMaterial* newContentsMaterial6 = GameEngineMaterial::Create("DeferredInstanceShadowRendering");
 	newContentsMaterial6->SetVertexShader("DeferredInstanceShadowRendering.hlsl");
 	newContentsMaterial6->SetPixelShader("DeferredInstanceShadowRendering.hlsl");
 	newContentsMaterial6->SetRasterizer("EngineRasterizer");
 	newContentsMaterial6->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial6->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial7
-		= GameEngineMaterial::Create("DeferredShadowRendering");
+	GameEngineMaterial* newContentsMaterial7 = GameEngineMaterial::Create("DeferredShadowRendering");
 	newContentsMaterial7->SetVertexShader("DeferredShadowRendering.hlsl");
 	newContentsMaterial7->SetPixelShader("DeferredShadowRendering.hlsl");
 	newContentsMaterial7->SetRasterizer("EngineRasterizer");
 	newContentsMaterial7->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial7->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial8
-		= GameEngineMaterial::Create("DeferredRendering");
+	GameEngineMaterial* newContentsMaterial8 = GameEngineMaterial::Create("DeferredRendering");
 	newContentsMaterial8->SetVertexShader("DeferredRendering.hlsl");
 	newContentsMaterial8->SetPixelShader("DeferredRendering.hlsl");
 	newContentsMaterial8->SetRasterizer("EngineRasterizer");
 	newContentsMaterial8->SetBlend_OutputMerger("AlphaBlend");
 	newContentsMaterial8->SetDepthStencil_OutputMerger("EngineBaseDepth");
 
-	std::shared_ptr<GameEngineMaterial> newContentsMaterial9
-		= GameEngineMaterial::Create("MonsterInstanceRendering");
+	GameEngineMaterial* newContentsMaterial9 = GameEngineMaterial::Create("MonsterInstanceRendering");
 	newContentsMaterial9->SetVertexShader("MonsterInstanceRendering.hlsl");
 	newContentsMaterial9->SetPixelShader("MonsterInstanceRendering.hlsl");
 	newContentsMaterial9->SetRasterizer("EngineRasterizer");

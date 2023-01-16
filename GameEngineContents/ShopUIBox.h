@@ -21,13 +21,13 @@ private:
 	void RenderOff();
 	void ShopReset();
 
-	std::shared_ptr<class SoulCardSelectBox> soulCardSelectBox_;
+	class SoulCardSelectBox* soulCardSelectBox_;
 
-	std::shared_ptr<GameEngineTextureRenderer> mainrenderer_;
-	std::vector<std::shared_ptr<class ShopButton>> buttons_;
+	GameEngineTextureRenderer* mainrenderer_;
+	std::vector<class ShopButton*> buttons_;
 
-	std::shared_ptr<GameEngineTextureRenderer> buttonrenderer_;
-	std::shared_ptr<GameEngineFontRenderer> buttonFontRenderer_;
+	GameEngineTextureRenderer* buttonrenderer_;
+	GameEngineFontRenderer* buttonFontRenderer_;
 
 
 	bool soundCheck_;

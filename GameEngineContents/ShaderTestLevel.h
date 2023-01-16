@@ -31,8 +31,8 @@ protected:
 	void LevelStartEvent() override;
 
 private:
-	std::shared_ptr<Mouse> shaderTestActor_;
-	//std::shared_ptr<GameEngineTextureRenderer> shaderTestRenderer_;
+	Mouse* shaderTestActor_;
+	//GameEngineTextureRenderer* shaderTestRenderer_;
 	//std::vector<RenderOption> testRenderOptionVector_;
 	//std::shared_ptr<GameEngineLighting> testLighting_;
 };

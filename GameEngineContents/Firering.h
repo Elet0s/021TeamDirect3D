@@ -21,7 +21,7 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn FireringToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn FireringToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 protected:
 	void Start() override;
@@ -31,14 +31,14 @@ protected:
 
 	void  StateSet();
 private:
-	std::shared_ptr<GameEngineTextureRenderer> circleRendererA_;
-	std::shared_ptr<GameEngineTextureRenderer> circleRendererB_;
-	std::shared_ptr<GameEngineTextureRenderer> circleRendererC_;
-	std::shared_ptr<GameEngineTextureRenderer> circleRendererD_;
-	std::shared_ptr<GameEngineTextureRenderer> circleCenterRenderer_;
-	std::shared_ptr<GameEngineCollision> fireringAuraCollision01_;
-	std::shared_ptr<GameEngineCollision> fireringAuraCollision02_;
-	std::shared_ptr<GameEngineCollision> fireringAuraCollision03_;
+	GameEngineTextureRenderer* circleRendererA_;
+	GameEngineTextureRenderer* circleRendererB_;
+	GameEngineTextureRenderer* circleRendererC_;
+	GameEngineTextureRenderer* circleRendererD_;
+	GameEngineTextureRenderer* circleCenterRenderer_;
+	GameEngineCollision* fireringAuraCollision01_;
+	GameEngineCollision* fireringAuraCollision02_;
+	GameEngineCollision* fireringAuraCollision03_;
 
 	WeaponInfo fireringAuraWeaponInfo_;//¹«±â ½ºÅÈ
 

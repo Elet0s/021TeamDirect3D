@@ -34,12 +34,12 @@ class GameItemObjectManager;
 class GameEngineRandom;
 class Monster: public GameEngineActor
 {
-	static std::vector<std::shared_ptr<Monster>> allMonsters_;
+	static std::vector<Monster*> allMonsters_;
 
 protected:
-	static std::shared_ptr<GameEngineInstancingRenderer> allMonstersRenderer_;	//모든 몬스터 렌더러.
-	static std::shared_ptr<GameEngineInstancingRenderer> allShadowsRenderer_;	//모든 몬스터 그림자 렌더러.
-	static std::shared_ptr<GameItemObjectManager> dropMonsterItemObject_;
+	static GameEngineInstancingRenderer* allMonstersRenderer_;	//모든 몬스터 렌더러.
+	static GameEngineInstancingRenderer* allShadowsRenderer_;	//모든 몬스터 그림자 렌더러.
+	static GameItemObjectManager* dropMonsterItemObject_;
 	static int monsterCreationIndex_;	
 public:
 	Monster();
@@ -57,22 +57,22 @@ public:
 
 public:
 
-	static std::shared_ptr<GameItemObjectManager> GetItemObjectManager()
+	static GameItemObjectManager* GetItemObjectManager()
 	{
 		return	dropMonsterItemObject_;
 	}
 
-	static std::vector<std::shared_ptr<Monster>>& GetMonsterList()
+	static std::vector<Monster*>& GetMonsterList()
 	{
 		return allMonsters_;
 	}
 	MonsterInfo& GetMonsterInfo()
 	{
-		return *CastThis<Monster>()->monsterInfo_;
+		return *monsterInfo_;
 	}
 
-	CollisionReturn MonsterToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
-	CollisionReturn MonsterToPlayerCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn MonsterToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	CollisionReturn MonsterToPlayerCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 	//몬스터풀 사이즈 예약.
 	static void ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCount);
@@ -96,7 +96,7 @@ public:
 	{
 		for (size_t i = 0; i < _monsterCount; ++i)
 		{
-			std::shared_ptr<Monster> newMonster = _thisLevel->CreateActor<MonsterClass>(ObjectOrder::Monster);
+			Monster* newMonster = _thisLevel->CreateActor<MonsterClass>(ObjectOrder::Monster);
 			newMonster->isSummoned_ = false;
 			newMonster->GetTransform().SetWorldPosition(float4::Zero);
 			newMonster->Off();
@@ -135,7 +135,7 @@ public:
 		size_t count = _summonCount;
 		for (size_t i = 0; i < allMonsters_.size(); ++i)
 		{
-			if (nullptr == std::dynamic_pointer_cast<MonsterClass>(allMonsters_[i]))
+			if (nullptr == dynamic_cast<MonsterClass*>(allMonsters_[i]))
 			{
 				//원하는 타입 몬스터가 아니라면 무시.
 				continue;
@@ -277,8 +277,8 @@ protected:
 	float4 playerReactionVector_;// 플레이어 반작용벡터
 	float4 monsterReactionVector_;// 몬스터 반작용벡터
 
-	std::shared_ptr<GameEngineCollision> monCollision_;
-	std::shared_ptr <MonsterInfo> monsterInfo_;
+	GameEngineCollision* monCollision_;
+	MonsterInfo* monsterInfo_;
 
 	int instancingUnitIndex_;	//이 몬스터를 담당해서 그리고 있는 인스턴싱유닛의 번호.
 
@@ -290,9 +290,9 @@ protected:
 	RenderOption renderOption_;
 	PixelData pixelData_;
 
-	std::shared_ptr<GameEngineTextureRenderer> monsterHpMax_;
-	std::shared_ptr<GameEngineTextureRenderer> monsterHp_;
-	std::shared_ptr<GameEngineFontRenderer>monsterHpScore_;
+	GameEngineTextureRenderer* monsterHpMax_;
+	GameEngineTextureRenderer* monsterHp_;
+	GameEngineFontRenderer* monsterHpScore_;
 
 private:
 	std::string monsterTextureName_;	//몬스터 자기 자신의 텍스처 이름. 

@@ -10,7 +10,7 @@ public:
 	CleaverProjectile& operator=(const CleaverProjectile& _Other) = delete;
 	CleaverProjectile& operator=(CleaverProjectile&& _Other) noexcept = delete;
 
-	CollisionReturn ProjectileToMonster(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn ProjectileToMonster(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 	void ProjectileSet(float _atk, float _speed, float _angle ,size_t _passNum);
 public:
@@ -24,8 +24,8 @@ protected:
 	void Rotate();
 	void LevelEndEvent() override;
 private:
-	std::shared_ptr < GameEngineTextureRenderer> projectileRen_;
-	std::shared_ptr < GameEngineCollision> projectileCol_;
+	GameEngineTextureRenderer* projectileRen_;
+	GameEngineCollision* projectileCol_;
 	float timer_;
 	float projectileatk_;
 	float projectilespeed_;

@@ -16,7 +16,7 @@ Hypersonic::~Hypersonic()
 
 void Hypersonic::Init()
 {
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sProjectileSpeed = std::to_string(PlayerPInfo_.projectileSpeed_Result).substr(0, std::to_string(PlayerPInfo_.projectileSpeed_Result).find(".")) + "%";
 	std::string sProjectileSpeedNext = std::to_string(PlayerPInfo_.projectileSpeed_Result + 70.0f).substr(0, std::to_string(PlayerPInfo_.projectileSpeed_Result + 70.0f).find(".")) + "%";
@@ -30,7 +30,7 @@ void Hypersonic::Init()
 void Hypersonic::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->projectileSpeed_Per += 70.f;
 	PlayerPInfo_->projectileDuration_ *= 0.7f;
 	PlayerPInfo_->projectileSpeed_Result += 70.0f;

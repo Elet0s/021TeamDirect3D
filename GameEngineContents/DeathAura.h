@@ -20,7 +20,7 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn DeatAuraToMonsterCollision(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other);
+	CollisionReturn DeatAuraToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 protected:
 	void Start() override;
@@ -30,15 +30,15 @@ protected:
 
 	void  StateSet();
 private:
-	std::shared_ptr<GameEngineTextureRenderer> circleRendererA_;
-	std::shared_ptr<GameEngineTextureRenderer> circleRendererB_;
-	std::shared_ptr<GameEngineTextureRenderer> circleRendererC_;
-	std::shared_ptr<GameEngineTextureRenderer> circleRendererD_;
-	std::shared_ptr<GameEngineTextureRenderer> circleCenterRenderer_;
+	GameEngineTextureRenderer* circleRendererA_;
+	GameEngineTextureRenderer* circleRendererB_;
+	GameEngineTextureRenderer* circleRendererC_;
+	GameEngineTextureRenderer* circleRendererD_;
+	GameEngineTextureRenderer* circleCenterRenderer_;
 
-	std::shared_ptr<GameEngineCollision> deathAuraCollision01_;
-	std::shared_ptr<GameEngineCollision> deathAuraCollision02_;
-	std::shared_ptr<GameEngineCollision> deathAuraCollision03_;
+	GameEngineCollision* deathAuraCollision01_;
+	GameEngineCollision* deathAuraCollision02_;
+	GameEngineCollision* deathAuraCollision03_;
 
 	WeaponInfo deathAuraWeaponInfo_;//¹«±â ½ºÅÈ
 

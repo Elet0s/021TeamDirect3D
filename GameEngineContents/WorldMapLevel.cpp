@@ -96,7 +96,7 @@ void WorldMapLevel::LevelStartEvent()
 {
 	this->GetMainCamera()->SetFarZ(10000.f);
 	stageUI_->SetUI(UIType::World);
-	Player::GetPlayerInst()->Off();
+	Player::GetPlayerInst().Off();
 	
 	SoundPlayer::BGMPlay_->ChangeBgm("MapSelectionForest.wav");
 }
@@ -186,9 +186,9 @@ void WorldMapLevel::CheckNextStageSelection()
 	//고정값을 한번 생성해서 계속 사용하다가 게임 끝날때나 소멸시킬 것이므로 로컬스태틱으로 선언.
 	//다른 렌더피봇이 필요하다면 변경할 것.
 
-	std::list<std::shared_ptr<StageObject>> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
+	std::list<StageObject*> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
 
-	for (std::list<std::shared_ptr<StageObject>>::iterator iter = nextLevelList.begin();
+	for (std::list<StageObject*>::iterator iter = nextLevelList.begin();
 		iter != nextLevelList.end(); ++iter)
 	{
 		if (false == mousePointer_->IsPointing((*iter)->GetWorldWorldMatrix(), renderPivot))
@@ -206,9 +206,9 @@ void WorldMapLevel::CheckNextStageSelection()
 void WorldMapLevel::SoundCheck()
 {
 	float4 renderPivot = float4(0.f, 0.5f, 0.f, 0.f);
-	std::list<std::shared_ptr<StageObject>> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
+	std::list<StageObject*> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
 
-	for (std::list<std::shared_ptr<StageObject>>::iterator iter = nextLevelList.begin();
+	for (std::list<StageObject*>::iterator iter = nextLevelList.begin();
 		iter != nextLevelList.end(); ++iter)
 	{
 		if (true == mousePointer_->IsPointing((*iter)->GetWorldWorldMatrix(), renderPivot))

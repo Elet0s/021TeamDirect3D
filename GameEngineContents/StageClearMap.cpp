@@ -16,7 +16,7 @@ StageClearMap::~StageClearMap()
 void StageClearMap::Start()
 {
 	{
-		std::shared_ptr<GameEngineTextureRenderer> TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
+		GameEngineTextureRenderer* TextureRenderer = CreateComponent<GameEngineTextureRenderer>();
 
 		TextureRenderer->Initialize("TextureAtlas");
 		TextureRenderer->SetTexture("FarGround.png");
@@ -25,7 +25,7 @@ void StageClearMap::Start()
 		TextureRenderer->GetTransform().SetWorldPosition(float4{ 162,-100, 512 });
 	}
 
-	mapRenderer_ = GetLevel()->GetMainCamera()->GetInstancingRenderer("0-mapRenderer");
+	mapRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("0-mapRenderer");
 	mapRenderer_->Initialize(
 		100,
 		"Rect",
@@ -177,7 +177,7 @@ void StageClearMap::Start()
 	}
 
 	{
-		std::shared_ptr<GameEngineTextureRenderer> playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+		GameEngineTextureRenderer* playerRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 		playerRenderer_->GetTransform().SetLocalScale(90, 90, 1);
 		playerRenderer_->GetTransform().SetWorldPosition(190, 45.f, 30.f);
 		playerRenderer_->CreateFrameAnimation_CutTexture("PlayerIdle", FrameAnimation_Desc("PlayerIdle.png", 0, 10, 0.2f));

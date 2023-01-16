@@ -40,9 +40,9 @@ public:
 protected:
 
 private:
-	std::shared_ptr<GameEngineTextureRenderer> renderer_;
-	std::shared_ptr<GameEngineFontRenderer> fontRenderer_;
-	std::shared_ptr<GameEngineFontRenderer> PricefontRenderer_;
+	GameEngineTextureRenderer* renderer_;
+	GameEngineFontRenderer* fontRenderer_;
+	GameEngineFontRenderer* PricefontRenderer_;
 	std::function<void()> click_;
 
 	size_t price_;

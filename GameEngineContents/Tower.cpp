@@ -16,7 +16,7 @@ Tower::~Tower()
 
 void Tower::Init()
 {
-	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	std::string sMaxHp = std::to_string(PlayerPInfo_.hpMax_Result).substr(0, std::to_string(PlayerPInfo_.hpMax_Result).find("."));
 	std::string sMaxHpNext = std::to_string(PlayerPInfo_.hpMax_Result + 75.f).substr(0, std::to_string(PlayerPInfo_.hpMax_Result + 75.f).find("."));
@@ -27,7 +27,7 @@ void Tower::Init()
 void Tower::Effect()
 {
 	currentlevel_ += 1;
-	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().get()->GetPlayerPassiveInfo();
+	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->hpMax_Per += 75.f;
 	PlayerPInfo_->hpMax_Result += 75.f;
 }

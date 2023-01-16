@@ -84,8 +84,8 @@ void Projectile::Shoothing(float _deltaTime)
 		shoothing_ = true;
 		mpx_ = GetTransform().GetWorldPosition().x;
 		mpy_ = GetTransform().GetWorldPosition().y;
-		px_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().x;
-		py_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition().y;
+		px_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
+		py_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;
 		range_.x = px_ - mpx_;
 		range_.y = py_ - mpy_;
 
@@ -94,9 +94,9 @@ void Projectile::Shoothing(float _deltaTime)
 	GetTransform().SetWorldMove(resultVector_ * _deltaTime);
 }
 
-CollisionReturn Projectile::ProjectileToPlayer(std::shared_ptr<GameEngineCollision> _This, std::shared_ptr<GameEngineCollision> _Other)
+CollisionReturn Projectile::ProjectileToPlayer(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	Player::GetPlayerInst()->GetPlayerInfo().hp_ -= projectileatk_;
+	Player::GetPlayerInst().GetPlayerInfo().hp_ -= projectileatk_;
 	projectileRen_->Off();
 	projectileCol_->Off();
 	Death();

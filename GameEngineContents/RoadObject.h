@@ -14,13 +14,13 @@ public:
 	RoadObject& operator=(const RoadObject& _Other) = delete;
 	RoadObject& operator=(RoadObject&& _Other) noexcept = delete;
 
-	std::shared_ptr<GameEngineTextureRenderer> GetRenderer()
+	GameEngineTextureRenderer* GetRenderer()
 	{
 		return renderer_;
 	}
 
 
-	std::shared_ptr<GameEngineCollision> GetCol()
+	GameEngineCollision* GetCol()
 	{
 		return col_;
 	}
@@ -32,7 +32,7 @@ private:
 	void End() override;
 
 
-	std::shared_ptr<GameEngineTextureRenderer> renderer_;
-	std::shared_ptr<GameEngineCollision> col_;
+	GameEngineTextureRenderer* renderer_;
+	GameEngineCollision* col_;
 };
 

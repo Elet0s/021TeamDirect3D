@@ -17,13 +17,13 @@ public:
 	void CreateItemObject(GameEngineLevel* _thisLevel, ItemObjectOrder _itemObjectOrder, float4 _itemObjectPos);//아이템 종류 직접설정한것으로 생성
 	void CreateItemObject(GameEngineLevel* _thisLevel, float4 _itemObjectPos); // 아이템 종류 랜덤으로 생성
 	void SetManager();
-	std::vector< std::shared_ptr<GameItemObject>> GetallObjectContainer();
+	std::vector<GameItemObject*> GetallObjectContainer();
 	void ObjectAllClear();
 	void DelteObject(size_t _Num);
 protected:
 	ItemObjectOrder RandomObjectOrder();
 private:
-	std::vector< std::shared_ptr<GameItemObject>> allObjectContainer_;
+	std::vector<GameItemObject*> allObjectContainer_;
 	size_t ItemUpdateNum_; // 현재 활성화 되어있는 아이템 총 갯수
 	bool isFullContainer_; 
 };

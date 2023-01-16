@@ -48,8 +48,8 @@ void ThunderStaf::Start()
 
 void ThunderStaf::StateSet()
 {
-	PlayerInfo* Info = &Player::GetPlayerInst()->GetPlayerInfo();
-	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst()->GetPlayerPassiveInfo();
+	PlayerInfo* Info = &Player::GetPlayerInst().GetPlayerInfo();
+	PlayerPassiveInfo* PInfo = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 
 	ThunderStafWeaponInfo_.weaponAtk_ = round((1.f + currentlevel_) * Info->atk_ * PInfo->atkMultiple_Result / 100);
 	ThunderStafWeaponInfo_.weaponAtkSpeed_ = round(500.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result));
@@ -97,8 +97,8 @@ void ThunderStaf::Shoothing(float _deltaTime)
 	if (timer_ > ThunderStafWeaponInfo_.weaponAtkSpeed_)
 	{
 		GameEngineSound::SoundPlayOneshot("Throw_Sound.wav");
-		mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst()->GetTransform().GetWorldPosition();
-		playerPos_ = Player::GetPlayerInst()->GetTransform().GetWorldPosition();
+		mouseAimPos_ = GetLevel<TestLevel>()->GetMousePointer()->GetTransform().GetWorldPosition() + Player::GetPlayerInst().GetTransform().GetWorldPosition();
+		playerPos_ = Player::GetPlayerInst().GetTransform().GetWorldPosition();
 		range_.x = mouseAimPos_.x - playerPos_.x;
 		range_.y = mouseAimPos_.y - playerPos_.y;
 		consecutiveAngle_ = 360.f / ThunderStafWeaponInfo_.weaponProjectileNum_;
@@ -120,8 +120,8 @@ void ThunderStaf::Shoothing(float _deltaTime)
 				}
 				angle_ += consecutiveAngle_;
 			}
-			std::shared_ptr<ThunderStafProjectile> A = GetLevel()->CreateActor<ThunderStafProjectile>(ObjectOrder::Projectile);
-			A->GetTransform().SetWorldPosition({ Player::GetPlayerInst()->GetTransform().GetWorldPosition().x,	Player::GetPlayerInst()->GetTransform().GetWorldPosition().y,-219.f });
+			ThunderStafProjectile* A = GetLevel()->CreateActor<ThunderStafProjectile>(ObjectOrder::Projectile);
+			A->GetTransform().SetWorldPosition({ Player::GetPlayerInst().GetTransform().GetWorldPosition().x,	Player::GetPlayerInst().GetTransform().GetWorldPosition().y,-219.f });
 			A->ProjectileSet(ThunderStafWeaponInfo_.weaponAtk_, ThunderStafWeaponInfo_.weaponSpeed_, angle_, ThunderStafWeaponInfo_.weaponPassNum_);
 		}
 		timer_ = 0.f;

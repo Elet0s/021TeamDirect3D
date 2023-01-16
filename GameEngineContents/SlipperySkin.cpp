@@ -17,7 +17,7 @@ SlipperySkin::~SlipperySkin()
 
 void SlipperySkin::Init()
 {
-	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo PlayerInfo_ = Player::GetPlayerInst().GetPlayerInfo();
 
 	std::string sdamageMitigation_ = std::to_string(PlayerInfo_.damageMitigation_).substr(0, std::to_string(PlayerInfo_.damageMitigation_).find(".") + 2);
 	std::string sdamageMitigation_Next = std::to_string(PlayerInfo_.damageMitigation_ + 10.f).substr(0, std::to_string(PlayerInfo_.damageMitigation_ + 10.f).find(".") + 2);
@@ -28,6 +28,6 @@ void SlipperySkin::Init()
 void SlipperySkin::Effect()
 {
 	currentlevel_ += 1;
-	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().get()->GetPlayerInfo();
+	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->damageMitigation_ += 10.f;
 }
