@@ -12,14 +12,8 @@ class GameEngineShaderResourceHelper
 	friend class GameEngineRenderUnit;
 	//AllResourcesSetting(), AllResourcesReset() 함수를 호출할 수 있게 하기 위해 프렌드. 
 	
-	friend class GameEngineInstancing;
-	//인스턴싱 버텍스셰이더로 ShaderCheck()함수를 써야해서 프렌드. 
-	
 	friend class GameEngineInstancingRenderer;
 	//인스턴싱 버텍스셰이더, 픽셀셰이더로 ShaderCheck()함수를 써야해서 프렌드. 
-
-	friend class GameEngineInstancingRenderUnit;
-	//AllResourcesSetting(), AllResourcesReset() 함수를 호출할 수 있게 하기 위해 프렌드. 
 
 public:
 	GameEngineShaderResourceHelper();
@@ -33,7 +27,7 @@ public:
 
 public:
 	//매개변수로 들어온 마테리얼이 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하는 함수.
-	void ResourceCheck(std::shared_ptr<GameEngineMaterial> _material);
+	void ResourceCheck(GameEngineMaterial* _material);
 
 	//이 셰이더 리소스 헬퍼가 주어진 이름의 상수버퍼세터를 가지고 있는가를 외부에서 확인하는 함수.
 	bool IsConstantBuffer(const std::string_view& _name);
@@ -55,15 +49,15 @@ public:
 	void SetConstantBuffer_New(const std::string_view& _name, const void* _data, unsigned int _dataSize);	//깊은 복사??
 	//외부 데이터를 복사받아야 하는 등의 SetConstantBufferLink()를 사용할 수 없는 예외적인 상황에만 사용할 것.
 
-	std::shared_ptr<GameEngineTexture> SetTexture(const std::string_view& _textureSetterName, const std::string_view& _textureName);
-	std::shared_ptr<GameEngineTexture> SetTexture(const std::string_view& _textureSetterName, std::shared_ptr<GameEngineTexture> _texture);
-	std::shared_ptr<GameEngineTexture> SetTexture(const std::string_view& _textureSetterName, const std::string_view& _folderTextureName, int _index);
+	GameEngineTexture* SetTexture(const std::string_view& _textureSetterName, const std::string_view& _textureName);
+	GameEngineTexture* SetTexture(const std::string_view& _textureSetterName, GameEngineTexture* _texture);
+	GameEngineTexture* SetTexture(const std::string_view& _textureSetterName, const std::string_view& _folderTextureName, int _index);
 
-	std::shared_ptr<GameEngineSampler> SetSampler(const std::string_view& _samplerSetterName, std::shared_ptr<GameEngineSampler> _sampler);
-	std::shared_ptr<GameEngineSampler> SetSampler(const std::string_view& _samplerSetterName, const std::string_view& _samplerName);
+	GameEngineSampler* SetSampler(const std::string_view& _samplerSetterName, GameEngineSampler* _sampler);
+	GameEngineSampler* SetSampler(const std::string_view& _samplerSetterName, const std::string_view& _samplerName);
 	
-	std::shared_ptr<GameEngineTexture2DArray> SetTexture2DArray(const std::string_view& _textureArraySetterName, const std::string_view& _textureArrayName);
-	std::shared_ptr<GameEngineTexture2DArray> SetTexture2DArray(const std::string_view& _textureArraySetterName, std::shared_ptr<GameEngineTexture2DArray> _textureArray);
+	GameEngineTexture2DArray* SetTexture2DArray(const std::string_view& _textureArraySetterName, const std::string_view& _textureArrayName);
+	GameEngineTexture2DArray* SetTexture2DArray(const std::string_view& _textureArraySetterName, GameEngineTexture2DArray* _textureArray);
 
 
 	GameEngineStructuredBufferSetter* GetStructuredBufferSetter(const std::string_view& _sBufferName);
@@ -89,7 +83,7 @@ public:
 protected:
 	//리소스 준비시점에, 짝으로 배치된 마테리얼의 셰이더가 필요로 하는 셰이더리소스들을 셰이더리소스헬퍼에 등록하고, 
 	// 매 렌더링마다 갱신된 셰이더리소스들을 각 셰이더들이 요구했던대로 디바이스 컨텍스트에 연결하는 함수. 
-	void ShaderCheck(std::shared_ptr<GameEngineShader> _shader);
+	void ShaderCheck(GameEngineShader* _shader);
 
 
 private:
@@ -110,7 +104,7 @@ private:
 	//셰이더 리소스 세터들의 저장, 관리를 멀티맵으로 한 이유:
 	//그냥 std::map으로는 중복되는 리소스 이름을 키값으로 쓸 수 없지만 std::multimap으로는 저장할 수 있다는 특성을 이용해,
 	// 이름만 똑같은 다른 상수버퍼세터나 텍스처세터 등의 리소스세터들을 여러 셰이더들이 동시에 사용하게 되는 경우에도 원활하게 저장하기 위해서.
-	//->같은 이름 다른 리소스를 정점셰이더와 픽셀셰이더가 동시에 사용할 수 있게 한다.
+	//->같은 이름 다른 리소스를 여러 셰이더들이 동시에 사용할 수 있게 한다.
 
 	//셰이더 리소스 세터들을 참조형이 아닌 값형으로 저장하는 이유:
 	//셰이더마다 각각의 셰이더 리소스 세터들을 만들어서 저장해야 하는데,

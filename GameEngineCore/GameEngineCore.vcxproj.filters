@@ -103,9 +103,6 @@
     <Filter Include="Debug">
       <UniqueIdentifier>{888f1880-9925-4638-ba3c-16555ea41837}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\FBX">
-      <UniqueIdentifier>{fcbda458-9d75-4d9b-9391-24d57ba17c1c}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">

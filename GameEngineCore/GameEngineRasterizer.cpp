@@ -15,13 +15,13 @@ GameEngineRasterizer::~GameEngineRasterizer()
     }
 }
 
-std::shared_ptr<GameEngineRasterizer> GameEngineRasterizer::Create(
+GameEngineRasterizer* GameEngineRasterizer::Create(
     const std::string_view& _name,
     const D3D11_RASTERIZER_DESC& _desc
 )
 {
-    std::shared_ptr<GameEngineRasterizer> newRes = CreateNamedRes(_name);
-    newRes->Create(_desc);
+    GameEngineRasterizer* newRes = CreateNamedRes(_name);
+    newRes->CreateRasterizer(_desc);
     return newRes;
 }
 
@@ -37,7 +37,7 @@ void GameEngineRasterizer::Set()
     //래스터라이저 스테이트 객체를 파이프라인에 연결하는 함수.
 }
 
-void GameEngineRasterizer::Create(const D3D11_RASTERIZER_DESC& _desc)
+void GameEngineRasterizer::CreateRasterizer(const D3D11_RASTERIZER_DESC& _desc)
 {
     rasterizerDesc_ = _desc;
 

@@ -10,14 +10,17 @@ class GameEngineInputLayout : public GameEngineRes<GameEngineInputLayout>
 	// 대한 정보를 버텍스셰이더에게 넘기기 위한 인터페이스.
 	//생성하는데 버텍스 정보와 버텍스셰이더가 모두 필요하다.
 
+	friend GameEngineRes<GameEngineInputLayout>;
+	//GameEngineInputLayout 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
+
 	friend class GameEngineMaterial;
+	//??
 
 
-public:
+private:
 	GameEngineInputLayout();
 	~GameEngineInputLayout();
 
-private:
 	GameEngineInputLayout(const GameEngineInputLayout& _other) = delete;
 	GameEngineInputLayout(GameEngineInputLayout&& _other) noexcept = delete;
 	GameEngineInputLayout& operator=(const GameEngineInputLayout& _other) = delete;
@@ -27,15 +30,18 @@ private:
 public:
 	void Set();
 
-	//
-	static std::shared_ptr<GameEngineInputLayout> Create(
+	//??
+	static GameEngineInputLayout* Create(
 		const GameEngineInputLayoutDesc& _desc,
-		std::shared_ptr<GameEngineVertexShader> _vertexShader);
+		GameEngineVertexShader* _vertexShader
+	);
 
 private:
+	//??
 	void CreateInputLayout(
 		const GameEngineInputLayoutDesc& _desc,
-		std::shared_ptr<GameEngineVertexShader> _vertexShader);
+		GameEngineVertexShader* _vertexShader
+	);
 
 private:
 	ID3D11InputLayout* inputLayout_;

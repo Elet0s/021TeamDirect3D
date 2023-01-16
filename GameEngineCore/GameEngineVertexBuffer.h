@@ -10,13 +10,18 @@ class GameEngineVertexBuffer : public GameEngineRes<GameEngineVertexBuffer>
 	//FVF(Flexible Vertex Format)이라는 개념으로 모아서 제공하고 있다.
 
 
+	friend GameEngineRes<GameEngineVertexBuffer>;
+	//GameEngineVertexBuffer클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
+
+
 	//그래픽 리소스들 중 버퍼(버텍스 버퍼, 인덱스 버퍼, 상수 버퍼, 스트림 출력 버퍼)는 
 	// 리소스뷰 없이도 렌더링 파이프라인에 연결할 수 있다.
-public:
+private:
 	GameEngineVertexBuffer();
 	~GameEngineVertexBuffer();
-
-private:
+	//외부에서 제멋대로 리소스를 생성/삭제하는걸 막기 위해서 생성자/소멸자를 프라이빗으로 지정해서 외부 접근을 막는다.
+	//이 프레임워크의 리소스는 반드시 소멸자가 아니라 ResourceDestroy()함수에서 제거해야 한다.
+	//프로그램 끝날때까지 리소스삭제를 안하면 끝나는 문제지만 그래도 최대한 막아둔다.
 
 	GameEngineVertexBuffer(const GameEngineVertexBuffer& _other) = delete;
 	GameEngineVertexBuffer(GameEngineVertexBuffer&& _other) noexcept = delete;
@@ -25,7 +30,7 @@ private:
 
 
 public:
-	static std::shared_ptr<GameEngineVertexBuffer> Create(
+	static GameEngineVertexBuffer* Create(
 		const std::string_view& _name,
 		const void* _initialData,
 		UINT _vertexSize,
@@ -33,7 +38,7 @@ public:
 		const GameEngineInputLayoutDesc& _info
 	);
 
-	static std::shared_ptr<GameEngineVertexBuffer> Create(
+	static GameEngineVertexBuffer* Create(
 		const void* _initialData,
 		UINT _vertexSize,
 		UINT _vertexCount,
@@ -44,7 +49,7 @@ public:
 
 public:
 	template<typename VertexType>
-	static std::shared_ptr<GameEngineVertexBuffer> Create(
+	static GameEngineVertexBuffer* Create(
 		const std::string_view& _name,
 		const std::vector<VertexType>& _vertex
 	)
@@ -59,7 +64,7 @@ public:
 	}
 
 	template<typename VertexType>
-	static std::shared_ptr<GameEngineVertexBuffer> Create(
+	static GameEngineVertexBuffer* Create(
 		const std::vector<VertexType>& _vertex
 	)
 	{

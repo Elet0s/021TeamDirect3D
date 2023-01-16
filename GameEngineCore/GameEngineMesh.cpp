@@ -17,29 +17,29 @@ GameEngineMesh::~GameEngineMesh()
 {
 }
 
-std::shared_ptr<GameEngineMesh> GameEngineMesh::Create(const std::string_view& _meshName)
+GameEngineMesh* GameEngineMesh::Create(const std::string_view& _meshName)
 {
     return Create(_meshName, _meshName, _meshName);
 }
 
-std::shared_ptr<GameEngineMesh> GameEngineMesh::Create(
+GameEngineMesh* GameEngineMesh::Create(
     const std::string_view& _meshName,
     const std::string_view& _vertexBufferName,
     const std::string_view& _indexBufferName
 )
 {
-    std::shared_ptr<GameEngineMesh> newRes = CreateNamedRes(_meshName);
+    GameEngineMesh* newRes = CreateNamedRes(_meshName);
     newRes->SetVertexBuffer_InputAssembler1(_vertexBufferName);
     newRes->SetIndexBuffer_InputAssembler2(_indexBufferName);
     return newRes;
 }
 
-std::shared_ptr<GameEngineMesh> GameEngineMesh::Create(
-    std::shared_ptr<GameEngineVertexBuffer> _vertexBuffer,
-    std::shared_ptr<GameEngineIndexBuffer> _indexBuffer
+GameEngineMesh* GameEngineMesh::Create(
+    GameEngineVertexBuffer* _vertexBuffer,
+    GameEngineIndexBuffer* _indexBuffer
 )
 {
-    std::shared_ptr<GameEngineMesh> newRes = CreateUnnamedRes();
+    GameEngineMesh* newRes = CreateUnnamedRes();
     newRes->SetVertexBuffer_InputAssembler1(_vertexBuffer);
     newRes->SetIndexBuffer_InputAssembler2(_indexBuffer);
     return newRes;
@@ -56,7 +56,7 @@ void GameEngineMesh::SetVertexBuffer_InputAssembler1(const std::string_view& _ve
     }
 }
 
-void GameEngineMesh::SetVertexBuffer_InputAssembler1(std::shared_ptr<GameEngineVertexBuffer> _vertexBuffer)
+void GameEngineMesh::SetVertexBuffer_InputAssembler1(GameEngineVertexBuffer* _vertexBuffer)
 {
     if (nullptr == _vertexBuffer)
     {
@@ -78,7 +78,7 @@ void GameEngineMesh::SetIndexBuffer_InputAssembler2(const std::string_view& _ind
     }
 }
 
-void GameEngineMesh::SetIndexBuffer_InputAssembler2(std::shared_ptr<GameEngineIndexBuffer> _indexBuffer)
+void GameEngineMesh::SetIndexBuffer_InputAssembler2(GameEngineIndexBuffer* _indexBuffer)
 {
     if (nullptr == _indexBuffer)
     {
@@ -95,7 +95,7 @@ void GameEngineMesh::Setting()
     this->InputAssembler2_IndexBufferSetting();
 }
 
-void GameEngineMesh::SettingInstancing(std::shared_ptr<GameEngineInstancingBuffer> _instancingBuffer)
+void GameEngineMesh::SettingInstancing(GameEngineInstancingBuffer* _instancingBuffer)
 {
     ID3D11Buffer* ArrBuffer[2] = { this->vertexBuffer_->GetBuffer(), _instancingBuffer->GetBuffer() };
     //버퍼 배열.

@@ -31,14 +31,14 @@ void GameEngineComputeShader::Set()
     );
 }
 
-std::shared_ptr<GameEngineComputeShader> GameEngineComputeShader::Load(const std::string_view& _path, const std::string_view& _entryPoint, UINT _versionHigh, UINT _versionLow)
+GameEngineComputeShader* GameEngineComputeShader::Load(const std::string_view& _path, const std::string_view& _entryPoint, UINT _versionHigh, UINT _versionLow)
 {
     return Load(_path, GameEnginePath::GetFileName(_path), _entryPoint, _versionHigh, _versionLow);
 }
 
-std::shared_ptr<GameEngineComputeShader> GameEngineComputeShader::Load(const std::string_view& _path, const std::string_view& _name, const std::string_view& _entryPoint, UINT _versionHigh, UINT _versionLow)
+GameEngineComputeShader* GameEngineComputeShader::Load(const std::string_view& _path, const std::string_view& _name, const std::string_view& _entryPoint, UINT _versionHigh, UINT _versionLow)
 {
-    std::shared_ptr<GameEngineComputeShader> newRes = CreateNamedRes(_name);
+    GameEngineComputeShader* newRes = CreateNamedRes(_name);
     newRes->CreateVersion("cs", _versionHigh, _versionLow);
     newRes->SetEntrtyPoint(_entryPoint);
     newRes->CompileHLSLCode(_path);

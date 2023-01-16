@@ -113,8 +113,8 @@ class FrameAnimation
 
 	GameEngineTextureRenderer* parentRenderer_;	//부모 렌더러.
 
-	std::shared_ptr<GameEngineTexture> cutTexture_;			//단일 텍스쳐.			
-	std::shared_ptr<GameEngineFolderTexture> folderTexture_;	//폴더단위 텍스쳐들 모음.
+	GameEngineTexture* cutTexture_;			//단일 텍스쳐.			
+	GameEngineFolderTexture* folderTexture_;	//폴더단위 텍스쳐들 모음.
 	//두개가 동시에 사용되는 경우는 없음!
 
 	bool bOnceStart_;
@@ -167,10 +167,10 @@ private:
 
 public:
 	void SetTexture(const std::string_view& _textureName);	//폴더텍스처용.
-	void SetTexture(std::shared_ptr<GameEngineTexture> _texture);		//폴더텍스처용.
+	void SetTexture(GameEngineTexture* _texture);		//폴더텍스처용.
 	void SetFolderTextureToIndex(const std::string_view& _textureName, UINT _index);
 	void SetTexture(const std::string_view& _textureName, int _index);	//아틀라스텍스처용.
-	void SetTexture(std::shared_ptr<GameEngineTexture> _texture, int _index);		//아틀라스텍스처용.
+	void SetTexture(GameEngineTexture* _texture, int _index);		//아틀라스텍스처용.
 
 	void SetFrame(int _index);	//애니메이션의 특정 프레임 지정.
 
@@ -196,7 +196,7 @@ public:
 	void CurAnimationPauseOff();
 	bool IsCurAnimationPaused();
 
-	std::shared_ptr<GameEngineTexture> GetCurrentTexture() const;
+	GameEngineTexture* GetCurrentTexture() const;
 
 	//텍스처렌더러를 초기화하는 함수. 마테리얼 재설정도 여기서 한다.
 	void Initialize(const std::string_view& _materialName);
@@ -302,7 +302,7 @@ private:
 
 private:
 	PivotMode pivotMode_;				//현재 사용중인 텍스처의 렌더링 기준점.
-	std::shared_ptr<GameEngineTexture> currentTexture_;	//현재 사용중인 텍스처.					
+	GameEngineTexture* currentTexture_;	//현재 사용중인 텍스처.					
 
 	std::map<std::string, FrameAnimation> allAnimations_;	//<-왜 애니메이션을 값형으로 저장??
 	FrameAnimation* currentAnimation_;

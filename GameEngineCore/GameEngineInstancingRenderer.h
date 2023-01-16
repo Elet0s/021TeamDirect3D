@@ -188,15 +188,15 @@ private:
 
     std::vector<InstancingUnit> allInstancingUnits_;   //인스턴싱유닛 벡터.
 
-    std::shared_ptr<GameEngineMesh> mesh_;                  //메쉬.
+    GameEngineMesh* mesh_;                  //메쉬.
 
-    std::shared_ptr<GameEngineInputLayout> inputLayout_;    //인풋 레이아웃.
+    GameEngineInputLayout* inputLayout_;    //인풋 레이아웃.
 
-    std::shared_ptr<GameEngineMaterial> material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
+    GameEngineMaterial* material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
 
     D3D11_PRIMITIVE_TOPOLOGY topology_;                     //토폴로지.
 
-    std::shared_ptr<GameEngineInstancingBuffer> instancingBuffer_;  //인스턴스별로 달라지는 정보들을 셰이더로 전달하는 버퍼
+    GameEngineInstancingBuffer* instancingBuffer_;  //인스턴스별로 달라지는 정보들을 셰이더로 전달하는 버퍼
 
     std::vector<char> instanceIndexBuffer_;  //컬러텍스처 인덱스와 노말맵텍스처 인덱스를 저장하는 버퍼.
 

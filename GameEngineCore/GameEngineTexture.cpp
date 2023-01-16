@@ -44,44 +44,44 @@ GameEngineTexture::~GameEngineTexture()
 	}
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(const std::string_view& _name, ID3D11Texture2D* _texture)
+GameEngineTexture* GameEngineTexture::Create(const std::string_view& _name, ID3D11Texture2D* _texture)
 {
-	std::shared_ptr<GameEngineTexture> newRes = CreateNamedRes(_name);
+	GameEngineTexture* newRes = CreateNamedRes(_name);
 	newRes->texture2D_ = _texture;
 	_texture->GetDesc(&newRes->desc_);
 	return newRes;
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(ID3D11Texture2D* _texture)
+GameEngineTexture* GameEngineTexture::Create(ID3D11Texture2D* _texture)
 {
-	std::shared_ptr<GameEngineTexture> newRes = CreateUnnamedRes();
+	GameEngineTexture* newRes = CreateUnnamedRes();
 	newRes->texture2D_ = _texture;
 	_texture->GetDesc(&newRes->desc_);
 	return newRes;
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(const D3D11_TEXTURE2D_DESC& _desc)
+GameEngineTexture* GameEngineTexture::Create(const D3D11_TEXTURE2D_DESC& _desc)
 {
-	std::shared_ptr<GameEngineTexture> newRes = CreateUnnamedRes();
+	GameEngineTexture* newRes = CreateUnnamedRes();
 	newRes->CreateTexture(_desc);
 	return newRes;
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineTexture::Create(const std::string_view& _name, const D3D11_TEXTURE2D_DESC& _desc)
+GameEngineTexture* GameEngineTexture::Create(const std::string_view& _name, const D3D11_TEXTURE2D_DESC& _desc)
 {
-	std::shared_ptr<GameEngineTexture> newRes = CreateNamedRes(_name);
+	GameEngineTexture* newRes = CreateNamedRes(_name);
 	newRes->CreateTexture(_desc);
 	return newRes;
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineTexture::Load(const std::string_view& _path)
+GameEngineTexture* GameEngineTexture::Load(const std::string_view& _path)
 {
 	return Load(_path, GameEnginePath::GetFileName(_path));
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineTexture::Load(const std::string_view& _path, const std::string_view& _name)
+GameEngineTexture* GameEngineTexture::Load(const std::string_view& _path, const std::string_view& _name)
 {
-	std::shared_ptr<GameEngineTexture> newRes = CreateNamedRes(_name);
+	GameEngineTexture* newRes = CreateNamedRes(_name);
 	newRes->LoadTexture(_path);
 	return newRes;
 }
@@ -250,7 +250,7 @@ void GameEngineTexture::CSSetUnorderedAccessView(int _bindPoint)
 
 void GameEngineTexture::Cut(const std::string_view& _textureName, int _x, int _y)
 {
-	std::shared_ptr<GameEngineTexture> findTexture = GameEngineTexture::Find(_textureName);
+	GameEngineTexture* findTexture = GameEngineTexture::Find(_textureName);
 	if (nullptr == findTexture)
 	{
 		MsgBoxAssertString(std::string(_textureName) + ": 그런 이름의 텍스쳐가 존재하지 않습니다.");

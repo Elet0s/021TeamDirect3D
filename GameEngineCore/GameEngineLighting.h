@@ -95,7 +95,7 @@ public:
 
 
 private:
-	void UpdataLightingData(std::weak_ptr<class GameEngineCamera> _camera);
+	void UpdataLightingData(GameEngineCamera* _camera);
 	//void SetShadowDepthRenderTarget();
 
 private:

@@ -7,10 +7,18 @@ class GameEngineSampler : public GameEngineRes<GameEngineSampler>
 	//샘플링: 텍스쳐 확대/축소, 밉매핑 등의 연산 과정 중간에 픽셀 색상 선택의 기준이 되어줄 텍셀이 없는 상황에서
 	// 특정 픽셀의 색을 임의로 정해야 할 때, 해당 픽셀의 색을 어떻게 결정할 지에 대한 옵션을 정하는 것.
 
-public:
+	friend GameEngineRes<GameEngineSampler>;
+	//GameEngineSampler 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.\
+
+	friend class GameEngineSamplerSetter;
+	//GameEngineSamplerSetter 클래스에서 리소스세팅 함수들을 호출하기 위해 프렌드.
+
+private:
 	GameEngineSampler();
 	~GameEngineSampler();
-private:
+	//외부에서 제멋대로 리소스를 생성/삭제하는걸 막기 위해서 생성자/소멸자를 프라이빗으로 지정해서 외부 접근을 막는다.
+	//이 프레임워크의 리소스는 반드시 소멸자가 아니라 ResourceDestroy()함수에서 제거해야 한다.
+	//프로그램 끝날때까지 리소스삭제를 안하면 끝나는 문제지만 그래도 최대한 막아둔다.
 
 	GameEngineSampler(const GameEngineSampler& _other) = delete;
 	GameEngineSampler(GameEngineSampler&& _other) noexcept = delete;
@@ -19,15 +27,14 @@ private:
 
 
 public:
-	static std::shared_ptr<GameEngineSampler> Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc);
+	static GameEngineSampler* Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc);
 
+private:
 	void VSSetSampler(int _bindPoint);
 	void CSSetSampler(int _bindPoint);
 	void PSSetSampler(int _bindPoint);
 
-
-private:
-	void Create(const D3D11_SAMPLER_DESC& _desc);
+	void CreateSampler(const D3D11_SAMPLER_DESC& _desc);
 
 private:
 	ID3D11SamplerState* samplerState_;	//

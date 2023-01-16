@@ -29,32 +29,32 @@ private:
 
 public:
 
-	static std::shared_ptr<GameEngineMaterial> Create(const std::string_view& _materialName);
-	static std::shared_ptr<GameEngineMaterial> Create();
+	static GameEngineMaterial* Create(const std::string_view& _materialName);
+	static GameEngineMaterial* Create();
 	static void AllShaderReset();
 
 public:
 	//세팅 준비 함수들.
 
 	void SetVertexShader(const std::string_view& _name);
-	void SetVertexShader(std::shared_ptr<GameEngineVertexShader> _vertexShader);
+	void SetVertexShader(GameEngineVertexShader* _vertexShader);
 
 	void SetRasterizer(const std::string_view& _name);
 	void SetPixelShader(const std::string_view& _name);
 	void SetBlend_OutputMerger(const std::string_view& _name);
 	void SetDepthStencil_OutputMerger(const std::string_view& _name);
-	void Copy(std::shared_ptr<GameEngineMaterial> _original);
+	void Copy(GameEngineMaterial* _original);
 
 	void Setting();
 	void SettingInstancing();
 	void SettingInstancing2();
 public:
 
-	inline std::shared_ptr<GameEngineVertexShader> GetVertexShader()
+	inline GameEngineVertexShader* GetVertexShader()
 	{
 		return this->vertexShader_;
 	}
-	inline std::shared_ptr<GameEnginePixelShader> GetPixelShader()
+	inline GameEnginePixelShader* GetPixelShader()
 	{
 		return this->pixelShader_;
 	}
@@ -73,15 +73,15 @@ private:
 
 
 private:
-	std::shared_ptr<GameEngineVertexShader> vertexShader_;
+	GameEngineVertexShader* vertexShader_;
 
-	std::shared_ptr<GameEngineRasterizer> rasterizer_;
+	GameEngineRasterizer* rasterizer_;
 
-	std::shared_ptr<GameEnginePixelShader> pixelShader_;
+	GameEnginePixelShader* pixelShader_;
 
-	std::shared_ptr<GameEngineDepthStencil> depthStencil_;
+	GameEngineDepthStencil* depthStencil_;
 
-	std::shared_ptr<GameEngineBlend> blend_;
+	GameEngineBlend* blend_;
 
 };
 

@@ -32,7 +32,7 @@ void GameEngineGeometryShader::Set()
     );
 }
 
-std::shared_ptr<GameEngineGeometryShader> GameEngineGeometryShader::Load(
+GameEngineGeometryShader* GameEngineGeometryShader::Load(
     const std::string_view& _path,
     const std::string_view& _entryPoint,
     UINT _versionHigh, /*= 5*/
@@ -42,7 +42,7 @@ std::shared_ptr<GameEngineGeometryShader> GameEngineGeometryShader::Load(
 	return Load(_path, GameEnginePath::GetFileName(_path), _entryPoint, _versionHigh, _versionLow);
 }
 
-std::shared_ptr<GameEngineGeometryShader> GameEngineGeometryShader::Load(
+GameEngineGeometryShader* GameEngineGeometryShader::Load(
     const std::string_view& _path,
     const std::string_view& _name,
     const std::string_view& _entryPoint,
@@ -50,7 +50,7 @@ std::shared_ptr<GameEngineGeometryShader> GameEngineGeometryShader::Load(
     UINT _versionLow /*= 0*/
 )
 {
-	std::shared_ptr<GameEngineGeometryShader> newRes = CreateNamedRes(_name);
+	GameEngineGeometryShader* newRes = CreateNamedRes(_name);
     newRes->CreateVersion("gs", _versionHigh, _versionLow);
     newRes->SetEntrtyPoint(_entryPoint);
     newRes->CompileHLSLCode(_path);

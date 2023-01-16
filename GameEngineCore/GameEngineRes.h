@@ -19,7 +19,7 @@
 //};
 
 template<typename ResType>
-class GameEngineRes : public GameEngineNameObject/*, public std::enable_shared_from_this<GameEngineRes<ResType>>*/
+class GameEngineRes : public GameEngineNameObject
 {
 	//리소스 클래스들의 중복되는 코드를 재활용하기 위한 템플릿 목적의 클래스.
 
@@ -28,19 +28,18 @@ class GameEngineRes : public GameEngineNameObject/*, public std::enable_shared_f
 
 
 protected:
-	GameEngineRes() : isOriginal_(true) {}
+	GameEngineRes() /*: isOriginal_(true)*/ {}
 	~GameEngineRes() {}	//ResourceDestroy()함수에서 각 리소스클래스 소멸자들을 직접 호출하므로 virtual을 붙이지 않아도 문제 없다.
 
-	//GameEngineRes(const GameEngineRes& _other) : isOriginal_(false) {};
 	GameEngineRes(const GameEngineRes& _other) = delete;
 	GameEngineRes(GameEngineRes&& _other) noexcept = delete;
 	GameEngineRes& operator=(const GameEngineRes& _other) = delete;
 	GameEngineRes& operator=(GameEngineRes&& _other) = delete;
 
 public:
-	static std::shared_ptr<ResType> Find(const std::string_view& _resName)
+	static ResType* Find(const std::string_view& _resName)
 	{
-		typename std::map<std::string, std::shared_ptr<ResType>>::iterator findIter;
+		typename std::map<std::string, ResType*>::iterator findIter;
 		{
 			std::lock_guard<std::mutex> lockInst(namedResLock_);
 			//std::lock_guard<std::mutex>: std::mutex의 래퍼 클래스.
@@ -60,33 +59,32 @@ public:
 
 	static void ResourceDestroy()
 	{
-		//for (std::pair<std::string, ResType*> resPair : namedRes_)
-		//{
-		//	if (nullptr != resPair.second)
-		//	{
-		//		delete resPair.second;
-		//		resPair.second = nullptr;
-		//	}
-		//}
+		for (std::pair<std::string, ResType*> resPair : namedRes_)
+		{
+			if (nullptr != resPair.second)
+			{
+				delete resPair.second;
+				resPair.second = nullptr;
+			}
+		}
 
-		//for (ResType* res : unnamedRes_)
-		//{
-		//	if (nullptr != res)
-		//	{
-		//		delete res;
-		//		res = nullptr;
-		//	}
-		//}
+		for (ResType* res : unnamedRes_)
+		{
+			if (nullptr != res)
+			{
+				delete res;
+				res = nullptr;
+			}
+		}
 
-
-		namedRes_.clear();
-		unnamedRes_.clear();
+		//사실 리소스를 프로그램 끝날때까지 안 지워도 해결되는 문제지만,
+		//그래도 막을 수 있는건 최대한 다 막아둔다.
 	}
 
-	bool IsOriginal()
-	{
-		return isOriginal_;
-	}
+	//bool IsOriginal()
+	//{
+	//	return isOriginal_;
+	//}
 
 	void SetPath(const std::string& _path)
 	{
@@ -105,11 +103,11 @@ public:
 
 
 protected:
-	static std::shared_ptr<ResType> CreateNamedRes(const std::string_view& _resName = "")
+	static ResType* CreateNamedRes(const std::string_view& _resName = "")
 	{
-		std::shared_ptr<ResType> newRes = CreateRes(_resName);
+		ResType* newRes = CreateRes(_resName);
 
-		std::pair<std::map<std::string, std::shared_ptr<ResType>>::iterator, bool> insertResult;
+		std::pair<std::map<std::string, ResType*>::iterator, bool> insertResult;
 
 		{
 			std::lock_guard<std::mutex> lockInst(namedResLock_);
@@ -129,17 +127,17 @@ protected:
 		return newRes;
 	}
 
-	static std::shared_ptr<ResType> CreateUnnamedRes()
+	static ResType* CreateUnnamedRes()
 	{
-		std::shared_ptr<ResType> newRes = CreateRes();
+		ResType* newRes = CreateRes();
 		std::lock_guard<std::mutex> lockInst(unnamedResLock_);
 		unnamedRes_.push_back(newRes);
 		return newRes;
 	}
 
-	static std::shared_ptr<ResType> CreateRes(const std::string_view& _resName = "")
+	static ResType* CreateRes(const std::string_view& _resName = "")
 	{
-		std::shared_ptr<ResType> newRes = std::make_shared<ResType>();
+		ResType* newRes = new ResType();
 		if (nullptr == newRes)
 		{
 			MsgBoxAssert("newRes 생성 실패!");
@@ -151,12 +149,12 @@ protected:
 	}
 
 protected:
-	bool isOriginal_;
+	//bool isOriginal_;
 	std::string path_;
 
 private:
-	static std::map<std::string, std::shared_ptr<ResType>> namedRes_;
-	static std::list<std::shared_ptr<ResType>> unnamedRes_;
+	static std::map<std::string, ResType*> namedRes_;
+	static std::list<ResType*> unnamedRes_;
 
 	static std::mutex namedResLock_;	//namedRes_의 뮤텍스.
 	static std::mutex unnamedResLock_;	//unnamedRes_의 뮤텍스.
@@ -175,10 +173,10 @@ private:
 
 //템플릿을 가진 정적 멤버변수는 초기화를 여기서 한다.
 template<typename ResType>
-std::map<std::string, std::shared_ptr<ResType>> GameEngineRes<ResType>::namedRes_;
+std::map<std::string, ResType*> GameEngineRes<ResType>::namedRes_;
 
 template<typename ResType>
-std::list<std::shared_ptr<ResType>> GameEngineRes<ResType>::unnamedRes_;
+std::list<ResType*> GameEngineRes<ResType>::unnamedRes_;
 
 template<typename ResType>
 std::mutex GameEngineRes<ResType>::namedResLock_;

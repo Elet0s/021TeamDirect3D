@@ -15,12 +15,12 @@ GameEngineDepthStencil::~GameEngineDepthStencil()
     }
 }
 
-std::shared_ptr<GameEngineDepthStencil> GameEngineDepthStencil::Create(
+GameEngineDepthStencil* GameEngineDepthStencil::Create(
     const std::string_view& _name,
     const D3D11_DEPTH_STENCIL_DESC& _desc
 )
 {
-    std::shared_ptr<GameEngineDepthStencil> newRes = CreateNamedRes(_name);
+    GameEngineDepthStencil* newRes = CreateNamedRes(_name);
     newRes->CreateDepthStencilState(_desc);
     return newRes;
 }

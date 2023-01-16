@@ -92,10 +92,10 @@ protected:
 	void Render(float _deltaTime) override;
 
 private:
-	static std::shared_ptr<GameEngineRenderTarget> fontTarget_;
+	static GameEngineRenderTarget* fontTarget_;
 
 	std::string text_;
-	std::shared_ptr<GameEngineFont> font_;
+	GameEngineFont* font_;
 	float fontSize_;
 	float4 fontColor_;
 	float4 textPosition_;	//글자 위치. 기본설정은 윈도우좌표계 기반

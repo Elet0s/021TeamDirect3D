@@ -2,7 +2,7 @@
 #include "GameEngineConstantBuffer.h"
 #include "GameEngineDevice.h"
 
-std::map<std::string, std::map<int, std::shared_ptr<GameEngineConstantBuffer>>> GameEngineConstantBuffer::allConstantBuffers_;
+std::map<std::string, std::map<int, GameEngineConstantBuffer*>> GameEngineConstantBuffer::allConstantBuffers_;
 
 GameEngineConstantBuffer::GameEngineConstantBuffer()
 	: shaderBufferDesc_(),
@@ -20,21 +20,21 @@ GameEngineConstantBuffer::~GameEngineConstantBuffer()
 	}
 }
 
-std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::Create(
+GameEngineConstantBuffer* GameEngineConstantBuffer::Create(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc
 )
 {
-	std::shared_ptr<GameEngineConstantBuffer> newBuffer = GameEngineConstantBuffer::CreateNamedRes(_name, _desc.Size);
+	GameEngineConstantBuffer* newBuffer = GameEngineConstantBuffer::CreateNamedRes(_name, _desc.Size);
 
 	newBuffer->CreateConstantBuffer(_desc);
 
 	return newBuffer;
 }
 
-std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::Find(const std::string_view& _name, int _byteWidth)
+GameEngineConstantBuffer* GameEngineConstantBuffer::Find(const std::string_view& _name, int _byteWidth)
 {
-	std::map<std::string, std::map<int, std::shared_ptr<GameEngineConstantBuffer>>>::iterator namedIter =
+	std::map<std::string, std::map<int, GameEngineConstantBuffer*>>::iterator namedIter =
 		allConstantBuffers_.find(GameEngineString::ToUpperReturn(_name));
 
 	if (allConstantBuffers_.end() == namedIter)
@@ -42,7 +42,7 @@ std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::Find(const s
 		return nullptr;
 	}
 
-	std::map<int, std::shared_ptr<GameEngineConstantBuffer>>::iterator sizeIter = namedIter->second.find(_byteWidth);
+	std::map<int, GameEngineConstantBuffer*>::iterator sizeIter = namedIter->second.find(_byteWidth);
 
 	if (namedIter->second.end() == sizeIter)
 	{
@@ -52,19 +52,19 @@ std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::Find(const s
 	return sizeIter->second;
 }
 
-std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::CreateOrFind(
+GameEngineConstantBuffer* GameEngineConstantBuffer::CreateOrFind(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc
 )
 {
-	std::shared_ptr<GameEngineConstantBuffer> findCBuffer = Find(_name, _desc.Size);
+	GameEngineConstantBuffer* findCBuffer = Find(_name, _desc.Size);
 
 	if (nullptr != findCBuffer)
 	{
 		return findCBuffer;
 	}
 
-	std::shared_ptr<GameEngineConstantBuffer> newCBuffer = CreateNamedRes(_name, _desc.Size);
+	GameEngineConstantBuffer* newCBuffer = CreateNamedRes(_name, _desc.Size);
 	newCBuffer->CreateConstantBuffer(_desc);
 	return newCBuffer;
 }
@@ -171,19 +171,19 @@ void GameEngineConstantBuffer::PSSetConstantBuffer(int _bindPoint)
 
 void GameEngineConstantBuffer::ResourceDestroy()
 {
-	//for (std::pair<std::string, std::map<int, std::shared_ptr<GameEngineConstantBuffer>>> namedPair : allConstantBuffers_)
-	//{
-	//	for (std::pair<int, GameEngineConstantBuffer*> sizePair : namedPair.second)
-	//	{
-	//		delete sizePair.second;
-	//		sizePair.second = nullptr;
-	//	}
-	//}
+	for (std::pair<std::string, std::map<int, GameEngineConstantBuffer*>> namedPair : allConstantBuffers_)
+	{
+		for (std::pair<int, GameEngineConstantBuffer*> sizePair : namedPair.second)
+		{
+			delete sizePair.second;
+			sizePair.second = nullptr;
+		}
+	}
 }
 
-std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
+GameEngineConstantBuffer* GameEngineConstantBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
 {
-	std::shared_ptr<GameEngineConstantBuffer> findBuffer = Find(_name, _byteWidth);
+	GameEngineConstantBuffer* findBuffer = Find(_name, _byteWidth);
 
 	//같은 이름, 같은 바이트크기의 상수버퍼가 없으면 만들고, 있으면 공유한다.
 	if (nullptr != findBuffer)
@@ -193,7 +193,7 @@ std::shared_ptr<GameEngineConstantBuffer> GameEngineConstantBuffer::CreateNamedR
 	}
 	else
 	{
-		std::shared_ptr<GameEngineConstantBuffer> newCBuffer = CreateRes(_name);
+		GameEngineConstantBuffer* newCBuffer = CreateRes(_name);
 		//GameEngineRes의 namedRes_에 등록시키지 않기 위해 CreateRes()함수를 직접 호출해서 생성한다.
 		allConstantBuffers_[newCBuffer->GetNameCopy()][_byteWidth] = newCBuffer;
 

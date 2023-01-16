@@ -78,17 +78,16 @@ GameEngineCollision::~GameEngineCollision()
 
 void GameEngineCollision::ChangeOrder(int _collisionOrder)
 {
-	this->GetActor()->GetLevel()->PushCollision(
-		std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), _collisionOrder);
+	this->GetActor()->GetLevel()->PushCollision(this, _collisionOrder);
 }
 
 //bool GameEngineCollision::IsCollision(
 //	CollisionType _thisType,
 //	int _collisionGroup,
 //	CollisionType _otherType,
-//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update /*= nullptr*/,
-//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter /*= nullptr*/,
-//	std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit /*= nullptr*/
+//	std::function<CollisionReturn(GameEngineCollision*  _this, GameEngineCollision*  _other)> _update /*= nullptr*/,
+//	std::function<CollisionReturn(GameEngineCollision*  _this, GameEngineCollision*  _other)> _enter /*= nullptr*/,
+//	std::function<CollisionReturn(GameEngineCollision*  _this, GameEngineCollision*  _other)> _exit /*= nullptr*/
 //)
 //{
 //	if (false == this->IsUpdate())
@@ -105,14 +104,14 @@ void GameEngineCollision::ChangeOrder(int _collisionOrder)
 //		return false;
 //	}
 //
-//	std::map<int, std::list<std::shared_ptr<GameEngineCollision>>>& allCollisions
+//	std::map<int, std::list<GameEngineCollision* >>& allCollisions
 //		= this->GetActor()->GetLevel()->allCollisions_;
 //
-//	std::list<std::shared_ptr<GameEngineCollision>>& collisionGroup = allCollisions[_collisionGroup];
+//	std::list<GameEngineCollision* >& collisionGroup = allCollisions[_collisionGroup];
 //
 //	bool isCollided = false;	//충돌 여부.
 //
-//	for (std::shared_ptr<GameEngineCollision> otherCollision : collisionGroup)
+//	for (GameEngineCollision*  otherCollision : collisionGroup)
 //	{
 //		if (shared_from_this() == otherCollision)
 //		{
@@ -133,7 +132,7 @@ void GameEngineCollision::ChangeOrder(int _collisionOrder)
 //				if (collisionCheck_.end() == collisionCheck_.find(otherCollision))
 //				{
 //					//첫 충돌.
-//					std::pair<std::set<std::shared_ptr<GameEngineCollision>>::iterator, bool> insertResult
+//					std::pair<std::set<GameEngineCollision* >::iterator, bool> insertResult
 //						= collisionCheck_.insert(otherCollision);
 //
 //					if (false == insertResult.second)
@@ -201,7 +200,14 @@ void GameEngineCollision::ChangeOrder(int _collisionOrder)
 //	return isCollided;
 //}
 
-bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGroup, CollisionType _otherType, std::function<CollisionReturn(std::shared_ptr<GameEngineCollision>_this, std::shared_ptr<GameEngineCollision>_other)> _update, std::function<CollisionReturn(std::shared_ptr<GameEngineCollision>_this, std::shared_ptr<GameEngineCollision>_other)> _enter, std::function<CollisionReturn(std::shared_ptr<GameEngineCollision>_this, std::shared_ptr<GameEngineCollision>_other)> _exit)
+bool GameEngineCollision::IsCollided(
+	CollisionType _thisType,
+	int _collisionGroup,
+	CollisionType _otherType,
+	std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _update,
+	std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _enter,
+	std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _exit
+)
 {
 	if (false == this->IsUpdate())
 	{
@@ -217,16 +223,15 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 		return false;
 	}
 
-	std::map<int, std::list<std::shared_ptr<GameEngineCollision>>>& allCollisions
-		= this->GetActor()->GetLevel()->allCollisions_;
+	std::map<int, std::list<GameEngineCollision*>>& allCollisions = this->GetActor()->GetLevel()->allCollisions_;
 
-	std::list<std::shared_ptr<GameEngineCollision>>& collisionGroup = allCollisions[_collisionGroup];
+	std::list<GameEngineCollision*>& collisionGroup = allCollisions[_collisionGroup];
 
 	bool collisionResult = false;
 
-	for (std::shared_ptr<GameEngineCollision> otherCollision : collisionGroup)
+	for (GameEngineCollision*  otherCollision : collisionGroup)
 	{
-		if (shared_from_this() == otherCollision)
+		if (this == otherCollision)
 		{
 			continue;
 		}
@@ -245,7 +250,7 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 				if (false == collisionCheck_.contains(otherCollision))
 				{
 					//첫 충돌.
-					std::pair<std::map<std::shared_ptr<GameEngineCollision>, CollisionReturn>::iterator, bool> insertResult
+					std::pair<std::map<GameEngineCollision* , CollisionReturn>::iterator, bool> insertResult
 						= collisionCheck_.insert(std::make_pair(otherCollision, CollisionReturn::Continue));
 
 					if (false == insertResult.second)
@@ -257,8 +262,7 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 
 					if (nullptr != _enter)
 					{
-						if (CollisionReturn::Stop == _enter(
-							std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+						if (CollisionReturn::Stop == _enter(this, otherCollision))
 						{
 							collisionCheck_[otherCollision] = CollisionReturn::Stop;
 						}
@@ -276,8 +280,7 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 						continue;
 					}
 
-					if (CollisionReturn::Stop == _update(
-						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+					if (CollisionReturn::Stop == _update(this, otherCollision))
 					{
 						collisionCheck_[otherCollision] = CollisionReturn::Stop;
 					}
@@ -285,7 +288,7 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 			}
 			else if (CollisionMode::Single == collisionMode_)
 			{
-				for (std::map<std::shared_ptr<GameEngineCollision>, CollisionReturn>::iterator iter = collisionCheck_.begin();
+				for (std::map<GameEngineCollision* , CollisionReturn>::iterator iter = collisionCheck_.begin();
 					iter != collisionCheck_.end(); ++iter)
 				{
 					if (CollisionReturn::Stop == iter->second)
@@ -297,7 +300,7 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 				if (false == collisionCheck_.contains(otherCollision))
 				{
 					//첫 충돌.
-					std::pair<std::map<std::shared_ptr<GameEngineCollision>, CollisionReturn>::iterator, bool> insertResult
+					std::pair<std::map<GameEngineCollision* , CollisionReturn>::iterator, bool> insertResult
 						= collisionCheck_.insert(std::make_pair(otherCollision, CollisionReturn::Stop));
 
 					if (false == insertResult.second)
@@ -312,8 +315,7 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 						continue;
 					}
 
-					if (CollisionReturn::Continue == _update(
-						std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision))
+					if (CollisionReturn::Continue == _update(this, otherCollision))
 					{
 						collisionCheck_[otherCollision] = CollisionReturn::Continue;
 					}
@@ -345,7 +347,7 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 					continue;
 				}
 
-				_exit(std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), otherCollision);
+				_exit(this, otherCollision);
 			}
 			else if (CollisionMode::Single == collisionMode_)
 			{
@@ -364,8 +366,7 @@ bool GameEngineCollision::IsCollided(CollisionType _thisType, int _collisionGrou
 
 void GameEngineCollision::DebugRender()
 {
-	std::shared_ptr<GameEngineCamera> debugCamera
-		= this->GetActor()->GetLevel()->cameras_[static_cast<UINT>(debugCameraOrder_)];
+	GameEngineCamera* debugCamera = this->GetActor()->GetLevel()->cameras_[static_cast<UINT>(debugCameraOrder_)];
 
 	switch (this->debugType_)
 	{
@@ -415,6 +416,5 @@ void GameEngineCollision::SetUIDebugCamera()
 
 void GameEngineCollision::Start()
 {
-	this->GetActor()->GetLevel()->PushCollision(
-		std::dynamic_pointer_cast<GameEngineCollision>(shared_from_this()), this->GetOrder());
+	this->GetActor()->GetLevel()->PushCollision(this, this->GetOrder());
 }

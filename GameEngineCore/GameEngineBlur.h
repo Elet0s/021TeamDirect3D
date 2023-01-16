@@ -20,12 +20,12 @@ private:
 
 public:
 	virtual void EffectInit() override;
-	virtual void Effect(std::shared_ptr<GameEngineRenderTarget> _renderTarget) override;
+	virtual void Effect(GameEngineRenderTarget* _renderTarget) override;
 
 
 private:
-	std::shared_ptr<GameEngineRenderTarget> copiedRenderTarget_;
-	std::shared_ptr<GameEngineRenderUnit> effectUnit_;
+	class GameEngineRenderTarget* copiedRenderTarget_;
+	class GameEngineRenderUnit effectUnit_;
 
 };
 

@@ -3,13 +3,18 @@
 
 class GameEngineStructuredBuffer : public GameEngineRes<GameEngineStructuredBuffer>
 {
-	friend class GameEngineStructuredBufferSetter;
+	friend GameEngineRes<GameEngineStructuredBuffer>;
+	//GameEngineStructuredBuffer 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
 
-public:
-	GameEngineStructuredBuffer();
-	~GameEngineStructuredBuffer();
+	friend class GameEngineStructuredBufferSetter;
+	//GameEngineStructuredBufferSetter 클래스에서 리소스세팅 함수들을 호출하기 위해 프렌드.
 
 private:
+	GameEngineStructuredBuffer();
+	~GameEngineStructuredBuffer();
+	//외부에서 제멋대로 리소스를 생성/삭제하는걸 막기 위해서 생성자/소멸자를 프라이빗으로 지정해서 외부 접근을 막는다.
+	//이 프레임워크의 리소스는 반드시 소멸자가 아니라 ResourceDestroy()함수에서 제거해야 한다.
+	//프로그램 끝날때까지 리소스삭제를 안하면 끝나는 문제지만 그래도 최대한 막아둔다.
 
 	GameEngineStructuredBuffer(const GameEngineStructuredBuffer& _other) = delete;
 	GameEngineStructuredBuffer(GameEngineStructuredBuffer&& _other) noexcept = delete;
@@ -19,18 +24,19 @@ private:
 public:
 	//이름규칙: 인스턴싱용 구조화버퍼는 Inst_로 시작.
 
-	static std::shared_ptr<GameEngineStructuredBuffer> Create(
+	static GameEngineStructuredBuffer* Create(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
 		size_t _count
 	);
-	static std::shared_ptr<GameEngineStructuredBuffer> Find(const std::string_view& _name, int _byteWidth);
-	static std::shared_ptr<GameEngineStructuredBuffer> CreateOrFind(
+	static GameEngineStructuredBuffer* Find(const std::string_view& _name, int _byteWidth);
+	static GameEngineStructuredBuffer* CreateOrFind(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
 		size_t _count
 	);
 
+private:
 	void ChangeData(const void* _data, size_t _byteWidth);
 
 	//구조화 버퍼를 렌더링 파이프라인의 정점셰이더에 연결하는 함수.
@@ -46,7 +52,7 @@ public:
 	void VSResetShaderResource(int _bindPoint);
 	void PSResetShaderResource(int _bindPoint);
 
-
+public:
 	static void ResourceDestroy();
 	//GameEngineRes의 리소스저장 컨테이너를 쓸 수 없으므로 전용 컨테이너를 따로 만들고 리소스 생성과 삭제 절차도 다시 만들어야 한다.
 
@@ -58,7 +64,7 @@ public:
 	}
 
 protected:
-	static std::shared_ptr<GameEngineStructuredBuffer> CreateNamedRes(const std::string_view& _name, int _byteWidth);
+	static GameEngineStructuredBuffer* CreateNamedRes(const std::string_view& _name, int _byteWidth);
 	//GameEngineRes의 리소스저장 컨테이너를 쓸 수 없으므로 전용 컨테이너를 따로 만들고 리소스 생성과 삭제 절차도 다시 만들어야 한다.
 
 
@@ -76,7 +82,7 @@ private:
 
 
 private:
-	static std::map<std::string, std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>> allStructuredBuffers_;
+	static std::map<std::string, std::map<int, GameEngineStructuredBuffer*>> allStructuredBuffers_;
 	//일반적인 GameEngineRes<ResType> 리소스들과는 다르게 이름과 크기를 둘 다 저장하고 대조해봐야 하므로 
 	// 이중맵 구조의 전용 컨테이너에 저장하고 삭제할때도 따로 삭제한다.
 

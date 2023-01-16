@@ -10,8 +10,9 @@ enum class ProjectionMode
 };
 
 class GameEngineInstancingRenderer;
-class GameEngineInstancing;
 class GameEngineMaterial;
+class GameEngineRenderTarget;
+class GameEngineRenderUnit;
 class GameEngineCamera : public GameEngineTransformComponent
 {
 	//카메라. 
@@ -20,7 +21,7 @@ class GameEngineCamera : public GameEngineTransformComponent
 	// 뷰포트행렬대로 다시 확대한 만큼의 정점 좌표를 계산해서 변형된 대로 그리는 컴포넌트.
 
 	friend GameEngineLevel;
-	friend class GameEngineRenderer;
+	friend GameEngineRenderer;
 
 public:
 
@@ -57,10 +58,10 @@ public:
 	//할 일이 있을지는 모르겠지만, 런타임 중간에 카메라 오더 변경 금지.
 
 	//인스턴싱렌더러 반환. 없다면 빈 인스턴싱렌더러를 만들어서 반환한다.
-	std::shared_ptr<GameEngineInstancingRenderer> GetInstancingRenderer(const std::string& _name);
+	GameEngineInstancingRenderer* GetInstancingRenderer(const std::string& _name);
 
 	//카메라에 조명 추가.
-	void PushLighting(std::shared_ptr<GameEngineLighting> _newLighting);
+	void PushLighting(GameEngineLighting* _newLighting);
 
 public:
 	void SetProjectionMode(ProjectionMode _mode)
@@ -98,31 +99,31 @@ public:
 	}
 
 	//이 카메라의 최종 렌더타겟을 가져오는 함수.
-	inline std::shared_ptr<class GameEngineRenderTarget> GetConclusionRenderTarget()
+	GameEngineRenderTarget* GetConclusionRenderTarget()
 	{
 		return conclusionRenderTarget_;
 	}
 
 	//이 카메라의 포워드렌더링용 렌더타겟을 가져오는 함수.
-	inline std::shared_ptr<class GameEngineRenderTarget> GetForwardRenderTarget()
+	GameEngineRenderTarget* GetForwardRenderTarget()
 	{
 		return forwardRenderTarget_;
 	}
 
 	//이 카메라의 디퍼드렌더링용 렌더타겟을 가져오는 함수.
-	inline std::shared_ptr<class GameEngineRenderTarget> GetDeferredRenderTarget()
+	GameEngineRenderTarget* GetDeferredRenderTarget()
 	{
 		return deferredRenderTarget_;
 	}
 
 	//이 카메라의 GBuffer 렌더타겟을 가져오는 함수.
-	inline std::shared_ptr<class GameEngineRenderTarget> GetGBufferRenderTarget()
+	GameEngineRenderTarget* GetGBufferRenderTarget()
 	{
 		return geometryBufferRenderTarget_;
 	}
 
 	//이 카메라가 가진 모든 조명데이터 반환.
-	inline AllLightingDatas& GetLightingDatas()
+	AllLightingDatas& GetLightingDatas()
 	{
 		return lightingDatasInst_;
 	}
@@ -141,7 +142,7 @@ private:
 	void Render(float _deltaTime);
 
 	//주어진 렌더러를 이 카메라에 등록하는 함수.
-	void PushRenderer(std::shared_ptr<GameEngineRenderer> _renderer);
+	void PushRenderer(GameEngineRenderer* _renderer);
 
 	//렌더러를 등록 해제하는 함수. 직접 삭제하는 함수가 아님에 주의할 것.
 	void Release(float _deltaTime);
@@ -149,19 +150,19 @@ private:
 	void Update(float _dletaTime) override;
 
 	//이 카메라의 렌더러들을 다른 레벨의 카메라로 옮기는 함수.
-	void OverRenderer(std::shared_ptr<GameEngineCamera> _nextCamera);
+	void OverRenderer(GameEngineCamera* _nextCamera);
 
 	//렌더링 순서 변경.
-	void ChangeRenderingOrder(std::shared_ptr<GameEngineRenderer> _renderer, int _newRenderingOrder);
+	void ChangeRenderingOrder(GameEngineRenderer* _renderer, int _newRenderingOrder);
 
 	//마우스 포인터 이동방향 업데이트 함수.
 	void UpdateMouseDirection();
 
 private:
-	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.
+	std::map<int, std::list<GameEngineRenderer*>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.
 	//렌더링오더로 먼저 분류한 후 렌더 직전에 zsort() 함수로 z값 순서대로 정렬한다. 
 
-	std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>> allInstancingRenderers_;
+	std::map<std::string, GameEngineInstancingRenderer*> allInstancingRenderers_;
 
 	//비정렬 맵(Unordered Map): 들어오는 키값을 해시함수를 거쳐서 나온 숫자로 바꿔서, 
 	// 그 값을 인덱스로 하는 배열 내 원소로 데이터를 저장하는 방식의 컨테이너. 
@@ -236,39 +237,39 @@ private:
 	float4 mouseDirection_;		//마우스포인터가 이동한 방향.
 
 	//최종 결과물을 받는 렌더타겟.
-	std::shared_ptr<GameEngineRenderTarget> conclusionRenderTarget_;
+	GameEngineRenderTarget* conclusionRenderTarget_;
 
 	//포워드 렌더링용 렌더타겟.
-	std::shared_ptr<GameEngineRenderTarget> forwardRenderTarget_;
+	GameEngineRenderTarget* forwardRenderTarget_;
 
 	//디퍼드 렌더링용 렌더타겟.
-	std::shared_ptr<GameEngineRenderTarget> deferredRenderTarget_;
+	GameEngineRenderTarget* deferredRenderTarget_;
 
 	//지오메트리 버퍼 렌더타겟(이하 g버퍼).
-	std::shared_ptr<GameEngineRenderTarget> geometryBufferRenderTarget_;
+	GameEngineRenderTarget* geometryBufferRenderTarget_;
 	//오브젝트의 깊이값도 여기에 저장한다.
 
 	//그림자 깊이값 저장용 렌더타겟.
-	std::shared_ptr<GameEngineRenderTarget> shadowDepthRenderTarget_;
+	GameEngineRenderTarget* shadowDepthRenderTarget_;
 
 	//빛 적용 배율값 저장용 렌더타겟.
-	std::shared_ptr<GameEngineRenderTarget> lightRatioBufferRenderTarget_;
+	GameEngineRenderTarget* lightRatioBufferRenderTarget_;
 
 	//빛정보 저장용 렌더타겟.
-	std::shared_ptr<GameEngineRenderTarget> lightDataBufferRenderTarget_;
+	GameEngineRenderTarget* lightDataBufferRenderTarget_;
 
 
-	std::shared_ptr<class GameEngineRenderUnit> lightRatioRenderUnit_;	//빛 배율 저장용 렌더유닛.
+	class GameEngineRenderUnit* lightRatioRenderUnit_;	//빛 배율 저장용 렌더유닛.
 
-	std::shared_ptr<class GameEngineRenderUnit> lightDataRenderUnit_;	//빛 정보 계산용 렌더유닛.
+	class GameEngineRenderUnit* lightDataRenderUnit_;	//빛 정보 계산용 렌더유닛.
 
-	std::shared_ptr<class GameEngineRenderUnit> mergerRenderUnit_;	//최종 통합 렌더유닛.
-
-
+	class GameEngineRenderUnit* mergeRenderUnit_;	//최종 통합 렌더유닛.
 
 
 
-	std::set<std::shared_ptr<GameEngineLighting>> allLightings_;	//모든 조명 정보.
+
+
+	std::set<GameEngineLighting*> allLightings_;	//모든 조명 정보.
 
 	AllLightingDatas lightingDatasInst_;	//이 카메라의 모든 조명 데이터들. 
 };

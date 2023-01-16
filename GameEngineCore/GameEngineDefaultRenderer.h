@@ -1,6 +1,5 @@
 #pragma once
 #include "GameEngineRenderer.h"
-#include "GameEngineShaderResourceHelper.h"
 
 class GameEngineRenderUnit;
 class GameEngineDefaultRenderer: public GameEngineRenderer
@@ -40,8 +39,7 @@ public:
 	inline GameEngineShaderResourceHelper& GetShaderResourceHelper()	
 		//셰이더리소스헬퍼 없는 렌더러란 있을 수 없으므로 레퍼런스 반환.
 	{
-		return this->renderUnit_->GetShaderResourceHelper();
-		//return this->allRenderUnits_[RenderingPath::ForwardRendering][0]->GetShaderResourceHelper();
+		return this->renderUnit_.GetShaderResourceHelper();
 	}
 	
 	//이 함수를 호출한 렌더러들은 그림자 렌더러가 되어 shadowDepthRenderTarget_에 그림자 깊이값을 저장한다.
@@ -55,33 +53,14 @@ public:
 		return isShadowRendering_;
 	}
 
-	//inline std::vector<std::shared_ptr<GameEngineRenderUnit>> GetForwardRenderUnitVector()
-	//{
-	//	return this->allRenderUnits_[RenderingPath::ForwardRendering];
-	//}
-
-	//inline std::vector<std::shared_ptr<GameEngineRenderUnit>> GetDeferredRenderUnitVector()
-	//{
-	//	return this->allRenderUnits_[RenderingPath::DeferredRendering];
-	//}
-
 protected:
 	virtual void Start();
 	virtual void Update(float _deltaTime);
 	virtual void End();
 
-
-	//std::shared_ptr<GameEngineRenderUnit> AddRenderUnit();
-	//std::shared_ptr<GameEngineRenderUnit> AddDeferredRenderUnit();
-
 private:
-	std::shared_ptr<GameEngineRenderUnit> renderUnit_;
+	GameEngineRenderUnit renderUnit_;
 	//한개의 디폴트렌더러마다 최소 한개의 렌더유닛을 가진다.
-
-	//이 렌더러가 가진 모든 렌더유닛들.
-	//std::map<RenderingPath, std::vector<std::shared_ptr<GameEngineRenderUnit>>> allRenderUnits_;
-	//렌더링패스 순서대로 정렬.
-	//맵과 벡터라고 만드시 많은 숫자를 저장한다는 보장은 없음.
 
 	bool isShadowRendering_;	 //true: 그림자의 깊이값을 렌더타겟에 저장한다.
 };

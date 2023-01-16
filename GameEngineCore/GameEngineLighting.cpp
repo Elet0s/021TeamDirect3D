@@ -67,13 +67,13 @@ void GameEngineLighting::Update(float _deltaTime)
 	//	= lightingData_.lightingViewMatrix_ * lightingData_.lightingProjectionMatrix_;
 }
 
-void GameEngineLighting::UpdataLightingData(std::weak_ptr<GameEngineCamera> _camera)
+void GameEngineLighting::UpdataLightingData(GameEngineCamera* _camera)
 {
-	this->lightingData_.cameraViewMatrix_ = _camera.lock()->GetViewMatrix();
+	this->lightingData_.cameraViewMatrix_ = _camera->GetViewMatrix();
 	this->lightingData_.inverseCameraViewMatrix_ = this->lightingData_.cameraViewMatrix_.InverseReturn();
 
 	this->GetTransform().SetViewMatrix(this->lightingData_.cameraViewMatrix_);
-	this->GetTransform().SetProjectionMatrix(_camera.lock()->GetProjectionMatrix());
+	this->GetTransform().SetProjectionMatrix(_camera->GetProjectionMatrix());
 	this->GetTransform().CalculateWorldViewProjection();
 	//조명 액터의 트랜스폼에 뷰행렬, 투영행렬 적용.
 

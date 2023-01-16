@@ -25,9 +25,9 @@ GameEngineCamera::GameEngineCamera()
 	shadowDepthRenderTarget_(nullptr),
 	lightRatioBufferRenderTarget_(nullptr),
 	lightDataBufferRenderTarget_(nullptr),
-	lightRatioRenderUnit_(std::make_shared<GameEngineRenderUnit>()),
-	lightDataRenderUnit_(std::make_shared<GameEngineRenderUnit>()),
-	mergerRenderUnit_(std::make_shared<GameEngineRenderUnit>())
+	lightRatioRenderUnit_(nullptr),
+	lightDataRenderUnit_(nullptr),
+	mergeRenderUnit_(nullptr)
 {
 	viewportDesc_.TopLeftX = 0;
 	viewportDesc_.TopLeftY = 0;
@@ -41,6 +41,23 @@ GameEngineCamera::GameEngineCamera()
 
 GameEngineCamera::~GameEngineCamera()
 {
+	if (nullptr != lightRatioRenderUnit_)
+	{
+		delete lightRatioRenderUnit_;
+		lightRatioRenderUnit_ = nullptr;
+	}
+
+	if (nullptr != lightDataRenderUnit_)
+	{
+		delete lightDataRenderUnit_;
+		lightDataRenderUnit_ = nullptr;
+	}
+	
+	if (nullptr != mergeRenderUnit_)
+	{
+		delete mergeRenderUnit_;
+		mergeRenderUnit_ = nullptr;
+	}
 }
 
 float4 GameEngineCamera::ConvertWorldPositionToScreenPosition(const float4& _worldPosition)
@@ -163,21 +180,15 @@ float4 GameEngineCamera::GetRayTowardMousePointer()
 
 void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 {
-	GetActor()->GetLevel()->PushCamera(std::dynamic_pointer_cast<GameEngineCamera>(shared_from_this()), _order);
+	GetActor()->GetLevel()->PushCamera(this, _order);
 }
 
-std::shared_ptr<GameEngineInstancingRenderer> GameEngineCamera::GetInstancingRenderer(const std::string& _name)
+GameEngineInstancingRenderer* GameEngineCamera::GetInstancingRenderer(const std::string& _name)
 {
-	if (false == allInstancingRenderers_.contains(_name))
-	{
-		std::pair<std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator, bool> insertResult 
-			= allInstancingRenderers_.insert(std::make_pair(_name, std::make_shared<GameEngineInstancingRenderer>()));
-	}
-
 	return allInstancingRenderers_[_name];
 }
 
-void GameEngineCamera::PushLighting(std::shared_ptr<GameEngineLighting> _newLighting)
+void GameEngineCamera::PushLighting(GameEngineLighting* _newLighting)
 {
 	if (true == allLightings_.contains(_newLighting))
 	{
@@ -296,7 +307,7 @@ void GameEngineCamera::Start()
 	//빛정보 저장 버퍼 렌더타겟에 환경광(Ambient Light) 정보를 저장할 텍스처 생성. 
 	//빛은 z값 관계없이 적용되므로 깊이스텐실뷰를 가져올 필요가 없다.
 
-
+	lightRatioRenderUnit_ = new GameEngineRenderUnit();
 	lightRatioRenderUnit_->SetMesh("Fullrect");
 	lightRatioRenderUnit_->SetMaterial("CalLightRatio");
 	lightRatioRenderUnit_->GetShaderResourceHelper().SetSampler("POINTCLAMP", "POINTCLAMP");
@@ -304,7 +315,7 @@ void GameEngineCamera::Start()
 	lightRatioRenderUnit_->GetShaderResourceHelper().SetTexture("ShadowDepthTexture", shadowDepthRenderTarget_->GetRenderTargetTexture(0));
 
 
-
+	lightDataRenderUnit_ = new GameEngineRenderUnit();
 	lightDataRenderUnit_->SetMesh("Fullrect");
 	lightDataRenderUnit_->SetMaterial("CalDeferredLight");
 	lightDataRenderUnit_->GetShaderResourceHelper().SetConstantBuffer_Link("AllLightingDatas", this->lightingDatasInst_);
@@ -313,13 +324,13 @@ void GameEngineCamera::Start()
 	lightDataRenderUnit_->GetShaderResourceHelper().SetTexture("LightRatioTexture", lightRatioBufferRenderTarget_->GetRenderTargetTexture(0));
 
 
-
-	mergerRenderUnit_->SetMesh("Fullrect");
-	mergerRenderUnit_->SetMaterial("CalDeferredMerger");
-	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("ColorTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(0));
-	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("DiffuseLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(0));
-	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("SpecularLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(1));
-	mergerRenderUnit_->GetShaderResourceHelper().SetTexture("AmbientLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(2));
+	mergeRenderUnit_ = new GameEngineRenderUnit();
+	mergeRenderUnit_->SetMesh("Fullrect");
+	mergeRenderUnit_->SetMaterial("CalDeferredMerger");
+	mergeRenderUnit_->GetShaderResourceHelper().SetTexture("ColorTexture", geometryBufferRenderTarget_->GetRenderTargetTexture(0));
+	mergeRenderUnit_->GetShaderResourceHelper().SetTexture("DiffuseLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(0));
+	mergeRenderUnit_->GetShaderResourceHelper().SetTexture("SpecularLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(1));
+	mergeRenderUnit_->GetShaderResourceHelper().SetTexture("AmbientLightTexture", lightDataBufferRenderTarget_->GetRenderTargetTexture(2));
 
 	GameEngineDevice::GetDC()->RSSetViewports(//파이프라인에 뷰포트들을 세팅하는 함수.
 		1,					//설정할 뷰포트 개수.
@@ -327,17 +338,17 @@ void GameEngineCamera::Start()
 	);
 }
 
-bool ZSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameEngineRenderer> _rendererB)
+bool ZSort(GameEngineRenderer* _rendererA, GameEngineRenderer* _rendererB)
 {
 	//
 	return _rendererA->GetTransform().GetWorldPosition().z > _rendererB->GetTransform().GetWorldPosition().z;
 }
 
-bool YSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameEngineRenderer> _rendererB)
-{
-	//
-	return _rendererA->GetTransform().GetWorldPosition().y < _rendererB->GetTransform().GetWorldPosition().y;
-}
+//bool YSort(std::shared_ptr<GameEngineRenderer> _rendererA, std::shared_ptr<GameEngineRenderer> _rendererB)
+//{
+//	//
+//	return _rendererA->GetTransform().GetWorldPosition().y < _rendererB->GetTransform().GetWorldPosition().y;
+//}
 
 void GameEngineCamera::Render(float _deltaTime)
 {
@@ -391,9 +402,9 @@ void GameEngineCamera::Render(float _deltaTime)
 
 	lightingDatasInst_.lightingCount_ = static_cast<int>(allLightings_.size());
 	int lightingIndex = 0;
-	for (std::shared_ptr<GameEngineLighting> singleLighting : allLightings_)
+	for (GameEngineLighting* singleLighting : allLightings_)
 	{
-		singleLighting->UpdataLightingData(std::dynamic_pointer_cast<GameEngineCamera>(shared_from_this()));
+		singleLighting->UpdataLightingData(this);
 		lightingDatasInst_.lightings_[lightingIndex++] = singleLighting->GetLightingData();
 	}
 
@@ -405,14 +416,14 @@ void GameEngineCamera::Render(float _deltaTime)
 		forwardRenderTarget_->SetRenderTarget();
 		//포워드 렌더타겟 세팅 및 초기화.
 
-		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
+		for (std::pair<const int, std::list<GameEngineRenderer*>>& rendererGroup : allRenderers_)
 		{
 			float scaleTime = GameEngineTime::GetInst().GetDeltaTime(rendererGroup.first);
 
-			std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
+			std::list<GameEngineRenderer*>& sortingRendererList = rendererGroup.second;
 			sortingRendererList.sort(ZSort);
 
-			for (std::shared_ptr<GameEngineRenderer> const renderer : rendererGroup.second)
+			for (GameEngineRenderer* const renderer : rendererGroup.second)
 				//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 				//하지만 renderer가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
 			{
@@ -436,7 +447,7 @@ void GameEngineCamera::Render(float _deltaTime)
 			}
 		}
 
-		for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstancingRenderer*>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second->Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
@@ -455,14 +466,14 @@ void GameEngineCamera::Render(float _deltaTime)
 		geometryBufferRenderTarget_->SetRenderTarget();
 		//gBuffer 렌더타겟을 DC에 연결.
 
-		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
+		for (std::pair<const int, std::list<GameEngineRenderer*>>& rendererGroup : allRenderers_)
 		{
 			float scaleTime = GameEngineTime::GetInst().GetDeltaTime(rendererGroup.first);
 
 			//std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
 			//sortingRendererList.sort(ZSort);
 
-			for (std::shared_ptr<GameEngineRenderer> const renderer : rendererGroup.second)
+			for (GameEngineRenderer* const renderer : rendererGroup.second)
 				//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 				//하지만 renderer가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
 			{
@@ -488,7 +499,7 @@ void GameEngineCamera::Render(float _deltaTime)
 			}
 		}
 
-		for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstancingRenderer*>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second->DeferredRender(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
@@ -503,21 +514,21 @@ void GameEngineCamera::Render(float _deltaTime)
 		shadowDepthRenderTarget_->Clear();
 		shadowDepthRenderTarget_->SetRenderTarget();
 
-		for (std::map<std::string, std::shared_ptr<GameEngineInstancingRenderer>>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstancingRenderer*>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second->RenderShadow(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
 		}
 		//플레이어가 자기 그림자에 가려지는것에 대한 임시 조치.
 
-		for (std::pair<const int, std::list<std::shared_ptr<GameEngineRenderer>>>& rendererGroup : allRenderers_)
+		for (std::pair<const int, std::list<GameEngineRenderer*>>& rendererGroup : allRenderers_)
 		{
 			float scaleTime = GameEngineTime::GetInst().GetDeltaTime(rendererGroup.first);
 
-			std::list<std::shared_ptr<GameEngineRenderer>>& sortingRendererList = rendererGroup.second;
+			std::list<GameEngineRenderer*>& sortingRendererList = rendererGroup.second;
 			sortingRendererList.sort(ZSort);
 
-			for (std::shared_ptr<GameEngineRenderer> const renderer : rendererGroup.second)
+			for (GameEngineRenderer* const renderer : rendererGroup.second)
 				//이 위치의 const는 renderer가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 				//하지만 renderer가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
 			{
@@ -545,7 +556,7 @@ void GameEngineCamera::Render(float _deltaTime)
 
 
 	lightRatioBufferRenderTarget_->Clear();
-	lightRatioBufferRenderTarget_->Effect(lightRatioRenderUnit_);
+	lightRatioBufferRenderTarget_->Effect(*lightRatioRenderUnit_);
 	//그림자의 깊이값과 오브젝트의 깊이값을 비교해서 그림자가 오브젝트보다 더 앞에 나온다면 
 	// 그림자가 그려지는 픽셀에는 난반사광을 절반만 적용되게 한다.
 
@@ -553,10 +564,10 @@ void GameEngineCamera::Render(float _deltaTime)
 	//렌더링 결과 통합.
 
 	lightDataBufferRenderTarget_->Clear();
-	lightDataBufferRenderTarget_->Effect(lightDataRenderUnit_);
+	lightDataBufferRenderTarget_->Effect(*lightDataRenderUnit_);
 
 	deferredRenderTarget_->Clear();
-	deferredRenderTarget_->Effect(mergerRenderUnit_);
+	deferredRenderTarget_->Effect(*mergeRenderUnit_);
 
 
 
@@ -573,7 +584,7 @@ void GameEngineCamera::Render(float _deltaTime)
 	//이렇게 합쳐진 색상값 정보들은 게임엔진레벨의 Render()함수에서 백버퍼 렌더타겟에 다시한번 합쳐진다. 
 }
 
-void GameEngineCamera::PushRenderer(std::shared_ptr<GameEngineRenderer> _renderer)
+void GameEngineCamera::PushRenderer(GameEngineRenderer* _renderer)
 {
 	allRenderers_[_renderer->GetOrder()].push_back(_renderer);
 	//게임엔진카메라의 소멸자가 호출되지 않으면, allRenderers 푸시백 과정에서 새로 동적할당된 노드들이 해제되지 
@@ -582,10 +593,10 @@ void GameEngineCamera::PushRenderer(std::shared_ptr<GameEngineRenderer> _rendere
 
 void GameEngineCamera::Release(float _deltaTime)
 {
-	for (std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>>::iterator mapIter = allRenderers_.begin();
+	for (std::map<int, std::list<GameEngineRenderer*>>::iterator mapIter = allRenderers_.begin();
 		mapIter != allRenderers_.end(); mapIter++)
 	{
-		for (std::list<std::shared_ptr<GameEngineRenderer>>::iterator listIter = mapIter->second.begin();
+		for (std::list<GameEngineRenderer*>::iterator listIter = mapIter->second.begin();
 			listIter != mapIter->second.end(); /*listIter++*/)
 		{
 			(*listIter)->ReleaseUpdate(_deltaTime);
@@ -610,7 +621,7 @@ void GameEngineCamera::Update(float _dletaTime)
 	UpdateMouseDirection();
 }
 
-void GameEngineCamera::OverRenderer(std::shared_ptr<GameEngineCamera> _nextCamera)
+void GameEngineCamera::OverRenderer(GameEngineCamera* _nextCamera)
 {
 	if (nullptr == _nextCamera)
 	{
@@ -618,19 +629,19 @@ void GameEngineCamera::OverRenderer(std::shared_ptr<GameEngineCamera> _nextCamer
 		return;
 	}
 
-	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>>::iterator startGroupIter = allRenderers_.begin();
-	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>>::iterator endGroupIter = allRenderers_.end();
+	std::map<int, std::list<GameEngineRenderer*>>::iterator startGroupIter = allRenderers_.begin();
+	std::map<int, std::list<GameEngineRenderer*>>::iterator endGroupIter = allRenderers_.end();
 
 	for (; startGroupIter != endGroupIter; ++startGroupIter)
 	{
-		std::list<std::shared_ptr<GameEngineRenderer>>& group = startGroupIter->second;
+		std::list<GameEngineRenderer*>& group = startGroupIter->second;
 
-		std::list<std::shared_ptr<GameEngineRenderer>>::iterator groupStart = group.begin();
-		std::list<std::shared_ptr<GameEngineRenderer>>::iterator groupEnd = group.end();
+		std::list<GameEngineRenderer*>::iterator groupStart = group.begin();
+		std::list<GameEngineRenderer*>::iterator groupEnd = group.end();
 
 		for (; groupStart != groupEnd; )
 		{
-			std::shared_ptr<GameEngineActor> root = (*groupStart)->GetRoot<GameEngineActor>();
+			GameEngineActor* root = (*groupStart)->GetRoot<GameEngineActor>();
 
 			if (true == root->isLevelOver_)
 			{
@@ -645,7 +656,7 @@ void GameEngineCamera::OverRenderer(std::shared_ptr<GameEngineCamera> _nextCamer
 	}
 }
 
-void GameEngineCamera::ChangeRenderingOrder(std::shared_ptr<GameEngineRenderer> _renderer, int _newRenderingOrder)
+void GameEngineCamera::ChangeRenderingOrder(GameEngineRenderer* _renderer, int _newRenderingOrder)
 {
 	this->allRenderers_[_renderer->GetRenderingOrder()].remove(_renderer);
 

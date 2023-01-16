@@ -47,7 +47,7 @@ class GameEngineConstantBufferSetter : public ShaderResSetter
 
 public:
 	//이 상수버퍼 세터가 담당한, 부모 셰이더가 필요로 하는 상수버퍼.
-	std::shared_ptr<GameEngineConstantBuffer> constantBuffer_;
+	GameEngineConstantBuffer* constantBuffer_;
 	//여러 상수버퍼 세터가 하나의 상수버퍼를 공유할 수 있다.
 
 	//GPU로 보내질, 각각의 상수버퍼들이 가진 데이터의 주소값. 
@@ -84,7 +84,7 @@ class GameEngineTextureSetter : public ShaderResSetter
 	friend class GameEngineShaderResourceHelper;
 
 	//이 텍스처세터가 가지는 텍스처. 
-	std::shared_ptr<GameEngineTexture> texture_;
+	GameEngineTexture* texture_;
 	//추가적인 텍스처를 세팅해주지 않으면 경고 차원에서 "NSet.png"이 그대로 렌더되게 한다. 
 
 public:
@@ -109,7 +109,7 @@ class GameEngineSamplerSetter : public ShaderResSetter
 
 
 	//이 샘플러세터가 가지는 샘플러.
-	std::shared_ptr<GameEngineSampler> sampler_;
+	GameEngineSampler* sampler_;
 
 public:
 	void Set() const;
@@ -143,7 +143,7 @@ public:
 private:
 	// 상수버퍼와 완전히 동일하게 동일하게 생각하면 됩니다.
 
-	std::shared_ptr<GameEngineStructuredBuffer> structuredBuffer_;
+	GameEngineStructuredBuffer* structuredBuffer_;
 	const void* settingDataToGPU_;
 	size_t size_;
 	size_t count_;
@@ -188,7 +188,7 @@ class GameEngineTexture2DArraySetter: public ShaderResSetter
 	void Bind();
 
 
-	std::shared_ptr<GameEngineTexture2DArray> texture2DArray_;
+	GameEngineTexture2DArray* texture2DArray_;
 
 public:
 	GameEngineTexture2DArraySetter() : texture2DArray_(nullptr)

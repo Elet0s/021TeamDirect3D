@@ -15,10 +15,10 @@ GameEngineSampler::~GameEngineSampler()
     }
 }
 
-std::shared_ptr<GameEngineSampler> GameEngineSampler::Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc)
+GameEngineSampler* GameEngineSampler::Create(const std::string_view& _name, const D3D11_SAMPLER_DESC& _desc)
 {
-    std::shared_ptr<GameEngineSampler> newSampler = CreateNamedRes(_name);
-    newSampler->Create(_desc);
+    GameEngineSampler* newSampler = CreateNamedRes(_name);
+    newSampler->CreateSampler(_desc);
     return newSampler;
 }
 
@@ -67,7 +67,7 @@ void GameEngineSampler::PSSetSampler(int _bindPoint)
     );
 }
 
-void GameEngineSampler::Create(const D3D11_SAMPLER_DESC& _desc)
+void GameEngineSampler::CreateSampler(const D3D11_SAMPLER_DESC& _desc)
 {
     samplerDesc_ = _desc;
 

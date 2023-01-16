@@ -371,7 +371,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 	size_t vsEntryIndex = allHLSLCode.find("_VS(");
 	if (std::string::npos != vsEntryIndex)
 	{
-		std::shared_ptr<GameEngineVertexShader> vertexShader = nullptr;
+		GameEngineVertexShader* vertexShader = nullptr;
 
 		size_t firstIndex = allHLSLCode.find_last_of(" ", vsEntryIndex);
 		std::string vsEntryName
@@ -404,7 +404,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 	size_t psEntryIndex = allHLSLCode.find("_PS(");
 	if (std::string::npos != psEntryIndex)
 	{
-		std::shared_ptr<GameEnginePixelShader> pixelShader = nullptr;
+		GameEnginePixelShader* pixelShader = nullptr;
 
 		size_t firstIndex = allHLSLCode.find_last_of(" ", psEntryIndex);
 		std::string psEntryName = allHLSLCode.substr(
@@ -458,7 +458,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 	size_t gsEntryIndex = allHLSLCode.find("_GS(");
 	if (std::string::npos != gsEntryIndex)
 	{
-		std::shared_ptr<GameEngineGeometryShader> geometryShader = nullptr;
+		GameEngineGeometryShader* geometryShader = nullptr;
 
 		size_t firstIndex = allHLSLCode.find_last_of(" ", gsEntryIndex);
 		std::string gsEntryName
@@ -473,7 +473,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 	size_t csEntryIndex = allHLSLCode.find("_CS(");
 	if (std::string::npos != csEntryIndex)
 	{
-		std::shared_ptr<GameEngineComputeShader> computeShader = nullptr;
+		GameEngineComputeShader* computeShader = nullptr;
 
 		size_t firstIndex = allHLSLCode.find_last_of(" ", csEntryIndex);
 		std::string csEntryName

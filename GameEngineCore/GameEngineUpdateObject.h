@@ -1,8 +1,6 @@
 #pragma once
 
-class GameEngineUpdateObject
-	: public GameEngineDebugObject,
-	public std::enable_shared_from_this<GameEngineUpdateObject>
+class GameEngineUpdateObject: public GameEngineDebugObject
 {
 	//이 프레임워크에 사용되는 모든 오브젝트들의 생성, 갱신, 삭제 구조를 만드는 클래스.
 
@@ -19,7 +17,7 @@ public:
 
 public:
 	//이 오브젝트에게 부모를 달아주고, 부모 오브젝트의 children_ 리스트에 이 오브젝트를 등록하는 함수.
-	virtual void SetParent(std::shared_ptr<GameEngineUpdateObject> _newParent);
+	virtual void SetParent(GameEngineUpdateObject* _newParent);
 
 	//이 오브젝트와 그 자식들을 최종 삭제하는 함수.
 	virtual void ReleaseHierarchy();
@@ -54,13 +52,13 @@ public:
 	//특정 오브젝트가 업데이트중인지 아닌지 받아보는 함수.
 	inline bool IsUpdate()
 	{
-		if (nullptr == parent_.lock())
+		if (nullptr == parent_)
 		{
 			return isUpdate_ && false == isDead_;
 		}
 		else
 		{
-			return isUpdate_ && false == isDead_ && true == parent_.lock()->IsUpdate();
+			return isUpdate_ && false == isDead_ && true == parent_->IsUpdate();
 			//자기 자신이 isUpdate_ == true여도 부모 오브젝트가 isUpdate_ == false면 업데이트에서 제외된다. 
 		}
 	}
@@ -72,13 +70,13 @@ public:
 
 	inline bool IsDead()
 	{
-		if (nullptr == parent_.lock())
+		if (nullptr == parent_)
 		{
 			return isDead_;
 		}
 		else
 		{
-			return isDead_ || true == parent_.lock()->IsDead();
+			return isDead_ || true == parent_->IsDead();
 			//자기 자신이 isDead_ == false여도 부모 오브젝트가 isUpdate_ == true면 사망 판정받고 삭제된다.
 		}
 	}
@@ -141,36 +139,36 @@ public:
 		order_ = _order;
 	}
 
-	template<typename ObjectType>
-	std::shared_ptr<ObjectType> CastThis()
-	{
-		return std::dynamic_pointer_cast<ObjectType>(shared_from_this());
-	}
+	//template<typename ObjectType>
+	//ObjectType* CastThis()
+	//{
+	//	return std::dynamic_pointer_cast<ObjectType>(shared_from_this());
+	//}
 
 	//형변환 부모 받기.
 	template<typename ParentType>
-	std::shared_ptr<ParentType> GetParent()
+	ParentType* GetParent()
 	{
-		return std::dynamic_pointer_cast<ParentType>(parent_.lock());
+		return dynamic_cast<ParentType*>(parent_);
 	}
 
 	//GameEngineUpdateObject* 형태로 부모 받기.
-	std::shared_ptr<GameEngineUpdateObject> GetParent()
+	GameEngineUpdateObject* GetParent()
 	{
-		return parent_.lock();
+		return parent_;
 	}
 
 	//레벨 바로 아래 등록된 오브젝트까지 거슬러 올라가, 그 오브젝트를 형변환해서 반환받는 함수.
 	template<typename ParentType>
-	std::shared_ptr<ParentType> GetRoot()
+	ParentType* GetRoot()
 	{
-		return std::dynamic_pointer_cast<ParentType>(GetRoot());
+		return dynamic_cast<ParentType*>(GetRoot());
 	}
 
 	//레벨 바로 아래 등록된 오브젝트까지 거슬러 올라가, 그 오브젝트를 반환받는 함수.
-	std::shared_ptr<GameEngineUpdateObject> GetRoot()
+	GameEngineUpdateObject* GetRoot()
 	{
-		std::shared_ptr<GameEngineUpdateObject> currentObject = shared_from_this();
+		GameEngineUpdateObject* currentObject = this;
 
 		while (nullptr != currentObject->GetParent())
 		{
@@ -202,7 +200,7 @@ protected:
 
 	//사망판정받은 오브젝트와 그 자식들을 업데이트 루프에서 떼어내 삭제 대상 리스트에 등록하는 함수.
 	//여기에 넣은 오브젝트들은 다음 루프에서 삭제된다. 바로 삭제되지 않는것에 주의할 것.
-	void ReleaseObject(std::list<std::shared_ptr<GameEngineUpdateObject>>& _releaseList);
+	void ReleaseObject(std::list<GameEngineUpdateObject*>& _releaseList);
 
 	//이 오브젝트를 부모 오브젝트의 children_리스트에서 제거하는 함수.
 	virtual void DetachObject();
@@ -227,7 +225,7 @@ protected:
 	}
 
 protected:
-	std::list<std::shared_ptr<GameEngineUpdateObject>> children_;	//자식 오브젝트들.
+	std::list<GameEngineUpdateObject*> children_;	//자식 오브젝트들.
 
 private:
 
@@ -242,7 +240,7 @@ private:
 	bool isUpdate_;	//true: 업데이트 참여. false: 업데이트 제외.
 	bool isDead_;	//true: 사망 판정 받음. false: 사망 판정 안 받음. 사망처리가 아닌 사망 판정임에 주의.
 
-	std::weak_ptr<GameEngineUpdateObject> parent_;	//부모 오브젝트.
+	GameEngineUpdateObject* parent_;	//부모 오브젝트.
 
 
 };

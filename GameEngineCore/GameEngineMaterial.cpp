@@ -26,12 +26,12 @@ GameEngineMaterial::~GameEngineMaterial()
 {
 }
 
-std::shared_ptr<GameEngineMaterial> GameEngineMaterial::Create(const std::string_view& _materialName)
+GameEngineMaterial* GameEngineMaterial::Create(const std::string_view& _materialName)
 {
 	return CreateNamedRes(_materialName);
 }
 
-std::shared_ptr<GameEngineMaterial> GameEngineMaterial::Create()
+GameEngineMaterial* GameEngineMaterial::Create()
 {
 	return CreateUnnamedRes();
 }
@@ -56,7 +56,7 @@ void GameEngineMaterial::SetVertexShader(const std::string_view& _name)
 	}
 }
 
-void GameEngineMaterial::SetVertexShader(std::shared_ptr<GameEngineVertexShader> _vertexShader)
+void GameEngineMaterial::SetVertexShader(GameEngineVertexShader* _vertexShader)
 {
 	this->vertexShader_ = _vertexShader;
 
@@ -138,7 +138,7 @@ void GameEngineMaterial::SetBlend_OutputMerger(const std::string_view& _name)
 	}
 }
 
-void GameEngineMaterial::Copy(std::shared_ptr<GameEngineMaterial> _original)
+void GameEngineMaterial::Copy(GameEngineMaterial* _original)
 {
 	this->vertexShader_ = _original->vertexShader_;
 	this->rasterizer_ = _original->rasterizer_;

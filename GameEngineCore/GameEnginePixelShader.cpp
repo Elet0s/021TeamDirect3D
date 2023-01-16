@@ -14,6 +14,12 @@ GameEnginePixelShader::~GameEnginePixelShader()
         pixelShader_->Release();
         pixelShader_ = nullptr;
     }
+
+    if (nullptr != inst_PixelShader_)
+    {
+        delete inst_PixelShader_;
+        inst_PixelShader_ = nullptr;
+    }
 }
 
 void GameEnginePixelShader::Set()
@@ -32,7 +38,7 @@ void GameEnginePixelShader::Set()
     );
 }
 
-std::shared_ptr<GameEnginePixelShader> GameEnginePixelShader::Load(
+GameEnginePixelShader* GameEnginePixelShader::Load(
     const std::string_view& _path,
     const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
@@ -42,7 +48,7 @@ std::shared_ptr<GameEnginePixelShader> GameEnginePixelShader::Load(
     return Load(_path, GameEnginePath::GetFileName(_path), _entryPoint, _versionHigh, _versionLow);
 }
 
-std::shared_ptr<GameEnginePixelShader> GameEnginePixelShader::Load(
+GameEnginePixelShader* GameEnginePixelShader::Load(
     const std::string_view& _path,
     const std::string_view& _name,
     const std::string_view& _entryPoint,
@@ -50,7 +56,7 @@ std::shared_ptr<GameEnginePixelShader> GameEnginePixelShader::Load(
     UINT _versionLow /*= 0*/
 )
 {
-    std::shared_ptr<GameEnginePixelShader> newRes = CreateNamedRes(_name);
+    GameEnginePixelShader* newRes = CreateNamedRes(_name);
     newRes->CreateVersion("ps", _versionHigh, _versionLow);
     newRes->SetEntrtyPoint(_entryPoint);
     newRes->CompileHLSLCode(_path);
@@ -66,7 +72,7 @@ void GameEnginePixelShader::InstancingPixelShaderCompile(
     UINT _versionLow /*= 0*/
 )
 {
-    inst_PixelShader_ = std::make_shared<GameEnginePixelShader>();  //GameEngineRes에 등록되지 않는 점 주의.
+    inst_PixelShader_ = new GameEnginePixelShader();  //GameEngineRes에 등록되지 않는 점 주의.
     inst_PixelShader_->SetName(_entryPoint);
     inst_PixelShader_->CreateVersion("ps", _versionHigh, _versionLow);
     inst_PixelShader_->SetEntrtyPoint(_entryPoint);

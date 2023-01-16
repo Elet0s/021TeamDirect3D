@@ -22,19 +22,19 @@ public:
 	GameEngineTransformComponent& operator=(GameEngineTransformComponent&& _other) = delete;
 
 public:
-	void SetParent(std::shared_ptr<GameEngineUpdateObject> _newParent) override;
+	void SetParent(GameEngineUpdateObject* _newParent) override;
 	void DetachObject() override;
 
 
 public:
 
-	std::shared_ptr<GameEngineActor> GetActor()
+	GameEngineActor* GetActor()
 	{
 		return this->GetRoot<GameEngineActor>();
 	}
 
 	template<typename ParentType>
-	std::shared_ptr<ParentType> GetActor()
+	ParentType* GetActor()
 	{
 		return this->GetParent<ParentType>();
 	}

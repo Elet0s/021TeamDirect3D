@@ -4,10 +4,7 @@
 #include "imgui_impl_win32.h"
 #include "GameEngineUpdateObject.h"
 
-class GameEngineGUIWindow
-	: public GameEngineNameObject,
-	public GameEngineUpdateObject,
-	public std::enable_shared_from_this<GameEngineGUIWindow>
+class GameEngineGUIWindow: public GameEngineNameObject, public GameEngineUpdateObject
 {
 	//이 클래스의 존재 이유는??
 
@@ -53,10 +50,10 @@ public:
 
 public:
 	template<typename GUIWindowType>
-	static std::shared_ptr<GUIWindowType> CreateGUIWindow(const std::string& _name, GameEngineLevel* _level)
+	static GUIWindowType* CreateGUIWindow(const std::string& _name, GameEngineLevel* _level)
 	{
-		std::shared_ptr<GUIWindowType> newWindow = std::make_shared<GUIWindowType>();
-		GameEngineGUIWindow* initWindow = newWindow.get();	//
+		GUIWindowType* newWindow = std::make_shared<GUIWindowType>();
+		GameEngineGUIWindow* initWindow = newWindow;	//
 		initWindow->SetName(_name);
 		initWindow->Initialize(_level);
 		guiWindows_.push_back(newWindow);
@@ -68,7 +65,7 @@ protected:
 	static void Destroy();
 
 private:
-	static std::list<std::shared_ptr<GameEngineGUIWindow>> guiWindows_;
+	static std::list<GameEngineGUIWindow*> guiWindows_;
 
 };
 

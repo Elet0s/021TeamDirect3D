@@ -33,9 +33,9 @@ namespace GameEngineDebug
 	{
 		DebugInfo info_;
 		TransformData data_;
-		std::shared_ptr<GameEngineTexture> texture_;
+		GameEngineTexture* texture_;
 
-		DebugRenderData(const DebugInfo& _info, const TransformData& _data, std::shared_ptr<GameEngineTexture> _texture = nullptr)
+		DebugRenderData(const DebugInfo& _info, const TransformData& _data, GameEngineTexture* _texture = nullptr)
 			: info_(_info),
 			data_(_data),
 			texture_(_texture)
@@ -62,12 +62,12 @@ namespace GameEngineDebug
 		debugRenderUnit_ = new GameEngineRenderUnit();
 		debugRenderUnit_->SetMesh("Box");
 		debugRenderUnit_->SetMaterial("3DDebug");
-		//debugRenderUnit_의 생성 시점을 "Box" 메쉬와 "3DDebug" 렌더링 파이프라인 이후로 지연시킨다.
+		//debugRenderUnit_의 생성 시점을 "Box" 메쉬와 "3DDebug" 마테리얼 생성 이후로 지연시킨다.
 
 		debugTextureRenderUnit_ = new GameEngineRenderUnit();
 		debugTextureRenderUnit_->SetMesh("Rect");
 		debugTextureRenderUnit_->SetMaterial("3DDebug");
-		//debugTextureRenderUnit_의 생성 시점을 "Rect" 메쉬와 "3DDebug" 렌더링 파이프라인 이후로 지연시킨다.
+		//debugTextureRenderUnit_의 생성 시점을 "Rect" 메쉬와 "3DDebug" 마테리얼 생성 이후로 지연시킨다.
 
 
 		isOnce = true;
@@ -116,7 +116,11 @@ namespace GameEngineDebug
 		DrawBox(_transform, GameEngineCore::GetCurrentLevel()->GetMainCamera(), _color);
 	}
 
-	void GameEngineDebug::DrawBox(const GameEngineTransform& _transform, std::shared_ptr<GameEngineCamera> _camera, const float4& _color)
+	void GameEngineDebug::DrawBox(
+		const GameEngineTransform& _transform,
+		GameEngineCamera* _camera,
+		const float4& _color
+	)
 	{
 		static GameEngineTransform debugTransform;
 
@@ -154,7 +158,11 @@ namespace GameEngineDebug
 		DrawSphere(_transform, GameEngineCore::GetCurrentLevel()->GetMainCamera(), _color);
 	}
 
-	void GameEngineDebug::DrawSphere(const GameEngineTransform& _transform, std::shared_ptr<GameEngineCamera> _camera, const float4& _color)
+	void GameEngineDebug::DrawSphere(
+		const GameEngineTransform& _transform,
+		GameEngineCamera* _camera,
+		const float4& _color
+	)
 	{
 		static GameEngineTransform debugTransform;
 
@@ -189,7 +197,7 @@ namespace GameEngineDebug
 
 	void GameEngineDebug::DrawTexture(
 		const std::string& _textureName,
-		std::shared_ptr<GameEngineCamera> _camera,
+		GameEngineCamera* _camera,
 		const float4& _position,
 		const float4& _rotation /*= float4::Zero*/,
 		const float4& _scale /*= float4::Zero*/
@@ -197,7 +205,7 @@ namespace GameEngineDebug
 	{
 		static GameEngineTransform debugTransform;
 
-		std::shared_ptr<GameEngineTexture> findTexture = GameEngineTexture::Find(_textureName);
+		GameEngineTexture* findTexture = GameEngineTexture::Find(_textureName);
 		if (nullptr == findTexture)
 		{
 			MsgBoxAssertString(_textureName + ": 그런 이름의 텍스처가 존재하지 않습니다.");
@@ -228,7 +236,7 @@ namespace GameEngineDebug
 	}
 
 	void GameEngineDebug::DrawTexture(
-		std::shared_ptr<GameEngineTexture> _texture,
+		GameEngineTexture* _texture,
 		const float4& _position,
 		const float4& _rotation /*= float4::Zero*/,
 		const float4& _scale /*= float4::Zero*/
@@ -244,8 +252,8 @@ namespace GameEngineDebug
 	}
 
 	void GameEngineDebug::DrawTexture(
-		std::shared_ptr<GameEngineTexture> _texture,
-		std::shared_ptr<GameEngineCamera> _camera,
+		GameEngineTexture* _texture,
+		GameEngineCamera* _camera,
 		const float4& _position,
 		const float4& _rotation /*= float4::Zero*/,
 		const float4& _scale /*= float4::Zero*/

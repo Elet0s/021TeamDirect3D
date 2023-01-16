@@ -46,9 +46,9 @@ public:
 		CollisionType _thisType,
 		int _collisionGroup,
 		CollisionType _otherType,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update = nullptr,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter = nullptr,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit = nullptr
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _update = nullptr,
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _enter = nullptr,
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _exit = nullptr
 	);
 	
 	virtual void DebugRender();	//함수 이름과는 다르게, 실제로는 충돌체를 직접 그리지 않고 그리는데 필요한 정보만 저장하는 함수.
@@ -68,8 +68,8 @@ public:
 		CollisionType _thisType,
 		EnumType _collisionGroup,
 		CollisionType _otherType,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this,
-			std::shared_ptr<GameEngineCollision> _other)> _function = nullptr
+		std::function<CollisionReturn(GameEngineCollision* _this,
+			GameEngineCollision* _other)> _function = nullptr
 	)
 	{
 		return IsCollided(_thisType, static_cast<int>(_collisionGroup), _otherType, _function);
@@ -79,9 +79,9 @@ public:
 		CollisionType _thisType,
 		int _groupOrder,
 		CollisionType _otherType,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter = nullptr,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update = nullptr,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit = nullptr
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _enter = nullptr,
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _update = nullptr,
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _exit = nullptr
 	)
 	{
 		return IsCollided(_thisType, _groupOrder, _otherType, _update, _enter, _exit);
@@ -91,9 +91,9 @@ public:
 		CollisionType _thisType,
 		int _groupOrder,
 		CollisionType _otherType,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _enter = nullptr,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _update = nullptr,
-		std::function<CollisionReturn(std::shared_ptr<GameEngineCollision> _this, std::shared_ptr<GameEngineCollision> _other)> _exit = nullptr
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _enter = nullptr,
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _update = nullptr,
+		std::function<CollisionReturn(GameEngineCollision* _this, GameEngineCollision* _other)> _exit = nullptr
 	)
 	{
 		return IsCollided(_thisType, _groupOrder, _otherType, _update, _enter, _exit);
@@ -131,7 +131,7 @@ private:
 
 private:
 	//std::set<std::shared_ptr<GameEngineCollision>> collisionCheck_;
-	std::map<std::shared_ptr<GameEngineCollision>, CollisionReturn> collisionCheck_;
+	std::map<GameEngineCollision*, CollisionReturn> collisionCheck_;
 
 	CollisionType debugType_;
 	CollisionMode collisionMode_;

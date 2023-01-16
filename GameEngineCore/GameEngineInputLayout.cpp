@@ -19,7 +19,7 @@ GameEngineInputLayout::~GameEngineInputLayout()
 
 void GameEngineInputLayout::CreateInputLayout(
     const GameEngineInputLayoutDesc& _desc,
-    std::shared_ptr<GameEngineVertexShader> _vertexShader
+    GameEngineVertexShader* _vertexShader
 )
 {
     if (S_OK != GameEngineDevice::GetDevice()->CreateInputLayout(	//ÀÎÇ²·¹ÀÌ¾Æ¿ô »ý¼º ÇÔ¼ö.
@@ -46,12 +46,12 @@ void GameEngineInputLayout::Set()
     GameEngineDevice::GetDC()->IASetInputLayout(inputLayout_);
 }
 
-std::shared_ptr<GameEngineInputLayout> GameEngineInputLayout::Create(
+GameEngineInputLayout* GameEngineInputLayout::Create(
     const GameEngineInputLayoutDesc& _desc,
-    std::shared_ptr<GameEngineVertexShader> _vertexShader
+    GameEngineVertexShader* _vertexShader
 )
 {
-    std::shared_ptr<GameEngineInputLayout> newRes = CreateUnnamedRes();
+    GameEngineInputLayout* newRes = CreateUnnamedRes();
     newRes->CreateInputLayout(_desc, _vertexShader);
     return newRes;
 }

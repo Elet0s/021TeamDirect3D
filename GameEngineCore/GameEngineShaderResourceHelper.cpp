@@ -18,7 +18,7 @@ GameEngineShaderResourceHelper::~GameEngineShaderResourceHelper()
 {
 }
 
-void GameEngineShaderResourceHelper::ResourceCheck(std::shared_ptr<GameEngineMaterial> _material)
+void GameEngineShaderResourceHelper::ResourceCheck(GameEngineMaterial* _material)
 {
 	if (nullptr == _material)
 	{
@@ -187,7 +187,7 @@ void GameEngineShaderResourceHelper::SetConstantBuffer_New(
 
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineShaderResourceHelper::SetTexture(
+GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
 	const std::string_view& _textureSetterName,
 	const std::string_view& _textureName
 )
@@ -201,9 +201,9 @@ std::shared_ptr<GameEngineTexture> GameEngineShaderResourceHelper::SetTexture(
 	return SetTexture(_textureSetterName, GameEngineTexture::Find(_textureName));
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineShaderResourceHelper::SetTexture(
+GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
 	const std::string_view& _textureSetterName,
-	std::shared_ptr<GameEngineTexture> _texture
+	GameEngineTexture* _texture
 )
 {
 	std::string uppercaseTextureSetterName = GameEngineString::ToUpperReturn(_textureSetterName);
@@ -230,8 +230,11 @@ std::shared_ptr<GameEngineTexture> GameEngineShaderResourceHelper::SetTexture(
 	return _texture;
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineShaderResourceHelper::SetTexture(
-	const std::string_view& _textureSetterName, const std::string_view& _folderTextureName, int _index)
+GameEngineTexture* GameEngineShaderResourceHelper::SetTexture(
+	const std::string_view& _textureSetterName,
+	const std::string_view& _folderTextureName,
+	int _index
+)
 {
 	if (false == IsTexture(_textureSetterName))
 	{
@@ -239,7 +242,7 @@ std::shared_ptr<GameEngineTexture> GameEngineShaderResourceHelper::SetTexture(
 		return nullptr;
 	}
 
-	std::shared_ptr<GameEngineFolderTexture> folderTexture = GameEngineFolderTexture::Find(_folderTextureName);
+	GameEngineFolderTexture* folderTexture = GameEngineFolderTexture::Find(_folderTextureName);
 
 	if (nullptr == folderTexture)
 	{
@@ -249,8 +252,10 @@ std::shared_ptr<GameEngineTexture> GameEngineShaderResourceHelper::SetTexture(
 	return SetTexture(_textureSetterName, folderTexture->GetTexture(_index));
 }
 
-std::shared_ptr<GameEngineSampler> GameEngineShaderResourceHelper::SetSampler(
-	const std::string_view& _samplerSetterName, std::shared_ptr<GameEngineSampler> _sampler)
+GameEngineSampler* GameEngineShaderResourceHelper::SetSampler(
+	const std::string_view& _samplerSetterName,
+	GameEngineSampler* _sampler
+)
 {
 	std::string uppercaseSamplerSetterName = GameEngineString::ToUpperReturn(_samplerSetterName);
 
@@ -276,18 +281,26 @@ std::shared_ptr<GameEngineSampler> GameEngineShaderResourceHelper::SetSampler(
 	return _sampler;
 }
 
-std::shared_ptr<GameEngineSampler> GameEngineShaderResourceHelper::SetSampler(
-	const std::string_view& _samplerSetterName, const std::string_view& _samplerName)
+GameEngineSampler* GameEngineShaderResourceHelper::SetSampler(
+	const std::string_view& _samplerSetterName,
+	const std::string_view& _samplerName
+)
 {
 	return SetSampler(_samplerSetterName, GameEngineSampler::Find(_samplerName));
 }
 
-std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTexture2DArray(const std::string_view& _textureArraySetterName, const std::string_view& _texturesName)
+GameEngineTexture2DArray* GameEngineShaderResourceHelper::SetTexture2DArray(
+	const std::string_view& _textureArraySetterName,
+	const std::string_view& _texturesName
+)
 {
 	return SetTexture2DArray(_textureArraySetterName, GameEngineTexture2DArray::Find(_texturesName));
 }
 
-std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTexture2DArray(const std::string_view& _textureArraySetterName, std::shared_ptr<GameEngineTexture2DArray> _textureArray)
+GameEngineTexture2DArray* GameEngineShaderResourceHelper::SetTexture2DArray(
+	const std::string_view& _textureArraySetterName,
+	GameEngineTexture2DArray* _textureArray
+)
 {
 	std::string uppercaseTexturesSetterName = GameEngineString::ToUpperReturn(_textureArraySetterName);
 
@@ -312,19 +325,6 @@ std::shared_ptr<GameEngineTexture2DArray> GameEngineShaderResourceHelper::SetTex
 	return _textureArray;
 }
 
-//void GameEngineShaderResourceHelper::AllConstantBufferNew()
-//{
-//	for (std::multimap<std::string, GameEngineConstantBufferSetter>::iterator iter = constantBufferSetterMap_.begin();
-//		iter != constantBufferSetterMap_.end(); iter++)
-//	{
-//		unsigned int cBufferByteWidth = iter->second.constantBuffer_->GetBufferDesc().ByteWidth;
-//
-//		iter->second.originalData_.resize(cBufferByteWidth);
-//		iter->second.settingDataToGPU_ = &iter->second.originalData_[0];
-//		iter->second.size_ = cBufferByteWidth;
-//	}
-//}
-
 GameEngineStructuredBufferSetter* GameEngineShaderResourceHelper::GetStructuredBufferSetter(const std::string_view& _sBufferName)
 {
 	std::string uppercaseSBufferName = GameEngineString::ToUpperReturn(_sBufferName);
@@ -347,7 +347,7 @@ std::multimap<std::string, GameEngineStructuredBufferSetter>& GameEngineShaderRe
 	return structuredBufferSetterMap_;
 }
 
-void GameEngineShaderResourceHelper::ShaderCheck(std::shared_ptr<GameEngineShader> _shader)
+void GameEngineShaderResourceHelper::ShaderCheck(GameEngineShader* _shader)
 {
 	for (const std::pair<std::string, GameEngineConstantBufferSetter>& setterPair
 		: _shader->constantBufferSetterMap_)

@@ -5,23 +5,22 @@
 
 GameEngineRenderTarget::GameEngineRenderTarget()
 	: depthTexture_(nullptr),
-	depthStencilView_(nullptr),
-	mergeUnit_(std::make_shared<GameEngineRenderUnit>())
+	depthStencilView_(nullptr)
 {
-	mergeUnit_->SetMesh("Fullrect");
-	mergeUnit_->SetMaterial("TargetMerge");
+	mergeUnit_.SetMesh("Fullrect");
+	mergeUnit_.SetMaterial("TargetMerge");
 }
 
 GameEngineRenderTarget::~GameEngineRenderTarget()
 {
 }
 
-std::shared_ptr<GameEngineRenderTarget> GameEngineRenderTarget::Create(const std::string_view& _name)
+GameEngineRenderTarget* GameEngineRenderTarget::Create(const std::string_view& _name)
 {
 	return CreateNamedRes(_name);
 }
 
-std::shared_ptr<GameEngineRenderTarget> GameEngineRenderTarget::Create()
+GameEngineRenderTarget* GameEngineRenderTarget::Create()
 {
 	return CreateUnnamedRes();
 }
@@ -31,7 +30,7 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	const float4& _color
 )
 {
-	std::shared_ptr<GameEngineTexture> newTexture = GameEngineTexture::Create(_texture);
+	GameEngineTexture* newTexture = GameEngineTexture::Create(_texture);
 	//_texture를 저장할 newTexture를 생성한다.
 
 	CreateRenderTargetTexture(newTexture, _color);
@@ -70,12 +69,12 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	const float4& _clearColor
 )
 {
-	std::shared_ptr<GameEngineTexture> newTexture = GameEngineTexture::Create(_desc);
+	GameEngineTexture* newTexture = GameEngineTexture::Create(_desc);
 	CreateRenderTargetTexture(newTexture, _clearColor);
 }
 
 void GameEngineRenderTarget::CreateRenderTargetTexture(
-	std::shared_ptr<GameEngineTexture> _texture,
+	GameEngineTexture* _texture,
 	const float4& _clearColor
 )
 {
@@ -92,7 +91,7 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 	//_clearColor도 저장한다.
 }
 
-std::shared_ptr<GameEngineTexture> GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
+GameEngineTexture* GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
 {
 	if (renderTargets_.size() <= _index)
 	{
@@ -146,7 +145,7 @@ void GameEngineRenderTarget::CreateDepthTexture(int _renderTargetIndex)
 }
 
 
-void GameEngineRenderTarget::SetDepthTexture(std::shared_ptr<GameEngineTexture> _depthTexture)
+void GameEngineRenderTarget::SetDepthTexture(GameEngineTexture* _depthTexture)
 {
 	depthTexture_ = _depthTexture;
 	depthStencilView_ = depthTexture_->CreateDepthStencilView();
@@ -202,32 +201,32 @@ void GameEngineRenderTarget::ResetRenderTarget()
 	);
 }
 
-void GameEngineRenderTarget::Copy(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index /*= 0*/)
+void GameEngineRenderTarget::Copy(GameEngineRenderTarget* _otherRenderTarget, int _index /*= 0*/)
 {
 	this->Clear();
-	mergeUnit_->GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
+	mergeUnit_.GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
 	Effect(mergeUnit_);
 }
 
-void GameEngineRenderTarget::Merge(std::shared_ptr<GameEngineRenderTarget> _otherRenderTarget, int _index /*= 0*/)
+void GameEngineRenderTarget::Merge(GameEngineRenderTarget* _otherRenderTarget, int _index /*= 0*/)
 {
-	mergeUnit_->GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
+	mergeUnit_.GetShaderResourceHelper().SetTexture("Tex", _otherRenderTarget->GetRenderTargetTexture(_index));
 	Effect(mergeUnit_);
 }
 
-void GameEngineRenderTarget::Effect(std::shared_ptr<GameEngineRenderUnit> _renderUnit)
+void GameEngineRenderTarget::Effect(GameEngineRenderUnit& _renderUnit)
 {
 	this->SetRenderTarget();
-	_renderUnit->Render(GameEngineTime::GetInst().GetDeltaTime());
+	_renderUnit.Render(GameEngineTime::GetInst().GetDeltaTime());
 }
 
 void GameEngineRenderTarget::EffectProcess()
 {
-	for (std::shared_ptr<GameEnginePostEffect>& effect : allEffects_)
+	for (GameEnginePostEffect* effect : allEffects_)
 	{
 		if (true == effect->IsUpdate())
 		{
-			effect->Effect(std::dynamic_pointer_cast<GameEngineRenderTarget>(shared_from_this()));
+			effect->Effect(this);
 		}
 	}
 }

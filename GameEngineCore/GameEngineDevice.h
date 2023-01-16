@@ -63,7 +63,7 @@ public:
 		return deviceContext_;
 	}
 
-	static std::shared_ptr<GameEngineRenderTarget> GetBackBuffer()
+	static GameEngineRenderTarget* GetBackBuffer()
 	{
 		return backBufferRenderTarget_;
 	}
@@ -95,7 +95,7 @@ private:
 
 	//디바이스, 디바이스 컨텍스트, 스왑체인 모두 IUnknown을 상속받는 COM 객체와 연결된 인터페이스이다.
 
-	static std::shared_ptr<GameEngineRenderTarget> backBufferRenderTarget_;
+	static GameEngineRenderTarget* backBufferRenderTarget_;
 	//백버퍼로 쓰이는 렌더타겟. 여기에 그려지는것만이 더블버퍼링 과정을 거쳐 화면에 그려진다.
 
 };

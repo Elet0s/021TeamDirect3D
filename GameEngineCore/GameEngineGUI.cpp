@@ -28,7 +28,7 @@ void GameEngineGUIWindow::Update(float _deltaTime)
 }
 
 
-std::list<std::shared_ptr<GameEngineGUIWindow>> GameEngineGUI::guiWindows_;
+std::list<GameEngineGUIWindow*> GameEngineGUI::guiWindows_;
 
 GameEngineGUI::GameEngineGUI()
 {
@@ -47,13 +47,13 @@ void GameEngineGUI::Render(GameEngineLevel* _level, float _deltaTime)
 
 
 
-    for (std::shared_ptr<GameEngineGUIWindow> guiWindow : guiWindows_)
+    for (GameEngineGUIWindow* singleGuiWindow : guiWindows_)
     {
-        if (true == guiWindow->IsUpdate())
+        if (true == singleGuiWindow->IsUpdate())
         {
-            guiWindow->Begin();         //필요한 ImGUI관련 렌더링 정보는 이 아래로.
-            guiWindow->OnGUI(_level, _deltaTime);
-            guiWindow->End();       //필요한 ImGUI관련 렌더링 정보는 이 위로.
+            singleGuiWindow->Begin();         //필요한 ImGUI관련 렌더링 정보는 이 아래로.
+            singleGuiWindow->OnGUI(_level, _deltaTime);
+            singleGuiWindow->End();       //필요한 ImGUI관련 렌더링 정보는 이 위로.
         }
     }
 
@@ -146,14 +146,14 @@ void GameEngineGUI::Initialize()
 
 void GameEngineGUI::Destroy()
 {
-    //for (GameEngineGUIWindow* guiWindow : guiWindows_)
-    //{
-    //    if (nullptr != guiWindow)
-    //    {
-    //        delete guiWindow;
-    //        guiWindow = nullptr;
-    //    }
-    //}
+    for (GameEngineGUIWindow* singleGuiWindow : guiWindows_)
+    {
+        if (nullptr != singleGuiWindow)
+        {
+            delete singleGuiWindow;
+            singleGuiWindow = nullptr;
+        }
+    }
 
     guiWindows_.clear();
 

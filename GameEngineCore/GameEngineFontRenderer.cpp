@@ -5,7 +5,7 @@
 #include "GameEngineBlend.h"
 #include "GameEngineCamera.h"
 
-std::shared_ptr<GameEngineRenderTarget> GameEngineFontRenderer::fontTarget_ = nullptr;
+GameEngineRenderTarget* GameEngineFontRenderer::fontTarget_ = nullptr;
 
 GameEngineFontRenderer::GameEngineFontRenderer()
 	:font_(nullptr),
@@ -56,8 +56,8 @@ void GameEngineFontRenderer::Render(float _deltaTime)
 	if (FontPositionMode::World == mode_)
 	{
 		position = this->GetTransform().GetWorldPosition();
-		position *= camera_.lock()->GetViewMatrix();
-		position *= camera_.lock()->GetProjectionMatrix();
+		position *= camera_->GetViewMatrix();
+		position *= camera_->GetProjectionMatrix();
 
 		float4 windowSize = GameEngineWindow::GetInst().GetScale();
 
@@ -81,5 +81,5 @@ void GameEngineFontRenderer::Render(float _deltaTime)
 	//최종 렌더타겟에 그냥 그리면 폰트렌더러의 결과물과 그 뒤에 그리는 인스턴싱 렌더러의 결과값까지 같이 
 	// 다른 렌더타겟들의 색상값에 덮혀버린다.
 
-	camera_.lock()->GetForwardRenderTarget()->Merge(fontTarget_);
+	camera_->GetForwardRenderTarget()->Merge(fontTarget_);
 }

@@ -45,9 +45,9 @@ GameEngineFont::~GameEngineFont()
 	}
 }
 
-std::shared_ptr<GameEngineFont> GameEngineFont::Load(const std::string_view& _path, const std::string_view& _name)
+GameEngineFont* GameEngineFont::Load(const std::string_view& _path, const std::string_view& _name)
 {
-	std::shared_ptr<GameEngineFont> newRes = CreateNamedRes(_name);
+	GameEngineFont* newRes = CreateNamedRes(_name);
 	newRes->LoadFont(_path);
 	return newRes;
 }

@@ -6,8 +6,11 @@
 #include "GameEngineMesh.h"
 #include "GlobalHeader.h"
 
-class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>
+class GameEngineRenderUnit
 {
+    //이 프레임워크에서 렌더링에 필수적인 요소인 메쉬, 마테리얼과 셰이더리소스헬퍼를 
+    // 한데 모아 렌더러를 통해 관리하기 편하기 위해 만든 클래스.
+    //다양한 종류의 메쉬를 세팅해서 사용하기 좀 더 편해진 체제.
 
     friend class GameEngineRenderer;
     //셰이더리소스헬퍼 가져다 써야해서 프렌드.
@@ -26,30 +29,24 @@ private:
 public:
     //렌더유닛에 메쉬를 지정하는 함수. 
     void SetMesh(const std::string_view& _meshName);
-    void SetMesh(std::shared_ptr<GameEngineMesh> _mesh);
+    void SetMesh(GameEngineMesh* _mesh);
 
     //렌더유닛에 마테리얼을 지정하는 함수.
     void SetMaterial(const std::string_view& _materialName);
 
     //새 부모 렌더러를 지정하고 렌더유닛이 가진 셰이더리소스헬퍼에
     // 엔진 기본제공 상수버퍼인 "TRANSFORMDATA"와 "RENDEROPTION"을 등록하는 함수.
-    void EngineShaderResourceSetting(std::shared_ptr<GameEngineRenderer> _parentRenderer);
+    void EngineShaderResourceSetting(GameEngineRenderer* _parentRenderer);
 
     //렌더유닛의 셰이더리소스헬퍼에 저장된 셰이더리소스들을 렌더링 파이프라인을 통해 
     // 부모 렌더러가 등록된 카메라의 렌더타겟에 옮기는 함수.
     void Render(float _deltaTime);
 
-    //void RenderInstancing(
-    //    float _deltaTime,
-    //    size_t _instancingDataCount,
-    //    std::shared_ptr<class GameEngineInstancingBuffer> _instancingBuffer
-    //);
-
-    std::shared_ptr<GameEngineMesh> GetMesh();
-    std::shared_ptr<GameEngineMaterial> GetMaterial();
+    GameEngineMesh* GetMesh();
+    GameEngineMaterial* GetMaterial();
 
     //렌더유닛에 부모 렌더러를 지정하고 EngineShaderResourceSetting() 함수를 호출해서 엔진 기본 상수버퍼를 등록하는 함수.
-    void SetRenderer(std::shared_ptr<GameEngineRenderer> _parentRenderer);
+    void SetRenderer(GameEngineRenderer* _parentRenderer);
 
 
 public:
@@ -66,13 +63,13 @@ public:
 
 private:
 
-    std::weak_ptr<GameEngineRenderer> parentRenderer_;    //이 렌더유닛을 가진 부모 렌더러.
+    GameEngineRenderer* parentRenderer_;    //이 렌더유닛을 가진 부모 렌더러.
 
-    std::shared_ptr<GameEngineMesh> mesh_;                  //메쉬.
+    GameEngineMesh* mesh_;                  //메쉬.
 
-    std::shared_ptr<GameEngineInputLayout> inputLayout_;    //인풋 레이아웃.
+    GameEngineInputLayout* inputLayout_;    //인풋 레이아웃.
 
-    std::shared_ptr<GameEngineMaterial> material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
+    GameEngineMaterial* material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
 
     D3D11_PRIMITIVE_TOPOLOGY topology_;     //토폴로지.
 
@@ -111,9 +108,9 @@ public:
         return renderingOrder_;
     }
 
-    inline std::weak_ptr<class GameEngineCamera> GetCamera()
+    inline GameEngineCamera* GetCamera()
     {
-        return camera_;
+        return this->camera_;
     }
 
 public:
@@ -130,7 +127,7 @@ protected:
     void PushRendererToUICamera();		//렌더러가 자기 자신을 UI카메라에 등록하는 함수.
 
 protected:
-    std::weak_ptr<class GameEngineCamera> camera_;    //렌더러가 등록된 카메라.
+    GameEngineCamera* camera_;    //이 렌더러가 등록된 카메라.
 
 private:
     CameraOrder cameraOrder_;

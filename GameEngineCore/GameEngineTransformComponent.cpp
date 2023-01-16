@@ -9,12 +9,11 @@ GameEngineTransformComponent::~GameEngineTransformComponent()
 {
 }
 
-void GameEngineTransformComponent::SetParent(std::shared_ptr<GameEngineUpdateObject> _newParent)
+void GameEngineTransformComponent::SetParent(GameEngineUpdateObject* _newParent)
 {
 	GameEngineUpdateObject::SetParent(_newParent);
 
-	std::shared_ptr<GameEngineTransformBase> transformParent
-		= std::dynamic_pointer_cast<GameEngineTransformBase>(_newParent);
+	GameEngineTransformBase* transformParent= dynamic_cast<GameEngineTransformBase*>(_newParent);
 	if (transformParent == nullptr)
 	{
 		MsgBoxAssert("트랜스폼이 있는 오브젝트만이 다른 트랜스폼오브젝트의 부모가 될 수 있습니다.");

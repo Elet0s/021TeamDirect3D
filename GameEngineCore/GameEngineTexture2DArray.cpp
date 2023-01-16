@@ -11,19 +11,19 @@ GameEngineTexture2DArray::~GameEngineTexture2DArray()
 	shaderResourceView_->Release();
 }
 
-std::shared_ptr<GameEngineTexture2DArray> GameEngineTexture2DArray::Load(
+GameEngineTexture2DArray* GameEngineTexture2DArray::Load(
     const std::string_view& _path
  )
 {
     return Load(_path, GameEnginePath::GetFileName(_path));
 }
 
-std::shared_ptr<GameEngineTexture2DArray> GameEngineTexture2DArray::Load(
+GameEngineTexture2DArray* GameEngineTexture2DArray::Load(
     const std::string_view& _path,
     const std::string_view& _name
 )
 {
-    std::shared_ptr<GameEngineTexture2DArray> newRes = CreateNamedRes(_name);
+    GameEngineTexture2DArray* newRes = CreateNamedRes(_name);
     newRes->LoadTextures(_path);
     return newRes;
 }

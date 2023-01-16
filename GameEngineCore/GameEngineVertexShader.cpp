@@ -17,6 +17,12 @@ GameEngineVertexShader::~GameEngineVertexShader()
         vertexShader_->Release();
         vertexShader_ = nullptr;
     } 
+
+    if (nullptr != inst_VertexShader_)
+    {
+        delete inst_VertexShader_;
+        inst_VertexShader_ = nullptr;
+    }
 }
 
 void GameEngineVertexShader::Set()
@@ -35,7 +41,7 @@ void GameEngineVertexShader::Set()
     );
 }
 
-std::shared_ptr<GameEngineVertexShader> GameEngineVertexShader::Load(
+GameEngineVertexShader* GameEngineVertexShader::Load(
     const std::string_view& _path,
     const std::string_view& _entryPoint,
     UINT _versionHigh /*= 5*/,
@@ -45,7 +51,7 @@ std::shared_ptr<GameEngineVertexShader> GameEngineVertexShader::Load(
     return Load(_path, GameEnginePath::GetFileName(_path), _entryPoint, _versionHigh, _versionLow);
 }
 
-std::shared_ptr<GameEngineVertexShader> GameEngineVertexShader::Load(
+GameEngineVertexShader* GameEngineVertexShader::Load(
     const std::string_view& _path,
     const std::string_view& _name,
     const std::string_view& _entryPoint,
@@ -53,7 +59,7 @@ std::shared_ptr<GameEngineVertexShader> GameEngineVertexShader::Load(
     UINT _versionLow /*= 0*/
 )
 {
-    std::shared_ptr<GameEngineVertexShader> newRes = CreateNamedRes(_name);
+    GameEngineVertexShader* newRes = CreateNamedRes(_name);
     newRes->CreateVersion("vs", _versionHigh, _versionLow);
     newRes->SetEntrtyPoint(_entryPoint);
     newRes->CompileHLSLCode(_path);
@@ -69,7 +75,7 @@ void GameEngineVertexShader::InstancingVertexShaderCompile(
     UINT _versionLow /*= 0*/
 )
 {
-    inst_VertexShader_ = std::make_shared<GameEngineVertexShader>(); //GameEngineRes에 등록되지 않는 점 주의.
+    inst_VertexShader_ = new GameEngineVertexShader(); //GameEngineRes에 등록되지 않는 점 주의.
     inst_VertexShader_->SetName(_entryPoint);
     inst_VertexShader_->CreateVersion("vs", _versionHigh, _versionLow);
     inst_VertexShader_->SetEntrtyPoint(_entryPoint);

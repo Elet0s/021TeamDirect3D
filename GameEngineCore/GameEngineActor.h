@@ -33,20 +33,20 @@ private:
 
 public:
 	void DetachObject() override;
-	void SetParent(std::shared_ptr<GameEngineUpdateObject> _newParent) override;	//액터에 레벨이 아닌 새 부모를 붙이는 함수.
+	void SetParent(GameEngineUpdateObject* _newParent) override;	//액터에 레벨이 아닌 새 부모를 붙이는 함수.
 
 public:
 
 	template<typename ComponentType>
-	std::shared_ptr<ComponentType> CreateComponent(const std::string_view& _componentName = "")
+	ComponentType* CreateComponent(const std::string_view& _componentName = "")
 	{
-		std::shared_ptr<GameEngineComponent> newComponent = std::make_shared<ComponentType>();
+		GameEngineComponent* newComponent = new ComponentType();
 
-		newComponent->SetParent(shared_from_this());
+		newComponent->SetParent(this);
 		newComponent->SetName(_componentName);
 		newComponent->Start();
 
-		return std::dynamic_pointer_cast<ComponentType>(newComponent);
+		return dynamic_cast<ComponentType*>(newComponent);
 	}
 
 	inline GameEngineLevel* GetLevel()

@@ -22,7 +22,7 @@ public:
 	void FreeCameraModeOnOff();
 
 public:
-	std::shared_ptr<GameEngineCamera> GetCameraComponent()
+	GameEngineCamera* GetCameraComponent()
 	{
 		return cameraComponent_;
 	}
@@ -32,7 +32,7 @@ public:
 	}
 
 private:
-	std::shared_ptr<GameEngineCamera> cameraComponent_;
+	GameEngineCamera* cameraComponent_;
 	bool freeCameraMode_;
 	float cameraMovingSpeed_;
 	float rotationSpeed_;

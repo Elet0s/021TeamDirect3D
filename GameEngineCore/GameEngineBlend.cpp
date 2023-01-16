@@ -19,12 +19,12 @@ GameEngineBlend::~GameEngineBlend()
     }
 }
 
-std::shared_ptr<GameEngineBlend> GameEngineBlend::Create(
+GameEngineBlend* GameEngineBlend::Create(
     const std::string_view& _name,
     const D3D11_BLEND_DESC& _desc
 )
 {
-    std::shared_ptr<GameEngineBlend> newRes = CreateNamedRes(_name);
+    GameEngineBlend* newRes = CreateNamedRes(_name);
     newRes->CreateBlendState(_desc);
     return newRes;
 }

@@ -14,18 +14,18 @@ GameEngineLevel::GameEngineLevel()
 {
 	cameras_.resize(static_cast<size_t>(CameraOrder::UICamera) + 1);
 
-	std::shared_ptr<GameEngineCameraActor> mainCameraActor = CreateActor<GameEngineCameraActor>();
+	GameEngineCameraActor* mainCameraActor = CreateActor<GameEngineCameraActor>();
 	mainCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
 	mainCameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	mainCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MainCamera);
 
-	std::shared_ptr<GameEngineCameraActor> midCameraActor = CreateActor<GameEngineCameraActor>();
+	GameEngineCameraActor* midCameraActor = CreateActor<GameEngineCameraActor>();
 	midCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
 	midCameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	midCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MidCamera);
 	//마우스포인터 위치 문제와 알파 렌더링 문제를 한번에 해결하기 위해 중간 카메라 추가.
 
-	std::shared_ptr<GameEngineCameraActor> UICameraActor = CreateActor<GameEngineCameraActor>();
+	GameEngineCameraActor* UICameraActor = CreateActor<GameEngineCameraActor>();
 	UICameraActor->GetTransform().SetLocalPosition(0, 0, -100);
 	UICameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	UICameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::UICamera);
@@ -33,7 +33,7 @@ GameEngineLevel::GameEngineLevel()
 
 GameEngineLevel::~GameEngineLevel()
 {
-	for (std::shared_ptr<GameEngineUpdateObject> object : deleteObjects_)
+	for (GameEngineUpdateObject* object : deleteObjects_)
 	{
 		object->ReleaseHierarchy();
 		//이전 루프에서 사망판정되서 objectsInDeletion_에 저장된 모든 오브젝트들과 그 자식들을 전부 삭제한다.
@@ -41,9 +41,9 @@ GameEngineLevel::~GameEngineLevel()
 	deleteObjects_.clear();
 	//오브젝트들을 전부 삭제했다면 objectsInDeletion_리스트를 비운다.
 
-	for (const std::pair<int, std::list<std::shared_ptr<GameEngineActor>>>& actorGroup : allActors_)
+	for (const std::pair<int, std::list<GameEngineActor*>>& actorGroup : allActors_)
 	{
-		for (std::shared_ptr<GameEngineActor> actor : actorGroup.second)
+		for (GameEngineActor* actor : actorGroup.second)
 		{
 			if (nullptr != actor)
 			{
@@ -57,7 +57,7 @@ GameEngineLevel::~GameEngineLevel()
 	}
 }
 
-std::shared_ptr<GameEngineCameraActor> GameEngineLevel::GetMainCameraActor()
+GameEngineCameraActor* GameEngineLevel::GetMainCameraActor()
 {
 	return cameras_[static_cast<int>(CameraOrder::MainCamera)]->GetActor<GameEngineCameraActor>();
 }
@@ -67,7 +67,7 @@ GameEngineTransform& GameEngineLevel::GetMainCameraActorTransform()
 	return cameras_[static_cast<int>(CameraOrder::MainCamera)]->GetActor()->GetTransform();
 }
 
-std::shared_ptr<GameEngineCameraActor> GameEngineLevel::GetUICameraActor()
+GameEngineCameraActor* GameEngineLevel::GetUICameraActor()
 {
 	return cameras_[static_cast<int>(CameraOrder::UICamera)]->GetActor<GameEngineCameraActor>();
 }
@@ -77,12 +77,12 @@ GameEngineTransform& GameEngineLevel::GetUICameraActorTransform()
 	return cameras_[static_cast<int>(CameraOrder::UICamera)]->GetActor()->GetTransform();
 }
 
-std::shared_ptr<GameEngineCameraActor> GameEngineLevel::GetCameraActor(UINT _index)
+GameEngineCameraActor* GameEngineLevel::GetCameraActor(UINT _index)
 {
 	return cameras_[_index]->GetActor<GameEngineCameraActor>();
 }
 
-std::shared_ptr<GameEngineCameraActor> GameEngineLevel::GetCameraActor(CameraOrder _cameraOrder)
+GameEngineCameraActor* GameEngineLevel::GetCameraActor(CameraOrder _cameraOrder)
 {
 	return cameras_[static_cast<int>(_cameraOrder)]->GetActor<GameEngineCameraActor>();
 }
@@ -105,9 +105,9 @@ void GameEngineLevel::UpdateLevel(float _deltaTime)
 
 void GameEngineLevel::UpdateActors(float _deltaTime)
 {
-	for (const std::pair<int, std::list<std::shared_ptr<GameEngineActor>>>& actorListPair : allActors_)
+	for (const std::pair<int, std::list<GameEngineActor*>>& actorListPair : allActors_)
 	{
-		for (std::shared_ptr<GameEngineActor> const actor : actorListPair.second)
+		for (GameEngineActor* const actor : actorListPair.second)
 			//이 위치의 const는 actor가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 			//하지만 actor가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
 		{
@@ -124,12 +124,12 @@ void GameEngineLevel::Render(float _deltaTime)
 {
 	if (true == GEngine::IsCollisionDebug())
 	{
-		for (std::map<int, std::list<std::shared_ptr<GameEngineCollision>>>::iterator collisionGroupIter = allCollisions_.begin();
+		for (std::map<int, std::list<GameEngineCollision*>>::iterator collisionGroupIter = allCollisions_.begin();
 			collisionGroupIter != this->allCollisions_.end(); collisionGroupIter++)
 		{
-			std::list<std::shared_ptr<GameEngineCollision>>& collisionGroup = collisionGroupIter->second;
+			std::list<GameEngineCollision*>& collisionGroup = collisionGroupIter->second;
 
-			for (std::list<std::shared_ptr<GameEngineCollision>>::iterator collisionIter = collisionGroup.begin();
+			for (std::list<GameEngineCollision*>::iterator collisionIter = collisionGroup.begin();
 				collisionIter != collisionGroup.end(); collisionIter++)
 			{
 				if (true == (*collisionIter)->IsUpdate())
@@ -183,7 +183,7 @@ void GameEngineLevel::Render(float _deltaTime)
 	GameEngineDevice::EndRendering();
 }
 
-void GameEngineLevel::RemoveActor(std::shared_ptr<GameEngineActor> _rootActor)
+void GameEngineLevel::RemoveActor(GameEngineActor* _rootActor)
 {
 	if (allActors_.end() == allActors_.find(_rootActor->GetOrder()))
 	{
@@ -197,7 +197,7 @@ void GameEngineLevel::RemoveActor(std::shared_ptr<GameEngineActor> _rootActor)
 
 void GameEngineLevel::Release(float _deltaTime)
 {
-	for (std::shared_ptr<GameEngineUpdateObject> object : deleteObjects_)
+	for (GameEngineUpdateObject* object : deleteObjects_)
 	{
 		object->ReleaseHierarchy();
 		//이전 루프에서 사망판정되서 deleteObjects_에 저장된 모든 오브젝트들과 그 자식들을 전부 삭제한다.
@@ -215,12 +215,12 @@ void GameEngineLevel::Release(float _deltaTime)
 		}
 	}
 
-	for (std::map<int, std::list<std::shared_ptr<GameEngineCollision>>>::iterator collisionGroupIter = allCollisions_.begin();
+	for (std::map<int, std::list<GameEngineCollision*>>::iterator collisionGroupIter = allCollisions_.begin();
 		collisionGroupIter != allCollisions_.end(); collisionGroupIter++)
 	{
-		std::list<std::shared_ptr<GameEngineCollision>>& collisionGroup = collisionGroupIter->second;
+		std::list<GameEngineCollision*>& collisionGroup = collisionGroupIter->second;
 
-		for (std::list<std::shared_ptr<GameEngineCollision>>::iterator collisionIter = collisionGroup.begin();
+		for (std::list<GameEngineCollision*>::iterator collisionIter = collisionGroup.begin();
 			collisionIter != collisionGroup.end(); /*collisionIter++*/)
 		{
 			if (true == (*collisionIter)->IsDead())
@@ -235,10 +235,10 @@ void GameEngineLevel::Release(float _deltaTime)
 		}
 	}
 
-	for (std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator actorGroupIter = allActors_.begin();
+	for (std::map<int, std::list<GameEngineActor*>>::iterator actorGroupIter = allActors_.begin();
 		actorGroupIter != allActors_.end(); actorGroupIter++)
 	{
-		for (std::list<std::shared_ptr<GameEngineActor>>::iterator actorIter = actorGroupIter->second.begin();
+		for (std::list<GameEngineActor*>::iterator actorIter = actorGroupIter->second.begin();
 			actorIter != actorGroupIter->second.end(); /*listIter++*/)
 		{
 			(*actorIter)->ReleaseObject(deleteObjects_);
@@ -266,23 +266,23 @@ void GameEngineLevel::Release(float _deltaTime)
 }
 
 
-void GameEngineLevel::PushRenderer(std::shared_ptr<GameEngineRenderer> _renderer, int _cameraOrder)
+void GameEngineLevel::PushRenderer(GameEngineRenderer* _renderer, int _cameraOrder)
 {
-	std::shared_ptr<GameEngineCamera> prevCamera = cameras_[static_cast<UINT>(_renderer->cameraOrder_)];
+	GameEngineCamera* prevCamera = cameras_[static_cast<UINT>(_renderer->cameraOrder_)];
 
 	prevCamera->allRenderers_[_renderer->GetRenderingOrder()].remove(_renderer);
 
 	_renderer->cameraOrder_ = static_cast<CameraOrder>(_cameraOrder);
 
 
-	std::shared_ptr<GameEngineCamera> nextCamera = cameras_[_cameraOrder];
+	GameEngineCamera* nextCamera = cameras_[_cameraOrder];
 
 	cameras_[_cameraOrder]->PushRenderer(_renderer);
 
 	_renderer->camera_ = nextCamera;
 }
 
-void GameEngineLevel::PushCamera(std::shared_ptr<GameEngineCamera> _camera, int _cameraOrder)
+void GameEngineLevel::PushCamera(GameEngineCamera* _camera, int _cameraOrder)
 {
 	if (static_cast<int>(CameraOrder::UICamera) < _cameraOrder
 		|| static_cast<int>(CameraOrder::MainCamera) > _cameraOrder)
@@ -294,7 +294,7 @@ void GameEngineLevel::PushCamera(std::shared_ptr<GameEngineCamera> _camera, int 
 	cameras_[_cameraOrder] = _camera;
 }
 
-void GameEngineLevel::PushCollision(std::shared_ptr<GameEngineCollision> _collision, int _collisionOrder)
+void GameEngineLevel::PushCollision(GameEngineCollision* _collision, int _collisionOrder)
 {
 	allCollisions_[_collision->GetOrder()].remove(_collision);
 	//원래 그룹에서 제거.
@@ -313,14 +313,14 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _nextLevel)
 		return;
 	}
 
-	std::list<std::shared_ptr<GameEngineActor>> actorOverList;
+	std::list<GameEngineActor*> actorOverList;
 
-	for (std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator actorGroupIter = allActors_.begin();
+	for (std::map<int, std::list<GameEngineActor*>>::iterator actorGroupIter = allActors_.begin();
 		actorGroupIter != allActors_.end(); actorGroupIter++)
 	{
 
-		std::list<std::shared_ptr<GameEngineActor>>& actorGroup = actorGroupIter->second;
-		for (std::list<std::shared_ptr<GameEngineActor>>::iterator actorIter = actorGroup.begin();
+		std::list<GameEngineActor*>& actorGroup = actorGroupIter->second;
+		for (std::list<GameEngineActor*>::iterator actorIter = actorGroup.begin();
 			actorIter != actorGroup.end(); /*actorIter++*/)
 		{
 			if (true == (*actorIter)->isLevelOver_)
@@ -335,7 +335,7 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _nextLevel)
 		}
 	}
 
-	for (std::shared_ptr<GameEngineActor> overActor : actorOverList)
+	for (GameEngineActor* overActor : actorOverList)
 	{
 		overActor->SetLevel(_nextLevel);
 		_nextLevel->allActors_[overActor->GetOrder()].push_back(overActor);
@@ -351,14 +351,14 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _nextLevel)
 		cameras_[i]->OverRenderer(_nextLevel->cameras_[i]);
 	}
 
-	std::list<std::shared_ptr<GameEngineCollision>> collisionOverList;
+	std::list<GameEngineCollision*> collisionOverList;
 
-	for (std::map<int, std::list<std::shared_ptr<GameEngineCollision>>>::iterator collisionGroupIter = allCollisions_.begin();
+	for (std::map<int, std::list<GameEngineCollision*>>::iterator collisionGroupIter = allCollisions_.begin();
 		collisionGroupIter != allCollisions_.end(); collisionGroupIter++)
 	{
-		std::list<std::shared_ptr<GameEngineCollision>>& collisionGroup = collisionGroupIter->second;
+		std::list<GameEngineCollision*>& collisionGroup = collisionGroupIter->second;
 
-		for (std::list<std::shared_ptr<GameEngineCollision>>::iterator collisionIter = collisionGroup.begin();
+		for (std::list<GameEngineCollision*>::iterator collisionIter = collisionGroup.begin();
 			collisionIter != collisionGroup.end(); /*collisionIter++*/)
 		{
 			if (true == (*collisionIter)->GetRoot<GameEngineActor>()->isLevelOver_)
@@ -373,7 +373,7 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _nextLevel)
 		}
 	}
 
-	for (std::shared_ptr<GameEngineCollision> overCollision : collisionOverList)
+	for (GameEngineCollision* overCollision : collisionOverList)
 	{
 		_nextLevel->allCollisions_[overCollision->GetOrder()].push_back(overCollision);
 	}
@@ -381,9 +381,9 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _nextLevel)
 
 void GameEngineLevel::ActorLevelStartEvent()
 {
-	for (const std::pair<int, std::list<std::shared_ptr<GameEngineActor>>>& actorListPair : allActors_)
+	for (const std::pair<int, std::list<GameEngineActor*>>& actorListPair : allActors_)
 	{
-		for (std::shared_ptr<GameEngineActor> const actor : actorListPair.second)
+		for (GameEngineActor* const actor : actorListPair.second)
 			//이 위치의 const는 actor가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 			//하지만 actor가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
 		{
@@ -397,9 +397,9 @@ void GameEngineLevel::ActorLevelStartEvent()
 
 void GameEngineLevel::ActorLevelEndEvent()
 {
-	for (const std::pair<int, std::list<std::shared_ptr<GameEngineActor>>>& actorListPair : allActors_)
+	for (const std::pair<int, std::list<GameEngineActor*>>& actorListPair : allActors_)
 	{
-		for (std::shared_ptr<GameEngineActor> const actor : actorListPair.second)
+		for (GameEngineActor* const actor : actorListPair.second)
 			//이 위치의 const는 actor가 가리키는 메모리 위치를 변경할 수 없게 하겠다는 의미이다. 
 			//하지만 actor가 가리키는 메모리가 가진 값은 얼마든지 변경 가능하다.
 		{

@@ -2,7 +2,7 @@
 #include "GameEngineStructuredBuffer.h"
 #include "GameEngineDevice.h"
 
-std::map<std::string, std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>> GameEngineStructuredBuffer::allStructuredBuffers_;
+std::map<std::string, std::map<int, GameEngineStructuredBuffer*>> GameEngineStructuredBuffer::allStructuredBuffers_;
 
 GameEngineStructuredBuffer::GameEngineStructuredBuffer()
 	: structuredBuffer_(nullptr),
@@ -31,20 +31,20 @@ GameEngineStructuredBuffer::~GameEngineStructuredBuffer()
 	}
 }
 
-std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::Create(
+GameEngineStructuredBuffer* GameEngineStructuredBuffer::Create(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
 	size_t _count
 )
 {
-	std::shared_ptr<GameEngineStructuredBuffer> newRes = CreateNamedRes(_name, _desc.Size);
+	GameEngineStructuredBuffer* newRes = CreateNamedRes(_name, _desc.Size);
 	newRes->CreateOrResize(_desc, _count, nullptr);
 	return newRes;
 }
 
-std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::Find(const std::string_view& _name, int _byteWidth)
+GameEngineStructuredBuffer* GameEngineStructuredBuffer::Find(const std::string_view& _name, int _byteWidth)
 {
-	std::map<std::string, std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>>::iterator nameFindIter
+	std::map<std::string, std::map<int, GameEngineStructuredBuffer*>>::iterator nameFindIter
 		= allStructuredBuffers_.find(GameEngineString::ToUpperReturn(_name));
 
 	if (allStructuredBuffers_.end() == nameFindIter)
@@ -52,7 +52,7 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::Find(con
 		return nullptr;
 	}
 
-	std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>::iterator sizeFindIter = nameFindIter->second.find(_byteWidth);
+	std::map<int, GameEngineStructuredBuffer*>::iterator sizeFindIter = nameFindIter->second.find(_byteWidth);
 
 	if (nameFindIter->second.end() == sizeFindIter)
 	{
@@ -62,13 +62,13 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::Find(con
 	return sizeFindIter->second;
 }
 
-std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateOrFind(
+GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateOrFind(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
 	size_t _count
 )
 {
-	std::shared_ptr<GameEngineStructuredBuffer> findBuffer = Find(_name, _desc.Size);
+	GameEngineStructuredBuffer* findBuffer = Find(_name, _desc.Size);
 
 	if (nullptr != findBuffer)
 	{
@@ -76,7 +76,7 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateOr
 	}
 	else
 	{
-		std::shared_ptr<GameEngineStructuredBuffer> newBuffer = CreateNamedRes(_name, _desc.Size);
+		GameEngineStructuredBuffer* newBuffer = CreateNamedRes(_name, _desc.Size);
 
 		newBuffer->CreateOrResize(_desc, _count);
 
@@ -193,7 +193,7 @@ void GameEngineStructuredBuffer::PSResetShaderResource(int _bindPoint)
 
 void GameEngineStructuredBuffer::ResourceDestroy()
 {
-	for (std::pair<std::string, std::map<int, std::shared_ptr<GameEngineStructuredBuffer>>> nameSortedBuffer : allStructuredBuffers_)
+	for (std::pair<std::string, std::map<int, GameEngineStructuredBuffer*>> nameSortedBuffer : allStructuredBuffers_)
 	{
 		nameSortedBuffer.second.clear();
 	}
@@ -201,9 +201,9 @@ void GameEngineStructuredBuffer::ResourceDestroy()
 	allStructuredBuffers_.clear();
 }
 
-std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
+GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateNamedRes(const std::string_view& _name, int _byteWidth)
 {
-	std::shared_ptr<GameEngineStructuredBuffer> findBuffer = Find(_name, _byteWidth);
+	GameEngineStructuredBuffer* findBuffer = Find(_name, _byteWidth);
 
 	if (nullptr != findBuffer)
 	{
@@ -211,7 +211,7 @@ std::shared_ptr<GameEngineStructuredBuffer> GameEngineStructuredBuffer::CreateNa
 	}
 	else
 	{
-		std::shared_ptr<GameEngineStructuredBuffer> newBuffer = CreateRes(_name);
+		GameEngineStructuredBuffer* newBuffer = CreateRes(_name);
 		//GameEngineRes의 namedRes_에 등록시키지 않기 위해 CreateRes()함수를 직접 호출해서 생성한다.
 
 		allStructuredBuffers_[newBuffer->GetNameCopy()][_byteWidth] = newBuffer;

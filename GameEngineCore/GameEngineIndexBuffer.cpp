@@ -21,21 +21,21 @@ GameEngineIndexBuffer::~GameEngineIndexBuffer()
 	}
 }
 
-std::shared_ptr<GameEngineIndexBuffer> GameEngineIndexBuffer::Create(
+GameEngineIndexBuffer* GameEngineIndexBuffer::Create(
 	const std::string_view& _name,
 	const void* _data,
 	UINT _indexSize,
 	UINT _indexCount
 )
 {
-	std::shared_ptr<GameEngineIndexBuffer> newRes = CreateNamedRes(_name);
+	GameEngineIndexBuffer* newRes = CreateNamedRes(_name);
 	newRes->CreateIndexBuffer(_data, _indexSize, _indexCount);
 	return newRes;
 }
 
-std::shared_ptr<GameEngineIndexBuffer> GameEngineIndexBuffer::Create(const void* _data, UINT _indexSize, UINT _indexCount)
+GameEngineIndexBuffer* GameEngineIndexBuffer::Create(const void* _data, UINT _indexSize, UINT _indexCount)
 {
-	std::shared_ptr<GameEngineIndexBuffer> newRes = CreateUnnamedRes();
+	GameEngineIndexBuffer* newRes = CreateUnnamedRes();
 	newRes->CreateIndexBuffer(_data, _indexSize, _indexCount);
 	return newRes;
 }

@@ -19,9 +19,9 @@ GameEngineInstancingBuffer::~GameEngineInstancingBuffer()
     }
 }
 
-std::shared_ptr<GameEngineInstancingBuffer> GameEngineInstancingBuffer::Create(size_t _count, size_t _size)
+GameEngineInstancingBuffer* GameEngineInstancingBuffer::Create(size_t _count, size_t _size)
 {
-    std::shared_ptr<GameEngineInstancingBuffer> newRes = CreateUnnamedRes();
+    GameEngineInstancingBuffer* newRes = CreateUnnamedRes();
     newRes->CreateInstancingBuffer(_count, _size);
     return newRes;
 }
