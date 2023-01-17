@@ -137,7 +137,7 @@ void GameEngineMesh::Render()
 
 void GameEngineMesh::RenderInstancing(size_t _instancingCount)
 {
-    GameEngineDevice::GetDC()->DrawIndexedInstanced(   //
+    GameEngineDevice::GetDC()->DrawIndexedInstanced(
         this->indexBuffer_->GetIndexCount(),                //인덱스 개수.
         static_cast<UINT>(_instancingCount),                //인스턴스 수.
         0,                                                  //읽기 시작할 인덱스 버퍼의 원소 번호.

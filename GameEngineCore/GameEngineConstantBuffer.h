@@ -52,13 +52,13 @@ private:
 	//실질적인 상수버퍼의 데이터세팅은 여기에서 한다.
 	//맵, 언맵 함수를 호출하므로 최소한으로 사용할 것.
 
-	//상수버퍼를 렌더링 파이프라인의 정점셰이더에 연결하는 함수.
+	//상수버퍼를 정점셰이더에 연결하는 함수.
 	void VSSetConstantBuffer(int _bindPoint);
 
 	//상수버퍼를 컴퓨트셰이더에 연결하는 함수.
 	void CSSetConstantBuffer(int _bindPoint);
 
-	//상수버퍼를 렌더링 파이프라인의 픽셀셰이더에 연결하는 함수.
+	//상수버퍼를 픽셀셰이더에 연결하는 함수.
 	void PSSetConstantBuffer(int _bindPoint);
 
 public:

@@ -9,15 +9,13 @@
 
 
 GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
-	const std::set<std::string>& _structuredBufferSetterNames
-)
+	const std::multiset<std::string>& _structuredBufferSetterNames
+): colorTextureIndex_(0), normalMapTextureIndex_(-1)
 {
 	for (const std::string& name : _structuredBufferSetterNames)
 	{
 		data_.insert(std::make_pair(name, nullptr));
 	}
-	this->colorTextureIndex_ = 0;
-	this->normalMapTextureIndex_ = -1;
 }
 
 void GameEngineInstancingRenderer::InstancingUnit::Link(const std::string_view& _name, const void* _data)
@@ -123,9 +121,10 @@ void GameEngineInstancingRenderer::Initialize(
 	}
 
 	this->instancingUnitCount_ = _instancingUnitCount;
-
+	//인스턴스별 렌더링 정보를 저장할 인스턴싱유닛의 개수 지정.
 
 	this->isShadowRendering_ = _isShadowRendering;
+	//그림자 렌더링 여부 저장.
 
 
 	this->mesh_ = GameEngineMesh::Find(_meshName);
@@ -150,34 +149,33 @@ void GameEngineInstancingRenderer::Initialize(
 		this->material_->GetVertexShader()->GetInst_VertexShader());
 	this->shaderResourceHelper_.ShaderCheck(
 		this->material_->GetPixelShader()->GetInst_PixelShader());
-
-
+	//인스턴싱렌더러가 쓸 셰이더리소스헬퍼를 생성하고 
+	// 위에서 지정한 마테리얼이 가진 인스턴싱용 정점셰이더와 픽셀셰이더가 필요로 하는 셰이더리소스를 
+	// 디바이스컨텍스트에 연결한다.
 	
 	std::multimap<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetters
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
 	//셰이더리소스헬퍼에 등록된 구조화버퍼 세터를 전부 가져온다.
 
-
-
 	for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator iter = structuredBufferSetters.begin();
 		iter != structuredBufferSetters.end(); ++iter)
 	{
-		//트랜스폼데이터, 아틀라스데이터는 따로 처리해야하므로 크기 조정만 하고 structuredBufferSetterNames_에는 등록하지 않는다.
 		if (0 == iter->first.compare("INST_TRANSFORMDATA")
 			|| 0 == iter->first.compare("INST_ATLASDATA"))
 		{
 			iter->second.Resize(instancingUnitCount_);
 			continue;
 		}
+		//트랜스폼데이터, 아틀라스데이터는 따로 처리하게 했으므로 크기 조정만 하고 structuredBufferSetterNames_에는 등록하지 않는다.
 
 		if (std::string::npos != iter->first.find("INST_"))
 		{
+			structuredBufferSetterNames_.insert(iter->first);
 			//structuredBufferSetters의 모든 구조화버퍼 세터들 중 이름에 "INST_" 라는 문자열이 포함된 것들만 골라서 
 			// structuredBufferSetterNames_에 이름을 등록한다.
-			structuredBufferSetterNames_.insert(iter->first);
 
-			//그 세터와 연결된 구조화버퍼를 생성하거나 크기를 조정한다.
 			iter->second.Resize(instancingUnitCount_);
+			//그 세터와 연결된 구조화버퍼를 생성하거나 크기를 조정한다.
 		}
 	}
 
@@ -190,6 +188,7 @@ void GameEngineInstancingRenderer::Initialize(
 			)
 		);
 	}
+	//instancingUnitCount_만큼의 인스턴싱유닛을 생성, 저장한다.
 }
 
 void GameEngineInstancingRenderer::SetAllUnitsWorldScale(const float4& _worldScaleVector)
@@ -239,43 +238,55 @@ void GameEngineInstancingRenderer::Render(
 
 	std::multimap<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetters
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
+	//ShaderCheck()함수를 통해 미리 준비했던 구조화버퍼들을 전부 가져온다.
 
 	int* instanceIndexBufferPtr = reinterpret_cast<int*>(&instanceIndexBuffer_[0]);
+	//인스턴스인덱스버퍼 메모리의 시작 주소값을 받아온다.
 
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
+		//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
 		{
-			//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
 			allInstancingUnits_[index].transformData_.worldViewMatrix_
 				= allInstancingUnits_[index].transformData_.worldWorldMatrix_ * _viewMatrix;
+			//인스턴싱유닛이 가진 월드행렬에 카메라의 뷰행렬을 받아서 적용.
 
 			allInstancingUnits_[index].transformData_.worldViewProjectionMatrix_
 				= allInstancingUnits_[index].transformData_.worldViewMatrix_ * _projectionMatrix;
+			//투영행렬도 받아서 적용.
 
-			size_t transformDataSize = sizeof(TransformData);
-			char* transformDataPtr
-				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_TransformData")->originalData_[index * transformDataSize];
+			size_t transformDataSize = sizeof(TransformData);	//한개 트랜스폼데이터 크기.
 
-			int copyResult = memcpy_s(	//
-				transformDataPtr,		//
-				transformDataSize,		//
-				&allInstancingUnits_[index].transformData_,	//
-				transformDataSize		//
+			//Inst_TransformData라는 이름을 가진 구조화버퍼 세터가 가진 오리지날데이터의 index번째 메모리의 주소값.
+			char* transformDataPtr	
+				= &shaderResourceHelper_.GetStructuredBufferSetter(
+					"Inst_TransformData")->originalData_[index * transformDataSize];
+
+			int copyResult = memcpy_s(	
+				transformDataPtr,		
+				transformDataSize,		
+				&allInstancingUnits_[index].transformData_,	
+				transformDataSize		
 			);
+			//각각의 인스턴싱유닛들이 가진 트랜스폼데이터를 Inst_TransformData구조화버퍼 세터가 가진 오리지날데이터로 복사한다.
 		}
 
+		//아틀라스데이터도 따로 처리.
 		{
-			//아틀라스데이터도 따로 처리.
-			size_t atlasDataSize = sizeof(AtlasData);
-			char* atlasDataPtr
-				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_AtlasData")->originalData_[index * atlasDataSize];
+			size_t atlasDataSize = sizeof(AtlasData);	//한개 아틀라스데이터 크기.
 
-			int copyResult = memcpy_s(	//
-				atlasDataPtr,		//
-				atlasDataSize,		//
-				&allInstancingUnits_[index].atlasData_,	//
-				atlasDataSize		//
+			//Inst_AtlasData라는 이름을 가진 구조화버퍼 세터가 가진 오리지날데이터의 index번째 메모리의 주소값.
+			char* atlasDataPtr	
+				= &shaderResourceHelper_.GetStructuredBufferSetter(
+					"Inst_AtlasData")->originalData_[index * atlasDataSize];
+
+			int copyResult = memcpy_s(	
+				atlasDataPtr,		
+				atlasDataSize,		
+				&allInstancingUnits_[index].atlasData_,	
+				atlasDataSize		
 			);
+			//각각의 인스턴싱유닛들이 가진 아틀라스데이터를 Inst_AtlasData구조화버퍼 세터가 가진 오리지날데이터로 복사한다.
 		}
 
 		for (std::map<std::string, const void*>::iterator unitDataIter = this->allInstancingUnits_[index].data_.begin();
@@ -292,11 +303,10 @@ void GameEngineInstancingRenderer::Render(
 				continue;
 			}
 
-			//구조화버퍼세터로 각 인스턴싱유닛별 데이터 전달.
+			//이름이 맞는 구조화버퍼세터로 각 인스턴싱유닛들이 가진 나머지 데이터 전달.
 			for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(unitDataIter->first);
 				sBufferSetterIter != structuredBufferSetters.upper_bound(unitDataIter->first); ++sBufferSetterIter) 
 			{
-			
 				size_t originalDataSize = sBufferSetterIter->second.size_;
 				//구조화버퍼 세터가 들고 있는 originalData_의 단위 크기.
 
@@ -304,11 +314,12 @@ void GameEngineInstancingRenderer::Render(
 				//구조화버퍼 세터가 들고 있는 originalData_의 포인터.
 
 				int copyResult = memcpy_s(
-					originalDataPtr,		//구조화버퍼 세터의 originalData_로 
-					originalDataSize,		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼
-					unitDataIter->second,	//인스턴싱유닛이 들고있는 데이터의 포인터를 복사한다.
-					originalDataSize		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼.
+					originalDataPtr,		
+					originalDataSize,		
+					unitDataIter->second,	
+					originalDataSize		
 				);
+				//각각의 인스턴싱유닛들이 가진 나머지 데이터를 구조화버퍼 세터가 가진 오리지날데이터로 전부 복사한다.
 			}
 		}
 
@@ -326,9 +337,13 @@ void GameEngineInstancingRenderer::Render(
 	}
 
 	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
+	//인스턴스인덱스버퍼에 저장된 컬러텍스처 인덱스와 노말맵텍스처 인덱스를 인스턴싱버퍼로 복사한다.
+
 	shaderResourceHelper_.AllResourcesSetting();
 
 	this->mesh_->SettingInstancing(this->instancingBuffer_);
+	//메쉬에 저장된 기본 정점정보와 함께 인스턴싱버퍼의 정보들도 디바이스 컨텍스트에 연결해서 정점셰이더로 전달한다.
+
 	this->inputLayout_->Set();
 	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
 	this->material_->SettingInstancing2();
@@ -376,8 +391,8 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
+		//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
 		{
-			//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
 			allInstancingUnits_[index].transformData_.worldViewMatrix_
 				= allInstancingUnits_[index].transformData_.worldWorldMatrix_ * _viewMatrix;
 
@@ -388,25 +403,25 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 			char* transformDataPtr
 				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_TransformData")->originalData_[index * transforDataSize];
 
-			int copyResult = memcpy_s(	//
-				transformDataPtr,		//
-				transforDataSize,		//
-				&allInstancingUnits_[index].transformData_,	//
-				transforDataSize		//
+			int copyResult = memcpy_s(	
+				transformDataPtr,		
+				transforDataSize,		
+				&allInstancingUnits_[index].transformData_,	
+				transforDataSize		
 			);
 		}
 
+		//아틀라스데이터도 따로 처리.
 		{
-			//아틀라스데이터도 따로 처리.
 			size_t atlasDataSize = sizeof(AtlasData);
 			char* atlasDataPtr
 				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_AtlasData")->originalData_[index * atlasDataSize];
 
-			int copyResult = memcpy_s(	//
-				atlasDataPtr,		//
-				atlasDataSize,		//
-				&allInstancingUnits_[index].atlasData_,	//
-				atlasDataSize		//
+			int copyResult = memcpy_s(	
+				atlasDataPtr,		
+				atlasDataSize,		
+				&allInstancingUnits_[index].atlasData_,	
+				atlasDataSize		
 			);
 		}
 
@@ -424,7 +439,7 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 				continue;
 			}
 
-			//구조화버퍼세터로 각 인스턴싱유닛별 데이터 전달.
+			//이름이 맞는 구조화버퍼세터로 각 인스턴싱유닛들이 가진 나머지 데이터 전달.
 			for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(unitDataIter->first);
 				sBufferSetterIter != structuredBufferSetters.upper_bound(unitDataIter->first); ++sBufferSetterIter)
 			{
@@ -436,10 +451,10 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 				//구조화버퍼 세터가 들고 있는 originalData_의 포인터.
 
 				int copyResult = memcpy_s(
-					originalDataPtr,		//구조화버퍼 세터의 originalData_로 
-					originalDataSize,		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼
-					unitDataIter->second,	//인스턴싱유닛이 들고있는 데이터의 포인터를 복사한다.
-					originalDataSize		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼.
+					originalDataPtr,		
+					originalDataSize,		
+					unitDataIter->second,	
+					originalDataSize		
 				);
 			}
 		}
@@ -509,8 +524,8 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
+		//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
 		{
-			//트랜스폼데이터는 뷰행렬, 투영행렬을 적용해야 하므로 따로 처리.
 			allInstancingUnits_[index].transformData_.worldViewMatrix_
 				= allInstancingUnits_[index].transformData_.worldWorldMatrix_ * _viewMatrix;
 
@@ -521,25 +536,25 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 			char* transformDataPtr
 				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_TransformData")->originalData_[index * transforDataSize];
 
-			int copyResult = memcpy_s(	//
-				transformDataPtr,		//
-				transforDataSize,		//
-				&allInstancingUnits_[index].transformData_,	//
-				transforDataSize		//
+			int copyResult = memcpy_s(	
+				transformDataPtr,		
+				transforDataSize,		
+				&allInstancingUnits_[index].transformData_,	
+				transforDataSize		
 			);
 		}
 
+		//아틀라스데이터도 따로 처리.
 		{
-			//아틀라스데이터도 따로 처리.
 			size_t atlasDataSize = sizeof(AtlasData);
 			char* atlasDataPtr
 				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_AtlasData")->originalData_[index * atlasDataSize];
 
-			int copyResult = memcpy_s(	//
-				atlasDataPtr,		//
-				atlasDataSize,		//
-				&allInstancingUnits_[index].atlasData_,	//
-				atlasDataSize		//
+			int copyResult = memcpy_s(	
+				atlasDataPtr,		
+				atlasDataSize,		
+				&allInstancingUnits_[index].atlasData_,	
+				atlasDataSize		
 			);
 		}
 
@@ -557,7 +572,7 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 				continue;
 			}
 
-			//구조화버퍼세터로 각 인스턴싱유닛별 데이터 전달.
+			//이름이 맞는 구조화버퍼세터로 각 인스턴싱유닛들이 가진 나머지 데이터 전달.
 			for (std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator sBufferSetterIter = structuredBufferSetters.lower_bound(unitDataIter->first);
 				sBufferSetterIter != structuredBufferSetters.upper_bound(unitDataIter->first); ++sBufferSetterIter)
 			{
@@ -569,10 +584,10 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 				//구조화버퍼 세터가 들고 있는 originalData_의 포인터.
 
 				int copyResult = memcpy_s(
-					originalDataPtr,		//구조화버퍼 세터의 originalData_로 
-					originalDataSize,		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼
-					unitDataIter->second,	//인스턴싱유닛이 들고있는 데이터의 포인터를 복사한다.
-					originalDataSize		//originalData_의 단위 크기만큼 == 인스턴싱유닛이 들고있는 데이터 크기만큼.
+					originalDataPtr,		
+					originalDataSize,		
+					unitDataIter->second,	
+					originalDataSize		
 				);
 			}
 		}

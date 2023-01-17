@@ -10,10 +10,12 @@ class GameEngineInstancingRenderer
 
     class InstancingUnit
     {
+        //인스턴스별 렌더링 정보 저장용 유닛.
+
         friend GameEngineInstancingRenderer;
 
 
-        InstancingUnit(const std::set<std::string>& _structuredBufferSetterNames);
+        InstancingUnit(const std::multiset<std::string>& _structuredBufferSetterNames);
     
         void Link(const std::string_view& _name, const void* _data);
 
@@ -86,7 +88,7 @@ class GameEngineInstancingRenderer
 
         AtlasData atlasData_;
 
-        std::map<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
+        std::multimap<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
 
         unsigned int colorTextureIndex_; //인스턴스별로 사용할 컬러텍스처의 인덱스.
 
@@ -182,27 +184,28 @@ private:
     void RenderShadow(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
 
 private:
-    bool isShadowRendering_;        //true: 그림자의 깊이값을 렌더타겟에 저장한다.
+    bool isShadowRendering_;                        //true: 그림자의 깊이값을 렌더타겟에 저장한다.
 
-    size_t instancingUnitCount_;    //전체 인스턴싱유닛 개수.
+    size_t instancingUnitCount_;                    //전체 인스턴싱유닛 개수.
 
-    std::vector<InstancingUnit> allInstancingUnits_;   //인스턴싱유닛 벡터.
+    std::vector<InstancingUnit> allInstancingUnits_;   //모든 인스턴싱유닛들이 저장된 벡터.
 
-    GameEngineMesh* mesh_;                  //메쉬.
+    GameEngineMesh* mesh_;                          //메쉬.
 
-    GameEngineInputLayout* inputLayout_;    //인풋 레이아웃.
+    GameEngineInputLayout* inputLayout_;            //인풋 레이아웃.
 
-    GameEngineMaterial* material_;    //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
+    GameEngineMaterial* material_;                  //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
 
-    D3D11_PRIMITIVE_TOPOLOGY topology_;                     //토폴로지.
+    D3D11_PRIMITIVE_TOPOLOGY topology_;             //토폴로지.
 
-    GameEngineInstancingBuffer* instancingBuffer_;  //인스턴스별로 달라지는 정보들을 셰이더로 전달하는 버퍼
+    GameEngineInstancingBuffer* instancingBuffer_;  //각각의 인스턴스별로 다른 정보들을 모아서 셰이더로 전달하는 버퍼
 
-    std::vector<char> instanceIndexBuffer_;  //컬러텍스처 인덱스와 노말맵텍스처 인덱스를 저장하는 버퍼.
+    std::vector<char> instanceIndexBuffer_;  //인스턴스별 컬러텍스처 인덱스와 노말맵텍스처 인덱스를 모아 저장해서 인스턴싱버퍼로 전달하는 임시저장용 버퍼.
 
     GameEngineShaderResourceHelper shaderResourceHelper_;   //이 렌더러가 쓸 셰이더리소스헬퍼.
 
-    std::set<std::string> structuredBufferSetterNames_;    //셰이더리소스헬퍼가 가진 인스턴스렌더링용 구조화버퍼 세터들의 이름 모음. 
+    std::multiset<std::string> structuredBufferSetterNames_;     //셰이더리소스헬퍼가 가진 인스턴스렌더링용 구조화버퍼 세터들의 이름 모음. 
+    //멀티셋이 아니라 같은 원소를 겹칠 수 없는 일반 셋이면 여러 셰이더가 같은 이름의 셰이더 리소스를 사용할 수 없다.
     //반드시 전부 대문자로 구성할 것.
 
 };

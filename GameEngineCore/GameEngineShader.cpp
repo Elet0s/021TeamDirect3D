@@ -193,6 +193,7 @@ void GameEngineSamplerSetter::Bind()
 void GameEngineStructuredBufferSetter::Set() const
 {
 	structuredBuffer_->ChangeData(settingDataToGPU_, size_ * count_);
+
 	setResourceFunction_();	//½ºÀ§Ä¡¹® ÇÑ¹ø ´ú ¾²·Á°í Æã¼Å³Î »ç¿ë.
 }
 

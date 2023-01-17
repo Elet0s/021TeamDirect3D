@@ -71,7 +71,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 	loadedScratchImages_.resize(allFilesInFolder.size());
 	cutData_.resize(allFilesInFolder.size());
 
-    for (size_t i = 0; i < allFilesInFolder.size(); i++)
+    for (size_t i = 0; i < allFilesInFolder.size(); ++i)
     {
 		std::wstring unicodePath = GameEngineString::AnsiToUnicodeReturn(allFilesInFolder[i].GetFullPath());
 
@@ -81,7 +81,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 		std::string uppercaseFileName
 			= GameEngineString::ToUpperReturn(allFilesInFolder[i].GetFileName());
 
-		nameIndexPairs_.insert(std::make_pair(uppercaseFileName, static_cast<UINT>(i)));
+		nameIndexPairs_.insert(std::make_pair(uppercaseFileName, static_cast<int>(i)));
 
 		if (uppercaseExtension == ".TGA")
 		{
@@ -103,11 +103,11 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 		}
 		else if (uppercaseExtension == ".PNG")
 		{
-			if (S_OK != DirectX::LoadFromWICFile(//
-				unicodePath.c_str(),				  //
-				DirectX::WIC_FLAGS_NONE,			  //
+			if (S_OK != DirectX::LoadFromWICFile(
+				unicodePath.c_str(),				  
+				DirectX::WIC_FLAGS_NONE,			  
 				&metaDatas_[i],
-				loadedScratchImages_[i]					  //
+				loadedScratchImages_[i]					  
 			))
 			{
 				MsgBoxAssertString(allFilesInFolder[i].GetFullPath() + ": 텍스쳐 로드 실패.");

@@ -48,8 +48,8 @@ void ShaderTestLevel::Start()
 	//	UINT MiscFlags;
 	//} 	D3D11_TEXTURE2D_DESC;
 
-	testTextureDesc_.Width = GameEngineWindow::GetScale().UIX();
-	testTextureDesc_.Height = GameEngineWindow::GetScale().UIY();
+	testTextureDesc_.Width = GameEngineWindow::GetInst().GetScale().UIX();
+	testTextureDesc_.Height = GameEngineWindow::GetInst().GetScale().UIY();
 	testTextureDesc_.MipLevels = 1;
 	testTextureDesc_.ArraySize = 1;
 	testTextureDesc_.Format = DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
