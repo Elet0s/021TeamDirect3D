@@ -97,7 +97,7 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth
 	//	MsgBoxAssertString(this->GetNameCopy() + ": 데이터의 전체 크기가 서로 맞지 않습니다.");
 	//	return;
 	//}
-	//최대 크기 구조화 버퍼를 모든 셰이더들이 공유하므로 크기를 정확히 맞출 필요가 없다.
+	//같은 이름의 최대 크기 구조화 버퍼를 모든 셰이더들이 공유하므로 크기를 정확히 맞출 필요가 없다.
 
 	destMemoryPtrInGPU_.pData = nullptr;
 

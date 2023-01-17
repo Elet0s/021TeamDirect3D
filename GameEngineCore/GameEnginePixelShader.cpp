@@ -2,7 +2,10 @@
 #include "GameEnginePixelShader.h"
 #include "GameEngineDevice.h"
 
-GameEnginePixelShader::GameEnginePixelShader() : pixelShader_(nullptr), isDeferredRendering_(false)
+GameEnginePixelShader::GameEnginePixelShader() 
+    : pixelShader_(nullptr),
+    isDeferredRendering_(false),
+    inst_PixelShader_(nullptr)
 {
     shaderType_ = ShaderType::PixelShader;
 }

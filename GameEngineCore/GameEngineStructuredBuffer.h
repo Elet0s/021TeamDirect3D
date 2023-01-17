@@ -7,7 +7,7 @@ class GameEngineStructuredBuffer : public GameEngineRes<GameEngineStructuredBuff
 	//GameEngineStructuredBuffer 클래스의 프라이빗 소멸자를 GameEngineRes클래스에서 호출하기 위한 방법.
 
 	friend class GameEngineStructuredBufferSetter;
-	//GameEngineStructuredBufferSetter 클래스에서 리소스세팅 함수들을 호출하기 위해 프렌드.
+	//GameEngineStructuredBufferSetter 클래스에서 리소스세팅 함수를 호출하기 위해 프렌드.
 
 private:
 	GameEngineStructuredBuffer();

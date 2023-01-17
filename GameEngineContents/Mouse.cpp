@@ -49,7 +49,7 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderP
 	float4 cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
 	//메인카메라 월드좌표 == 레이 원점.
 
-	float4 rayDirection = this->GetLevel()->GetMainCamera()->GetRayTowardMousePointer();
+	float4 rayDirection = float4::Zero;
 	//레이 방향벡터.
 
 	if (false == _isUI)

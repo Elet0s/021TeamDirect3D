@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "Texture2DShadowRenderer.h"
 
-Texture2DShadowRenderer::Texture2DShadowRenderer(): isAnimation_(false)
+Texture2DShadowRenderer::Texture2DShadowRenderer(): isAnimation_(false), parentTextureRenderer_(nullptr)
 {
 }
 

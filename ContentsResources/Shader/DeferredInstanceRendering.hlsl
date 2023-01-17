@@ -8,7 +8,6 @@ struct Input
 {
     float4 localPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    //uint instancingIndex_ : ROWINDEX; //인스턴싱 인덱스. unsigned int 한개만 사용. 더 이상 필요 없음.
     uint instanceIndex_ : SV_InstanceID; //인스턴스 식별번호.
     uint colorTextureIndex_ : COLORTEXTUREINDEX; //인스턴스별로 사용할 컬러텍스처 번호.
     uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //인스턴스별로 사용할 노말맵텍스처 번호.
@@ -20,7 +19,6 @@ struct Output
     float4 viewPosition_ : POSITION1;
     float4 projSpacePosition_ : POSITION2;   //투영변환 이후의 오브젝트 위치. 
     float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: 텍스쳐의 UV값을 의미하는 시맨틱네임. 텍스쳐좌표를 뜻하는 Texture Coordinate의 줄임말.
-    //uint instancingIndex_ : ROWINDEX; 필요 없음.
     uint colorTextureIndex_ : COLORTEXTUREINDEX; //인스턴스별로 사용할 컬러텍스처 번호.
     uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //인스턴스별로 사용할 노말맵텍스처 번호.
 };

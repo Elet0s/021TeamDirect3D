@@ -129,8 +129,6 @@ class GameEngineStructuredBufferSetter : public ShaderResSetter
 {
 	friend class GameEngineShader;
 	friend class GameEngineShaderResourceHelper;
-	friend class GameEngineFBXAnimationRenderer;
-	friend class GameEngineInstancing;
 	friend class GameEngineInstancingRenderer;
 
 public:

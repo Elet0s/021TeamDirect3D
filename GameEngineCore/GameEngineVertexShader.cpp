@@ -5,7 +5,6 @@
 GameEngineVertexShader::GameEngineVertexShader()
     : vertexShader_(nullptr),
     inst_VertexShader_(nullptr)
-
 {
     shaderType_ = ShaderType::VertexShader;
 }

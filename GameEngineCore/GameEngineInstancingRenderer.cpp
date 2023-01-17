@@ -85,7 +85,11 @@ void GameEngineInstancingRenderer::InstancingUnit::CalWorldWorldMatrix()
 GameEngineInstancingRenderer::GameEngineInstancingRenderer()
 	: isShadowRendering_(false),
 	instancingUnitCount_(0),
-	topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	mesh_(nullptr),
+	inputLayout_(nullptr),
+	material_(nullptr),
+	topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST),
+	instancingBuffer_(nullptr)
 {
 }
 
@@ -248,15 +252,15 @@ void GameEngineInstancingRenderer::Render(
 			allInstancingUnits_[index].transformData_.worldViewProjectionMatrix_
 				= allInstancingUnits_[index].transformData_.worldViewMatrix_ * _projectionMatrix;
 
-			size_t transforDataSize = sizeof(TransformData);
+			size_t transformDataSize = sizeof(TransformData);
 			char* transformDataPtr
-				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_TransformData")->originalData_[index * transforDataSize];
+				= &shaderResourceHelper_.GetStructuredBufferSetter("Inst_TransformData")->originalData_[index * transformDataSize];
 
 			int copyResult = memcpy_s(	//
 				transformDataPtr,		//
-				transforDataSize,		//
+				transformDataSize,		//
 				&allInstancingUnits_[index].transformData_,	//
-				transforDataSize		//
+				transformDataSize		//
 			);
 		}
 

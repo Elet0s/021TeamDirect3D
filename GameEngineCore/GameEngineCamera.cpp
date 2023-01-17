@@ -58,8 +58,6 @@ GameEngineCamera::~GameEngineCamera()
 		delete mergeRenderUnit_;
 		mergeRenderUnit_ = nullptr;
 	}
-
-	this;
 }
 
 float4 GameEngineCamera::ConvertWorldPositionToScreenPosition(const float4& _worldPosition)
