@@ -274,6 +274,9 @@
     <ClCompile Include="GameEngineComputeShader.cpp">
       <Filter>Resource\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineRWTexture.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -457,6 +460,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineComputeShader.h">
       <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRWTexture.h">
+      <Filter>Resource\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

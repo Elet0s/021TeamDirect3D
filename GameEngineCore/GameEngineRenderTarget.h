@@ -46,8 +46,8 @@ class GameEngineRenderTarget: public GameEngineRes<GameEngineRenderTarget>
 	//프렌드 이유??
 
 
-	//게임엔진렌더타겟과 게임엔진텍스쳐 클래스를 분리한 이유: 
-	//게임엔진텍스쳐는 자기가 가진 텍스쳐와 그 서브리소스들만 가지고 관리하는 클래스이고,
+	//게임엔진렌더타겟과 게임엔진텍스처 클래스를 분리한 이유: 
+	//게임엔진텍스쳐는 자기가 가진 텍스처와 그 서브리소스들만 가지고 관리하는 클래스이고,
 	//게임엔진렌더타겟은 이 프레임워크내 모든 렌더타겟뷰를 관리하는 클래스이다. 
 
 private:
@@ -142,7 +142,7 @@ public:
 
 private:
 	//렌더타겟으로 사용할 텍스쳐들.
-	std::vector<GameEngineTexture*> renderTargets_;
+	std::vector<GameEngineTexture*> renderTargetTextures_;
 
 	//위 텍스쳐에서 파생된 렌더타겟뷰들.
 	std::vector<ID3D11RenderTargetView*> renderTargetViews_;

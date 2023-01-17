@@ -35,5 +35,8 @@ private:
 	//GameEngineTextureRenderer* shaderTestRenderer_;
 	//std::vector<RenderOption> testRenderOptionVector_;
 	//std::shared_ptr<GameEngineLighting> testLighting_;
+	D3D11_TEXTURE2D_DESC testTextureDesc_;
+	GameEngineTexture* testTexture_;
+	D3D11_UNORDERED_ACCESS_VIEW_DESC testUAVDesc_;
 };
 

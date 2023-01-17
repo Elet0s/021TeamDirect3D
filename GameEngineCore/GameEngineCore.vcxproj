@@ -194,6 +194,10 @@
     <ClInclude Include="GameEngineMaterial.h" />
     <ClInclude Include="GameEngineRenderTarget.h" />
     <ClInclude Include="GameEngineRes.h" />
+    <ClInclude Include="GameEngineRWTexture.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineSampler.h" />
     <ClInclude Include="GameEngineShader.h" />
     <ClInclude Include="GameEngineShaderResourceHelper.h" />
@@ -271,6 +275,10 @@
     <ClCompile Include="GameEngineMaterial.cpp" />
     <ClCompile Include="GameEngineRenderTarget.cpp" />
     <ClCompile Include="GameEngineRes.cpp" />
+    <ClCompile Include="GameEngineRWTexture.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineSampler.cpp" />
     <ClCompile Include="GameEngineShader.cpp" />
     <ClCompile Include="GameEngineShaderResourceHelper.cpp" />
