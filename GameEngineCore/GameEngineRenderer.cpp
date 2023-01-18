@@ -155,13 +155,13 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 	}
 
 
-	mesh_->Setting();
+	mesh_->Set();
 
 	inputLayout_->Set();
 
 	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
 
-	material_->Setting();
+	material_->Set();
 
 	shaderResourceHelper_.AllResourcesSetting();
 

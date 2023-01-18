@@ -40,7 +40,7 @@ protected:
 class GameEngineConstantBuffer;
 class GameEngineConstantBufferSetter : public ShaderResSetter
 {
-	//셰이더들이 필요로 하는 각각의 상수버퍼가 가져야 하는 정보 관리 클래스.
+	//셰이더들이 필요로 하는 상수버퍼가 각각 가져야 하는 정보 관리 클래스.
 
 
 	friend class GameEngineShader;

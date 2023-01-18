@@ -87,7 +87,8 @@ GameEngineInstancingRenderer::GameEngineInstancingRenderer()
 	inputLayout_(nullptr),
 	material_(nullptr),
 	topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST),
-	instancingBuffer_(nullptr)
+	instancingBuffer_(nullptr),
+	instanceDataSize_(0)
 {
 }
 
@@ -135,14 +136,15 @@ void GameEngineInstancingRenderer::Initialize(
 	);
 	//메쉬, 마테리얼, 인풋 레이아웃 세팅.
 
-	//인스턴스 단위 크기.
-	UINT instanceSize = this->mesh_->GetInputLayoutDesc().instanceSize_;
 	
-	this->instancingBuffer_ = GameEngineInstancingBuffer::Create(instancingUnitCount_, instanceSize);
-	//instancingUnitCount_ * instancingSize크기의 인스턴싱버퍼 생성.
+	instanceDataSize_ = static_cast<size_t>(this->mesh_->GetInputLayoutDesc().instanceDataSize_);
+	//인스턴스별 인풋레이아웃 크기를 가져온다. 
+	
+	this->instancingBuffer_ = GameEngineInstancingBuffer::Create(instancingUnitCount_, instanceDataSize_);
+	//instancingUnitCount_ * instanceDataSize크기의 인스턴싱버퍼 생성.
 
-	instanceIndexBuffer_.resize(static_cast<size_t>(instanceSize) * instancingUnitCount_);
-	//instancingUnitCount_ * instancingSize크기로 인스턴스인덱스 버퍼 크기 조정.
+	instanceDataBuffer_.resize(instanceDataSize_ * instancingUnitCount_);
+	//instancingUnitCount_ * instanceDataSize크기로 인스턴스데이터 버퍼 크기 조정.
 
 	this->shaderResourceHelper_ = GameEngineShaderResourceHelper();
 	this->shaderResourceHelper_.ShaderCheck(
@@ -151,7 +153,7 @@ void GameEngineInstancingRenderer::Initialize(
 		this->material_->GetPixelShader()->GetInst_PixelShader());
 	//인스턴싱렌더러가 쓸 셰이더리소스헬퍼를 생성하고 
 	// 위에서 지정한 마테리얼이 가진 인스턴싱용 정점셰이더와 픽셀셰이더가 필요로 하는 셰이더리소스를 
-	// 디바이스컨텍스트에 연결한다.
+	// 디바이스 컨텍스트에 연결한다.
 	
 	std::multimap<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetters
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
@@ -240,8 +242,8 @@ void GameEngineInstancingRenderer::Render(
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
 	//ShaderCheck()함수를 통해 미리 준비했던 구조화버퍼들을 전부 가져온다.
 
-	int* instanceIndexBufferPtr = reinterpret_cast<int*>(&instanceIndexBuffer_[0]);
-	//인스턴스인덱스버퍼 메모리의 시작 주소값을 받아온다.
+	//int* instanceDataBufferPtr = reinterpret_cast<int*>(&instanceDataBuffer_[0]);
+	//인스턴스데이터버퍼 메모리의 시작 주소값을 받아온다.
 
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
@@ -323,32 +325,49 @@ void GameEngineInstancingRenderer::Render(
 			}
 		}
 
-		//*instanceIndexBufferPtr = static_cast<int>(index);
-		//instanceIndexBufferPtr += 1;
-		////인스턴스인덱스버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
+		//*instanceDataBufferPtr = static_cast<int>(index);
+		//instanceDataBufferPtr += 1;
+		////인스턴스데이터버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
 
-		*instanceIndexBufferPtr = allInstancingUnits_[index].colorTextureIndex_;
-		instanceIndexBufferPtr += 1;
-		//인스턴스인덱스버퍼에 텍스처배열의 컬러텍스처 인덱스를 기록하고 뒤로 넘어간다.
+		size_t colorTextureIndexSize = sizeof(allInstancingUnits_[index].colorTextureIndex_);
+		char* instanceDataBufferPtr1 = &instanceDataBuffer_[index * instanceDataSize_];
 
-		*instanceIndexBufferPtr = allInstancingUnits_[index].normalMapTextureIndex_;
-		instanceIndexBufferPtr += 1;
-		//인스턴스인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
+		int copyResult1 = memcpy_s(
+			instanceDataBufferPtr1,
+			colorTextureIndexSize,
+			&allInstancingUnits_[index].colorTextureIndex_,
+			colorTextureIndexSize
+		);
+		//인스턴스데이터버퍼에 텍스처배열의 컬러텍스처 인덱스를 기록한다.
+
+		size_t normalMapTextureIndexSize = sizeof(allInstancingUnits_[index].normalMapTextureIndex_);
+		char* instanceDataBufferPtr2 = &instanceDataBuffer_[index * instanceDataSize_ + colorTextureIndexSize];
+
+		int copyResult2 = memcpy_s(
+			instanceDataBufferPtr2,
+			normalMapTextureIndexSize,
+			&allInstancingUnits_[index].normalMapTextureIndex_,
+			normalMapTextureIndexSize
+		);
+		//인스턴스데이터버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록한다.
 	}
 
-	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
-	//인스턴스인덱스버퍼에 저장된 컬러텍스처 인덱스와 노말맵텍스처 인덱스를 인스턴싱버퍼로 복사한다.
+	instancingBuffer_->ChangeData(&instanceDataBuffer_[0], instanceDataBuffer_.size());
+	//인스턴스데이터버퍼에 저장된 컬러텍스처 인덱스와 노말맵텍스처 인덱스를 인스턴싱버퍼로 복사한다.
 
 	shaderResourceHelper_.AllResourcesSetting();
+	//셰이더리소스헬퍼가 가진 모든 리소스들을 디바이스 컨텍스트에 연결한다.
 
 	this->mesh_->SettingInstancing(this->instancingBuffer_);
-	//메쉬에 저장된 기본 정점정보와 함께 인스턴싱버퍼의 정보들도 디바이스 컨텍스트에 연결해서 정점셰이더로 전달한다.
+	//메쉬가 가진 기본 정점정보와 함께 인스턴싱버퍼의 정보들도 디바이스 컨텍스트에 연결한다.
 
 	this->inputLayout_->Set();
 	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
 	this->material_->SettingInstancing2();
 
 	this->mesh_->RenderInstancing(this->instancingUnitCount_);
+	//넣어준 인스턴스 개수만큼 기본 도형을 그린다.
+
 	shaderResourceHelper_.AllResourcesReset();
 }
 
@@ -387,7 +406,7 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 	std::multimap<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetters
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
 
-	int* instanceIndexBufferPtr = reinterpret_cast<int*>(&instanceIndexBuffer_[0]);
+	//int* instanceDataBufferPtr = reinterpret_cast<int*>(&instanceDataBuffer_[0]);
 
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
@@ -459,20 +478,34 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 			}
 		}
 
-		//*instanceIndexBufferPtr = static_cast<int>(index);
-		//instanceIndexBufferPtr += 1;
-		//인스턴스인덱스버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
+		//*instanceDataBufferPtr = static_cast<int>(index);
+		//instanceDataBufferPtr += 1;
+		////인스턴스데이터버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
 
-		*instanceIndexBufferPtr = allInstancingUnits_[index].colorTextureIndex_;
-		instanceIndexBufferPtr += 1;
-		//인스턴스인덱스버퍼에 텍스처배열 인덱스를 기록하고 뒤로 넘어간다.
+		size_t colorTextureIndexSize = sizeof(allInstancingUnits_[index].colorTextureIndex_);
+		char* instanceDataBufferPtr1 = &instanceDataBuffer_[index * instanceDataSize_];
 
-		*instanceIndexBufferPtr = allInstancingUnits_[index].normalMapTextureIndex_;
-		instanceIndexBufferPtr += 1;
-		//인스턴스인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
+		int copyResult1 = memcpy_s(
+			instanceDataBufferPtr1,
+			colorTextureIndexSize,
+			&allInstancingUnits_[index].colorTextureIndex_,
+			colorTextureIndexSize
+		);
+		//인스턴스데이터버퍼에 텍스처배열의 컬러텍스처 인덱스를 기록한다.
+
+		size_t normalMapTextureIndexSize = sizeof(allInstancingUnits_[index].normalMapTextureIndex_);
+		char* instanceDataBufferPtr2 = &instanceDataBuffer_[index * instanceDataSize_ + colorTextureIndexSize];
+
+		int copyResult2 = memcpy_s(
+			instanceDataBufferPtr2,
+			normalMapTextureIndexSize,
+			&allInstancingUnits_[index].normalMapTextureIndex_,
+			normalMapTextureIndexSize
+		);
+		//인스턴스데이터버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록한다.
 	}
 
-	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
+	instancingBuffer_->ChangeData(&instanceDataBuffer_[0], instanceDataBuffer_.size());
 	shaderResourceHelper_.AllResourcesSetting();
 
 	this->mesh_->SettingInstancing(this->instancingBuffer_);
@@ -520,7 +553,7 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 	std::multimap<std::string, GameEngineStructuredBufferSetter>& structuredBufferSetters
 		= shaderResourceHelper_.GetStructuredBufferSetterMap();
 
-	int* instanceIndexBufferPtr = reinterpret_cast<int*>(&instanceIndexBuffer_[0]);
+	//int* instanceDataBufferPtr = reinterpret_cast<int*>(&instanceDataBuffer_[0]);
 
 	for (size_t index = 0; index < instancingUnitCount_; ++index)
 	{
@@ -592,20 +625,34 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 			}
 		}
 
-		//*instanceIndexBufferPtr = static_cast<int>(index);
-		//instanceIndexBufferPtr += 1;
-		//인스턴스인덱스버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
+		//*instanceDataBufferPtr = static_cast<int>(index);
+		//instanceDataBufferPtr += 1;
+		////인스턴스데이터버퍼에 인스턴스 인덱스를 기록하고 뒤로 넘어간다.
 
-		*instanceIndexBufferPtr = allInstancingUnits_[index].colorTextureIndex_;
-		instanceIndexBufferPtr += 1;
-		//인스턴스인덱스버퍼에 텍스처배열 인덱스를 기록하고 뒤로 넘어간다.
+		size_t colorTextureIndexSize = sizeof(allInstancingUnits_[index].colorTextureIndex_);
+		char* instanceDataBufferPtr1 = &instanceDataBuffer_[index * instanceDataSize_];
 
-		*instanceIndexBufferPtr = allInstancingUnits_[index].normalMapTextureIndex_;
-		instanceIndexBufferPtr += 1;
-		//인스턴싱인덱스버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록하고 뒤로 넘어간다.
+		int copyResult1 = memcpy_s(
+			instanceDataBufferPtr1,
+			colorTextureIndexSize,
+			&allInstancingUnits_[index].colorTextureIndex_,
+			colorTextureIndexSize
+		);
+		//인스턴스데이터버퍼에 텍스처배열의 컬러텍스처 인덱스를 기록한다.
+
+		size_t normalMapTextureIndexSize = sizeof(allInstancingUnits_[index].normalMapTextureIndex_);
+		char* instanceDataBufferPtr2 = &instanceDataBuffer_[index * instanceDataSize_ + colorTextureIndexSize];
+
+		int copyResult2 = memcpy_s(
+			instanceDataBufferPtr2,
+			normalMapTextureIndexSize,
+			&allInstancingUnits_[index].normalMapTextureIndex_,
+			normalMapTextureIndexSize
+		);
+		//인스턴스데이터버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록한다.
 	}
 
-	instancingBuffer_->ChangeData(&instanceIndexBuffer_[0], instanceIndexBuffer_.size());
+	instancingBuffer_->ChangeData(&instanceDataBuffer_[0], instanceDataBuffer_.size());
 	shaderResourceHelper_.AllResourcesSetting();
 
 	this->mesh_->SettingInstancing(this->instancingBuffer_);

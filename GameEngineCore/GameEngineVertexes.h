@@ -9,15 +9,14 @@ class GameEngineInputLayoutDesc
 	friend class GameEngineInputLayout;
 
 public:
-	std::vector<D3D11_INPUT_ELEMENT_DESC> descs_;	//
-	std::map<const char*, int> semanticIndexData_;	//
-	unsigned int offset_;							//
-	//std::map<std::string, unsigned int> instancingFormatSizeMap_;							
-	unsigned int instanceSize_;					//인스턴싱 단위 크기.
+	std::vector<D3D11_INPUT_ELEMENT_DESC> descs_;	//인풋 레이아웃 생성시 필요한 정보들.
+	std::map<const char*, int> semanticNameIndexPairs_;	//시맨틱네임별 최대 인덱스데이터를 저장하는 맵.
+	unsigned int offset_;							//시작 위치.						
+	unsigned int instanceDataSize_;		//인스턴싱용으로 넣어준 인스턴스별 인풋레이아웃 데이터들의 단위 크기.
 
 
 public:
-	GameEngineInputLayoutDesc(): offset_(0), instanceSize_(0)
+	GameEngineInputLayoutDesc(): offset_(0), instanceDataSize_(0)
 	{
 	}
 
@@ -41,7 +40,7 @@ public:
 
 struct GameEngineVertex
 {
-	//버텍스 하나마다 가져야 하는 정보들을 하나로 모아 관리하는 클래스.
+	//각각의 버텍스 하나마다 가져야 하는 정보들을 하나로 모아 관리하는 클래스.
 
 	static GameEngineInputLayoutDesc inputLayoutInfo_;
 	//버텍스 하나마다 inputLayoutInfo_ 한개씩만 가진다. 
@@ -49,7 +48,7 @@ struct GameEngineVertex
 	float4 POSITION;	//위치.
 	float4 COLOR;		//색상.
 	float4 TEXCOORD;	//UV좌표.
-	float4 NORMAL;		//정점 법선벡터.
+	float4 NORMAL;		//정점의 법선벡터.
 	float4 TANGENT;		//접선.
 	float4 BINORMAL;	//종법선.
 	float4 WEIGHT;		// 애니메이션 가중치

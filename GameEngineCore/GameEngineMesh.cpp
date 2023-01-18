@@ -89,7 +89,7 @@ void GameEngineMesh::SetIndexBuffer_InputAssembler2(GameEngineIndexBuffer* _inde
     this->indexBuffer_ = _indexBuffer;
 }
 
-void GameEngineMesh::Setting()
+void GameEngineMesh::Set()
 {
     this->InputAssembler1_VertexBufferSetting();
     this->InputAssembler2_IndexBufferSetting();
@@ -98,9 +98,9 @@ void GameEngineMesh::Setting()
 void GameEngineMesh::SettingInstancing(GameEngineInstancingBuffer* _instancingBuffer)
 {
     ID3D11Buffer* ArrBuffer[2] = { this->vertexBuffer_->GetBuffer(), _instancingBuffer->GetBuffer() };
-    //버퍼 배열.
-    //왜 this->vertexBuffer_와 _instancingBuffer를 섞어 쓰지??
-    //->버텍스버퍼와 인스턴싱버퍼를 같이 넣어주기 위해서.
+    //정점버퍼와 인스턴싱버퍼가 담긴 배열.
+    //정점 n개 단위로 묶어서 인스턴스를 구성해서 정점셰이더로 넘겨줘야 하므로 
+    // 정점별 정보와 인스턴스별 정보들을 함께 넣어준다.
 
 
     UINT ArrVertexSize[2] = {
@@ -109,7 +109,7 @@ void GameEngineMesh::SettingInstancing(GameEngineInstancingBuffer* _instancingBu
     };
 
     UINT ArrOffset[2] = { 0, 0 };
-    //오프셋 바이트.
+    //각 버퍼의 오프셋 바이트.
 
     GameEngineDevice::GetDC()->IASetVertexBuffers(
         0,
@@ -137,12 +137,12 @@ void GameEngineMesh::Render()
 
 void GameEngineMesh::RenderInstancing(size_t _instancingCount)
 {
-    GameEngineDevice::GetDC()->DrawIndexedInstanced(
-        this->indexBuffer_->GetIndexCount(),                //인덱스 개수.
-        static_cast<UINT>(_instancingCount),                //인스턴스 수.
-        0,                                                  //읽기 시작할 인덱스 버퍼의 원소 번호.
-        0,                                                  //읽기 시작할 버텍스 버퍼의 원소 번호.
-        0                                                   //읽기 시작할 인스턴스의 번호.
+    GameEngineDevice::GetDC()->DrawIndexedInstanced(    //인덱스에 연동된 정점들을 그리는 인스턴스 수만큼 그리는 함수.
+        this->indexBuffer_->GetIndexCount(),            //인덱스 개수.
+        static_cast<UINT>(_instancingCount),            //인스턴스 수.
+        0,                                              //GPU가 읽기 시작할 인덱스 버퍼의 원소 번호.
+        0,                                              //GPU가 읽기 시작할 버텍스 버퍼의 원소 번호.
+        0                                               //GPU가 읽기 시작할 인스턴스의 번호.
     );
 }
 

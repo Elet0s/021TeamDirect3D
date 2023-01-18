@@ -8,10 +8,10 @@ GameEngineStructuredBuffer::GameEngineStructuredBuffer()
 	: structuredBuffer_(nullptr),
 	structuredBufferDesc_(),
 	shaderBufferDesc_(),
-	destMemoryPtrInGPU_(),
+	mappedPtrInCPU_(),
 	shaderResourceView_(nullptr),
 	count_(0),
-	dataUnitSize_(0),
+	dataSize_(0),
 	isInitialized_(false)
 {
 }
@@ -99,24 +99,24 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth
 	//}
 	////같은 이름의 최대 크기 구조화 버퍼를 모든 셰이더들이 공유하므로 크기를 정확히 맞출 필요가 없다.
 
-	destMemoryPtrInGPU_.pData = nullptr;
+	mappedPtrInCPU_.pData = nullptr;
 
 	HRESULT mapResult = GameEngineDevice::GetDC()->Map(
 		structuredBuffer_,
 		0,
 		D3D11_MAP_WRITE_DISCARD,
 		0,
-		&destMemoryPtrInGPU_
+		&mappedPtrInCPU_
 	);
 
-	if (nullptr == destMemoryPtrInGPU_.pData)
+	if (nullptr == mappedPtrInCPU_.pData)
 	{
 		MsgBoxAssert("그래픽카드 버퍼에 접근하지 못했습니다.");
 		return;
 	}
 
 	memcpy_s(
-		destMemoryPtrInGPU_.pData,
+		mappedPtrInCPU_.pData,
 		structuredBufferDesc_.ByteWidth,
 		_data,
 		_byteWidth
@@ -233,15 +233,15 @@ void GameEngineStructuredBuffer::CreateOrResize(
 	CreateStructuredBuffer(shaderBufferDesc_.Size, _count, _initialData);
 }
 
-void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataUnitSize, size_t _count, void* _initialData /*= nullptr*/)
+void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataSize, size_t _count, void* _initialData /*= nullptr*/)
 {
-	if (0 >= _dataUnitSize)
+	if (0 >= _dataSize)
 	{
 		MsgBoxAssert("데이터 사이즈가 0인 구조화 버퍼를 만들수는 없습니다.");
 		return;
 	}
 
-	this->dataUnitSize_ = _dataUnitSize;
+	this->dataSize_ = _dataSize;
 
 	if (0 == _count)
 	{
@@ -264,7 +264,7 @@ void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataUnitSize, si
 
 
 
-	structuredBufferDesc_.ByteWidth = static_cast<UINT>(dataUnitSize_ * count_);
+	structuredBufferDesc_.ByteWidth = static_cast<UINT>(dataSize_ * count_);
 	//GPU에 생성할 구조화 버퍼 메모리의 전체 크기
 
 	structuredBufferDesc_.Usage = D3D11_USAGE_DYNAMIC;	//버퍼의 사용 방식.
@@ -276,13 +276,13 @@ void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataUnitSize, si
 	//구조화 버퍼는 D3D11_BIND_SHADER_RESOURCE와 D3D11_BIND_UNORDERED_ACCESS 두가지 바인드플래그밖에 쓸 수 없다.
 
 	structuredBufferDesc_.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;	//버퍼에 대한 CPU의 접근권한 설정. 
-	//D3D11_CPU_ACCESS_WRITE: CPU는 버퍼에 쓰기만 가능.
+	//D3D11_CPU_ACCESS_WRITE: CPU는 버퍼에 쓰기 가능.
 	//구조화 버퍼의 데이터와 크기는 지속적으로 바뀌므로 CPU가 갱신할 수 있게 해야 한다.
 
 	structuredBufferDesc_.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;	//버퍼에 관련된 부가 옵션 설정.
 	//D3D11_RESOURCE_MISC_BUFFER_STRUCTURED: 이 버퍼를 구조화 버퍼로 설정.
 
-	structuredBufferDesc_.StructureByteStride = static_cast<UINT>(dataUnitSize_);	//구조화 버퍼 데이터의 단위 크기.
+	structuredBufferDesc_.StructureByteStride = static_cast<UINT>(dataSize_);	//구조화 버퍼 데이터의 단위 크기.
 	//사실상 구조화버퍼 전용 기능이므로 반드시 넣어준다.
 
 	D3D11_SUBRESOURCE_DATA initialData = { 0 };
@@ -343,7 +343,7 @@ void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataUnitSize, si
 
 void GameEngineStructuredBuffer::CreateOrResize(size_t _count, void* _initialData /*= nullptr*/)
 {
-	CreateStructuredBuffer(this->dataUnitSize_, _count, _initialData);
+	CreateStructuredBuffer(this->dataSize_, _count, _initialData);
 }
 
 void GameEngineStructuredBuffer::Release()

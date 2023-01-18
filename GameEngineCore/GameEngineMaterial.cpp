@@ -100,7 +100,7 @@ void GameEngineMaterial::SetDepthStencil_OutputMerger(const std::string_view& _n
 	}
 }
 
-void GameEngineMaterial::Setting()
+void GameEngineMaterial::Set()
 {
 	VertexShaderSetting();
 	RasterizerSetting();

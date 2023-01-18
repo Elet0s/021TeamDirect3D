@@ -198,9 +198,13 @@ private:
 
     D3D11_PRIMITIVE_TOPOLOGY topology_;             //토폴로지.
 
-    GameEngineInstancingBuffer* instancingBuffer_;  //각각의 인스턴스별로 다른 정보들을 모아서 셰이더로 전달하는 버퍼
+    //각각의 인스턴스들이 가지고 있는 정보들을 모아서 정점 정보들과 함께 정점셰이더로 전달하는 버퍼.
+    GameEngineInstancingBuffer* instancingBuffer_;  
 
-    std::vector<char> instanceIndexBuffer_;  //인스턴스별 컬러텍스처 인덱스와 노말맵텍스처 인덱스를 모아 저장해서 인스턴싱버퍼로 전달하는 임시저장용 버퍼.
+    //컬러텍스처 인덱스와 노말맵텍스처 인덱스 등의 인스턴스별 정보들을 모아 저장해서 인스턴싱버퍼로 전달하는 임시저장용 버퍼.
+    std::vector<char> instanceDataBuffer_;  
+
+    size_t instanceDataSize_; //인스턴스별로 가지고 있는 인풋 레이아웃들의 총합 크기.
 
     GameEngineShaderResourceHelper shaderResourceHelper_;   //이 렌더러가 쓸 셰이더리소스헬퍼.
 

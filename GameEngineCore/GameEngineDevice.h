@@ -27,10 +27,10 @@ public:
 	static void Initialize();
 
 	//한번의 렌더링을 준비하기 위해 백버퍼 렌더타겟을 리셋하는 함수.
-	static void StartRendering();
+	static void RenderStart();
 
 	//모든 렌더링 과정을 거친 백버퍼를 전면 버퍼와 교체하는 함수.
-	static void EndRendering();
+	static void RenderEnd();
 
 public:
 
@@ -78,7 +78,7 @@ private:
 
 private:
 	static ID3D11Device* device_;
-	//다이렉트X 디바이스: 그래픽카드에 메모리 공간을 할당하려고 할 때 필요한 것.
+	//다이렉트X 디바이스: 그래픽카드가 가진 메모리에 공간을 할당하려고 할 때 필요한 것.
 	//그래픽카드의 메모리에 new연산을 할 수 있는 권한을 가지고 있다.
 
 	static ID3D11DeviceContext* deviceContext_;	//다이렉트X의 디바이스 컨텍스트.

@@ -45,7 +45,7 @@ public:
 	void SetDepthStencil_OutputMerger(const std::string_view& _name);
 	void Copy(GameEngineMaterial* _original);
 
-	void Setting();
+	void Set();
 	void SettingInstancing();
 	void SettingInstancing2();
 public:

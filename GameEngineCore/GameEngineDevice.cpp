@@ -250,7 +250,7 @@ void GameEngineDevice::CreateSwapChain()
 	//깊이스텐실뷰를 만드는데 사용할 텍스처를 생성한다.
 }
 
-void GameEngineDevice::StartRendering()
+void GameEngineDevice::RenderStart()
 {
 	backBufferRenderTarget_->Clear();
 	//백버퍼에 남아있던 이전 픽셀정보들은 전부 한 색으로 덮어서 지운다.
@@ -259,7 +259,7 @@ void GameEngineDevice::StartRendering()
 	//다시 디바이스 컨텍스트에 연결해 렌더링 할 준비를 한다.
 }
 
-void GameEngineDevice::EndRendering()
+void GameEngineDevice::RenderEnd()
 {
 	HRESULT presentResult = swapChain_->Present(	//백버퍼를 전면 버퍼로 교체하는 함수.
 		0,	//동기화 지연 간격. 0: 수직동기화 없이 즉시 백버퍼를 교체해서 화면에 띄운다. 

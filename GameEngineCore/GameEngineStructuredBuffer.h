@@ -60,9 +60,9 @@ public:
 
 
 public:
-	inline size_t GetDataSize()
+	inline size_t GetDataSize() const
 	{
-		return dataUnitSize_;
+		return dataSize_;
 	}
 
 protected:
@@ -76,7 +76,7 @@ private:
 		size_t _count,
 		void* _initialData = nullptr
 	);
-	void CreateStructuredBuffer(size_t _dataUnitSize, size_t _count, void* _initialData = nullptr);
+	void CreateStructuredBuffer(size_t _dataSize, size_t _count, void* _initialData = nullptr);
 
 	void CreateOrResize(size_t _count, void* _initialData = nullptr);
 
@@ -91,13 +91,13 @@ private:
 	ID3D11Buffer* structuredBuffer_;
 	D3D11_BUFFER_DESC structuredBufferDesc_;
 	D3D11_SHADER_BUFFER_DESC shaderBufferDesc_;
-	D3D11_MAPPED_SUBRESOURCE destMemoryPtrInGPU_;	//구조화버퍼의 데이터를 받을 그래픽카드 내 메모리의 주소값.
+	D3D11_MAPPED_SUBRESOURCE mappedPtrInCPU_;	//구조화버퍼에 해당하는 GPU 내 메모리영역에 매핑시킬 CPU 메모리의 주소값.
 
 	ID3D11ShaderResourceView* shaderResourceView_;	//셰이더 리소스뷰.
 	//구조화버퍼는 버퍼지만 셰이더 리소스로 분류되므로 셰이더 리소스 뷰가 필요하다.
 
 	size_t count_;	//데이터 개수.
-	size_t dataUnitSize_;		//데이터 단위 크기.
+	size_t dataSize_;		//데이터 단위 크기.
 	bool isInitialized_;	//초기화 여부.
 };
 

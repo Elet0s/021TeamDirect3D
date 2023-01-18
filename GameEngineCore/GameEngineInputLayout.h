@@ -30,14 +30,14 @@ private:
 public:
 	void Set();
 
-	//??
+	//인풋 레이아웃 생성 함수. 
 	static GameEngineInputLayout* Create(
 		const GameEngineInputLayoutDesc& _desc,
 		GameEngineVertexShader* _vertexShader
 	);
 
 private:
-	//??
+	//ID3D11InputLayout* 생성 함수.
 	void CreateInputLayout(
 		const GameEngineInputLayoutDesc& _desc,
 		GameEngineVertexShader* _vertexShader

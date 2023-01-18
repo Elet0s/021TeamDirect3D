@@ -129,8 +129,6 @@ void GameEngineShaderResourceHelper::SetConstantBuffer_Link(
 	for (std::multimap<std::string, GameEngineConstantBufferSetter>::iterator iter = nameLowerBound;
 		iter != nameUpperBound; ++iter)
 	{
-		//트랜스폼이 바뀌면 변경된 정보가 자동 갱신된다.
-
 		iter->second.settingDataToGPU_ = _data;
 		iter->second.size_ = _dataSize;
 		//상수버퍼의 주소값과 크기를 얕은 복사로 셰이더리소스헬퍼에게 넘겨 저장하게 한다.
@@ -180,7 +178,7 @@ void GameEngineShaderResourceHelper::SetConstantBuffer_New(
 			_byteWidth,
 			_data,
 			_byteWidth
-		);	//깊은복사.
+		);	//데이터 전체를 복사하는 깊은복사.
 
 		iter->second.size_ = _byteWidth;
 	}
