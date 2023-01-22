@@ -71,21 +71,24 @@ Output DeferredInstanceShadowRendering_VSINST(Input _input)
     vertexPos += Inst_AtlasData[_input.instanceIndex_].pivotPos_;
     vertexPos.x = (-sin(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) + vertexPos.x);
     vertexPos.y = cos(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) - 0.5f;
-
+    //정점좌표를 shadowAngle_만큼 기울여 준다.
     
     result.wvpPosition_ 
         = mul(vertexPos, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
+     //정점의 wvp변환 위치 계산.
     
     result.shadowPosition_ = result.wvpPosition_;
-    
+    //그림자의 투영공간 내 위치 전달.
     
     result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.x)
         + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.x;
     result.texcoord_.y = (_input.texcoord_.y * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.y)
         + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.y;
     result.texcoord_.z = 0.f;
+    //인스턴스별 텍스처 uv좌표 계산.
 
     result.colorTextureIndex_ = _input.colorTextureIndex_;
+    //텍스처 배열 내 컬러 텍스처 번호를 픽셀셰이더로 전달.
     
     return result;
 }
@@ -98,11 +101,13 @@ float4 DeferredInstanceShadowRendering_PSINST(Output _input) : SV_Target0
     );
     
     float4 shadowDepth = float4(1.f, 0.f, 0.f, 1.f);
+    //그림자의 기본 깊이값을 1로 설정하여 가장 뒤로 가게 한다.
   
     if (0.0f < sampledColor.a)
     {
         shadowDepth = float4(_input.shadowPosition_.z / _input.shadowPosition_.w, 0.f, 0.f, 1.f);
-        //사실 직교투영 특성상 w가 1 고정이므로 별 의미없는 연산이지만 그래도 한다.
+        //그림자의 투영공간 내 z값을 깊이값으로 덮어 씌운다.
+        //사실 직교투영이면 w가 1 고정이므로 필요없는 연산이지만 원근투영도 사용하므로 w로 나누어준다.
     }
     else
     {

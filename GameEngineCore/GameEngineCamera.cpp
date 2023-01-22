@@ -340,7 +340,6 @@ void GameEngineCamera::Start()
 
 bool ZSort(GameEngineRenderer* _rendererA, GameEngineRenderer* _rendererB)
 {
-	//
 	return _rendererA->GetTransform().GetWorldPosition().z > _rendererB->GetTransform().GetWorldPosition().z;
 }
 
@@ -445,7 +444,7 @@ void GameEngineCamera::Render(float _deltaTime)
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second.Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
-			//내부에서 자체적으로 트랜스폼 행렬계산을 해야 하므로 뷰행렬, 투영행렬을 넣어준다.
+			//내부에서 자체적으로 트랜스폼 행렬계산을 하므로 뷰행렬, 투영행렬을 넣어준다.
 		}
 	}
 
@@ -482,7 +481,7 @@ void GameEngineCamera::Render(float _deltaTime)
 				//
 				//renderer->GetTransform().CalculateWorldViewProjection();
 				//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
-				////행렬 변환은 이미 위에서 했으므로 또다시 하지 않는다.
+				////행렬 계산은 이미 위에서 했으므로 또다시 하지 않는다.
 
 				renderer->DeferredRender(scaleTime);
 				//geometryBufferRenderTarget_의 네 렌더타겟뷰들에 오브젝트의 원래 색상, 오브젝트 표면 모든 점들의 뷰공간 위치, 
@@ -494,6 +493,7 @@ void GameEngineCamera::Render(float _deltaTime)
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second.DeferredRender(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+			//내부에서 자체적으로 트랜스폼 행렬계산을 하므로 뷰행렬, 투영행렬을 넣어준다.
 		}
 	}
 	
@@ -509,6 +509,7 @@ void GameEngineCamera::Render(float _deltaTime)
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second.RenderShadow(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
+			//내부에서 자체적으로 트랜스폼 행렬계산을 하므로 뷰행렬, 투영행렬을 넣어준다.
 		}
 		//플레이어가 자기 그림자에 가려지는것에 대한 임시 조치.
 
@@ -537,7 +538,7 @@ void GameEngineCamera::Render(float _deltaTime)
 
 				//renderer->GetTransform().CalculateWorldViewProjection();
 				//크자이공부 변환을 거친 월드행렬에 뷰행렬과 투영행렬까지 계산한다.
-				////행렬 변환은 이미 위에서 했으므로 또다시 하지 않는다.
+				////행렬 계산은 이미 위에서 했으므로 또다시 하지 않는다.
 
 				renderer->RenderShadow(scaleTime);
 				//shadowDepthRenderTarget_의 렌더타겟뷰에 그림자의 깊이값을 저장하게 한다.

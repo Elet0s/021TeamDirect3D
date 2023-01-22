@@ -90,18 +90,6 @@ DeferredRenderingOutput DeferredRendering_PS(Output _input)
     }
     
     result.viewNormal_ = float4(-0.5773f, 0.5773f, -0.5773f, 1.f);
-    //if (-1 != _input.normalMapTextureIndex_)
-    //{
-    //    result.viewNormal_ = normalize(
-    //        CalTrueNormalVector(Inst_Textures.Sample(
-    //                POINTCLAMP,
-    //                float3(_input.texcoord_.xy, _input.normalMapTextureIndex_)
-    //            )
-    //        )
-    //    );
-    
-    //    result.viewNormal_ = float4(-result.viewNormal_.x, -result.viewNormal_.y, result.viewNormal_.z, 1.f);
-    //}
     
     result.viewPosition_ = _input.viewPosition_;
      

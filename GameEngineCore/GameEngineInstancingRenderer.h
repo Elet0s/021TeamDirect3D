@@ -83,16 +83,20 @@ class GameEngineInstancingRenderer
         void CalWorldWorldMatrix();
 
     private:
-
+        //메쉬를 그릴 위치, 크기 등의 정보가 담긴 트랜스폼데이터.
         TransformData transformData_;
 
+        //메쉬 안에 그려질 텍스처 UV값, 피봇 등의 정보.
         AtlasData atlasData_;
 
-        std::multimap<std::string, const void*> data_;  //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
+        //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
+        std::multimap<std::string, const void*> data_;  
 
-        unsigned int colorTextureIndex_; //인스턴스별로 사용할 컬러텍스처의 인덱스.
+        //인스턴스별로 사용할 컬러텍스처의 인덱스.
+        unsigned int colorTextureIndex_; 
 
-        unsigned int normalMapTextureIndex_; //인스턴스별로 사용할 노말맵텍스처의 인덱스.
+        //인스턴스별로 사용할 노말맵텍스처의 인덱스.
+        unsigned int normalMapTextureIndex_; 
     };
 
 
@@ -208,7 +212,8 @@ private:
 
     GameEngineShaderResourceHelper shaderResourceHelper_;   //이 렌더러가 쓸 셰이더리소스헬퍼.
 
-    std::multiset<std::string> structuredBufferSetterNames_;     //셰이더리소스헬퍼가 가진 인스턴스렌더링용 구조화버퍼 세터들의 이름 모음. 
+    //셰이더리소스헬퍼가 가진 인스턴스렌더링용 구조화버퍼 세터들의 이름 모음. 
+    std::multiset<std::string> structuredBufferSetterNames_;     
     //멀티셋이 아니라 같은 원소를 겹칠 수 없는 일반 셋이면 여러 셰이더가 같은 이름의 셰이더 리소스를 사용할 수 없다.
     //반드시 전부 대문자로 구성할 것.
 

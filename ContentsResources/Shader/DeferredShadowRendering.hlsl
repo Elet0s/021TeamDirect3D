@@ -60,7 +60,8 @@ float4 DeferredShadowRendering_PS(Output _input) : SV_Target0
     if (0.0f < sampledColor.a)
     {
         shadowDepth = float4(_input.shadowPosition_.z / _input.shadowPosition_.w, 0.f, 0.f, 1.f);
-        //사실 직교투영 특성상 w가 1 고정이므로 별 의미없는 연산이지만 그래도 한다.
+        //그림자의 투영공간 내 z값을 깊이값으로 덮어 씌운다.
+        //사실 직교투영이면 w가 1 고정이므로 필요없는 연산이지만 원근투영도 사용하므로 w로 나누어준다.//사실 직교투영 특성상 w가 1 고정이므로 별 의미없는 연산이지만 그래도 한다.
     }
     else
     {

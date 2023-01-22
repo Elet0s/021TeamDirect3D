@@ -1,5 +1,4 @@
 //블러 적용할 것.
-//컴퓨트셰이더 사용 가능해지면 이 셰이더는 없애고 다른 셰이더로 모든 기능 옮길 것.
 
 struct Input
 {
@@ -35,7 +34,7 @@ float4 CalLightRatio_PS(Output _input) : SV_Target0
     if (objectDepth.r - 0.02f > shadowDepth.r)
     {
         result.r *= 0.5f;
-        //그림자깊이값이 오브젝트깊이값보다 더 작으면 그림자 픽셀이므로 적용될 디퓨즈라이트를 절반만 적용되게 한다.
+        //그림자 깊이값이 오브젝트 깊이값보다 더 작으면 그림자 픽셀이므로 적용될 디퓨즈라이트를 절반만 적용되게 한다.
     }
     
     return result;
