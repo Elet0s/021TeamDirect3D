@@ -40,7 +40,7 @@ bool GameEngineCore::ChangeLevel(const std::string& _levelName)
 	}
 }
 
-void GameEngineCore::Initiate(const std::string& _title, GameEngineCore* _userCore)
+void GameEngineCore::Start(const std::string& _title, GameEngineCore* _userCore)
 {
 	GameEngineWindow::GetInst().CreateGameWindow(nullptr, _title.c_str());
 	//윈도우 핸들 생성.

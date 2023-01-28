@@ -32,7 +32,7 @@ public:
 		size_t _count
 	);
 	static GameEngineStructuredBuffer* Find(const std::string_view& _name, size_t _byteWidth);
-	static GameEngineStructuredBuffer* CreateOrFind(
+	static GameEngineStructuredBuffer* FindOrCreate(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc,
 		size_t _count

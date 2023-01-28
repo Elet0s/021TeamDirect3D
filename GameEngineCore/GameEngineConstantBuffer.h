@@ -40,7 +40,7 @@ public:
 		const D3D11_SHADER_BUFFER_DESC& _desc
 	);
 	static GameEngineConstantBuffer* Find(const std::string_view& _name, int _byteWidth);
-	static GameEngineConstantBuffer* CreateOrFind(
+	static GameEngineConstantBuffer* FindOrCreate(
 		const std::string_view& _name,
 		const D3D11_SHADER_BUFFER_DESC& _desc
 	);

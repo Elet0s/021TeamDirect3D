@@ -17,14 +17,14 @@ class GameEngineInstancingRenderer
 
         InstancingUnit(const std::multiset<std::string>& _structuredBufferSetterNames);
     
-        void Link(const std::string_view& _name, const void* _data);
+        void Link(const std::string_view& _structuredBufferName, const void* _data);
 
     public:
         void SetWorldScale(const float4& _worldScaleVector);
         void SetWorldRotation(const float4& _worldRotationVector);
         void SetWorldPosition(const float4& _worldPositionVector);
 
-        void SetColorTextureIndex(unsigned int _colortextureIndex);
+        void SetColorTextureIndex(unsigned int _colorTextureIndex);
         void SetNormalMapTextureIndex(unsigned int _normalMapTextureIndex);
 
         //이 인스턴싱 유닛이 그리는 텍스처를 좌우반전하는 함수.
@@ -33,9 +33,9 @@ class GameEngineInstancingRenderer
     public:
         //트랜스폼데이터, 아틀라스데이터는 여기에 넣지 말 것!
         template<typename ValueType>
-        void Link(const std::string_view& _name, ValueType& _data)
+        void Link(const std::string_view& _structuredBufferName, ValueType& _data)
         {
-            Link(_name, reinterpret_cast<const void*>(&_data));
+            Link(_structuredBufferName, reinterpret_cast<const void*>(&_data));
         }
 
         AtlasData& GetAtlasData()
@@ -43,7 +43,7 @@ class GameEngineInstancingRenderer
             return atlasData_;
         }
 
-        const float4& GetWorldPosition()
+        const float4& GetWorldPosition() const
         {
             return this->transformData_.worldPositionVector_;
         }
@@ -188,24 +188,26 @@ private:
     void RenderShadow(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix);
 
 private:
-    bool isShadowRendering_;                        //true: 그림자의 깊이값을 렌더타겟에 저장한다.
+    bool isShadowRendering_;                        //true: 렌더타겟에 일반적인 텍스처 컬러값이 아니라 그림자의 깊이값을 저장한다.
 
     size_t instancingUnitCount_;                    //전체 인스턴싱유닛 개수.
 
     std::vector<InstancingUnit> allInstancingUnits_;   //모든 인스턴싱유닛들이 저장된 벡터.
+    //인스턴싱 유닛들이 주로 저장하게 될 정보들은 float과 unsigned int가 대부분이라서 값복사로 인한 효율 감소보다 
+    // 캐시 적중율 향상으로 인한 효율 증가가 더 크다고 판단해서 값으로 저장함.
 
-    GameEngineMesh* mesh_;                          //메쉬.
+    GameEngineMesh* mesh_;                          
 
-    GameEngineInputLayout* inputLayout_;            //인풋 레이아웃.
+    GameEngineInputLayout* inputLayout_;            
 
-    GameEngineMaterial* material_;                  //셰이더리소스들을 렌더타겟에 그릴 마테리얼.
+    GameEngineMaterial* material_;                  
 
-    D3D11_PRIMITIVE_TOPOLOGY topology_;             //토폴로지.
+    D3D11_PRIMITIVE_TOPOLOGY topology_;             
 
     //각각의 인스턴스들이 가지고 있는 정보들을 모아서 정점 정보들과 함께 정점셰이더로 전달하는 버퍼.
     GameEngineInstancingBuffer* instancingBuffer_;  
 
-    //컬러텍스처 인덱스와 노말맵텍스처 인덱스 등의 인스턴스별 정보들을 모아 저장해서 인스턴싱버퍼로 전달하는 임시저장용 버퍼.
+    //컬러텍스처 인덱스와 노말맵텍스처 인덱스 등의 인스턴스별 정보들을 모아 저장해서 인스턴싱버퍼로 전달하는 중간저장용 버퍼.
     std::vector<char> instanceDataBuffer_;  
 
     size_t instanceDataSize_; //인스턴스별로 가지고 있는 인풋 레이아웃들의 총합 크기.

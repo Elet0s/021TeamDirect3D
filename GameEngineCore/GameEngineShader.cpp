@@ -702,8 +702,8 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 			newCBufferSetter.parentShaderType_ = this->shaderType_;
 			//부모 셰이더가 어떤 셰이더인지 저장한다.
 
-			newCBufferSetter.constantBuffer_ = GameEngineConstantBuffer::CreateOrFind(
-				newCBufferSetter.GetName(),	//만들려는 상수버퍼가 없으면 만들고, 이미 있으면 공유한다.
+			newCBufferSetter.constantBuffer_ = GameEngineConstantBuffer::FindOrCreate(
+				newCBufferSetter.GetName(),	//만들려는 상수버퍼를 찾아본 후 없으면 만들고, 이미 있으면 공유한다.
 				cBufferDesc			//같은 이름, 같은 크기의 상수 버퍼는 셰이더리소스헬퍼들이 포인터를 공유한다.
 						//그래서 이미 만들어져 있는걸 또 만들어도 터뜨리지 않고 대신 이미 만들어져 있는걸 공유한다.
 			);
@@ -836,9 +836,6 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 
 		case D3D_SIT_STRUCTURED:
 		{
-			//구조화버퍼는 구조적인 특성상 대용량 메모리를 사용하는것이 기본인데, 
-			//동적 할당되는 특성상 미리 만들수도 없다.
-
 			ID3D11ShaderReflectionConstantBuffer* cBufferPtr = compileInfo->GetConstantBufferByName(resInfo.Name);
 			D3D11_SHADER_BUFFER_DESC shaderBufferDesc = { 0 };
 			cBufferPtr->GetDesc(&shaderBufferDesc);
@@ -848,13 +845,11 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 			newSBufferSetter.SetName(uppercaseResourceName);
 			newSBufferSetter.parentShaderType_ = this->shaderType_;
 
-			//아직은 데이터의 사이즈는 알수있어도 이걸로 몇개짜리 버퍼를 만들지는 알수가 없다.
-			// 그래서 개수 0 으로 일단 만들어둔다.
-
-			newSBufferSetter.structuredBuffer_ = GameEngineStructuredBuffer::CreateOrFind(
-				newSBufferSetter.GetName(),	//
-				shaderBufferDesc,		//
-				0						//
+			newSBufferSetter.structuredBuffer_ = GameEngineStructuredBuffer::FindOrCreate(
+				newSBufferSetter.GetName(),	//만들려는 구조화버퍼를 찾아본 후 없으면 만들고, 이미 있으면 공유한다.
+				shaderBufferDesc,	//같은 이름, 같은 단위 크기의 구조화버퍼는 셰이더리소스헬퍼들이 포인터를 공유한다.
+				0	//데이터의 단위 크기는 컴파일할때 알 수 있어도, 동적 할당되는 구조화버퍼 특성상 전체 길이는 런타임에나 알 수 있으므로
+					// 일단 길이 0인 구조화버퍼를 만들어둔다.
 			);
 			newSBufferSetter.bindPoint_ = resInfo.BindPoint;
 

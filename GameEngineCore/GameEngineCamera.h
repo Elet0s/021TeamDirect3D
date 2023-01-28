@@ -58,7 +58,7 @@ public:
 	//할 일이 있을지는 모르겠지만, 런타임 중간에 카메라 오더 변경 금지.
 
 	//인스턴싱렌더러 반환. 없다면 빈 인스턴싱렌더러를 만들어서 반환한다.
-	GameEngineInstancingRenderer& GetInstancingRenderer(const std::string& _name);
+	GameEngineInstancingRenderer& GetInstancingRenderer(const std::string_view& _name);
 
 	//카메라에 조명 추가.
 	void PushLighting(GameEngineLighting* _newLighting);

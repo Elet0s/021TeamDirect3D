@@ -112,8 +112,8 @@ float4 GameEngineCamera::GetMousePositionInViewSpace()
 		return float4();
 	}
 
-	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
-		GameEngineWindow::GetInst().GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
+	if (false == ScreenToClient(	//화면상의 어느 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
+		GameEngineWindow::GetInst().GetHWND(),	//화면상의 좌표를 변환하려고 하는 윈도우의 핸들.
 		&pointerPosition)	//화면 전체기준 마우스 포인터 좌표.
 		)
 	{
@@ -142,10 +142,10 @@ float4 GameEngineCamera::GetMousePositionInWorldSpace()
 		return float4();
 	}
 
-	if (false == ScreenToClient(	//화면 전체 기준 마우스 포인터 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
-		GameEngineWindow::GetInst().GetHWND(),	//마우스 포인터 좌표를 알려고 하는 윈도우의 핸들.
+	if (false == ScreenToClient(	//화면상의 어느 좌표를 특정 윈도우 기준 좌표로 변환하는 함수.
+		GameEngineWindow::GetInst().GetHWND(),	//화면상의 좌표를 변환하려고 하는 윈도우의 핸들.
 		&pointerPosition)	//화면 전체기준 마우스 포인터 좌표.
-	)
+		)
 	{
 		MsgBoxAssert("마우스 포인터 좌표를 변환하는데 실패했습니다.");
 		return float4();
@@ -183,9 +183,9 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 	GetActor()->GetLevel()->PushCamera(this, _order);
 }
 
-GameEngineInstancingRenderer& GameEngineCamera::GetInstancingRenderer(const std::string& _name)
+GameEngineInstancingRenderer& GameEngineCamera::GetInstancingRenderer(const std::string_view& _name)
 {
-	return allInstancingRenderers_[_name];
+	return allInstancingRenderers_[_name.data()];
 }
 
 void GameEngineCamera::PushLighting(GameEngineLighting* _newLighting)
@@ -283,28 +283,28 @@ void GameEngineCamera::Start()
 
 
 	lightDataBufferRenderTarget_ = GameEngineRenderTarget::Create();
-	//빛정보 저장 버퍼 렌더타겟 생성.
+	//빛 정보 저장 버퍼 렌더타겟 생성.
 
 	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
 		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
-	//빛정보 저장 버퍼 렌더타겟에 난반사광(Diffuse Light) 정보를 저장할 텍스처 생성. 
+	//빛 정보 저장 버퍼 렌더타겟에 난반사광(Diffuse Light) 정보를 저장할 텍스처 생성. 
 
 	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
 		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
-	//빛정보 저장 버퍼 렌더타겟에 정반사광(Specular Light) 정보를 저장할 텍스처 생성. 
+	//빛 정보 저장 버퍼 렌더타겟에 정반사광(Specular Light) 정보를 저장할 텍스처 생성. 
 
 	lightDataBufferRenderTarget_->CreateRenderTargetTexture(
 		GameEngineWindow::GetInst().GetScale(),
 		DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT,
 		float4::Zero
 	);
-	//빛정보 저장 버퍼 렌더타겟에 환경광(Ambient Light) 정보를 저장할 텍스처 생성. 
+	//빛 정보 저장 버퍼 렌더타겟에 환경광(Ambient Light) 정보를 저장할 텍스처 생성. 
 	//빛은 z값 관계없이 적용되므로 깊이스텐실뷰를 가져올 필요가 없다.
 
 	lightRatioRenderUnit_ = new GameEngineRenderUnit();

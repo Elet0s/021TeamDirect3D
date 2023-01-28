@@ -74,6 +74,7 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 
 	//allShadowsRenderer_ = _thisLevel->GetCamera(CameraOrder::MidCamera)->GetInstancingRenderer("1-AllShadowsRenderer");
+	//미드카메라에서 그림자가 그려지지 않는 원인 찾아낼 것.
 	allShadowsRenderer_ = &_thisLevel->GetMainCamera()->GetInstancingRenderer("1-AllShadowsRenderer");
 	allShadowsRenderer_->Initialize(_allMonsterCount, "Rect", "DeferredInstanceShadowRendering", true);
 	allShadowsRenderer_->SetTexture2DArray("Inst_Textures", "Monster");

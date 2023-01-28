@@ -18,13 +18,16 @@ GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
 	}
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::Link(const std::string_view& _name, const void* _data)
+void GameEngineInstancingRenderer::InstancingUnit::Link(
+	const std::string_view& _structuredBufferName,
+	const void* _data
+)
 {
-	std::string uppercaseDataName = GameEngineString::ToUpperReturn(_name);
+	std::string uppercaseDataName = GameEngineString::ToUpperReturn(_structuredBufferName);
 
 	if (data_.end() == data_.find(uppercaseDataName))
 	{
-		MsgBoxAssertString(std::string(_name) + ": 그런 이름의 인스턴싱 데이터가 존재하지 않습니다.");
+		MsgBoxAssertString(std::string(_structuredBufferName) + ": 그런 이름의 구조화 버퍼를 사용하지 않습니다.");
 		//트랜스폼데이터, 아틀라스데이터를 링크시켜도 여기로 들어오는점 주의.
 		return;
 	}

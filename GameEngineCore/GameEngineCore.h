@@ -28,7 +28,7 @@ public:
 #endif							//릴리즈모드에서는 하지 않는다.
 
 		CoreType core{};
-		Initiate(core.GetWindowTitle(), &core);
+		Start(core.GetWindowTitle(), &core);
 	}
 
 	static GameEngineLevel* GetCurrentLevel()
@@ -55,7 +55,7 @@ protected:
 	static void EndCore(GameEngineCore* _userCore);		
 
 	//프로세스 개시 함수. 종료까지 담당.
-	static void Initiate(const std::string& _title, GameEngineCore* _userCore);	
+	static void Start(const std::string& _title, GameEngineCore* _userCore);	
 
 	//엔진 기본제공 리소스 초기화 함수.
 	static void InitializeEngineResource();

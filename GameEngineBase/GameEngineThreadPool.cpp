@@ -83,7 +83,7 @@ void GameEngineThreadPool::Initialize(const std::string_view& _threadName, int _
 		//0을 넣으면 자동으로 프로세서 숫자를 알아내서 넣어준다고 한다. 
 		// 하지만 여기서는 allThreads_벡터의 크기를 결정해야 하므로 0을 넣지 않고 
 		// GetSystemInfo()함수를 통해 알아낸 프로세서 숫자를 넣어준다.
-		//이미 생성한 IOCP핸들이 있어서 두번째 인자로 넣어젔다면 이 값은 무시된다.
+		//이미 생성한 IOCP핸들이 있어서 두번째 인자로 넣어줬다면 이 값은 무시된다.
 	);
 
 	if (nullptr == iocpHandle_)
@@ -95,7 +95,7 @@ void GameEngineThreadPool::Initialize(const std::string_view& _threadName, int _
 	isRunning_ = true;
 	destroyedThreadCount_ = 0;
 	this->allThreads_.reserve(this->createdThreadCount_);
-	for (size_t i = 0; i < this->createdThreadCount_; i++)
+	for (size_t i = 0; i < this->createdThreadCount_; ++i)
 	{
 		GameEngineThread* newThread = new GameEngineThread();
 		allThreads_.push_back(newThread);

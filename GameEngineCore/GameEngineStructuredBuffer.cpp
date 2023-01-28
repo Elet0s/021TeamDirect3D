@@ -62,7 +62,7 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::Find(const std::string_v
 	return sizeFindIter->second;
 }
 
-GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateOrFind(
+GameEngineStructuredBuffer* GameEngineStructuredBuffer::FindOrCreate(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc,
 	size_t _count

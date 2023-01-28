@@ -52,7 +52,7 @@ GameEngineConstantBuffer* GameEngineConstantBuffer::Find(const std::string_view&
 	return sizeIter->second;
 }
 
-GameEngineConstantBuffer* GameEngineConstantBuffer::CreateOrFind(
+GameEngineConstantBuffer* GameEngineConstantBuffer::FindOrCreate(
 	const std::string_view& _name,
 	const D3D11_SHADER_BUFFER_DESC& _desc
 )
