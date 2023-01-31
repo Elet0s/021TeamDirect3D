@@ -15,7 +15,7 @@ class GameEngineInstancingRenderer
         friend GameEngineInstancingRenderer;
 
 
-        InstancingUnit(const std::multiset<std::string>& _structuredBufferSetterNames);
+        InstancingUnit(const std::multiset<std::string>& _structuredBufferSetterNames, size_t _unitIndexs);
     
         void Link(const std::string_view& _structuredBufferName, const void* _data);
 
@@ -81,8 +81,21 @@ class GameEngineInstancingRenderer
 
     private:
         void CalWorldWorldMatrix();
+        void UpdateTransformData(
+            const float4x4& _viewMatrix,
+            const float4x4& _projectionMatrix,
+            char* _transformDataPtr
+        );
+        void UpdateAtlasData(char* _atlasDataPtr);
+        void UpdateLinkedData(
+            std::multimap<std::string, GameEngineStructuredBufferSetter>& _structuredBufferSetters
+        );
+        void UpdateTextureIndex(char* _instanceDataBufferPtr1, char* _instanceDataBufferPtr2);
 
     private:
+
+        const size_t unitIndex_;
+
         //메쉬를 그릴 위치, 크기 등의 정보가 담긴 트랜스폼데이터.
         TransformData transformData_;
 
