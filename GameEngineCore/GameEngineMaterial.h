@@ -47,7 +47,7 @@ public:
 
 	void Set();
 	void SettingInstancing();
-	void SettingInstancing2();
+	void SetInstancingMaterial();
 public:
 
 	inline GameEngineVertexShader* GetVertexShader()

@@ -103,7 +103,7 @@ class GameEngineInstancingRenderer
         AtlasData atlasData_;
 
         //키값으로 쓰인 문자열과 같은 이름을 가진 구조화버퍼에 넣어 셰이더로 전달할 데이터.
-        std::multimap<std::string, const void*> data_;  
+        std::multimap<std::string, const void*> linkedData_;  
 
         //인스턴스별로 사용할 컬러텍스처의 인덱스.
         unsigned int colorTextureIndex_; 
@@ -208,7 +208,7 @@ private:
     std::vector<InstancingUnit> allInstancingUnits_;   //모든 인스턴싱유닛들이 저장된 벡터.
     //인스턴싱 유닛들이 주로 저장하게 될 정보들은 float과 unsigned int가 대부분이라서 값복사로 인한 효율 감소보다 
     // 캐시 적중율 향상으로 인한 효율 증가가 더 크다고 판단해서 값으로 저장함.
-
+    
     GameEngineMesh* mesh_;                          
 
     GameEngineInputLayout* inputLayout_;            
@@ -220,8 +220,8 @@ private:
     //각각의 인스턴스들이 가지고 있는 정보들을 모아서 정점 정보들과 함께 정점셰이더로 전달하는 버퍼.
     GameEngineInstancingBuffer* instancingBuffer_;  
 
-    //컬러텍스처 인덱스와 노말맵텍스처 인덱스 등의 인스턴스별 정보들을 모아 저장해서 인스턴싱버퍼로 전달하는 중간저장용 버퍼.
-    std::vector<char> instanceDataBuffer_;  
+    //컬러텍스처 인덱스와 노말맵텍스처 인덱스 등의 인스턴스별 정보들을 모아 저장해서 인스턴싱버퍼로 전달하는 중간저장용 컨테이너.
+    std::vector<char> instanceDataVector_;  
 
     size_t instanceDataSize_; //인스턴스별로 가지고 있는 인풋 레이아웃들의 총합 크기.
 

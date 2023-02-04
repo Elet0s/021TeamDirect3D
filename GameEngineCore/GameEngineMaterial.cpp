@@ -118,7 +118,7 @@ void GameEngineMaterial::SettingInstancing()
 	OutputMerger_BlendSetting();
 }
 
-void GameEngineMaterial::SettingInstancing2()
+void GameEngineMaterial::SetInstancingMaterial()
 {
 	Inst_VertexShaderSetting();
 	RasterizerSetting();

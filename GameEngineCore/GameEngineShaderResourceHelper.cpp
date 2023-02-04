@@ -394,7 +394,7 @@ void GameEngineShaderResourceHelper::ShaderCheck(GameEngineShader* _shader)
 	}
 }
 
-void GameEngineShaderResourceHelper::AllResourcesSetting()
+void GameEngineShaderResourceHelper::SetAllResources()
 {
 	for (const std::pair<std::string, GameEngineConstantBufferSetter>& cBufferSetterPair
 		: constantBufferSetterMap_)
@@ -427,7 +427,7 @@ void GameEngineShaderResourceHelper::AllResourcesSetting()
 	}
 }
 
-void GameEngineShaderResourceHelper::AllResourcesReset()
+void GameEngineShaderResourceHelper::ResetAllResources()
 {
 	for (const std::pair<std::string, GameEngineTextureSetter>& textureSetterPair : textureSetterMap_)
 	{

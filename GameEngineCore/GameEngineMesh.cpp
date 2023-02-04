@@ -95,7 +95,7 @@ void GameEngineMesh::Set()
     this->InputAssembler2_IndexBufferSetting();
 }
 
-void GameEngineMesh::SettingInstancing(GameEngineInstancingBuffer* _instancingBuffer)
+void GameEngineMesh::SetInstancingBuffer(GameEngineInstancingBuffer* _instancingBuffer)
 {
     ID3D11Buffer* ArrBuffer[2] = { this->vertexBuffer_->GetBuffer(), _instancingBuffer->GetBuffer() };
     //정점버퍼와 인스턴싱버퍼가 담긴 배열.
@@ -135,7 +135,7 @@ void GameEngineMesh::Render()
     // 내가 원하는 카메라의 렌더타겟에 렌더할 수 있게 된다.
 }
 
-void GameEngineMesh::RenderInstancing(size_t _instancingCount)
+void GameEngineMesh::RenderInstances(size_t _instancingCount)
 {
     GameEngineDevice::GetDC()->DrawIndexedInstanced(    //인덱스에 연동된 정점들을 그리는 인스턴스 수만큼 그리는 함수.
         this->indexBuffer_->GetIndexCount(),            //인덱스 개수.

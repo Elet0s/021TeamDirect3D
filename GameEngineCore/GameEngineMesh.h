@@ -54,7 +54,7 @@ public:
 	void Set();	
 
 	//이 메쉬와 인스턴싱버퍼를 DC에 연결하는 함수.
-	void SettingInstancing(GameEngineInstancingBuffer* _instancingBuffer);	
+	void SetInstancingBuffer(GameEngineInstancingBuffer* _instancingBuffer);	
 	//인스턴싱버퍼는 여기서 정점버퍼와 함께 IA1 단계로 연결된다. 
 	// 그래서 인스턴싱버퍼에는 세팅 함수가 따로 존재하지 않는다.
 
@@ -62,7 +62,7 @@ public:
 	void Render();
 
 	//인스턴스 렌더링 함수.
-	void RenderInstancing(size_t _instancingCount);
+	void RenderInstances(size_t _instancingCount);
 
 	const class GameEngineInputLayoutDesc& GetInputLayoutDesc() const;
 

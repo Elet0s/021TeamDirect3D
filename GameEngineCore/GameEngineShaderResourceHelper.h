@@ -89,10 +89,10 @@ protected:
 private:
 
 	//해당 셰이더리소스헬퍼가 가진 모든 상수버퍼, 텍스처, 샘플러를 매 루프마다 갱신하고 정점셰이더나 픽셀셰이더에 연결하는 함수.
-	void AllResourcesSetting();
+	void SetAllResources();
 
 	//해당 셰이더리소스헬퍼가 디바이스 컨텍스트에 연결했던 모든 상수버퍼, 텍스처, 샘플러를 널포인터로 대체하는 함수.
-	void AllResourcesReset();
+	void ResetAllResources();
 
 private:
 	std::multimap<std::string, GameEngineConstantBufferSetter> constantBufferSetterMap_;

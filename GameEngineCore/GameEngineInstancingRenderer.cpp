@@ -17,7 +17,7 @@ normalMapTextureIndex_(-1)
 {
 	for (const std::string& name : _structuredBufferSetterNames)
 	{
-		data_.insert(std::make_pair(name, nullptr));
+		linkedData_.insert(std::make_pair(name, nullptr));
 	}
 }
 
@@ -28,7 +28,7 @@ void GameEngineInstancingRenderer::InstancingUnit::Link(
 {
 	std::string uppercaseDataName = GameEngineString::ToUpperReturn(_structuredBufferName);
 
-	if (data_.end() == data_.find(uppercaseDataName))
+	if (linkedData_.end() == linkedData_.find(uppercaseDataName))
 	{
 		MsgBoxAssertString(std::string(_structuredBufferName) + ": 그런 이름의 구조화 버퍼를 사용하지 않습니다.");
 		//트랜스폼데이터, 아틀라스데이터를 링크시켜도 여기로 들어오는점 주의.
@@ -36,7 +36,7 @@ void GameEngineInstancingRenderer::InstancingUnit::Link(
 	}
 	else
 	{
-		data_.find(uppercaseDataName)->second = _data;
+		linkedData_.find(uppercaseDataName)->second = _data;
 	}
 }
 
@@ -124,8 +124,8 @@ void GameEngineInstancingRenderer::InstancingUnit::UpdateAtlasData(char* _atlasD
 
 void GameEngineInstancingRenderer::InstancingUnit::UpdateLinkedData(std::multimap<std::string, GameEngineStructuredBufferSetter>& _structuredBufferSetters)
 {
-	for (std::map<std::string, const void*>::iterator unitDataIter = this->data_.begin();
-		unitDataIter != this->data_.end(); ++unitDataIter)
+	for (std::map<std::string, const void*>::iterator unitDataIter = this->linkedData_.begin();
+		unitDataIter != this->linkedData_.end(); ++unitDataIter)
 	{
 		//if (nullptr == unitDataIter->second)
 		//{
@@ -245,8 +245,8 @@ void GameEngineInstancingRenderer::Initialize(
 	this->instancingBuffer_ = GameEngineInstancingBuffer::Create(instancingUnitCount_, instanceDataSize_);
 	//instancingUnitCount_ * instanceDataSize크기의 인스턴싱버퍼 생성.
 
-	instanceDataBuffer_.resize(instanceDataSize_ * instancingUnitCount_);
-	//instancingUnitCount_ * instanceDataSize크기로 인스턴스데이터 버퍼 크기 조정.
+	instanceDataVector_.resize(instanceDataSize_ * instancingUnitCount_);
+	//instancingUnitCount_ * instanceDataSize크기로 인스턴스데이터벡터 크기 조정.
 
 	this->shaderResourceHelper_ = GameEngineShaderResourceHelper();
 	this->shaderResourceHelper_.ShaderCheck(
@@ -374,28 +374,28 @@ void GameEngineInstancingRenderer::Render(
 		//const static size_t normalMapTextureIndexSize = sizeof(allInstancingUnits_[index].normalMapTextureIndex_);
 
 		this->allInstancingUnits_[index].UpdateTextureIndex(
-			&instanceDataBuffer_[index * instanceDataSize_],
-			&instanceDataBuffer_[index * instanceDataSize_ + colorTextureIndexSize]
+			&instanceDataVector_[index * instanceDataSize_],
+			&instanceDataVector_[index * instanceDataSize_ + colorTextureIndexSize]
 		);
 	}
 
-	instancingBuffer_->ChangeData(&instanceDataBuffer_[0], instanceDataBuffer_.size());
+	this->instancingBuffer_->ChangeData(&instanceDataVector_[0], instanceDataVector_.size());
 	//인스턴스데이터버퍼에 저장된 컬러텍스처 인덱스와 노말맵텍스처 인덱스를 인스턴싱버퍼로 복사한다.
 
-	shaderResourceHelper_.AllResourcesSetting();
+	shaderResourceHelper_.SetAllResources();
 	//셰이더리소스헬퍼가 가진 모든 리소스들을 디바이스 컨텍스트에 연결한다.
 
-	this->mesh_->SettingInstancing(this->instancingBuffer_);
+	this->mesh_->SetInstancingBuffer(this->instancingBuffer_);
 	//메쉬가 가진 기본 정점정보와 함께 인스턴싱버퍼의 정보들도 디바이스 컨텍스트에 연결한다.
 
 	this->inputLayout_->Set();
 	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
-	this->material_->SettingInstancing2();
+	this->material_->SetInstancingMaterial();
 
-	this->mesh_->RenderInstancing(this->instancingUnitCount_);
+	this->mesh_->RenderInstances(this->instancingUnitCount_);
 	//넣어준 인스턴스 개수만큼 기본 도형을 그린다.
 
-	shaderResourceHelper_.AllResourcesReset();
+	shaderResourceHelper_.ResetAllResources();
 }
 
 void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix)
@@ -458,21 +458,22 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 		//const static size_t normalMapTextureIndexSize = sizeof(allInstancingUnits_[index].normalMapTextureIndex_);
 
 		this->allInstancingUnits_[index].UpdateTextureIndex(
-			&instanceDataBuffer_[index * instanceDataSize_],
-			&instanceDataBuffer_[index * instanceDataSize_ + colorTextureIndexSize]
+			&instanceDataVector_[index * instanceDataSize_],
+			&instanceDataVector_[index * instanceDataSize_ + colorTextureIndexSize]
 		);
 	}
 
-	instancingBuffer_->ChangeData(&instanceDataBuffer_[0], instanceDataBuffer_.size());
-	shaderResourceHelper_.AllResourcesSetting();
+	this->instancingBuffer_->ChangeData(&instanceDataVector_[0], instanceDataVector_.size());
 
-	this->mesh_->SettingInstancing(this->instancingBuffer_);
+	shaderResourceHelper_.SetAllResources();
+
+	this->mesh_->SetInstancingBuffer(this->instancingBuffer_);
 	this->inputLayout_->Set();
 	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
-	this->material_->SettingInstancing2();
+	this->material_->SetInstancingMaterial();
 
-	this->mesh_->RenderInstancing(this->instancingUnitCount_);
-	shaderResourceHelper_.AllResourcesReset();
+	this->mesh_->RenderInstances(this->instancingUnitCount_);
+	shaderResourceHelper_.ResetAllResources();
 }
 
 void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix)
@@ -536,19 +537,20 @@ void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4
 		//const static size_t normalMapTextureIndexSize = sizeof(allInstancingUnits_[index].normalMapTextureIndex_);
 
 		this->allInstancingUnits_[index].UpdateTextureIndex(
-			&instanceDataBuffer_[index * instanceDataSize_],
-			&instanceDataBuffer_[index * instanceDataSize_ + colorTextureIndexSize]
+			&instanceDataVector_[index * instanceDataSize_],
+			&instanceDataVector_[index * instanceDataSize_ + colorTextureIndexSize]
 		);
 	}
 
-	instancingBuffer_->ChangeData(&instanceDataBuffer_[0], instanceDataBuffer_.size());
-	shaderResourceHelper_.AllResourcesSetting();
+	this->instancingBuffer_->ChangeData(&instanceDataVector_[0], instanceDataVector_.size());
 
-	this->mesh_->SettingInstancing(this->instancingBuffer_);
+	shaderResourceHelper_.SetAllResources();
+
+	this->mesh_->SetInstancingBuffer(this->instancingBuffer_);
 	this->inputLayout_->Set();
 	GameEngineDevice::GetDC()->IASetPrimitiveTopology(topology_);
-	this->material_->SettingInstancing2();
+	this->material_->SetInstancingMaterial();
 
-	this->mesh_->RenderInstancing(this->instancingUnitCount_);
-	shaderResourceHelper_.AllResourcesReset();
+	this->mesh_->RenderInstances(this->instancingUnitCount_);
+	shaderResourceHelper_.ResetAllResources();
 }

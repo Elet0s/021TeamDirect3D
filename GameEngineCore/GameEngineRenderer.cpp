@@ -163,11 +163,11 @@ void GameEngineRenderUnit::Render(float _deltaTime)
 
 	material_->Set();
 
-	shaderResourceHelper_.AllResourcesSetting();
+	shaderResourceHelper_.SetAllResources();
 
 	mesh_->Render();
 
-	shaderResourceHelper_.AllResourcesReset();
+	shaderResourceHelper_.ResetAllResources();
 }
 
 GameEngineMesh* GameEngineRenderUnit::GetMesh()
