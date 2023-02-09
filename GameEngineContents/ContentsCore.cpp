@@ -39,7 +39,7 @@ void ContentsCore::Start()
 	//RTTI(Run-Time Type information): 런타임 형식 정보. 
 	//프로그램 실행 중간에 데이터 타입을 받아오는 방법. 
 
-	//ShowCursor(false); 마우스 감추기
+	ShowCursor(false); //마우스 감추기
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<TestLevel>("Test");

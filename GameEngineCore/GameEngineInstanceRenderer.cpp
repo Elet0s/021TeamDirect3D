@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "GameEngineInstancingRenderer.h"
+#include "GameEngineInstanceRenderer.h"
 #include "GameEngineInputLayout.h"
 #include "GameEngineDevice.h"
 #include "GameEngineInstancingBuffer.h"
@@ -8,7 +8,7 @@
 #include "GameEngineVertexes.h"
 
 
-GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
+GameEngineInstanceRenderer::InstancingUnit::InstancingUnit(
 	const std::multiset<std::string>& _structuredBufferSetterNames,
 	size_t _unitIndex
 ): unitIndex_(_unitIndex),
@@ -21,7 +21,7 @@ normalMapTextureIndex_(-1)
 	}
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::Link(
+void GameEngineInstanceRenderer::InstancingUnit::Link(
 	const std::string_view& _structuredBufferName,
 	const void* _data
 )
@@ -40,45 +40,45 @@ void GameEngineInstancingRenderer::InstancingUnit::Link(
 	}
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::SetWorldScale(const float4& _worldScaleVector)
+void GameEngineInstanceRenderer::InstancingUnit::SetWorldScale(const float4& _worldScaleVector)
 {
 	this->transformData_.worldScaleVector_ = _worldScaleVector;
 	this->transformData_.localScaleMatrix_.Scale(_worldScaleVector);
 	CalWorldWorldMatrix();
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::SetWorldRotation(const float4& _worldRotationVector)
+void GameEngineInstanceRenderer::InstancingUnit::SetWorldRotation(const float4& _worldRotationVector)
 {
 	this->transformData_.worldRotationVector_ = _worldRotationVector;
 	this->transformData_.localRotationMatrix_.Rotate3AxisByDegree(_worldRotationVector);
 	CalWorldWorldMatrix();
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::SetWorldPosition(const float4& _worldPositionVector)
+void GameEngineInstanceRenderer::InstancingUnit::SetWorldPosition(const float4& _worldPositionVector)
 {
 	this->transformData_.worldPositionVector_ = _worldPositionVector;
 	this->transformData_.localPositionMatrix_.Position(_worldPositionVector);
 	CalWorldWorldMatrix();
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::SetColorTextureIndex(unsigned int _colorTextureIndex)
+void GameEngineInstanceRenderer::InstancingUnit::SetColorTextureIndex(unsigned int _colorTextureIndex)
 {
 	colorTextureIndex_ = _colorTextureIndex;
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::SetNormalMapTextureIndex(unsigned int _normalMapTextureIndex)
+void GameEngineInstanceRenderer::InstancingUnit::SetNormalMapTextureIndex(unsigned int _normalMapTextureIndex)
 {
 	normalMapTextureIndex_ = _normalMapTextureIndex;
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::SwitchLeftToRight()
+void GameEngineInstanceRenderer::InstancingUnit::SwitchLeftToRight()
 {
 	this->transformData_.worldScaleVector_.x = -this->transformData_.worldScaleVector_.x;
 	this->transformData_.localScaleMatrix_.Scale(this->transformData_.worldScaleVector_);
 	CalWorldWorldMatrix();
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::CalWorldWorldMatrix()
+void GameEngineInstanceRenderer::InstancingUnit::CalWorldWorldMatrix()
 {
 	this->transformData_.worldWorldMatrix_
 		= this->transformData_.localScaleMatrix_ 
@@ -86,7 +86,7 @@ void GameEngineInstancingRenderer::InstancingUnit::CalWorldWorldMatrix()
 		* this->transformData_.localPositionMatrix_;
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::UpdateTransformData(
+void GameEngineInstanceRenderer::InstancingUnit::UpdateTransformData(
 	const float4x4& _viewMatrix,
 	const float4x4& _projectionMatrix,
 	char* _transformDataPtr
@@ -109,7 +109,7 @@ void GameEngineInstancingRenderer::InstancingUnit::UpdateTransformData(
 	//각각의 인스턴싱유닛들이 가진 트랜스폼데이터를 Inst_TransformData구조화버퍼 세터가 가진 오리지날데이터로 복사한다.
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::UpdateAtlasData(char* _atlasDataPtr)
+void GameEngineInstanceRenderer::InstancingUnit::UpdateAtlasData(char* _atlasDataPtr)
 {
 	const size_t atlasDataSize = sizeof(AtlasData);	//한개 아틀라스데이터 크기.
 
@@ -122,7 +122,7 @@ void GameEngineInstancingRenderer::InstancingUnit::UpdateAtlasData(char* _atlasD
 	//각각의 인스턴싱유닛들이 가진 아틀라스데이터를 Inst_AtlasData구조화버퍼 세터가 가진 오리지날데이터로 복사한다.
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::UpdateLinkedData(std::multimap<std::string, GameEngineStructuredBufferSetter>& _structuredBufferSetters)
+void GameEngineInstanceRenderer::InstancingUnit::UpdateLinkedData(std::multimap<std::string, GameEngineStructuredBufferSetter>& _structuredBufferSetters)
 {
 	for (std::map<std::string, const void*>::iterator unitDataIter = this->linkedData_.begin();
 		unitDataIter != this->linkedData_.end(); ++unitDataIter)
@@ -159,7 +159,7 @@ void GameEngineInstancingRenderer::InstancingUnit::UpdateLinkedData(std::multima
 	}
 }
 
-void GameEngineInstancingRenderer::InstancingUnit::UpdateTextureIndex(char* _instanceDataBufferPtr1, char* _instanceDataBufferPtr2)
+void GameEngineInstanceRenderer::InstancingUnit::UpdateTextureIndex(char* _instanceDataBufferPtr1, char* _instanceDataBufferPtr2)
 {
 	//char* instanceDataBufferPtr1 = &instanceDataBuffer_[index * instanceDataSize_];
 
@@ -182,7 +182,7 @@ void GameEngineInstancingRenderer::InstancingUnit::UpdateTextureIndex(char* _ins
 	//인스턴스데이터버퍼에 텍스처배열의 노말맵텍스처 인덱스를 기록한다.
 }
 
-GameEngineInstancingRenderer::GameEngineInstancingRenderer()
+GameEngineInstanceRenderer::GameEngineInstanceRenderer()
 	: isShadowRendering_(false),
 	instancingUnitCount_(0),
 	mesh_(nullptr),
@@ -194,11 +194,11 @@ GameEngineInstancingRenderer::GameEngineInstancingRenderer()
 {
 }
 
-GameEngineInstancingRenderer::~GameEngineInstancingRenderer()
+GameEngineInstanceRenderer::~GameEngineInstanceRenderer()
 {
 }
 
-void GameEngineInstancingRenderer::Initialize(
+void GameEngineInstanceRenderer::Initialize(
 	size_t _instancingUnitCount,
 	const std::string_view& _meshName,
 	const std::string_view& _materialName,
@@ -287,7 +287,7 @@ void GameEngineInstancingRenderer::Initialize(
 	for (size_t i = 0; i < instancingUnitCount_; ++i)
 	{
 		allInstancingUnits_.push_back(
-			GameEngineInstancingRenderer::InstancingUnit::InstancingUnit(
+			GameEngineInstanceRenderer::InstancingUnit::InstancingUnit(
 				this->structuredBufferSetterNames_,
 				i
 			)
@@ -296,7 +296,7 @@ void GameEngineInstancingRenderer::Initialize(
 	//instancingUnitCount_만큼의 인스턴싱유닛을 생성, 저장한다.
 }
 
-void GameEngineInstancingRenderer::SetAllUnitsWorldScale(const float4& _worldScaleVector)
+void GameEngineInstanceRenderer::SetAllUnitsWorldScale(const float4& _worldScaleVector)
 {
 	for (InstancingUnit& singleInstancingUnit : allInstancingUnits_)
 	{
@@ -305,7 +305,7 @@ void GameEngineInstancingRenderer::SetAllUnitsWorldScale(const float4& _worldSca
 	}
 }
 
-void GameEngineInstancingRenderer::Render(
+void GameEngineInstanceRenderer::Render(
 	float _deltaTime,
 	const float4x4& _viewMatrix,
 	const float4x4& _projectionMatrix
@@ -398,7 +398,7 @@ void GameEngineInstancingRenderer::Render(
 	shaderResourceHelper_.ResetAllResources();
 }
 
-void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix)
+void GameEngineInstanceRenderer::DeferredRender(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix)
 {
 	if (true == this->isShadowRendering_)
 	{
@@ -476,7 +476,7 @@ void GameEngineInstancingRenderer::DeferredRender(float _deltaTime, const float4
 	shaderResourceHelper_.ResetAllResources();
 }
 
-void GameEngineInstancingRenderer::RenderShadow(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix)
+void GameEngineInstanceRenderer::RenderShadow(float _deltaTime, const float4x4& _viewMatrix, const float4x4& _projectionMatrix)
 {
 	if (false == isShadowRendering_)
 	{

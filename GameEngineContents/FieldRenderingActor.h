@@ -80,9 +80,9 @@ private:
 
 	float4 totalFieldSize_;	//전체 필드 크기.
 
-	GameEngineInstancingRenderer* fieldRenderer_;	//인스턴싱 렌더러.
+	GameEngineInstanceRenderer* fieldRenderer_;	//인스턴싱 렌더러.
 								
-	GameEngineInstancingRenderer* fieldObjectShadowRenderer_;	//필드오브젝트 그림자 렌더러.
+	GameEngineInstanceRenderer* fieldObjectShadowRenderer_;	//필드오브젝트 그림자 렌더러.
 
 	std::vector<AtlasData> fieldObjectAtlasDatas_;	//필드 오브젝트별 아틀라스데이터 모음.
 

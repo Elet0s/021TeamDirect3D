@@ -68,7 +68,7 @@ void WorldMapRenderingActor::InitializeFieldObjects(
 
 void WorldMapRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 {
-	worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("0-WorldRenderer");
+	worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstanceRenderer("0-WorldRenderer");
 	worldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",

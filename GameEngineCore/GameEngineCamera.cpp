@@ -183,7 +183,7 @@ void GameEngineCamera::SetCameraOrder(CameraOrder _order)
 	GetActor()->GetLevel()->PushCamera(this, _order);
 }
 
-GameEngineInstancingRenderer& GameEngineCamera::GetInstancingRenderer(const std::string_view& _name)
+GameEngineInstanceRenderer& GameEngineCamera::GetInstanceRenderer(const std::string_view& _name)
 {
 	return allInstancingRenderers_[_name.data()];
 }
@@ -440,7 +440,7 @@ void GameEngineCamera::Render(float _deltaTime)
 			}
 		}
 
-		for (std::map<std::string, GameEngineInstancingRenderer>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstanceRenderer>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second.Render(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
@@ -489,7 +489,7 @@ void GameEngineCamera::Render(float _deltaTime)
 			}
 		}
 
-		for (std::map<std::string, GameEngineInstancingRenderer>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstanceRenderer>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second.DeferredRender(_deltaTime, this->viewMatrix_, this->projectionMatrix_);
@@ -505,7 +505,7 @@ void GameEngineCamera::Render(float _deltaTime)
 		shadowDepthRenderTarget_->Clear();
 		shadowDepthRenderTarget_->SetRenderTarget();
 
-		for (std::map<std::string, GameEngineInstancingRenderer>::iterator iter = allInstancingRenderers_.begin();
+		for (std::map<std::string, GameEngineInstanceRenderer>::iterator iter = allInstancingRenderers_.begin();
 			iter != allInstancingRenderers_.end(); ++iter)
 		{
 			iter->second.RenderShadow(_deltaTime, this->viewMatrix_, this->projectionMatrix_);

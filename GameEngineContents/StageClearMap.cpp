@@ -25,7 +25,7 @@ void StageClearMap::Start()
 		TextureRenderer->GetTransform().SetWorldPosition(float4{ 162,-100, 512 });
 	}
 
-	mapRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("0-mapRenderer");
+	mapRenderer_ = &GetLevel()->GetMainCamera()->GetInstanceRenderer("0-mapRenderer");
 	mapRenderer_->Initialize(
 		100,
 		"Rect",

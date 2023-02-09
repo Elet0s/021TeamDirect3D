@@ -22,7 +22,7 @@
 #include <GameEngineCore\GameEngineUIRenderer.h>
 #include <GameEngineCore\GameEngineFontRenderer.h>
 
-#include <GameEngineCore\GameEngineInstancingRenderer.h>
+#include <GameEngineCore\GameEngineInstanceRenderer.h>
 
 #include <GameEngineCore\GameEngineFont.h>
 #include <GameEngineCore\GameEngineTexture.h>

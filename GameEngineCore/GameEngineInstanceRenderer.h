@@ -5,14 +5,14 @@
 #include "GlobalHeader.h"
 
 class GameEngineInstancingBuffer;
-class GameEngineInstancingRenderer
+class GameEngineInstanceRenderer
 {
 
     class InstancingUnit
     {
         //인스턴스별 렌더링 정보 저장용 유닛.
 
-        friend GameEngineInstancingRenderer;
+        friend GameEngineInstanceRenderer;
 
 
         InstancingUnit(const std::multiset<std::string>& _structuredBufferSetterNames, size_t _unitIndexs);
@@ -116,16 +116,16 @@ class GameEngineInstancingRenderer
     friend class GameEngineCamera;
 
 public:
-	GameEngineInstancingRenderer();
-	~GameEngineInstancingRenderer();
+	GameEngineInstanceRenderer();
+	~GameEngineInstanceRenderer();
 
 protected:
-	GameEngineInstancingRenderer(const GameEngineInstancingRenderer& _other) = delete;
-	GameEngineInstancingRenderer(GameEngineInstancingRenderer&& _other) noexcept = delete;
+	GameEngineInstanceRenderer(const GameEngineInstanceRenderer& _other) = delete;
+	GameEngineInstanceRenderer(GameEngineInstanceRenderer&& _other) noexcept = delete;
 
 private:
-	GameEngineInstancingRenderer& operator=(const GameEngineInstancingRenderer& _other) = delete;
-	GameEngineInstancingRenderer& operator=(const GameEngineInstancingRenderer&& _other) = delete;
+	GameEngineInstanceRenderer& operator=(const GameEngineInstanceRenderer& _other) = delete;
+	GameEngineInstanceRenderer& operator=(const GameEngineInstanceRenderer&& _other) = delete;
 
 
 public:	

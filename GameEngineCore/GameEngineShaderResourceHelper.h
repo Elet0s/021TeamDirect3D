@@ -12,7 +12,7 @@ class GameEngineShaderResourceHelper
 	friend class GameEngineRenderUnit;
 	//AllResourcesSetting(), AllResourcesReset() 함수를 호출할 수 있게 하기 위해 프렌드. 
 	
-	friend class GameEngineInstancingRenderer;
+	friend class GameEngineInstanceRenderer;
 	//인스턴싱 버텍스셰이더, 픽셀셰이더로 ShaderCheck()함수를 써야해서 프렌드. 
 
 public:

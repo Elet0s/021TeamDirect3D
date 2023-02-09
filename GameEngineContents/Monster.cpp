@@ -20,8 +20,8 @@
 
 std::vector<Monster*> Monster::allMonsters_;
 
-GameEngineInstancingRenderer* Monster::allMonstersRenderer_ = nullptr;
-GameEngineInstancingRenderer* Monster::allShadowsRenderer_ = nullptr;
+GameEngineInstanceRenderer* Monster::allMonstersRenderer_ = nullptr;
+GameEngineInstanceRenderer* Monster::allShadowsRenderer_ = nullptr;
 GameItemObjectManager* Monster::dropMonsterItemObject_ = new GameItemObjectManager();
 int Monster::monsterCreationIndex_ = 0;
 
@@ -68,14 +68,14 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 {
 	allMonsters_.reserve(_allMonsterCount);
 
-	allMonstersRenderer_ = &_thisLevel->GetCamera(CameraOrder::MidCamera)->GetInstancingRenderer("1-AllMonstersRenderer");
+	allMonstersRenderer_ = &_thisLevel->GetCamera(CameraOrder::MidCamera)->GetInstanceRenderer("1-AllMonstersRenderer");
 	allMonstersRenderer_->Initialize(_allMonsterCount, "Rect", "MonsterInstanceRendering");
 	allMonstersRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 
 	//allShadowsRenderer_ = _thisLevel->GetCamera(CameraOrder::MidCamera)->GetInstancingRenderer("1-AllShadowsRenderer");
 	//미드카메라에서 그림자가 그려지지 않는 원인 찾아낼 것.
-	allShadowsRenderer_ = &_thisLevel->GetMainCamera()->GetInstancingRenderer("1-AllShadowsRenderer");
+	allShadowsRenderer_ = &_thisLevel->GetMainCamera()->GetInstanceRenderer("1-AllShadowsRenderer");
 	allShadowsRenderer_->Initialize(_allMonsterCount, "Rect", "DeferredInstanceShadowRendering", true);
 	allShadowsRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
 	allShadowsRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");

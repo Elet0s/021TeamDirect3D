@@ -259,7 +259,7 @@
     <ClCompile Include="GameEngineTexture2DArray.cpp">
       <Filter>Resource\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineInstancingRenderer.cpp">
+    <ClCompile Include="GameEngineInstanceRenderer.cpp">
       <Filter>Object\Component\Rendering\Instancing</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineLighting.cpp">
@@ -442,7 +442,7 @@
     <ClInclude Include="GameEngineTexture2DArray.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineInstancingRenderer.h">
+    <ClInclude Include="GameEngineInstanceRenderer.h">
       <Filter>Object\Component\Rendering\Instancing</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineLighting.h">

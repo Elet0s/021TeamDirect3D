@@ -124,7 +124,7 @@ void FieldRenderingActor::InitializeFieldObjects(
 
 void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 {
-	fieldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("0-FieldRenderer");
+	fieldRenderer_ = &GetLevel()->GetMainCamera()->GetInstanceRenderer("0-FieldRenderer");
 	fieldRenderer_->Initialize(
 		static_cast<size_t>(tileCount_) + _objectInWindowCount,
 		"Rect",
@@ -136,7 +136,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	//그려질 필요없는 렌더유닛들이 256, 256 크기로 그려지는 버그 발생.
 
 
-	fieldObjectShadowRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("0-FieldObjectShadowRenderer");
+	fieldObjectShadowRenderer_ = &GetLevel()->GetMainCamera()->GetInstanceRenderer("0-FieldObjectShadowRenderer");
 	fieldObjectShadowRenderer_->Initialize(
 		_objectInWindowCount,		//타일 그림자까지 그릴 필요는 없으므로 _objectInWindowCount만큼만 그린다.
 		"Rect",

@@ -17,7 +17,7 @@ StageCreater::~StageCreater()
 
 void StageCreater::Start()
 {
-	GameEngineInstancingRenderer* worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("1-DirtPatch");
+	GameEngineInstanceRenderer* worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstanceRenderer("1-DirtPatch");
 	{
 		worldRenderer_->Initialize(
 			100,
@@ -73,7 +73,7 @@ void StageCreater::Start()
 	{
 		int PrevMaxCount = 0;
 		int unitIndex = 2;
-		GameEngineInstancingRenderer* worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstancingRenderer("1-DirtPatch");
+		GameEngineInstanceRenderer* worldRenderer_ = &GetLevel()->GetMainCamera()->GetInstanceRenderer("1-DirtPatch");
 		for (int level = 1; level < 7; level++)
 		{
 			int maxCount = GameEngineRandom::mainRandom_.RandomInt(2, 5);

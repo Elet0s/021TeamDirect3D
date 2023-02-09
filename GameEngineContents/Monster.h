@@ -37,8 +37,8 @@ class Monster: public GameEngineActor
 	static std::vector<Monster*> allMonsters_;
 
 protected:
-	static GameEngineInstancingRenderer* allMonstersRenderer_;	//모든 몬스터 렌더러.
-	static GameEngineInstancingRenderer* allShadowsRenderer_;	//모든 몬스터 그림자 렌더러.
+	static GameEngineInstanceRenderer* allMonstersRenderer_;	//모든 몬스터 렌더러.
+	static GameEngineInstanceRenderer* allShadowsRenderer_;	//모든 몬스터 그림자 렌더러.
 	static GameItemObjectManager* dropMonsterItemObject_;
 	static int monsterCreationIndex_;	
 public:

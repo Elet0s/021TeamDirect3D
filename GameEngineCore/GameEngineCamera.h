@@ -9,7 +9,7 @@ enum class ProjectionMode
 	Orthographic //직교투영.
 };
 
-class GameEngineInstancingRenderer;
+class GameEngineInstanceRenderer;
 class GameEngineMaterial;
 class GameEngineRenderTarget;
 class GameEngineRenderUnit;
@@ -58,7 +58,7 @@ public:
 	//할 일이 있을지는 모르겠지만, 런타임 중간에 카메라 오더 변경 금지.
 
 	//인스턴싱렌더러 반환. 없다면 빈 인스턴싱렌더러를 만들어서 반환한다.
-	GameEngineInstancingRenderer& GetInstancingRenderer(const std::string_view& _name);
+	GameEngineInstanceRenderer& GetInstanceRenderer(const std::string_view& _name);
 
 	//카메라에 조명 추가.
 	void PushLighting(GameEngineLighting* _newLighting);
@@ -162,7 +162,7 @@ private:
 	std::map<int, std::list<GameEngineRenderer*>> allRenderers_;	//이 카메라가 가진 모든 렌더러들.
 	//렌더링오더로 먼저 분류한 후 렌더 직전에 zsort() 함수로 z값 순서대로 정렬한다. 
 
-	std::map<std::string, GameEngineInstancingRenderer> allInstancingRenderers_;
+	std::map<std::string, GameEngineInstanceRenderer> allInstancingRenderers_;
 
 	//비정렬 맵(Unordered Map): 들어오는 키값을 해시함수를 거쳐서 나온 숫자로 바꿔서, 
 	// 그 값을 인덱스로 하는 배열 내 원소로 데이터를 저장하는 방식의 컨테이너. 

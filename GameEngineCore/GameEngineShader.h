@@ -129,7 +129,7 @@ class GameEngineStructuredBufferSetter : public ShaderResSetter
 {
 	friend class GameEngineShader;
 	friend class GameEngineShaderResourceHelper;
-	friend class GameEngineInstancingRenderer;
+	friend class GameEngineInstanceRenderer;
 
 public:
 	void Set() const;

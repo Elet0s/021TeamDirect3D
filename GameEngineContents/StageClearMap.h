@@ -28,6 +28,6 @@ private:
 
 	const int tileCount_;
 
-	GameEngineInstancingRenderer* mapRenderer_;
+	GameEngineInstanceRenderer* mapRenderer_;
 };
 
