@@ -187,25 +187,19 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(GameEngineCollision* _Th
 	case ItemObjectOrder::Voidbead:
 		for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)
 		{
-			if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] != A)
-			{
-				if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::GreenExp)
+			ItemObjectOrder B =Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() ;
+				if (B == ItemObjectOrder::GreenExp)
 				{
 					Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
 				}
-				else if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::YellowExp)
+				else if (B == ItemObjectOrder::YellowExp)
 				{
 					Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
 				}
-				else if (Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() == ItemObjectOrder::RedExp)
+				else if (B == ItemObjectOrder::RedExp)
 				{
 					Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
 				}
-			}
-			else
-			{
-				break;
-			}
 		}
 	}
 	

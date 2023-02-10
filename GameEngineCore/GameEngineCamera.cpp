@@ -10,7 +10,7 @@
 #include "GameEngineVertexes.h"
 #include "GameEngineInstancingBuffer.h"
 #include "GameEngineStructuredBuffer.h"
-#include "GameEngineInstancingRenderer.h"
+#include "GameEngineInstanceRenderer.h"
 
 GameEngineCamera::GameEngineCamera()
 	: size_(GameEngineWindow::GetInst().GetScale()),
