@@ -75,12 +75,12 @@ public:
 	
 	std::list<StageObject*>& GetNextLevelList()
 	{
-		return nextLevels_;
+		return nextStages_;
 	}
 
 	bool IsNextLevelEmpty()
 	{
-		if (nextLevels_.size() == 0)
+		if (nextStages_.size() == 0)
 		{
 			return true;
 		}
@@ -121,7 +121,7 @@ private:
 	CombatType combatType_;
 
 	GameEngineTextureRenderer* renderer_;
-	std::list<StageObject*> nextLevels_;
+	std::list<StageObject*> nextStages_;
 
 	std::map<MonsterType, size_t> summoningMonsterCountMap_;
 	size_t totalMonsterCount_;
