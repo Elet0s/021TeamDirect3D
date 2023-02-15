@@ -125,6 +125,7 @@ void TestLevel::Update(float _DeltaTime)
 	StageMonsterManager();
 
 	PlayerMoveCamera();
+	MouseMoveCamera();
 
 	this->GetCameraActor(CameraOrder::MidCamera)->GetTransform().SetWorldPosition(
 		GetMainCameraActor()->GetTransform().GetWorldPosition()
