@@ -130,9 +130,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor\02. Play\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerUI.cpp">
       <Filter>Actor\00. Global\UI</Filter>
     </ClCompile>
@@ -442,6 +439,9 @@
     <ClCompile Include="ThunderStafProjectile.cpp">
       <Filter>Actor\02. Play\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Level\Global\ContentsSupport\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -476,9 +476,6 @@
       <Filter>Actor\02. Play\Player</Filter>
     </ClInclude>
     <ClInclude Include="LoginUI.h" />
-    <ClInclude Include="Mouse.h">
-      <Filter>Actor\00. Global\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="TreeObject.h">
       <Filter>Actor\01. MapObject</Filter>
     </ClInclude>
@@ -787,6 +784,9 @@
     </ClInclude>
     <ClInclude Include="ThunderStafProjectile.h">
       <Filter>Actor\02. Play\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Level\Global\ContentsSupport\Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

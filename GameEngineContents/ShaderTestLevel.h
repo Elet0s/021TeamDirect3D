@@ -1,6 +1,7 @@
 #pragma once
 
 class Mouse;
+class FieldRenderingActor;
 class ShaderTestLevel: public GameEngineLevel
 {
 
@@ -31,10 +32,10 @@ protected:
 	void LevelStartEvent() override;
 
 private:
-	Mouse* shaderTestActor_;
-	//GameEngineTextureRenderer* shaderTestRenderer_;
-	//std::vector<RenderOption> testRenderOptionVector_;
-	//std::shared_ptr<GameEngineLighting> testLighting_;
+	//Mouse* shaderTestActor_;
+	FieldRenderingActor* shaderTestActor_;
+	GameEngineLighting* lighting_;
+
 	D3D11_TEXTURE2D_DESC testTextureDesc_;
 	GameEngineTexture* testTexture_;
 	D3D11_UNORDERED_ACCESS_VIEW_DESC testUAVDesc_;

@@ -44,6 +44,7 @@ Monster::Monster()
 	, flash_(false)
 	, flashLoop_(false)
 	, flashTimer_(0)
+	, isToRight_(true)
 {
 	monsterInfo_ = new MonsterInfo();
 	dropMonsterItemObject_->SetManager();
@@ -323,23 +324,18 @@ void Monster::Chaseplayer(float _deltaTime)
 	range_.x = px_ - mx_;//플레이어와 몬스터 x거리차이
 	range_.y = py_ - my_;
 
-	if (range_.x < 0)
+	if (range_.x < 0 && true == isToRight_)
 	{
-		if (monsterScale_.x > 0)
-		{
-			monsterScale_.x = -monsterScale_.x;
-		}
+		isToRight_ = false;
+		allMonstersRenderer_->GetInstancingUnit(instancingUnitIndex_).SwitchLeftToRight();
+		allShadowsRenderer_->GetInstancingUnit(instancingUnitIndex_).SwitchLeftToRight();
 	}
-	else if (range_.x > 0)
+	else if (range_.x > 0 && false == isToRight_)
 	{
-		if (monsterScale_.x < 0)
-		{
-			monsterScale_.x = -monsterScale_.x;
-		}
+		isToRight_ = true;
+		allMonstersRenderer_->GetInstancingUnit(instancingUnitIndex_).SwitchLeftToRight();
+		allShadowsRenderer_->GetInstancingUnit(instancingUnitIndex_).SwitchLeftToRight();
 	}
-	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldScale(
-		this->monsterScale_
-	);
 
 
 	playerRange_ = static_cast<float>(sqrt(pow(range_.x,2) + pow(range_.y,2))); // 몬스터와 플레이어 사이의 거리의 절대값

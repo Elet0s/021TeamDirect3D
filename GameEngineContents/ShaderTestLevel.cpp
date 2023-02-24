@@ -15,6 +15,7 @@
 
 ShaderTestLevel::ShaderTestLevel()
 	: shaderTestActor_(nullptr),
+	lighting_(nullptr),
 	testTextureDesc_(),
 	testTexture_(nullptr),
 	testUAVDesc_()
@@ -32,7 +33,36 @@ void ShaderTestLevel::Start()
 	//this->GetCamera(static_cast<UINT>(CameraOrder::MousePointerCamera))->SetProjectionMode(CameraProjectionMode::Perspective);
 
 
-	shaderTestActor_ = CreateActor<Mouse>(0, "ShaderTestActor");
+	shaderTestActor_ = CreateActor<FieldRenderingActor>(0, "ShaderTestActor");
+	shaderTestActor_->Initialize(
+		550,
+		100,
+		float4(100, 100),
+		60.f
+	);
+
+	lighting_ = CreateActor<GameEngineLighting>(0, "Lighting");
+	lighting_ = CreateActor<GameEngineLighting>(0, "TestLevelLighting");
+	//테스트레벨에 조명 추가.
+
+	lighting_->GetTransform().SetWorldRotation(45.f, 45.f, 0.f);
+	//조명 각도 설정.
+
+	lighting_->GetLightingData().mainLightColor_ = float4(0.7f, 0.7f, 0.7f);
+	//정반사광, 난반사광 색, 밝기 설정.
+
+	lighting_->GetLightingData().ambientLightColor_ = float4(0.1f, 0.1f, 0.1f);
+	//환경광 색, 밝기 설정.
+
+	lighting_->GetLightingData().specularLightRatio_ = 0.f;
+	//정반사광 사용 안함.
+
+	lighting_->GetLightingData().diffuseLightRatio_ = 2.f;
+	//난반사광을 두배로 적용.
+
+	this->GetMainCamera()->PushLighting(lighting_);
+	//메인카메라에 조명 등록.
+
 
 	//typedef struct D3D11_TEXTURE2D_DESC
 	//{
@@ -48,21 +78,21 @@ void ShaderTestLevel::Start()
 	//	UINT MiscFlags;
 	//} 	D3D11_TEXTURE2D_DESC;
 
-	testTextureDesc_.Width = GameEngineWindow::GetInst().GetScale().UIX();
-	testTextureDesc_.Height = GameEngineWindow::GetInst().GetScale().UIY();
-	testTextureDesc_.MipLevels = 1;
-	testTextureDesc_.ArraySize = 1;
-	testTextureDesc_.Format = DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
-	testTextureDesc_.SampleDesc.Count = 1;
-	testTextureDesc_.SampleDesc.Quality = 0;
-	testTextureDesc_.Usage = D3D11_USAGE_DEFAULT;
-	testTextureDesc_.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
-	testTextureDesc_.CPUAccessFlags = 0;
-	testTextureDesc_.MiscFlags = 0;
+	//testTextureDesc_.Width = GameEngineWindow::GetInst().GetScale().UIX();
+	//testTextureDesc_.Height = GameEngineWindow::GetInst().GetScale().UIY();
+	//testTextureDesc_.MipLevels = 1;
+	//testTextureDesc_.ArraySize = 1;
+	//testTextureDesc_.Format = DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
+	//testTextureDesc_.SampleDesc.Count = 1;
+	//testTextureDesc_.SampleDesc.Quality = 0;
+	//testTextureDesc_.Usage = D3D11_USAGE_DEFAULT;
+	//testTextureDesc_.BindFlags = D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
+	//testTextureDesc_.CPUAccessFlags = 0;
+	//testTextureDesc_.MiscFlags = 0;
 
-	testTexture_ = GameEngineTexture::Create("TestTexture", testTextureDesc_);
-	testTexture_->CreateUnorderedAccessView();
-	testTexture_->CSSetUnorderedAccessView(0);
+	//testTexture_ = GameEngineTexture::Create("TestTexture", testTextureDesc_);
+	//testTexture_->CreateUnorderedAccessView();
+	//testTexture_->CSSetUnorderedAccessView(0);
 
 
 	//typedef struct D3D11_UNORDERED_ACCESS_VIEW_DESC
@@ -87,14 +117,34 @@ void ShaderTestLevel::Start()
 	//GameEngineDevice::GetDevice()->CreateUnorderedAccessView()
 
 
-	int i = 0;
 	//DirectX::XMPlaneIntersectLine();
 	//DirectX::TriangleTests::Intersects();
 }
 
 void ShaderTestLevel::Update(float _deltaTime)
 {
-	
+	static float4 lightingRotation = float4(45.f, 45.f, 0.f);
+
+	if (true == GameEngineInput::GetInst().IsPressed("PlayerLeft"))
+	{
+		lightingRotation += float4(45.f * _deltaTime, 0.f, 0.f);
+	}
+	else if (true == GameEngineInput::GetInst().IsPressed("PlayerRight"))
+	{
+		lightingRotation += float4(-45.f * _deltaTime, 0.f, 0.f);
+	}	
+	else if (true == GameEngineInput::GetInst().IsPressed("PlayerUp"))
+	{
+		lightingRotation += float4(0.f, -45.f * _deltaTime, 0.f);
+	}
+	else if (true == GameEngineInput::GetInst().IsPressed("PlayerDown"))
+	{
+		lightingRotation += float4(0.f, 45.f * _deltaTime, 0.f);
+	}
+
+	lighting_->GetTransform().SetWorldRotation(lightingRotation);
+
+	shaderTestActor_->GetTransform().SetWorldPosition(this->GetMainCamera()->GetTransform().GetWorldPosition());
 }
 
 void ShaderTestLevel::End()
@@ -104,4 +154,5 @@ void ShaderTestLevel::End()
 void ShaderTestLevel::LevelStartEvent()
 {
 	//shaderTestActor_->SetProjectionMode(ProjectionMode::Perspective);
+	this->GetMainCamera()->SetFarZ(100000.f);
 }

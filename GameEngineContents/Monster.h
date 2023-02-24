@@ -300,4 +300,6 @@ private:
 
 	bool isSummoned_;	//true: 소환되서 필드에서 활동하고 있음.
 
+	bool isToRight_;	//true: 몬스터가 오른쪽 보고 있음.
+
 };
