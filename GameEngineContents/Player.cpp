@@ -385,11 +385,11 @@ void Player::LevelUpEvent()
 {
 	if (playerInfo_->exp_ >= playerInfo_->maxExp_)
 	{
-		//GameEngineSound::SoundPlayOneshot("Level_Up.wav");
-		//playerInfo_->exp_ -= playerInfo_->maxExp_;
-		//playerInfo_->maxExp_ *= 1.5;
-		//playerInfo_->level_ += 1;
-		//GetLevel()->CreateActor<SoulCardSelectBox>();
+		GameEngineSound::SoundPlayOneshot("Level_Up.wav");
+		playerInfo_->exp_ -= playerInfo_->maxExp_;
+		playerInfo_->maxExp_ *= 1.5;
+		playerInfo_->level_ += 1;
+		GetLevel()->CreateActor<SoulCardSelectBox>();
 	}
 }
 
