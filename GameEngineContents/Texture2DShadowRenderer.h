@@ -27,7 +27,7 @@ private:
 
 public:	
 	void SetTextureRenderer(GameEngineTextureRenderer* _textureRenderer);
-	void SetShadowAngle(float _angle = 30.f);
+	void SetLightingRotation(float _lightingRotationX, float _lightingRotationY);
 
 private:
 	void Start() override;

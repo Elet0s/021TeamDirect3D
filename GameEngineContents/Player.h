@@ -153,6 +153,7 @@ public:
 	int gold_;
 };
 
+class Texture2DShadowRenderer;
 class PlayerUI;
 class Player: public GameEngineActor
 {
@@ -180,11 +181,6 @@ public:
 	{
 		return *mainPlayer_;
 	}
-
-	//static std::weak_ptr<Player> GetPlayerWeakPtr()
-	//{
-	//	return mainPlayer_;
-	//}
 
 	PlayerInfo& GetPlayerInfo()
 	{
@@ -216,6 +212,9 @@ public:
 	void ResetScore();
 
 	void FlashPlayer(float _deltaTime);
+
+	void SetLightingRotation(float _lightingRotationX, float _lightingRotationY);
+
 public:
 	GameEngineCollision* collision_;
 
@@ -254,6 +253,7 @@ private:
 	PlayerPassiveInfo* playerPassiveInfo_;
 	PlayerUI* playerUi_;
 	GameEngineTextureRenderer* playerRenderer_;
+	Texture2DShadowRenderer* playerShadowRenderer_;
 	static SkillManager* playerSkillManager_;
 
 

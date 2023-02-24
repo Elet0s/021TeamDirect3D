@@ -327,14 +327,16 @@ void Monster::Chaseplayer(float _deltaTime)
 	if (range_.x < 0 && true == isToRight_)
 	{
 		isToRight_ = false;
-		allMonstersRenderer_->GetInstancingUnit(instancingUnitIndex_).SwitchLeftToRight();
-		allShadowsRenderer_->GetInstancingUnit(instancingUnitIndex_).SwitchLeftToRight();
+		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SwitchLeftToRight();
+		allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SwitchLeftToRight();
+		renderOption_.vertexInversion_ = -1;
 	}
 	else if (range_.x > 0 && false == isToRight_)
 	{
 		isToRight_ = true;
-		allMonstersRenderer_->GetInstancingUnit(instancingUnitIndex_).SwitchLeftToRight();
-		allShadowsRenderer_->GetInstancingUnit(instancingUnitIndex_).SwitchLeftToRight();
+		allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SwitchLeftToRight();
+		allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SwitchLeftToRight();
+		renderOption_.vertexInversion_ = 1;
 	}
 
 
@@ -391,7 +393,7 @@ void Monster::Update(float _deltaTime)
 		GameEngineTexture2DArray::Find("Monster")->GetCutData(monsterTextureName_, monsterAnimation_.GetCurrentIndex()),
 		float4::Zero
 	);
-	//allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).Link("Inst_RenderOption", this->renderOption_);
+	allShadowsRenderer_->GetInstancingUnit(this->instancingUnitIndex_).Link("Inst_RenderOption", this->renderOption_);
 	FlashMonster(_deltaTime);
 }
 

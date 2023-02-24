@@ -12,6 +12,7 @@ SkillManager* Player::playerSkillManager_ = new SkillManager();
 
 Player::Player()
 	:playerRenderer_(nullptr),
+	playerShadowRenderer_(nullptr),
 	collision_(nullptr),
 	itemRangeCollision_(nullptr),
 	playerInfo_(nullptr),
@@ -96,8 +97,8 @@ void Player::Start()
 	playerRenderer_->CreateFrameAnimation_CutTexture("PlayerRun", FrameAnimation_Desc("PlayerRun.png", 0, 9, 0.2f));
 	playerRenderer_->ChangeFrameAnimation("PlayerIdle");
 	playerRenderer_->ChangeCamera(CameraOrder::MidCamera);
-	Texture2DShadowRenderer* shadowRenderer = CreateComponent<Texture2DShadowRenderer>();
-	shadowRenderer->SetTextureRenderer(playerRenderer_);
+	playerShadowRenderer_ = CreateComponent<Texture2DShadowRenderer>();
+	playerShadowRenderer_->SetTextureRenderer(playerRenderer_);
 
 	dashRechargeTimer_ = playerInfo_->dashReChargeTime_;
 	//serchCloseMonster_;
@@ -384,11 +385,11 @@ void Player::LevelUpEvent()
 {
 	if (playerInfo_->exp_ >= playerInfo_->maxExp_)
 	{
-		GameEngineSound::SoundPlayOneshot("Level_Up.wav");
-		playerInfo_->exp_ -= playerInfo_->maxExp_;
-		playerInfo_->maxExp_ *= 1.5;
-		playerInfo_->level_ += 1;
-		GetLevel()->CreateActor<SoulCardSelectBox>();
+		//GameEngineSound::SoundPlayOneshot("Level_Up.wav");
+		//playerInfo_->exp_ -= playerInfo_->maxExp_;
+		//playerInfo_->maxExp_ *= 1.5;
+		//playerInfo_->level_ += 1;
+		//GetLevel()->CreateActor<SoulCardSelectBox>();
 	}
 }
 
@@ -407,6 +408,12 @@ void Player::Update(float _deltaTime)
 		playerInfo_->hp_ += playerInfo_->hpRecuvere_;
 		healingTimer_ = 0.f;
 	}
+
+	if (true == GameEngineInput::GetInst().IsDown("Test"))
+	{
+		playerInfo_->hp_ += 75.f;
+	}
+
 	MoveDirectionUpdate(_deltaTime);
 	PlayerDash(_deltaTime);
 	ReChargeDash(_deltaTime);
@@ -496,4 +503,9 @@ void Player::FlashPlayer(float _deltaTime)
 			flash_ = false;
 		}
 	}
+}
+
+void Player::SetLightingRotation(float _lightingRotationX, float _lightingRotationY)
+{
+	playerShadowRenderer_->SetLightingRotation(_lightingRotationX, _lightingRotationY);
 }

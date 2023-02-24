@@ -75,6 +75,6 @@ struct RenderOption
 	int vertexInversion_ = 1;   //그림자용 정점 좌우 뒤집힘 표시 변수. 좌우 뒤집어야 하면 -1 대입.
 	float pivotPosX_ = 0.f;     //피봇포스 X
 	float pivotPosY_ = 0.f;     //피봇포스 Y
-	float shadowAngle_ = 30.f;  //그림자 각도. 기본값 30도.
-	unsigned int bytePad1_ = 0;          //바이트패드.
+	float lightingRotationX_ = 0.f;  //조명 X축 각도. 
+	float lightingRotationY_ = 0.f;  //조명 Y축 각도. 
 };

@@ -69,9 +69,10 @@ Output DeferredInstanceShadowRendering_VSINST(Input _input)
     
     float4 vertexPos = _input.localPosition_;
     vertexPos += Inst_AtlasData[_input.instanceIndex_].pivotPos_;
-    vertexPos.x = (-sin(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) + vertexPos.x);
-    vertexPos.y = cos(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) - 0.5f;
+    vertexPos.x = ((-sin(radians(Inst_RenderOption[_input.instanceIndex_].lightingRotationY_)) * (vertexPos.y + 0.5f) + vertexPos.x)) * Inst_RenderOption[_input.instanceIndex_].vertexInversion_;
     //정점좌표를 shadowAngle_만큼 기울여 준다.
+    
+    vertexPos.y = tan(radians(Inst_RenderOption[_input.instanceIndex_].lightingRotationX_)) * (vertexPos.y + 0.5f) - 0.5f;
     
     result.wvpPosition_ 
         = mul(vertexPos, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
@@ -79,6 +80,12 @@ Output DeferredInstanceShadowRendering_VSINST(Input _input)
     
     result.shadowPosition_ = result.wvpPosition_;
     //그림자의 투영공간 내 위치 전달.
+    
+    if (-1 == Inst_RenderOption[_input.instanceIndex_].vertexInversion_)
+    {
+        _input.texcoord_.x = 1.f - _input.texcoord_.x;
+        //오브젝트가 좌우반전되면 texcoord도 좌우반전해서 그려지게 한다.
+    }
     
     result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.x)
         + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.x;

@@ -34,6 +34,8 @@ class GameItemObjectManager;
 class GameEngineRandom;
 class Monster: public GameEngineActor
 {
+	friend class TestLevel;
+
 	static std::vector<Monster*> allMonsters_;
 
 protected:
@@ -153,7 +155,7 @@ public:
 				float4(cameraX - 1280, cameraY - 720),
 				float4(cameraX + 1280, cameraY + 720)
 			);
-			monsterPosition_.z = -199.f;
+			monsterPosition_.z = -200.f;
 
 			if (monsterPosition_.x > cameraX + 640 || monsterPosition_.x < cameraX - 640)
 			{

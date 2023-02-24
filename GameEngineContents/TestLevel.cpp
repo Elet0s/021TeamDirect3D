@@ -58,10 +58,9 @@ void TestLevel::Start()
 	fieldRenderingActor_->GetTransform().SetWorldScale(float4::White);
 	fieldRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
 
-	//if (true == Player::GetPlayerWeakPtr().expired())
-	//{
-		Player::CreatePlayer(this, { 0, 0,-219 });
-	//}
+
+	Player::CreatePlayer(this, { 0, 0, -220 });
+
 
 	PlayerUI* NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
 	
@@ -119,24 +118,60 @@ void TestLevel::Start()
 	CreateActor<DashUI>();
 }
 
-void TestLevel::Update(float _DeltaTime)
+void TestLevel::Update(float _deltaTime)
 {						
-	stageManagerTimer_ += _DeltaTime;
+	stageManagerTimer_ += _deltaTime;
 	StageMonsterManager();
 
 	PlayerMoveCamera();
 	MouseMoveCamera();
+
+	Player::GetPlayerInst().SetLightingRotation(
+		testLevelLighting_->GetTransform().GetWorldRotation().x,
+		testLevelLighting_->GetTransform().GetWorldRotation().y
+	);
 
 	this->GetCameraActor(CameraOrder::MidCamera)->GetTransform().SetWorldPosition(
 		GetMainCameraActor()->GetTransform().GetWorldPosition()
 	);
 
 	fieldRenderingActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
+	fieldRenderingActor_->SetLightingRotation(
+		testLevelLighting_->GetTransform().GetWorldRotation().x,
+		testLevelLighting_->GetTransform().GetWorldRotation().y
+	);
 
 	mousePointer_->UpdatePivotPosition(Player::GetPlayerInst().GetTransform().GetWorldPosition());
 
-	//mousePointer_->ChangeMousePointerRenderer(true);
+	for (Monster* const singleMonster : Monster::allMonsters_)
+	{
+		if (true == singleMonster->isSummoned_)
+		{
+			singleMonster->renderOption_.lightingRotationX_ = testLevelLighting_->GetTransform().GetWorldRotation().x;
+			singleMonster->renderOption_.lightingRotationY_ = testLevelLighting_->GetTransform().GetWorldRotation().y;
+		}
+	}
 
+	//static float4 lightingRotation = float4(45.f, 45.f, 0.f);
+
+	//if (true == GameEngineInput::GetInst().IsPressed("TestD"))
+	//{
+	//	lightingRotation += float4(45.f * _deltaTime, 0.f, 0.f);
+	//}
+	//else if (true == GameEngineInput::GetInst().IsPressed("TestU"))
+	//{
+	//	lightingRotation += float4(-45.f * _deltaTime, 0.f, 0.f);
+	//}
+	//else if (true == GameEngineInput::GetInst().IsPressed("TestL"))
+	//{
+	//	lightingRotation += float4(0.f, -45.f * _deltaTime, 0.f);
+	//}
+	//else if (true == GameEngineInput::GetInst().IsPressed("TestR"))
+	//{
+	//	lightingRotation += float4(0.f, 45.f * _deltaTime, 0.f);
+	//}
+
+	//testLevelLighting_->GetTransform().SetWorldRotation(lightingRotation);
 }
 
 void TestLevel::LevelStartEvent()

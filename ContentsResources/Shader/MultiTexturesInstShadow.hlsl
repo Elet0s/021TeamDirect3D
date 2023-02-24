@@ -63,10 +63,10 @@ Output MultiTexturesInstShadow_VSINST(Input _input)
     vertexPos += Inst_AtlasData[_input.instanceIndex_].pivotPos_;
     
     
-    vertexPos.x = (-sin(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) + vertexPos.x) * Inst_RenderOption[_input.instanceIndex_].vertexInversion_;
+    vertexPos.x = (-sin(radians(Inst_RenderOption[_input.instanceIndex_].lightingRotationY_)) * (vertexPos.y + 0.5f) + vertexPos.x) * Inst_RenderOption[_input.instanceIndex_].vertexInversion_;
     //오브젝트가 좌우반전되면 -1을 곱해서 그림자는 다시한번 좌우반전시킨다.
 
-    vertexPos.y = cos(radians(Inst_RenderOption[_input.instanceIndex_].shadowAngle_)) * (vertexPos.y + 0.5f) - 0.5f;
+    vertexPos.y = tan(radians(Inst_RenderOption[_input.instanceIndex_].lightingRotationX_)) * (vertexPos.y + 0.5f) - 0.5f;
     
     result.wvpPosition_ = mul(vertexPos, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
     

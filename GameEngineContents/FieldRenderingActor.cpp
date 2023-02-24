@@ -11,7 +11,6 @@ FieldRenderingActor::FieldRenderingActor()
 	totalFieldSize_(float4::Zero)
 {
 	renderOption_.vertexInversion_ = 1;
-	renderOption_.shadowAngle_ = 30.f;
 }
 
 FieldRenderingActor::~FieldRenderingActor()
@@ -145,11 +144,7 @@ void FieldRenderingActor::InitializeFieldRenderer(size_t _objectInWindowCount)
 	);
 	fieldObjectShadowRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 	fieldObjectShadowRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
-	for (size_t i = 0; i < fieldObjectShadowRenderer_->GetUnitCount(); ++i)
-	{
-		fieldObjectShadowRenderer_->GetInstancingUnit(i).Link("Inst_RenderOption", this->renderOption_);
-		//필드 오브젝트와 그림자들은 위치정보 외에는 변동사항이 없으므로 한개 렌더옵션을 모든 그림자 인스턴싱유닛에 연결한다.
-	}
+
 
 	int unitIndex = 0;
 	for (int y = 0; y < tileCountXY_.IY(); ++y)
@@ -264,7 +259,7 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 			_thisWorldPosition.x - singleData->worldPosition_.x,
 			singleData->worldPosition_.y - _thisWorldPosition.y
 		};
-		singleData->worldPosition_.z = (worldPosXYSum.x + worldPosXYSum.y) * 0.01f - 200.f;
+		singleData->worldPosition_.z = (worldPosXYSum.x + worldPosXYSum.y) * 0.01f - 180.f;
 		//화면상 오른쪽 아래 있는 오브젝트의 z값을 작게, 왼쪽 위에 있는 오브젝트의 z값을 크게 해서
 		// 오른쪽 아래에 있는 그림자가 왼쪽 위에 있는 오브젝트를 덮어 씌우게 깊이값을 조정한다
 		// 그래서 오른쪽 아래에서 해가 비치는 것 같은 효과를 준다.
@@ -321,6 +316,9 @@ void FieldRenderingActor::UpdateFieldObjectInfos(const float4& _thisWorldPositio
 
 		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).SetColorTextureIndex(0);
 		//필드오브젝트 그림자 렌더러에도 인덱스만 다른 같은 절차를 반복한다.
+
+		fieldObjectShadowRenderer_->GetInstancingUnit(objectIndex).Link("Inst_RenderOption", this->renderOption_);
+		
 
 		++objectIndex;
 	}

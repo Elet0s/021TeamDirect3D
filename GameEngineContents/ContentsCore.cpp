@@ -31,6 +31,13 @@ void ContentsCore::Start()
 		GameEngineInput::GetInst().CreateKey("Click", VK_LBUTTON);
 	}
 
+	GameEngineInput::GetInst().CreateKey("TestL", 'J');
+	GameEngineInput::GetInst().CreateKey("TestR", 'L');
+	GameEngineInput::GetInst().CreateKey("TestU", 'I');
+	GameEngineInput::GetInst().CreateKey("TestD", 'K');
+	GameEngineInput::GetInst().CreateKey("Test", 'T');
+
+
 	LoadContentsResource();
 	LoadContentsShader();
 

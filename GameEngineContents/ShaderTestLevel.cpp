@@ -125,24 +125,30 @@ void ShaderTestLevel::Update(float _deltaTime)
 {
 	static float4 lightingRotation = float4(45.f, 45.f, 0.f);
 
-	if (true == GameEngineInput::GetInst().IsPressed("PlayerLeft"))
+	if (true == GameEngineInput::GetInst().IsPressed("TestD"))
 	{
 		lightingRotation += float4(45.f * _deltaTime, 0.f, 0.f);
 	}
-	else if (true == GameEngineInput::GetInst().IsPressed("PlayerRight"))
+	else if (true == GameEngineInput::GetInst().IsPressed("TestU"))
 	{
 		lightingRotation += float4(-45.f * _deltaTime, 0.f, 0.f);
-	}	
-	else if (true == GameEngineInput::GetInst().IsPressed("PlayerUp"))
+	}
+	else if (true == GameEngineInput::GetInst().IsPressed("TestL"))
 	{
 		lightingRotation += float4(0.f, -45.f * _deltaTime, 0.f);
 	}
-	else if (true == GameEngineInput::GetInst().IsPressed("PlayerDown"))
+	else if (true == GameEngineInput::GetInst().IsPressed("TestR"))
 	{
 		lightingRotation += float4(0.f, 45.f * _deltaTime, 0.f);
 	}
 
 	lighting_->GetTransform().SetWorldRotation(lightingRotation);
+
+	shaderTestActor_->GetTransform().SetWorldPosition(GetMainCameraActor()->GetTransform().GetWorldPosition());
+	shaderTestActor_->SetLightingRotation(
+		lighting_->GetTransform().GetWorldRotation().x,
+		lighting_->GetTransform().GetWorldRotation().y
+	);
 
 	shaderTestActor_->GetTransform().SetWorldPosition(this->GetMainCamera()->GetTransform().GetWorldPosition());
 }

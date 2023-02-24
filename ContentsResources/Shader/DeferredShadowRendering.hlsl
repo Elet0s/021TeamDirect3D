@@ -28,10 +28,10 @@ Output DeferredShadowRendering_VS(Input _input)
 
     float4 vertexPos = _input.localPosition_;
     vertexPos += pivotPos_;
-    vertexPos.x = (-sin(radians(shadowAngle_)) * (vertexPos.y + 0.5f) + vertexPos.x) * vertexInversion_;
+    vertexPos.x = (-sin(radians(lightingRotationY_)) * (vertexPos.y + 0.5f) + vertexPos.x) * vertexInversion_;
     //오브젝트가 좌우반전되면 -1을 곱해서 그림자는 다시한번 좌우반전시킨다.
 
-    vertexPos.y = cos(radians(shadowAngle_)) * (vertexPos.y + 0.5f) - 0.5f;
+    vertexPos.y = tan(radians(lightingRotationX_)) * (vertexPos.y + 0.5f) - 0.5f;
     
     result.wvpPosition_ = mul(vertexPos, worldViewProjectionMatrix_); //WVP행렬 적용.
     

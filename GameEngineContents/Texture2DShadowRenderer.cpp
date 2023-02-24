@@ -73,8 +73,9 @@ void Texture2DShadowRenderer::SetTextureRenderer(GameEngineTextureRenderer* _tex
 	}
 }
 
-void Texture2DShadowRenderer::SetShadowAngle(float _angle /*= 30.f*/)
+void Texture2DShadowRenderer::SetLightingRotation(float _lightingRotationX, float _lightingRotationY)
 {
-	renderOptionInst_.shadowAngle_ = _angle;	//그림자 기본값 30도.
+	renderOptionInst_.lightingRotationX_ = _lightingRotationX;	
+	renderOptionInst_.lightingRotationY_ = _lightingRotationY;	
 	GetShaderResourceHelper().SetConstantBuffer_Link("RenderOption", renderOptionInst_);
 }

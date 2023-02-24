@@ -47,6 +47,12 @@ public:
 		float _diffusionDegree = 1.f	//필드오브젝트 확산도.
 	);
 
+	inline void SetLightingRotation(float _lightingRotationX, float _lightingRotationY)
+	{
+		renderOption_.lightingRotationX_ = _lightingRotationX;
+		renderOption_.lightingRotationY_ = _lightingRotationY;
+	}
+
 private:
 	//필드렌더러, 필드오브젝트 그림자 렌더러 초기화.
 	void InitializeFieldRenderer(size_t _objectInWindowCount);

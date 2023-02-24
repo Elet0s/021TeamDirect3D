@@ -6,8 +6,8 @@ cbuffer RenderOption : register(b10)
     int vertexInversion_;   //그림자용 정점 좌우 뒤집힘 표시 변수. 좌우 뒤집어야 하면 -1 대입.
     float pivotPosX_;       //피봇포스 X
     float pivotPosY_;       //피봇포스 Y
-    float shadowAngle_;     //그림자 각도.
-    uint bytePad1_;
+    float lightingRotationX_; //조명 X축 각도. 기본값 30도.
+    float lightingRotationY_; //조명 Y축 각도. 기본값 0도.
 }
 
 struct InstRenderOption
@@ -18,6 +18,6 @@ struct InstRenderOption
     int vertexInversion_; //그림자용 정점 좌우 뒤집힘 표시 변수. 좌우 뒤집어야 하면 -1 대입.
     float pivotPosX_; //피봇포스 X.
     float pivotPosY_; //피봇포스 Y.
-    float shadowAngle_;
-    uint bytePad1_;
+    float lightingRotationX_; //조명 X축 각도.
+    float lightingRotationY_; //조명 Y축 각도.
 };
