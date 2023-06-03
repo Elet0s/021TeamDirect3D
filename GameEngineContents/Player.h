@@ -1,12 +1,12 @@
 #pragma once
 #include "SkillManager.h"
 
-// ÇÃ·¹ÀÌ¾î°¡ °¡Áø ±¸Á¶Ã¼ÀÌ³ª ÆĞ½Ãºê°¡ °¡Áö°í ÀÖ´Â ½ºÅİ ¸ğÀ½
+// í”Œë ˆì´ì–´ê°€ ê°€ì§„ êµ¬ì¡°ì²´ì´ë‚˜ íŒ¨ì‹œë¸Œê°€ ê°€ì§€ê³  ìˆëŠ” ìŠ¤í…Ÿ ëª¨ìŒ
 struct PlayerPassiveInfo
 {
 public:
 	PlayerPassiveInfo()
-	: atkMultiple_Per(100.f),
+		: atkMultiple_Per(100.f),
 		defMul_Per(100.f),
 		passMul_Per(0.f),
 		attackSpeed_Per(100.f),
@@ -37,7 +37,7 @@ public:
 
 public:
 	float hpMax_Per;
-	float atkMultiple_Per; // ÆÛ¼¾Æ® ÇÕ
+	float atkMultiple_Per; // í¼ì„¼íŠ¸ í•©
 	float defMul_Per;   
 	float passMul_Per;
 	float attackSpeed_Per;
@@ -47,16 +47,16 @@ public:
 	float speed_Per;
 
 	float hpMax_;
-	float atkMultiple_;  // ÆÛ¼¾Æ® °ö
+	float atkMultiple_;  // í¼ì„¼íŠ¸ ê³±
 	float defMul_;
 	float passMul_;
 	float attackSpeed_;
 	float projectileSize_;
 	float projectileDuration_;
 	float projectileSpeed_;
-	
+
 	float hpMax_Result;
-	float atkMultiple_Result;	// ÇÕ°ú °öÀ» °öÇÑ °ª ¹«±âµ¥¹ÌÁö¿¡ °öÇØ¼­ »ç¿ë
+	float atkMultiple_Result;	// í•©ê³¼ ê³±ì„ ê³±í•œ ê°’ ë¬´ê¸°ë°ë¯¸ì§€ì— ê³±í•´ì„œ ì‚¬ìš©
 	float defMul_Result;
 	float passMul_Result;
 	float attackSpeed_Result;
@@ -124,7 +124,7 @@ public:
 	float goldMultiple_;
 	float expMultiple_;
 	int dashFullCharge_;
-	int dashCount_;  // ÇöÀç ÃæÀüµÈ ´ë½Ã ¼ö
+	int dashCount_;  // í˜„ì¬ ì¶©ì „ëœ ëŒ€ì‹œ ìˆ˜
 	float dashReChargeTime_;
 	float dashReUseTime_;
 	int dashReChargeCount_;
@@ -158,10 +158,10 @@ class PlayerUI;
 class Player: public GameEngineActor
 {
 	static Player* mainPlayer_;
-	//ÇÃ·¹ÀÌ¾î¸¦ Àü¿ªÀ¸·Î ¸¸µç ÀÌÀ¯: ÀÌ °ÔÀÓ Æ¯¼º»ó ¿ùµå¸Ê°ú ÀüÅõ¸Ê ¾çÂÊ¿¡¼­ °øÀ¯ÇØ¾ß ÇÏ´Â ÇÃ·¹ÀÌ¾î Á¤º¸°¡ ¸¹Àºµ¥,
-	// ±×°É ±»ÀÌ ÇÃ·¹ÀÌ¾î¿Í ºĞ¸®µÈ ±¸Á¶·Î µû·Î ¸¸µå´À´Ï ÇÃ·¹ÀÌ¾î ÅëÂ°·Î Àü¿ªÀ¸·Î »ı¼ºÇÏ´Â°Ô ´õ ÆíÇÒ °Í °°¾Æ¼­.
+	//í”Œë ˆì´ì–´ë¥¼ ì „ì—­ìœ¼ë¡œ ë§Œë“  ì´ìœ : ì´ ê²Œì„ íŠ¹ì„±ìƒ ì›”ë“œë§µê³¼ ì „íˆ¬ë§µ ì–‘ìª½ì—ì„œ ê³µìœ í•´ì•¼ í•˜ëŠ” í”Œë ˆì´ì–´ ì •ë³´ê°€ ë§ì€ë°,
+	// ê·¸ê±¸ êµ³ì´ í”Œë ˆì´ì–´ì™€ ë¶„ë¦¬ëœ êµ¬ì¡°ë¡œ ë”°ë¡œ ë§Œë“œëŠë‹ˆ í”Œë ˆì´ì–´ í†µì§¸ë¡œ ì „ì—­ìœ¼ë¡œ ìƒì„±í•˜ëŠ”ê²Œ ë” í¸í•  ê²ƒ ê°™ì•„ì„œ.
 
-	static bool isInitialized_;	//true: ÇÃ·¹ÀÌ¾î »ı¼º ¹× ÃÊ±âÈ­ ³¡³².
+	static bool isInitialized_;	//true: í”Œë ˆì´ì–´ ìƒì„± ë° ì´ˆê¸°í™” ëë‚¨.
 
 public:
 	Player();
@@ -173,7 +173,7 @@ public:
 	Player& operator=(Player&& _other) = delete;
 
 public:
-	//ÇÃ·¹ÀÌ¾î °ø½Ä »ı¼º ÇÔ¼ö.
+	//í”Œë ˆì´ì–´ ê³µì‹ ìƒì„± í•¨ìˆ˜.
 	static void CreatePlayer(GameEngineLevel* _thisLevel,const float4& _initPosition,const std::string_view& _playerName = "MainPlayer");
 
 
@@ -197,7 +197,7 @@ public:
 		//return CastThis<Player>()->playerSkillManager_;
 		if (nullptr == this)
 		{
-			MsgBoxAssert("ÇÃ·¹ÀÌ¾î°¡ ¾ø½À´Ï´Ù.");
+			MsgBoxAssert("í”Œë ˆì´ì–´ê°€ ì—†ìŠµë‹ˆë‹¤.");
 			return nullptr;
 		}
 		else
@@ -234,8 +234,8 @@ protected:
 
 	void ReChargeDash(float _deltaTime);
 
-	void PlayerDeathEvent();//hp 0ÀÌÇÏ¸é offÇÏ°í ÆÄÆ¼Å¬ÀÌº¥Æ®
-	void LevelUpEvent();//°æÇèÄ¡ ¹Ş°í ÀüºÎÂ÷¸é ÃÊ±âÈ­ÇØÁÖ°í ·¹º§¾÷ÇØÁÖ´ÂºÎºĞ
+	void PlayerDeathEvent();//hp 0ì´í•˜ë©´ offí•˜ê³  íŒŒí‹°í´ì´ë²¤íŠ¸
+	void LevelUpEvent();//ê²½í—˜ì¹˜ ë°›ê³  ì „ë¶€ì°¨ë©´ ì´ˆê¸°í™”í•´ì£¼ê³  ë ˆë²¨ì—…í•´ì£¼ëŠ”ë¶€ë¶„
 
 	void ColCheak();
 private:

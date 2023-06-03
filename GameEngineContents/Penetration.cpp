@@ -4,7 +4,7 @@
 
 Penetration::Penetration() 
 {
-	name_ = "°üÅë";
+	name_ = "ê´€í†µ";
 	SetName(std::string_view("Penetration"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 3;
@@ -24,8 +24,8 @@ void Penetration::Init()
 	std::string sAttackMultiple = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
 	std::string sAttackMultipleNext = std::to_string(PlayerPInfo_.atkMultiple_Result + 4.0f).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result + 4.0f).find(".")) + "%";
 
-	etc_ = sPassProjectile_ + " -> " + sPassProjectile_Next + " Åõ»çÃ¼\n°üÅë\n"
-		+ sAttackMultiple + " -> " + sAttackMultipleNext + " ÇÇÇØ ¹è¼ö ";
+	etc_ = sPassProjectile_ + " -> " + sPassProjectile_Next + " íˆ¬ì‚¬ì²´\nê´€í†µ\n"
+		+ sAttackMultiple + " -> " + sAttackMultipleNext + " í”¼í•´ ë°°ìˆ˜ ";
 
 }
 

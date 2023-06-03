@@ -21,12 +21,12 @@ public:
 
         if (nullptr == soundSystem_)
         {
-            MsgBoxAssert("»ç¿îµå½Ã½ºÅÛ »ý¼º¿¡ ½ÇÆÐÇß½À´Ï´Ù.");
+            MsgBoxAssert("ì‚¬ìš´ë“œì‹œìŠ¤í…œ ìƒì„±ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
             return;
         }
         if (FMOD_OK != soundSystem_->init(32, FMOD_DEFAULT, nullptr))
         {
-            MsgBoxAssert("»ç¿îµå½Ã½ºÅÛ ÃÊ±âÈ­¿¡ ½ÇÆÐÇß½À´Ï´Ù.");
+            MsgBoxAssert("ì‚¬ìš´ë“œì‹œìŠ¤í…œ ì´ˆê¸°í™”ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
             return;
         }
     }
@@ -50,7 +50,7 @@ GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string_view& 
     GameEngineSound* findSound = GameEngineSound::FindSingleResource(uppercaseSoundName);
     if (nullptr == findSound)
     {
-        MsgBoxAssertString(std::string(_name) + ": ±×·± ÀÌ¸§ÀÇ »ç¿îµå°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        MsgBoxAssertString(std::string(_name) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì‚¬ìš´ë“œê°€ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         return GameEngineSoundPlayer();
     }
 
@@ -69,7 +69,7 @@ void GameEngineSound::SoundPlayOneshot(const std::string_view& _name, int _loopC
     GameEngineSound* findSound = GameEngineSound::FindSingleResource(uppercaseSoundName);
     if (nullptr == findSound)
     {
-        MsgBoxAssertString(std::string(_name) + ": ±×·± ÀÌ¸§ÀÇ »ç¿îµå°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        MsgBoxAssertString(std::string(_name) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì‚¬ìš´ë“œê°€ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         return;
     }
 
@@ -107,7 +107,7 @@ GameEngineSound* GameEngineSound::LoadResource(const std::string_view& _path, co
     {
         delete newSound;
         newSound = nullptr;
-        MsgBoxAssertString(std::string(_name) + ": ±×·± ÀÌ¸§ÀÇ »ç¿îµå°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        MsgBoxAssertString(std::string(_name) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì‚¬ìš´ë“œê°€ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         return nullptr;
     }
 
@@ -152,7 +152,7 @@ bool GameEngineSound::Load(const std::string_view& _path)
 {
     if (FMOD_OK != soundSystem_->createSound(_path.data(), FMOD_LOOP_NORMAL, nullptr, &sound_))
     {
-        MsgBoxAssert("»ç¿îµå¸¦ ºÒ·¯¿À´Âµ¥ ½ÇÆÐÇß½À´Ï´Ù.");
+        MsgBoxAssert("ì‚¬ìš´ë“œë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
         return false;
     }
 
@@ -187,7 +187,7 @@ void GameEngineSoundPlayer::Stop()
 {
     if (nullptr == controlHandle_)
     {
-        MsgBoxAssert("»ç¿îµå ÄÁÆ®·Ñ Ã¤³Î¿¡ ¹®Á¦°¡ ÀÖ½À´Ï´Ù.");
+        MsgBoxAssert("ì‚¬ìš´ë“œ ì»¨íŠ¸ë¡¤ ì±„ë„ì— ë¬¸ì œê°€ ìžˆìŠµë‹ˆë‹¤.");
         return;
     }
     controlHandle_->stop();
@@ -197,7 +197,7 @@ void GameEngineSoundPlayer::PlaySpeed(float _speed)
 {
     if (nullptr == controlHandle_)
     {
-        MsgBoxAssert("»ç¿îµå ÄÁÆ®·Ñ Ã¤³Î¿¡ ¹®Á¦°¡ ÀÖ½À´Ï´Ù.");
+        MsgBoxAssert("ì‚¬ìš´ë“œ ì»¨íŠ¸ë¡¤ ì±„ë„ì— ë¬¸ì œê°€ ìžˆìŠµë‹ˆë‹¤.");
         return;
     }
     controlHandle_->setPitch(_speed);
@@ -207,7 +207,7 @@ void GameEngineSoundPlayer::Volume(float _value)
 {
     if (nullptr == controlHandle_)
     {
-        MsgBoxAssert("»ç¿îµå ÄÁÆ®·Ñ Ã¤³Î¿¡ ¹®Á¦°¡ ÀÖ½À´Ï´Ù.");
+        MsgBoxAssert("ì‚¬ìš´ë“œ ì»¨íŠ¸ë¡¤ ì±„ë„ì— ë¬¸ì œê°€ ìžˆìŠµë‹ˆë‹¤.");
         return;
     }
     controlHandle_->setVolume(_value);

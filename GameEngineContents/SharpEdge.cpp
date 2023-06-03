@@ -4,7 +4,7 @@
 
 SharpEdge::SharpEdge() 
 {
-	name_ = "³¯Ä«·Î¿î Ä®³¯";
+	name_ = "ë‚ ì¹´ë¡œìš´ ì¹¼ë‚ ";
 	SetName(std::string_view("SharpEdge"));
 	maxLevel_ = 6;
 	myRank_ = Rank::Normal;
@@ -20,8 +20,8 @@ void SharpEdge::Init()
 
 	std::string sDamege = std::to_string(PlayerInfo_.atk_).substr(0, std::to_string(PlayerInfo_.atk_).find(".") + 3);
 	std::string sDamegeNext = std::to_string(PlayerInfo_.atk_ + 0.25f).substr(0, std::to_string(PlayerInfo_.atk_ + 0.25f).find(".") + 3);
-		
-	etc_ = sDamege + "-> " + sDamegeNext + "±âº» ÇÇÇØ";
+
+	etc_ = sDamege + "-> " + sDamegeNext + "ê¸°ë³¸ í”¼í•´";
 }
 
 void SharpEdge::Effect()

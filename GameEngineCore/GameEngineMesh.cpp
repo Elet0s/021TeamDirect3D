@@ -51,7 +51,7 @@ void GameEngineMesh::SetVertexBuffer_InputAssembler1(const std::string_view& _ve
 
     if (nullptr == vertexBuffer_)
     {
-        MsgBoxAssertString(std::string(_vertexBufferName) + ": ±×·± ÀÌ¸§ÀÇ ¹öÅØ½º¹öÆÛ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        MsgBoxAssertString(std::string(_vertexBufferName) + ": ê·¸ëŸ° ì´ë¦„ì˜ ë²„í…ìŠ¤ë²„í¼ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         return;
     }
 }
@@ -60,7 +60,7 @@ void GameEngineMesh::SetVertexBuffer_InputAssembler1(GameEngineVertexBuffer* _ve
 {
     if (nullptr == _vertexBuffer)
     {
-        MsgBoxAssert("¹öÅØ½º¹öÆÛ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        MsgBoxAssert("ë²„í…ìŠ¤ë²„í¼ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         return;
     }
 
@@ -73,7 +73,7 @@ void GameEngineMesh::SetIndexBuffer_InputAssembler2(const std::string_view& _ind
 
     if (nullptr == indexBuffer_)
     {
-        MsgBoxAssertString(std::string(_indexBufferName) + ": ±×·± ÀÌ¸§ÀÇ ÀÎµ¦½º¹öÆÛ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        MsgBoxAssertString(std::string(_indexBufferName) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì¸ë±ìŠ¤ë²„í¼ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         return;
     }
 }
@@ -82,7 +82,7 @@ void GameEngineMesh::SetIndexBuffer_InputAssembler2(GameEngineIndexBuffer* _inde
 {
     if (nullptr == _indexBuffer)
     {
-        MsgBoxAssert("ÀÎµ¦½º¹öÆÛ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        MsgBoxAssert("ì¸ë±ìŠ¤ë²„í¼ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         return;
     }
 
@@ -98,9 +98,9 @@ void GameEngineMesh::Set()
 void GameEngineMesh::SetInstancingBuffer(GameEngineInstancingBuffer* _instancingBuffer)
 {
     ID3D11Buffer* ArrBuffer[2] = { this->vertexBuffer_->GetBuffer(), _instancingBuffer->GetBuffer() };
-    //Á¤Á¡¹öÆÛ¿Í ÀÎ½ºÅÏ½Ì¹öÆÛ°¡ ´ã±ä ¹è¿­.
-    //Á¤Á¡ n°³ ´ÜÀ§·Î ¹­¾î¼­ ÀÎ½ºÅÏ½º¸¦ ±¸¼ºÇØ¼­ Á¤Á¡¼ÎÀÌ´õ·Î ³Ñ°ÜÁà¾ß ÇÏ¹Ç·Î 
-    // Á¤Á¡º° Á¤º¸¿Í ÀÎ½ºÅÏ½ºº° Á¤º¸µéÀ» ÇÔ²² ³Ö¾îÁØ´Ù.
+    //ì •ì ë²„í¼ì™€ ì¸ìŠ¤í„´ì‹±ë²„í¼ê°€ ë‹´ê¸´ ë°°ì—´.
+    //ì •ì  nê°œ ë‹¨ìœ„ë¡œ ë¬¶ì–´ì„œ ì¸ìŠ¤í„´ìŠ¤ë¥¼ êµ¬ì„±í•´ì„œ ì •ì ì…°ì´ë”ë¡œ ë„˜ê²¨ì¤˜ì•¼ í•˜ë¯€ë¡œ 
+    // ì •ì ë³„ ì •ë³´ì™€ ì¸ìŠ¤í„´ìŠ¤ë³„ ì •ë³´ë“¤ì„ í•¨ê»˜ ë„£ì–´ì¤€ë‹¤.
 
 
     UINT ArrVertexSize[2] = {
@@ -109,7 +109,7 @@ void GameEngineMesh::SetInstancingBuffer(GameEngineInstancingBuffer* _instancing
     };
 
     UINT ArrOffset[2] = { 0, 0 };
-    //°¢ ¹öÆÛÀÇ ¿ÀÇÁ¼Â ¹ÙÀÌÆ®.
+    //ê° ë²„í¼ì˜ ì˜¤í”„ì…‹ ë°”ì´íŠ¸.
 
     GameEngineDevice::GetDC()->IASetVertexBuffers(
         0,
@@ -124,25 +124,25 @@ void GameEngineMesh::SetInstancingBuffer(GameEngineInstancingBuffer* _instancing
 
 void GameEngineMesh::Render()
 {
-    GameEngineDevice::GetDC()->DrawIndexed(	//ÀÎµ¦½º¿¡ ¿¬µ¿µÈ Á¤Á¡µéÀ» ±×¸®´Â ÇÔ¼ö.
-        this->indexBuffer_->GetIndexCount(),//ÀÎµ¦½º °³¼ö.
-        0,									//ÀĞ±â ½ÃÀÛÇÒ ÀÎµ¦½º ¹öÆÛÀÇ ¿ø¼Ò ¹øÈ£. 
-        0									//ÀĞ±â ½ÃÀÛÇÒ ¹öÅØ½º ¹öÆÛÀÇ ¿ø¼Ò ¹øÈ£. 
+    GameEngineDevice::GetDC()->DrawIndexed(	//ì¸ë±ìŠ¤ì— ì—°ë™ëœ ì •ì ë“¤ì„ ê·¸ë¦¬ëŠ” í•¨ìˆ˜.
+        this->indexBuffer_->GetIndexCount(),//ì¸ë±ìŠ¤ ê°œìˆ˜.
+        0,									//ì½ê¸° ì‹œì‘í•  ì¸ë±ìŠ¤ ë²„í¼ì˜ ì›ì†Œ ë²ˆí˜¸. 
+        0									//ì½ê¸° ì‹œì‘í•  ë²„í…ìŠ¤ ë²„í¼ì˜ ì›ì†Œ ë²ˆí˜¸. 
     );
-    //³»°¡ »ç¿ëÇÏ·Á´Â Ä«¸Ş¶ó ·»´õÅ¸°ÙÀÌ ¹ºÁö ¾î¶»°Ô ¾Ë°í °Å±â´Ù ±×¸®´Â°ÅÁö??
-    //->Ä«¸Ş¶ó ·»´õÇÏ±â Àü¿¡ Ä«¸Ş¶óÀÇ ·»´õÅ¸°ÙÀ» ¸ÕÀú µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®¿¡ ¼¼ÆÃÇÏ°í, 
-    // ±× µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®¸¦ ÅëÇØ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ °úÁ¤À» ÁøÇàÇÏ¹Ç·Î ¿©±â¼­ ·»´õÅ¸°ÙÀ» ÁöÁ¤ÇØÁÖÁö ¾Ê¾Æµµ 
-    // ³»°¡ ¿øÇÏ´Â Ä«¸Ş¶óÀÇ ·»´õÅ¸°Ù¿¡ ·»´õÇÒ ¼ö ÀÖ°Ô µÈ´Ù.
+    //ë‚´ê°€ ì‚¬ìš©í•˜ë ¤ëŠ” ì¹´ë©”ë¼ ë Œë”íƒ€ê²Ÿì´ ë­”ì§€ ì–´ë–»ê²Œ ì•Œê³  ê±°ê¸°ë‹¤ ê·¸ë¦¬ëŠ”ê±°ì§€??
+    //->ì¹´ë©”ë¼ ë Œë”í•˜ê¸° ì „ì— ì¹´ë©”ë¼ì˜ ë Œë”íƒ€ê²Ÿì„ ë¨¼ì € ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì— ì„¸íŒ…í•˜ê³ , 
+    // ê·¸ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ë¥¼ í†µí•´ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ ê³¼ì •ì„ ì§„í–‰í•˜ë¯€ë¡œ ì—¬ê¸°ì„œ ë Œë”íƒ€ê²Ÿì„ ì§€ì •í•´ì£¼ì§€ ì•Šì•„ë„ 
+    // ë‚´ê°€ ì›í•˜ëŠ” ì¹´ë©”ë¼ì˜ ë Œë”íƒ€ê²Ÿì— ë Œë”í•  ìˆ˜ ìˆê²Œ ëœë‹¤.
 }
 
 void GameEngineMesh::RenderInstances(size_t _instancingCount)
 {
-    GameEngineDevice::GetDC()->DrawIndexedInstanced(    //ÀÎµ¦½º¿¡ ¿¬µ¿µÈ Á¤Á¡µéÀ» ±×¸®´Â ÀÎ½ºÅÏ½º ¼ö¸¸Å­ ±×¸®´Â ÇÔ¼ö.
-        this->indexBuffer_->GetIndexCount(),            //ÀÎµ¦½º °³¼ö.
-        static_cast<UINT>(_instancingCount),            //ÀÎ½ºÅÏ½º ¼ö.
-        0,                                              //GPU°¡ ÀĞ±â ½ÃÀÛÇÒ ÀÎµ¦½º ¹öÆÛÀÇ ¿ø¼Ò ¹øÈ£.
-        0,                                              //GPU°¡ ÀĞ±â ½ÃÀÛÇÒ ¹öÅØ½º ¹öÆÛÀÇ ¿ø¼Ò ¹øÈ£.
-        0                                               //GPU°¡ ÀĞ±â ½ÃÀÛÇÒ ÀÎ½ºÅÏ½ºÀÇ ¹øÈ£.
+    GameEngineDevice::GetDC()->DrawIndexedInstanced(    //ì¸ë±ìŠ¤ì— ì—°ë™ëœ ì •ì ë“¤ì„ ê·¸ë¦¬ëŠ” ì¸ìŠ¤í„´ìŠ¤ ìˆ˜ë§Œí¼ ê·¸ë¦¬ëŠ” í•¨ìˆ˜.
+        this->indexBuffer_->GetIndexCount(),            //ì¸ë±ìŠ¤ ê°œìˆ˜.
+        static_cast<UINT>(_instancingCount),            //ì¸ìŠ¤í„´ìŠ¤ ìˆ˜.
+        0,                                              //GPUê°€ ì½ê¸° ì‹œì‘í•  ì¸ë±ìŠ¤ ë²„í¼ì˜ ì›ì†Œ ë²ˆí˜¸.
+        0,                                              //GPUê°€ ì½ê¸° ì‹œì‘í•  ë²„í…ìŠ¤ ë²„í¼ì˜ ì›ì†Œ ë²ˆí˜¸.
+        0                                               //GPUê°€ ì½ê¸° ì‹œì‘í•  ì¸ìŠ¤í„´ìŠ¤ì˜ ë²ˆí˜¸.
     );
 }
 
@@ -150,7 +150,7 @@ const GameEngineInputLayoutDesc& GameEngineMesh::GetInputLayoutDesc() const
 {
     if (nullptr == this->vertexBuffer_)
     {
-        MsgBoxAssert("¹öÅØ½º¹öÆÛ°¡ ¾ø½À´Ï´Ù. ÀÎÇ² ·¹ÀÌ¾Æ¿ô ¼¼ÆÃÀ» °¡Á®¿Ã ¼ö ¾ø½À´Ï´Ù.");
+        MsgBoxAssert("ë²„í…ìŠ¤ë²„í¼ê°€ ì—†ìŠµë‹ˆë‹¤. ì¸í’‹ ë ˆì´ì•„ì›ƒ ì„¸íŒ…ì„ ê°€ì ¸ì˜¬ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
     }
 
     return vertexBuffer_->GetInputLayoutDesc();

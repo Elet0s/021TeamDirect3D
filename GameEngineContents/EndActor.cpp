@@ -25,12 +25,13 @@ void EndActor::Update(float _deltaTime)
 {
 	if (GameEngineInput::GetInst().IsDown("SPACE") == true)
 	{
-		exit(false);
+		//exit(false);
+		GameEngineWindow::GetInst().Off();
 	}
 }
 
 void EndActor::End()
 {
-
+	int i = 0;
 }
 

@@ -22,7 +22,7 @@ public:
 	static void SoundPlayOneshot(const std::string_view& _name, int _loopCount = 0);
 	static void Update();
 
-	//ÆÄÀÏÀÌ »ç¿îµåº¸´Ù ´õ ±Ùº»¿¡ °¡±î¿ì¹Ç·Î °ÔÀÓ¿£Áø»ç¿îµå¿¡¼­ °ÔÀÓ¿£Áø ÆÄÀÏµµ ¹ŞÀ» ¼ö ÀÖ°Ô ±¸¼ºÇÑ´Ù.
+	//íŒŒì¼ì´ ì‚¬ìš´ë“œë³´ë‹¤ ë” ê·¼ë³¸ì— ê°€ê¹Œìš°ë¯€ë¡œ ê²Œì„ì—”ì§„ì‚¬ìš´ë“œì—ì„œ ê²Œì„ì—”ì§„ íŒŒì¼ë„ ë°›ì„ ìˆ˜ ìˆê²Œ êµ¬ì„±í•œë‹¤.
 	static GameEngineSound* LoadResource(const GameEngineFile& _path);
 	static GameEngineSound* LoadResource(const std::string_view& _path);
 	static GameEngineSound* LoadResource(const std::string_view& _path, const std::string_view& _name);

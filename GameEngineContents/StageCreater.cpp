@@ -27,7 +27,7 @@ void StageCreater::Start()
 		worldRenderer_->SetTexture2DArray("Inst_Textures", "Field");
 		worldRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 		//fieldRenderer_->SetAllUnitsWorldScale(256, 256, 1);
-		//±×·ÁÁú ÇÊ¿ä¾ø´Â ·»´õÀ¯´ÖµéÀÌ 256, 256 Å©±â·Î ±×·ÁÁö´Â ¹ö±× ¹ß»ı.
+		//ê·¸ë ¤ì§ˆ í•„ìš”ì—†ëŠ” ë Œë”ìœ ë‹›ë“¤ì´ 256, 256 í¬ê¸°ë¡œ ê·¸ë ¤ì§€ëŠ” ë²„ê·¸ ë°œìƒ.
 	}
 
 	{
@@ -66,7 +66,7 @@ void StageCreater::Start()
 	}
 
 
-	
+
 
 
 
@@ -157,20 +157,20 @@ void StageCreater::Start()
 				x = 400 + xInterval + GameEngineRandom().mainRandom_.RandomFloat(-50.f, 50.f);
 				object->GetTransform().SetWorldPosition(x, (-2400 + 250.f * level) * sinf(30.f * GameEngineMath::DegreeToRadian), (-2400 + 250.f * level) * cosf(30.f * GameEngineMath::DegreeToRadian));
 				worldRenderer_->GetInstancingUnit(unitIndex).GetAtlasData().SetData(0.f, 0.f, 1.f, 1.f, 0.f, 0.0f);
-				//NewGrassTexture.png ÀüÃ¼¸¦ ´Ù ±×¸°´Ù.
+				//NewGrassTexture.png ì „ì²´ë¥¼ ë‹¤ ê·¸ë¦°ë‹¤.
 
 				worldRenderer_->GetInstancingUnit(unitIndex).SetColorTextureIndex(4);
-				//NewGrassTexture.png´Â 2¹øÀ¸·Î »ğÀÔµÇ¾î ÀÖ´Ù.
+				//NewGrassTexture.pngëŠ” 2ë²ˆìœ¼ë¡œ ì‚½ì…ë˜ì–´ ìˆë‹¤.
 				worldRenderer_->GetInstancingUnit(unitIndex).SetNormalMapTextureIndex(5);
 				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldScale(128.f, 128.f, 1.f);
-				//Å¸ÀÏÀ» ±×¸®´Â ÀÎ½ºÅÏ½ÌÀ¯´Öµé¸¸ Å©±â ¼³Á¤À» ÇØÁØ´Ù.
+				//íƒ€ì¼ì„ ê·¸ë¦¬ëŠ” ì¸ìŠ¤í„´ì‹±ìœ ë‹›ë“¤ë§Œ í¬ê¸° ì„¤ì •ì„ í•´ì¤€ë‹¤.
 
-				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(x, (-2400 + 250.f * level)* sinf(30.f * GameEngineMath::DegreeToRadian), (-2401 + 250.f * level)* cosf(30.f * GameEngineMath::DegreeToRadian));	//Å¸ÀÏ ·»´õÇÏ´Â ÀÎ½ºÅÏ½ÌÀ¯´ÖµéÀÇ À§Ä¡ ¼³Á¤.
+				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(x, (-2400 + 250.f * level)* sinf(30.f * GameEngineMath::DegreeToRadian), (-2401 + 250.f * level)* cosf(30.f * GameEngineMath::DegreeToRadian));	//íƒ€ì¼ ë Œë”í•˜ëŠ” ì¸ìŠ¤í„´ì‹±ìœ ë‹›ë“¤ì˜ ìœ„ì¹˜ ì„¤ì •.
 
 				worldRenderer_->GetInstancingUnit(unitIndex).SetWorldRotation(float4(60.f, 0.f, 0.f));
 
 				++unitIndex;
-				//worldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(x, (-2400 + 250.f * level)* sinf(30.f * GameEngineMath::DegreeToRadian), (-2401 + 250.f * level)* cosf(30.f * GameEngineMath::DegreeToRadian));	//Å¸ÀÏ ·»´õÇÏ´Â ÀÎ½ºÅÏ½ÌÀ¯´ÖµéÀÇ À§Ä¡ ¼³Á¤.
+				//worldRenderer_->GetInstancingUnit(unitIndex).SetWorldPosition(x, (-2400 + 250.f * level)* sinf(30.f * GameEngineMath::DegreeToRadian), (-2401 + 250.f * level)* cosf(30.f * GameEngineMath::DegreeToRadian));	//íƒ€ì¼ ë Œë”í•˜ëŠ” ì¸ìŠ¤í„´ì‹±ìœ ë‹›ë“¤ì˜ ìœ„ì¹˜ ì„¤ì •.
 				float c = -2400.f + (250.f * static_cast<float>(level));
 				object->posY_ = c;
 				GroupActor.push_back(object);
@@ -179,8 +179,8 @@ void StageCreater::Start()
 			PrevMaxCount = maxCount;
 		}
 	}
-	
-	 
+
+
 	for (int level = 0; level < 7; level++)
 	{
 		std::list<StageObject*>& GroupActor = stageObjects_[level];
@@ -202,7 +202,7 @@ void StageCreater::Start()
 
 				road->GetRenderer()->GetTransform().SetWorldScale(float4(128.f, float4(PosX - PosNX, PosY - PosNY, 0.f, 0.f).Length() - 60.f));
 				road->GetCol()->GetTransform().SetWorldScale(float4(40.f, float4(PosX - PosNX, PosY - PosNY, 0.f, 0.f).Length() - 60.f));
-				
+
 				if (level != 0 && level != 6)
 				{
 					if (true == road->GetCol()->IsCollision(CollisionType::CT_AABB, ObjectOrder::Road, CollisionType::CT_AABB))
@@ -214,7 +214,7 @@ void StageCreater::Start()
 					{
 						road->Death();
 					}
-				
+
 
 					else
 					{

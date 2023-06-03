@@ -5,7 +5,7 @@
 
 DamascusSteel::DamascusSteel() 
 {
-	name_ = "´Ù¸¶½ºÄí½º °­Ã¶";
+	name_ = "ë‹¤ë§ˆìŠ¤ì¿ ìŠ¤ ê°•ì² ";
 	SetName(std::string_view("DamascusSteel"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 6;
@@ -18,13 +18,13 @@ DamascusSteel::~DamascusSteel()
 void DamascusSteel::Init()
 {
 	PlayerPassiveInfo PlayerPInfo_ = Player::GetPlayerInst().GetPlayerPassiveInfo();
-	
+
 
 	std::string sAttackMultiple = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
 	std::string sAttackMultipleNext = std::to_string(PlayerPInfo_.atkMultiple_Result + 5.0f).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result + 5.0f).find(".")) + "%";
-	
-	etc_ = sAttackMultiple + " -> " + sAttackMultipleNext + " ÇÇÇØ ¹è¼ö ";
-	
+
+	etc_ = sAttackMultiple + " -> " + sAttackMultipleNext + " í”¼í•´ ë°°ìˆ˜ ";
+
 }
 
 void DamascusSteel::Effect()

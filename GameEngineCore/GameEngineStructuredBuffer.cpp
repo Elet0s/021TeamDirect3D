@@ -88,16 +88,16 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth
 {
 	if (nullptr == _data)
 	{
-		MsgBoxAssert("µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
 	//if (this->structuredBufferDesc_.ByteWidth != _byteWidth)
 	//{
-	//	MsgBoxAssertString(this->GetNameCopy() + ": µ¥ÀÌÅÍÀÇ ÀüÃ¼ Å©±â°¡ ¼­·Î ¸ÂÁö ¾Ê½À´Ï´Ù.");
+	//	MsgBoxAssertString(this->GetNameCopy() + ": ë°ì´í„°ì˜ ì „ì²´ í¬ê¸°ê°€ ì„œë¡œ ë§žì§€ ì•ŠìŠµë‹ˆë‹¤.");
 	//	return;
 	//}
-	////°°Àº ÀÌ¸§ÀÇ ÃÖ´ë Å©±â ±¸Á¶È­ ¹öÆÛ¸¦ ¸ðµç ¼ÎÀÌ´õµéÀÌ °øÀ¯ÇÏ¹Ç·Î Å©±â¸¦ Á¤È®È÷ ¸ÂÃâ ÇÊ¿ä°¡ ¾ø´Ù.
+	////ê°™ì€ ì´ë¦„ì˜ ìµœëŒ€ í¬ê¸° êµ¬ì¡°í™” ë²„í¼ë¥¼ ëª¨ë“  ì…°ì´ë”ë“¤ì´ ê³µìœ í•˜ë¯€ë¡œ í¬ê¸°ë¥¼ ì •í™•ížˆ ë§žì¶œ í•„ìš”ê°€ ì—†ë‹¤.
 
 	mappedPtrInCPU_.pData = nullptr;
 
@@ -111,7 +111,7 @@ void GameEngineStructuredBuffer::ChangeData(const void* _data, size_t _byteWidth
 
 	if (nullptr == mappedPtrInCPU_.pData)
 	{
-		MsgBoxAssert("±×·¡ÇÈÄ«µå ¹öÆÛ¿¡ Á¢±ÙÇÏÁö ¸øÇß½À´Ï´Ù.");
+		MsgBoxAssert("ê·¸ëž˜í”½ì¹´ë“œ ë²„í¼ì— ì ‘ê·¼í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.");
 		return;
 	}
 
@@ -130,7 +130,7 @@ void GameEngineStructuredBuffer::VSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == shaderResourceView_)
 	{
-		MsgBoxAssert("±¸Á¶È­ ¹öÆÛ°¡ ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("êµ¬ì¡°í™” ë²„í¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
@@ -145,7 +145,7 @@ void GameEngineStructuredBuffer::CSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == shaderResourceView_)
 	{
-		MsgBoxAssert("±¸Á¶È­ ¹öÆÛ°¡ ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("êµ¬ì¡°í™” ë²„í¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
@@ -160,7 +160,7 @@ void GameEngineStructuredBuffer::PSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == shaderResourceView_)
 	{
-		MsgBoxAssert("±¸Á¶È­ ¹öÆÛ°¡ ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("êµ¬ì¡°í™” ë²„í¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
@@ -214,7 +214,7 @@ GameEngineStructuredBuffer* GameEngineStructuredBuffer::CreateNamedRes(const std
 	else
 	{
 		GameEngineStructuredBuffer* newBuffer = CreateRes(_name);
-		//GameEngineResÀÇ namedRes_¿¡ µî·Ï½ÃÅ°Áö ¾Ê±â À§ÇØ CreateRes()ÇÔ¼ö¸¦ Á÷Á¢ È£ÃâÇØ¼­ »ý¼ºÇÑ´Ù.
+		//GameEngineResì˜ namedRes_ì— ë“±ë¡ì‹œí‚¤ì§€ ì•Šê¸° ìœ„í•´ CreateRes()í•¨ìˆ˜ë¥¼ ì§ì ‘ í˜¸ì¶œí•´ì„œ ìƒì„±í•œë‹¤.
 
 		allStructuredBuffers_[newBuffer->GetNameCopy()][_byteWidth] = newBuffer;
 
@@ -237,7 +237,7 @@ void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataSize, size_t
 {
 	if (0 >= _dataSize)
 	{
-		MsgBoxAssert("µ¥ÀÌÅÍ »çÀÌÁî°¡ 0ÀÎ ±¸Á¶È­ ¹öÆÛ¸¦ ¸¸µé¼ö´Â ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("ë°ì´í„° ì‚¬ì´ì¦ˆê°€ 0ì¸ êµ¬ì¡°í™” ë²„í¼ë¥¼ ë§Œë“¤ìˆ˜ëŠ” ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
@@ -248,12 +248,12 @@ void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataSize, size_t
 		return;
 	}
 
-	if (count_ >= _count)	//»õ µ¥ÀÌÅÍ °³¼ö°¡ ÀÌÀü µ¥ÀÌÅ¸ °³¼öº¸´Ù ÀÛ°Å³ª °°À¸¸é ±×³É ³Ñ¾î°£´Ù.
+	if (count_ >= _count)	//ìƒˆ ë°ì´í„° ê°œìˆ˜ê°€ ì´ì „ ë°ì´íƒ€ ê°œìˆ˜ë³´ë‹¤ ìž‘ê±°ë‚˜ ê°™ìœ¼ë©´ ê·¸ëƒ¥ ë„˜ì–´ê°„ë‹¤.
 	{
 		return;
 	}
 
-	this->Release();	//´õ Å©´Ù¸é std::vectorÃ³·³ Áö¿ì°í ´Ù½Ã ¸¸µç´Ù.
+	this->Release();	//ë” í¬ë‹¤ë©´ std::vectorì²˜ëŸ¼ ì§€ìš°ê³  ë‹¤ì‹œ ë§Œë“ ë‹¤.
 
 	if (false == isInitialized_)
 	{
@@ -265,66 +265,66 @@ void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataSize, size_t
 
 
 	structuredBufferDesc_.ByteWidth = static_cast<UINT>(dataSize_ * count_);
-	//GPU¿¡ »ý¼ºÇÒ ±¸Á¶È­ ¹öÆÛ ¸Þ¸ð¸®ÀÇ ÀüÃ¼ Å©±â
+	//GPUì— ìƒì„±í•  êµ¬ì¡°í™” ë²„í¼ ë©”ëª¨ë¦¬ì˜ ì „ì²´ í¬ê¸°
 
-	structuredBufferDesc_.Usage = D3D11_USAGE_DYNAMIC;	//¹öÆÛÀÇ »ç¿ë ¹æ½Ä.
-	//D3D11_USAGE_DYNAMIC: GPU´Â ÀÐ±â¸¸, CPU´Â ¾²±â¸¸ °¡´É.
-	//±¸Á¶È­ ¹öÆÛÀÇ µ¥ÀÌÅÍ¿Í Å©±â´Â Áö¼ÓÀûÀ¸·Î ¹Ù²î¹Ç·Î CPU°¡ °»½ÅÇÒ ¼ö ÀÖ°Ô ÇØ¾ß ÇÑ´Ù.
+	structuredBufferDesc_.Usage = D3D11_USAGE_DYNAMIC;	//ë²„í¼ì˜ ì‚¬ìš© ë°©ì‹.
+	//D3D11_USAGE_DYNAMIC: GPUëŠ” ì½ê¸°ë§Œ, CPUëŠ” ì“°ê¸°ë§Œ ê°€ëŠ¥.
+	//êµ¬ì¡°í™” ë²„í¼ì˜ ë°ì´í„°ì™€ í¬ê¸°ëŠ” ì§€ì†ì ìœ¼ë¡œ ë°”ë€Œë¯€ë¡œ CPUê°€ ê°±ì‹ í•  ìˆ˜ ìžˆê²Œ í•´ì•¼ í•œë‹¤.
 
-	structuredBufferDesc_.BindFlags = D3D11_BIND_SHADER_RESOURCE;	//·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¼ÎÀÌ´õ ¸®¼Ò½º·Î ¿¬°á.
-	//±¸Á¶È­ ¹öÆÛ´Â ¹öÆÛÁö¸¸ ¹öÆÛ°¡ ¾Æ´Ï¶ó, ¹öÆÛ ±â¹Ý ¼ÎÀÌ´õ ¸®¼Ò½º·Î È°¿ëÇÏ¹Ç·Î ¼ÎÀÌ´õ ¸®¼Ò½º·Î ¿¬°áÇÑ´Ù.
-	//±¸Á¶È­ ¹öÆÛ´Â D3D11_BIND_SHADER_RESOURCE¿Í D3D11_BIND_UNORDERED_ACCESS µÎ°¡Áö ¹ÙÀÎµåÇÃ·¡±×¹Û¿¡ ¾µ ¼ö ¾ø´Ù.
+	structuredBufferDesc_.BindFlags = D3D11_BIND_SHADER_RESOURCE;	//ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë¡œ ì—°ê²°.
+	//êµ¬ì¡°í™” ë²„í¼ëŠ” ë²„í¼ì§€ë§Œ ë²„í¼ê°€ ì•„ë‹ˆë¼, ë²„í¼ ê¸°ë°˜ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë¡œ í™œìš©í•˜ë¯€ë¡œ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë¡œ ì—°ê²°í•œë‹¤.
+	//êµ¬ì¡°í™” ë²„í¼ëŠ” D3D11_BIND_SHADER_RESOURCEì™€ D3D11_BIND_UNORDERED_ACCESS ë‘ê°€ì§€ ë°”ì¸ë“œí”Œëž˜ê·¸ë°–ì— ì“¸ ìˆ˜ ì—†ë‹¤.
 
-	structuredBufferDesc_.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;	//¹öÆÛ¿¡ ´ëÇÑ CPUÀÇ Á¢±Ù±ÇÇÑ ¼³Á¤. 
-	//D3D11_CPU_ACCESS_WRITE: CPU´Â ¹öÆÛ¿¡ ¾²±â °¡´É.
-	//±¸Á¶È­ ¹öÆÛÀÇ µ¥ÀÌÅÍ¿Í Å©±â´Â Áö¼ÓÀûÀ¸·Î ¹Ù²î¹Ç·Î CPU°¡ °»½ÅÇÒ ¼ö ÀÖ°Ô ÇØ¾ß ÇÑ´Ù.
+	structuredBufferDesc_.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;	//ë²„í¼ì— ëŒ€í•œ CPUì˜ ì ‘ê·¼ê¶Œí•œ ì„¤ì •. 
+	//D3D11_CPU_ACCESS_WRITE: CPUëŠ” ë²„í¼ì— ì“°ê¸° ê°€ëŠ¥.
+	//êµ¬ì¡°í™” ë²„í¼ì˜ ë°ì´í„°ì™€ í¬ê¸°ëŠ” ì§€ì†ì ìœ¼ë¡œ ë°”ë€Œë¯€ë¡œ CPUê°€ ê°±ì‹ í•  ìˆ˜ ìžˆê²Œ í•´ì•¼ í•œë‹¤.
 
-	structuredBufferDesc_.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;	//¹öÆÛ¿¡ °ü·ÃµÈ ºÎ°¡ ¿É¼Ç ¼³Á¤.
-	//D3D11_RESOURCE_MISC_BUFFER_STRUCTURED: ÀÌ ¹öÆÛ¸¦ ±¸Á¶È­ ¹öÆÛ·Î ¼³Á¤.
+	structuredBufferDesc_.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;	//ë²„í¼ì— ê´€ë ¨ëœ ë¶€ê°€ ì˜µì…˜ ì„¤ì •.
+	//D3D11_RESOURCE_MISC_BUFFER_STRUCTURED: ì´ ë²„í¼ë¥¼ êµ¬ì¡°í™” ë²„í¼ë¡œ ì„¤ì •.
 
-	structuredBufferDesc_.StructureByteStride = static_cast<UINT>(dataSize_);	//±¸Á¶È­ ¹öÆÛ µ¥ÀÌÅÍÀÇ ´ÜÀ§ Å©±â.
-	//»ç½Ç»ó ±¸Á¶È­¹öÆÛ Àü¿ë ±â´ÉÀÌ¹Ç·Î ¹Ýµå½Ã ³Ö¾îÁØ´Ù.
+	structuredBufferDesc_.StructureByteStride = static_cast<UINT>(dataSize_);	//êµ¬ì¡°í™” ë²„í¼ ë°ì´í„°ì˜ ë‹¨ìœ„ í¬ê¸°.
+	//ì‚¬ì‹¤ìƒ êµ¬ì¡°í™”ë²„í¼ ì „ìš© ê¸°ëŠ¥ì´ë¯€ë¡œ ë°˜ë“œì‹œ ë„£ì–´ì¤€ë‹¤.
 
 	D3D11_SUBRESOURCE_DATA initialData = { 0 };
 	D3D11_SUBRESOURCE_DATA* initialDataPtr = nullptr;
 	if (nullptr != _initialData)
 	{
 		initialData.pSysMem = _initialData;
-		initialData.SysMemPitch = 0;			//2, 3Â÷¿ø ÅØ½ºÃ³°¡ ¾Æ´Ï¹Ç·Î 0.
-		initialData.SysMemSlicePitch = 0;		//3Â÷¿ø ÅØ½ºÃ³°¡ ¾Æ´Ï¹Ç·Î 0.
+		initialData.SysMemPitch = 0;			//2, 3ì°¨ì› í…ìŠ¤ì²˜ê°€ ì•„ë‹ˆë¯€ë¡œ 0.
+		initialData.SysMemSlicePitch = 0;		//3ì°¨ì› í…ìŠ¤ì²˜ê°€ ì•„ë‹ˆë¯€ë¡œ 0.
 		initialDataPtr = &initialData;
 	}
 
 	if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(
 		&structuredBufferDesc_,
 		initialDataPtr,
-		//³ÎÆ÷ÀÎÅÍ¸¦ µû·Î ³Ö¾îÁÖÁö ¾ÊÀ¸¸é ¸ðµç °ªÀÌ 0ÀÎ D3D11_SUBRESOURCE_DATAÀÇ Æ÷ÀÎÅÍ¸¦ ³Ö¾îÁØ °ÍÀ¸·Î ¾Ë°í 
-		// ±¸Á¶È­¹öÆÛ¸¦ »ý¼ºÇÏ·Á´Ù°¡ ½ÇÆÐÇÑ´Ù.
+		//ë„í¬ì¸í„°ë¥¼ ë”°ë¡œ ë„£ì–´ì£¼ì§€ ì•Šìœ¼ë©´ ëª¨ë“  ê°’ì´ 0ì¸ D3D11_SUBRESOURCE_DATAì˜ í¬ì¸í„°ë¥¼ ë„£ì–´ì¤€ ê²ƒìœ¼ë¡œ ì•Œê³  
+		// êµ¬ì¡°í™”ë²„í¼ë¥¼ ìƒì„±í•˜ë ¤ë‹¤ê°€ ì‹¤íŒ¨í•œë‹¤.
 		&structuredBuffer_
 	))
 	{
-		MsgBoxAssert("±¸Á¶È­ ¹öÆÛ »ý¼º ½ÇÆÐ.");
+		MsgBoxAssert("êµ¬ì¡°í™” ë²„í¼ ìƒì„± ì‹¤íŒ¨.");
 		return;
 	}
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc = {};
-	//±¸Á¶È­ ¹öÆÛÀÇ ¼ÎÀÌ´õ ¸®¼Ò½ººä¸¦ ¸¸µå´Â°Ô ÇÊ¿äÇÑ ¸í¼¼¼­.
-	//±¸Á¶È­ ¹öÆÛ´Â ¹öÆÛÁö¸¸ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡¼­ ¼ÎÀÌ´õ ¸®¼Ò½º·Î »ç¿ëµÇ¹Ç·Î, ±×¿¡ ¸Â°Ô ¼ÎÀÌ´õ ¸®¼Ò½ººä¸¦ »ý¼ºÇØ¾ß ÇÑ´Ù.
+	//êµ¬ì¡°í™” ë²„í¼ì˜ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë·°ë¥¼ ë§Œë“œëŠ”ê²Œ í•„ìš”í•œ ëª…ì„¸ì„œ.
+	//êµ¬ì¡°í™” ë²„í¼ëŠ” ë²„í¼ì§€ë§Œ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì—ì„œ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë¡œ ì‚¬ìš©ë˜ë¯€ë¡œ, ê·¸ì— ë§žê²Œ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë·°ë¥¼ ìƒì„±í•´ì•¼ í•œë‹¤.
 
 	shaderResourceViewDesc.Format = DXGI_FORMAT::DXGI_FORMAT_UNKNOWN;
-	//DXGI_FORMAT::DXGI_FORMAT_UNKNOWN: DXGI_FORMATÀÇ ±âÁ¸ Æ÷¸Ë¿¡ ¾ø´Â Çü½Ä.
-	//±¸Á¶È­ ¹öÆÛÀÇ ¿ø¼Ò´Â »ç¿ëÀÚÁ¤ÀÇ ±¸Á¶Ã¼ÀÌ¹Ç·Î DXGI_FORMATÀÇ ±âÁ¸ Æ÷¸ËÀ¸·Î Á¤ÀÇ ÇÒ ¼ö ¾ø´Ù.
-	//±×·¯¹Ç·Î DXGI_FORMAT_UNKNOWNÀ¸·Î Çü½ÄÀ» ÁöÁ¤ÇÑ´Ù.
+	//DXGI_FORMAT::DXGI_FORMAT_UNKNOWN: DXGI_FORMATì˜ ê¸°ì¡´ í¬ë§·ì— ì—†ëŠ” í˜•ì‹.
+	//êµ¬ì¡°í™” ë²„í¼ì˜ ì›ì†ŒëŠ” ì‚¬ìš©ìžì •ì˜ êµ¬ì¡°ì²´ì´ë¯€ë¡œ DXGI_FORMATì˜ ê¸°ì¡´ í¬ë§·ìœ¼ë¡œ ì •ì˜ í•  ìˆ˜ ì—†ë‹¤.
+	//ê·¸ëŸ¬ë¯€ë¡œ DXGI_FORMAT_UNKNOWNìœ¼ë¡œ í˜•ì‹ì„ ì§€ì •í•œë‹¤.
 
 	shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-	//D3D11_SRV_DIMENSION_BUFFEREX: ¼ÎÀÌ´õ ¸®¼Ò½ººä¸¦ ¸¸µé·Á´Â ¸®¼Ò½º°¡ ÅØ½ºÃ³³ª ÅØ½ºÃ³ ¹è¿­ÀÌ ¾Æ´Ï¶ó, 
-	// Á¤Á¡¹öÆÛ³ª ÀÎµ¦½º¹öÆÛ µîÀ¸·Î °¡°øµÇÁö ¾ÊÀº Çü½ÄÀÇ ¹öÆÛÀÌ´Ù.
+	//D3D11_SRV_DIMENSION_BUFFEREX: ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë·°ë¥¼ ë§Œë“¤ë ¤ëŠ” ë¦¬ì†ŒìŠ¤ê°€ í…ìŠ¤ì²˜ë‚˜ í…ìŠ¤ì²˜ ë°°ì—´ì´ ì•„ë‹ˆë¼, 
+	// ì •ì ë²„í¼ë‚˜ ì¸ë±ìŠ¤ë²„í¼ ë“±ìœ¼ë¡œ ê°€ê³µë˜ì§€ ì•Šì€ í˜•ì‹ì˜ ë²„í¼ì´ë‹¤.
 
 	shaderResourceViewDesc.BufferEx.FirstElement = 0;
-	//¹öÆÛÀÇ Ã¹ ¿ø¼Ò ÀÎµ¦½º.
+	//ë²„í¼ì˜ ì²« ì›ì†Œ ì¸ë±ìŠ¤.
 
 	shaderResourceViewDesc.BufferEx.NumElements = static_cast<UINT>(count_);
-	//¹öÆÛÀÇ ¿ø¼Ò ¼ýÀÚ.
+	//ë²„í¼ì˜ ì›ì†Œ ìˆ«ìž.
 
 	shaderResourceViewDesc.BufferEx.Flags = 0;
 	//??
@@ -336,7 +336,7 @@ void GameEngineStructuredBuffer::CreateStructuredBuffer(size_t _dataSize, size_t
 		&this->shaderResourceView_
 	))
 	{
-		MsgBoxAssert("±¸Á¶È­ ¹öÆÛÀÇ ¼ÎÀÌ´õ ¸®¼Ò½ººä »ý¼º ½ÇÆÐ.");
+		MsgBoxAssert("êµ¬ì¡°í™” ë²„í¼ì˜ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë·° ìƒì„± ì‹¤íŒ¨.");
 		return;
 	}
 }

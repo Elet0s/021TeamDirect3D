@@ -3,7 +3,7 @@
 #include "Player.h"
 SingleHanded::SingleHanded() 
 {
-	name_ = "ÇÑ¼ÕÀâÀÌ";
+	name_ = "í•œì†ìž¡ì´";
 	SetName(std::string_view("SingleHanded"));
 	myRank_ = Rank::Epic;
 	maxLevel_ = 1;
@@ -23,8 +23,8 @@ void SingleHanded::Init()
 	std::string sAddProjectileNext = std::to_string(PlayerInfo_.addProjectile_ - 1).substr(0, std::to_string(PlayerInfo_.addProjectile_ - 1).find("."));
 	std::string sAtkMulNext = std::to_string((PlayerPInfo_.atkMultiple_Result * 1.5f)).substr(0, std::to_string((PlayerPInfo_.atkMultiple_Result * 1.5f)).find("."));
 
-	etc_ = sAtkMul + "% -> " + sAtkMulNext + "% ÇÇÇØ ¹è¼ö\n"
-		+ sAddProjectile + " ->" + sAddProjectileNext + " Ãß°¡ Åõ»çÃ¼ ";
+	etc_ = sAtkMul + "% -> " + sAtkMulNext + "% í”¼í•´ ë°°ìˆ˜\n"
+		+ sAddProjectile + " ->" + sAddProjectileNext + " ì¶”ê°€ íˆ¬ì‚¬ì²´ ";
 }
 
 void SingleHanded::Effect()
@@ -33,7 +33,7 @@ void SingleHanded::Effect()
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerInfo_->addProjectile_ -= 1;
-	
+
 	PlayerPInfo_->atkMultiple_ *= 1.5f;
 	PlayerPInfo_->atkMultiple_Result *= 1.5f;
 	PlayerPInfo_->atkMultiple_Result = ceil(PlayerPInfo_->atkMultiple_Result);

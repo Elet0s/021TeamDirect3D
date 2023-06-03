@@ -24,8 +24,8 @@ public:
 		GameEngineDebug::LeakCheckOn();
 
 #ifdef _DEBUG
-		int* i = new int(11);	//¸¯ Ã¼Å©°¡ ÀÌ·ç¾îÁö°í ÀÖ´ÂÁö¸¦ È®ÀÎÇÏ±â À§ÇÑ ÀÇµµÀûÀÎ ¸¯.
-#endif							//¸±¸®Áî¸ğµå¿¡¼­´Â ÇÏÁö ¾Ê´Â´Ù.
+		int* i = new int(11);	//ë¦­ ì²´í¬ê°€ ì´ë£¨ì–´ì§€ê³  ìˆëŠ”ì§€ë¥¼ í™•ì¸í•˜ê¸° ìœ„í•œ ì˜ë„ì ì¸ ë¦­.
+#endif							//ë¦´ë¦¬ì¦ˆëª¨ë“œì—ì„œëŠ” í•˜ì§€ ì•ŠëŠ”ë‹¤.
 
 		CoreType core{};
 		Start(core.GetWindowTitle(), &core);
@@ -37,7 +37,7 @@ public:
 	}
 
 protected:
-	//ÄÁÅÙÃ÷ Á¦ÀÛÀÚ¿ë ÇÔ¼öµé.
+	//ì»¨í…ì¸  ì œì‘ììš© í•¨ìˆ˜ë“¤.
 	virtual void Start() = 0;
 	virtual void Update(float _deltaTime) = 0;
 	virtual void End() = 0;
@@ -45,31 +45,31 @@ protected:
 	static bool ChangeLevel(const std::string& _levelName);
 
 protected:
-	//ÇÁ·Î¼¼½º ½ÃÀÛ.
+	//í”„ë¡œì„¸ìŠ¤ ì‹œì‘.
 	static void StartCore(GameEngineCore* _userCore);	
 
-	//ÇÁ·Î¼¼½º °»½Å.
+	//í”„ë¡œì„¸ìŠ¤ ê°±ì‹ .
 	static void UpdateCore(GameEngineCore* _userCore);	
 
-	//ÇÁ·Î¼¼½º Á¾·á.
+	//í”„ë¡œì„¸ìŠ¤ ì¢…ë£Œ.
 	static void EndCore(GameEngineCore* _userCore);		
 
-	//ÇÁ·Î¼¼½º °³½Ã ÇÔ¼ö. Á¾·á±îÁö ´ã´ç.
+	//í”„ë¡œì„¸ìŠ¤ ê°œì‹œ í•¨ìˆ˜. ì¢…ë£Œê¹Œì§€ ë‹´ë‹¹.
 	static void Start(const std::string& _title, GameEngineCore* _userCore);	
 
-	//¿£Áø ±âº»Á¦°ø ¸®¼Ò½º ÃÊ±âÈ­ ÇÔ¼ö.
+	//ì—”ì§„ ê¸°ë³¸ì œê³µ ë¦¬ì†ŒìŠ¤ ì´ˆê¸°í™” í•¨ìˆ˜.
 	static void InitializeEngineResource();
-	//»ç°¢Çü, À°¸éÃ¼, ¿¡·¯ÅØ½ºÃÄ, ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ, °¢Á¾ ¼ÎÀÌ´õ µî, 
-	// ¿£Áø ¼öÁØ¿¡¼­ ±âº»ÀûÀ¸·Î Áö¿øµÇ¾î¾ß ÇÏ´Â ¸®¼Ò½º¸¦ ÁØºñÇÏ´Â ÇÔ¼ö.
+	//ì‚¬ê°í˜•, ìœ¡ë©´ì²´, ì—ëŸ¬í…ìŠ¤ì³, ë Œë”ë§ íŒŒì´í”„ë¼ì¸, ê°ì¢… ì…°ì´ë” ë“±, 
+	// ì—”ì§„ ìˆ˜ì¤€ì—ì„œ ê¸°ë³¸ì ìœ¼ë¡œ ì§€ì›ë˜ì–´ì•¼ í•˜ëŠ” ë¦¬ì†ŒìŠ¤ë¥¼ ì¤€ë¹„í•˜ëŠ” í•¨ìˆ˜.
 
-	//¿£Áø ±âº»Á¦°ø ¸®¼Ò½º Á¤¸® ÇÔ¼ö.
+	//ì—”ì§„ ê¸°ë³¸ì œê³µ ë¦¬ì†ŒìŠ¤ ì •ë¦¬ í•¨ìˆ˜.
 	static void DestroyEngineResource();
 
-	//Çì´õ Ãß°¡ÇÏ±â ½È¾î¼­ ÃÊ±âÈ­¸¦ CPP¿¡¼­ ÇÏ·Á°í ¸¸µç ÇÔ¼ö.
+	//í—¤ë” ì¶”ê°€í•˜ê¸° ì‹«ì–´ì„œ ì´ˆê¸°í™”ë¥¼ CPPì—ì„œ í•˜ë ¤ê³  ë§Œë“  í•¨ìˆ˜.
 	static void InitializeLevel(GameEngineLevel* _level, const std::string& _levelName);
 
 
-protected:	//ÄÁÅÙÃ÷ÄÚ¾î¸¸ »ó¼Ó¹Ş¾Æ¼­ »ç¿ëÇØ¾ß ÇÏ´Â ÇÔ¼öµé.
+protected:	//ì»¨í…ì¸ ì½”ì–´ë§Œ ìƒì†ë°›ì•„ì„œ ì‚¬ìš©í•´ì•¼ í•˜ëŠ” í•¨ìˆ˜ë“¤.
 	virtual std::string GetWindowTitle()
 	{
 		return "DefaultWindowTitle";
@@ -109,7 +109,7 @@ protected:	//ÄÁÅÙÃ÷ÄÚ¾î¸¸ »ó¼Ó¹Ş¾Æ¼­ »ç¿ëÇØ¾ß ÇÏ´Â ÇÔ¼öµé.
 	}
 
 public:
-	static GameEngineThreadPool engineThreadPool_;	//¿£Áø Â÷¿ø¿¡¼­ Á¦°øÇÏ´Â ½º·¹µåÇ®.
+	static GameEngineThreadPool engineThreadPool_;	//ì—”ì§„ ì°¨ì›ì—ì„œ ì œê³µí•˜ëŠ” ìŠ¤ë ˆë“œí’€.
 
 
 private:

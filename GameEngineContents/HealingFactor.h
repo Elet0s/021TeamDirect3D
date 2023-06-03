@@ -1,7 +1,6 @@
 #pragma once
 #include "Skill.h"
 
-// Ό³Έν :
 class HealingFactor : public Skill
 {
 public:

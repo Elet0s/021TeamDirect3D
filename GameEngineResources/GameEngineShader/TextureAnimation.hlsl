@@ -16,14 +16,14 @@ struct Output
 
 struct AnimationMatrix
 {
-    //ÀÏ¹İ float4x4¸¦ ±×³É ³ÖÀ¸¸é DirectXÀÇ ±âº» ¼³Á¤ÀÎ ¿­ Áß½ÉÀÇ ÀüÄ¡µÈ Çà·Ä·Î µé¾î¿À¹Ç·Î,
-    // ±×°É ¹æÁöÇÏ±â À§ÇØ ±»ÀÌ ±¸Á¶Ã¼¸¦ ¸¸µé¾î¼­ ³Ö¾îÁØ´Ù.
+    //ì¼ë°˜ float4x4ë¥¼ ê·¸ëƒ¥ ë„£ìœ¼ë©´ DirectXì˜ ê¸°ë³¸ ì„¤ì •ì¸ ì—´ ì¤‘ì‹¬ì˜ ì „ì¹˜ëœ í–‰ë ¬ë¡œ ë“¤ì–´ì˜¤ë¯€ë¡œ,
+    // ê·¸ê±¸ ë°©ì§€í•˜ê¸° ìœ„í•´ êµ³ì´ êµ¬ì¡°ì²´ë¥¼ ë§Œë“¤ì–´ì„œ ë„£ì–´ì¤€ë‹¤.
     float4x4 matrix_;
 };
 
 StructuredBuffer<AnimationMatrix> ArrAnimationMatrix : register(t11);
 
-// inout c++·Î Ä¡¸é ·¹ÆÛ·±½º
+// inout c++ë¡œ ì¹˜ë©´ ë ˆí¼ëŸ°ìŠ¤
 // float4&
 void Skinning(inout float4 _Pos, inout float4 _Weight, inout int4 _Index, StructuredBuffer<AnimationMatrix> _ArrMatrix)
 {

@@ -71,7 +71,7 @@ void EngineInputLayout()
 
 	GameEngineVertex::inputLayoutInfo_.ResetOffset();
 
-	////ÀÎ½ºÅÏ½Ì µ¥ÀÌÅÍ¿ë.
+	////ì¸ìŠ¤í„´ì‹± ë°ì´í„°ìš©.
 	//GameEngineVertex::inputLayoutInfo_.AddInputLayout(
 	//	"ROWINDEX",
 	//	DXGI_FORMAT::DXGI_FORMAT_R32_UINT,
@@ -81,7 +81,7 @@ void EngineInputLayout()
 	//	D3D11_INPUT_PER_INSTANCE_DATA
 	//);
 
-	//ÀÎ½ºÅÏ½ºº°·Î ÇÊ¿äÇÑ ÄÃ·¯ ÅØ½ºÃ³ ÀÎµ¦½º Á¤º¸.
+	//ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ í•„ìš”í•œ ì»¬ëŸ¬ í…ìŠ¤ì²˜ ì¸ë±ìŠ¤ ì •ë³´.
 	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
 		"COLORTEXTUREINDEX",
 		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,
@@ -91,7 +91,7 @@ void EngineInputLayout()
 		D3D11_INPUT_PER_INSTANCE_DATA
 	);
 
-	//ÀÎ½ºÅÏ½ºº°·Î ÇÊ¿äÇÑ ³ë¸» ÅØ½ºÃ³ ÀÎµ¦½º Á¤º¸.
+	//ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ í•„ìš”í•œ ë…¸ë§ í…ìŠ¤ì²˜ ì¸ë±ìŠ¤ ì •ë³´.
 	GameEngineVertex::inputLayoutInfo_.AddInputLayout(
 		"NORMALTEXTUREINDEX",
 		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,
@@ -107,23 +107,23 @@ void EngineSubSetting()
 {
 	//typedef struct D3D11_RASTERIZER_DESC
 	//{
-	//	D3D11_FILL_MODE FillMode;		Á¤Á¡µéÀ» ÀÕ´Â ¼± »çÀÌ¸¦ Ã¤¿ïÁö ¸»Áö °áÁ¤ÇÏ´Â ¿É¼Ç.
-	//	D3D11_CULL_MODE CullMode;		¾ÕµŞ¸é Áß ¾î´À ¸éÀ» ÄÃ¸µÇÒÁö °áÁ¤ÇÏ´Â ¿É¼Ç.
-	//	BOOL FrontCounterClockwise;		¹İ½Ã°è¹æÇâÀ¸·Î ¹èÄ¡µÈ Á¤Á¡µéÀ» Á¤¸éÀ¸·Î ÆÇÁ¤ÇÒÁö, ±× ¹İ´ë·Î ÇÒÁö °áÁ¤ÇÏ´Â ¿É¼Ç.
-	//	INT DepthBias;					±íÀÌ ¹ÙÀÌ¾Æ½º??
-	//	FLOAT DepthBiasClamp;			±íÀÌ ¹ÙÀÌ¾Æ½º Å¬·¥ÇÁ??
+	//	D3D11_FILL_MODE FillMode;		ì •ì ë“¤ì„ ì‡ëŠ” ì„  ì‚¬ì´ë¥¼ ì±„ìš¸ì§€ ë§ì§€ ê²°ì •í•˜ëŠ” ì˜µì…˜.
+	//	D3D11_CULL_MODE CullMode;		ì•ë’·ë©´ ì¤‘ ì–´ëŠ ë©´ì„ ì»¬ë§í• ì§€ ê²°ì •í•˜ëŠ” ì˜µì…˜.
+	//	BOOL FrontCounterClockwise;		ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ ë°°ì¹˜ëœ ì •ì ë“¤ì„ ì •ë©´ìœ¼ë¡œ íŒì •í• ì§€, ê·¸ ë°˜ëŒ€ë¡œ í• ì§€ ê²°ì •í•˜ëŠ” ì˜µì…˜.
+	//	INT DepthBias;					ê¹Šì´ ë°”ì´ì•„ìŠ¤??
+	//	FLOAT DepthBiasClamp;			ê¹Šì´ ë°”ì´ì•„ìŠ¤ í´ë¨í”„??
 	//	FLOAT SlopeScaledDepthBias;		??
-	//	BOOL DepthClipEnable;			±íÀÌ Å¬¸®ÇÎ Àû¿ë ¿©ºÎ.
-	//	BOOL ScissorEnable;				½ÃÀú·ºÅÊ±Û ÄÃ¸µ(ÁöÁ¤ÇÑ »ç°¢Çü ¹ÛÀÇ ¸ğµç ¿ä¼Ò¸¦ ±×¸®Áö ¾ÊÀ½) Àû¿ë ¿©ºÎ.
-	//	BOOL MultisampleEnable;			¸ÖÆ¼»ùÇÃ¸µ Àû¿ë ¿©ºÎ.
-	//	BOOL AntialiasedLineEnable;		¶óÀÎ ¾ÈÆ¼¾Ù¸®¾î½Ì(ÇÈ¼¿´ÜÀ§ ³ÊºñÀÇ ¼±¿¡ ¾ÈÆ¼¾Ù¸®¾î½Ì) Àû¿ë ¿©ºÎ.
+	//	BOOL DepthClipEnable;			ê¹Šì´ í´ë¦¬í•‘ ì ìš© ì—¬ë¶€.
+	//	BOOL ScissorEnable;				ì‹œì €ë ‰íƒ±ê¸€ ì»¬ë§(ì§€ì •í•œ ì‚¬ê°í˜• ë°–ì˜ ëª¨ë“  ìš”ì†Œë¥¼ ê·¸ë¦¬ì§€ ì•ŠìŒ) ì ìš© ì—¬ë¶€.
+	//	BOOL MultisampleEnable;			ë©€í‹°ìƒ˜í”Œë§ ì ìš© ì—¬ë¶€.
+	//	BOOL AntialiasedLineEnable;		ë¼ì¸ ì•ˆí‹°ì•¨ë¦¬ì–´ì‹±(í”½ì…€ë‹¨ìœ„ ë„ˆë¹„ì˜ ì„ ì— ì•ˆí‹°ì•¨ë¦¬ì–´ì‹±) ì ìš© ì—¬ë¶€.
 	//} 	D3D11_RASTERIZER_DESC;
 
 
 	D3D11_RASTERIZER_DESC rasterizerDesc = {};
 
 	rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
-	rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;	//¹Ù²Ù¸é ÁÂ¿ì¹İÀü½Ã ·»´õ¸µ ¾ÈµÊ.
+	rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;	//ë°”ê¾¸ë©´ ì¢Œìš°ë°˜ì „ì‹œ ë Œë”ë§ ì•ˆë¨.
 
 	GameEngineRasterizer::Create("EngineRasterizer", rasterizerDesc);
 
@@ -133,57 +133,57 @@ void EngineSubSetting()
 
 	//typedef struct D3D11_BLEND_DESC
 	//{
-	//	BOOL AlphaToCoverageEnable;							¾ËÆÄºí·»µù¿¡µµ ¸ÖÆ¼»ùÇÃ¸µÀ» ÇÏ´Â ±â¼úÀÎ ¾ËÆÄ Åõ Ä¿¹ö¸®Áö¸¦ Àû¿ëÇÒ Áö ¿©ºÎ.
-	//	BOOL IndependentBlendEnable;						·»´õÅ¸°ÙµéÀÌ °¢ÀÚÀÇ µ¶ÀÚÀûÀÎ ºí·»µù ¼³Á¤°ªÀ» °¡Áö°Ô ÇÒ Áö ¿©ºÎ. 
-	//														 true: 8°¡Áö ºí·»µù ¼³Á¤°ªÀ» °¡Áü.
-	//														 false: 0¹ø ¼³Á¤°ª¸¸ ºí·»µù¿¡ »ç¿ëÇÔ.
+	//	BOOL AlphaToCoverageEnable;							ì•ŒíŒŒë¸”ë Œë”©ì—ë„ ë©€í‹°ìƒ˜í”Œë§ì„ í•˜ëŠ” ê¸°ìˆ ì¸ ì•ŒíŒŒ íˆ¬ ì»¤ë²„ë¦¬ì§€ë¥¼ ì ìš©í•  ì§€ ì—¬ë¶€.
+	//	BOOL IndependentBlendEnable;						ë Œë”íƒ€ê²Ÿë“¤ì´ ê°ìì˜ ë…ìì ì¸ ë¸”ë Œë”© ì„¤ì •ê°’ì„ ê°€ì§€ê²Œ í•  ì§€ ì—¬ë¶€. 
+	//														 true: 8ê°€ì§€ ë¸”ë Œë”© ì„¤ì •ê°’ì„ ê°€ì§.
+	//														 false: 0ë²ˆ ì„¤ì •ê°’ë§Œ ë¸”ë Œë”©ì— ì‚¬ìš©í•¨.
 	// 
-	//	D3D11_RENDER_TARGET_BLEND_DESC RenderTarget[8];		·»´õÅ¸°Ù¿¡ Àû¿ëµÉ ¾ËÆÄºí·»µù ¼³Á¤°ª Á¤º¸¸¦ ÀúÀåÇÒ D3D11_RENDER_TARGET_BLEND_DESC±¸Á¶Ã¼ ¹è¿­.
-	//														 ÃÖ´ë 8°³ ·»´õÅ¸°Ù¿¡ °¢°¢ ´Ù¸¥ ¾ËÆÄºí·»µù ¹æ½ÄÀ» ÀúÀåÇÒ ¼ö ÀÖ´Ù.
+	//	D3D11_RENDER_TARGET_BLEND_DESC RenderTarget[8];		ë Œë”íƒ€ê²Ÿì— ì ìš©ë  ì•ŒíŒŒë¸”ë Œë”© ì„¤ì •ê°’ ì •ë³´ë¥¼ ì €ì¥í•  D3D11_RENDER_TARGET_BLEND_DESCêµ¬ì¡°ì²´ ë°°ì—´.
+	//														 ìµœëŒ€ 8ê°œ ë Œë”íƒ€ê²Ÿì— ê°ê° ë‹¤ë¥¸ ì•ŒíŒŒë¸”ë Œë”© ë°©ì‹ì„ ì €ì¥í•  ìˆ˜ ìˆë‹¤.
 
 	//	typedef struct D3D11_RENDER_TARGET_BLEND_DESC
 	//	{
-	//		BOOL BlendEnable;						¾ËÆÄºí·»µùÀ» ÇÒ Áö ¿©ºÎ.
-	//		D3D11_BLEND SrcBlend;					¾ËÆÄºí·»µù °ø½ÄÀÇ srcFactorÀÇ 4°³ ¿ø¼Ò¸¦ ¾î¶»°Ô Ã¤¿ïÁö ¼±ÅÃÇÏ´Â ¿É¼Ç.
-	//		D3D11_BLEND DestBlend;					¾ËÆÄºí·»µù °ø½ÄÀÇ destFactorÀÇ 4°³ ¿ø¼Ò¸¦ ¾î¶»°Ô Ã¤¿ïÁö ¼±ÅÃÇÏ´Â ¿É¼Ç.
-	//		D3D11_BLEND_OP BlendOp;					¾ËÆÄºí·»µù °ø½ÄÀÇ ¿É¼Ç ºÎºĞ¿¡ ¾î¶² ¿¬»êÀ» Àû¿ëÇÒÁö ¼±ÅÃÇÏ´Â ¿É¼Ç.
-	//		D3D11_BLEND SrcBlendAlpha;				srcColorÀÇ ¾ËÆÄ°ª ¼³Á¤.
-	//		D3D11_BLEND DestBlendAlpha;				destColorÀÇ ¾ËÆÄ°ª ¼³Á¤.
-	//		D3D11_BLEND_OP BlendOpAlpha;			¾ËÆÄºí·»µù °ø½ÄÀÇ ¿É¼Ç Ç×¸ñ¿¡ ´õÇÏ±â Àû¿ë. ¾ËÆÄ°ª °è»ê¿¡¸¸ Àû¿ëµÈ´Ù.
-	//		UINT8 RenderTargetWriteMask;			ºí·»µùÀ» Àû¿ëÇÒ »ö»ó. RGBAÁß ¸î°¡Áö¸¸ ¼±ÅÃÇØ¼­ ¾ËÆÄºí·»µùÀ» Àû¿ëÇÒ ¼öµµ ÀÖ´Ù.
+	//		BOOL BlendEnable;						ì•ŒíŒŒë¸”ë Œë”©ì„ í•  ì§€ ì—¬ë¶€.
+	//		D3D11_BLEND SrcBlend;					ì•ŒíŒŒë¸”ë Œë”© ê³µì‹ì˜ srcFactorì˜ 4ê°œ ì›ì†Œë¥¼ ì–´ë–»ê²Œ ì±„ìš¸ì§€ ì„ íƒí•˜ëŠ” ì˜µì…˜.
+	//		D3D11_BLEND DestBlend;					ì•ŒíŒŒë¸”ë Œë”© ê³µì‹ì˜ destFactorì˜ 4ê°œ ì›ì†Œë¥¼ ì–´ë–»ê²Œ ì±„ìš¸ì§€ ì„ íƒí•˜ëŠ” ì˜µì…˜.
+	//		D3D11_BLEND_OP BlendOp;					ì•ŒíŒŒë¸”ë Œë”© ê³µì‹ì˜ ì˜µì…˜ ë¶€ë¶„ì— ì–´ë–¤ ì—°ì‚°ì„ ì ìš©í• ì§€ ì„ íƒí•˜ëŠ” ì˜µì…˜.
+	//		D3D11_BLEND SrcBlendAlpha;				srcColorì˜ ì•ŒíŒŒê°’ ì„¤ì •.
+	//		D3D11_BLEND DestBlendAlpha;				destColorì˜ ì•ŒíŒŒê°’ ì„¤ì •.
+	//		D3D11_BLEND_OP BlendOpAlpha;			ì•ŒíŒŒë¸”ë Œë”© ê³µì‹ì˜ ì˜µì…˜ í•­ëª©ì— ë”í•˜ê¸° ì ìš©. ì•ŒíŒŒê°’ ê³„ì‚°ì—ë§Œ ì ìš©ëœë‹¤.
+	//		UINT8 RenderTargetWriteMask;			ë¸”ë Œë”©ì„ ì ìš©í•  ìƒ‰ìƒ. RGBAì¤‘ ëª‡ê°€ì§€ë§Œ ì„ íƒí•´ì„œ ì•ŒíŒŒë¸”ë Œë”©ì„ ì ìš©í•  ìˆ˜ë„ ìˆë‹¤.
 	//	} 	D3D11_RENDER_TARGET_BLEND_DESC;
 	//
 	//} 	D3D11_BLEND_DESC;
 
 	D3D11_BLEND_DESC alphaBlendDesc = { 0 };
 
-	alphaBlendDesc.AlphaToCoverageEnable = false;		//¾ËÆÄ Åõ Ä¿¹ö¸®Áö ºñÀû¿ë.
-	alphaBlendDesc.IndependentBlendEnable = false;		//0¹ø ·»´õÅ¸°ÙÀÇ ¾ËÆÄºí·»µù ¼³Á¤°ªÀ» ¸ğµç ·»´õÅ¸°Ù¿¡ Àû¿ë.
-	alphaBlendDesc.RenderTarget[0].BlendEnable = true;	//¾ËÆÄºí·»µù ÇÔ.
+	alphaBlendDesc.AlphaToCoverageEnable = false;		//ì•ŒíŒŒ íˆ¬ ì»¤ë²„ë¦¬ì§€ ë¹„ì ìš©.
+	alphaBlendDesc.IndependentBlendEnable = false;		//0ë²ˆ ë Œë”íƒ€ê²Ÿì˜ ì•ŒíŒŒë¸”ë Œë”© ì„¤ì •ê°’ì„ ëª¨ë“  ë Œë”íƒ€ê²Ÿì— ì ìš©.
+	alphaBlendDesc.RenderTarget[0].BlendEnable = true;	//ì•ŒíŒŒë¸”ë Œë”© í•¨.
 	alphaBlendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	//D3D11_COLOR_WRITE_ENABLE_ALL: RGBA ¸ğµç »ö»ó¿¡ ºí·»µù Àû¿ë.
+	//D3D11_COLOR_WRITE_ENABLE_ALL: RGBA ëª¨ë“  ìƒ‰ìƒì— ë¸”ë Œë”© ì ìš©.
 
-	//¾ËÆÄºí·»µù °ø½Ä.
-	//output: ÃÖÁ¾ °á°ú¹°.
-	//dest: ¹é¹öÆÛÀÇ ÇöÀç »ö»ó.
-	//src: ¹é¹öÆÛÀÇ »ö»ó°ú ºí·»µåÇÒ ¿øº»ÀÇ »ö»ó.
-	//¿É¼Ç: BlendOpÀ¸·Î ÁöÁ¤ÇÏ´Â ºí·»µå ¿¬»ê ¹æ½Ä.
-	//outputColor = (srcColor * srcFactor) ¿É¼Ç (destColor * destFactor)
+	//ì•ŒíŒŒë¸”ë Œë”© ê³µì‹.
+	//output: ìµœì¢… ê²°ê³¼ë¬¼.
+	//dest: ë°±ë²„í¼ì˜ í˜„ì¬ ìƒ‰ìƒ.
+	//src: ë°±ë²„í¼ì˜ ìƒ‰ìƒê³¼ ë¸”ë Œë“œí•  ì›ë³¸ì˜ ìƒ‰ìƒ.
+	//ì˜µì…˜: BlendOpìœ¼ë¡œ ì§€ì •í•˜ëŠ” ë¸”ë Œë“œ ì—°ì‚° ë°©ì‹.
+	//outputColor = (srcColor * srcFactor) ì˜µì…˜ (destColor * destFactor)
 
 	alphaBlendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	//¿É¼Ç ¿¬»êÀ» ´õÇÏ±â·Î ÇÑ´Ù.
+	//ì˜µì…˜ ì—°ì‚°ì„ ë”í•˜ê¸°ë¡œ í•œë‹¤.
 
 	alphaBlendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-	//srcFactor¿¡ srcColorÀÇ ¾ËÆÄ°ªÀ» ÀÏ°ı ´ëÀÔ.
+	//srcFactorì— srcColorì˜ ì•ŒíŒŒê°’ì„ ì¼ê´„ ëŒ€ì….
 
 	alphaBlendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-	//destFactor¿¡ (1 - srcColorÀÇ ¾ËÆÄ°ª)À» ÀÏ°ı ´ëÀÔ.
+	//destFactorì— (1 - srcColorì˜ ì•ŒíŒŒê°’)ì„ ì¼ê´„ ëŒ€ì….
 
-	//¾ËÆÄÂÊÀº µû·Î Ã³¸®.
+	//ì•ŒíŒŒìª½ì€ ë”°ë¡œ ì²˜ë¦¬.
 	alphaBlendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	alphaBlendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 	alphaBlendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-	//ÀÌ ¼¼ ÁÙ¸¸ ÁÖ¼®Ã³¸®ÇØ º¼ °Í.->ÇÏ¸é ºí·»µå ½ºÅ×ÀÌÆ® »ı¼º ½ÇÆĞ.
+	//ì´ ì„¸ ì¤„ë§Œ ì£¼ì„ì²˜ë¦¬í•´ ë³¼ ê²ƒ.->í•˜ë©´ ë¸”ë Œë“œ ìŠ¤í…Œì´íŠ¸ ìƒì„± ì‹¤íŒ¨.
 
 	GameEngineBlend::Create("AlphaBlend", alphaBlendDesc);
 
@@ -195,11 +195,11 @@ void EngineSubSetting()
 
 	D3D11_BLEND_DESC transparentBlendDesc = { 0 };
 
-	transparentBlendDesc.AlphaToCoverageEnable = false;		//¾ËÆÄ Åõ Ä¿¹ö¸®Áö ºñÀû¿ë.
-	transparentBlendDesc.IndependentBlendEnable = false;		//0¹ø ·»´õÅ¸°ÙÀÇ ¾ËÆÄºí·»µù ¼³Á¤°ªÀ» ¸ğµç ·»´õÅ¸°Ù¿¡ Àû¿ë.
-	transparentBlendDesc.RenderTarget[0].BlendEnable = true;	//¾ËÆÄºí·»µù ÇÔ.
+	transparentBlendDesc.AlphaToCoverageEnable = false;		//ì•ŒíŒŒ íˆ¬ ì»¤ë²„ë¦¬ì§€ ë¹„ì ìš©.
+	transparentBlendDesc.IndependentBlendEnable = false;		//0ë²ˆ ë Œë”íƒ€ê²Ÿì˜ ì•ŒíŒŒë¸”ë Œë”© ì„¤ì •ê°’ì„ ëª¨ë“  ë Œë”íƒ€ê²Ÿì— ì ìš©.
+	transparentBlendDesc.RenderTarget[0].BlendEnable = true;	//ì•ŒíŒŒë¸”ë Œë”© í•¨.
 	transparentBlendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	//D3D11_COLOR_WRITE_ENABLE_ALL: RGBA ¸ğµç »ö»ó¿¡ ºí·»µù Àû¿ë.
+	//D3D11_COLOR_WRITE_ENABLE_ALL: RGBA ëª¨ë“  ìƒ‰ìƒì— ë¸”ë Œë”© ì ìš©.
 
 	transparentBlendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 	//??
@@ -210,7 +210,7 @@ void EngineSubSetting()
 	transparentBlendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
 	//??
 
-	//¾ËÆÄÂÊÀº µû·Î Ã³¸®.
+	//ì•ŒíŒŒìª½ì€ ë”°ë¡œ ì²˜ë¦¬.
 	transparentBlendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	transparentBlendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
 	transparentBlendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
@@ -224,10 +224,10 @@ void EngineSubSetting()
 
 	//typedef struct D3D11_DEPTH_STENCIL_DESC
 	//{
-	//	BOOL DepthEnable;						±íÀÌÅ×½ºÆ® È°¼ºÈ­ ¿©ºÎ.
-	//	D3D11_DEPTH_WRITE_MASK DepthWriteMask;	±íÀÌÅ×½ºÆ® °á°ú¸¦ ±âÁ¸ ±íÀÌ µ¥ÀÌÅÍ¿Í ºñ±³ÇÒ Áö ¿©ºÎ??
-	//	D3D11_COMPARISON_FUNC DepthFunc;		±íÀÌÅ×½ºÆ® ¹æ½Ä.
-	//	BOOL StencilEnable;						½ºÅÙ½ÇÅ×½ºÆ®¸¦ È°¼ºÈ­ ¿©ºÎ.
+	//	BOOL DepthEnable;						ê¹Šì´í…ŒìŠ¤íŠ¸ í™œì„±í™” ì—¬ë¶€.
+	//	D3D11_DEPTH_WRITE_MASK DepthWriteMask;	ê¹Šì´í…ŒìŠ¤íŠ¸ ê²°ê³¼ë¥¼ ê¸°ì¡´ ê¹Šì´ ë°ì´í„°ì™€ ë¹„êµí•  ì§€ ì—¬ë¶€??
+	//	D3D11_COMPARISON_FUNC DepthFunc;		ê¹Šì´í…ŒìŠ¤íŠ¸ ë°©ì‹.
+	//	BOOL StencilEnable;						ìŠ¤í…ì‹¤í…ŒìŠ¤íŠ¸ë¥¼ í™œì„±í™” ì—¬ë¶€.
 	//	UINT8 StencilReadMask;					???
 	//	UINT8 StencilWriteMask;					???
 	//	D3D11_DEPTH_STENCILOP_DESC FrontFace;	???
@@ -237,16 +237,16 @@ void EngineSubSetting()
 	D3D11_DEPTH_STENCIL_DESC engineBaseDepthStencilDesc = { 0 };
 
 	engineBaseDepthStencilDesc.DepthEnable = true;
-	//true: ±íÀÌÅ×½ºÆ® ÇÔ.
+	//true: ê¹Šì´í…ŒìŠ¤íŠ¸ í•¨.
 
 	engineBaseDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL;
-	//D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL: ±âÁ¸ ±íÀÌµ¥ÀÌÅÍ¿Í ºñ±³ ÇÔ.
+	//D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL: ê¸°ì¡´ ê¹Šì´ë°ì´í„°ì™€ ë¹„êµ í•¨.
 
 	engineBaseDepthStencilDesc.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS;
-	//D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS: ºñ±³ÇßÀ»¶§ °ªÀÌ ÀÛÀº°ÍÀ» Åë°ú½ÃÅ´.
+	//D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS: ë¹„êµí–ˆì„ë•Œ ê°’ì´ ì‘ì€ê²ƒì„ í†µê³¼ì‹œí‚´.
 
 	engineBaseDepthStencilDesc.StencilEnable = false;
-	//false: ½ºÅÙ½Ç Å×½ºÆ® ¾ÈÇÔ.
+	//false: ìŠ¤í…ì‹¤ í…ŒìŠ¤íŠ¸ ì•ˆí•¨.
 
 	GameEngineDepthStencil::Create("EngineBaseDepth", engineBaseDepthStencilDesc);
 
@@ -258,17 +258,17 @@ void EngineSubSetting()
 	D3D11_DEPTH_STENCIL_DESC alwaysDepthStencilDesc = { 0 };
 
 	alwaysDepthStencilDesc.DepthEnable = true;
-	//true: ±íÀÌÅ×½ºÆ® ÇÔ.
+	//true: ê¹Šì´í…ŒìŠ¤íŠ¸ í•¨.
 
 	alwaysDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL;
-	//D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL: ±âÁ¸ ±íÀÌµ¥ÀÌÅÍ¿Í ºñ±³ ÇÔ.
-	//ÀÌ°É Á¦·Î·Î ¹Ù²Ù¸é ¿Ö ±íÀÌÅ×½ºÆ®°¡ Á¦´ë·Î ¾È µÇ´Â °É±î??
+	//D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL: ê¸°ì¡´ ê¹Šì´ë°ì´í„°ì™€ ë¹„êµ í•¨.
+	//ì´ê±¸ ì œë¡œë¡œ ë°”ê¾¸ë©´ ì™œ ê¹Šì´í…ŒìŠ¤íŠ¸ê°€ ì œëŒ€ë¡œ ì•ˆ ë˜ëŠ” ê±¸ê¹Œ??
 
 	alwaysDepthStencilDesc.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_ALWAYS;
-	//D3D11_COMPARISON_FUNC::D3D11_COMPARISON_ALWAYS: Ç×»ó Åë°ú½ÃÅ´.
+	//D3D11_COMPARISON_FUNC::D3D11_COMPARISON_ALWAYS: í•­ìƒ í†µê³¼ì‹œí‚´.
 
 	alwaysDepthStencilDesc.StencilEnable = false;
-	//false: ½ºÅÙ½Ç Å×½ºÆ® ¾ÈÇÔ.
+	//false: ìŠ¤í…ì‹¤ í…ŒìŠ¤íŠ¸ ì•ˆí•¨.
 
 	GameEngineDepthStencil::Create("AlwaysDepth", alwaysDepthStencilDesc);
 
@@ -279,89 +279,89 @@ void EngineTextureLoad()
 {
 
 	//typedef struct D3D11_SAMPLER_DESC
-	//	D3D11_FILTER Filter;					ÅØ½ºÃÄ¸¦ »ùÇÃ¸µÇÒ¶§ Àû¿ëÇÒ ÇÊÅÍ.
-	//	D3D11_TEXTURE_ADDRESS_MODE AddressU;	UVÁÂÇ¥ 0~1¹üÀ§¸¦ °¡·Î·Î ¹ş¾î³­ ¸Ş½¬¿¡ ´ëÇÑ Ã³¸® ¹æ¹ı.
-	//	D3D11_TEXTURE_ADDRESS_MODE AddressV;	UVÁÂÇ¥ 0~1¹üÀ§¸¦ ¼¼·Î·Î ¹ş¾î³­ ¸Ş½¬¿¡ ´ëÇÑ Ã³¸® ¹æ¹ı.
+	//	D3D11_FILTER Filter;					í…ìŠ¤ì³ë¥¼ ìƒ˜í”Œë§í• ë•Œ ì ìš©í•  í•„í„°.
+	//	D3D11_TEXTURE_ADDRESS_MODE AddressU;	UVì¢Œí‘œ 0~1ë²”ìœ„ë¥¼ ê°€ë¡œë¡œ ë²—ì–´ë‚œ ë©”ì‰¬ì— ëŒ€í•œ ì²˜ë¦¬ ë°©ë²•.
+	//	D3D11_TEXTURE_ADDRESS_MODE AddressV;	UVì¢Œí‘œ 0~1ë²”ìœ„ë¥¼ ì„¸ë¡œë¡œ ë²—ì–´ë‚œ ë©”ì‰¬ì— ëŒ€í•œ ì²˜ë¦¬ ë°©ë²•.
 	//	D3D11_TEXTURE_ADDRESS_MODE AddressW;	??
-	//	FLOAT MipLODBias;						¹Ó¸Ê ½ÃÀÛ ¿ÀÇÁ¼Â??
+	//	FLOAT MipLODBias;						ë°‰ë§µ ì‹œì‘ ì˜¤í”„ì…‹??
 	// 
-	//	UINT MaxAnisotropy;						ºñµî¹æ¼º ÇÊÅÍ¸µ ÃÖ´ë°ª. 1~16 ¹üÀ§·Î °¡´É. 1Àº ºñµî¹æ¼º ÇÊÅÍ¸µ »ç¿ë ¾ÈÇÔ.
-	//ÃÖ´ë°ªÀÎ 16À¸·Î ÇÏ¸é 1/16·Î Ãà¼ÒµÈ ¹Ó¸Ê ÀÌ¹ÌÁö±îÁö ¸¸µé¾î¼­ »ç¿ëÇÑ´Ù´Â °Ç°¡??
-	//Filter°¡ D3D11_FILTER_ANISOTROPIC, D3D11_FILTER_COMPARISON_ANISOTROPICÀÏ¶§¸¸ Àû¿ë.
+	//	UINT MaxAnisotropy;						ë¹„ë“±ë°©ì„± í•„í„°ë§ ìµœëŒ€ê°’. 1~16 ë²”ìœ„ë¡œ ê°€ëŠ¥. 1ì€ ë¹„ë“±ë°©ì„± í•„í„°ë§ ì‚¬ìš© ì•ˆí•¨.
+	//ìµœëŒ€ê°’ì¸ 16ìœ¼ë¡œ í•˜ë©´ 1/16ë¡œ ì¶•ì†Œëœ ë°‰ë§µ ì´ë¯¸ì§€ê¹Œì§€ ë§Œë“¤ì–´ì„œ ì‚¬ìš©í•œë‹¤ëŠ” ê±´ê°€??
+	//Filterê°€ D3D11_FILTER_ANISOTROPIC, D3D11_FILTER_COMPARISON_ANISOTROPICì¼ë•Œë§Œ ì ìš©.
 	// 
-	//	D3D11_COMPARISON_FUNC ComparisonFunc;	»ùÇÃ¸µ µ¥ÀÌÅÍ¸¦ ±âÁ¸ »ùÇÃ¸µ µ¥ÀÌÅÍ¿Í ºñ±³ÇÒ ¶§ Àû¿ëµÇ´Â ¿É¼Ç??
-	//ÇÊÅÍ ¿É¼ÇÀÌ D3D11_FILTER_COMPARISON_~ À¸·Î ½ÃÀÛÇÒ ¶§¸¸ Àû¿ë.
+	//	D3D11_COMPARISON_FUNC ComparisonFunc;	ìƒ˜í”Œë§ ë°ì´í„°ë¥¼ ê¸°ì¡´ ìƒ˜í”Œë§ ë°ì´í„°ì™€ ë¹„êµí•  ë•Œ ì ìš©ë˜ëŠ” ì˜µì…˜??
+	//í•„í„° ì˜µì…˜ì´ D3D11_FILTER_COMPARISON_~ ìœ¼ë¡œ ì‹œì‘í•  ë•Œë§Œ ì ìš©.
 	// 
-	//	FLOAT BorderColor[4];					rgba 0~1 ¹üÀ§³»¿¡¼­ °æ°è¼± »ö»óÀ» Á¤ÇÑ´Ù.
-	//AddressU, AddressV, AddressW Áß D3D11_TEXTURE_ADDRESS_BORDER¸¦ ¼±ÅÃÇÑ °÷¿¡¸¸ Àû¿ëµÈ´Ù.
+	//	FLOAT BorderColor[4];					rgba 0~1 ë²”ìœ„ë‚´ì—ì„œ ê²½ê³„ì„  ìƒ‰ìƒì„ ì •í•œë‹¤.
+	//AddressU, AddressV, AddressW ì¤‘ D3D11_TEXTURE_ADDRESS_BORDERë¥¼ ì„ íƒí•œ ê³³ì—ë§Œ ì ìš©ëœë‹¤.
 	// 
-	//	FLOAT MinLOD;							¹Ó¸Ê ·¹º§ ¹üÀ§ ÃÖÀú Á¦ÇÑ. 0ÀÌ¸é °¡Àå Å©°í »ó¼¼ÇÑ ¹Ó¸Ê ·¹º§.
-	//	FLOAT MaxLOD;							¹Ó¸Ê ·¹º§ ¹üÀ§ ÃÖ°í Á¦ÇÑ. 0ÀÌ¸é °¡Àå Å©°í »ó¼¼ÇÑ ¹Ó¸Ê ·¹º§. ¹İµå½Ã MinLODº¸´Ù Å©°Å³ª °°Àº °ªÀÌ¾î¾ß ÇÑ´Ù.
+	//	FLOAT MinLOD;							ë°‰ë§µ ë ˆë²¨ ë²”ìœ„ ìµœì € ì œí•œ. 0ì´ë©´ ê°€ì¥ í¬ê³  ìƒì„¸í•œ ë°‰ë§µ ë ˆë²¨.
+	//	FLOAT MaxLOD;							ë°‰ë§µ ë ˆë²¨ ë²”ìœ„ ìµœê³  ì œí•œ. 0ì´ë©´ ê°€ì¥ í¬ê³  ìƒì„¸í•œ ë°‰ë§µ ë ˆë²¨. ë°˜ë“œì‹œ MinLODë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì€ ê°’ì´ì–´ì•¼ í•œë‹¤.
 	//											
 	//} 	D3D11_SAMPLER_DESC;
 
 
-	//¹Ó¸Ê: ¿øº» ÅØ½ºÃ³ÀÇ ÇØ»óµµ¸¦ ÁÙÀÎ ÀÛÀº ¹öÀü ¿©·µÀ» ¹Ì¸® ¸¸µé¾î ÀúÀåÇØµÎ°í ÇÊ¿äÇÒ ¶§ ²¨³»´Ù ¾²´Â °Í. 
-	// Ä¿´Ù¶õ ¿øº» ÅØ½ºÃ³¸¸ »ç¿ëÇÑ´Ù¸é Ä«¸Ş¶ó¿¡¼­ ¸Ö¸® ÀÖ´Â ÅØ½ºÃ³ÀÇ °æ¿ì ÅØ½ºÃ³ÀÇ Á¤º¸¸¦ ¶ç¾ö¶ç¾ö ÀĞ°Ô µÇ¾î¼­ º¸±â¿¡µµ ÁÁÁö ¾Ê°í 
-	// ¸Ş¸ğ¸® Ä³½ÃÀÇ È¿À²µµ ±Ş°İÇÏ°Ô ¶³¾îÁø´Ù. µû¶ó¼­ ÅØ½ºÃ³ ´Ü°è¿¡¼­ ´Ù¿î½ºÄÉÀÏ¸µÀ» ÅëÇÑ ¾ÈÆ¼¾Ù¸®¾î½ÌÀ» ÇØÁÙ ÇÊ¿ä°¡ ÀÖ´Âµ¥, 
-	// ÀÌ°ÍÀ» ¹Ì¸® ÇØµÎ´Â °ÍÀÌ ¹Ó¸ÅÇÎ, ¹Ó¸ÅÇÎÀ» À§ÇÑ ÅØ½ºÃ³ ¸ğÀ½ÀÌ ¹Ó¸ÊÀÌ´Ù.
+	//ë°‰ë§µ: ì›ë³¸ í…ìŠ¤ì²˜ì˜ í•´ìƒë„ë¥¼ ì¤„ì¸ ì‘ì€ ë²„ì „ ì—¬ëŸ¿ì„ ë¯¸ë¦¬ ë§Œë“¤ì–´ ì €ì¥í•´ë‘ê³  í•„ìš”í•  ë•Œ êº¼ë‚´ë‹¤ ì“°ëŠ” ê²ƒ. 
+	// ì»¤ë‹¤ë€ ì›ë³¸ í…ìŠ¤ì²˜ë§Œ ì‚¬ìš©í•œë‹¤ë©´ ì¹´ë©”ë¼ì—ì„œ ë©€ë¦¬ ìˆëŠ” í…ìŠ¤ì²˜ì˜ ê²½ìš° í…ìŠ¤ì²˜ì˜ ì •ë³´ë¥¼ ë„ì—„ë„ì—„ ì½ê²Œ ë˜ì–´ì„œ ë³´ê¸°ì—ë„ ì¢‹ì§€ ì•Šê³  
+	// ë©”ëª¨ë¦¬ ìºì‹œì˜ íš¨ìœ¨ë„ ê¸‰ê²©í•˜ê²Œ ë–¨ì–´ì§„ë‹¤. ë”°ë¼ì„œ í…ìŠ¤ì²˜ ë‹¨ê³„ì—ì„œ ë‹¤ìš´ìŠ¤ì¼€ì¼ë§ì„ í†µí•œ ì•ˆí‹°ì•¨ë¦¬ì–´ì‹±ì„ í•´ì¤„ í•„ìš”ê°€ ìˆëŠ”ë°, 
+	// ì´ê²ƒì„ ë¯¸ë¦¬ í•´ë‘ëŠ” ê²ƒì´ ë°‰ë§¤í•‘, ë°‰ë§¤í•‘ì„ ìœ„í•œ í…ìŠ¤ì²˜ ëª¨ìŒì´ ë°‰ë§µì´ë‹¤.
 
 	D3D11_SAMPLER_DESC pointClampSamplerDesc = { };
 
 	pointClampSamplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT;
 	//D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT: 
-	// Ãà¼Ò(Minification), È®´ë(Magnification), ¹Ó ·¹º§ »ùÇÃ¸µÀ» ÀüºÎ Æ÷ÀÎÅÍ »ùÇÃ¸µÀ¸·Î ÇÑ´Ù.
-	//Æ÷Åä¼¥ È®´ë/Ãà¼ÒÀÇ ÃÖ´ÜÀÔÁ¡(Nearest Neighbor. ÁÖº¯ »öÀ» ¼¯Áö ¾Ê°í ±× Áß ÇÏ³ª¸¸ °ñ¶ó¼­ ¾¸) ¿É¼Ç°ú °°Àº ±â´É.
+	// ì¶•ì†Œ(Minification), í™•ëŒ€(Magnification), ë°‰ ë ˆë²¨ ìƒ˜í”Œë§ì„ ì „ë¶€ í¬ì¸í„° ìƒ˜í”Œë§ìœ¼ë¡œ í•œë‹¤.
+	//í¬í† ìƒµ í™•ëŒ€/ì¶•ì†Œì˜ ìµœë‹¨ì…ì (Nearest Neighbor. ì£¼ë³€ ìƒ‰ì„ ì„ì§€ ì•Šê³  ê·¸ ì¤‘ í•˜ë‚˜ë§Œ ê³¨ë¼ì„œ ì”€) ì˜µì…˜ê³¼ ê°™ì€ ê¸°ëŠ¥.
 
 	//D3D11_FILTER::D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR:
-	//Ãà¼Ò(Minification), È®´ë(Magnification)´Â Æ÷ÀÎÅÍ »ùÇÃ¸µÀ¸·Î, ¹Ó ·¹º§ »ùÇÃ¸µÀº ¼±Çüº¸°£ÇÑ´Ù.
+	//ì¶•ì†Œ(Minification), í™•ëŒ€(Magnification)ëŠ” í¬ì¸í„° ìƒ˜í”Œë§ìœ¼ë¡œ, ë°‰ ë ˆë²¨ ìƒ˜í”Œë§ì€ ì„ í˜•ë³´ê°„í•œë‹¤.
 
 	//D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_LINEAR:
-	//Ãà¼Ò(Minification), È®´ë(Magnification), ¹Ó ·¹º§ »ùÇÃ¸µÀ» ÀüºÎ ¼±Çüº¸°£ ÇÑ´Ù. 
+	//ì¶•ì†Œ(Minification), í™•ëŒ€(Magnification), ë°‰ ë ˆë²¨ ìƒ˜í”Œë§ì„ ì „ë¶€ ì„ í˜•ë³´ê°„ í•œë‹¤. 
 
 	//D3D11_FILTER::D3D11_FILTER_ANISOTROPIC:
-	// ºñµî¹æ¼º(ANISOTROPIC) ÇÊÅÍ¸µ: »óÇÏÁÂ¿ì¸¦ µ¿ÀÏÇÑ ºñÀ²·Î È®´ë Ãà¼ÒÇÑ ¹Ó¸Ê ÀÌ¹ÌÁö¸¦ »ç¿ëÇÏ´Â °ÍÀÌ ¾Æ´Ï¶ó, 
-	// »óÇÏ³ª ÁÂ¿ì ºñÀ²À» ´Ù¸¥ ºñÀ²·Î È®´ë Ãà¼ÒÇÑ ¹Ó¸ÊÀÌ¹ÌÁö¸¦ »ç¿ëÇØ¼­ Ä«¸Ş¶ó°¡ ´Ù¾çÇÑ À§Ä¡·Î ¿òÁ÷¿©µµ ±×¿¡ ¸Â´Â ÀûÀıÇÑ ¹Ó¸ÊÀ» »ç¿ëÇÏ´Â ±â¹ı.
+	// ë¹„ë“±ë°©ì„±(ANISOTROPIC) í•„í„°ë§: ìƒí•˜ì¢Œìš°ë¥¼ ë™ì¼í•œ ë¹„ìœ¨ë¡œ í™•ëŒ€ ì¶•ì†Œí•œ ë°‰ë§µ ì´ë¯¸ì§€ë¥¼ ì‚¬ìš©í•˜ëŠ” ê²ƒì´ ì•„ë‹ˆë¼, 
+	// ìƒí•˜ë‚˜ ì¢Œìš° ë¹„ìœ¨ì„ ë‹¤ë¥¸ ë¹„ìœ¨ë¡œ í™•ëŒ€ ì¶•ì†Œí•œ ë°‰ë§µì´ë¯¸ì§€ë¥¼ ì‚¬ìš©í•´ì„œ ì¹´ë©”ë¼ê°€ ë‹¤ì–‘í•œ ìœ„ì¹˜ë¡œ ì›€ì§ì—¬ë„ ê·¸ì— ë§ëŠ” ì ì ˆí•œ ë°‰ë§µì„ ì‚¬ìš©í•˜ëŠ” ê¸°ë²•.
 
-	//ÀÌ ¿Ü¿¡µµ ¸¹Àº ÇÊÅÍ¸µ ¿É¼ÇµéÀÌ ÀÖ´Ù. 
+	//ì´ ì™¸ì—ë„ ë§ì€ í•„í„°ë§ ì˜µì…˜ë“¤ì´ ìˆë‹¤. 
 
 
 	//typedef
-	//enum D3D11_TEXTURE_ADDRESS_MODE			UVÁÂÇ¥¹üÀ§ 0~1À» ¹ş¾î³­ ÁÂÇ¥ÀÇ ¸Ş½¬ °ø°£À» µ¤´Â ¹æ½Ä.
+	//enum D3D11_TEXTURE_ADDRESS_MODE			UVì¢Œí‘œë²”ìœ„ 0~1ì„ ë²—ì–´ë‚œ ì¢Œí‘œì˜ ë©”ì‰¬ ê³µê°„ì„ ë®ëŠ” ë°©ì‹.
 	//{
-	//	D3D11_TEXTURE_ADDRESS_WRAP = 1,			ÅØ½ºÃÄ¸¦ ±×´ë·Î º¹»çÇØ¼­ ±×¸°´Ù.	
-	//	D3D11_TEXTURE_ADDRESS_MIRROR = 2,		ÁÂ¿ì/»óÇÏ µÚÁı¾î¼­ ±×¸°´Ù.
-	//	D3D11_TEXTURE_ADDRESS_CLAMP = 3,		±×¸®Áö ¾Ê´Â´Ù.
-	//	D3D11_TEXTURE_ADDRESS_BORDER = 4,		ÅØ½ºÃÄ ÇØ´ç ¹æÇâ °æ°è¼±ÀÇ »öÀ» ´Ã·Á ±×¸°´Ù
-	//	D3D11_TEXTURE_ADDRESS_MIRROR_ONCE = 5	ÁÂ¿ì/»óÇÏ¸¦ µÚÁı¾î¼­ ÇÑ¹ø¸¸ ±×¸°´Ù.
+	//	D3D11_TEXTURE_ADDRESS_WRAP = 1,			í…ìŠ¤ì³ë¥¼ ê·¸ëŒ€ë¡œ ë³µì‚¬í•´ì„œ ê·¸ë¦°ë‹¤.	
+	//	D3D11_TEXTURE_ADDRESS_MIRROR = 2,		ì¢Œìš°/ìƒí•˜ ë’¤ì§‘ì–´ì„œ ê·¸ë¦°ë‹¤.
+	//	D3D11_TEXTURE_ADDRESS_CLAMP = 3,		ê·¸ë¦¬ì§€ ì•ŠëŠ”ë‹¤.
+	//	D3D11_TEXTURE_ADDRESS_BORDER = 4,		í…ìŠ¤ì³ í•´ë‹¹ ë°©í–¥ ê²½ê³„ì„ ì˜ ìƒ‰ì„ ëŠ˜ë ¤ ê·¸ë¦°ë‹¤
+	//	D3D11_TEXTURE_ADDRESS_MIRROR_ONCE = 5	ì¢Œìš°/ìƒí•˜ë¥¼ ë’¤ì§‘ì–´ì„œ í•œë²ˆë§Œ ê·¸ë¦°ë‹¤.
 	//} 	D3D11_TEXTURE_ADDRESS_MODE;
 
 	pointClampSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
 	pointClampSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
 	pointClampSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
 
-	//D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP°¡ ±âº»ÀÎ ÀÌÀ¯: 
-	// ½Ç¼ö ¿ÀÂ÷·Î UV°ªÀÌ 1À» ÃÊ°úÇØµµ ´õ ±×¸®Áö ¾Ê°í ¹«½ÃÇØ ¹ö¸®¹Ç·Î °¡Àå ±ò²ûÇÏ°Ô ³ª¿Â´Ù.
+	//D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMPê°€ ê¸°ë³¸ì¸ ì´ìœ : 
+	// ì‹¤ìˆ˜ ì˜¤ì°¨ë¡œ UVê°’ì´ 1ì„ ì´ˆê³¼í•´ë„ ë” ê·¸ë¦¬ì§€ ì•Šê³  ë¬´ì‹œí•´ ë²„ë¦¬ë¯€ë¡œ ê°€ì¥ ê¹”ë”í•˜ê²Œ ë‚˜ì˜¨ë‹¤.
 
 
 	pointClampSamplerDesc.MipLODBias = 0.f;
-	pointClampSamplerDesc.MaxAnisotropy = 1;	//1: ºñµî¹æ¼º ¹Ó¸Ê »ı¼º ¾ÈÇÔ.
+	pointClampSamplerDesc.MaxAnisotropy = 1;	//1: ë¹„ë“±ë°©ì„± ë°‰ë§µ ìƒì„± ì•ˆí•¨.
 
 	//	typedef 
 	//	enum D3D11_COMPARISON_FUNC
 	//	{
-	//		D3D11_COMPARISON_NEVER = 1,			¾Æ¹«°Íµµ Åë°ú½ÃÅ°Áö ¾ÊÀ½.
-	//		D3D11_COMPARISON_LESS = 2,			°ªÀÌ ÀÛÀº °Í¸¸ Åë°ú.
-	//		D3D11_COMPARISON_EQUAL = 3,			°ªÀÌ °°Àº °Í¸¸ Åë°ú.
-	//		D3D11_COMPARISON_LESS_EQUAL = 4,	°ªÀÌ ÀÛ°Å³ª °°Àº °Í¸¸ Åë°ú.
-	//		D3D11_COMPARISON_GREATER = 5,		°ªÀÌ Å« °Í¸¸ Åë°ú.
-	//		D3D11_COMPARISON_NOT_EQUAL = 6,		°ªÀÌ °°Áö ¾ÊÀº °Í¸¸ Åë°ú.
-	//		D3D11_COMPARISON_GREATER_EQUAL = 7,	°ªÀÌ Å©°Å³ª °°Àº °Í¸¸ Åë°ú.
-	//		D3D11_COMPARISON_ALWAYS = 8			¾ğÁ¦³ª Åë°ú.
+	//		D3D11_COMPARISON_NEVER = 1,			ì•„ë¬´ê²ƒë„ í†µê³¼ì‹œí‚¤ì§€ ì•ŠìŒ.
+	//		D3D11_COMPARISON_LESS = 2,			ê°’ì´ ì‘ì€ ê²ƒë§Œ í†µê³¼.
+	//		D3D11_COMPARISON_EQUAL = 3,			ê°’ì´ ê°™ì€ ê²ƒë§Œ í†µê³¼.
+	//		D3D11_COMPARISON_LESS_EQUAL = 4,	ê°’ì´ ì‘ê±°ë‚˜ ê°™ì€ ê²ƒë§Œ í†µê³¼.
+	//		D3D11_COMPARISON_GREATER = 5,		ê°’ì´ í° ê²ƒë§Œ í†µê³¼.
+	//		D3D11_COMPARISON_NOT_EQUAL = 6,		ê°’ì´ ê°™ì§€ ì•Šì€ ê²ƒë§Œ í†µê³¼.
+	//		D3D11_COMPARISON_GREATER_EQUAL = 7,	ê°’ì´ í¬ê±°ë‚˜ ê°™ì€ ê²ƒë§Œ í†µê³¼.
+	//		D3D11_COMPARISON_ALWAYS = 8			ì–¸ì œë‚˜ í†µê³¼.
 	//	} 	D3D11_COMPARISON_FUNC;	
 
 	pointClampSamplerDesc.ComparisonFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_NEVER;
-	//¾ÖÃÊ¿¡ ÇÊÅÍ ¿É¼ÇÀ» ºñ±³ÇÏÁö ¾Ê´Â ¿É¼ÇÀ¸·Î Çß±â ¶§¹®¿¡ ¹» °ñ¶óµµ ¾îÂ÷ÇÇ Àû¿ëµÇÁö ¾Ê´Â´Ù.
+	//ì• ì´ˆì— í•„í„° ì˜µì…˜ì„ ë¹„êµí•˜ì§€ ì•ŠëŠ” ì˜µì…˜ìœ¼ë¡œ í–ˆê¸° ë•Œë¬¸ì— ë­˜ ê³¨ë¼ë„ ì–´ì°¨í”¼ ì ìš©ë˜ì§€ ì•ŠëŠ”ë‹¤.
 
 	pointClampSamplerDesc.MinLOD = -FLT_MAX;
 	pointClampSamplerDesc.MaxLOD = FLT_MAX;
@@ -414,8 +414,8 @@ void EngineTextureLoad()
 	//but the sampler bound at this slot is configured for comparison filtering.  
 	//This mismatch will produce undefined behavior if the sampler is used (e.g. it is not skipped due to shader code branching).
 	//[ EXECUTION ERROR #390: DEVICE_DRAW_SAMPLER_MISMATCH]
-	//->»ùÇÃ·¯ ÇÊÅÍ ¿É¼ÇÀº D3D11_FILTER::D3D11_FILTER_COMPARISON_~À¸·Î ¼¼ÆÃÇßÁö¸¸, 
-	// HLSLÄÚµå»óÀ¸·Î´Â Àú ÇÊÅÍ ¿É¼ÇÀ» È°¿ëÇÏÁö ¾Ê¾ÒÀ» ¶§ ³ª¿À´Â °æ°í¶ó°í ÇÑ´Ù..
+	//->ìƒ˜í”ŒëŸ¬ í•„í„° ì˜µì…˜ì€ D3D11_FILTER::D3D11_FILTER_COMPARISON_~ìœ¼ë¡œ ì„¸íŒ…í–ˆì§€ë§Œ, 
+	// HLSLì½”ë“œìƒìœ¼ë¡œëŠ” ì € í•„í„° ì˜µì…˜ì„ í™œìš©í•˜ì§€ ì•Šì•˜ì„ ë•Œ ë‚˜ì˜¤ëŠ” ê²½ê³ ë¼ê³  í•œë‹¤..
 
 
 	GameEngineDirectory currentDir;
@@ -546,22 +546,22 @@ void EngineMaterial()
 
 void EngineMesh()
 {
-	//±âº» »ç°¢Çü.
+	//ê¸°ë³¸ ì‚¬ê°í˜•.
 	std::vector<GameEngineVertex> rectVertex;
 	rectVertex.reserve(4);
-	rectVertex.push_back({ float4(-0.5f, 0.5f), float4::Black, float4(0, 0), float4::Back });	//0¹ø Á¡.
-	rectVertex.push_back({ float4(0.5f, 0.5f), float4::Black, float4(1, 0), float4::Back });	//1¹ø Á¡.
-	rectVertex.push_back({ float4(0.5f, -0.5f), float4::Black, float4(1, 1), float4::Back });	//2¹ø Á¡.
-	rectVertex.push_back({ float4(-0.5f, -0.5f), float4::Black, float4(0, 1), float4::Back });	//3¹ø Á¡.
+	rectVertex.push_back({ float4(-0.5f, 0.5f), float4::Black, float4(0, 0), float4::Back });	//0ë²ˆ ì .
+	rectVertex.push_back({ float4(0.5f, 0.5f), float4::Black, float4(1, 0), float4::Back });	//1ë²ˆ ì .
+	rectVertex.push_back({ float4(0.5f, -0.5f), float4::Black, float4(1, 1), float4::Back });	//2ë²ˆ ì .
+	rectVertex.push_back({ float4(-0.5f, -0.5f), float4::Black, float4(0, 1), float4::Back });	//3ë²ˆ ì .
 	GameEngineVertexBuffer::Create("RectVertex", rectVertex);
 
 	std::vector<int> rectIndex;
 	rectIndex.reserve(6);
-	//1¹ø »ï°¢Çü.
+	//1ë²ˆ ì‚¼ê°í˜•.
 	rectIndex.push_back(0);
 	rectIndex.push_back(1);
 	rectIndex.push_back(2);
-	//2¹ø »ï°¢Çü.
+	//2ë²ˆ ì‚¼ê°í˜•.
 	rectIndex.push_back(0);
 	rectIndex.push_back(2);
 	rectIndex.push_back(3);
@@ -573,22 +573,22 @@ void EngineMesh()
 
 
 
-	//À©µµ¿ì ÀüÃ¼ Å©±â »ç°¢Çü.
+	//ìœˆë„ìš° ì „ì²´ í¬ê¸° ì‚¬ê°í˜•.
 	std::vector<GameEngineVertex> fullrectVertex;
 	fullrectVertex.reserve(4);
-	fullrectVertex.push_back({ float4(-1.f, 1.f), float4::Black, float4(0, 0) });	//0¹ø Á¡.
-	fullrectVertex.push_back({ float4(1.f, 1.f), float4::Black, float4(1, 0)});		//1¹ø Á¡.
-	fullrectVertex.push_back({ float4(1.f, -1.f), float4::Black, float4(1, 1) });	//2¹ø Á¡.
-	fullrectVertex.push_back({ float4(-1.f, -1.f), float4::Black, float4(0, 1) });	//3¹ø Á¡.
+	fullrectVertex.push_back({ float4(-1.f, 1.f), float4::Black, float4(0, 0) });	//0ë²ˆ ì .
+	fullrectVertex.push_back({ float4(1.f, 1.f), float4::Black, float4(1, 0)});		//1ë²ˆ ì .
+	fullrectVertex.push_back({ float4(1.f, -1.f), float4::Black, float4(1, 1) });	//2ë²ˆ ì .
+	fullrectVertex.push_back({ float4(-1.f, -1.f), float4::Black, float4(0, 1) });	//3ë²ˆ ì .
 	GameEngineVertexBuffer::Create("FullrectVertex", fullrectVertex);
 
 	std::vector<int> fullrectIndex;
 	fullrectIndex.reserve(6);
-	//1¹ø »ï°¢Çü.
+	//1ë²ˆ ì‚¼ê°í˜•.
 	fullrectIndex.push_back(0);
 	fullrectIndex.push_back(1);
 	fullrectIndex.push_back(2);
-	//2¹ø »ï°¢Çü.
+	//2ë²ˆ ì‚¼ê°í˜•.
 	fullrectIndex.push_back(0);
 	fullrectIndex.push_back(2);
 	fullrectIndex.push_back(3);
@@ -596,70 +596,70 @@ void EngineMesh()
 
 	GameEngineMesh::Create("Fullrect", "FullrectVertex", "FullrectIndex");
 
-	//±âº» À°¸éÃ¼.
+	//ê¸°ë³¸ ìœ¡ë©´ì²´.
 	std::vector<GameEngineVertex> boxVertex;
 	boxVertex.reserve(8);
-	boxVertex.push_back({ float4(-0.5f, 0.5f, -0.5f), float4::Black, float4(0, 0), float4(-0.5773f, 0.5773f, -0.5773f) });		//0¹ø Á¡.
-	boxVertex.push_back({ float4(0.5f, 0.5f, -0.5f), float4::Black, float4(1, 0),  float4(0.5773f, 0.5773f, -0.5773f) });		//1¹ø Á¡.
-	boxVertex.push_back({ float4(0.5f, -0.5f, -0.5f), float4::Black, float4(1, 1), float4(0.5773f, -0.5773f, -0.5773f) });		//2¹ø Á¡.
-	boxVertex.push_back({ float4(-0.5f, -0.5f, -0.5f), float4::Black, float4(0, 1), float4(-0.5773f, -0.5773f, -0.5773f) });	//3¹ø Á¡.
+	boxVertex.push_back({ float4(-0.5f, 0.5f, -0.5f), float4::Black, float4(0, 0), float4(-0.5773f, 0.5773f, -0.5773f) });		//0ë²ˆ ì .
+	boxVertex.push_back({ float4(0.5f, 0.5f, -0.5f), float4::Black, float4(1, 0),  float4(0.5773f, 0.5773f, -0.5773f) });		//1ë²ˆ ì .
+	boxVertex.push_back({ float4(0.5f, -0.5f, -0.5f), float4::Black, float4(1, 1), float4(0.5773f, -0.5773f, -0.5773f) });		//2ë²ˆ ì .
+	boxVertex.push_back({ float4(-0.5f, -0.5f, -0.5f), float4::Black, float4(0, 1), float4(-0.5773f, -0.5773f, -0.5773f) });	//3ë²ˆ ì .
 
-	boxVertex.push_back({ float4(0.5f, 0.5f, 0.5f), float4::Black, float4(0, 1), float4(0.5773f, 0.5773f, 0.5773f) });		//4¹ø Á¡.
-	boxVertex.push_back({ float4(-0.5f, 0.5f, 0.5f), float4::Black, float4(1, 1), float4(-0.5773f, 0.5773f, 0.5773f) });		//5¹ø Á¡.
-	boxVertex.push_back({ float4(-0.5f, -0.5f, 0.5f), float4::Black, float4(1, 0), float4(-0.5773f, -0.5776f, 0.5776f) });		//6¹ø Á¡.
-	boxVertex.push_back({ float4(0.5f, -0.5f, 0.5f), float4::Black, float4(0, 0), float4(0.5773f, -0.5773f, 0.5773f) });		//7¹ø Á¡.
+	boxVertex.push_back({ float4(0.5f, 0.5f, 0.5f), float4::Black, float4(0, 1), float4(0.5773f, 0.5773f, 0.5773f) });		//4ë²ˆ ì .
+	boxVertex.push_back({ float4(-0.5f, 0.5f, 0.5f), float4::Black, float4(1, 1), float4(-0.5773f, 0.5773f, 0.5773f) });		//5ë²ˆ ì .
+	boxVertex.push_back({ float4(-0.5f, -0.5f, 0.5f), float4::Black, float4(1, 0), float4(-0.5773f, -0.5776f, 0.5776f) });		//6ë²ˆ ì .
+	boxVertex.push_back({ float4(0.5f, -0.5f, 0.5f), float4::Black, float4(0, 0), float4(0.5773f, -0.5773f, 0.5773f) });		//7ë²ˆ ì .
 	GameEngineVertexBuffer::Create("BoxVertex", boxVertex);
 
 	std::vector<int> boxIndex;
 	rectIndex.reserve(36);
 
-	//Á¤¸é 1¹ø »ï°¢Çü.
+	//ì •ë©´ 1ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(0);
 	boxIndex.push_back(1);
 	boxIndex.push_back(2);
-	//Á¤¸é 2¹ø »ï°¢Çü.
+	//ì •ë©´ 2ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(0);
 	boxIndex.push_back(2);
 	boxIndex.push_back(3);
-	//ÈÄ¸é 1¹ø »ï°¢Çü.
+	//í›„ë©´ 1ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(4);
 	boxIndex.push_back(5);
 	boxIndex.push_back(6);
-	//ÈÄ¸é 2¹ø »ï°¢Çü.
+	//í›„ë©´ 2ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(4);
 	boxIndex.push_back(6);
 	boxIndex.push_back(7);
 
-	//ÁÂ¸é 1¹ø »ï°¢Çü.
+	//ì¢Œë©´ 1ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(5);
 	boxIndex.push_back(0);
 	boxIndex.push_back(3);
-	//ÁÂ¸é 2¹ø »ï°¢Çü.
+	//ì¢Œë©´ 2ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(5);
 	boxIndex.push_back(3);
 	boxIndex.push_back(6);
-	//¿ì¸é 1¹ø »ï°¢Çü.
+	//ìš°ë©´ 1ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(1);
 	boxIndex.push_back(4);
 	boxIndex.push_back(7);
-	//¿ì¸é 2¹ø »ï°¢Çü.
+	//ìš°ë©´ 2ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(1);
 	boxIndex.push_back(7);
 	boxIndex.push_back(2);
 
-	//»ó¸é 1¹ø »ï°¢Çü.
+	//ìƒë©´ 1ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(5);
 	boxIndex.push_back(4);
 	boxIndex.push_back(1);
-	//»ó¸é 2¹ø »ï°¢Çü.
+	//ìƒë©´ 2ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(5);
 	boxIndex.push_back(1);
 	boxIndex.push_back(0);
-	//ÇÏ¸é 1¹ø »ï°¢Çü.
+	//í•˜ë©´ 1ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(2);
 	boxIndex.push_back(3);
 	boxIndex.push_back(6);
-	//ÇÏ¸é 2¹ø »ï°¢Çü.
+	//í•˜ë©´ 2ë²ˆ ì‚¼ê°í˜•.
 	boxIndex.push_back(2);
 	boxIndex.push_back(6);
 	boxIndex.push_back(7);
@@ -677,12 +677,12 @@ void EngineMesh()
 		std::vector<UINT> IBVector;
 
 		float Radius = 0.5f;
-		// ºÏ±ØÁ¡ºÎÅÍ ½ÃÀÛÇÕ´Ï´Ù.
+		// ë¶ê·¹ì ë¶€í„° ì‹œì‘í•©ë‹ˆë‹¤.
 		V.POSITION = float4(0.0f, Radius, 0.0f, 1.0f);
 		V.TEXCOORD = float4(0.5f, 0.0f);
-		// ³ë¸» ¹éÅÍ È¤Àº ¹ı¼±¹éÅÍ¶ó°í ºÒ¸®¸ç
-		// ¸é¿¡ ¼öÁ÷ÀÎ º¤ÅÍ¸¦ ÀÇ¹ÌÇÏ°Ô µÈ´Ù.
-		// ºûÀ» ¹İ»çÇÒ¶§ ÇÊ¼ö.
+		// ë…¸ë§ ë°±í„° í˜¹ì€ ë²•ì„ ë°±í„°ë¼ê³  ë¶ˆë¦¬ë©°
+		// ë©´ì— ìˆ˜ì§ì¸ ë²¡í„°ë¥¼ ì˜ë¯¸í•˜ê²Œ ëœë‹¤.
+		// ë¹›ì„ ë°˜ì‚¬í• ë•Œ í•„ìˆ˜.
 		V.NORMAL = float4(0.0f, Radius, 0.0f, 1.0f);
 		V.NORMAL.Normalize3D();
 		V.NORMAL.w = 0.0f;
@@ -691,19 +691,19 @@ void EngineMesh()
 
 		VBVector.push_back(V);
 
-		UINT iStackCount = 40; // °¡·Î ºĞÇÒ °³¼öÀÔ´Ï´Ù.
-		UINT iSliceCount = 40; // ¼¼·ÎºĞÇÒ °³¼ö
+		UINT iStackCount = 40; // ê°€ë¡œ ë¶„í•  ê°œìˆ˜ì…ë‹ˆë‹¤.
+		UINT iSliceCount = 40; // ì„¸ë¡œë¶„í•  ê°œìˆ˜
 
 		float yRotAngle = GameEngineMath::PI / (float)iStackCount;
 		float zRotAngle = (GameEngineMath::PI * 2) / (float)iSliceCount;
 
-		// UVÀÇ °¡·Î¼¼·Î °£°İ°ªÀ» ±¸ÇÑ´Ù.
+		// UVì˜ ê°€ë¡œì„¸ë¡œ ê°„ê²©ê°’ì„ êµ¬í•œë‹¤.
 		float yUvRatio = 1.0f / (float)iStackCount;
 		float zUvRatio = 1.0f / (float)iStackCount;
 
 		for (UINT y = 1; y < iStackCount; ++y)
 		{
-			// °¢ °£°İ¿¡ ´ëÇÑ °¢µµ°ª
+			// ê° ê°„ê²©ì— ëŒ€í•œ ê°ë„ê°’
 			float phi = y * yRotAngle;
 			for (UINT z = 0; z < iSliceCount + 1; ++z)
 			{
@@ -712,7 +712,7 @@ void EngineMesh()
 					Radius * sinf(y * yRotAngle) * cosf(z * zRotAngle),
 					Radius * cosf(y * yRotAngle),
 					Radius * sinf(y * yRotAngle) * sinf(z * zRotAngle),
-					1.0f // À§Ä¡ Å©±â °ª¿¡ ¿µÇâÀ» ÁÖ±â À§ÇØ¼­
+					1.0f // ìœ„ì¹˜ í¬ê¸° ê°’ì— ì˜í–¥ì„ ì£¼ê¸° ìœ„í•´ì„œ
 				};
 
 				// V.Pos *= GameEngineRandom::RandomFloat(-0.9f, 0.1f);
@@ -735,7 +735,7 @@ void EngineMesh()
 			}
 		}
 
-		// ³²±ØÁ¡
+		// ë‚¨ê·¹ì 
 		V.POSITION = float4(0.0f, -Radius, 0.0f, 1.0f);
 		V.TEXCOORD = float4(0.5f, 1.0f);
 		V.NORMAL = float4(0.0f, -Radius, 0.0f, 1.0f);
@@ -745,13 +745,13 @@ void EngineMesh()
 		V.BINORMAL = float4(0.0f, 0.0f, -1.0f, 0.0f);
 		VBVector.push_back(V);
 
-		// ÀÎµ¦½º ¹öÆÛ¸¦ ¸¸µì´Ï´Ù.
+		// ì¸ë±ìŠ¤ ë²„í¼ë¥¼ ë§Œë“­ë‹ˆë‹¤.
 		IBVector.clear();
 
-		// ºÏ±ØÁ¡À» ÀÌ·ç´Â Á¡À» ¸¸µå´Â°Ç.
+		// ë¶ê·¹ì ì„ ì´ë£¨ëŠ” ì ì„ ë§Œë“œëŠ”ê±´.
 		for (UINT i = 0; i < iSliceCount; i++)
 		{
-			// ½ÃÀÛÀº ¹«Á¶°Ç ºÏ±ØÁ¡
+			// ì‹œì‘ì€ ë¬´ì¡°ê±´ ë¶ê·¹ì 
 			IBVector.push_back(0);
 			IBVector.push_back(i + 2);
 			IBVector.push_back(i + 1);
@@ -772,11 +772,11 @@ void EngineMesh()
 			}
 		}
 
-		// ¸¶Áö¸·À¸·Î ³²±ØÁ¡ ÀÎµ¦½º
+		// ë§ˆì§€ë§‰ìœ¼ë¡œ ë‚¨ê·¹ì  ì¸ë±ìŠ¤
 		UINT iBotIndex = (UINT)VBVector.size() - 1;
 		for (UINT i = 0; i < iSliceCount; i++)
 		{
-			// ½ÃÀÛÀº ¹«Á¶°Ç ºÏ±ØÁ¡
+			// ì‹œì‘ì€ ë¬´ì¡°ê±´ ë¶ê·¹ì 
 			IBVector.push_back(iBotIndex);
 			IBVector.push_back(iBotIndex - (i + 2));
 			IBVector.push_back(iBotIndex - (i + 1));
@@ -791,7 +791,7 @@ void EngineMesh()
 
 
 
-	GameEngineFont::Load("µ¸¿ò");
+	GameEngineFont::Load("ë‹ì›€");
 }
 
 void ShaderCompile()
@@ -812,18 +812,18 @@ void ShaderCompile()
 
 void GameEngineCore::InitializeEngineResource()
 {
-	EngineTextureLoad();	//»ùÇÃ·¯¸¦ »ı¼ºÇÏ°í ÅØ½ºÃ³¸¦ ºÒ·¯¿À´Â ÇÔ¼ö.
-	EngineInputLayout();	//¿£Áø ±âº»Á¦°ø ÀÎÇ² ·¹ÀÌ¾Æ¿ôÀ» ÀúÀåÇÏ´Â ÇÔ¼ö.
-	EngineMesh();			//¿£Áø ±âº»Á¦°ø »ç°¢Çü°ú À°¸éÃ¼ ¸Ş½¬¸¦ »ı¼ºÇÏ´Â ÇÔ¼ö.
-	EngineSubSetting();		//¿£Áø ±âº»Á¦°ø ·¡½ºÅÍ¶óÀÌÀú, ºí·»µå, ±íÀÌ½ºÅÙ½ÇÀ» »ı¼ºÇÏ´Â ÇÔ¼ö.
-	ShaderCompile();		//¿£Áø ±âº»Á¦°ø HLSLÄÚµå¸¦ ÄÄÆÄÀÏÇØ¼­ ¼ÎÀÌ´õ¿Í ¼ÎÀÌ´õ¸®¼Ò½º¸¦ »ı¼º, ¿¬°áÇÏ´Â ÇÔ¼ö.
+	EngineTextureLoad();	//ìƒ˜í”ŒëŸ¬ë¥¼ ìƒì„±í•˜ê³  í…ìŠ¤ì²˜ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ” í•¨ìˆ˜.
+	EngineInputLayout();	//ì—”ì§„ ê¸°ë³¸ì œê³µ ì¸í’‹ ë ˆì´ì•„ì›ƒì„ ì €ì¥í•˜ëŠ” í•¨ìˆ˜.
+	EngineMesh();			//ì—”ì§„ ê¸°ë³¸ì œê³µ ì‚¬ê°í˜•ê³¼ ìœ¡ë©´ì²´ ë©”ì‰¬ë¥¼ ìƒì„±í•˜ëŠ” í•¨ìˆ˜.
+	EngineSubSetting();		//ì—”ì§„ ê¸°ë³¸ì œê³µ ë˜ìŠ¤í„°ë¼ì´ì €, ë¸”ë Œë“œ, ê¹Šì´ìŠ¤í…ì‹¤ì„ ìƒì„±í•˜ëŠ” í•¨ìˆ˜.
+	ShaderCompile();		//ì—”ì§„ ê¸°ë³¸ì œê³µ HLSLì½”ë“œë¥¼ ì»´íŒŒì¼í•´ì„œ ì…°ì´ë”ì™€ ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±, ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 
-	EngineMaterial();		//¿£Áø ±âº»Á¦°ø ¸¶Å×¸®¾óµéÀ» »ı¼ºÇÏ´Â ÇÔ¼ö.
+	EngineMaterial();		//ì—”ì§„ ê¸°ë³¸ì œê³µ ë§ˆí…Œë¦¬ì–¼ë“¤ì„ ìƒì„±í•˜ëŠ” í•¨ìˆ˜.
 }
 
 void GameEngineCore::DestroyEngineResource()
 {
-	//»ç°¢Çü, À°¸éÃ¼, ¿¡·¯ÅØ½ºÃÄ µîµî, ¿£Áø ¼öÁØ¿¡¼­ ±âº»ÀûÀ¸·Î Áö¿øµÇ¾î¾ß ÇÏ´Â ¸®¼Ò½º¸¦ »èÁ¦ÇÏ´Â ÇÔ¼ö.
+	//ì‚¬ê°í˜•, ìœ¡ë©´ì²´, ì—ëŸ¬í…ìŠ¤ì³ ë“±ë“±, ì—”ì§„ ìˆ˜ì¤€ì—ì„œ ê¸°ë³¸ì ìœ¼ë¡œ ì§€ì›ë˜ì–´ì•¼ í•˜ëŠ” ë¦¬ì†ŒìŠ¤ë¥¼ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜.
 	GameEngineMaterial::ResourceDestroy();
 
 	GameEngineInputLayout::ResourceDestroy();
@@ -851,6 +851,6 @@ void GameEngineCore::DestroyEngineResource()
 	GameEngineFont::ResourceDestroy();
 
 	GameEngineDevice::Destroy();
-	//¸ğµç ¸®¼Ò½ºµéÀº ´ÙÀÌ·ºÆ®X µğ¹ÙÀÌ½ºÀÇ Áö¿øÀÌ ÀÖ¾î¾ß Á¸ÀçÇÒ ¼ö ÀÖÀ¸¹Ç·Î,
-	// ¸®¼Ò½º¸¦ ÀüºÎ ÆÄ±«ÇÑ ÈÄ¿¡ µğ¹ÙÀÌ½º¸¦ Á¤¸®ÇÑ´Ù.
+	//ëª¨ë“  ë¦¬ì†ŒìŠ¤ë“¤ì€ ë‹¤ì´ë ‰íŠ¸X ë””ë°”ì´ìŠ¤ì˜ ì§€ì›ì´ ìˆì–´ì•¼ ì¡´ì¬í•  ìˆ˜ ìˆìœ¼ë¯€ë¡œ,
+	// ë¦¬ì†ŒìŠ¤ë¥¼ ì „ë¶€ íŒŒê´´í•œ í›„ì— ë””ë°”ì´ìŠ¤ë¥¼ ì •ë¦¬í•œë‹¤.
 }

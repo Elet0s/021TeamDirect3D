@@ -105,7 +105,7 @@ void KunaiProjectile::Rotate()
 CollisionReturn KunaiProjectile::ProjectileToMonster(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
-	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ•πÃ¡ˆ¡‹
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 	if (passNum_ == 0)
 	{
 		projectileRen_->Off();

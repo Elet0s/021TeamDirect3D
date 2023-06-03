@@ -103,7 +103,7 @@ void PikeProjectile::Rotate()
 CollisionReturn PikeProjectile::ProjectileToMonster(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
-	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //µ¥¹ÌÁöÁÜ
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= projectileatk_; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	return CollisionReturn::Continue;
 }
 

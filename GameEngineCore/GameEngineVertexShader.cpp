@@ -28,15 +28,15 @@ void GameEngineVertexShader::Set()
 {
     if (nullptr == vertexShader_)
     {
-        MsgBoxAssert("¹öÅØ½º ¼ÎÀÌ´õ°¡ ¾ø½À´Ï´Ù.");
+        MsgBoxAssert("ë²„í…ìŠ¤ ì…°ì´ë”ê°€ ì—†ìŠµë‹ˆë‹¤.");
         return;
     }
 
-    //µÎ¹øÂ° ÀÎÀÚ´Â #include³ª #defineµî hlsl¿¡¼­ »ç¿ëÇÒ Çì´õ³ª µðÆÄÀÎÀÇ °´Ã¼¸¦ ³Ö¾îÁÙ¼ö ÀÖ´Ù.
-    GameEngineDevice::GetDC()->VSSetShader(//ÆÄÀÌÇÁ¶óÀÎ¿¡ ¹öÅØ½º¼ÎÀÌ´õ¸¦ ¼¼ÆÃÇÏ´Â ÇÔ¼ö.
-        vertexShader_,                     //¹öÅØ½º ¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
-        nullptr,                           //Å¬·¡½º ÀÎ½ºÅÏ½º ÀÎÅÍÆäÀÌ½º ¹è¿­ ÁÖ¼Ò°ª. ¾øÀ¸¸é NULL.
-        0                                  //»ç¿ëÇÒ Å¬·¡½º ÀÎ½ºÅÏ½º ÀÎÅÍÆäÀÌ½º ¹è¿­ÀÇ ÀÎµ¦½º.
+    //ë‘ë²ˆì§¸ ì¸ìžëŠ” #includeë‚˜ #defineë“± hlslì—ì„œ ì‚¬ìš©í•  í—¤ë”ë‚˜ ë””íŒŒì¸ì˜ ê°ì²´ë¥¼ ë„£ì–´ì¤„ìˆ˜ ìžˆë‹¤.
+    GameEngineDevice::GetDC()->VSSetShader(//íŒŒì´í”„ë¼ì¸ì— ë²„í…ìŠ¤ì…°ì´ë”ë¥¼ ì„¸íŒ…í•˜ëŠ” í•¨ìˆ˜.
+        vertexShader_,                     //ë²„í…ìŠ¤ ì…°ì´ë” í¬ì¸í„°.
+        nullptr,                           //í´ëž˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ ì¸í„°íŽ˜ì´ìŠ¤ ë°°ì—´ ì£¼ì†Œê°’. ì—†ìœ¼ë©´ NULL.
+        0                                  //ì‚¬ìš©í•  í´ëž˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ ì¸í„°íŽ˜ì´ìŠ¤ ë°°ì—´ì˜ ì¸ë±ìŠ¤.
     );
 }
 
@@ -74,7 +74,7 @@ void GameEngineVertexShader::InstancingVertexShaderCompile(
     UINT _versionLow /*= 0*/
 )
 {
-    inst_VertexShader_ = new GameEngineVertexShader(); //GameEngineRes¿¡ µî·ÏµÇÁö ¾Ê´Â Á¡ ÁÖÀÇ.
+    inst_VertexShader_ = new GameEngineVertexShader(); //GameEngineResì— ë“±ë¡ë˜ì§€ ì•ŠëŠ” ì  ì£¼ì˜.
     inst_VertexShader_->SetName(_entryPoint);
     inst_VertexShader_->CreateVersion("vs", _versionHigh, _versionLow);
     inst_VertexShader_->SetEntrtyPoint(_entryPoint);
@@ -85,14 +85,14 @@ void GameEngineVertexShader::InstancingVertexShaderCompile(
 
 void GameEngineVertexShader::CreateVertexShader()
 {
-    if (S_OK != GameEngineDevice::GetDevice()->CreateVertexShader(  //¹öÅØ½º¼ÎÀÌ´õ »ý¼º ÇÔ¼ö.
-        binaryCode_->GetBufferPointer(), //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸® ÄÚµå.
-        binaryCode_->GetBufferSize(),    //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå Å©±â.
+    if (S_OK != GameEngineDevice::GetDevice()->CreateVertexShader(  //ë²„í…ìŠ¤ì…°ì´ë” ìƒì„± í•¨ìˆ˜.
+        binaryCode_->GetBufferPointer(), //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ ì½”ë“œ.
+        binaryCode_->GetBufferSize(),    //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ í¬ê¸°.
         NULL,                               //??
-        &vertexShader_                      //¹öÅØ½º¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
+        &vertexShader_                      //ë²„í…ìŠ¤ì…°ì´ë” í¬ì¸í„°.
     ))
     {
-        MsgBoxAssert("¹öÅØ½º ¼ÎÀÌ´õ »ý¼º ½ÇÆÐ.");
+        MsgBoxAssert("ë²„í…ìŠ¤ ì…°ì´ë” ìƒì„± ì‹¤íŒ¨.");
         return;
     }
 }
@@ -100,14 +100,14 @@ void GameEngineVertexShader::CreateVertexShader()
 
 void GameEngineVertexShader::CreateInstancingVertexShader()
 {
-    if (S_OK != GameEngineDevice::GetDevice()->CreateVertexShader(  //¹öÅØ½º¼ÎÀÌ´õ »ý¼º ÇÔ¼ö.
-        this->binaryCode_->GetBufferPointer(), //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸® ÄÚµå.
-        this->binaryCode_->GetBufferSize(),    //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå Å©±â.
+    if (S_OK != GameEngineDevice::GetDevice()->CreateVertexShader(  //ë²„í…ìŠ¤ì…°ì´ë” ìƒì„± í•¨ìˆ˜.
+        this->binaryCode_->GetBufferPointer(), //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ ì½”ë“œ.
+        this->binaryCode_->GetBufferSize(),    //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ í¬ê¸°.
         NULL,                                   //??
-        &this->vertexShader_                   //ÀÎ½ºÅÏ½º ¹öÅØ½º¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
+        &this->vertexShader_                   //ì¸ìŠ¤í„´ìŠ¤ ë²„í…ìŠ¤ì…°ì´ë” í¬ì¸í„°.
     ))
     {
-        MsgBoxAssert("ÀÎ½ºÅÏ½Ì ¹öÅØ½º¼ÎÀÌ´õ »ý¼º ½ÇÆÐ.");
+        MsgBoxAssert("ì¸ìŠ¤í„´ì‹± ë²„í…ìŠ¤ì…°ì´ë” ìƒì„± ì‹¤íŒ¨.");
         return;
     }
 }

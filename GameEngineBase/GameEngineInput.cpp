@@ -49,9 +49,9 @@ void GameEngineInput::GameEngineKey::Update(float _deltaTime)
 
 void GameEngineInput::CreateKey(const std::string_view& _keyName, int _keyValue)
 {
-	if (true == _keyName.empty())	//ÀÌ¸§¾ø´Â Å°´Â »ı¼º±İÁö.
+	if (true == _keyName.empty())	//ì´ë¦„ì—†ëŠ” í‚¤ëŠ” ìƒì„±ê¸ˆì§€.
 	{
-		MsgBoxAssert("Å°ÀÇ ÀÌ¸§ÀÌ ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("í‚¤ì˜ ì´ë¦„ì´ ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
@@ -62,7 +62,7 @@ void GameEngineInput::CreateKey(const std::string_view& _keyName, int _keyValue)
 
 	if (false == insertResult.second)
 	{
-		MsgBoxAssertString(insertResult.first->first + ": °°Àº ÀÌ¸§ÀÇ Å°°¡ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
+		MsgBoxAssertString(insertResult.first->first + ": ê°™ì€ ì´ë¦„ì˜ í‚¤ê°€ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤.");
 		return;
 	}
 
@@ -79,14 +79,14 @@ void GameEngineInput::Update(float _deltaTime)
 	//{
 	//	keyPair.second.Update(_deltaTime);
 	//}
-	//¿©±â¼­ keyPair´Â Å° ±× ÀÚÃ¼°¡ ¾Æ´Ï¶ó allKeys_¿¡ ÀúÀåµÈ ¿øº» Å°ÀÇ °ªº¹»çµÈ º¹»çº»ÀÌ¹Ç·Î, 
-	//¾÷µ¥ÀÌÆ®¿¡¼­ º¯°æµÈ º¯°æ»çÇ×À» ¿øº» Å°·Î '³Ñ°ÜÁÖÁö ¾Ê°í' ¼Ò¸êµÈ´Ù.
+	//ì—¬ê¸°ì„œ keyPairëŠ” í‚¤ ê·¸ ìì²´ê°€ ì•„ë‹ˆë¼ allKeys_ì— ì €ì¥ëœ ì›ë³¸ í‚¤ì˜ ê°’ë³µì‚¬ëœ ë³µì‚¬ë³¸ì´ë¯€ë¡œ, 
+	//ì—…ë°ì´íŠ¸ì—ì„œ ë³€ê²½ëœ ë³€ê²½ì‚¬í•­ì„ ì›ë³¸ í‚¤ë¡œ 'ë„˜ê²¨ì£¼ì§€ ì•Šê³ ' ì†Œë©¸ëœë‹¤.
 
 	//for (const std::pair<std::string, GameEngineKey>& keyPair : allKeys_)
 	//{
 	//	GameEngineKey tempKey = keyPair.second;
 	//	tempKey.Update(_deltaTime);
-	//	ÀÌ°Íµµ º¹»ç»ı¼º.
+	//	ì´ê²ƒë„ ë³µì‚¬ìƒì„±.
 	//}
 
 	for (std::map<std::string, GameEngineKey>::iterator iter = allKeys_.begin();
@@ -106,8 +106,8 @@ void GameEngineInput::Reset()
 	//{
 	//	keyPair.second.Reset();
 	//}
-	//¿©±â¼­ keyPair´Â Å° ±× ÀÚÃ¼°¡ ¾Æ´Ï¶ó allKeys_¿¡ ÀúÀåµÈ ¿øº» Å°ÀÇ °ªº¹»çµÈ º¹»çº»ÀÌ°í, 
-	//¾÷µ¥ÀÌÆ®¿¡¼­ º¯°æµÈ º¯°æ»çÇ×À» ¿øº» Å°·Î ³Ñ°ÜÁÖÁö ¾Ê°í ¼Ò¸êµÈ´Ù.
+	//ì—¬ê¸°ì„œ keyPairëŠ” í‚¤ ê·¸ ìì²´ê°€ ì•„ë‹ˆë¼ allKeys_ì— ì €ì¥ëœ ì›ë³¸ í‚¤ì˜ ê°’ë³µì‚¬ëœ ë³µì‚¬ë³¸ì´ê³ , 
+	//ì—…ë°ì´íŠ¸ì—ì„œ ë³€ê²½ëœ ë³€ê²½ì‚¬í•­ì„ ì›ë³¸ í‚¤ë¡œ ë„˜ê²¨ì£¼ì§€ ì•Šê³  ì†Œë©¸ëœë‹¤.
 
 	for (std::map<std::string, GameEngineKey>::iterator iter = allKeys_.begin();
 		iter != allKeys_.end(); iter++)
@@ -122,7 +122,7 @@ float GameEngineInput::GetTime(const std::string_view& _keyName)
 
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(std::string(_keyName) + ": ±×·± ÀÌ¸§ÀÇ Å°°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssertString(std::string(_keyName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í‚¤ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return false;
 	}
 
@@ -134,7 +134,7 @@ bool GameEngineInput::IsDown(const std::string_view& _keyName)
 	std::string uppercaseKeyName = GameEngineString::ToUpperReturn(_keyName);
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(std::string(_keyName) + ": ±×·± ÀÌ¸§ÀÇ Å°°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssertString(std::string(_keyName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í‚¤ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return false;
 	}
 
@@ -147,7 +147,7 @@ bool GameEngineInput::IsPressed(const std::string_view& _keyName)
 
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(std::string(_keyName) + ": ±×·± ÀÌ¸§ÀÇ Å°°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssertString(std::string(_keyName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í‚¤ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return false;
 	}
 
@@ -160,7 +160,7 @@ bool GameEngineInput::IsUp(const std::string_view& _keyName)
 
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(std::string(_keyName) + ": ±×·± ÀÌ¸§ÀÇ Å°°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssertString(std::string(_keyName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í‚¤ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return false;
 	}
 
@@ -173,7 +173,7 @@ bool GameEngineInput::IsFree(const std::string_view& _keyName)
 
 	if (allKeys_.end() == allKeys_.find(uppercaseKeyName))
 	{
-		MsgBoxAssertString(std::string(_keyName) + ": ±×·± ÀÌ¸§ÀÇ Å°°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssertString(std::string(_keyName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í‚¤ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return false;
 	}
 
@@ -193,5 +193,5 @@ GameEngineInput::GameEngineInput() : wheelValue_(0), curWheelValue_(0)
 
 GameEngineInput::~GameEngineInput()
 {
-	//Å°µéÀÌ ÀüºÎ °ªÇüÀ¸·Î ½ºÅÃ¿µ¿ª¿¡ ÀúÀåµÇ¾î ÀÖ±â ¶§¹®¿¡ Æ¯º°ÇÑ ¸Ş¸ğ¸® ÇØÁ¦ ÀıÂ÷°¡ ÇÊ¿ä ¾ø´Ù.
+	//í‚¤ë“¤ì´ ì „ë¶€ ê°’í˜•ìœ¼ë¡œ ìŠ¤íƒì˜ì—­ì— ì €ì¥ë˜ì–´ ìˆê¸° ë•Œë¬¸ì— íŠ¹ë³„í•œ ë©”ëª¨ë¦¬ í•´ì œ ì ˆì°¨ê°€ í•„ìš” ì—†ë‹¤.
 }

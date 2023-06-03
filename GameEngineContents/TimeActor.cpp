@@ -53,22 +53,22 @@ void TimeActor::SetTimer(std::string& _Text)
 	int Time_s;
 	int Time_m;
 
-	Time_all = time_; // ÇöÀç ½ºÅ×ÀÌÁö°¡ ½ÃÀÛµÇ°í °æ°úÇÑ ½Ã°£À» ±¸ÇÑ´Ù
+	Time_all = time_; // í˜„ì¬ ìŠ¤í…Œì´ì§€ê°€ ì‹œì‘ë˜ê³  ê²½ê³¼í•œ ì‹œê°„ì„ êµ¬í•œë‹¤
 
-	Time_m = static_cast<int>(Time_all) / 60;		// ÃÑ ½Ã°£À» ÃÊ·Î ¹Ù²ÛµÚ¿¡ 3600À¸·Î ³ª´²¼­ ºĞÀ» ±¸ÇÑ´Ù
-	Time_s = static_cast<int>(Time_all) - (60 * Time_m);	// ÃÑ ½Ã°£À» ÃÊ·Î ¹Ù²ÛµÚ¿¡ 3600 * ºĞÀ» ÇÏ¿© ÃÊ¸¦ ±¸ÇÑ´Ù.
-	Time_all -= static_cast<float>(Time_s) +  60.f * static_cast<float>(Time_m);			// ÃÑ ½Ã°£¿¡¼­ ÃÊ¸¦ »©¼­ ¼Ò¼öÁ¡ ÀÚ¸®¸¸ ±¸ÇÑ´Ù.
+	Time_m = static_cast<int>(Time_all) / 60;		// ì´ ì‹œê°„ì„ ì´ˆë¡œ ë°”ê¾¼ë’¤ì— 3600ìœ¼ë¡œ ë‚˜ëˆ ì„œ ë¶„ì„ êµ¬í•œë‹¤
+	Time_s = static_cast<int>(Time_all) - (60 * Time_m);	// ì´ ì‹œê°„ì„ ì´ˆë¡œ ë°”ê¾¼ë’¤ì— 3600 * ë¶„ì„ í•˜ì—¬ ì´ˆë¥¼ êµ¬í•œë‹¤.
+	Time_all -= static_cast<float>(Time_s) +  60.f * static_cast<float>(Time_m);			// ì´ ì‹œê°„ì—ì„œ ì´ˆë¥¼ ë¹¼ì„œ ì†Œìˆ˜ì  ìë¦¬ë§Œ êµ¬í•œë‹¤.
 
 	std::string num_text = std::to_string(Time_all);
-	num_text = num_text.substr(num_text.find(".") + 1, num_text.find(".") + 2); // ¼Ò¼öÁ¡ ¼¼ÀÚ¸®¸¸ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+	num_text = num_text.substr(num_text.find(".") + 1, num_text.find(".") + 2); // ì†Œìˆ˜ì  ì„¸ìë¦¬ë§Œ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 
 	size_t s = num_text.find(".") + 2 - num_text.find(".") + 1;
 
 	std::string num_s = std::to_string(Time_s);
-	num_s = std::string(n_zero - std::min<size_t>(n_zero, num_s.length()), '0') + num_s; // ¼¼ÀÚ¸®¸¦ Ãâ·ÂÇÏ±â À§ÇØ ÃÊÀÇ ÀÚ¸´¼ö¸¦ ±¸ÇÑÈÄ ³²Àº ÀÚ¸®¸¦ 0À¸·Î Ã¤¿î´Ù.
+	num_s = std::string(n_zero - std::min<size_t>(n_zero, num_s.length()), '0') + num_s; // ì„¸ìë¦¬ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ì´ˆì˜ ìë¦¿ìˆ˜ë¥¼ êµ¬í•œí›„ ë‚¨ì€ ìë¦¬ë¥¼ 0ìœ¼ë¡œ ì±„ìš´ë‹¤.
 
 	std::string num_m = std::to_string(Time_m);
 	num_m = std::string(n_zero - std::min<size_t>(n_zero, num_m.length()), '0') + num_m; 
 
-	TimeString = num_m + ":" + num_s + ":" + num_text; // ºĞ, ÃÊ, 1000/1 ÃÊ¸¦ ÀüºÎ Ãâ·ÂÇÑ´Ù. 
+	TimeString = num_m + ":" + num_s + ":" + num_text; // ë¶„, ì´ˆ, 1000/1 ì´ˆë¥¼ ì „ë¶€ ì¶œë ¥í•œë‹¤. 
 }

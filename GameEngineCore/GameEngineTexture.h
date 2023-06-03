@@ -24,31 +24,31 @@ struct PixelColor
 
 class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
-	//ID3D11Texture2D* ÇüÅÂ·Î ÇÒ´çµÈ ÅØ½ºÃÄ¿Í °Å±â¼­ ÆÄ»ýµÈ °¢Á¾ ¼­ºê¸®¼Ò½ººäµéÀ» ÀúÀå, °ü¸®ÇÏ±â À§ÇÑ Å¬·¡½º.
-	//ÀÚ±â ÅØ½ºÃÄ¿Í °ü°èµÈ ¸®¼Ò½ººäµé'¸¸' °ü¸®ÇÏ´Â Å¬·¡½º.
-	//·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¸®¼Ò½ººäµéÀ» ¿¬°áÇÏ´Â°Ç ÇØ´ç ¸®¼Ò½ººä Å¬·¡½º¿¡¼­ ÇÑ´Ù.
+	//ID3D11Texture2D* í˜•íƒœë¡œ í• ë‹¹ëœ í…ìŠ¤ì³ì™€ ê±°ê¸°ì„œ íŒŒìƒëœ ê°ì¢… ì„œë¸Œë¦¬ì†ŒìŠ¤ë·°ë“¤ì„ ì €ìž¥, ê´€ë¦¬í•˜ê¸° ìœ„í•œ í´ëž˜ìŠ¤.
+	//ìžê¸° í…ìŠ¤ì³ì™€ ê´€ê³„ëœ ë¦¬ì†ŒìŠ¤ë·°ë“¤'ë§Œ' ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤.
+	//ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ë¦¬ì†ŒìŠ¤ë·°ë“¤ì„ ì—°ê²°í•˜ëŠ”ê±´ í•´ë‹¹ ë¦¬ì†ŒìŠ¤ë·° í´ëž˜ìŠ¤ì—ì„œ í•œë‹¤.
 
-	//¸®¼Ò½º: ·»´õ¸µ °úÁ¤¿¡¼­ »ç¿ëµÇ´Â ¸ðµç ½Ç¼ö ¹è¿­ µ¥ÀÌÅÍ¸¦ ¸»ÇÑ´Ù. Å©°Ô ÅØ½ºÃÄ¿Í ¹öÆÛ µÎ°¡Áö·Î ³ª´©¾îÁø´Ù.
-	//DirectX¿¡¼­ ¸®¼Ò½º´Â Direct3D ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖ´Â ±×·¡ÇÈÄ«µå ³» ¸Þ¸ð¸® ¿µ¿ªÀÌ´Ù.
+	//ë¦¬ì†ŒìŠ¤: ë Œë”ë§ ê³¼ì •ì—ì„œ ì‚¬ìš©ë˜ëŠ” ëª¨ë“  ì‹¤ìˆ˜ ë°°ì—´ ë°ì´í„°ë¥¼ ë§í•œë‹¤. í¬ê²Œ í…ìŠ¤ì³ì™€ ë²„í¼ ë‘ê°€ì§€ë¡œ ë‚˜ëˆ„ì–´ì§„ë‹¤.
+	//DirectXì—ì„œ ë¦¬ì†ŒìŠ¤ëŠ” Direct3D ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” ê·¸ëž˜í”½ì¹´ë“œ ë‚´ ë©”ëª¨ë¦¬ ì˜ì—­ì´ë‹¤.
 
-	//¸®¼Ò½ººä: ÀÏÁ¾ÀÇ Çüº¯È¯À» ÅëÇØ ÅØ½ºÃÄ¿¡¼­ ÆÄ»ýµÈ ¸®¼Ò½ºµéÀ» ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÒ ¼ö ÀÖ´Â ÇüÅÂ·Î ¸¸µç °Í.
+	//ë¦¬ì†ŒìŠ¤ë·°: ì¼ì¢…ì˜ í˜•ë³€í™˜ì„ í†µí•´ í…ìŠ¤ì³ì—ì„œ íŒŒìƒëœ ë¦¬ì†ŒìŠ¤ë“¤ì„ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•  ìˆ˜ ìžˆëŠ” í˜•íƒœë¡œ ë§Œë“  ê²ƒ.
 
 
 	friend GameEngineRes<GameEngineTexture>;
-	//GameEngineTextureÅ¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ý.
+	//GameEngineTextureí´ëž˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìžë¥¼ GameEngineResí´ëž˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
 
 	friend class GameEngineFolderTexture;
-	//GameEngineFolderTexture´Â ¿Ö ÇÁ·»µå??
+	//GameEngineFolderTextureëŠ” ì™œ í”„ë Œë“œ??
 
 	friend class GameEngineDepthStencilTexture;
-	//GameEngineDepthStencilTexture´Â ¿Ö ÇÁ·»µå??
+	//GameEngineDepthStencilTextureëŠ” ì™œ í”„ë Œë“œ??
 
 private:
 	GameEngineTexture();
 	~GameEngineTexture();
-	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ý¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ý¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
-	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹Ýµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
-	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµÐ´Ù.
+	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ìž/ì†Œë©¸ìžë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
+	//ì´ í”„ë ˆìž„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìžê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
+	//í”„ë¡œê·¸ëž¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ëž˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
 
 	GameEngineTexture(const GameEngineTexture& _other) = delete;
 	GameEngineTexture(GameEngineTexture&& _other) noexcept = delete;
@@ -62,11 +62,11 @@ public:
 	static GameEngineTexture* Create(ID3D11Texture2D* _texture);
 	static GameEngineTexture* Create(const D3D11_TEXTURE2D_DESC& _desc);
 	static GameEngineTexture* Create(const std::string_view& _name, const D3D11_TEXTURE2D_DESC& _desc);
-							
+
 	static GameEngineTexture* Load(const std::string_view& _path);
 	static GameEngineTexture* Load(const std::string_view& _path, const std::string_view& _name);
 
-//private:
+	//private:
 	ID3D11RenderTargetView* CreateRenderTargetView();
 	ID3D11ShaderResourceView* CreateShaderResourceView();
 	ID3D11UnorderedAccessView* CreateUnorderedAccessView();
@@ -81,27 +81,27 @@ public:
 
 	void CSSetUnorderedAccessView(int _bindPoint);
 
-	//ÁöÁ¤ÇÑ ÅØ½ºÃ³¸¦ °¡·Î xµîºÐ, ¼¼·Î yµîºÐÀ¸·Î ±ÕÀÏ ºÐÇÒ.
+	//ì§€ì •í•œ í…ìŠ¤ì²˜ë¥¼ ê°€ë¡œ xë“±ë¶„, ì„¸ë¡œ yë“±ë¶„ìœ¼ë¡œ ê· ì¼ ë¶„í• .
 	static void Cut(const std::string_view& _textureName, int _x, int _y);
 
-	//¿øÇÏ´Â Àý´Ü ÁöÁ¡ÀÇ ÇÈ¼¿ÁÂÇ¥¿Í Å©±â¸¦ UV°ªÀ¸·Î º¯È¯ ÈÄ ÀúÀå.
+	//ì›í•˜ëŠ” ì ˆë‹¨ ì§€ì ì˜ í”½ì…€ì¢Œí‘œì™€ í¬ê¸°ë¥¼ UVê°’ìœ¼ë¡œ ë³€í™˜ í›„ ì €ìž¥.
 	void Cut(UINT _startX, UINT _startY, UINT _sizeX, UINT _sizeY);
 
-	float4 GetPixelToFloat4(int _x, int _y);	//float4´Â ½Ç¼ö Æ¯¼º»ó »ö»ó°ªÀÇ ¿ÀÂ÷ ¹ß»ý °¡´É¼º ÀÖÀ½.
-	PixelColor GetPixelToPixelColor(int _x, int _y);	//unsigned int ÇüÅÂ·Î ¹Þ¾Æ¼­ »ö»ó°ªÀÇ ¿ÀÂ÷ ¾øÀ½.
+	float4 GetPixelToFloat4(int _x, int _y);	//float4ëŠ” ì‹¤ìˆ˜ íŠ¹ì„±ìƒ ìƒ‰ìƒê°’ì˜ ì˜¤ì°¨ ë°œìƒ ê°€ëŠ¥ì„± ìžˆìŒ.
+	PixelColor GetPixelToPixelColor(int _x, int _y);	//unsigned int í˜•íƒœë¡œ ë°›ì•„ì„œ ìƒ‰ìƒê°’ì˜ ì˜¤ì°¨ ì—†ìŒ.
 
 public:
 	float4 GetFrameData(int _index)
 	{
 		if (true == this->cutData_.empty())
 		{
-			MsgBoxAssertString(this->GetNameCopy() + ": ¾ÆÁ÷ ÀÚ¸£Áö ¾ÊÀº ÅØ½ºÃÄÀÔ´Ï´Ù.");
+			MsgBoxAssertString(this->GetNameCopy() + ": ì•„ì§ ìžë¥´ì§€ ì•Šì€ í…ìŠ¤ì³ìž…ë‹ˆë‹¤.");
 			return float4();
 		}
 
 		if (cutData_.size() <= _index)
 		{
-			MsgBoxAssertString(this->GetNameCopy() + ": ÀÎµ¦½º ¹üÀ§¸¦ ³Ñ¾î¼¹½À´Ï´Ù.");
+			MsgBoxAssertString(this->GetNameCopy() + ": ì¸ë±ìŠ¤ ë²”ìœ„ë¥¼ ë„˜ì–´ì„°ìŠµë‹ˆë‹¤.");
 			return float4();
 		}
 
@@ -110,7 +110,7 @@ public:
 
 	float4 GetScale()
 	{
-		//(metadata_.width), (metadata_.height)ÀÌ°Å¾²¸é 0,0µÇ¼­ ÅØ½ºÃÄ »ý¼º¿¡ ½ÇÆÐÇÔ ¶ä
+		//(metadata_.width), (metadata_.height)ì´ê±°ì“°ë©´ 0,0ë˜ì„œ í…ìŠ¤ì³ ìƒì„±ì— ì‹¤íŒ¨í•¨ ëœ¸
 		return float4(static_cast<float>(desc_.Width),
 			static_cast<float>(desc_.Height));
 	}
@@ -133,41 +133,41 @@ public:
 	}
 
 private:
-	//ÁöÁ¤ÇÑ °æ·Î¿¡¼­ ÅØ½ºÃ³¸¦ ºÒ·¯¿À´Â ÇÔ¼ö. ¼ÎÀÌ´õ¸®¼Ò½ººä »ý¼º °úÁ¤±îÁö Æ÷ÇÔµÇ¾î ÀÖÀ½.
+	//ì§€ì •í•œ ê²½ë¡œì—ì„œ í…ìŠ¤ì²˜ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ” í•¨ìˆ˜. ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·° ìƒì„± ê³¼ì •ê¹Œì§€ í¬í•¨ë˜ì–´ ìžˆìŒ.
 	void LoadTexture(const std::string_view& _path);
 
-	//ID3D11Texture2D* Çü ÅØ½ºÃ³ »ý¼º ÇÔ¼ö. 
+	//ID3D11Texture2D* í˜• í…ìŠ¤ì²˜ ìƒì„± í•¨ìˆ˜. 
 	void CreateTexture(const D3D11_TEXTURE2D_DESC& _desc);
 
 	void Cut(int _x, int _y);
 
 private:
 	ID3D11Texture2D* texture2D_;
-	//ÇÈ¼¿º° »ö»ó Á¤º¸°¡ µç 2Â÷¿ø ¹è¿­ÀÌ ÀúÀåµÈ ±×·¡ÇÈÄ«µå ³» ¸Þ¸ð¸® ¿µ¿ªÀ» °ü¸®ÇÏ´Â ÀÎÅÍÆäÀÌ½º ID3D11Texture2D* Å¸ÀÔ ¸â¹öº¯¼ö.
+	//í”½ì…€ë³„ ìƒ‰ìƒ ì •ë³´ê°€ ë“  2ì°¨ì› ë°°ì—´ì´ ì €ìž¥ëœ ê·¸ëž˜í”½ì¹´ë“œ ë‚´ ë©”ëª¨ë¦¬ ì˜ì—­ì„ ê´€ë¦¬í•˜ëŠ” ì¸í„°íŽ˜ì´ìŠ¤ ID3D11Texture2D* íƒ€ìž… ë©¤ë²„ë³€ìˆ˜.
 
 	ID3D11RenderTargetView* renderTargetView_;
 	//
-	//·»´õÅ¸°Ùºä: ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎÀ» ÀüºÎ °ÅÄ£ °á°ú¹°·Î¼­ÀÇ »ö»ó°ª 2Â÷¿ø ¹è¿­À» ¹Þ´Âµ¥ »ç¿ëµÇ´Â ±×·¡ÇÈ Ä«µå ³» ¸Þ¸ð¸® ¿µ¿ª.
+	//ë Œë”íƒ€ê²Ÿë·°: ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì„ ì „ë¶€ ê±°ì¹œ ê²°ê³¼ë¬¼ë¡œì„œì˜ ìƒ‰ìƒê°’ 2ì°¨ì› ë°°ì—´ì„ ë°›ëŠ”ë° ì‚¬ìš©ë˜ëŠ” ê·¸ëž˜í”½ ì¹´ë“œ ë‚´ ë©”ëª¨ë¦¬ ì˜ì—­.
 
-	ID3D11ShaderResourceView* shaderResourceView_;	//¼ÎÀÌ´õ¸®¼Ò½ººä.
+	ID3D11ShaderResourceView* shaderResourceView_;	//ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°.
 	//
-	//¼ÎÀÌ´õ¸®¼Ò½ººä: 
+	//ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°: 
 
-	ID3D11UnorderedAccessView* unorderedAccessView_;//¼ø¼­¾ø´Â ¿¬°áºä.
+	ID3D11UnorderedAccessView* unorderedAccessView_;//ìˆœì„œì—†ëŠ” ì—°ê²°ë·°.
 	//
-	//¼ø¼­¾ø´Â ¿¬°áºä:
+	//ìˆœì„œì—†ëŠ” ì—°ê²°ë·°:
 
-	ID3D11DepthStencilView* depthStencilView_;	//±íÀÌ½ºÅÙ½Çºä.
+	ID3D11DepthStencilView* depthStencilView_;	//ê¹Šì´ìŠ¤í…ì‹¤ë·°.
 	//
-	//±íÀÌ½ºÅÙ½Çºä:
+	//ê¹Šì´ìŠ¤í…ì‹¤ë·°:
 
-	D3D11_TEXTURE2D_DESC desc_;	//ÅØ½ºÃ³ »ý¼º¿ë ¸í¼¼¼­.
+	D3D11_TEXTURE2D_DESC desc_;	//í…ìŠ¤ì²˜ ìƒì„±ìš© ëª…ì„¸ì„œ.
 
 
-	DirectX::ScratchImage scratchImage_;//DirectXTex·Î ºÒ·¯¿Â ÅØ½ºÃ³
-	DirectX::TexMetadata metaData_;		//DirectXTex·Î ºÒ·¯¿Â ÅØ½ºÃ³ÀÇ °¢Á¾ Á¤º¸µé.
+	DirectX::ScratchImage scratchImage_;//DirectXTexë¡œ ë¶ˆëŸ¬ì˜¨ í…ìŠ¤ì²˜
+	DirectX::TexMetadata metaData_;		//DirectXTexë¡œ ë¶ˆëŸ¬ì˜¨ í…ìŠ¤ì²˜ì˜ ê°ì¢… ì •ë³´ë“¤.
 
-	std::vector<float4> cutData_;	//ÇÁ·¹ÀÓ ¾Ö´Ï¸ÞÀÌ¼Ç ¸¸µé ¶§ ÇÊ¿äÇÑ ¾ÆÆ²¶ó½ºÅØ½ºÃ³ ºÐÇÒ Á¤º¸.
+	std::vector<float4> cutData_;	//í”„ë ˆìž„ ì• ë‹ˆë©”ì´ì…˜ ë§Œë“¤ ë•Œ í•„ìš”í•œ ì•„í‹€ë¼ìŠ¤í…ìŠ¤ì²˜ ë¶„í•  ì •ë³´.
 
 };
 

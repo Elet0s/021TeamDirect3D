@@ -23,7 +23,7 @@ GameEngineLevel::GameEngineLevel()
 	midCameraActor->GetTransform().SetLocalPosition(0, 0, -100);
 	midCameraActor->GetCameraComponent()->SetProjectionMode(ProjectionMode::Orthographic);
 	midCameraActor->GetCameraComponent()->SetCameraOrder(CameraOrder::MidCamera);
-	//¸¶¿ì½ºÆ÷ÀÎÅÍ À§Ä¡ ¹®Á¦¿Í ¾ËÆÄ ·»´õ¸µ ¹®Á¦¸¦ ÇÑ¹ø¿¡ ÇØ°áÇÏ±â À§ÇØ Áß°£ Ä«¸Ş¶ó Ãß°¡.
+	//ë§ˆìš°ìŠ¤í¬ì¸í„° ìœ„ì¹˜ ë¬¸ì œì™€ ì•ŒíŒŒ ë Œë”ë§ ë¬¸ì œë¥¼ í•œë²ˆì— í•´ê²°í•˜ê¸° ìœ„í•´ ì¤‘ê°„ ì¹´ë©”ë¼ ì¶”ê°€.
 
 	GameEngineCameraActor* UICameraActor = CreateActor<GameEngineCameraActor>();
 	UICameraActor->GetTransform().SetLocalPosition(0, 0, -100);
@@ -36,10 +36,10 @@ GameEngineLevel::~GameEngineLevel()
 	for (GameEngineUpdateObject* object : deleteObjects_)
 	{
 		object->ReleaseHierarchy();
-		//ÀÌÀü ·çÇÁ¿¡¼­ »ç¸ÁÆÇÁ¤µÇ¼­ objectsInDeletion_¿¡ ÀúÀåµÈ ¸ğµç ¿ÀºêÁ§Æ®µé°ú ±× ÀÚ½ÄµéÀ» ÀüºÎ »èÁ¦ÇÑ´Ù.
+		//ì´ì „ ë£¨í”„ì—ì„œ ì‚¬ë§íŒì •ë˜ì„œ objectsInDeletion_ì— ì €ì¥ëœ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë“¤ê³¼ ê·¸ ìì‹ë“¤ì„ ì „ë¶€ ì‚­ì œí•œë‹¤.
 	}
 	deleteObjects_.clear();
-	//¿ÀºêÁ§Æ®µéÀ» ÀüºÎ »èÁ¦Çß´Ù¸é objectsInDeletion_¸®½ºÆ®¸¦ ºñ¿î´Ù.
+	//ì˜¤ë¸Œì íŠ¸ë“¤ì„ ì „ë¶€ ì‚­ì œí–ˆë‹¤ë©´ objectsInDeletion_ë¦¬ìŠ¤íŠ¸ë¥¼ ë¹„ìš´ë‹¤.
 
 	for (const std::pair<int, std::list<GameEngineActor*>>& actorGroup : allActors_)
 	{
@@ -50,8 +50,8 @@ GameEngineLevel::~GameEngineLevel()
 				//delete actor;
 				//actor = nullptr;
 				actor->ReleaseHierarchy();
-				//´õÀÌ»ó ·¹º§ÀÌ °¡Áø ¾×ÅÍµéÀ» ±×³É »èÁ¦ÇÏÁö ¾Ê°í, ReleaseHierarchy() ÇÔ¼ö¸¦ ÅëÇØ
-				// ÀÚ½ÄÀ¸·Î °¡Áø ÄÄÆ÷³ÍÆ®µéÀ» »èÁ¦ÇÏ´Â °úÁ¤À» °ÅÄ£ ÈÄ »èÁ¦ÇÑ´Ù.	
+				//ë”ì´ìƒ ë ˆë²¨ì´ ê°€ì§„ ì•¡í„°ë“¤ì„ ê·¸ëƒ¥ ì‚­ì œí•˜ì§€ ì•Šê³ , ReleaseHierarchy() í•¨ìˆ˜ë¥¼ í†µí•´
+				// ìì‹ìœ¼ë¡œ ê°€ì§„ ì»´í¬ë„ŒíŠ¸ë“¤ì„ ì‚­ì œí•˜ëŠ” ê³¼ì •ì„ ê±°ì¹œ í›„ ì‚­ì œí•œë‹¤.	
 			}
 		}
 	}
@@ -97,8 +97,8 @@ void GameEngineLevel::AllClear()
 void GameEngineLevel::UpdateLevel(float _deltaTime)
 {
 	this->AddAccTime(_deltaTime);
-	this->Update(_deltaTime);		//·¹º§°ú ±× ÀÚ½Ä Å¬·¡½ºµéÀÌ °¡Áø ¿ä¼Òµé Áß ¾×ÅÍ Á¦¿ÜÇÑ °ÍµéÀ» ¾÷µ¥ÀÌÆ® ÇÏ´Â ÇÔ¼ö.
-	this->UpdateActors(_deltaTime);	//·¹º§ÀÌ °¡Áø ¾×ÅÍµéÀ» ¾÷µ¥ÀÌÆ®ÇÏ´Â ÇÔ¼ö.
+	this->Update(_deltaTime);		//ë ˆë²¨ê³¼ ê·¸ ìì‹ í´ë˜ìŠ¤ë“¤ì´ ê°€ì§„ ìš”ì†Œë“¤ ì¤‘ ì•¡í„° ì œì™¸í•œ ê²ƒë“¤ì„ ì—…ë°ì´íŠ¸ í•˜ëŠ” í•¨ìˆ˜.
+	this->UpdateActors(_deltaTime);	//ë ˆë²¨ì´ ê°€ì§„ ì•¡í„°ë“¤ì„ ì—…ë°ì´íŠ¸í•˜ëŠ” í•¨ìˆ˜.
 	this->Render(_deltaTime);
 	this->Release(_deltaTime);
 }
@@ -108,13 +108,13 @@ void GameEngineLevel::UpdateActors(float _deltaTime)
 	for (const std::pair<int, std::list<GameEngineActor*>>& actorListPair : allActors_)
 	{
 		for (GameEngineActor* const actor : actorListPair.second)
-			//ÀÌ À§Ä¡ÀÇ const´Â actor°¡ °¡¸®Å°´Â ¸Ş¸ğ¸® À§Ä¡¸¦ º¯°æÇÒ ¼ö ¾ø°Ô ÇÏ°Ú´Ù´Â ÀÇ¹ÌÀÌ´Ù. 
-			//ÇÏÁö¸¸ actor°¡ °¡¸®Å°´Â ¸Ş¸ğ¸®°¡ °¡Áø °ªÀº ¾ó¸¶µçÁö º¯°æ °¡´ÉÇÏ´Ù.
+			//ì´ ìœ„ì¹˜ì˜ constëŠ” actorê°€ ê°€ë¦¬í‚¤ëŠ” ë©”ëª¨ë¦¬ ìœ„ì¹˜ë¥¼ ë³€ê²½í•  ìˆ˜ ì—†ê²Œ í•˜ê² ë‹¤ëŠ” ì˜ë¯¸ì´ë‹¤. 
+			//í•˜ì§€ë§Œ actorê°€ ê°€ë¦¬í‚¤ëŠ” ë©”ëª¨ë¦¬ê°€ ê°€ì§„ ê°’ì€ ì–¼ë§ˆë“ ì§€ ë³€ê²½ ê°€ëŠ¥í•˜ë‹¤.
 		{
 			if (true == actor->IsUpdate())
 			{
 				actor->AllUpdate(_deltaTime);
-				//¾×ÅÍµé°ú ±× ¾Æ·¡ ÄÄÆ÷³ÍÆ®µéÀÇ ¾÷µ¥ÀÌÆ®´Â ÀüºÎ AllUpdate·Î ÅëÇÕ.	
+				//ì•¡í„°ë“¤ê³¼ ê·¸ ì•„ë˜ ì»´í¬ë„ŒíŠ¸ë“¤ì˜ ì—…ë°ì´íŠ¸ëŠ” ì „ë¶€ AllUpdateë¡œ í†µí•©.	
 			}
 		}
 	}
@@ -135,21 +135,21 @@ void GameEngineLevel::Render(float _deltaTime)
 				if (true == (*collisionIter)->IsUpdate())
 				{
 					(*collisionIter)->DebugRender();
-					//ÁøÂ¥ ·»´õ¸µ °úÁ¤ÀÌ ¾Æ´Ï¹Ç·Î RenderStart()¿Í RenderEnd()»çÀÌ¿¡ µé¾î°¡Áö ¾Ê¾Æµµ µÈ´Ù.
+					//ì§„ì§œ ë Œë”ë§ ê³¼ì •ì´ ì•„ë‹ˆë¯€ë¡œ RenderStart()ì™€ RenderEnd()ì‚¬ì´ì— ë“¤ì–´ê°€ì§€ ì•Šì•„ë„ ëœë‹¤.
 				}
 			}
 		}
 	}
 
 	GameEngineDevice::RenderStart();
-	//RenderStart()¿Í RenderEnd()»çÀÌ¿¡ ¸ğµç ·»´õ¸µ °úÁ¤ÀÌ µé¾î°¡¾ß ÇÑ´Ù. 
+	//RenderStart()ì™€ RenderEnd()ì‚¬ì´ì— ëª¨ë“  ë Œë”ë§ ê³¼ì •ì´ ë“¤ì–´ê°€ì•¼ í•œë‹¤. 
 
 	for (size_t i = 0; i < cameras_.size(); i++)
 	{
 		if (nullptr != cameras_[i])
 		{
 			cameras_[i]->Render(_deltaTime);
-			//·»´õ·¯µéÀÌ °¡Áø ·»´õ¸µ Á¤º¸¸¦ °¢ Ä«¸Ş¶óº°·Î °¡Áø ·»´õÅ¸°Ù¿¡ ¿Å±ä´Ù.
+			//ë Œë”ëŸ¬ë“¤ì´ ê°€ì§„ ë Œë”ë§ ì •ë³´ë¥¼ ê° ì¹´ë©”ë¼ë³„ë¡œ ê°€ì§„ ë Œë”íƒ€ê²Ÿì— ì˜®ê¸´ë‹¤.
 		}
 	}
 
@@ -158,7 +158,7 @@ void GameEngineLevel::Render(float _deltaTime)
 		if (nullptr != cameras_[i])
 		{
 			cameras_[i]->GetConclusionRenderTarget()->EffectProcess();
-			//Ä«¸Ş¶óº°·Î °¡Áö°í ÀÖ´Â ·»´õÅ¸°Ù¿¡, °¡Áö°í ÀÖ´Â ºí·¯ µîÀÇ ÈÄÃ³¸® È¿°ú°¡ ÀÖ´Ù¸é Àû¿ëÇÑ´Ù.
+			//ì¹´ë©”ë¼ë³„ë¡œ ê°€ì§€ê³  ìˆëŠ” ë Œë”íƒ€ê²Ÿì—, ê°€ì§€ê³  ìˆëŠ” ë¸”ëŸ¬ ë“±ì˜ í›„ì²˜ë¦¬ íš¨ê³¼ê°€ ìˆë‹¤ë©´ ì ìš©í•œë‹¤.
 		}
 	}
 
@@ -167,15 +167,15 @@ void GameEngineLevel::Render(float _deltaTime)
 		if (nullptr != cameras_[i])
 		{
 			GameEngineDevice::GetBackBuffer()->Merge(cameras_[i]->conclusionRenderTarget_, 0);
-			//´Ù¸¥ Ä«¸Ş¶óµéÀÌ °¡Áø ·»´õÅ¸°ÙÀÇ ·»´õ¸µ Á¤º¸µéÀ» ¹é¹öÆÛ ·»´õÅ¸°ÙÀ¸·Î ÇÕÄ£´Ù.
+			//ë‹¤ë¥¸ ì¹´ë©”ë¼ë“¤ì´ ê°€ì§„ ë Œë”íƒ€ê²Ÿì˜ ë Œë”ë§ ì •ë³´ë“¤ì„ ë°±ë²„í¼ ë Œë”íƒ€ê²Ÿìœ¼ë¡œ í•©ì¹œë‹¤.
 		}
 	}
 
 	GameEngineDevice::GetBackBuffer()->EffectProcess();
-	//¹é¹öÆÛ ·»´õÅ¸°ÙÀÌ °¡Áø, À©µµ¿ì ÀüÃ¼¿¡ Àû¿ëÇØ¾ß ÇÏ´Â ÈÄÃ³¸® È¿°ú°¡ ÀÖ´Ù¸é ¿©±â¼­ Àû¿ëÇÑ´Ù.
+	//ë°±ë²„í¼ ë Œë”íƒ€ê²Ÿì´ ê°€ì§„, ìœˆë„ìš° ì „ì²´ì— ì ìš©í•´ì•¼ í•˜ëŠ” í›„ì²˜ë¦¬ íš¨ê³¼ê°€ ìˆë‹¤ë©´ ì—¬ê¸°ì„œ ì ìš©í•œë‹¤.
 
 	GameEngineDebug::Debug3DRender();
-	//DebugRender()·Î µî·ÏµÈ µğ¹ö±ë Á¤º¸´Â ½ÇÁ¦·Î´Â ¿©±â¼­ ¹é¹öÆÛ ·»´õÅ¸°ÙÀ¸·Î ¿Å°ÜÁø´Ù.
+	//DebugRender()ë¡œ ë“±ë¡ëœ ë””ë²„ê¹… ì •ë³´ëŠ” ì‹¤ì œë¡œëŠ” ì—¬ê¸°ì„œ ë°±ë²„í¼ ë Œë”íƒ€ê²Ÿìœ¼ë¡œ ì˜®ê²¨ì§„ë‹¤.
 
 	GameEngineGUI::Render(this, _deltaTime);
 
@@ -187,7 +187,7 @@ void GameEngineLevel::RemoveActor(GameEngineActor* _rootActor)
 {
 	if (allActors_.end() == allActors_.find(_rootActor->GetOrder()))
 	{
-		MsgBoxAssert("·çÆ® ¾×ÅÍ°¡ ¾Æ´Ñ ¾×ÅÍ´Â ¿©±â¼­ »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("ë£¨íŠ¸ ì•¡í„°ê°€ ì•„ë‹Œ ì•¡í„°ëŠ” ì—¬ê¸°ì„œ ì‚­ì œí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 	}
 	else
 	{
@@ -200,18 +200,18 @@ void GameEngineLevel::Release(float _deltaTime)
 	for (GameEngineUpdateObject* object : deleteObjects_)
 	{
 		object->ReleaseHierarchy();
-		//ÀÌÀü ·çÇÁ¿¡¼­ »ç¸ÁÆÇÁ¤µÇ¼­ deleteObjects_¿¡ ÀúÀåµÈ ¸ğµç ¿ÀºêÁ§Æ®µé°ú ±× ÀÚ½ÄµéÀ» ÀüºÎ »èÁ¦ÇÑ´Ù.
+		//ì´ì „ ë£¨í”„ì—ì„œ ì‚¬ë§íŒì •ë˜ì„œ deleteObjects_ì— ì €ì¥ëœ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë“¤ê³¼ ê·¸ ìì‹ë“¤ì„ ì „ë¶€ ì‚­ì œí•œë‹¤.
 	}
 	deleteObjects_.clear();
-	//¿ÀºêÁ§Æ®µéÀ» ÀüºÎ »èÁ¦Çß´Ù¸é deleteObjects_¸®½ºÆ®¸¦ ºñ¿î´Ù.
+	//ì˜¤ë¸Œì íŠ¸ë“¤ì„ ì „ë¶€ ì‚­ì œí–ˆë‹¤ë©´ deleteObjects_ë¦¬ìŠ¤íŠ¸ë¥¼ ë¹„ìš´ë‹¤.
 
 
 	for (size_t i = 0; i < cameras_.size(); i++)
 	{
 		if (nullptr != cameras_[i])
 		{
-			cameras_[i]->Release(_deltaTime);	//i¹øÂ° Ä«¸Ş¶ó¿¡¼­ »ç¸Á ÆÇÁ¤µÈ ·»´õ·¯µé µî·Ï ÇØÁ¦.
-			//·»´õ·¯ »èÁ¦°¡ ¾Æ´Ï¶ó i¹øÂ° Ä«¸Ş¶óÀÇ allRenderers_¸®½ºÆ®¿¡¼­ »©´Â µî·ÏÇØÁ¦ÀÎ °Í¿¡ À¯ÀÇ.
+			cameras_[i]->Release(_deltaTime);	//ië²ˆì§¸ ì¹´ë©”ë¼ì—ì„œ ì‚¬ë§ íŒì •ëœ ë Œë”ëŸ¬ë“¤ ë“±ë¡ í•´ì œ.
+			//ë Œë”ëŸ¬ ì‚­ì œê°€ ì•„ë‹ˆë¼ ië²ˆì§¸ ì¹´ë©”ë¼ì˜ allRenderers_ë¦¬ìŠ¤íŠ¸ì—ì„œ ë¹¼ëŠ” ë“±ë¡í•´ì œì¸ ê²ƒì— ìœ ì˜.
 		}
 	}
 
@@ -226,7 +226,7 @@ void GameEngineLevel::Release(float _deltaTime)
 			if (true == (*collisionIter)->IsDead())
 			{
 				collisionIter = collisionGroup.erase(collisionIter);
-				//¿©±â¼­´Â allColiisions_¿¡¼­ Á¦°ÅÇÏ±â¸¸ ÇÑ´Ù.
+				//ì—¬ê¸°ì„œëŠ” allColiisions_ì—ì„œ ì œê±°í•˜ê¸°ë§Œ í•œë‹¤.
 			}
 			else
 			{
@@ -242,20 +242,20 @@ void GameEngineLevel::Release(float _deltaTime)
 			actorIter != actorGroupIter->second.end(); /*listIter++*/)
 		{
 			(*actorIter)->ReleaseObject(deleteObjects_);
-			//¾×ÅÍ¿Í ±× ÀÚ½Ä ÄÄÆ÷³ÍÆ®µéÀÌ »ç¸Á ÆÇÁ¤À» ¹Ş¾Ò´ÂÁö È®ÀÎÇÏ°í, 
-			//»ç¸Á ÆÇÁ¤¹Ş¾Ò´Ù¸é ºÎ¸ğ ¿ÀºêÁ§Æ®ÀÇ children_¸®½ºÆ®¿¡¼­ ¶¼¾î³» deleteObjects_¿¡ ³Ö´Â´Ù.
+			//ì•¡í„°ì™€ ê·¸ ìì‹ ì»´í¬ë„ŒíŠ¸ë“¤ì´ ì‚¬ë§ íŒì •ì„ ë°›ì•˜ëŠ”ì§€ í™•ì¸í•˜ê³ , 
+			//ì‚¬ë§ íŒì •ë°›ì•˜ë‹¤ë©´ ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ children_ë¦¬ìŠ¤íŠ¸ì—ì„œ ë–¼ì–´ë‚´ deleteObjects_ì— ë„£ëŠ”ë‹¤.
 
 			if (true == (*actorIter)->IsDead())
 			{
-				//¾×ÅÍ°¡ »ç¸ÁÆÇÁ¤¹Ş¾Ò´Ù¸é allActors_¸Ê¿¡¼­ Á¦°Å.
+				//ì•¡í„°ê°€ ì‚¬ë§íŒì •ë°›ì•˜ë‹¤ë©´ allActors_ë§µì—ì„œ ì œê±°.
 				actorIter = actorGroupIter->second.erase(actorIter);
-				//delete (*actorIter); ¿Ö ±×³É »èÁ¦¸¦ ¾ÈÇÏ°í ÀÌ·¸°Ô º¹ÀâÇÑ »èÁ¦/Á¤¸® Ã¼°è¸¦ ¸¸µé°í ÀÖÁö??
-				//->·¹º§ ¾Æ·¡·Î ¾×ÅÍ ¾÷µ¥ÀÌÆ®¿ÀºêÁ§Æ® ¹Ø¿¡ °¢Á¾ ±â´ÉÀ» °¡Áø ÄÄÆ÷³ÍÆ® ¾÷µ¥ÀÌÆ®¿ÀºêÁ§Æ®µéÀÌ 
-				// ÀûÃş½ÄÀ¸·Î ½×ÀÌ°í »óÈ£ µî·Ï, °ü¸®µÇ´Â ÇöÀç ±¸Á¶»ó ¹«ºĞº°ÇÏ°Ô »èÁ¦ÇÏ¸é
-				// ¾÷µ¥ÀÌÆ®¿ÀºêÁ§Æ® ±¸Á¶°¡ ¹«³ÊÁö°í ¸Ş¸ğ¸® ´©¼ö¸¦ ¸·À» ¼ö ¾ø°Ô µÈ´Ù.
-				//µû¶ó¼­, ¿ÀºêÁ§Æ®¸¦ »èÁ¦ÇÒ ¶§ ¾÷µ¥ÀÌÆ®¿ÀºêÁ§Æ® ÀûÃş ±¸Á¶¿¡¼­ ¿ÏÀüÈ÷ ¶¼¾î³½ °úÁ¤À» °ÅÄ£ ÈÄ »èÁ¦ÇØ¾ß ÇÏ°í
-				// ¶¼¾î³»´Â °úÁ¤À» °ÅÃÄ¾ß ÇÏ±â ¶§¹®¿¡ »èÁ¦ÇÏ°íÀÚÇÏ´Â ·çÇÁ¿¡¼­ ¹Ù·Î »èÁ¦ÇÏÁö ¾Ê°í
-				// deleteObjects_ ¸®½ºÆ®¿¡ ³ÖÀº ÈÄ ´ÙÀ½ ·çÇÁ¿¡¼­ »èÁ¦ÇÏ´Â ÀıÂ÷°¡ ÇÊ¿äÇÏ´Ù.
+				//delete (*actorIter); ì™œ ê·¸ëƒ¥ ì‚­ì œë¥¼ ì•ˆí•˜ê³  ì´ë ‡ê²Œ ë³µì¡í•œ ì‚­ì œ/ì •ë¦¬ ì²´ê³„ë¥¼ ë§Œë“¤ê³  ìˆì§€??
+				//->ë ˆë²¨ ì•„ë˜ë¡œ ì•¡í„° ì—…ë°ì´íŠ¸ì˜¤ë¸Œì íŠ¸ ë°‘ì— ê°ì¢… ê¸°ëŠ¥ì„ ê°€ì§„ ì»´í¬ë„ŒíŠ¸ ì—…ë°ì´íŠ¸ì˜¤ë¸Œì íŠ¸ë“¤ì´ 
+				// ì ì¸µì‹ìœ¼ë¡œ ìŒ“ì´ê³  ìƒí˜¸ ë“±ë¡, ê´€ë¦¬ë˜ëŠ” í˜„ì¬ êµ¬ì¡°ìƒ ë¬´ë¶„ë³„í•˜ê²Œ ì‚­ì œí•˜ë©´
+				// ì—…ë°ì´íŠ¸ì˜¤ë¸Œì íŠ¸ êµ¬ì¡°ê°€ ë¬´ë„ˆì§€ê³  ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ë¥¼ ë§‰ì„ ìˆ˜ ì—†ê²Œ ëœë‹¤.
+				//ë”°ë¼ì„œ, ì˜¤ë¸Œì íŠ¸ë¥¼ ì‚­ì œí•  ë•Œ ì—…ë°ì´íŠ¸ì˜¤ë¸Œì íŠ¸ ì ì¸µ êµ¬ì¡°ì—ì„œ ì™„ì „íˆ ë–¼ì–´ë‚¸ ê³¼ì •ì„ ê±°ì¹œ í›„ ì‚­ì œí•´ì•¼ í•˜ê³ 
+				// ë–¼ì–´ë‚´ëŠ” ê³¼ì •ì„ ê±°ì³ì•¼ í•˜ê¸° ë•Œë¬¸ì— ì‚­ì œí•˜ê³ ìí•˜ëŠ” ë£¨í”„ì—ì„œ ë°”ë¡œ ì‚­ì œí•˜ì§€ ì•Šê³ 
+				// deleteObjects_ ë¦¬ìŠ¤íŠ¸ì— ë„£ì€ í›„ ë‹¤ìŒ ë£¨í”„ì—ì„œ ì‚­ì œí•˜ëŠ” ì ˆì°¨ê°€ í•„ìš”í•˜ë‹¤.
 			}
 			else
 			{
@@ -287,7 +287,7 @@ void GameEngineLevel::PushCamera(GameEngineCamera* _camera, int _cameraOrder)
 	if (static_cast<int>(CameraOrder::UICamera) < _cameraOrder
 		|| static_cast<int>(CameraOrder::MainCamera) > _cameraOrder)
 	{
-		MsgBoxAssert("Ä«¸Ş¶ó ¿À´õ°¡ Çã¿ë ¹üÀ§¸¦ ³Ñ¾î¼¹½À´Ï´Ù.");
+		MsgBoxAssert("ì¹´ë©”ë¼ ì˜¤ë”ê°€ í—ˆìš© ë²”ìœ„ë¥¼ ë„˜ì–´ì„°ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
@@ -297,13 +297,13 @@ void GameEngineLevel::PushCamera(GameEngineCamera* _camera, int _cameraOrder)
 void GameEngineLevel::PushCollision(GameEngineCollision* _collision, int _collisionOrder)
 {
 	allCollisions_[_collision->GetOrder()].remove(_collision);
-	//¿ø·¡ ±×·ì¿¡¼­ Á¦°Å.
+	//ì›ë˜ ê·¸ë£¹ì—ì„œ ì œê±°.
 
 	_collision->SetOrder(_collisionOrder);
-	//»õ ¿À´õ ºÎ¿©.
+	//ìƒˆ ì˜¤ë” ë¶€ì—¬.
 
 	allCollisions_[_collision->GetOrder()].push_back(_collision);
-	//»õ ±×·ì¿¡ »ğÀÔ.
+	//ìƒˆ ê·¸ë£¹ì— ì‚½ì….
 }
 
 void GameEngineLevel::OverChildMove(GameEngineLevel* _nextLevel)
@@ -384,8 +384,8 @@ void GameEngineLevel::ActorLevelStartEvent()
 	for (const std::pair<int, std::list<GameEngineActor*>>& actorListPair : allActors_)
 	{
 		for (GameEngineActor* const actor : actorListPair.second)
-			//ÀÌ À§Ä¡ÀÇ const´Â actor°¡ °¡¸®Å°´Â ¸Ş¸ğ¸® À§Ä¡¸¦ º¯°æÇÒ ¼ö ¾ø°Ô ÇÏ°Ú´Ù´Â ÀÇ¹ÌÀÌ´Ù. 
-			//ÇÏÁö¸¸ actor°¡ °¡¸®Å°´Â ¸Ş¸ğ¸®°¡ °¡Áø °ªÀº ¾ó¸¶µçÁö º¯°æ °¡´ÉÇÏ´Ù.
+			//ì´ ìœ„ì¹˜ì˜ constëŠ” actorê°€ ê°€ë¦¬í‚¤ëŠ” ë©”ëª¨ë¦¬ ìœ„ì¹˜ë¥¼ ë³€ê²½í•  ìˆ˜ ì—†ê²Œ í•˜ê² ë‹¤ëŠ” ì˜ë¯¸ì´ë‹¤. 
+			//í•˜ì§€ë§Œ actorê°€ ê°€ë¦¬í‚¤ëŠ” ë©”ëª¨ë¦¬ê°€ ê°€ì§„ ê°’ì€ ì–¼ë§ˆë“ ì§€ ë³€ê²½ ê°€ëŠ¥í•˜ë‹¤.
 		{
 			if (true == actor->IsUpdate())
 			{
@@ -400,8 +400,8 @@ void GameEngineLevel::ActorLevelEndEvent()
 	for (const std::pair<int, std::list<GameEngineActor*>>& actorListPair : allActors_)
 	{
 		for (GameEngineActor* const actor : actorListPair.second)
-			//ÀÌ À§Ä¡ÀÇ const´Â actor°¡ °¡¸®Å°´Â ¸Ş¸ğ¸® À§Ä¡¸¦ º¯°æÇÒ ¼ö ¾ø°Ô ÇÏ°Ú´Ù´Â ÀÇ¹ÌÀÌ´Ù. 
-			//ÇÏÁö¸¸ actor°¡ °¡¸®Å°´Â ¸Ş¸ğ¸®°¡ °¡Áø °ªÀº ¾ó¸¶µçÁö º¯°æ °¡´ÉÇÏ´Ù.
+			//ì´ ìœ„ì¹˜ì˜ constëŠ” actorê°€ ê°€ë¦¬í‚¤ëŠ” ë©”ëª¨ë¦¬ ìœ„ì¹˜ë¥¼ ë³€ê²½í•  ìˆ˜ ì—†ê²Œ í•˜ê² ë‹¤ëŠ” ì˜ë¯¸ì´ë‹¤. 
+			//í•˜ì§€ë§Œ actorê°€ ê°€ë¦¬í‚¤ëŠ” ë©”ëª¨ë¦¬ê°€ ê°€ì§„ ê°’ì€ ì–¼ë§ˆë“ ì§€ ë³€ê²½ ê°€ëŠ¥í•˜ë‹¤.
 		{
 			if (true == actor->IsUpdate())
 			{

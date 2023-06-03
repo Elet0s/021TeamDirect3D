@@ -2,32 +2,32 @@
 
 struct Input
 {
-    //¸â¹öº¯¼ö°£ ¼ø¼­´Â ÀüÇô Áß¿äÇÏÁö ¾Ê´Ù. ÀÎÇ² ·¹ÀÌ¾Æ¿ôÀ» ÅëÇØ °¢ ¸â¹öº¯¼öÀÇ ¿ÀÇÁ¼Â°ª¸¸ Á¤È®È÷ ¾Ë·ÁÁÖ¸é µÈ´Ù??
-    //´ÜÁö ÆíÀÇ¸¦ À§ÇØ¼­ µÇµµ·Ï ¼ø¼­¸¦ ÁöÅ³ »ÓÀÌ´Ù??
+    //ë©¤ë²„ë³€ìˆ˜ê°„ ìˆœì„œëŠ” ì „í˜€ ì¤‘ìš”í•˜ì§€ ì•Šë‹¤. ì¸í’‹ ë ˆì´ì•„ì›ƒì„ í†µí•´ ê° ë©¤ë²„ë³€ìˆ˜ì˜ ì˜¤í”„ì…‹ê°’ë§Œ ì •í™•íˆ ì•Œë ¤ì£¼ë©´ ëœë‹¤??
+    //ë‹¨ì§€ í¸ì˜ë¥¼ ìœ„í•´ì„œ ë˜ë„ë¡ ìˆœì„œë¥¼ ì§€í‚¬ ë¿ì´ë‹¤??
     float4 pos_ : POSITION;
     float4 texcoord_ : TEXCOORD;
 };
 
 struct Output
 {
-    //½Ã¸ÇÆ½(semantic). GPU¿¡°Ô ¾Ë·ÁÁÖ´Â, ÇØ´ç °ªÀÇ Á¾·ù. GPU°¡ ÀÚµ¿À¸·Î Ã³¸®ÇÒ ¼ö ÀÖ´Â Á¾·ùÀÇ °ªÀÌ¸é ÀÚµ¿À¸·Î Ã³¸®ÇØÁØ´Ù.
-    float4 pos_ : SV_Position; //SV_Position: ÀÌ ½Ã¸ÇÆ½À» ÅëÇØ¼­¸¸ÀÌ ¹öÅØ½º ¼ÎÀÌ´õ¿¡¼­ º¯°æµÈ Á¤Á¡ À§Ä¡¸¦ ·¡½ºÅÍ¶óÀÌÀú·Î Àü´ŞÇÒ ¼ö ÀÖ´Ù.
-    //SV´Â System-Value semanticÀÇ ¾àÀÚ·Î, DirectX10¿¡¼­ºÎÅÍ µµÀÔµÈ, ¿ëµµ°¡ Á¤ÇØÁ® ÀÖ¾î¼­ GPU°¡ ÀÚµ¿À¸·Î Ã³¸®ÇÏ´Â ½Ã¸ÇÆ½ Å°¿öµåÀÌ´Ù.
+    //ì‹œë§¨í‹±(semantic). GPUì—ê²Œ ì•Œë ¤ì£¼ëŠ”, í•´ë‹¹ ê°’ì˜ ì¢…ë¥˜. GPUê°€ ìë™ìœ¼ë¡œ ì²˜ë¦¬í•  ìˆ˜ ìˆëŠ” ì¢…ë¥˜ì˜ ê°’ì´ë©´ ìë™ìœ¼ë¡œ ì²˜ë¦¬í•´ì¤€ë‹¤.
+    float4 pos_ : SV_Position; //SV_Position: ì´ ì‹œë§¨í‹±ì„ í†µí•´ì„œë§Œì´ ë²„í…ìŠ¤ ì…°ì´ë”ì—ì„œ ë³€ê²½ëœ ì •ì  ìœ„ì¹˜ë¥¼ ë˜ìŠ¤í„°ë¼ì´ì €ë¡œ ì „ë‹¬í•  ìˆ˜ ìˆë‹¤.
+    //SVëŠ” System-Value semanticì˜ ì•½ìë¡œ, DirectX10ì—ì„œë¶€í„° ë„ì…ëœ, ìš©ë„ê°€ ì •í•´ì ¸ ìˆì–´ì„œ GPUê°€ ìë™ìœ¼ë¡œ ì²˜ë¦¬í•˜ëŠ” ì‹œë§¨í‹± í‚¤ì›Œë“œì´ë‹¤.
     
-    float4 posLocal_ : POSITION;    //ÃÖÃÊ Á¤Á¡ÁÂÇ¥(-0.5~0.5 »çÀÌ ÁÂÇ¥). 
+    float4 posLocal_ : POSITION; //ìµœì´ˆ ì •ì ì¢Œí‘œ(-0.5~0.5 ì‚¬ì´ ì¢Œí‘œ). 
 
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
 
 };
 
 Output Texture_VS(Input _input)
 {
-    Output result = (Output) 0; //OutputÅ¸ÀÔ º¯¼ö newOutputÀ» 0À¸·Î ÃÊ±âÈ­.
-    //HLSLÀÇ °æ¿ì¿¡´Â ´ëºÎºĞÀÇ »óÈ²¿¡¼­ Çüº¯È¯ÀÌ °¡´ÉÇÏ´Ù.
+    Output result = (Output) 0; //Outputíƒ€ì… ë³€ìˆ˜ newOutputì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”.
+    //HLSLì˜ ê²½ìš°ì—ëŠ” ëŒ€ë¶€ë¶„ì˜ ìƒí™©ì—ì„œ í˜•ë³€í™˜ì´ ê°€ëŠ¥í•˜ë‹¤.
 
-    result.pos_ = mul(_input.pos_, worldViewProjectionMatrix_); //WVPÇà·Ä Àû¿ë.
+    result.pos_ = mul(_input.pos_, worldViewProjectionMatrix_); //WVPí–‰ë ¬ ì ìš©.
     
-    result.posLocal_ = _input.pos_; //WVPÇà·Ä ºñÀû¿ë. ÃÖÃÊ Á¤Á¡ÁÂÇ¥(-0.5~0.5 »çÀÌ ÁÂÇ¥) À¯Áö.
+    result.posLocal_ = _input.pos_; //WVPí–‰ë ¬ ë¹„ì ìš©. ìµœì´ˆ ì •ì ì¢Œí‘œ(-0.5~0.5 ì‚¬ì´ ì¢Œí‘œ) ìœ ì§€.
     
     result.texcoord_ = _input.texcoord_;
     
@@ -43,7 +43,7 @@ Output Texture_VS(Input _input)
 Texture2D DiffuseTexture : register(t0);
 SamplerState LINEARWRAP : register(s0);
 
-float4 Texture_PS(Output _input) : SV_Target0 //SV_Target[n]: n¹ø ·»´õÅ¸°Ù¿¡ °á°ú°ªÀ» ÀúÀåÇÑ´Ù.
+float4 Texture_PS(Output _input) : SV_Target0 //SV_Target[n]: në²ˆ ë Œë”íƒ€ê²Ÿì— ê²°ê³¼ê°’ì„ ì €ì¥í•œë‹¤.
 {
     float4 resultColor = DiffuseTexture.Sample(LINEARWRAP, _input.texcoord_.xy);
     //float4 color = (Tex.Sample(Smp, _input.texcoord_.xy) * mulColor_) + plusColor_;

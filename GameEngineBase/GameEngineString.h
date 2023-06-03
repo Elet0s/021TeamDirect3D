@@ -2,23 +2,23 @@
 
 class GameEngineString
 {
-	//ÀÎÄÚµù: 
+	//ì¸ì½”ë”©: 
 
-	//¾Æ½ºÅ°ÄÚµå(American Standard Code for Information Interchange, ¹Ì±¹ Á¤º¸ ±³È¯ Ç¥ÁØ ºÎÈ£): 
-	//1963³â ANSI¿¡¼­ Ç¥ÁØÈ­ÇÑ 1¹ÙÀÌÆ® ¹®ÀÚ ÀÎÄÚµù Ã¼°è. 
-	//1¹ÙÀÌÆ® == 8ºñÆ® Áß ÆÐ¸®Æ¼ ºñÆ®(Parity Bit: Àü¼Û ¿À·ù °¨Áö¿ë ºñÆ®)·Î »ç¿ëÇÏ´Â 1ºñÆ®¸¦ Á¦¿ÜÇÑ 
-	// ³ª¸ÓÁö 7ºñÆ®·Î ¹®ÀÚ¸¦ Ç¥ÇöÇÏ¹Ç·Î 2^7=128°³ÀÇ ¹®ÀÚµé·Î ±¸¼ºµÇ¾î ÀÖ´Ù. 
-	//´ë¼Ò¹®ÀÚ ¾ËÆÄºª 26*2=52±ÛÀÚ + ¼ýÀÚ 10±ÛÀÚ + 33°³ÀÇ °ø¹é Æ÷ÇÔÇÑ Æ¯¼ö¹®ÀÚ + 33°³ÀÇ 
-	// Ãâ·Â ºÒ°¡´ÉÇÑ Á¦¾î¹®ÀÚµé·Î ÀÌ·ç¾îÁ® ÀÖ´Ù.
+	//ì•„ìŠ¤í‚¤ì½”ë“œ(American Standard Code for Information Interchange, ë¯¸êµ­ ì •ë³´ êµí™˜ í‘œì¤€ ë¶€í˜¸): 
+	//1963ë…„ ANSIì—ì„œ í‘œì¤€í™”í•œ 1ë°”ì´íŠ¸ ë¬¸ìž ì¸ì½”ë”© ì²´ê³„. 
+	//1ë°”ì´íŠ¸ == 8ë¹„íŠ¸ ì¤‘ íŒ¨ë¦¬í‹° ë¹„íŠ¸(Parity Bit: ì „ì†¡ ì˜¤ë¥˜ ê°ì§€ìš© ë¹„íŠ¸)ë¡œ ì‚¬ìš©í•˜ëŠ” 1ë¹„íŠ¸ë¥¼ ì œì™¸í•œ 
+	// ë‚˜ë¨¸ì§€ 7ë¹„íŠ¸ë¡œ ë¬¸ìžë¥¼ í‘œí˜„í•˜ë¯€ë¡œ 2^7=128ê°œì˜ ë¬¸ìžë“¤ë¡œ êµ¬ì„±ë˜ì–´ ìžˆë‹¤. 
+	//ëŒ€ì†Œë¬¸ìž ì•ŒíŒŒë²³ 26*2=52ê¸€ìž + ìˆ«ìž 10ê¸€ìž + 33ê°œì˜ ê³µë°± í¬í•¨í•œ íŠ¹ìˆ˜ë¬¸ìž + 33ê°œì˜ 
+	// ì¶œë ¥ ë¶ˆê°€ëŠ¥í•œ ì œì–´ë¬¸ìžë“¤ë¡œ ì´ë£¨ì–´ì ¸ ìžˆë‹¤.
 
 
-	//ANSI: ¹Ì±¹ ±¹¸³ Ç¥ÁØ ÇùÈ¸(American National Standards Institute) È¤Àº 
-	// ±×°÷¿¡¼­ ÁöÁ¤ÇÑ 1¹ÙÀÌÆ® 'ÀÌ»ó'ÀÇ Å©±â(¸ÖÆ¼¹ÙÀÌÆ®(Multibyte))¸¦ °¡Áø ¹®ÀÚÃ¼°è.
-	//¾ð¾î¸¶´Ù ÇÑ ±ÛÀÚ´ç ¿ë·®ÀÌ Á¦°¢°¢ÀÌ¶ó¼­ ¹®ÀÚ¿­ ±æÀÌ ÆÄ¾ÇÀÌ ¾î·Æ°í, 
-	// °°Àº °ªÀÌ¶óµµ, °¢ ¾ð¾îÀÇ ÄÚµåÆäÀÌÁö¸¶´Ù ´Ù¸¥ ±ÛÀÚ¸¦ Ç¥ÇöÇÏ¹Ç·Î, ÁöÁ¤ÇÑ ¾ð¾î°¡ ´Þ¶óÁö¸é ÄÚµåÆäÀÌÁö°¡ ´Þ¶óÁ®¼­ 
-	// ÇÑ ¾ð¾î¿¡¼­´Â ¾Æ¹« ¹®Á¦¾ø´Â ¹®ÀÚ¿­ÀÌ ´Ù¸¥ ¾ð¾î¿¡¼­´Â ÀÇ¹Ì¾ø´Â ±âÈ£ ³ª¿­ÀÌ µÇ´Â, ±ÛÀÚ ±úÁü Çö»óÀÌ ¹ß»ýÇÑ´Ù.
-	
-	//À¯´ÏÄÚµå(Unicode): À¯´ÏÄÚµå ÄÜ¼Ò½Ã¾ö(Unicode Consortium)¿¡¼­ ¸¸µç, Àü¼¼°è ¸ðµç ¹®ÀÚ¸¦ Ç¥ÇöÇÏ±â À§ÇØ ¸¸µç ¹®ÀÚÃ¼°è.
+	//ANSI: ë¯¸êµ­ êµ­ë¦½ í‘œì¤€ í˜‘íšŒ(American National Standards Institute) í˜¹ì€ 
+	// ê·¸ê³³ì—ì„œ ì§€ì •í•œ 1ë°”ì´íŠ¸ 'ì´ìƒ'ì˜ í¬ê¸°(ë©€í‹°ë°”ì´íŠ¸(Multibyte))ë¥¼ ê°€ì§„ ë¬¸ìžì²´ê³„.
+	//ì–¸ì–´ë§ˆë‹¤ í•œ ê¸€ìžë‹¹ ìš©ëŸ‰ì´ ì œê°ê°ì´ë¼ì„œ ë¬¸ìžì—´ ê¸¸ì´ íŒŒì•…ì´ ì–´ë µê³ , 
+	// ê°™ì€ ê°’ì´ë¼ë„, ê° ì–¸ì–´ì˜ ì½”ë“œíŽ˜ì´ì§€ë§ˆë‹¤ ë‹¤ë¥¸ ê¸€ìžë¥¼ í‘œí˜„í•˜ë¯€ë¡œ, ì§€ì •í•œ ì–¸ì–´ê°€ ë‹¬ë¼ì§€ë©´ ì½”ë“œíŽ˜ì´ì§€ê°€ ë‹¬ë¼ì ¸ì„œ 
+	// í•œ ì–¸ì–´ì—ì„œëŠ” ì•„ë¬´ ë¬¸ì œì—†ëŠ” ë¬¸ìžì—´ì´ ë‹¤ë¥¸ ì–¸ì–´ì—ì„œëŠ” ì˜ë¯¸ì—†ëŠ” ê¸°í˜¸ ë‚˜ì—´ì´ ë˜ëŠ”, ê¸€ìž ê¹¨ì§ í˜„ìƒì´ ë°œìƒí•œë‹¤.
+
+	//ìœ ë‹ˆì½”ë“œ(Unicode): ìœ ë‹ˆì½”ë“œ ì½˜ì†Œì‹œì—„(Unicode Consortium)ì—ì„œ ë§Œë“ , ì „ì„¸ê³„ ëª¨ë“  ë¬¸ìžë¥¼ í‘œí˜„í•˜ê¸° ìœ„í•´ ë§Œë“  ë¬¸ìžì²´ê³„.
 
 
 private:
@@ -32,20 +32,20 @@ private:
 	GameEngineString& operator=(GameEngineString&& _other) = delete;
 
 public:
-	//ÁÖ¾îÁø ¹®ÀÚµéÀ» ÀüºÎ ´ë¹®ÀÚ·Î º¯°æÇÏ´Â ÇÔ¼ö. ÀÔ·Â¹ÞÀº ÅØ½ºÆ®¸¦ ¹Ù²Û´Ù.
+	//ì£¼ì–´ì§„ ë¬¸ìžë“¤ì„ ì „ë¶€ ëŒ€ë¬¸ìžë¡œ ë³€ê²½í•˜ëŠ” í•¨ìˆ˜. ìž…ë ¥ë°›ì€ í…ìŠ¤íŠ¸ë¥¼ ë°”ê¾¼ë‹¤.
 	static void ToUpper(std::string& _text);
 
-	//ÁÖ¾îÁø ¹®ÀÚµéÀ» ÀüºÎ ´ë¹®ÀÚ·Î º¯°æÇÏ´Â ÇÔ¼ö. ¹Ù²ãÁø ÅØ½ºÆ®¸¦ ¹ÝÈ¯ÇÑ´Ù.
+	//ì£¼ì–´ì§„ ë¬¸ìžë“¤ì„ ì „ë¶€ ëŒ€ë¬¸ìžë¡œ ë³€ê²½í•˜ëŠ” í•¨ìˆ˜. ë°”ê¿”ì§„ í…ìŠ¤íŠ¸ë¥¼ ë°˜í™˜í•œë‹¤.
 	static std::string ToUpperReturn(const std::string_view& _text);
 
-	//¹®ÀÚ¿­ ºÎºÐ ±³Ã¼. ½ºÆ®¸µ ¹ÝÈ¯.
+	//ë¬¸ìžì—´ ë¶€ë¶„ êµì²´. ìŠ¤íŠ¸ë§ ë°˜í™˜.
 	static std::string Replace(
 		const std::string_view& _text,
 		const std::string_view& _prevText,
 		const std::string_view& _newText
 	);
 
-	//¹®ÀÚ¿­ ºÎºÐ ±³Ã¼.
+	//ë¬¸ìžì—´ ë¶€ë¶„ êµì²´.
 	static void Replace(
 		std::string& _text,
 		const std::string_view& _prevText,

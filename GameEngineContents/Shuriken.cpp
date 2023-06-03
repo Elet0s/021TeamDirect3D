@@ -27,7 +27,7 @@ Shuriken::Shuriken()
 	referenceVectorList02_(),
 	referenceVectorList03_()
 {
-	name_ = "¼ö¸®°Ë";
+	name_ = "ìˆ˜ë¦¬ê²€";
 	SetName(std::string_view("Shuriken"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 7;
@@ -45,7 +45,7 @@ void Shuriken::Init()
 	std::string sDamege = std::to_string(shuriKenWeaponInfo_.weaponAtk_).substr(0, std::to_string(shuriKenWeaponInfo_.weaponAtk_).find(".") + 3);
 	std::string sAttackSpeed = std::to_string(shuriKenWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(shuriKenWeaponInfo_.weaponAtkSpeed_).find(".") + 2);
 
-	etc_ = "°¡Àå ³·Àº Ã¼·ÂÀÇ ÀûÀ»\n°ø°İÇÏ´Â ´Ù¼öÀÇ\n¼ö¸®°ËÀ» ´øÁı´Ï´Ù\n" + sDamege + " ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°İ\nÅõ»çÃ¼ " + std::to_string(shuriKenWeaponInfo_.weaponProjectileNum_) + " °³ ";
+	etc_ = "ê°€ì¥ ë‚®ì€ ì²´ë ¥ì˜ ì ì„\nê³µê²©í•˜ëŠ” ë‹¤ìˆ˜ì˜\nìˆ˜ë¦¬ê²€ì„ ë˜ì§‘ë‹ˆë‹¤\n" + sDamege + " ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²©\níˆ¬ì‚¬ì²´ " + std::to_string(shuriKenWeaponInfo_.weaponProjectileNum_) + " ê°œ ";
 }
 void Shuriken::Effect()
 {
@@ -58,7 +58,7 @@ void Shuriken::Start()
 	projectileGroupList02_.reserve(20);
 	projectileGroupList03_.reserve(20);
 	passNum_.reserve(60);
-	for (size_t i = 0; i < 60; i++) // Ã³À½ºÎÅÍ ÃÖ´ë°¹¼ö ¸ğµÎ ¸¸µé¾î¼­ °¡Áö°í ÀÖÀ» °Í 
+	for (size_t i = 0; i < 60; i++) // ì²˜ìŒë¶€í„° ìµœëŒ€ê°¯ìˆ˜ ëª¨ë‘ ë§Œë“¤ì–´ì„œ ê°€ì§€ê³  ìˆì„ ê²ƒ 
 	{
 		passNum_.push_back(0);
 
@@ -155,18 +155,18 @@ void Shuriken::SerchTarget()
 		targetSerchCounter_ = 0;
 		monsterList_ = Monster::GetMonsterList();
 		targetInst01_.clear();
-		for (size_t n = 0; n < shuriKenWeaponInfo_.weaponProjectileNum_; n++)//ÇÑ¹ø¿¡ ´øÁö´Â Åõ»çÃ¼ °¹¼ö¸¸Å­ ¹İº¹ÇÒ°ÍÀÓ
+		for (size_t n = 0; n < shuriKenWeaponInfo_.weaponProjectileNum_; n++)//í•œë²ˆì— ë˜ì§€ëŠ” íˆ¬ì‚¬ì²´ ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µí• ê²ƒì„
 		{
 			for (size_t i = 0; i < monsterList_.size(); i++)
 			{
 				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
 				{
-					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0ÀÌ»ó, Ã¹¹øÂ° ¼ø¹øÀÏ°æ¿ì
+					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0ì´ìƒ, ì²«ë²ˆì§¸ ìˆœë²ˆì¼ê²½ìš°
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 						firstSerchCheak_ = true;
 					}
-					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//ÇöÀç°Ë»çÁßÀÎ ¸ó½ºÅÍ Ã¼·ÂÀÌ ´õ ³·´Ù¸é
+					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//í˜„ì¬ê²€ì‚¬ì¤‘ì¸ ëª¬ìŠ¤í„° ì²´ë ¥ì´ ë” ë‚®ë‹¤ë©´
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 					}
@@ -174,7 +174,7 @@ void Shuriken::SerchTarget()
 				if (i == monsterList_.size() - 1)
 				{
 					targetSerchCounter_ += 1;
-					targetInst01_.push_back(minHpPair_);//Å¸°Ù¸®½ºÆ®¿¡ Ãß°¡
+					targetInst01_.push_back(minHpPair_);//íƒ€ê²Ÿë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
 					monsterList_[minHpPair_.first]->isTarget_ = true;
 					firstSerchCheak_ = false;
 					istarget_ = true;
@@ -205,7 +205,7 @@ void Shuriken::ProjectileSort()
 		{
 			for (size_t i = 0; i < projectileGroupList01_.size(); i++)
 			{
-				if (targetInst01_.size() > i) // Å¸°Ù¼ö¸¸Å­ ÇÊ¿ä
+				if (targetInst01_.size() > i) // íƒ€ê²Ÿìˆ˜ë§Œí¼ í•„ìš”
 				{
 					passNum_[i] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList01_[i].first->On();
@@ -224,7 +224,7 @@ void Shuriken::ProjectileSort()
 		{
 			for (size_t i = 0; i < projectileGroupList02_.size(); i++)
 			{
-				if (targetInst02_.size() > i) // Å¸°Ù¼ö¸¸Å­ ÇÊ¿ä
+				if (targetInst02_.size() > i) // íƒ€ê²Ÿìˆ˜ë§Œí¼ í•„ìš”
 				{
 					passNum_[i+20] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList02_[i].first->On();
@@ -243,7 +243,7 @@ void Shuriken::ProjectileSort()
 		{
 			for (size_t i = 0; i < projectileGroupList03_.size(); i++)
 			{
-				if (targetInst03_.size() > i) // Å¸°Ù¼ö¸¸Å­ ÇÊ¿ä
+				if (targetInst03_.size() > i) // íƒ€ê²Ÿìˆ˜ë§Œí¼ í•„ìš”
 				{
 					passNum_[i + 40] = shuriKenWeaponInfo_.weaponPassNum_;
 					projectileGroupList03_[i].first->On();
@@ -260,7 +260,7 @@ void Shuriken::ProjectileSort()
 		}
 	}
 }
-	
+
 void Shuriken::RenderRotate()
 {
 	if (istarget_ == true)
@@ -276,8 +276,8 @@ void Shuriken::RenderRotate()
 				float Mx = monsterList_[targetInst01_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst01_[i].first]->GetTransform().GetWorldPosition().y;
 				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//¸ó½ºÅÍ ¿Å°ÜÁø À§Ä¡·Î °¡¾ßÇÔ
-				referenceVector_.x = (Mx - Px); //¹æÇâ ±¸ÇÏ´Â °ø½Ä
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//ëª¬ìŠ¤í„° ì˜®ê²¨ì§„ ìœ„ì¹˜ë¡œ ê°€ì•¼í•¨
+				referenceVector_.x = (Mx - Px); //ë°©í–¥ êµ¬í•˜ëŠ” ê³µì‹
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
 				referenceVectorList01_.push_back(referenceVector_);
@@ -296,8 +296,8 @@ void Shuriken::RenderRotate()
 				float Mx = monsterList_[targetInst02_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst02_[i].first]->GetTransform().GetWorldPosition().y;
 				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//¸ó½ºÅÍ ¿Å°ÜÁø À§Ä¡·Î °¡¾ßÇÔ
-				referenceVector_.x = (Mx - Px); //¹æÇâ ±¸ÇÏ´Â °ø½Ä
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//ëª¬ìŠ¤í„° ì˜®ê²¨ì§„ ìœ„ì¹˜ë¡œ ê°€ì•¼í•¨
+				referenceVector_.x = (Mx - Px); //ë°©í–¥ êµ¬í•˜ëŠ” ê³µì‹
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
 				referenceVectorList02_.push_back(referenceVector_);
@@ -316,8 +316,8 @@ void Shuriken::RenderRotate()
 				float Mx = monsterList_[targetInst03_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst03_[i].first]->GetTransform().GetWorldPosition().y;
 				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//¸ó½ºÅÍ ¿Å°ÜÁø À§Ä¡·Î °¡¾ßÇÔ
-				referenceVector_.x = (Mx - Px); //¹æÇâ ±¸ÇÏ´Â °ø½Ä
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//ëª¬ìŠ¤í„° ì˜®ê²¨ì§„ ìœ„ì¹˜ë¡œ ê°€ì•¼í•¨
+				referenceVector_.x = (Mx - Px); //ë°©í–¥ êµ¬í•˜ëŠ” ê³µì‹
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
 				referenceVectorList03_.push_back(referenceVector_);
@@ -391,13 +391,13 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(GameEngineCollision* _This,
 	{
 		if (i < 20)
 		{
-			if (projectileGroupList01_[i].second == _This)//¹ß»çÃ¼Áß ºÎµúÈù ¹ß»çÃ¼ Ã£¾Æ¼­ Áö¿ò
+			if (projectileGroupList01_[i].second == _This)//ë°œì‚¬ì²´ì¤‘ ë¶€ë”ªíŒ ë°œì‚¬ì²´ ì°¾ì•„ì„œ ì§€ì›€
 			{
 				if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] > 0)
 				{
 					dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] -= 1;
 				}
-				 if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
+				if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
 				{
 					projectileGroupList01_[i].first->Off();
 					projectileGroupList01_[i].second->Off();
@@ -412,7 +412,7 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(GameEngineCollision* _This,
 				{
 					dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] -= 1;
 				}
-				 if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
+				if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
 				{
 					projectileGroupList02_[i - 20].first->Off();
 					projectileGroupList02_[i - 20].second->Off();
@@ -428,7 +428,7 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(GameEngineCollision* _This,
 				{
 					dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] -= 1;
 				}
-				 if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
+				if (dynamic_cast<Shuriken*>(_This->GetActor())->passNum_[i] == 0)
 				{
 					projectileGroupList03_[i - 40].first->Off();
 					projectileGroupList03_[i - 40].second->Off();
@@ -436,7 +436,7 @@ CollisionReturn Shuriken::ShurikenToMonsterCollision(GameEngineCollision* _This,
 			}
 		}
 	}
-	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= shuriKenWeaponInfo_.weaponAtk_; //µ¥¹ÌÁöÁÜ
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= shuriKenWeaponInfo_.weaponAtk_; //ë°ë¯¸ì§€ì¤Œ
 	return CollisionReturn::Stop;
 }
 

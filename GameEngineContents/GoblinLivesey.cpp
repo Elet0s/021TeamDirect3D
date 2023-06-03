@@ -33,7 +33,7 @@ void GoblinLivesey::Start()
 
 	monsterHp_ = CreateComponent<GameEngineTextureRenderer>();
 	monsterHp_->SetTexture("DefaultUi.png");
-	monsterHp_->GetPixelData().mulColor_ = float4::Green; //≥Ïªˆ
+	monsterHp_->GetPixelData().mulColor_ = float4::Green; //ÎÖπÏÉâ
 	monsterHp_->GetTransform().SetWorldScale(-130.f, 15.f, 1.f);
 	monsterHp_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHp_->SetRenderingOrder(15);
@@ -41,7 +41,7 @@ void GoblinLivesey::Start()
 
 	monsterHpMax_ = CreateComponent<GameEngineTextureRenderer>();
 	monsterHpMax_->SetTexture("DefaultUi.png");
-	monsterHpMax_->GetPixelData().mulColor_ = float4::Black; //∞À¿∫ªˆ
+	monsterHpMax_->GetPixelData().mulColor_ = float4::Black; //Í≤ÄÏùÄÏÉâ
 	monsterHpMax_->GetTransform().SetLocalScale(130, 15, 1);
 	monsterHpMax_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHpMax_->SetRenderingOrder(15);
@@ -51,7 +51,7 @@ void GoblinLivesey::Start()
 	monsterHpScore_ = CreateComponent<GameEngineFontRenderer>();
 	monsterHpScore_->SetSize(20.f);
 	monsterHpScore_->SetLeftAndRightSort(LeftAndRightSort::Center);
-	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "∏º¿Ω");
+	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "ÎßëÏùå");
 	monsterHpScore_->SetPositionMode(FontPositionMode::World);
 	monsterHpScore_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHpScore_->GetTransform().SetLocalPosition({ 0.f,115.f,0.f });
@@ -65,7 +65,7 @@ void GoblinLivesey::Update(float _deltaTime)
 	HpCheak();
 
 	GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
-	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "∏º¿Ω");
+	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "ÎßëÏùå");
 	ReduceHP();
 }
 void GoblinLivesey::End()

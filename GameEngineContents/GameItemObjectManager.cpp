@@ -17,7 +17,7 @@ void GameItemObjectManager::DelteObject(size_t _Num)
 {
 	if (allObjectContainer_[_Num] == nullptr)
 	{
-		MsgBoxAssert("Áö¿ì·Á°í ÇÏ´Â ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssert("ì§€ìš°ë ¤ê³  í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 	}
 	allObjectContainer_[_Num]->Death();
 	allObjectContainer_.erase(allObjectContainer_.begin()+ _Num);
@@ -28,7 +28,7 @@ void GameItemObjectManager::DelteObject(size_t _Num)
 		isFullContainer_ = false;
 	}
 }
-	
+
 void GameItemObjectManager::SetManager()
 {
 	allObjectContainer_.reserve(300);

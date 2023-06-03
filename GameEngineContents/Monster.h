@@ -19,7 +19,7 @@ public:
 
 	}
 public:
-	float baseSpeed_; //¸ó½ºÅÍ ±âº»¼Óµµ
+	float baseSpeed_; //ëª¬ìŠ¤í„° ê¸°ë³¸ì†ë„
 	float ResultSpeed_;
 	float maxHp_;
 	float hp_;
@@ -39,8 +39,8 @@ class Monster: public GameEngineActor
 	static std::vector<Monster*> allMonsters_;
 
 protected:
-	static GameEngineInstanceRenderer* allMonstersRenderer_;	//¸ğµç ¸ó½ºÅÍ ·»´õ·¯.
-	static GameEngineInstanceRenderer* allShadowsRenderer_;	//¸ğµç ¸ó½ºÅÍ ±×¸²ÀÚ ·»´õ·¯.
+	static GameEngineInstanceRenderer* allMonstersRenderer_;	//ëª¨ë“  ëª¬ìŠ¤í„° ë Œë”ëŸ¬.
+	static GameEngineInstanceRenderer* allShadowsRenderer_;	//ëª¨ë“  ëª¬ìŠ¤í„° ê·¸ë¦¼ì ë Œë”ëŸ¬.
 	static GameItemObjectManager* dropMonsterItemObject_;
 	static int monsterCreationIndex_;	
 public:
@@ -76,23 +76,23 @@ public:
 	CollisionReturn MonsterToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	CollisionReturn MonsterToPlayerCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
-	//¸ó½ºÅÍÇ® »çÀÌÁî ¿¹¾à.
+	//ëª¬ìŠ¤í„°í’€ ì‚¬ì´ì¦ˆ ì˜ˆì•½.
 	static void ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCount);
 
-	//»ç¸ÁÇÑ ¸ó½ºÅÍ´Â Ç®·Î º¹±Í, ´ë±â.
-	void Unsummon(); // °ÔÀÓ Áß°£¿¡ Áö¿ì´Â ¿ëµµ
+	//ì‚¬ë§í•œ ëª¬ìŠ¤í„°ëŠ” í’€ë¡œ ë³µê·€, ëŒ€ê¸°.
+	void Unsummon(); // ê²Œì„ ì¤‘ê°„ì— ì§€ìš°ëŠ” ìš©ë„
 
-	//¸ğµç ¸ó½ºÅÍ Ç®·Î º¹±Í.
+	//ëª¨ë“  ëª¬ìŠ¤í„° í’€ë¡œ ë³µê·€.
 	static void UnsummonAllMonsters();
 
-	//¸ó½ºÅÍ »ı¼º ¹× ´ë±â.
+	//ëª¬ìŠ¤í„° ìƒì„± ë° ëŒ€ê¸°.
 	static void CreateMonsterWithEnum(
 		GameEngineLevel* _thisLevel,
 		MonsterType _monsterType,
 		size_t _monsterCount
 	);
 
-	//¸ó½ºÅÍ »ı¼º ¹× ´ë±â.
+	//ëª¬ìŠ¤í„° ìƒì„± ë° ëŒ€ê¸°.
 	template <class MonsterClass>
 	static void CreateMonster(GameEngineLevel* _thisLevel, size_t _monsterCount)
 	{
@@ -130,7 +130,7 @@ public:
 	}
 
 
-	//·¹º§¿¡ ¸ó½ºÅÍ ¹èÄ¡.
+	//ë ˆë²¨ì— ëª¬ìŠ¤í„° ë°°ì¹˜.
 	template <typename MonsterClass>
 	static void SummonMonster(GameEngineLevel* _thisLevel, size_t _summonCount)
 	{
@@ -139,13 +139,13 @@ public:
 		{
 			if (nullptr == dynamic_cast<MonsterClass*>(allMonsters_[i]))
 			{
-				//¿øÇÏ´Â Å¸ÀÔ ¸ó½ºÅÍ°¡ ¾Æ´Ï¶ó¸é ¹«½Ã.
+				//ì›í•˜ëŠ” íƒ€ì… ëª¬ìŠ¤í„°ê°€ ì•„ë‹ˆë¼ë©´ ë¬´ì‹œ.
 				continue;
 			}
 
 			if (true == allMonsters_[i]->isSummoned_)
 			{
-				//ÀÌ¹Ì ¼ÒÈ¯µÈ ¸ó½ºÅÍ¶ó¸é ¹«½Ã.
+				//ì´ë¯¸ ì†Œí™˜ëœ ëª¬ìŠ¤í„°ë¼ë©´ ë¬´ì‹œ.
 				continue;
 			}
 
@@ -176,7 +176,7 @@ public:
 					monsterPosition_.y,
 					monsterPosition_.z + 2.f
 				);
-	
+
 				allMonsters_[i]->On();
 				allMonsters_[i]->isSummoned_ = true;
 				//allShadowsRenderer_->GetInstancingUnit(allMonsters_[i]->instancingUnitIndex_).Link(
@@ -215,18 +215,18 @@ public:
 				++count;
 			}
 
-			--count;//¼ÒÈ¯ ´ë±âÁßÀÎ ¸ó½ºÅÍ¶ó¸é ¼ÒÈ¯ÇÏ°í Ä«¿îÆ® °¨¼Ò.
+			--count;//ì†Œí™˜ ëŒ€ê¸°ì¤‘ì¸ ëª¬ìŠ¤í„°ë¼ë©´ ì†Œí™˜í•˜ê³  ì¹´ìš´íŠ¸ ê°ì†Œ.
 			if (0 == count)
 			{
-				//´Ù ¼ÒÈ¯Çß´Ù¸é Á¾·á.
+				//ë‹¤ ì†Œí™˜í–ˆë‹¤ë©´ ì¢…ë£Œ.
 				break;
 			}
 		}
 
 		if (0 != count)
 		{
-			//¼ÒÈ¯ÇÏ±â¿¡ ÃæºĞÇÑ ¸ó½ºÅÍ°¡ ¾ø¾ú´Ù¸é °æ°í.
-			MsgBoxAssert("ÃæºĞÇÑ ¼ıÀÚÀÇ ¸ó½ºÅÍ°¡ ¾ø¾ú½À´Ï´Ù.");
+			//ì†Œí™˜í•˜ê¸°ì— ì¶©ë¶„í•œ ëª¬ìŠ¤í„°ê°€ ì—†ì—ˆë‹¤ë©´ ê²½ê³ .
+			MsgBoxAssert("ì¶©ë¶„í•œ ìˆ«ìì˜ ëª¬ìŠ¤í„°ê°€ ì—†ì—ˆìŠµë‹ˆë‹¤.");
 			return;
 		}
 	}
@@ -261,33 +261,33 @@ protected:
 	bool colCheakToPlayer_;
 	bool colCheakToMonster_;
 
-	float mx_;//ÀÚ½ÅÀÇ ÁÂÇ¥
+	float mx_;//ìì‹ ì˜ ì¢Œí‘œ
 	float my_;
 	float px_;
 	float py_;
 
-	float playerRange_; // ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸®
+	float playerRange_; // í”Œë ˆì´ì–´ì™€ì˜ ê±°ë¦¬
 	float atkDeltaTime_;
 
 	float4 pushToMonsterVector;
 
 	float4 pushVector_;
 	float4 reactionVector_;
-	float4 range_; // ¸ó½ºÅÍ¿¡¼­ ÇÃ·¹ÀÌ¾î±îÁöÀÇ º¤ÅÍ
-	float4 monsterBaseVector_;//Ãæµ¹°ªÀû¿ë¾ÈµÈ °¡Àå ±âº»ÀûÀÎ ¸ó½ºÅÍ º¤ÅÍ
-	float4 monsterResultVector_;// ÃÖÁ¾ ¹«ºêº¤ÅÍ
-	float4 playerReactionVector_;// ÇÃ·¹ÀÌ¾î ¹İÀÛ¿ëº¤ÅÍ
-	float4 monsterReactionVector_;// ¸ó½ºÅÍ ¹İÀÛ¿ëº¤ÅÍ
+	float4 range_; // ëª¬ìŠ¤í„°ì—ì„œ í”Œë ˆì´ì–´ê¹Œì§€ì˜ ë²¡í„°
+	float4 monsterBaseVector_;//ì¶©ëŒê°’ì ìš©ì•ˆëœ ê°€ì¥ ê¸°ë³¸ì ì¸ ëª¬ìŠ¤í„° ë²¡í„°
+	float4 monsterResultVector_;// ìµœì¢… ë¬´ë¸Œë²¡í„°
+	float4 playerReactionVector_;// í”Œë ˆì´ì–´ ë°˜ì‘ìš©ë²¡í„°
+	float4 monsterReactionVector_;// ëª¬ìŠ¤í„° ë°˜ì‘ìš©ë²¡í„°
 
 	GameEngineCollision* monCollision_;
 	MonsterInfo* monsterInfo_;
 
-	int instancingUnitIndex_;	//ÀÌ ¸ó½ºÅÍ¸¦ ´ã´çÇØ¼­ ±×¸®°í ÀÖ´Â ÀÎ½ºÅÏ½ÌÀ¯´ÖÀÇ ¹øÈ£.
+	int instancingUnitIndex_;	//ì´ ëª¬ìŠ¤í„°ë¥¼ ë‹´ë‹¹í•´ì„œ ê·¸ë¦¬ê³  ìˆëŠ” ì¸ìŠ¤í„´ì‹±ìœ ë‹›ì˜ ë²ˆí˜¸.
 
-	float4 monsterScale_;		//°¢ ¸ó½ºÅÍ Á¾·ùº° Å©±â.
+	float4 monsterScale_;		//ê° ëª¬ìŠ¤í„° ì¢…ë¥˜ë³„ í¬ê¸°.
 
-	GameEngineAnimation monsterAnimation_;	//½Ã°£ Áö³¯¶§¸¶´Ù ÀÎµ¦½º¸¸ ¹Ù²ãÁÖ´Â ¾Ö´Ï¸ŞÀÌ¼Ç ¸ğµâ.
-	//±¸Á¶¿Í ±â´ÉÀÌ ±×´ÙÁö º¹ÀâÇÏÁö ¾Ê°í, °¢°¢ÀÇ ¸ó½ºÅÍ¸¶´Ù ¹İµå½Ã ÇÑ°³¾¿ °¡Á®¾ß ÇÏ¹Ç·Î °ªÇüÀ¸·Î ÀúÀå.
+	GameEngineAnimation monsterAnimation_;	//ì‹œê°„ ì§€ë‚ ë•Œë§ˆë‹¤ ì¸ë±ìŠ¤ë§Œ ë°”ê¿”ì£¼ëŠ” ì• ë‹ˆë©”ì´ì…˜ ëª¨ë“ˆ.
+	//êµ¬ì¡°ì™€ ê¸°ëŠ¥ì´ ê·¸ë‹¤ì§€ ë³µì¡í•˜ì§€ ì•Šê³ , ê°ê°ì˜ ëª¬ìŠ¤í„°ë§ˆë‹¤ ë°˜ë“œì‹œ í•œê°œì”© ê°€ì ¸ì•¼ í•˜ë¯€ë¡œ ê°’í˜•ìœ¼ë¡œ ì €ì¥.
 
 	RenderOption renderOption_;
 	PixelData pixelData_;
@@ -297,11 +297,11 @@ protected:
 	GameEngineFontRenderer* monsterHpScore_;
 
 private:
-	std::string monsterTextureName_;	//¸ó½ºÅÍ ÀÚ±â ÀÚ½ÅÀÇ ÅØ½ºÃ³ ÀÌ¸§. 
-	//Å¬·¡½º ÀÌ¸§°ú µ¿ÀÏÇÏ´Ù´Â ÀüÁ¦·Î ÀúÀåµÇ°Ô ÇÔ.
+	std::string monsterTextureName_;	//ëª¬ìŠ¤í„° ìê¸° ìì‹ ì˜ í…ìŠ¤ì²˜ ì´ë¦„. 
+	//í´ë˜ìŠ¤ ì´ë¦„ê³¼ ë™ì¼í•˜ë‹¤ëŠ” ì „ì œë¡œ ì €ì¥ë˜ê²Œ í•¨.
 
-	bool isSummoned_;	//true: ¼ÒÈ¯µÇ¼­ ÇÊµå¿¡¼­ È°µ¿ÇÏ°í ÀÖÀ½.
+	bool isSummoned_;	//true: ì†Œí™˜ë˜ì„œ í•„ë“œì—ì„œ í™œë™í•˜ê³  ìˆìŒ.
 
-	bool isToRight_;	//true: ¸ó½ºÅÍ°¡ ¿À¸¥ÂÊ º¸°í ÀÖÀ½.
+	bool isToRight_;	//true: ëª¬ìŠ¤í„°ê°€ ì˜¤ë¥¸ìª½ ë³´ê³  ìˆìŒ.
 
 };

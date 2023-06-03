@@ -4,7 +4,7 @@
 
 Castle::Castle() 
 {
-	name_ = "Ä³½½";
+	name_ = "ìºìŠ¬";
 	SetName(std::string_view("Castle"));
 	myRank_ = Rank::Epic;
 	maxLevel_ = 2;
@@ -23,8 +23,8 @@ void Castle::Init()
 	std::string sDef = std::to_string(PlayerInfo_.def_).substr(0, std::to_string(PlayerInfo_.def_).find("."));
 	std::string sDefNext = std::to_string(PlayerInfo_.def_ + 1.0f).substr(0, std::to_string(PlayerInfo_.def_ + 1.0f).find(".") + 3);
 
-	etc_ = sMaxHp + " -> " + sMaxHpNext + " ÃÖ´ë Ã¼·Â\n"
-		+ sDef + "->" + sDefNext + " ¹æ¾î·Â ";
+	etc_ = sMaxHp + " -> " + sMaxHpNext + " ìµœëŒ€ ì²´ë ¥\n"
+		+ sDef + "->" + sDefNext + " ë°©ì–´ë ¥ ";
 }
 
 void Castle::Effect()

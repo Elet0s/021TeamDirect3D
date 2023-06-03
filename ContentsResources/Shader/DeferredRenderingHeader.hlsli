@@ -1,7 +1,7 @@
 struct DeferredRenderingOutput
 {
-    float4 color_ : SV_Target0;         //±âº» »ö»ó.
-    float4 viewPosition_ : SV_Target1;  //ºä°ø°£¿¡¼­ÀÇ À§Ä¡.
-    float4 viewNormal_ : SV_Target2;    //ºä°ø°£¿¡¼­ÀÇ ¹ı¼±º¤ÅÍ.
-    float4 objectDepth_ : SV_Target3;   //¿ÀºêÁ§Æ®ÀÇ ±íÀÌ°ª.
+    float4 color_ : SV_Target0; //ê¸°ë³¸ ìƒ‰ìƒ.
+    float4 viewPosition_ : SV_Target1; //ë·°ê³µê°„ì—ì„œì˜ ìœ„ì¹˜.
+    float4 viewNormal_ : SV_Target2; //ë·°ê³µê°„ì—ì„œì˜ ë²•ì„ ë²¡í„°.
+    float4 objectDepth_ : SV_Target3; //ì˜¤ë¸Œì íŠ¸ì˜ ê¹Šì´ê°’.
 };

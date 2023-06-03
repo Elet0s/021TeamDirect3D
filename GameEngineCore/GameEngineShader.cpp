@@ -16,177 +16,177 @@ void GameEngineConstantBufferSetter::Set() const
 {
 	constantBuffer_->ChangeData(this->settingDataToGPU_, size_);
 
-	setResourceFunction_();	//½ºÀ§Ä¡¹® ÇÑ¹ø ´ú ¾²·Á°í Æã¼Å³Î »ç¿ë.
+	setResourceFunction_();	//ìŠ¤ìœ„ì¹˜ë¬¸ í•œë²ˆ ëœ ì“°ë ¤ê³  í‘ì…”ë„ ì‚¬ìš©.
 }
 
 void GameEngineConstantBufferSetter::Bind()
 {
 	if (nullptr == this->constantBuffer_)
 	{
-		MsgBoxAssert("»ó¼ö¹öÆÛ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssert("ìƒìˆ˜ë²„í¼ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return;
 	}
 
 	switch (this->parentShaderType_)
 	{
-	case ShaderType::VertexShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineConstantBuffer::VSSetConstantBuffer,
-			this->constantBuffer_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::VertexShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineConstantBuffer::VSSetConstantBuffer,
+				this->constantBuffer_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	case ShaderType::ComputeShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineConstantBuffer::CSSetConstantBuffer,
-			this->constantBuffer_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::ComputeShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineConstantBuffer::CSSetConstantBuffer,
+				this->constantBuffer_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	case ShaderType::PixelShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineConstantBuffer::PSSetConstantBuffer,
-			this->constantBuffer_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::PixelShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineConstantBuffer::PSSetConstantBuffer,
+				this->constantBuffer_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	default:
-		MsgBoxAssert("¾ÆÁ÷ ÁØºñµÇÁö ¾ÊÀº ¼ÎÀÌ´õ Å¸ÀÔÀÔ´Ï´Ù.");
-		return;
+		default:
+			MsgBoxAssert("ì•„ì§ ì¤€ë¹„ë˜ì§€ ì•Šì€ ì…°ì´ë” íƒ€ì…ì…ë‹ˆë‹¤.");
+			return;
 	}
 }
 
 void GameEngineTextureSetter::Set() const
 {
-	setResourceFunction_();	//½ºÀ§Ä¡¹® ÇÑ¹ø ´ú ¾²·Á°í Æã¼Å³Î »ç¿ë.
+	setResourceFunction_();	//ìŠ¤ìœ„ì¹˜ë¬¸ í•œë²ˆ ëœ ì“°ë ¤ê³  í‘ì…”ë„ ì‚¬ìš©.
 }
 
 void GameEngineTextureSetter::Reset() const
 {
-	resetResourceFunction_();	//½ºÀ§Ä¡¹® ÇÑ¹ø ´ú ¾²·Á°í Æã¼Å³Î »ç¿ë.
+	resetResourceFunction_();	//ìŠ¤ìœ„ì¹˜ë¬¸ í•œë²ˆ ëœ ì“°ë ¤ê³  í‘ì…”ë„ ì‚¬ìš©.
 }
 
 void GameEngineTextureSetter::Bind()
 {
 	if (nullptr == this->texture_)
 	{
-		MsgBoxAssert("ÅØ½ºÃ³°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssert("í…ìŠ¤ì²˜ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return;
 	}
 
 	switch (this->parentShaderType_)
 	{
-	case ShaderType::VertexShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineTexture::VSSetShaderResource,
-			this->texture_,
-			this->bindPoint_
-		);
+		case ShaderType::VertexShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineTexture::VSSetShaderResource,
+				this->texture_,
+				this->bindPoint_
+			);
 
-		this->resetResourceFunction_ = std::bind(
-			&GameEngineTexture::VSResetShaderResource,
-			this->texture_,
-			this->bindPoint_
-		);
-		break;
-	}
+			this->resetResourceFunction_ = std::bind(
+				&GameEngineTexture::VSResetShaderResource,
+				this->texture_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	case ShaderType::ComputeShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineTexture::CSSetShaderResource,
-			this->texture_,
-			this->bindPoint_
-		);
+		case ShaderType::ComputeShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineTexture::CSSetShaderResource,
+				this->texture_,
+				this->bindPoint_
+			);
 
-		//this->resetResourceFunction_ = std::bind(
-		//	&GameEngineTexture::CSResetShaderResource,
-		//	this->texture_,
-		//	this->bindPoint_
-		//);
-		break;
-	}
+			//this->resetResourceFunction_ = std::bind(
+			//	&GameEngineTexture::CSResetShaderResource,
+			//	this->texture_,
+			//	this->bindPoint_
+			//);
+			break;
+		}
 
-	case ShaderType::PixelShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineTexture::PSSetShaderResource,
-			this->texture_,
-			this->bindPoint_
-		);
+		case ShaderType::PixelShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineTexture::PSSetShaderResource,
+				this->texture_,
+				this->bindPoint_
+			);
 
-		this->resetResourceFunction_ = std::bind(
-			&GameEngineTexture::PSResetShaderResource,
-			this->texture_,
-			this->bindPoint_
-		);
-		break;
-	}
+			this->resetResourceFunction_ = std::bind(
+				&GameEngineTexture::PSResetShaderResource,
+				this->texture_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	default:
-		MsgBoxAssert("¾ÆÁ÷ ÁØºñµÇÁö ¾ÊÀº ¼ÎÀÌ´õ Å¸ÀÔÀÔ´Ï´Ù.");
-		return;
+		default:
+			MsgBoxAssert("ì•„ì§ ì¤€ë¹„ë˜ì§€ ì•Šì€ ì…°ì´ë” íƒ€ì…ì…ë‹ˆë‹¤.");
+			return;
 	}
 }
 
 void GameEngineSamplerSetter::Set() const
 {
-	setResourceFunction_();	//½ºÀ§Ä¡¹® ÇÑ¹ø ´ú ¾²·Á°í Æã¼Å³Î »ç¿ë.
+	setResourceFunction_();	//ìŠ¤ìœ„ì¹˜ë¬¸ í•œë²ˆ ëœ ì“°ë ¤ê³  í‘ì…”ë„ ì‚¬ìš©.
 }
 
 void GameEngineSamplerSetter::Bind()
 {
 	if (nullptr == this->sampler_)
 	{
-		MsgBoxAssert("»ùÇÃ·¯°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssert("ìƒ˜í”ŒëŸ¬ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return;
 	}
 
 	switch (this->parentShaderType_)
 	{
-	case ShaderType::VertexShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineSampler::VSSetSampler,
-			this->sampler_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::VertexShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineSampler::VSSetSampler,
+				this->sampler_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	case ShaderType::ComputeShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineSampler::CSSetSampler,
-			this->sampler_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::ComputeShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineSampler::CSSetSampler,
+				this->sampler_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	case ShaderType::PixelShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineSampler::PSSetSampler,
-			this->sampler_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::PixelShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineSampler::PSSetSampler,
+				this->sampler_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	default:
-		MsgBoxAssert("¾ÆÁ÷ ÁØºñµÇÁö ¾ÊÀº ¼ÎÀÌ´õ Å¸ÀÔÀÔ´Ï´Ù.");
-		return;
+		default:
+			MsgBoxAssert("ì•„ì§ ì¤€ë¹„ë˜ì§€ ì•Šì€ ì…°ì´ë” íƒ€ì…ì…ë‹ˆë‹¤.");
+			return;
 	}
 }
 
@@ -194,52 +194,52 @@ void GameEngineStructuredBufferSetter::Set() const
 {
 	structuredBuffer_->ChangeData(this->settingDataToGPU_, size_ * count_);
 
-	setResourceFunction_();	//½ºÀ§Ä¡¹® ÇÑ¹ø ´ú ¾²·Á°í Æã¼Å³Î »ç¿ë.
+	setResourceFunction_();	//ìŠ¤ìœ„ì¹˜ë¬¸ í•œë²ˆ ëœ ì“°ë ¤ê³  í‘ì…”ë„ ì‚¬ìš©.
 }
 
 void GameEngineStructuredBufferSetter::Bind()
 {
 	if (nullptr == this->structuredBuffer_)
 	{
-		MsgBoxAssert("±¸Á¶È­ ¹öÆÛ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssert("êµ¬ì¡°í™” ë²„í¼ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return;
 	}
 
 	switch (this->parentShaderType_)
 	{
-	case ShaderType::VertexShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineStructuredBuffer::VSSetShaderResource,
-			this->structuredBuffer_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::VertexShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineStructuredBuffer::VSSetShaderResource,
+				this->structuredBuffer_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	case ShaderType::ComputeShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineStructuredBuffer::CSSetShaderResource,
-			this->structuredBuffer_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::ComputeShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineStructuredBuffer::CSSetShaderResource,
+				this->structuredBuffer_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	case ShaderType::PixelShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineStructuredBuffer::PSSetShaderResource,
-			this->structuredBuffer_,
-			this->bindPoint_
-		);
-		break;
-	}
+		case ShaderType::PixelShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineStructuredBuffer::PSSetShaderResource,
+				this->structuredBuffer_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	default:
-		MsgBoxAssert("¾ÆÁ÷ ÁØºñµÇÁö ¾ÊÀº ¼ÎÀÌ´õ Å¸ÀÔÀÔ´Ï´Ù.");
-		return;
+		default:
+			MsgBoxAssert("ì•„ì§ ì¤€ë¹„ë˜ì§€ ì•Šì€ ì…°ì´ë” íƒ€ì…ì…ë‹ˆë‹¤.");
+			return;
 	}
 }
 
@@ -282,65 +282,65 @@ void GameEngineTexture2DArraySetter::Bind()
 {
 	if (nullptr == this->texture2DArray_)
 	{
-		MsgBoxAssert("ÅØ½ºÃ³ ¹è¿­ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssert("í…ìŠ¤ì²˜ ë°°ì—´ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		return;
 	}
 
 	switch (this->parentShaderType_)
 	{
-	case ShaderType::VertexShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineTexture2DArray::VSSetShaderResource,
-			this->texture2DArray_,
-			this->bindPoint_
-		);
+		case ShaderType::VertexShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineTexture2DArray::VSSetShaderResource,
+				this->texture2DArray_,
+				this->bindPoint_
+			);
 
-		this->resetResourceFunction_ = std::bind(
-			&GameEngineTexture2DArray::VSResetShaderResource,
-			this->texture2DArray_,
-			this->bindPoint_
-		);
+			this->resetResourceFunction_ = std::bind(
+				&GameEngineTexture2DArray::VSResetShaderResource,
+				this->texture2DArray_,
+				this->bindPoint_
+			);
 
-		break;
-	}
+			break;
+		}
 
-	case ShaderType::ComputeShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineTexture2DArray::CSSetShaderResource,
-			this->texture2DArray_,
-			this->bindPoint_
-		);
+		case ShaderType::ComputeShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineTexture2DArray::CSSetShaderResource,
+				this->texture2DArray_,
+				this->bindPoint_
+			);
 
-		//this->resetResourceFunction_ = std::bind(
-		//	&GameEngineTexture2DArray::CSResetShaderResource,
-		//	this->texture2DArray_,
-		//	this->bindPoint_
-		//);
+			//this->resetResourceFunction_ = std::bind(
+			//	&GameEngineTexture2DArray::CSResetShaderResource,
+			//	this->texture2DArray_,
+			//	this->bindPoint_
+			//);
 
-		break;
-	}
+			break;
+		}
 
-	case ShaderType::PixelShader:
-	{
-		this->setResourceFunction_ = std::bind(
-			&GameEngineTexture2DArray::PSSetShaderResource,
-			this->texture2DArray_,
-			this->bindPoint_
-		);
+		case ShaderType::PixelShader:
+		{
+			this->setResourceFunction_ = std::bind(
+				&GameEngineTexture2DArray::PSSetShaderResource,
+				this->texture2DArray_,
+				this->bindPoint_
+			);
 
-		this->resetResourceFunction_ = std::bind(
-			&GameEngineTexture2DArray::PSResetShaderResource,
-			this->texture2DArray_,
-			this->bindPoint_
-		);
-		break;
-	}
+			this->resetResourceFunction_ = std::bind(
+				&GameEngineTexture2DArray::PSResetShaderResource,
+				this->texture2DArray_,
+				this->bindPoint_
+			);
+			break;
+		}
 
-	default:
-		MsgBoxAssert("¾ÆÁ÷ ÁØºñµÇÁö ¾ÊÀº ¼ÎÀÌ´õ Å¸ÀÔÀÔ´Ï´Ù.");
-		return;
+		default:
+			MsgBoxAssert("ì•„ì§ ì¤€ë¹„ë˜ì§€ ì•Šì€ ì…°ì´ë” íƒ€ì…ì…ë‹ˆë‹¤.");
+			return;
 	}
 }
 
@@ -368,7 +368,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 
 	std::string allHLSLCode = file.GetString();
 
-	//´ë¼Ò¹®ÀÚ ÁÖÀÇ!
+	//ëŒ€ì†Œë¬¸ì ì£¼ì˜!
 	size_t vsEntryIndex = allHLSLCode.find("_VS(");
 	if (std::string::npos != vsEntryIndex)
 	{
@@ -376,9 +376,9 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 
 		size_t firstIndex = allHLSLCode.find_last_of(" ", vsEntryIndex);
 		std::string vsEntryName
-			= allHLSLCode.substr(	//ÁÖ¾îÁø ¹®ÀÚ¿­ÀÇ ÀÏºÎ¸¦ º¹»çÇØ¼­ ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
-				firstIndex + 1,									//º¹»ç¸¦ ½ÃÀÛÇÒ ±ÛÀÚ ÀÎµ¦½º.
-				vsEntryIndex - firstIndex - 1					//º¹»ç ÇÒ ±ÛÀÚ ¼ö.
+			= allHLSLCode.substr(	//ì£¼ì–´ì§„ ë¬¸ìì—´ì˜ ì¼ë¶€ë¥¼ ë³µì‚¬í•´ì„œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
+				firstIndex + 1,									//ë³µì‚¬ë¥¼ ì‹œì‘í•  ê¸€ì ì¸ë±ìŠ¤.
+				vsEntryIndex - firstIndex - 1					//ë³µì‚¬ í•  ê¸€ì ìˆ˜.
 			);
 		vsEntryName += "_VS";
 		vertexShader = GameEngineVertexShader::Load(_path, vsEntryName);
@@ -388,7 +388,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 			size_t vsInstEntryIndex = allHLSLCode.find("_VSINST(");
 			if (std::string::npos != vsInstEntryIndex)
 			{
-				//allHLSLCode¾È¿¡ "_VSINST(" ¹®ÀÚ¿­ÀÌ ÀÖ´Ù¸é ÀÎ½ºÅÏ½º ¹öÅØ½º¼ÎÀÌ´õ ÄÄÆÄÀÏ ½ÃÀÛ.
+				//allHLSLCodeì•ˆì— "_VSINST(" ë¬¸ìì—´ì´ ìˆë‹¤ë©´ ì¸ìŠ¤í„´ìŠ¤ ë²„í…ìŠ¤ì…°ì´ë” ì»´íŒŒì¼ ì‹œì‘.
 				size_t instFirstIndex = allHLSLCode.find_last_of(" ", vsInstEntryIndex);
 				std::string vsInstEntryPoint = allHLSLCode.substr(
 					instFirstIndex + 1,
@@ -437,7 +437,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 				);
 				if (std::string::npos != psReturnType.find("DeferredRenderingOutput"))
 				{
-					//ÀÎ½ºÅÏ½Ì ÇÈ¼¿¼ÎÀÌ´õ ¹İÈ¯ÇüÀÌ float4°¡ ¾Æ´Ï¶ó "DeferredRenderingOutput"¶ó¸é gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ¶ó´Â ¶æ.
+					//ì¸ìŠ¤í„´ì‹± í”½ì…€ì…°ì´ë” ë°˜í™˜í˜•ì´ float4ê°€ ì•„ë‹ˆë¼ "DeferredRenderingOutput"ë¼ë©´ gBuffer ë Œë”íƒ€ê²Ÿì˜ í…ìŠ¤ì²˜ì— ë Œë”ë§í•˜ëŠ” í”½ì…€ì…°ì´ë”ë¼ëŠ” ëœ».
 					pixelShader->GetInst_PixelShader()->isDeferredRendering_ = true;
 				}
 			}
@@ -450,7 +450,7 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 
 			if (std::string::npos != psReturnType.find("DeferredRenderingOutput"))
 			{
-				//ÇÈ¼¿¼ÎÀÌ´õ ¹İÈ¯ÇüÀÌ float4°¡ ¾Æ´Ï¶ó "DeferredRenderingOutput"¶ó¸é gBuffer ·»´õÅ¸°ÙÀÇ ÅØ½ºÃ³¿¡ ·»´õ¸µÇÏ´Â ÇÈ¼¿¼ÎÀÌ´õ¶ó´Â ¶æ.
+				//í”½ì…€ì…°ì´ë” ë°˜í™˜í˜•ì´ float4ê°€ ì•„ë‹ˆë¼ "DeferredRenderingOutput"ë¼ë©´ gBuffer ë Œë”íƒ€ê²Ÿì˜ í…ìŠ¤ì²˜ì— ë Œë”ë§í•˜ëŠ” í”½ì…€ì…°ì´ë”ë¼ëŠ” ëœ».
 				pixelShader->isDeferredRendering_ = true;
 			}
 		}
@@ -463,9 +463,9 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 
 		size_t firstIndex = allHLSLCode.find_last_of(" ", gsEntryIndex);
 		std::string gsEntryName
-			= allHLSLCode.substr(	//ÁÖ¾îÁø ¹®ÀÚ¿­ÀÇ ÀÏºÎ¸¦ º¹»çÇØ¼­ ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
-				firstIndex + 1,									//º¹»ç¸¦ ½ÃÀÛÇÒ ±ÛÀÚ ÀÎµ¦½º.
-				gsEntryIndex - firstIndex - 1					//º¹»ç ÇÒ ±ÛÀÚ ¼ö.
+			= allHLSLCode.substr(	//ì£¼ì–´ì§„ ë¬¸ìì—´ì˜ ì¼ë¶€ë¥¼ ë³µì‚¬í•´ì„œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
+				firstIndex + 1,									//ë³µì‚¬ë¥¼ ì‹œì‘í•  ê¸€ì ì¸ë±ìŠ¤.
+				gsEntryIndex - firstIndex - 1					//ë³µì‚¬ í•  ê¸€ì ìˆ˜.
 			);
 		gsEntryName += "_GS";
 		geometryShader = GameEngineGeometryShader::Load(_path, gsEntryName);
@@ -478,9 +478,9 @@ void GameEngineShader::AutoCompile(const std::string_view& _path)
 
 		size_t firstIndex = allHLSLCode.find_last_of(" ", csEntryIndex);
 		std::string csEntryName
-			= allHLSLCode.substr(	//ÁÖ¾îÁø ¹®ÀÚ¿­ÀÇ ÀÏºÎ¸¦ º¹»çÇØ¼­ ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
-				firstIndex + 1,									//º¹»ç¸¦ ½ÃÀÛÇÒ ±ÛÀÚ ÀÎµ¦½º.
-				csEntryIndex - firstIndex - 1					//º¹»ç ÇÒ ±ÛÀÚ ¼ö.
+			= allHLSLCode.substr(	//ì£¼ì–´ì§„ ë¬¸ìì—´ì˜ ì¼ë¶€ë¥¼ ë³µì‚¬í•´ì„œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
+				firstIndex + 1,									//ë³µì‚¬ë¥¼ ì‹œì‘í•  ê¸€ì ì¸ë±ìŠ¤.
+				csEntryIndex - firstIndex - 1					//ë³µì‚¬ í•  ê¸€ì ìˆ˜.
 			);
 		csEntryName += "_CS";
 		computeShader = GameEngineComputeShader::Load(_path, csEntryName);
@@ -493,7 +493,7 @@ GameEngineConstantBufferSetter& GameEngineShader::GetConstantBufferSetter(const 
 
 	if (constantBufferSetterMap_.end() == constantBufferSetterMap_.find(uppercaseSetterName))
 	{
-		MsgBoxAssertString(_name + ": ±×·± ÀÌ¸§ÀÇ »ó¼ö¹öÆÛ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+		MsgBoxAssertString(_name + ": ê·¸ëŸ° ì´ë¦„ì˜ ìƒìˆ˜ë²„í¼ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 	}
 
 	return constantBufferSetterMap_[uppercaseSetterName];
@@ -583,62 +583,62 @@ void GameEngineShader::CompileHLSLCode(const std::string_view& _path)
 {
 	unsigned int compileFlag = 0;
 #ifdef _DEBUG
-	compileFlag = D3D10_SHADER_DEBUG;	//µğ¹ö±× ÆÄÀÏ/ÁÙ/À¯Çü/±âÈ£ Á¤º¸¸¦ »ğÀÔÇÑ´Ù.
+	compileFlag = D3D10_SHADER_DEBUG;	//ë””ë²„ê·¸ íŒŒì¼/ì¤„/ìœ í˜•/ê¸°í˜¸ ì •ë³´ë¥¼ ì‚½ì…í•œë‹¤.
 #endif // _DEBUG
-	compileFlag |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;  //Çà Áß½É ¸ÅÆ®¸¯½º »ç¿ë(¾ÈÇÏ¸é ÀüÄ¡Çà·Ä »ç¿ë).
+	compileFlag |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;  //í–‰ ì¤‘ì‹¬ ë§¤íŠ¸ë¦­ìŠ¤ ì‚¬ìš©(ì•ˆí•˜ë©´ ì „ì¹˜í–‰ë ¬ ì‚¬ìš©).
 
-	ID3DBlob* errorMessage = { 0 };		//ÄÄÆÄÀÏ ½ÇÆĞ½Ã ¿¡·¯ÄÚµå¸¦ ¹Ş´Â º¯¼ö.
+	ID3DBlob* errorMessage = { 0 };		//ì»´íŒŒì¼ ì‹¤íŒ¨ì‹œ ì—ëŸ¬ì½”ë“œë¥¼ ë°›ëŠ” ë³€ìˆ˜.
 
-	//¿ÍÀÌµå½ºÆ®¸µ °æ·Î.
+	//ì™€ì´ë“œìŠ¤íŠ¸ë§ ê²½ë¡œ.
 	std::wstring unicodePath = GameEngineString::AnsiToUnicodeReturn(_path);
 
 
-	if (S_OK != D3DCompileFromFile( //hlsl ÄÄÆÄÀÏ ÇÔ¼ö.
-		unicodePath.c_str(),          //°æ·Î°¡ Æ÷ÇÔµÈ HLSL ÆÄÀÏ ÀÌ¸§. C½ºÅ¸ÀÏ ¿ÍÀÌµå½ºÆ®¸µ¸¸ ¹Ş´Â´Ù.
-		nullptr,							//ÀÔ·ÂÇÒ ÄÚµå¿¡¼­ »ç¿ëÇÒ ¸ÅÅ©·Î°¡ µé¾îÀÖ´Â D3D_SHADER_MACRO±¸Á¶Ã¼ÀÇ ¹è¿­ ÁÖ¼Ò°ª.
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,  //ÀÔ·ÂÇÒ ÄÚµå¿¡¼­ »ç¿ëÇÒ ÀüÃ³¸®±â°¡ µé¾îÀÖ´Â ID3DInclude±¸Á¶Ã¼ÀÇ ¹è¿­ ÁÖ¼Ò°ª.
-		//D3D_COMPILE_STANDARD_FILE_INCLUDE ¸ÅÅ©·Î°¡ ±âº» ÀÎÅ¬·çµå ÇÚµé·¯¸¦ °¡¸®Å°°í ÀÖÀ¸´Ï,
-		//hlslÄÚµå¿¡ #include°¡ Æ÷ÇÔµÇ¾î ÀÖÀ¸¸é ÀÌ°É ³ÖÀ¸¸é µÈ´Ù°í ÇÑ´Ù.
-		entryPoint_.c_str(),    //¼ÎÀÌ´õ ÁøÀÔÁ¡ÇÔ¼ö ÀÌ¸§.
-		shaderVersion_.c_str(), //»ç¿ëÇÒ HLSL ÄÄÆÄÀÏ·¯ÀÇ ¸ñÀû°ú ¹öÀü. vs_5_0ÀÌ¶ó¸é HLSLÄÄÆÄÀÏ·¯ 5.0À¸·Î ÄÄÆÄÀÏÇÑ °á°ú¹°À» ¹öÅØ½º ¼ÎÀÌ´õ·Î ¾²°Ú´Ù´Â ¶æ.
-		compileFlag,			//ÄÄÆÄÀÏ ¿É¼Ç ÇÃ·¡±× 1.
-		0,						//ÄÄÆÄÀÏ ¿É¼Ç ÇÃ·¡±× 2. ¼ÎÀÌ´õ ÄÄÆÄÀÏ¶§´Â ¹«½ÃµÊ.
-		&binaryCode_,			//ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸® ÄÚµå¸¦ ¹ŞÀ» ID3DBlob ÀÎÅÍÆäÀÌ½º ÁÖ¼Ò°ª.
-		&errorMessage			//¿¡·¯¸Ş¼¼Áö¸¦ ¹ŞÀ» ID3DBlob ÀÎÅÍÆäÀÌ½º ÁÖ¼Ò°ª.
+	if (S_OK != D3DCompileFromFile( //hlsl ì»´íŒŒì¼ í•¨ìˆ˜.
+		unicodePath.c_str(),          //ê²½ë¡œê°€ í¬í•¨ëœ HLSL íŒŒì¼ ì´ë¦„. CìŠ¤íƒ€ì¼ ì™€ì´ë“œìŠ¤íŠ¸ë§ë§Œ ë°›ëŠ”ë‹¤.
+		nullptr,							//ì…ë ¥í•  ì½”ë“œì—ì„œ ì‚¬ìš©í•  ë§¤í¬ë¡œê°€ ë“¤ì–´ìˆëŠ” D3D_SHADER_MACROêµ¬ì¡°ì²´ì˜ ë°°ì—´ ì£¼ì†Œê°’.
+		D3D_COMPILE_STANDARD_FILE_INCLUDE,  //ì…ë ¥í•  ì½”ë“œì—ì„œ ì‚¬ìš©í•  ì „ì²˜ë¦¬ê¸°ê°€ ë“¤ì–´ìˆëŠ” ID3DIncludeêµ¬ì¡°ì²´ì˜ ë°°ì—´ ì£¼ì†Œê°’.
+		//D3D_COMPILE_STANDARD_FILE_INCLUDE ë§¤í¬ë¡œê°€ ê¸°ë³¸ ì¸í´ë£¨ë“œ í•¸ë“¤ëŸ¬ë¥¼ ê°€ë¦¬í‚¤ê³  ìˆìœ¼ë‹ˆ,
+		//hlslì½”ë“œì— #includeê°€ í¬í•¨ë˜ì–´ ìˆìœ¼ë©´ ì´ê±¸ ë„£ìœ¼ë©´ ëœë‹¤ê³  í•œë‹¤.
+		entryPoint_.c_str(),    //ì…°ì´ë” ì§„ì…ì í•¨ìˆ˜ ì´ë¦„.
+		shaderVersion_.c_str(), //ì‚¬ìš©í•  HLSL ì»´íŒŒì¼ëŸ¬ì˜ ëª©ì ê³¼ ë²„ì „. vs_5_0ì´ë¼ë©´ HLSLì»´íŒŒì¼ëŸ¬ 5.0ìœ¼ë¡œ ì»´íŒŒì¼í•œ ê²°ê³¼ë¬¼ì„ ë²„í…ìŠ¤ ì…°ì´ë”ë¡œ ì“°ê² ë‹¤ëŠ” ëœ».
+		compileFlag,			//ì»´íŒŒì¼ ì˜µì…˜ í”Œë˜ê·¸ 1.
+		0,						//ì»´íŒŒì¼ ì˜µì…˜ í”Œë˜ê·¸ 2. ì…°ì´ë” ì»´íŒŒì¼ë•ŒëŠ” ë¬´ì‹œë¨.
+		&binaryCode_,			//ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ ì½”ë“œë¥¼ ë°›ì„ ID3DBlob ì¸í„°í˜ì´ìŠ¤ ì£¼ì†Œê°’.
+		&errorMessage			//ì—ëŸ¬ë©”ì„¸ì§€ë¥¼ ë°›ì„ ID3DBlob ì¸í„°í˜ì´ìŠ¤ ì£¼ì†Œê°’.
 	))
 	{
 		std::string errorText = reinterpret_cast<char*>(errorMessage->GetBufferPointer());
-		MsgBoxAssertString(entryPoint_ + ": HLSLÄÚµå ÄÄÆÄÀÏ ½ÇÆĞ.\n" + errorText);
+		MsgBoxAssertString(entryPoint_ + ": HLSLì½”ë“œ ì»´íŒŒì¼ ì‹¤íŒ¨.\n" + errorText);
 		errorMessage->Release();
 		return;
 	}
 
 	//errorMessage->Release();
-	//ÄÄÆÄÀÏ¿¡ ¹®Á¦°¡ ¾ø¾ú´Ù¸é errorMessage´Â ³ÎÆ÷ÀÎÅÍÀÎ»óÅÂ ±×´ë·Î ³»·Á¿À¹Ç·Î ¸±¸®ÁîÇÒ °ÍÀÌ ¾ø´Ù.
+	//ì»´íŒŒì¼ì— ë¬¸ì œê°€ ì—†ì—ˆë‹¤ë©´ errorMessageëŠ” ë„í¬ì¸í„°ì¸ìƒíƒœ ê·¸ëŒ€ë¡œ ë‚´ë ¤ì˜¤ë¯€ë¡œ ë¦´ë¦¬ì¦ˆí•  ê²ƒì´ ì—†ë‹¤.
 }
 
 void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 {
 	if (nullptr == binaryCode_)
 	{
-		MsgBoxAssert("¹ÙÀÌ³Ê¸®ÄÚµå°¡ ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("ë°”ì´ë„ˆë¦¬ì½”ë“œê°€ ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
-	//¸®ÇÃ·º¼Ç: ¿ø·¡ÀÇ ±¸Ã¼ÀûÀÎ Å¬·¡½º³ª ÀÚ·áÇü¿¡ ´ëÇØ ¸ô¶óµµ ¹ÙÀÌÆ®ÄÚµå·Î µÇ¾îÀÖ´Â ÄÄÆÄÀÏ °á°ú¹°¿¡¼­ 
-	// Á¤º¸¸¦ ÃßÃâÇØ³»´Â ÇÁ·Î±×·¥ ±â¹ıÀÌ´Ù. ±×·¯´Ï±î ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå¿¡¼­ ÆÄ½ÌÇÏ´Â°Í°ú ¸¶Âù°¡Áö.
+	//ë¦¬í”Œë ‰ì…˜: ì›ë˜ì˜ êµ¬ì²´ì ì¸ í´ë˜ìŠ¤ë‚˜ ìë£Œí˜•ì— ëŒ€í•´ ëª°ë¼ë„ ë°”ì´íŠ¸ì½”ë“œë¡œ ë˜ì–´ìˆëŠ” ì»´íŒŒì¼ ê²°ê³¼ë¬¼ì—ì„œ 
+	// ì •ë³´ë¥¼ ì¶”ì¶œí•´ë‚´ëŠ” í”„ë¡œê·¸ë¨ ê¸°ë²•ì´ë‹¤. ê·¸ëŸ¬ë‹ˆê¹Œ ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œì—ì„œ íŒŒì‹±í•˜ëŠ”ê²ƒê³¼ ë§ˆì°¬ê°€ì§€.
 
 	ID3D11ShaderReflection* compileInfo = { 0 };
 
-	if (S_OK != D3DReflect(				//ÄÄÆÄÀÏµÈ HLSLÄÚµå¸¦ ¹ÙÅÁÀ¸·Î ³»°¡ ¼ÎÀÌ´õ¿¡¼­ »ç¿ëÇÑ º¯¼ö, ÇÔ¼ö, ÀÎÀÚµé¿¡ 
-		// ´ëÇÑ Á¤º¸¸¦ ÃßÃâÇØ¼­ ¼ÎÀÌ´õ ¸®ÇÃ·º¼ÇÀÌ¶ó´Â ÀÎÅÍÆäÀÌ½º¸¦ ÅëÇØ ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
-		binaryCode_->GetBufferPointer(),		//ÄÄÆÄÀÏµÈ HLSL ÄÚµåÀÇ Æ÷ÀÎÅÍ.
-		binaryCode_->GetBufferSize(),		//ÄÄÆÄÀÏµÈ HLSL ÄÚµåÀÇ Å©±â.
-		IID_ID3D11ShaderReflection,				//ÃßÃâÇÑ HLSL ÄÚµå Á¤º¸¸¦ ¹İÈ¯ÇÒ¶§ ÂüÁ¶ÇÒ ID3D11ShaderReflectionÀÇ ÀÎÅÍÆäÀÌ½º ½Äº°ÀÚ(GUID).
-		reinterpret_cast<void**>(&compileInfo)	//ÃßÃâÇÑ HLSL ÄÚµå Á¤º¸¸¦ ¹İÈ¯¹ŞÀ» ID3D11ShaderReflectionÀÇ Æ÷ÀÎÅÍ.
+	if (S_OK != D3DReflect(				//ì»´íŒŒì¼ëœ HLSLì½”ë“œë¥¼ ë°”íƒ•ìœ¼ë¡œ ë‚´ê°€ ì…°ì´ë”ì—ì„œ ì‚¬ìš©í•œ ë³€ìˆ˜, í•¨ìˆ˜, ì¸ìë“¤ì— 
+		// ëŒ€í•œ ì •ë³´ë¥¼ ì¶”ì¶œí•´ì„œ ì…°ì´ë” ë¦¬í”Œë ‰ì…˜ì´ë¼ëŠ” ì¸í„°í˜ì´ìŠ¤ë¥¼ í†µí•´ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
+		binaryCode_->GetBufferPointer(),		//ì»´íŒŒì¼ëœ HLSL ì½”ë“œì˜ í¬ì¸í„°.
+		binaryCode_->GetBufferSize(),		//ì»´íŒŒì¼ëœ HLSL ì½”ë“œì˜ í¬ê¸°.
+		IID_ID3D11ShaderReflection,				//ì¶”ì¶œí•œ HLSL ì½”ë“œ ì •ë³´ë¥¼ ë°˜í™˜í• ë•Œ ì°¸ì¡°í•  ID3D11ShaderReflectionì˜ ì¸í„°í˜ì´ìŠ¤ ì‹ë³„ì(GUID).
+		reinterpret_cast<void**>(&compileInfo)	//ì¶”ì¶œí•œ HLSL ì½”ë“œ ì •ë³´ë¥¼ ë°˜í™˜ë°›ì„ ID3D11ShaderReflectionì˜ í¬ì¸í„°.
 	))
 	{
-		MsgBoxAssert("¼ÎÀÌ´õ Á¤º¸ ÃßÃâ ½ÇÆĞ.");
+		MsgBoxAssert("ì…°ì´ë” ì •ë³´ ì¶”ì¶œ ì‹¤íŒ¨.");
 		return;
 	}
 
@@ -650,228 +650,228 @@ void GameEngineShader::ShaderResCheck(const std::string_view& _thisShaderName)
 
 	//typedef struct _D3D11_SHADER_INPUT_BIND_DESC
 	//{
-	//	LPCSTR                      Name;			¼ÎÀÌ´õ°¡ »ç¿ëÇÏ´Â ¸®¼Ò½º ÀÌ¸§.
-	//	D3D_SHADER_INPUT_TYPE       Type;			¼ÎÀÌ´õ°¡ »ç¿ëÇÏ´Â ¸®¼Ò½º Á¾·ù(ÅØ½ºÃÄ, »ó¼ö¹öÆÛ µîµî...)
-	//	UINT                        BindPoint;		ÇØ´ç ¸®¼Ò½ºÀÇ ·¹Áö½ºÅÍ µî·Ï ¹øÈ£.
-	//	UINT                        BindCount;		¿¬°áÇÒ ¸®¼Ò½º °³¼ö.
+	//	LPCSTR                      Name;			ì…°ì´ë”ê°€ ì‚¬ìš©í•˜ëŠ” ë¦¬ì†ŒìŠ¤ ì´ë¦„.
+	//	D3D_SHADER_INPUT_TYPE       Type;			ì…°ì´ë”ê°€ ì‚¬ìš©í•˜ëŠ” ë¦¬ì†ŒìŠ¤ ì¢…ë¥˜(í…ìŠ¤ì³, ìƒìˆ˜ë²„í¼ ë“±ë“±...)
+	//	UINT                        BindPoint;		í•´ë‹¹ ë¦¬ì†ŒìŠ¤ì˜ ë ˆì§€ìŠ¤í„° ë“±ë¡ ë²ˆí˜¸.
+	//	UINT                        BindCount;		ì—°ê²°í•  ë¦¬ì†ŒìŠ¤ ê°œìˆ˜.
 	//	UINT                        uFlags;			Input binding flags
-	//	D3D_RESOURCE_RETURN_TYPE    ReturnType;		¹İÈ¯Çü. 3Â÷¿ø ÅØ½ºÃ³¿¡¸¸ »ç¿ë.
-	//	D3D_SRV_DIMENSION           Dimension;		Dimension (if texture) 3Â÷¿ø ÅØ½ºÃ³¿¡¸¸ »ç¿ë.
-	//	UINT                        NumSamples;		¸ÖÆ¼»ùÇÃ¸µ¿ë ÅØ½ºÃ³ ¼ö. ÅØ½ºÃÄ°¡ ¾Æ´Ï¶ó¸é 0. ÅØ½ºÃ³¶óµµ ¸ÖÆ¼»ùÇÃ¸µÇÏÁö ¾Ê´Â´Ù¸é -1.
+	//	D3D_RESOURCE_RETURN_TYPE    ReturnType;		ë°˜í™˜í˜•. 3ì°¨ì› í…ìŠ¤ì²˜ì—ë§Œ ì‚¬ìš©.
+	//	D3D_SRV_DIMENSION           Dimension;		Dimension (if texture) 3ì°¨ì› í…ìŠ¤ì²˜ì—ë§Œ ì‚¬ìš©.
+	//	UINT                        NumSamples;		ë©€í‹°ìƒ˜í”Œë§ìš© í…ìŠ¤ì²˜ ìˆ˜. í…ìŠ¤ì³ê°€ ì•„ë‹ˆë¼ë©´ 0. í…ìŠ¤ì²˜ë¼ë„ ë©€í‹°ìƒ˜í”Œë§í•˜ì§€ ì•ŠëŠ”ë‹¤ë©´ -1.
 	//} D3D11_SHADER_INPUT_BIND_DESC;
 	D3D11_SHADER_INPUT_BIND_DESC resInfo = { 0 };
 
 	for (UINT i = 0; i < shaderInfo.BoundResources; i++)
-		//shaderInfo.BoundResources: ÀÌ ¼ÎÀÌ´õ¿¡¼­ '»ç¿ëµÈ' ÃÑ ¸®¼Ò½º ¾ç. »ç¿ëµÇÁö ¾ÊÀº ¸®¼Ò½º´Â ¹«½ÃµÈ´Ù.
+		//shaderInfo.BoundResources: ì´ ì…°ì´ë”ì—ì„œ 'ì‚¬ìš©ëœ' ì´ ë¦¬ì†ŒìŠ¤ ì–‘. ì‚¬ìš©ë˜ì§€ ì•Šì€ ë¦¬ì†ŒìŠ¤ëŠ” ë¬´ì‹œëœë‹¤.
 	{
 		compileInfo->GetResourceBindingDesc(i, &resInfo);
-		//DirectX ¿ÜºÎ¿¡¼­ »ç¿ëÇÒ ¼ö ¾ø´Â compileInfo¿¡¼­ D3D11_SHADER_INPUT_BIND_DESC Çü½ÄÀ¸·Î 
-		// ¼ÎÀÌ´õ°¡ »ç¿ëÇÏ°Ô µÉ ¸®¼Ò½ºÀÇ ¼¼ºÎÁ¤º¸¸¦ ÃßÃâÇÑ´Ù.
+		//DirectX ì™¸ë¶€ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ì—†ëŠ” compileInfoì—ì„œ D3D11_SHADER_INPUT_BIND_DESC í˜•ì‹ìœ¼ë¡œ 
+		// ì…°ì´ë”ê°€ ì‚¬ìš©í•˜ê²Œ ë  ë¦¬ì†ŒìŠ¤ì˜ ì„¸ë¶€ì •ë³´ë¥¼ ì¶”ì¶œí•œë‹¤.
 
 		std::string uppercaseResourceName = GameEngineString::ToUpperReturn(resInfo.Name);
 
 		switch (resInfo.Type)
 		{
-		case D3D_SIT_CBUFFER:
-		{
-			ID3D11ShaderReflectionConstantBuffer* cBufferPtr = compileInfo->GetConstantBufferByName(resInfo.Name);
-			//DirectX ¿ÜºÎ¿¡¼­ »ç¿ëÇÒ ¼ö ¾ø´Â compileInfo¿¡¼­ »ó¼ö¹öÆÛ¸¦ ÃßÃâÇÑ´Ù.
-
-			//typedef struct _D3D11_SHADER_BUFFER_DESC
-			//{
-			//	LPCSTR                  Name;		»ó¼ö¹öÆÛ ÀÌ¸§.
-			//	D3D_CBUFFER_TYPE        Type;		»ó¼ö¹öÆÛÀÇ Á¾·ù.
-			//	UINT                    Variables;	»ó¼ö¹öÆÛÀÇ ¸â¹öº¯¼ö °³¼ö.
-			//	UINT                    Size;		»ó¼ö¹öÆÛ Å©±â.
-			//	UINT                    uFlags;		»ó¼ö¹öÆÛ°¡ ¿¬°áµÉ ½½·ÔÀ» ÁöÁ¤ÇÏ´Â ÇÃ·¡±×. 
-			//		hlslÄÚµå¿¡ ÁöÁ¤µÈ ½½·ÔÀ¸·Î ¿¬°áÇÑ´Ù´Â ÇÃ·¡±× ÇÏ³ª¹Û¿¡ ¾øÀ¸¹Ç·Î ÀÇ¹Ì ¾øÀ½.
-			//} D3D11_SHADER_BUFFER_DESC;
-			D3D11_SHADER_BUFFER_DESC cBufferDesc = { 0 };
-			cBufferPtr->GetDesc(&cBufferDesc);
-
-
-			GameEngineConstantBufferSetter newCBufferSetter;
-			//»õ »ó¼ö¹öÆÛ¼¼ÅÍ¸¦ »ı¼ºÇÏ°í, ¼¼ÅÍ¿¡ ¼ÎÀÌ´õ°¡ »ó¼ö¹öÆÛ ¹× »ó¼ö¹öÆÛ¸¦ »ç¿ëÇÏ´Âµ¥ ÇÊ¿äÇÑ Á¤º¸µéÀ» ÀúÀåÇÑ´Ù.
-
-			newCBufferSetter.parentShader_ = this;
-			//ÀÌ »ó¼ö¹öÆÛ¼¼ÅÍ¸¦ »ı¼ºÇÏ´Â ¼ÎÀÌ´õ¸¦ ºÎ¸ğ ¼ÎÀÌ´õ·Î ÇÑ´Ù.
-
-			newCBufferSetter.SetName(uppercaseResourceName);
-			//¸®¼Ò½º¼¼ÅÍÀÇ ÀÌ¸§Àº HLSLÄÚµå ³»¿¡ ¼±¾ğµÈ ÀÚ±â ¸®¼Ò½ºÅ¸ÀÔ º¯¼ö ÀÌ¸§À» ±×´ë·Î µû¶ó°£´Ù.
-
-			newCBufferSetter.parentShaderType_ = this->shaderType_;
-			//ºÎ¸ğ ¼ÎÀÌ´õ°¡ ¾î¶² ¼ÎÀÌ´õÀÎÁö ÀúÀåÇÑ´Ù.
-
-			newCBufferSetter.constantBuffer_ = GameEngineConstantBuffer::FindOrCreate(
-				newCBufferSetter.GetName(),	//¸¸µé·Á´Â »ó¼ö¹öÆÛ¸¦ Ã£¾Æº» ÈÄ ¾øÀ¸¸é ¸¸µé°í, ÀÌ¹Ì ÀÖÀ¸¸é °øÀ¯ÇÑ´Ù.
-				cBufferDesc			//°°Àº ÀÌ¸§, °°Àº Å©±âÀÇ »ó¼ö ¹öÆÛ´Â ¼ÎÀÌ´õ¸®¼Ò½ºÇïÆÛµéÀÌ Æ÷ÀÎÅÍ¸¦ °øÀ¯ÇÑ´Ù.
-						//±×·¡¼­ ÀÌ¹Ì ¸¸µé¾îÁ® ÀÖ´Â°É ¶Ç ¸¸µé¾îµµ ÅÍ¶ß¸®Áö ¾Ê°í ´ë½Å ÀÌ¹Ì ¸¸µé¾îÁ® ÀÖ´Â°É °øÀ¯ÇÑ´Ù.
-			);
-
-			newCBufferSetter.bindPoint_ = resInfo.BindPoint;
-
-			std::pair<std::map<std::string, GameEngineConstantBufferSetter>::iterator, bool> insertResult =
-				constantBufferSetterMap_.insert(std::make_pair(newCBufferSetter.GetName(), newCBufferSetter));
-			//¸Ê¿¡ °ãÄ¡´Â Å°°ªÀ» °¡Áø ¿ø¼Ò¸¦ »ğÀÔÇÏ·Á°í ÇÏ¸é Áßº¹µÈ Å°°ªÀ» °¡Áø ¿ø¼Ò¸¦ °¡¸®Å°´Â 
-			//ÀÌÅÍ·¹ÀÌÅÍ¿Í false°¡ µç Æä¾î¸¦ ¹İÈ¯ÇÏ°í »ğÀÔ ½Ãµµ´Â ¹«½ÃµÈ´Ù.
-			//»ğÀÔÀÌ ¼º°øÇß´Ù¸é »ğÀÔÇÑ ¿ø¼Ò¸¦ °¡¸®Å°´Â ÀÌÅÍ·¹ÀÌÅÍ¿Í true¸¦ °¡Áø Æä¾î¸¦ ¹İÈ¯ÇÑ´Ù.
-
-
-			if (false == insertResult.second)
+			case D3D_SIT_CBUFFER:
 			{
-				MsgBoxAssertString(std::string(resInfo.Name) + ": ÀÌ¹Ì °°Àº ÀÌ¸§ÀÇ »ó¼ö¹öÆÛ ¼¼ÅÍ°¡ Á¸ÀçÇÕ´Ï´Ù.");
-				//Áßº¹À¸·Î ¸¸µå´ÂÀÏÀÌ »ı°Ü¼± ¾ÈµÈ´Ù.
-				return;
-			}
+				ID3D11ShaderReflectionConstantBuffer* cBufferPtr = compileInfo->GetConstantBufferByName(resInfo.Name);
+				//DirectX ì™¸ë¶€ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ì—†ëŠ” compileInfoì—ì„œ ìƒìˆ˜ë²„í¼ë¥¼ ì¶”ì¶œí•œë‹¤.
 
-			break;
-		}
-
-		case D3D_SIT_TEXTURE:
-		{
-			if (D3D_SRV_DIMENSION::D3D_SRV_DIMENSION_TEXTURE2DARRAY == resInfo.Dimension)
-			{
-				GameEngineTexture2DArraySetter newTexture2DArraySetter;
-
-				newTexture2DArraySetter.parentShader_ = this;
-
-				newTexture2DArraySetter.SetName(uppercaseResourceName);
-
-				newTexture2DArraySetter.parentShaderType_ = this->shaderType_;
-
-				newTexture2DArraySetter.texture2DArray_ = GameEngineTexture2DArray::Find("NSet5Colors");
-
-				newTexture2DArraySetter.bindPoint_ = resInfo.BindPoint;
-
-				std::pair<std::map<std::string, GameEngineTexture2DArraySetter>::iterator, bool> insertResult
-					= texture2DArraySetterMap_.insert(std::make_pair(newTexture2DArraySetter.GetName(), newTexture2DArraySetter));
-
-				if (false == insertResult.second)
-				{
-					MsgBoxAssertString(std::string(resInfo.Name) + ":  ÀÌ¹Ì °°Àº ÀÌ¸§ÀÇ ÅØ½ºÃÄ2D¹è¿­ ¼¼ÅÍ°¡ Á¸ÀçÇÕ´Ï´Ù.");
-					return;
-				}
-				break;
-			}
-			else if (D3D_SRV_DIMENSION::D3D_SRV_DIMENSION_TEXTURE2D == resInfo.Dimension)
-			{
-				GameEngineTextureSetter newTextureSetter;
-				//»õ ÅØ½ºÃ³¼¼ÅÍ¸¦ »ı¼ºÇÏ°í, ¼¼ÅÍ¿¡ ¼ÎÀÌ´õ°¡ ÅØ½ºÃ³ ¹× ÅØ½ºÃ³¸¦ »ç¿ëÇÏ´Âµ¥ ÇÊ¿äÇÑ Á¤º¸µéÀ» ÀúÀåÇÑ´Ù.
-
-				newTextureSetter.parentShader_ = this;
-				//ÀÌ ÅØ½ºÃ³¼¼ÅÍ¸¦ »ı¼ºÇÏ´Â ¼ÎÀÌ´õ¸¦ ºÎ¸ğ ¼ÎÀÌ´õ·Î ÇÑ´Ù.
-
-				newTextureSetter.SetName(uppercaseResourceName);
-				//¸®¼Ò½º¼¼ÅÍÀÇ ÀÌ¸§Àº HLSLÄÚµå ³»¿¡ ¼±¾ğµÈ Texture2DÅ¸ÀÔ º¯¼ö ÀÌ¸§À» ±×´ë·Î µû¶ó°£´Ù.
-
-				newTextureSetter.parentShaderType_ = this->shaderType_;
-				//ºÎ¸ğ ¼ÎÀÌ´õ°¡ ¾î¶² ¼ÎÀÌ´õÀÎÁö ÀúÀåÇÑ´Ù.
-
-				newTextureSetter.texture_ = GameEngineTexture::Find("NSet.png");//<-ÅØ½ºÃÄ°¡ ¾Æ¿¹ ¾ø´Ù´Â °æ°í°¡ ¶ß¸é ¿©±â·Î.
-				//³ªÁß¿¡ ÁöÁ¤ÇÒ ÅØ½ºÃ³°¡ ¹«¾ùÀÌµç ÀÏ´Ü ¿£Áø ±âº»Á¦°ø ÅØ½ºÃ³ÀÎ "NSet.png"¸¦ ÅØ½ºÃ³¼¼ÅÍ¿¡ ÀúÀåÇØ¼­ 
-				// Ãß°¡ÀûÀÎ ÅØ½ºÃ³ ¼¼ÆÃÀÌ ¾øÀ¸¸é °æ°í Â÷¿ø¿¡¼­ "NSet.png"°¡ ·»´õ¸µµÇ°Ô ÇÑ´Ù.
-
-				newTextureSetter.bindPoint_ = resInfo.BindPoint;
-
-				std::pair<std::map<std::string, GameEngineTextureSetter>::iterator, bool> insertResult
-					= textureSetterMap_.insert(std::make_pair(newTextureSetter.GetName(), newTextureSetter));
-				//¸Ê¿¡ °ãÄ¡´Â Å°°ªÀ» °¡Áø ¿ø¼Ò¸¦ »ğÀÔÇÏ·Á°í ÇÏ¸é Áßº¹µÈ Å°°ªÀ» °¡Áø ¿ø¼Ò¸¦ °¡¸®Å°´Â 
-				//ÀÌÅÍ·¹ÀÌÅÍ¿Í false°¡ µç Æä¾î¸¦ ¹İÈ¯ÇÏ°í »ğÀÔ ½Ãµµ´Â ¹«½ÃµÈ´Ù.
-				//»ğÀÔÀÌ ¼º°øÇß´Ù¸é »ğÀÔÇÑ ¿ø¼Ò¸¦ °¡¸®Å°´Â ÀÌÅÍ·¹ÀÌÅÍ¿Í true¸¦ °¡Áø Æä¾î¸¦ ¹İÈ¯ÇÑ´Ù.
-
-				if (false == insertResult.second)
-				{
-					MsgBoxAssertString(std::string(resInfo.Name) + ":  ÀÌ¹Ì °°Àº ÀÌ¸§ÀÇ ÅØ½ºÃÄ ¼¼ÅÍ°¡ Á¸ÀçÇÕ´Ï´Ù.");
-					return;
-				}
-
-				break;
-			}
-			else
-			{
-				MsgBoxAssert("¾ÆÁ÷ ÁØºñµÇÁö ¾ÊÀº Çü½ÄÀÇ ÅØ½ºÃ³ÀÔ´Ï´Ù.");
-				return;
-			}
-		}
-
-		case D3D_SIT_SAMPLER:
-		{
-			GameEngineSamplerSetter newSamplerSetter;
-			//»õ »ùÇÃ·¯¼¼ÅÍ¸¦ »ı¼ºÇÏ°í, ¼¼ÅÍ¿¡ ¼ÎÀÌ´õ°¡ »ùÇÃ·¯ ¹× »ùÇÃ·¯¸¦ »ç¿ëÇÏ´Âµ¥ ÇÊ¿äÇÑ Á¤º¸µéÀ» ÀúÀåÇÑ´Ù.
-
-			newSamplerSetter.parentShader_ = this;
-			//ÀÌ »ùÇÃ·¯¼¼ÅÍ¸¦ »ı¼ºÇÏ´Â ¼ÎÀÌ´õ¸¦ ºÎ¸ğ ¼ÎÀÌ´õ·Î ÇÑ´Ù.
-
-			newSamplerSetter.SetName(uppercaseResourceName);
-			//¸®¼Ò½º¼¼ÅÍÀÇ ÀÌ¸§Àº HLSLÄÚµå ³»¿¡ ¼±¾ğµÈ ÀÚ±â ¸®¼Ò½ºÅ¸ÀÔ º¯¼ö ÀÌ¸§À» ±×´ë·Î µû¶ó°£´Ù.
-
-			newSamplerSetter.parentShaderType_ = this->shaderType_;
-			//ºÎ¸ğ ¼ÎÀÌ´õ°¡ ¾î¶² ¼ÎÀÌ´õÀÎÁö ÀúÀåÇÑ´Ù.
-
-			newSamplerSetter.sampler_ = GameEngineSampler::Find(uppercaseResourceName);
-
-			if (nullptr == newSamplerSetter.sampler_)
-			{
-				MsgBoxAssertString(std::string(resInfo.Name) + ": ±×·± ÀÌ¸§ÀÇ »ùÇÃ·¯°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù. \nShaderName: " + _thisShaderName.data());
-				return;
-			}
+				//typedef struct _D3D11_SHADER_BUFFER_DESC
+				//{
+				//	LPCSTR                  Name;		ìƒìˆ˜ë²„í¼ ì´ë¦„.
+				//	D3D_CBUFFER_TYPE        Type;		ìƒìˆ˜ë²„í¼ì˜ ì¢…ë¥˜.
+				//	UINT                    Variables;	ìƒìˆ˜ë²„í¼ì˜ ë©¤ë²„ë³€ìˆ˜ ê°œìˆ˜.
+				//	UINT                    Size;		ìƒìˆ˜ë²„í¼ í¬ê¸°.
+				//	UINT                    uFlags;		ìƒìˆ˜ë²„í¼ê°€ ì—°ê²°ë  ìŠ¬ë¡¯ì„ ì§€ì •í•˜ëŠ” í”Œë˜ê·¸. 
+				//		hlslì½”ë“œì— ì§€ì •ëœ ìŠ¬ë¡¯ìœ¼ë¡œ ì—°ê²°í•œë‹¤ëŠ” í”Œë˜ê·¸ í•˜ë‚˜ë°–ì— ì—†ìœ¼ë¯€ë¡œ ì˜ë¯¸ ì—†ìŒ.
+				//} D3D11_SHADER_BUFFER_DESC;
+				D3D11_SHADER_BUFFER_DESC cBufferDesc = { 0 };
+				cBufferPtr->GetDesc(&cBufferDesc);
 
 
-			newSamplerSetter.bindPoint_ = resInfo.BindPoint;
+				GameEngineConstantBufferSetter newCBufferSetter;
+				//ìƒˆ ìƒìˆ˜ë²„í¼ì„¸í„°ë¥¼ ìƒì„±í•˜ê³ , ì„¸í„°ì— ì…°ì´ë”ê°€ ìƒìˆ˜ë²„í¼ ë° ìƒìˆ˜ë²„í¼ë¥¼ ì‚¬ìš©í•˜ëŠ”ë° í•„ìš”í•œ ì •ë³´ë“¤ì„ ì €ì¥í•œë‹¤.
 
-			std::pair<std::map<std::string, GameEngineSamplerSetter>::iterator, bool> insertResult
-				= samplerSetterMap_.insert(std::make_pair(newSamplerSetter.GetName(), newSamplerSetter));
-			//¸Ê¿¡ °ãÄ¡´Â Å°°ªÀ» °¡Áø ¿ø¼Ò¸¦ »ğÀÔÇÏ·Á°í ÇÏ¸é Áßº¹µÈ Å°°ªÀ» °¡Áø ¿ø¼Ò¸¦ °¡¸®Å°´Â 
-			//ÀÌÅÍ·¹ÀÌÅÍ¿Í false°¡ µç Æä¾î¸¦ ¹İÈ¯ÇÏ°í »ğÀÔ ½Ãµµ´Â ¹«½ÃµÈ´Ù.
-			//»ğÀÔÀÌ ¼º°øÇß´Ù¸é »ğÀÔÇÑ ¿ø¼Ò¸¦ °¡¸®Å°´Â ÀÌÅÍ·¹ÀÌÅÍ¿Í true¸¦ °¡Áø Æä¾î¸¦ ¹İÈ¯ÇÑ´Ù.
+				newCBufferSetter.parentShader_ = this;
+				//ì´ ìƒìˆ˜ë²„í¼ì„¸í„°ë¥¼ ìƒì„±í•˜ëŠ” ì…°ì´ë”ë¥¼ ë¶€ëª¨ ì…°ì´ë”ë¡œ í•œë‹¤.
 
-			if (false == insertResult.second)
-			{
-				MsgBoxAssertString(std::string(resInfo.Name) + ":  ÀÌ¹Ì °°Àº ÀÌ¸§ÀÇ »ùÇÃ·¯ ¼¼ÅÍ°¡ Á¸ÀçÇÕ´Ï´Ù.");
-				return;
-			}
+				newCBufferSetter.SetName(uppercaseResourceName);
+				//ë¦¬ì†ŒìŠ¤ì„¸í„°ì˜ ì´ë¦„ì€ HLSLì½”ë“œ ë‚´ì— ì„ ì–¸ëœ ìê¸° ë¦¬ì†ŒìŠ¤íƒ€ì… ë³€ìˆ˜ ì´ë¦„ì„ ê·¸ëŒ€ë¡œ ë”°ë¼ê°„ë‹¤.
 
-			break;
-		}
+				newCBufferSetter.parentShaderType_ = this->shaderType_;
+				//ë¶€ëª¨ ì…°ì´ë”ê°€ ì–´ë–¤ ì…°ì´ë”ì¸ì§€ ì €ì¥í•œë‹¤.
 
-		case D3D_SIT_STRUCTURED:
-		{
-			ID3D11ShaderReflectionConstantBuffer* cBufferPtr = compileInfo->GetConstantBufferByName(resInfo.Name);
-			D3D11_SHADER_BUFFER_DESC shaderBufferDesc = { 0 };
-			cBufferPtr->GetDesc(&shaderBufferDesc);
-
-			GameEngineStructuredBufferSetter newSBufferSetter;
-			newSBufferSetter.parentShader_ = this;
-			newSBufferSetter.SetName(uppercaseResourceName);
-			newSBufferSetter.parentShaderType_ = this->shaderType_;
-
-			newSBufferSetter.structuredBuffer_ = GameEngineStructuredBuffer::FindOrCreate(
-				newSBufferSetter.GetName(),	//¸¸µé·Á´Â ±¸Á¶È­¹öÆÛ¸¦ Ã£¾Æº» ÈÄ ¾øÀ¸¸é ¸¸µé°í, ÀÌ¹Ì ÀÖÀ¸¸é °øÀ¯ÇÑ´Ù.
-				shaderBufferDesc,	//°°Àº ÀÌ¸§, °°Àº ´ÜÀ§ Å©±âÀÇ ±¸Á¶È­¹öÆÛ´Â ¼ÎÀÌ´õ¸®¼Ò½ºÇïÆÛµéÀÌ Æ÷ÀÎÅÍ¸¦ °øÀ¯ÇÑ´Ù.
-				0	//µ¥ÀÌÅÍÀÇ ´ÜÀ§ Å©±â´Â ÄÄÆÄÀÏÇÒ¶§ ¾Ë ¼ö ÀÖ¾îµµ, µ¿Àû ÇÒ´çµÇ´Â ±¸Á¶È­¹öÆÛ Æ¯¼º»ó ÀüÃ¼ ±æÀÌ´Â ·±Å¸ÀÓ¿¡³ª ¾Ë ¼ö ÀÖÀ¸¹Ç·Î
-					// ÀÏ´Ü ±æÀÌ 0ÀÎ ±¸Á¶È­¹öÆÛ¸¦ ¸¸µé¾îµĞ´Ù.
-			);
-			newSBufferSetter.bindPoint_ = resInfo.BindPoint;
-
-			std::pair<std::map<std::string, GameEngineStructuredBufferSetter>::iterator, bool> insertResult
-				= structuredBufferSetterMap_.insert(
-					std::make_pair(newSBufferSetter.GetName(), newSBufferSetter)
+				newCBufferSetter.constantBuffer_ = GameEngineConstantBuffer::FindOrCreate(
+					newCBufferSetter.GetName(),	//ë§Œë“¤ë ¤ëŠ” ìƒìˆ˜ë²„í¼ë¥¼ ì°¾ì•„ë³¸ í›„ ì—†ìœ¼ë©´ ë§Œë“¤ê³ , ì´ë¯¸ ìˆìœ¼ë©´ ê³µìœ í•œë‹¤.
+					cBufferDesc			//ê°™ì€ ì´ë¦„, ê°™ì€ í¬ê¸°ì˜ ìƒìˆ˜ ë²„í¼ëŠ” ì…°ì´ë”ë¦¬ì†ŒìŠ¤í—¬í¼ë“¤ì´ í¬ì¸í„°ë¥¼ ê³µìœ í•œë‹¤.
+										//ê·¸ë˜ì„œ ì´ë¯¸ ë§Œë“¤ì–´ì ¸ ìˆëŠ”ê±¸ ë˜ ë§Œë“¤ì–´ë„ í„°ëœ¨ë¦¬ì§€ ì•Šê³  ëŒ€ì‹  ì´ë¯¸ ë§Œë“¤ì–´ì ¸ ìˆëŠ”ê±¸ ê³µìœ í•œë‹¤.
 				);
 
-			if (false == insertResult.second)
-			{
-				MsgBoxAssertString(std::string(resInfo.Name) + ": ÀÌ¹Ì °°Àº ÀÌ¸§ÀÇ ±¸Á¶È­ ¹öÆÛ ¼¼ÅÍ°¡ Á¸ÀçÇÕ´Ï´Ù.");
-				return;
+				newCBufferSetter.bindPoint_ = resInfo.BindPoint;
+
+				std::pair<std::map<std::string, GameEngineConstantBufferSetter>::iterator, bool> insertResult =
+					constantBufferSetterMap_.insert(std::make_pair(newCBufferSetter.GetName(), newCBufferSetter));
+				//ë§µì— ê²¹ì¹˜ëŠ” í‚¤ê°’ì„ ê°€ì§„ ì›ì†Œë¥¼ ì‚½ì…í•˜ë ¤ê³  í•˜ë©´ ì¤‘ë³µëœ í‚¤ê°’ì„ ê°€ì§„ ì›ì†Œë¥¼ ê°€ë¦¬í‚¤ëŠ” 
+				//ì´í„°ë ˆì´í„°ì™€ falseê°€ ë“  í˜ì–´ë¥¼ ë°˜í™˜í•˜ê³  ì‚½ì… ì‹œë„ëŠ” ë¬´ì‹œëœë‹¤.
+				//ì‚½ì…ì´ ì„±ê³µí–ˆë‹¤ë©´ ì‚½ì…í•œ ì›ì†Œë¥¼ ê°€ë¦¬í‚¤ëŠ” ì´í„°ë ˆì´í„°ì™€ trueë¥¼ ê°€ì§„ í˜ì–´ë¥¼ ë°˜í™˜í•œë‹¤.
+
+
+				if (false == insertResult.second)
+				{
+					MsgBoxAssertString(std::string(resInfo.Name) + ": ì´ë¯¸ ê°™ì€ ì´ë¦„ì˜ ìƒìˆ˜ë²„í¼ ì„¸í„°ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
+					//ì¤‘ë³µìœ¼ë¡œ ë§Œë“œëŠ”ì¼ì´ ìƒê²¨ì„  ì•ˆëœë‹¤.
+					return;
+				}
+
+				break;
 			}
 
-			break;
-		}
+			case D3D_SIT_TEXTURE:
+			{
+				if (D3D_SRV_DIMENSION::D3D_SRV_DIMENSION_TEXTURE2DARRAY == resInfo.Dimension)
+				{
+					GameEngineTexture2DArraySetter newTexture2DArraySetter;
 
-		default:
-		{
-			MsgBoxAssert("Á¤ÀÇµÇÁö ¾ÊÀº ¼ÎÀÌ´õ ¸®¼Ò½º Å¸ÀÔÀÔ´Ï´Ù.");
-			return;
-		}
+					newTexture2DArraySetter.parentShader_ = this;
+
+					newTexture2DArraySetter.SetName(uppercaseResourceName);
+
+					newTexture2DArraySetter.parentShaderType_ = this->shaderType_;
+
+					newTexture2DArraySetter.texture2DArray_ = GameEngineTexture2DArray::Find("NSet5Colors");
+
+					newTexture2DArraySetter.bindPoint_ = resInfo.BindPoint;
+
+					std::pair<std::map<std::string, GameEngineTexture2DArraySetter>::iterator, bool> insertResult
+						= texture2DArraySetterMap_.insert(std::make_pair(newTexture2DArraySetter.GetName(), newTexture2DArraySetter));
+
+					if (false == insertResult.second)
+					{
+						MsgBoxAssertString(std::string(resInfo.Name) + ":  ì´ë¯¸ ê°™ì€ ì´ë¦„ì˜ í…ìŠ¤ì³2Dë°°ì—´ ì„¸í„°ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
+						return;
+					}
+					break;
+				}
+				else if (D3D_SRV_DIMENSION::D3D_SRV_DIMENSION_TEXTURE2D == resInfo.Dimension)
+				{
+					GameEngineTextureSetter newTextureSetter;
+					//ìƒˆ í…ìŠ¤ì²˜ì„¸í„°ë¥¼ ìƒì„±í•˜ê³ , ì„¸í„°ì— ì…°ì´ë”ê°€ í…ìŠ¤ì²˜ ë° í…ìŠ¤ì²˜ë¥¼ ì‚¬ìš©í•˜ëŠ”ë° í•„ìš”í•œ ì •ë³´ë“¤ì„ ì €ì¥í•œë‹¤.
+
+					newTextureSetter.parentShader_ = this;
+					//ì´ í…ìŠ¤ì²˜ì„¸í„°ë¥¼ ìƒì„±í•˜ëŠ” ì…°ì´ë”ë¥¼ ë¶€ëª¨ ì…°ì´ë”ë¡œ í•œë‹¤.
+
+					newTextureSetter.SetName(uppercaseResourceName);
+					//ë¦¬ì†ŒìŠ¤ì„¸í„°ì˜ ì´ë¦„ì€ HLSLì½”ë“œ ë‚´ì— ì„ ì–¸ëœ Texture2Díƒ€ì… ë³€ìˆ˜ ì´ë¦„ì„ ê·¸ëŒ€ë¡œ ë”°ë¼ê°„ë‹¤.
+
+					newTextureSetter.parentShaderType_ = this->shaderType_;
+					//ë¶€ëª¨ ì…°ì´ë”ê°€ ì–´ë–¤ ì…°ì´ë”ì¸ì§€ ì €ì¥í•œë‹¤.
+
+					newTextureSetter.texture_ = GameEngineTexture::Find("NSet.png");//<-í…ìŠ¤ì³ê°€ ì•„ì˜ˆ ì—†ë‹¤ëŠ” ê²½ê³ ê°€ ëœ¨ë©´ ì—¬ê¸°ë¡œ.
+					//ë‚˜ì¤‘ì— ì§€ì •í•  í…ìŠ¤ì²˜ê°€ ë¬´ì—‡ì´ë“  ì¼ë‹¨ ì—”ì§„ ê¸°ë³¸ì œê³µ í…ìŠ¤ì²˜ì¸ "NSet.png"ë¥¼ í…ìŠ¤ì²˜ì„¸í„°ì— ì €ì¥í•´ì„œ 
+					// ì¶”ê°€ì ì¸ í…ìŠ¤ì²˜ ì„¸íŒ…ì´ ì—†ìœ¼ë©´ ê²½ê³  ì°¨ì›ì—ì„œ "NSet.png"ê°€ ë Œë”ë§ë˜ê²Œ í•œë‹¤.
+
+					newTextureSetter.bindPoint_ = resInfo.BindPoint;
+
+					std::pair<std::map<std::string, GameEngineTextureSetter>::iterator, bool> insertResult
+						= textureSetterMap_.insert(std::make_pair(newTextureSetter.GetName(), newTextureSetter));
+					//ë§µì— ê²¹ì¹˜ëŠ” í‚¤ê°’ì„ ê°€ì§„ ì›ì†Œë¥¼ ì‚½ì…í•˜ë ¤ê³  í•˜ë©´ ì¤‘ë³µëœ í‚¤ê°’ì„ ê°€ì§„ ì›ì†Œë¥¼ ê°€ë¦¬í‚¤ëŠ” 
+					//ì´í„°ë ˆì´í„°ì™€ falseê°€ ë“  í˜ì–´ë¥¼ ë°˜í™˜í•˜ê³  ì‚½ì… ì‹œë„ëŠ” ë¬´ì‹œëœë‹¤.
+					//ì‚½ì…ì´ ì„±ê³µí–ˆë‹¤ë©´ ì‚½ì…í•œ ì›ì†Œë¥¼ ê°€ë¦¬í‚¤ëŠ” ì´í„°ë ˆì´í„°ì™€ trueë¥¼ ê°€ì§„ í˜ì–´ë¥¼ ë°˜í™˜í•œë‹¤.
+
+					if (false == insertResult.second)
+					{
+						MsgBoxAssertString(std::string(resInfo.Name) + ":  ì´ë¯¸ ê°™ì€ ì´ë¦„ì˜ í…ìŠ¤ì³ ì„¸í„°ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
+						return;
+					}
+
+					break;
+				}
+				else
+				{
+					MsgBoxAssert("ì•„ì§ ì¤€ë¹„ë˜ì§€ ì•Šì€ í˜•ì‹ì˜ í…ìŠ¤ì²˜ì…ë‹ˆë‹¤.");
+					return;
+				}
+			}
+
+			case D3D_SIT_SAMPLER:
+			{
+				GameEngineSamplerSetter newSamplerSetter;
+				//ìƒˆ ìƒ˜í”ŒëŸ¬ì„¸í„°ë¥¼ ìƒì„±í•˜ê³ , ì„¸í„°ì— ì…°ì´ë”ê°€ ìƒ˜í”ŒëŸ¬ ë° ìƒ˜í”ŒëŸ¬ë¥¼ ì‚¬ìš©í•˜ëŠ”ë° í•„ìš”í•œ ì •ë³´ë“¤ì„ ì €ì¥í•œë‹¤.
+
+				newSamplerSetter.parentShader_ = this;
+				//ì´ ìƒ˜í”ŒëŸ¬ì„¸í„°ë¥¼ ìƒì„±í•˜ëŠ” ì…°ì´ë”ë¥¼ ë¶€ëª¨ ì…°ì´ë”ë¡œ í•œë‹¤.
+
+				newSamplerSetter.SetName(uppercaseResourceName);
+				//ë¦¬ì†ŒìŠ¤ì„¸í„°ì˜ ì´ë¦„ì€ HLSLì½”ë“œ ë‚´ì— ì„ ì–¸ëœ ìê¸° ë¦¬ì†ŒìŠ¤íƒ€ì… ë³€ìˆ˜ ì´ë¦„ì„ ê·¸ëŒ€ë¡œ ë”°ë¼ê°„ë‹¤.
+
+				newSamplerSetter.parentShaderType_ = this->shaderType_;
+				//ë¶€ëª¨ ì…°ì´ë”ê°€ ì–´ë–¤ ì…°ì´ë”ì¸ì§€ ì €ì¥í•œë‹¤.
+
+				newSamplerSetter.sampler_ = GameEngineSampler::Find(uppercaseResourceName);
+
+				if (nullptr == newSamplerSetter.sampler_)
+				{
+					MsgBoxAssertString(std::string(resInfo.Name) + ": ê·¸ëŸ° ì´ë¦„ì˜ ìƒ˜í”ŒëŸ¬ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. \nShaderName: " + _thisShaderName.data());
+					return;
+				}
+
+
+				newSamplerSetter.bindPoint_ = resInfo.BindPoint;
+
+				std::pair<std::map<std::string, GameEngineSamplerSetter>::iterator, bool> insertResult
+					= samplerSetterMap_.insert(std::make_pair(newSamplerSetter.GetName(), newSamplerSetter));
+				//ë§µì— ê²¹ì¹˜ëŠ” í‚¤ê°’ì„ ê°€ì§„ ì›ì†Œë¥¼ ì‚½ì…í•˜ë ¤ê³  í•˜ë©´ ì¤‘ë³µëœ í‚¤ê°’ì„ ê°€ì§„ ì›ì†Œë¥¼ ê°€ë¦¬í‚¤ëŠ” 
+				//ì´í„°ë ˆì´í„°ì™€ falseê°€ ë“  í˜ì–´ë¥¼ ë°˜í™˜í•˜ê³  ì‚½ì… ì‹œë„ëŠ” ë¬´ì‹œëœë‹¤.
+				//ì‚½ì…ì´ ì„±ê³µí–ˆë‹¤ë©´ ì‚½ì…í•œ ì›ì†Œë¥¼ ê°€ë¦¬í‚¤ëŠ” ì´í„°ë ˆì´í„°ì™€ trueë¥¼ ê°€ì§„ í˜ì–´ë¥¼ ë°˜í™˜í•œë‹¤.
+
+				if (false == insertResult.second)
+				{
+					MsgBoxAssertString(std::string(resInfo.Name) + ":  ì´ë¯¸ ê°™ì€ ì´ë¦„ì˜ ìƒ˜í”ŒëŸ¬ ì„¸í„°ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
+					return;
+				}
+
+				break;
+			}
+
+			case D3D_SIT_STRUCTURED:
+			{
+				ID3D11ShaderReflectionConstantBuffer* cBufferPtr = compileInfo->GetConstantBufferByName(resInfo.Name);
+				D3D11_SHADER_BUFFER_DESC shaderBufferDesc = { 0 };
+				cBufferPtr->GetDesc(&shaderBufferDesc);
+
+				GameEngineStructuredBufferSetter newSBufferSetter;
+				newSBufferSetter.parentShader_ = this;
+				newSBufferSetter.SetName(uppercaseResourceName);
+				newSBufferSetter.parentShaderType_ = this->shaderType_;
+
+				newSBufferSetter.structuredBuffer_ = GameEngineStructuredBuffer::FindOrCreate(
+					newSBufferSetter.GetName(),	//ë§Œë“¤ë ¤ëŠ” êµ¬ì¡°í™”ë²„í¼ë¥¼ ì°¾ì•„ë³¸ í›„ ì—†ìœ¼ë©´ ë§Œë“¤ê³ , ì´ë¯¸ ìˆìœ¼ë©´ ê³µìœ í•œë‹¤.
+					shaderBufferDesc,	//ê°™ì€ ì´ë¦„, ê°™ì€ ë‹¨ìœ„ í¬ê¸°ì˜ êµ¬ì¡°í™”ë²„í¼ëŠ” ì…°ì´ë”ë¦¬ì†ŒìŠ¤í—¬í¼ë“¤ì´ í¬ì¸í„°ë¥¼ ê³µìœ í•œë‹¤.
+					0	//ë°ì´í„°ì˜ ë‹¨ìœ„ í¬ê¸°ëŠ” ì»´íŒŒì¼í• ë•Œ ì•Œ ìˆ˜ ìˆì–´ë„, ë™ì  í• ë‹¹ë˜ëŠ” êµ¬ì¡°í™”ë²„í¼ íŠ¹ì„±ìƒ ì „ì²´ ê¸¸ì´ëŠ” ëŸ°íƒ€ì„ì—ë‚˜ ì•Œ ìˆ˜ ìˆìœ¼ë¯€ë¡œ
+						// ì¼ë‹¨ ê¸¸ì´ 0ì¸ êµ¬ì¡°í™”ë²„í¼ë¥¼ ë§Œë“¤ì–´ë‘”ë‹¤.
+				);
+				newSBufferSetter.bindPoint_ = resInfo.BindPoint;
+
+				std::pair<std::map<std::string, GameEngineStructuredBufferSetter>::iterator, bool> insertResult
+					= structuredBufferSetterMap_.insert(
+						std::make_pair(newSBufferSetter.GetName(), newSBufferSetter)
+					);
+
+				if (false == insertResult.second)
+				{
+					MsgBoxAssertString(std::string(resInfo.Name) + ": ì´ë¯¸ ê°™ì€ ì´ë¦„ì˜ êµ¬ì¡°í™” ë²„í¼ ì„¸í„°ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
+					return;
+				}
+
+				break;
+			}
+
+			default:
+			{
+				MsgBoxAssert("ì •ì˜ë˜ì§€ ì•Šì€ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ íƒ€ì…ì…ë‹ˆë‹¤.");
+				return;
+			}
 		}
 	}
 }

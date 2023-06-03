@@ -15,17 +15,17 @@ enum class TopAndBotSort
 	Bot = 0x8
 };
 
-enum class FontPositionMode	//±ÛÀÚÀÇ ÁÂÇ¥°è ¼³Á¤.
+enum class FontPositionMode	//ê¸€ìì˜ ì¢Œí‘œê³„ ì„¤ì •.
 {
-	World = 0x4,	//±ÛÀÚ¸¦ ¹èÄ¡ÇÏ´Â ÁÂÇ¥°¡ ¿ùµåÁÂÇ¥°è ±â¹İÀÌ´Ù.
-	Window = 0X8	//±ÛÀÚ¸¦ ¹èÄ¡ÇÏ´Â ÁÂÇ¥°¡ À©µµ¿ìÁÂÇ¥°è ±â¹İÀÌ´Ù.
+	World = 0x4,	//ê¸€ìë¥¼ ë°°ì¹˜í•˜ëŠ” ì¢Œí‘œê°€ ì›”ë“œì¢Œí‘œê³„ ê¸°ë°˜ì´ë‹¤.
+	Window = 0X8	//ê¸€ìë¥¼ ë°°ì¹˜í•˜ëŠ” ì¢Œí‘œê°€ ìœˆë„ìš°ì¢Œí‘œê³„ ê¸°ë°˜ì´ë‹¤.
 };
 
 class GameEngineRenderTarget;
 class GameEngineFont;
 class GameEngineFontRenderer : public GameEngineDefaultRenderer
 {
-	//ÀÌ Å¬·¡½ºÀÇ Á¸Àç ÀÌÀ¯:
+	//ì´ í´ë˜ìŠ¤ì˜ ì¡´ì¬ ì´ìœ :
 
 public:
 	GameEngineFontRenderer();
@@ -41,7 +41,7 @@ private:
 
 
 public:
-	void SetText(const std::string_view& _text, const std::string_view& _font = "µ¸¿ò");
+	void SetText(const std::string_view& _text, const std::string_view& _font = "ë‹ì›€");
 
 public:
 	const std::string& GetText()
@@ -49,7 +49,7 @@ public:
 		return text_;
 	}
 
-	void SetTextPosition(const float4& _position)	//±ÛÀÚÀÇ À§Ä¡ ¼³Á¤.
+	void SetTextPosition(const float4& _position)	//ê¸€ìì˜ ìœ„ì¹˜ ì„¤ì •.
 	{
 		textPosition_ = _position;
 	}
@@ -69,19 +69,19 @@ public:
 		fontSize_ = _size;
 	}
 
-	//±ÛÀÚ¸¦ ÁöÁ¤ÇÑ ÁöÁ¡ÀÇ ¿ŞÂÊ/°¡¿îµ¥/¿À¸¥ÂÊ¿¡ ¹èÄ¡ÇÑ´Ù.
+	//ê¸€ìë¥¼ ì§€ì •í•œ ì§€ì ì˜ ì™¼ìª½/ê°€ìš´ë°/ì˜¤ë¥¸ìª½ì— ë°°ì¹˜í•œë‹¤.
 	void SetLeftAndRightSort(LeftAndRightSort _value)
 	{
 		lr_ = _value;
 	}
 
-	//±ÛÀÚ¸¦ ÁöÁ¤ÇÑ ÁöÁ¡ÀÇ À§/Áß°£/¾Æ·¡¿¡ ¹èÄ¡ÇÑ´Ù.
+	//ê¸€ìë¥¼ ì§€ì •í•œ ì§€ì ì˜ ìœ„/ì¤‘ê°„/ì•„ë˜ì— ë°°ì¹˜í•œë‹¤.
 	void SetTopAndBotSort(TopAndBotSort _value)
 	{
 		tb_ = _value;
 	}
 
-	//±ÛÀÚÀÇ ÁÂÇ¥¸¦ ¿ùµåÁÂÇ¥°è/À©µµ¿ìÁÂÇ¥°è·Î ¼³Á¤.
+	//ê¸€ìì˜ ì¢Œí‘œë¥¼ ì›”ë“œì¢Œí‘œê³„/ìœˆë„ìš°ì¢Œí‘œê³„ë¡œ ì„¤ì •.
 	void SetPositionMode(FontPositionMode _mode)
 	{
 		mode_ = _mode;
@@ -98,11 +98,11 @@ private:
 	GameEngineFont* font_;
 	float fontSize_;
 	float4 fontColor_;
-	float4 textPosition_;	//±ÛÀÚ À§Ä¡. ±âº»¼³Á¤Àº À©µµ¿ìÁÂÇ¥°è ±â¹İ
+	float4 textPosition_;	//ê¸€ì ìœ„ì¹˜. ê¸°ë³¸ì„¤ì •ì€ ìœˆë„ìš°ì¢Œí‘œê³„ ê¸°ë°˜
 
-	LeftAndRightSort lr_;	//±ÛÀÚ¸¦ ÁöÁ¤ÇÑ ÁöÁ¡ÀÇ ¿ŞÂÊ/°¡¿îµ¥/¿À¸¥ÂÊ¿¡ ¹èÄ¡ÇÑ´Ù.
-	TopAndBotSort tb_;		//±ÛÀÚ¸¦ ÁöÁ¤ÇÑ ÁöÁ¡ÀÇ À§/Áß°£/¾Æ·¡¿¡ ¹èÄ¡ÇÑ´Ù.
-	FontPositionMode mode_;	//±ÛÀÚÀÇ ÁÂÇ¥¸¦ ¿ùµåÁÂÇ¥°è/À©µµ¿ìÁÂÇ¥°è ±âÁØÀ¸·Î º¸°í ¹èÄ¡ÇÑ´Ù.
+	LeftAndRightSort lr_;	//ê¸€ìë¥¼ ì§€ì •í•œ ì§€ì ì˜ ì™¼ìª½/ê°€ìš´ë°/ì˜¤ë¥¸ìª½ì— ë°°ì¹˜í•œë‹¤.
+	TopAndBotSort tb_;		//ê¸€ìë¥¼ ì§€ì •í•œ ì§€ì ì˜ ìœ„/ì¤‘ê°„/ì•„ë˜ì— ë°°ì¹˜í•œë‹¤.
+	FontPositionMode mode_;	//ê¸€ìì˜ ì¢Œí‘œë¥¼ ì›”ë“œì¢Œí‘œê³„/ìœˆë„ìš°ì¢Œí‘œê³„ ê¸°ì¤€ìœ¼ë¡œ ë³´ê³  ë°°ì¹˜í•œë‹¤.
 
 };
 

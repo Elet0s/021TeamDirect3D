@@ -13,16 +13,16 @@ enum class ShaderType
 class GameEngineShader;
 class ShaderResSetter : public GameEngineNameObject
 {
-	//°¢°¢ÀÇ ¼ÎÀÌ´õµé³¢¸® »ó¼ö¹öÆÛ³ª ´Ù¸¥ ¼ÎÀÌ´õ ¸®¼Ò½ºµéÀº °øÀ¯ÇÏ´õ¶óµµ, ¹ÙÀÎµåÆ÷ÀÎÆ® µîÀÇ
-	// ¼ÎÀÌ´õ ¸®¼Ò½º ½º½º·Î°¡ ¾Ë ¼ö ¾ø´Â Á¤º¸°¡ ´Ù¸¥ °æ¿ì¿¡ ´ëÀÀÇÏ±â À§ÇØ ¸¸µç, ¼ÎÀÌ´õ¸®¼Ò½º ¿ÜºÎÁ¤º¸ Àü´ã°ü¸®¿ë Å¬·¡½º.
-	//¼ÎÀÌ´õ¸®¼Ò½º ±× ÀÚÃ¼°¡ ¾÷µ¥ÀÌÆ®ÀÇ ´ë»óÀº ¾Æ´Ï¹Ç·Î ³×ÀÓ¿ÀºêÁ§Æ®¸¸ »ó¼Ó¹Þ¾Æ¼­ °ü¸®ÇÒ ¶§ ÇÊ¿äÇÑ ÀÌ¸§ °ü·Ã ±â´É¸¸ Ãß°¡ÇÑ´Ù.
+	//ê°ê°ì˜ ì…°ì´ë”ë“¤ë¼ë¦¬ ìƒìˆ˜ë²„í¼ë‚˜ ë‹¤ë¥¸ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë“¤ì€ ê³µìœ í•˜ë”ë¼ë„, ë°”ì¸ë“œí¬ì¸íŠ¸ ë“±ì˜
+	// ì…°ì´ë” ë¦¬ì†ŒìŠ¤ ìŠ¤ìŠ¤ë¡œê°€ ì•Œ ìˆ˜ ì—†ëŠ” ì •ë³´ê°€ ë‹¤ë¥¸ ê²½ìš°ì— ëŒ€ì‘í•˜ê¸° ìœ„í•´ ë§Œë“ , ì…°ì´ë”ë¦¬ì†ŒìŠ¤ ì™¸ë¶€ì •ë³´ ì „ë‹´ê´€ë¦¬ìš© í´ëž˜ìŠ¤.
+	//ì…°ì´ë”ë¦¬ì†ŒìŠ¤ ê·¸ ìžì²´ê°€ ì—…ë°ì´íŠ¸ì˜ ëŒ€ìƒì€ ì•„ë‹ˆë¯€ë¡œ ë„¤ìž„ì˜¤ë¸Œì íŠ¸ë§Œ ìƒì†ë°›ì•„ì„œ ê´€ë¦¬í•  ë•Œ í•„ìš”í•œ ì´ë¦„ ê´€ë ¨ ê¸°ëŠ¥ë§Œ ì¶”ê°€í•œë‹¤.
 
 public:
-	GameEngineShader* parentShader_;	//ÀÌ ¸®¼Ò½º¼¼ÅÍ°¡ °¡Áø ¸®¼Ò½º¸¦ »ç¿ëÇÒ ºÎ¸ð ¼ÎÀÌ´õ.
-	int bindPoint_;		//ÇØ´ç ¼ÎÀÌ´õ¸®¼Ò½ºÀÇ ¹ÙÀÎµåÆ÷ÀÎÆ®(·¹Áö½ºÅÍ µî·Ï ¹øÈ£).
-	ShaderType parentShaderType_;	//ÀÌ ¸®¼Ò½º¼¼ÅÍ¸¦ »ý¼ºÇÏ°í °¡Áö°Ô µÉ ºÎ¸ð ¼ÎÀÌ´õÀÇ Á¾·ù.
-	std::function<void()> setResourceFunction_;	//¼ÎÀÌ´õ°¡ °¡Áø ¸®¼Ò½ºµéÀ» ¼¼ÆÃÇÏ´Â ÇÔ¼ö.
-	std::function<void()> resetResourceFunction_;	//¼ÎÀÌ´õ°¡ °¡Áø ¸®¼Ò½ºµéÀ» ¸®¼ÂÇÏ´Â ÇÔ¼ö.
+	GameEngineShader* parentShader_;	//ì´ ë¦¬ì†ŒìŠ¤ì„¸í„°ê°€ ê°€ì§„ ë¦¬ì†ŒìŠ¤ë¥¼ ì‚¬ìš©í•  ë¶€ëª¨ ì…°ì´ë”.
+	int bindPoint_;		//í•´ë‹¹ ì…°ì´ë”ë¦¬ì†ŒìŠ¤ì˜ ë°”ì¸ë“œí¬ì¸íŠ¸(ë ˆì§€ìŠ¤í„° ë“±ë¡ ë²ˆí˜¸).
+	ShaderType parentShaderType_;	//ì´ ë¦¬ì†ŒìŠ¤ì„¸í„°ë¥¼ ìƒì„±í•˜ê³  ê°€ì§€ê²Œ ë  ë¶€ëª¨ ì…°ì´ë”ì˜ ì¢…ë¥˜.
+	std::function<void()> setResourceFunction_;	//ì…°ì´ë”ê°€ ê°€ì§„ ë¦¬ì†ŒìŠ¤ë“¤ì„ ì„¸íŒ…í•˜ëŠ” í•¨ìˆ˜.
+	std::function<void()> resetResourceFunction_;	//ì…°ì´ë”ê°€ ê°€ì§„ ë¦¬ì†ŒìŠ¤ë“¤ì„ ë¦¬ì…‹í•˜ëŠ” í•¨ìˆ˜.
 
 protected:
 	ShaderResSetter()
@@ -40,32 +40,32 @@ protected:
 class GameEngineConstantBuffer;
 class GameEngineConstantBufferSetter : public ShaderResSetter
 {
-	//¼ÎÀÌ´õµéÀÌ ÇÊ¿ä·Î ÇÏ´Â »ó¼ö¹öÆÛ°¡ °¢°¢ °¡Á®¾ß ÇÏ´Â Á¤º¸ °ü¸® Å¬·¡½º.
+	//ì…°ì´ë”ë“¤ì´ í•„ìš”ë¡œ í•˜ëŠ” ìƒìˆ˜ë²„í¼ê°€ ê°ê° ê°€ì ¸ì•¼ í•˜ëŠ” ì •ë³´ ê´€ë¦¬ í´ëž˜ìŠ¤.
 
 
 	friend class GameEngineShader;
 
 public:
-	//ÀÌ »ó¼ö¹öÆÛ ¼¼ÅÍ°¡ ´ã´çÇÑ, ºÎ¸ð ¼ÎÀÌ´õ°¡ ÇÊ¿ä·Î ÇÏ´Â »ó¼ö¹öÆÛ.
+	//ì´ ìƒìˆ˜ë²„í¼ ì„¸í„°ê°€ ë‹´ë‹¹í•œ, ë¶€ëª¨ ì…°ì´ë”ê°€ í•„ìš”ë¡œ í•˜ëŠ” ìƒìˆ˜ë²„í¼.
 	GameEngineConstantBuffer* constantBuffer_;
-	//¿©·¯ »ó¼ö¹öÆÛ ¼¼ÅÍ°¡ ÇÏ³ªÀÇ »ó¼ö¹öÆÛ¸¦ °øÀ¯ÇÒ ¼ö ÀÖ´Ù.
+	//ì—¬ëŸ¬ ìƒìˆ˜ë²„í¼ ì„¸í„°ê°€ í•˜ë‚˜ì˜ ìƒìˆ˜ë²„í¼ë¥¼ ê³µìœ í•  ìˆ˜ ìžˆë‹¤.
 
-	//GPU·Î º¸³»Áú, °¢°¢ÀÇ »ó¼ö¹öÆÛµéÀÌ °¡Áø µ¥ÀÌÅÍÀÇ ÁÖ¼Ò°ª. 
+	//GPUë¡œ ë³´ë‚´ì§ˆ, ê°ê°ì˜ ìƒìˆ˜ë²„í¼ë“¤ì´ ê°€ì§„ ë°ì´í„°ì˜ ì£¼ì†Œê°’. 
 	const void* settingDataToGPU_;
 
-	size_t size_;	//»ó¼ö¹öÆÛ ÀüÃ¼ Å©±â. 
-	//»ó¼ö¹öÆÛ´Â Å©±â¿Í ÀÌ¸§ µÎ°¡Áö·Î ºÐ·ùµÇ¾î ÀúÀåÇÏ°í ÀÖÀ¸¹Ç·Î 
-	//»ó¼ö¹öÆÛ¼¼ÅÍµµ ÀÚ±â°¡ ´ã´çÇÏ´Â »ó¼ö¹öÆÛ¸¦ Á¤È®È÷ Ã£±â À§ÇØ µÑ ´Ù ÀúÀåÇÑ´Ù.
+	size_t size_;	//ìƒìˆ˜ë²„í¼ ì „ì²´ í¬ê¸°. 
+	//ìƒìˆ˜ë²„í¼ëŠ” í¬ê¸°ì™€ ì´ë¦„ ë‘ê°€ì§€ë¡œ ë¶„ë¥˜ë˜ì–´ ì €ìž¥í•˜ê³  ìžˆìœ¼ë¯€ë¡œ 
+	//ìƒìˆ˜ë²„í¼ì„¸í„°ë„ ìžê¸°ê°€ ë‹´ë‹¹í•˜ëŠ” ìƒìˆ˜ë²„í¼ë¥¼ ì •í™•ížˆ ì°¾ê¸° ìœ„í•´ ë‘˜ ë‹¤ ì €ìž¥í•œë‹¤.
 
 	std::vector<char> originalData_;
-	// ¾Æ¿¹ ÀÚ±â ¸Þ¸ð¸®·Î ¸¸µç´Ù??
+	// ì•„ì˜ˆ ìžê¸° ë©”ëª¨ë¦¬ë¡œ ë§Œë“ ë‹¤??
 
 	void Set() const;
 	void Bind();
 
-	//private:	<-ÀÏÀÏÈ÷ ´Ù ¸·±â¿£ ÀÏÀÌ ³Ê¹« º¹ÀâÇØÁ®¼­ ¸·Áö´Â ¾ÊÁö¸¸ ¿ÜºÎ¿¡¼­ »ç¿ëÇØ¼± ¾ÈµÈ´Ù.
-	// ¿©±â¼­ ¿ÜºÎ´Â ÀÌ ¸®¼Ò½º¸¦ Á÷Á¢ »ç¿ëÇÒ GameEngineShaderÀÇ ÀÚ½Ä Å¬·¡½ºµé°ú ¼ÎÀÌ´õ¸¦ »ç¿ëÇÒ GameEngineRenderingPipeLine,
-	// ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎÀ» »ç¿ëÇÒ GameEngineDefaultRendererÅ¬·¡½º¿Í ±× ÀÚ½ÄÅ¬·¡½ºµéÀ» Á¦¿ÜÇÏ°í´Â ´Ù ¿ÜºÎÀÌ´Ù.
+	//private:	<-ì¼ì¼ížˆ ë‹¤ ë§‰ê¸°ì—” ì¼ì´ ë„ˆë¬´ ë³µìž¡í•´ì ¸ì„œ ë§‰ì§€ëŠ” ì•Šì§€ë§Œ ì™¸ë¶€ì—ì„œ ì‚¬ìš©í•´ì„  ì•ˆëœë‹¤.
+	// ì—¬ê¸°ì„œ ì™¸ë¶€ëŠ” ì´ ë¦¬ì†ŒìŠ¤ë¥¼ ì§ì ‘ ì‚¬ìš©í•  GameEngineShaderì˜ ìžì‹ í´ëž˜ìŠ¤ë“¤ê³¼ ì…°ì´ë”ë¥¼ ì‚¬ìš©í•  GameEngineRenderingPipeLine,
+	// ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì„ ì‚¬ìš©í•  GameEngineDefaultRendererí´ëž˜ìŠ¤ì™€ ê·¸ ìžì‹í´ëž˜ìŠ¤ë“¤ì„ ì œì™¸í•˜ê³ ëŠ” ë‹¤ ì™¸ë¶€ì´ë‹¤.
 
 	GameEngineConstantBufferSetter()
 		: constantBuffer_(),
@@ -78,23 +78,23 @@ public:
 class GameEngineTexture;
 class GameEngineTextureSetter : public ShaderResSetter
 {
-	//ÀÌ Å¬·¡½ºÀÇ ¸ñÀûÀº??
+	//ì´ í´ëž˜ìŠ¤ì˜ ëª©ì ì€??
 
 	friend class GameEngineShader;
 	friend class GameEngineShaderResourceHelper;
 
-	//ÀÌ ÅØ½ºÃ³¼¼ÅÍ°¡ °¡Áö´Â ÅØ½ºÃ³. 
+	//ì´ í…ìŠ¤ì²˜ì„¸í„°ê°€ ê°€ì§€ëŠ” í…ìŠ¤ì²˜. 
 	GameEngineTexture* texture_;
-	//Ãß°¡ÀûÀÎ ÅØ½ºÃ³¸¦ ¼¼ÆÃÇØÁÖÁö ¾ÊÀ¸¸é °æ°í Â÷¿ø¿¡¼­ "NSet.png"ÀÌ ±×´ë·Î ·»´õµÇ°Ô ÇÑ´Ù. 
+	//ì¶”ê°€ì ì¸ í…ìŠ¤ì²˜ë¥¼ ì„¸íŒ…í•´ì£¼ì§€ ì•Šìœ¼ë©´ ê²½ê³  ì°¨ì›ì—ì„œ "NSet.png"ì´ ê·¸ëŒ€ë¡œ ë Œë”ë˜ê²Œ í•œë‹¤. 
 
 public:
 	void Set() const;
 	void Reset() const;
 	void Bind();
 
-	//private:	<-ÀÏÀÏÈ÷ ´Ù ¸·±â¿£ ÀÏÀÌ ³Ê¹« º¹ÀâÇØÁ®¼­ ¸·Áö´Â ¾ÊÁö¸¸ ¿ÜºÎ¿¡¼­ »ç¿ëÇØ¼± ¾ÈµÈ´Ù.
-	// ¿©±â¼­ ¿ÜºÎ´Â ÀÌ ¸®¼Ò½º¸¦ Á÷Á¢ »ç¿ëÇÒ GameEngineShaderÀÇ ÀÚ½Ä Å¬·¡½ºµé°ú ¼ÎÀÌ´õ¸¦ »ç¿ëÇÒ GameEngineRenderingPipeLine,
-	// ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎÀ» »ç¿ëÇÒ GameEngineDefaultRendererÅ¬·¡½º¿Í ±× ÀÚ½ÄÅ¬·¡½ºµéÀ» Á¦¿ÜÇÏ°í´Â ´Ù ¿ÜºÎÀÌ´Ù.
+	//private:	<-ì¼ì¼ížˆ ë‹¤ ë§‰ê¸°ì—” ì¼ì´ ë„ˆë¬´ ë³µìž¡í•´ì ¸ì„œ ë§‰ì§€ëŠ” ì•Šì§€ë§Œ ì™¸ë¶€ì—ì„œ ì‚¬ìš©í•´ì„  ì•ˆëœë‹¤.
+	// ì—¬ê¸°ì„œ ì™¸ë¶€ëŠ” ì´ ë¦¬ì†ŒìŠ¤ë¥¼ ì§ì ‘ ì‚¬ìš©í•  GameEngineShaderì˜ ìžì‹ í´ëž˜ìŠ¤ë“¤ê³¼ ì…°ì´ë”ë¥¼ ì‚¬ìš©í•  GameEngineRenderingPipeLine,
+	// ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì„ ì‚¬ìš©í•  GameEngineDefaultRendererí´ëž˜ìŠ¤ì™€ ê·¸ ìžì‹í´ëž˜ìŠ¤ë“¤ì„ ì œì™¸í•˜ê³ ëŠ” ë‹¤ ì™¸ë¶€ì´ë‹¤.
 
 	GameEngineTextureSetter() : texture_(nullptr)
 	{
@@ -108,16 +108,16 @@ class GameEngineSamplerSetter : public ShaderResSetter
 	friend class GameEngineShaderResourceHelper;
 
 
-	//ÀÌ »ùÇÃ·¯¼¼ÅÍ°¡ °¡Áö´Â »ùÇÃ·¯.
+	//ì´ ìƒ˜í”ŒëŸ¬ì„¸í„°ê°€ ê°€ì§€ëŠ” ìƒ˜í”ŒëŸ¬.
 	GameEngineSampler* sampler_;
 
 public:
 	void Set() const;
 	void Bind();
 
-	//private:	<-ÀÏÀÏÈ÷ ´Ù ¸·±â¿£ ÀÏÀÌ ³Ê¹« º¹ÀâÇØÁ®¼­ ¸·Áö´Â ¾ÊÁö¸¸ ¿ÜºÎ¿¡¼­ »ç¿ëÇØ¼± ¾ÈµÈ´Ù.
-	// ¿©±â¼­ ¿ÜºÎ´Â ÀÌ ¸®¼Ò½º¸¦ Á÷Á¢ »ç¿ëÇÒ GameEngineShaderÀÇ ÀÚ½Ä Å¬·¡½ºµé°ú ¼ÎÀÌ´õ¸¦ »ç¿ëÇÒ GameEngineRenderingPipeLine,
-	// ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎÀ» »ç¿ëÇÒ GameEngineDefaultRendererÅ¬·¡½º¿Í ±× ÀÚ½ÄÅ¬·¡½ºµéÀ» Á¦¿ÜÇÏ°í´Â ´Ù ¿ÜºÎÀÌ´Ù.
+	//private:	<-ì¼ì¼ížˆ ë‹¤ ë§‰ê¸°ì—” ì¼ì´ ë„ˆë¬´ ë³µìž¡í•´ì ¸ì„œ ë§‰ì§€ëŠ” ì•Šì§€ë§Œ ì™¸ë¶€ì—ì„œ ì‚¬ìš©í•´ì„  ì•ˆëœë‹¤.
+	// ì—¬ê¸°ì„œ ì™¸ë¶€ëŠ” ì´ ë¦¬ì†ŒìŠ¤ë¥¼ ì§ì ‘ ì‚¬ìš©í•  GameEngineShaderì˜ ìžì‹ í´ëž˜ìŠ¤ë“¤ê³¼ ì…°ì´ë”ë¥¼ ì‚¬ìš©í•  GameEngineRenderingPipeLine,
+	// ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì„ ì‚¬ìš©í•  GameEngineDefaultRendererí´ëž˜ìŠ¤ì™€ ê·¸ ìžì‹í´ëž˜ìŠ¤ë“¤ì„ ì œì™¸í•˜ê³ ëŠ” ë‹¤ ì™¸ë¶€ì´ë‹¤.
 
 	GameEngineSamplerSetter() : sampler_(nullptr)
 	{
@@ -139,7 +139,7 @@ public:
 
 
 private:
-	// »ó¼ö¹öÆÛ¿Í ¿ÏÀüÈ÷ µ¿ÀÏÇÏ°Ô µ¿ÀÏÇÏ°Ô »ý°¢ÇÏ¸é µË´Ï´Ù.
+	// ìƒìˆ˜ë²„í¼ì™€ ì™„ì „ížˆ ë™ì¼í•˜ê²Œ ë™ì¼í•˜ê²Œ ìƒê°í•˜ë©´ ë©ë‹ˆë‹¤.
 
 	GameEngineStructuredBuffer* structuredBuffer_;
 	const void* settingDataToGPU_;
@@ -156,7 +156,7 @@ public:
 
 		if (leftSize != rightSize)
 		{
-			MsgBoxAssert("±¸Á¶È­¹öÆÛ¿¡ ³ÖÀ¸·Á´Â µ¥ÀÌÅÍÀÇ Å©±â°¡ ´Ù¸¨´Ï´Ù.");
+			MsgBoxAssert("êµ¬ì¡°í™”ë²„í¼ì— ë„£ìœ¼ë ¤ëŠ” ë°ì´í„°ì˜ í¬ê¸°ê°€ ë‹¤ë¦…ë‹ˆë‹¤.");
 		}
 
 		PushData(&_data, _count);
@@ -197,7 +197,7 @@ public:
 
 class GameEngineShader
 {
-	//ÀÌ ÇÁ·¹ÀÓ¿öÅ© ³» ¸ðµç ¼ÎÀÌ´õ¿Í ¼ÎÀÌ´õ¿¡¼­ »ç¿ëÇÏ´Â ¸®¼Ò½ºµéÀ» °ü¸®ÇÏ´Â Å¬·¡½º.
+	//ì´ í”„ë ˆìž„ì›Œí¬ ë‚´ ëª¨ë“  ì…°ì´ë”ì™€ ì…°ì´ë”ì—ì„œ ì‚¬ìš©í•˜ëŠ” ë¦¬ì†ŒìŠ¤ë“¤ì„ ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤.
 
 	friend class GameEngineShaderResourceHelper;
 	//
@@ -216,44 +216,44 @@ private:
 
 
 public:
-	//ÁöÁ¤ÇÑ °æ·ÎÀÇ HLSLÄÚµå¸¦ ÇØ¼®ÇÏ°í ±× ³»¿ë´ë·Î ¼ÎÀÌ´õ¿Í ¼ÎÀÌ´õ¸®¼Ò½º¸¦ ¸¸µå´Â ÇÔ¼ö.
+	//ì§€ì •í•œ ê²½ë¡œì˜ HLSLì½”ë“œë¥¼ í•´ì„í•˜ê³  ê·¸ ë‚´ìš©ëŒ€ë¡œ ì…°ì´ë”ì™€ ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë¥¼ ë§Œë“œëŠ” í•¨ìˆ˜.
 	static void AutoCompile(const std::string_view& _path);
 
 	GameEngineConstantBufferSetter& GetConstantBufferSetter(const std::string& _name);
 
-	//ÀÌ ¼ÎÀÌ´õ°¡ ÁÖ¾îÁø ÀÌ¸§ÀÇ »ó¼ö¹öÆÛ¼¼ÅÍ¸¦ °¡Áö°í ÀÖ´Â°¡¸¦ ¿ÜºÎ¿¡¼­ È®ÀÎÇÏ´Â ÇÔ¼ö.
+	//ì´ ì…°ì´ë”ê°€ ì£¼ì–´ì§„ ì´ë¦„ì˜ ìƒìˆ˜ë²„í¼ì„¸í„°ë¥¼ ê°€ì§€ê³  ìžˆëŠ”ê°€ë¥¼ ì™¸ë¶€ì—ì„œ í™•ì¸í•˜ëŠ” í•¨ìˆ˜.
 	bool IsConstantBuffer(const std::string_view& _name);
 
-	//ÀÌ ¼ÎÀÌ´õ°¡ ÁÖ¾îÁø ÀÌ¸§ÀÇ ÅØ½ºÃ³¼¼ÅÍ¸¦ °¡Áö°í ÀÖ´Â°¡¸¦ ¿ÜºÎ¿¡¼­ È®ÀÎÇÏ´Â ÇÔ¼ö.
+	//ì´ ì…°ì´ë”ê°€ ì£¼ì–´ì§„ ì´ë¦„ì˜ í…ìŠ¤ì²˜ì„¸í„°ë¥¼ ê°€ì§€ê³  ìžˆëŠ”ê°€ë¥¼ ì™¸ë¶€ì—ì„œ í™•ì¸í•˜ëŠ” í•¨ìˆ˜.
 	bool IsTexture(const std::string_view& _name);
 
-	//ÀÌ ¼ÎÀÌ´õ°¡ ÁÖ¾îÁø ÀÌ¸§ÀÇ »ùÇÃ·¯¼¼ÅÍ¸¦ °¡Áö°í ÀÖ´Â°¡¸¦ ¿ÜºÎ¿¡¼­ È®ÀÎÇÏ´Â ÇÔ¼ö.
+	//ì´ ì…°ì´ë”ê°€ ì£¼ì–´ì§„ ì´ë¦„ì˜ ìƒ˜í”ŒëŸ¬ì„¸í„°ë¥¼ ê°€ì§€ê³  ìžˆëŠ”ê°€ë¥¼ ì™¸ë¶€ì—ì„œ í™•ì¸í•˜ëŠ” í•¨ìˆ˜.
 	bool IsSampler(const std::string_view& _name);
 
-	//ÀÌ ¼ÎÀÌ´õ°¡ ÁÖ¾îÁø ÀÌ¸§ÀÇ ±¸Á¶È­¹öÆÛ¼¼ÅÍ¸¦ °¡Áö°í ÀÖ´Â°¡¸¦ ¿ÜºÎ¿¡¼­ È®ÀÎÇÏ´Â ÇÔ¼ö.
+	//ì´ ì…°ì´ë”ê°€ ì£¼ì–´ì§„ ì´ë¦„ì˜ êµ¬ì¡°í™”ë²„í¼ì„¸í„°ë¥¼ ê°€ì§€ê³  ìžˆëŠ”ê°€ë¥¼ ì™¸ë¶€ì—ì„œ í™•ì¸í•˜ëŠ” í•¨ìˆ˜.
 	bool IsStructuredBuffer(const std::string_view& _name);
-	
-	//ÀÌ ¼ÎÀÌ´õ°¡ ÁÖ¾îÁø ÀÌ¸§ÀÇ ÅØ½ºÃ³2D¹è¿­¼¼ÅÍ¸¦ °¡Áö°í ÀÖ´Â°¡¸¦ ¿ÜºÎ¿¡¼­ È®ÀÎÇÏ´Â ÇÔ¼ö.
+
+	//ì´ ì…°ì´ë”ê°€ ì£¼ì–´ì§„ ì´ë¦„ì˜ í…ìŠ¤ì²˜2Dë°°ì—´ì„¸í„°ë¥¼ ê°€ì§€ê³  ìžˆëŠ”ê°€ë¥¼ ì™¸ë¶€ì—ì„œ í™•ì¸í•˜ëŠ” í•¨ìˆ˜.
 	bool IsTexture2DArray(const std::string_view& _name);
 
 protected:
-	//ÀÐ¾îµéÀÎ HLSLÄÚµå¸¦ ÄÄÆÄÀÏÇÏ´Âµ¥ ÇÊ¿äÇÑ HLSL ¹öÀüÀ» »ý¼ºÇÏ´Â ÇÔ¼ö.
+	//ì½ì–´ë“¤ì¸ HLSLì½”ë“œë¥¼ ì»´íŒŒì¼í•˜ëŠ”ë° í•„ìš”í•œ HLSL ë²„ì „ì„ ìƒì„±í•˜ëŠ” í•¨ìˆ˜.
 	void CreateVersion(const std::string_view& _shaderType, UINT _versionHigh, UINT _versionLow);
 
-	//ShaderCompile()ÇÔ¼ö¸¦ ´ëÃ¼ÇÏ´Â, ¼ÎÀÌ´õ °ø¿ë HLSLÄÚµå ÄÄÆÄÀÏ ÇÔ¼ö.
+	//ShaderCompile()í•¨ìˆ˜ë¥¼ ëŒ€ì²´í•˜ëŠ”, ì…°ì´ë” ê³µìš© HLSLì½”ë“œ ì»´íŒŒì¼ í•¨ìˆ˜.
 	void CompileHLSLCode(const std::string_view& _path);
 
-	//³»°¡ ÀÔ·ÂÇÑ HLSLÄÚµåÀÇ ³»¿ë´ë·Î ¼ÎÀÌ´õÀÇ ¸®¼Ò½º°¡ ÀÖ´ÂÁö È®ÀÎÇÏ°í, ¸®¼Ò½º¼¼ÅÍ¸¦ ÅëÇØ ¸®¼Ò½º Á¤º¸¸¦ ÀúÀåÇÑ´Ù.
-	//»ó¼ö¹öÆÛ´Â Ã£¾ÆºÁ¼­ ÀÖÀ¸¸é °¡Á®¿À°í ¾ø´Ù¸é »ý¼ºÇÑ´Ù.
-	//ÅØ½ºÃ³¿Í »ùÇÃ·¯´Â ÀÏ´Ü ¿£Áø ±âº»Á¦°ø ¸®¼Ò½º¸¦ ¼¼ÆÃÇÑ´Ù. 
+	//ë‚´ê°€ ìž…ë ¥í•œ HLSLì½”ë“œì˜ ë‚´ìš©ëŒ€ë¡œ ì…°ì´ë”ì˜ ë¦¬ì†ŒìŠ¤ê°€ ìžˆëŠ”ì§€ í™•ì¸í•˜ê³ , ë¦¬ì†ŒìŠ¤ì„¸í„°ë¥¼ í†µí•´ ë¦¬ì†ŒìŠ¤ ì •ë³´ë¥¼ ì €ìž¥í•œë‹¤.
+	//ìƒìˆ˜ë²„í¼ëŠ” ì°¾ì•„ë´ì„œ ìžˆìœ¼ë©´ ê°€ì ¸ì˜¤ê³  ì—†ë‹¤ë©´ ìƒì„±í•œë‹¤.
+	//í…ìŠ¤ì²˜ì™€ ìƒ˜í”ŒëŸ¬ëŠ” ì¼ë‹¨ ì—”ì§„ ê¸°ë³¸ì œê³µ ë¦¬ì†ŒìŠ¤ë¥¼ ì„¸íŒ…í•œë‹¤. 
 	void ShaderResCheck(const std::string_view& _thisShaderName);
-	//ÀÌ °úÁ¤À» ÅëÇØ ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¼ÎÀÌ´õ´Â ½º½º·Î°¡ ¾î¶² ¼ÎÀÌ´õ¸®¼Ò½º¸¦ ÇÊ¿ä·Î ÇÏ´ÂÁö ÀüºÎ ¾Ë ¼ö ÀÖ´Ù.
+	//ì´ ê³¼ì •ì„ í†µí•´ ì´ í”„ë ˆìž„ì›Œí¬ì˜ ì…°ì´ë”ëŠ” ìŠ¤ìŠ¤ë¡œê°€ ì–´ë–¤ ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë¥¼ í•„ìš”ë¡œ í•˜ëŠ”ì§€ ì „ë¶€ ì•Œ ìˆ˜ ìžˆë‹¤.
 
 protected:
-	std::string entryPoint_;	//HLSL ÄÚµåÀÇ ÁøÀÔÁ¡ÇÔ¼ö ÀÌ¸§.
-	std::string shaderVersion_;	//HLSL ÄÚµåÀÇ »ç¿ë ¸ñÀû°ú ÄÄÆÄÀÏ·¯ÀÇ ¹öÀü.
-	ID3DBlob* binaryCode_;		//HLSL ÄÚµå¸¦ ÄÄÆÄÀÏÇÑ °á°ú¹°(¹ÙÀÌÆ®ÄÚµå).
-	ShaderType shaderType_;		//ÀÌ ¼ÎÀÌ´õÀÇ Á¾·ù.
+	std::string entryPoint_;	//HLSL ì½”ë“œì˜ ì§„ìž…ì í•¨ìˆ˜ ì´ë¦„.
+	std::string shaderVersion_;	//HLSL ì½”ë“œì˜ ì‚¬ìš© ëª©ì ê³¼ ì»´íŒŒì¼ëŸ¬ì˜ ë²„ì „.
+	ID3DBlob* binaryCode_;		//HLSL ì½”ë“œë¥¼ ì»´íŒŒì¼í•œ ê²°ê³¼ë¬¼(ë°”ì´íŠ¸ì½”ë“œ).
+	ShaderType shaderType_;		//ì´ ì…°ì´ë”ì˜ ì¢…ë¥˜.
 
 	std::map<std::string, GameEngineConstantBufferSetter> constantBufferSetterMap_;
 	std::map<std::string, GameEngineTextureSetter> textureSetterMap_;
@@ -261,14 +261,14 @@ protected:
 	std::map<std::string, GameEngineStructuredBufferSetter> structuredBufferSetterMap_;
 	std::map<std::string, GameEngineTexture2DArraySetter> texture2DArraySetterMap_;
 
-	//¼ÎÀÌ´õ¸®¼Ò½º¼¼ÅÍµéÀ» °ªÇüÀ¸·Î ÀúÀåÇÑ ÀÌÀ¯´Â??
-	//->¼ÎÀÌ´õ ¸®¼Ò½º Á¾·ù°¡ ´Ù¾çÇÏÁö ¾Ê¾Æ¼­ °ªÇüÀ¸·Î º¸°üÇØµµ ¸¹Àº ÄÁÅ×ÀÌ³ÊµéÀ» ¸¸µé ÇÊ¿ä°¡ ¾ø°í, 
-	// °¢°¢ÀÇ ¸®¼Ò½ºµéÀ» ºÐ¸®ÇØ¼­ º¸´Ù ¼¼¹ÐÇÏ°Ô °ü¸®ÇÒ ¼ö ÀÖ´Ù´Â ÀåÁ¡À» ÀÌ¿ëÇÒ ¼ö ÀÖ±â ¶§¹®.
+	//ì…°ì´ë”ë¦¬ì†ŒìŠ¤ì„¸í„°ë“¤ì„ ê°’í˜•ìœ¼ë¡œ ì €ìž¥í•œ ì´ìœ ëŠ”??
+	//->ì…°ì´ë” ë¦¬ì†ŒìŠ¤ ì¢…ë¥˜ê°€ ë‹¤ì–‘í•˜ì§€ ì•Šì•„ì„œ ê°’í˜•ìœ¼ë¡œ ë³´ê´€í•´ë„ ë§Žì€ ì»¨í…Œì´ë„ˆë“¤ì„ ë§Œë“¤ í•„ìš”ê°€ ì—†ê³ , 
+	// ê°ê°ì˜ ë¦¬ì†ŒìŠ¤ë“¤ì„ ë¶„ë¦¬í•´ì„œ ë³´ë‹¤ ì„¸ë°€í•˜ê²Œ ê´€ë¦¬í•  ìˆ˜ ìžˆë‹¤ëŠ” ìž¥ì ì„ ì´ìš©í•  ìˆ˜ ìžˆê¸° ë•Œë¬¸.
 
 	//std::map<std::string, ShaderResSetter*> resSetterMap_;
-	//ÀÌ·¸°Ô µ¿ÀûÇÒ´çÇØ¼­ ¼ÎÀÌ´õ¸®¼Ò½ºµéÀ» º¸°üÇÑ´Ù¸é, ´ÙÇü¼ºÀ» ÀÌ¿ëÇØ¼­ ShaderResSetter¸¦ »ó¼Ó¹ÞÀº ¸ðµç ¼ÎÀÌ´õ¸®¼Ò½ºµéÀ» 
-	// ÇÏ³ªÀÇ ÄÁÅ×ÀÌ³Ê·Î ´õ ÀûÀº ¸Þ¸ð¸®·Î °ü¸®ÇÒ ¼ö ÀÖ´Ù.
-	// ÇÏÁö¸¸ ±×Á¤µµ·Î ÃÖÀûÈ­µÈ ¸Þ¸ð¸®°ü¸®°¡ ¾ÆÁ÷Àº ÇÊ¿ä ¾øÀ¸¹Ç·Î À§¿Í°°ÀÌ ÀúÀåÇÑ´Ù.
+	//ì´ë ‡ê²Œ ë™ì í• ë‹¹í•´ì„œ ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë“¤ì„ ë³´ê´€í•œë‹¤ë©´, ë‹¤í˜•ì„±ì„ ì´ìš©í•´ì„œ ShaderResSetterë¥¼ ìƒì†ë°›ì€ ëª¨ë“  ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë“¤ì„ 
+	// í•˜ë‚˜ì˜ ì»¨í…Œì´ë„ˆë¡œ ë” ì ì€ ë©”ëª¨ë¦¬ë¡œ ê´€ë¦¬í•  ìˆ˜ ìžˆë‹¤.
+	// í•˜ì§€ë§Œ ê·¸ì •ë„ë¡œ ìµœì í™”ëœ ë©”ëª¨ë¦¬ê´€ë¦¬ê°€ ì•„ì§ì€ í•„ìš” ì—†ìœ¼ë¯€ë¡œ ìœ„ì™€ê°™ì´ ì €ìž¥í•œë‹¤.
 
 protected:
 	inline void SetEntrtyPoint(const std::string_view& _entryPoint)

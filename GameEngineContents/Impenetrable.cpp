@@ -4,7 +4,7 @@
 
 Impenetrable::Impenetrable() 
 {
-	name_ = "¶Õ¾îº¸½ÃÁö";
+	name_ = "ëš«ì–´ë³´ì‹œì§€";
 	SetName(std::string_view("Impenetrable"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 5;
@@ -25,8 +25,8 @@ void Impenetrable::Init()
 	std::string sdamageMitigation_Next = std::to_string(PlayerInfo_.damageMitigation_ + 5.f).substr(0, std::to_string(PlayerInfo_.damageMitigation_ + 5.f).find(".") + 2);
 
 
-	etc_ = sDefMul + "% -> " + sDefMulNext + "% ¹æ¾î·Â\n"
-		+ sdamageMitigation_ + "% -> " + sdamageMitigation_Next + "% ÇÇÇØ\n¿ÏÈ­ ";
+	etc_ = sDefMul + "% -> " + sDefMulNext + "% ë°©ì–´ë ¥\n"
+		+ sdamageMitigation_ + "% -> " + sdamageMitigation_Next + "% í”¼í•´\nì™„í™” ";
 }
 
 void Impenetrable::Effect()

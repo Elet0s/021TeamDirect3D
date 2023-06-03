@@ -2,7 +2,7 @@
 
 class GameEnginePath
 {
-	//std::fileSystemÀ» ±â¹İÀ¸·Î Æ¯Á¤ ÆÄÀÏÀÇ °æ·Î¿Í ÆÄÀÏ¸í, È®ÀåÀÚ¸¦ °ü¸®ÇÏ´Â Å¬·¡½º. 
+	//std::fileSystemì„ ê¸°ë°˜ìœ¼ë¡œ íŠ¹ì • íŒŒì¼ì˜ ê²½ë¡œì™€ íŒŒì¼ëª…, í™•ì¥ìë¥¼ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤. 
 	//https://en.cppreference.com/w/cpp/filesystem/path
 
 protected:

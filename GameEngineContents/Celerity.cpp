@@ -4,7 +4,7 @@
 
 Celerity::Celerity() 
 {
-	name_ = "°¡¼Ó";
+	name_ = "ê°€ì†";
 	SetName(std::string_view("Celerity"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 4;
@@ -22,7 +22,7 @@ void Celerity::Init()
 	std::string sAttackSpeedNext = std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.08f)).substr(0, std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.08f)).find(".")) + "%";
 
 
-	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " °ø°İ ¼Óµµ ";
+	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " ê³µê²© ì†ë„ ";
 }
 
 void Celerity::Effect()

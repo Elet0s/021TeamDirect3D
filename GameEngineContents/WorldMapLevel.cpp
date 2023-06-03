@@ -38,26 +38,26 @@ void WorldMapLevel::Start()
 	WorldMapRenderingActor_->GetTransform().SetWorldPosition(float4::Zero);
 
 	WorldLevelLighting_ = CreateActor<GameEngineLighting>(0, "WorldMapLighting");
-	//¿ùµå¸Ê¿¡ Á¶¸í Ãß°¡.
+	//ì›”ë“œë§µì— ì¡°ëª… ì¶”ê°€.
 
 	WorldLevelLighting_->GetTransform().SetWorldRotation(-30.f, 45.f, 0.f);
-	//Á¶¸í °¢µµ ¼³Á¤.
+	//ì¡°ëª… ê°ë„ ì„¤ì •.
 
 	WorldLevelLighting_->GetLightingData().mainLightColor_ = float4(0.7f, 0.7f, 0.7f);
-	//Á¤¹İ»ç±¤, ³­¹İ»ç±¤ »ö, ¹à±â ¼³Á¤.
+	//ì •ë°˜ì‚¬ê´‘, ë‚œë°˜ì‚¬ê´‘ ìƒ‰, ë°ê¸° ì„¤ì •.
 
 	WorldLevelLighting_->GetLightingData().ambientLightColor_ = float4(0.1f, 0.1f, 0.1f);
-	//È¯°æ±¤ »ö, ¹à±â ¼³Á¤.
+	//í™˜ê²½ê´‘ ìƒ‰, ë°ê¸° ì„¤ì •.
 
 	WorldLevelLighting_->GetLightingData().specularLightRatio_ = 0.f;
-	//Á¤¹İ»ç±¤ »ç¿ë ¾ÈÇÔ.
+	//ì •ë°˜ì‚¬ê´‘ ì‚¬ìš© ì•ˆí•¨.
 
 	WorldLevelLighting_->GetLightingData().diffuseLightRatio_ = 2.f;
-	//³­¹İ»ç±¤À» µÎ¹è·Î Àû¿ë.
+	//ë‚œë°˜ì‚¬ê´‘ì„ ë‘ë°°ë¡œ ì ìš©.
 
 	this->GetMainCamera()->PushLighting(WorldLevelLighting_);
-	//¸ŞÀÎÄ«¸Ş¶ó¿¡ Á¶¸í µî·Ï.
-	
+	//ë©”ì¸ì¹´ë©”ë¼ì— ì¡°ëª… ë“±ë¡.
+
 	GetMainCameraActorTransform().SetWorldPosition(float4(872.f, -1088.f, -2300.f));
 	GetMainCamera()->SetProjectionMode(ProjectionMode::Perspective);
 	//GetUICamera()->GetTransform().SetWorldPosition(float4(896.f, -1145.f, -2226.f));
@@ -75,7 +75,7 @@ void WorldMapLevel::Start()
 		mousePointer_ = CreateActor<Mouse>(ObjectOrder::Mouse, "WorldMapMousePointer");
 	}
 
-    stageUI_ = CreateActor<StageUI>();
+	stageUI_ = CreateActor<StageUI>();
 	stageUI_->SetUI(UIType::World);
 }
 
@@ -97,14 +97,14 @@ void WorldMapLevel::LevelStartEvent()
 	this->GetMainCamera()->SetFarZ(10000.f);
 	stageUI_->SetUI(UIType::World);
 	Player::GetPlayerInst().Off();
-	
+
 	SoundPlayer::BGMPlay_->ChangeBgm("MapSelectionForest.wav");
 }
 
 void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 {
 	static const float cameraSpeed = 500.f;
-	//°íÁ¤°ªÀ» ÇÑ¹ø »ı¼ºÇØ¼­ °è¼Ó »ç¿ëÇÏ´Ù°¡ °ÔÀÓ ³¡³¯¶§³ª ¼Ò¸ê½ÃÅ³ °ÍÀÌ¹Ç·Î ·ÎÄÃ½ºÅÂÆ½À¸·Î ¼±¾ğ.
+	//ê³ ì •ê°’ì„ í•œë²ˆ ìƒì„±í•´ì„œ ê³„ì† ì‚¬ìš©í•˜ë‹¤ê°€ ê²Œì„ ëë‚ ë•Œë‚˜ ì†Œë©¸ì‹œí‚¬ ê²ƒì´ë¯€ë¡œ ë¡œì»¬ìŠ¤íƒœí‹±ìœ¼ë¡œ ì„ ì–¸.
 
 	float4 Pos = GetMainCameraActorTransform().GetWorldPosition();
 
@@ -183,8 +183,8 @@ void WorldMapLevel::UpdateCameraMovement(float _deltaTime)
 void WorldMapLevel::CheckNextStageSelection()
 {
 	static const float4 renderPivot = float4(0.f, 0.5f, 0.f, 0.f);
-	//°íÁ¤°ªÀ» ÇÑ¹ø »ı¼ºÇØ¼­ °è¼Ó »ç¿ëÇÏ´Ù°¡ °ÔÀÓ ³¡³¯¶§³ª ¼Ò¸ê½ÃÅ³ °ÍÀÌ¹Ç·Î ·ÎÄÃ½ºÅÂÆ½À¸·Î ¼±¾ğ.
-	//´Ù¸¥ ·»´õÇÇº¿ÀÌ ÇÊ¿äÇÏ´Ù¸é º¯°æÇÒ °Í.
+	//ê³ ì •ê°’ì„ í•œë²ˆ ìƒì„±í•´ì„œ ê³„ì† ì‚¬ìš©í•˜ë‹¤ê°€ ê²Œì„ ëë‚ ë•Œë‚˜ ì†Œë©¸ì‹œí‚¬ ê²ƒì´ë¯€ë¡œ ë¡œì»¬ìŠ¤íƒœí‹±ìœ¼ë¡œ ì„ ì–¸.
+	//ë‹¤ë¥¸ ë Œë”í”¼ë´‡ì´ í•„ìš”í•˜ë‹¤ë©´ ë³€ê²½í•  ê²ƒ.
 
 	std::list<StageObject*> nextLevelList = stageCreater_->GetCurLevel()->GetNextLevelList();
 
@@ -220,7 +220,7 @@ void WorldMapLevel::SoundCheck()
 			soundCheck_ = true;
 			return;
 		}
-	
+
 	}
 
 	soundCheck_ = false;

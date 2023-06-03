@@ -38,7 +38,7 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 )
 {
 	GameEngineTexture* newTexture = GameEngineTexture::Create(_texture);
-	//_texture¸¦ ÀúÀåÇÒ newTexture¸¦ »ı¼ºÇÑ´Ù.
+	//_textureë¥¼ ì €ì¥í•  newTextureë¥¼ ìƒì„±í•œë‹¤.
 
 	CreateRenderTargetTexture(newTexture, _color);
 }
@@ -86,23 +86,23 @@ void GameEngineRenderTarget::CreateRenderTargetTexture(
 )
 {
 	this->renderTargetTextures_.push_back(_texture);
-	//renderTargetTextures_¿¡ newTexture¸¦ ÀúÀåÇÑ´Ù.
+	//renderTargetTextures_ì— newTextureë¥¼ ì €ì¥í•œë‹¤.
 
 	this->renderTargetViews_.push_back(_texture->CreateRenderTargetView());
-	//newTexture¿¡¼­ »ı¼ºÇÑ ·»´õÅ¸°Ùºä¸¦ ÀúÀåÇÑ´Ù.
+	//newTextureì—ì„œ ìƒì„±í•œ ë Œë”íƒ€ê²Ÿë·°ë¥¼ ì €ì¥í•œë‹¤.
 
 	this->shaderResourceViews_.push_back(_texture->CreateShaderResourceView());
-	//newTexture¿¡¼­ »ı¼ºÇÑ ¼ÎÀÌ´õ¸®¼Ò½ººä¸¦ ÀúÀåÇÑ´Ù.
+	//newTextureì—ì„œ ìƒì„±í•œ ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°ë¥¼ ì €ì¥í•œë‹¤.
 
 	this->clearColors_.push_back(_clearColor);
-	//_clearColorµµ ÀúÀåÇÑ´Ù.
+	//_clearColorë„ ì €ì¥í•œë‹¤.
 }
 
 GameEngineTexture* GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
 {
 	if (renderTargetTextures_.size() <= _index)
 	{
-		MsgBoxAssert("·»´õÅ¸°ÙÀÇ °³¼ö¸¦ ÃÊ°úÇÑ ÀÎµ¦½º¸¦ ÀÔ·ÂÇÏ¿´½À´Ï´Ù.");
+		MsgBoxAssert("ë Œë”íƒ€ê²Ÿì˜ ê°œìˆ˜ë¥¼ ì´ˆê³¼í•œ ì¸ë±ìŠ¤ë¥¼ ì…ë ¥í•˜ì˜€ìŠµë‹ˆë‹¤.");
 		return nullptr;
 	}
 
@@ -112,39 +112,39 @@ GameEngineTexture* GameEngineRenderTarget::GetRenderTargetTexture(size_t _index)
 void GameEngineRenderTarget::CreateDepthTexture(int _renderTargetIndex)
 {
 	D3D11_TEXTURE2D_DESC depthTextureDesc = { 0 };
-	//±íÀÌ½ºÅÙ½Çºä »ı¼º¿¡ ÇÊ¿äÇÑ desc ÃÊ±âÈ­.
+	//ê¹Šì´ìŠ¤í…ì‹¤ë·° ìƒì„±ì— í•„ìš”í•œ desc ì´ˆê¸°í™”.
 
 	depthTextureDesc.Width = renderTargetTextures_[_renderTargetIndex]->GetScale().UIX();
-	//±íÀÌ½ºÅÙ½Çºä °¡·Î±æÀÌ: _renderTargetIndex¹ø ·»´õÅ¸°ÙÀÇ °¡·Î±æÀÌ.
-	//À¢¸¸ÇØ¼± 0¹ø ÇÏ³ª¸¸ ¾µ °ÍÀÌ´Ù.
+	//ê¹Šì´ìŠ¤í…ì‹¤ë·° ê°€ë¡œê¸¸ì´: _renderTargetIndexë²ˆ ë Œë”íƒ€ê²Ÿì˜ ê°€ë¡œê¸¸ì´.
+	//ì›¬ë§Œí•´ì„  0ë²ˆ í•˜ë‚˜ë§Œ ì“¸ ê²ƒì´ë‹¤.
 
 	depthTextureDesc.Height = renderTargetTextures_[_renderTargetIndex]->GetScale().UIY();
-	//±íÀÌ½ºÅÙ½Çºä ¼¼·Î±æÀÌ: _renderTargetIndex¹ø ·»´õÅ¸°ÙÀÇ ¼¼·Î±æÀÌ.
-	//À¢¸¸ÇØ¼± 0¹ø ÇÏ³ª¸¸ ¾µ °ÍÀÌ´Ù.
+	//ê¹Šì´ìŠ¤í…ì‹¤ë·° ì„¸ë¡œê¸¸ì´: _renderTargetIndexë²ˆ ë Œë”íƒ€ê²Ÿì˜ ì„¸ë¡œê¸¸ì´.
+	//ì›¬ë§Œí•´ì„  0ë²ˆ í•˜ë‚˜ë§Œ ì“¸ ê²ƒì´ë‹¤.
 
 	depthTextureDesc.MipLevels = 1;
 	//??
 
 	depthTextureDesc.ArraySize = 1;
-	//ÅØ½ºÃ³ ¹è¿­ Å©±â: 1.
+	//í…ìŠ¤ì²˜ ë°°ì—´ í¬ê¸°: 1.
 
 	depthTextureDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
-	//ÅØ½ºÃ³ Çü½Ä: ±íÀÌ Ç¥Çö¿ë ¹«ºÎÈ£ Á¤±ÔÈ­µÈ 24ºñÆ® Á¤¼ö¿Í ½ºÅÙ½Ç Ç¥Çö¿ë 8ºñÆ® ¹«ºÎÈ£ Á¤¼ö.
+	//í…ìŠ¤ì²˜ í˜•ì‹: ê¹Šì´ í‘œí˜„ìš© ë¬´ë¶€í˜¸ ì •ê·œí™”ëœ 24ë¹„íŠ¸ ì •ìˆ˜ì™€ ìŠ¤í…ì‹¤ í‘œí˜„ìš© 8ë¹„íŠ¸ ë¬´ë¶€í˜¸ ì •ìˆ˜.
 
 	depthTextureDesc.SampleDesc.Count = 1;
-	//¸ÖÆ¼»ùÇÃ¸µ¿¡ ÂüÁ¶ÇÒ ÇÈ¼¿´ç »ùÇÃ °³¼ö: 1°³(ÂüÁ¶ ¾ÈÇÔ).
+	//ë©€í‹°ìƒ˜í”Œë§ì— ì°¸ì¡°í•  í”½ì…€ë‹¹ ìƒ˜í”Œ ê°œìˆ˜: 1ê°œ(ì°¸ì¡° ì•ˆí•¨).
 
 	depthTextureDesc.SampleDesc.Quality = 0;
-	//¸ÖÆ¼»ùÇÃ¸µ Ç°Áú ¼öÁØ: 0 == ¸ÖÆ¼»ùÇÃ¸µ ¾ÈÇÔ.
+	//ë©€í‹°ìƒ˜í”Œë§ í’ˆì§ˆ ìˆ˜ì¤€: 0 == ë©€í‹°ìƒ˜í”Œë§ ì•ˆí•¨.
 
 	depthTextureDesc.Usage = D3D11_USAGE_DEFAULT;
-	//ÅØ½ºÃ³ »ç¿ëÃ³: ±âº».
+	//í…ìŠ¤ì²˜ ì‚¬ìš©ì²˜: ê¸°ë³¸.
 
 	depthTextureDesc.CPUAccessFlags = 0;
-	//CPUÀÇ ¹öÆÛ Á¢±Ù Çã¿ë ¿©ºÎ. 0: ÀĞ±â/¾²±â µÑ´Ù ºÒ°¡. 
+	//CPUì˜ ë²„í¼ ì ‘ê·¼ í—ˆìš© ì—¬ë¶€. 0: ì½ê¸°/ì“°ê¸° ë‘˜ë‹¤ ë¶ˆê°€. 
 
 	depthTextureDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
-	//ÅØ½ºÃ³ ¿¬°á¹æ½Ä: ±íÀÌ½ºÅÙ½Ç·Î ¿¬°á.
+	//í…ìŠ¤ì²˜ ì—°ê²°ë°©ì‹: ê¹Šì´ìŠ¤í…ì‹¤ë¡œ ì—°ê²°.
 
 	depthTexture_ = GameEngineTexture::Create(depthTextureDesc);
 
@@ -162,9 +162,9 @@ void GameEngineRenderTarget::Clear(bool _clearDepthStencilView /*= true*/)
 {
 	for (size_t i = 0; i < renderTargetViews_.size(); i++)
 	{
-		GameEngineDevice::GetDC()->ClearRenderTargetView(	//ÁöÁ¤ÇÑ ·»´õÅ¸°Ùºä¸¦ ÇÑ »öÀ¸·Î Ã¤¿ì´Â ÇÔ¼ö.
-			renderTargetViews_[i],		//´ë»ó ·»´õÅ¸°Ùºä.
-			clearColors_[i].arr1D		//´ë»ó ·»´õÅ¸°Ùºä¸¦ Ä¥ÇÒ »ö.
+		GameEngineDevice::GetDC()->ClearRenderTargetView(	//ì§€ì •í•œ ë Œë”íƒ€ê²Ÿë·°ë¥¼ í•œ ìƒ‰ìœ¼ë¡œ ì±„ìš°ëŠ” í•¨ìˆ˜.
+			renderTargetViews_[i],		//ëŒ€ìƒ ë Œë”íƒ€ê²Ÿë·°.
+			clearColors_[i].arr1D		//ëŒ€ìƒ ë Œë”íƒ€ê²Ÿë·°ë¥¼ ì¹ í•  ìƒ‰.
 		);
 	}
 
@@ -175,11 +175,11 @@ void GameEngineRenderTarget::Clear(bool _clearDepthStencilView /*= true*/)
 
 	if (nullptr != depthStencilView_)
 	{
-		GameEngineDevice::GetDC()->ClearDepthStencilView(	//±íÀÌ ½ºÅÙ½Ç ºä ÃÊ±âÈ­ÇÔ¼ö.
-			depthStencilView_,						//ÃÊ±âÈ­ ´ë»ó ±íÀÌ ½ºÅÙ½Ç ºä.
-			D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,//±íÀÌ¹öÆÛ | ½ºÅÙ½Ç¹öÆÛ ÃÊ±âÈ­
-			1.f,									//±íÀÌ ÃÊ±â°ª.
-			0										//½ºÅÙ½Ç ÃÊ±â°ª.
+		GameEngineDevice::GetDC()->ClearDepthStencilView(	//ê¹Šì´ ìŠ¤í…ì‹¤ ë·° ì´ˆê¸°í™”í•¨ìˆ˜.
+			depthStencilView_,						//ì´ˆê¸°í™” ëŒ€ìƒ ê¹Šì´ ìŠ¤í…ì‹¤ ë·°.
+			D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,//ê¹Šì´ë²„í¼ | ìŠ¤í…ì‹¤ë²„í¼ ì´ˆê¸°í™”
+			1.f,									//ê¹Šì´ ì´ˆê¸°ê°’.
+			0										//ìŠ¤í…ì‹¤ ì´ˆê¸°ê°’.
 		);
 	}
 }
@@ -188,20 +188,20 @@ void GameEngineRenderTarget::SetRenderTarget()
 {
 	if (true == renderTargetViews_.empty())
 	{
-		MsgBoxAssert("¼¼ÆÃÇÒ ·»´õÅ¸°Ùºä°¡ ÇÏ³ªµµ ¾ø½À´Ï´Ù.");
+		MsgBoxAssert("ì„¸íŒ…í•  ë Œë”íƒ€ê²Ÿë·°ê°€ í•˜ë‚˜ë„ ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 
-	GameEngineDevice::GetDC()->OMSetRenderTargets(		//ÁöÁ¤ÇÑ ·»´õÅ¸°Ùºä¸¦ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
-		static_cast<UINT>(renderTargetViews_.size()),	//¿¬°áÇÒ	·»´õÅ¸°Ùºä ¼ö. 0~8°³ ÁöÁ¤ °¡´É.
-		&renderTargetViews_[0],			//·»´õÅ¸°Ùºä ¹è¿­ ÁÖ¼Ò.
+	GameEngineDevice::GetDC()->OMSetRenderTargets(		//ì§€ì •í•œ ë Œë”íƒ€ê²Ÿë·°ë¥¼ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
+		static_cast<UINT>(renderTargetViews_.size()),	//ì—°ê²°í• 	ë Œë”íƒ€ê²Ÿë·° ìˆ˜. 0~8ê°œ ì§€ì • ê°€ëŠ¥.
+		&renderTargetViews_[0],			//ë Œë”íƒ€ê²Ÿë·° ë°°ì—´ ì£¼ì†Œ.
 		depthStencilView_
 	);
 }
 
 void GameEngineRenderTarget::ResetRenderTarget()
 {
-	GameEngineDevice::GetDC()->OMSetRenderTargets(		//ÁöÁ¤ÇÑ ·»´õÅ¸°Ùºä¸¦ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
+	GameEngineDevice::GetDC()->OMSetRenderTargets(		//ì§€ì •í•œ ë Œë”íƒ€ê²Ÿë·°ë¥¼ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 		0,
 		nullptr,
 		nullptr

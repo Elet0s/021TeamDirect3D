@@ -4,7 +4,7 @@
 
 StoneHanded::StoneHanded() 
 {
-	name_ = "¹ÙÀ§ ¼Õ";
+	name_ = "ë°”ìœ„ ì†";
 	SetName(std::string_view("StoneHanded"));
 	myRank_ = Rank::Epic;
 	maxLevel_ = 1;
@@ -26,9 +26,9 @@ void StoneHanded::Init()
 	std::string sAtkSpeedNext = std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 0.75f)).substr(0, std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 0.75f)).find(".") );
 	std::string sProjectileDurationNext = std::to_string(ceil(PlayerPInfo_.projectileDuration_Result * 0.7f)).substr(0, std::to_string(ceil(PlayerPInfo_.projectileDuration_Result * 0.7f)).find("."));
 
-	etc_ = sAddProjectile + " -> " + sAddProjectileNext + " Ãß°¡ Åõ»çÃ¼\n"
-		+ sProjectileDuration + "% ->" + sProjectileDurationNext + "% Åõ»çÃ¼\nÁö¼Ó½Ã°£\n"
-		+ sAtkSpeed + "% ->" + sAtkSpeedNext + "% °ø°İ ¼Óµµ ";
+	etc_ = sAddProjectile + " -> " + sAddProjectileNext + " ì¶”ê°€ íˆ¬ì‚¬ì²´\n"
+		+ sProjectileDuration + "% ->" + sProjectileDurationNext + "% íˆ¬ì‚¬ì²´\nì§€ì†ì‹œê°„\n"
+		+ sAtkSpeed + "% ->" + sAtkSpeedNext + "% ê³µê²© ì†ë„ ";
 }
 
 void StoneHanded::Effect()

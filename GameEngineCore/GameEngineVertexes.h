@@ -2,17 +2,17 @@
 
 class GameEngineInputLayoutDesc
 {
-	//ÀÎÇ²·¹ÀÌ¾Æ¿ô »ý¼º½Ã ÇÊ¿äÇÑ D3D11_INPUT_ELEMENT_DESC ±¸Á¶Ã¼µé°ú ºÎ°¡ Á¤º¸¸¦ ÇÑ ¹­À½À¸·Î °ü¸®ÇÏ´Â Å¬·¡½º.
-	//ÀÏ¹ÝÀûÀÎ ¸â¹öº¯¼ö¸¦ °¡Áö¸é ¾ÈµÇ´Â ÀÌÀ¯°¡ ¹«¾ù??
+	//ì¸í’‹ë ˆì´ì•„ì›ƒ ìƒì„±ì‹œ í•„ìš”í•œ D3D11_INPUT_ELEMENT_DESC êµ¬ì¡°ì²´ë“¤ê³¼ ë¶€ê°€ ì •ë³´ë¥¼ í•œ ë¬¶ìŒìœ¼ë¡œ ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤.
+	//ì¼ë°˜ì ì¸ ë©¤ë²„ë³€ìˆ˜ë¥¼ ê°€ì§€ë©´ ì•ˆë˜ëŠ” ì´ìœ ê°€ ë¬´ì—‡??
 
 
 	friend class GameEngineInputLayout;
 
 public:
-	std::vector<D3D11_INPUT_ELEMENT_DESC> descs_;	//ÀÎÇ² ·¹ÀÌ¾Æ¿ô »ý¼º½Ã ÇÊ¿äÇÑ Á¤º¸µé.
-	std::map<const char*, int> semanticNameIndexPairs_;	//½Ã¸ÇÆ½³×ÀÓº° ÃÖ´ë ÀÎµ¦½ºµ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ´Â ¸Ê.
-	unsigned int offset_;							//½ÃÀÛ À§Ä¡.						
-	unsigned int instanceDataSize_;		//ÀÎ½ºÅÏ½Ì¿ëÀ¸·Î ³Ö¾îÁØ ÀÎ½ºÅÏ½ºº° ÀÎÇ²·¹ÀÌ¾Æ¿ô µ¥ÀÌÅÍµéÀÇ ´ÜÀ§ Å©±â.
+	std::vector<D3D11_INPUT_ELEMENT_DESC> descs_;	//ì¸í’‹ ë ˆì´ì•„ì›ƒ ìƒì„±ì‹œ í•„ìš”í•œ ì •ë³´ë“¤.
+	std::map<const char*, int> semanticNameIndexPairs_;	//ì‹œë§¨í‹±ë„¤ìž„ë³„ ìµœëŒ€ ì¸ë±ìŠ¤ë°ì´í„°ë¥¼ ì €ìž¥í•˜ëŠ” ë§µ.
+	unsigned int offset_;							//ì‹œìž‘ ìœ„ì¹˜.						
+	unsigned int instanceDataSize_;		//ì¸ìŠ¤í„´ì‹±ìš©ìœ¼ë¡œ ë„£ì–´ì¤€ ì¸ìŠ¤í„´ìŠ¤ë³„ ì¸í’‹ë ˆì´ì•„ì›ƒ ë°ì´í„°ë“¤ì˜ ë‹¨ìœ„ í¬ê¸°.
 
 
 public:
@@ -40,17 +40,17 @@ public:
 
 struct GameEngineVertex
 {
-	//°¢°¢ÀÇ ¹öÅØ½º ÇÏ³ª¸¶´Ù °¡Á®¾ß ÇÏ´Â Á¤º¸µéÀ» ÇÏ³ª·Î ¸ð¾Æ °ü¸®ÇÏ´Â Å¬·¡½º.
+	//ê°ê°ì˜ ë²„í…ìŠ¤ í•˜ë‚˜ë§ˆë‹¤ ê°€ì ¸ì•¼ í•˜ëŠ” ì •ë³´ë“¤ì„ í•˜ë‚˜ë¡œ ëª¨ì•„ ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤.
 
 	static GameEngineInputLayoutDesc inputLayoutInfo_;
-	//¹öÅØ½º ÇÏ³ª¸¶´Ù inputLayoutInfo_ ÇÑ°³¾¿¸¸ °¡Áø´Ù. 
+	//ë²„í…ìŠ¤ í•˜ë‚˜ë§ˆë‹¤ inputLayoutInfo_ í•œê°œì”©ë§Œ ê°€ì§„ë‹¤. 
 
-	float4 POSITION;	//À§Ä¡.
-	float4 COLOR;		//»ö»ó.
-	float4 TEXCOORD;	//UVÁÂÇ¥.
-	float4 NORMAL;		//Á¤Á¡ÀÇ ¹ý¼±º¤ÅÍ.
-	float4 TANGENT;		//Á¢¼±.
-	float4 BINORMAL;	//Á¾¹ý¼±.
-	float4 WEIGHT;		// ¾Ö´Ï¸ÞÀÌ¼Ç °¡ÁßÄ¡
-	int BLENDINDICES[4] = { 0, };		//ÀÌ ¹öÅØ½º¸¦ ¿òÁ÷ÀÌ´Â ¸ðµç º»µéÀÇ ¹øÈ£.
+	float4 POSITION;	//ìœ„ì¹˜.
+	float4 COLOR;		//ìƒ‰ìƒ.
+	float4 TEXCOORD;	//UVì¢Œí‘œ.
+	float4 NORMAL;		//ì •ì ì˜ ë²•ì„ ë²¡í„°.
+	float4 TANGENT;		//ì ‘ì„ .
+	float4 BINORMAL;	//ì¢…ë²•ì„ .
+	float4 WEIGHT;		// ì• ë‹ˆë©”ì´ì…˜ ê°€ì¤‘ì¹˜
+	int BLENDINDICES[4] = { 0, };		//ì´ ë²„í…ìŠ¤ë¥¼ ì›€ì§ì´ëŠ” ëª¨ë“  ë³¸ë“¤ì˜ ë²ˆí˜¸.
 };

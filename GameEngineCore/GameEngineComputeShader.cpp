@@ -20,7 +20,7 @@ void GameEngineComputeShader::Set()
 {
     if (nullptr == computeShader_)
     {
-        MsgBoxAssert("ÄÄÇ»Æ® ¼ÎÀÌ´õ°¡ ¾ø½À´Ï´Ù.");
+        MsgBoxAssert("ì»´í“¨íŠ¸ ì…°ì´ë”ê°€ ì—†ìŠµë‹ˆë‹¤.");
         return;
     }
 
@@ -50,13 +50,13 @@ GameEngineComputeShader* GameEngineComputeShader::Load(const std::string_view& _
 void GameEngineComputeShader::CreateComputeShader()
 {
     if (S_OK != GameEngineDevice::GetDevice()->CreateComputeShader(
-        this->binaryCode_->GetBufferPointer(),  //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå.
-        this->binaryCode_->GetBufferSize(),     //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå Å©±â.
+        this->binaryCode_->GetBufferPointer(),  //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ.
+        this->binaryCode_->GetBufferSize(),     //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ í¬ê¸°.
         NULL,                                   //??
-        &this->computeShader_                  //ÄÄÇ»Æ® ¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
+        &this->computeShader_                  //ì»´í“¨íŠ¸ ì…°ì´ë” í¬ì¸í„°.
     ))
     {
-        MsgBoxAssert("ÄÄÇ»Æ® ¼ÎÀÌ´õ »ı¼º ½ÇÆĞ.");
+        MsgBoxAssert("ì»´í“¨íŠ¸ ì…°ì´ë” ìƒì„± ì‹¤íŒ¨.");
         return;
     }
 }

@@ -7,7 +7,7 @@ enum class UIType
 	Claer,
 	Shop,
 };
-// ¼³¸í :
+// ì„¤ëª… :
 class StageUI : public GameEngineActor
 {
 public:
@@ -23,7 +23,7 @@ public:
 
 	void SetStageText(const std::string& _Text)
 	{
-		stagefontrenderer_->SetText("½ºÅ×ÀÌÁö : " + _Text, "Free Pixel");
+		stagefontrenderer_->SetText("ìŠ¤í…Œì´ì§€ : " + _Text, "Free Pixel");
 	}
 
 	void SetCoinText(const std::string& _Text)
@@ -39,26 +39,26 @@ private:
 	GameEngineFontRenderer* stagefontrenderer_;
 	GameEngineFontRenderer* spacefontrenderer_;
 	GameEngineFontRenderer* coinfontrenderer_;
-						  
+
 	GameEngineFontRenderer* killcountfontrenderer_;
 	GameEngineFontRenderer* elitekillFontrenderer_;
-						  
+
 	GameEngineFontRenderer* timerfontRenderer_;
 	GameEngineTextureRenderer* timerboxrenderer_;
-							 
+
 	GameEngineTextureRenderer* coinrenderer_;
-							 
-							 
+
+
 	GameEngineTextureRenderer* stageboxrenderer_;
 	GameEngineTextureRenderer* spaceboxrenderer_;
 	GameEngineTextureRenderer* coinboxrenderer_;
-							 
+
 	GameEngineTextureRenderer* killcountboxrenderer_;
 
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-	
+
 	void StageSetting();
 	void WorldSetting();
 	void ClearSetting();

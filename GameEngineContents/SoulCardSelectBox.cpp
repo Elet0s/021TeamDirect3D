@@ -15,7 +15,7 @@ SoulCardSelectBox::~SoulCardSelectBox()
 
 void SoulCardSelectBox::Start()
 {
-	
+
 	if (nullptr == GameEngineTexture::Find("SoulCardNormal.png"))
 	{
 		GameEngineDirectory Dir;
@@ -35,7 +35,7 @@ void SoulCardSelectBox::Start()
 	SoundPlayer::BGMPlay_->SpeedSet(0.9f);
 	GameEngineTime::GetInst().SetGlobalTimeScale(0.01f);
 	GameEngineTextureRenderer* Box = CreateComponent<GameEngineTextureRenderer>();
-	Box->SetTexture("SoulCardSelectTemplate - º¹»çº».png");
+	Box->SetTexture("SoulCardSelectTemplate - ë³µì‚¬ë³¸.png");
 	Box->ChangeCamera(CameraOrder::UICamera);
 	Box->GetTransform().SetLocalMove(float4(0,0, 10));
 	Box->ScaleToTexture();
@@ -57,7 +57,7 @@ void SoulCardSelectBox::Start()
 		Cards[2]->Setting();
 		Cards[2]->GetTransform().SetLocalMove(float4(220.f, -200.f));
 	}
-	
+
 
 	{
 		GameEngineFontRenderer* Font0 = CreateComponent<GameEngineFontRenderer>();
@@ -65,14 +65,14 @@ void SoulCardSelectBox::Start()
 		Font0->ChangeCamera(CameraOrder::UICamera);
 		Font0->SetLeftAndRightSort(LeftAndRightSort::Center);
 		Font0->SetSize(40.f);
-		Font0->SetText("¿µÈ¥ÀÌ °­ÇØÁö°í ÀÖ½À´Ï´Ù!");
+		Font0->SetText("ì˜í˜¼ì´ ê°•í•´ì§€ê³  ìˆìŠµë‹ˆë‹¤!");
 
 		GameEngineFontRenderer* Font1 = CreateComponent<GameEngineFontRenderer>();
 		Font1->SetTextPosition(float4(640.f, 160.f, -2000.f));
 		Font1->ChangeCamera(CameraOrder::UICamera);
 		Font1->SetLeftAndRightSort(LeftAndRightSort::Center);
 		Font1->SetSize(36.f);
-		Font1->SetText("¼Ò¿ïÄ«µå¸¦ ¼±ÅÃÇÏ¼¼¿ä");
+		Font1->SetText("ì†Œìš¸ì¹´ë“œë¥¼ ì„ íƒí•˜ì„¸ìš”");
 	}
 }
 

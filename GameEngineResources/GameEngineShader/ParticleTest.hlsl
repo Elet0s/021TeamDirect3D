@@ -9,10 +9,10 @@ struct ParticleInfo
     float4 direction_;
     float4 color_;
     
-    int isAlive_; //0: ÆÄÆ¼Å¬ ºñÈ°¼ºÈ­µÊ. 1: ÆÄÆ¼Å¬ È°¼ºÈ­µÊ.
+    int isAlive_; //0: íŒŒí‹°í´ ë¹„í™œì„±í™”ë¨. 1: íŒŒí‹°í´ í™œì„±í™”ë¨.
     
     float currentTime_; //
-    float maxTime_;     //
+    float maxTime_; //
 };
 
 StructuredBuffer<ParticleInfo> allParticleInfos : register(t16);
@@ -40,12 +40,12 @@ Output ParticleTest_VS(Input _input)
     Output result = (Output) 0.f;
     
     result.instanceIndex_ = _input.instanceIndex_;
-    //ÀÎ½ºÅÏ½º ÀÎ½Ä¹øÈ£¸¸ Àü´Ş.
+    //ì¸ìŠ¤í„´ìŠ¤ ì¸ì‹ë²ˆí˜¸ë§Œ ì „ë‹¬.
  
     return result;
 }
 
-[maxvertexcount(6)] //[maxvertexcount(int NumVerts)] NumVerts°³¼ö¸¸Å­ÀÇ Á¤Á¡À» »ı¼ºÇÏ°Ú´Ù´Â ¼±¾ğ.
+[maxvertexcount(6)] //[maxvertexcount(int NumVerts)] NumVertsê°œìˆ˜ë§Œí¼ì˜ ì •ì ì„ ìƒì„±í•˜ê² ë‹¤ëŠ” ì„ ì–¸.
 void ParticleTest_GS(point Output _input[1], inout TriangleStream<ParticleOutput> _output)
 {
     uint instanceIndex = _input[0].instanceIndex_;
@@ -66,10 +66,10 @@ void ParticleTest_GS(point Output _input[1], inout TriangleStream<ParticleOutput
     
     float4 arrRect[4] =
     {
-        float4(viewPosition.x - (scale.x / 2.f), viewPosition.y + (scale.y / 2.f), viewPosition.z, 1.f),    //0¹ø Á¡.
-        float4(viewPosition.x + (scale.x / 2.f), viewPosition.y + (scale.y / 2.f), viewPosition.z, 1.f),    //1¹ø Á¡.
-        float4(viewPosition.x + (scale.x / 2.f), viewPosition.y - (scale.y / 2.f), viewPosition.z, 1.f),    //2¹ø Á¡.
-        float4(viewPosition.x - (scale.x / 2.f), viewPosition.y - (scale.y / 2.f), viewPosition.z, 1.f)     //3¹ø Á¡.
+        float4(viewPosition.x - (scale.x / 2.f), viewPosition.y + (scale.y / 2.f), viewPosition.z, 1.f), //0ë²ˆ ì .
+        float4(viewPosition.x + (scale.x / 2.f), viewPosition.y + (scale.y / 2.f), viewPosition.z, 1.f), //1ë²ˆ ì .
+        float4(viewPosition.x + (scale.x / 2.f), viewPosition.y - (scale.y / 2.f), viewPosition.z, 1.f), //2ë²ˆ ì .
+        float4(viewPosition.x - (scale.x / 2.f), viewPosition.y - (scale.y / 2.f), viewPosition.z, 1.f) //3ë²ˆ ì .
     };
     
     ParticleOutput result[4] =
@@ -103,7 +103,7 @@ void ParticleTest_GS(point Output _input[1], inout TriangleStream<ParticleOutput
     _output.RestartStrip();
 }
 
-float4 ParticleTest_PS(Output _input): SV_Target0
+float4 ParticleTest_PS(Output _input) : SV_Target0
 {
     return float4(1.f, 0.f, 1.f, 1.f);
 }

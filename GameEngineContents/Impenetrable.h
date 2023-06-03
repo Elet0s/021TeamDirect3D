@@ -1,6 +1,6 @@
 #pragma once
 #include "Skill.h"
-// Ό³Έν :
+// μ„¤λª… :
 class Impenetrable : public Skill
 {
 public:

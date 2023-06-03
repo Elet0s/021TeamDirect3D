@@ -1,57 +1,57 @@
-//ºûÀÇ 3°¡Áö Á¾·ù.
-// Á¤¹Ý»ç±¤(Specular Light): ºûÀÌ ¹Ý»çµÈ°Ô ³»´«¿¡ ¾ó¸¶³ª µé¾î¿À´À³Ä.
-// ³­¹Ý»ç±¤(Diffuse Light): ºûÀÇ ¹æÇâ¿¡ µû¶ó¼­ Ç¥¸éÀûÀ¸·Î ¾î¶»°Ô ºÐÆ÷µÉ°Å³Ä?
-// È¯°æ±¤, ÁÖº¯±¤(Ambient Light): 
-// °¡Àå ¸®¾óÇÑ ºûÀ» Ç¥ÇöÇÏ·Á¸é È¯°æ±¤À» Á¦´ë·Î °è»êÇØ¾ß ÇÏ´Âµ¥, °è»ê·®ÀÌ ³Ê¹« ¸¹¾Æ¼­ ´Ù °è»êÇÏ´Â°Ô  ºÒ°¡´É¿¡ °¡±õ±â ¶§¹®¿¡ 
-// Åë°è¿¡ °¡±î¿î °ø½ÄÀ¸·Î Ã³¸®ÇÏ°Å³ª, ±×³É »ó¼ö°ªÀ» ³Ö¾î¹ö¸°´Ù.
-//±× ¿Ü¿¡µµ È®»ê±¤(Emissive Lighting, Àü±¸°°Àº Æ¯Á¤ ±¤¿ø¿¡¼­ »ç¹æÀ¸·Î ÆÛÁ®³ª¿À´Â ºû) °°Àº °Íµµ ÀÖ´Ù.
+//ë¹›ì˜ 3ê°€ì§€ ì¢…ë¥˜.
+// ì •ë°˜ì‚¬ê´‘(Specular Light): ë¹›ì´ ë°˜ì‚¬ëœê²Œ ë‚´ëˆˆì— ì–¼ë§ˆë‚˜ ë“¤ì–´ì˜¤ëŠëƒ.
+// ë‚œë°˜ì‚¬ê´‘(Diffuse Light): ë¹›ì˜ ë°©í–¥ì— ë”°ë¼ì„œ í‘œë©´ì ìœ¼ë¡œ ì–´ë–»ê²Œ ë¶„í¬ë ê±°ëƒ?
+// í™˜ê²½ê´‘, ì£¼ë³€ê´‘(Ambient Light): 
+// ê°€ìž¥ ë¦¬ì–¼í•œ ë¹›ì„ í‘œí˜„í•˜ë ¤ë©´ í™˜ê²½ê´‘ì„ ì œëŒ€ë¡œ ê³„ì‚°í•´ì•¼ í•˜ëŠ”ë°, ê³„ì‚°ëŸ‰ì´ ë„ˆë¬´ ë§Žì•„ì„œ ë‹¤ ê³„ì‚°í•˜ëŠ”ê²Œ  ë¶ˆê°€ëŠ¥ì— ê°€ê¹ê¸° ë•Œë¬¸ì— 
+// í†µê³„ì— ê°€ê¹Œìš´ ê³µì‹ìœ¼ë¡œ ì²˜ë¦¬í•˜ê±°ë‚˜, ê·¸ëƒ¥ ìƒìˆ˜ê°’ì„ ë„£ì–´ë²„ë¦°ë‹¤.
+//ê·¸ ì™¸ì—ë„ í™•ì‚°ê´‘(Emissive Lighting, ì „êµ¬ê°™ì€ íŠ¹ì • ê´‘ì›ì—ì„œ ì‚¬ë°©ìœ¼ë¡œ í¼ì ¸ë‚˜ì˜¤ëŠ” ë¹›) ê°™ì€ ê²ƒë„ ìžˆë‹¤.
 
 struct LightingData
 {
-    float4 mainLightColor_; //ÁÖ Á¶¸í±¤ »ö»ó°ª. Á¤¹Ý»ç±¤, ³­¹Ý»ç±¤¿¡ Àû¿ë.
-    float4 ambientLightColor_; //ÁÖº¯±¤ »ö»ó°ª.
+    float4 mainLightColor_; //ì£¼ ì¡°ëª…ê´‘ ìƒ‰ìƒê°’. ì •ë°˜ì‚¬ê´‘, ë‚œë°˜ì‚¬ê´‘ì— ì ìš©.
+    float4 ambientLightColor_; //ì£¼ë³€ê´‘ ìƒ‰ìƒê°’.
 
-    float specularLightRatio_; //Á¤¹Ý»ç±¤ Àû¿ë ºñÀ². 0~1.
-    float diffuseLightRatio_; //³­¹Ý»ç±¤ Àû¿ë ºñÀ². 0~1.
-    float ambientLightRatio_; //ÁÖº¯±¤ Àû¿ë ºñÀ². 0~1.
+    float specularLightRatio_; //ì •ë°˜ì‚¬ê´‘ ì ìš© ë¹„ìœ¨. 0~1.
+    float diffuseLightRatio_; //ë‚œë°˜ì‚¬ê´‘ ì ìš© ë¹„ìœ¨. 0~1.
+    float ambientLightRatio_; //ì£¼ë³€ê´‘ ì ìš© ë¹„ìœ¨. 0~1.
 
-    float specularLightExponent_; //Á¤¹Ý»ç±¤ Áö¼ö. ÀÌ ¼öÄ¡°¡ Ä¿Áö¸é Á¤¹Ý»ç±¤ÀÌ ¹Ý»çµÇ´Â ¸éÀûÀÌ Á¦°ö¹Ýºñ·Ê·Î ÁÙ¾îµç´Ù.
-	//¹Ý´ë·Î À½¼ö°¡ µÇ¸é ÀÌ Á¶¸íÀÌ ºñÃß´Â ¸ðµç ¿µ¿ª¿¡ Á¤¹Ý»ç±¤ÀÌ ºñÃá´Ù.
+    float specularLightExponent_; //ì •ë°˜ì‚¬ê´‘ ì§€ìˆ˜. ì´ ìˆ˜ì¹˜ê°€ ì»¤ì§€ë©´ ì •ë°˜ì‚¬ê´‘ì´ ë°˜ì‚¬ë˜ëŠ” ë©´ì ì´ ì œê³±ë°˜ë¹„ë¡€ë¡œ ì¤„ì–´ë“ ë‹¤.
+	//ë°˜ëŒ€ë¡œ ìŒìˆ˜ê°€ ë˜ë©´ ì´ ì¡°ëª…ì´ ë¹„ì¶”ëŠ” ëª¨ë“  ì˜ì—­ì— ì •ë°˜ì‚¬ê´‘ì´ ë¹„ì¶˜ë‹¤.
     
-    //float4x4 lightingViewMatrix_; //Á¶¸íÀÇ ºäÇà·Ä.
-    //float4x4 inverseLightingViewMatrix_; //Á¶¸íÀÇ ºäÇà·ÄÀÇ ¿ªÇà·Ä.
+    //float4x4 lightingViewMatrix_; //ì¡°ëª…ì˜ ë·°í–‰ë ¬.
+    //float4x4 inverseLightingViewMatrix_; //ì¡°ëª…ì˜ ë·°í–‰ë ¬ì˜ ì—­í–‰ë ¬.
     
-    //float4x4 lightingProjectionMatrix_; //Á¶¸íÀÇ Åõ¿µÇà·Ä.
-    //float4x4 inverseLightingProjectionMatrix_; //Á¶¸íÀÇ Åõ¿µÇà·ÄÀÇ ¿ªÇà·Ä.
+    //float4x4 lightingProjectionMatrix_; //ì¡°ëª…ì˜ íˆ¬ì˜í–‰ë ¬.
+    //float4x4 inverseLightingProjectionMatrix_; //ì¡°ëª…ì˜ íˆ¬ì˜í–‰ë ¬ì˜ ì—­í–‰ë ¬.
 
-	//float4x4 lightingViewProjectionMatrix_;	//Á¶¸íÀÇ ºä, Åõ¿µ ÅëÇÕÇà·Ä.
+	//float4x4 lightingViewProjectionMatrix_;	//ì¡°ëª…ì˜ ë·°, íˆ¬ì˜ í†µí•©í–‰ë ¬.
 
-    float4x4 cameraViewMatrix_; //Ä«¸Þ¶óÀÇ ºäÇà·Ä.
-    float4x4 inverseCameraViewMatrix_; //Ä«¸Þ¶óÀÇ ºäÇà·ÄÀÇ ¿ªÇà·Ä.
+    float4x4 cameraViewMatrix_; //ì¹´ë©”ë¼ì˜ ë·°í–‰ë ¬.
+    float4x4 inverseCameraViewMatrix_; //ì¹´ë©”ë¼ì˜ ë·°í–‰ë ¬ì˜ ì—­í–‰ë ¬.
 
-    //float shadowRenderTargetWidth_; //±×¸²ÀÚ ·»´õÅ¸°Ù °¡·Î±æÀÌ.
-    //float shadowRenderTargetHeight_; //±×¸²ÀÚ ·»´õÅ¸°Ù ¼¼·Î±æÀÌ.
-    //float lightingViewFrustumNearZ_; //Á¶¸íÀÇ ºäÇÁ·¯½ºÅÒ ±ÙÆò¸é z°ª.
-    //float lightingViewFrustumFarZ_; //Á¶¸íÀÇ ºäÇÁ·¯½ºÅÒ ¿øÆò¸é z°ª.
+    //float shadowRenderTargetWidth_; //ê·¸ë¦¼ìž ë Œë”íƒ€ê²Ÿ ê°€ë¡œê¸¸ì´.
+    //float shadowRenderTargetHeight_; //ê·¸ë¦¼ìž ë Œë”íƒ€ê²Ÿ ì„¸ë¡œê¸¸ì´.
+    //float lightingViewFrustumNearZ_; //ì¡°ëª…ì˜ ë·°í”„ëŸ¬ìŠ¤í…€ ê·¼í‰ë©´ zê°’.
+    //float lightingViewFrustumFarZ_; //ì¡°ëª…ì˜ ë·°í”„ëŸ¬ìŠ¤í…€ ì›í‰ë©´ zê°’.
 
-    float4 lightingPosition_; //¿ùµå°ø°£ Á¶¸í À§Ä¡.
-    float4 lightingDirection_; //¿ùµå°ø°£ Á¶¸í ¹æÇâ.
-    float4 inverseLightingDirection_; //¿ùµå°ø°£ Á¶¸í ¿ª¹æÇâ.
-	//¼ÎÀÌ´õ°¡ ÀÌ °ªÀ» Á÷Á¢ ¾µ ÀÏÀº ¾øÀ» °Í °°Áö¸¸ ±×·¡µµ º¸³½´Ù.
+    float4 lightingPosition_; //ì›”ë“œê³µê°„ ì¡°ëª… ìœ„ì¹˜.
+    float4 lightingDirection_; //ì›”ë“œê³µê°„ ì¡°ëª… ë°©í–¥.
+    float4 inverseLightingDirection_; //ì›”ë“œê³µê°„ ì¡°ëª… ì—­ë°©í–¥.
+	//ì…°ì´ë”ê°€ ì´ ê°’ì„ ì§ì ‘ ì“¸ ì¼ì€ ì—†ì„ ê²ƒ ê°™ì§€ë§Œ ê·¸ëž˜ë„ ë³´ë‚¸ë‹¤.
 
-    float4 viewLightingPosition_; //ºä°ø°£¿¡¼­ÀÇ Á¶¸í À§Ä¡.
-    float4 viewLightingDirection_; //ºä°ø°£¿¡¼­ÀÇ Á¶¸í ¹æÇâ.
-    float4 inverseViewLightingDirection_; //ºä°ø°£¿¡¼­ÀÇ Á¶¸í ¿ª¹æÇâ.
+    float4 viewLightingPosition_; //ë·°ê³µê°„ì—ì„œì˜ ì¡°ëª… ìœ„ì¹˜.
+    float4 viewLightingDirection_; //ë·°ê³µê°„ì—ì„œì˜ ì¡°ëª… ë°©í–¥.
+    float4 inverseViewLightingDirection_; //ë·°ê³µê°„ì—ì„œì˜ ì¡°ëª… ì—­ë°©í–¥.
     
-    //float4 viewSpaceCameraPosition_; //Ä«¸Þ¶ó À§Ä¡. 
-    //ºä°ø°£ Ä«¸Þ¶óÀ§Ä¡´Â (0, 0, 0) °íÁ¤ ¾Æ´Ñ°¡?
+    //float4 viewSpaceCameraPosition_; //ì¹´ë©”ë¼ ìœ„ì¹˜. 
+    //ë·°ê³µê°„ ì¹´ë©”ë¼ìœ„ì¹˜ëŠ” (0, 0, 0) ê³ ì • ì•„ë‹Œê°€?
 };
 
 cbuffer AllLightingDatas : register(b13)
 {
-    int lightingCount_; //Á¶¸í °³¼ö.
-    LightingData lightings_[16]; //LightingData ¸ðÀ½.
-    //½ÇÁ¦·Î´Â 3°³ ÀÌÇÏ·Î ¾µ °Å¶ó ¿¹»óµÊ.
+    int lightingCount_; //ì¡°ëª… ê°œìˆ˜.
+    LightingData lightings_[16]; //LightingData ëª¨ìŒ.
+    //ì‹¤ì œë¡œëŠ” 3ê°œ ì´í•˜ë¡œ ì“¸ ê±°ë¼ ì˜ˆìƒë¨.
 };
 
 struct LightOutput
@@ -62,47 +62,47 @@ struct LightOutput
 };
 
 float4 CalSpecularLight(
-    float4 _viewSpaceFocusPosition, //³»°¡ º¸°íÀÖ´Â ¿ÀºêÁ§Æ® Ç¥¸éÀÇ ºä°ø°£ ±âÁØ À§Ä¡ º¤ÅÍ.
-    float4 _viewSpaceNormalVector, //ºä°ø°£¿¡¼­ÀÇ ¿ÀºêÁ§Æ® Ç¥¸é Æ¯Á¤ ÁöÁ¡ÀÇ ¹ý¼±º¤ÅÍ. ºû °è»êÀº ºä°ø°£¿¡¼­ ÁøÇàÇØ¾ß ÇÑ´Ù.
-    LightingData _lightingData //Á¶¸íµ¥ÀÌÅÍ.
+    float4 _viewSpaceFocusPosition, //ë‚´ê°€ ë³´ê³ ìžˆëŠ” ì˜¤ë¸Œì íŠ¸ í‘œë©´ì˜ ë·°ê³µê°„ ê¸°ì¤€ ìœ„ì¹˜ ë²¡í„°.
+    float4 _viewSpaceNormalVector, //ë·°ê³µê°„ì—ì„œì˜ ì˜¤ë¸Œì íŠ¸ í‘œë©´ íŠ¹ì • ì§€ì ì˜ ë²•ì„ ë²¡í„°. ë¹› ê³„ì‚°ì€ ë·°ê³µê°„ì—ì„œ ì§„í–‰í•´ì•¼ í•œë‹¤.
+    LightingData _lightingData //ì¡°ëª…ë°ì´í„°.
 )
 {
     float3 normalVector = normalize(_viewSpaceNormalVector.xyz);
-    //¿ÀºêÁ§Æ® Ç¥¸é ¹ý¼±º¤ÅÍ¸¦ ´Ù½ÃÇÑ¹ø Á¤±ÔÈ­.
+    //ì˜¤ë¸Œì íŠ¸ í‘œë©´ ë²•ì„ ë²¡í„°ë¥¼ ë‹¤ì‹œí•œë²ˆ ì •ê·œí™”.
     
     float3 lightingInvDirection = normalize(_lightingData.inverseViewLightingDirection_.xyz);
-    //Á¶¸í ¿ª¹æÇâº¤ÅÍ¸¦ ´Ù½ÃÇÑ¹ø Á¤±ÔÈ­.
+    //ì¡°ëª… ì—­ë°©í–¥ë²¡í„°ë¥¼ ë‹¤ì‹œí•œë²ˆ ì •ê·œí™”.
     
     float3 orthogonalProjectionVector = normalVector * dot(lightingInvDirection, normalVector);
-    //¹ý¼±º¤ÅÍ¿¡ Á¶¸í ¿ª¹æÇâº¤ÅÍÀÇ ÄÚ»çÀÎ°ª(´ë½Å ³»Àû°ª)À» °öÇØ¼­ Á¤»ç¿µº¤ÅÍ¸¦ ¸¸µç´Ù.
+    //ë²•ì„ ë²¡í„°ì— ì¡°ëª… ì—­ë°©í–¥ë²¡í„°ì˜ ì½”ì‚¬ì¸ê°’(ëŒ€ì‹  ë‚´ì ê°’)ì„ ê³±í•´ì„œ ì •ì‚¬ì˜ë²¡í„°ë¥¼ ë§Œë“ ë‹¤.
     
     float3 reflectionAngle = normalize(2.f * orthogonalProjectionVector - lightingInvDirection);
-    //±æÀÌ¸¦ µÎ¹è·Î ´Ã¸° Á¤»ç¿µº¤ÅÍ¿¡ Á¶¸í ¹æÇâº¤ÅÍ¸¦ ´õÇÏ¸é(== Á¶¸í ¿ª¹æÇâº¤ÅÍ¸¦ »©¸é) ºûÀÇ ¹Ý»ç°¢º¤ÅÍ¸¦ ±¸ÇÒ ¼ö ÀÖ´Ù.
+    //ê¸¸ì´ë¥¼ ë‘ë°°ë¡œ ëŠ˜ë¦° ì •ì‚¬ì˜ë²¡í„°ì— ì¡°ëª… ë°©í–¥ë²¡í„°ë¥¼ ë”í•˜ë©´(== ì¡°ëª… ì—­ë°©í–¥ë²¡í„°ë¥¼ ë¹¼ë©´) ë¹›ì˜ ë°˜ì‚¬ê°ë²¡í„°ë¥¼ êµ¬í•  ìˆ˜ ìžˆë‹¤.
     
     //float3 negEyeDirection = normalize(_lightingData.viewSpaceCameraPosition_.xyz - _viewSpaceFocusPosition.xyz);
-    //Ä«¸Þ¶óÀ§Ä¡º¤ÅÍ¿¡¼­ ³»°¡ º¸°íÀÖ´Â ÁöÁ¡ÀÇ À§Ä¡º¤ÅÍ¸¦ »©¼­ ½Ã¼± ¿ª¹æÇâ º¤ÅÍ¸¦ ±¸ÇÑ´Ù
+    //ì¹´ë©”ë¼ìœ„ì¹˜ë²¡í„°ì—ì„œ ë‚´ê°€ ë³´ê³ ìžˆëŠ” ì§€ì ì˜ ìœ„ì¹˜ë²¡í„°ë¥¼ ë¹¼ì„œ ì‹œì„  ì—­ë°©í–¥ ë²¡í„°ë¥¼ êµ¬í•œë‹¤
     
     float3 negEyeDirection = normalize(-_viewSpaceFocusPosition.xyz);
-    //ºä°ø°£¿¡¼­ÀÇ Ä«¸Þ¶ó À§Ä¡´Â (0, 0, 0)ÀÌ¹Ç·Î ³»°¡ º¸°íÀÖ´Â À§Ä¡º¤ÅÍÀÇ ¿ªº¤ÅÍ == ½Ã¼± ¿ª¹æÇâ º¤ÅÍ.
+    //ë·°ê³µê°„ì—ì„œì˜ ì¹´ë©”ë¼ ìœ„ì¹˜ëŠ” (0, 0, 0)ì´ë¯€ë¡œ ë‚´ê°€ ë³´ê³ ìžˆëŠ” ìœ„ì¹˜ë²¡í„°ì˜ ì—­ë²¡í„° == ì‹œì„  ì—­ë°©í–¥ ë²¡í„°.
     
     float brightness = saturate(dot(reflectionAngle, negEyeDirection));
-    //½Ã¼± ¿ª¹æÇâº¤ÅÍ¿Í ºûÀÇ ¹Ý»ç°¢º¤ÅÍ¸¦ ³»ÀûÇÏ¸é Ä«¸Þ¶ó¿¡ µé¾î¿À´Â Á¤¹Ý»ç±¤ÀÇ ¹à±â¸¦ ±¸ÇÒ ¼ö ÀÖ´Ù.
-    //saturate(): ÁÖ¾îÁø °ªÀÌ 0º¸´Ù ÀÛÀ¸¸é 0À¸·Î, 1º¸´Ù Å©¸é 1·Î ¹Ù²Ù´Â ÇÔ¼ö.
+    //ì‹œì„  ì—­ë°©í–¥ë²¡í„°ì™€ ë¹›ì˜ ë°˜ì‚¬ê°ë²¡í„°ë¥¼ ë‚´ì í•˜ë©´ ì¹´ë©”ë¼ì— ë“¤ì–´ì˜¤ëŠ” ì •ë°˜ì‚¬ê´‘ì˜ ë°ê¸°ë¥¼ êµ¬í•  ìˆ˜ ìžˆë‹¤.
+    //saturate(): ì£¼ì–´ì§„ ê°’ì´ 0ë³´ë‹¤ ìž‘ìœ¼ë©´ 0ìœ¼ë¡œ, 1ë³´ë‹¤ í¬ë©´ 1ë¡œ ë°”ê¾¸ëŠ” í•¨ìˆ˜.
     
     float4 specularLight = _lightingData.mainLightColor_ * pow(brightness, _lightingData.specularLightExponent_);
-    //Á¤¹Ý»ç±¤ÀÇ ¹à±â¸¦ Á¶¸í Á¤º¸ÀÇ specularLightExponent_¸¸Å­ Á¦°öÇÑ °ªÀ» ÁÖ Á¶¸í±¤ »ö»ó°ª¿¡ °öÇÑ´Ù.
-    //0~1 ¹üÀ§ °ª¿¡ Á¦°öÀ» ¸¹ÀÌ ÇÒ ¼ö·Ï 0¿¡ °¡±î¿î °ªÀº Á¦°öºñ·Ê·Î 0¿¡ ´õ °¡±î¿î ÀÛÀº ¼ýÀÚ°¡ µÇ¼­ 
-    // °á°úÀûÀ¸·Î Á¤¹Ý»ç±¤ Àû¿ë ¸éÀûÀÌ ÁÙ¾îµå´Â°Í °°Àº È¿°ú¸¦ º¸¿©ÁØ´Ù.
+    //ì •ë°˜ì‚¬ê´‘ì˜ ë°ê¸°ë¥¼ ì¡°ëª… ì •ë³´ì˜ specularLightExponent_ë§Œí¼ ì œê³±í•œ ê°’ì„ ì£¼ ì¡°ëª…ê´‘ ìƒ‰ìƒê°’ì— ê³±í•œë‹¤.
+    //0~1 ë²”ìœ„ ê°’ì— ì œê³±ì„ ë§Žì´ í•  ìˆ˜ë¡ 0ì— ê°€ê¹Œìš´ ê°’ì€ ì œê³±ë¹„ë¡€ë¡œ 0ì— ë” ê°€ê¹Œìš´ ìž‘ì€ ìˆ«ìžê°€ ë˜ì„œ 
+    // ê²°ê³¼ì ìœ¼ë¡œ ì •ë°˜ì‚¬ê´‘ ì ìš© ë©´ì ì´ ì¤„ì–´ë“œëŠ”ê²ƒ ê°™ì€ íš¨ê³¼ë¥¼ ë³´ì—¬ì¤€ë‹¤.
     
     specularLight.a = 1.f;
-    //¾î¶² »ö»ó°ªÀÌ ³ª¿Àµç ¾ËÆÄ°ªÀÌ 0ÀÌ¸é º¸ÀÌÁö ¾ÊÀ¸¹Ç·Î ¾ËÆÄ°ªÀ» 1·Î °­Á¦°íÁ¤.
+    //ì–´ë–¤ ìƒ‰ìƒê°’ì´ ë‚˜ì˜¤ë“  ì•ŒíŒŒê°’ì´ 0ì´ë©´ ë³´ì´ì§€ ì•Šìœ¼ë¯€ë¡œ ì•ŒíŒŒê°’ì„ 1ë¡œ ê°•ì œê³ ì •.
     
     return specularLight * _lightingData.specularLightRatio_;
 }
 
 float4 CalAllSpecularLight(
-    float4 _viewSpaceFocusPosition, //³»°¡ º¸°íÀÖ´Â ¿ÀºêÁ§Æ® Ç¥¸éÀÇ ºä°ø°£ ±âÁØ À§Ä¡ º¤ÅÍ.
-    float4 _viewSpaceNormalVector //ºä°ø°£¿¡¼­ÀÇ ¿ÀºêÁ§Æ® Ç¥¸é Æ¯Á¤ ÁöÁ¡ÀÇ ¹ý¼±º¤ÅÍ. ºû °è»êÀº ºä°ø°£¿¡¼­ ÁøÇàÇØ¾ß ÇÑ´Ù.
+    float4 _viewSpaceFocusPosition, //ë‚´ê°€ ë³´ê³ ìžˆëŠ” ì˜¤ë¸Œì íŠ¸ í‘œë©´ì˜ ë·°ê³µê°„ ê¸°ì¤€ ìœ„ì¹˜ ë²¡í„°.
+    float4 _viewSpaceNormalVector //ë·°ê³µê°„ì—ì„œì˜ ì˜¤ë¸Œì íŠ¸ í‘œë©´ íŠ¹ì • ì§€ì ì˜ ë²•ì„ ë²¡í„°. ë¹› ê³„ì‚°ì€ ë·°ê³µê°„ì—ì„œ ì§„í–‰í•´ì•¼ í•œë‹¤.
 )
 {
     float4 specularLight = (float4) 0.f;
@@ -113,39 +113,39 @@ float4 CalAllSpecularLight(
     }
     
     specularLight.a = 1.f;
-    //¾î¶² »ö»ó°ªÀÌ ³ª¿Àµç ¾ËÆÄ°ªÀÌ 0ÀÌ¸é º¸ÀÌÁö ¾ÊÀ¸¹Ç·Î ¾ËÆÄ°ªÀ» 1·Î °­Á¦°íÁ¤.
+    //ì–´ë–¤ ìƒ‰ìƒê°’ì´ ë‚˜ì˜¤ë“  ì•ŒíŒŒê°’ì´ 0ì´ë©´ ë³´ì´ì§€ ì•Šìœ¼ë¯€ë¡œ ì•ŒíŒŒê°’ì„ 1ë¡œ ê°•ì œê³ ì •.
     
     return specularLight;
 }
 
-//³­¹Ý»ç±¤ °è»ê.
+//ë‚œë°˜ì‚¬ê´‘ ê³„ì‚°.
 float4 CalDiffuseLight(
-    float4 _viewSpaceNormalVector, //ºä°ø°£¿¡¼­ÀÇ ¿ÀºêÁ§Æ® Ç¥¸é Æ¯Á¤ ÁöÁ¡ÀÇ ¹ý¼±º¤ÅÍ. ºû °è»êÀº ºä°ø°£¿¡¼­ ÁøÇàÇØ¾ß ÇÑ´Ù.
-    LightingData _lightingData //Á¶¸íµ¥ÀÌÅÍ.
+    float4 _viewSpaceNormalVector, //ë·°ê³µê°„ì—ì„œì˜ ì˜¤ë¸Œì íŠ¸ í‘œë©´ íŠ¹ì • ì§€ì ì˜ ë²•ì„ ë²¡í„°. ë¹› ê³„ì‚°ì€ ë·°ê³µê°„ì—ì„œ ì§„í–‰í•´ì•¼ í•œë‹¤.
+    LightingData _lightingData //ì¡°ëª…ë°ì´í„°.
 )
 {
-    //¶÷º£¸£Æ®(Lambert) ³­¹Ý»ç±¤ °è»ê ¸ðµ¨. 
-    // ¶÷º£¸£Æ® ¸ðµ¨Àº Ä«¸Þ¶ó°¡ ¾î´À À§Ä¡¿¡ ÀÖµç »ó°ü¾øÀÌ, Ä«¸Þ¶ó¿¡ µé¾î¿À´Â ¸ðµç ³­¹Ý»ç±¤ÀÇ ¾çÀº °°´Ù°í °¡Á¤ÇÑ´Ù.
-    // ±×·¡¼­ ¾Ë¾Æ¾ß ÇÏ´Â º¯¼ö´Â Á¶¸íÀÇ À§Ä¡¿Í Á¶»ç°¢(ºûÀÇ ÀÔ»ç°¢), ¿ÀºêÁ§Æ® Ç¥¸é¿¡¼­ ¼öÁ÷À¸·Î »¸¾î³ª¿Â ¹ý¼±º¤ÅÍ ÀÌ ¼¼°¡Áö¸¸ ÇÊ¿äÇÏ´Ù.
+    //ëžŒë² ë¥´íŠ¸(Lambert) ë‚œë°˜ì‚¬ê´‘ ê³„ì‚° ëª¨ë¸. 
+    // ëžŒë² ë¥´íŠ¸ ëª¨ë¸ì€ ì¹´ë©”ë¼ê°€ ì–´ëŠ ìœ„ì¹˜ì— ìžˆë“  ìƒê´€ì—†ì´, ì¹´ë©”ë¼ì— ë“¤ì–´ì˜¤ëŠ” ëª¨ë“  ë‚œë°˜ì‚¬ê´‘ì˜ ì–‘ì€ ê°™ë‹¤ê³  ê°€ì •í•œë‹¤.
+    // ê·¸ëž˜ì„œ ì•Œì•„ì•¼ í•˜ëŠ” ë³€ìˆ˜ëŠ” ì¡°ëª…ì˜ ìœ„ì¹˜ì™€ ì¡°ì‚¬ê°(ë¹›ì˜ ìž…ì‚¬ê°), ì˜¤ë¸Œì íŠ¸ í‘œë©´ì—ì„œ ìˆ˜ì§ìœ¼ë¡œ ë»—ì–´ë‚˜ì˜¨ ë²•ì„ ë²¡í„° ì´ ì„¸ê°€ì§€ë§Œ í•„ìš”í•˜ë‹¤.
     
    
     
     
     float4 normalVector = normalize(_viewSpaceNormalVector);
-    //¿ÀºêÁ§Æ® Ç¥¸é ¹ý¼±º¤ÅÍ¸¦ ´Ù½ÃÇÑ¹ø Á¤±ÔÈ­.
+    //ì˜¤ë¸Œì íŠ¸ í‘œë©´ ë²•ì„ ë²¡í„°ë¥¼ ë‹¤ì‹œí•œë²ˆ ì •ê·œí™”.
     
     float4 lightingInvDirection = normalize(_lightingData.inverseViewLightingDirection_);
-    //Á¶¸í ¿ª¹æÇâº¤ÅÍ¸¦ ´Ù½ÃÇÑ¹ø Á¤±ÔÈ­.
+    //ì¡°ëª… ì—­ë°©í–¥ë²¡í„°ë¥¼ ë‹¤ì‹œí•œë²ˆ ì •ê·œí™”.
     
     float4 diffuseLight = max(0.f, dot(normalVector.xyz, lightingInvDirection.xyz));
-    //³»Àû°ªÀº -1~1 ¹üÀ§·Î ³ª¿À´Âµ¥ ³»Àû°ªÀÌ À½¼ö°¡ µÇ¸é °ªÀ» ±×³É 0À¸·Î ¹Ù²ã¹ö¸°´Ù.
-    //max(): ÁÖ¾îÁø µÎ °ª Áß Å« °ª¸¸ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö.
+    //ë‚´ì ê°’ì€ -1~1 ë²”ìœ„ë¡œ ë‚˜ì˜¤ëŠ”ë° ë‚´ì ê°’ì´ ìŒìˆ˜ê°€ ë˜ë©´ ê°’ì„ ê·¸ëƒ¥ 0ìœ¼ë¡œ ë°”ê¿”ë²„ë¦°ë‹¤.
+    //max(): ì£¼ì–´ì§„ ë‘ ê°’ ì¤‘ í° ê°’ë§Œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
     
     diffuseLight *= _lightingData.mainLightColor_;
-    //ÁÖ Á¶¸í±¤ »ö»ó°ª Àû¿ë.
+    //ì£¼ ì¡°ëª…ê´‘ ìƒ‰ìƒê°’ ì ìš©.
     
     diffuseLight.a = 1.f;
-    //¾î¶² »ö»ó°ªÀÌ ³ª¿Àµç ¾ËÆÄ°ªÀÌ 0ÀÌ¸é º¸ÀÌÁö ¾ÊÀ¸¹Ç·Î ¾ËÆÄ°ªÀ» 1·Î °íÁ¤.
+    //ì–´ë–¤ ìƒ‰ìƒê°’ì´ ë‚˜ì˜¤ë“  ì•ŒíŒŒê°’ì´ 0ì´ë©´ ë³´ì´ì§€ ì•Šìœ¼ë¯€ë¡œ ì•ŒíŒŒê°’ì„ 1ë¡œ ê³ ì •.
     
     return diffuseLight * _lightingData.diffuseLightRatio_;
 }
@@ -159,12 +159,12 @@ float4 CalAllDiffuseLight(float4 _viewSpaceNormal)
         diffuseLighting += CalDiffuseLight(_viewSpaceNormal, lightings_[i]);
     }
     diffuseLighting.a = 1.f;
-    //¾î¶² »ö»ó°ªÀÌ ³ª¿Àµç ¾ËÆÄ°ªÀÌ 0ÀÌ¸é º¸ÀÌÁö ¾ÊÀ¸¹Ç·Î ¾ËÆÄ°ªÀ» 1·Î °íÁ¤.
+    //ì–´ë–¤ ìƒ‰ìƒê°’ì´ ë‚˜ì˜¤ë“  ì•ŒíŒŒê°’ì´ 0ì´ë©´ ë³´ì´ì§€ ì•Šìœ¼ë¯€ë¡œ ì•ŒíŒŒê°’ì„ 1ë¡œ ê³ ì •.
     
     return diffuseLighting;
 }
 
-//ÁÖº¯±¤ °è»ê.
+//ì£¼ë³€ê´‘ ê³„ì‚°.
 float4 CalAmbientLight(LightingData _lightingData)
 {
     return _lightingData.ambientLightColor_ * _lightingData.ambientLightRatio_;
@@ -180,7 +180,7 @@ float4 CalAllAmbientLight()
     }
     
     ambientLight.a = 1.f;
-    //¾î¶² »ö»ó°ªÀÌ ³ª¿Àµç ¾ËÆÄ°ªÀÌ 0ÀÌ¸é º¸ÀÌÁö ¾ÊÀ¸¹Ç·Î ¾ËÆÄ°ªÀ» 1·Î °íÁ¤.
+    //ì–´ë–¤ ìƒ‰ìƒê°’ì´ ë‚˜ì˜¤ë“  ì•ŒíŒŒê°’ì´ 0ì´ë©´ ë³´ì´ì§€ ì•Šìœ¼ë¯€ë¡œ ì•ŒíŒŒê°’ì„ 1ë¡œ ê³ ì •.
     
     return ambientLight;
 }

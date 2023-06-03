@@ -5,20 +5,20 @@
 
 struct Input
 {
-    //¸â¹öº¯¼ö°£ ¼ø¼­´Â ÀüÇô Áß¿äÇÏÁö ¾Ê´Ù. ÀÎÇ² ·¹ÀÌ¾Æ¿ôÀ» ÅëÇØ °¢ ¸â¹öº¯¼öÀÇ ¿ÀÇÁ¼Â°ª¸¸ Á¤È®È÷ ¾Ë·ÁÁÖ¸é µÈ´Ù?
-    //´ÜÁö ÆíÀÇ¸¦ À§ÇØ¼­ µÇµµ·Ï ¼ø¼­¸¦ ÁöÅ³ »ÓÀÌ´Ù?
+    //ë©¤ë²„ë³€ìˆ˜ê°„ ìˆœì„œëŠ” ì „í˜€ ì¤‘ìš”í•˜ì§€ ì•Šë‹¤. ì¸í’‹ ë ˆì´ì•„ì›ƒì„ í†µí•´ ê° ë©¤ë²„ë³€ìˆ˜ì˜ ì˜¤í”„ì…‹ê°’ë§Œ ì •í™•ížˆ ì•Œë ¤ì£¼ë©´ ëœë‹¤?
+    //ë‹¨ì§€ íŽ¸ì˜ë¥¼ ìœ„í•´ì„œ ë˜ë„ë¡ ìˆœì„œë¥¼ ì§€í‚¬ ë¿ì´ë‹¤?
     float4 localPosition_ : POSITION;
     float4 texcoord_ : TEXCOORD;
 };
 
 struct Output
 {
-    //½Ã¸ÇÆ½(semantic). GPU¿¡°Ô ¾Ë·ÁÁÖ´Â, ÇØ´ç °ªÀÇ Á¾·ù. GPU°¡ ÀÚµ¿À¸·Î Ã³¸®ÇÒ ¼ö ÀÖ´Â Á¾·ùÀÇ °ªÀÌ¸é ÀÚµ¿À¸·Î Ã³¸®ÇØÁØ´Ù.
-    float4 wvpPosition_ : SV_Position; //SV_Position: ÀÌ ½Ã¸ÇÆ½À» ÅëÇØ¼­¸¸ ¹öÅØ½º ¼ÎÀÌ´õ¿¡¼­ º¯°æµÈ Á¤Á¡ À§Ä¡¸¦ ·¡½ºÅÍ¶óÀÌÀú·Î Àü´ÞÇÒ ¼ö ÀÖ´Ù.
-    //SV´Â System-Value semanticÀÇ ¾àÀÚ·Î, DirectX10¿¡¼­ºÎÅÍ µµÀÔµÈ, ¿ëµµ°¡ Á¤ÇØÁ® ÀÖ¾î¼­ GPU°¡ ÀÚµ¿À¸·Î Ã³¸®ÇÏ´Â ½Ã¸ÇÆ½ Å°¿öµåÀÌ´Ù.
+    //ì‹œë§¨í‹±(semantic). GPUì—ê²Œ ì•Œë ¤ì£¼ëŠ”, í•´ë‹¹ ê°’ì˜ ì¢…ë¥˜. GPUê°€ ìžë™ìœ¼ë¡œ ì²˜ë¦¬í•  ìˆ˜ ìžˆëŠ” ì¢…ë¥˜ì˜ ê°’ì´ë©´ ìžë™ìœ¼ë¡œ ì²˜ë¦¬í•´ì¤€ë‹¤.
+    float4 wvpPosition_ : SV_Position; //SV_Position: ì´ ì‹œë§¨í‹±ì„ í†µí•´ì„œë§Œ ë²„í…ìŠ¤ ì…°ì´ë”ì—ì„œ ë³€ê²½ëœ ì •ì  ìœ„ì¹˜ë¥¼ ëž˜ìŠ¤í„°ë¼ì´ì €ë¡œ ì „ë‹¬í•  ìˆ˜ ìžˆë‹¤.
+    //SVëŠ” System-Value semanticì˜ ì•½ìžë¡œ, DirectX10ì—ì„œë¶€í„° ë„ìž…ëœ, ìš©ë„ê°€ ì •í•´ì ¸ ìžˆì–´ì„œ GPUê°€ ìžë™ìœ¼ë¡œ ì²˜ë¦¬í•˜ëŠ” ì‹œë§¨í‹± í‚¤ì›Œë“œì´ë‹¤.
     float4 viewPosition_ : POSITION1;
-    float4 projSpacePosition_ : POSITION2; //Åõ¿µº¯È¯ ÀÌÈÄÀÇ ¿ÀºêÁ§Æ® À§Ä¡. 
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
+    float4 projSpacePosition_ : POSITION2; //íˆ¬ì˜ë³€í™˜ ì´í›„ì˜ ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜. 
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ìž„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ìž„ë§.
 };
 
 cbuffer AtlasData : register(b1)
@@ -30,15 +30,15 @@ cbuffer AtlasData : register(b1)
 
 Output DeferredRendering_VS(Input _input)
 {
-    Output result = (Output) 0; //OutputÅ¸ÀÔ º¯¼ö newOutputÀ» 0À¸·Î ÃÊ±âÈ­.
-    //HLSLÀÇ °æ¿ì¿¡´Â ´ëºÎºÐÀÇ »óÈ²¿¡¼­ Çüº¯È¯ÀÌ °¡´ÉÇÏ´Ù.
+    Output result = (Output) 0; //Outputíƒ€ìž… ë³€ìˆ˜ newOutputì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”.
+    //HLSLì˜ ê²½ìš°ì—ëŠ” ëŒ€ë¶€ë¶„ì˜ ìƒí™©ì—ì„œ í˜•ë³€í™˜ì´ ê°€ëŠ¥í•˜ë‹¤.
 
     _input.localPosition_ += pivotPos_;
-    //Á¤Á¡µéÀÇ ·ÎÄÃÁÂÇ¥¸¦ ÇÇº¿ º¸Á¤Ä¡¸¸Å­ º¯°æÇÑ´Ù.
+    //ì •ì ë“¤ì˜ ë¡œì»¬ì¢Œí‘œë¥¼ í”¼ë´‡ ë³´ì •ì¹˜ë§Œí¼ ë³€ê²½í•œë‹¤.
     
     result.viewPosition_ = mul(_input.localPosition_, worldViewMatrix_);
     
-    result.wvpPosition_ = mul(_input.localPosition_, worldViewProjectionMatrix_); //WVPÇà·Ä Àû¿ë.
+    result.wvpPosition_ = mul(_input.localPosition_, worldViewProjectionMatrix_); //WVPí–‰ë ¬ ì ìš©.
     
     result.projSpacePosition_ = result.wvpPosition_;
     

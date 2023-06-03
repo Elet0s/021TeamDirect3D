@@ -1,6 +1,6 @@
 #pragma once
 #include "Skill.h"
-//(¹üÀ§) ÁÖº¯ÀÇ Àû¿¡°Ô ÇÇÇØ Ä¡¸íÅ¸°¡ ¹ß»ıÇÏÁö ¾ÊÀ½
+//(ë²”ìœ„) ì£¼ë³€ì˜ ì ì—ê²Œ í”¼í•´ ì¹˜ëª…íƒ€ê°€ ë°œìƒí•˜ì§€ ì•ŠìŒ
 class DeathAura : public Skill
 {
 public:
@@ -40,7 +40,7 @@ private:
 	GameEngineCollision* deathAuraCollision02_;
 	GameEngineCollision* deathAuraCollision03_;
 
-	WeaponInfo deathAuraWeaponInfo_;//¹«±â ½ºÅÈ
+	WeaponInfo deathAuraWeaponInfo_;//ë¬´ê¸° ìŠ¤íƒ¯
 
 
 	float atkTimer_;

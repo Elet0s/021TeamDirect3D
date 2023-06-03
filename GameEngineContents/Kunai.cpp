@@ -18,7 +18,7 @@ Kunai::Kunai()
 	consecutiveCounter_(0),
 	consecutiveAngle_(0)
 {
-	name_ = "Äí³ªÀÌ";
+	name_ = "ì¿ ë‚˜ì´";
 	SetName(std::string_view("Kunai"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 7;
@@ -34,7 +34,7 @@ void Kunai::Init()
 	std::string sAttackSpeed = std::to_string(kunaiWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(kunaiWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 
 
-	etc_ = "ÀÚ½ÅÀÇ ÁÖº¯À¸·Î\nÄí³ªÀÌ¸¦ ´øÁı´Ï´Ù\n" + sDamege + "ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°İ\nÅõ»çÃ¼ " + std::to_string(kunaiWeaponInfo_.weaponProjectileNum_) + " °³ ";
+	etc_ = "ìì‹ ì˜ ì£¼ë³€ìœ¼ë¡œ\nì¿ ë‚˜ì´ë¥¼ ë˜ì§‘ë‹ˆë‹¤\n" + sDamege + "ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²©\níˆ¬ì‚¬ì²´ " + std::to_string(kunaiWeaponInfo_.weaponProjectileNum_) + " ê°œ ";
 }
 void Kunai::Effect()
 {
@@ -74,8 +74,8 @@ void Kunai::StateSet()
 
 	kunaiWeaponInfo_.weponConsecutiveAtkNum_ = 1;
 
-	
-	
+
+
 }
 
 void Kunai::Shoothing(float _deltaTime)

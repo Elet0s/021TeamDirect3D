@@ -1,6 +1,6 @@
 #pragma once
 
-// Ό³Έν :
+// μ„¤λª… :
 class SoulCardUI;
 class SoulCardSelectBox : public GameEngineActor
 {
@@ -14,13 +14,13 @@ public:
 	SoulCardSelectBox(SoulCardSelectBox&& _Other) noexcept = delete;
 	SoulCardSelectBox& operator=(const SoulCardSelectBox& _Other) = delete;
 	SoulCardSelectBox& operator=(SoulCardSelectBox&& _Other) noexcept = delete;
-	
+
 	void DrawWeapon();
 protected:
 
 private:
 	SoulCardUI* Cards[3];
-	
+
 
 	void Start() override;
 	void Update(float _deltaTime) override;

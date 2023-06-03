@@ -6,17 +6,17 @@ class GameEngineStructuredBuffer : public GameEngineRes<GameEngineStructuredBuff
 	//
 
 	friend GameEngineRes<GameEngineStructuredBuffer>;
-	//GameEngineStructuredBuffer Å¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ı.
+	//GameEngineStructuredBuffer í´ë˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìë¥¼ GameEngineResí´ë˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
 
 	friend class GameEngineStructuredBufferSetter;
-	//GameEngineStructuredBufferSetter Å¬·¡½º¿¡¼­ ¸®¼Ò½º¼¼ÆÃ ÇÔ¼ö¸¦ È£ÃâÇÏ±â À§ÇØ ÇÁ·»µå.
+	//GameEngineStructuredBufferSetter í´ë˜ìŠ¤ì—ì„œ ë¦¬ì†ŒìŠ¤ì„¸íŒ… í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ê¸° ìœ„í•´ í”„ë Œë“œ.
 
 private:
 	GameEngineStructuredBuffer();
 	~GameEngineStructuredBuffer();
-	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ı¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ı¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
-	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹İµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
-	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµĞ´Ù.
+	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ì/ì†Œë©¸ìë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
+	//ì´ í”„ë ˆì„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
+	//í”„ë¡œê·¸ë¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ë˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
 
 	GameEngineStructuredBuffer(const GameEngineStructuredBuffer& _other) = delete;
 	GameEngineStructuredBuffer(GameEngineStructuredBuffer&& _other) noexcept = delete;
@@ -24,7 +24,7 @@ private:
 	GameEngineStructuredBuffer& operator=(const GameEngineStructuredBuffer&& _other) = delete;
 
 public:
-	//ÀÌ¸§±ÔÄ¢: ÀÎ½ºÅÏ½Ì¿ë ±¸Á¶È­¹öÆÛ´Â Inst_·Î ½ÃÀÛ.
+	//ì´ë¦„ê·œì¹™: ì¸ìŠ¤í„´ì‹±ìš© êµ¬ì¡°í™”ë²„í¼ëŠ” Inst_ë¡œ ì‹œì‘.
 
 	static GameEngineStructuredBuffer* Create(
 		const std::string_view& _name,
@@ -41,13 +41,13 @@ public:
 private:
 	void ChangeData(const void* _data, size_t _byteWidth);
 
-	//±¸Á¶È­ ¹öÆÛ¸¦ Á¤Á¡¼ÎÀÌ´õ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
+	//êµ¬ì¡°í™” ë²„í¼ë¥¼ ì •ì ì…°ì´ë”ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 	void VSSetShaderResource(int _bindPoint);
 
-	//±¸Á¶È­ ¹öÆÛ¸¦ ÄÄÇ»Æ®¼ÎÀÌ´õ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
+	//êµ¬ì¡°í™” ë²„í¼ë¥¼ ì»´í“¨íŠ¸ì…°ì´ë”ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 	void CSSetShaderResource(int _bindPoint);
 
-	//±¸Á¶È­ ¹öÆÛ¸¦ ÇÈ¼¿¼ÎÀÌ´õ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
+	//êµ¬ì¡°í™” ë²„í¼ë¥¼ í”½ì…€ì…°ì´ë”ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 	void PSSetShaderResource(int _bindPoint);
 
 
@@ -56,7 +56,7 @@ private:
 
 public:
 	static void ResourceDestroy();
-	//GameEngineResÀÇ ¸®¼Ò½ºÀúÀå ÄÁÅ×ÀÌ³Ê¸¦ ¾µ ¼ö ¾øÀ¸¹Ç·Î Àü¿ë ÄÁÅ×ÀÌ³Ê¸¦ µû·Î ¸¸µé°í ¸®¼Ò½º »ı¼º°ú »èÁ¦ ÀıÂ÷µµ ´Ù½Ã ¸¸µé¾î¾ß ÇÑ´Ù.
+	//GameEngineResì˜ ë¦¬ì†ŒìŠ¤ì €ì¥ ì»¨í…Œì´ë„ˆë¥¼ ì“¸ ìˆ˜ ì—†ìœ¼ë¯€ë¡œ ì „ìš© ì»¨í…Œì´ë„ˆë¥¼ ë”°ë¡œ ë§Œë“¤ê³  ë¦¬ì†ŒìŠ¤ ìƒì„±ê³¼ ì‚­ì œ ì ˆì°¨ë„ ë‹¤ì‹œ ë§Œë“¤ì–´ì•¼ í•œë‹¤.
 
 
 public:
@@ -67,7 +67,7 @@ public:
 
 protected:
 	static GameEngineStructuredBuffer* CreateNamedRes(const std::string_view& _name, size_t _byteWidth);
-	//GameEngineResÀÇ ¸®¼Ò½ºÀúÀå ÄÁÅ×ÀÌ³Ê¸¦ ¾µ ¼ö ¾øÀ¸¹Ç·Î Àü¿ë ÄÁÅ×ÀÌ³Ê¸¦ µû·Î ¸¸µé°í ¸®¼Ò½º »ı¼º°ú »èÁ¦ ÀıÂ÷µµ ´Ù½Ã ¸¸µé¾î¾ß ÇÑ´Ù.
+	//GameEngineResì˜ ë¦¬ì†ŒìŠ¤ì €ì¥ ì»¨í…Œì´ë„ˆë¥¼ ì“¸ ìˆ˜ ì—†ìœ¼ë¯€ë¡œ ì „ìš© ì»¨í…Œì´ë„ˆë¥¼ ë”°ë¡œ ë§Œë“¤ê³  ë¦¬ì†ŒìŠ¤ ìƒì„±ê³¼ ì‚­ì œ ì ˆì°¨ë„ ë‹¤ì‹œ ë§Œë“¤ì–´ì•¼ í•œë‹¤.
 
 
 private:
@@ -85,19 +85,19 @@ private:
 
 private:
 	static std::map<std::string, std::map<size_t, GameEngineStructuredBuffer*>> allStructuredBuffers_;
-	//ÀÏ¹İÀûÀÎ GameEngineRes<ResType> ¸®¼Ò½ºµé°ú´Â ´Ù¸£°Ô ÀÌ¸§°ú Å©±â¸¦ µÑ ´Ù ÀúÀåÇÏ°í ´ëÁ¶ÇØºÁ¾ß ÇÏ¹Ç·Î 
-	// ÀÌÁß¸Ê ±¸Á¶ÀÇ Àü¿ë ÄÁÅ×ÀÌ³Ê¿¡ ÀúÀåÇÏ°í »èÁ¦ÇÒ¶§µµ µû·Î »èÁ¦ÇÑ´Ù.
+	//ì¼ë°˜ì ì¸ GameEngineRes<ResType> ë¦¬ì†ŒìŠ¤ë“¤ê³¼ëŠ” ë‹¤ë¥´ê²Œ ì´ë¦„ê³¼ í¬ê¸°ë¥¼ ë‘˜ ë‹¤ ì €ì¥í•˜ê³  ëŒ€ì¡°í•´ë´ì•¼ í•˜ë¯€ë¡œ 
+	// ì´ì¤‘ë§µ êµ¬ì¡°ì˜ ì „ìš© ì»¨í…Œì´ë„ˆì— ì €ì¥í•˜ê³  ì‚­ì œí• ë•Œë„ ë”°ë¡œ ì‚­ì œí•œë‹¤.
 
 	ID3D11Buffer* structuredBuffer_;
 	D3D11_BUFFER_DESC structuredBufferDesc_;
 	D3D11_SHADER_BUFFER_DESC shaderBufferDesc_;
-	D3D11_MAPPED_SUBRESOURCE mappedPtrInCPU_;	//±¸Á¶È­¹öÆÛ¿¡ ÇØ´çÇÏ´Â GPU ³» ¸Ş¸ğ¸®¿µ¿ª¿¡ ¸ÅÇÎ½ÃÅ³ CPU ¸Ş¸ğ¸®ÀÇ ÁÖ¼Ò°ª.
+	D3D11_MAPPED_SUBRESOURCE mappedPtrInCPU_;	//êµ¬ì¡°í™”ë²„í¼ì— í•´ë‹¹í•˜ëŠ” GPU ë‚´ ë©”ëª¨ë¦¬ì˜ì—­ì— ë§¤í•‘ì‹œí‚¬ CPU ë©”ëª¨ë¦¬ì˜ ì£¼ì†Œê°’.
 
-	ID3D11ShaderResourceView* shaderResourceView_;	//¼ÎÀÌ´õ ¸®¼Ò½ººä.
-	//±¸Á¶È­¹öÆÛ´Â ¹öÆÛÁö¸¸ ¼ÎÀÌ´õ ¸®¼Ò½º·Î ºĞ·ùµÇ¹Ç·Î ¼ÎÀÌ´õ ¸®¼Ò½º ºä°¡ ÇÊ¿äÇÏ´Ù.
+	ID3D11ShaderResourceView* shaderResourceView_;	//ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë·°.
+	//êµ¬ì¡°í™”ë²„í¼ëŠ” ë²„í¼ì§€ë§Œ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë¡œ ë¶„ë¥˜ë˜ë¯€ë¡œ ì…°ì´ë” ë¦¬ì†ŒìŠ¤ ë·°ê°€ í•„ìš”í•˜ë‹¤.
 
-	size_t count_;	//µ¥ÀÌÅÍ °³¼ö.
-	size_t dataSize_;		//µ¥ÀÌÅÍ ´ÜÀ§ Å©±â.
-	bool isInitialized_;	//ÃÊ±âÈ­ ¿©ºÎ.
+	size_t count_;	//ë°ì´í„° ê°œìˆ˜.
+	size_t dataSize_;		//ë°ì´í„° ë‹¨ìœ„ í¬ê¸°.
+	bool isInitialized_;	//ì´ˆê¸°í™” ì—¬ë¶€.
 };
 

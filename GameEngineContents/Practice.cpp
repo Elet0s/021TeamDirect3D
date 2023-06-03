@@ -4,7 +4,7 @@
 
 Practice::Practice() 
 {
-	name_ = "¿¬½À";
+	name_ = "ì—°ìŠµ";
 	SetName(std::string_view("Practice"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 10;
@@ -22,10 +22,10 @@ void Practice::Init()
 	std::string sAttackMultiple = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
 	std::string sAttackSpeedNext = std::to_string(PlayerPInfo_.attackSpeed_Result + 1.0f).substr(0, std::to_string(PlayerPInfo_.attackSpeed_Result + 1.0f).find(".")) + "%";
 	std::string sAttackMultipleNext = std::to_string(PlayerPInfo_.atkMultiple_Result + 3.0f).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result + 3.f).find(".")) + "%";
-	
-	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " °ø°Ý ¼Óµµ\n"
-			+ sAttackMultiple + " -> " + sAttackMultipleNext + " ÇÇÇØ ¹è¼ö ";
-	
+
+	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " ê³µê²© ì†ë„\n"
+		+ sAttackMultiple + " -> " + sAttackMultipleNext + " í”¼í•´ ë°°ìˆ˜ ";
+
 }
 
 void Practice::Effect()

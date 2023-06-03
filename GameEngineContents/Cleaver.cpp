@@ -18,7 +18,7 @@ Cleaver::Cleaver()
 	consecutiveCounter_(0),
 	consecutiveAngle_(0)
 {
-	name_ = "´ë°Ë";
+	name_ = "ëŒ€ê²€";
 	SetName(std::string_view("Cleaver"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 7;
@@ -33,8 +33,8 @@ void Cleaver::Init()
 	std::string sDamege = std::to_string(static_cast<int>(floor(cleaverWeaponInfo_.weaponAtk_)));
 	std::string sAttackSpeed = std::to_string(cleaverWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(cleaverWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 
-	
-	etc_ = "Á¶ÁØµÈ ¹æÇâÀ¸·Î\n ÀûÀ» ¹Ð¾î³»´Â\n¾àÇÏÁö¸¸ Å«\nÅõ»çÃ¼¸¦ ¹ß»çÇÕ´Ï´Ù\n" + sDamege + "ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°Ý ";
+
+	etc_ = "ì¡°ì¤€ëœ ë°©í–¥ìœ¼ë¡œ\n ì ì„ ë°€ì–´ë‚´ëŠ”\nì•½í•˜ì§€ë§Œ í°\níˆ¬ì‚¬ì²´ë¥¼ ë°œì‚¬í•©ë‹ˆë‹¤\n" + sDamege + "ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²© ";
 }
 void Cleaver::Effect()
 {
@@ -57,7 +57,7 @@ void Cleaver::StateSet()
 	cleaverWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100; ;
 	cleaverWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
 
-	
+
 }
 
 void Cleaver::Start()
