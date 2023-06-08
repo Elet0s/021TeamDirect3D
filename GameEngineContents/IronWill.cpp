@@ -4,7 +4,7 @@
 
 IronWill::IronWill() 
 {
-	name_ = "ºÒ±¼ÀÇ ÀÇÁö";
+	name_ = "ë¶ˆêµ´ì˜ ì˜ì§€";
 	SetName(std::string_view("IronWill"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 4;
@@ -21,7 +21,7 @@ void IronWill::Init()
 	std::string sMaxHp = std::to_string(PlayerInfo_.hpMax_Result).substr(0, std::to_string(PlayerInfo_.hpMax_Result).find(".") );
 	std::string sMaxHpNext = std::to_string(PlayerInfo_.hpMax_Result + 35.f).substr(0, std::to_string(PlayerInfo_.hpMax_Result + 35.f).find("."));
 
-	etc_ = sMaxHp + "% -> " + sMaxHpNext + "% ÃÖ´ë Ã¼·Â ";
+	etc_ = sMaxHp + "% -> " + sMaxHpNext + "% ìµœëŒ€ ì²´ë ¥ ";
 }
 
 void IronWill::Effect()

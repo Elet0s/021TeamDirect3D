@@ -4,7 +4,7 @@
 
 Agility::Agility() 
 {
-	name_ = "¹ÎÃ¸ÇÔ";
+	name_ = "ë¯¼ì²©í•¨";
 	SetName(std::string_view("Agility"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 4;
@@ -24,7 +24,7 @@ void Agility::Init()
 
 
 
-	etc_ = sSpeed + " -> " + sSpeedNext + " ÀÌµ¿ ¼Óµµ ";
+	etc_ = sSpeed + " -> " + sSpeedNext + " ì´ë™ ì†ë„ ";
 }
 
 void Agility::Effect()
@@ -32,5 +32,5 @@ void Agility::Effect()
 	currentlevel_ += 1;
 	PlayerPassiveInfo* PlayerPInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	PlayerPInfo_->speed_Per += 10.f;
-	
+
 }

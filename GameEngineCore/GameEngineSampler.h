@@ -3,22 +3,22 @@
 
 class GameEngineSampler : public GameEngineRes<GameEngineSampler>
 {
-	//»ùÇÃ·¯ °ü¸® Å¬·¡½º.
-	//»ùÇÃ¸µ: ÅØ½ºÃÄ È®´ë/Ãà¼Ò, ¹Ó¸ÅÇÎ µîÀÇ ¿¬»ê °úÁ¤ Áß°£¿¡ ÇÈ¼¿ »ö»ó ¼±ÅÃÀÇ ±âÁØÀÌ µÇ¾îÁÙ ÅØ¼¿ÀÌ ¾ø´Â »óÈ²¿¡¼­
-	// Æ¯Á¤ ÇÈ¼¿ÀÇ »öÀ» ÀÓÀÇ·Î Á¤ÇØ¾ß ÇÒ ¶§, ÇØ´ç ÇÈ¼¿ÀÇ »öÀ» ¾î¶»°Ô °áÁ¤ÇÒ Áö¿¡ ´ëÇÑ ¿É¼ÇÀ» Á¤ÇÏ´Â °Í.
+	//ìƒ˜í”ŒëŸ¬ ê´€ë¦¬ í´ëž˜ìŠ¤.
+	//ìƒ˜í”Œë§: í…ìŠ¤ì³ í™•ëŒ€/ì¶•ì†Œ, ë°‰ë§¤í•‘ ë“±ì˜ ì—°ì‚° ê³¼ì • ì¤‘ê°„ì— í”½ì…€ ìƒ‰ìƒ ì„ íƒì˜ ê¸°ì¤€ì´ ë˜ì–´ì¤„ í…ì…€ì´ ì—†ëŠ” ìƒí™©ì—ì„œ
+	// íŠ¹ì • í”½ì…€ì˜ ìƒ‰ì„ ìž„ì˜ë¡œ ì •í•´ì•¼ í•  ë•Œ, í•´ë‹¹ í”½ì…€ì˜ ìƒ‰ì„ ì–´ë–»ê²Œ ê²°ì •í•  ì§€ì— ëŒ€í•œ ì˜µì…˜ì„ ì •í•˜ëŠ” ê²ƒ.
 
 	friend GameEngineRes<GameEngineSampler>;
-	//GameEngineSampler Å¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ý.\
+	//GameEngineSampler í´ëž˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìžë¥¼ GameEngineResí´ëž˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.\
 
 	friend class GameEngineSamplerSetter;
-	//GameEngineSamplerSetter Å¬·¡½º¿¡¼­ ¸®¼Ò½º¼¼ÆÃ ÇÔ¼öµéÀ» È£ÃâÇÏ±â À§ÇØ ÇÁ·»µå.
+	//GameEngineSamplerSetter í´ëž˜ìŠ¤ì—ì„œ ë¦¬ì†ŒìŠ¤ì„¸íŒ… í•¨ìˆ˜ë“¤ì„ í˜¸ì¶œí•˜ê¸° ìœ„í•´ í”„ë Œë“œ.
 
 private:
 	GameEngineSampler();
 	~GameEngineSampler();
-	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ý¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ý¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
-	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹Ýµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
-	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµÐ´Ù.
+	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ìž/ì†Œë©¸ìžë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
+	//ì´ í”„ë ˆìž„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìžê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
+	//í”„ë¡œê·¸ëž¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ëž˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
 
 	GameEngineSampler(const GameEngineSampler& _other) = delete;
 	GameEngineSampler(GameEngineSampler&& _other) noexcept = delete;
@@ -41,24 +41,24 @@ private:
 
 
 	//typedef struct D3D11_SAMPLER_DESC
-	//	D3D11_FILTER Filter;					ÅØ½ºÃÄ¸¦ »ùÇÃ¸µÇÒ¶§ Àû¿ëÇÒ ÇÊÅÍ.
-	//	D3D11_TEXTURE_ADDRESS_MODE AddressU;	UVÁÂÇ¥ 0~1¹üÀ§¸¦ °¡·Î·Î ¹þ¾î³­ ¸Þ½¬¿¡ ´ëÇÑ Ã³¸® ¹æ¹ý.
-	//	D3D11_TEXTURE_ADDRESS_MODE AddressV;	UVÁÂÇ¥ 0~1¹üÀ§¸¦ ¼¼·Î·Î ¹þ¾î³­ ¸Þ½¬¿¡ ´ëÇÑ Ã³¸® ¹æ¹ý.
+	//	D3D11_FILTER Filter;					í…ìŠ¤ì³ë¥¼ ìƒ˜í”Œë§í• ë•Œ ì ìš©í•  í•„í„°.
+	//	D3D11_TEXTURE_ADDRESS_MODE AddressU;	UVì¢Œí‘œ 0~1ë²”ìœ„ë¥¼ ê°€ë¡œë¡œ ë²—ì–´ë‚œ ë©”ì‰¬ì— ëŒ€í•œ ì²˜ë¦¬ ë°©ë²•.
+	//	D3D11_TEXTURE_ADDRESS_MODE AddressV;	UVì¢Œí‘œ 0~1ë²”ìœ„ë¥¼ ì„¸ë¡œë¡œ ë²—ì–´ë‚œ ë©”ì‰¬ì— ëŒ€í•œ ì²˜ë¦¬ ë°©ë²•.
 	//	D3D11_TEXTURE_ADDRESS_MODE AddressW;	??
-	//	FLOAT MipLODBias;						¹Ó¸Ê ½ÃÀÛ ¿ÀÇÁ¼Â??
+	//	FLOAT MipLODBias;						ë°‰ë§µ ì‹œìž‘ ì˜¤í”„ì…‹??
 	// 
-	//	UINT MaxAnisotropy;						ºñµî¹æ¼º ÇÊÅÍ¸µ ÃÖ´ë°ª. 1~16 ¹üÀ§·Î °¡´É. 1Àº ºñµî¹æ¼º ÇÊÅÍ¸µ »ç¿ë ¾ÈÇÔ.
-	//ÃÖ´ë°ªÀÎ 16À¸·Î ÇÏ¸é 1/16·Î Ãà¼ÒµÈ ¹Ó¸Ê ÀÌ¹ÌÁö±îÁö ¸¸µé¾î¼­ »ç¿ëÇÑ´Ù´Â °Ç°¡??
-	//Filter°¡ D3D11_FILTER_ANISOTROPIC, D3D11_FILTER_COMPARISON_ANISOTROPICÀÏ¶§¸¸ Àû¿ë.
+	//	UINT MaxAnisotropy;						ë¹„ë“±ë°©ì„± í•„í„°ë§ ìµœëŒ€ê°’. 1~16 ë²”ìœ„ë¡œ ê°€ëŠ¥. 1ì€ ë¹„ë“±ë°©ì„± í•„í„°ë§ ì‚¬ìš© ì•ˆí•¨.
+	//ìµœëŒ€ê°’ì¸ 16ìœ¼ë¡œ í•˜ë©´ 1/16ë¡œ ì¶•ì†Œëœ ë°‰ë§µ ì´ë¯¸ì§€ê¹Œì§€ ë§Œë“¤ì–´ì„œ ì‚¬ìš©í•œë‹¤ëŠ” ê±´ê°€??
+	//Filterê°€ D3D11_FILTER_ANISOTROPIC, D3D11_FILTER_COMPARISON_ANISOTROPICì¼ë•Œë§Œ ì ìš©.
 	// 
-	//	D3D11_COMPARISON_FUNC ComparisonFunc;	»ùÇÃ¸µ µ¥ÀÌÅÍ¸¦ ±âÁ¸ »ùÇÃ¸µ µ¥ÀÌÅÍ¿Í ºñ±³ÇÒ ¶§ Àû¿ëµÇ´Â ¿É¼Ç??
-	//Filter°¡ D3D11_FILTER_COMPARISON_~ À¸·Î ½ÃÀÛÇÒ ¶§¸¸ Àû¿ë.
+	//	D3D11_COMPARISON_FUNC ComparisonFunc;	ìƒ˜í”Œë§ ë°ì´í„°ë¥¼ ê¸°ì¡´ ìƒ˜í”Œë§ ë°ì´í„°ì™€ ë¹„êµí•  ë•Œ ì ìš©ë˜ëŠ” ì˜µì…˜??
+	//Filterê°€ D3D11_FILTER_COMPARISON_~ ìœ¼ë¡œ ì‹œìž‘í•  ë•Œë§Œ ì ìš©.
 	// 
-	//	FLOAT BorderColor[4];					rgba 0~1 ¹üÀ§³»¿¡¼­ °æ°è¼± »ö»óÀ» Á¤ÇÑ´Ù.
-	//AddressU, AddressV, AddressW Áß D3D11_TEXTURE_ADDRESS_BORDER¸¦ ¼±ÅÃÇÑ °÷¿¡¸¸ Àû¿ëµÈ´Ù.
+	//	FLOAT BorderColor[4];					rgba 0~1 ë²”ìœ„ë‚´ì—ì„œ ê²½ê³„ì„  ìƒ‰ìƒì„ ì •í•œë‹¤.
+	//AddressU, AddressV, AddressW ì¤‘ D3D11_TEXTURE_ADDRESS_BORDERë¥¼ ì„ íƒí•œ ê³³ì—ë§Œ ì ìš©ëœë‹¤.
 	// 
-	//	FLOAT MinLOD;							¹Ó¸Ê ·¹º§ ¹üÀ§ ÃÖÀú Á¦ÇÑ. 0ÀÌ¸é °¡Àå Å©°í »ó¼¼ÇÑ ¹Ó¸Ê ·¹º§.
-	//	FLOAT MaxLOD;							¹Ó¸Ê ·¹º§ ¹üÀ§ ÃÖ°í Á¦ÇÑ. 0ÀÌ¸é °¡Àå Å©°í »ó¼¼ÇÑ ¹Ó¸Ê ·¹º§. ¹Ýµå½Ã MinLODº¸´Ù Å©°Å³ª °°Àº °ªÀÌ¾î¾ß ÇÑ´Ù.
+	//	FLOAT MinLOD;							ë°‰ë§µ ë ˆë²¨ ë²”ìœ„ ìµœì € ì œí•œ. 0ì´ë©´ ê°€ìž¥ í¬ê³  ìƒì„¸í•œ ë°‰ë§µ ë ˆë²¨.
+	//	FLOAT MaxLOD;							ë°‰ë§µ ë ˆë²¨ ë²”ìœ„ ìµœê³  ì œí•œ. 0ì´ë©´ ê°€ìž¥ í¬ê³  ìƒì„¸í•œ ë°‰ë§µ ë ˆë²¨. ë°˜ë“œì‹œ MinLODë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì€ ê°’ì´ì–´ì•¼ í•œë‹¤.
 	//											
 	//} 	D3D11_SAMPLER_DESC;
 

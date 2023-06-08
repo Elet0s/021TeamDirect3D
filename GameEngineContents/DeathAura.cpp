@@ -10,7 +10,7 @@ DeathAura::DeathAura()
 	, addRadian_(0)
 	, atkTimer_(0)
 {
-	name_ = "Á×À½ÀÇ ¿À¶ó";
+	name_ = "ì£½ìŒì˜ ì˜¤ë¼";
 	SetName(std::string_view("DeathAura"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 7;
@@ -29,7 +29,7 @@ void DeathAura::Init()
 	std::string sAttackSpeed = std::to_string(deathAuraWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(deathAuraWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 	std::string sRange = std::to_string(deathAuraWeaponInfo_.weaponSize_).substr(0, std::to_string(deathAuraWeaponInfo_.weaponSize_).find(".") + 3);
 
-	etc_ = "¹üÀ§ ³»ÀÇ ±ÙÃ³ Àû¿¡°Ô Áö¼Ó\nÇÇÇØ¸¦ ÀÔÈü´Ï´Ù\nÄ¡¸íÅ¸°¡ ¹ß»ıÇÏÁö ¾Ê½À´Ï´Ù\n" + sDamege + " ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°İ\n¹üÀ§ "
+	etc_ = "ë²”ìœ„ ë‚´ì˜ ê·¼ì²˜ ì ì—ê²Œ ì§€ì†\ní”¼í•´ë¥¼ ì…í™ë‹ˆë‹¤\nì¹˜ëª…íƒ€ê°€ ë°œìƒí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n" + sDamege + " ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²©\në²”ìœ„ "
 		+ sRange + "m ";
 }
 
@@ -43,7 +43,7 @@ void  DeathAura::StateSet()
 	PlayerInfo* Info_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerPassiveInfo* PInfo_ = &Player::GetPlayerInst().GetPlayerPassiveInfo();
 	deathAuraWeaponInfo_.weaponAtk_ = 1.f + (1.f * currentlevel_) * (Info_->atk_ * PInfo_->atkMultiple_Result / 100.f);
-	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (Info_->attackSpeed_ * PInfo_->attackSpeed_Result / 100.f);//1ÃÊ¸¶´Ù
+	deathAuraWeaponInfo_.weaponAtkSpeed_ = 0.3f * (Info_->attackSpeed_ * PInfo_->attackSpeed_Result / 100.f);//1ì´ˆë§ˆë‹¤
 
 	deathAuraWeaponInfo_.weaponPassAtk_ = 0;
 	deathAuraWeaponInfo_.weaponPassNum_ = 2;
@@ -204,9 +204,9 @@ void DeathAura::End()
 
 }
 
-CollisionReturn DeathAura::DeatAuraToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other) // ¹ß»çÃ¼ ºÎµúÈ÷¸é
+CollisionReturn DeathAura::DeatAuraToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other) // ë°œì‚¬ì²´ ë¶€ë”ªíˆë©´
 {
 	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
-	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= deathAuraWeaponInfo_.weaponAtk_; //µ¥¹ÌÁöÁÜ
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= deathAuraWeaponInfo_.weaponAtk_; //ë°ë¯¸ì§€ì¤Œ
 	return CollisionReturn::Continue;
 }

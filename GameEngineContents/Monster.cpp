@@ -10,7 +10,7 @@
 #include "NormalSkeleton.h"
 #include "Red.h"
 #include "RedFlyingEyes.h"
-		 
+
 #include "BlackEyes.h"
 #include "GoblinLivesey.h"
 #include "Green.h"
@@ -75,7 +75,7 @@ void Monster::ReserveMonsters(GameEngineLevel* _thisLevel, size_t _allMonsterCou
 	allMonstersRenderer_->SetSampler("POINTCLAMP", "POINTCLAMP");
 
 	//allShadowsRenderer_ = _thisLevel->GetCamera(CameraOrder::MidCamera)->GetInstancingRenderer("1-AllShadowsRenderer");
-	//¹ÌµåÄ«¸Ş¶ó¿¡¼­ ±×¸²ÀÚ°¡ ±×·ÁÁöÁö ¾Ê´Â ¿øÀÎ Ã£¾Æ³¾ °Í.
+	//ë¯¸ë“œì¹´ë©”ë¼ì—ì„œ ê·¸ë¦¼ìê°€ ê·¸ë ¤ì§€ì§€ ì•ŠëŠ” ì›ì¸ ì°¾ì•„ë‚¼ ê²ƒ.
 	allShadowsRenderer_ = &_thisLevel->GetMainCamera()->GetInstanceRenderer("1-AllShadowsRenderer");
 	allShadowsRenderer_->Initialize(_allMonsterCount, "Rect", "DeferredInstanceShadowRendering", true);
 	allShadowsRenderer_->SetTexture2DArray("Inst_Textures", "Monster");
@@ -121,46 +121,46 @@ void Monster::CreateMonsterWithEnum(GameEngineLevel* _thisLevel, MonsterType _mo
 {
 	switch (_monsterType)
 	{
-	case MonsterType::Brown:
-		Monster::CreateMonster<Brown>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::FlyingEyes:
-		Monster::CreateMonster<FlyingEyes>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::NormalGoblin:
-		Monster::CreateMonster<NormalGoblin>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::NormalKobold:
-		Monster::CreateMonster<NormalKobold>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::NormalSkeleton:
-		Monster::CreateMonster<NormalSkeleton>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::Red:
-		Monster::CreateMonster<Red>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::RedFlyingEyes:
-		Monster::CreateMonster<RedFlyingEyes>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::BlackEyes:
-		Monster::CreateMonster<BlackEyes>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::GoblinLivesey:
-		Monster::CreateMonster<GoblinLivesey>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::Green:
-		Monster::CreateMonster<Green>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::KoboldLivesey:
-		Monster::CreateMonster<KoboldLivesey>(_thisLevel, _monsterCount);
-		break;
-	case MonsterType::Boss:
-		Monster::CreateMonster<Boss01>(_thisLevel, _monsterCount);
-		break;
+		case MonsterType::Brown:
+			Monster::CreateMonster<Brown>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::FlyingEyes:
+			Monster::CreateMonster<FlyingEyes>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::NormalGoblin:
+			Monster::CreateMonster<NormalGoblin>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::NormalKobold:
+			Monster::CreateMonster<NormalKobold>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::NormalSkeleton:
+			Monster::CreateMonster<NormalSkeleton>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::Red:
+			Monster::CreateMonster<Red>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::RedFlyingEyes:
+			Monster::CreateMonster<RedFlyingEyes>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::BlackEyes:
+			Monster::CreateMonster<BlackEyes>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::GoblinLivesey:
+			Monster::CreateMonster<GoblinLivesey>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::Green:
+			Monster::CreateMonster<Green>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::KoboldLivesey:
+			Monster::CreateMonster<KoboldLivesey>(_thisLevel, _monsterCount);
+			break;
+		case MonsterType::Boss:
+			Monster::CreateMonster<Boss01>(_thisLevel, _monsterCount);
+			break;
 
-	default:
-		MsgBoxAssert("¾ÆÁ÷ ÁØºñµÇÁö ¾ÊÀº ÇüÅÂÀÇ ¸ó½ºÅÍÀÔ´Ï´Ù.");
-		break;
+		default:
+			MsgBoxAssert("ì•„ì§ ì¤€ë¹„ë˜ì§€ ì•Šì€ í˜•íƒœì˜ ëª¬ìŠ¤í„°ì…ë‹ˆë‹¤.");
+			break;
 	}
 }
 
@@ -175,13 +175,13 @@ CollisionReturn Monster::MonsterToMonsterCollision(GameEngineCollision* _This, G
 		colCheakToMonster_ = true;
 	}
 	Monster* A = dynamic_cast<Monster*>(_Other->GetActor());
-	pushToMonsterVector.x = mx_ - A->mx_;// Äİ¸®Àü ´ë»ó¸ó½ºÅÍ°¡ this ¸ó½ºÅÍ¿¡°Ô ¿À´Â ¹æÇâº¤ÅÍ
+	pushToMonsterVector.x = mx_ - A->mx_;// ì½œë¦¬ì „ ëŒ€ìƒëª¬ìŠ¤í„°ê°€ this ëª¬ìŠ¤í„°ì—ê²Œ ì˜¤ëŠ” ë°©í–¥ë²¡í„°
 	pushToMonsterVector.y = my_ - A->my_;
 
-	monsterReactionVector_ = (A->monsterResultVector_ + monsterResultVector_) / 2;//ÇÃ·¹ÀÌ¾îÇÑÅ×°¡´Â ÃÖÁ¾º¤ÅÍ
+	monsterReactionVector_ = (A->monsterResultVector_ + monsterResultVector_) / 2;//í”Œë ˆì´ì–´í•œí…Œê°€ëŠ” ìµœì¢…ë²¡í„°
 
-	monsterReactionVector_ += pushToMonsterVector.Normalize3D() * 120;// ¸ó½ºÅÍ³¢¸® ºÎµúÇûÀ»¶§ ¸ó½ºÅÍ³¢¸® ¹Ğ¾î³»´Â Èû
-	
+	monsterReactionVector_ += pushToMonsterVector.Normalize3D() * 120;// ëª¬ìŠ¤í„°ë¼ë¦¬ ë¶€ë”ªí˜”ì„ë•Œ ëª¬ìŠ¤í„°ë¼ë¦¬ ë°€ì–´ë‚´ëŠ” í˜
+
 	return CollisionReturn::Continue;
 }
 
@@ -208,42 +208,42 @@ CollisionReturn Monster::MonsterToPlayerCollision(GameEngineCollision* _This, Ga
 	float PY = abs(pushVector_.y);
 	if (mx_ < px_)
 	{
-		if (my_ < py_) // ¸ó½ºÅÍ°¡ 3»çºĞ¸é
+		if (my_ < py_) // ëª¬ìŠ¤í„°ê°€ 3ì‚¬ë¶„ë©´
 		{
-			if ( PX > PY)// ÇÃ·¹ÀÌ¾î°¡ xÃàÀÌµ¿
+			if ( PX > PY)// í”Œë ˆì´ì–´ê°€ xì¶•ì´ë™
 			{
 				pushVector_.y -= 100.f;
 			}
-			else if (PX < PY)//ÇÃ·¹ÀÌ¾î°¡ yÃàÀÌµ¿
+			else if (PX < PY)//í”Œë ˆì´ì–´ê°€ yì¶•ì´ë™
 			{
 				pushVector_.x -= 100.f;
 			}
-			else if (PX == PY && PX != 0)//ÇÃ·¹ÀÌ¾î°¡ ´ë°¢¼± ÀÌµ¿
+			else if (PX == PY && PX != 0)//í”Œë ˆì´ì–´ê°€ ëŒ€ê°ì„  ì´ë™
 			{
 				float PC = abs(range_.x) / abs(range_.y);
 				if (PC > 1)
 				{
-				
+
 					pushVector_.x -= 200.f;
 				}
 				else if (PC < 1)
-				
+
 				{
 					pushVector_.y -= 200.f;
 				}
 			}
 		}
-		else if (my_ > py_)// ¸ó½ºÅÍ°¡ 1»çºĞ¸é 
+		else if (my_ > py_)// ëª¬ìŠ¤í„°ê°€ 1ì‚¬ë¶„ë©´ 
 		{
-			if (PX > PY)// ÇÃ·¹ÀÌ¾î°¡ xÃàÀÌµ¿
+			if (PX > PY)// í”Œë ˆì´ì–´ê°€ xì¶•ì´ë™
 			{
 				pushVector_.y += 100.f;
 			}
-			else if (PX < PY)//ÇÃ·¹ÀÌ¾î°¡ yÃàÀÌµ¿
+			else if (PX < PY)//í”Œë ˆì´ì–´ê°€ yì¶•ì´ë™
 			{
 				pushVector_.x -= 100.f;
 			}
-			else if (PX == PY && PX !=0)//ÇÃ·¹ÀÌ¾î°¡ ´ë°¢¼± ÀÌµ¿
+			else if (PX == PY && PX !=0)//í”Œë ˆì´ì–´ê°€ ëŒ€ê°ì„  ì´ë™
 			{
 				float PC = abs(range_.x) / abs(range_.y);
 				if (PC > 1)
@@ -251,7 +251,7 @@ CollisionReturn Monster::MonsterToPlayerCollision(GameEngineCollision* _This, Ga
 					pushVector_.x -= 200.f;
 				}
 				else if (PC < 1)
-				
+
 				{
 					pushVector_.y += 200.f;
 				}
@@ -260,17 +260,17 @@ CollisionReturn Monster::MonsterToPlayerCollision(GameEngineCollision* _This, Ga
 	}
 	else if (mx_ > px_)
 	{
-		if (my_ > py_)// ¸ó½ºÅÍ°¡ 2»çºĞ¸é 
+		if (my_ > py_)// ëª¬ìŠ¤í„°ê°€ 2ì‚¬ë¶„ë©´ 
 		{
-			if (PX > PY)// ÇÃ·¹ÀÌ¾î°¡ xÃàÀÌµ¿
+			if (PX > PY)// í”Œë ˆì´ì–´ê°€ xì¶•ì´ë™
 			{
 				pushVector_.y += 100.f;
 			}
-			else if (PX < PY)//ÇÃ·¹ÀÌ¾î°¡ yÃàÀÌµ¿
+			else if (PX < PY)//í”Œë ˆì´ì–´ê°€ yì¶•ì´ë™
 			{
 				pushVector_.x += 100.f;
 			}
-			else if (PX == PY && PX != 0)//ÇÃ·¹ÀÌ¾î°¡ ´ë°¢¼± ÀÌµ¿
+			else if (PX == PY && PX != 0)//í”Œë ˆì´ì–´ê°€ ëŒ€ê°ì„  ì´ë™
 			{
 				float PC = abs(range_.x) / abs(range_.y);
 				if (PC > 1)
@@ -278,23 +278,23 @@ CollisionReturn Monster::MonsterToPlayerCollision(GameEngineCollision* _This, Ga
 					pushVector_.x += 200.f;
 				}
 				else if (PC < 1)
-				
+
 				{
 					pushVector_.y += 200.f;
 				}
 			}
 		}
-		else if (my_ < py_)// ¸ó½ºÅÍ°¡ 4»çºĞ¸é 
+		else if (my_ < py_)// ëª¬ìŠ¤í„°ê°€ 4ì‚¬ë¶„ë©´ 
 		{
-			if (PX > PY)// ÇÃ·¹ÀÌ¾î°¡ xÃàÀÌµ¿
+			if (PX > PY)// í”Œë ˆì´ì–´ê°€ xì¶•ì´ë™
 			{
 				pushVector_.y -= 100.f;
 			}
-			else if (PX < PY)//ÇÃ·¹ÀÌ¾î°¡ yÃàÀÌµ¿
+			else if (PX < PY)//í”Œë ˆì´ì–´ê°€ yì¶•ì´ë™
 			{
 				pushVector_.x += 100.f;
 			}
-			else if (PX == PY && PX != 0)//ÇÃ·¹ÀÌ¾î°¡ ´ë°¢¼± ÀÌµ¿
+			else if (PX == PY && PX != 0)//í”Œë ˆì´ì–´ê°€ ëŒ€ê°ì„  ì´ë™
 			{
 				float PC = abs(range_.x) / abs(range_.y);
 				if (PC > 1)
@@ -302,7 +302,7 @@ CollisionReturn Monster::MonsterToPlayerCollision(GameEngineCollision* _This, Ga
 					pushVector_.x += 200.f;
 				}
 				else if (PC < 1)
-			
+
 				{
 					pushVector_.y -= 200.f;
 				}
@@ -310,18 +310,18 @@ CollisionReturn Monster::MonsterToPlayerCollision(GameEngineCollision* _This, Ga
 		}
 	}
 
- // ¸ó½ºÅÍ´Â µÚ·Î
-	
+	// ëª¬ìŠ¤í„°ëŠ” ë’¤ë¡œ
+
 	return CollisionReturn::Continue;
 }
 
 void Monster::Chaseplayer(float _deltaTime)
 { 
-	mx_ = GetTransform().GetWorldPosition().x;//¸ó½ºÅÍ ÁÂÇ¥
+	mx_ = GetTransform().GetWorldPosition().x;//ëª¬ìŠ¤í„° ì¢Œí‘œ
 	my_ = GetTransform().GetWorldPosition().y;
-	px_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().x; //ÇÃ·¹ÀÌ¾î ÁÂÇ¥
+	px_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().x; //í”Œë ˆì´ì–´ ì¢Œí‘œ
 	py_ = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;
-	range_.x = px_ - mx_;//ÇÃ·¹ÀÌ¾î¿Í ¸ó½ºÅÍ x°Å¸®Â÷ÀÌ
+	range_.x = px_ - mx_;//í”Œë ˆì´ì–´ì™€ ëª¬ìŠ¤í„° xê±°ë¦¬ì°¨ì´
 	range_.y = py_ - my_;
 
 	if (range_.x < 0 && true == isToRight_)
@@ -340,25 +340,25 @@ void Monster::Chaseplayer(float _deltaTime)
 	}
 
 
-	playerRange_ = static_cast<float>(sqrt(pow(range_.x,2) + pow(range_.y,2))); // ¸ó½ºÅÍ¿Í ÇÃ·¹ÀÌ¾î »çÀÌÀÇ °Å¸®ÀÇ Àı´ë°ª
+	playerRange_ = static_cast<float>(sqrt(pow(range_.x,2) + pow(range_.y,2))); // ëª¬ìŠ¤í„°ì™€ í”Œë ˆì´ì–´ ì‚¬ì´ì˜ ê±°ë¦¬ì˜ ì ˆëŒ€ê°’
 
-	monsterBaseVector_ = (range_.Normalize3D() * monsterInfo_->baseSpeed_); //Ãæµ¹ ¾ÈÇßÀ» ¶§ ±âº» ¹æÇâ,Èû ÇÕÄ¡´Â ºÎºĞ
+	monsterBaseVector_ = (range_.Normalize3D() * monsterInfo_->baseSpeed_); //ì¶©ëŒ ì•ˆí–ˆì„ ë•Œ ê¸°ë³¸ ë°©í–¥,í˜ í•©ì¹˜ëŠ” ë¶€ë¶„
 	monsterResultVector_ = monsterBaseVector_;
 
-	if (colCheakToPlayer_ == true)//ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹½Ã º¤ÅÍ ÇÕ»êÇÏ´ÂºÎºĞ
+	if (colCheakToPlayer_ == true)//í”Œë ˆì´ì–´ì™€ ì¶©ëŒì‹œ ë²¡í„° í•©ì‚°í•˜ëŠ”ë¶€ë¶„
 	{
-		reactionVector_ = -(monsterBaseVector_);// ¸ó½ºÅÍ°¡ ÇÃ·¹ÀÌ¾î¿¡ Á¢ÃËÇßÀ¸´Ï ÈûÀÇ ¹İÀÛ¿ë 
+		reactionVector_ = -(monsterBaseVector_);// ëª¬ìŠ¤í„°ê°€ í”Œë ˆì´ì–´ì— ì ‘ì´‰í–ˆìœ¼ë‹ˆ í˜ì˜ ë°˜ì‘ìš© 
 		monsterResultVector_ = monsterBaseVector_ + (reactionVector_ *1.3f ) + pushToMonsterVector;
-		monsterResultVector_ += pushVector_; // ÇÃ·¹ÀÌ¾îÀÇ ¿òÁ÷ÀÓÀ¸·Î ¹Ğ¸®´Â Èû
+		monsterResultVector_ += pushVector_; // í”Œë ˆì´ì–´ì˜ ì›€ì§ì„ìœ¼ë¡œ ë°€ë¦¬ëŠ” í˜
 		colCheakToPlayer_ = false;
 	}
-	else if (colCheakToMonster_ == true)//¸ó½ºÅÍ¿Í Ãæµ¹½Ã º¤ÅÍ ÇÕ»êÇÏ´ÂºÎºĞ
+	else if (colCheakToMonster_ == true)//ëª¬ìŠ¤í„°ì™€ ì¶©ëŒì‹œ ë²¡í„° í•©ì‚°í•˜ëŠ”ë¶€ë¶„
 	{
 		monsterResultVector_ = monsterReactionVector_;
 		colCheakToMonster_ = false;
 	}
 
-	GetTransform().SetWorldMove(monsterResultVector_ * _deltaTime); //ÀÌµ¿
+	GetTransform().SetWorldMove(monsterResultVector_ * _deltaTime); //ì´ë™
 	monsterReactionVector_ = 0;
 
 	if (monsterInfo_->monsterType_ == MonsterType::Boss)
@@ -373,7 +373,7 @@ void Monster::Chaseplayer(float _deltaTime)
 void Monster::Update(float _deltaTime)
 {
 	atkDeltaTime_ += _deltaTime;
-	
+
 	monsterAnimation_.Update(_deltaTime);
 	allMonstersRenderer_->GetInstancingUnit(this->instancingUnitIndex_).SetWorldPosition(
 		this->GetTransform().GetWorldPosition()
@@ -439,166 +439,166 @@ void Monster::HpCheak()
 
 		switch (monsterInfo_->monsterType_)
 		{
-		case MonsterType::Brown:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
-			}
-			break;
-		case MonsterType::FlyingEyes:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
-			}
-			break;
-		case MonsterType::NormalGoblin:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Goblin_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Goblin_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Goblin_Hit_C.wav");
-			}
-			break;
-		case MonsterType::NormalKobold:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
-			}
-			else 
-			{
-				GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
-			}
-			break;
-		case MonsterType::NormalSkeleton:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Skeleton_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Skeleton_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Skeleton_Hit_C.wav");
-			}
-			break;
-		case MonsterType::Red:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
-			}
-			break;
-		case MonsterType::RedFlyingEyes:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
-			}
-			break;
-		case MonsterType::BlackEyes:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
-			}
-			break;
-		case MonsterType::GoblinLivesey:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Goblin_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Goblin_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Goblin_Hit_C.wav");
-			}
-			break;
-		case MonsterType::Green:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
-			}
-			break;
-		case MonsterType::KoboldLivesey:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
-			}
-			else
-			{
-				GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
-			}
-			break;
-		case MonsterType::Boss:
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
-			}
-			else
-			{
-				GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
-			}
+			case MonsterType::Brown:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
+				}
+				break;
+			case MonsterType::FlyingEyes:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
+				}
+				break;
+			case MonsterType::NormalGoblin:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Goblin_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Goblin_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Goblin_Hit_C.wav");
+				}
+				break;
+			case MonsterType::NormalKobold:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
+				}
+				else 
+				{
+					GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
+				}
+				break;
+			case MonsterType::NormalSkeleton:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Skeleton_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Skeleton_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Skeleton_Hit_C.wav");
+				}
+				break;
+			case MonsterType::Red:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
+				}
+				break;
+			case MonsterType::RedFlyingEyes:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
+				}
+				break;
+			case MonsterType::BlackEyes:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Bat_Hit_C.wav");
+				}
+				break;
+			case MonsterType::GoblinLivesey:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Goblin_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Goblin_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Goblin_Hit_C.wav");
+				}
+				break;
+			case MonsterType::Green:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_A.wav");
+				}
+				else if (random_ == 2)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_B.wav");
+				}
+				else if (random_ == 3)
+				{
+					GameEngineSound::SoundPlayOneshot("Mushroom_Hit_C.wav");
+				}
+				break;
+			case MonsterType::KoboldLivesey:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
+				}
+				else
+				{
+					GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
+				}
+				break;
+			case MonsterType::Boss:
+				if (random_ == 1)
+				{
+					GameEngineSound::SoundPlayOneshot("Generic_Hit.wav");
+				}
+				else
+				{
+					GameEngineSound::SoundPlayOneshot("Generic_Hit_old.wav");
+				}
 		}
 		dropMonsterItemObject_->CreateItemObject(GetLevel(), this->GetTransform().GetWorldPosition());
 
-			switch (monsterInfo_->monsterType_)
-			{
+		switch (monsterInfo_->monsterType_)
+		{
 			case MonsterType::BlackEyes:
 				Player::GetPlayerInst().GetPlayerInfo().eliteTargetScore_ += 1;
 				break;
@@ -614,8 +614,8 @@ void Monster::HpCheak()
 			default:
 				Player::GetPlayerInst().GetPlayerInfo().targetScore_ += 1;
 				break;
-			}
-		
+		}
+
 
 		RelocationMonster();
 		monsterInfo_->hp_ = monsterInfo_->maxHp_;

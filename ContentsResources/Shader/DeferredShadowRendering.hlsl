@@ -29,18 +29,18 @@ Output DeferredShadowRendering_VS(Input _input)
     float4 vertexPos = _input.localPosition_;
     vertexPos += pivotPos_;
     vertexPos.x = (-sin(radians(lightingRotationY_)) * (vertexPos.y + 0.5f) + vertexPos.x) * vertexInversion_;
-    //¿ÀºêÁ§Æ®°¡ ÁÂ¿ì¹İÀüµÇ¸é -1À» °öÇØ¼­ ±×¸²ÀÚ´Â ´Ù½ÃÇÑ¹ø ÁÂ¿ì¹İÀü½ÃÅ²´Ù.
+    //ì˜¤ë¸Œì íŠ¸ê°€ ì¢Œìš°ë°˜ì „ë˜ë©´ -1ì„ ê³±í•´ì„œ ê·¸ë¦¼ìëŠ” ë‹¤ì‹œí•œë²ˆ ì¢Œìš°ë°˜ì „ì‹œí‚¨ë‹¤.
 
     vertexPos.y = tan(radians(lightingRotationX_)) * (vertexPos.y + 0.5f) - 0.5f;
     
-    result.wvpPosition_ = mul(vertexPos, worldViewProjectionMatrix_); //WVPÇà·Ä Àû¿ë.
+    result.wvpPosition_ = mul(vertexPos, worldViewProjectionMatrix_); //WVPí–‰ë ¬ ì ìš©.
     
     result.shadowPosition_ = result.wvpPosition_;
     
     if (-1 == vertexInversion_)
     {
         _input.texcoord_.x = 1.f - _input.texcoord_.x;
-        //¿ÀºêÁ§Æ®°¡ ÁÂ¿ì¹İÀüµÇ¸é texcoordµµ ÁÂ¿ì¹İÀüÇØ¼­ ±×·ÁÁö°Ô ÇÑ´Ù.
+        //ì˜¤ë¸Œì íŠ¸ê°€ ì¢Œìš°ë°˜ì „ë˜ë©´ texcoordë„ ì¢Œìš°ë°˜ì „í•´ì„œ ê·¸ë ¤ì§€ê²Œ í•œë‹¤.
     }
     
     result.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
@@ -60,8 +60,8 @@ float4 DeferredShadowRendering_PS(Output _input) : SV_Target0
     if (0.0f < sampledColor.a)
     {
         shadowDepth = float4(_input.shadowPosition_.z / _input.shadowPosition_.w, 0.f, 0.f, 1.f);
-        //±×¸²ÀÚÀÇ Åõ¿µ°ø°£ ³» z°ªÀ» ±íÀÌ°ªÀ¸·Î µ¤¾î ¾º¿î´Ù.
-        //»ç½Ç Á÷±³Åõ¿µÀÌ¸é w°¡ 1 °íÁ¤ÀÌ¹Ç·Î ÇÊ¿ä¾ø´Â ¿¬»êÀÌÁö¸¸ ¿ø±ÙÅõ¿µµµ »ç¿ëÇÏ¹Ç·Î w·Î ³ª´©¾îÁØ´Ù.//»ç½Ç Á÷±³Åõ¿µ Æ¯¼º»ó w°¡ 1 °íÁ¤ÀÌ¹Ç·Î º° ÀÇ¹Ì¾ø´Â ¿¬»êÀÌÁö¸¸ ±×·¡µµ ÇÑ´Ù.
+        //ê·¸ë¦¼ìì˜ íˆ¬ì˜ê³µê°„ ë‚´ zê°’ì„ ê¹Šì´ê°’ìœ¼ë¡œ ë®ì–´ ì”Œìš´ë‹¤.
+        //ì‚¬ì‹¤ ì§êµíˆ¬ì˜ì´ë©´ wê°€ 1 ê³ ì •ì´ë¯€ë¡œ í•„ìš”ì—†ëŠ” ì—°ì‚°ì´ì§€ë§Œ ì›ê·¼íˆ¬ì˜ë„ ì‚¬ìš©í•˜ë¯€ë¡œ wë¡œ ë‚˜ëˆ„ì–´ì¤€ë‹¤.//ì‚¬ì‹¤ ì§êµíˆ¬ì˜ íŠ¹ì„±ìƒ wê°€ 1 ê³ ì •ì´ë¯€ë¡œ ë³„ ì˜ë¯¸ì—†ëŠ” ì—°ì‚°ì´ì§€ë§Œ ê·¸ë˜ë„ í•œë‹¤.
     }
     else
     {

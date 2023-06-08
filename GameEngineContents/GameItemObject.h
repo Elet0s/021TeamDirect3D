@@ -38,6 +38,6 @@ private:
 
 	ItemObjectOrder itemObjectOrder_;
 	GameEngineTextureRenderer* itemObjectRenderer_;
-	GameEngineCollision* itemObjectCol_;//닿으면 효과발생
+	GameEngineCollision* itemObjectCol_;
 
 };

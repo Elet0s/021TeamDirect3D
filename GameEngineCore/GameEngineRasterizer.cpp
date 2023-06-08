@@ -29,12 +29,12 @@ void GameEngineRasterizer::Set()
 {
     if (nullptr == rasterizerState_)
     {
-        MsgBoxAssert("·¡½ºÅÍ¶óÀÌÀú ½ºÅ×ÀÌÆ®°¡ ¾ø½À´Ï´Ù.");
+        MsgBoxAssert("ë˜ìŠ¤í„°ë¼ì´ì € ìŠ¤í…Œì´íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
         return;
     }
 
     GameEngineDevice::GetDC()->RSSetState(rasterizerState_);
-    //·¡½ºÅÍ¶óÀÌÀú ½ºÅ×ÀÌÆ® °´Ã¼¸¦ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
+    //ë˜ìŠ¤í„°ë¼ì´ì € ìŠ¤í…Œì´íŠ¸ ê°ì²´ë¥¼ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 }
 
 void GameEngineRasterizer::CreateRasterizer(const D3D11_RASTERIZER_DESC& _desc)
@@ -46,7 +46,7 @@ void GameEngineRasterizer::CreateRasterizer(const D3D11_RASTERIZER_DESC& _desc)
         &rasterizerState_
     ))
     {
-        MsgBoxAssert("·¡½ºÅÍ¶óÀÌÀú ½ºÅ×ÀÌÆ® »ı¼º ½ÇÆĞ.");
+        MsgBoxAssert("ë˜ìŠ¤í„°ë¼ì´ì € ìŠ¤í…Œì´íŠ¸ ìƒì„± ì‹¤íŒ¨.");
         return;
     }
 }

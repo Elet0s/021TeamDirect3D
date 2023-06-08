@@ -1,6 +1,6 @@
 #pragma once
 #include"Skill.h"
-//ÀÚ½ÅÀÇ ¾ç¿·¿¡ ¹Ù¶÷ Ä®³¯À» ¼ÒÈ¯
+//ìì‹ ì˜ ì–‘ì˜†ì— ë°”ëŒ ì¹¼ë‚ ì„ ì†Œí™˜
 class WindsBlade :public Skill
 {
 public:
@@ -25,11 +25,11 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-	void Shoothing(float _deltaTime);//»çÃâÆĞÅÏ
-	void StateSet() override;//·¹º§¿¡ µû¸¥ ½ºÅÈ Àû¿ë
+	void Shoothing(float _deltaTime);//ì‚¬ì¶œíŒ¨í„´
+	void StateSet() override;//ë ˆë²¨ì— ë”°ë¥¸ ìŠ¤íƒ¯ ì ìš©
 	void LevelEndEvent() override;
 private:
-	WeaponInfo WindsBladeWeaponInfo_;//¹«±â ½ºÅÈ
+	WeaponInfo WindsBladeWeaponInfo_;//ë¬´ê¸° ìŠ¤íƒ¯
 	bool RLSwitch_;
 	float timer_;
 

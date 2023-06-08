@@ -1,7 +1,7 @@
 #pragma once
 #include "Skill.h"
 
-// Ό³Έν :
+// μ„¤λª… :
 class SlipperySkin : public Skill
 {
 public:

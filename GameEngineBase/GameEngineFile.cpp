@@ -44,57 +44,57 @@ void GameEngineFile::Open(OpenMode _openMode, FileMode _fileMode)
 {
 	std::string mode = "";
 
-	// "wb": ¾´´Ù ¹ÙÀÌ³Ê¸®.
-	// "wt": ¾´´Ù ÅØ½ºÆ®.
+	// "wb": ì“´ë‹¤ ë°”ì´ë„ˆë¦¬.
+	// "wt": ì“´ë‹¤ í…ìŠ¤íŠ¸.
 
-	// "rb": ÀĞ´Â´Ù ¹ÙÀÌ³Ê¸®.
-	// "rt": ÀĞ´Â´Ù ÅØ½ºÆ®.
+	// "rb": ì½ëŠ”ë‹¤ ë°”ì´ë„ˆë¦¬.
+	// "rt": ì½ëŠ”ë‹¤ í…ìŠ¤íŠ¸.
 
 
 	switch (_openMode)
 	{
-	case OpenMode::Read:
-		mode += "r";
-		break;
+		case OpenMode::Read:
+			mode += "r";
+			break;
 
-	case OpenMode::Write:
-		mode += "w";
-		break;
+		case OpenMode::Write:
+			mode += "w";
+			break;
 
-	default:
-		MsgBoxAssert("ºÒ°¡´ÉÇÑ ¹æ½ÄÀÔ´Ï´Ù.");
-		return;
+		default:
+			MsgBoxAssert("ë¶ˆê°€ëŠ¥í•œ ë°©ì‹ì…ë‹ˆë‹¤.");
+			return;
 	}
 
 	switch (_fileMode)
 	{
-	case FileMode::Binary:
-		mode += "b";
-		break;
+		case FileMode::Binary:
+			mode += "b";
+			break;
 
-	case FileMode::Text:
-		mode += "t";
-		break;
+		case FileMode::Text:
+			mode += "t";
+			break;
 
-	default:
-		MsgBoxAssert("ºÒ°¡´ÉÇÑ ¹æ½ÄÀÔ´Ï´Ù.");
-		return;
+		default:
+			MsgBoxAssert("ë¶ˆê°€ëŠ¥í•œ ë°©ì‹ì…ë‹ˆë‹¤.");
+			return;
 	}
 
-	int openResult = fopen_s(	//ÁöÁ¤ÇÑ °æ·ÎÀÇ ÆÄÀÏÀ» ¿­°í ÆÄÀÏÇÚµéÀ» ¹Ş¾Æ¿À´Â ÇÔ¼ö.
-		&filePtr_,				//¿­¸° ÆÄÀÏ¿¡ ´ëÇÑ ÆÄÀÏÇÚµéÀÇ ÁÖ¼Ò°ª.
-		path_.string().c_str(),	//°æ·Î°¡ Æ÷ÇÔµÈ ÆÄÀÏ ÀÌ¸§.
-		mode.c_str()			//ÆÄÀÏ ¿ÀÇÂ ¸ğµå. 
+	int openResult = fopen_s(	//ì§€ì •í•œ ê²½ë¡œì˜ íŒŒì¼ì„ ì—´ê³  íŒŒì¼í•¸ë“¤ì„ ë°›ì•„ì˜¤ëŠ” í•¨ìˆ˜.
+		&filePtr_,				//ì—´ë¦° íŒŒì¼ì— ëŒ€í•œ íŒŒì¼í•¸ë“¤ì˜ ì£¼ì†Œê°’.
+		path_.string().c_str(),	//ê²½ë¡œê°€ í¬í•¨ëœ íŒŒì¼ ì´ë¦„.
+		mode.c_str()			//íŒŒì¼ ì˜¤í”ˆ ëª¨ë“œ. 
 	);
 
 	if (2 == openResult)
 	{
-		MsgBoxAssertString(path_.string() + "\nÁ¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù.");
+		MsgBoxAssertString(path_.string() + "\nì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œì…ë‹ˆë‹¤.");
 		return;
 	}
 	else if (0 != openResult)
 	{
-		MsgBoxAssert("ÆÄÀÏÀ» Á¤»óÀûÀ¸·Î ¿©´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù.");
+		MsgBoxAssert("íŒŒì¼ì„ ì •ìƒì ìœ¼ë¡œ ì—¬ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		return;
 	}
 }
@@ -114,22 +114,22 @@ void GameEngineFile::Read(void* _readData, size_t _dataSize, size_t _readSize)
 		_readData,
 		_dataSize,
 		_readSize,
-		1,			//ÀĞ´Â È½¼ö.
+		1,			//ì½ëŠ” íšŸìˆ˜.
 		filePtr_
 	);
 
 	if (0 != ferror(filePtr_))
 	{
-		MsgBoxAssert("ÆÄÀÏÀ» ÀĞ´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù.");
+		MsgBoxAssert("íŒŒì¼ì„ ì½ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		return;
 	}
 	//if (0 != feof(filePtr_))
 	//{
-	//	MsgBoxAssert("ÆÄÀÏ ³¡À» ³Ñ¾î¼¹½À´Ï´Ù.");
+	//	MsgBoxAssert("íŒŒì¼ ëì„ ë„˜ì–´ì„°ìŠµë‹ˆë‹¤.");
 	//	return;
 	//}
-	//¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ¼ÎÀÌ´õÆÄÀÏ Å©±â¿Í ¼ÎÀÌ´õÄÚµå ¹®ÀÚ¿­ ±æÀÌ°¡ ´Ù¸£¹Ç·Î feof()°°Àº ÆÄÀÏ ³¡ °Ë»ç ÇÏÁö ¸» °Í.
-	//->¾Æ¸¶ ÇÑ±Û ÁÖ¼® µîÀÇ 2¹ÙÀÌÆ® ÀÌ»ó Å©±âÀÇ ±ÛÀÚµé ¶§¹®¿¡ ±ÛÀÚ ¼öº¸´Ù ½ÇÁ¦ ÆÄÀÏ Å©±â°¡ ´õ Ä¿Áø°ÍÀ¸·Î ¿¹»óµÊ.
+	//ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì…°ì´ë”íŒŒì¼ í¬ê¸°ì™€ ì…°ì´ë”ì½”ë“œ ë¬¸ìì—´ ê¸¸ì´ê°€ ë‹¤ë¥´ë¯€ë¡œ feof()ê°™ì€ íŒŒì¼ ë ê²€ì‚¬ í•˜ì§€ ë§ ê²ƒ.
+	//->ì•„ë§ˆ í•œê¸€ ì£¼ì„ ë“±ì˜ 2ë°”ì´íŠ¸ ì´ìƒ í¬ê¸°ì˜ ê¸€ìë“¤ ë•Œë¬¸ì— ê¸€ì ìˆ˜ë³´ë‹¤ ì‹¤ì œ íŒŒì¼ í¬ê¸°ê°€ ë” ì»¤ì§„ê²ƒìœ¼ë¡œ ì˜ˆìƒë¨.
 }
 
 void GameEngineFile::Read(std::string& _text)
@@ -170,21 +170,21 @@ void GameEngineFile::Write(const void* _writeData, size_t _writeSize)
 	size_t writeResult = fwrite(
 		_writeData,
 		_writeSize,
-		1,			//¾²´Â È½¼ö.
+		1,			//ì“°ëŠ” íšŸìˆ˜.
 		filePtr_
 	);
 
 	if (1 != writeResult)
 	{
-		MsgBoxAssert("ÆÄÀÏ ¾²±â ½ÇÆĞ.");
+		MsgBoxAssert("íŒŒì¼ ì“°ê¸° ì‹¤íŒ¨.");
 		return;
 	}
 }
 
 void GameEngineFile::Write(const std::string& _text)
 {
-	// Å©±â¸¦ ÀúÀåÇØÁà¾ß ÇÕ´Ï´Ù.
-	// stringÀº? Å©±â°¡ ÀÏÁ¤ÇÑ µ¥ÀÌÅÍ¸¦ °¡Áö°í ÀÖ³ª¿ä?
+	// í¬ê¸°ë¥¼ ì €ì¥í•´ì¤˜ì•¼ í•©ë‹ˆë‹¤.
+	// stringì€? í¬ê¸°ê°€ ì¼ì •í•œ ë°ì´í„°ë¥¼ ê°€ì§€ê³  ìˆë‚˜ìš”?
 	size_t size = _text.size();
 	Write(&size, sizeof(size_t));
 	Write(_text.data(), _text.size());
@@ -231,7 +231,7 @@ std::string GameEngineFile::GetString()
 uintmax_t GameEngineFile::GetFileSize() const
 {
 	return std::filesystem::file_size(this->path_);
-	//ÆÄÀÏÅ©±â¸¦ ÀĞ´Âµ¥ ½ÇÆĞÇÏ¸é -1 ¹İÈ¯.
+	//íŒŒì¼í¬ê¸°ë¥¼ ì½ëŠ”ë° ì‹¤íŒ¨í•˜ë©´ -1 == 0xffffffff ë°˜í™˜.
 }
 
 uintmax_t GameEngineFile::GetFileSize(const std::filesystem::path& _path)

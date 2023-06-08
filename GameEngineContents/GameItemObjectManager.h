@@ -14,8 +14,8 @@ public:
 	GameItemObjectManager& operator=(const GameItemObjectManager& _Other) = delete;
 	GameItemObjectManager& operator=(GameItemObjectManager&& _Other) noexcept = delete;
 public:
-	void CreateItemObject(GameEngineLevel* _thisLevel, ItemObjectOrder _itemObjectOrder, float4 _itemObjectPos);//¾ÆÀÌÅÛ Á¾·ù Á÷Á¢¼³Á¤ÇÑ°ÍÀ¸·Î »ı¼º
-	void CreateItemObject(GameEngineLevel* _thisLevel, float4 _itemObjectPos); // ¾ÆÀÌÅÛ Á¾·ù ·£´ıÀ¸·Î »ı¼º
+	void CreateItemObject(GameEngineLevel* _thisLevel, ItemObjectOrder _itemObjectOrder, float4 _itemObjectPos);//ì•„ì´í…œ ì¢…ë¥˜ ì§ì ‘ì„¤ì •í•œê²ƒìœ¼ë¡œ ìƒì„±
+	void CreateItemObject(GameEngineLevel* _thisLevel, float4 _itemObjectPos); // ì•„ì´í…œ ì¢…ë¥˜ ëœë¤ìœ¼ë¡œ ìƒì„±
 	void SetManager();
 	std::vector<GameItemObject*> GetallObjectContainer();
 	void ObjectAllClear();
@@ -24,6 +24,6 @@ protected:
 	ItemObjectOrder RandomObjectOrder();
 private:
 	std::vector<GameItemObject*> allObjectContainer_;
-	size_t ItemUpdateNum_; // ÇöÀç È°¼ºÈ­ µÇ¾îÀÖ´Â ¾ÆÀÌÅÛ ÃÑ °¹¼ö
+	size_t ItemUpdateNum_; // í˜„ì¬ í™œì„±í™” ë˜ì–´ìˆëŠ” ì•„ì´í…œ ì´ ê°¯ìˆ˜
 	bool isFullContainer_; 
 };

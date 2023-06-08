@@ -7,7 +7,6 @@ enum class PlayerObjectMode
 	Max,
 };
 
-// Ό³Έν :
 class PlayerObject : public GameEngineActor
 {
 public:

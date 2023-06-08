@@ -5,17 +5,17 @@
 struct Input
 {
     float4 localPosition_ : POSITION;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
-    uint instanceIndex_ : SV_InstanceID; //ÀÎ½ºÅÏ½º ½Äº°¹øÈ£.
-    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ÅØ½ºÃ³ ÀÎµ¦½º. ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ÅØ½ºÃ³ ¹øÈ£.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
+    uint instanceIndex_ : SV_InstanceID; //ì¸ìŠ¤í„´ìŠ¤ ì‹ë³„ë²ˆí˜¸.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //í…ìŠ¤ì²˜ ì¸ë±ìŠ¤. ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  í…ìŠ¤ì²˜ ë²ˆí˜¸.
 };
 
 struct Output
 {
     float4 wvpPosition_ : SV_Position;
     float4 shadowPosition_ : POSITION;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
-    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ÅØ½ºÃ³ ÀÎµ¦½º. ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ÅØ½ºÃ³ ¹øÈ£.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //í…ìŠ¤ì²˜ ì¸ë±ìŠ¤. ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  í…ìŠ¤ì²˜ ë²ˆí˜¸.
 };
 
 //cbuffer PixelData : register(b0)
@@ -51,7 +51,7 @@ float4 Test_PS(Output _input) : SV_Target0
 }
 
 
-struct InstAtlasData     //ÀÎ½ºÅÏ½Ì¿ë ¾ÆÆ²¶ó½ºµ¥ÀÌÅÍ.
+struct InstAtlasData     //ì¸ìŠ¤í„´ì‹±ìš© ì•„í‹€ë¼ìŠ¤ë°ì´í„°.
 {
     float2 textureFramePos_;
     float2 textureFrameSize_;
@@ -60,7 +60,7 @@ struct InstAtlasData     //ÀÎ½ºÅÏ½Ì¿ë ¾ÆÆ²¶ó½ºµ¥ÀÌÅÍ.
 
 StructuredBuffer<InstTransformData> Inst_TransformData : register(t12);
 StructuredBuffer<InstRenderOption> Inst_RenderOption : register(t13);
-Texture2DArray Inst_Textures : register(t14);  
+Texture2DArray Inst_Textures : register(t14);
 StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
 
 Output Test_VSINST(Input _input)
@@ -82,7 +82,7 @@ Output Test_VSINST(Input _input)
     if (-1 == Inst_RenderOption[_input.instanceIndex_].vertexInversion_)
     {
         _input.texcoord_.x = 1.f - _input.texcoord_.x;
-        //¿ÀºêÁ§Æ®°¡ ÁÂ¿ì¹İÀüµÇ¸é texcoordµµ ÁÂ¿ì¹İÀüÇØ¼­ ±×·ÁÁö°Ô ÇÑ´Ù.
+        //ì˜¤ë¸Œì íŠ¸ê°€ ì¢Œìš°ë°˜ì „ë˜ë©´ texcoordë„ ì¢Œìš°ë°˜ì „í•´ì„œ ê·¸ë ¤ì§€ê²Œ í•œë‹¤.
     }
     
     result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.x)
@@ -108,7 +108,7 @@ float4 Test_PSINST(Output _input) : SV_Target0
     if (0.0f < sampledColor.a)
     {
         shadowDepth = float4(_input.shadowPosition_.z / _input.shadowPosition_.w, 0.f, 0.f, 1.f);
-        //»ç½Ç Á÷±³Åõ¿µ Æ¯¼º»ó w°¡ 1 °íÁ¤ÀÌ¹Ç·Î º° ÀÇ¹Ì¾ø´Â ¿¬»êÀÌÁö¸¸ ±×·¡µµ ÇÑ´Ù.
+        //ì‚¬ì‹¤ ì§êµíˆ¬ì˜ íŠ¹ì„±ìƒ wê°€ 1 ê³ ì •ì´ë¯€ë¡œ ë³„ ì˜ë¯¸ì—†ëŠ” ì—°ì‚°ì´ì§€ë§Œ ê·¸ë˜ë„ í•œë‹¤.
     }
     
     return shadowDepth;

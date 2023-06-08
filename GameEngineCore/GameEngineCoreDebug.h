@@ -4,17 +4,17 @@ class GameEngineCamera;
 class GameEngineTexture;
 namespace GameEngineDebug
 {
-	//µğ¹ö±× ·»´õ¿ë ·»´õÀ¯´Ö »ı¼º, ÃÊ±âÈ­.
+	//ë””ë²„ê·¸ ë Œë”ìš© ë Œë”ìœ ë‹› ìƒì„±, ì´ˆê¸°í™”.
 	void Debug3DInitialize();
 
-	//µğ¹ö±× ·»´õ¸µ °ü·Ã Á¤º¸¸¦ ½ÇÁ¦·Î ·»´õ¸µÇÏ´Â ÇÔ¼ö.
+	//ë””ë²„ê·¸ ë Œë”ë§ ê´€ë ¨ ì •ë³´ë¥¼ ì‹¤ì œë¡œ ë Œë”ë§í•˜ëŠ” í•¨ìˆ˜.
 	void Debug3DRender();
 
-	//µğ¹ö±× ·»´õ¿ë ·»´õÀ¯´Ö ÆÄ±«.
+	//ë””ë²„ê·¸ ë Œë”ìš© ë Œë”ìœ ë‹› íŒŒê´´.
 	void Debug3DDestroy();
 
 
-	//¾Æ·¡´Â µğ¹ö±× ·»´õ¸µ¿¡ ÇÊ¿äÇÑ Á¤º¸¸¦ ÀúÀåÇÏ´Â ÇÔ¼öµé.
+	//ì•„ë˜ëŠ” ë””ë²„ê·¸ ë Œë”ë§ì— í•„ìš”í•œ ì •ë³´ë¥¼ ì €ì¥í•˜ëŠ” í•¨ìˆ˜ë“¤.
 
 	void DrawBox(const GameEngineTransform& _transform, const float4& _color);
 	void DrawBox(const GameEngineTransform& _transform, GameEngineCamera* _camera, const float4& _color);

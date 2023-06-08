@@ -33,22 +33,22 @@ class GameEngineThreadPool
 
 
 
-	//ÀÌ Å¬·¡½ºÀÇ Á¸Àç ÀÌÀ¯: IOCP °´Ã¼°¡ °¡Áø ½º·¹µå Ç®À» ÀÌ¿ëÇØ¼­ ½º·¹µåµéÀ» °ü¸®ÇÏ°í ÁÖ¾îÁø ÀÛ¾÷À» ÀûÀýÇÏ°Ô ¹èºÐÇÏ´Â °Í.
+	//ì´ í´ëž˜ìŠ¤ì˜ ì¡´ìž¬ ì´ìœ : IOCP ê°ì²´ê°€ ê°€ì§„ ìŠ¤ë ˆë“œ í’€ì„ ì´ìš©í•´ì„œ ìŠ¤ë ˆë“œë“¤ì„ ê´€ë¦¬í•˜ê³  ì£¼ì–´ì§„ ìž‘ì—…ì„ ì ì ˆí•˜ê²Œ ë°°ë¶„í•˜ëŠ” ê²ƒ.
 
-	//¿ÀºêÁ§Æ® Ç®(object pool): ¿ÀºêÁ§Æ®¿¡ ÇØ´çÇÏ´Â ¹«¾ð°¡¸¦ ¹Ì¸® ´ë·®À¸·Î »ý¼ºÇØ¼­ Ç®(pool)¿¡ º¸°üÇØ µÎ¾ú´Ù°¡ 
-	// ÇÊ¿äÇÏ¸é ²¨³» ¾²°í, ÇÊ¿ä ¾ø¾îÁ®µµ »èÁ¦ÇÏÁö ¾Ê°í ´Ù½Ã Ç®¿¡ µ¹·Á³õ´Â °úÁ¤À» ¹Ýº¹ÇÏ´Â °³³äÀ» ¸»ÇÑ´Ù.
-	//C++ ¿¬»ê Áß °¡Àå ¿¬»ê ¼Ò¿ä°¡ Å« new¿Í delete ¿¬»êÀÇ ºóµµ¸¦ ÁÙÀÏ ¼ö ÀÖ´Ù´Â ÀåÁ¡°ú,
-	// ´ë·®ÀÇ ¸Þ¸ð¸®¸¦ ÇÊ¿ä·Î ÇÑ´Ù´Â ´ÜÁ¡ÀÌ ÀÖ´Ù. 
-	
-	//ÇìÅ×·ÎÁö´Ï¾î½º(Heterogeneous: ÀÌÁ¾) ¹æ½Ä:
-	//ÀÛ¾÷À» Á¾·ùº°·Î ÂÉ°³¼­ ÇØ´ç ÀÛ¾÷ Àü´ã ½º·¹µå¿¡°Ô ¸Ã±â´Â ½ºÅ¸ÀÏ.
-	//±¸¼º ÃÊ±âºÎÅÍ ¸ÖÆ¼½º·¹µù »óÈ²À» ¿°µÎ¿¡ µÎ¾ú´Ù¸é ÀÌ ¹æ½ÄÀÌ ´õ ³´´Ù°í ÇÑ´Ù.
-	
-	//È£¸ðÁö´Ï¾î½º(Homogenous: µ¿Á¾) ¹æ½Ä:
-	//ÀÛ¾÷ Á¾·ù »ó°ü¾øÀÌ µé¾î¿À´Â ¼ø¼­´ë·Î ´ë±âÁßÀÎ ½º·¹µå¿¡°Ô ¸Ã±â´Â ½ºÅ¸ÀÏ.
-	//ÀÌº¥Æ®°¡ ¹ß»ýÇØ¾ß ÀÛµ¿ÇÏ´Â ¹æ½ÄÀÌ¶ó¼­ ÀÌº¥Æ® µå¸®ºì(Event Driven), µ¥ÀÌÅÍ µå¸®ºì(Data Driven) ¹æ½ÄÀÌ¶ó°íµµ ÇÑ´Ù.
-	//ÁÖ·Î ¼­¹ö¿¡¼­ »ç¿ë.
-	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©¿¡¼± ÀÌ ¹æ½ÄÀ¸·Î ¸ÖÆ¼½º·¹µå »ç¿ë.
+	//ì˜¤ë¸Œì íŠ¸ í’€(object pool): ì˜¤ë¸Œì íŠ¸ì— í•´ë‹¹í•˜ëŠ” ë¬´ì–¸ê°€ë¥¼ ë¯¸ë¦¬ ëŒ€ëŸ‰ìœ¼ë¡œ ìƒì„±í•´ì„œ í’€(pool)ì— ë³´ê´€í•´ ë‘ì—ˆë‹¤ê°€ 
+	// í•„ìš”í•˜ë©´ êº¼ë‚´ ì“°ê³ , í•„ìš” ì—†ì–´ì ¸ë„ ì‚­ì œí•˜ì§€ ì•Šê³  ë‹¤ì‹œ í’€ì— ëŒë ¤ë†“ëŠ” ê³¼ì •ì„ ë°˜ë³µí•˜ëŠ” ê°œë…ì„ ë§í•œë‹¤.
+	//C++ ì—°ì‚° ì¤‘ ê°€ìž¥ ì—°ì‚° ì†Œìš”ê°€ í° newì™€ delete ì—°ì‚°ì˜ ë¹ˆë„ë¥¼ ì¤„ì¼ ìˆ˜ ìžˆë‹¤ëŠ” ìž¥ì ê³¼,
+	// ëŒ€ëŸ‰ì˜ ë©”ëª¨ë¦¬ë¥¼ í•„ìš”ë¡œ í•œë‹¤ëŠ” ë‹¨ì ì´ ìžˆë‹¤. 
+
+	//í—¤í…Œë¡œì§€ë‹ˆì–´ìŠ¤(Heterogeneous: ì´ì¢…) ë°©ì‹:
+	//ìž‘ì—…ì„ ì¢…ë¥˜ë³„ë¡œ ìª¼ê°œì„œ í•´ë‹¹ ìž‘ì—… ì „ë‹´ ìŠ¤ë ˆë“œì—ê²Œ ë§¡ê¸°ëŠ” ìŠ¤íƒ€ì¼.
+	//êµ¬ì„± ì´ˆê¸°ë¶€í„° ë©€í‹°ìŠ¤ë ˆë”© ìƒí™©ì„ ì—¼ë‘ì— ë‘ì—ˆë‹¤ë©´ ì´ ë°©ì‹ì´ ë” ë‚«ë‹¤ê³  í•œë‹¤.
+
+	//í˜¸ëª¨ì§€ë‹ˆì–´ìŠ¤(Homogenous: ë™ì¢…) ë°©ì‹:
+	//ìž‘ì—… ì¢…ë¥˜ ìƒê´€ì—†ì´ ë“¤ì–´ì˜¤ëŠ” ìˆœì„œëŒ€ë¡œ ëŒ€ê¸°ì¤‘ì¸ ìŠ¤ë ˆë“œì—ê²Œ ë§¡ê¸°ëŠ” ìŠ¤íƒ€ì¼.
+	//ì´ë²¤íŠ¸ê°€ ë°œìƒí•´ì•¼ ìž‘ë™í•˜ëŠ” ë°©ì‹ì´ë¼ì„œ ì´ë²¤íŠ¸ ë“œë¦¬ë¸(Event Driven), ë°ì´í„° ë“œë¦¬ë¸(Data Driven) ë°©ì‹ì´ë¼ê³ ë„ í•œë‹¤.
+	//ì£¼ë¡œ ì„œë²„ì—ì„œ ì‚¬ìš©.
+	//ì´ í”„ë ˆìž„ì›Œí¬ì—ì„  ì´ ë°©ì‹ìœ¼ë¡œ ë©€í‹°ìŠ¤ë ˆë“œ ì‚¬ìš©.
 
 public:
 	GameEngineThreadPool();
@@ -65,18 +65,18 @@ private:
 
 
 public:
-	//½º·¹µåÇ® ÃÊ±âÈ­ ÇÔ¼ö. _threadCount°¡ ±âº»°ªÀÎ 0ÀÌ¶ó¸é IOCP °´Ã¼°¡ ÀÚµ¿À¸·Î ÀûÀýÇÑ ½º·¹µå °³¼ö¸¦ Á¤ÇÑ´Ù.
+	//ìŠ¤ë ˆë“œí’€ ì´ˆê¸°í™” í•¨ìˆ˜. _threadCountê°€ ê¸°ë³¸ê°’ì¸ 0ì´ë¼ë©´ IOCP ê°ì²´ê°€ ìžë™ìœ¼ë¡œ ì ì ˆí•œ ìŠ¤ë ˆë“œ ê°œìˆ˜ë¥¼ ì •í•œë‹¤.
 	void Initialize(const std::string_view& _threadName, int _threadCount = 0);
-	//ÄÚ¾î ¼ö * 2°¡ ¸ÖÆ¼½º·¹µù¿¡ ÀûÀýÇÑ ½º·¹µå °³¼ö¶ó°í ÇÑ´Ù. 
+	//ì½”ì–´ ìˆ˜ * 2ê°€ ë©€í‹°ìŠ¤ë ˆë”©ì— ì ì ˆí•œ ìŠ¤ë ˆë“œ ê°œìˆ˜ë¼ê³  í•œë‹¤. 
 
-	//¸ÞÀÎ½º·¹µå°¡ Á÷Á¢ ¹º°¡¸¦ ÀÛ¾÷ÇÏ´Â °ÍÀÌ ¾Æ´Ï¶ó, IO¿Ï·áÅ¥¿¡ ÀÛ¾÷À» ºÐ¹è, µî·Ï½ÃÅ°´Â ÇÔ¼ö.
-	//IO¿Ï·áÅ¥¿¡ µî·ÏµÈ ÀÛ¾÷ ÇÔ¼öÆ÷ÀÎÅÍ´Â IOCP°¡ ¹Þ¾Æ¼­ ÀÚ±â°¡ °¡Áø ½º·¹µåÇ® ¾È¿¡¼­ °¡Àå ÀûÇÕÇÑ ½º·¹µå¿¡°Ô ¸Ã±â°Ô µÈ´Ù. 
+	//ë©”ì¸ìŠ¤ë ˆë“œê°€ ì§ì ‘ ë­”ê°€ë¥¼ ìž‘ì—…í•˜ëŠ” ê²ƒì´ ì•„ë‹ˆë¼, IOì™„ë£Œíì— ìž‘ì—…ì„ ë¶„ë°°, ë“±ë¡ì‹œí‚¤ëŠ” í•¨ìˆ˜.
+	//IOì™„ë£Œíì— ë“±ë¡ëœ ìž‘ì—… í•¨ìˆ˜í¬ì¸í„°ëŠ” IOCPê°€ ë°›ì•„ì„œ ìžê¸°ê°€ ê°€ì§„ ìŠ¤ë ˆë“œí’€ ì•ˆì—ì„œ ê°€ìž¥ ì í•©í•œ ìŠ¤ë ˆë“œì—ê²Œ ë§¡ê¸°ê²Œ ëœë‹¤. 
 	void DistributeWork(std::function<void()> _callback);
 
 private:
-	//¸ÞÀÎ ½º·¹µå°¡ Á÷Á¢ È£ÃâÇÒ ÇÔ¼ö°¡ ¾Æ´Ñ, ½º·¹µåÇ®¿¡ µî·ÏµÈ ½º·¹µåµéÀÌ »ý¼º°ú µ¿½Ã¿¡ LinkFunction()ÇÔ¼ö¸¦ ÅëÇØ È£ÃâÇÏ°Ô µÉ ÇÔ¼ö. 
-	//GameEngineThreadPool °´Ã¼°¡ ÆÄ±«µÇ±â Àü±îÁö °è¼Ó GetQueuedCompletionStatus()ÇÔ¼ö¸¦ È£ÃâÇÏ´Â ±¸Á¶·Î µÇ¾î ÀÖÀ¸¹Ç·Î
-	//IOCP°¡ GameEngineThread °´Ã¼µéÀ» ÀÚ±â ½º·¹µåÇ®¿¡ ³Ö°í °ü¸®ÇÒ ¼ö ÀÖ°Ô µÈ´Ù.
+	//ë©”ì¸ ìŠ¤ë ˆë“œê°€ ì§ì ‘ í˜¸ì¶œí•  í•¨ìˆ˜ê°€ ì•„ë‹Œ, ìŠ¤ë ˆë“œí’€ì— ë“±ë¡ëœ ìŠ¤ë ˆë“œë“¤ì´ ìƒì„±ê³¼ ë™ì‹œì— LinkFunction()í•¨ìˆ˜ë¥¼ í†µí•´ í˜¸ì¶œí•˜ê²Œ ë  í•¨ìˆ˜. 
+	//GameEngineThreadPool ê°ì²´ê°€ íŒŒê´´ë˜ê¸° ì „ê¹Œì§€ ê³„ì† GetQueuedCompletionStatus()í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ëŠ” êµ¬ì¡°ë¡œ ë˜ì–´ ìžˆìœ¼ë¯€ë¡œ
+	//IOCPê°€ GameEngineThread ê°ì²´ë“¤ì„ ìžê¸° ìŠ¤ë ˆë“œí’€ì— ë„£ê³  ê´€ë¦¬í•  ìˆ˜ ìžˆê²Œ ëœë‹¤.
 	static void	ExecuteWork(
 		GameEngineThreadPool* _threadPool,
 		GameEngineThread* _thread,
@@ -85,59 +85,59 @@ private:
 
 
 private:
-	HANDLE iocpHandle_;		//IOCP °´Ã¼¿Í ¿¬°áµÈ ÇÚµé. ÀÌ Å¬·¡½ºÀÇ ÇÙ½É. ½º·¹µåÇ®µµ ÀÌ ÇÚµé°ú ¿¬°áµÈ IOCP °´Ã¼°¡ °ü¸®ÇÑ´Ù.
-	//Æ¯º°È÷ ¸·¾ÆµÎÁö´Â ¾Ê¾ÒÁö¸¸ IOCP °´Ã¼°¡ °ü¸®ÇÏ´Â ½º·¹µåÇ®À» ÇÑ°³¸¸ ¾µ °Ô °ÅÀÇ È®½ÇÇÏ¹Ç·Î GameEngineThreadPool °´Ã¼µµ 
-	//GameEngineCore¿¡¼­ Á¤Àû ¸â¹öº¯¼ö·Î ÇÑ°³¸¸ °¡Áö°Ô ÇÑ´Ù.
-	//IOCP ÀÚÃ¼´Â Á÷Á¢ ÅëÁ¦ÇÒ ¼ö ¾ø´Ù.
+	HANDLE iocpHandle_;		//IOCP ê°ì²´ì™€ ì—°ê²°ëœ í•¸ë“¤. ì´ í´ëž˜ìŠ¤ì˜ í•µì‹¬. ìŠ¤ë ˆë“œí’€ë„ ì´ í•¸ë“¤ê³¼ ì—°ê²°ëœ IOCP ê°ì²´ê°€ ê´€ë¦¬í•œë‹¤.
+	//íŠ¹ë³„ížˆ ë§‰ì•„ë‘ì§€ëŠ” ì•Šì•˜ì§€ë§Œ IOCP ê°ì²´ê°€ ê´€ë¦¬í•˜ëŠ” ìŠ¤ë ˆë“œí’€ì„ í•œê°œë§Œ ì“¸ ê²Œ ê±°ì˜ í™•ì‹¤í•˜ë¯€ë¡œ GameEngineThreadPool ê°ì²´ë„ 
+	//GameEngineCoreì—ì„œ ì •ì  ë©¤ë²„ë³€ìˆ˜ë¡œ í•œê°œë§Œ ê°€ì§€ê²Œ í•œë‹¤.
+	//IOCP ìžì²´ëŠ” ì§ì ‘ í†µì œí•  ìˆ˜ ì—†ë‹¤.
 
-	//IOCP(Input/Output Completion Port: ÀÔÃâ·Â ¿Ï·á Æ÷Æ®): À©µµ¿ìÁî¿¡¼­ Á¦°øÇÏ´Â
-	// ½º·¹µå °ü¸® Àü¹® Ä¿³Î ¿ÀºêÁ§Æ®(ÇÁ·Î¼¼½º°¡ ¾Æ´Ñ, ¿î¿µÃ¼Á¦ ¼öÁØ¿¡¼­ »ý¼ºÇÑ ÇÁ·Î¼¼½º, ½º·¹µå, ÆÄÀÏ µîÀÇ ¸®¼Ò½º °ü¸®¿ë ±¸Á¶Ã¼).
-	//½º·¹µå³ª ÇÁ·Î¼¼½º°¡ »ý¼ºÇÏ´Â ¿ÀºêÁ§Æ®°¡ ¾Æ´Ï¶ó ¿î¿µÃ¼Á¦°¡ Á÷Á¢ »ý¼º °ü¸®ÇÏ´Â ¿ÀºêÁ§Æ®ÀÌ¹Ç·Î ½º·¹µå³ª ÇÁ·Î¼¼½ºÀÇ »óÅÂ¿Í °ü°è ¾øÀÌ 
-	// ½Ç½Ã°£À¸·Î ½º·¹µåÇ®À» °ü¸®ÇÒ ¼ö ÀÖ´Ù.
+	//IOCP(Input/Output Completion Port: ìž…ì¶œë ¥ ì™„ë£Œ í¬íŠ¸): ìœˆë„ìš°ì¦ˆì—ì„œ ì œê³µí•˜ëŠ”
+	// ìŠ¤ë ˆë“œ ê´€ë¦¬ ì „ë¬¸ ì»¤ë„ ì˜¤ë¸Œì íŠ¸(í”„ë¡œì„¸ìŠ¤ê°€ ì•„ë‹Œ, ìš´ì˜ì²´ì œ ìˆ˜ì¤€ì—ì„œ ìƒì„±í•œ í”„ë¡œì„¸ìŠ¤, ìŠ¤ë ˆë“œ, íŒŒì¼ ë“±ì˜ ë¦¬ì†ŒìŠ¤ ê´€ë¦¬ìš© êµ¬ì¡°ì²´).
+	//ìŠ¤ë ˆë“œë‚˜ í”„ë¡œì„¸ìŠ¤ê°€ ìƒì„±í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ê°€ ì•„ë‹ˆë¼ ìš´ì˜ì²´ì œê°€ ì§ì ‘ ìƒì„± ê´€ë¦¬í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ì´ë¯€ë¡œ ìŠ¤ë ˆë“œë‚˜ í”„ë¡œì„¸ìŠ¤ì˜ ìƒíƒœì™€ ê´€ê³„ ì—†ì´ 
+	// ì‹¤ì‹œê°„ìœ¼ë¡œ ìŠ¤ë ˆë“œí’€ì„ ê´€ë¦¬í•  ìˆ˜ ìžˆë‹¤.
 
-	//IOCP ÀÛµ¿ ¿ø¸®:
-	//¾î´À IOÀÛ¾÷ÀÌ ¿Ï·áµÇ¸é IO ¿Ï·á ÆÐÅ¶(Completion Packet)ÀÇ Á¤º¸(½ÇÁ¦ ÆÐÅ¶ ¾Æ´Ô)°¡ IO¿Ï·á Å¥(Completion Queue)¿¡ ½×ÀÎ´Ù. 
-	// È¤Àº PostQueuedCompletionStatus()ÇÔ¼ö¸¦ ÅëÇØ Á÷Á¢ ³Ö¾îÁÙ ¼öµµ ÀÖ´Ù. 
-	//¾î¶² ¹æ½ÄÀ¸·Îµç IO¿Ï·á Å¥¿¡ IO ¿Ï·á ÆÐÅ¶ Á¤º¸°¡ ½×ÀÌ¸é IOCP°¡ ½º·¹µåÇ® ¾ÈÀÇ ½º·¹µå Áß ÇÏ³ª¸¦ °ñ¶ó ±ú¿î´Ù.
-	//±ú¾î³­ ½º·¹µå°¡ GetQueuedCompletionStatus()ÇÔ¼ö¸¦ È£ÃâÇÏ¸é ±× Å¥¿¡ ½×ÀÎ ÆÐÅ¶ Á¤º¸µé Áß 
-	// °¡Àå ¸ÕÀú ½×¿©ÀÖ´ø °ÍÀ» »Ì¾Æ¼­ ¿Ï·á Å°¿¡ ¿¬°áµÈ ÇÔ¼ö¸¦ Ã³¸®ÇÑ´Ù.
-
-
-	//ÄÁÅØ½ºÆ® ½ºÀ§Äª(Context Switching):
-	//ÀÌ ½º·¹µå/ÇÁ·Î¼¼½º°¡ °¡Áø CPU »ç¿ë ±ÇÇÑÀ» ´Ù¸¥ ½º·¹µå/ÇÁ·Î¼¼½º¿¡°Ô ³Ñ°ÜÁÖ´Â ÀÛ¾÷. 
-	//CPU »ç¿ë±ÇÀ» ³Ñ°ÜÁÖ±â Àü¿¡ ÇöÀç ÁøÇàÁßÀÌ´ø ÀÛ¾÷ÀÇ Á¤º¸¸¦ ´Ù¸¥ °÷¿¡ ÀúÀåÇØ µÎ¾î¾ß ÇÏ°í, 
-	//CPU »ç¿ë±ÇÀ» ³Ñ°Ü¹Þ±â Àü¿¡ ÀÌÀü¿¡ ÁøÇàÇÏ°íÀÖ´ø ÀÛ¾÷ Á¤º¸¸¦ ´Ù½Ã ºÒ·¯¿Í¾ß ÇÏ´Âµ¥ 
-	//ÄÁÅØ½ºÆ® ½ºÀ§ÄªÀÌ ³Ê¹« ÀÚÁÖ ÀÏ¾î³ª°Ô µÇ¸é ÀÛ¾÷À» ÁøÇàÇÏ´Â°Íº¸´Ù ÀÛ¾÷ Á¤º¸¸¦ ÀúÀåÇÏ°Å³ª ºÒ·¯¿À´Âµ¥ 
-	//´õ ¸¹Àº ¿¬»êÀ» ÇÏ°Ô µÇ´Â ºñÈ¿À²ÀÌ »ý±â°Ô µÈ´Ù. ±×·¡¼­ ÄÁÅØ½ºÆ® ½ºÀ§ÄªÀº ÃÖ¼ÒÇÑÀ¸·Î¸¸ ÀÏ¾î³ª¾ß ÇÑ´Ù.
-	//¸Þ¸ð¸®¸¦ °øÀ¯ÇÏÁö ¾Ê´Â ÇÁ·Î¼¼½º°£ ÄÁÅØ½ºÆ® ½ºÀ§Äªº¸´Ù ¸Þ¸ð¸®¸¦ ¸¹Àº ºÎºÐ °øÀ¯ÇÏ´Â ½º·¹µå°£ ÄÁÅØ½ºÆ® ½ºÀ§ÄªÀÌ ´õ ºü¸£´Ù°í ÇÑ´Ù.
+	//IOCP ìž‘ë™ ì›ë¦¬:
+	//ì–´ëŠ IOìž‘ì—…ì´ ì™„ë£Œë˜ë©´ IO ì™„ë£Œ íŒ¨í‚·(Completion Packet)ì˜ ì •ë³´(ì‹¤ì œ íŒ¨í‚· ì•„ë‹˜)ê°€ IOì™„ë£Œ í(Completion Queue)ì— ìŒ“ì¸ë‹¤. 
+	// í˜¹ì€ PostQueuedCompletionStatus()í•¨ìˆ˜ë¥¼ í†µí•´ ì§ì ‘ ë„£ì–´ì¤„ ìˆ˜ë„ ìžˆë‹¤. 
+	//ì–´ë–¤ ë°©ì‹ìœ¼ë¡œë“  IOì™„ë£Œ íì— IO ì™„ë£Œ íŒ¨í‚· ì •ë³´ê°€ ìŒ“ì´ë©´ IOCPê°€ ìŠ¤ë ˆë“œí’€ ì•ˆì˜ ìŠ¤ë ˆë“œ ì¤‘ í•˜ë‚˜ë¥¼ ê³¨ë¼ ê¹¨ìš´ë‹¤.
+	//ê¹¨ì–´ë‚œ ìŠ¤ë ˆë“œê°€ GetQueuedCompletionStatus()í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ë©´ ê·¸ íì— ìŒ“ì¸ íŒ¨í‚· ì •ë³´ë“¤ ì¤‘ 
+	// ê°€ìž¥ ë¨¼ì € ìŒ“ì—¬ìžˆë˜ ê²ƒì„ ë½‘ì•„ì„œ ì™„ë£Œ í‚¤ì— ì—°ê²°ëœ í•¨ìˆ˜ë¥¼ ì²˜ë¦¬í•œë‹¤.
 
 
-	//IOCPÀÇ ½º·¹µå ÄÁÅ×ÀÌ³Êµé.
-	//Release Thread List(È°¼ºÈ­ ½º·¹µå ¸®½ºÆ®): ÇöÀç ÀÛ¾÷ ÁøÇà ÁßÀÎ ½º·¹µåµéÀÇ ID°¡ ÀúÀåµÇ´Â ¸®½ºÆ®.
-	//CreateIoCompletionPort()ÇÔ¼ö¿¡¼­ ¸¶Áö¸·À¸·Î ³Ö¾îÁØ °ªÀÌ ÀÌ ¸®½ºÆ®ÀÇ Å©±â°¡ µÈ´Ù. 
+	//ì»¨í…ìŠ¤íŠ¸ ìŠ¤ìœ„ì¹­(Context Switching):
+	//ì´ ìŠ¤ë ˆë“œ/í”„ë¡œì„¸ìŠ¤ê°€ ê°€ì§„ CPU ì‚¬ìš© ê¶Œí•œì„ ë‹¤ë¥¸ ìŠ¤ë ˆë“œ/í”„ë¡œì„¸ìŠ¤ì—ê²Œ ë„˜ê²¨ì£¼ëŠ” ìž‘ì—…. 
+	//CPU ì‚¬ìš©ê¶Œì„ ë„˜ê²¨ì£¼ê¸° ì „ì— í˜„ìž¬ ì§„í–‰ì¤‘ì´ë˜ ìž‘ì—…ì˜ ì •ë³´ë¥¼ ë‹¤ë¥¸ ê³³ì— ì €ìž¥í•´ ë‘ì–´ì•¼ í•˜ê³ , 
+	//CPU ì‚¬ìš©ê¶Œì„ ë„˜ê²¨ë°›ê¸° ì „ì— ì´ì „ì— ì§„í–‰í•˜ê³ ìžˆë˜ ìž‘ì—… ì •ë³´ë¥¼ ë‹¤ì‹œ ë¶ˆëŸ¬ì™€ì•¼ í•˜ëŠ”ë° 
+	//ì»¨í…ìŠ¤íŠ¸ ìŠ¤ìœ„ì¹­ì´ ë„ˆë¬´ ìžì£¼ ì¼ì–´ë‚˜ê²Œ ë˜ë©´ ìž‘ì—…ì„ ì§„í–‰í•˜ëŠ”ê²ƒë³´ë‹¤ ìž‘ì—… ì •ë³´ë¥¼ ì €ìž¥í•˜ê±°ë‚˜ ë¶ˆëŸ¬ì˜¤ëŠ”ë° 
+	//ë” ë§Žì€ ì—°ì‚°ì„ í•˜ê²Œ ë˜ëŠ” ë¹„íš¨ìœ¨ì´ ìƒê¸°ê²Œ ëœë‹¤. ê·¸ëž˜ì„œ ì»¨í…ìŠ¤íŠ¸ ìŠ¤ìœ„ì¹­ì€ ìµœì†Œí•œìœ¼ë¡œë§Œ ì¼ì–´ë‚˜ì•¼ í•œë‹¤.
+	//ë©”ëª¨ë¦¬ë¥¼ ê³µìœ í•˜ì§€ ì•ŠëŠ” í”„ë¡œì„¸ìŠ¤ê°„ ì»¨í…ìŠ¤íŠ¸ ìŠ¤ìœ„ì¹­ë³´ë‹¤ ë©”ëª¨ë¦¬ë¥¼ ë§Žì€ ë¶€ë¶„ ê³µìœ í•˜ëŠ” ìŠ¤ë ˆë“œê°„ ì»¨í…ìŠ¤íŠ¸ ìŠ¤ìœ„ì¹­ì´ ë” ë¹ ë¥´ë‹¤ê³  í•œë‹¤.
+
+
+	//IOCPì˜ ìŠ¤ë ˆë“œ ì»¨í…Œì´ë„ˆë“¤.
+	//Release Thread List(í™œì„±í™” ìŠ¤ë ˆë“œ ë¦¬ìŠ¤íŠ¸): í˜„ìž¬ ìž‘ì—… ì§„í–‰ ì¤‘ì¸ ìŠ¤ë ˆë“œë“¤ì˜ IDê°€ ì €ìž¥ë˜ëŠ” ë¦¬ìŠ¤íŠ¸.
+	//CreateIoCompletionPort()í•¨ìˆ˜ì—ì„œ ë§ˆì§€ë§‰ìœ¼ë¡œ ë„£ì–´ì¤€ ê°’ì´ ì´ ë¦¬ìŠ¤íŠ¸ì˜ í¬ê¸°ê°€ ëœë‹¤. 
 	// 
-	//Pause Thread List(ÀÏ½ÃÁ¤Áö ½º·¹µå ¸®½ºÆ®):
-	//Release Thread List¿¡¼­ ÀÛ¾÷ÇÏ´ø Áß Sleep()ÇÔ¼ö¸¦ È£ÃâÇÏ°Å³ª ÇÏ´Â µîÀÇ ÀÌÀ¯·Î ÀÏ½ÃÁ¤Áö »óÅÂ°¡ µÈ ½º·¹µåµéÀÇ ID°¡ º¸°üµÇ´Â ¸®½ºÆ®.
-	//ÀÏ½ÃÁ¤Áö »óÅÂÀÇ ½º·¹µåµéÀÌ ¿À´Â ¸®½ºÆ®Áö¸¸, ÀÏ½ÃÁ¤Áö°¡ ³¡³µ¾îµµ Release Thread List¿¡ ºó ÀÚ¸®°¡ ¾ø´Ù¸é °è¼Ó ¿©±â¿¡¼­ ´ë±âÇÑ´Ù.
+	//Pause Thread List(ì¼ì‹œì •ì§€ ìŠ¤ë ˆë“œ ë¦¬ìŠ¤íŠ¸):
+	//Release Thread Listì—ì„œ ìž‘ì—…í•˜ë˜ ì¤‘ Sleep()í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ê±°ë‚˜ í•˜ëŠ” ë“±ì˜ ì´ìœ ë¡œ ì¼ì‹œì •ì§€ ìƒíƒœê°€ ëœ ìŠ¤ë ˆë“œë“¤ì˜ IDê°€ ë³´ê´€ë˜ëŠ” ë¦¬ìŠ¤íŠ¸.
+	//ì¼ì‹œì •ì§€ ìƒíƒœì˜ ìŠ¤ë ˆë“œë“¤ì´ ì˜¤ëŠ” ë¦¬ìŠ¤íŠ¸ì§€ë§Œ, ì¼ì‹œì •ì§€ê°€ ëë‚¬ì–´ë„ Release Thread Listì— ë¹ˆ ìžë¦¬ê°€ ì—†ë‹¤ë©´ ê³„ì† ì—¬ê¸°ì—ì„œ ëŒ€ê¸°í•œë‹¤.
 	//  
-	//Waiting Thread Queue(´ë±â ½º·¹µå Å¥):  
-	// ½º·¹µåÇ®¿¡ Ã³À½ µé¾î°¡´Â ½º·¹µåµç Release Thread ListÀÇ ½º·¹µå Áß ¿Ï·á·çÆ¾ÀÌ ³¡³­ ½º·¹µåµç GetQueuedCompletionStatus()ÇÔ¼ö¸¦
-	// È£ÃâÇÏ¿´Áö¸¸ IOCP·ÎºÎÅÍ ÀÛ¾÷À» ¹ÞÁö ¸øÇÏ°í ´ë±âÁßÀÎ ¸ðµç ½º·¹µåµéÀÇ ID°¡ ¿©±â¿¡ µé¾î°£´Ù. 
-	//¾î¶² ÀÌÀ¯·Îµç Release Thread List¿¡ ºó ÀÚ¸®°¡ »ý°å´Âµ¥ IO¿Ï·áÅ¥¿¡ »õ ÀÛ¾÷ÀÌ µé¾î¿À¸é, 
-	// IOCP°¡ ¿©±â¿¡ ÀÖ´Â ½º·¹µå Áß ÇÏ³ª¸¦ »©¼­ Release Thread List¿¡ ³Ö°í ÀÛ¾÷À» ½ÃÅ²´Ù.
-	//ÀÌ¸§Àº Å¥Áö¸¸ LIFO¹æ½ÄÀÌ¶ó¼­ °¡Àå ¸¶Áö¸·À¸·Î µé¾î°£ ½º·¹µåºÎÅÍ ´Ù½Ã È£ÃâµÇ´Â ±¸Á¶ÀÌ´Ù.
-	//½º·¹µå¸¦ ÁØºñ½ÃÅ°´Â ÄÁÅØ½ºÆ® ½ºÀ§Äªµµ ¿¬»ê ¼Ò¿äÀÌ¹Ç·Î, 
-	// ÀÌ¹Ì ÁØºñµÇ¾îÀÖ¾î¼­ ÄÁÅØ½ºÆ® ½ºÀ§ÄªÀÌ ÇÊ¿ä¾øÀ» È®·üÀÌ °¡Àå ³ôÀº ¸¶Áö¸· ½º·¹µåºÎÅÍ Àç»ç¿ëÇÏ±â À§ÇÑ ±¸Á¶¶ó°í ÇÑ´Ù.
+	//Waiting Thread Queue(ëŒ€ê¸° ìŠ¤ë ˆë“œ í):  
+	// ìŠ¤ë ˆë“œí’€ì— ì²˜ìŒ ë“¤ì–´ê°€ëŠ” ìŠ¤ë ˆë“œë“  Release Thread Listì˜ ìŠ¤ë ˆë“œ ì¤‘ ì™„ë£Œë£¨í‹´ì´ ëë‚œ ìŠ¤ë ˆë“œë“  GetQueuedCompletionStatus()í•¨ìˆ˜ë¥¼
+	// í˜¸ì¶œí•˜ì˜€ì§€ë§Œ IOCPë¡œë¶€í„° ìž‘ì—…ì„ ë°›ì§€ ëª»í•˜ê³  ëŒ€ê¸°ì¤‘ì¸ ëª¨ë“  ìŠ¤ë ˆë“œë“¤ì˜ IDê°€ ì—¬ê¸°ì— ë“¤ì–´ê°„ë‹¤. 
+	//ì–´ë–¤ ì´ìœ ë¡œë“  Release Thread Listì— ë¹ˆ ìžë¦¬ê°€ ìƒê²¼ëŠ”ë° IOì™„ë£Œíì— ìƒˆ ìž‘ì—…ì´ ë“¤ì–´ì˜¤ë©´, 
+	// IOCPê°€ ì—¬ê¸°ì— ìžˆëŠ” ìŠ¤ë ˆë“œ ì¤‘ í•˜ë‚˜ë¥¼ ë¹¼ì„œ Release Thread Listì— ë„£ê³  ìž‘ì—…ì„ ì‹œí‚¨ë‹¤.
+	//ì´ë¦„ì€ íì§€ë§Œ LIFOë°©ì‹ì´ë¼ì„œ ê°€ìž¥ ë§ˆì§€ë§‰ìœ¼ë¡œ ë“¤ì–´ê°„ ìŠ¤ë ˆë“œë¶€í„° ë‹¤ì‹œ í˜¸ì¶œë˜ëŠ” êµ¬ì¡°ì´ë‹¤.
+	//ìŠ¤ë ˆë“œë¥¼ ì¤€ë¹„ì‹œí‚¤ëŠ” ì»¨í…ìŠ¤íŠ¸ ìŠ¤ìœ„ì¹­ë„ ì—°ì‚° ì†Œìš”ì´ë¯€ë¡œ, 
+	// ì´ë¯¸ ì¤€ë¹„ë˜ì–´ìžˆì–´ì„œ ì»¨í…ìŠ¤íŠ¸ ìŠ¤ìœ„ì¹­ì´ í•„ìš”ì—†ì„ í™•ë¥ ì´ ê°€ìž¥ ë†’ì€ ë§ˆì§€ë§‰ ìŠ¤ë ˆë“œë¶€í„° ìž¬ì‚¬ìš©í•˜ê¸° ìœ„í•œ êµ¬ì¡°ë¼ê³  í•œë‹¤.
 
 
 
-	int createdThreadCount_;		//»ý¼ºµÈ ½º·¹µå °³¼ö.
-	std::atomic<bool> isRunning_;	//true: ½º·¹µåÇ® ÀÛµ¿Áß. 
-	std::atomic<int> destroyedThreadCount_;	//ÆÄ±«µÈ ½º·¹µå °³¼ö.
+	int createdThreadCount_;		//ìƒì„±ëœ ìŠ¤ë ˆë“œ ê°œìˆ˜.
+	std::atomic<bool> isRunning_;	//true: ìŠ¤ë ˆë“œí’€ ìž‘ë™ì¤‘. 
+	std::atomic<int> destroyedThreadCount_;	//íŒŒê´´ëœ ìŠ¤ë ˆë“œ ê°œìˆ˜.
 
-	//std::atomic<T>: ¿øÀÚ¼º
-	//½º·¹µåµé³¢¸® ¼­·Î Ä§¹üÇÒ ¼ö ÀÖ´Â ÀÏ¹Ý ¿¬»êÀÌ ¾Æ´Ñ, ¿øÀÚÃ³·³ ÂÉ°¶¼ö ¾ø´Â ¿¬»êÀ» °¡´ÉÇÏ°Ô ÇÑ´Ù°í ÇØ¼­ atomic.
+	//std::atomic<T>: ì›ìžì„±
+	//ìŠ¤ë ˆë“œë“¤ë¼ë¦¬ ì„œë¡œ ì¹¨ë²”í•  ìˆ˜ ìžˆëŠ” ì¼ë°˜ ì—°ì‚°ì´ ì•„ë‹Œ, ì›ìžì²˜ëŸ¼ ìª¼ê°¤ìˆ˜ ì—†ëŠ” ì—°ì‚°ì„ ê°€ëŠ¥í•˜ê²Œ í•œë‹¤ê³  í•´ì„œ atomic.
 
-	std::vector<GameEngineThread*> allThreads_;	//IOCP°¡ °ü¸®ÇÏ°Ô µÉ ¸ðµç GameEngineThread °´Ã¼µé.
+	std::vector<GameEngineThread*> allThreads_;	//IOCPê°€ ê´€ë¦¬í•˜ê²Œ ë  ëª¨ë“  GameEngineThread ê°ì²´ë“¤.
 };
 

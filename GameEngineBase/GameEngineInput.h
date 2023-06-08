@@ -24,7 +24,7 @@ class GameEngineInput
 			time_(0.f)
 		{
 		}
-		
+
 
 	public:
 		void Update(float _deltaTime);
@@ -61,7 +61,7 @@ public:
 
 	static void Destroy()
 	{
-		//½Ì±ÛÅæ »èÁ¦'¸¸' ¿øÇÏ´Â Å¸ÀÌ¹Ö¿¡ ÇÑ´Ù.
+		//ì‹±ê¸€í†¤ ì‚­ì œ'ë§Œ' ì›í•˜ëŠ” íƒ€ì´ë°ì— í•œë‹¤.
 		if (nullptr != inst_)
 		{
 			delete inst_;

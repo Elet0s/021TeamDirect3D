@@ -1,7 +1,7 @@
 #pragma once
 #include"Skill.h"
 
-//ÀûÀ» Á¶ÁØ ¹æÇâÀ¸·Î ¹Ğ¾î³»´Â ¾àÇÏÁö¸¸ Å« Åõ»çÃ¼¸¦ ¹ß»ç
+//ì ì„ ì¡°ì¤€ ë°©í–¥ìœ¼ë¡œ ë°€ì–´ë‚´ëŠ” ì•½í•˜ì§€ë§Œ í° íˆ¬ì‚¬ì²´ë¥¼ ë°œì‚¬
 class Cleaver : public Skill
 {
 public:
@@ -25,16 +25,16 @@ public:
 	GameEngineCollision* spearRangeCol_;
 
 	std::pair<GameEngineTextureRenderer*, GameEngineCollision*>projectileGroup_;
-	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList_;//¹ß»çÃ¼ ¸ğÀ½
+	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList_;//ë°œì‚¬ì²´ ëª¨ìŒ
 
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void Shoothing(float _deltaTime);//»çÃâÆĞÅÏ
-	void StateSet() override;//·¹º§¿¡ µû¸¥ ½ºÅÈ Àû¿ë
-	void AimSet();//¸¶¿ì½º ÄÑÁÜ
+	void Shoothing(float _deltaTime);//ì‚¬ì¶œíŒ¨í„´
+	void StateSet() override;//ë ˆë²¨ì— ë”°ë¥¸ ìŠ¤íƒ¯ ì ìš©
+	void AimSet();//ë§ˆìš°ìŠ¤ ì¼œì¤Œ
 
 private:
 	bool Shooting_;
@@ -43,14 +43,14 @@ private:
 	float duringtime_;
 	size_t consecutiveCounter_;
 	float angle_;
-	float resultCos_;//¸ó½ºÅÍ ÁÂÇ¥, ÇÃ·¹ÀÌ¾î ÁÂÇ¥ xÃà ±âÁØ °¢µµ 
-	float4 referenceVector_;//ÇÃ·¹ÀÌ¾î ¿¡¼­ ¸ó½ºÅÍ·Î °¡´Â º¤ÅÍ 
+	float resultCos_;//ëª¬ìŠ¤í„° ì¢Œí‘œ, í”Œë ˆì´ì–´ ì¢Œí‘œ xì¶• ê¸°ì¤€ ê°ë„ 
+	float4 referenceVector_;//í”Œë ˆì´ì–´ ì—ì„œ ëª¬ìŠ¤í„°ë¡œ ê°€ëŠ” ë²¡í„° 
 	float4 mouseAimPos_;
 	float consecutiveAngle_;
 	float4 range_;
 	float4 playerPos_;
 
-	WeaponInfo cleaverWeaponInfo_;//¹«±â ½ºÅÈ
+	WeaponInfo cleaverWeaponInfo_;//ë¬´ê¸° ìŠ¤íƒ¯
 
 
 };

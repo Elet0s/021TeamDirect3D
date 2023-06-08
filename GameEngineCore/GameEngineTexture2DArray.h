@@ -4,20 +4,20 @@
 
 class GameEngineTexture2DArray: public GameEngineRes<GameEngineTexture2DArray>
 {
-	//ÅØ½ºÃ³2D¹è¿­ °ü¸® Å¬·¡½º.
+	//í…ìŠ¤ì²˜2Dë°°ì—´ ê´€ë¦¬ í´ë˜ìŠ¤.
 
 	friend GameEngineRes<GameEngineTexture2DArray>;
-	//GameEngineTexture2DArray Å¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ı.
+	//GameEngineTexture2DArray í´ë˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìë¥¼ GameEngineResí´ë˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
 
 	friend class GameEngineTexture2DArraySetter;
-	//GameEngineTexture2DArraySetter Å¬·¡½º¿¡¼­ ¸®¼Ò½º¼¼ÆÃ ÇÔ¼öµéÀ» È£ÃâÇÏ±â À§ÇØ ÇÁ·»µå.
+	//GameEngineTexture2DArraySetter í´ë˜ìŠ¤ì—ì„œ ë¦¬ì†ŒìŠ¤ì„¸íŒ… í•¨ìˆ˜ë“¤ì„ í˜¸ì¶œí•˜ê¸° ìœ„í•´ í”„ë Œë“œ.
 
 private:
 	GameEngineTexture2DArray();
 	~GameEngineTexture2DArray();
-	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ı¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ı¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
-	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹İµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
-	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµĞ´Ù.
+	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ì/ì†Œë©¸ìë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
+	//ì´ í”„ë ˆì„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
+	//í”„ë¡œê·¸ë¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ë˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
 
 	GameEngineTexture2DArray(const GameEngineTexture2DArray& _other) = delete;
 	GameEngineTexture2DArray(GameEngineTexture2DArray&& _other) noexcept = delete;
@@ -41,7 +41,7 @@ public:
 		}
 		else
 		{
-			MsgBoxAssertString(std::string(_textureFileName) + ": ±×·± ÀÌ¸§ÀÇ ÅØ½ºÃ³°¡ ÀÌ ÅØ½ºÃ³ ¹è¿­¿¡ ¾ø½À´Ï´Ù.");
+			MsgBoxAssertString(std::string(_textureFileName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í…ìŠ¤ì²˜ê°€ ì´ í…ìŠ¤ì²˜ ë°°ì—´ì— ì—†ìŠµë‹ˆë‹¤.");
 			return -1;
 		}
 	}
@@ -63,7 +63,7 @@ public:
 
 		if (nameIndexPairs_.end() == findIter)
 		{
-			MsgBoxAssertString(std::string(_textureName) + ": ±×·± ÀÌ¸§ÀÇ ÅØ½ºÃ³°¡ ¾ø½À´Ï´Ù.");
+			MsgBoxAssertString(std::string(_textureName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í…ìŠ¤ì²˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
 			return float4::Zero;
 		}
 
@@ -74,13 +74,13 @@ public:
 	{
 		if (true == this->cutData_[_textureIndex].empty())
 		{
-			MsgBoxAssertString(this->GetNameCopy()+ "-" + std::to_string(_textureIndex) + ": ¾ÆÁ÷ ÀÚ¸£Áö ¾ÊÀº ÅØ½ºÃÄÀÔ´Ï´Ù.");
+			MsgBoxAssertString(this->GetNameCopy()+ "-" + std::to_string(_textureIndex) + ": ì•„ì§ ìë¥´ì§€ ì•Šì€ í…ìŠ¤ì³ì…ë‹ˆë‹¤.");
 			return float4::Zero;
 		}
 
 		if (cutData_[_textureIndex].size() <= _cutDataIndex)
 		{
-			MsgBoxAssertString(this->GetNameCopy() + "-" + std::to_string(_textureIndex) + ": ÀÎµ¦½º ¹üÀ§¸¦ ³Ñ¾î¼¹½À´Ï´Ù.");
+			MsgBoxAssertString(this->GetNameCopy() + "-" + std::to_string(_textureIndex) + ": ì¸ë±ìŠ¤ ë²”ìœ„ë¥¼ ë„˜ì–´ì„°ìŠµë‹ˆë‹¤.");
 			return float4::Zero;
 		}
 
@@ -103,21 +103,21 @@ private:
 	void PSResetShaderResource(int _bindPoint);
 
 private:
-	std::map<std::string, int> nameIndexPairs_;	//ÅØ½ºÃ³ °¢°¢ÀÇ ÀÌ¸§°ú, ±× ÅØ½ºÃ³ÀÇ ÀÎµ¦½º ¸ğÀ½.
+	std::map<std::string, int> nameIndexPairs_;	//í…ìŠ¤ì²˜ ê°ê°ì˜ ì´ë¦„ê³¼, ê·¸ í…ìŠ¤ì²˜ì˜ ì¸ë±ìŠ¤ ëª¨ìŒ.
 
 
-	std::vector<DirectX::ScratchImage> loadedScratchImages_;	//DirectXTex·Î ºÒ·¯¿Â ÅØ½ºÃ³µé.
+	std::vector<DirectX::ScratchImage> loadedScratchImages_;	//DirectXTexë¡œ ë¶ˆëŸ¬ì˜¨ í…ìŠ¤ì²˜ë“¤.
 
-	std::vector<DirectX::TexMetadata> metaDatas_;		//DirectXTex·Î ºÒ·¯¿Â ÅØ½ºÃ³ÀÇ °¢Á¾ Á¤º¸µé.
+	std::vector<DirectX::TexMetadata> metaDatas_;		//DirectXTexë¡œ ë¶ˆëŸ¬ì˜¨ í…ìŠ¤ì²˜ì˜ ê°ì¢… ì •ë³´ë“¤.
 
-	std::vector<DirectX::Image> images_;		//loadedScratchImages_¿¡¼­ ÃßÃâÇÑ ÀÌ¹ÌÁöµé.
+	std::vector<DirectX::Image> images_;		//loadedScratchImages_ì—ì„œ ì¶”ì¶œí•œ ì´ë¯¸ì§€ë“¤.
 
-	DirectX::ScratchImage scratchImage_;		//images_¸¦ ÇÏ³ª·Î ¸ğ¾Æ¼­ ¸¸µç ÅØ½ºÃ³ ¸ğÀ½.
+	DirectX::ScratchImage scratchImage_;		//images_ë¥¼ í•˜ë‚˜ë¡œ ëª¨ì•„ì„œ ë§Œë“  í…ìŠ¤ì²˜ ëª¨ìŒ.
 
-	ID3D11ShaderResourceView* shaderResourceView_;		//scratchImage_·Î ¸¸µç ¼ÎÀÌ´õ¸®¼Ò½ººä.
+	ID3D11ShaderResourceView* shaderResourceView_;		//scratchImage_ë¡œ ë§Œë“  ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°.
 
 
 
-	std::vector<std::vector<float4>> cutData_;	//ÇÁ·¹ÀÓ ¾Ö´Ï¸ŞÀÌ¼Ç ¸¸µé ¶§ ÇÊ¿äÇÑ ÅØ½ºÃ³º° ºĞÇÒ Á¤º¸.
+	std::vector<std::vector<float4>> cutData_;	//í”„ë ˆì„ ì• ë‹ˆë©”ì´ì…˜ ë§Œë“¤ ë•Œ í•„ìš”í•œ í…ìŠ¤ì²˜ë³„ ë¶„í•  ì •ë³´.
 };
 

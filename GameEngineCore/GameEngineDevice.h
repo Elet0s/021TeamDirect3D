@@ -3,12 +3,12 @@
 class GameEngineRenderTarget;
 class GameEngineDevice
 {
-	//±×·¡ÇÈÄ«µåÀÇ ¸Þ¸ð¸®¿¡ Á¢±ÙÇØ °¢Á¾ ¸®¼Ò½º¸¦ »ý¼ºÇÏ´Âµ¥ ÇÊ¿äÇÑ ID3D11Device, 
-	// »ý¼ºÇÑ °¢Á¾ ¸®¼Ò½ºµé·Î ·»´õ¸µ ÀÛ¾÷À» ¼öÇàÇÒ ID3D11DeviceContext,
-	// ·»´õ¸µÆÄÀÌÇÁ¶óÀÎÀ» °ÅÄ£ ¹é¹öÆÛ ·»´õÅ¸°ÙºäÀÇ ·»´õ¸µ Á¤º¸¸¦ OS¸¦ ÅëÇØ ¸ð´ÏÅÍ¿¡ Àü´ÞÇÏ´Âµ¥ ÇÊ¿äÇÑ IDXGISwapChain °´Ã¼µéÀ» 
-	// »ý¼º, °ü¸®ÇÏ´Â Å¬·¡½º.
+	//ê·¸ëž˜í”½ì¹´ë“œì˜ ë©”ëª¨ë¦¬ì— ì ‘ê·¼í•´ ê°ì¢… ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±í•˜ëŠ”ë° í•„ìš”í•œ ID3D11Device, 
+	// ìƒì„±í•œ ê°ì¢… ë¦¬ì†ŒìŠ¤ë“¤ë¡œ ë Œë”ë§ ìž‘ì—…ì„ ìˆ˜í–‰í•  ID3D11DeviceContext,
+	// ë Œë”ë§íŒŒì´í”„ë¼ì¸ì„ ê±°ì¹œ ë°±ë²„í¼ ë Œë”íƒ€ê²Ÿë·°ì˜ ë Œë”ë§ ì •ë³´ë¥¼ OSë¥¼ í†µí•´ ëª¨ë‹ˆí„°ì— ì „ë‹¬í•˜ëŠ”ë° í•„ìš”í•œ IDXGISwapChain ê°ì²´ë“¤ì„ 
+	// ìƒì„±, ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤.
 
-	//¿©±âÀú±â ¾µ °÷ÀÌ ¸¹À¸¹Ç·Î º¯¼ö, ÇÔ¼ö ¸ðµÎ ½ºÅÂÆ½À¸·Î ÇÑ´Ù.
+	//ì—¬ê¸°ì €ê¸° ì“¸ ê³³ì´ ë§Žìœ¼ë¯€ë¡œ ë³€ìˆ˜, í•¨ìˆ˜ ëª¨ë‘ ìŠ¤íƒœí‹±ìœ¼ë¡œ í•œë‹¤.
 
 	friend class GameEngineCore;
 
@@ -23,13 +23,13 @@ private:
 
 
 public:
-	//µð¹ÙÀÌ½º ÃÊ±âÈ­.
+	//ë””ë°”ì´ìŠ¤ ì´ˆê¸°í™”.
 	static void Initialize();
 
-	//ÇÑ¹øÀÇ ·»´õ¸µÀ» ÁØºñÇÏ±â À§ÇØ ¹é¹öÆÛ ·»´õÅ¸°ÙÀ» ¸®¼ÂÇÏ´Â ÇÔ¼ö.
+	//í•œë²ˆì˜ ë Œë”ë§ì„ ì¤€ë¹„í•˜ê¸° ìœ„í•´ ë°±ë²„í¼ ë Œë”íƒ€ê²Ÿì„ ë¦¬ì…‹í•˜ëŠ” í•¨ìˆ˜.
 	static void RenderStart();
 
-	//¸ðµç ·»´õ¸µ °úÁ¤À» °ÅÄ£ ¹é¹öÆÛ¸¦ Àü¸é ¹öÆÛ¿Í ±³Ã¼ÇÏ´Â ÇÔ¼ö.
+	//ëª¨ë“  ë Œë”ë§ ê³¼ì •ì„ ê±°ì¹œ ë°±ë²„í¼ë¥¼ ì „ë©´ ë²„í¼ì™€ êµì²´í•˜ëŠ” í•¨ìˆ˜.
 	static void RenderEnd();
 
 public:
@@ -70,33 +70,33 @@ public:
 
 private:
 	static void CreateDevice();
-	//ÀÎÅÍÆäÀÌ½º ±¸Á¶Ã¼ ID3D11DeviceÅ¸ÀÔ Æ÷ÀÎÅÍ °´Ã¼¿Í ID3D11DeviceContextÅ¸ÀÔ Æ÷ÀÎÅÍ °´Ã¼¸¦ »ý¼ºÇØ¼­,
-	// °¢°¢ ¸â¹öº¯¼ö device_¿Í deviceContext_·Î ÀúÀå/°ü¸®ÇÏ´Â ÇÔ¼ö. 
+	//ì¸í„°íŽ˜ì´ìŠ¤ êµ¬ì¡°ì²´ ID3D11Deviceíƒ€ìž… í¬ì¸í„° ê°ì²´ì™€ ID3D11DeviceContextíƒ€ìž… í¬ì¸í„° ê°ì²´ë¥¼ ìƒì„±í•´ì„œ,
+	// ê°ê° ë©¤ë²„ë³€ìˆ˜ device_ì™€ deviceContext_ë¡œ ì €ìž¥/ê´€ë¦¬í•˜ëŠ” í•¨ìˆ˜. 
 
 	static void CreateSwapChain();
-	//ÀÎÅÍÆäÀÌ½º ±¸Á¶Ã¼ IDXGISwapChainÅ¸ÀÔ Æ÷ÀÎÅÍ °´Ã¼¸¦ »ý¼ºÇØ¼­ ¸â¹öº¯¼ö swapChain_À¸·Î ÀúÀå/°ü¸®ÇÏ´Â ÇÔ¼ö.
+	//ì¸í„°íŽ˜ì´ìŠ¤ êµ¬ì¡°ì²´ IDXGISwapChainíƒ€ìž… í¬ì¸í„° ê°ì²´ë¥¼ ìƒì„±í•´ì„œ ë©¤ë²„ë³€ìˆ˜ swapChain_ìœ¼ë¡œ ì €ìž¥/ê´€ë¦¬í•˜ëŠ” í•¨ìˆ˜.
 
 private:
 	static ID3D11Device* device_;
-	//´ÙÀÌ·ºÆ®X µð¹ÙÀÌ½º: ±×·¡ÇÈÄ«µå°¡ °¡Áø ¸Þ¸ð¸®¿¡ °ø°£À» ÇÒ´çÇÏ·Á°í ÇÒ ¶§ ÇÊ¿äÇÑ °Í.
-	//±×·¡ÇÈÄ«µåÀÇ ¸Þ¸ð¸®¿¡ new¿¬»êÀ» ÇÒ ¼ö ÀÖ´Â ±ÇÇÑÀ» °¡Áö°í ÀÖ´Ù.
+	//ë‹¤ì´ë ‰íŠ¸X ë””ë°”ì´ìŠ¤: ê·¸ëž˜í”½ì¹´ë“œê°€ ê°€ì§„ ë©”ëª¨ë¦¬ì— ê³µê°„ì„ í• ë‹¹í•˜ë ¤ê³  í•  ë•Œ í•„ìš”í•œ ê²ƒ.
+	//ê·¸ëž˜í”½ì¹´ë“œì˜ ë©”ëª¨ë¦¬ì— newì—°ì‚°ì„ í•  ìˆ˜ ìžˆëŠ” ê¶Œí•œì„ ê°€ì§€ê³  ìžˆë‹¤.
 
-	static ID3D11DeviceContext* deviceContext_;	//´ÙÀÌ·ºÆ®XÀÇ µð¹ÙÀÌ½º ÄÁÅØ½ºÆ®.
-	//±×·¡ÇÈÄ«µå¿¡ ·»´õ¸µ °ü·Ã ¿¬»êÀ» ¸í·ÉÇÒ ¶§ ÇÊ¿äÇÏ´Ù. 
-	//´ÙÀÌ·ºÆ® 9¶§´Â ¾ø¾úÁö¸¸ 11¶§´Â device¿Í deviceContext°¡ ºÐ¸®µÇ¾ú´Ù.
+	static ID3D11DeviceContext* deviceContext_;	//ë‹¤ì´ë ‰íŠ¸Xì˜ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸.
+	//ê·¸ëž˜í”½ì¹´ë“œì— ë Œë”ë§ ê´€ë ¨ ì—°ì‚°ì„ ëª…ë ¹í•  ë•Œ í•„ìš”í•˜ë‹¤. 
+	//ë‹¤ì´ë ‰íŠ¸ 9ë•ŒëŠ” ì—†ì—ˆì§€ë§Œ 11ë•ŒëŠ” deviceì™€ deviceContextê°€ ë¶„ë¦¬ë˜ì—ˆë‹¤.
 
-	static IDXGISwapChain* swapChain_;	//¼öÁ÷µ¿±âÈ­¿Í ´ÙÁß ¹öÆÛ¸µÀ» ÇÏ´Âµ¥ »ç¿ëµÇ´Â ´ÙÀÌ·ºÆ®XÀÇ ÀÎÅÍÆäÀÌ½º.
-	//ÇÊ¿äÇÑ À©µµ¿ì °³¼ö¸¸Å­ ¸¸µé¸é µÈ´Ù.
-	//ÇÙ½É ¿ªÇÒÀº ¹é¹öÆÛ ·»´õÅ¸°Ù¿¡ ±×·ÁÁø ·»´õ¸µ Á¤º¸¸¦ OS(Windows)¸¦ ÅëÇØ ¸ð´ÏÅÍ¿¡ Àü´ÞÇÏ´Â°ÍÀÌ´Ù.
-	//±×·¸°Ô ÇØ¼­ Àü´ÞµÈ ·»´õ¸µ Á¤º¸´ë·Î OS°¡ ÀÌ ÇÁ·Î¼¼½º¿¡°Ô ÇÒ´çµÈ À©µµ¿ì¿¡ ÇØ´çÇÏ´Â ÇÈ¼¿µé¿¡ ±×¸®´Â °ÍÀÌ´Ù.
+	static IDXGISwapChain* swapChain_;	//ìˆ˜ì§ë™ê¸°í™”ì™€ ë‹¤ì¤‘ ë²„í¼ë§ì„ í•˜ëŠ”ë° ì‚¬ìš©ë˜ëŠ” ë‹¤ì´ë ‰íŠ¸Xì˜ ì¸í„°íŽ˜ì´ìŠ¤.
+	//í•„ìš”í•œ ìœˆë„ìš° ê°œìˆ˜ë§Œí¼ ë§Œë“¤ë©´ ëœë‹¤.
+	//í•µì‹¬ ì—­í• ì€ ë°±ë²„í¼ ë Œë”íƒ€ê²Ÿì— ê·¸ë ¤ì§„ ë Œë”ë§ ì •ë³´ë¥¼ OS(Windows)ë¥¼ í†µí•´ ëª¨ë‹ˆí„°ì— ì „ë‹¬í•˜ëŠ”ê²ƒì´ë‹¤.
+	//ê·¸ë ‡ê²Œ í•´ì„œ ì „ë‹¬ëœ ë Œë”ë§ ì •ë³´ëŒ€ë¡œ OSê°€ ì´ í”„ë¡œì„¸ìŠ¤ì—ê²Œ í• ë‹¹ëœ ìœˆë„ìš°ì— í•´ë‹¹í•˜ëŠ” í”½ì…€ë“¤ì— ê·¸ë¦¬ëŠ” ê²ƒì´ë‹¤.
 
 	//DXGI(DirectX Graphics Infrastructure): 
-	//´ÙÀÌ·ºÆ®X 10ºÎÅÍ Áö¿øµÇ´Â Çü½ÄÀÌ¶ó°í ÇÑ´Ù.
+	//ë‹¤ì´ë ‰íŠ¸X 10ë¶€í„° ì§€ì›ë˜ëŠ” í˜•ì‹ì´ë¼ê³  í•œë‹¤.
 
-	//µð¹ÙÀÌ½º, µð¹ÙÀÌ½º ÄÁÅØ½ºÆ®, ½º¿ÒÃ¼ÀÎ ¸ðµÎ IUnknownÀ» »ó¼Ó¹Þ´Â COM °´Ã¼¿Í ¿¬°áµÈ ÀÎÅÍÆäÀÌ½ºÀÌ´Ù.
+	//ë””ë°”ì´ìŠ¤, ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸, ìŠ¤ì™‘ì²´ì¸ ëª¨ë‘ IUnknownì„ ìƒì†ë°›ëŠ” COM ê°ì²´ì™€ ì—°ê²°ëœ ì¸í„°íŽ˜ì´ìŠ¤ì´ë‹¤.
 
 	static GameEngineRenderTarget* backBufferRenderTarget_;
-	//¹é¹öÆÛ·Î ¾²ÀÌ´Â ·»´õÅ¸°Ù. ¿©±â¿¡ ±×·ÁÁö´Â°Í¸¸ÀÌ ´õºí¹öÆÛ¸µ °úÁ¤À» °ÅÃÄ È­¸é¿¡ ±×·ÁÁø´Ù.
+	//ë°±ë²„í¼ë¡œ ì“°ì´ëŠ” ë Œë”íƒ€ê²Ÿ. ì—¬ê¸°ì— ê·¸ë ¤ì§€ëŠ”ê²ƒë§Œì´ ë”ë¸”ë²„í¼ë§ ê³¼ì •ì„ ê±°ì³ í™”ë©´ì— ê·¸ë ¤ì§„ë‹¤.
 
 };
 

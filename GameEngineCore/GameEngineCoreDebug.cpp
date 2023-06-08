@@ -45,10 +45,10 @@ namespace GameEngineDebug
 
 	std::vector<DebugRenderData> debugData_ = std::vector<DebugRenderData>();
 	GameEngineRenderUnit* debugRenderUnit_;
-	//Àü¿ª º¯¼öÀÇ »ý¼º ½ÃÁ¡À» Á¶ÀýÇÏ±â À§ÇØ¼­ µ¿ÀûÇÒ´çÀ¸·Î »ý¼º.
+	//ì „ì—­ ë³€ìˆ˜ì˜ ìƒì„± ì‹œì ì„ ì¡°ì ˆí•˜ê¸° ìœ„í•´ì„œ ë™ì í• ë‹¹ìœ¼ë¡œ ìƒì„±.
 
 	GameEngineRenderUnit* debugTextureRenderUnit_;
-	//Àü¿ª º¯¼öÀÇ »ý¼º ½ÃÁ¡À» Á¶ÀýÇÏ±â À§ÇØ¼­ µ¿ÀûÇÒ´çÀ¸·Î »ý¼º.
+	//ì „ì—­ ë³€ìˆ˜ì˜ ìƒì„± ì‹œì ì„ ì¡°ì ˆí•˜ê¸° ìœ„í•´ì„œ ë™ì í• ë‹¹ìœ¼ë¡œ ìƒì„±.
 
 	void GameEngineDebug::Debug3DInitialize()
 	{
@@ -62,12 +62,12 @@ namespace GameEngineDebug
 		debugRenderUnit_ = new GameEngineRenderUnit();
 		debugRenderUnit_->SetMesh("Box");
 		debugRenderUnit_->SetMaterial("3DDebug");
-		//debugRenderUnit_ÀÇ »ý¼º ½ÃÁ¡À» "Box" ¸Þ½¬¿Í "3DDebug" ¸¶Å×¸®¾ó »ý¼º ÀÌÈÄ·Î Áö¿¬½ÃÅ²´Ù.
+		//debugRenderUnit_ì˜ ìƒì„± ì‹œì ì„ "Box" ë©”ì‰¬ì™€ "3DDebug" ë§ˆí…Œë¦¬ì–¼ ìƒì„± ì´í›„ë¡œ ì§€ì—°ì‹œí‚¨ë‹¤.
 
 		debugTextureRenderUnit_ = new GameEngineRenderUnit();
 		debugTextureRenderUnit_->SetMesh("Rect");
 		debugTextureRenderUnit_->SetMaterial("3DDebug");
-		//debugTextureRenderUnit_ÀÇ »ý¼º ½ÃÁ¡À» "Rect" ¸Þ½¬¿Í "3DDebug" ¸¶Å×¸®¾ó »ý¼º ÀÌÈÄ·Î Áö¿¬½ÃÅ²´Ù.
+		//debugTextureRenderUnit_ì˜ ìƒì„± ì‹œì ì„ "Rect" ë©”ì‰¬ì™€ "3DDebug" ë§ˆí…Œë¦¬ì–¼ ìƒì„± ì´í›„ë¡œ ì§€ì—°ì‹œí‚¨ë‹¤.
 
 
 		isOnce = true;
@@ -208,7 +208,7 @@ namespace GameEngineDebug
 		GameEngineTexture* findTexture = GameEngineTexture::Find(_textureName);
 		if (nullptr == findTexture)
 		{
-			MsgBoxAssertString(_textureName + ": ±×·± ÀÌ¸§ÀÇ ÅØ½ºÃ³°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+			MsgBoxAssertString(_textureName + ": ê·¸ëŸ° ì´ë¦„ì˜ í…ìŠ¤ì²˜ê°€ ì¡´ìž¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return;
 		}
 
@@ -217,7 +217,7 @@ namespace GameEngineDebug
 		debugTransform.SetLocalPosition(_position);
 
 		if (_scale.CompareInt2D(float4::Zero))
-			//Å©±â ¼³Á¤ÀÌ ±âº»°ªÀÎ float4::Zero¶ó¸é, Å©±â¼³Á¤À» ÇÒ »ý°¢ÀÌ ¾ø´Â °ÍÀ¸·Î »ý°¢ÇÏ°í ÅØ½ºÃ³ ÀÚÃ¼ Å©±â·Î ¼¼ÆÃÇÑ´Ù. 
+			//í¬ê¸° ì„¤ì •ì´ ê¸°ë³¸ê°’ì¸ float4::Zeroë¼ë©´, í¬ê¸°ì„¤ì •ì„ í•  ìƒê°ì´ ì—†ëŠ” ê²ƒìœ¼ë¡œ ìƒê°í•˜ê³  í…ìŠ¤ì²˜ ìžì²´ í¬ê¸°ë¡œ ì„¸íŒ…í•œë‹¤. 
 		{
 			debugTransform.SetLocalScale(findTexture->GetScale());
 		}
@@ -263,7 +263,7 @@ namespace GameEngineDebug
 
 		if (nullptr == _texture)
 		{
-			MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â ÅØ½ºÃ³ÀÔ´Ï´Ù.");
+			MsgBoxAssert("ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” í…ìŠ¤ì²˜ìž…ë‹ˆë‹¤.");
 			return;
 		}
 
@@ -272,7 +272,7 @@ namespace GameEngineDebug
 		debugTransform.SetLocalPosition(_position);
 
 		if (_scale.CompareInt2D(float4::Zero))
-			//Å©±â ¼³Á¤ÀÌ ±âº»°ªÀÎ float4::Zero¶ó¸é, Å©±â¼³Á¤À» ÇÒ »ý°¢ÀÌ ¾ø´Â °ÍÀ¸·Î »ý°¢ÇÏ°í ÅØ½ºÃ³ ÀÚÃ¼ Å©±â·Î ¼¼ÆÃÇÑ´Ù. 
+			//í¬ê¸° ì„¤ì •ì´ ê¸°ë³¸ê°’ì¸ float4::Zeroë¼ë©´, í¬ê¸°ì„¤ì •ì„ í•  ìƒê°ì´ ì—†ëŠ” ê²ƒìœ¼ë¡œ ìƒê°í•˜ê³  í…ìŠ¤ì²˜ ìžì²´ í¬ê¸°ë¡œ ì„¸íŒ…í•œë‹¤. 
 		{
 			debugTransform.SetLocalScale(_texture->GetScale());
 		}

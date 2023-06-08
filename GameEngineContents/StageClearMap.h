@@ -1,6 +1,5 @@
 #pragma once
 
-// Ό³Έν :
 class StageClearMap : public GameEngineActor
 {
 public:

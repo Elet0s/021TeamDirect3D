@@ -78,7 +78,7 @@
 
 SkillManager::SkillManager()
 {
-	
+
 }
 SkillManager::~SkillManager()
 {
@@ -119,7 +119,7 @@ void SkillManager::CreatePlayerAllSkill()
 	}
 
 
-	// ´õ·´ÇôÁø ·©Å© 
+	// ë”ëŸ½í˜€ì§„ ë­í¬ 
 	skillList_[0].reserve(6);
 	{
 		Skill* Skill00 = myLevel_->CreateActor<LowPressure>(ObjectOrder::Skill,"LowPressure");
@@ -141,12 +141,12 @@ void SkillManager::CreatePlayerAllSkill()
 		skillList_[0].push_back(Skill06);
 	}
 
-	// ³ë¸» ·©Å©
+	// ë…¸ë§ ë­í¬
 	skillList_[1].reserve(16);
 	{
 		Skill* Skill00 = myLevel_->CreateActor<Agility>(ObjectOrder::Skill, "Agility");
 		skillList_[1].push_back(Skill00);
-		
+
 		Skill* Skill01 = myLevel_->CreateActor<Void>(ObjectOrder::Skill, "Void");
 		skillList_[1].push_back(Skill01);
 
@@ -191,7 +191,7 @@ void SkillManager::CreatePlayerAllSkill()
 	}
 
 
-	// ¾ğÄ¿¸Õ ·©Å©
+	// ì–¸ì»¤ë¨¼ ë­í¬
 	skillList_[2].reserve(9);
 	{
 		Skill* Skill00 = myLevel_->CreateActor<Dash>(ObjectOrder::Skill, "Dash");
@@ -222,7 +222,7 @@ void SkillManager::CreatePlayerAllSkill()
 		skillList_[2].push_back(Skill08);
 	}
 
-	// ·¹¾î ·©Å©
+	// ë ˆì–´ ë­í¬
 	skillList_[3].reserve(6);
 	{
 		Skill* Skill00 = myLevel_->CreateActor<DashCooldown>(ObjectOrder::Skill, "DashCooldown");
@@ -245,10 +245,10 @@ void SkillManager::CreatePlayerAllSkill()
 		Skill* Skill05 = myLevel_->CreateActor<Penetration>(ObjectOrder::Skill, "Penetration");
 		skillList_[3].push_back(Skill05);
 
-		
+
 	}
 
-	// ¿¡ÇÈ ·©Å©
+	// ì—í”½ ë­í¬
 	skillList_[4].reserve(4);
 	{
 		Skill* Skill00 = myLevel_->CreateActor<SingleHanded>(ObjectOrder::Skill, "SingleHanded");
@@ -293,7 +293,7 @@ void SkillManager::SkillLevelCheak()
 		skillList_[5][5]->On();
 	}
 
-	
+
 	if (skillList_[5][6]->currentlevel_ > 0 && skillList_[5][6]->IsUpdate() == false) //thunderStaf
 	{
 		skillList_[5][6]->On();
@@ -337,7 +337,7 @@ void SkillManager::SkillLevelCheak()
 	if (skillList_[5][11]->currentlevel_ > 0 && skillList_[5][11]->IsUpdate() == false) //shuriken
 	{
 		skillList_[5][11]->On();
-		//ÇÃ·¹ÀÌ¾î À§Ä¡·Î ÀÌµ¿½ÃÅ°°í on
+		//í”Œë ˆì´ì–´ ìœ„ì¹˜ë¡œ ì´ë™ì‹œí‚¤ê³  on
 		for (size_t i = 0; i < 60; i++)
 		{
 			if (i < 20)

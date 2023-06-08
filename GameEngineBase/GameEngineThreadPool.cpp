@@ -30,7 +30,7 @@ GameEngineThreadPool::~GameEngineThreadPool()
 			nullptr
 		))
 		{
-			MsgBoxAssert("½º·¹µå¿¡°Ô ÄÝ¹éÀâÀ» Àü´ÞÇÏ´Âµ¥ ½ÇÆÐÇß½À´Ï´Ù.");
+			MsgBoxAssert("ìŠ¤ë ˆë“œì—ê²Œ ì½œë°±ìž¡ì„ ì „ë‹¬í•˜ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 			return;
 		}
 
@@ -57,38 +57,38 @@ void GameEngineThreadPool::Initialize(const std::string_view& _threadName, int _
 	if (0 == this->createdThreadCount_)
 	{
 		SYSTEM_INFO info = { 0 };
-		GetSystemInfo(&info);	//OS¿¡°Ô ½Ã½ºÅÛ Á¤º¸¸¦ ¾ò¾î¿À´Â ÇÔ¼ö.
-		createdThreadCount_ = info.dwNumberOfProcessors;	// »ý¼ºÇÒ ½º·¹µå ¼ö¸¦ ÀÌ ½Ã½ºÅÛÀÇ ÇÁ·Î¼¼¼­ °³¼ö·Î Á¤ÇÑ´Ù.
+		GetSystemInfo(&info);	//OSì—ê²Œ ì‹œìŠ¤í…œ ì •ë³´ë¥¼ ì–»ì–´ì˜¤ëŠ” í•¨ìˆ˜.
+		createdThreadCount_ = info.dwNumberOfProcessors;	// ìƒì„±í•  ìŠ¤ë ˆë“œ ìˆ˜ë¥¼ ì´ ì‹œìŠ¤í…œì˜ í”„ë¡œì„¸ì„œ ê°œìˆ˜ë¡œ ì •í•œë‹¤.
 	}
 
-	this->iocpHandle_ = CreateIoCompletionPort(	//IOCP °´Ã¼¸¦ »ý¼ºÇÏ°í °Å±â¿¡ ¿¬°áµÈ ÇÚµéÀ» ÁÖ´Â ÇÔ¼ö.
-		//ÆÄÀÏ ÇÚµéÀÌ NULLÀÌ ¾Æ´Ï¶ó¸é ³Ö¾îÁØ ÆÄÀÏ ÇÚµé¿¡ »ý¼ºÇÑ IOCP ÇÚµéÀ» ¿¬°áÇØ¼­ ¹ÝÈ¯ÇÏ±âµµ ÇÑ´Ù.
-		//ÆÄÀÏ ÇÚµé°ú ±âÁ¸ IOCPÇÚµéÀ» ³Ö¾îÁØ´Ù¸é IOCP ÇÚµé¿¡ ÆÄÀÏ ÇÚµéÀ» µî·Ï½ÃÄÑÁÖ´Â ÀÛ¾÷µµ ÇÏ´Â ÇÔ¼öÀÌ±âµµ ÇÏ´Ù.
+	this->iocpHandle_ = CreateIoCompletionPort(	//IOCP ê°ì²´ë¥¼ ìƒì„±í•˜ê³  ê±°ê¸°ì— ì—°ê²°ëœ í•¸ë“¤ì„ ì£¼ëŠ” í•¨ìˆ˜.
+		//íŒŒì¼ í•¸ë“¤ì´ NULLì´ ì•„ë‹ˆë¼ë©´ ë„£ì–´ì¤€ íŒŒì¼ í•¸ë“¤ì— ìƒì„±í•œ IOCP í•¸ë“¤ì„ ì—°ê²°í•´ì„œ ë°˜í™˜í•˜ê¸°ë„ í•œë‹¤.
+		//íŒŒì¼ í•¸ë“¤ê³¼ ê¸°ì¡´ IOCPí•¸ë“¤ì„ ë„£ì–´ì¤€ë‹¤ë©´ IOCP í•¸ë“¤ì— íŒŒì¼ í•¸ë“¤ì„ ë“±ë¡ì‹œì¼œì£¼ëŠ” ìž‘ì—…ë„ í•˜ëŠ” í•¨ìˆ˜ì´ê¸°ë„ í•˜ë‹¤.
 
-		INVALID_HANDLE_VALUE,		//ÆÄÀÏ ÇÚµé. ¿ÏÀüÈ÷ »õ·Î »ý¼ºÇÏ¸é INVALID_HANDLE_VALUEÀ» ³Ö´Â´Ù.
-		//MSDN¿¡ ÀÇÇÏ¸é ÀÌ°Ô ´Ü¼øÇÑ ÆÄÀÏ ÇÚµé¸¸À» °¡¸®Å°´Â°ÍÀÌ ¾Æ´Ï¶ó 
-		// ³×Æ®¿öÅ© ¿£µåÆ÷ÀÎÆ®, TCP ¼ÒÄÏ, ³×ÀÓµå ÆÄÀÌÇÁ ¼­¹ö ¹× ¸ÞÀÏ ½½·Ô°ú °°ÀÌ overlapped I/O¸¦ Áö¿øÇÏ´Â 
-		// ¸ðµç ½Ã½ºÅÛ °³Ã¼µéÀÇ ÇÚµé±îÁö ¸ðµÎ Æ÷ÇÔÇÏ´Â °³³äÀÌ¶ó°í ÇÑ´Ù.
-		//IOCP ÇÚµé°ú ¿¬°áÇØ¾ßÇÏ´Â ¿©·¯ ÇÚµéÀ» ³Ö°í ÀÌ ÇÔ¼ö¸¦ °è¼Ó È£ÃâÇØ¼­ 
-		// ÇÑ°³ÀÇ IOCP ÇÚµé¿¡ ¿©·¯ ÆÄÀÏ ÇÚµéµéÀ» µî·Ï½ÃÅ°´Â°ÍÀÌ ÀÌ ÇÔ¼öÀÇ »ç¿ë¹ý Áß ÇÑ°³¶ó°í ÇÑ´Ù.
+		INVALID_HANDLE_VALUE,		//íŒŒì¼ í•¸ë“¤. ì™„ì „ížˆ ìƒˆë¡œ ìƒì„±í•˜ë©´ INVALID_HANDLE_VALUEì„ ë„£ëŠ”ë‹¤.
+		//MSDNì— ì˜í•˜ë©´ ì´ê²Œ ë‹¨ìˆœí•œ íŒŒì¼ í•¸ë“¤ë§Œì„ ê°€ë¦¬í‚¤ëŠ”ê²ƒì´ ì•„ë‹ˆë¼ 
+		// ë„¤íŠ¸ì›Œí¬ ì—”ë“œí¬ì¸íŠ¸, TCP ì†Œì¼“, ë„¤ìž„ë“œ íŒŒì´í”„ ì„œë²„ ë° ë©”ì¼ ìŠ¬ë¡¯ê³¼ ê°™ì´ overlapped I/Oë¥¼ ì§€ì›í•˜ëŠ” 
+		// ëª¨ë“  ì‹œìŠ¤í…œ ê°œì²´ë“¤ì˜ í•¸ë“¤ê¹Œì§€ ëª¨ë‘ í¬í•¨í•˜ëŠ” ê°œë…ì´ë¼ê³  í•œë‹¤.
+		//IOCP í•¸ë“¤ê³¼ ì—°ê²°í•´ì•¼í•˜ëŠ” ì—¬ëŸ¬ í•¸ë“¤ì„ ë„£ê³  ì´ í•¨ìˆ˜ë¥¼ ê³„ì† í˜¸ì¶œí•´ì„œ 
+		// í•œê°œì˜ IOCP í•¸ë“¤ì— ì—¬ëŸ¬ íŒŒì¼ í•¸ë“¤ë“¤ì„ ë“±ë¡ì‹œí‚¤ëŠ”ê²ƒì´ ì´ í•¨ìˆ˜ì˜ ì‚¬ìš©ë²• ì¤‘ í•œê°œë¼ê³  í•œë‹¤.
 
-		NULL,						//±âÁ¸ IOCPÇÚµé. »õ·Î »ý¼ºÇÑ´Ù¸é NULLÀ» ³Ö´Â´Ù.
+		NULL,						//ê¸°ì¡´ IOCPí•¸ë“¤. ìƒˆë¡œ ìƒì„±í•œë‹¤ë©´ NULLì„ ë„£ëŠ”ë‹¤.
 
-		NULL,						//ÆÄÀÏ ÇÚµé¿¡ ¿¬°áµÉ ¿Ï·á Å°(Completion Key). »ç¿ëÀÚ ÀÔ·Â µ¥ÀÌÅÍ.
-		//8¹ÙÀÌÆ® Æ÷ÀÎÅÍ Çü½ÄÀÌ¹Ç·Î ¿©±â¿¡ ½º·¹µå¿¡°Ô ½ÇÇà½ÃÅ³ ÇÔ¼öÀÇ Æ÷ÀÎÅÍ¸¦ ³Ö¾î Àü¼ÛÇÒ ¼ö ÀÖ´Ù. 
-		// ÀÌ ÇÔ¼ö¸¦ ¿Ï·á ·çÆ¾(Completion Routine)ÀÌ¶ó°í ÇÑ´Ù. ¿Ï·á ·çÆ¾¿¡ °ü°èµÈ Å°°ªÀÌ¶ó¼­ ¿Ï·á Å°¶ó°í ÇÏ´Â°ÍÀÏ¼öµµ ÀÖ´Ù.
-		//´çÀåÀº IOCP ÇÚµé »ý¼º¸¸ ÇØ µÑ °ÍÀÌ¹Ç·Î NULLÀ» ³Ö´Â´Ù. 
+		NULL,						//íŒŒì¼ í•¸ë“¤ì— ì—°ê²°ë  ì™„ë£Œ í‚¤(Completion Key). ì‚¬ìš©ìž ìž…ë ¥ ë°ì´í„°.
+		//8ë°”ì´íŠ¸ í¬ì¸í„° í˜•ì‹ì´ë¯€ë¡œ ì—¬ê¸°ì— ìŠ¤ë ˆë“œì—ê²Œ ì‹¤í–‰ì‹œí‚¬ í•¨ìˆ˜ì˜ í¬ì¸í„°ë¥¼ ë„£ì–´ ì „ì†¡í•  ìˆ˜ ìžˆë‹¤. 
+		// ì´ í•¨ìˆ˜ë¥¼ ì™„ë£Œ ë£¨í‹´(Completion Routine)ì´ë¼ê³  í•œë‹¤. ì™„ë£Œ ë£¨í‹´ì— ê´€ê³„ëœ í‚¤ê°’ì´ë¼ì„œ ì™„ë£Œ í‚¤ë¼ê³  í•˜ëŠ”ê²ƒì¼ìˆ˜ë„ ìžˆë‹¤.
+		//ë‹¹ìž¥ì€ IOCP í•¸ë“¤ ìƒì„±ë§Œ í•´ ë‘˜ ê²ƒì´ë¯€ë¡œ NULLì„ ë„£ëŠ”ë‹¤. 
 
-		this->createdThreadCount_			//ÀÌ IOCP°¡ ÀÛ¾÷½ÃÅ³ ¼ö ÀÖ´Â ÃÖ´ë ½º·¹µå ¼ö.
-		//0À» ³ÖÀ¸¸é ÀÚµ¿À¸·Î ÇÁ·Î¼¼¼­ ¼ýÀÚ¸¦ ¾Ë¾Æ³»¼­ ³Ö¾îÁØ´Ù°í ÇÑ´Ù. 
-		// ÇÏÁö¸¸ ¿©±â¼­´Â allThreads_º¤ÅÍÀÇ Å©±â¸¦ °áÁ¤ÇØ¾ß ÇÏ¹Ç·Î 0À» ³ÖÁö ¾Ê°í 
-		// GetSystemInfo()ÇÔ¼ö¸¦ ÅëÇØ ¾Ë¾Æ³½ ÇÁ·Î¼¼¼­ ¼ýÀÚ¸¦ ³Ö¾îÁØ´Ù.
-		//ÀÌ¹Ì »ý¼ºÇÑ IOCPÇÚµéÀÌ ÀÖ¾î¼­ µÎ¹øÂ° ÀÎÀÚ·Î ³Ö¾îÁá´Ù¸é ÀÌ °ªÀº ¹«½ÃµÈ´Ù.
+		this->createdThreadCount_			//ì´ IOCPê°€ ìž‘ì—…ì‹œí‚¬ ìˆ˜ ìžˆëŠ” ìµœëŒ€ ìŠ¤ë ˆë“œ ìˆ˜.
+		//0ì„ ë„£ìœ¼ë©´ ìžë™ìœ¼ë¡œ í”„ë¡œì„¸ì„œ ìˆ«ìžë¥¼ ì•Œì•„ë‚´ì„œ ë„£ì–´ì¤€ë‹¤ê³  í•œë‹¤. 
+		// í•˜ì§€ë§Œ ì—¬ê¸°ì„œëŠ” allThreads_ë²¡í„°ì˜ í¬ê¸°ë¥¼ ê²°ì •í•´ì•¼ í•˜ë¯€ë¡œ 0ì„ ë„£ì§€ ì•Šê³  
+		// GetSystemInfo()í•¨ìˆ˜ë¥¼ í†µí•´ ì•Œì•„ë‚¸ í”„ë¡œì„¸ì„œ ìˆ«ìžë¥¼ ë„£ì–´ì¤€ë‹¤.
+		//ì´ë¯¸ ìƒì„±í•œ IOCPí•¸ë“¤ì´ ìžˆì–´ì„œ ë‘ë²ˆì§¸ ì¸ìžë¡œ ë„£ì–´ì¤¬ë‹¤ë©´ ì´ ê°’ì€ ë¬´ì‹œëœë‹¤.
 	);
 
 	if (nullptr == iocpHandle_)
 	{
-		MsgBoxAssert("IOCP ÇÚµé »ý¼º ½ÇÆÐ.");
+		MsgBoxAssert("IOCP í•¸ë“¤ ìƒì„± ì‹¤íŒ¨.");
 		return;
 	}
 
@@ -112,7 +112,7 @@ void GameEngineThreadPool::DistributeWork(std::function<void()> _callback)
 {
 	if (nullptr == _callback)
 	{
-		MsgBoxAssert("À¯È¿ÇÏÁö ¾ÊÀº ÇÔ¼ö Æ÷ÀÎÅÍÀÔ´Ï´Ù.");
+		MsgBoxAssert("ìœ íš¨í•˜ì§€ ì•Šì€ í•¨ìˆ˜ í¬ì¸í„°ìž…ë‹ˆë‹¤.");
 		return;
 	}
 
@@ -120,92 +120,92 @@ void GameEngineThreadPool::DistributeWork(std::function<void()> _callback)
 
 	newJob->work_ = _callback;
 
-	if (false == PostQueuedCompletionStatus(		//ÁöÁ¤ÇÑ IOCPÀÇ IO¿Ï·á Å¥¿¡ IO¿Ï·á ÆÐÅ¶ÀÇ Á¤º¸¸¦ ³Ö´Â ÇÔ¼ö.
-		//¿©±â¿¡ ³Ö¾îÁø IO¿Ï·á ÆÐÅ¶ Á¤º¸´Â ³ÖÀº ¼ø¼­´ë·Î ÇÏ³ª¾¿ »ÌÇô¼­ IOCP°¡ Ã³¸®ÇÏ°Ô µÈ´Ù.
-		//Release Thread List¿¡ ºó ÀÚ¸®°¡ ÀÖ´Ù¸é IOCP°¡ ÀûÀýÇÑ ½º·¹µå ÇÑ°³¸¦ ±ú¿ì°í Release Thread List¿¡ ³Ö°ÔÇÏ´Â ±â´Éµµ ÀÖ´Ù.
+	if (false == PostQueuedCompletionStatus(		//ì§€ì •í•œ IOCPì˜ IOì™„ë£Œ íì— IOì™„ë£Œ íŒ¨í‚·ì˜ ì •ë³´ë¥¼ ë„£ëŠ” í•¨ìˆ˜.
+		//ì—¬ê¸°ì— ë„£ì–´ì§„ IOì™„ë£Œ íŒ¨í‚· ì •ë³´ëŠ” ë„£ì€ ìˆœì„œëŒ€ë¡œ í•˜ë‚˜ì”© ë½‘í˜€ì„œ IOCPê°€ ì²˜ë¦¬í•˜ê²Œ ëœë‹¤.
+		//Release Thread Listì— ë¹ˆ ìžë¦¬ê°€ ìžˆë‹¤ë©´ IOCPê°€ ì ì ˆí•œ ìŠ¤ë ˆë“œ í•œê°œë¥¼ ê¹¨ìš°ê³  Release Thread Listì— ë„£ê²Œí•˜ëŠ” ê¸°ëŠ¥ë„ ìžˆë‹¤.
 
-		iocpHandle_,	//¿©±â¿¡ ³Ö¾îÁØ ÇÚµé°ú ¿¬°áµÈ IOCP °´Ã¼ÀÇ IO¿Ï·á Å¥¿¡ IO¿Ï·á ÆÐÅ¶ Á¤º¸¸¦ ³Ö´Â´Ù.
+		iocpHandle_,	//ì—¬ê¸°ì— ë„£ì–´ì¤€ í•¸ë“¤ê³¼ ì—°ê²°ëœ IOCP ê°ì²´ì˜ IOì™„ë£Œ íì— IOì™„ë£Œ íŒ¨í‚· ì •ë³´ë¥¼ ë„£ëŠ”ë‹¤.
 
-		static_cast<DWORD>(ThreadWorkType::UserWork),	//Áö±Ý±îÁö Àü´ÞµÈ ´©Àû ¹ÙÀÌÆ® Å©±â¸¦ Àü´Þ¹ÞÀ» DWORD* º¯¼ö.
-		//½ÇÁ¦·Î´Â »çÀü¿¡ ¾à¼ÓµÈ Á¤¼ö¸¦ Àü´ÞÇØ¼­ ±× Á¤¼ö¿¡ ÇØ´çÇÏ´Â ThreadWorkType ¿­°ÅÇüÀ¸·Î º¯È¯,
-		// ¾î¶² Á¾·ùÀÇ ÀÛ¾÷ÀÎÁö ¾Ë ¼ö ÀÖ°Ô ÇÑ´Ù.
+		static_cast<DWORD>(ThreadWorkType::UserWork),	//ì§€ê¸ˆê¹Œì§€ ì „ë‹¬ëœ ëˆ„ì  ë°”ì´íŠ¸ í¬ê¸°ë¥¼ ì „ë‹¬ë°›ì„ DWORD* ë³€ìˆ˜.
+		//ì‹¤ì œë¡œëŠ” ì‚¬ì „ì— ì•½ì†ëœ ì •ìˆ˜ë¥¼ ì „ë‹¬í•´ì„œ ê·¸ ì •ìˆ˜ì— í•´ë‹¹í•˜ëŠ” ThreadWorkType ì—´ê±°í˜•ìœ¼ë¡œ ë³€í™˜,
+		// ì–´ë–¤ ì¢…ë¥˜ì˜ ìž‘ì—…ì¸ì§€ ì•Œ ìˆ˜ ìžˆê²Œ í•œë‹¤.
 
-		reinterpret_cast<ULONG_PTR>(newJob),	//IOCP °´Ã¼°¡ ½º·¹µå¿¡°Ô ¹èºÐÇÒ ÇÔ¼öÀÇ ÇÔ¼ö Æ÷ÀÎÅÍ.
+		reinterpret_cast<ULONG_PTR>(newJob),	//IOCP ê°ì²´ê°€ ìŠ¤ë ˆë“œì—ê²Œ ë°°ë¶„í•  í•¨ìˆ˜ì˜ í•¨ìˆ˜ í¬ì¸í„°.
 		//
 
-		nullptr			//Overlapped IOÀÛ¾÷½Ã Àü´ÞÇØ¾ß ÇÏ´Â OVERLAPPED ±¸Á¶Ã¼ÀÇ ÀÌÁßÆ÷ÀÎÅÍ.
-		//¿ø·¡´Â IOCPÀÇ Å¥¿¡ ½×ÀÎ IO¿Ï·áÆÐÅ¶ Á¤º¸°¡ ¾î¶² IOÀÛ¾÷ÀÇ ¿Ï·á¸¦ ¾Ë¸®´Â ÆÐÅ¶ÀÇ Á¤º¸ÀÎÁö ÆÇ´ÜÇÏ´Â ½Äº°ÀÚ ¿ªÇÒÀ» ÇÏÁö¸¸,
-		//½º·¹µå¸¸ ¿î¿ëÇÒ¶§´Â ÀÇ¹Ì¾ø´Â º¯¼öÀÌ¹Ç·Î nullptr¸¸ °è¼Ó º¸³¾ °ÍÀÌ´Ù.
+		nullptr			//Overlapped IOìž‘ì—…ì‹œ ì „ë‹¬í•´ì•¼ í•˜ëŠ” OVERLAPPED êµ¬ì¡°ì²´ì˜ ì´ì¤‘í¬ì¸í„°.
+						//ì›ëž˜ëŠ” IOCPì˜ íì— ìŒ“ì¸ IOì™„ë£ŒíŒ¨í‚· ì •ë³´ê°€ ì–´ë–¤ IOìž‘ì—…ì˜ ì™„ë£Œë¥¼ ì•Œë¦¬ëŠ” íŒ¨í‚·ì˜ ì •ë³´ì¸ì§€ íŒë‹¨í•˜ëŠ” ì‹ë³„ìž ì—­í• ì„ í•˜ì§€ë§Œ,
+						//ìŠ¤ë ˆë“œë§Œ ìš´ìš©í• ë•ŒëŠ” ì˜ë¯¸ì—†ëŠ” ë³€ìˆ˜ì´ë¯€ë¡œ nullptrë§Œ ê³„ì† ë³´ë‚¼ ê²ƒì´ë‹¤.
 	))
 	{
-		MsgBoxAssert("½º·¹µå¿¡°Ô ÄÝ¹éÀâÀ» Àü´ÞÇÏ´Âµ¥ ½ÇÆÐÇß½À´Ï´Ù.");
+		MsgBoxAssert("ìŠ¤ë ˆë“œì—ê²Œ ì½œë°±ìž¡ì„ ì „ë‹¬í•˜ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		return;
 	}
 }
 
 void GameEngineThreadPool::ExecuteWork(GameEngineThreadPool* _threadPool, GameEngineThread* _thread, HANDLE _iocpHandle)
 {
-	DWORD byte = 0;		//Áö±Ý±îÁö Àü´ÞµÈ ´©Àû ¹ÙÀÌÆ® Å©±â. ½ÇÁ¦·Î´Â ½º·¹µå¿¡°Ô ½ÇÇà½ÃÅ³ ÀÛ¾÷ÀÇ À¯Çü.
+	DWORD byte = 0;		//ì§€ê¸ˆê¹Œì§€ ì „ë‹¬ëœ ëˆ„ì  ë°”ì´íŠ¸ í¬ê¸°. ì‹¤ì œë¡œëŠ” ìŠ¤ë ˆë“œì—ê²Œ ì‹¤í–‰ì‹œí‚¬ ìž‘ì—…ì˜ ìœ í˜•.
 
-	//IOCP °´Ã¼¸¦ ÅëÇØ ½º·¹µå¿¡°Ô Àü´ÞÇÒ ÇÔ¼öÆ÷ÀÎÅÍ. 
+	//IOCP ê°ì²´ë¥¼ í†µí•´ ìŠ¤ë ˆë“œì—ê²Œ ì „ë‹¬í•  í•¨ìˆ˜í¬ì¸í„°. 
 	ULONG_PTR completionKey = NULL;
-	//IOÀÛ¾÷ÀÌ ³¡³ª¸é ´ë±âÁßÀÎ ½º·¹µå¿¡°Ô ½ÇÇà½ÃÅ³ ÇÔ¼ö¸¦ ¿Ï·á ·çÆ¾(Completion Routine)ÀÌ¶ó°í ÇÏ´Â µ¥,
-	// ±× ÇÔ¼öÀÇ Æ÷ÀÎÅÍ¶ó¼­ Completion KeyÀÎ°Í °°´Ù.
+	//IOìž‘ì—…ì´ ëë‚˜ë©´ ëŒ€ê¸°ì¤‘ì¸ ìŠ¤ë ˆë“œì—ê²Œ ì‹¤í–‰ì‹œí‚¬ í•¨ìˆ˜ë¥¼ ì™„ë£Œ ë£¨í‹´(Completion Routine)ì´ë¼ê³  í•˜ëŠ” ë°,
+	// ê·¸ í•¨ìˆ˜ì˜ í¬ì¸í„°ë¼ì„œ Completion Keyì¸ê²ƒ ê°™ë‹¤.
 
-	LPOVERLAPPED lpOverlapped = NULL;	//Overlapped IOÀÛ¾÷½Ã ÇÊ¿äÇÑ OVERLAPPED ±¸Á¶Ã¼ÀÇ Æ÷ÀÎÅÍ. ½ÇÁ¦·Î´Â »ç¿ëÇÏÁö ¾ÊÀ½.
+	LPOVERLAPPED lpOverlapped = NULL;	//Overlapped IOìž‘ì—…ì‹œ í•„ìš”í•œ OVERLAPPED êµ¬ì¡°ì²´ì˜ í¬ì¸í„°. ì‹¤ì œë¡œëŠ” ì‚¬ìš©í•˜ì§€ ì•ŠìŒ.
 
 
 	while (_threadPool->isRunning_)
 	{
-		GetQueuedCompletionStatus(	//IOCP °´Ã¼¿¡°Ô IO¿Ï·á Å¥¿¡¼­ IO ¿Ï·áÆÐÅ¶(Completion Packet)ÀÇ Á¤º¸ ÇÏ³ª¸¦ ²¨³»¿À°Ô ÇÏ´Â ÇÔ¼ö.
-			//ÀÌ ÇÔ¼ö¸¦ ÇÑ¹øÀÌ¶óµµ È£ÃâÇÑ ½º·¹µå¸¦, Ã¹¹øÂ° ÀÎÀÚ·Î ³Ö¾îÁØ ÇÚµéÀÇ IOCP°´Ã¼°¡ °ü¸®ÇÏ´Â ½º·¹µåÇ®¿¡ ³Ö´Â ±â´Éµµ ÀÖ´Ù.
-			//¿ø·¡´Â ºñµ¿±âÀûÀ¸·Î ÁßÃ¸µÇ¼­ ½ÇÇàµÇ´Â IOÀÛ¾÷µéÀÇ Á¦°¢°¢ÀÎ ¿Ï·á ¿©ºÎ¸¦ IOCP¿¡°Ô ¾Ë¸®°í 
-			// CompletionKey¸¦ ÅëÇØ Àü´ÞµÈ IOÀÛ¾÷ ¸¶°¨ ÇÔ¼ö(Completion routine)ÀÇ Æ÷ÀÎÅÍ¸¦, 
-			// ´ë±âÁßÀÎ ½º·¹µåµé Áß ÇÏ³ª¿¡°Ô ÀûÀýÇÏ°Ô ¹èºÐÇÏ´Â°ÍÀÌ ÀÌ ÇÔ¼öÀÇ ¿ø·¡ ¸ñÀûÀÌÁö¸¸ 
-			// ¿©±â¼­´Â Completion routineÀ» ´ë±âÁßÀÎ ½º·¹µåµé Áß ÇÏ³ª¿¡°Ô ÀûÀýÇÏ°Ô ¹èºÐÇÏ´Â ±â´É°ú
-			// ¹èºÐÇÒ ÀÛ¾÷ÀÌ ¾ø´Ù¸é ½º·¹µå¸¦ ÀÏ½ÃÁ¤Áö »óÅÂ·Î ¸¸µå´Â ±â´É¸¸ »ç¿ëÇÑ´Ù.
-			//½º·¹µå Ç®ÀÇ ¸ðµç ½º·¹µåµéÀÌ ¹Ýº¹ÀûÀ¸·Î ÀÌ ÇÔ¼ö¸¦ È£ÃâÇÏ°Ô ÇØ¾ß IOCP°¡ ½º·¹µåµéÀ» Á¦´ë·Î °ü¸®ÇÒ ¼ö ÀÖ´Ù.
+		GetQueuedCompletionStatus(	//IOCP ê°ì²´ì—ê²Œ IOì™„ë£Œ íì—ì„œ IO ì™„ë£ŒíŒ¨í‚·(Completion Packet)ì˜ ì •ë³´ í•˜ë‚˜ë¥¼ êº¼ë‚´ì˜¤ê²Œ í•˜ëŠ” í•¨ìˆ˜.
+			//ì´ í•¨ìˆ˜ë¥¼ í•œë²ˆì´ë¼ë„ í˜¸ì¶œí•œ ìŠ¤ë ˆë“œë¥¼, ì²«ë²ˆì§¸ ì¸ìžë¡œ ë„£ì–´ì¤€ í•¸ë“¤ì˜ IOCPê°ì²´ê°€ ê´€ë¦¬í•˜ëŠ” ìŠ¤ë ˆë“œí’€ì— ë„£ëŠ” ê¸°ëŠ¥ë„ ìžˆë‹¤.
+			//ì›ëž˜ëŠ” ë¹„ë™ê¸°ì ìœ¼ë¡œ ì¤‘ì²©ë˜ì„œ ì‹¤í–‰ë˜ëŠ” IOìž‘ì—…ë“¤ì˜ ì œê°ê°ì¸ ì™„ë£Œ ì—¬ë¶€ë¥¼ IOCPì—ê²Œ ì•Œë¦¬ê³  
+			// CompletionKeyë¥¼ í†µí•´ ì „ë‹¬ëœ IOìž‘ì—… ë§ˆê° í•¨ìˆ˜(Completion routine)ì˜ í¬ì¸í„°ë¥¼, 
+			// ëŒ€ê¸°ì¤‘ì¸ ìŠ¤ë ˆë“œë“¤ ì¤‘ í•˜ë‚˜ì—ê²Œ ì ì ˆí•˜ê²Œ ë°°ë¶„í•˜ëŠ”ê²ƒì´ ì´ í•¨ìˆ˜ì˜ ì›ëž˜ ëª©ì ì´ì§€ë§Œ 
+			// ì—¬ê¸°ì„œëŠ” Completion routineì„ ëŒ€ê¸°ì¤‘ì¸ ìŠ¤ë ˆë“œë“¤ ì¤‘ í•˜ë‚˜ì—ê²Œ ì ì ˆí•˜ê²Œ ë°°ë¶„í•˜ëŠ” ê¸°ëŠ¥ê³¼
+			// ë°°ë¶„í•  ìž‘ì—…ì´ ì—†ë‹¤ë©´ ìŠ¤ë ˆë“œë¥¼ ì¼ì‹œì •ì§€ ìƒíƒœë¡œ ë§Œë“œëŠ” ê¸°ëŠ¥ë§Œ ì‚¬ìš©í•œë‹¤.
+			//ìŠ¤ë ˆë“œ í’€ì˜ ëª¨ë“  ìŠ¤ë ˆë“œë“¤ì´ ë°˜ë³µì ìœ¼ë¡œ ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ê²Œ í•´ì•¼ IOCPê°€ ìŠ¤ë ˆë“œë“¤ì„ ì œëŒ€ë¡œ ê´€ë¦¬í•  ìˆ˜ ìžˆë‹¤.
 
-			_iocpHandle, 		  //ÀÌ ½º·¹µå¸¦ °ü¸®ÇÏ°Ô ÇÒ IOCP °´Ã¼ÀÇ ÇÚµé.
+			_iocpHandle, 		  //ì´ ìŠ¤ë ˆë“œë¥¼ ê´€ë¦¬í•˜ê²Œ í•  IOCP ê°ì²´ì˜ í•¸ë“¤.
 
-			&byte,				  //Áö±Ý±îÁö Àü´ÞµÈ ´©Àû ¹ÙÀÌÆ® Å©±â¸¦ Àü´Þ¹ÞÀ» DWORD* º¯¼ö.
-			//½ÇÁ¦·Î´Â »çÀü¿¡ ¾à¼ÓµÈ Á¤¼ö¸¦ Àü´Þ¹Þ¾Æ¼­ ±× Á¤¼ö¿¡ ÇØ´çÇÏ´Â ThreadWorkType ¿­°ÅÇüÀ¸·Î º¯È¯,
-			// ¾î¶² Á¾·ùÀÇ ÀÛ¾÷ÀÎÁö ¾Ë ¼ö ÀÖ°Ô ÇÑ´Ù.
+			&byte,				  //ì§€ê¸ˆê¹Œì§€ ì „ë‹¬ëœ ëˆ„ì  ë°”ì´íŠ¸ í¬ê¸°ë¥¼ ì „ë‹¬ë°›ì„ DWORD* ë³€ìˆ˜.
+			//ì‹¤ì œë¡œëŠ” ì‚¬ì „ì— ì•½ì†ëœ ì •ìˆ˜ë¥¼ ì „ë‹¬ë°›ì•„ì„œ ê·¸ ì •ìˆ˜ì— í•´ë‹¹í•˜ëŠ” ThreadWorkType ì—´ê±°í˜•ìœ¼ë¡œ ë³€í™˜,
+			// ì–´ë–¤ ì¢…ë¥˜ì˜ ìž‘ì—…ì¸ì§€ ì•Œ ìˆ˜ ìžˆê²Œ í•œë‹¤.
 
-			&completionKey,		  //CreateIoCompletionPort()ÇÔ¼ö¿¡¼­ ÆÄÀÏ ÇÚµé¿¡ ºÙ¿©ÁØ ÄÄÇÃ¸®¼Ç Å°.
-			//IOÀÛ¾÷ÀÌ ¿Ï·áµÇ¸é ÀÌ Å°·Î µî·ÏµÈ ÇÔ¼öÆ÷ÀÎÅÍ°¡ IOCP¿¡ ÀÇÇØ ÀûÇÕÇÑ ½º·¹µå¿¡°Ô ¹èºÐµÇ¾î È£ÃâµÈ´Ù. 
-			//ÀÌ ÇÔ¼ö¸¦ °¡¸®ÄÑ ¿Ï·á ·çÆ¾(Completion Routine)ÀÌ¶ó°í ÇÑ´Ù.
+			&completionKey,		  //CreateIoCompletionPort()í•¨ìˆ˜ì—ì„œ íŒŒì¼ í•¸ë“¤ì— ë¶™ì—¬ì¤€ ì»´í”Œë¦¬ì…˜ í‚¤.
+			//IOìž‘ì—…ì´ ì™„ë£Œë˜ë©´ ì´ í‚¤ë¡œ ë“±ë¡ëœ í•¨ìˆ˜í¬ì¸í„°ê°€ IOCPì— ì˜í•´ ì í•©í•œ ìŠ¤ë ˆë“œì—ê²Œ ë°°ë¶„ë˜ì–´ í˜¸ì¶œëœë‹¤. 
+			//ì´ í•¨ìˆ˜ë¥¼ ê°€ë¦¬ì¼œ ì™„ë£Œ ë£¨í‹´(Completion Routine)ì´ë¼ê³  í•œë‹¤.
 
-			&lpOverlapped,		  //Overlapped IOÀÛ¾÷½Ã Àü´Þ¹Þ¾Æ¾ß ÇÏ´Â OVERLAPPED ±¸Á¶Ã¼ÀÇ ÀÌÁßÆ÷ÀÎÅÍ.
-			//¿ø·¡´Â IOCPÀÇ Å¥¿¡ ½×ÀÎ IO¿Ï·áÆÐÅ¶ÀÌ ¾î¶² IOÀÛ¾÷ÀÇ ¿Ï·á¸¦ ¾Ë¸®´Â ÆÐÅ¶ÀÎÁö ÆÇ´ÜÇÏ´Â ½Äº°ÀÚ ¿ªÇÒÀ» ÇÏÁö¸¸,
-			//½º·¹µå¸¸ ¿î¿ëÇÒ¶§´Â ÀÇ¹Ì¾ø´Â º¯¼öÀÌ¹Ç·Î nullptr¸¸ °è¼Ó ¼ö½ÅÇÒ °ÍÀÌ´Ù.
+			&lpOverlapped,		  //Overlapped IOìž‘ì—…ì‹œ ì „ë‹¬ë°›ì•„ì•¼ í•˜ëŠ” OVERLAPPED êµ¬ì¡°ì²´ì˜ ì´ì¤‘í¬ì¸í„°.
+			//ì›ëž˜ëŠ” IOCPì˜ íì— ìŒ“ì¸ IOì™„ë£ŒíŒ¨í‚·ì´ ì–´ë–¤ IOìž‘ì—…ì˜ ì™„ë£Œë¥¼ ì•Œë¦¬ëŠ” íŒ¨í‚·ì¸ì§€ íŒë‹¨í•˜ëŠ” ì‹ë³„ìž ì—­í• ì„ í•˜ì§€ë§Œ,
+			//ìŠ¤ë ˆë“œë§Œ ìš´ìš©í• ë•ŒëŠ” ì˜ë¯¸ì—†ëŠ” ë³€ìˆ˜ì´ë¯€ë¡œ nullptrë§Œ ê³„ì† ìˆ˜ì‹ í•  ê²ƒì´ë‹¤.
 
-			INFINITE	//ÃÖ´ë ´ë±â½Ã°£. 
-			//ÀÌ ½Ã°£µ¿¾È IOCP´Â ÀÌ ÇÔ¼ö¸¦ È£ÃâÇÑ ½º·¹µå¿¡°Ô ¹èºÐÇÒ IO¿Ï·á ÆÐÅ¶ÀÌ »ý±æ ¶§±îÁö ÇÔ¼öÀÇ ¹ÝÈ¯À» ¹Ì·ç°í ´ë±âÇÏ°Ô ÇÑ´Ù.
-			//ÀÌ ½Ã°£ÀÌ ´Ù Áö³¯¶§±îÁö »õ ¿Ï·á ÆÐÅ¶ÀÌ µé¾î¿ÀÁö ¾Ê´Â´Ù¸é ½º·¹µå´Â ½Ã°£ÃÊ°ú(TimeOut)µÇ¾î ÇÏ´ÂÀÏ ¾øÀÌ ·çÇÁ¸¦ ÇÑ¹ø µ·´Ù.
-			// ÇÏÁö¸¸ ¿©±â¼­´Â ´ë±â ½Ã°£À» INFINITE == 0xffffffff == »ç½Ç»ó ¹«ÇÑ´ë·Î ¼³Á¤ÇßÀ¸¹Ç·Î 
-			// ÀÛ¾÷À» ¸¶Ä£ ½º·¹µå¿¡°Ô ´ÙÀ½ IO¿Ï·á ÆÐÅ¶ == »õ ÀÛ¾÷ÀÌ µé¾î¿Ã ¶§±îÁö Waiting Thread List¿¡¼­ ¹«ÇÑÁ¤ ±â´Ù¸®°Ô ÇÑ´Ù.
+			INFINITE	//ìµœëŒ€ ëŒ€ê¸°ì‹œê°„. 
+						//ì´ ì‹œê°„ë™ì•ˆ IOCPëŠ” ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•œ ìŠ¤ë ˆë“œì—ê²Œ ë°°ë¶„í•  IOì™„ë£Œ íŒ¨í‚·ì´ ìƒê¸¸ ë•Œê¹Œì§€ í•¨ìˆ˜ì˜ ë°˜í™˜ì„ ë¯¸ë£¨ê³  ëŒ€ê¸°í•˜ê²Œ í•œë‹¤.
+						//ì´ ì‹œê°„ì´ ë‹¤ ì§€ë‚ ë•Œê¹Œì§€ ìƒˆ ì™„ë£Œ íŒ¨í‚·ì´ ë“¤ì–´ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ ìŠ¤ë ˆë“œëŠ” ì‹œê°„ì´ˆê³¼(TimeOut)ë˜ì–´ í•˜ëŠ”ì¼ ì—†ì´ ë£¨í”„ë¥¼ í•œë²ˆ ëˆë‹¤.
+						// í•˜ì§€ë§Œ ì—¬ê¸°ì„œëŠ” ëŒ€ê¸° ì‹œê°„ì„ INFINITE == 0xffffffff == ì‚¬ì‹¤ìƒ ë¬´í•œëŒ€ë¡œ ì„¤ì •í–ˆìœ¼ë¯€ë¡œ 
+						// ìž‘ì—…ì„ ë§ˆì¹œ ìŠ¤ë ˆë“œì—ê²Œ ë‹¤ìŒ IOì™„ë£Œ íŒ¨í‚· == ìƒˆ ìž‘ì—…ì´ ë“¤ì–´ì˜¬ ë•Œê¹Œì§€ Waiting Thread Listì—ì„œ ë¬´í•œì • ê¸°ë‹¤ë¦¬ê²Œ í•œë‹¤.
 		);
 
 		ThreadWorkType workType = static_cast<ThreadWorkType>(byte);
 
 		switch (workType)
 		{
-		case ThreadWorkType::UserWork:
-		{
-			GameEngineThreadCallbackJob* job = reinterpret_cast<GameEngineThreadCallbackJob*>(completionKey);
-			job->Process();
-			delete job;
-			break;
-		}
-		case ThreadWorkType::Destroy:
-			++_threadPool->destroyedThreadCount_;
-			return;
+			case ThreadWorkType::UserWork:
+			{
+				GameEngineThreadCallbackJob* job = reinterpret_cast<GameEngineThreadCallbackJob*>(completionKey);
+				job->Process();
+				delete job;
+				break;
+			}
+			case ThreadWorkType::Destroy:
+				++_threadPool->destroyedThreadCount_;
+				return;
 
 
-		default:
-			//MsgBoxAssert("¾Ë ¼ö ¾ø´Â ÄÝ¹éÀâ À¯ÇüÀÔ´Ï´Ù.");
-			break;
+			default:
+				//MsgBoxAssert("ì•Œ ìˆ˜ ì—†ëŠ” ì½œë°±ìž¡ ìœ í˜•ìž…ë‹ˆë‹¤.");
+				break;
 		}
 	}
 }

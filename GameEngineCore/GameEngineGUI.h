@@ -6,7 +6,7 @@
 
 class GameEngineGUIWindow: public GameEngineNameObject, public GameEngineUpdateObject
 {
-	//ÀÌ Å¬·¡½ºÀÇ Á¸Àç ÀÌÀ¯´Â??
+	//ì´ í´ë˜ìŠ¤ì˜ ì¡´ì¬ ì´ìœ ëŠ”??
 
 	friend class GameEngineGUI;
 
@@ -25,10 +25,10 @@ protected:
 
 class GameEngineGUI
 {
-	//ImGui »ı¼º ¹× °ü¸® Å¬·¡½º.
+	//ImGui ìƒì„± ë° ê´€ë¦¬ í´ë˜ìŠ¤.
 
 	friend class GameEngineCore;
-	//Destroy()ÇÔ¼ö¸¦ ¿ÀÁ÷ GameEngineCoreÅ¬·¡½º¿¡¼­¸¸ ¾²°Ô ÇÏ±â À§ÇØ¼­ private·Î ¸·°í friend¸¦ °Ç´Ù.
+	//Destroy()í•¨ìˆ˜ë¥¼ ì˜¤ì§ GameEngineCoreí´ë˜ìŠ¤ì—ì„œë§Œ ì“°ê²Œ í•˜ê¸° ìœ„í•´ì„œ privateë¡œ ë§‰ê³  friendë¥¼ ê±´ë‹¤.
 
 
 public:
@@ -68,4 +68,3 @@ private:
 	static std::list<GameEngineGUIWindow*> guiWindows_;
 
 };
-

@@ -1,6 +1,6 @@
 #pragma once
 
-// Ό³Έν :
+// μ„¤λª… :
 class ClearUIBox : public GameEngineActor
 {
 public:
@@ -18,7 +18,7 @@ protected:
 
 private:
 	class SoulCardSelectBox* soulCardSelectBox_;
-	
+
 	GameEngineTextureRenderer* mainrenderer_;
 	GameEngineTextureRenderer* button1renderer_;
 	GameEngineTextureRenderer* button2renderer_;
@@ -40,6 +40,6 @@ private:
 	void Start()override;
 	void Update(float _deltaTime) override;
 	void End()  override {};
-	
+
 };
 

@@ -4,7 +4,7 @@
 
 SteelSkin::SteelSkin() 
 {
-	name_ = "°­Ã¶ ÇÇºÎ";
+	name_ = "ê°•ì²  í”¼ë¶€";
 	SetName(std::string_view("SteelSkin"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 2;
@@ -21,7 +21,7 @@ void SteelSkin::Init()
 	std::string sDef = std::to_string(PlayerInfo_.def_).substr(0, std::to_string(PlayerInfo_.def_).find(".") + 3);
 	std::string sDefNext = std::to_string(PlayerInfo_.def_ + 1.5f).substr(0, std::to_string(PlayerInfo_.def_ + 1.5f).find(".") + 3);
 
-	etc_ = sDef + " -> " + sDefNext + " ¹æ¾î·Â ";
+	etc_ = sDef + " -> " + sDefNext + " ë°©ì–´ë ¥ ";
 }
 
 void SteelSkin::Effect()

@@ -32,18 +32,18 @@ void GameEngineUpdateObject::ReleaseHierarchy()
 		if (nullptr != (*iter))
 		{
 			(*iter)->ReleaseHierarchy();	
-			//´õÀÌ»óÀÇ ÀÚ½ÄÀÌ ¾øÀ»¶§±îÁö Àç±Í ¹æ½ÄÀ¸·Î ReleaseHierarchy()ÇÔ¼ö¸¦ °è¼Ó È£ÃâÇÑ´Ù.
+			//ë”ì´ìƒì˜ ìì‹ì´ ì—†ì„ë•Œê¹Œì§€ ì¬ê·€ ë°©ì‹ìœ¼ë¡œ ReleaseHierarchy()í•¨ìˆ˜ë¥¼ ê³„ì† í˜¸ì¶œí•œë‹¤.
 		}
 	}
 
-	//´õ ÀÌ»óÀÇ ÀÚ½ÄÀÌ ¾ø´Ù¸é ÇÔ¼ö È£ÃâÀ» ¸ØÃß°í ¿©±â±îÁö ³»·Á¿Â´Ù.
-	delete this;	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©¿¡¼­ ÁøÂ¥·Î ¿ÀºêÁ§Æ®ÀÇ ¸Ş¸ğ¸®ÇØÁ¦¸¦ ÇÏ´Â ºÎºĞ.
+	//ë” ì´ìƒì˜ ìì‹ì´ ì—†ë‹¤ë©´ í•¨ìˆ˜ í˜¸ì¶œì„ ë©ˆì¶”ê³  ì—¬ê¸°ê¹Œì§€ ë‚´ë ¤ì˜¨ë‹¤.
+	delete this;	//ì´ í”„ë ˆì„ì›Œí¬ì—ì„œ ì§„ì§œë¡œ ì˜¤ë¸Œì íŠ¸ì˜ ë©”ëª¨ë¦¬í•´ì œë¥¼ í•˜ëŠ” ë¶€ë¶„.
 }
 
 void GameEngineUpdateObject::AllUpdate(float _deltaTime)
 {
 	this->AddAccTime(_deltaTime);
-	this->ReleaseUpdate(_deltaTime);	 //deadTime_ÀÌ 0ÀÌ µÈ ¿ÀºêÁ§Æ®µé¿¡°Ô »ç¸Á ÆÇÁ¤À» ³»¸°´Ù.
+	this->ReleaseUpdate(_deltaTime);	 //deadTime_ì´ 0ì´ ëœ ì˜¤ë¸Œì íŠ¸ë“¤ì—ê²Œ ì‚¬ë§ íŒì •ì„ ë‚´ë¦°ë‹¤.
 	this->Update(GameEngineTime::GetInst().GetTimeScale(this->GetOrder()) * _deltaTime);
 
 	for (GameEngineUpdateObject* child : children_)
@@ -109,35 +109,35 @@ void GameEngineUpdateObject::AllOffEvent()
 
 void GameEngineUpdateObject::ReleaseObject(std::list<GameEngineUpdateObject*>& _releaseList)
 {
-	//ÀÚ±â ÀÚ½ÅÀÌ (true == IsDead())ÀÎÁö == »ç¸ÁÆÇÁ¤À» ¹Ş¾Ò´ÂÁö È®ÀÎÇÑ´Ù.
+	//ìê¸° ìì‹ ì´ (true == IsDead())ì¸ì§€ == ì‚¬ë§íŒì •ì„ ë°›ì•˜ëŠ”ì§€ í™•ì¸í•œë‹¤.
 	if (true == this->IsDead())
-		//ÀÚ±â ÀÚ½Å¸¸ È®ÀÎÇÏ´Â isDead_ º¯¼ö°¡ ¾Æ´Ï¶ó ºÎ¸ğ±îÁö È®ÀÎÇÏ´Â IsDead()ÇÔ¼ö·Î È®ÀÎÇØ¾ß ÇÑ´Ù.
+		//ìê¸° ìì‹ ë§Œ í™•ì¸í•˜ëŠ” isDead_ ë³€ìˆ˜ê°€ ì•„ë‹ˆë¼ ë¶€ëª¨ê¹Œì§€ í™•ì¸í•˜ëŠ” IsDead()í•¨ìˆ˜ë¡œ í™•ì¸í•´ì•¼ í•œë‹¤.
 	{
-		DetachObject();		//»ç¸ÁÆÇÁ¤¹ŞÀº ¸ğµç ¿ÀºêÁ§Æ®µéÀ» ºÎ¸ğ ¿ÀºêÁ§Æ®ÀÇ chlidren¸®½ºÆ®¿¡¼­ Á¦°ÅÇÑ´Ù.
+		DetachObject();		//ì‚¬ë§íŒì •ë°›ì€ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë“¤ì„ ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ chlidrenë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°í•œë‹¤.
 		_releaseList.push_back(this);
-		//»ç¸ÁÆÇÁ¤¹ŞÀº ¸ğµç ¿ÀºêÁ§Æ®µéÀ» ÇØ´ç ·¹º§ÀÇ _releaseObjects¿¡ ³Ö´Â´Ù.
+		//ì‚¬ë§íŒì •ë°›ì€ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë“¤ì„ í•´ë‹¹ ë ˆë²¨ì˜ _releaseObjectsì— ë„£ëŠ”ë‹¤.
 
-		return;	//¾Æ·¡·Î ³»·Á°¡Áö ¸»°í ¹Ù·Î ÇÔ¼ö Á¾·á.
+		return;	//ì•„ë˜ë¡œ ë‚´ë ¤ê°€ì§€ ë§ê³  ë°”ë¡œ í•¨ìˆ˜ ì¢…ë£Œ.
 	}
 
-	//thisÀÇ isDead°¡ false¶ó¼­ ¿©±â±îÁö ³»·Á ¿Ô´Ù¸é ÀÚ½Ä ¿ÀºêÁ§Æ®µé Áß »ç¸ÁÆÇÁ¤¹ŞÀº ¿ÀºêÁ§Æ®°¡ ÀÖ´ÂÁö Å½»öÇÑ´Ù.
+	//thisì˜ isDeadê°€ falseë¼ì„œ ì—¬ê¸°ê¹Œì§€ ë‚´ë ¤ ì™”ë‹¤ë©´ ìì‹ ì˜¤ë¸Œì íŠ¸ë“¤ ì¤‘ ì‚¬ë§íŒì •ë°›ì€ ì˜¤ë¸Œì íŠ¸ê°€ ìˆëŠ”ì§€ íƒìƒ‰í•œë‹¤.
 	for (std::list<GameEngineUpdateObject*>::iterator iter = children_.begin();
 		iter != children_.end(); /*iter++*/)
 	{
 		if (true == (*iter)->IsDead())
 		{
-			//ÀÚ½Ä ¿ÀºêÁ§Æ®µé Áß »ç¸ÁÆÇÁ¤¹ŞÀº ¿ÀºêÁ§Æ®°¡ ÀÖ´Ù¸é,
-			_releaseList.push_back((*iter));	//_releaseObjects¿¡ ³Ö¾î »èÁ¦ ´ë»óÀ¸·Î µî·ÏÇÑ´Ù.
+			//ìì‹ ì˜¤ë¸Œì íŠ¸ë“¤ ì¤‘ ì‚¬ë§íŒì •ë°›ì€ ì˜¤ë¸Œì íŠ¸ê°€ ìˆë‹¤ë©´,
+			_releaseList.push_back((*iter));	//_releaseObjectsì— ë„£ì–´ ì‚­ì œ ëŒ€ìƒìœ¼ë¡œ ë“±ë¡í•œë‹¤.
 
 			GameEngineUpdateObject* deleteObject = (*iter);
-			++iter;	//chlidren¸®½ºÆ®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ Á¦°ÅÇÏ±â Àü¿¡ ÀÌÅÍ·¹ÀÌÅÍ¸¦ ¸ÕÀú ÀÌµ¿½ÃÄÑ³õÁö ¾ÊÀ¸¸é,
-			//ÀÌÅÍ·¹ÀÌÅÍ°¡ ´ÙÀ½ ³ëµå·Î ÀÌµ¿ÇÒ ¼ö ¾ø´Ù.
+			++iter;	//chlidrenë¦¬ìŠ¤íŠ¸ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì œê±°í•˜ê¸° ì „ì— ì´í„°ë ˆì´í„°ë¥¼ ë¨¼ì € ì´ë™ì‹œì¼œë†“ì§€ ì•Šìœ¼ë©´,
+			//ì´í„°ë ˆì´í„°ê°€ ë‹¤ìŒ ë…¸ë“œë¡œ ì´ë™í•  ìˆ˜ ì—†ë‹¤.
 
-			deleteObject->DetachObject();	//ºÎ¸ğ ¿ÀºêÁ§Æ®ÀÇ chlidren¸®½ºÆ®¿¡¼­ Á¦°ÅÇÑ´Ù.
+			deleteObject->DetachObject();	//ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ chlidrenë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°í•œë‹¤.
 		}
 		else
 		{
-			//ÀÚ½Ä ¿ÀºêÁ§Æ®µé Áß »ç¸ÁÆÇÁ¤¹ŞÀº ¿ÀºêÁ§Æ®°¡ ¾ø´Ù¸é ÀÚ½ÄÀÇ ÀÚ½Äµé±îÁö Àç±Í ¹æ½ÄÀ¸·Î ÀüºÎ Å½»öÇÑ´Ù.
+			//ìì‹ ì˜¤ë¸Œì íŠ¸ë“¤ ì¤‘ ì‚¬ë§íŒì •ë°›ì€ ì˜¤ë¸Œì íŠ¸ê°€ ì—†ë‹¤ë©´ ìì‹ì˜ ìì‹ë“¤ê¹Œì§€ ì¬ê·€ ë°©ì‹ìœ¼ë¡œ ì „ë¶€ íƒìƒ‰í•œë‹¤.
 			(*iter)->ReleaseObject(_releaseList);
 			++iter;
 		}

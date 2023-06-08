@@ -22,14 +22,14 @@ GameEngineFontRenderer::~GameEngineFontRenderer()
 {
 }
 
-void GameEngineFontRenderer::SetText(const std::string_view& _text, const std::string_view& _font /*= "µ¸¿ò"*/)
+void GameEngineFontRenderer::SetText(const std::string_view& _text, const std::string_view& _font /*= "ë‹ì›€"*/)
 {
 	text_ = _text;
 	font_ = GameEngineFont::Find(_font);
 
 	if (nullptr == font_)
 	{
-		MsgBoxAssertString(std::string(_font) + ": ±×·± ÀÌ¸§ÀÇ ÆùÆ®°¡ ¾ø½À´Ï´Ù.");
+		MsgBoxAssertString(std::string(_font) + ": ê·¸ëŸ° ì´ë¦„ì˜ í°íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
 		return;
 	}
 }
@@ -78,8 +78,8 @@ void GameEngineFontRenderer::Render(float _deltaTime)
 	GameEngineMaterial::AllShaderReset();
 
 	//camera_.lock()->GetConclusionRenderTarget()->Merge(fontTarget_);
-	//ÃÖÁ¾ ·»´õÅ¸°Ù¿¡ ±×³É ±×¸®¸é ÆùÆ®·»´õ·¯ÀÇ °á°ú¹°°ú ±× µÚ¿¡ ±×¸®´Â ÀÎ½ºÅÏ½Ì ·»´õ·¯ÀÇ °á°ú°ª±îÁö °°ÀÌ 
-	// ´Ù¸¥ ·»´õÅ¸°ÙµéÀÇ »ö»ó°ª¿¡ µ¤Çô¹ö¸°´Ù.
+	//ìµœì¢… ë Œë”íƒ€ê²Ÿì— ê·¸ëƒ¥ ê·¸ë¦¬ë©´ í°íŠ¸ë Œë”ëŸ¬ì˜ ê²°ê³¼ë¬¼ê³¼ ê·¸ ë’¤ì— ê·¸ë¦¬ëŠ” ì¸ìŠ¤í„´ì‹± ë Œë”ëŸ¬ì˜ ê²°ê³¼ê°’ê¹Œì§€ ê°™ì´ 
+	// ë‹¤ë¥¸ ë Œë”íƒ€ê²Ÿë“¤ì˜ ìƒ‰ìƒê°’ì— ë®í˜€ë²„ë¦°ë‹¤.
 
 	camera_->GetForwardRenderTarget()->Merge(fontTarget_);
 }

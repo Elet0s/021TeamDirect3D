@@ -6,17 +6,17 @@ class GameEngineIndexBuffer;
 class GameEngineInstancingBuffer;
 class GameEngineMesh : public GameEngineRes<GameEngineMesh>
 {
-	//¸Ş½¬¸¦ ±¸¼ºÇÏ´Â µÎ°¡Áö ¿ä¼ÒÀÎ ¹öÅØ½º¹öÆÛ¿Í ÀÎµ¦½º¹öÆÛ¸¦ ¹­¾î¼­ °ü¸®ÇÏ´Â Å¬·¡½º.
+	//ë©”ì‰¬ë¥¼ êµ¬ì„±í•˜ëŠ” ë‘ê°€ì§€ ìš”ì†Œì¸ ë²„í…ìŠ¤ë²„í¼ì™€ ì¸ë±ìŠ¤ë²„í¼ë¥¼ ë¬¶ì–´ì„œ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤.
 
 	friend GameEngineRes<GameEngineMesh>;
-	//GameEngineMesh Å¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ı.
+	//GameEngineMesh í´ë˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìë¥¼ GameEngineResí´ë˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
 
 private:
 	GameEngineMesh();
 	~GameEngineMesh();
-	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ı¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ı¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
-	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹İµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
-	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµĞ´Ù.
+	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ì/ì†Œë©¸ìë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
+	//ì´ í”„ë ˆì„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
+	//í”„ë¡œê·¸ë¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ë˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
 
 	GameEngineMesh(const GameEngineMesh& _other) = delete;
 	GameEngineMesh(GameEngineMesh&& _other) noexcept = delete;
@@ -25,10 +25,10 @@ private:
 
 
 public:
-	//¸Ş½¬¿Í µ¿ÀÏÇÑ ÀÌ¸§À» °¡Áø ¹öÅØ½º¹öÆÛ¿Í ÀÎµ¦½º¹öÆÛ·Î ¸Ş½¬ »ı¼º,
+	//ë©”ì‰¬ì™€ ë™ì¼í•œ ì´ë¦„ì„ ê°€ì§„ ë²„í…ìŠ¤ë²„í¼ì™€ ì¸ë±ìŠ¤ë²„í¼ë¡œ ë©”ì‰¬ ìƒì„±,
 	static GameEngineMesh* Create(const std::string_view& _meshName);
 
-	//¸Ş½¬ ÀÌ¸§, ¹öÅØ½º¹öÆÛ ÀÌ¸§, ÀÎµ¦½º¹öÆÛ ÀÌ¸§À» °¢°¢ ÁöÁ¤ÇØ¼­ ¸Ş½¬ »ı¼º.
+	//ë©”ì‰¬ ì´ë¦„, ë²„í…ìŠ¤ë²„í¼ ì´ë¦„, ì¸ë±ìŠ¤ë²„í¼ ì´ë¦„ì„ ê°ê° ì§€ì •í•´ì„œ ë©”ì‰¬ ìƒì„±.
 	static GameEngineMesh* Create(
 		const std::string_view& _meshName,
 		const std::string_view& _vertexBufferName,
@@ -40,28 +40,28 @@ public:
 		GameEngineIndexBuffer* _indexBuffer
 	);
 
-	//ÀÌ ¸Ş½¬¿¡ ¹öÅØ½º¹öÆÛ¸¦ ¼¼ÆÃÇÏ´Â ÇÔ¼ö.
+	//ì´ ë©”ì‰¬ì— ë²„í…ìŠ¤ë²„í¼ë¥¼ ì„¸íŒ…í•˜ëŠ” í•¨ìˆ˜.
 	void SetVertexBuffer_InputAssembler1(const std::string_view& _vertexBufferName);
 
 	void SetVertexBuffer_InputAssembler1(GameEngineVertexBuffer* _vertexBuffer);
 
-	//ÀÌ ¸Ş½¬¿¡ ÀÎµ¦½º¹öÆÛ¸¦ ¼¼ÆÃÇÏ´Â ÇÔ¼ö.
+	//ì´ ë©”ì‰¬ì— ì¸ë±ìŠ¤ë²„í¼ë¥¼ ì„¸íŒ…í•˜ëŠ” í•¨ìˆ˜.
 	void SetIndexBuffer_InputAssembler2(const std::string_view& _indexBufferName);
 
 	void SetIndexBuffer_InputAssembler2(GameEngineIndexBuffer* _indexBuffer);
 
-	//ÀÌ ¸Ş½¬¸¦ DC¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
+	//ì´ ë©”ì‰¬ë¥¼ DCì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 	void Set();	
 
-	//ÀÌ ¸Ş½¬¿Í ÀÎ½ºÅÏ½Ì¹öÆÛ¸¦ DC¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
+	//ì´ ë©”ì‰¬ì™€ ì¸ìŠ¤í„´ì‹±ë²„í¼ë¥¼ DCì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 	void SetInstancingBuffer(GameEngineInstancingBuffer* _instancingBuffer);	
-	//ÀÎ½ºÅÏ½Ì¹öÆÛ´Â ¿©±â¼­ Á¤Á¡¹öÆÛ¿Í ÇÔ²² IA1 ´Ü°è·Î ¿¬°áµÈ´Ù. 
-	// ±×·¡¼­ ÀÎ½ºÅÏ½Ì¹öÆÛ¿¡´Â ¼¼ÆÃ ÇÔ¼ö°¡ µû·Î Á¸ÀçÇÏÁö ¾Ê´Â´Ù.
+	//ì¸ìŠ¤í„´ì‹±ë²„í¼ëŠ” ì—¬ê¸°ì„œ ì •ì ë²„í¼ì™€ í•¨ê»˜ IA1 ë‹¨ê³„ë¡œ ì—°ê²°ëœë‹¤. 
+	// ê·¸ë˜ì„œ ì¸ìŠ¤í„´ì‹±ë²„í¼ì—ëŠ” ì„¸íŒ… í•¨ìˆ˜ê°€ ë”°ë¡œ ì¡´ì¬í•˜ì§€ ì•ŠëŠ”ë‹¤.
 
-	//·»´õ¸µ ÇÔ¼ö.
+	//ë Œë”ë§ í•¨ìˆ˜.
 	void Render();
 
-	//ÀÎ½ºÅÏ½º ·»´õ¸µ ÇÔ¼ö.
+	//ì¸ìŠ¤í„´ìŠ¤ ë Œë”ë§ í•¨ìˆ˜.
 	void RenderInstances(size_t _instancingCount);
 
 	const class GameEngineInputLayoutDesc& GetInputLayoutDesc() const;

@@ -4,7 +4,7 @@
 
 GodsWrath::GodsWrath() 
 {
-	name_ = "½ÅÀÇ °Ý³ë";
+	name_ = "ì‹ ì˜ ê²©ë…¸";
 	SetName(std::string_view("GodsWrath"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 4;
@@ -21,7 +21,7 @@ void GodsWrath::Init()
 	std::string sAttackMultiple = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
 	std::string sAttackMultipleNext = std::to_string(PlayerPInfo_.atkMultiple_Result + 15.0f).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result + 15.0f).find(".")) + "%";
 
-	etc_ = sAttackMultiple + " -> " + sAttackMultipleNext + " ÇÇÇØ ¹è¼ö ";
+	etc_ = sAttackMultiple + " -> " + sAttackMultipleNext + " í”¼í•´ ë°°ìˆ˜ ";
 }
 
 void GodsWrath::Effect()

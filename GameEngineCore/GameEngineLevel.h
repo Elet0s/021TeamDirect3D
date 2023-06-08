@@ -23,7 +23,7 @@ class GameEngineTransform;
 class GameEngineCollision;
 class GameEngineLevel : public GameEngineNameObject, public GameEngineUpdateObject
 {
-	//·¹º§: ¸ğµç ÇüÅÂÀÇ ¾÷µ¥ÀÌÆ®¿ÀºêÁ§Æ®µéÀ» °ü¸®ÇÏ´Â ¿ÀºêÁ§Æ®.
+	//ë ˆë²¨: ëª¨ë“  í˜•íƒœì˜ ì—…ë°ì´íŠ¸ì˜¤ë¸Œì íŠ¸ë“¤ì„ ê´€ë¦¬í•˜ëŠ” ì˜¤ë¸Œì íŠ¸.
 
 	friend class GameEngineCore;
 	friend GameEngineRenderer;
@@ -32,7 +32,7 @@ class GameEngineLevel : public GameEngineNameObject, public GameEngineUpdateObje
 	friend GameEngineCollision;
 
 protected:
-	GameEngineLevel();	//ÀÌÁ¦´Â ·¹º§ »ı¼ºÀÚ¿¡¼­ ¸ŞÀÎÄ«¸Ş¶ó¿Í UIÄ«¸Ş¶ó¸¦ »ı¼ºÇÏ°í ½ÃÀÛÇÑ´Ù.
+	GameEngineLevel();	//ì´ì œëŠ” ë ˆë²¨ ìƒì„±ìì—ì„œ ë©”ì¸ì¹´ë©”ë¼ì™€ UIì¹´ë©”ë¼ë¥¼ ìƒì„±í•˜ê³  ì‹œì‘í•œë‹¤.
 	virtual ~GameEngineLevel() = 0;
 
 	GameEngineLevel(const GameEngineLevel& _other) = delete;
@@ -51,7 +51,7 @@ public:
 	void AllClear();
 
 public:
-	//¸ŞÀÎÄ«¸Ş¶ó ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿À´Â ÇÔ¼ö.
+	//ë©”ì¸ì¹´ë©”ë¼ ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜.
 	GameEngineCamera* GetMainCamera()
 	{
 		return cameras_[static_cast<int>(CameraOrder::MainCamera)];
@@ -72,19 +72,19 @@ public:
 		return cameras_[static_cast<int>(_cameraOrder)];
 	}
 
-	//¾×ÅÍµé Áß Æ¯Á¤ Á¾·ù¸¸ °¡Á®¿À´Â ÇÔ¼ö.
+	//ì•¡í„°ë“¤ ì¤‘ íŠ¹ì • ì¢…ë¥˜ë§Œ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜.
 	template<typename GroupIndexType>
 	std::list<GameEngineActor*> GetGroup(GroupIndexType _objectGroupIndex)
 	{
 		return allActors_[static_cast<int>(_objectGroupIndex)];
 	}
-	//¾×ÅÍµé Áß Æ¯Á¤ Á¾·ù¸¸ °¡Á®¿À´Â ÇÔ¼ö.
+	//ì•¡í„°ë“¤ ì¤‘ íŠ¹ì • ì¢…ë¥˜ë§Œ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜.
 	std::list<GameEngineActor*> GetGroup(int _objectGroupIndex)
 	{
 		return allActors_[_objectGroupIndex];
 	}
 
-	//¾×ÅÍµé Áß Æ¯Á¤ Á¾·ù¸¸ ¿øÇÏ´Â ÇüÅÂ·Î Çüº¯È¯ÇØ¼­ °¡Á®¿À´Â ÇÔ¼ö.
+	//ì•¡í„°ë“¤ ì¤‘ íŠ¹ì • ì¢…ë¥˜ë§Œ ì›í•˜ëŠ” í˜•íƒœë¡œ í˜•ë³€í™˜í•´ì„œ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜.
 	template<typename ObjectType>
 	std::list<ObjectType*> GetConvertedGroup(int _objectGroupIndex)
 	{
@@ -95,21 +95,21 @@ public:
 		}
 		return result;
 	}
-	//¾×ÅÍµé Áß Æ¯Á¤ Á¾·ù¸¸ ¿øÇÏ´Â ÇüÅÂ·Î Çüº¯È¯ÇØ¼­ °¡Á®¿À´Â ÇÔ¼ö.
+	//ì•¡í„°ë“¤ ì¤‘ íŠ¹ì • ì¢…ë¥˜ë§Œ ì›í•˜ëŠ” í˜•íƒœë¡œ í˜•ë³€í™˜í•´ì„œ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜.
 	template<typename ObjectType, typename GroupIndexType>
 	std::list<ObjectType*> GetConvertedGroup(GroupIndexType _objectGroupIndex)
 	{
 		return GetConvertedGroup<ObjectType>(static_cast<int>(_objectGroupIndex));
 	}
 
-	//¾×ÅÍ »ı¼º ÇÔ¼ö.
+	//ì•¡í„° ìƒì„± í•¨ìˆ˜.
 	template<typename ActorType, typename GroupIndexType>
 	ActorType* CreateActor(GroupIndexType _type, const std::string_view& _actorName = "")
 	{
 		return CreateActor<ActorType>(static_cast<int>(_type), _actorName);
 	}
 
-	//¾×ÅÍ »ı¼º ÇÔ¼ö.
+	//ì•¡í„° ìƒì„± í•¨ìˆ˜.
 	template<typename ActorType>
 	ActorType* CreateActor(int _objectGroupIndex = 0, const std::string_view& _actorName = "")
 	{
@@ -121,11 +121,11 @@ public:
 		newActor->Start();
 
 		std::list<GameEngineActor*>& actorGroup = allActors_[_objectGroupIndex];
-		//allActors_ ¾È¿¡ _objectGroupIndex¸¦ Å°°ªÀ¸·Î °¡Áø Æä¾î°¡ ÀÖ´Ù¸é ±×°É Ã£¾Æ¼­ ¹İÈ¯ÇÏ°í,
-		// ¾ø´Ù¸é ¸¸µé¾î¼­ ¹İÈ¯ÇÑ´Ù. 
-		//Áï allActors_.find(_objectGroupIndex) + 
+		//allActors_ ì•ˆì— _objectGroupIndexë¥¼ í‚¤ê°’ìœ¼ë¡œ ê°€ì§„ í˜ì–´ê°€ ìˆë‹¤ë©´ ê·¸ê±¸ ì°¾ì•„ì„œ ë°˜í™˜í•˜ê³ ,
+		// ì—†ë‹¤ë©´ ë§Œë“¤ì–´ì„œ ë°˜í™˜í•œë‹¤. 
+		//ì¦‰ allActors_.find(_objectGroupIndex) + 
 		// allActors_.insert(std::make_pair(_objectGroupIndex, std::list<GameEngineActor*>(newActor));
-		// ÇüÅÂÀÇ ÄÚµåÀÌ´Ù.
+		// í˜•íƒœì˜ ì½”ë“œì´ë‹¤.
 
 		actorGroup.push_back(newActor);
 
@@ -137,35 +137,35 @@ private:
 
 	void UpdateLevel(float _deltaTime);
 
-	//ÀÌ ·¹º§ÀÌ °¡Áø ¾×ÅÍµéÀ» ¾÷µ¥ÀÌÆ®ÇÏ´Â ÇÔ¼ö.
+	//ì´ ë ˆë²¨ì´ ê°€ì§„ ì•¡í„°ë“¤ì„ ì—…ë°ì´íŠ¸í•˜ëŠ” í•¨ìˆ˜.
 	void UpdateActors(float _deltaTime);
 
-	//ÀÌ ·¹º§ÀÇ Ä«¸Ş¶óµéÀÌ °¡Áø ·»´õ·¯µéÀÇ ·»´õ¸µ Á¤º¸´ë·Î °¢°¢ÀÇ Ä«¸Ş¶óµéÀÌ °¡Áø ·»´õÅ¸°Ù¿¡ ·»´õÇØ¼­ 
-	// ¹é¹öÆÛ ·»´õÅ¸°ÙÀ¸·Î ÇÕÄ¡°í Àü¸é ¹öÆÛ¿Í ±³Ã¼±îÁö ÇÏ´Â ÇÔ¼ö.
+	//ì´ ë ˆë²¨ì˜ ì¹´ë©”ë¼ë“¤ì´ ê°€ì§„ ë Œë”ëŸ¬ë“¤ì˜ ë Œë”ë§ ì •ë³´ëŒ€ë¡œ ê°ê°ì˜ ì¹´ë©”ë¼ë“¤ì´ ê°€ì§„ ë Œë”íƒ€ê²Ÿì— ë Œë”í•´ì„œ 
+	// ë°±ë²„í¼ ë Œë”íƒ€ê²Ÿìœ¼ë¡œ í•©ì¹˜ê³  ì „ë©´ ë²„í¼ì™€ êµì²´ê¹Œì§€ í•˜ëŠ” í•¨ìˆ˜.
 	void Render(float _deltaTime);
 
-	//allActors_¸Ê¿¡¼­ ¾×ÅÍ¸¦ Á¦°ÅÇÏ´Â ÇÔ¼ö.
+	//allActors_ë§µì—ì„œ ì•¡í„°ë¥¼ ì œê±°í•˜ëŠ” í•¨ìˆ˜.
 	void RemoveActor(GameEngineActor* _actor);
 
-	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ Á¤½Ä ¿ÀºêÁ§Æ® »èÁ¦ ÀıÂ÷.
+	//ì´ í”„ë ˆì„ì›Œí¬ì˜ ì •ì‹ ì˜¤ë¸Œì íŠ¸ ì‚­ì œ ì ˆì°¨.
 	void Release(float _deltaTime);
 
-	//Ä«¸Ş¶ó¿¡ ·»´õ·¯¸¦ µî·ÏÇÏ´Â ÇÔ¼ö. 
+	//ì¹´ë©”ë¼ì— ë Œë”ëŸ¬ë¥¼ ë“±ë¡í•˜ëŠ” í•¨ìˆ˜. 
 	void PushRenderer(GameEngineRenderer* _renderer, int _cameraOrder);
 
-	//ÀÌ ·¹º§¿¡ Ä«¸Ş¶ó¸¦ µî·ÏÇÏ´Â ÇÔ¼ö.
+	//ì´ ë ˆë²¨ì— ì¹´ë©”ë¼ë¥¼ ë“±ë¡í•˜ëŠ” í•¨ìˆ˜.
 	void PushCamera(GameEngineCamera* _camera, int _cameraOrder);
 
-	//ÀÌ ·¹º§¿¡ Ãæµ¹Ã¼¸¦ µî·ÏÇÏ´Â ÇÔ¼ö.
+	//ì´ ë ˆë²¨ì— ì¶©ëŒì²´ë¥¼ ë“±ë¡í•˜ëŠ” í•¨ìˆ˜.
 	void PushCollision(GameEngineCollision* _collision, int _order);
 
-	//¿ÀºêÁ§Æ®¸¦ ´ÙÀ½ ·¹º§·Î ÀÌÀü½ÃÅ°´Â ÇÔ¼ö.
+	//ì˜¤ë¸Œì íŠ¸ë¥¼ ë‹¤ìŒ ë ˆë²¨ë¡œ ì´ì „ì‹œí‚¤ëŠ” í•¨ìˆ˜.
 	void OverChildMove(GameEngineLevel* _nextLevel);
 
-	//·¹º§ÀÌ ±³Ã¼µÇ¼­ Ã¹ ¾÷µ¥ÀÌÆ®¸¦ ½ÃÀÛÇÒ ¶§ ¾×ÅÍµéÀÌ °¡Áø AllLevelStartEvent() ÇÔ¼öµéÀ» ÀüºÎ È£ÃâÇÏ´Â ÇÔ¼ö.
+	//ë ˆë²¨ì´ êµì²´ë˜ì„œ ì²« ì—…ë°ì´íŠ¸ë¥¼ ì‹œì‘í•  ë•Œ ì•¡í„°ë“¤ì´ ê°€ì§„ AllLevelStartEvent() í•¨ìˆ˜ë“¤ì„ ì „ë¶€ í˜¸ì¶œí•˜ëŠ” í•¨ìˆ˜.
 	void ActorLevelStartEvent();
 
-	//·¹º§ÀÌ ±³Ã¼µÇ¼­ ´õÀÌ»ó ¾÷µ¥ÀÌÆ®¸¦ ÇÏÁö ¾ÊÀ» ¶§ ¾×ÅÍµéÀÌ °¡Áø AllLevelEndEvent() ÇÔ¼öµéÀ» ÀüºÎ È£ÃâÇÏ´Â ÇÔ¼ö.
+	//ë ˆë²¨ì´ êµì²´ë˜ì„œ ë”ì´ìƒ ì—…ë°ì´íŠ¸ë¥¼ í•˜ì§€ ì•Šì„ ë•Œ ì•¡í„°ë“¤ì´ ê°€ì§„ AllLevelEndEvent() í•¨ìˆ˜ë“¤ì„ ì „ë¶€ í˜¸ì¶œí•˜ëŠ” í•¨ìˆ˜.
 	void ActorLevelEndEvent();
 
 private:
@@ -196,16 +196,16 @@ private:
 	}
 
 private:
-	//ÀÌ ·¹º§ÀÇ ¸ğµç ¾×ÅÍµéÀÌ ÀúÀåµÈ ¸Ê.
+	//ì´ ë ˆë²¨ì˜ ëª¨ë“  ì•¡í„°ë“¤ì´ ì €ì¥ëœ ë§µ.
 	std::map<int, std::list<GameEngineActor*>> allActors_;
 
-	//»èÁ¦ ¿¹Á¤ÀÎ ¸ğµç ¿ÀºêÁ§Æ®µéÀÌ Á¾·ù ºÒ¹®ÇÏ°í Àá½Ã ÀúÀåµÇ´Â ÀÏÁ¾ÀÇ ÈŞÁöÅë.
+	//ì‚­ì œ ì˜ˆì •ì¸ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë“¤ì´ ì¢…ë¥˜ ë¶ˆë¬¸í•˜ê³  ì ì‹œ ì €ì¥ë˜ëŠ” ì¼ì¢…ì˜ íœ´ì§€í†µ.
 	std::list<GameEngineUpdateObject*> deleteObjects_;
 
-	//ÀÌ ·¹º§ÀÌ »ç¿ëÇÏ´Â ¸ğµç Ä«¸Ş¶óµé.
+	//ì´ ë ˆë²¨ì´ ì‚¬ìš©í•˜ëŠ” ëª¨ë“  ì¹´ë©”ë¼ë“¤.
 	std::vector<GameEngineCamera*> cameras_;
 
-	//ÀÌ ·¹º§ÀÇ ¸ğµç Ãæµ¹Ã¼µé.	
+	//ì´ ë ˆë²¨ì˜ ëª¨ë“  ì¶©ëŒì²´ë“¤.	
 	std::map<int, std::list<GameEngineCollision*>> allCollisions_;
 
 };

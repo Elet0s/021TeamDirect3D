@@ -53,7 +53,7 @@ void ClearUIBox::Start()
 
 
 	}
-	
+
 
 
 	{
@@ -64,7 +64,7 @@ void ClearUIBox::Start()
 		button2renderer_->ChangeCamera(CameraOrder::UICamera);
 
 
-	
+
 	}
 
 	{
@@ -74,21 +74,21 @@ void ClearUIBox::Start()
 		button1FontRenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
 		button1FontRenderer_->SetSize(28.f);
 
-		button1FontRenderer_->SetText(std::to_string(gold_) + " °ñµå");
+		button1FontRenderer_->SetText(std::to_string(gold_) + " ê³¨ë“œ");
 
 		button2FontRenderer_ = CreateComponent<GameEngineFontRenderer>();
 		button2FontRenderer_->SetTextPosition(float4(90.f, 185.f, -2000.f));
 		button2FontRenderer_->ChangeCamera(CameraOrder::UICamera);
 		button2FontRenderer_->SetLeftAndRightSort(LeftAndRightSort::Left);
 		button2FontRenderer_->SetSize(28.f);
-		button2FontRenderer_->SetText("Ä«µå ¼±ÅÃ");
+		button2FontRenderer_->SetText("ì¹´ë“œ ì„ íƒ");
 
 		button3FontRenderer_ = CreateComponent<GameEngineFontRenderer>();
 		button3FontRenderer_->SetTextPosition(float4(1080.f, 630.f, -2000.f));
 		button3FontRenderer_->ChangeCamera(CameraOrder::UICamera);
 		button3FontRenderer_->SetLeftAndRightSort(LeftAndRightSort::Center);
 		button3FontRenderer_->SetSize(30.f);
-		button3FontRenderer_->SetText("´ÙÀ½ ½ºÅ×ÀÌÁö");
+		button3FontRenderer_->SetText("ë‹¤ìŒ ìŠ¤í…Œì´ì§€");
 	}
 
 	{
@@ -106,7 +106,7 @@ void ClearUIBox::Update(float _deltaTime)
 {
 	if (true == button1renderer_->IsUpdate() &&
 		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button1renderer_->GetTransformData().worldWorldMatrix_, float4::Zero, true)
-	)
+		)
 	{
 		button1renderer_->SetTexture("Button_Selected.png");
 		if (GameEngineInput::GetInst().IsUp("Click"))
@@ -134,7 +134,7 @@ void ClearUIBox::Update(float _deltaTime)
 
 	if (true == button2renderer_->IsUpdate() &&
 		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button2renderer_->GetTransformData().worldWorldMatrix_, float4::Zero, true)
-	)
+		)
 	{
 		button2renderer_->SetTexture("Button_Selected.png");
 		if (GameEngineInput::GetInst().IsUp("Click"))
@@ -153,7 +153,7 @@ void ClearUIBox::Update(float _deltaTime)
 
 	if (true == button3renderer_->IsUpdate() &&
 		true == GetLevel<ClearLevel>()->GetMousePointer()->IsPointing(button3renderer_->GetTransformData().worldWorldMatrix_, float4::Zero, true)
-	)
+		)
 	{
 		button3renderer_->SetTexture("Button_Selected_Stage.png");
 		if (GameEngineInput::GetInst().IsUp("Click"))
@@ -198,11 +198,11 @@ void ClearUIBox::RendererOff()
 	mainrenderer_->Off();
 	button1FontRenderer_->Off();
 	button1renderer_->Off();
-	
+
 	button2FontRenderer_->Off();
 	button2renderer_->Off();
 
 	button3FontRenderer_->Off();
 	button3renderer_->Off();
-	
+
 }

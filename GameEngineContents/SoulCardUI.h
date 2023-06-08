@@ -6,7 +6,7 @@ enum class Appear
 	False,
 };
 
-// Ό³Έν :
+// μ„¤λª… :
 class Skill;
 class SoulCardUI : public GameEngineActor
 {
@@ -36,7 +36,7 @@ private:
 	GameEngineFontRenderer* Level_;
 	GameEngineFontRenderer* Rank_;
 	GameEngineCollision* cardColision_;
-	
+
 	Skill* mySkill_;
 
 	float alphaTexture_;
@@ -53,9 +53,9 @@ private:
 	void CardDraw();
 	void WeaponDraw();
 	void ColorChange(Appear _Value);
-	
 
 
-	
+
+
 };
 

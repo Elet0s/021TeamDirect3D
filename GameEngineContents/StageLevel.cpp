@@ -10,7 +10,6 @@ StageLevel::StageLevel()
 }
 StageLevel::~StageLevel()
 {
-
 }
 void StageLevel::Start()
 {

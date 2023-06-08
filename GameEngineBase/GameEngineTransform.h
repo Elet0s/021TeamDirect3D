@@ -28,8 +28,8 @@ class CollisionData
 	};
 
 	CollisionData() : obb_()
-		//°¡Àå ¸¹Àº µ¥ÀÌÅÍ°¡ ÇÊ¿äÇÑ OBB·Î ÃÊ±âÈ­¸¦ ÇÏ¸é, 
-		// °°Àº µ¥ÀÌÅÍ¸¦ ¾²´Â À¯´Ï¾ðÀÇ ´Ù¸¥ º¯¼öµéµµ °°ÀÌ ÃÊ±âÈ­°¡ µÈ´Ù
+		//ê°€ìž¥ ë§Žì€ ë°ì´í„°ê°€ í•„ìš”í•œ OBBë¡œ ì´ˆê¸°í™”ë¥¼ í•˜ë©´, 
+		// ê°™ì€ ë°ì´í„°ë¥¼ ì“°ëŠ” ìœ ë‹ˆì–¸ì˜ ë‹¤ë¥¸ ë³€ìˆ˜ë“¤ë„ ê°™ì´ ì´ˆê¸°í™”ê°€ ëœë‹¤
 	{
 	}
 
@@ -37,36 +37,36 @@ class CollisionData
 
 struct TransformData
 {
-	//°ø°£Á¤º¸ ÀúÀå ¹× Ãæµ¹ÆÇÁ¤.
-	//Æ®·£½ºÆû ±âº» Ã¼°è´Â ¾Ë¾Æº¸±â ½±°Ô 60µµ¹ýÀ¸·Î ÀúÀåÇÑ´Ù.
+	//ê³µê°„ì •ë³´ ì €ìž¥ ë° ì¶©ëŒíŒì •.
+	//íŠ¸ëžœìŠ¤í¼ ê¸°ë³¸ ì²´ê³„ëŠ” ì•Œì•„ë³´ê¸° ì‰½ê²Œ 60ë„ë²•ìœ¼ë¡œ ì €ìž¥í•œë‹¤.
 
-	float4 localScaleVector_;		//·ÎÄÃ ÁÂÇ¥»ó Å©±â. Å©±â°¡ 0ÀÎ ¹°Ã¼´Â Á¸ÀçÇÒ ¼ö ¾øÀ¸¹Ç·Î ±âº»°ªÀÌ 1ÀÌ µÇ¾î¾ß ÇÑ´Ù.
-	float4 localRotationVector_;	//·ÎÄÃ ÁÂÇ¥»ó ÀÚÀü(°¢µµ).
-	float4 localPositionVector_;	//·ÎÄÃ ÁÂÇ¥»ó ÀÌµ¿(À§Ä¡).
+	float4 localScaleVector_;		//ë¡œì»¬ ì¢Œí‘œìƒ í¬ê¸°. í¬ê¸°ê°€ 0ì¸ ë¬¼ì²´ëŠ” ì¡´ìž¬í•  ìˆ˜ ì—†ìœ¼ë¯€ë¡œ ê¸°ë³¸ê°’ì´ 1ì´ ë˜ì–´ì•¼ í•œë‹¤.
+	float4 localRotationVector_;	//ë¡œì»¬ ì¢Œí‘œìƒ ìžì „(ê°ë„).
+	float4 localPositionVector_;	//ë¡œì»¬ ì¢Œí‘œìƒ ì´ë™(ìœ„ì¹˜).
 
-	float4x4 localScaleMatrix_;		//Å©±âÇà·Ä.
-	float4x4 localRotationMatrix_;	//ÀÚÀüÇà·Ä(°¢µµ/È¸Àü). ¼­·Î ¼öÁ÷ÀÎ 3°³ ±âÀúº¤ÅÍ°¡ ÀÖ¾î¾ß È¸ÀüÇà·ÄÀÌ µÈ´Ù.
-	float4x4 localPositionMatrix_;	//ÀÌµ¿Çà·Ä(À§Ä¡).
+	float4x4 localScaleMatrix_;		//í¬ê¸°í–‰ë ¬.
+	float4x4 localRotationMatrix_;	//ìžì „í–‰ë ¬(ê°ë„/íšŒì „). ì„œë¡œ ìˆ˜ì§ì¸ 3ê°œ ê¸°ì €ë²¡í„°ê°€ ìžˆì–´ì•¼ íšŒì „í–‰ë ¬ì´ ëœë‹¤.
+	float4x4 localPositionMatrix_;	//ì´ë™í–‰ë ¬(ìœ„ì¹˜).
 
 	float4x4 localWorldMatrix_;
-	//¿ÀºêÁ§Æ®ÀÇ Å©±â, ÀÚÀü, ÀÌµ¿Çà·ÄÀÌ ¹Ý¿µµÈ, ºÎ¸ð ¿ÀºêÁ§Æ®ÀÇ ·ÎÄÃ¿ùµå»ó¿¡¼­ÀÇ ¿ùµåÇà·Ä. Çà·ÄÀÇ Áß°£Á¤»ê.
+	//ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°, ìžì „, ì´ë™í–‰ë ¬ì´ ë°˜ì˜ëœ, ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ ë¡œì»¬ì›”ë“œìƒì—ì„œì˜ ì›”ë“œí–‰ë ¬. í–‰ë ¬ì˜ ì¤‘ê°„ì •ì‚°.
 
 
-	float4 worldScaleVector_;	//¿ùµåÁÂÇ¥»ó Å©±â. ÀÌµ¿ÇÏÁö ¾ÊÀ¸¹Ç·Î w´Â 0À¸·Î ¼³Á¤ÇÑ´Ù.
-	float4 worldRotationVector_;	//¿ùµåÁÂÇ¥»ó È¸Àü·®. ÀÌµ¿ÇÏÁö ¾ÊÀ¸¹Ç·Î w´Â 0À¸·Î ¼³Á¤ÇÑ´Ù.
-	float4 worldPositionVector_;	//¿ùµåÁÂÇ¥»ó À§Ä¡. ÀÌµ¿·®À» ¹Ý¿µÇØ¾ß ÇÏ¹Ç·Î w´Â 1À¸·Î ¼³Á¤ÇÑ´Ù.
+	float4 worldScaleVector_;	//ì›”ë“œì¢Œí‘œìƒ í¬ê¸°. ì´ë™í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ wëŠ” 0ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
+	float4 worldRotationVector_;	//ì›”ë“œì¢Œí‘œìƒ íšŒì „ëŸ‰. ì´ë™í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ wëŠ” 0ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
+	float4 worldPositionVector_;	//ì›”ë“œì¢Œí‘œìƒ ìœ„ì¹˜. ì´ë™ëŸ‰ì„ ë°˜ì˜í•´ì•¼ í•˜ë¯€ë¡œ wëŠ” 1ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
 
 
-	//¿ÀºêÁ§Æ®ÀÇ ·ÎÄÃ Å©±â, ·ÎÄÃ ÀÚÀü, ·ÎÄÃ ÀÌµ¿Çà·Ä¿¡ ºÎ¸ðÀÇ ¿ùµåÇà·Ä±îÁö ¹Ý¿µµÈ ÃÖÁ¾ ¿ùµå Çà·Ä.
+	//ì˜¤ë¸Œì íŠ¸ì˜ ë¡œì»¬ í¬ê¸°, ë¡œì»¬ ìžì „, ë¡œì»¬ ì´ë™í–‰ë ¬ì— ë¶€ëª¨ì˜ ì›”ë“œí–‰ë ¬ê¹Œì§€ ë°˜ì˜ëœ ìµœì¢… ì›”ë“œ í–‰ë ¬.
 	float4x4 worldWorldMatrix_;
-	//¿©±â¿¡ Ä«¸Þ¶ó ÄÄÆ÷³ÍÆ®ÀÇ ºäÇà·Ä°ú Åõ¿µÇà·Ä±îÁö °ÅÄ¡°í ³ª¾ß ºñ·Î¼Ò ¸ð´ÏÅÍ¿¡ ¶ç¿ï ¼ö ÀÖ°Ô µÈ´Ù.
-	//ºÎ¸ðÀÇ ¿ùµåÇà·Ä±îÁö ¹Ý¿µÇÏ¸é¼­ ÀÚ¿¬½º·´°Ô °øÀü±îÁö ¹Ý¿µµÇ¹Ç·Î µû·Î ºÐ¸®µÈ °øÀüÇà·ÄÀ» ¸¸µé ÇÊ¿ä°¡ ¾ø´Ù.
+	//ì—¬ê¸°ì— ì¹´ë©”ë¼ ì»´í¬ë„ŒíŠ¸ì˜ ë·°í–‰ë ¬ê³¼ íˆ¬ì˜í–‰ë ¬ê¹Œì§€ ê±°ì¹˜ê³  ë‚˜ì•¼ ë¹„ë¡œì†Œ ëª¨ë‹ˆí„°ì— ë„ìš¸ ìˆ˜ ìžˆê²Œ ëœë‹¤.
+	//ë¶€ëª¨ì˜ ì›”ë“œí–‰ë ¬ê¹Œì§€ ë°˜ì˜í•˜ë©´ì„œ ìžì—°ìŠ¤ëŸ½ê²Œ ê³µì „ê¹Œì§€ ë°˜ì˜ë˜ë¯€ë¡œ ë”°ë¡œ ë¶„ë¦¬ëœ ê³µì „í–‰ë ¬ì„ ë§Œë“¤ í•„ìš”ê°€ ì—†ë‹¤.
 
-	float4x4 viewMatrix_;		//ºäÇà·Ä.
-	float4x4 projectionMatrix_;	//Åõ¿µÇà·Ä.
+	float4x4 viewMatrix_;		//ë·°í–‰ë ¬.
+	float4x4 projectionMatrix_;	//íˆ¬ì˜í–‰ë ¬.
 
-	float4x4 worldViewMatrix_;	//¿ùµåÇà·Ä¿¡ ºäÇà·ÄÀÌ Àû¿ëµÈ Çà·Ä.
-	float4x4 worldViewProjectionMatrix_;	//¿ùµåÇà·Ä¿¡ ºäÇà·Ä + Åõ¿µÇà·Ä±îÁö Àû¿ëµÈ Çà·Ä.
+	float4x4 worldViewMatrix_;	//ì›”ë“œí–‰ë ¬ì— ë·°í–‰ë ¬ì´ ì ìš©ëœ í–‰ë ¬.
+	float4x4 worldViewProjectionMatrix_;	//ì›”ë“œí–‰ë ¬ì— ë·°í–‰ë ¬ + íˆ¬ì˜í–‰ë ¬ê¹Œì§€ ì ìš©ëœ í–‰ë ¬.
 
 public:
 	TransformData()
@@ -99,19 +99,19 @@ public:
 
 public: 
 
-	//ÃÖÁ¾ ¿ùµåÇà·ÄÀ» °è»êÇÏ´Â ÇÔ¼ö. 
+	//ìµœì¢… ì›”ë“œí–‰ë ¬ì„ ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜. 
 	void CalculateWorldMatrix();
-	// Æ®·£½ºÆû º¯°æÀÌ ÀÏ¾î³¯ ¶§¸¶´Ù ¸Å¹ø È£ÃâµÇ¾î 
-	// ÀÚ±â ÀÚ½Å°ú ÀÚ½Ä Æ®·£½ºÆûµéÀÇ ¿ùµåÇà·Ä±îÁö ÀüºÎ °è»êÇÏ¹Ç·Î 
-	// ´õ ÀÌ»ó ´Ù¸¥ °÷¿¡¼­ ¿ùµåÇà·Ä °è»êÀ» ÇÒ ÇÊ¿ä°¡ ¾ø´Ù.
+	// íŠ¸ëžœìŠ¤í¼ ë³€ê²½ì´ ì¼ì–´ë‚  ë•Œë§ˆë‹¤ ë§¤ë²ˆ í˜¸ì¶œë˜ì–´ 
+	// ìžê¸° ìžì‹ ê³¼ ìžì‹ íŠ¸ëžœìŠ¤í¼ë“¤ì˜ ì›”ë“œí–‰ë ¬ê¹Œì§€ ì „ë¶€ ê³„ì‚°í•˜ë¯€ë¡œ 
+	// ë” ì´ìƒ ë‹¤ë¥¸ ê³³ì—ì„œ ì›”ë“œí–‰ë ¬ ê³„ì‚°ì„ í•  í•„ìš”ê°€ ì—†ë‹¤.
 
-	//¿ùµåÇà·Ä * ºäÇà·Ä * Åõ¿µÇà·Ä.
+	//ì›”ë“œí–‰ë ¬ * ë·°í–‰ë ¬ * íˆ¬ì˜í–‰ë ¬.
 	void CalculateWorldViewProjection();
 
-	//ÀÚ±â ÀÚ½ÅÀÇ Æ®·£½ºÆûÀ» ºÎ¸ð ¿ÀºêÁ§Æ®ÀÇ Æ®·£½ºÆû¿¡ ºÙÀÌ´Â ÇÔ¼ö.
+	//ìžê¸° ìžì‹ ì˜ íŠ¸ëžœìŠ¤í¼ì„ ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ íŠ¸ëžœìŠ¤í¼ì— ë¶™ì´ëŠ” í•¨ìˆ˜.
 	void SetParentTransform(GameEngineTransform& _newParent);
 
-	//ÀÚ±â ÀÚ½ÅÀÇ Æ®·£½ºÆûÀ» ºÎ¸ð ¿ÀºêÁ§Æ®ÀÇ Æ®·£½ºÆû¿¡¼­ ¶¼¾î³»´Â ÇÔ¼ö.
+	//ìžê¸° ìžì‹ ì˜ íŠ¸ëžœìŠ¤í¼ì„ ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ íŠ¸ëžœìŠ¤í¼ì—ì„œ ë–¼ì–´ë‚´ëŠ” í•¨ìˆ˜.
 	void DetachTransform();
 
 	//
@@ -124,7 +124,7 @@ public:
 
 
 public:
-	//Ãæµ¹ ÇÔ¼öµé.
+	//ì¶©ëŒ í•¨ìˆ˜ë“¤.
 
 	static bool SphereToSphere(const GameEngineTransform& _sphereA, const GameEngineTransform& _sphereB);
 	static bool AABBToAABB(const GameEngineTransform& _boxA, const GameEngineTransform& _boxB);
@@ -141,7 +141,7 @@ public:
 	static bool Sphere2DToOBB2D(const GameEngineTransform& _circle, const GameEngineTransform& _box);
 
 public:
-	//Á¡Â÷ÀûÀ¸·Î Æ¯Á¤ ¿ÀºêÁ§Æ®ÀÇ Å©±â¸¦ º¯È­½ÃÅ°´Â ÇÔ¼ö.
+	//ì ì°¨ì ìœ¼ë¡œ íŠ¹ì • ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°ë¥¼ ë³€í™”ì‹œí‚¤ëŠ” í•¨ìˆ˜.
 	inline void AddLocalScale(const float4& _scaleValue)
 	{
 		SetLocalScale(data_.localScaleVector_ + _scaleValue);
@@ -172,7 +172,7 @@ public:
 	inline void SetLocalRotationByRadian(const float4& _radianVector)
 	{	
 		CalculateWorldRotation(_radianVector * GameEngineMath::RadianToDegree);
-		//È¸Àü ½ÇÇàÀº ¶óµð¾ÈÀ¸·Î ÇØµµ °ª ÀúÀåÀº 60ºÐ¹ýÀ¸·Î ÇÑ´Ù.
+		//íšŒì „ ì‹¤í–‰ì€ ë¼ë””ì•ˆìœ¼ë¡œ í•´ë„ ê°’ ì €ìž¥ì€ 60ë¶„ë²•ìœ¼ë¡œ í•œë‹¤.
 	}
 	inline void SetLocalRotation(float _degreeX, float _degreeY, float _degreeZ)
 	{
@@ -181,11 +181,11 @@ public:
 	inline void SetLocalRotationByRadian(float _radianX, float _radianY, float _radianZ)
 	{
 		CalculateWorldRotation(
-				_radianX * GameEngineMath::RadianToDegree,
-				_radianY * GameEngineMath::RadianToDegree,
-				_radianZ * GameEngineMath::RadianToDegree
+			_radianX * GameEngineMath::RadianToDegree,
+			_radianY * GameEngineMath::RadianToDegree,
+			_radianZ * GameEngineMath::RadianToDegree
 		);
-		//È¸Àü ½ÇÇàÀº ¶óµð¾ÈÀ¸·Î ÇØµµ °ª ÀúÀåÀº 60ºÐ¹ýÀ¸·Î ÇÑ´Ù.
+		//íšŒì „ ì‹¤í–‰ì€ ë¼ë””ì•ˆìœ¼ë¡œ í•´ë„ ê°’ ì €ìž¥ì€ 60ë¶„ë²•ìœ¼ë¡œ í•œë‹¤.
 	}
 
 
@@ -374,7 +374,7 @@ public:
 	}
 
 
-	//±âÀúº¤ÅÍ: Çà·ÄÀÇ ÃàÀ» ÀÌ·ç´Â 3°³ÀÇ º¤ÅÍ. ¼­·Î ¼öÁ÷ÀÎ 3°³ ±âÀúº¤ÅÍ°¡ ÀÖ¾î¾ß È¸ÀüÇà·ÄÀÌ µÈ´Ù.
+	//ê¸°ì €ë²¡í„°: í–‰ë ¬ì˜ ì¶•ì„ ì´ë£¨ëŠ” 3ê°œì˜ ë²¡í„°. ì„œë¡œ ìˆ˜ì§ì¸ 3ê°œ ê¸°ì €ë²¡í„°ê°€ ìžˆì–´ì•¼ íšŒì „í–‰ë ¬ì´ ëœë‹¤.
 
 	inline float4 GetForwardVector() const
 	{
@@ -419,7 +419,7 @@ public:
 	{
 		return data_.projectionMatrix_;
 	}
-	
+
 
 protected:
 	virtual void Start() {}
@@ -429,7 +429,7 @@ protected:
 
 private:
 
-	//ÄÝ¸®Àü Á¤º¸ °»½Å ÇÔ¼öµé.
+	//ì½œë¦¬ì „ ì •ë³´ ê°±ì‹  í•¨ìˆ˜ë“¤.
 
 	void CollisionScaleSetting();		
 	void CollisionRotationSetting();	
@@ -441,7 +441,7 @@ private:
 	void CalculateWorldScale(const float4& _localScaleVector)
 	{
 		data_.localScaleVector_ = _localScaleVector;
-		data_.localScaleVector_.w = 0.f;	//ÀÌµ¿ °è»ê Á¦¿Ü.
+		data_.localScaleVector_.w = 0.f;	//ì´ë™ ê³„ì‚° ì œì™¸.
 		if (nullptr == parentTransform_)
 		{
 			data_.worldScaleVector_ = this->data_.localScaleVector_;
@@ -463,11 +463,11 @@ private:
 	}	
 	void CalculateWorldScale(float _localScaleX, float _localScaleY, float _localScaleZ)
 	{
-		
+
 		data_.localScaleVector_.x = _localScaleX;
 		data_.localScaleVector_.y = _localScaleY;
 		data_.localScaleVector_.z = _localScaleZ;
-		data_.localScaleVector_.w = 0.f;			//ÀÌµ¿ °è»ê Á¦¿Ü.
+		data_.localScaleVector_.w = 0.f;			//ì´ë™ ê³„ì‚° ì œì™¸.
 		if (nullptr == parentTransform_)
 		{
 			this->data_.worldScaleVector_ = this->data_.localScaleVector_;
@@ -492,11 +492,11 @@ private:
 		}	
 		CollisionDataSetting();
 	}	
-	
+
 	void CalculateWorldRotation(const float4& _localRotationVector)
 	{
 		data_.localRotationVector_ = _localRotationVector;
-		data_.localRotationVector_.w = 0.f;	//ÀÌµ¿ °è»ê Á¦¿Ü.
+		data_.localRotationVector_.w = 0.f;	//ì´ë™ ê³„ì‚° ì œì™¸.
 		if (nullptr == parentTransform_)
 		{
 			data_.worldRotationVector_ = this->data_.localRotationVector_;
@@ -522,8 +522,8 @@ private:
 		data_.localRotationVector_.x = _degreeX;
 		data_.localRotationVector_.y = _degreeY;
 		data_.localRotationVector_.z = _degreeZ;
-		data_.localRotationVector_.w = 0.f;	//ÀÌµ¿ °è»ê Á¦¿Ü.
-		//È¸Àü ½ÇÇàÀº ¶óµð¾ÈÀ¸·Î ÇØµµ °ª ÀúÀåÀº 60ºÐ¹ýÀ¸·Î ÇÑ´Ù.
+		data_.localRotationVector_.w = 0.f;	//ì´ë™ ê³„ì‚° ì œì™¸.
+		//íšŒì „ ì‹¤í–‰ì€ ë¼ë””ì•ˆìœ¼ë¡œ í•´ë„ ê°’ ì €ìž¥ì€ 60ë¶„ë²•ìœ¼ë¡œ í•œë‹¤.
 		if (nullptr == parentTransform_)
 		{
 			data_.worldRotationVector_ = this->data_.localRotationVector_;
@@ -548,11 +548,11 @@ private:
 		}
 		CollisionDataSetting();
 	}	
-	
+
 	void CalculateWorldPosition(const float4& _localPositionVector)
 	{
 		data_.localPositionVector_ = _localPositionVector;
-		data_.localPositionVector_.w = 1.f;	//ÀÌµ¿ °è»ê Æ÷ÇÔ.
+		data_.localPositionVector_.w = 1.f;	//ì´ë™ ê³„ì‚° í¬í•¨.
 		if (nullptr == parentTransform_)
 		{
 			data_.worldPositionVector_ = this->data_.localPositionVector_;
@@ -578,7 +578,7 @@ private:
 		data_.localPositionVector_.x = _positionX;
 		data_.localPositionVector_.y = _positionY;
 		data_.localPositionVector_.z = _positionZ;
-		data_.localPositionVector_.w = 1.f;	//ÀÌµ¿ °è»ê Æ÷ÇÔ.
+		data_.localPositionVector_.w = 1.f;	//ì´ë™ ê³„ì‚° í¬í•¨.
 		if (nullptr == parentTransform_)
 		{
 			data_.worldPositionVector_ = this->data_.localPositionVector_;
@@ -607,16 +607,16 @@ private:
 private:
 	TransformData data_;
 
-	GameEngineTransform* parentTransform_;	//ºÎ¸ð ¿ÀºêÁ§Æ®ÀÇ Æ®·£½ºÆû.
+	GameEngineTransform* parentTransform_;	//ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ íŠ¸ëžœìŠ¤í¼.
 
-	std::list<GameEngineTransform*> childTranforms_;	//ÀÚ½Ä ÄÄÆ÷³ÍÆ®µéÀÇ Æ®·£½ºÆûµé.
+	std::list<GameEngineTransform*> childTranforms_;	//ìžì‹ ì»´í¬ë„ŒíŠ¸ë“¤ì˜ íŠ¸ëžœìŠ¤í¼ë“¤.
 
 	CollisionData collisionDataObject_;
 
-	//Æ®·£½ºÆûÀ» Áï½Ã °è»êÇÏ´Â ÀÌÀ¯:
-	//1. °£È¤ Áï°¢ÀûÀÎ ¹ÝÀÀÀ» ¿ä±¸ÇÒ ¶§°¡ ÀÖ¾î¼­(Æ¯È÷ Ãæµ¹°ü·Ã).
-	//2. ÃÖÀûÈ­º¸´Ù´Â °¡µ¶¼ºÀ» ´õ ½Å°æ½è±â ¶§¹®¿¡.
-	//3. ÃÖÀûÈ­¸¦ ÇØµµ ³·¾ÆÁø °¡µ¶¼º ´ëºñ »ý°¢º¸´Ù ¸¹ÀÌ »¡¶óÁöÁö ¾Ê¾Æ¼­.
+	//íŠ¸ëžœìŠ¤í¼ì„ ì¦‰ì‹œ ê³„ì‚°í•˜ëŠ” ì´ìœ :
+	//1. ê°„í˜¹ ì¦‰ê°ì ì¸ ë°˜ì‘ì„ ìš”êµ¬í•  ë•Œê°€ ìžˆì–´ì„œ(íŠ¹ížˆ ì¶©ëŒê´€ë ¨).
+	//2. ìµœì í™”ë³´ë‹¤ëŠ” ê°€ë…ì„±ì„ ë” ì‹ ê²½ì¼ê¸° ë•Œë¬¸ì—.
+	//3. ìµœì í™”ë¥¼ í•´ë„ ë‚®ì•„ì§„ ê°€ë…ì„± ëŒ€ë¹„ ìƒê°ë³´ë‹¤ ë§Žì´ ë¹¨ë¼ì§€ì§€ ì•Šì•„ì„œ.
 
 };
 

@@ -4,7 +4,7 @@
 
 Momentum::Momentum() 
 {
-	name_ = "ÃßÁø·Â";
+	name_ = "ì¶”ì§„ë ¥";
 	SetName(std::string_view("Momentum"));
 	maxLevel_ = 5;
 	myRank_ = Rank::Normal;
@@ -23,9 +23,9 @@ void Momentum::Init()
 	std::string sKnockBack = std::to_string(PlayerInfo_.knockBack_).substr(0, std::to_string(PlayerInfo_.knockBack_).find("."));	
 	std::string sProjectileSizeNext = std::to_string(PlayerPInfo_.projectileSize_Result + 5.f).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result + 5.f).find("."));
 	std::string sKnockBackNext = std::to_string(PlayerInfo_.knockBack_ +10.0f).substr(0, std::to_string(PlayerInfo_.knockBack_ + 10.f).find("."));
-	
-	etc_ = sProjectileSize + "% -> " + sProjectileSizeNext + "% Åõ»çÃ¼\nÅ©±â\n"
-			+ sKnockBack + "% ->" + sKnockBackNext + "% ³Ë¹é " ;
+
+	etc_ = sProjectileSize + "% -> " + sProjectileSizeNext + "% íˆ¬ì‚¬ì²´\ní¬ê¸°\n"
+		+ sKnockBack + "% ->" + sKnockBackNext + "% ë„‰ë°± " ;
 }
 
 void Momentum::Effect()

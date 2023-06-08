@@ -12,7 +12,7 @@ GameEngineDirectory::GameEngineDirectory(const char* _path): GameEnginePath(_pat
 {
 	if (false == std::filesystem::exists(path_))
 	{
-		MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù.");
+		MsgBoxAssert("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œì…ë‹ˆë‹¤.");
 		return;
 	}
 }
@@ -21,7 +21,7 @@ GameEngineDirectory::GameEngineDirectory(const std::string& _path): GameEnginePa
 {
 	if (false == std::filesystem::exists(path_))
 	{
-		MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù.");
+		MsgBoxAssert("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œì…ë‹ˆë‹¤.");
 		return;
 	}
 }
@@ -30,7 +30,7 @@ GameEngineDirectory::GameEngineDirectory(const std::string_view& _path): GameEng
 {
 	if (false == std::filesystem::exists(path_))
 	{
-		MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù.");
+		MsgBoxAssert("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œì…ë‹ˆë‹¤.");
 		return;
 	}
 }
@@ -39,7 +39,7 @@ GameEngineDirectory::GameEngineDirectory(const std::filesystem::path& _path): Ga
 {
 	if (false == std::filesystem::exists(path_))
 	{
-		MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù.");
+		MsgBoxAssert("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œì…ë‹ˆë‹¤.");
 		return;
 	}
 }
@@ -48,7 +48,7 @@ GameEngineDirectory::GameEngineDirectory(const GameEngineDirectory& _other): Gam
 {
 	if (false == std::filesystem::exists(path_))
 	{
-		MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù.");
+		MsgBoxAssert("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œì…ë‹ˆë‹¤.");
 		return;
 	}
 }
@@ -57,7 +57,7 @@ GameEngineDirectory::GameEngineDirectory(GameEngineDirectory&& _other) noexcept 
 {
 	if (false == std::filesystem::exists(path_))
 	{
-		MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù.");
+		MsgBoxAssert("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œì…ë‹ˆë‹¤.");
 		return;
 	}
 }
@@ -118,7 +118,7 @@ bool GameEngineDirectory::MoveParentToExistChildDirectory(const std::string_view
 bool GameEngineDirectory::IsRoot() const
 {
 	return this->path_.root_path() == this->path_;
-	//std::filesystem::path::root_path() ÇöÀç ÁÖ¾îÁø °æ·ÎÀÇ ·çÆ® °æ·Î¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
+	//std::filesystem::path::root_path() í˜„ì¬ ì£¼ì–´ì§„ ê²½ë¡œì˜ ë£¨íŠ¸ ê²½ë¡œë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
 }
 
 bool GameEngineDirectory::IsFileExist(const std::string_view& _fileName)
@@ -136,7 +136,7 @@ void GameEngineDirectory::MoveToChild(const std::string_view& _childName)
 
 	if (false == std::filesystem::exists(checkPath))
 	{
-		MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â °æ·ÎÀÔ´Ï´Ù.");
+		MsgBoxAssert("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ë¡œì…ë‹ˆë‹¤.");
 		return;
 	}
 
@@ -168,7 +168,7 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFiles(const std::string_v
 	{
 		if (true == entry.is_directory())
 		{
-			//ÇÏÀ§ µğ·ºÅä¸®ÀÇ ÆÄÀÏµéÀ» ±Ü¾î¸ğÀ»°Å¶ó¸é ¿©±â¼­ Àç±Í.
+			//í•˜ìœ„ ë””ë ‰í† ë¦¬ì˜ íŒŒì¼ë“¤ì„ ê¸ì–´ëª¨ì„ê±°ë¼ë©´ ì—¬ê¸°ì„œ ì¬ê·€.
 			continue;
 		}
 

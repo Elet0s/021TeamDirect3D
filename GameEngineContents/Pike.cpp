@@ -18,7 +18,7 @@ Pike::Pike()
 	duringtime_(0),
 	consecutiveCounter_(0)
 {
-	name_ = "Ã¢";
+	name_ = "ì°½";
 	SetName(std::string_view("Pike"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 7;
@@ -34,8 +34,8 @@ void Pike::Init()
 	std::string sAttackSpeed = std::to_string(pikeWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(pikeWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 	std::string sSize = std::to_string(static_cast<int>(pikeWeaponInfo_.weaponSize_));
 
-	etc_ = "Á¶ÁØµÈ ¹æÇâÀ¸·Î\nºü¸£°Ô Âî¸¨´Ï´Ù\n" + sDamege + "ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°Ý\nÅõ»çÃ¼ " + std::to_string(pikeWeaponInfo_.weaponProjectileNum_) + " °³\n" 
-		+ sSize + "% Åõ»çÃ¼ Å©±â ";
+	etc_ = "ì¡°ì¤€ëœ ë°©í–¥ìœ¼ë¡œ\në¹ ë¥´ê²Œ ì°Œë¦…ë‹ˆë‹¤\n" + sDamege + "ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²©\níˆ¬ì‚¬ì²´ " + std::to_string(pikeWeaponInfo_.weaponProjectileNum_) + " ê°œ\n" 
+		+ sSize + "% íˆ¬ì‚¬ì²´ í¬ê¸° ";
 }
 void Pike::Effect()
 {
@@ -69,7 +69,7 @@ void Pike::StateSet()
 
 	pikeWeaponInfo_.weaponSize_ = 1.2f + (0.2f * currentlevel_) * (Info->projectileSize_ * PInfo->projectileSize_Result  / 100);
 	pikeWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result / 100; ;
-	pikeWeaponInfo_.weaponSpeed_ = 1000.f * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100; // ¼Óµµ 10¹è Á¶Á¤ÇÔ
+	pikeWeaponInfo_.weaponSpeed_ = 1000.f * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100; // ì†ë„ 10ë°° ì¡°ì •í•¨
 	pikeWeaponInfo_.weaponProjectileNum_ = 1;
 	pikeWeaponInfo_.weponConsecutiveAtkNum_ = 2;
 
@@ -87,7 +87,7 @@ void Pike::StateSet()
 		pikeWeaponInfo_.weaponProjectileNum_ = 5 + currentlevel_ + Info->addProjectile_;
 	}
 }
-	
+
 
 void Pike::Shoothing(float _deltaTime)
 {

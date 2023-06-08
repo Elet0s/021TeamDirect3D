@@ -4,7 +4,7 @@
 
 Hypersonic::Hypersonic() 
 {
-	name_ = "ÃÊÀ½¼Ó";
+	name_ = "ì´ˆìŒì†";
 	SetName(std::string_view("Hypersonic"));
 	myRank_ = Rank::Epic;
 	maxLevel_ = 1;
@@ -23,8 +23,8 @@ void Hypersonic::Init()
 	std::string sProjectileDuration = std::to_string(PlayerPInfo_.projectileDuration_Result).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result).find(".")) + "%";
 	std::string sAProjectileDurationNext = std::to_string(ceil(PlayerPInfo_.projectileDuration_Result * 0.7f)).substr(0, std::to_string(ceil(PlayerPInfo_.projectileDuration_Result * 0.7f)).find(".")) + "%";
 
-	etc_ = sProjectileSpeed + " -> " + sProjectileSpeedNext + " Åõ»çÃ¼\n¼Óµµ\n"
-		+ sProjectileDuration + " -> " + sAProjectileDurationNext + " Åõ»çÃ¼\nÁö¼Ó½Ã°£ ";
+	etc_ = sProjectileSpeed + " -> " + sProjectileSpeedNext + " íˆ¬ì‚¬ì²´\nì†ë„\n"
+		+ sProjectileDuration + " -> " + sAProjectileDurationNext + " íˆ¬ì‚¬ì²´\nì§€ì†ì‹œê°„ ";
 }
 
 void Hypersonic::Effect()

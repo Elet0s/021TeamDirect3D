@@ -1,7 +1,7 @@
 #pragma once
 #include "Skill.h"
 
-class SkillManager//:GameEngineUpdateObject // ½ºÅ³¸Å´ÏÀúÀÇ ¿ªÇÒ = °ÔÀÓ½ÃÀÛÇÒ¶§ ¸ğµç ½ºÅ³À» ÇÏ³ª¾¿ ¸¸µé°í ½ºÅ³·¹º§¿¡ µû¶ó È°¼º½ÃÄÑÁÖ´Â ¿ªÇÒ
+class SkillManager//:GameEngineUpdateObject // ìŠ¤í‚¬ë§¤ë‹ˆì €ì˜ ì—­í•  = ê²Œì„ì‹œì‘í• ë•Œ ëª¨ë“  ìŠ¤í‚¬ì„ í•˜ë‚˜ì”© ë§Œë“¤ê³  ìŠ¤í‚¬ë ˆë²¨ì— ë”°ë¼ í™œì„±ì‹œì¼œì£¼ëŠ” ì—­í• 
 {
 public:
 
@@ -24,10 +24,10 @@ public:
 		return skillList_;
 	}
 
-	void CreatePlayerAllSkill();// ½ºÅ³º°·Î ¿¢ÅÍÇÏ³ª¾¿¸¸µé°í ÀÚ·á±¸Á¶¾È¿¡ Áı¾î³Ö¾îÁÖ´Â ÇÔ¼ö 1È¸¸¸ ½ÇÇà
-	void SkillLevelCheak(); //½ºÅ³ ·¹º§0º¸´Ù Å©¸é ¾÷µ¥ÀÌÆ® ½ÃÄÑÁÖ´Â ÇÔ¼ö
+	void CreatePlayerAllSkill();// ìŠ¤í‚¬ë³„ë¡œ ì—‘í„°í•˜ë‚˜ì”©ë§Œë“¤ê³  ìë£Œêµ¬ì¡°ì•ˆì— ì§‘ì–´ë„£ì–´ì£¼ëŠ” í•¨ìˆ˜ 1íšŒë§Œ ì‹¤í–‰
+	void SkillLevelCheak(); //ìŠ¤í‚¬ ë ˆë²¨0ë³´ë‹¤ í¬ë©´ ì—…ë°ì´íŠ¸ ì‹œì¼œì£¼ëŠ” í•¨ìˆ˜
 private:
 
-	 GameEngineLevel* myLevel_;
+	GameEngineLevel* myLevel_;
 	std::vector <std::vector<Skill*>> skillList_;
 };

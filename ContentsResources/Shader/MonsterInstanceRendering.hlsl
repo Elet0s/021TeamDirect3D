@@ -7,23 +7,23 @@
 struct Input
 {
     float4 localPosition_ : POSITION;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
-    //uint instancingIndex_ : ROWINDEX; //ÀÎ½ºÅÏ½Ì ÀÎµ¦½º. unsigned int ÇÑ°³¸¸ »ç¿ë. ´õ ÀÌ»ó ÇÊ¿ä ¾øÀ½.
-    uint instanceIndex_ : SV_InstanceID; //ÀÎ½ºÅÏ½º ½Äº°¹øÈ£.
-    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ÄÃ·¯ÅØ½ºÃ³ ¹øÈ£.
-    uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ³ë¸»¸ÊÅØ½ºÃ³ ¹øÈ£.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
+    //uint instancingIndex_ : ROWINDEX; //ì¸ìŠ¤í„´ì‹± ì¸ë±ìŠ¤. unsigned int í•œê°œë§Œ ì‚¬ìš©. ë” ì´ìƒ í•„ìš” ì—†ìŒ.
+    uint instanceIndex_ : SV_InstanceID; //ì¸ìŠ¤í„´ìŠ¤ ì‹ë³„ë²ˆí˜¸.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  ì»¬ëŸ¬í…ìŠ¤ì²˜ ë²ˆí˜¸.
+    uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  ë…¸ë§ë§µí…ìŠ¤ì²˜ ë²ˆí˜¸.
 };
 
 struct Output
 {
     float4 wvpPosition_ : SV_Position;
     float4 viewPosition_ : POSITION1;
-    float4 projSpacePosition_ : POSITION2; //Åõ¿µº¯È¯ ÀÌÈÄÀÇ ¿ÀºêÁ§Æ® À§Ä¡. 
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
-    //uint instanceIndex_ : ROWINDEX; ÇÊ¿ä ¾øÀ½.
+    float4 projSpacePosition_ : POSITION2; //íˆ¬ì˜ë³€í™˜ ì´í›„ì˜ ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜. 
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
+    //uint instanceIndex_ : ROWINDEX; í•„ìš” ì—†ìŒ.
     uint instanceIndex_ : SV_InstanceID;
-    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ÄÃ·¯ÅØ½ºÃ³ ¹øÈ£.
-    uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ³ë¸»¸ÊÅØ½ºÃ³ ¹øÈ£.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  ì»¬ëŸ¬í…ìŠ¤ì²˜ ë²ˆí˜¸.
+    uint normalMapTextureIndex_ : NORMALTEXTUREINDEX; //ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  ë…¸ë§ë§µí…ìŠ¤ì²˜ ë²ˆí˜¸.
 };
 
 Output MonsterInstanceRendering_VS(Input _input)
@@ -51,7 +51,7 @@ float4 MonsterInstanceRendering_PS(Output _input) : SV_Target0
     return resultColor;
 }
 
-struct InstAtlasData     //ÀÎ½ºÅÏ½Ì¿ë ¾ÆÆ²¶ó½ºµ¥ÀÌÅÍ.
+struct InstAtlasData     //ì¸ìŠ¤í„´ì‹±ìš© ì•„í‹€ë¼ìŠ¤ë°ì´í„°.
 {
     float2 textureFramePos_;
     float2 textureFrameSize_;
@@ -77,12 +77,12 @@ Output MonsterInstanceRendering_VSINST(Input _input)
     
     result.wvpPosition_ 
         = mul(_input.localPosition_, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
-    //Á¤Á¡ÀÇ wvpº¯È¯ À§Ä¡ °è»ê.
+    //ì •ì ì˜ wvpë³€í™˜ ìœ„ì¹˜ ê³„ì‚°.
     
     result.projSpacePosition_ = result.wvpPosition_;
     
     result.viewPosition_ = mul(_input.localPosition_, Inst_TransformData[_input.instanceIndex_].worldViewMatrix_);
-    //Á¤Á¡ÀÇ ºä°ø°£¿¡¼­ÀÇ À§Ä¡ °è»ê ÈÄ Àü´Ş.
+    //ì •ì ì˜ ë·°ê³µê°„ì—ì„œì˜ ìœ„ì¹˜ ê³„ì‚° í›„ ì „ë‹¬.
     
     result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.x)
         + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.x;
@@ -139,11 +139,11 @@ DeferredRenderingOutput MonsterInstanceRendering_PSINST(Output _input)
         result.viewNormal_ = float4(-result.viewNormal_.x, -result.viewNormal_.y, result.viewNormal_.z, 1.f);
     }
     
-    //³ë¸»ÅØ½ºÃ³¿¡¼­ ³ë¸»º¤ÅÍ ÃßÃâ.
+    //ë…¸ë§í…ìŠ¤ì²˜ì—ì„œ ë…¸ë§ë²¡í„° ì¶”ì¶œ.
     
-    //2DÀÎ ·Î±×Á¦³×½Ã¾Æ Æ¯¼º»ó ºäº¯È¯¿¡ ÇÊ¿äÇÑ ¿ä¼Òµé Áß¿¡ Ä«¸Ş¶ó ¹æÇâ°ú À§Ä¡Z°ªÀº °íÁ¤ÀÌ°í 
-    //Ä«¸Ş¶ó¿Í Á¶¸í ¸ğµÎ °¢µµ¸¸ ´Ù¸¥ Á÷±³Åõ¿µÀ¸·Î º¸°í ÀÖÀ¸¹Ç·Î ÃßÃâÇÑ ¹ı¼±º¤ÅÍ¿¡ ºäº¯È¯Àº ÇÏÁö ¾Ê¾Æµµ µÉ °Í °°´Ù.
-    //ºäº¯È¯À» ÇÏÁö ¾Ê´Â ´ë½Å ¹ı¼±º¤ÅÍ x, yÀÇ ºÎÈ£¸¦ ¹Ù²ãÁÖ¾î¾ß Á¦´ë·Î µÈ ³­¹İ»ç±¤ °è»êÀÌ µÇ´Â °ªµéÀÌ ³ë¸»ÅØ½ºÃ³¿¡ ÀúÀåµÇ¾î ÀÖÀ¸¹Ç·Î µÚÁı¾îÁØ´Ù.
+    //2Dì¸ ë¡œê·¸ì œë„¤ì‹œì•„ íŠ¹ì„±ìƒ ë·°ë³€í™˜ì— í•„ìš”í•œ ìš”ì†Œë“¤ ì¤‘ì— ì¹´ë©”ë¼ ë°©í–¥ê³¼ ìœ„ì¹˜Zê°’ì€ ê³ ì •ì´ê³  
+    //ì¹´ë©”ë¼ì™€ ì¡°ëª… ëª¨ë‘ ê°ë„ë§Œ ë‹¤ë¥¸ ì§êµíˆ¬ì˜ìœ¼ë¡œ ë³´ê³  ìˆìœ¼ë¯€ë¡œ ì¶”ì¶œí•œ ë²•ì„ ë²¡í„°ì— ë·°ë³€í™˜ì€ í•˜ì§€ ì•Šì•„ë„ ë  ê²ƒ ê°™ë‹¤.
+    //ë·°ë³€í™˜ì„ í•˜ì§€ ì•ŠëŠ” ëŒ€ì‹  ë²•ì„ ë²¡í„° x, yì˜ ë¶€í˜¸ë¥¼ ë°”ê¿”ì£¼ì–´ì•¼ ì œëŒ€ë¡œ ëœ ë‚œë°˜ì‚¬ê´‘ ê³„ì‚°ì´ ë˜ëŠ” ê°’ë“¤ì´ ë…¸ë§í…ìŠ¤ì²˜ì— ì €ì¥ë˜ì–´ ìˆìœ¼ë¯€ë¡œ ë’¤ì§‘ì–´ì¤€ë‹¤.
     
     result.viewPosition_ = _input.viewPosition_;
     

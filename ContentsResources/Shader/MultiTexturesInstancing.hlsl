@@ -4,19 +4,19 @@
 struct Input
 {
     float4 pos_ : POSITION;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
-    //uint instancingIndex_ : ROWINDEX;   //ÀÎ½ºÅÏ½º ÀÎµ¦½º. unsigned int ÇÑ°³¸¸ »ç¿ë.
-    uint instanceIndex_ : SV_InstanceID; //ÀÎ½ºÅÏ½º ½Äº°¹øÈ£.
-    uint colorTextureIndex_ : COLORTEXTUREINDEX;  //ÅØ½ºÃ³ ÀÎµ¦½º. ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ÅØ½ºÃ³ ¹øÈ£.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
+    //uint instancingIndex_ : ROWINDEX;   //ì¸ìŠ¤í„´ìŠ¤ ì¸ë±ìŠ¤. unsigned int í•œê°œë§Œ ì‚¬ìš©.
+    uint instanceIndex_ : SV_InstanceID; //ì¸ìŠ¤í„´ìŠ¤ ì‹ë³„ë²ˆí˜¸.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //í…ìŠ¤ì²˜ ì¸ë±ìŠ¤. ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  í…ìŠ¤ì²˜ ë²ˆí˜¸.
 };
 
 struct Output
 {
     float4 pos_ : SV_Position;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
     //uint instancingIndex_ : ROWINDEX;
     //uint instanceIndex_ : SV_InstanceID;
-    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ÅØ½ºÃ³ ÀÎµ¦½º. ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ÅØ½ºÃ³ ¹øÈ£.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //í…ìŠ¤ì²˜ ì¸ë±ìŠ¤. ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  í…ìŠ¤ì²˜ ë²ˆí˜¸.
 };
 
 Output MultiTexturesInstancing_VS(Input _input)
@@ -44,7 +44,7 @@ float4 MultiTexturesInstancing_PS(Output _input) : SV_Target0
     return resultColor;
 }
 
-struct InstAtlasData     //ÀÎ½ºÅÏ½Ì¿ë ¾ÆÆ²¶ó½ºµ¥ÀÌÅÍ.
+struct InstAtlasData     //ì¸ìŠ¤í„´ì‹±ìš© ì•„í‹€ë¼ìŠ¤ë°ì´í„°.
 {
     float2 textureFramePos_;
     float2 textureFrameSize_;

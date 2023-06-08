@@ -78,28 +78,20 @@ bool GameEnginePath::IsExist(const std::filesystem::path& _path)
 
 std::string GameEnginePath::GetFileName(const std::filesystem::path& _path)
 {
-	//std::filesystem::path returnFileName = _path;
-	//return returnFileName.filename().string();
 	return _path.filename().string();
 }
 
 std::string GameEnginePath::GetStem(const std::filesystem::path& _path)
 {
-	//std::filesystem::path returnStem = _path;
-	//return returnStem.stem().string();
 	return _path.stem().string();
 }
 
 std::string GameEnginePath::GetExtension(const std::filesystem::path& _path)
 {
-	//std::filesystem::path returnExtention = _path;
-	//return returnExtention.extension().string();
 	return _path.extension().string();
 }
 
 std::string GameEnginePath::GetFolderPath(const std::filesystem::path& _path)
 {
-	//std::filesystem::path returnFolderPath = _path;
-	//return returnFolderPath.parent_path().string();
 	return _path.parent_path().string();
 }

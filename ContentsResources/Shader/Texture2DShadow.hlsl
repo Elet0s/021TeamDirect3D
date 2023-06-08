@@ -22,21 +22,21 @@ cbuffer AtlasData : register(b1)
 
 Output TextureShadow_VS(Input _input)
 {
-    Output newOutput = (Output) 0; //OutputÅ¸ÀÔ º¯¼ö newOutputÀ» 0À¸·Î ÃÊ±âÈ­.
+    Output newOutput = (Output) 0; //Outputíƒ€ì… ë³€ìˆ˜ newOutputì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”.
 
     float4 vertexPos = _input.pos_;
-    vertexPos += pivotPos_;        
+    vertexPos += pivotPos_;
     vertexPos.x = (-sin(radians(lightingRotationY_)) * (vertexPos.y + 0.5f) + vertexPos.x) * vertexInversion_;
-    //¿ÀºêÁ§Æ®°¡ ÁÂ¿ì¹İÀüµÇ¸é -1À» °öÇØ¼­ ±×¸²ÀÚ´Â ´Ù½ÃÇÑ¹ø ÁÂ¿ì¹İÀü½ÃÅ²´Ù.
+    //ì˜¤ë¸Œì íŠ¸ê°€ ì¢Œìš°ë°˜ì „ë˜ë©´ -1ì„ ê³±í•´ì„œ ê·¸ë¦¼ìëŠ” ë‹¤ì‹œí•œë²ˆ ì¢Œìš°ë°˜ì „ì‹œí‚¨ë‹¤.
 
     vertexPos.y = tan(radians(lightingRotationX_)) * (vertexPos.y + 0.5f) - 0.5f;
     
-    newOutput.pos_ = mul(vertexPos, worldViewProjectionMatrix_); //WVPÇà·Ä Àû¿ë.
+    newOutput.pos_ = mul(vertexPos, worldViewProjectionMatrix_); //WVPí–‰ë ¬ ì ìš©.
     
     if (-1 == vertexInversion_)
     {
         _input.texcoord_.x = 1.f - _input.texcoord_.x;
-        //¿ÀºêÁ§Æ®°¡ ÁÂ¿ì¹İÀüµÇ¸é texcoordµµ ÁÂ¿ì¹İÀüÇØ¼­ ±×·ÁÁö°Ô ÇÑ´Ù.
+        //ì˜¤ë¸Œì íŠ¸ê°€ ì¢Œìš°ë°˜ì „ë˜ë©´ texcoordë„ ì¢Œìš°ë°˜ì „í•´ì„œ ê·¸ë ¤ì§€ê²Œ í•œë‹¤.
     }
     
     newOutput.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
@@ -46,7 +46,7 @@ Output TextureShadow_VS(Input _input)
     //{
     //    newOutput.texcoord_.x = 1.f - newOutput.texcoord_.x;
     //}
-    //±×¸²ÀÚ°¡ ÇÑ¹ÚÀÚ ´Ê°Ô ¿òÁ÷ÀÌ¹Ç·Î »ç¿ë ±İÁö.
+    //ê·¸ë¦¼ìê°€ í•œë°•ì ëŠ¦ê²Œ ì›€ì§ì´ë¯€ë¡œ ì‚¬ìš© ê¸ˆì§€.
     
     return newOutput;
 }
@@ -55,7 +55,7 @@ Texture2D Tex : register(t0);
 SamplerState LINEARWRAP : register(s0);
 
 float4 TextureShadow_PS(Output _input) : SV_Target0
-{  
+{
     float4 sampledColor = Tex.Sample(LINEARWRAP, _input.texcoord_.xy);
     float4 shadowColor = float4(0.f, 0.f, 0.f, 1.f);
     

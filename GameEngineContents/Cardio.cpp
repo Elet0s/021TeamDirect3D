@@ -5,7 +5,7 @@
 
 Cardio::Cardio() 
 {
-	name_ = "À¯»ê¼Ò¿îµ¿";
+	name_ = "ìœ ì‚°ì†Œìš´ë™";
 	SetName(std::string_view("Cardio"));
 	maxLevel_ = 999;
 	myRank_ = Rank::Spotted;
@@ -22,9 +22,9 @@ void Cardio::Init()
 
 	std::string sAttackSpeed = std::to_string(PlayerPInfo_.attackSpeed_Result).substr(0, std::to_string(PlayerPInfo_.attackSpeed_Result).find(".")) + "%";
 	std::string sDamegeNext = std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.01f)).substr(0, std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.01f)).find(".")) + "%";
-	
-	etc_ = sAttackSpeed + " -> " + sDamegeNext + " °ø°İ ¼Óµµ";
-	
+
+	etc_ = sAttackSpeed + " -> " + sDamegeNext + " ê³µê²© ì†ë„";
+
 }
 
 void Cardio::Effect()

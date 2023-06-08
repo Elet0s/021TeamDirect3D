@@ -4,7 +4,7 @@
 class GameEngineTexture;
 class GameEngineRWTexture: public GameEngineRes<GameEngineRWTexture>
 {
-	//¼ø¼­¾ø´Â ¾×¼¼½ººä »ı¼º, °ü¸®¿ë Å¬·¡½º.
+	//ìˆœì„œì—†ëŠ” ì•¡ì„¸ìŠ¤ë·° ìƒì„±, ê´€ë¦¬ìš© í´ë˜ìŠ¤.
 
 public:
 	GameEngineRWTexture();
@@ -20,32 +20,32 @@ private:
 public:	
 	static GameEngineRWTexture* Create(const std::string& _name);
 	static GameEngineRWTexture* Create();
-	
+
 	void CreateUnorderedAccessTexture(
 		D3D11_TEXTURE2D_DESC _desc,
 		const float4& _clearColor
 	);
-	
+
 	void CreateUnorderedAccessTexture(
 		GameEngineTexture* _texture,
 		const float4& _clearColor
 	);
 
-	void CSSetUnorderedAccessView(int _bindPoint);	//ÇØ´ç ¸®¼Ò½º¸¦ µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
+	void CSSetUnorderedAccessView(int _bindPoint);	//í•´ë‹¹ ë¦¬ì†ŒìŠ¤ë¥¼ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
 
-	//ÀÌ ÅØ½ºÃ³°¡ °¡Áø ¼ø¼­¾ø´Â Á¢±Ùºä¸¦ ÇÑ °¡Áö °ªÀ¸·Î ÀüºÎ µ¤¾î¼­ ÃÊ±âÈ­ÇÏ´Â ÇÔ¼ö.
+	//ì´ í…ìŠ¤ì²˜ê°€ ê°€ì§„ ìˆœì„œì—†ëŠ” ì ‘ê·¼ë·°ë¥¼ í•œ ê°€ì§€ ê°’ìœ¼ë¡œ ì „ë¶€ ë®ì–´ì„œ ì´ˆê¸°í™”í•˜ëŠ” í•¨ìˆ˜.
 	void Clear();
 
 
 
 private:
-	//¼ø¼­¾ø´Â ¿¬°á¿ëÀ¸·Î »ç¿ëÇÒ ÅØ½ºÃÄµé.
+	//ìˆœì„œì—†ëŠ” ì—°ê²°ìš©ìœ¼ë¡œ ì‚¬ìš©í•  í…ìŠ¤ì³ë“¤.
 	std::vector<GameEngineTexture*> unorderedAccessTexture_;
 
-	//À§ ÅØ½ºÃ³·Î ¸¸µç ¼ø¼­¾ø´Â ¿¬°áºäµé.
+	//ìœ„ í…ìŠ¤ì²˜ë¡œ ë§Œë“  ìˆœì„œì—†ëŠ” ì—°ê²°ë·°ë“¤.
 	std::vector<ID3D11UnorderedAccessView*> unorderedAccessViews_;
 
-	//¼ø¼­¾ø´Â ¿¬°áºä ÃÊ±âÈ­°ª.
+	//ìˆœì„œì—†ëŠ” ì—°ê²°ë·° ì´ˆê¸°í™”ê°’.
 	std::vector<float4> clearColors_;
 
 };

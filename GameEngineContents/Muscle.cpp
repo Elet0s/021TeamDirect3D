@@ -5,7 +5,7 @@
 
 Muscle::Muscle() 
 {
-	name_ = "¹úÅ©¾÷";
+	name_ = "ë²Œí¬ì—…";
 	SetName(std::string_view("Muscle"));
 	maxLevel_ = 3;
 	myRank_ = Rank::Normal;
@@ -21,8 +21,8 @@ void Muscle::Init()
 
 	std::string sProjectileSize = std::to_string(PlayerPInfo_.projectileSize_Result).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result).find("."));
 	std::string sProjectileSizeNext = std::to_string(PlayerPInfo_.projectileSize_Result + 15.f).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result + 15.f).find(".") );
-	
-	etc_ = sProjectileSize + "% -> " + sProjectileSizeNext + "% Åõ»çÃ¼\nÅ©±â ";
+
+	etc_ = sProjectileSize + "% -> " + sProjectileSizeNext + "% íˆ¬ì‚¬ì²´\ní¬ê¸° ";
 }
 
 void Muscle::Effect()

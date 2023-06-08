@@ -4,7 +4,7 @@
 
 Void::Void() 
 {
-	name_ = "°øÇã";
+	name_ = "ê³µí—ˆ";
 	SetName(std::string_view("Void"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 3;
@@ -23,7 +23,7 @@ void Void::Init()
 
 
 
-	etc_ = sRuting_Range + "m -> " + sRuting_RangeNext + "m È¹µæ ¹İ°æ ";
+	etc_ = sRuting_Range + "m -> " + sRuting_RangeNext + "m íšë“ ë°˜ê²½ ";
 }
 
 void Void::Effect()
@@ -31,5 +31,4 @@ void Void::Effect()
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->ruting_Range_ += 1.5f;
-
 }

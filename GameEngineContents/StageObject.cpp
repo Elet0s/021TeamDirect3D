@@ -42,45 +42,45 @@ void StageObject::SetStageType(int _num)
 {
 	switch (_num)
 	{
-	case 0:
-		stageType_ = StageType::Combat;
-		combatType_ = CombatType::Kill;
-		renderer_->SetTexture("Combat.png");
-		break;
-	case 1:
-		stageType_ = StageType::Chest;
-		combatType_ = CombatType::Max;
-		renderer_->SetTexture("Chest.png");
-		break;
-	case 2:
-		stageType_ = StageType::Elite;
-		combatType_ = CombatType::EilteKill;
-		renderer_->SetTexture("Elite.png");
-		break;
-	case 3:
-		stageType_ = StageType::Shop;
-		combatType_ = CombatType::Max;
-		renderer_->SetTexture("Shop.png");
-		break;
-	case 4:
-		stageType_ = StageType::Boss;
-		combatType_ = CombatType::BossKill;
-		renderer_->SetTexture("Boss.png");
-		break;
-	case 5:
-		stageType_ = StageType::Swarm;
-		combatType_ = CombatType::TimeAttack;
-		renderer_->SetTexture("swarm.png");
-		break;
-	case 6:
-		stageType_ = StageType::Empty;
-		combatType_ = CombatType::Max;
-		renderer_->SetTexture("Empty.png");
-		break;
+		case 0:
+			stageType_ = StageType::Combat;
+			combatType_ = CombatType::Kill;
+			renderer_->SetTexture("Combat.png");
+			break;
+		case 1:
+			stageType_ = StageType::Chest;
+			combatType_ = CombatType::Max;
+			renderer_->SetTexture("Chest.png");
+			break;
+		case 2:
+			stageType_ = StageType::Elite;
+			combatType_ = CombatType::EilteKill;
+			renderer_->SetTexture("Elite.png");
+			break;
+		case 3:
+			stageType_ = StageType::Shop;
+			combatType_ = CombatType::Max;
+			renderer_->SetTexture("Shop.png");
+			break;
+		case 4:
+			stageType_ = StageType::Boss;
+			combatType_ = CombatType::BossKill;
+			renderer_->SetTexture("Boss.png");
+			break;
+		case 5:
+			stageType_ = StageType::Swarm;
+			combatType_ = CombatType::TimeAttack;
+			renderer_->SetTexture("swarm.png");
+			break;
+		case 6:
+			stageType_ = StageType::Empty;
+			combatType_ = CombatType::Max;
+			renderer_->SetTexture("Empty.png");
+			break;
 
-	default:
-		MsgBoxAssert("Àß¸øµÈ ½ºÅ×ÀÌÁö Å¸ÀÔÀÔ´Ï´Ù.");
-		break;
+		default:
+			MsgBoxAssert("ì˜ëª»ëœ ìŠ¤í…Œì´ì§€ íƒ€ì…ì…ë‹ˆë‹¤.");
+			break;
 	}
 
 	renderer_->ScaleToTexture();
@@ -92,24 +92,24 @@ void StageObject::SetMonsterCount(MonsterType _monsterType, size_t _monsterCount
 {
 	if (CombatType::Max == this->combatType_)
 	{
-		MsgBoxAssert("ºñÀüÅõ ½ºÅ×ÀÌÁöÀÔ´Ï´Ù.");
+		MsgBoxAssert("ë¹„ì „íˆ¬ ìŠ¤í…Œì´ì§€ì…ë‹ˆë‹¤.");
 		return;
 	}
 
 	if (true == summoningMonsterCountMap_.contains(_monsterType))
 	{
 		totalMonsterCount_ -= summoningMonsterCountMap_[_monsterType];
-		//ÀÌ¹Ì ¸ó½ºÅÍ ¼ÒÈ¯ ¼ıÀÚ¸¦ ÁöÁ¤Çß´Âµ¥ ´Ù½Ã ÁöÁ¤ÇÏ´Â °æ¿ì¸¦ ´ëºñÇØ¼­ totalMonsterCount_¿¡¼­ ±âÁ¸°ªÀ» »«´Ù.
+		//ì´ë¯¸ ëª¬ìŠ¤í„° ì†Œí™˜ ìˆ«ìë¥¼ ì§€ì •í–ˆëŠ”ë° ë‹¤ì‹œ ì§€ì •í•˜ëŠ” ê²½ìš°ë¥¼ ëŒ€ë¹„í•´ì„œ totalMonsterCount_ì—ì„œ ê¸°ì¡´ê°’ì„ ëº€ë‹¤.
 
 		summoningMonsterCountMap_[_monsterType] = _monsterCount;
-		//»õ °ª ÀúÀå.
+		//ìƒˆ ê°’ ì €ì¥.
 
 		totalMonsterCount_ += summoningMonsterCountMap_[_monsterType];
-		//ÀüÃ¼ ¸ó½ºÅÍ ¼ıÀÚ ÇÕ»ê.
+		//ì „ì²´ ëª¬ìŠ¤í„° ìˆ«ì í•©ì‚°.
 	}
 	else
 	{
-		MsgBoxAssert("ÁØºñµÇÁö ¾ÊÀº ¸ó½ºÅÍ Å¸ÀÔÀÔ´Ï´Ù.");
+		MsgBoxAssert("ì¤€ë¹„ë˜ì§€ ì•Šì€ ëª¬ìŠ¤í„° íƒ€ì…ì…ë‹ˆë‹¤.");
 		return;
 	}
 }

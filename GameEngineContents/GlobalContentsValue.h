@@ -21,7 +21,7 @@ enum class ObjectOrder
 
 enum class MonsterType
 {
-	//ÀÏ¹İ¸ó½ºÅÍ
+	//ì¼ë°˜ëª¬ìŠ¤í„°
 	Brown,
 	FlyingEyes,
 	NormalGoblin,
@@ -30,13 +30,13 @@ enum class MonsterType
 	Red,
 	RedFlyingEyes,
 
-	//¿¤¸®Æ®¸ó½ºÅÍ
+	//ì—˜ë¦¬íŠ¸ëª¬ìŠ¤í„°
 	BlackEyes,
 	GoblinLivesey,
 	Green,
 	KoboldLivesey,
 
-	//º¸½º
+	//ë³´ìŠ¤
 	Boss,
 
 	None
@@ -55,30 +55,30 @@ enum class SoulCard
 	Kunai,
 
 	WindsBlade,
-	SilphsBlade, //(ÁøÈ­)
+	SilphsBlade, //(ì§„í™”)
 
 	Swordrang,
 
 	MagicWisp,
-	VoidWisp,//(ÁøÈ­)
+	VoidWisp,//(ì§„í™”)
 
 	DeathAura,
 
 	ShamanStaff,
-	ArcanistStaff,//(ÁøÈ­)
+	ArcanistStaff,//(ì§„í™”)
 
 	Katana,
-	ArtificersKatana,//(ÁøÈ­)
+	ArtificersKatana,//(ì§„í™”)
 
 	Crossbow,
 	FireRing,
 
-	//ÀÌ¹ØÀ¸·Î °ø°İ ÆĞ½Ãºê
+	//ì´ë°‘ìœ¼ë¡œ ê³µê²© íŒ¨ì‹œë¸Œ
 	SharpeningStone,
 	Cardio,
 	SharpEdge,
 	Range,
-	TenseString, // ¹Ì¿Ï¼º
+	TenseString, // ë¯¸ì™„ì„±
 	Momentum,
 	Muscle,
 	Compromise,
@@ -98,9 +98,9 @@ enum class SoulCard
 	Hypersonic,
 	StoneHanded,
 
-	Overworked,   // ¹Ì¿Ï¼º
-	Average,	  // ¹Ì¿Ï¼º 
-	Overloaded,	  // ¹Ì¿Ï¼º
+	Overworked,   // ë¯¸ì™„ì„±
+	Average,	  // ë¯¸ì™„ì„± 
+	Overloaded,	  // ë¯¸ì™„ì„±
 	MultiHanded,
 	Recursion,
 	Accumulation,
@@ -111,7 +111,7 @@ enum class SoulCard
 	ThornFirework,
 	Lunatic,
 
-	//ÀÌ¹ØÀ¸·Î ¹æ¾î ÆĞ½Ãºê
+	//ì´ë°‘ìœ¼ë¡œ ë°©ì–´ íŒ¨ì‹œë¸Œ
 	Healthy,
 	Durability,
 	StoneSkin,
@@ -125,13 +125,13 @@ enum class SoulCard
 	Tower,
 	SteelSkin,
 
-	Thorn,  // º¸·ù
+	Thorn,  // ë³´ë¥˜
 	Castle,
 	Turtle,
 	Flesh,
 	Martyr,
 
-	//ÀÌ¹ØÀ¸·Î º¸Á¶ ÆĞ½Ãºê
+	//ì´ë°‘ìœ¼ë¡œ ë³´ì¡° íŒ¨ì‹œë¸Œ
 	LowPressure,
 	Agility,
 	Void,
@@ -191,24 +191,24 @@ enum class Artifact
 
 enum class PlayerStatue
 {
-	AtkMutiple,								    // ÇÇÇØ¹è¼ö   100%,
-	AttackSpeed,								// °ø°İ ¼Óµµ  100.0%
-	AddProjectile,								// Ãß°¡ Åõ»çÃ¼  0
-	ThroughProjectile,                          // Åõ»çÃ¼ °üÅë (¸î¹ø±îÁö Ãæµ¹ÇÏ´Â°¡) 0 
-	ProjectileSize,                             // Åõ»çÃ¼ Å©±â 100%
-	ProjectileDuration,							// Åõ»çÃ¼ Áö¼Ó½Ã°£ 100%
-	ProjectileSpeed,                            // Åõ»çÃ¼ ¼Óµµ (³¯¶ó°¡´Â ÀÌµ¿¼Óµµ) 100%
-	RangeSize,                                  // ¹üÀ§ Å©±â(¿À¶ó, ¸¶¹ıÁøÀÇ Å©±â¿Í °ü·Ã) 100%
-	KnockBack,									// ³Ë¹é(¸ó½ºÅÍ°¡ ¹Ğ·Á³ª´Â °Å¸®) 100%
-	CriticalChance,                             // Ä¡¸íÅ¸È®·ü 10%
-	CriticalDamege,                             // Ä¡¸íÅ¸ µ¥¹ÌÁö (Ä¡¸íÅ¸½Ã µ¥¹ÌÁö ºñÀ²)  150%
-	GoldMultiple,                               // °ñµå¹è¼ö(°ñµå¸¦ ¾òÀ» ¶§ÀÇ È¹µæ ºñÀ²) 100%
-	ExpMultiple,								// °æÇèÄ¡¹è¼ö(°æÇèÄ¡¸¦ ¾òÀ» ¶§ÀÇ È¹µæ ºñÀ²) 100%
-	Def,                                        // ¹æ¾î·Â 0 
-	DashFullCharge,                             // ´ë½¬ÃÖ´ëÃæÀü (´ë½¬°¡ ÃæÀüµÇ´Â ÃÖ´ë °³¼ö) 0
-	DashReChargeTime,                           // ´ë½¬ ÀçÃæÀü ½Ã°£(´ë½¬°¡ ÀçÃæÀü µÇ´Âµ¥ °É¸®´Â ½Ã°£) 3.0f
-	DashReUseTime,                              // ´ë½¬ Àç»ç¿ë ½Ã°£(´ë½¬¸¦ »ç¿ëÇÏ°í ³ª¼­ ´Ù½Ã »ç¿ëÇÒ ¶§ ±îÁö °É¸®´Â ½Ã°£) 0.3f
-	DashReChargeCount,                          // ÀçÃæÀü µÇ´Â ´ë½¬ ¼ö (ÀçÃæÀü ½Ã°£ÀÌ Áö³ª°í ´ë½¬°¡ ÃæÀüµÇ´Â ¼ö) 1
+	AtkMutiple,								    // í”¼í•´ë°°ìˆ˜   100%,
+	AttackSpeed,								// ê³µê²© ì†ë„  100.0%
+	AddProjectile,								// ì¶”ê°€ íˆ¬ì‚¬ì²´  0
+	ThroughProjectile,                          // íˆ¬ì‚¬ì²´ ê´€í†µ (ëª‡ë²ˆê¹Œì§€ ì¶©ëŒí•˜ëŠ”ê°€) 0 
+	ProjectileSize,                             // íˆ¬ì‚¬ì²´ í¬ê¸° 100%
+	ProjectileDuration,							// íˆ¬ì‚¬ì²´ ì§€ì†ì‹œê°„ 100%
+	ProjectileSpeed,                            // íˆ¬ì‚¬ì²´ ì†ë„ (ë‚ ë¼ê°€ëŠ” ì´ë™ì†ë„) 100%
+	RangeSize,                                  // ë²”ìœ„ í¬ê¸°(ì˜¤ë¼, ë§ˆë²•ì§„ì˜ í¬ê¸°ì™€ ê´€ë ¨) 100%
+	KnockBack,									// ë„‰ë°±(ëª¬ìŠ¤í„°ê°€ ë°€ë ¤ë‚˜ëŠ” ê±°ë¦¬) 100%
+	CriticalChance,                             // ì¹˜ëª…íƒ€í™•ë¥  10%
+	CriticalDamege,                             // ì¹˜ëª…íƒ€ ë°ë¯¸ì§€ (ì¹˜ëª…íƒ€ì‹œ ë°ë¯¸ì§€ ë¹„ìœ¨)  150%
+	GoldMultiple,                               // ê³¨ë“œë°°ìˆ˜(ê³¨ë“œë¥¼ ì–»ì„ ë•Œì˜ íšë“ ë¹„ìœ¨) 100%
+	ExpMultiple,								// ê²½í—˜ì¹˜ë°°ìˆ˜(ê²½í—˜ì¹˜ë¥¼ ì–»ì„ ë•Œì˜ íšë“ ë¹„ìœ¨) 100%
+	Def,                                        // ë°©ì–´ë ¥ 0 
+	DashFullCharge,                             // ëŒ€ì‰¬ìµœëŒ€ì¶©ì „ (ëŒ€ì‰¬ê°€ ì¶©ì „ë˜ëŠ” ìµœëŒ€ ê°œìˆ˜) 0
+	DashReChargeTime,                           // ëŒ€ì‰¬ ì¬ì¶©ì „ ì‹œê°„(ëŒ€ì‰¬ê°€ ì¬ì¶©ì „ ë˜ëŠ”ë° ê±¸ë¦¬ëŠ” ì‹œê°„) 3.0f
+	DashReUseTime,                              // ëŒ€ì‰¬ ì¬ì‚¬ìš© ì‹œê°„(ëŒ€ì‰¬ë¥¼ ì‚¬ìš©í•˜ê³  ë‚˜ì„œ ë‹¤ì‹œ ì‚¬ìš©í•  ë•Œ ê¹Œì§€ ê±¸ë¦¬ëŠ” ì‹œê°„) 0.3f
+	DashReChargeCount,                          // ì¬ì¶©ì „ ë˜ëŠ” ëŒ€ì‰¬ ìˆ˜ (ì¬ì¶©ì „ ì‹œê°„ì´ ì§€ë‚˜ê³  ëŒ€ì‰¬ê°€ ì¶©ì „ë˜ëŠ” ìˆ˜) 1
 };
 
 enum class Rank

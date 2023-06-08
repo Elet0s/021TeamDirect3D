@@ -1,7 +1,7 @@
 #pragma once
 #include"Skill.h"
 #include"Monster.h"
-//°¡Àå °¡±î¿î Àû¿¡°Ô ¹ß»ç
+//ê°€ì¥ ê°€ê¹Œìš´ ì ì—ê²Œ ë°œì‚¬
 class Bow :public Skill
 {
 public:
@@ -21,7 +21,7 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn ProjectileToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other); // ¹ß»çÃ¼ Ãæµ¹
+	CollisionReturn ProjectileToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other); // ë°œì‚¬ì²´ ì¶©ëŒ
 public:
 	std::pair<GameEngineTextureRenderer*, GameEngineCollision*>projectileGroup_;
 	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList02_;
@@ -31,39 +31,39 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void SerchTarget();//°ø°İ ´ë»ó Å½»ö'
-	void ProjectileSort();//¹ß»çÃ¼ »ı¼º¹× ÇÃ·¹ÀÌ¾î À§Ä¡·Î Á¤·Ä
-	void RenderRotate();// ¹ß»çÃ¼ È¸Àü
-	void RangeCheak(float _deltaTime);//¹ß»çÃ¼ »çÃâ
-	void StateSet() override;//·¹º§¿¡ µû¸¥ ½ºÅÈ Àû¿ë
-	void ColCheak();//Äİ¸®Àü Ã¼Å©
-	void TarGetInitialization();//Å¸°ÙÃÊ±âÈ­
-	void TimerUpdater(float _deltaTime);//Å¸ÀÌ¸Ó ¾÷µ¥ÀÌÆ®
+	void SerchTarget();//ê³µê²© ëŒ€ìƒ íƒìƒ‰'
+	void ProjectileSort();//ë°œì‚¬ì²´ ìƒì„±ë° í”Œë ˆì´ì–´ ìœ„ì¹˜ë¡œ ì •ë ¬
+	void RenderRotate();// ë°œì‚¬ì²´ íšŒì „
+	void RangeCheak(float _deltaTime);//ë°œì‚¬ì²´ ì‚¬ì¶œ
+	void StateSet() override;//ë ˆë²¨ì— ë”°ë¥¸ ìŠ¤íƒ¯ ì ìš©
+	void ColCheak();//ì½œë¦¬ì „ ì²´í¬
+	void TarGetInitialization();//íƒ€ê²Ÿì´ˆê¸°í™”
+	void TimerUpdater(float _deltaTime);//íƒ€ì´ë¨¸ ì—…ë°ì´íŠ¸
 
 private:
 	bool firstSerchCheak_;
-	bool istarget_;//Å¸°ÙÀÌ ÀÖÀ¸¸é true
+	bool istarget_;//íƒ€ê²Ÿì´ ìˆìœ¼ë©´ true
 
 	float targerSerchTimer_;
-	float targerSerchTimer01_;//Å¸°Ù °Ë»ç ÁÖ±â=°ø°İ¼Óµµ
+	float targerSerchTimer01_;//íƒ€ê²Ÿ ê²€ì‚¬ ì£¼ê¸°=ê³µê²©ì†ë„
 	float targerSerchTimer02_;
 
 	std::vector<size_t> passNum_;
 
-	size_t targetSerchCounter_;//Å¸°Ù°Ë»çÇÑ ¸ó½ºÅÍ ¼ö ¸Å ¾÷µ¥ÀÌÆ® °»½Å
+	size_t targetSerchCounter_;//íƒ€ê²Ÿê²€ì‚¬í•œ ëª¬ìŠ¤í„° ìˆ˜ ë§¤ ì—…ë°ì´íŠ¸ ê°±ì‹ 
 
-	float resultCos_;//¸ó½ºÅÍ ÁÂÇ¥, ÇÃ·¹ÀÌ¾î ÁÂÇ¥ xÃà ±âÁØ °¢µµ 
-	float4 referenceVector_;//ÇÃ·¹ÀÌ¾î ¿¡¼­ ¸ó½ºÅÍ·Î °¡´Â º¤ÅÍ 
+	float resultCos_;//ëª¬ìŠ¤í„° ì¢Œí‘œ, í”Œë ˆì´ì–´ ì¢Œí‘œ xì¶• ê¸°ì¤€ ê°ë„ 
+	float4 referenceVector_;//í”Œë ˆì´ì–´ ì—ì„œ ëª¬ìŠ¤í„°ë¡œ ê°€ëŠ” ë²¡í„° 
 
-	WeaponInfo bowWeaponInfo_;//¹«±â ½ºÅÈ
+	WeaponInfo bowWeaponInfo_;//ë¬´ê¸° ìŠ¤íƒ¯
 
-	std::vector<Monster*> monsterList_; //ÀüÃ¼ ¸ó½ºÅÍ ¸®½ºÆ®
+	std::vector<Monster*> monsterList_; //ì „ì²´ ëª¬ìŠ¤í„° ë¦¬ìŠ¤íŠ¸
 
-	std::pair<size_t, float> minHpPair_;//Å¸°Ù ´ë»ó
+	std::pair<size_t, float> minHpPair_;//íƒ€ê²Ÿ ëŒ€ìƒ
 
-	std::vector<std::pair<size_t, float>> targetInst01_;//Å¸°Ù ¹­À½
+	std::vector<std::pair<size_t, float>> targetInst01_;//íƒ€ê²Ÿ ë¬¶ìŒ
 	std::vector<std::pair<size_t, float>> targetInst02_;
 
-	std::vector<float4> referenceVectorList01_;//¹æÇâ ¸ğÀ½
+	std::vector<float4> referenceVectorList01_;//ë°©í–¥ ëª¨ìŒ
 	std::vector<float4> referenceVectorList02_;
 };

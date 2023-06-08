@@ -11,8 +11,8 @@ class GameEngineDepthStencil;
 class GameEngineBlend;
 class GameEngineMaterial : public GameEngineRes<GameEngineMaterial>
 {
-	//ÀÌ Å¬·¡½ºÀÇ Á¸Àç ÀÌÀ¯: ¼ÎÀÌ´õ¿Í ¼ÎÀÌ´õ¸®¼Ò½º, ·¡½ºÅÍ¶óÀÌÀú¿Í ºí·»µå, ±íÀÌ½ºÅÙ½ÇÀ» °¡Áö°í 
-	// ·»´õ¸µ °úÁ¤¿¡ °ü¿©ÇÏ´Â Å¬·¡½º.
+	//ì´ í´ë˜ìŠ¤ì˜ ì¡´ì¬ ì´ìœ : ì…°ì´ë”ì™€ ì…°ì´ë”ë¦¬ì†ŒìŠ¤, ë˜ìŠ¤í„°ë¼ì´ì €ì™€ ë¸”ë Œë“œ, ê¹Šì´ìŠ¤í…ì‹¤ì„ ê°€ì§€ê³  
+	// ë Œë”ë§ ê³¼ì •ì— ê´€ì—¬í•˜ëŠ” í´ë˜ìŠ¤.
 
 public:
 	GameEngineMaterial();
@@ -34,7 +34,7 @@ public:
 	static void AllShaderReset();
 
 public:
-	//¼¼ÆÃ ÁØºñ ÇÔ¼öµé.
+	//ì„¸íŒ… ì¤€ë¹„ í•¨ìˆ˜ë“¤.
 
 	void SetVertexShader(const std::string_view& _name);
 	void SetVertexShader(GameEngineVertexShader* _vertexShader);
@@ -60,8 +60,8 @@ public:
 	}
 
 private:
-	//¼¼ÆÃ ÇÔ¼öµé.
-	//½ÇÁúÀûÀ¸·Î ¼¼ÆÃ ¼ø¼­´Â ±×´ÙÁö Áß¿äÇÏÁö ¾Ê´Ù. DrawIndexed() ÇÔ¼ö È£Ãâ ÀÌÀü±îÁö¸¸ ¸ğµç ¼¼ÆÃÀÌ ³¡³ªÀÖÀ¸¸é µÈ´Ù.
+	//ì„¸íŒ… í•¨ìˆ˜ë“¤.
+	//ì‹¤ì§ˆì ìœ¼ë¡œ ì„¸íŒ… ìˆœì„œëŠ” ê·¸ë‹¤ì§€ ì¤‘ìš”í•˜ì§€ ì•Šë‹¤. DrawIndexed() í•¨ìˆ˜ í˜¸ì¶œ ì´ì „ê¹Œì§€ë§Œ ëª¨ë“  ì„¸íŒ…ì´ ëë‚˜ìˆìœ¼ë©´ ëœë‹¤.
 
 	void VertexShaderSetting();
 	void Inst_VertexShaderSetting();

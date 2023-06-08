@@ -4,7 +4,7 @@
 
 Healthy::Healthy() 
 {
-	name_ = "°Ç°­";
+	name_ = "ê±´ê°•";
 	SetName(std::string_view("Healthy"));
 	myRank_ = Rank::Spotted;
 	maxLevel_ = 999;
@@ -21,7 +21,7 @@ void Healthy::Init()
 	std::string sHealing = std::to_string(PlayerInfo_.hpRecuvere_).substr(0, std::to_string(PlayerInfo_.hpRecuvere_).find(".") + 3);
 	std::string sHealingNext = std::to_string(PlayerInfo_.hpRecuvere_ + 0.1f).substr(0, std::to_string(PlayerInfo_.hpRecuvere_ + 0.1f).find(".") + 3);
 
-	etc_ = sHealing + " -> " + sHealingNext + " Ã¼·Â Àç»ı ";
+	etc_ = sHealing + " -> " + sHealingNext + " ì²´ë ¥ ì¬ìƒ ";
 }
 
 void Healthy::Effect()

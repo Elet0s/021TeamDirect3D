@@ -15,7 +15,7 @@ struct Output
     float4 viewNormal_ : NORMAL;
 };
 
-//ÇÔ¼ö ÀÌ¸§°ú ÆÄÀÏ¸íÀÌ ´Ş¶óµµ »ó°ü¾øÁö¸¸ ÀÏ´Ü ÅëÀÏ½ÃÅ²´Ù.
+//í•¨ìˆ˜ ì´ë¦„ê³¼ íŒŒì¼ëª…ì´ ë‹¬ë¼ë„ ìƒê´€ì—†ì§€ë§Œ ì¼ë‹¨ í†µì¼ì‹œí‚¨ë‹¤.
 Output DeferredColor_VS(Input _input)
 {
     Output result = (Output) 0;

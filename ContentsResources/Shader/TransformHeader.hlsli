@@ -1,68 +1,68 @@
-//cbuffer: »ó¼ö ¹öÆÛ(Constant Buffer) ±¸Á¶Ã¼.
-//°¢ »ó¼ö ¹öÆÛ´Â ÃÖ´ë 4096°³ÀÇ 16 * n¹ÙÀÌÆ® Å©±âÀÇ º¤ÅÍ¸¦ º¸À¯ÇÒ ¼ö ÀÖ´Ù. 
-//°¢ º¤ÅÍ¿¡´Â ÃÖ´ë 4°³ÀÇ 32ºñÆ® °ªÀ» Æ÷ÇÔÇÒ ¼ö ÀÖ´Ù. 
+//cbuffer: ìƒìˆ˜ ë²„í¼(Constant Buffer) êµ¬ì¡°ì²´.
+//ê° ìƒìˆ˜ ë²„í¼ëŠ” ìµœëŒ€ 4096ê°œì˜ 16 * në°”ì´íŠ¸ í¬ê¸°ì˜ ë²¡í„°ë¥¼ ë³´ìœ í•  ìˆ˜ ìžˆë‹¤. 
+//ê° ë²¡í„°ì—ëŠ” ìµœëŒ€ 4ê°œì˜ 32ë¹„íŠ¸ ê°’ì„ í¬í•¨í•  ìˆ˜ ìžˆë‹¤. 
 
-//»ó¼ö¹öÆÛ´Â ÃÖ¼Ò 16¹ÙÀÌÆ® ÀÌ»óÀÇ Å©±â¸¦ °¡Á®¾ß ÇÏ´Â ÀÌÀ¯°¡ ¹«¾ù??
-//->MSDN¿¡µµ ºó¹øÇÑ ¾×¼¼½º¿Í ¾÷µ¥ÀÌÆ®¿¡ ¸ÂÃç ÃÖÀûÈ­½ÃÄ×±â ¶§¹®ÀÌ¶ó°í¸¸ ÇÑ´Ù.
+//ìƒìˆ˜ë²„í¼ëŠ” ìµœì†Œ 16ë°”ì´íŠ¸ ì´ìƒì˜ í¬ê¸°ë¥¼ ê°€ì ¸ì•¼ í•˜ëŠ” ì´ìœ ê°€ ë¬´ì—‡??
+//->MSDNì—ë„ ë¹ˆë²ˆí•œ ì•¡ì„¸ìŠ¤ì™€ ì—…ë°ì´íŠ¸ì— ë§žì¶° ìµœì í™”ì‹œì¼°ê¸° ë•Œë¬¸ì´ë¼ê³ ë§Œ í•œë‹¤.
 
-//»ó¼ö¹öÆÛ´Â ÇÁ·Î±×·¥ ³»ºÎ¿¡¼­ Àü¿ªº¯¼öÃ³·³ »ç¿ëµÈ´Ù.
-cbuffer TransformData : register(b0) //<-register(b0): ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ 0¹ø ½½·Ô¿¡ ¿¬°áµÇ´Â »ó¼ö ¹öÆÛ¶ó´Â ÀÇ¹Ì.
-    //t: ÅØ½ºÃÄ, c: ¹öÆÛ ¿ÀÇÁ¼Â, s: »ùÇÃ·¯, u: unordered access view.
-    //register(ps_5_0, b0) <-ÀÌ·± ½ÄÀ¸·Î Æ¯Á¤ ¼ÎÀÌ´õ³ª hlslÄÄÆÄÀÏ·¯ ¹öÀüÀ» Áö¸ñÇØ¼­ »ç¿ëÇÒ ¼öµµ ÀÖ´Ù°í ÇÑ´Ù.
+//ìƒìˆ˜ë²„í¼ëŠ” í”„ë¡œê·¸ëž¨ ë‚´ë¶€ì—ì„œ ì „ì—­ë³€ìˆ˜ì²˜ëŸ¼ ì‚¬ìš©ëœë‹¤.
+cbuffer TransformData : register(b0) //<-register(b0): ë Œë”ë§ íŒŒì´í”„ë¼ì¸ 0ë²ˆ ìŠ¬ë¡¯ì— ì—°ê²°ë˜ëŠ” ìƒìˆ˜ ë²„í¼ë¼ëŠ” ì˜ë¯¸.
+    //t: í…ìŠ¤ì³, c: ë²„í¼ ì˜¤í”„ì…‹, s: ìƒ˜í”ŒëŸ¬, u: unordered access view.
+    //register(ps_5_0, b0) <-ì´ëŸ° ì‹ìœ¼ë¡œ íŠ¹ì • ì…°ì´ë”ë‚˜ hlslì»´íŒŒì¼ëŸ¬ ë²„ì „ì„ ì§€ëª©í•´ì„œ ì‚¬ìš©í•  ìˆ˜ë„ ìžˆë‹¤ê³  í•œë‹¤.
 {
-    float4 localScaleVector_;    //·ÎÄÃ ÁÂÇ¥»ó Å©±â. Å©±â°¡ 0ÀÎ ¹°Ã¼´Â Á¸ÀçÇÒ ¼ö ¾øÀ¸¹Ç·Î ±âº»°ªÀÌ 1ÀÌ µÇ¾î¾ß ÇÑ´Ù.
-    float4 localRotationVector_; //·ÎÄÃ ÁÂÇ¥»ó ÀÚÀü(°¢µµ).
-    float4 localPositionVector_; //·ÎÄÃ ÁÂÇ¥»ó ÀÌµ¿(À§Ä¡).
+    float4 localScaleVector_; //ë¡œì»¬ ì¢Œí‘œìƒ í¬ê¸°. í¬ê¸°ê°€ 0ì¸ ë¬¼ì²´ëŠ” ì¡´ìž¬í•  ìˆ˜ ì—†ìœ¼ë¯€ë¡œ ê¸°ë³¸ê°’ì´ 1ì´ ë˜ì–´ì•¼ í•œë‹¤.
+    float4 localRotationVector_; //ë¡œì»¬ ì¢Œí‘œìƒ ìžì „(ê°ë„).
+    float4 localPositionVector_; //ë¡œì»¬ ì¢Œí‘œìƒ ì´ë™(ìœ„ì¹˜).
 
-    float4x4 localScaleMatrix_;    //Å©±âÇà·Ä.
-    float4x4 localRotationMatrix_; //ÀÚÀüÇà·Ä(°¢µµ).
-    float4x4 localPositionMatrix_; //ÀÌµ¿Çà·Ä(À§Ä¡).
+    float4x4 localScaleMatrix_; //í¬ê¸°í–‰ë ¬.
+    float4x4 localRotationMatrix_; //ìžì „í–‰ë ¬(ê°ë„).
+    float4x4 localPositionMatrix_; //ì´ë™í–‰ë ¬(ìœ„ì¹˜).
 
     float4x4 localWorldMatrix_;
-	//¿ÀºêÁ§Æ®ÀÇ Å©±â, ÀÚÀü, ÀÌµ¿Çà·ÄÀÌ ¹Ý¿µµÈ, ºÎ¸ð ¿ÀºêÁ§Æ®ÀÇ ·ÎÄÃ¿ùµå»ó¿¡¼­ÀÇ ¿ùµåÇà·Ä. Çà·ÄÀÇ Áß°£Á¤»ê.
+	//ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°, ìžì „, ì´ë™í–‰ë ¬ì´ ë°˜ì˜ëœ, ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ ë¡œì»¬ì›”ë“œìƒì—ì„œì˜ ì›”ë“œí–‰ë ¬. í–‰ë ¬ì˜ ì¤‘ê°„ì •ì‚°.
 
 
-    float4 worldScaleVector_; //¿ùµåÁÂÇ¥»ó Å©±â. ÀÌµ¿ÇÏÁö ¾ÊÀ¸¹Ç·Î w´Â 0À¸·Î ¼³Á¤ÇÑ´Ù.
-    float4 worldRotationVector_; //¿ùµåÁÂÇ¥»ó È¸Àü·®. ÀÌµ¿ÇÏÁö ¾ÊÀ¸¹Ç·Î w´Â 0À¸·Î ¼³Á¤ÇÑ´Ù.
-    float4 worldPositionVector_; //¿ùµåÁÂÇ¥»ó À§Ä¡. ÀÌµ¿·®À» ¹Ý¿µÇØ¾ß ÇÏ¹Ç·Î w´Â 1À¸·Î ¼³Á¤ÇÑ´Ù.
+    float4 worldScaleVector_; //ì›”ë“œì¢Œí‘œìƒ í¬ê¸°. ì´ë™í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ wëŠ” 0ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
+    float4 worldRotationVector_; //ì›”ë“œì¢Œí‘œìƒ íšŒì „ëŸ‰. ì´ë™í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ wëŠ” 0ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
+    float4 worldPositionVector_; //ì›”ë“œì¢Œí‘œìƒ ìœ„ì¹˜. ì´ë™ëŸ‰ì„ ë°˜ì˜í•´ì•¼ í•˜ë¯€ë¡œ wëŠ” 1ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
 
 
     float4x4 worldWorldMatrix_;
-	//¿ÀºêÁ§Æ®ÀÇ ·ÎÄÃ Å©±â, ·ÎÄÃ ÀÚÀü, ·ÎÄÃ ÀÌµ¿Çà·Ä¿¡ ºÎ¸ðÀÇ ¿ùµåÇà·Ä±îÁö ¹Ý¿µµÈ ÃÖÁ¾ ¿ùµå Çà·Ä.
-	//¿©±â¿¡ Ä«¸Þ¶ó ÄÄÆ÷³ÍÆ®ÀÇ ºäÇà·Ä°ú Åõ¿µÇà·Ä±îÁö °ÅÄ¡°í ³ª¾ß ºñ·Î¼Ò ¸ð´ÏÅÍ¿¡ ¶ç¿ï ¼ö ÀÖ°Ô µÈ´Ù.
+	//ì˜¤ë¸Œì íŠ¸ì˜ ë¡œì»¬ í¬ê¸°, ë¡œì»¬ ìžì „, ë¡œì»¬ ì´ë™í–‰ë ¬ì— ë¶€ëª¨ì˜ ì›”ë“œí–‰ë ¬ê¹Œì§€ ë°˜ì˜ëœ ìµœì¢… ì›”ë“œ í–‰ë ¬.
+	//ì—¬ê¸°ì— ì¹´ë©”ë¼ ì»´í¬ë„ŒíŠ¸ì˜ ë·°í–‰ë ¬ê³¼ íˆ¬ì˜í–‰ë ¬ê¹Œì§€ ê±°ì¹˜ê³  ë‚˜ì•¼ ë¹„ë¡œì†Œ ëª¨ë‹ˆí„°ì— ë„ìš¸ ìˆ˜ ìžˆê²Œ ëœë‹¤.
 
-    float4x4 viewMatrix_; //ºäÇà·Ä.
-    float4x4 projectionMatrix_; //Åõ¿µÇà·Ä.
+    float4x4 viewMatrix_; //ë·°í–‰ë ¬.
+    float4x4 projectionMatrix_; //íˆ¬ì˜í–‰ë ¬.
 
-    float4x4 worldViewMatrix_; //¿ùµåÇà·Ä¿¡ ºäÇà·ÄÀÌ Àû¿ëµÈ Çà·Ä.
-    float4x4 worldViewProjectionMatrix_; //¿ùµåÇà·Ä¿¡ ºäÇà·Ä + Åõ¿µÇà·Ä±îÁö Àû¿ëµÈ Çà·Ä.
+    float4x4 worldViewMatrix_; //ì›”ë“œí–‰ë ¬ì— ë·°í–‰ë ¬ì´ ì ìš©ëœ í–‰ë ¬.
+    float4x4 worldViewProjectionMatrix_; //ì›”ë“œí–‰ë ¬ì— ë·°í–‰ë ¬ + íˆ¬ì˜í–‰ë ¬ê¹Œì§€ ì ìš©ëœ í–‰ë ¬.
 };
 
 struct InstTransformData
 {
-    float4 localScaleVector_; //·ÎÄÃ ÁÂÇ¥»ó Å©±â. Å©±â°¡ 0ÀÎ ¹°Ã¼´Â Á¸ÀçÇÒ ¼ö ¾øÀ¸¹Ç·Î ±âº»°ªÀÌ 1ÀÌ µÇ¾î¾ß ÇÑ´Ù.
-    float4 localRotationVector_; //·ÎÄÃ ÁÂÇ¥»ó ÀÚÀü(°¢µµ).
-    float4 localPositionVector_; //·ÎÄÃ ÁÂÇ¥»ó ÀÌµ¿(À§Ä¡).
+    float4 localScaleVector_; //ë¡œì»¬ ì¢Œí‘œìƒ í¬ê¸°. í¬ê¸°ê°€ 0ì¸ ë¬¼ì²´ëŠ” ì¡´ìž¬í•  ìˆ˜ ì—†ìœ¼ë¯€ë¡œ ê¸°ë³¸ê°’ì´ 1ì´ ë˜ì–´ì•¼ í•œë‹¤.
+    float4 localRotationVector_; //ë¡œì»¬ ì¢Œí‘œìƒ ìžì „(ê°ë„).
+    float4 localPositionVector_; //ë¡œì»¬ ì¢Œí‘œìƒ ì´ë™(ìœ„ì¹˜).
 
-    float4x4 localScaleMatrix_; //Å©±âÇà·Ä.
-    float4x4 localRotationMatrix_; //ÀÚÀüÇà·Ä(°¢µµ).
-    float4x4 localPositionMatrix_; //ÀÌµ¿Çà·Ä(À§Ä¡).
+    float4x4 localScaleMatrix_; //í¬ê¸°í–‰ë ¬.
+    float4x4 localRotationMatrix_; //ìžì „í–‰ë ¬(ê°ë„).
+    float4x4 localPositionMatrix_; //ì´ë™í–‰ë ¬(ìœ„ì¹˜).
 
     float4x4 localWorldMatrix_;
-	//¿ÀºêÁ§Æ®ÀÇ Å©±â, ÀÚÀü, ÀÌµ¿Çà·ÄÀÌ ¹Ý¿µµÈ, ºÎ¸ð ¿ÀºêÁ§Æ®ÀÇ ·ÎÄÃ¿ùµå»ó¿¡¼­ÀÇ ¿ùµåÇà·Ä. Çà·ÄÀÇ Áß°£Á¤»ê.
+	//ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°, ìžì „, ì´ë™í–‰ë ¬ì´ ë°˜ì˜ëœ, ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ ë¡œì»¬ì›”ë“œìƒì—ì„œì˜ ì›”ë“œí–‰ë ¬. í–‰ë ¬ì˜ ì¤‘ê°„ì •ì‚°.
 
 
-    float4 worldScaleVector_; //¿ùµåÁÂÇ¥»ó Å©±â. ÀÌµ¿ÇÏÁö ¾ÊÀ¸¹Ç·Î w´Â 0À¸·Î ¼³Á¤ÇÑ´Ù.
-    float4 worldRotationVector_; //¿ùµåÁÂÇ¥»ó È¸Àü·®. ÀÌµ¿ÇÏÁö ¾ÊÀ¸¹Ç·Î w´Â 0À¸·Î ¼³Á¤ÇÑ´Ù.
-    float4 worldPositionVector_; //¿ùµåÁÂÇ¥»ó À§Ä¡. ÀÌµ¿·®À» ¹Ý¿µÇØ¾ß ÇÏ¹Ç·Î w´Â 1À¸·Î ¼³Á¤ÇÑ´Ù.
+    float4 worldScaleVector_; //ì›”ë“œì¢Œí‘œìƒ í¬ê¸°. ì´ë™í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ wëŠ” 0ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
+    float4 worldRotationVector_; //ì›”ë“œì¢Œí‘œìƒ íšŒì „ëŸ‰. ì´ë™í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ wëŠ” 0ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
+    float4 worldPositionVector_; //ì›”ë“œì¢Œí‘œìƒ ìœ„ì¹˜. ì´ë™ëŸ‰ì„ ë°˜ì˜í•´ì•¼ í•˜ë¯€ë¡œ wëŠ” 1ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
 
     float4x4 worldWorldMatrix_;
-	//¿ÀºêÁ§Æ®ÀÇ ·ÎÄÃ Å©±â, ·ÎÄÃ ÀÚÀü, ·ÎÄÃ ÀÌµ¿Çà·Ä¿¡ ºÎ¸ðÀÇ ¿ùµåÇà·Ä±îÁö ¹Ý¿µµÈ ÃÖÁ¾ ¿ùµå Çà·Ä.
-	//¿©±â¿¡ Ä«¸Þ¶ó ÄÄÆ÷³ÍÆ®ÀÇ ºäÇà·Ä°ú Åõ¿µÇà·Ä±îÁö °ÅÄ¡°í ³ª¾ß ºñ·Î¼Ò ¸ð´ÏÅÍ¿¡ ¶ç¿ï ¼ö ÀÖ°Ô µÈ´Ù.
+	//ì˜¤ë¸Œì íŠ¸ì˜ ë¡œì»¬ í¬ê¸°, ë¡œì»¬ ìžì „, ë¡œì»¬ ì´ë™í–‰ë ¬ì— ë¶€ëª¨ì˜ ì›”ë“œí–‰ë ¬ê¹Œì§€ ë°˜ì˜ëœ ìµœì¢… ì›”ë“œ í–‰ë ¬.
+	//ì—¬ê¸°ì— ì¹´ë©”ë¼ ì»´í¬ë„ŒíŠ¸ì˜ ë·°í–‰ë ¬ê³¼ íˆ¬ì˜í–‰ë ¬ê¹Œì§€ ê±°ì¹˜ê³  ë‚˜ì•¼ ë¹„ë¡œì†Œ ëª¨ë‹ˆí„°ì— ë„ìš¸ ìˆ˜ ìžˆê²Œ ëœë‹¤.
 
-    float4x4 viewMatrix_; //ºäÇà·Ä.
-    float4x4 projectionMatrix_; //Åõ¿µÇà·Ä.
+    float4x4 viewMatrix_; //ë·°í–‰ë ¬.
+    float4x4 projectionMatrix_; //íˆ¬ì˜í–‰ë ¬.
 
-    float4x4 worldViewMatrix_; //¿ùµåÇà·Ä¿¡ ºäÇà·ÄÀÌ Àû¿ëµÈ Çà·Ä.
-    float4x4 worldViewProjectionMatrix_; //¿ùµåÇà·Ä¿¡ ºäÇà·Ä + Åõ¿µÇà·Ä±îÁö Àû¿ëµÈ Çà·Ä.
+    float4x4 worldViewMatrix_; //ì›”ë“œí–‰ë ¬ì— ë·°í–‰ë ¬ì´ ì ìš©ëœ í–‰ë ¬.
+    float4x4 worldViewProjectionMatrix_; //ì›”ë“œí–‰ë ¬ì— ë·°í–‰ë ¬ + íˆ¬ì˜í–‰ë ¬ê¹Œì§€ ì ìš©ëœ í–‰ë ¬.
 };

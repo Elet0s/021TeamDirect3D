@@ -4,7 +4,7 @@
 
 HealingFactor::HealingFactor() 
 {
-	name_ = "Àç»ı";
+	name_ = "ì¬ìƒ";
 	SetName(std::string_view("HealingFactor"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 5;
@@ -22,7 +22,7 @@ void HealingFactor::Init()
 	std::string sHealing = std::to_string(PlayerInfo_.hpRecuvere_).substr(0, std::to_string(PlayerInfo_.hpRecuvere_).find(".") + 3 );
 	std::string sHealingNext = std::to_string(PlayerInfo_.hpRecuvere_ + 0.5f).substr(0, std::to_string(PlayerInfo_.hpRecuvere_ + 0.15f).find(".") + 3);
 
-	etc_ = sHealing + " -> " + sHealingNext + " Ã¼·Â Àç»ı ";
+	etc_ = sHealing + " -> " + sHealingNext + " ì²´ë ¥ ì¬ìƒ ";
 }
 
 void HealingFactor::Effect()

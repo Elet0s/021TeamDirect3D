@@ -8,7 +8,7 @@ EndLevel::EndLevel()
 }
 EndLevel::~EndLevel()
 {
-
+	int i = 0;
 }
 
 void EndLevel::Start()

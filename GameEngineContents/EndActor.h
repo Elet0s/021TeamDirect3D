@@ -1,6 +1,5 @@
 #pragma once
 
-// Ό³Έν :
 class EndActor : public GameEngineActor
 {
 public:
