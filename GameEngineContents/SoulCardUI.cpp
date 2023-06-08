@@ -20,7 +20,7 @@ SoulCardUI::SoulCardUI()
 
 SoulCardUI::~SoulCardUI() 
 {
-	this->DetachObject();
+	
 }
 
 void SoulCardUI::Start()
