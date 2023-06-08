@@ -18,7 +18,7 @@ ThunderStaf::ThunderStaf()
 	consecutiveCounter_(0),
 	consecutiveAngle_(0)
 {
-	name_ = "ë²ˆê°œ ì§€íŒ¡ì´";
+	name_ = "¹ø°³ ÁöÆÎÀÌ";
 	SetName(std::string_view("ThunderStaf"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 7;
@@ -34,8 +34,8 @@ void ThunderStaf::Init()
 	std::string sAttackSpeed = std::to_string(ThunderStafWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(ThunderStafWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 	std::string sTime = std::to_string(ThunderStafWeaponInfo_.weaponDuration_ /100).substr(0, std::to_string(ThunderStafWeaponInfo_.weaponDuration_ / 100).find(".") + 3);
 
-	etc_ = "ìì‹ ì„ ì¤‘ì‹¬ìœ¼ë¡œ ê³µì „í•˜ëŠ”\në²ˆê°œ êµ¬ì²´ë¥¼ ì†Œí™˜í•©ë‹ˆë‹¤\n" + sDamege + "ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²©\níˆ¬ì‚¬ì²´" + std::to_string(ThunderStafWeaponInfo_.weaponProjectileNum_) + "ê°œ\n"
-		+ sTime + "ì´ˆ íˆ¬ì‚¬ì²´ ì§€ì† ì‹œê°„ ";
+	etc_ = "ÀÚ½ÅÀ» Áß½ÉÀ¸·Î °øÀüÇÏ´Â\n¹ø°³ ±¸Ã¼¸¦ ¼ÒÈ¯ÇÕ´Ï´Ù\n" + sDamege + "ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°İ\nÅõ»çÃ¼" + std::to_string(ThunderStafWeaponInfo_.weaponProjectileNum_) + "°³\n"
+		+ sTime + "ÃÊ Åõ»çÃ¼ Áö¼Ó ½Ã°£ ";
 }
 void ThunderStaf::Effect()
 {

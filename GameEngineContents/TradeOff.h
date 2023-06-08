@@ -1,6 +1,7 @@
 #pragma once
 #include "Skill.h"
 
+// Ό³Έν :
 class TradeOff : public Skill
 {
 public:

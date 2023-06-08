@@ -1,6 +1,6 @@
 #pragma once
 #include"Skill.h"
-//ì£¼ë³€ì˜ ë²”ìœ„ë‚´ì˜ ì ì—ê²Œ í”¼í•´ë¥¼ ì…í˜ ì¹˜ëª…íƒ€ë°œìƒí•˜ì§€ì•ŠìŒ
+//ÁÖº¯ÀÇ ¹üÀ§³»ÀÇ Àû¿¡°Ô ÇÇÇØ¸¦ ÀÔÈû Ä¡¸íÅ¸¹ß»ıÇÏÁö¾ÊÀ½
 class Firering:public Skill
 {
 public:
@@ -40,7 +40,7 @@ private:
 	GameEngineCollision* fireringAuraCollision02_;
 	GameEngineCollision* fireringAuraCollision03_;
 
-	WeaponInfo fireringAuraWeaponInfo_;//ë¬´ê¸° ìŠ¤íƒ¯
+	WeaponInfo fireringAuraWeaponInfo_;//¹«±â ½ºÅÈ
 
 	float atkTimer_;
 	float addRadian_;

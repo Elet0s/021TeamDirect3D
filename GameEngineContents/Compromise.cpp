@@ -4,7 +4,7 @@
 
 Compromise::Compromise() 
 {
-	name_ = "íƒ€í˜‘";
+	name_ = "Å¸Çù";
 	SetName(std::string_view("Compromise"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 1;
@@ -25,9 +25,9 @@ void Compromise::Init()
 	std::string sAttackNext = std::to_string((PlayerInfo_.atk_ -0.35f) * PlayerPInfo_.atkMultiple_Result / 100).substr(0, std::to_string(((PlayerInfo_.atk_ - 0.35f) * PlayerPInfo_.atkMultiple_Result / 100) -0.35f).find(".") + 3);
 
 
-	etc_ = sAddProjectile + " -> " + sAddProjectileNext + " ì¶”ê°€ íˆ¬ì‚¬ì²´\n"
-		+ sAttack + " -> " + sAttackNext + " ê¸°ë³¸ í”¼í•´ ";
-
+	etc_ = sAddProjectile + " -> " + sAddProjectileNext + " Ãß°¡ Åõ»çÃ¼\n"
+		+ sAttack + " -> " + sAttackNext + " ±âº» ÇÇÇØ ";
+	
 }
 
 void Compromise::Effect()

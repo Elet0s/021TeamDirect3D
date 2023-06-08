@@ -4,18 +4,18 @@
 
 class GameEngineBlend : public GameEngineRes<GameEngineBlend>
 {
-	//ë¸”ë Œë“œìŠ¤í…Œì´íŠ¸ ìƒì„±, ê´€ë¦¬ ì‚­ì œ ë‹´ë‹¹ í´ëž˜ìŠ¤.
-	//ë¸”ë Œë“œ: ìƒ‰ìƒ í˜¼í•© ë° ë°˜íˆ¬ëª…ì„ ì œì–´í•˜ëŠ” ê¸°ìˆ .
+	//ºí·»µå½ºÅ×ÀÌÆ® »ý¼º, °ü¸® »èÁ¦ ´ã´ç Å¬·¡½º.
+	//ºí·»µå: »ö»ó È¥ÇÕ ¹× ¹ÝÅõ¸íÀ» Á¦¾îÇÏ´Â ±â¼ú.
 
 	friend GameEngineRes<GameEngineBlend>;
-	//GameEngineBlend í´ëž˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìžë¥¼ GameEngineResí´ëž˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
+	//GameEngineBlend Å¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ý.
 
 private:
 	GameEngineBlend();
 	~GameEngineBlend();
-	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ìž/ì†Œë©¸ìžë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
-	//ì´ í”„ë ˆìž„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìžê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
-	//í”„ë¡œê·¸ëž¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ëž˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
+	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ý¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ý¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
+	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹Ýµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
+	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµÐ´Ù.
 
 	GameEngineBlend(const GameEngineBlend& _other) = delete;
 	GameEngineBlend(GameEngineBlend&& _other) noexcept = delete;
@@ -28,50 +28,50 @@ public:
 		const std::string_view& _name,
 		const D3D11_BLEND_DESC& _desc
 	);
-	void Set();	//í•´ë‹¹ ë¦¬ì†ŒìŠ¤ë¥¼ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
+	void Set();	//ÇØ´ç ¸®¼Ò½º¸¦ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
 
 private:
 	void CreateBlendState(const D3D11_BLEND_DESC& _desc);
 
 private:
-	ID3D11BlendState* blendState_;	//ë Œë”ë§ íŒŒì´í”„ë¼ì¸ ì•„ì›ƒí’‹ë¨¸ì ¸ ë‹¨ê³„ì— ì—°ê²°í•  ë¸”ë Œë“œìŠ¤í…Œì´íŠ¸.
+	ID3D11BlendState* blendState_;	//·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ ¾Æ¿ôÇ²¸ÓÁ® ´Ü°è¿¡ ¿¬°áÇÒ ºí·»µå½ºÅ×ÀÌÆ®.
 
 	//typedef struct D3D11_BLEND_DESC
 	//{
-	//	BOOL AlphaToCoverageEnable;							ì•ŒíŒŒë¸”ë Œë”©ì—ë„ ì•ˆí‹°ì•¨ë¦¬ì–´ì‹±ì„ í•˜ëŠ” ê¸°ìˆ ì¸ ì•ŒíŒŒ íˆ¬ ì»¤ë²„ë¦¬ì§€ë¥¼ ì ìš©í•  ì§€ ì—¬ë¶€.
-	//	BOOL IndependentBlendEnable;						ì—¬ëŸ¬ ê°€ì§€ì˜ ë…ë¦½ì ì¸ ë¸”ë Œë”© ì„¤ì •ê°’ì„ ê°€ì§€ê²Œ í•  ì§€ ì—¬ë¶€. 
-	//														 true: 8ê°€ì§€ ë¸”ë Œë”© ì„¤ì •ê°’ì„ ê°€ì§.
-	//														 false: 0ë²ˆ ì„¤ì •ê°’ë§Œ ë¸”ë Œë”©ì— ì‚¬ìš©í•¨.
+	//	BOOL AlphaToCoverageEnable;							¾ËÆÄºí·»µù¿¡µµ ¾ÈÆ¼¾Ù¸®¾î½ÌÀ» ÇÏ´Â ±â¼úÀÎ ¾ËÆÄ Åõ Ä¿¹ö¸®Áö¸¦ Àû¿ëÇÒ Áö ¿©ºÎ.
+	//	BOOL IndependentBlendEnable;						¿©·¯ °¡ÁöÀÇ µ¶¸³ÀûÀÎ ºí·»µù ¼³Á¤°ªÀ» °¡Áö°Ô ÇÒ Áö ¿©ºÎ. 
+	//														 true: 8°¡Áö ºí·»µù ¼³Á¤°ªÀ» °¡Áü.
+	//														 false: 0¹ø ¼³Á¤°ª¸¸ ºí·»µù¿¡ »ç¿ëÇÔ.
 	// 
-	//	D3D11_RENDER_TARGET_BLEND_DESC RenderTarget[8];		ë Œë”íƒ€ê²Ÿì— ì ìš©ë  ì•ŒíŒŒë¸”ë Œë”© ì„¤ì •ê°’ ì •ë³´ë¥¼ ì €ìž¥í•  D3D11_RENDER_TARGET_BLEND_DESCêµ¬ì¡°ì²´ ë°°ì—´.
-	//														 ìµœëŒ€ 8ê°œ ë Œë”íƒ€ê²Ÿì— ê°ê° ë‹¤ë¥¸ ì•ŒíŒŒë¸”ë Œë”© ë°©ì‹ì„ ì €ìž¥í•  ìˆ˜ ìžˆë‹¤.
+	//	D3D11_RENDER_TARGET_BLEND_DESC RenderTarget[8];		·»´õÅ¸°Ù¿¡ Àû¿ëµÉ ¾ËÆÄºí·»µù ¼³Á¤°ª Á¤º¸¸¦ ÀúÀåÇÒ D3D11_RENDER_TARGET_BLEND_DESC±¸Á¶Ã¼ ¹è¿­.
+	//														 ÃÖ´ë 8°³ ·»´õÅ¸°Ù¿¡ °¢°¢ ´Ù¸¥ ¾ËÆÄºí·»µù ¹æ½ÄÀ» ÀúÀåÇÒ ¼ö ÀÖ´Ù.
 
 	//	typedef struct D3D11_RENDER_TARGET_BLEND_DESC
 	//	{
-	//		BOOL BlendEnable;						ì•ŒíŒŒë¸”ë Œë”©ì„ í•  ì§€ ì—¬ë¶€.
-	//		D3D11_BLEND SrcBlend;					ì•ŒíŒŒë¸”ë Œë”© ê³µì‹ì˜ srcFactorì˜ 4ê°œ ì›ì†Œë¥¼ ì–´ë–»ê²Œ ì±„ìš¸ì§€ ì„ íƒí•˜ëŠ” ì˜µì…˜.
-	//		D3D11_BLEND DestBlend;					ì•ŒíŒŒë¸”ë Œë”© ê³µì‹ì˜ destFactorì˜ 4ê°œ ì›ì†Œë¥¼ ì–´ë–»ê²Œ ì±„ìš¸ì§€ ì„ íƒí•˜ëŠ” ì˜µì…˜.
-	//		D3D11_BLEND_OP BlendOp;					ì•ŒíŒŒë¸”ë Œë”© ê³µì‹ì˜ ì˜µì…˜ ë¶€ë¶„ì— ì–´ë–¤ ì—°ì‚°ì„ ì ìš©í• ì§€ ì„ íƒí•˜ëŠ” ì˜µì…˜.
-	//		D3D11_BLEND SrcBlendAlpha;				srcColorì˜ ì•ŒíŒŒê°’ ì„¤ì •.
-	//		D3D11_BLEND DestBlendAlpha;				destColorì˜ ì•ŒíŒŒê°’ ì„¤ì •.
-	//		D3D11_BLEND_OP BlendOpAlpha;			ì•ŒíŒŒë¸”ë Œë”© ê³µì‹ì˜ ì˜µì…˜ í•­ëª©ì— ë”í•˜ê¸° ì ìš©. ì•ŒíŒŒê°’ ê³„ì‚°ì—ë§Œ ì ìš©ëœë‹¤.
-	//		UINT8 RenderTargetWriteMask;			ë¸”ë Œë”©ì„ ì ìš©í•  ìƒ‰ìƒ. RGBAì¤‘ ëª‡ê°€ì§€ë§Œ ì„ íƒí•´ì„œ ì•ŒíŒŒë¸”ë Œë”©ì„ ì ìš©í•  ìˆ˜ë„ ìžˆë‹¤.
+	//		BOOL BlendEnable;						¾ËÆÄºí·»µùÀ» ÇÒ Áö ¿©ºÎ.
+	//		D3D11_BLEND SrcBlend;					¾ËÆÄºí·»µù °ø½ÄÀÇ srcFactorÀÇ 4°³ ¿ø¼Ò¸¦ ¾î¶»°Ô Ã¤¿ïÁö ¼±ÅÃÇÏ´Â ¿É¼Ç.
+	//		D3D11_BLEND DestBlend;					¾ËÆÄºí·»µù °ø½ÄÀÇ destFactorÀÇ 4°³ ¿ø¼Ò¸¦ ¾î¶»°Ô Ã¤¿ïÁö ¼±ÅÃÇÏ´Â ¿É¼Ç.
+	//		D3D11_BLEND_OP BlendOp;					¾ËÆÄºí·»µù °ø½ÄÀÇ ¿É¼Ç ºÎºÐ¿¡ ¾î¶² ¿¬»êÀ» Àû¿ëÇÒÁö ¼±ÅÃÇÏ´Â ¿É¼Ç.
+	//		D3D11_BLEND SrcBlendAlpha;				srcColorÀÇ ¾ËÆÄ°ª ¼³Á¤.
+	//		D3D11_BLEND DestBlendAlpha;				destColorÀÇ ¾ËÆÄ°ª ¼³Á¤.
+	//		D3D11_BLEND_OP BlendOpAlpha;			¾ËÆÄºí·»µù °ø½ÄÀÇ ¿É¼Ç Ç×¸ñ¿¡ ´õÇÏ±â Àû¿ë. ¾ËÆÄ°ª °è»ê¿¡¸¸ Àû¿ëµÈ´Ù.
+	//		UINT8 RenderTargetWriteMask;			ºí·»µùÀ» Àû¿ëÇÒ »ö»ó. RGBAÁß ¸î°¡Áö¸¸ ¼±ÅÃÇØ¼­ ¾ËÆÄºí·»µùÀ» Àû¿ëÇÒ ¼öµµ ÀÖ´Ù.
 	//	} 	D3D11_RENDER_TARGET_BLEND_DESC;
 	//
 	//} 	D3D11_BLEND_DESC;
 
 	// 
-	//ì•ŒíŒŒë¸”ë Œë”© ê³µì‹.
-	//output: ìµœì¢… ê²°ê³¼ë¬¼.
-	//dest: ë°±ë²„í¼ì˜ í˜„ìž¬ ìƒ‰ìƒ.
-	//src: ë°±ë²„í¼ì˜ ìƒ‰ìƒê³¼ ë¸”ë Œë“œí•  ì›ë³¸ì˜ ìƒ‰ìƒ.
-	//ì˜µì…˜: BlendOpìœ¼ë¡œ ì§€ì •í•˜ëŠ” ë¸”ë Œë“œ ì—°ì‚° ë°©ì‹.
-	//outputColor = (srcColor * srcFactor) ì˜µì…˜ (destColor * destFactor)
+	//¾ËÆÄºí·»µù °ø½Ä.
+	//output: ÃÖÁ¾ °á°ú¹°.
+	//dest: ¹é¹öÆÛÀÇ ÇöÀç »ö»ó.
+	//src: ¹é¹öÆÛÀÇ »ö»ó°ú ºí·»µåÇÒ ¿øº»ÀÇ »ö»ó.
+	//¿É¼Ç: BlendOpÀ¸·Î ÁöÁ¤ÇÏ´Â ºí·»µå ¿¬»ê ¹æ½Ä.
+	//outputColor = (srcColor * srcFactor) ¿É¼Ç (destColor * destFactor)
 
 
-	D3D11_BLEND_DESC blendDesc_;		//ë¸”ë Œë“œìŠ¤í…Œì´íŠ¸ë¥¼ ë§Œë“¤ë•Œ ì‚¬ìš©í•  ì„¸ë¶€ì •ë³´.
-	float4 factor_;				//srcFactorë‚˜ destFactorë¥¼ ì§ì ‘ ìž…ë ¥í• ë•Œ ì‚¬ìš©í•  ê°’. í˜„ìž¬ëŠ” ì‚¬ìš©í•˜ì§€ ì•ŠìŒ.
-	unsigned int mask_;			//ë¸”ë Œë”©ì„ ì ìš©í•  ìƒ‰ìƒê°’. ì›¬ë§Œí•˜ë©´ ê¸°ë³¸ê°’ì¸ ëª¨ë“  ìƒ‰ìƒì—ì„œ ì†ëŒ€ì§€ ë§ ê²ƒ.
+	D3D11_BLEND_DESC blendDesc_;		//ºí·»µå½ºÅ×ÀÌÆ®¸¦ ¸¸µé¶§ »ç¿ëÇÒ ¼¼ºÎÁ¤º¸.
+	float4 factor_;				//srcFactor³ª destFactor¸¦ Á÷Á¢ ÀÔ·ÂÇÒ¶§ »ç¿ëÇÒ °ª. ÇöÀç´Â »ç¿ëÇÏÁö ¾ÊÀ½.
+	unsigned int mask_;			//ºí·»µùÀ» Àû¿ëÇÒ »ö»ó°ª. À¢¸¸ÇÏ¸é ±âº»°ªÀÎ ¸ðµç »ö»ó¿¡¼­ ¼Õ´ëÁö ¸» °Í.
 
 };
 

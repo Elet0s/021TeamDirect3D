@@ -4,7 +4,7 @@
 
 Thorn::Thorn() 
 {
-	name_ = "Í∞ÄÏãú";
+	name_ = "∞°Ω√";
 	SetName(std::string_view("Thorn"));
 	myRank_ = Rank::Epic;
 	maxLevel_ = 7;
@@ -21,7 +21,7 @@ void Thorn::Init()
 	std::string sProjectileDuration = std::to_string(PlayerPInfo_.projectileDuration_Result).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result).find(".")) + "%";
 	std::string sProjectileDurationNext = std::to_string(PlayerPInfo_.projectileDuration_Result + 20).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result + 20).find(".")) + "%";
 
-	etc_ = sProjectileDuration + "-> " + sProjectileDurationNext + " Ìà¨ÏÇ¨Ï≤¥\n ÏßÄÏÜç ÏãúÍ∞Ñ ";
+	etc_ = sProjectileDuration + "-> " + sProjectileDurationNext + " ≈ıªÁ√º\n ¡ˆº” Ω√∞£ ";
 }
 
 void Thorn::Effect()

@@ -12,20 +12,20 @@ GameEngineTexture2DArray::~GameEngineTexture2DArray()
 }
 
 GameEngineTexture2DArray* GameEngineTexture2DArray::Load(
-	const std::string_view& _path
-)
+    const std::string_view& _path
+ )
 {
-	return Load(_path, GameEnginePath::GetFileName(_path));
+    return Load(_path, GameEnginePath::GetFileName(_path));
 }
 
 GameEngineTexture2DArray* GameEngineTexture2DArray::Load(
-	const std::string_view& _path,
-	const std::string_view& _name
+    const std::string_view& _path,
+    const std::string_view& _name
 )
 {
-	GameEngineTexture2DArray* newRes = CreateNamedRes(_name);
-	newRes->LoadTextures(_path);
-	return newRes;
+    GameEngineTexture2DArray* newRes = CreateNamedRes(_name);
+    newRes->LoadTextures(_path);
+    return newRes;
 }
 
 void GameEngineTexture2DArray::Cut(const std::string_view& _textureName, int _x, int _y)
@@ -63,16 +63,16 @@ void GameEngineTexture2DArray::Cut(int _textureIndex, int _x, int _y)
 
 void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 {
-	GameEngineDirectory folderPath = _folderPath;
-	std::vector<GameEngineFile> allFilesInFolder = folderPath.GetAllFiles();
+    GameEngineDirectory folderPath = _folderPath;
+    std::vector<GameEngineFile> allFilesInFolder = folderPath.GetAllFiles();
 
 	metaDatas_.resize(allFilesInFolder.size());
 	images_.resize(allFilesInFolder.size());
 	loadedScratchImages_.resize(allFilesInFolder.size());
 	cutData_.resize(allFilesInFolder.size());
 
-	for (size_t i = 0; i < allFilesInFolder.size(); ++i)
-	{
+    for (size_t i = 0; i < allFilesInFolder.size(); ++i)
+    {
 		std::wstring unicodePath = GameEngineString::AnsiToUnicodeReturn(allFilesInFolder[i].GetFullPath());
 
 		std::string uppercaseExtension 
@@ -92,13 +92,13 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 				loadedScratchImages_[i]
 			))
 			{
-				MsgBoxAssertString(allFilesInFolder[i].GetFullPath() + ": í…ìŠ¤ì³ ë¡œë“œ ì‹¤íŒ¨.");
+				MsgBoxAssertString(allFilesInFolder[i].GetFullPath() + ": ÅØ½ºÃÄ ·Îµå ½ÇÆĞ.");
 				return;
 			}
 		}
 		else if (uppercaseExtension == ".DDS")
 		{
-			MsgBoxAssert("DDS: ì•„ì§ ì²˜ë¦¬ ì¤€ë¹„ë˜ì§€ ì•Šì€ ì´ë¯¸ì§€ í¬ë§·ì…ë‹ˆë‹¤.");
+			MsgBoxAssert("DDS: ¾ÆÁ÷ Ã³¸® ÁØºñµÇÁö ¾ÊÀº ÀÌ¹ÌÁö Æ÷¸ËÀÔ´Ï´Ù.");
 			return;
 		}
 		else if (uppercaseExtension == ".PNG")
@@ -110,7 +110,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 				loadedScratchImages_[i]					  
 			))
 			{
-				MsgBoxAssertString(allFilesInFolder[i].GetFullPath() + ": í…ìŠ¤ì³ ë¡œë“œ ì‹¤íŒ¨.");
+				MsgBoxAssertString(allFilesInFolder[i].GetFullPath() + ": ÅØ½ºÃÄ ·Îµå ½ÇÆĞ.");
 				return;
 			}
 		}
@@ -120,19 +120,19 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 				|| metaDatas_[i].height != metaDatas_[0].height
 				|| metaDatas_[i].format != metaDatas_[0].format))
 		{
-			MsgBoxAssert("0ë²ˆ í…ìŠ¤ì²˜ì™€ ê°™ì€ í¬ê¸°ì™€ í¬ë§·ì„ ê°€ì§„ í…ìŠ¤ì²˜ë§Œ ì‚½ì…í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+			MsgBoxAssert("0¹ø ÅØ½ºÃ³¿Í °°Àº Å©±â¿Í Æ÷¸ËÀ» °¡Áø ÅØ½ºÃ³¸¸ »ğÀÔÇÒ ¼ö ÀÖ½À´Ï´Ù.");
 			return;
 		}
 
 		images_[i] = *loadedScratchImages_[i].GetImages();
-	}
+    }
 
 	if (S_OK != scratchImage_.InitializeArrayFromImages(
 		&images_[0],
 		images_.size()
 	))
 	{
-		MsgBoxAssert("í…ìŠ¤ì²˜ ë°°ì—´ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("ÅØ½ºÃ³ ¹è¿­ »ı¼º ½ÇÆĞ.");
 		return;
 	}
 
@@ -144,7 +144,7 @@ void GameEngineTexture2DArray::LoadTextures(const std::string_view& _folderPath)
 		&shaderResourceView_
 	))
 	{
-		MsgBoxAssert("ì…°ì´ë” ë¦¬ì†ŒìŠ¤ë·° ë°°ì—´ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("¼ÎÀÌ´õ ¸®¼Ò½ººä ¹è¿­ »ı¼º ½ÇÆĞ.");
 		return;
 	}
 
@@ -157,7 +157,7 @@ void GameEngineTexture2DArray::VSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == this->shaderResourceView_)
 	{
-		MsgBoxAssert("ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¼ÎÀÌ´õ¸®¼Ò½ººä°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -172,7 +172,7 @@ void GameEngineTexture2DArray::CSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == this->shaderResourceView_)
 	{
-		MsgBoxAssert("ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¼ÎÀÌ´õ¸®¼Ò½ººä°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -187,7 +187,7 @@ void GameEngineTexture2DArray::PSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == this->shaderResourceView_)
 	{
-		MsgBoxAssert("ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¼ÎÀÌ´õ¸®¼Ò½ººä°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 

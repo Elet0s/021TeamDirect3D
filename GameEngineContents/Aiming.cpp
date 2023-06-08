@@ -5,7 +5,7 @@
 
 Aiming::Aiming() 
 {
-	name_ = "ì¡°ì¤€";
+	name_ = "Á¶ÁØ";
 	SetName(std::string_view("Aiming"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 4;
@@ -24,9 +24,9 @@ void Aiming::Init()
 	std::string sAttackSpeed = std::to_string(PlayPInfo_.attackSpeed_Result).substr(0, std::to_string(PlayPInfo_.attackSpeed_Result).find(".")) + "%";
 	std::string sAttackSpeedNext = std::to_string(ceil(PlayPInfo_.attackSpeed_Result * 0.95f)).substr(0, std::to_string(ceil(PlayPInfo_.attackSpeed_Result * 0.95f)).find(".")) + "%";
 
-	etc_ = sAttackMultiple + " -> " + sAttackMultipleNext + " í”¼í•´ ë°°ìˆ˜\n"
-		+ sAttackSpeed + " -> " + sAttackSpeedNext + " ê³µê²© ì†ë„ ";
-
+	etc_ = sAttackMultiple + " -> " + sAttackMultipleNext + " ÇÇÇØ ¹è¼ö\n"
+			+ sAttackSpeed + " -> " + sAttackSpeedNext + " °ø°Ý ¼Óµµ ";
+	
 }
 
 void Aiming::Effect()

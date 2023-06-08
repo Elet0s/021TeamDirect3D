@@ -4,7 +4,7 @@
 
 LightHand::LightHand() 
 {
-	name_ = "ê°€ë²¼ìš´ ì†";
+	name_ = "°¡º­¿î ¼Õ";
 	SetName(std::string_view("LightHand"));
 	myRank_ = Rank::Epic;
 	maxLevel_ = 1;
@@ -23,8 +23,8 @@ void LightHand::Init()
 	std::string sAttackMul = std::to_string(PlayerPInfo_.atkMultiple_Result).substr(0, std::to_string(PlayerPInfo_.atkMultiple_Result).find(".")) + "%";
 	std::string sAttackMulNext = std::to_string(ceil(PlayerPInfo_.atkMultiple_Result * 0.8f)).substr(0, std::to_string(ceil(PlayerPInfo_.atkMultiple_Result * 0.8f)).find(".")) + "%";
 
-	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " ê³µê²©ì†ë„\n"
-		+ sAttackMul + " -> " + sAttackMulNext + " í”¼í•´\në°°ìˆ˜ ";
+	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " °ø°Ý¼Óµµ\n"
+		+ sAttackMul + " -> " + sAttackMulNext + " ÇÇÇØ\n¹è¼ö ";
 }
 
 void LightHand::Effect()

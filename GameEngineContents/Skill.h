@@ -4,17 +4,17 @@
 
 struct WeaponInfo
 {
-	float weaponAtk_;//ë¬´ê¸°ê³µê²©ë ¥
-	float weaponAtkSpeed_;//ê³µê²©ì†ë„
-	size_t weaponPassAtk_;//ê´€í†µë ¥
-	size_t weaponPassNum_;//ê´€í†µíšŸìˆ˜
-	float weaponSize_;//íˆ¬ì‚¬ì²´í¬ê¸°
-	float weaponDuration_;//íˆ¬ì‚¬ì²´ì§€ì†ì‹œê°„
-	float weaponSpeed_;// íˆ¬ì‚¬ì²´ì†ë„ 
-	float weaponRange_;// ë¬´ê¸° ë²”ìœ„
-	float weaponknockback_;//ë„‰ë°±
-	size_t weponConsecutiveAtkNum_;//íˆ¬ì‚¬ì²´ ì—°ì†ê³µê²©íšŸìˆ˜(í•œ ê³µê²© ì£¼ê¸°ì— ëª‡ë²ˆ ë˜ì§€ëŠ”ì§€)
-	size_t weaponProjectileNum_; //íˆ¬ì‚¬ì²´ì¶”ê°€ê°¯ìˆ˜(í•œë²ˆì— ë˜ì§€ëŠ” ë°œì‚¬ì²´ íšŸìˆ˜)
+	float weaponAtk_;//¹«±â°ø°İ·Â
+	float weaponAtkSpeed_;//°ø°İ¼Óµµ
+	size_t weaponPassAtk_;//°üÅë·Â
+	size_t weaponPassNum_;//°üÅëÈ½¼ö
+	float weaponSize_;//Åõ»çÃ¼Å©±â
+	float weaponDuration_;//Åõ»çÃ¼Áö¼Ó½Ã°£
+	float weaponSpeed_;// Åõ»çÃ¼¼Óµµ 
+	float weaponRange_;// ¹«±â ¹üÀ§
+	float weaponknockback_;//³Ë¹é
+	size_t weponConsecutiveAtkNum_;//Åõ»çÃ¼ ¿¬¼Ó°ø°İÈ½¼ö(ÇÑ °ø°İ ÁÖ±â¿¡ ¸î¹ø ´øÁö´ÂÁö)
+	size_t weaponProjectileNum_; //Åõ»çÃ¼Ãß°¡°¹¼ö(ÇÑ¹ø¿¡ ´øÁö´Â ¹ß»çÃ¼ È½¼ö)
 	WeaponInfo()
 		:weaponAtk_(0), 
 		weaponPassAtk_(0),
@@ -80,7 +80,7 @@ public:
 	{
 		isOn_ = true;
 	}
-
+	
 	bool GetIsOn()
 	{
 		return isOn_;
@@ -93,7 +93,7 @@ protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
-
+	
 	bool isOn_;
 	SoulCard valueSoulCard_;
 	std::string name_;

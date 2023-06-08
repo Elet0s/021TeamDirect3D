@@ -31,7 +31,7 @@ void Green::Start()
 
 	monsterHp_ = CreateComponent<GameEngineTextureRenderer>();
 	monsterHp_->SetTexture("DefaultUi.png");
-	monsterHp_->GetPixelData().mulColor_ = float4::Green; //ë…¹ìƒ‰
+	monsterHp_->GetPixelData().mulColor_ = float4::Green; //³ì»ö
 	monsterHp_->GetTransform().SetWorldScale(-130.f, 15.f, 1.f);
 	monsterHp_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHp_->SetRenderingOrder(15);
@@ -39,7 +39,7 @@ void Green::Start()
 
 	monsterHpMax_ = CreateComponent<GameEngineTextureRenderer>();
 	monsterHpMax_->SetTexture("DefaultUi.png");
-	monsterHpMax_->GetPixelData().mulColor_ = float4::Black; //ê²€ì€ìƒ‰
+	monsterHpMax_->GetPixelData().mulColor_ = float4::Black; //°ËÀº»ö
 	monsterHpMax_->GetTransform().SetLocalScale(130, 15, 1);
 	monsterHpMax_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHpMax_->SetRenderingOrder(15);
@@ -49,7 +49,7 @@ void Green::Start()
 	monsterHpScore_ = CreateComponent<GameEngineFontRenderer>();
 	monsterHpScore_->SetSize(20.f);
 	monsterHpScore_->SetLeftAndRightSort(LeftAndRightSort::Center);
-	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "ë§‘ìŒ");
+	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "¸¼À½");
 	monsterHpScore_->SetPositionMode(FontPositionMode::World);
 	monsterHpScore_->ChangeCamera(CameraOrder::MidCamera);
 	monsterHpScore_->GetTransform().SetLocalPosition({ 0.f,115.f,0.f });
@@ -63,7 +63,7 @@ void Green::Update(float _deltaTime)
 	HpCheak();
 
 	GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
-	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "ë§‘ìŒ");
+	monsterHpScore_->SetText(std::to_string(static_cast <int>(monsterInfo_->hp_)), "¸¼À½");
 	ReduceHP();
 }
 void Green::End()

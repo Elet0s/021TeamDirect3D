@@ -4,7 +4,7 @@
 
 LightArmor::LightArmor() 
 {
-	name_ = "Í≤ΩÍ∞ë";
+	name_ = "∞Ê∞©";
 	SetName(std::string_view("LightArmor"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 5;
@@ -25,8 +25,8 @@ void LightArmor::Init()
 	std::string sSpeedNext = std::to_string(ceil(PlayerInfo_.speed_ * ((PlayerPInfo_.speed_Per + 2.0f)/100))).substr(0, std::to_string(ceil(PlayerInfo_.speed_ * ((PlayerPInfo_.speed_Per + 2.0f) / 100))).find("."));
 
 
-	etc_ = sdamageMitigation_ + " -> " + sdamageMitigation_Next + " ÌîºÌï¥ ÏôÑÌôî\n"
-		+ sSpeed + " ->" + sSpeedNext + "Ïù¥Îèô ÏÜçÎèÑ ";
+	etc_ = sdamageMitigation_ + " -> " + sdamageMitigation_Next + " «««ÿ øœ»≠\n"
+		+ sSpeed + " ->" + sSpeedNext + "¿Ãµø º”µµ ";
 }
 
 void LightArmor::Effect()

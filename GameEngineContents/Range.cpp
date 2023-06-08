@@ -4,7 +4,7 @@
 
 Range::Range() 
 {
-	name_ = "ì‚¬ì •ê±°ë¦¬";
+	name_ = "»çÁ¤°Å¸®";
 	SetName(std::string_view("Range"));
 	maxLevel_ = 6;
 	myRank_ = Rank::Normal;
@@ -20,8 +20,8 @@ void Range::Init()
 
 	std::string sProjectileDuration = std::to_string(PlayerPInfo_.projectileDuration_Result).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result).find(".") ) + "%";
 	std::string sProjectileDurationNext = std::to_string(PlayerPInfo_.projectileDuration_Result + 20).substr(0, std::to_string(PlayerPInfo_.projectileDuration_Result + 20).find(".") ) + "%";
-
-	etc_ = sProjectileDuration + "-> " + sProjectileDurationNext + " íˆ¬ì‚¬ì²´\n ì§€ì† ì‹œê°„ ";
+	
+	etc_ = sProjectileDuration + "-> " + sProjectileDurationNext + " Åõ»çÃ¼\n Áö¼Ó ½Ã°£ ";
 }
 
 void Range::Effect()

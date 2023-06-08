@@ -4,7 +4,7 @@
 
 Tower::Tower() 
 {
-	name_ = "íƒ€ì›Œ";
+	name_ = "Å¸¿ö";
 	SetName(std::string_view("Tower"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 2;
@@ -21,7 +21,7 @@ void Tower::Init()
 	std::string sMaxHp = std::to_string(PlayerPInfo_.hpMax_Result).substr(0, std::to_string(PlayerPInfo_.hpMax_Result).find("."));
 	std::string sMaxHpNext = std::to_string(PlayerPInfo_.hpMax_Result + 75.f).substr(0, std::to_string(PlayerPInfo_.hpMax_Result + 75.f).find("."));
 
-	etc_ = sMaxHp + "% -> " + sMaxHpNext + "% ìµœëŒ€ ì²´ë ¥ ";
+	etc_ = sMaxHp + "% -> " + sMaxHpNext + "% ÃÖ´ë Ã¼·Â ";
 }
 
 void Tower::Effect()

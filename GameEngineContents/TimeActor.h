@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+// Ό³Έν :
 class TimeActor : public GameEngineActor
 {
 public:

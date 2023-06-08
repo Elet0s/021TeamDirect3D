@@ -44,18 +44,18 @@ void GameEngineIndexBuffer::Set()
 {
 	if (nullptr == indexBuffer_)
 	{
-		MsgBoxAssert("ì¸ë±ìŠ¤ë²„í¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("ÀÎµ¦½º¹öÆÛ°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
-	GameEngineDevice::GetDC()->IASetIndexBuffer(//ì¸í’‹ ì–´ì…ˆë¸”ëŸ¬ ê³¼ì •ì—ì„œ ì¸ë±ìŠ¤ë²„í¼ë¥¼ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
+	GameEngineDevice::GetDC()->IASetIndexBuffer(//ÀÎÇ² ¾î¼Àºí·¯ °úÁ¤¿¡¼­ ÀÎµ¦½º¹öÆÛ¸¦ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
 
-		indexBuffer_,							//íŒŒì´í”„ë¼ì¸ì— ì„¸íŒ…í•  ë²„í¼. 2ì°¨ì›ë°°ì—´ í•˜ë‚˜ë§Œ ë„£ì–´ì¤Œ.
-		//ìƒì„±í• ë•Œ ë°”ì¸ë“œí”Œë˜ê·¸ë¥¼ D3D11_BIND_INDEX_BUFFERë¡œ ì„¤ì •í•´ì¤€ ë²„í¼ì—¬ì•¼ ì—¬ê¸°ì— ì—°ê²°í•  ìˆ˜ ìˆë‹¤.
+		indexBuffer_,							//ÆÄÀÌÇÁ¶óÀÎ¿¡ ¼¼ÆÃÇÒ ¹öÆÛ. 2Â÷¿ø¹è¿­ ÇÏ³ª¸¸ ³Ö¾îÁÜ.
+		//»ı¼ºÇÒ¶§ ¹ÙÀÎµåÇÃ·¡±×¸¦ D3D11_BIND_INDEX_BUFFER·Î ¼³Á¤ÇØÁØ ¹öÆÛ¿©¾ß ¿©±â¿¡ ¿¬°áÇÒ ¼ö ÀÖ´Ù.
 
-		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,		//ì¸ë±ìŠ¤ë²„í¼ì˜ ë°ì´í„° í˜•ì‹. 
+		DXGI_FORMAT::DXGI_FORMAT_R32_UINT,		//ÀÎµ¦½º¹öÆÛÀÇ µ¥ÀÌÅÍ Çü½Ä. 
 
-		0										//ì„¸íŒ…ì„ ì‹œì‘í•  ë²„í¼ì˜ ì›ì†Œ ë²ˆí˜¸ * ê° ë²„í¼ì˜ í¬ê¸°.
+		0										//¼¼ÆÃÀ» ½ÃÀÛÇÒ ¹öÆÛÀÇ ¿ø¼Ò ¹øÈ£ * °¢ ¹öÆÛÀÇ Å©±â.
 	);
 }
 
@@ -64,25 +64,25 @@ void GameEngineIndexBuffer::CreateIndexBuffer(const void* _initialData, UINT _in
 	indexSize_ = _indexSize;
 	indexCount_ = _indexCount;
 
-	resData_.pSysMem = _initialData;	//ë²„í¼ ì´ˆê¸°ë°ì´í„° ì„¤ì •.
-	//ê·¸ë˜í”½ì¹´ë“œê°€ në°”ì´íŠ¸ë§Œí¼ ìê¸° ë©”ëª¨ë¦¬ì— í• ë‹¹í•˜ëŠ”ë° í•„ìš”í•˜ë¯€ë¡œ ë²„í¼ì— ëŒ€í•œ ì •ë³´ë¥¼ ì¤˜ì•¼ í•œë‹¤.
+	resData_.pSysMem = _initialData;	//¹öÆÛ ÃÊ±âµ¥ÀÌÅÍ ¼³Á¤.
+	//±×·¡ÇÈÄ«µå°¡ n¹ÙÀÌÆ®¸¸Å­ ÀÚ±â ¸Ş¸ğ¸®¿¡ ÇÒ´çÇÏ´Âµ¥ ÇÊ¿äÇÏ¹Ç·Î ¹öÆÛ¿¡ ´ëÇÑ Á¤º¸¸¦ Áà¾ß ÇÑ´Ù.
 
-	indexBufferDesc_.ByteWidth = indexSize_ * indexCount_;	//ë²„í¼ êµ¬ì¡°ì²´ì˜ ë°”ì´íŠ¸í¬ê¸° ë“±ë¡.
+	indexBufferDesc_.ByteWidth = indexSize_ * indexCount_;	//¹öÆÛ ±¸Á¶Ã¼ÀÇ ¹ÙÀÌÆ®Å©±â µî·Ï.
 
-	indexBufferDesc_.CPUAccessFlags = 0;	//CPUì˜ ë²„í¼ ì ‘ê·¼ í—ˆìš© ì—¬ë¶€. 0: ì½ê¸°/ì“°ê¸° ë‘˜ë‹¤ ë¶ˆê°€. 
-	//0ìœ¼ë¡œ í•˜ëŠ”ê²ƒì´ ìµœì í™” íš¨ìœ¨ì´ ì¦ê°€í•œë‹¤.
+	indexBufferDesc_.CPUAccessFlags = 0;	//CPUÀÇ ¹öÆÛ Á¢±Ù Çã¿ë ¿©ºÎ. 0: ÀĞ±â/¾²±â µÑ´Ù ºÒ°¡. 
+	//0À¸·Î ÇÏ´Â°ÍÀÌ ÃÖÀûÈ­ È¿À²ÀÌ Áõ°¡ÇÑ´Ù.
 
-	indexBufferDesc_.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;		//ì´ ë²„í¼ë¥¼ ì–´ë–¤ ë°©ì‹ìœ¼ë¡œ ì‚¬ìš©í• ì§€ ë“±ë¡. 
-	//D3D11_USAGE::D3D11_USAGE_DEFAULT: GPUê°€ ì½ê¸°/ì“°ê¸° ê°€ëŠ¥í•œ ë¦¬ì†ŒìŠ¤. CPUëŠ” ì ‘ê·¼ ë¶ˆê°€.
+	indexBufferDesc_.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;		//ÀÌ ¹öÆÛ¸¦ ¾î¶² ¹æ½ÄÀ¸·Î »ç¿ëÇÒÁö µî·Ï. 
+	//D3D11_USAGE::D3D11_USAGE_DEFAULT: GPU°¡ ÀĞ±â/¾²±â °¡´ÉÇÑ ¸®¼Ò½º. CPU´Â Á¢±Ù ºÒ°¡.
 
-	indexBufferDesc_.BindFlags = D3D11_BIND_INDEX_BUFFER;	//ì´ ë²„í¼ë¥¼ íŒŒì´í”„ë¼ì¸ì— ì–´ë–¤ ìš©ë„ë¡œ ì‚¬ìš©í•˜ëŠ”ê°€.
-	//D3D11_BIND_INDEX_BUFFER: ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì¸ë±ìŠ¤ë²„í¼ë¡œ ì‚¬ìš©.
+	indexBufferDesc_.BindFlags = D3D11_BIND_INDEX_BUFFER;	//ÀÌ ¹öÆÛ¸¦ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¾î¶² ¿ëµµ·Î »ç¿ëÇÏ´Â°¡.
+	//D3D11_BIND_INDEX_BUFFER: ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ÀÎµ¦½º¹öÆÛ·Î »ç¿ë.
 
 	indexBufferDesc_.StructureByteStride = 0;
-	//ë‚´ë¶€ êµ¬ì¡°ë¥¼ ì•Œ ìˆ˜ ì—†ëŠ” ë‹¤ì´ë ‰íŠ¸X ì œê³µ ë²„í¼ê°€ ì•„ë‹Œ, ë™ì¼í•œ í¬ê¸°ì˜ ì›ì†Œë“¤ë¡œ êµ¬ì„±ëœ êµ¬ì¡°ì²´ë¡œ ë²„í¼ë¥¼ ë§Œë“¤ ë•Œ í•„ìš”í•˜ë‹¤ê³  í•œë‹¤.
-	// 0: êµ¬ì¡°ì²´ ë²„í¼ë¥¼ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ.
+	//³»ºÎ ±¸Á¶¸¦ ¾Ë ¼ö ¾ø´Â ´ÙÀÌ·ºÆ®X Á¦°ø ¹öÆÛ°¡ ¾Æ´Ñ, µ¿ÀÏÇÑ Å©±âÀÇ ¿ø¼Òµé·Î ±¸¼ºµÈ ±¸Á¶Ã¼·Î ¹öÆÛ¸¦ ¸¸µé ¶§ ÇÊ¿äÇÏ´Ù°í ÇÑ´Ù.
+	// 0: ±¸Á¶Ã¼ ¹öÆÛ¸¦ »ç¿ëÇÏÁö ¾ÊÀ½.
 
-	indexBufferDesc_.MiscFlags = 0;	//ë²„í¼ì— ê´€ë ¨ëœ ë¶€ê°€ ì˜µì…˜ ì„¤ì •. 0: ë¶€ê°€ ì˜µì…˜ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ.	
+	indexBufferDesc_.MiscFlags = 0;	//¹öÆÛ¿¡ °ü·ÃµÈ ºÎ°¡ ¿É¼Ç ¼³Á¤. 0: ºÎ°¡ ¿É¼Ç »ç¿ëÇÏÁö ¾ÊÀ½.	
 
 	if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(
 		&indexBufferDesc_,
@@ -90,7 +90,7 @@ void GameEngineIndexBuffer::CreateIndexBuffer(const void* _initialData, UINT _in
 		&indexBuffer_
 	))
 	{
-		MsgBoxAssert("ì¸ë±ìŠ¤ ë²„í¼ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("ÀÎµ¦½º ¹öÆÛ »ı¼º ½ÇÆĞ.");
 		return;
 	}
 }

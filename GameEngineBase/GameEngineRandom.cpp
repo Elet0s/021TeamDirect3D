@@ -8,8 +8,8 @@ GameEngineRandom::GameEngineRandom(long long _seed /*= -1*/)
 	if (-1 == _seed)
 	{
 		mt_ = std::mt19937_64(
-			std::chrono::system_clock::to_time_t(	//ì…ë ¥ëœ time_pointêµ¬ì¡°ì²´ í˜•ì‹ì˜ ì‹œê°„ì„ time_t(long long)í˜•ì‹ìœ¼ë¡œ í˜•ë³€í™˜í•˜ëŠ” í•¨ìˆ˜.
-				std::chrono::system_clock::now()	//í˜„ì¬ì˜ ì´ˆë‹¨ìœ„ ì‹œê°„ì„ time_pointêµ¬ì¡°ì²´ í˜•ì‹ìœ¼ë¡œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
+			std::chrono::system_clock::to_time_t(	//ÀÔ·ÂµÈ time_point±¸Á¶Ã¼ Çü½ÄÀÇ ½Ã°£À» time_t(long long)Çü½ÄÀ¸·Î Çüº¯È¯ÇÏ´Â ÇÔ¼ö.
+				std::chrono::system_clock::now()	//ÇöÀçÀÇ ÃÊ´ÜÀ§ ½Ã°£À» time_point±¸Á¶Ã¼ Çü½ÄÀ¸·Î ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
 			)
 		);
 	}

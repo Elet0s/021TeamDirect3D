@@ -29,15 +29,15 @@ void GameEnginePixelShader::Set()
 {
     if (nullptr == pixelShader_)
     {
-        MsgBoxAssert("í”½ì…€ ì…°ì´ë”ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("ÇÈ¼¿ ¼ÎÀÌ´õ°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
-    //ë‘ë²ˆì§¸ ì¸ìžëŠ” #includeë‚˜ #defineë“± hlslì—ì„œ ì‚¬ìš©í•  í—¤ë”ë‚˜ ë””íŒŒì¸ì˜ ê°ì²´ë¥¼ ë„£ì–´ì¤„ìˆ˜ ìžˆë‹¤.
-    GameEngineDevice::GetDC()->PSSetShader(//íŒŒì´í”„ë¼ì¸ì— í”½ì…€ì…°ì´ë”ë¥¼ ì„¸íŒ…í•˜ëŠ” í•¨ìˆ˜.
-        pixelShader_,                      //í”½ì…€ì…°ì´ë” í¬ì¸í„°.
-        nullptr,                           //í´ëž˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ ì¸í„°íŽ˜ì´ìŠ¤ ë°°ì—´ ì£¼ì†Œê°’. ì—†ìœ¼ë©´ NULL.
-        0                                  //ì‚¬ìš©í•  í´ëž˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ ì¸í„°íŽ˜ì´ìŠ¤ ë°°ì—´ì˜ ì¸ë±ìŠ¤.
+    //µÎ¹øÂ° ÀÎÀÚ´Â #include³ª #defineµî hlsl¿¡¼­ »ç¿ëÇÒ Çì´õ³ª µðÆÄÀÎÀÇ °´Ã¼¸¦ ³Ö¾îÁÙ¼ö ÀÖ´Ù.
+    GameEngineDevice::GetDC()->PSSetShader(//ÆÄÀÌÇÁ¶óÀÎ¿¡ ÇÈ¼¿¼ÎÀÌ´õ¸¦ ¼¼ÆÃÇÏ´Â ÇÔ¼ö.
+        pixelShader_,                      //ÇÈ¼¿¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
+        nullptr,                           //Å¬·¡½º ÀÎ½ºÅÏ½º ÀÎÅÍÆäÀÌ½º ¹è¿­ ÁÖ¼Ò°ª. ¾øÀ¸¸é NULL.
+        0                                  //»ç¿ëÇÒ Å¬·¡½º ÀÎ½ºÅÏ½º ÀÎÅÍÆäÀÌ½º ¹è¿­ÀÇ ÀÎµ¦½º.
     );
 }
 
@@ -75,7 +75,7 @@ void GameEnginePixelShader::InstancingPixelShaderCompile(
     UINT _versionLow /*= 0*/
 )
 {
-    inst_PixelShader_ = new GameEnginePixelShader();  //GameEngineResì— ë“±ë¡ë˜ì§€ ì•ŠëŠ” ì  ì£¼ì˜.
+    inst_PixelShader_ = new GameEnginePixelShader();  //GameEngineRes¿¡ µî·ÏµÇÁö ¾Ê´Â Á¡ ÁÖÀÇ.
     inst_PixelShader_->SetName(_entryPoint);
     inst_PixelShader_->CreateVersion("ps", _versionHigh, _versionLow);
     inst_PixelShader_->SetEntrtyPoint(_entryPoint);
@@ -86,28 +86,28 @@ void GameEnginePixelShader::InstancingPixelShaderCompile(
 
 void GameEnginePixelShader::CreatePixelShader()
 {
-    if (S_OK != GameEngineDevice::GetDevice()->CreatePixelShader(   //í”½ì…€ì…°ì´ë” ìƒì„± í•¨ìˆ˜.
-        binaryCode_->GetBufferPointer(),    //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ.
-        binaryCode_->GetBufferSize(),       //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ í¬ê¸°.
+    if (S_OK != GameEngineDevice::GetDevice()->CreatePixelShader(   //ÇÈ¼¿¼ÎÀÌ´õ »ý¼º ÇÔ¼ö.
+        binaryCode_->GetBufferPointer(),    //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå.
+        binaryCode_->GetBufferSize(),       //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå Å©±â.
         NULL,                               //??
-        &pixelShader_                       //í”½ì…€ì…°ì´ë” í¬ì¸í„°.
+        &pixelShader_                       //ÇÈ¼¿¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
     ))
     {
-        MsgBoxAssert("í”½ì…€ ì…°ì´ë” ìƒì„± ì‹¤íŒ¨.");
+        MsgBoxAssert("ÇÈ¼¿ ¼ÎÀÌ´õ »ý¼º ½ÇÆÐ.");
         return;
     }
 }
 
 void GameEnginePixelShader::CreateInstancingPixelShader()
 {
-    if (S_OK != GameEngineDevice::GetDevice()->CreatePixelShader(   //í”½ì…€ì…°ì´ë” ìƒì„± í•¨ìˆ˜.
-        this->binaryCode_->GetBufferPointer(),  //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ.
-        this->binaryCode_->GetBufferSize(),     //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ í¬ê¸°.
+    if (S_OK != GameEngineDevice::GetDevice()->CreatePixelShader(   //ÇÈ¼¿¼ÎÀÌ´õ »ý¼º ÇÔ¼ö.
+        this->binaryCode_->GetBufferPointer(),  //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå.
+        this->binaryCode_->GetBufferSize(),     //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå Å©±â.
         NULL,                                   //??
-        &this->pixelShader_                     //í”½ì…€ì…°ì´ë” í¬ì¸í„°.
+        &this->pixelShader_                     //ÇÈ¼¿¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
     ))
     {
-        MsgBoxAssert("ì¸ìŠ¤í„´ì‹± í”½ì…€ì…°ì´ë” ìƒì„± ì‹¤íŒ¨.");
+        MsgBoxAssert("ÀÎ½ºÅÏ½Ì ÇÈ¼¿¼ÎÀÌ´õ »ý¼º ½ÇÆÐ.");
         return;
     }
 }

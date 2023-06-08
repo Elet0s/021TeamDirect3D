@@ -1,7 +1,7 @@
 #pragma once
 #include"Skill.h"
 
-//ë²”ìœ„ë‚´ì—ì„œ ì œì¼ ê°€ê¹Œìš´ ì  ì†Œìˆ˜ë¥¼ ê³µê²©
+//¹üÀ§³»¿¡¼­ Á¦ÀÏ °¡±î¿î Àû ¼Ò¼ö¸¦ °ø°İ
 class Monster;
 class Katana :public Skill
 {
@@ -35,14 +35,14 @@ private:
 
 private:
 
-	WeaponInfo katanaWeaponInfo_;//ë¬´ê¸° ìŠ¤íƒ¯
+	WeaponInfo katanaWeaponInfo_;//¹«±â ½ºÅÈ
 	float squaredWeaponRange_;
 	size_t targetLimitation_;
 	float attackInterval_;
-
-	std::list<Monster*> monstersInRange_;	//ë²”ìœ„ ë‚´ ëª‡ëª‡ ëª¬ìŠ¤í„°.
-	//std::pair<size_t, float> minHpPair_;//íƒ€ê²Ÿ ëŒ€ìƒ
-	//std::vector<std::pair<size_t, float>> targetInst_;//íƒ€ê²Ÿ ëª¨ìŒ
+	
+	std::list<Monster*> monstersInRange_;	//¹üÀ§ ³» ¸î¸î ¸ó½ºÅÍ.
+	//std::pair<size_t, float> minHpPair_;//Å¸°Ù ´ë»ó
+	//std::vector<std::pair<size_t, float>> targetInst_;//Å¸°Ù ¸ğÀ½
 
 
 

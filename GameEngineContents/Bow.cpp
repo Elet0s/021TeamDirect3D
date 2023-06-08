@@ -24,7 +24,7 @@ Bow::Bow()
 	referenceVectorList02_(),
 	passNum_()
 {
-	name_ = "í™œ";
+	name_ = "È°";
 	SetName(std::string_view("Bow"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 7;
@@ -39,7 +39,7 @@ void Bow::Init()
 	std::string sDamege = std::to_string(static_cast<int>(floor(bowWeaponInfo_.weaponAtk_)));
 	std::string sAttackSpeed = std::to_string(bowWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(bowWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 
-	etc_ = "ê°€ì¥ê°€ê¹Œìš´ì ì—ê²Œë°œì‚¬í•©ë‹ˆë‹¤\n" + sDamege + " ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²©\níˆ¬ì‚¬ì²´ " + std::to_string(bowWeaponInfo_.weaponProjectileNum_) + "ê°œ\n ";
+	etc_ = "°¡Àå°¡±î¿îÀû¿¡°Ô¹ß»çÇÕ´Ï´Ù\n" + sDamege + " ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°İ\nÅõ»çÃ¼ " + std::to_string(bowWeaponInfo_.weaponProjectileNum_) + "°³\n ";
 }
 void Bow::Effect()
 {
@@ -48,11 +48,11 @@ void Bow::Effect()
 
 void Bow::Start()
 {
-
+	
 	projectileGroupList01_.reserve(20);
 	projectileGroupList02_.reserve(20);
 	passNum_.reserve(40);
-	for (size_t i = 0; i < 40; i++) // ì²˜ìŒë¶€í„° ìµœëŒ€ê°¯ìˆ˜ ëª¨ë‘ ë§Œë“¤ì–´ì„œ ê°€ì§€ê³  ìˆì„ ê²ƒ 
+	for (size_t i = 0; i < 40; i++) // Ã³À½ºÎÅÍ ÃÖ´ë°¹¼ö ¸ğµÎ ¸¸µé¾î¼­ °¡Áö°í ÀÖÀ» °Í 
 	{
 		passNum_.push_back(0);
 		projectileGroup_.first = CreateComponent<GameEngineTextureRenderer>();
@@ -138,26 +138,26 @@ void Bow::SerchTarget()
 		targetSerchCounter_ = 0;
 		monsterList_ = Monster::GetMonsterList();
 		targetInst01_.clear();
-		for (size_t n = 0; n < bowWeaponInfo_.weaponProjectileNum_; n++)//í•œë²ˆì— ë˜ì§€ëŠ” íˆ¬ì‚¬ì²´ ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µí• ê²ƒì„
+		for (size_t n = 0; n < bowWeaponInfo_.weaponProjectileNum_; n++)//ÇÑ¹ø¿¡ ´øÁö´Â Åõ»çÃ¼ °¹¼ö¸¸Å­ ¹İº¹ÇÒ°ÍÀÓ
 		{
 			for (size_t i = 0; i < monsterList_.size(); i++)
 			{
 				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
 				{
 					targetSerchCounter_ += 1;
-					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0ì´ìƒ, ì²«ë²ˆì§¸ ìˆœë²ˆì¼ê²½ìš°
+					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0ÀÌ»ó, Ã¹¹øÂ° ¼ø¹øÀÏ°æ¿ì
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 						firstSerchCheak_ = true;
 					}
-					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//í˜„ì¬ê²€ì‚¬ì¤‘ì¸ ëª¬ìŠ¤í„° ì²´ë ¥ì´ ë” ë‚®ë‹¤ë©´
+					else if (minHpPair_.second > monsterList_[i]->GetMonsterInfo().hp_)//ÇöÀç°Ë»çÁßÀÎ ¸ó½ºÅÍ Ã¼·ÂÀÌ ´õ ³·´Ù¸é
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 					}
 				}
 				if (i == monsterList_.size() - 1)
 				{
-					targetInst01_.push_back(minHpPair_);//íƒ€ê²Ÿë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+					targetInst01_.push_back(minHpPair_);//Å¸°Ù¸®½ºÆ®¿¡ Ãß°¡
 					monsterList_[minHpPair_.first]->isTarget_ = true;
 					firstSerchCheak_ = false;
 					istarget_ = true;
@@ -183,7 +183,7 @@ void Bow::ProjectileSort()
 		{
 			for (size_t i = 0; i < projectileGroupList01_.size(); i++)
 			{
-				if (targetInst01_.size() > i) // íƒ€ê²Ÿìˆ˜ë§Œí¼ í•„ìš”
+				if (targetInst01_.size() > i) // Å¸°Ù¼ö¸¸Å­ ÇÊ¿ä
 				{
 					passNum_[i] = bowWeaponInfo_.weaponPassNum_;
 					projectileGroupList01_[i].first->On();
@@ -202,7 +202,7 @@ void Bow::ProjectileSort()
 		{
 			for (size_t i = 0; i < projectileGroupList02_.size(); i++)
 			{
-				if (targetInst02_.size() > i) // íƒ€ê²Ÿìˆ˜ë§Œí¼ í•„ìš”
+				if (targetInst02_.size() > i) // Å¸°Ù¼ö¸¸Å­ ÇÊ¿ä
 				{
 					passNum_[i+20] = bowWeaponInfo_.weaponPassNum_;
 					projectileGroupList02_[i].first->On();
@@ -233,8 +233,8 @@ void Bow::RenderRotate()
 				float Mx = monsterList_[targetInst01_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst01_[i].first]->GetTransform().GetWorldPosition().y;
 				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//ëª¬ìŠ¤í„° ì˜®ê²¨ì§„ ìœ„ì¹˜ë¡œ ê°€ì•¼í•¨
-				referenceVector_.x = (Mx - Px); //ë°©í–¥ êµ¬í•˜ëŠ” ê³µì‹
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//¸ó½ºÅÍ ¿Å°ÜÁø À§Ä¡·Î °¡¾ßÇÔ
+				referenceVector_.x = (Mx - Px); //¹æÇâ ±¸ÇÏ´Â °ø½Ä
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
 				referenceVectorList01_.push_back(referenceVector_);
@@ -252,8 +252,8 @@ void Bow::RenderRotate()
 				float Mx = monsterList_[targetInst02_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst02_[i].first]->GetTransform().GetWorldPosition().y;
 				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//ëª¬ìŠ¤í„° ì˜®ê²¨ì§„ ìœ„ì¹˜ë¡œ ê°€ì•¼í•¨
-				referenceVector_.x = (Mx - Px); //ë°©í–¥ êµ¬í•˜ëŠ” ê³µì‹
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//¸ó½ºÅÍ ¿Å°ÜÁø À§Ä¡·Î °¡¾ßÇÔ
+				referenceVector_.x = (Mx - Px); //¹æÇâ ±¸ÇÏ´Â °ø½Ä
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
 				referenceVectorList02_.push_back(referenceVector_);
@@ -339,7 +339,7 @@ CollisionReturn Bow::ProjectileToMonsterCollision(GameEngineCollision* _This, Ga
 			}
 		}
 	}
-	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= bowWeaponInfo_.weaponAtk_; //ë°ë¯¸ì§€ì¤Œ
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= bowWeaponInfo_.weaponAtk_; //µ¥¹ÌÁöÁÜ
 	return CollisionReturn::Stop;
 }
 

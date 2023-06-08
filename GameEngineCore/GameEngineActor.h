@@ -11,9 +11,9 @@ class GameEngineActor :
 	public GameEngineTransformBase
 {
 	//
-	//ì•¡í„°:
+	//¾×ÅÍ:
 
-	//ë‹¤ì¤‘ìƒì† ì´ìœ : ìƒì†ë°›ì€ ë¶€ëª¨ í´ë˜ìŠ¤ë“¤ì˜ ê¸°ëŠ¥ì€ ê°€ì ¸ì•¼ í•˜ëŠ”ë°, ê·¸ ê¸°ëŠ¥ì„ ê°€ì§„ í´ë˜ìŠ¤ë“¤ì„ ì¼ì¼íˆ ë§Œë“œëŠ”ê±´ ë¹„í˜„ì‹¤ì ì´ì–´ì„œ.
+	//´ÙÁß»ó¼Ó ÀÌÀ¯: »ó¼Ó¹ŞÀº ºÎ¸ğ Å¬·¡½ºµéÀÇ ±â´ÉÀº °¡Á®¾ß ÇÏ´Âµ¥, ±× ±â´ÉÀ» °¡Áø Å¬·¡½ºµéÀ» ÀÏÀÏÈ÷ ¸¸µå´Â°Ç ºñÇö½ÇÀûÀÌ¾î¼­.
 
 
 	friend GameEngineLevel;
@@ -33,7 +33,7 @@ private:
 
 public:
 	void DetachObject() override;
-	void SetParent(GameEngineUpdateObject* _newParent) override;	//ì•¡í„°ì— ë ˆë²¨ì´ ì•„ë‹Œ ìƒˆ ë¶€ëª¨ë¥¼ ë¶™ì´ëŠ” í•¨ìˆ˜.
+	void SetParent(GameEngineUpdateObject* _newParent) override;	//¾×ÅÍ¿¡ ·¹º§ÀÌ ¾Æ´Ñ »õ ºÎ¸ğ¸¦ ºÙÀÌ´Â ÇÔ¼ö.
 
 public:
 
@@ -60,10 +60,10 @@ public:
 		return dynamic_cast<LevelType*>(parentLevel_);
 	}
 
-	void SetLevelOverOn()	//ë ˆë²¨ì„ ì˜®ê¸¸ ì•¡í„°ë“¤ì„ í‘œì‹œí•˜ëŠ” í•¨ìˆ˜.
+	void SetLevelOverOn()	//·¹º§À» ¿Å±æ ¾×ÅÍµéÀ» Ç¥½ÃÇÏ´Â ÇÔ¼ö.
 	{
 		isLevelOver_ = true;
-		//ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•œ ì˜¤ë¸Œì íŠ¸ëŠ” ì¤‘ë³µìƒì„± ê¸ˆì§€!
+		//ÀÌ ÇÔ¼ö¸¦ È£ÃâÇÑ ¿ÀºêÁ§Æ®´Â Áßº¹»ı¼º ±İÁö!
 	}
 
 
@@ -81,8 +81,8 @@ private:
 
 private:
 
-	GameEngineLevel* parentLevel_;	//ì´ ì•¡í„°ë¥¼ ê°€ì§„ ë ˆë²¨.
+	GameEngineLevel* parentLevel_;	//ÀÌ ¾×ÅÍ¸¦ °¡Áø ·¹º§.
 
-	bool isLevelOver_;	//true: ì´ ë ˆë²¨ì—ì„œ ë‹¤ë¥¸ ë ˆë²¨ë¡œ ì˜®ê¸¸ ì˜ˆì •ì¸ ì˜¤ë¸Œì íŠ¸.
+	bool isLevelOver_;	//true: ÀÌ ·¹º§¿¡¼­ ´Ù¸¥ ·¹º§·Î ¿Å±æ ¿¹Á¤ÀÎ ¿ÀºêÁ§Æ®.
 };
 

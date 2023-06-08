@@ -4,7 +4,7 @@
 class GameEngineFile;
 class GameEngineDirectory : public GameEnginePath
 {
-	//ì†”ë£¨ì…˜ íŒŒì¼ì´ ìžˆëŠ” ì§€ì ì„ ì›ì ìœ¼ë¡œ, í”„ë¡œì íŠ¸ ë‚´ ì›í•˜ëŠ” ë””ë ‰í† ë¦¬ë¡œ ì´ë™í•˜ëŠ” ê¸°ëŠ¥ë“¤ì„ ëª¨ì•„ ë‘” í´ëž˜ìŠ¤. 
+	//¼Ö·ç¼Ç ÆÄÀÏÀÌ ÀÖ´Â ÁöÁ¡À» ¿øÁ¡À¸·Î, ÇÁ·ÎÁ§Æ® ³» ¿øÇÏ´Â µð·ºÅä¸®·Î ÀÌµ¿ÇÏ´Â ±â´ÉµéÀ» ¸ð¾Æ µÐ Å¬·¡½º. 
 public:
 
 	GameEngineDirectory();

@@ -32,30 +32,30 @@ public:
 class GameEngineTexture;
 class GameEngineRenderTarget: public GameEngineRes<GameEngineRenderTarget>
 {
-	//ë Œë”íƒ€ê²Ÿë·°ì™€ ê¹Šì´ìŠ¤í…ì‹¤ë·°ë¥¼ ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤.
-	//ë Œë”íƒ€ê²Ÿ: ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì„ ì „ë¶€ ê±°ì¹œ ê²°ê³¼ë¬¼ë¡œì„œì˜ ìƒ‰ìƒê°’ 2ì°¨ì› ë°°ì—´ì„ ë°›ëŠ”ë° ì‚¬ìš©ë˜ëŠ” ê·¸ëž˜í”½ ì¹´ë“œ ë‚´ ë©”ëª¨ë¦¬ ì˜ì—­.
-	//GameEngineTexture í´ëž˜ìŠ¤ í˜•íƒœë¡œ ì €ìž¥ëœ í…ìŠ¤ì³ë“¤ê³¼ ê°ê°ì˜ í…ìŠ¤ì³ë“¤ì— ì—°ë™ëœ ë Œë”íƒ€ê²Ÿë·°ë“¤ì„ ì´ í´ëž˜ìŠ¤ë¡œ í†µì œí•œë‹¤. 
+	//·»´õÅ¸°Ùºä¿Í ±íÀÌ½ºÅÙ½Çºä¸¦ °ü¸®ÇÏ´Â Å¬·¡½º.
+	//·»´õÅ¸°Ù: ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎÀ» ÀüºÎ °ÅÄ£ °á°ú¹°·Î¼­ÀÇ »ö»ó°ª 2Â÷¿ø ¹è¿­À» ¹Þ´Âµ¥ »ç¿ëµÇ´Â ±×·¡ÇÈ Ä«µå ³» ¸Þ¸ð¸® ¿µ¿ª.
+	//GameEngineTexture Å¬·¡½º ÇüÅÂ·Î ÀúÀåµÈ ÅØ½ºÃÄµé°ú °¢°¢ÀÇ ÅØ½ºÃÄµé¿¡ ¿¬µ¿µÈ ·»´õÅ¸°ÙºäµéÀ» ÀÌ Å¬·¡½º·Î ÅëÁ¦ÇÑ´Ù. 
 
 	friend GameEngineRes<GameEngineRenderTarget>;
-	//GameEngineRenderTargetí´ëž˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìžë¥¼ GameEngineResí´ëž˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
+	//GameEngineRenderTargetÅ¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ý.
 
 	friend class GameEngineStatusWindow;
-	//í”„ë Œë“œ ì´ìœ ??
+	//ÇÁ·»µå ÀÌÀ¯??
 
 	friend class GameEngineBlur;
-	//í”„ë Œë“œ ì´ìœ ??
+	//ÇÁ·»µå ÀÌÀ¯??
 
 
-	//ê²Œìž„ì—”ì§„ë Œë”íƒ€ê²Ÿê³¼ ê²Œìž„ì—”ì§„í…ìŠ¤ì²˜ í´ëž˜ìŠ¤ë¥¼ ë¶„ë¦¬í•œ ì´ìœ : 
-	//ê²Œìž„ì—”ì§„í…ìŠ¤ì³ëŠ” ìžê¸°ê°€ ê°€ì§„ í…ìŠ¤ì²˜ì™€ ê·¸ ì„œë¸Œë¦¬ì†ŒìŠ¤ë“¤ë§Œ ê°€ì§€ê³  ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤ì´ê³ ,
-	//ê²Œìž„ì—”ì§„ë Œë”íƒ€ê²Ÿì€ ì´ í”„ë ˆìž„ì›Œí¬ë‚´ ëª¨ë“  ë Œë”íƒ€ê²Ÿë·°ë¥¼ ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤ì´ë‹¤. 
+	//°ÔÀÓ¿£Áø·»´õÅ¸°Ù°ú °ÔÀÓ¿£ÁøÅØ½ºÃ³ Å¬·¡½º¸¦ ºÐ¸®ÇÑ ÀÌÀ¯: 
+	//°ÔÀÓ¿£ÁøÅØ½ºÃÄ´Â ÀÚ±â°¡ °¡Áø ÅØ½ºÃ³¿Í ±× ¼­ºê¸®¼Ò½ºµé¸¸ °¡Áö°í °ü¸®ÇÏ´Â Å¬·¡½ºÀÌ°í,
+	//°ÔÀÓ¿£Áø·»´õÅ¸°ÙÀº ÀÌ ÇÁ·¹ÀÓ¿öÅ©³» ¸ðµç ·»´õÅ¸°Ùºä¸¦ °ü¸®ÇÏ´Â Å¬·¡½ºÀÌ´Ù. 
 
 private:
 	GameEngineRenderTarget();
 	~GameEngineRenderTarget();
-	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ìž/ì†Œë©¸ìžë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
-	//ì´ í”„ë ˆìž„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìžê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
-	//í”„ë¡œê·¸ëž¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ëž˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
+	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ý¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ý¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
+	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹Ýµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
+	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµÐ´Ù.
 
 	GameEngineRenderTarget(const GameEngineRenderTarget& _other) = delete;
 	GameEngineRenderTarget(GameEngineRenderTarget&& _other) noexcept = delete;
@@ -67,32 +67,32 @@ public:
 	static GameEngineRenderTarget* Create(const std::string_view& _name);
 	static GameEngineRenderTarget* Create();
 
-	//ë Œë”íƒ€ê²Ÿìœ¼ë¡œ ì“¸ ê²Œìž„ì—”ì§„í…ìŠ¤ì²˜ ê°ì²´ë¥¼ ìƒì„±, ì €ìž¥í•˜ëŠ” í•¨ìˆ˜.
+	//·»´õÅ¸°ÙÀ¸·Î ¾µ °ÔÀÓ¿£ÁøÅØ½ºÃ³ °´Ã¼¸¦ »ý¼º, ÀúÀåÇÏ´Â ÇÔ¼ö.
 	void CreateRenderTargetTexture(	
 		ID3D11Texture2D* _texture,
 		const float4& _clearColor
 	);
 
-	//ë Œë”íƒ€ê²Ÿìœ¼ë¡œ ì“¸ ê²Œìž„ì—”ì§„í…ìŠ¤ì²˜ ê°ì²´ë¥¼ ìƒì„±, ì €ìž¥í•˜ëŠ” í•¨ìˆ˜.
+	//·»´õÅ¸°ÙÀ¸·Î ¾µ °ÔÀÓ¿£ÁøÅØ½ºÃ³ °´Ã¼¸¦ »ý¼º, ÀúÀåÇÏ´Â ÇÔ¼ö.
 	void CreateRenderTargetTexture(
 		const float4& _size,
 		const float4& _clearColor
 	);
 
-	//ë Œë”íƒ€ê²Ÿìœ¼ë¡œ ì“¸ ê²Œìž„ì—”ì§„í…ìŠ¤ì²˜ ê°ì²´ë¥¼ ìƒì„±, ì €ìž¥í•˜ëŠ” í•¨ìˆ˜.
+	//·»´õÅ¸°ÙÀ¸·Î ¾µ °ÔÀÓ¿£ÁøÅØ½ºÃ³ °´Ã¼¸¦ »ý¼º, ÀúÀåÇÏ´Â ÇÔ¼ö.
 	void CreateRenderTargetTexture(
 		const float4& _size,
 		DXGI_FORMAT _format,
 		const float4& _clearColor
 	);
 
-	//ë Œë”íƒ€ê²Ÿìœ¼ë¡œ ì“¸ ê²Œìž„ì—”ì§„í…ìŠ¤ì²˜ ê°ì²´ë¥¼ ìƒì„±, ì €ìž¥í•˜ëŠ” í•¨ìˆ˜.
+	//·»´õÅ¸°ÙÀ¸·Î ¾µ °ÔÀÓ¿£ÁøÅØ½ºÃ³ °´Ã¼¸¦ »ý¼º, ÀúÀåÇÏ´Â ÇÔ¼ö.
 	void CreateRenderTargetTexture(
 		D3D11_TEXTURE2D_DESC _desc,
 		const float4& _clearColor
 	);
 
-	//ë Œë”íƒ€ê²Ÿìœ¼ë¡œ ì“¸ ê²Œìž„ì—”ì§„í…ìŠ¤ì²˜ ê°ì²´ë¥¼ ìƒì„±, ì €ìž¥í•˜ëŠ” í•¨ìˆ˜.
+	//·»´õÅ¸°ÙÀ¸·Î ¾µ °ÔÀÓ¿£ÁøÅØ½ºÃ³ °´Ã¼¸¦ »ý¼º, ÀúÀåÇÏ´Â ÇÔ¼ö.
 	void CreateRenderTargetTexture(
 		GameEngineTexture* _texture,
 		const float4& _clearColor
@@ -103,25 +103,25 @@ public:
 	void CreateDepthTexture(int _renderTargetIndex);
 	void SetDepthTexture(GameEngineTexture* _depthTexture);
 
-	//ì´ ë Œë”íƒ€ê²Ÿì´ ê°€ì§„ ë Œë”íƒ€ê²Ÿë·°ì™€ ê¹Šì´ìŠ¤í…ì‹¤ë·°ë¥¼ í•œ ê°€ì§€ ê°’ìœ¼ë¡œ ì „ë¶€ ë®ì–´ì„œ ì´ˆê¸°í™”í•˜ëŠ” í•¨ìˆ˜.
+	//ÀÌ ·»´õÅ¸°ÙÀÌ °¡Áø ·»´õÅ¸°Ùºä¿Í ±íÀÌ½ºÅÙ½Çºä¸¦ ÇÑ °¡Áö °ªÀ¸·Î ÀüºÎ µ¤¾î¼­ ÃÊ±âÈ­ÇÏ´Â ÇÔ¼ö.
 	void Clear(bool _clearDepthStencilView = true);
 
-	//ì´ ë Œë”íƒ€ê²Ÿë·°ë¥¼ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì— ì„¸íŒ…í•´ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì„ ê±°ì¹œ ê²°ê³¼ë¬¼ì„ ë°›ì„ ìˆ˜ ìžˆê²Œ í•˜ëŠ” í•¨ìˆ˜.
+	//ÀÌ ·»´õÅ¸°Ùºä¸¦ µð¹ÙÀÌ½º ÄÁÅØ½ºÆ®¿¡ ¼¼ÆÃÇØ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎÀ» °ÅÄ£ °á°ú¹°À» ¹ÞÀ» ¼ö ÀÖ°Ô ÇÏ´Â ÇÔ¼ö.
 	void SetRenderTarget();
 
-	//ì´ ë Œë”íƒ€ê²Ÿë·°ë¥¼ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì—ì„œ ë¹¼ëŠ” í•¨ìˆ˜.
+	//ÀÌ ·»´õÅ¸°Ùºä¸¦ µð¹ÙÀÌ½º ÄÁÅØ½ºÆ®¿¡¼­ »©´Â ÇÔ¼ö.
 	void ResetRenderTarget();
 
-	//ì´ ë Œë”íƒ€ê²Ÿì— ìžˆë˜ ê¸°ì¡´ ë Œë”ë§ ì •ë³´ë¥¼ ë¬´ì‹œí•˜ê³ , ë‹¤ë¥¸ ë Œë”íƒ€ê²Ÿì˜ ë Œë”ë§ ì •ë³´ë¥¼ ê°€ì ¸ì™€ì„œ ë®ì–´ì”Œìš°ëŠ” í•¨ìˆ˜.
+	//ÀÌ ·»´õÅ¸°Ù¿¡ ÀÖ´ø ±âÁ¸ ·»´õ¸µ Á¤º¸¸¦ ¹«½ÃÇÏ°í, ´Ù¸¥ ·»´õÅ¸°ÙÀÇ ·»´õ¸µ Á¤º¸¸¦ °¡Á®¿Í¼­ µ¤¾î¾º¿ì´Â ÇÔ¼ö.
 	void Copy(GameEngineRenderTarget* _otherRenderTarget, int _index = 0);
 
-	//ì£¼ì–´ì§„ ë Œë”íƒ€ê²Ÿì´ ê°€ì§„ ë Œë”ë§ ì •ë³´ë¥¼ ì´ ë Œë”íƒ€ê²Ÿì´ ê°€ì§„ ê¸°ì¡´ ë Œë”ë§ì •ë³´ì— ë®ì–´ ì”Œì›Œì„œ í†µí•©í•˜ëŠ” í•¨ìˆ˜. 
+	//ÁÖ¾îÁø ·»´õÅ¸°ÙÀÌ °¡Áø ·»´õ¸µ Á¤º¸¸¦ ÀÌ ·»´õÅ¸°ÙÀÌ °¡Áø ±âÁ¸ ·»´õ¸µÁ¤º¸¿¡ µ¤¾î ¾º¿ö¼­ ÅëÇÕÇÏ´Â ÇÔ¼ö. 
 	void Merge(GameEngineRenderTarget* _otherRenderTarget, int _index = 0);
 
-	//ì´ ë Œë”íƒ€ê²Ÿì—, ì£¼ì–´ì§„ ë Œë”ìœ ë‹›ì´ ê°€ì§„ ë Œë”ë§ ì •ë³´ë¥¼ ë®ì–´ ì”Œìš°ëŠ” í•¨ìˆ˜. 
+	//ÀÌ ·»´õÅ¸°Ù¿¡, ÁÖ¾îÁø ·»´õÀ¯´ÖÀÌ °¡Áø ·»´õ¸µ Á¤º¸¸¦ µ¤¾î ¾º¿ì´Â ÇÔ¼ö. 
 	void Effect(GameEngineRenderUnit& _renderUnit);
 
-	//ì´ ë Œë”íƒ€ê²Ÿì´ ê°€ì§„ ëª¨ë“  í›„ì²˜ë¦¬íš¨ê³¼ë¥¼ ë Œë”íƒ€ê²Ÿì˜ ê¸°ì¡´ ë Œë”ë§ì •ë³´ì— ì ìš©ì‹œí‚¤ëŠ” í•¨ìˆ˜.
+	//ÀÌ ·»´õÅ¸°ÙÀÌ °¡Áø ¸ðµç ÈÄÃ³¸®È¿°ú¸¦ ·»´õÅ¸°ÙÀÇ ±âÁ¸ ·»´õ¸µÁ¤º¸¿¡ Àû¿ë½ÃÅ°´Â ÇÔ¼ö.
 	void EffectProcess();
 
 public:
@@ -141,27 +141,27 @@ public:
 
 
 private:
-	//ë Œë”íƒ€ê²Ÿìœ¼ë¡œ ì‚¬ìš©í•  í…ìŠ¤ì³ë“¤.
+	//·»´õÅ¸°ÙÀ¸·Î »ç¿ëÇÒ ÅØ½ºÃÄµé.
 	std::vector<GameEngineTexture*> renderTargetTextures_;
 
-	//ìœ„ í…ìŠ¤ì³ì—ì„œ íŒŒìƒëœ ë Œë”íƒ€ê²Ÿë·°ë“¤.
+	//À§ ÅØ½ºÃÄ¿¡¼­ ÆÄ»ýµÈ ·»´õÅ¸°Ùºäµé.
 	std::vector<ID3D11RenderTargetView*> renderTargetViews_;
 
-	//ìœ„ í…ìŠ¤ì³ì—ì„œ íŒŒìƒëœ ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°ë“¤.
+	//À§ ÅØ½ºÃÄ¿¡¼­ ÆÄ»ýµÈ ¼ÎÀÌ´õ¸®¼Ò½ººäµé.
 	std::vector<ID3D11ShaderResourceView*> shaderResourceViews_;
 
-	//ë Œë”íƒ€ê²Ÿë·°ë¥¼ ì´ˆê¸°í™”í• ë•Œ ì“¸ ìƒ‰ìƒê°’ë“¤.
+	//·»´õÅ¸°Ùºä¸¦ ÃÊ±âÈ­ÇÒ¶§ ¾µ »ö»ó°ªµé.
 	std::vector<float4> clearColors_;
-	//ë²¡í„°ì— ë„£ì—ˆë‹¤ê³  ë°˜ë“œì‹œ ì—¬ëŸ¬ê°œ ì‚¬ìš©í•œë‹¤ëŠ” ë³´ìž¥ì€ ì—†ìŒ.
+	//º¤ÅÍ¿¡ ³Ö¾ú´Ù°í ¹Ýµå½Ã ¿©·¯°³ »ç¿ëÇÑ´Ù´Â º¸ÀåÀº ¾øÀ½.
 
-	GameEngineTexture* depthTexture_;	//ê¹Šì´ìŠ¤í…ì‹¤ë·°ë¥¼ ë§Œë“¤ í…ìŠ¤ì²˜.
+	GameEngineTexture* depthTexture_;	//±íÀÌ½ºÅÙ½Çºä¸¦ ¸¸µé ÅØ½ºÃ³.
 
-	ID3D11DepthStencilView* depthStencilView_;	//ìœ„ í…ìŠ¤ì²˜ë¡œ ë§Œë“  ê¹Šì´ìŠ¤í…ì‹¤ë·°.
+	ID3D11DepthStencilView* depthStencilView_;	//À§ ÅØ½ºÃ³·Î ¸¸µç ±íÀÌ½ºÅÙ½Çºä.
 
-	GameEngineRenderUnit mergeUnit_;	//Copy(), Merge()ë“±ì˜ í•¨ìˆ˜ ì‹¤í–‰ì— í•„ìš”í•œ ë Œë”ìœ ë‹›.
-	//ê°’í˜•ì¸ ì´ìœ ??
+	GameEngineRenderUnit mergeUnit_;	//Copy(), Merge()µîÀÇ ÇÔ¼ö ½ÇÇà¿¡ ÇÊ¿äÇÑ ·»´õÀ¯´Ö.
+	//°ªÇüÀÎ ÀÌÀ¯??
 
-	std::list<GameEnginePostEffect*> allEffects_;	//ì´ ë Œë”íƒ€ê²Ÿì´ ê°€ì§„ ëª¨ë“  í›„ì²˜ë¦¬íš¨ê³¼ë“¤.
+	std::list<GameEnginePostEffect*> allEffects_;	//ÀÌ ·»´õÅ¸°ÙÀÌ °¡Áø ¸ðµç ÈÄÃ³¸®È¿°úµé.
 
 };
 

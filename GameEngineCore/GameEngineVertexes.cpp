@@ -20,25 +20,25 @@ void GameEngineInputLayoutDesc::AddInputLayout(
 	int semanticIndex = _index;
 
 	if (-1 == semanticIndex)	
-		//_indexê°€ ê¸°ë³¸ê°’ì¸ -1ì´ë¼ë©´ ì‚¬ìš©ìžê°€ ì¸ë±ìŠ¤ì— ëŒ€í•´ ì‹ ê²½ì“°ì§€ ì•Šê² ë‹¤ëŠ” ì˜ë¯¸ì´ë¯€ë¡œ ìžë™ìœ¼ë¡œ ì²˜ë¦¬ë˜ê²Œ í•œë‹¤.
+		//_index°¡ ±âº»°ªÀÎ -1ÀÌ¶ó¸é »ç¿ëÀÚ°¡ ÀÎµ¦½º¿¡ ´ëÇØ ½Å°æ¾²Áö ¾Ê°Ú´Ù´Â ÀÇ¹ÌÀÌ¹Ç·Î ÀÚµ¿À¸·Î Ã³¸®µÇ°Ô ÇÑ´Ù.
 	{
-		if (semanticNameIndexPairs_.end() == semanticNameIndexPairs_.find(_semanticName))	//ê°™ì€ ì‹œë§¨í‹±ë„¤ìž„ì´ ì—†ë‹¤ë©´,
+		if (semanticNameIndexPairs_.end() == semanticNameIndexPairs_.find(_semanticName))	//°°Àº ½Ã¸ÇÆ½³×ÀÓÀÌ ¾ø´Ù¸é,
 		{
-			semanticNameIndexPairs_[_semanticName] = -1;	//valueì¸ ì¸ë±ìŠ¤ê°’ì— -1 ì €ìž¥.
+			semanticNameIndexPairs_[_semanticName] = -1;	//valueÀÎ ÀÎµ¦½º°ª¿¡ -1 ÀúÀå.
 		}
 		semanticIndex = ++semanticNameIndexPairs_[_semanticName];
-		//ë§µì— ì €ìž¥ëœ ì‹œë§¨í‹±ë„¤ìž„ì˜ ì¸ë±ìŠ¤ë¥¼ 1 ì¦ê°€ì‹œí‚¤ë©´ì„œ semanticIndexì— ëŒ€ìž…í•œë‹¤.
+		//¸Ê¿¡ ÀúÀåµÈ ½Ã¸ÇÆ½³×ÀÓÀÇ ÀÎµ¦½º¸¦ 1 Áõ°¡½ÃÅ°¸é¼­ semanticIndex¿¡ ´ëÀÔÇÑ´Ù.
 	}
 
-	//typedef struct D3D11_INPUT_ELEMENT_DESC		ì¸í’‹ë ˆì´ì•„ì›ƒì„ ìƒì„±í• ë•Œ í•„ìš”í•œ ì„¸ë¶€ì„¤ì • ì •ë³´ë¥¼ ë‹´ëŠ” êµ¬ì¡°ì²´.
+	//typedef struct D3D11_INPUT_ELEMENT_DESC		ÀÎÇ²·¹ÀÌ¾Æ¿ôÀ» »ý¼ºÇÒ¶§ ÇÊ¿äÇÑ ¼¼ºÎ¼³Á¤ Á¤º¸¸¦ ´ã´Â ±¸Á¶Ã¼.
 	//{
-	//	LPCSTR SemanticName;						ì´ ì¸í’‹ë ˆì´ì•„ì›ƒì´ ê°€ë¦¬í‚¤ëŠ” ë°ì´í„°ì˜ ì‹œë§¨í‹±ì˜ ì´ë¦„. ëŒ€ì†Œë¬¸ìž êµ¬ë¶„ ì•ˆí•¨.
-	//	UINT SemanticIndex;							ì´ ì¸í’‹ë ˆì´ì•„ì›ƒì´ ê°€ë¦¬í‚¤ëŠ” ë°ì´í„°ì˜ ì‹œë§¨í‹±ì˜ ë²ˆí˜¸.  COLOR[n]ì˜ n.
-	//	DXGI_FORMAT Format;							ì´ ì¸í’‹ë ˆì´ì•„ì›ƒì´ ê°€ë¦¬í‚¤ëŠ” ë°ì´í„°ì˜ ë°ì´í„°íƒ€ìž…. 
-	//	UINT InputSlot;								ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ë²„í…ìŠ¤ë²„í¼ë¥¼ ë“±ë¡í•  ìŠ¬ë¡¯ ë²ˆí˜¸. 0~15ê¹Œì§€ ê°€ëŠ¥.
-	//	UINT AlignedByteOffset;						ì´ ì¸í’‹ë ˆì´ì•„ì›ƒì´ ê°€ë¦¬í‚¤ëŠ” ë°ì´í„°ì˜ ì˜¤í”„ì…‹(ë©”ëª¨ë¦¬ ì‹œìž‘ì ì—ì„œë¶€í„°ì˜ ë°”ì´íŠ¸ ê±°ë¦¬).
-	//	D3D11_INPUT_CLASSIFICATION InputSlotClass;	ì´ ì¸í’‹ë ˆì´ì•„ì›ƒìœ¼ë¡œ ë“±ë¡ë˜ëŠ”ê²ƒì´ ë‹¨ìˆœ ë²„í…ìŠ¤ ì •ë³´ì¸ì§€, ì¸ìŠ¤í„´ì‹±ì— í•„ìš”í•œ ì¸ìŠ¤í„´ìŠ¤ë³„ ë°ì´í„°ì¸ì§€ë¥¼ ì•Œë ¤ì£¼ëŠ” ê°’.
-	//	UINT InstanceDataStepRate;					ì´ ì¸í’‹ë ˆì´ì•„ì›ƒ ë°ì´í„° í•œê°œë¥¼ ì‚¬ìš©í•  ì¸ìŠ¤í„´ìŠ¤ ê°œìˆ˜. 
+	//	LPCSTR SemanticName;						ÀÌ ÀÎÇ²·¹ÀÌ¾Æ¿ôÀÌ °¡¸®Å°´Â µ¥ÀÌÅÍÀÇ ½Ã¸ÇÆ½ÀÇ ÀÌ¸§. ´ë¼Ò¹®ÀÚ ±¸ºÐ ¾ÈÇÔ.
+	//	UINT SemanticIndex;							ÀÌ ÀÎÇ²·¹ÀÌ¾Æ¿ôÀÌ °¡¸®Å°´Â µ¥ÀÌÅÍÀÇ ½Ã¸ÇÆ½ÀÇ ¹øÈ£.  COLOR[n]ÀÇ n.
+	//	DXGI_FORMAT Format;							ÀÌ ÀÎÇ²·¹ÀÌ¾Æ¿ôÀÌ °¡¸®Å°´Â µ¥ÀÌÅÍÀÇ µ¥ÀÌÅÍÅ¸ÀÔ. 
+	//	UINT InputSlot;								·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¹öÅØ½º¹öÆÛ¸¦ µî·ÏÇÒ ½½·Ô ¹øÈ£. 0~15±îÁö °¡´É.
+	//	UINT AlignedByteOffset;						ÀÌ ÀÎÇ²·¹ÀÌ¾Æ¿ôÀÌ °¡¸®Å°´Â µ¥ÀÌÅÍÀÇ ¿ÀÇÁ¼Â(¸Þ¸ð¸® ½ÃÀÛÁ¡¿¡¼­ºÎÅÍÀÇ ¹ÙÀÌÆ® °Å¸®).
+	//	D3D11_INPUT_CLASSIFICATION InputSlotClass;	ÀÌ ÀÎÇ²·¹ÀÌ¾Æ¿ôÀ¸·Î µî·ÏµÇ´Â°ÍÀÌ ´Ü¼ø ¹öÅØ½º Á¤º¸ÀÎÁö, ÀÎ½ºÅÏ½Ì¿¡ ÇÊ¿äÇÑ ÀÎ½ºÅÏ½ºº° µ¥ÀÌÅÍÀÎÁö¸¦ ¾Ë·ÁÁÖ´Â °ª.
+	//	UINT InstanceDataStepRate;					ÀÌ ÀÎÇ²·¹ÀÌ¾Æ¿ô µ¥ÀÌÅÍ ÇÑ°³¸¦ »ç¿ëÇÒ ÀÎ½ºÅÏ½º °³¼ö. 
 	//} 	D3D11_INPUT_ELEMENT_DESC;
 
 	inputLayoutDesc.SemanticName = _semanticName;
@@ -64,23 +64,23 @@ unsigned int ConvertFormatToByteScale(DXGI_FORMAT _format)
 {
 	switch (_format)
 	{
-		case DXGI_FORMAT_UNKNOWN:
-			MsgBoxAssert("í¬ë§·ì´ ì •í•´ì§€ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
-			return -1;
+	case DXGI_FORMAT_UNKNOWN:
+		MsgBoxAssert("Æ÷¸ËÀÌ Á¤ÇØÁöÁö ¾Ê¾Ò½À´Ï´Ù.");
+		return -1;
 
-		case DXGI_FORMAT_R32G32B32A32_TYPELESS:
-		case DXGI_FORMAT_R32G32B32A32_FLOAT:
-		case DXGI_FORMAT_R32G32B32A32_UINT:
-		case DXGI_FORMAT_R32G32B32A32_SINT:
-			return 16;
+	case DXGI_FORMAT_R32G32B32A32_TYPELESS:
+	case DXGI_FORMAT_R32G32B32A32_FLOAT:
+	case DXGI_FORMAT_R32G32B32A32_UINT:
+	case DXGI_FORMAT_R32G32B32A32_SINT:
+		return 16;
 
-		case DXGI_FORMAT_R32_UINT:
-		case DXGI_FORMAT_R32_SINT:
-			return 4;
+	case DXGI_FORMAT_R32_UINT:
+	case DXGI_FORMAT_R32_SINT:
+		return 4;
 
 
-		default:
-			MsgBoxAssert("í¬ê¸°ë¥¼ ì•„ì§ ì±…ì •í•˜ì§€ ì•Šì€ í¬ë§·ìž…ë‹ˆë‹¤.");
-			return -1;
+	default:
+		MsgBoxAssert("Å©±â¸¦ ¾ÆÁ÷ Ã¥Á¤ÇÏÁö ¾ÊÀº Æ÷¸ËÀÔ´Ï´Ù.");
+		return -1;
 	}
 }

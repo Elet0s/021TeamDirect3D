@@ -63,7 +63,7 @@ void TestLevel::Start()
 
 
 	PlayerUI* NewPlayerUI = CreateActor<PlayerUI>(ObjectOrder::UI);
-
+	
 	Monster::ReserveMonsters(this, 722);
 
 	Monster::CreateMonster<RedFlyingEyes>(this, 100);
@@ -82,33 +82,33 @@ void TestLevel::Start()
 	Monster::CreateMonster<Boss01>(this, 1);
 
 
-
+	
 	CreateActor<TimeActor>();
 	stageUI_ = CreateActor<StageUI>();
 
 	testLevelLighting_ = CreateActor<GameEngineLighting>(0, "TestLevelLighting");
-	//í…ŒìŠ¤íŠ¸ë ˆë²¨ì— ì¡°ëª… ì¶”ê°€.
+	//Å×½ºÆ®·¹º§¿¡ Á¶¸í Ãß°¡.
 
 	testLevelLighting_->GetTransform().SetWorldRotation(45.f, 45.f, 0.f);
-	//ì¡°ëª… ê°ë„ ì„¤ì •.
+	//Á¶¸í °¢µµ ¼³Á¤.
 
 	testLevelLighting_->GetLightingData().mainLightColor_ = float4(0.7f, 0.7f, 0.7f);
-	//ì •ë°˜ì‚¬ê´‘, ë‚œë°˜ì‚¬ê´‘ ìƒ‰, ë°ê¸° ì„¤ì •.
+	//Á¤¹Ý»ç±¤, ³­¹Ý»ç±¤ »ö, ¹à±â ¼³Á¤.
 
 	testLevelLighting_->GetLightingData().ambientLightColor_ = float4(0.1f, 0.1f, 0.1f);
-	//í™˜ê²½ê´‘ ìƒ‰, ë°ê¸° ì„¤ì •.
+	//È¯°æ±¤ »ö, ¹à±â ¼³Á¤.
 
 	testLevelLighting_->GetLightingData().specularLightRatio_ = 0.f;
-	//ì •ë°˜ì‚¬ê´‘ ì‚¬ìš© ì•ˆí•¨.
+	//Á¤¹Ý»ç±¤ »ç¿ë ¾ÈÇÔ.
 
 	testLevelLighting_->GetLightingData().diffuseLightRatio_ = 2.f;
-	//ë‚œë°˜ì‚¬ê´‘ì„ ë‘ë°°ë¡œ ì ìš©.
+	//³­¹Ý»ç±¤À» µÎ¹è·Î Àû¿ë.
 
 	this->GetMainCamera()->PushLighting(testLevelLighting_);
-	//ë©”ì¸ì¹´ë©”ë¼ì— ì¡°ëª… ë“±ë¡.
+	//¸ÞÀÎÄ«¸Þ¶ó¿¡ Á¶¸í µî·Ï.
 
 	this->GetCamera(CameraOrder::MidCamera)->PushLighting(testLevelLighting_);
-	//ë¯¸ë“œì¹´ë©”ë¼ì—ë„ ì¡°ëª… ë“±ë¡.
+	//¹ÌµåÄ«¸Þ¶ó¿¡µµ Á¶¸í µî·Ï.
 
 	if (nullptr == mousePointer_)
 	{
@@ -177,13 +177,13 @@ void TestLevel::Update(float _deltaTime)
 void TestLevel::LevelStartEvent()
 {
 	summonCounter_ = 0;
-	stageManagerTimer_ = 0.f;
+		stageManagerTimer_ = 0.f;
 
 	Player::GetPlayerInst().On();
 	stageUI_->SetUI(UIType::Stage);
 	if (Player::GetPlayerInst().GetPlayerInfo().level_ == 0)
 	{
-		CreateActor<SoulCardSelectBox>()->DrawWeapon();
+	CreateActor<SoulCardSelectBox>()->DrawWeapon();
 
 	}
 	this->GetMainCamera()->SetFarZ(500.f);
@@ -242,14 +242,14 @@ void TestLevel::MouseMoveCamera()
 	{
 		MouseDir.y = -100.f;
 	}
-
+	
 	GetMainCameraActor()->GetTransform().SetWorldMove(float4((MouseDir.x) * Time, (MouseDir.y) * Time));
 }
 
 void TestLevel::StageMonsterManager()
 {
-	switch (StageObject::GetNextStageInfo().combatType_)
-	{
+		switch (StageObject::GetNextStageInfo().combatType_)
+		{
 		case CombatType::TimeAttack:
 			if (summonCounter_ == 0 && stageManagerTimer_ < 1.f)
 			{
@@ -328,7 +328,7 @@ void TestLevel::StageMonsterManager()
 				Monster::SummonMonster<Red>(this, 10);
 				summonCounter_ += 1;
 			}
-
+			
 			break;
 		case CombatType::EilteKill:
 			if (summonCounter_ == 0 && stageManagerTimer_ < 1.f)
@@ -403,5 +403,5 @@ void TestLevel::StageMonsterManager()
 			break;
 		default:
 			break;
-	}
+		}
 }

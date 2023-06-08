@@ -1,6 +1,6 @@
 #pragma once
 
-// μ„¤λª… :
+// Ό³Έν :
 class ShopUIBox : public GameEngineActor
 {
 public:

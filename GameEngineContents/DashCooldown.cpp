@@ -4,7 +4,7 @@
 
 DashCooldown::DashCooldown() 
 {
-	name_ = "ëŒ€ì‰¬ ì¿¨íƒ€ìž„ ê°ì†Œ";
+	name_ = "´ë½¬ ÄðÅ¸ÀÓ °¨¼Ò";
 	SetName(std::string_view("DashCoolDown"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 3;
@@ -23,7 +23,7 @@ void DashCooldown::Init()
 
 
 
-	etc_ = sDashReChargeTime + " -> " + sDashReChargeTimeNext + " ëŒ€ì‰¬\n ìž¬ì¶©ì „ ì‹œê°„ ";
+	etc_ = sDashReChargeTime + " -> " + sDashReChargeTimeNext + " ´ë½¬\n ÀçÃæÀü ½Ã°£ ";
 }
 
 void DashCooldown::Effect()
@@ -31,5 +31,5 @@ void DashCooldown::Effect()
 	currentlevel_ += 1;
 	PlayerInfo* PlayerInfo_ = &Player::GetPlayerInst().GetPlayerInfo();
 	PlayerInfo_->dashReChargeTime_ *= 0.80f;
-
+	
 }

@@ -31,7 +31,7 @@ StageUI::~StageUI()
 void StageUI::Start()
 {
 
-	// ê³µìš© ë Œë”ëŸ¬
+	// °ø¿ë ·»´õ·¯
 	{
 		stagefontrenderer_ = CreateComponent<GameEngineFontRenderer>();
 		spacefontrenderer_ = CreateComponent<GameEngineFontRenderer>();
@@ -44,13 +44,13 @@ void StageUI::Start()
 		stagefontrenderer_->SetTextPosition(float4{ X,20.f });
 		stagefontrenderer_->SetSize(Size);
 		stagefontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
-		stagefontrenderer_->SetText("ìŠ¤í…Œì´ì§€ : 0", "Free Pixel");
+		stagefontrenderer_->SetText("½ºÅ×ÀÌÁö : 0", "Free Pixel");
 		stagefontrenderer_->ChangeCamera(CameraOrder::UICamera);
 
 		spacefontrenderer_->SetTextPosition(float4{ X,80.f });
 		spacefontrenderer_->SetSize(Size);
 		spacefontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
-		spacefontrenderer_->SetText("ì§„ì˜ : 1/1 ", "Free Pixel");
+		spacefontrenderer_->SetText("Áø¿µ : 1/1 ", "Free Pixel");
 		spacefontrenderer_->ChangeCamera(CameraOrder::UICamera);
 
 		coinfontrenderer_->SetTextPosition(float4{ X,140.f });
@@ -90,7 +90,7 @@ void StageUI::Start()
 		coinrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 200.f , -1.f });
 	}
 
-	// ìŠ¤í…Œì´ì§€ìš© ëœë”ëŸ¬ 
+	// ½ºÅ×ÀÌÁö¿ë ·£´õ·¯ 
 	{
 		killcountfontrenderer_->SetTextPosition(float4{ 30.f, 20.f });
 		killcountfontrenderer_->SetSize(20.f);
@@ -110,11 +110,11 @@ void StageUI::Start()
 		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 328.f });
 		killcountboxrenderer_->ChangeCamera(CameraOrder::UICamera);
 	}
-
-
+	
+	
 
 	{
-
+		
 
 		timerfontRenderer_->SetTextPosition(float4{ 1260.f, 160.f });
 		timerfontRenderer_->SetSize(24.f);
@@ -145,7 +145,7 @@ void StageUI::Update(float _deltaTime)
 			elitekillFontrenderer_->Off();
 			killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 30.f ,1.f });
 			killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 328.f });
-			killcountfontrenderer_->SetText("ìŠ¤í…Œì´ì§€ ì¢…ë£Œê¹Œì§€: " + std::to_string(num));
+			killcountfontrenderer_->SetText("½ºÅ×ÀÌÁö Á¾·á±îÁö: " + std::to_string(num));
 			killcountfontrenderer_->SetColor(float4::White);
 			if (time_ < 0.f)
 			{
@@ -168,20 +168,20 @@ void StageUI::SetUI(UIType _type)
 	AllOff();
 	switch (_type)
 	{
-		case UIType::World:
-			WorldSetting();
-			break;
-		case UIType::Stage:
-			StageSetting();
-			break;
-		case UIType::Claer:
-			ClearSetting();
-			break;
-		case UIType::Shop:
-			WorldSetting();
-			break;
-		default:
-			break;
+	case UIType::World:
+		WorldSetting();
+		break;
+	case UIType::Stage:
+		StageSetting();
+		break;
+	case UIType::Claer:
+		ClearSetting();
+		break;
+	case UIType::Shop:
+		WorldSetting();
+		break;
+	default:
+		break;
 	}
 	mytype_ = _type;
 }
@@ -232,8 +232,8 @@ void StageUI::StageSetting()
 	killcountfontrenderer_->On();
 	killcountboxrenderer_->On();
 	goalCount_ = StageObject::GetNextStageInfo().killCount_;
-	stagefontrenderer_->SetText("ìŠ¤í…Œì´ì§€ : " + std::to_string(Pinfo.stage_), "Free Pixel");
-
+	stagefontrenderer_->SetText("½ºÅ×ÀÌÁö : " + std::to_string(Pinfo.stage_), "Free Pixel");
+	
 	coinfontrenderer_->SetTextPosition(float4{ 1260.f,140.f });
 	coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
 	coinrenderer_->GetTransform().SetWorldPosition(float4{ 460.f, 200.f , -1.f });
@@ -249,7 +249,7 @@ void StageUI::StageSetting()
 		elitekillFontrenderer_->On();
 		elitekillFontrenderer_->SetTextPosition(float4{ 30.f, 44.f });
 		elitekillFontrenderer_->SetSize(18.f);
-		elitekillFontrenderer_->SetText("ì—˜ë¦¬íŠ¸ë¥¼ ì¡ìœ¼ì„¸ìš”");
+		elitekillFontrenderer_->SetText("¿¤¸®Æ®¸¦ ÀâÀ¸¼¼¿ä");
 		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 50.f ,1.f });
 		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 318.f });
 
@@ -267,7 +267,7 @@ void StageUI::StageSetting()
 		elitekillFontrenderer_->On();
 		elitekillFontrenderer_->SetTextPosition(float4{ 30.f, 44.f });
 		elitekillFontrenderer_->SetSize(18.f);
-		elitekillFontrenderer_->SetText("ë³´ìŠ¤ë¥¼ ì¡ìœ¼ì„¸ìš”");
+		elitekillFontrenderer_->SetText("º¸½º¸¦ ÀâÀ¸¼¼¿ä");
 		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 350.f, 50.f ,1.f });
 		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ -464.f, 318.f });
 
@@ -299,13 +299,13 @@ void StageUI::ClearSetting()
 		timerfontRenderer_->On();
 		timerboxrenderer_->On();
 
-
+		
 
 		killcountfontrenderer_->SetTextPosition(float4{ 1260.f, 80.f });
 		killcountfontrenderer_->SetLeftAndRightSort(LeftAndRightSort::Right);
 		killcountfontrenderer_->SetSize(24.f);
 		killcountfontrenderer_->SetColor(float4::White);
-		killcountfontrenderer_->SetText("ì²˜ì¹˜í•œ ì :\n" + std::to_string(Pinfo.targetScore_), "ë§‘ìŒ");
+		killcountfontrenderer_->SetText("Ã³Ä¡ÇÑ Àû:\n" + std::to_string(Pinfo.targetScore_), "¸¼À½");
 		killcountboxrenderer_->SetTexture("GradientRightToLeft.png");
 		killcountboxrenderer_->GetTransform().SetWorldScale(float4{ 200.f, 64.f ,1.f });
 		killcountboxrenderer_->GetTransform().SetWorldPosition(float4{ 540.f, 250.f });
@@ -321,52 +321,52 @@ void StageUI::UIUpdate()
 	PlayerInfo Pinfo = Player::GetPlayerInst().GetPlayerInfo();
 	switch (mytype_)
 	{
-		case UIType::World:
-			break;
-		case UIType::Stage:
-			coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
-			if (StageObject::GetNextStageInfo().combatType_ == CombatType::Kill)
+	case UIType::World:
+		break;
+	case UIType::Stage:
+		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+		if (StageObject::GetNextStageInfo().combatType_ == CombatType::Kill)
+		{
+			killcountfontrenderer_->SetText("Ã³Ä¡ÇÑ ¸ó½ºÅÍ: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+			if (Pinfo.targetScore_ >= goalCount_)
 			{
-				killcountfontrenderer_->SetText("ì²˜ì¹˜í•œ ëª¬ìŠ¤í„°: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
-				if (Pinfo.targetScore_ >= goalCount_)
-				{
-					IsClear_ = true;
-					Monster::UnsummonAllMonsters();
-				}
+				IsClear_ = true;
+				Monster::UnsummonAllMonsters();
 			}
-
-			else if (StageObject::GetNextStageInfo().combatType_ == CombatType::EilteKill)
+		}
+		
+		else if (StageObject::GetNextStageInfo().combatType_ == CombatType::EilteKill)
+		{
+			killcountfontrenderer_->SetText("Ã³Ä¡ÇÑ ¸ó½ºÅÍ: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+			
+			if (Pinfo.eliteTargetScore_>= 5)
 			{
-				killcountfontrenderer_->SetText("ì²˜ì¹˜í•œ ëª¬ìŠ¤í„°: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
-
-				if (Pinfo.eliteTargetScore_>= 5)
-				{
-					IsClear_ = true;
-					Monster::UnsummonAllMonsters();
-				}
+				IsClear_ = true;
+				Monster::UnsummonAllMonsters();
 			}
-			else if (StageObject::GetNextStageInfo().combatType_ == CombatType::TimeAttack)
+		}
+		else if (StageObject::GetNextStageInfo().combatType_ == CombatType::TimeAttack)
+		{
+			killcountfontrenderer_->SetText("Ã³Ä¡ÇÑ ¸ó½ºÅÍ: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+			TimeCounter();
+			if (Pinfo.stageTimer_ >= 90.f)
 			{
-				killcountfontrenderer_->SetText("ì²˜ì¹˜í•œ ëª¬ìŠ¤í„°: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
-				TimeCounter();
-				if (Pinfo.stageTimer_ >= 90.f)
-				{
-					IsClear_ = true;
-					Monster::UnsummonAllMonsters();
-				}
-				else if (StageObject::GetNextStageInfo().combatType_ == CombatType::BossKill)
-				{
-					killcountfontrenderer_->SetText("ì²˜ì¹˜í•œ ëª¬ìŠ¤í„°: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
-				}
+				IsClear_ = true;
+				Monster::UnsummonAllMonsters();
 			}
-			break;
-		case UIType::Claer:
-			coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
-			break;
-		case UIType::Shop:
-			coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
-		default:
-			break;
+			else if (StageObject::GetNextStageInfo().combatType_ == CombatType::BossKill)
+			{
+				killcountfontrenderer_->SetText("Ã³Ä¡ÇÑ ¸ó½ºÅÍ: " + std::to_string(Pinfo.targetScore_) + " / " + std::to_string(goalCount_));
+			}
+		}
+		break;
+	case UIType::Claer:
+		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+		break;
+	case UIType::Shop:
+		coinfontrenderer_->SetText(std::to_string(Pinfo.gold_), "Free Pixel");
+	default:
+		break;
 	}
 }
 
@@ -378,19 +378,19 @@ void StageUI::TimeSet()
 	int Time_s;
 	int Time_m;
 
-	Time_all = Pinfo.stageTimer_; // í˜„ì¬ ìŠ¤í…Œì´ì§€ê°€ ì‹œì‘ë˜ê³  ê²½ê³¼í•œ ì‹œê°„ì„ êµ¬í•œë‹¤
+	Time_all = Pinfo.stageTimer_; // ÇöÀç ½ºÅ×ÀÌÁö°¡ ½ÃÀÛµÇ°í °æ°úÇÑ ½Ã°£À» ±¸ÇÑ´Ù
 
-	Time_m = static_cast<int>(Time_all) / 60;		// ì´ ì‹œê°„ì„ ì´ˆë¡œ ë°”ê¾¼ë’¤ì— 60ìœ¼ë¡œ ë‚˜ëˆ ì„œ ë¶„ì„ êµ¬í•œë‹¤
+	Time_m = static_cast<int>(Time_all) / 60;		// ÃÑ ½Ã°£À» ÃÊ·Î ¹Ù²ÛµÚ¿¡ 60À¸·Î ³ª´²¼­ ºĞÀ» ±¸ÇÑ´Ù
 	Time_s = static_cast<int>(Time_all) - (60 * Time_m);
 
 	std::string num_s = std::to_string(Time_s);
-	// ì„¸ìë¦¬ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ì´ˆì˜ ìë¦¿ìˆ˜ë¥¼ êµ¬í•œí›„ ë‚¨ì€ ìë¦¬ë¥¼ 0ìœ¼ë¡œ ì±„ìš´ë‹¤.
+	 // ¼¼ÀÚ¸®¸¦ Ãâ·ÂÇÏ±â À§ÇØ ÃÊÀÇ ÀÚ¸´¼ö¸¦ ±¸ÇÑÈÄ ³²Àº ÀÚ¸®¸¦ 0À¸·Î Ã¤¿î´Ù.
 
 	std::string num_m = std::to_string(Time_m);
 
 	std::string TimeString = num_m + ":" + num_s;
 
-	timerfontRenderer_->SetText("ìƒì¡´ ì‹œê°„:\n" + TimeString, "ë§‘ìŒ");
+	timerfontRenderer_->SetText("»ıÁ¸ ½Ã°£:\n" + TimeString, "¸¼À½");
 }
 
 void StageUI::TimeCounter()
@@ -401,19 +401,19 @@ void StageUI::TimeCounter()
 	int Time_s;
 	int Time_m;
 
-	Time_all = Pinfo.stageTimer_; // í˜„ì¬ ìŠ¤í…Œì´ì§€ê°€ ì‹œì‘ë˜ê³  ê²½ê³¼í•œ ì‹œê°„ì„ êµ¬í•œë‹¤
+	Time_all = Pinfo.stageTimer_; // ÇöÀç ½ºÅ×ÀÌÁö°¡ ½ÃÀÛµÇ°í °æ°úÇÑ ½Ã°£À» ±¸ÇÑ´Ù
 
-	Time_m = static_cast<int>(Time_all) / 60;		// ì´ ì‹œê°„ì„ ì´ˆë¡œ ë°”ê¾¼ë’¤ì— 3600ìœ¼ë¡œ ë‚˜ëˆ ì„œ ë¶„ì„ êµ¬í•œë‹¤
+	Time_m = static_cast<int>(Time_all) / 60;		// ÃÑ ½Ã°£À» ÃÊ·Î ¹Ù²ÛµÚ¿¡ 3600À¸·Î ³ª´²¼­ ºĞÀ» ±¸ÇÑ´Ù
 	Time_s = static_cast<int>(Time_all) - (60 * Time_m);
 
 
 	std::string num_s = std::to_string(Time_s);
-	num_s = std::string(2 - std::min<size_t>(2, num_s.length()), '0') + num_s; // ì„¸ìë¦¬ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ì´ˆì˜ ìë¦¿ìˆ˜ë¥¼ êµ¬í•œí›„ ë‚¨ì€ ìë¦¬ë¥¼ 0ìœ¼ë¡œ ì±„ìš´ë‹¤.
+	num_s = std::string(2 - std::min<size_t>(2, num_s.length()), '0') + num_s; // ¼¼ÀÚ¸®¸¦ Ãâ·ÂÇÏ±â À§ÇØ ÃÊÀÇ ÀÚ¸´¼ö¸¦ ±¸ÇÑÈÄ ³²Àº ÀÚ¸®¸¦ 0À¸·Î Ã¤¿î´Ù.
 
 	std::string num_m = std::to_string(Time_m);
 	num_m = std::string(2 - std::min<size_t>(2, num_m.length()), '0') + num_m;
 
 	std::string TimeString = num_m + ":" + num_s;
 
-	elitekillFontrenderer_->SetText("ìƒì¡´:" + TimeString + " / 01:30");
+	elitekillFontrenderer_->SetText("»ıÁ¸:" + TimeString + " / 01:30");
 }

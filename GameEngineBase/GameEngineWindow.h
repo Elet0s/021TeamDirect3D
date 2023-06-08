@@ -6,8 +6,8 @@
 class GameEngineWindow
 {
 	static GameEngineWindow* inst_;
-	//ê°’í˜•ìœ¼ë¡œ ì•ˆ í•˜ê³  í¬ì¸í„° í˜•ì‹ìœ¼ë¡œ ì‹±ê¸€í„´ì„ ë§Œë“œëŠ” ì´ìœ : ìƒì„±ê³¼ ì œê±° ì‹œì ì„ ë‚´ ë§ˆìŒëŒ€ë¡œ í†µì œí•˜ê¸° ìœ„í•´ì„œ. 
-	//í•˜ì§€ë§Œ ì´ ê²½ìš°ì—ëŠ” ìƒì„±ì‹œì ì€ ëŸ°íƒ€ì„ ì‹œì‘í• ë•Œë¡œ ê³ ì •ë˜ì–´ ìˆê³  ì‚­ì œ ì‹œì 'ë§Œ' í†µì œí•  ìˆ˜ ìˆë‹¤.
+	//°ªÇüÀ¸·Î ¾È ÇÏ°í Æ÷ÀÎÅÍ Çü½ÄÀ¸·Î ½Ì±ÛÅÏÀ» ¸¸µå´Â ÀÌÀ¯: »ı¼º°ú Á¦°Å ½ÃÁ¡À» ³» ¸¶À½´ë·Î ÅëÁ¦ÇÏ±â À§ÇØ¼­. 
+	//ÇÏÁö¸¸ ÀÌ °æ¿ì¿¡´Â »ı¼º½ÃÁ¡Àº ·±Å¸ÀÓ ½ÃÀÛÇÒ¶§·Î °íÁ¤µÇ¾î ÀÖ°í »èÁ¦ ½ÃÁ¡'¸¸' ÅëÁ¦ÇÒ ¼ö ÀÖ´Ù.
 
 private:
 	GameEngineWindow();
@@ -38,7 +38,7 @@ public:
 
 	static void Destroy()
 	{
-		//ì‹±ê¸€í†¤ ì‚­ì œ'ë§Œ' ì›í•˜ëŠ” íƒ€ì´ë°ì— í•œë‹¤.
+		//½Ì±ÛÅæ »èÁ¦'¸¸' ¿øÇÏ´Â Å¸ÀÌ¹Ö¿¡ ÇÑ´Ù.
 		if (nullptr != inst_)
 		{
 			delete inst_;
@@ -74,8 +74,8 @@ public:
 
 
 private:
-	bool windowOn_;		//ìœˆë„ìš° ì˜¨ì˜¤í”„.
-	bool isFocused_;	//í™”ë©´ ì„ íƒì‹œì—ë§Œ ì…ë ¥ë°›ìŒ/ì•ˆë°›ìŒ.
+	bool windowOn_;		//À©µµ¿ì ¿Â¿ÀÇÁ.
+	bool isFocused_;	//È­¸é ¼±ÅÃ½Ã¿¡¸¸ ÀÔ·Â¹ŞÀ½/¾È¹ŞÀ½.
 
 	HINSTANCE instanceHandle_;
 	HWND windowHandle_;
@@ -85,7 +85,7 @@ private:
 	float4 windowScale_;
 
 	static std::function<LRESULT(HWND, UINT, WPARAM, LPARAM)> messageHandler_;
-	//ImGUIì˜ ë©”ì„¸ì§€ í•¸ë“¤ëŸ¬ í•¨ìˆ˜ë¥¼ std::functionìœ¼ë¡œ ì €ì¥.
+	//ImGUIÀÇ ¸Ş¼¼Áö ÇÚµé·¯ ÇÔ¼ö¸¦ std::functionÀ¸·Î ÀúÀå.
 
 	static LRESULT CALLBACK MessageProcess(HWND _hWnd, UINT _message, WPARAM _wParam, LPARAM _lParam);
 

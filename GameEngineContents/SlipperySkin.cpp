@@ -4,7 +4,7 @@
 
 SlipperySkin::SlipperySkin() 
 {
-	name_ = "ë¯¸ë„ëŸ¬ìš´ í”¼ë¶€";
+	name_ = "¹Ì²ô·¯¿î ÇÇºÎ";
 	SetName(std::string_view("SlipperySkin"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 3;
@@ -22,7 +22,7 @@ void SlipperySkin::Init()
 	std::string sdamageMitigation_ = std::to_string(PlayerInfo_.damageMitigation_).substr(0, std::to_string(PlayerInfo_.damageMitigation_).find(".") + 2);
 	std::string sdamageMitigation_Next = std::to_string(PlayerInfo_.damageMitigation_ + 10.f).substr(0, std::to_string(PlayerInfo_.damageMitigation_ + 10.f).find(".") + 2);
 
-	etc_ = sdamageMitigation_ + "% -> " + sdamageMitigation_Next + "% í”¼í•´\nì™„í™” ";
+	etc_ = sdamageMitigation_ + "% -> " + sdamageMitigation_Next + "% ÇÇÇØ\n¿ÏÈ­ ";
 }
 
 void SlipperySkin::Effect()

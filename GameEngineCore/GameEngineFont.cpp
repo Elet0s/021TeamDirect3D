@@ -11,7 +11,7 @@ public:
 	{
 		if (S_OK != FW1CreateFactory(FW1_VERSION, &GameEngineFont::fontFactory_))
 		{
-			MsgBoxAssert("í°íŠ¸íŒ©í† ë¦¬ ìƒì„± ì‹¤íŒ¨.");
+			MsgBoxAssert("ÆùÆ®ÆÑÅä¸® »ı¼º ½ÇÆĞ.");
 			return;
 		}
 	}
@@ -84,7 +84,7 @@ void GameEngineFont::LoadFont(const std::string_view& _path)
 		&fontWrapper_
 	))
 	{
-		MsgBoxAssert("í°íŠ¸ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("ÆùÆ® »ı¼º ½ÇÆĞ.");
 		return;
 	}
 }

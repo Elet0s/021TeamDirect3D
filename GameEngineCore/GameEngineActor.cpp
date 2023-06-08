@@ -26,10 +26,10 @@ GameEngineActor::~GameEngineActor()
 	//		transformComponent = nullptr;
 	//	}
 	//}
-	//ï¿½ï¿½ ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½Ò¸ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½??
-	//->ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ GameEngineUpdateObjectÅ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ children_ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Death()ï¿½Ô¼ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+	//¿Ö ´õÀÌ»ó ¼Ò¸êÀÚ¿¡¼­ »èÁ¦ÇÏÁö ¾ÊÁö??
+	//->¾×ÅÍ°¡ ÄÄÆ÷³ÍÆ®µéÀ» ´õÀÌ»ó Á÷Á¢ °¡ÁöÁö ¾Ê°í GameEngineUpdateObjectÅ¬·¡½ºÀÇ children_À» ÅëÇØ °£Á¢ÀûÀ¸·Î °¡Áö±â 
+	// ¶§¹®¿¡ ÄÄÆ÷³ÍÆ® »èÁ¦µµ Á÷Á¢ »èÁ¦ÇÒ ¼ö ¾ø°í, »èÁ¦ ´ë»óÀÎ ÄÄÆ÷³ÍÆ®°¡ Á÷Á¢ Death()ÇÔ¼ö¸¦ È£ÃâÇØ¾ß ¿©·¯ ÀıÂ÷¸¦ °ÅÃÄ 
+	// Á¦´ë·Î »èÁ¦ÇÒ ¼ö ÀÖ´Ù.
 }
 
 void GameEngineActor::DetachObject()
@@ -37,7 +37,7 @@ void GameEngineActor::DetachObject()
 	GameEngineUpdateObject::DetachObject();
 
 	this->GetTransform().DetachTransform();
-	//ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+	//´õ ÀÌ»ó ¾×ÅÍ ºÎ¸ğ·Î ·¹º§¸¸ ¿Â´Ù´Â º¸ÀåÀÌ ¾ø´Ù.
 
 	if (false == this->IsDead())
 	{
@@ -47,22 +47,22 @@ void GameEngineActor::DetachObject()
 
 void GameEngineActor::SetParent(GameEngineUpdateObject* _newParent)
 {
-	if (nullptr == this->GetParent())	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ == ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½.	
+	if (nullptr == this->GetParent())	//¾×ÅÍÀÇ ºÎ¸ğ°¡ ¾ø´Ù == ·¹º§ÀÌ ¾×ÅÍÀÇ ºÎ¸ğ´Ù.	
 	{
 		this->GetLevel()->RemoveActor(this);
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ allActors_ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		//·¹º§ÀÇ allActors_¿¡ µî·ÏµÈ ¾×ÅÍ¸¦ Á¦°ÅÇÑ´Ù.
 	}
 
-	this->GameEngineUpdateObject::SetParent(_newParent);	//ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+	this->GameEngineUpdateObject::SetParent(_newParent);	//¾×ÅÍ¿¡°Ô »õ·Î¿î ºÎ¸ğ¸¦ ¼¼ÆÃÇØÁØ´Ù.
 
 	GameEngineTransformBase* newParent = dynamic_cast<GameEngineTransformBase*>(_newParent);
 	if (nullptr == newParent)
 	{
-		MsgBoxAssert("Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.");
+		MsgBoxAssert("Æ®·£½ºÆûÀÌ ÀÖ´Â ¿ÀºêÁ§Æ®¸¸ÀÌ ¾×ÅÍÀÇ ºÎ¸ğ°¡ µÉ ¼ö ÀÖ½À´Ï´Ù.");
 	}
 	else
 	{
-		this->GetTransform().SetParentTransform(newParent->GetTransform());	//Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½è¸¦ ï¿½Î´Â´ï¿½.
+		this->GetTransform().SetParentTransform(newParent->GetTransform());	//Æ®·£½ºÆûµµ ºÎ¸ğÀÚ½Ä °ü°è¸¦ ¸Î´Â´Ù.
 	}
 }
 

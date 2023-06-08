@@ -16,8 +16,8 @@ private:
 
 
 public:
-	void Reset();			//ì‹œê°„ ì¸¡ì • ì¤€ë¹„ í•¨ìˆ˜.
-	void Update();			//ë¸íƒ€íƒ€ìž„ ê°±ì‹  í•¨ìˆ˜.
+	void Reset();			//½Ã°£ ÃøÁ¤ ÁØºñ ÇÔ¼ö.
+	void Update();			//µ¨Å¸Å¸ÀÓ °»½Å ÇÔ¼ö.
 
 public:
 	static inline GameEngineTime& GetInst()
@@ -27,8 +27,8 @@ public:
 
 	static void Destroy()
 	{
-		//ê°’í˜•ìœ¼ë¡œ ì•ˆ í•˜ê³  í¬ì¸í„° í˜•ì‹ìœ¼ë¡œ ì‹±ê¸€í„´ì„ ë§Œë“œëŠ” ì´ìœ : ì œê±° ì‹œì ì„ ë‚´ ë§ˆìŒëŒ€ë¡œ í†µì œí•˜ê¸° ìœ„í•´ì„œ.
-		//ì‹±ê¸€í†¤ ì‚­ì œ'ë§Œ' ì›í•˜ëŠ” íƒ€ì´ë°ì— í•œë‹¤.
+		//°ªÇüÀ¸·Î ¾È ÇÏ°í Æ÷ÀÎÅÍ Çü½ÄÀ¸·Î ½Ì±ÛÅÏÀ» ¸¸µå´Â ÀÌÀ¯: Á¦°Å ½ÃÁ¡À» ³» ¸¶À½´ë·Î ÅëÁ¦ÇÏ±â À§ÇØ¼­.
+		//½Ì±ÛÅæ »èÁ¦'¸¸' ¿øÇÏ´Â Å¸ÀÌ¹Ö¿¡ ÇÑ´Ù.
 		if (nullptr != inst_)
 		{
 			delete inst_;
@@ -47,11 +47,11 @@ public:
 		if (-1 == frameLimit_)
 		{
 			return deltaTimeF_ * globalTimeScale_;
-			//í”„ë ˆìž„ ì œí•œì´ ì—†ëŠ” ìƒí™©ì—ì„œ globalTimeScale_ì´ ê³±í•´ì§„ ë¸íƒ€íƒ€ìž„ ë°˜í™˜.
+			//ÇÁ·¹ÀÓ Á¦ÇÑÀÌ ¾ø´Â »óÈ²¿¡¼­ globalTimeScale_ÀÌ °öÇØÁø µ¨Å¸Å¸ÀÓ ¹ÝÈ¯.
 		}
 
 		return sumDeltaTimeF_ * globalTimeScale_;
-		//í”„ë ˆìž„ ì œí•œì´ ìžˆëŠ” ìƒí™©ì—ì„œ globalTimeScale_ì´ ê³±í•´ì§„ ëˆ„ì  ë¸íƒ€íƒ€ìž„ ë°˜í™˜.
+		//ÇÁ·¹ÀÓ Á¦ÇÑÀÌ ÀÖ´Â »óÈ²¿¡¼­ globalTimeScale_ÀÌ °öÇØÁø ´©Àû µ¨Å¸Å¸ÀÓ ¹ÝÈ¯.
 	}
 
 	inline float GetDeltaTime(int _index)
@@ -91,7 +91,7 @@ public:
 		globalTimeScale_ = _globalTimeScale;
 	}
 
-	//í”„ë ˆìž„ ì œí•œì„ ì„¤ì •í•˜ëŠ” í•¨ìˆ˜. -1ì€ ì œí•œí•˜ì§€ ì•Šê² ë‹¤ëŠ” ì˜ë¯¸.
+	//ÇÁ·¹ÀÓ Á¦ÇÑÀ» ¼³Á¤ÇÏ´Â ÇÔ¼ö. -1Àº Á¦ÇÑÇÏÁö ¾Ê°Ú´Ù´Â ÀÇ¹Ì.
 	inline void SetFrameLimit(int _frameLimit)
 	{
 		frameLimit_ = _frameLimit;
@@ -115,33 +115,33 @@ public:
 
 private:
 
-	std::chrono::steady_clock::time_point prev_;	//ì´ì „ ë£¨í”„ ì‹œìž‘ ì‹œê°„.
-	//std::chrono::time_point: epochë¼ê³  ì‚¬ì „ì— ì •í•´ë†“ì€, íŠ¹ì • ì‹œì ìœ¼ë¡œë¶€í„° 
-	// ì‚¬ìš©ìžê°€ ì§€ì •í•œ ì‹œì ê°„ì˜ ì‹œê°„ ê°„ê²©ì´ ì–¼ë§ˆë‚˜ ë˜ëŠ”ì§€ë¥¼ durationì´ë¼ëŠ” í´ëž˜ìŠ¤ë¡œ í‘œí˜„í•˜ê³  ê³„ì‚°í•˜ëŠ” í´ëž˜ìŠ¤.
+	std::chrono::steady_clock::time_point prev_;	//ÀÌÀü ·çÇÁ ½ÃÀÛ ½Ã°£.
+	//std::chrono::time_point: epoch¶ó°í »çÀü¿¡ Á¤ÇØ³õÀº, Æ¯Á¤ ½ÃÁ¡À¸·ÎºÎÅÍ 
+	// »ç¿ëÀÚ°¡ ÁöÁ¤ÇÑ ½ÃÁ¡°£ÀÇ ½Ã°£ °£°ÝÀÌ ¾ó¸¶³ª µÇ´ÂÁö¸¦ durationÀÌ¶ó´Â Å¬·¡½º·Î Ç¥ÇöÇÏ°í °è»êÇÏ´Â Å¬·¡½º.
 
-	//std::chrono::system_clockì˜ ê²½ìš°ì—ëŠ” ìœ ë‹‰ìŠ¤ íƒ€ìž„ì´ë¼ê³  ë¶€ë¥´ëŠ” ê·¸ë ˆê³ ë¦¬ë ¥ 1970ë…„ 1ì›” 1ì¼ 00ì‹œ 00ë¶„ 00ì´ˆê°€ 
-	// epochì´ë©°, ì‹œìŠ¤í…œ ì‹œê°„ ì„¤ì •ì— ë”°ë¼ì„œ ì‹œê°„ì´ ì—­í–‰í•´ì„œ durationì´ ìŒìˆ˜ê°€ ë  ìˆ˜ë„ ìžˆë‹¤.
-	//std::chrono::steady_clockì˜ ê²½ìš°ì—ëŠ” ì‹œìŠ¤í…œ ë¶€íŒ… ì‹œì ì´ epochê°€ ë˜ë©°, 
-	// ë‹¨ë°©í–¥(monotonic)ìœ¼ë¡œë§Œ ì‹œê°„ì´ í˜ëŸ¬ê°€ë¯€ë¡œ ì ˆëŒ€ ì—­í–‰í•˜ì§€ ì•Šê³ , durationì´ ìŒìˆ˜ê°€ ë‚˜ì˜¬ ìˆ˜ë„ ì—†ë‹¤.
+	//std::chrono::system_clockÀÇ °æ¿ì¿¡´Â À¯´Ð½º Å¸ÀÓÀÌ¶ó°í ºÎ¸£´Â ±×·¹°í¸®·Â 1970³â 1¿ù 1ÀÏ 00½Ã 00ºÐ 00ÃÊ°¡ 
+	// epochÀÌ¸ç, ½Ã½ºÅÛ ½Ã°£ ¼³Á¤¿¡ µû¶ó¼­ ½Ã°£ÀÌ ¿ªÇàÇØ¼­ durationÀÌ À½¼ö°¡ µÉ ¼öµµ ÀÖ´Ù.
+	//std::chrono::steady_clockÀÇ °æ¿ì¿¡´Â ½Ã½ºÅÛ ºÎÆÃ ½ÃÁ¡ÀÌ epoch°¡ µÇ¸ç, 
+	// ´Ü¹æÇâ(monotonic)À¸·Î¸¸ ½Ã°£ÀÌ Èê·¯°¡¹Ç·Î Àý´ë ¿ªÇàÇÏÁö ¾Ê°í, durationÀÌ À½¼ö°¡ ³ª¿Ã ¼öµµ ¾ø´Ù.
 
-	double deltaTimeD_;				//ë¸íƒ€íƒ€ìž„: ì§€ë‚œ ë£¨í”„ë¥¼ í•œë²ˆ ìˆ˜í–‰ í•  ë•Œ ê±¸ë¦° ì‹œê°„.
-	float deltaTimeF_;				//ë¸íƒ€íƒ€ìž„: ì§€ë‚œ ë£¨í”„ë¥¼ í•œë²ˆ ìˆ˜í–‰ í•  ë•Œ ê±¸ë¦° ì‹œê°„.
-	//ì»´í“¨í„°ì˜ ì„±ëŠ¥ì´ ì¢‹ì„ìˆ˜ë¡ ë¸íƒ€íƒ€ìž„ ê°’ì´ ìž‘ì•„ì§€ë¯€ë¡œ, ì»´í“¨í„° ì„±ëŠ¥ ê²©ì°¨ë¡œ ì¸í•´ ê°ìž ë‹¤ë¥¸ ì†ë„ë¡œ ë£¨í”„ë¥¼ ìˆ˜í–‰í•œë‹¤ê³  í•´ë„ 
-	//ì„±ëŠ¥ì— ë°˜ë¹„ë¡€í•´ì„œ ë¸íƒ€íƒ€ìž„ ê°’ì´ ìž‘ê²Œ ìž¡ížˆê³ , ê·¸ë¡œ ì¸í•´ ì»´í“¨í„° ì„±ëŠ¥ ìƒê´€ì—†ì´ ê°™ì€ ì‹œê°„ ê°™ì€ ê²Œìž„ ì§„í–‰ì†ë„ë¥¼ ë³´ì—¬ì£¼ê²Œ ëœë‹¤.
+	double deltaTimeD_;				//µ¨Å¸Å¸ÀÓ: Áö³­ ·çÇÁ¸¦ ÇÑ¹ø ¼öÇà ÇÒ ¶§ °É¸° ½Ã°£.
+	float deltaTimeF_;				//µ¨Å¸Å¸ÀÓ: Áö³­ ·çÇÁ¸¦ ÇÑ¹ø ¼öÇà ÇÒ ¶§ °É¸° ½Ã°£.
+	//ÄÄÇ»ÅÍÀÇ ¼º´ÉÀÌ ÁÁÀ»¼ö·Ï µ¨Å¸Å¸ÀÓ °ªÀÌ ÀÛ¾ÆÁö¹Ç·Î, ÄÄÇ»ÅÍ ¼º´É °ÝÂ÷·Î ÀÎÇØ °¢ÀÚ ´Ù¸¥ ¼Óµµ·Î ·çÇÁ¸¦ ¼öÇàÇÑ´Ù°í ÇØµµ 
+	//¼º´É¿¡ ¹Ýºñ·ÊÇØ¼­ µ¨Å¸Å¸ÀÓ °ªÀÌ ÀÛ°Ô ÀâÈ÷°í, ±×·Î ÀÎÇØ ÄÄÇ»ÅÍ ¼º´É »ó°ü¾øÀÌ °°Àº ½Ã°£ °°Àº °ÔÀÓ ÁøÇà¼Óµµ¸¦ º¸¿©ÁÖ°Ô µÈ´Ù.
 
 	std::map<int, float> timeScale_;
 
-	float globalTimeScale_;		//ê²Œìž„ ì „ì²´ ì†ë„ ì¡°ì •ìš© ë°°ìˆ˜.
+	float globalTimeScale_;		//°ÔÀÓ ÀüÃ¼ ¼Óµµ Á¶Á¤¿ë ¹è¼ö.
 
-	int averageFPS_;					//ì´ˆë‹¹ í‰ê·  í”„ë ˆìž„ ê°±ì‹  íšŸìˆ˜.
-	float sumDeltaTimeF_;	//í”„ë ˆìž„ ì œí•œì´ ìžˆì„ë•Œ ì‚¬ìš©ë˜ëŠ” í”„ë ˆìž„ê°„ ëˆ„ì  ë¸íƒ€íƒ€ìž„.
-	double fpsCheckTime_;	//ì™¸ë¶€ ì˜í–¥ì„ ë°›ì§€ ì•ŠëŠ” ì •í™•í•œ FPS ì¸¡ì •ìš© ì‹œê°„ê³„ì‚° ë³€ìˆ˜.
-	double curFrameTime_;	//í˜„ìž¬ ë‚¨ì€ ë‹¤ìŒ í”„ë ˆìž„ ê°±ì‹  ì£¼ê¸°.
-	double frameInterval_;	//í”„ë ˆìž„ ì œí•œì´ ê±¸ë ¸ì„ ë•Œ ì ìš©ë˜ëŠ” í”„ë ˆìž„ê°„ ê°„ê²©. 
-	int frameCount_;				//1ì´ˆê°„ ìˆ˜í–‰í•œ ì „ì²´ ë£¨í”„ ìˆ˜.
-	int totalFPS_;			//1ì´ˆê°„ ì§‘ê³„ëœ FPSì˜ ì´í•©.
+	int averageFPS_;					//ÃÊ´ç Æò±Õ ÇÁ·¹ÀÓ °»½Å È½¼ö.
+	float sumDeltaTimeF_;	//ÇÁ·¹ÀÓ Á¦ÇÑÀÌ ÀÖÀ»¶§ »ç¿ëµÇ´Â ÇÁ·¹ÀÓ°£ ´©Àû µ¨Å¸Å¸ÀÓ.
+	double fpsCheckTime_;	//¿ÜºÎ ¿µÇâÀ» ¹ÞÁö ¾Ê´Â Á¤È®ÇÑ FPS ÃøÁ¤¿ë ½Ã°£°è»ê º¯¼ö.
+	double curFrameTime_;	//ÇöÀç ³²Àº ´ÙÀ½ ÇÁ·¹ÀÓ °»½Å ÁÖ±â.
+	double frameInterval_;	//ÇÁ·¹ÀÓ Á¦ÇÑÀÌ °É·ÈÀ» ¶§ Àû¿ëµÇ´Â ÇÁ·¹ÀÓ°£ °£°Ý. 
+	int frameCount_;				//1ÃÊ°£ ¼öÇàÇÑ ÀüÃ¼ ·çÇÁ ¼ö.
+	int totalFPS_;			//1ÃÊ°£ Áý°èµÈ FPSÀÇ ÃÑÇÕ.
 
-	bool isUpdateOn_;		//í”„ë ˆìž„ ì œí•œ ì¤‘ì¸ê°€ ì—¬ë¶€. trueë©´ ì œí•œì„ ê±¸ì§€ ì•ŠëŠ”ë‹¤.
-	int frameLimit_;			//ì´ˆë‹¹ í”„ë ˆìž„ ì œí•œ ê¸°ì¤€. -1ì´ë©´ ì œí•œí•˜ì§€ ì•ŠìŒ.
+	bool isUpdateOn_;		//ÇÁ·¹ÀÓ Á¦ÇÑ ÁßÀÎ°¡ ¿©ºÎ. true¸é Á¦ÇÑÀ» °ÉÁö ¾Ê´Â´Ù.
+	int frameLimit_;			//ÃÊ´ç ÇÁ·¹ÀÓ Á¦ÇÑ ±âÁØ. -1ÀÌ¸é Á¦ÇÑÇÏÁö ¾ÊÀ½.
 };
 

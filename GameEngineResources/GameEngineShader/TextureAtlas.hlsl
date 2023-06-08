@@ -3,21 +3,21 @@
 
 struct Input
 {
-    //ë©¤ë²„ë³€ìˆ˜ê°„ ìˆœì„œëŠ” ì „í˜€ ì¤‘ìš”í•˜ì§€ ì•Šë‹¤. ì¸í’‹ ë ˆì´ì•„ì›ƒì„ í†µí•´ ê° ë©¤ë²„ë³€ìˆ˜ì˜ ì˜¤í”„ì…‹ê°’ë§Œ ì •í™•íˆ ì•Œë ¤ì£¼ë©´ ëœë‹¤?
-    //ë‹¨ì§€ í¸ì˜ë¥¼ ìœ„í•´ì„œ ë˜ë„ë¡ ìˆœì„œë¥¼ ì§€í‚¬ ë¿ì´ë‹¤?
+    //¸â¹öº¯¼ö°£ ¼ø¼­´Â ÀüÇô Áß¿äÇÏÁö ¾Ê´Ù. ÀÎÇ² ·¹ÀÌ¾Æ¿ôÀ» ÅëÇØ °¢ ¸â¹öº¯¼öÀÇ ¿ÀÇÁ¼Â°ª¸¸ Á¤È®È÷ ¾Ë·ÁÁÖ¸é µÈ´Ù?
+    //´ÜÁö ÆíÀÇ¸¦ À§ÇØ¼­ µÇµµ·Ï ¼ø¼­¸¦ ÁöÅ³ »ÓÀÌ´Ù?
     float4 pos_ : POSITION;
     float4 texcoord_ : TEXCOORD;
     
-    uint index_ : SV_InstanceID; //ì¸ìŠ¤í„´ìŠ¤ ì‹ë³„ë²ˆí˜¸.
+    uint index_ : SV_InstanceID; //ÀÎ½ºÅÏ½º ½Äº°¹øÈ£.
 };
 
 struct Output
 {
-    //ì‹œë§¨í‹±(semantic). GPUì—ê²Œ ì•Œë ¤ì£¼ëŠ”, í•´ë‹¹ ê°’ì˜ ì¢…ë¥˜. GPUê°€ ìë™ìœ¼ë¡œ ì²˜ë¦¬í•  ìˆ˜ ìˆëŠ” ì¢…ë¥˜ì˜ ê°’ì´ë©´ ìë™ìœ¼ë¡œ ì²˜ë¦¬í•´ì¤€ë‹¤.
-    float4 pos_ : SV_Position; //SV_Position: ì´ ì‹œë§¨í‹±ì„ í†µí•´ì„œë§Œ ë²„í…ìŠ¤ ì…°ì´ë”ì—ì„œ ë³€ê²½ëœ ì •ì  ìœ„ì¹˜ë¥¼ ë˜ìŠ¤í„°ë¼ì´ì €ë¡œ ì „ë‹¬í•  ìˆ˜ ìˆë‹¤.
-    //SVëŠ” System-Value semanticì˜ ì•½ìë¡œ, DirectX10ì—ì„œë¶€í„° ë„ì…ëœ, ìš©ë„ê°€ ì •í•´ì ¸ ìˆì–´ì„œ GPUê°€ ìë™ìœ¼ë¡œ ì²˜ë¦¬í•˜ëŠ” ì‹œë§¨í‹± í‚¤ì›Œë“œì´ë‹¤.
+    //½Ã¸ÇÆ½(semantic). GPU¿¡°Ô ¾Ë·ÁÁÖ´Â, ÇØ´ç °ªÀÇ Á¾·ù. GPU°¡ ÀÚµ¿À¸·Î Ã³¸®ÇÒ ¼ö ÀÖ´Â Á¾·ùÀÇ °ªÀÌ¸é ÀÚµ¿À¸·Î Ã³¸®ÇØÁØ´Ù.
+    float4 pos_ : SV_Position; //SV_Position: ÀÌ ½Ã¸ÇÆ½À» ÅëÇØ¼­¸¸ ¹öÅØ½º ¼ÎÀÌ´õ¿¡¼­ º¯°æµÈ Á¤Á¡ À§Ä¡¸¦ ·¡½ºÅÍ¶óÀÌÀú·Î Àü´ŞÇÒ ¼ö ÀÖ´Ù.
+    //SV´Â System-Value semanticÀÇ ¾àÀÚ·Î, DirectX10¿¡¼­ºÎÅÍ µµÀÔµÈ, ¿ëµµ°¡ Á¤ÇØÁ® ÀÖ¾î¼­ GPU°¡ ÀÚµ¿À¸·Î Ã³¸®ÇÏ´Â ½Ã¸ÇÆ½ Å°¿öµåÀÌ´Ù.
 
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
 };
 
 cbuffer AtlasData : register(b1)
@@ -29,13 +29,13 @@ cbuffer AtlasData : register(b1)
 
 Output TextureAtlas_VS(Input _input)
 {
-    Output newOutput = (Output) 0; //Outputíƒ€ì… ë³€ìˆ˜ newOutputì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”.
-    //HLSLì˜ ê²½ìš°ì—ëŠ” ëŒ€ë¶€ë¶„ì˜ ìƒí™©ì—ì„œ í˜•ë³€í™˜ì´ ê°€ëŠ¥í•˜ë‹¤.
+    Output newOutput = (Output) 0; //OutputÅ¸ÀÔ º¯¼ö newOutputÀ» 0À¸·Î ÃÊ±âÈ­.
+    //HLSLÀÇ °æ¿ì¿¡´Â ´ëºÎºĞÀÇ »óÈ²¿¡¼­ Çüº¯È¯ÀÌ °¡´ÉÇÏ´Ù.
 
     _input.pos_ += pivotPos_;
-    //ì •ì ë“¤ì˜ ë¡œì»¬ì¢Œí‘œë¥¼ í”¼ë´‡ ë³´ì •ì¹˜ë§Œí¼ ë³€ê²½í•œë‹¤.
+    //Á¤Á¡µéÀÇ ·ÎÄÃÁÂÇ¥¸¦ ÇÇº¿ º¸Á¤Ä¡¸¸Å­ º¯°æÇÑ´Ù.
     
-    newOutput.pos_ = mul(_input.pos_, worldViewProjectionMatrix_); //WVPí–‰ë ¬ ì ìš©.
+    newOutput.pos_ = mul(_input.pos_, worldViewProjectionMatrix_); //WVPÇà·Ä Àû¿ë.
     
     
     newOutput.texcoord_.x = (_input.texcoord_.x * textureFrameSize_.x) + textureFramePos_.x;
@@ -44,7 +44,7 @@ Output TextureAtlas_VS(Input _input)
     return newOutput;
 }
 
-cbuffer PixelData : register(b0)
+cbuffer PixelData: register(b0)
 {
     float4 mulColor_;
     float4 plusColor_;
@@ -54,7 +54,7 @@ cbuffer PixelData : register(b0)
 Texture2D Tex : register(t0);
 SamplerState POINTCLAMP : register(s0);
 
-float4 TextureAtlas_PS(Output _input) : SV_Target0 //SV_Target[n]: në²ˆ ë Œë”íƒ€ê²Ÿì— ê²°ê³¼ê°’ì„ ì €ì¥í•œë‹¤.
+float4 TextureAtlas_PS(Output _input) : SV_Target0 //SV_Target[n]: n¹ø ·»´õÅ¸°Ù¿¡ °á°ú°ªÀ» ÀúÀåÇÑ´Ù.
 {
 
     if (_input.texcoord_.x < slice_.x)
@@ -81,7 +81,7 @@ float4 TextureAtlas_PS(Output _input) : SV_Target0 //SV_Target[n]: në²ˆ ë Œë”íƒ
     return resultColor;
 }
 
-struct InstAtlasData     //ì¸ìŠ¤í„´ì‹±ìš© ì•„í‹€ë¼ìŠ¤ë°ì´í„°.
+struct InstAtlasData     //ÀÎ½ºÅÏ½Ì¿ë ¾ÆÆ²¶ó½ºµ¥ÀÌÅÍ.
 {
     float2 textureFramePos_;
     float2 textureFrameSize_;
@@ -93,8 +93,8 @@ StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t13);
 
 Output TextureAtlas_VSINST(Input _input)
 {
-    // _Input.Index => ì¸ìŠ¤í„´ì‹± ë²„í¼ë¥¼ í†µí•´ì„œ ì „ë‹¬.
-    // ì¸ìŠ¤í„´ì‹± ë²„í¼ë¥¼ í†µí•´ì„œ í–‰ë ¬ì„ ì „ë‹¬í•˜ì§€ ì•Šì€ ì´ìœ ëŠ” ì¸ìŠ¤í„´ì‹± ë²„í¼ë¥¼ ë§¤ë²ˆ ìƒˆë¡­ê²Œ ì •ì˜í•´ì•¼ í•˜ê¸° ë•Œë¬¸ì´ë‹¤.
+    // _Input.Index => ÀÎ½ºÅÏ½Ì ¹öÆÛ¸¦ ÅëÇØ¼­ Àü´Ş.
+    // ÀÎ½ºÅÏ½Ì ¹öÆÛ¸¦ ÅëÇØ¼­ Çà·ÄÀ» Àü´ŞÇÏÁö ¾ÊÀº ÀÌÀ¯´Â ÀÎ½ºÅÏ½Ì ¹öÆÛ¸¦ ¸Å¹ø »õ·Ó°Ô Á¤ÀÇÇØ¾ß ÇÏ±â ¶§¹®ÀÌ´Ù.
     
     Output result = (Output) 0;
     result.pos_ = mul(_input.pos_, Inst_TransformData[_input.index_].worldViewProjectionMatrix_);

@@ -4,8 +4,8 @@
 const float GameEngineMath::PI = 3.14159265359f;
 const float GameEngineMath::PI2 = PI * 2.0f;
 const float GameEngineMath::HalfPI = PI * 0.5f;
-const float GameEngineMath::DegreeToRadian = GameEngineMath::PI / 180.0f;	//60ë¶„ë²•->í˜¸ë„ë²•(0.017453...)
-const float GameEngineMath::RadianToDegree = 180.0f / GameEngineMath::PI;	//í˜¸ë„ë²•->60ë¶„ë²•(57.29577...)
+const float GameEngineMath::DegreeToRadian = GameEngineMath::PI / 180.0f;	//60ºÐ¹ý->È£µµ¹ý(0.017453...)
+const float GameEngineMath::RadianToDegree = 180.0f / GameEngineMath::PI;	//È£µµ¹ý->60ºÐ¹ý(57.29577...)
 
 const float4 float4::Zero = { 0, 0, 0, 0 };
 const float4 float4::One = { 1, 1, 1, 1 };

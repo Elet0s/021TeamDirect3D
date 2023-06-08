@@ -17,11 +17,11 @@ GameEngineTransform::~GameEngineTransform()
 void GameEngineTransform::CalculateWorldMatrix()
 {
 	data_.localWorldMatrix_ = data_.localScaleMatrix_ * data_.localRotationMatrix_ * data_.localPositionMatrix_;
-	//í¬ê¸°ì™€ íšŒì „ì´ ë°”ë€Œë©´: í¬ê¸°ì™€ íšŒì „ì´ ì„œë¡œ ì˜í–¥ì„ ì£¼ê³  ë°›ì•„ì„œ í¬ê¸°ë§Œ ë³€ê²½í•´ë„ íšŒì „ì„ í•˜ê³ , 
-	// íšŒì „ë§Œ ì‹œì¼œë„ í¬ê¸°ê°€ ë³€ê²½ëœë‹¤.
-	//ì´ë™ í›„ íšŒì „ì„ í•˜ë©´: ì´ë™í•œ ë§Œí¼ ì¤‘ì‹¬ì ì—ì„œ ë©€ì–´ì§„ ìƒíƒœë¡œ ìì „ì´ ì•„ë‹Œ ê³µì „ì„ í•œë‹¤.
-	//ì´ë™ í›„ í¬ê¸°ë³€ê²½ì„ í•˜ë©´: í¬ê¸°ë³€ê²½ê°’ì´ ì´ë™í–‰ë ¬ì— ì ìš©ë˜ì–´ ì´ë™ê°’ * í¬ê¸°ê°’ë§Œí¼ 
-	// ì´ë™í•œ ìœ„ì¹˜ì— ì˜¤ë¸Œì íŠ¸ê°€ ìƒì„±ëœë‹¤.
+	//Å©±â¿Í È¸ÀüÀÌ ¹Ù²î¸é: Å©±â¿Í È¸ÀüÀÌ ¼­·Î ¿µÇâÀ» ÁÖ°í ¹Ş¾Æ¼­ Å©±â¸¸ º¯°æÇØµµ È¸ÀüÀ» ÇÏ°í, 
+	// È¸Àü¸¸ ½ÃÄÑµµ Å©±â°¡ º¯°æµÈ´Ù.
+	//ÀÌµ¿ ÈÄ È¸ÀüÀ» ÇÏ¸é: ÀÌµ¿ÇÑ ¸¸Å­ Áß½ÉÁ¡¿¡¼­ ¸Ö¾îÁø »óÅÂ·Î ÀÚÀüÀÌ ¾Æ´Ñ °øÀüÀ» ÇÑ´Ù.
+	//ÀÌµ¿ ÈÄ Å©±âº¯°æÀ» ÇÏ¸é: Å©±âº¯°æ°ªÀÌ ÀÌµ¿Çà·Ä¿¡ Àû¿ëµÇ¾î ÀÌµ¿°ª * Å©±â°ª¸¸Å­ 
+	// ÀÌµ¿ÇÑ À§Ä¡¿¡ ¿ÀºêÁ§Æ®°¡ »ı¼ºµÈ´Ù.
 
 	if (nullptr == parentTransform_)
 	{
@@ -32,7 +32,7 @@ void GameEngineTransform::CalculateWorldMatrix()
 		data_.worldWorldMatrix_ = this->data_.localWorldMatrix_ * parentTransform_->GetWorldWorld();
 	}
 
-	//ìì‹ì˜ ìì‹ íŠ¸ëœìŠ¤í¼ë“¤ë„ ì›”ë“œí–‰ë ¬ ê³„ì‚°ì„ í•´ì¤€ë‹¤.
+	//ÀÚ½ÄÀÇ ÀÚ½Ä Æ®·£½ºÆûµéµµ ¿ùµåÇà·Ä °è»êÀ» ÇØÁØ´Ù.
 	for (GameEngineTransform* const child : childTranforms_)
 	{
 		child->CalculateWorldMatrix();
@@ -74,7 +74,7 @@ void GameEngineTransform::DetachTransform()
 
 void GameEngineTransform::PixLocalNegativeX()
 {
-	if (0.f > data_.localScaleVector_.x)	//ì´ë¯¸ xì¢Œí‘œê°€ -ì´ë¯€ë¡œ í•¨ìˆ˜ ì‹¤í–‰í•˜ì§€ ì•ŠìŒ.
+	if (0.f > data_.localScaleVector_.x)	//ÀÌ¹Ì xÁÂÇ¥°¡ -ÀÌ¹Ç·Î ÇÔ¼ö ½ÇÇàÇÏÁö ¾ÊÀ½.
 	{
 		return;
 	}
@@ -86,7 +86,7 @@ void GameEngineTransform::PixLocalNegativeX()
 
 void GameEngineTransform::PixLocalPositiveX()
 {
-	if (0.f < data_.localScaleVector_.x)	//ì´ë¯¸ xì¢Œí‘œê°€ +ì´ë¯€ë¡œ í•¨ìˆ˜ ì‹¤í–‰í•˜ì§€ ì•ŠìŒ.
+	if (0.f < data_.localScaleVector_.x)	//ÀÌ¹Ì xÁÂÇ¥°¡ +ÀÌ¹Ç·Î ÇÔ¼ö ½ÇÇàÇÏÁö ¾ÊÀ½.
 	{
 		return;
 	}

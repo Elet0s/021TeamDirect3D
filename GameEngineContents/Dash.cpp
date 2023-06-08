@@ -4,7 +4,7 @@
 
 Dash::Dash() 
 {
-	name_ = "ëŒ€ì‰¬";
+	name_ = "´ë½¬";
 	SetName(std::string_view("Dash"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 3;
@@ -23,7 +23,7 @@ void Dash::Init()
 
 
 
-	etc_ = sDashChargeCount + " -> " + sDashChargeCountNext + " ëŒ€ì‰¬ ì¶©ì „ ";
+	etc_ = sDashChargeCount + " -> " + sDashChargeCountNext + " ´ë½¬ ÃæÀü ";
 }
 
 void Dash::Effect()

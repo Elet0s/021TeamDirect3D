@@ -1,6 +1,6 @@
 #pragma once
 #include"Skill.h"
-//íˆ¬ì‚¬ì²´ ì¡°ì¤€ëœ ë°©í–¥ìœ¼ë¡œ ë°œì‚¬
+//Åõ»çÃ¼ Á¶ÁØµÈ ¹æÇâÀ¸·Î ¹ß»ç
 class Spear : public Skill
 {
 public:
@@ -24,16 +24,16 @@ public:
 	GameEngineCollision* spearRangeCol_;
 
 	std::pair<GameEngineTextureRenderer*, GameEngineCollision*>projectileGroup_;
-	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList_;//ë°œì‚¬ì²´ ëª¨ìŒ
+	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList_;//¹ß»çÃ¼ ¸ğÀ½
 
 protected:
 	void Start() override;
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void Shoothing(float _deltaTime);//ì‚¬ì¶œíŒ¨í„´
-	void StateSet() override;//ë ˆë²¨ì— ë”°ë¥¸ ìŠ¤íƒ¯ ì ìš©
-	void AimSet();//ë§ˆìš°ìŠ¤ ì¼œì¤Œ
+	void Shoothing(float _deltaTime);//»çÃâÆĞÅÏ
+	void StateSet() override;//·¹º§¿¡ µû¸¥ ½ºÅÈ Àû¿ë
+	void AimSet();//¸¶¿ì½º ÄÑÁÜ
 
 
 private:
@@ -43,14 +43,14 @@ private:
 	float duringtime_;
 	size_t consecutiveCounter_;
 	float angle_;
-	float resultCos_;//ëª¬ìŠ¤í„° ì¢Œí‘œ, í”Œë ˆì´ì–´ ì¢Œí‘œ xì¶• ê¸°ì¤€ ê°ë„ 
-	float4 referenceVector_;//í”Œë ˆì´ì–´ ì—ì„œ ëª¬ìŠ¤í„°ë¡œ ê°€ëŠ” ë²¡í„° 
+	float resultCos_;//¸ó½ºÅÍ ÁÂÇ¥, ÇÃ·¹ÀÌ¾î ÁÂÇ¥ xÃà ±âÁØ °¢µµ 
+	float4 referenceVector_;//ÇÃ·¹ÀÌ¾î ¿¡¼­ ¸ó½ºÅÍ·Î °¡´Â º¤ÅÍ 
 	float4 mouseAimPos_;
-
+	
 	float4 range_;
 	float4 playerPos_;
 
-	WeaponInfo spearWeaponInfo_;//ë¬´ê¸° ìŠ¤íƒ¯
+	WeaponInfo spearWeaponInfo_;//¹«±â ½ºÅÈ
 
 
 };

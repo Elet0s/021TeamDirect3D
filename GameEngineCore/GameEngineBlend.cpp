@@ -33,7 +33,7 @@ void GameEngineBlend::Set()
 {
     if (nullptr == blendState_)
     {
-        MsgBoxAssert("ë¸”ë Œë“œìŠ¤í…Œì´íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("ºí·»µå½ºÅ×ÀÌÆ®°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
@@ -51,7 +51,7 @@ void GameEngineBlend::CreateBlendState(const D3D11_BLEND_DESC& _desc)
         &blendState_
     ))
     {
-        MsgBoxAssert("ë¸”ë Œë“œìŠ¤í…Œì´íŠ¸ ìƒì„± ì‹¤íŒ¨.");
+        MsgBoxAssert("ºí·»µå½ºÅ×ÀÌÆ® »ı¼º ½ÇÆĞ.");
         return;
     }
 }

@@ -4,7 +4,7 @@
 
 TradeOff::TradeOff() 
 {
-	name_ = "Ï†àÏ∂©";
+	name_ = "¿˝√Ê";
 	SetName(std::string_view("TradeOff"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 2;
@@ -25,8 +25,8 @@ void TradeOff::Init()
 	std::string sAttackSpeedNext = std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.25f)).substr(0, std::to_string(ceil(PlayerPInfo_.attackSpeed_Result * 1.25f)).find(".")) + "%";
 
 
-	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " Í≥µÍ≤© ÏÜçÎèÑ\n"
-		+ sAddProjectile + " -> " + sAddProjectileNext + " Ï∂îÍ∞Ä Ìà¨ÏÇ¨Ï≤¥ ";
+	etc_ = sAttackSpeed + " -> " + sAttackSpeedNext + " ∞¯∞› º”µµ\n"
+		+ sAddProjectile + " -> " + sAddProjectileNext + " √ﬂ∞° ≈ıªÁ√º ";
 }
 
 void TradeOff::Effect()

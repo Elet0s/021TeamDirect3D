@@ -13,7 +13,7 @@ public:
 	Celerity(Celerity&& _Other) noexcept = delete;
 	Celerity& operator=(const Celerity& _Other) = delete;
 	Celerity& operator=(Celerity&& _Other) noexcept = delete;
-
+	
 	void Init() override;
 	void Effect() override;
 

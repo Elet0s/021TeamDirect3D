@@ -26,7 +26,7 @@ void GameEngineSampler::VSSetSampler(int _bindPoint)
 {
     if (nullptr == samplerState_)
     {
-        MsgBoxAssert("ìƒ˜í”ŒëŸ¬ ìŠ¤í…Œì´íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("»ùÇÃ·¯ ½ºÅ×ÀÌÆ®°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
@@ -41,7 +41,7 @@ void GameEngineSampler::CSSetSampler(int _bindPoint)
 {
     if (nullptr == samplerState_)
     {
-        MsgBoxAssert("ìƒ˜í”ŒëŸ¬ ìŠ¤í…Œì´íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("»ùÇÃ·¯ ½ºÅ×ÀÌÆ®°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
@@ -56,7 +56,7 @@ void GameEngineSampler::PSSetSampler(int _bindPoint)
 {
     if (nullptr == samplerState_)
     {
-        MsgBoxAssert("ìƒ˜í”ŒëŸ¬ ìŠ¤í…Œì´íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("»ùÇÃ·¯ ½ºÅ×ÀÌÆ®°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
@@ -76,7 +76,7 @@ void GameEngineSampler::CreateSampler(const D3D11_SAMPLER_DESC& _desc)
         &samplerState_
     ))
     {
-        MsgBoxAssert("ìƒ˜í”ŒëŸ¬ ìŠ¤í…Œì´íŠ¸ ìƒì„± ì‹¤íŒ¨.");
+        MsgBoxAssert("»ùÇÃ·¯ ½ºÅ×ÀÌÆ® »ı¼º ½ÇÆĞ.");
         return;
     }
 }

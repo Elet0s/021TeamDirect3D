@@ -5,8 +5,8 @@
 class GameEngineFile;
 class GameEngineSerializer
 {
-	//ì§ë ¬í™”(Serialization): í”„ë¡œì„¸ìŠ¤ ë°–ì—ì„œëŠ” ì´í•´í•  ìˆ˜ ì—†ëŠ” í˜•íƒœì˜ ê°ì²´ ë“±ì˜ ì •ë³´ë¥¼ 
-	// íŒŒì¼ë¡œ ì½ê³  ì“°ê±°ë‚˜ ë„¤íŠ¸ì›Œí¬ë¥¼ í†µí•´ ì†¡ìˆ˜ì‹  í•˜ê¸° ì‰¬ìš´ í˜•íƒœë¡œ ë°”ê¾¸ëŠ” ì‘ì—…. 
+	//Á÷·ÄÈ­(Serialization): ÇÁ·Î¼¼½º ¹Û¿¡¼­´Â ÀÌÇØÇÒ ¼ö ¾ø´Â ÇüÅÂÀÇ °´Ã¼ µîÀÇ Á¤º¸¸¦ 
+	// ÆÄÀÏ·Î ÀĞ°í ¾²°Å³ª ³×Æ®¿öÅ©¸¦ ÅëÇØ ¼Û¼ö½Å ÇÏ±â ½¬¿î ÇüÅÂ·Î ¹Ù²Ù´Â ÀÛ¾÷. 
 public:
 	virtual void Write(GameEngineFile& _File) = 0;
 	virtual void Read(GameEngineFile& _File) = 0;
@@ -26,7 +26,7 @@ enum class FileMode
 
 class GameEngineFile: public GameEnginePath
 {
-	//íŒŒì¼ì˜ ìƒì„±ê³¼ ì—´ê³  ë‹«ìŒ, ë°ì´í„° ì €ì¥/ë¶ˆëŸ¬ì˜¤ê¸° ë“± íŒŒì¼ ê´€ë¦¬í•˜ëŠ”ë° í•„ìš”í•œ ê¸°ëŠ¥ë“¤ì„ ëª¨ì•„ë‘” í´ë˜ìŠ¤.
+	//ÆÄÀÏÀÇ »ı¼º°ú ¿­°í ´İÀ½, µ¥ÀÌÅÍ ÀúÀå/ºÒ·¯¿À±â µî ÆÄÀÏ °ü¸®ÇÏ´Âµ¥ ÇÊ¿äÇÑ ±â´ÉµéÀ» ¸ğ¾ÆµĞ Å¬·¡½º.
 
 
 public:
@@ -97,7 +97,7 @@ public:
 		{
 			if (false == std::is_base_of<GameEngineSerializer, Value>::value)
 				//template< class Base, class Derived > struct std::is_base_of;
-				//Derived í´ë˜ìŠ¤ê°€ Base í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•˜ëŠ”ì§€ ì•„ë‹Œì§€ íŒì •í•˜ëŠ” êµ¬ì¡°ì²´.
+				//Derived Å¬·¡½º°¡ Base Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Ò´ÂÁö ¾Æ´ÑÁö ÆÇÁ¤ÇÏ´Â ±¸Á¶Ã¼.
 			{
 				Write(_data[i]);
 			}
@@ -124,7 +124,7 @@ public:
 		{
 			if (false == std::is_base_of<GameEngineSerializer, Key>::value)
 				//template< class Base, class Derived > struct std::is_base_of;
-				//Derived í´ë˜ìŠ¤ê°€ Base í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•˜ëŠ”ì§€ ì•„ë‹Œì§€ íŒì •í•˜ëŠ” êµ¬ì¡°ì²´.
+				//Derived Å¬·¡½º°¡ Base Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Ò´ÂÁö ¾Æ´ÑÁö ÆÇÁ¤ÇÏ´Â ±¸Á¶Ã¼.
 			{
 				Write(writePair.first);
 			}
@@ -169,7 +169,7 @@ public:
 		{
 			if (false == std::is_base_of<GameEngineSerializer, Value>::value)
 				//template< class Base, class Derived > struct std::is_base_of;
-				//Derived í´ë˜ìŠ¤ê°€ Base í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•˜ëŠ”ì§€ ì•„ë‹Œì§€ íŒì •í•˜ëŠ” êµ¬ì¡°ì²´.
+				//Derived Å¬·¡½º°¡ Base Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Ò´ÂÁö ¾Æ´ÑÁö ÆÇÁ¤ÇÏ´Â ±¸Á¶Ã¼.
 			{
 				Read(_data[i]);
 			}
@@ -198,7 +198,7 @@ public:
 
 			if (false == std::is_base_of<GameEngineSerializer, Key>::value)
 				//template< class Base, class Derived > struct std::is_base_of;
-				//Derived í´ë˜ìŠ¤ê°€ Base í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•˜ëŠ”ì§€ ì•„ë‹Œì§€ íŒì •í•˜ëŠ” êµ¬ì¡°ì²´.
+				//Derived Å¬·¡½º°¡ Base Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Ò´ÂÁö ¾Æ´ÑÁö ÆÇÁ¤ÇÏ´Â ±¸Á¶Ã¼.
 			{
 				Read(readPair.first);
 			}
@@ -211,7 +211,7 @@ public:
 
 			if (false == std::is_base_of<GameEngineSerializer, Value>::value)
 				//template< class Base, class Derived > struct std::is_base_of;
-				//Derived í´ë˜ìŠ¤ê°€ Base í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•˜ëŠ”ì§€ ì•„ë‹Œì§€ íŒì •í•˜ëŠ” êµ¬ì¡°ì²´.
+				//Derived Å¬·¡½º°¡ Base Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Ò´ÂÁö ¾Æ´ÑÁö ÆÇÁ¤ÇÏ´Â ±¸Á¶Ã¼.
 			{
 				Read(readPair.second);
 			}
@@ -227,7 +227,7 @@ public:
 
 private:
 	FILE* filePtr_;
-	//íŒŒì¼ì€ OSê°€ ê´€ë¦¬í•˜ë¯€ë¡œ ì›¬ë§Œí•œ íŒŒì¼ ì…ì¶œë ¥ ê´€ë ¨ ê¸°ëŠ¥ì€ OSì™€ ë°€ì ‘í•˜ê²Œ ê´€ê³„ë¥¼ ë§ºê³  ìˆë‹¤.
+	//ÆÄÀÏÀº OS°¡ °ü¸®ÇÏ¹Ç·Î À¢¸¸ÇÑ ÆÄÀÏ ÀÔÃâ·Â °ü·Ã ±â´ÉÀº OS¿Í ¹ĞÁ¢ÇÏ°Ô °ü°è¸¦ ¸Î°í ÀÖ´Ù.
 
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Skill.h"
-
+// Ό³Έν :
 class DamascusSteel : public Skill
 {
 public:

@@ -4,15 +4,15 @@
 struct Input
 {
     float4 pos_ : POSITION;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
-    uint instanceIndex_ : SV_InstanceID; //ì¸ìŠ¤í„´ìŠ¤ ì‹ë³„ë²ˆí˜¸.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
+    uint instanceIndex_ : SV_InstanceID; //ÀÎ½ºÅÏ½º ½Äº°¹øÈ£.
 };
 
 struct Output
 {
     float4 pos_ : SV_Position;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
-    uint instanceIndex_ : SV_InstanceID; //ì¸ìŠ¤í„´ìŠ¤ ì‹ë³„ë²ˆí˜¸.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
+    uint instanceIndex_ : SV_InstanceID; //ÀÎ½ºÅÏ½º ½Äº°¹øÈ£.
 };
 
 //cbuffer PixelData : register(b0)
@@ -34,7 +34,7 @@ SamplerState POINTCLAMP : register(s0);
 
 float4 SingleTextureInstancing_PS(Output _input) : SV_Target0
 {
-    float4 resultColor = (float4) 0;
+    float4 resultColor = (float4)0;
     
     //if (_input.texcoord_.x < slice_.x)
     //{
@@ -60,14 +60,14 @@ float4 SingleTextureInstancing_PS(Output _input) : SV_Target0
     return resultColor;
 }
 
-struct InstAtlasData     //ì¸ìŠ¤í„´ì‹±ìš© ì•„í‹€ë¼ìŠ¤ë°ì´í„°.
+struct InstAtlasData     //ÀÎ½ºÅÏ½Ì¿ë ¾ÆÆ²¶ó½ºµ¥ÀÌÅÍ.
 {
     float2 textureFramePos_;
     float2 textureFrameSize_;
     float4 pivotPos_;
 };
 
-struct InstPixelData
+struct InstPixelData 
 {
     float4 mulColor_;
     float4 plusColor_;

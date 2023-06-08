@@ -20,7 +20,7 @@ Crossbow::Crossbow()
 	targetInst_(),
 	referenceVectorList_()
 {
-	name_ = "ì„ê¶";
+	name_ = "¼®±Ã";
 	SetName(std::string_view("CrossBow"));
 	myRank_ = Rank::Epic;
 	maxLevel_ = 7;
@@ -36,8 +36,8 @@ void Crossbow::Init()
 	std::string sDamege = std::to_string(crossbowWeaponInfo_.weaponAtk_).substr(0, std::to_string(crossbowWeaponInfo_.weaponAtk_).find(".") + 3);
 	std::string sAttackSpeed = std::to_string(crossbowWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(crossbowWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 
-	etc_ = "ê°€ì¥ ì²´ë ¥ì´ ë§ì€ ì ì—ê²Œ\në°œì‚¬í•©ë‹ˆë‹¤\n" + sDamege + "ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²©\níˆ¬ì‚¬ì²´"
-		+ std::to_string(crossbowWeaponInfo_.weaponProjectileNum_) + "ê°œ\n" + std::to_string(crossbowWeaponInfo_.weaponPassNum_) + "ê´€í†µ ";
+	etc_ = "°¡Àå Ã¼·ÂÀÌ ¸¹Àº Àû¿¡°Ô\n¹ß»çÇÕ´Ï´Ù\n" + sDamege + "ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°İ\nÅõ»çÃ¼"
+		+ std::to_string(crossbowWeaponInfo_.weaponProjectileNum_) + "°³\n" + std::to_string(crossbowWeaponInfo_.weaponPassNum_) + "°üÅë ";
 }
 void Crossbow::Effect()
 {
@@ -46,7 +46,7 @@ void Crossbow::Effect()
 void Crossbow::Start()
 {
 	passNum_.reserve(20);
-	for (size_t i = 0; i < 20; i++) // ì²˜ìŒë¶€í„° ìµœëŒ€ê°¯ìˆ˜ ëª¨ë‘ ë§Œë“¤ì–´ì„œ ê°€ì§€ê³  ìˆì„ ê²ƒ 
+	for (size_t i = 0; i < 20; i++) // Ã³À½ºÎÅÍ ÃÖ´ë°¹¼ö ¸ğµÎ ¸¸µé¾î¼­ °¡Áö°í ÀÖÀ» °Í 
 	{
 		passNum_.push_back(0);
 
@@ -116,7 +116,7 @@ void Crossbow::StateSet()
 		crossbowWeaponInfo_.weaponAtkSpeed_ = 75.f / (Info->attackSpeed_ * PInfo->attackSpeed_Result);
 		crossbowWeaponInfo_.weaponProjectileNum_ = 3 + Info->addProjectile_;
 	}
-
+	
 }
 
 void Crossbow::SerchTarget()
@@ -126,18 +126,18 @@ void Crossbow::SerchTarget()
 		targetSerchCounter_ = 0;
 		monsterList_ = Monster::GetMonsterList();
 		targetInst_.clear();
-		for (size_t n = 0; n < crossbowWeaponInfo_.weaponProjectileNum_; n++)//í•œë²ˆì— ë˜ì§€ëŠ” íˆ¬ì‚¬ì²´ ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µí• ê²ƒì„
+		for (size_t n = 0; n < crossbowWeaponInfo_.weaponProjectileNum_; n++)//ÇÑ¹ø¿¡ ´øÁö´Â Åõ»çÃ¼ °¹¼ö¸¸Å­ ¹İº¹ÇÒ°ÍÀÓ
 		{
 			for (size_t i = 0; i < monsterList_.size(); i++)
 			{
 				if (monsterList_[i]->IsSummoned() == true && monsterList_[i]->isTarget_ == false)
 				{
-					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0ì´ìƒ, ì²«ë²ˆì§¸ ìˆœë²ˆì¼ê²½ìš°
+					if (monsterList_[i]->GetMonsterInfo().hp_ > 0 && firstSerchCheak_ == false)//hp0ÀÌ»ó, Ã¹¹øÂ° ¼ø¹øÀÏ°æ¿ì
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 						firstSerchCheak_ = true;
 					}
-					else if (minHpPair_.second < monsterList_[i]->GetMonsterInfo().hp_)//í˜„ì¬ê²€ì‚¬ì¤‘ì¸ ëª¬ìŠ¤í„° ì²´ë ¥ì´ ë” ë†’ë‹¤ë©´
+					else if (minHpPair_.second < monsterList_[i]->GetMonsterInfo().hp_)//ÇöÀç°Ë»çÁßÀÎ ¸ó½ºÅÍ Ã¼·ÂÀÌ ´õ ³ô´Ù¸é
 					{
 						minHpPair_ = std::make_pair(i, monsterList_[i]->GetMonsterInfo().hp_);
 					}
@@ -145,7 +145,7 @@ void Crossbow::SerchTarget()
 				if (i == monsterList_.size() - 1)
 				{
 					targetSerchCounter_ += 1;
-					targetInst_.push_back(minHpPair_);//íƒ€ê²Ÿë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+					targetInst_.push_back(minHpPair_);//Å¸°Ù¸®½ºÆ®¿¡ Ãß°¡
 					monsterList_[minHpPair_.first]->isTarget_ = true;
 					firstSerchCheak_ = false;
 					istarget_ = true;
@@ -167,7 +167,7 @@ void Crossbow::ProjectileSort()
 		{
 			for (size_t i = 0; i < projectileGroupList_.size(); i++)
 			{
-				if (targetInst_.size() > i) // íƒ€ê²Ÿìˆ˜ë§Œí¼ í•„ìš”
+				if (targetInst_.size() > i) // Å¸°Ù¼ö¸¸Å­ ÇÊ¿ä
 				{
 					passNum_[i] = crossbowWeaponInfo_.weaponPassNum_;
 					projectileGroupList_[i].first->On();
@@ -198,8 +198,8 @@ void Crossbow::RenderRotate()
 				float Mx = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().x;
 				float My = monsterList_[targetInst_[i].first]->GetTransform().GetWorldPosition().y;
 				float Px = Player::GetPlayerInst().GetTransform().GetWorldPosition().x;
-				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//ëª¬ìŠ¤í„° ì˜®ê²¨ì§„ ìœ„ì¹˜ë¡œ ê°€ì•¼í•¨
-				referenceVector_.x = (Mx - Px); //ë°©í–¥ êµ¬í•˜ëŠ” ê³µì‹
+				float Py = Player::GetPlayerInst().GetTransform().GetWorldPosition().y;//¸ó½ºÅÍ ¿Å°ÜÁø À§Ä¡·Î °¡¾ßÇÔ
+				referenceVector_.x = (Mx - Px); //¹æÇâ ±¸ÇÏ´Â °ø½Ä
 				referenceVector_.y = (My - Py);
 				referenceVector_.w = 0;
 				referenceVectorList_.push_back(referenceVector_);
@@ -243,7 +243,7 @@ CollisionReturn Crossbow::ProjectileToMonsterCollision(GameEngineCollision* _Thi
 			}
 		}
 	}
-	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= crossbowWeaponInfo_.weaponAtk_; //ë°ë¯¸ì§€ì¤Œ
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= crossbowWeaponInfo_.weaponAtk_; //µ¥¹ÌÁöÁÜ
 	return CollisionReturn::Stop;
 }
 

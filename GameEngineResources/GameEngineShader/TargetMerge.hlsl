@@ -1,4 +1,4 @@
-//ìœˆë„ìš°ì°½ ì „ì²´ë¥¼ ì»¤ë²„í•˜ëŠ” ì´ ì…°ì´ë” íŠ¹ì„±ìƒ "TransformHeader.hlsli"ê°€ í•„ìš” ì—†ë‹¤.
+//À©µµ¿ìÃ¢ ÀüÃ¼¸¦ Ä¿¹öÇÏ´Â ÀÌ ¼ÎÀÌ´õ Æ¯¼º»ó "TransformHeader.hlsli"°¡ ÇÊ¿ä ¾ø´Ù.
 
 struct Input
 {
@@ -23,11 +23,11 @@ Output TargetMerge_VS(Input _input)
 Texture2D Tex : register(t0);
 SamplerState LINEARWRAP : register(s0);
 
-float4 TargetMerge_PS(Output _input) : SV_Target0
+float4 TargetMerge_PS(Output _input): SV_Target0
 {
     float4 resultColor = Tex.Sample(LINEARWRAP, _input.tex_.xy);
 
-    if (resultColor.a <= 0.f)
+    if(resultColor.a <= 0.f)
     {
         clip(-1);
     }

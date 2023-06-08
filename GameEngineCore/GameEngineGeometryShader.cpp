@@ -20,15 +20,15 @@ void GameEngineGeometryShader::Set()
 {
     if (nullptr == geometryShader_)
     {
-        MsgBoxAssert("ì§€ì˜¤ë©”íŠ¸ë¦¬ ì…°ì´ë”ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("Áö¿À¸ŞÆ®¸® ¼ÎÀÌ´õ°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
-    //ë‘ë²ˆì§¸ ì¸ìëŠ” #includeë‚˜ #defineë“± hlslì—ì„œ ì‚¬ìš©í•  í—¤ë”ë‚˜ ë””íŒŒì¸ì˜ ê°ì²´ë¥¼ ë„£ì–´ì¤„ìˆ˜ ìˆë‹¤.
-    GameEngineDevice::GetDC()->GSSetShader(//íŒŒì´í”„ë¼ì¸ì— ì§€ì˜¤ë©”íŠ¸ë¦¬ ì…°ì´ë”ë¥¼ ì„¸íŒ…í•˜ëŠ” í•¨ìˆ˜.
-        geometryShader_,                    //ì§€ì˜¤ë©”íŠ¸ë¦¬ ì…°ì´ë” í¬ì¸í„°.
-        nullptr,                            //í´ë˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ ì¸í„°í˜ì´ìŠ¤ ë°°ì—´ ì£¼ì†Œê°’. ì—†ìœ¼ë©´ NULL.
-        0                                   //ì‚¬ìš©í•  í´ë˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ ì¸í„°í˜ì´ìŠ¤ ë°°ì—´ì˜ ì¸ë±ìŠ¤.
+    //µÎ¹øÂ° ÀÎÀÚ´Â #include³ª #defineµî hlsl¿¡¼­ »ç¿ëÇÒ Çì´õ³ª µğÆÄÀÎÀÇ °´Ã¼¸¦ ³Ö¾îÁÙ¼ö ÀÖ´Ù.
+    GameEngineDevice::GetDC()->GSSetShader(//ÆÄÀÌÇÁ¶óÀÎ¿¡ Áö¿À¸ŞÆ®¸® ¼ÎÀÌ´õ¸¦ ¼¼ÆÃÇÏ´Â ÇÔ¼ö.
+        geometryShader_,                    //Áö¿À¸ŞÆ®¸® ¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
+        nullptr,                            //Å¬·¡½º ÀÎ½ºÅÏ½º ÀÎÅÍÆäÀÌ½º ¹è¿­ ÁÖ¼Ò°ª. ¾øÀ¸¸é NULL.
+        0                                   //»ç¿ëÇÒ Å¬·¡½º ÀÎ½ºÅÏ½º ÀÎÅÍÆäÀÌ½º ¹è¿­ÀÇ ÀÎµ¦½º.
     );
 }
 
@@ -39,7 +39,7 @@ GameEngineGeometryShader* GameEngineGeometryShader::Load(
     UINT _versionLow /*= 0*/
 )
 {
-    return Load(_path, GameEnginePath::GetFileName(_path), _entryPoint, _versionHigh, _versionLow);
+	return Load(_path, GameEnginePath::GetFileName(_path), _entryPoint, _versionHigh, _versionLow);
 }
 
 GameEngineGeometryShader* GameEngineGeometryShader::Load(
@@ -50,7 +50,7 @@ GameEngineGeometryShader* GameEngineGeometryShader::Load(
     UINT _versionLow /*= 0*/
 )
 {
-    GameEngineGeometryShader* newRes = CreateNamedRes(_name);
+	GameEngineGeometryShader* newRes = CreateNamedRes(_name);
     newRes->CreateVersion("gs", _versionHigh, _versionLow);
     newRes->SetEntrtyPoint(_entryPoint);
     newRes->CompileHLSLCode(_path);
@@ -62,13 +62,13 @@ GameEngineGeometryShader* GameEngineGeometryShader::Load(
 void GameEngineGeometryShader::CreateGeometryShader()
 {
     if (S_OK != GameEngineDevice::GetDevice()->CreateGeometryShader(
-        this->binaryCode_->GetBufferPointer(),  //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ.
-        this->binaryCode_->GetBufferSize(),     //ì»´íŒŒì¼ëœ ë°”ì´ë„ˆë¦¬ì½”ë“œ í¬ê¸°.
+        this->binaryCode_->GetBufferPointer(),  //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå.
+        this->binaryCode_->GetBufferSize(),     //ÄÄÆÄÀÏµÈ ¹ÙÀÌ³Ê¸®ÄÚµå Å©±â.
         NULL,                                   //??
-        &this->geometryShader_                  //ì§€ì˜¤ë©”íŠ¸ë¦¬ ì…°ì´ë” í¬ì¸í„°.
+        &this->geometryShader_                  //Áö¿À¸ŞÆ®¸® ¼ÎÀÌ´õ Æ÷ÀÎÅÍ.
     ))
     {
-        MsgBoxAssert("ì§€ì˜¤ë©”íŠ¸ë¦¬ ì…°ì´ë” ìƒì„± ì‹¤íŒ¨.");
+        MsgBoxAssert("Áö¿À¸ŞÆ®¸® ¼ÎÀÌ´õ »ı¼º ½ÇÆĞ.");
         return;
     }
 }

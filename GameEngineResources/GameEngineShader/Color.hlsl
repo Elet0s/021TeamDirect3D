@@ -1,39 +1,39 @@
 //HLSL(High-Level Shader Language): 
-//ê·¸ëž˜í”½ì¹´ë“œ ë©”ëª¨ë¦¬ì— ì €ìž¥ëœ íŠ¹ì • ë°ì´í„°ì— ëŒ€í•œ ì²˜ë¦¬ ë°©ì‹ì„ GPUì— ì§€ì‹œí•  ìˆ˜ ìžˆëŠ” ì…°ì´ë” ì œìž‘ìš© ì–¸ì–´.
+//±×·¡ÇÈÄ«µå ¸Þ¸ð¸®¿¡ ÀúÀåµÈ Æ¯Á¤ µ¥ÀÌÅÍ¿¡ ´ëÇÑ Ã³¸® ¹æ½ÄÀ» GPU¿¡ Áö½ÃÇÒ ¼ö ÀÖ´Â ¼ÎÀÌ´õ Á¦ÀÛ¿ë ¾ð¾î.
 
-//ì…°ì´ë” ê·œì¹™0: ë²„í…ìŠ¤ ì…°ì´ë”ëŠ” "_VS + (",í”½ì…€ ì…°ì´ë”ëŠ” "_PS + ("ê°€ ë¬¸ìžì—´ë‚´ë¶€ì— í¬í•¨ë˜ì–´ìžˆì–´ì•¼ í•œë‹¤.
-//ì…°ì´ë” ê·œì¹™1: ì…°ì´ë”íŒŒì¼ëª….hlsl íŒŒì¼ì€ ë°˜ë“œì‹œ ì…°ì´ë”íŒŒì¼ëª…_VS, ì…°ì´ë”íŒŒì¼ëª…_PSë¼ëŠ” ì´ë¦„ì˜ 
-// ë²„í…ìŠ¤ ì…°ì´ë”, í”½ì…€ ì…°ì´ë” í•œê°œì”©ë§Œì„ ê°€ì§ˆìˆ˜ ìžˆë‹¤. ê·¸ë¦¬ê³  "ì…°ì´ë”íŒŒì¼ëª….hlsl" ì´ë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ì €ìž¥ëœë‹¤. 
+//¼ÎÀÌ´õ ±ÔÄ¢0: ¹öÅØ½º ¼ÎÀÌ´õ´Â "_VS + (",ÇÈ¼¿ ¼ÎÀÌ´õ´Â "_PS + ("°¡ ¹®ÀÚ¿­³»ºÎ¿¡ Æ÷ÇÔµÇ¾îÀÖ¾î¾ß ÇÑ´Ù.
+//¼ÎÀÌ´õ ±ÔÄ¢1: ¼ÎÀÌ´õÆÄÀÏ¸í.hlsl ÆÄÀÏÀº ¹Ýµå½Ã ¼ÎÀÌ´õÆÄÀÏ¸í_VS, ¼ÎÀÌ´õÆÄÀÏ¸í_PS¶ó´Â ÀÌ¸§ÀÇ 
+// ¹öÅØ½º ¼ÎÀÌ´õ, ÇÈ¼¿ ¼ÎÀÌ´õ ÇÑ°³¾¿¸¸À» °¡Áú¼ö ÀÖ´Ù. ±×¸®°í "¼ÎÀÌ´õÆÄÀÏ¸í.hlsl" ÀÌ¶ó´Â ÀÌ¸§À¸·Î ÀúÀåµÈ´Ù. 
 
 #include "TransformHeader.hlsli"
 
 struct Input
 {
-    //ë©¤ë²„ë³€ìˆ˜ê°„ ìˆœì„œëŠ” ì „í˜€ ì¤‘ìš”í•˜ì§€ ì•Šë‹¤. ì¸í’‹ ë ˆì´ì•„ì›ƒì„ í†µí•´ ê° ë©¤ë²„ë³€ìˆ˜ì˜ ì˜¤í”„ì…‹ê°’ë§Œ ì •í™•ížˆ ì•Œë ¤ì£¼ë©´ ëœë‹¤.
-    //ë‹¨ì§€ íŽ¸ì˜ë¥¼ ìœ„í•´ì„œ ë˜ë„ë¡ ìˆœì„œë¥¼ ì§€í‚¬ ë¿ì´ë‹¤.
-    float4 pos_ : POSITION;
+    //¸â¹öº¯¼ö°£ ¼ø¼­´Â ÀüÇô Áß¿äÇÏÁö ¾Ê´Ù. ÀÎÇ² ·¹ÀÌ¾Æ¿ôÀ» ÅëÇØ °¢ ¸â¹öº¯¼öÀÇ ¿ÀÇÁ¼Â°ª¸¸ Á¤È®È÷ ¾Ë·ÁÁÖ¸é µÈ´Ù.
+    //´ÜÁö ÆíÀÇ¸¦ À§ÇØ¼­ µÇµµ·Ï ¼ø¼­¸¦ ÁöÅ³ »ÓÀÌ´Ù.
+    float4 pos_: POSITION;
 };
 
 struct Output
 {
-    //ì‹œë§¨í‹±(semantic). GPUì—ê²Œ ì•Œë ¤ì£¼ëŠ”, í•´ë‹¹ ê°’ì˜ ì¢…ë¥˜. GPUê°€ ìžë™ìœ¼ë¡œ ì²˜ë¦¬í•  ìˆ˜ ìžˆëŠ” ì¢…ë¥˜ì˜ ê°’ì´ë©´ ìžë™ìœ¼ë¡œ ì²˜ë¦¬í•´ì¤€ë‹¤.
-    float4 pos_ : SV_Position;
-    //SV_Position: ì´ ì‹œë§¨í‹±ì„ í†µí•´ì„œë§Œì´ ë²„í…ìŠ¤ ì…°ì´ë”ì—ì„œ ë³€ê²½ëœ ì •ì  ìœ„ì¹˜ë¥¼ ëž˜ìŠ¤í„°ë¼ì´ì €ë¡œ ì „ë‹¬í•´ ë·°í¬íŠ¸ë³€í™˜ì´ ì´ë£¨ì–´ì§„ë‹¤.
-    //SVëŠ” System-Value semanticì˜ ì•½ìžë¡œ, DirectX10ì—ì„œë¶€í„° ë„ìž…ëœ, ìš©ë„ê°€ ì •í•´ì ¸ ìžˆì–´ì„œ GPUê°€ ìžë™ìœ¼ë¡œ ì²˜ë¦¬í•˜ëŠ” ì‹œë§¨í‹± í‚¤ì›Œë“œì´ë‹¤.   
+    //½Ã¸ÇÆ½(semantic). GPU¿¡°Ô ¾Ë·ÁÁÖ´Â, ÇØ´ç °ªÀÇ Á¾·ù. GPU°¡ ÀÚµ¿À¸·Î Ã³¸®ÇÒ ¼ö ÀÖ´Â Á¾·ùÀÇ °ªÀÌ¸é ÀÚµ¿À¸·Î Ã³¸®ÇØÁØ´Ù.
+    float4 pos_ : SV_Position; 
+    //SV_Position: ÀÌ ½Ã¸ÇÆ½À» ÅëÇØ¼­¸¸ÀÌ ¹öÅØ½º ¼ÎÀÌ´õ¿¡¼­ º¯°æµÈ Á¤Á¡ À§Ä¡¸¦ ·¡½ºÅÍ¶óÀÌÀú·Î Àü´ÞÇØ ºäÆ÷Æ®º¯È¯ÀÌ ÀÌ·ç¾îÁø´Ù.
+    //SV´Â System-Value semanticÀÇ ¾àÀÚ·Î, DirectX10¿¡¼­ºÎÅÍ µµÀÔµÈ, ¿ëµµ°¡ Á¤ÇØÁ® ÀÖ¾î¼­ GPU°¡ ÀÚµ¿À¸·Î Ã³¸®ÇÏ´Â ½Ã¸ÇÆ½ Å°¿öµåÀÌ´Ù.   
     
 };
 
 Output Color_VS(Input _input)
 {
-    Output newOutput = (Output) 0; //Outputíƒ€ìž… ë³€ìˆ˜ newOutputì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”.
+    Output newOutput = (Output)0;  //OutputÅ¸ÀÔ º¯¼ö newOutputÀ» 0À¸·Î ÃÊ±âÈ­.
     
-    //HLSLì˜ ê²½ìš°ì—ëŠ” ëŒ€ë¶€ë¶„ì˜ ìƒí™©ì—ì„œ í˜•ë³€í™˜ì´ ê°€ëŠ¥í•˜ë‹¤.
+    //HLSLÀÇ °æ¿ì¿¡´Â ´ëºÎºÐÀÇ »óÈ²¿¡¼­ Çüº¯È¯ÀÌ °¡´ÉÇÏ´Ù.
 
-    newOutput.pos_ = mul(_input.pos_, worldViewProjectionMatrix_); //WVPí–‰ë ¬ ì ìš©.
+    newOutput.pos_ = mul(_input.pos_, worldViewProjectionMatrix_);  //WVPÇà·Ä Àû¿ë.
     
     
 
-    return newOutput;
+	return newOutput;
 }
 
 cbuffer ResultColor : register(b8)
@@ -42,21 +42,21 @@ cbuffer ResultColor : register(b8)
 }
 
 
-//ë²„í…ìŠ¤ ì…°ì´ë”ì˜ ë°˜í™˜ê°’ì€ ì›¬ë§Œí•˜ë©´ ìžë™ìœ¼ë¡œ í”½ì…€ì…°ì´ë”ì˜ ë§¤ê°œë³€ìˆ˜ë¡œ ë“¤ì–´ê°„ë‹¤.
-//ê±´ì ¸ë‚¸ í”½ì…€ ìˆ«ìžë§Œí¼ í˜¸ì¶œëœë‹¤.
-float4 Color_PS(Output _input) : SV_Target0
-//SV_Target[n]: ì´ ì…°ì´ë”ë¥¼ ê±°ì¹œ ê²°ê³¼ê°’ì´ në²ˆ ë Œë”íƒ€ê²Ÿì— ì €ìž¥ëœë‹¤ëŠ” ì˜ë¯¸ì˜ ì‹œë§¨í‹±.
+//¹öÅØ½º ¼ÎÀÌ´õÀÇ ¹ÝÈ¯°ªÀº À¢¸¸ÇÏ¸é ÀÚµ¿À¸·Î ÇÈ¼¿¼ÎÀÌ´õÀÇ ¸Å°³º¯¼ö·Î µé¾î°£´Ù.
+//°ÇÁ®³½ ÇÈ¼¿ ¼ýÀÚ¸¸Å­ È£ÃâµÈ´Ù.
+float4 Color_PS(Output _input) : SV_Target0 
+//SV_Target[n]: ÀÌ ¼ÎÀÌ´õ¸¦ °ÅÄ£ °á°ú°ªÀÌ n¹ø ·»´õÅ¸°Ù¿¡ ÀúÀåµÈ´Ù´Â ÀÇ¹ÌÀÇ ½Ã¸ÇÆ½.
 {
     return color_;
     
   
-    //ì› ê·¸ë¦¬ê¸°.
+    //¿ø ±×¸®±â.
     //if (0.5f < length(_input.posLocal_.xy))
     //{
     //    clip(-1);
     //}
     
-    //íƒ€ì› ê·¸ë¦¬ê¸°1.
+    //Å¸¿ø ±×¸®±â1.
     //if (0.5f < length(_input.pos2_.xy - f))
     //{
     //    clip(-1);
@@ -67,7 +67,7 @@ float4 Color_PS(Output _input) : SV_Target0
     //}
     
     
-    //íƒ€ì› ê·¸ë¦¬ê¸°2.
+    //Å¸¿ø ±×¸®±â2.
     //if (0.5f < length(_input.pos2_.xy - float2(0.2f, 0.f)))
     //{
     //    clip(-1);

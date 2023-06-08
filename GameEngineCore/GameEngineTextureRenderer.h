@@ -5,16 +5,16 @@
 
 enum class PivotMode
 {
-	Top,		//ìƒë‹¨ì¤‘ì•™.
-	Center,		//ì¤‘ì‹¬.
-	Bot,		//í•˜ë‹¨ì¤‘ì•™.
-	Left,		//ì¢Œì¸¡ì¤‘ì•™.
-	Right,		//ìš°ì¸¡ì¤‘ì•™.
-	LeftTop,	//ì¢Œìƒë‹¨.
-	RightTop,	//ìš°ìƒë‹¨.
-	LeftBot,	//ì¢Œí•˜ë‹¨.
-	RightBot,	//ìš°í•˜ë‹¨.
-	Custom,		//ì„ì˜ì§€ì .
+	Top,		//»ó´ÜÁß¾Ó.
+	Center,		//Áß½É.
+	Bot,		//ÇÏ´ÜÁß¾Ó.
+	Left,		//ÁÂÃøÁß¾Ó.
+	Right,		//¿ìÃøÁß¾Ó.
+	LeftTop,	//ÁÂ»ó´Ü.
+	RightTop,	//¿ì»ó´Ü.
+	LeftBot,	//ÁÂÇÏ´Ü.
+	RightBot,	//¿ìÇÏ´Ü.
+	Custom,		//ÀÓÀÇÁöÁ¡.
 	None
 };
 
@@ -26,23 +26,23 @@ enum class ScaleMode
 
 class FrameAnimation_Desc
 {
-	//í”„ë ˆì„ ì• ë‹ˆë©”ì´ì…˜ ìƒì„±ì— í•„ìš”í•œ ê°ì¢… ìƒì„¸ì •ë³´ë“¤ì„ ëª¨ì•„ì„œ ì €ì¥, ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤.
+	//ÇÁ·¹ÀÓ ¾Ö´Ï¸ŞÀÌ¼Ç »ı¼º¿¡ ÇÊ¿äÇÑ °¢Á¾ »ó¼¼Á¤º¸µéÀ» ¸ğ¾Æ¼­ ÀúÀå, °ü¸®ÇÏ´Â Å¬·¡½º.
 public:
 	class GameEngineTextureRenderer* parentRenderer_;
 
 	std::string textureName_;
 
-	std::vector<UINT> frames_;	//ì¬ìƒí•  í”„ë ˆì„ ë²ˆí˜¸ ìˆœì„œ.
+	std::vector<UINT> frames_;	//Àç»ıÇÒ ÇÁ·¹ÀÓ ¹øÈ£ ¼ø¼­.
 
-	UINT curFrame_;	//í˜„ì¬ í”„ë ˆì„ ì¸ë±ìŠ¤.
+	UINT curFrame_;	//ÇöÀç ÇÁ·¹ÀÓ ÀÎµ¦½º.
 
-	float curframeTime_;//í˜„ì¬í”„ë ˆì„ ì§€ë‚œ ì‹œê°„.
+	float curframeTime_;//ÇöÀçÇÁ·¹ÀÓ Áö³­ ½Ã°£.
 
-	float interval_;	//í”„ë ˆì„ê°„ ì‹œê°„ê°„ê²©.
+	float interval_;	//ÇÁ·¹ÀÓ°£ ½Ã°£°£°İ.
 
-	bool isLoop_;		//true == ì• ë‹ˆë©”ì´ì…˜ ë¬´í•œë°˜ë³µ. false == 1íšŒë°˜ë³µ í›„ ë§ˆì§€ë§‰í”„ë ˆì„ì—ì„œ ì •ì§€.
+	bool isLoop_;		//true == ¾Ö´Ï¸ŞÀÌ¼Ç ¹«ÇÑ¹İº¹. false == 1È¸¹İº¹ ÈÄ ¸¶Áö¸·ÇÁ·¹ÀÓ¿¡¼­ Á¤Áö.
 
-	float playTime_;	//ì—¬íƒœê¹Œì§€ ì• ë‹ˆë©”ì´ì…˜ì´ ì¬ìƒëœ ì‹œê°„.
+	float playTime_;	//¿©ÅÂ±îÁö ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ Àç»ıµÈ ½Ã°£.
 
 	FrameAnimation_Desc()
 		: parentRenderer_(nullptr),
@@ -104,27 +104,27 @@ public:
 class GameEngineFolderTexture;
 class FrameAnimation
 {
-	//í”„ë ˆì„ í…ìŠ¤ì³ ë° ì• ë‹ˆë©”ì´ì…˜ ë Œë”ë§ í´ë˜ìŠ¤.
+	//ÇÁ·¹ÀÓ ÅØ½ºÃÄ ¹× ¾Ö´Ï¸ŞÀÌ¼Ç ·»´õ¸µ Å¬·¡½º.
 
 	friend class GameEngineTextureRenderer;
 	//
 
-	FrameAnimation_Desc info_;	//ì• ë‹ˆë©”ì´ì…˜ ìƒì„±ì‹œ í•„ìš”í•œ ìƒì„¸ì •ë³´ ëª¨ìŒ.
+	FrameAnimation_Desc info_;	//¾Ö´Ï¸ŞÀÌ¼Ç »ı¼º½Ã ÇÊ¿äÇÑ »ó¼¼Á¤º¸ ¸ğÀ½.
 
-	GameEngineTextureRenderer* parentRenderer_;	//ë¶€ëª¨ ë Œë”ëŸ¬.
+	GameEngineTextureRenderer* parentRenderer_;	//ºÎ¸ğ ·»´õ·¯.
 
-	GameEngineTexture* cutTexture_;			//ë‹¨ì¼ í…ìŠ¤ì³.			
-	GameEngineFolderTexture* folderTexture_;	//í´ë”ë‹¨ìœ„ í…ìŠ¤ì³ë“¤ ëª¨ìŒ.
-	//ë‘ê°œê°€ ë™ì‹œì— ì‚¬ìš©ë˜ëŠ” ê²½ìš°ëŠ” ì—†ìŒ!
+	GameEngineTexture* cutTexture_;			//´ÜÀÏ ÅØ½ºÃÄ.			
+	GameEngineFolderTexture* folderTexture_;	//Æú´õ´ÜÀ§ ÅØ½ºÃÄµé ¸ğÀ½.
+	//µÎ°³°¡ µ¿½Ã¿¡ »ç¿ëµÇ´Â °æ¿ì´Â ¾øÀ½!
 
 	bool bOnceStart_;
 	bool bOnceEnd_;
-	bool isPaused_;	//true: ì¼ì‹œì •ì§€.
+	bool isPaused_;	//true: ÀÏ½ÃÁ¤Áö.
 
-	std::function<void(const FrameAnimation_Desc&)> start_;		//ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ ì‹œì‘ì‹œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜ë“¤.
-	std::function<void(const FrameAnimation_Desc&)> frame_;		//ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒì¤‘ ë§¤ í”„ë ˆì„ë§ˆë‹¤ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜ë“¤.
-	std::function<void(const FrameAnimation_Desc&, float)> time_;	//ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒì¤‘ ì¼ì • ì‹œê°„ í›„ì— í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜ë“¤.
-	std::function<void(const FrameAnimation_Desc&)> end_;			//ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ ì¢…ë£Œì‹œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜ë“¤.
+	std::function<void(const FrameAnimation_Desc&)> start_;		//¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ½ÃÀÛ½Ã È£ÃâµÇ´Â ÇÔ¼öµé.
+	std::function<void(const FrameAnimation_Desc&)> frame_;		//¾Ö´Ï¸ŞÀÌ¼Ç Àç»ıÁß ¸Å ÇÁ·¹ÀÓ¸¶´Ù È£ÃâµÇ´Â ÇÔ¼öµé.
+	std::function<void(const FrameAnimation_Desc&, float)> time_;	//¾Ö´Ï¸ŞÀÌ¼Ç Àç»ıÁß ÀÏÁ¤ ½Ã°£ ÈÄ¿¡ È£ÃâµÇ´Â ÇÔ¼öµé.
+	std::function<void(const FrameAnimation_Desc&)> end_;			//¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı Á¾·á½Ã È£ÃâµÇ´Â ÇÔ¼öµé.
 
 	void Reset();
 	void Update(float _deltaTime);
@@ -146,7 +146,7 @@ public:
 class GameEngineTexture;
 class GameEngineTextureRenderer : public GameEngineDefaultRenderer
 {
-	//íŠ¹ì • í…ìŠ¤ì²˜ë‚˜ ê·¸ í…ìŠ¤ì²˜ë¡œ ë§Œë“  ì• ë‹ˆë©”ì´ì…˜ì„ ë Œë”ë§í•˜ëŠ” ë Œë”ëŸ¬.
+	//Æ¯Á¤ ÅØ½ºÃ³³ª ±× ÅØ½ºÃ³·Î ¸¸µç ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ·»´õ¸µÇÏ´Â ·»´õ·¯.
 
 	friend FrameAnimation;
 	//
@@ -166,13 +166,13 @@ private:
 
 
 public:
-	void SetTexture(const std::string_view& _textureName);	//í´ë”í…ìŠ¤ì²˜ìš©.
-	void SetTexture(GameEngineTexture* _texture);		//í´ë”í…ìŠ¤ì²˜ìš©.
+	void SetTexture(const std::string_view& _textureName);	//Æú´õÅØ½ºÃ³¿ë.
+	void SetTexture(GameEngineTexture* _texture);		//Æú´õÅØ½ºÃ³¿ë.
 	void SetFolderTextureToIndex(const std::string_view& _textureName, UINT _index);
-	void SetTexture(const std::string_view& _textureName, int _index);	//ì•„í‹€ë¼ìŠ¤í…ìŠ¤ì²˜ìš©.
-	void SetTexture(GameEngineTexture* _texture, int _index);		//ì•„í‹€ë¼ìŠ¤í…ìŠ¤ì²˜ìš©.
+	void SetTexture(const std::string_view& _textureName, int _index);	//¾ÆÆ²¶ó½ºÅØ½ºÃ³¿ë.
+	void SetTexture(GameEngineTexture* _texture, int _index);		//¾ÆÆ²¶ó½ºÅØ½ºÃ³¿ë.
 
-	void SetFrame(int _index);	//ì• ë‹ˆë©”ì´ì…˜ì˜ íŠ¹ì • í”„ë ˆì„ ì§€ì •.
+	void SetFrame(int _index);	//¾Ö´Ï¸ŞÀÌ¼ÇÀÇ Æ¯Á¤ ÇÁ·¹ÀÓ ÁöÁ¤.
 
 	void SetPivot();
 	void SetPivot(PivotMode _pivot);
@@ -184,12 +184,12 @@ public:
 
 	void ChangeFrameAnimation(const std::string_view& _animationName, bool _isForcedChange = false);
 
-	void ScaleToTexture();	//í…ìŠ¤ì²˜ í¬ê¸°ì— ë©”ì‰¬ ìŠ¤ì¼€ì¼ì„ ìë™ìœ¼ë¡œ ë§ì¶°ì£¼ëŠ” í•¨ìˆ˜.
+	void ScaleToTexture();	//ÅØ½ºÃ³ Å©±â¿¡ ¸Ş½¬ ½ºÄÉÀÏÀ» ÀÚµ¿À¸·Î ¸ÂÃçÁÖ´Â ÇÔ¼ö.
 
-	void ScaleToCutTexture(int _index);		//ì˜ë¦° í…ìŠ¤ì²˜ í¬ê¸°ì— ë©”ì‰¬ ìŠ¤ì¼€ì¼ì„ ìë™ìœ¼ë¡œ ë§ì¶°ì£¼ëŠ” í•¨ìˆ˜.
+	void ScaleToCutTexture(int _index);		//Àß¸° ÅØ½ºÃ³ Å©±â¿¡ ¸Ş½¬ ½ºÄÉÀÏÀ» ÀÚµ¿À¸·Î ¸ÂÃçÁÖ´Â ÇÔ¼ö.
 
 	void CurAnimationReset();
-	void CurAnimationSetStartPivotFrame(int _setFrame);	//ì• ë‹ˆë©”ì´ì…˜ ì¤‘ ë‚´ê°€ ì›í•˜ëŠ” í”„ë ˆì„ìœ¼ë¡œ ì˜®ê¸°ëŠ” í•¨ìˆ˜.
+	void CurAnimationSetStartPivotFrame(int _setFrame);	//¾Ö´Ï¸ŞÀÌ¼Ç Áß ³»°¡ ¿øÇÏ´Â ÇÁ·¹ÀÓÀ¸·Î ¿Å±â´Â ÇÔ¼ö.
 
 	void CurAnimationPauseSwitch();
 	void CurAnimationPauseOn();
@@ -198,7 +198,7 @@ public:
 
 	GameEngineTexture* GetCurrentTexture() const;
 
-	//í…ìŠ¤ì²˜ë Œë”ëŸ¬ë¥¼ ì´ˆê¸°í™”í•˜ëŠ” í•¨ìˆ˜. ë§ˆí…Œë¦¬ì–¼ ì¬ì„¤ì •ë„ ì—¬ê¸°ì„œ í•œë‹¤.
+	//ÅØ½ºÃ³·»´õ·¯¸¦ ÃÊ±âÈ­ÇÏ´Â ÇÔ¼ö. ¸¶Å×¸®¾ó Àç¼³Á¤µµ ¿©±â¼­ ÇÑ´Ù.
 	void Initialize(const std::string_view& _materialName);
 
 public:
@@ -211,7 +211,7 @@ public:
 
 		if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 		{
-			MsgBoxAssertString(std::string(_animationName) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì• ë‹ˆë©”ì´ì…˜ì´ ì—†ìŠµë‹ˆë‹¤.");
+			MsgBoxAssertString(std::string(_animationName) + ": ±×·± ÀÌ¸§ÀÇ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ¾ø½À´Ï´Ù.");
 			return;
 		}
 
@@ -226,7 +226,7 @@ public:
 
 		if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 		{
-			MsgBoxAssertString(std::string(_animationName) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì• ë‹ˆë©”ì´ì…˜ì´ ì—†ìŠµë‹ˆë‹¤.");
+			MsgBoxAssertString(std::string(_animationName) + ": ±×·± ÀÌ¸§ÀÇ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ¾ø½À´Ï´Ù.");
 			return;
 		}
 
@@ -241,7 +241,7 @@ public:
 
 		if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 		{
-			MsgBoxAssertString(std::string(_animationName) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì• ë‹ˆë©”ì´ì…˜ì´ ì—†ìŠµë‹ˆë‹¤.");
+			MsgBoxAssertString(std::string(_animationName) + ": ±×·± ÀÌ¸§ÀÇ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ¾ø½À´Ï´Ù.");
 			return;
 		}
 
@@ -256,7 +256,7 @@ public:
 
 		if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 		{
-			MsgBoxAssertString(std::string(_animationName) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì• ë‹ˆë©”ì´ì…˜ì´ ì—†ìŠµë‹ˆë‹¤.");
+			MsgBoxAssertString(std::string(_animationName) + ": ±×·± ÀÌ¸§ÀÇ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ¾ø½À´Ï´Ù.");
 			return;
 		}
 
@@ -282,7 +282,7 @@ public:
 	{
 		return pixelDataInst_;
 	}
-
+	
 	AtlasData& GetAtlasData()
 	{
 		return atlasDataInst_;
@@ -301,17 +301,17 @@ private:
 	void ResetFrameData();
 
 private:
-	PivotMode pivotMode_;				//í˜„ì¬ ì‚¬ìš©ì¤‘ì¸ í…ìŠ¤ì²˜ì˜ ë Œë”ë§ ê¸°ì¤€ì .
-	GameEngineTexture* currentTexture_;	//í˜„ì¬ ì‚¬ìš©ì¤‘ì¸ í…ìŠ¤ì²˜.					
+	PivotMode pivotMode_;				//ÇöÀç »ç¿ëÁßÀÎ ÅØ½ºÃ³ÀÇ ·»´õ¸µ ±âÁØÁ¡.
+	GameEngineTexture* currentTexture_;	//ÇöÀç »ç¿ëÁßÀÎ ÅØ½ºÃ³.					
 
-	std::map<std::string, FrameAnimation> allAnimations_;	//<-ì™œ ì• ë‹ˆë©”ì´ì…˜ì„ ê°’í˜•ìœ¼ë¡œ ì €ì¥??
+	std::map<std::string, FrameAnimation> allAnimations_;	//<-¿Ö ¾Ö´Ï¸ŞÀÌ¼ÇÀ» °ªÇüÀ¸·Î ÀúÀå??
 	FrameAnimation* currentAnimation_;
 
 	ScaleMode scaleMode_;
 	float scaleRatio_;
 
 	PixelData pixelDataInst_;
-	AtlasData atlasDataInst_;		//í˜„ì¬ ì‚¬ìš©ì¤‘ì¸ í…ìŠ¤ì²˜ì—ì„œ ë Œë”ë§ë˜ëŠ” ë²”ìœ„ ì •ë³´ì™€ í…ìŠ¤ì²˜ë¥¼ ê·¸ë¦´ í”¼ë´‡ ì •ë³´ë¥¼ ê°€ì§„ ë³€ìˆ˜. 
+	AtlasData atlasDataInst_;		//ÇöÀç »ç¿ëÁßÀÎ ÅØ½ºÃ³¿¡¼­ ·»´õ¸µµÇ´Â ¹üÀ§ Á¤º¸¿Í ÅØ½ºÃ³¸¦ ±×¸± ÇÇº¿ Á¤º¸¸¦ °¡Áø º¯¼ö. 
 
 };
 

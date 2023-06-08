@@ -4,7 +4,7 @@
 #include "portable-file-dialogs.h"
 
 //Forward declare message handler from imgui_impl_win32.cpp
-//->imgui_impl_win32.cppì— ìžˆëŠ” ë©”ì„¸ì§€ í•¸ë“¤ëŸ¬ì˜ ì „ë°©ì„ ì–¸.
+//->imgui_impl_win32.cpp¿¡ ÀÖ´Â ¸Þ¼¼Áö ÇÚµé·¯ÀÇ Àü¹æ¼±¾ð.
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 void GameEngineGUIWindow::Begin()
@@ -43,7 +43,7 @@ void GameEngineGUI::Render(GameEngineLevel* _level, float _deltaTime)
     // Start the Dear ImGui frame
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
-    ImGui::NewFrame();  //<-ImGUI ë Œë”ë§ ì‹œìž‘ í•¨ìˆ˜??
+    ImGui::NewFrame();  //<-ImGUI ·»´õ¸µ ½ÃÀÛ ÇÔ¼ö??
 
 
 
@@ -51,9 +51,9 @@ void GameEngineGUI::Render(GameEngineLevel* _level, float _deltaTime)
     {
         if (true == singleGuiWindow->IsUpdate())
         {
-            singleGuiWindow->Begin();         //í•„ìš”í•œ ImGUIê´€ë ¨ ë Œë”ë§ ì •ë³´ëŠ” ì´ ì•„ëž˜ë¡œ.
+            singleGuiWindow->Begin();         //ÇÊ¿äÇÑ ImGUI°ü·Ã ·»´õ¸µ Á¤º¸´Â ÀÌ ¾Æ·¡·Î.
             singleGuiWindow->OnGUI(_level, _deltaTime);
-            singleGuiWindow->End();       //í•„ìš”í•œ ImGUIê´€ë ¨ ë Œë”ë§ ì •ë³´ëŠ” ì´ ìœ„ë¡œ.
+            singleGuiWindow->End();       //ÇÊ¿äÇÑ ImGUI°ü·Ã ·»´õ¸µ Á¤º¸´Â ÀÌ À§·Î.
         }
     }
 

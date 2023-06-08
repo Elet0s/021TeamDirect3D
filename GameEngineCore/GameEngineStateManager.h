@@ -3,8 +3,8 @@
 class StateInfo
 {
 public:
-	float stateTime_;	//ì´ ìŠ¤í…Œì´íŠ¸ê°€ ì§€ê¸ˆê¹Œì§€ ì–¼ë§ˆë‚˜ ì˜¤ë˜ ì§€ì†ë˜ì—ˆë‚˜.
-	std::string prevState_;	//ì´ì „ ìŠ¤í…Œì´íŠ¸ëŠ” ë­ì˜€ë‚˜.
+	float stateTime_;	//ÀÌ ½ºÅ×ÀÌÆ®°¡ Áö±İ±îÁö ¾ó¸¶³ª ¿À·¡ Áö¼ÓµÇ¾ú³ª.
+	std::string prevState_;	//ÀÌÀü ½ºÅ×ÀÌÆ®´Â ¹¹¿´³ª.
 
 	StateInfo() : stateTime_(0.f), prevState_("")
 	{
@@ -39,7 +39,7 @@ private:
 	std::function<void(const StateInfo&)> end_;
 };
 
-class GameEngineStateManager final	//final: <-ì´ ë°‘ìœ¼ë¡œ ì¶”ê°€ ìƒì† ë¶ˆê°€.
+class GameEngineStateManager final	//final: <-ÀÌ ¹ØÀ¸·Î Ãß°¡ »ó¼Ó ºÒ°¡.
 {
 	//
 public:
@@ -65,7 +65,7 @@ public:
 	{
 		if (allStates_.end() != allStates_.find(_stateName))
 		{
-			MsgBoxAssertString(_stateName + ": ì´ë¯¸ ê°™ì€ ì´ë¦„ì˜ ìŠ¤í…Œì´íŠ¸ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
+			MsgBoxAssertString(_stateName + ": ÀÌ¹Ì °°Àº ÀÌ¸§ÀÇ ½ºÅ×ÀÌÆ®°¡ Á¸ÀçÇÕ´Ï´Ù.");
 			return;
 		}
 
@@ -76,12 +76,12 @@ public:
 		{
 			newState.update_ = _update;
 		}	
-
+		
 		if (nullptr != _start)
 		{
 			newState.start_ = _start;
 		}	
-
+		
 		if (nullptr != _end)
 		{
 			newState.end_ = _end;
@@ -93,7 +93,7 @@ public:
 	{
 		if (allStates_.end() == allStates_.find(_stateName))
 		{
-			MsgBoxAssertString(_stateName + ": ê·¸ëŸ° ì´ë¦„ì˜ ìŠ¤í…Œì´íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
+			MsgBoxAssertString(_stateName + ": ±×·± ÀÌ¸§ÀÇ ½ºÅ×ÀÌÆ®°¡ ¾ø½À´Ï´Ù.");
 			return;
 		}
 

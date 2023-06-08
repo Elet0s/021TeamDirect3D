@@ -31,7 +31,7 @@ bool GameEngineCore::ChangeLevel(const std::string& _levelName)
 	nextLevel_ = FindLevel(uppercaseLevelName);
 	if (nullptr == nextLevel_)
 	{
-		MsgBoxAssertString(_levelName + ": ê·¸ëŸ° ì´ë¦„ì˜ ë ˆë²¨ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(_levelName + ": ±×·± ÀÌ¸§ÀÇ ·¹º§ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return false;
 	}
 	else
@@ -43,42 +43,42 @@ bool GameEngineCore::ChangeLevel(const std::string& _levelName)
 void GameEngineCore::Start(const std::string& _title, GameEngineCore* _userCore)
 {
 	GameEngineWindow::GetInst().CreateGameWindow(nullptr, _title.c_str());
-	//ìœˆë„ìš° í•¸ë“¤ ìƒì„±.
+	//À©µµ¿ì ÇÚµé »ı¼º.
 
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition(
 		_userCore->StartWindowPosition(), _userCore->StartWindowSize());
-	//ìœˆë„ìš° ìƒì„± ìœ„ì¹˜ì™€ í¬ê¸° ì¡°ì •.
+	//À©µµ¿ì »ı¼º À§Ä¡¿Í Å©±â Á¶Á¤.
 
 	GameEngineWindow::GetInst().ShowGameWindow();
-	//ìœˆë„ìš° ìƒì„±.
-
+	//À©µµ¿ì »ı¼º.
+	
 	GameEngineDevice::Initialize();
-	//ë‹¤ì´ë ‰íŠ¸x ë””ë°”ì´ìŠ¤, DC, ìŠ¤ì™‘ì²´ì¸ ìƒì„±.
+	//´ÙÀÌ·ºÆ®x µğ¹ÙÀÌ½º, DC, ½º¿ÒÃ¼ÀÎ »ı¼º.
 
 	GameEngineWindow::GetInst().MessageLoop(
 		std::bind(&GameEngineCore::StartCore, _userCore),
 		std::bind(&GameEngineCore::UpdateCore, _userCore),
 		std::bind(&GameEngineCore::EndCore, _userCore)
 	);
-	//ê²Œì„ êµ¬ë™.
+	//°ÔÀÓ ±¸µ¿.
 
 }
 
 void GameEngineCore::StartCore(GameEngineCore* _userCore)
 {
 	InitializeEngineResource();
-	//ì—”ì§„ì½”ì–´ ì´ˆê¸°í™” ë° ê°ì¢… ì—”ì§„ ë¦¬ì†ŒìŠ¤ ì¤€ë¹„.
-	//ìœ ì €ì½”ì–´ì˜ ìŠ¤íƒ€íŠ¸ ì´ì „ì— ì—”ì§„ ë¦¬ì†ŒìŠ¤ ì¤€ë¹„ê°€ ëë‚˜ìˆì–´ì•¼ í•œë‹¤.
+	//¿£ÁøÄÚ¾î ÃÊ±âÈ­ ¹× °¢Á¾ ¿£Áø ¸®¼Ò½º ÁØºñ.
+	//À¯ÀúÄÚ¾îÀÇ ½ºÅ¸Æ® ÀÌÀü¿¡ ¿£Áø ¸®¼Ò½º ÁØºñ°¡ ³¡³ªÀÖ¾î¾ß ÇÑ´Ù.
 
-	engineThreadPool_.Initialize("GameEngineThread");	//ì—”ì§„ ê¸°ë³¸ì œê³µ ìŠ¤ë ˆë“œí’€ ì¤€ë¹„.
+	engineThreadPool_.Initialize("GameEngineThread");	//¿£Áø ±âº»Á¦°ø ½º·¹µåÇ® ÁØºñ.
 
 	GameEngineDevice::CreateSwapChain();
-	//ìŠ¤ì™‘ì²´ì¸ ìƒì„±.
+	//½º¿ÒÃ¼ÀÎ »ı¼º.
 
 	GameEngineDebug::Debug3DInitialize();
 
 	GameEngineGUI::Initialize();
-	//ImGUI ì´ˆê¸°í™”.
+	//ImGUI ÃÊ±âÈ­.
 
 	_userCore->Start();
 }
@@ -92,7 +92,7 @@ void GameEngineCore::UpdateCore(GameEngineCore* _userCore)
 		{
 			currentLevel_->ActorLevelEndEvent();
 			currentLevel_->LevelEndEvent();
-			currentLevel_->OverChildMove(nextLevel_);	//ì›í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ë¥¼ ë‹¤ìŒ ë ˆë²¨ë¡œ ë„˜ê¸´ë‹¤. 
+			currentLevel_->OverChildMove(nextLevel_);	//¿øÇÏ´Â ¿ÀºêÁ§Æ®¸¦ ´ÙÀ½ ·¹º§·Î ³Ñ±ä´Ù. 
 		}
 		currentLevel_ = nextLevel_;
 		nextLevel_ = nullptr;
@@ -106,7 +106,7 @@ void GameEngineCore::UpdateCore(GameEngineCore* _userCore)
 
 	if (nullptr == currentLevel_)
 	{
-		MsgBoxAssert("currentLevel_ì´ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("currentLevel_ÀÌ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -143,10 +143,10 @@ void GameEngineCore::EndCore(GameEngineCore* _userCore)
 	}
 
 	GameEngineGUI::Destroy();
-	//í…ìŠ¤ì²˜ ë“±ì˜ ë¦¬ì†ŒìŠ¤ë¥¼ ì“¸ ìˆ˜ë„ ìˆìœ¼ë‹ˆ ë¦¬ì†ŒìŠ¤ë³´ë‹¤ ë¨¼ì € íŒŒê´´í•œë‹¤.
+	//ÅØ½ºÃ³ µîÀÇ ¸®¼Ò½º¸¦ ¾µ ¼öµµ ÀÖÀ¸´Ï ¸®¼Ò½ºº¸´Ù ¸ÕÀú ÆÄ±«ÇÑ´Ù.
 
 	GameEngineDebug::Debug3DDestroy();
-	//ë™ì í• ë‹¹ìœ¼ë¡œ ìƒì„±í•œ ë Œë”ìœ ë‹›ë“¤ì„ íŒŒê´´í•œë‹¤.
+	//µ¿ÀûÇÒ´çÀ¸·Î »ı¼ºÇÑ ·»´õÀ¯´ÖµéÀ» ÆÄ±«ÇÑ´Ù.
 
 	DestroyEngineResource();
 
@@ -172,13 +172,13 @@ void GameEngineCore::InitializeLevel(GameEngineLevel* _level, const std::string&
 
 	std::pair<std::map<std::string, GameEngineLevel*>::iterator, bool> insertResult = 
 		allLevels_.insert(std::make_pair(_levelName, _level));
-	//make_pair()ê°€ std::pairë¥¼ í•œê°œ ë§Œë“œëŠ” ì‹œê°„ ë•Œë¬¸ì— value_type()ë³´ë‹¤ ì•½ê°„ ëŠë¦¬ì§€ë§Œ,
-	//ì• ì´ˆì— ì‹œì‘í• ë•Œ í•œë²ˆë§Œ ì‹¤í–‰í•  ì½”ë“œì´ë©°, ë§µìœ¼ë¡œ ë³´ê´€í•œë‹¤ëŠ” ê²ƒ ìì²´ê°€ ë§ì´ ë°˜ë³µí•˜ì§€ ì•ŠëŠ”ë‹¤ëŠ” ì˜ë¯¸ì´ë¯€ë¡œ í° ì°¨ì´ê°€ ë‚˜ì§€ ì•ŠëŠ”ë‹¤.
-	//ê·¸ëŸ¬ë¯€ë¡œ ë” ì§§ê³  ê°€ë…ì„± ì¢‹ì€ make_pairë¡œ ë‰´ë ˆë²¨ì„ ì €ì¥í•œë‹¤.
+	//make_pair()°¡ std::pair¸¦ ÇÑ°³ ¸¸µå´Â ½Ã°£ ¶§¹®¿¡ value_type()º¸´Ù ¾à°£ ´À¸®Áö¸¸,
+	//¾ÖÃÊ¿¡ ½ÃÀÛÇÒ¶§ ÇÑ¹ø¸¸ ½ÇÇàÇÒ ÄÚµåÀÌ¸ç, ¸ÊÀ¸·Î º¸°üÇÑ´Ù´Â °Í ÀÚÃ¼°¡ ¸¹ÀÌ ¹İº¹ÇÏÁö ¾Ê´Â´Ù´Â ÀÇ¹ÌÀÌ¹Ç·Î Å« Â÷ÀÌ°¡ ³ªÁö ¾Ê´Â´Ù.
+	//±×·¯¹Ç·Î ´õ Âª°í °¡µ¶¼º ÁÁÀº make_pair·Î ´º·¹º§À» ÀúÀåÇÑ´Ù.
 
 	if (false == insertResult.second)
 	{
-		MsgBoxAssertString(_levelName + ": ê°™ì€ ì´ë¦„ì˜ ë ˆë²¨ì´ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤.");
+		MsgBoxAssertString(_levelName + ": °°Àº ÀÌ¸§ÀÇ ·¹º§ÀÌ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
 		return;
 	}
 }

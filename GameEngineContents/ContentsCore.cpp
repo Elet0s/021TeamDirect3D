@@ -41,12 +41,12 @@ void ContentsCore::Start()
 	LoadContentsResource();
 	LoadContentsShader();
 
-	//GameEngineDebug::ConsoleOpen(); ì½˜ì†”ì°½ì´ í•„ìš”í•˜ë©´ ë³µì›.
+	//GameEngineDebug::ConsoleOpen(); ÄÜ¼ÖÃ¢ÀÌ ÇÊ¿äÇÏ¸é º¹¿ø.
 
-	//RTTI(Run-Time Type information): ëŸ°íƒ€ì„ í˜•ì‹ ì •ë³´. 
-	//í”„ë¡œê·¸ë¨ ì‹¤í–‰ ì¤‘ê°„ì— ë°ì´í„° íƒ€ì…ì„ ë°›ì•„ì˜¤ëŠ” ë°©ë²•. 
+	//RTTI(Run-Time Type information): ·±Å¸ÀÓ Çü½Ä Á¤º¸. 
+	//ÇÁ·Î±×·¥ ½ÇÇà Áß°£¿¡ µ¥ÀÌÅÍ Å¸ÀÔÀ» ¹Ş¾Æ¿À´Â ¹æ¹ı. 
 
-	ShowCursor(false); //ë§ˆìš°ìŠ¤ ê°ì¶”ê¸°
+	ShowCursor(false); //¸¶¿ì½º °¨Ãß±â
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<TestLevel>("Test");
@@ -92,7 +92,7 @@ void ContentsCore::LoadContentsShader()
 	}
 	else
 	{
-		MsgBoxAssertString(std::string("ContentsResources") + "ê·¸ëŸ° ì´ë¦„ì˜ ë””ë ‰í† ë¦¬ê°€ ì—†ìŠµë‹ˆë‹¤. ë””ë ‰í† ë¦¬ëª…ì„ í™•ì¸í•˜ì„¸ìš”.");
+		MsgBoxAssertString(std::string("ContentsResources") + "±×·± ÀÌ¸§ÀÇ µğ·ºÅä¸®°¡ ¾ø½À´Ï´Ù. µğ·ºÅä¸®¸íÀ» È®ÀÎÇÏ¼¼¿ä.");
 		return;
 	}
 
@@ -334,7 +334,7 @@ void ContentsCore::LoadContentsResource()
 	GameEngineTexture::Cut("PlayerIdle.png", 11, 1);
 	GameEngineTexture::Cut("PlayerRun.png", 10, 1);
 
-	GameEngineFont::Load("ê¶ì„œ");
-	GameEngineFont::Load("ë§‘ìŒ");
+	GameEngineFont::Load("±Ã¼­");
+	GameEngineFont::Load("¸¼À½");
 	GameEngineFont::Load("Free Pixel");
 }

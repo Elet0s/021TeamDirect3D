@@ -4,7 +4,7 @@
 
 StoneSkin::StoneSkin() 
 {
-	name_ = "ë‹¨ë‹¨í•œ í”¼ë¶€";
+	name_ = "´Ü´ÜÇÑ ÇÇºÎ";
 	SetName(std::string_view("StoneSkin"));
 	myRank_ = Rank::Spotted;
 	maxLevel_ = 999;
@@ -21,7 +21,7 @@ void StoneSkin::Init()
 	std::string sDef = std::to_string(PlayerInfo_.def_).substr(0, std::to_string(PlayerInfo_.def_).find(".") + 3);
 	std::string sDefNext = std::to_string(PlayerInfo_.def_ + 0.25f).substr(0, std::to_string(PlayerInfo_.def_ + 0.25f).find(".") + 3);
 
-	etc_ = sDef + " -> " + sDefNext + " ë°©ì–´ë ¥ ";
+	etc_ = sDef + " -> " + sDefNext + " ¹æ¾î·Â ";
 }
 
 void StoneSkin::Effect()

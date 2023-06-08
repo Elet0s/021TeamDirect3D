@@ -4,7 +4,7 @@
 
 Student::Student() 
 {
-	name_ = "í•™ìƒ";
+	name_ = "ÇĞ»ı";
 	SetName(std::string_view("Student"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 3;
@@ -23,7 +23,7 @@ void Student::Init()
 
 
 
-	etc_ = sExpMul + "% -> " + sExpMulNext + "% ê²½í—˜ì¹˜\në°°ìˆ˜ ";
+	etc_ = sExpMul + "% -> " + sExpMulNext + "% °æÇèÄ¡\n¹è¼ö ";
 }
 
 void Student::Effect()

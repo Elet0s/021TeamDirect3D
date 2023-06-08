@@ -4,7 +4,7 @@
 
 class GameEngineBlur : public GameEnginePostEffect
 {
-	//ì´ í´ë˜ìŠ¤ì˜ ì¡´ì¬ ì´ìœ :
+	//ÀÌ Å¬·¡½ºÀÇ Á¸Àç ÀÌÀ¯:
 public:
 	GameEngineBlur();
 	~GameEngineBlur();

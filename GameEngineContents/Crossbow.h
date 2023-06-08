@@ -1,7 +1,7 @@
 #pragma once
 #include"Skill.h"
 #include"Monster.h"
-//ê°€ì¥ ì²´ë ¥ì´ ë§ì€ ì ì—ê²Œ ë°œì‚¬
+//°¡Àå Ã¼·ÂÀÌ ¸¹Àº Àû¿¡°Ô ¹ß»ç
 class Crossbow :public Skill
 {
 public:
@@ -21,7 +21,7 @@ public:
 		return etc_;
 	}
 
-	CollisionReturn ProjectileToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other); // ë°œì‚¬ì²´ ì¶©ëŒ
+	CollisionReturn ProjectileToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other); // ¹ß»çÃ¼ Ãæµ¹
 public:
 	std::pair< GameEngineTextureRenderer*, GameEngineCollision*>projectileGroup_;
 	std::vector<std::pair<GameEngineTextureRenderer*, GameEngineCollision*>> projectileGroupList_;
@@ -30,18 +30,18 @@ protected:
 	void Update(float _deltaTime) override;
 	void End() override;
 
-	void SerchTarget();//ê³µê²© ëŒ€ìƒ íƒìƒ‰'
-	void ProjectileSort();//ë°œì‚¬ì²´ ìƒì„±ë° í”Œë ˆì´ì–´ ìœ„ì¹˜ë¡œ ì •ë ¬
-	void RenderRotate();// ë°œì‚¬ì²´ íšŒì „
-	void RangeCheak(float _deltaTime);//ë°œì‚¬ì²´ ì‚¬ì¶œ
-	void StateSet() override;//ë ˆë²¨ì— ë”°ë¥¸ ìŠ¤íƒ¯ ì ìš©
-	void ColCheak();//ì½œë¦¬ì „ ì²´í¬
-	void TarGetInitialization();//íƒ€ê²Ÿì´ˆê¸°í™”
-	void TimerUpdater(float _deltaTime);//íƒ€ì´ë¨¸ ì—…ë°ì´íŠ¸
+	void SerchTarget();//°ø°İ ´ë»ó Å½»ö'
+	void ProjectileSort();//¹ß»çÃ¼ »ı¼º¹× ÇÃ·¹ÀÌ¾î À§Ä¡·Î Á¤·Ä
+	void RenderRotate();// ¹ß»çÃ¼ È¸Àü
+	void RangeCheak(float _deltaTime);//¹ß»çÃ¼ »çÃâ
+	void StateSet() override;//·¹º§¿¡ µû¸¥ ½ºÅÈ Àû¿ë
+	void ColCheak();//Äİ¸®Àü Ã¼Å©
+	void TarGetInitialization();//Å¸°ÙÃÊ±âÈ­
+	void TimerUpdater(float _deltaTime);//Å¸ÀÌ¸Ó ¾÷µ¥ÀÌÆ®
 
 private:
 	bool firstSerchCheak_;
-	bool istarget_;//íƒ€ê²Ÿì´ ìˆìœ¼ë©´ true
+	bool istarget_;//Å¸°ÙÀÌ ÀÖÀ¸¸é true
 
 	float targerSerchTimer_;
 
@@ -49,17 +49,17 @@ private:
 
 	std::vector<size_t> passNum_;
 
-	float resultCos_;//ëª¬ìŠ¤í„° ì¢Œí‘œ, í”Œë ˆì´ì–´ ì¢Œí‘œ xì¶• ê¸°ì¤€ ê°ë„ 
-	float4 referenceVector_;//í”Œë ˆì´ì–´ ì—ì„œ ëª¬ìŠ¤í„°ë¡œ ê°€ëŠ” ë²¡í„° 
+	float resultCos_;//¸ó½ºÅÍ ÁÂÇ¥, ÇÃ·¹ÀÌ¾î ÁÂÇ¥ xÃà ±âÁØ °¢µµ 
+	float4 referenceVector_;//ÇÃ·¹ÀÌ¾î ¿¡¼­ ¸ó½ºÅÍ·Î °¡´Â º¤ÅÍ 
 
-	WeaponInfo crossbowWeaponInfo_;//ë¬´ê¸° ìŠ¤íƒ¯
+	WeaponInfo crossbowWeaponInfo_;//¹«±â ½ºÅÈ
 
-	std::vector<Monster*> monsterList_; //ì „ì²´ ëª¬ìŠ¤í„° ë¦¬ìŠ¤íŠ¸
+	std::vector<Monster*> monsterList_; //ÀüÃ¼ ¸ó½ºÅÍ ¸®½ºÆ®
 
-	std::pair<size_t, float> minHpPair_;//íƒ€ê²Ÿ ëŒ€ìƒ
+	std::pair<size_t, float> minHpPair_;//Å¸°Ù ´ë»ó
 
-	std::vector<std::pair<size_t, float>> targetInst_;//íƒ€ê²Ÿ ëª¨ìŒ
+	std::vector<std::pair<size_t, float>> targetInst_;//Å¸°Ù ¸ğÀ½
 
-	std::vector<float4> referenceVectorList_;//ë°©í–¥ ëª¨ìŒ
+	std::vector<float4> referenceVectorList_;//¹æÇâ ¸ğÀ½
 
 };

@@ -47,27 +47,27 @@ void Mouse::UpdatePivotPosition(const float4& _pivot)
 bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderPivot, bool _isUI /*= false*/)
 {
 	float4 cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
-	//ë©”ì¸ì¹´ë©”ë¼ ì›”ë“œì¢Œí‘œ == ë ˆì´ ì›ì .
+	//¸ÞÀÎÄ«¸Þ¶ó ¿ùµåÁÂÇ¥ == ·¹ÀÌ ¿øÁ¡.
 
 	float4 rayDirection = float4::Zero;
-	//ë ˆì´ ë°©í–¥ë²¡í„°.
+	//·¹ÀÌ ¹æÇâº¤ÅÍ.
 
 	if (false == _isUI)
 	{
 		cameraWorldPosition = this->GetLevel()->GetMainCameraActor()->GetTransform().GetWorldPosition();
-		//ë©”ì¸ì¹´ë©”ë¼ ì›”ë“œì¢Œí‘œ == ë ˆì´ ì›ì .
+		//¸ÞÀÎÄ«¸Þ¶ó ¿ùµåÁÂÇ¥ == ·¹ÀÌ ¿øÁ¡.
 
 		rayDirection = this->GetLevel()->GetMainCamera()->GetRayTowardMousePointer();
-		//ë ˆì´ ë°©í–¥ë²¡í„°.
+		//·¹ÀÌ ¹æÇâº¤ÅÍ.
 	}
 	else
 	{
 		cameraWorldPosition = this->GetLevel()->GetUICamera()->GetMousePositionInWorldSpace();
-		//UIëŠ” ì „ë¶€ ì§êµíˆ¬ì˜ì¸ UIì¹´ë©”ë¼ì— ë“±ë¡ë˜ì–´ ìžˆìœ¼ë¯€ë¡œ,
-		// UIì¹´ë©”ë¼ ê¸°ì¤€ ë§ˆìš°ìŠ¤ ì›”ë“œì¢Œí‘œë¥¼ ë°›ì•„ì„œ ê·¸ê³³ì„ ê´€í†µí•˜ê³  ì›”ë“œê³µê°„ Zì¶•ê³¼ í‰í–‰í•œ ë ˆì´ë¥¼ ì¸ìœ„ì ìœ¼ë¡œ ë§Œë“ ë‹¤.
+		//UI´Â ÀüºÎ Á÷±³Åõ¿µÀÎ UIÄ«¸Þ¶ó¿¡ µî·ÏµÇ¾î ÀÖÀ¸¹Ç·Î,
+		// UIÄ«¸Þ¶ó ±âÁØ ¸¶¿ì½º ¿ùµåÁÂÇ¥¸¦ ¹Þ¾Æ¼­ ±×°÷À» °üÅëÇÏ°í ¿ùµå°ø°£ ZÃà°ú ÆòÇàÇÑ ·¹ÀÌ¸¦ ÀÎÀ§ÀûÀ¸·Î ¸¸µç´Ù.
 
 		rayDirection = float4::Blue;
-		//ë ˆì´ ë°©í–¥ë²¡í„°. ê·¸ëƒ¥ ì›”ë“œê³µê°„ Zì¶•ê³¼ í‰í–‰í•˜ê²Œ ì²˜ë¦¬í•œë‹¤.
+		//·¹ÀÌ ¹æÇâº¤ÅÍ. ±×³É ¿ùµå°ø°£ ZÃà°ú ÆòÇàÇÏ°Ô Ã³¸®ÇÑ´Ù.
 
 		rayDirection.w = 0.f;
 	}
@@ -81,13 +81,13 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderP
 		((localVertexPosition_[2] + _renderPivot) * _worldWorldMatrix).directXVector_,
 		((localVertexPosition_[3] + _renderPivot) * _worldWorldMatrix).directXVector_
 	};
-	//ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì€, ë ˆì´ì™€ì˜ êµì°¨ ì—¬ë¶€ë¥¼ ì•Œê³ ì‹¶ì€ ë Œë”ëŸ¬ì˜ ì›”ë“œí–‰ë ¬ì„ "Rect"ì˜ ë„¤ ì •ì ì— ì ìš©í•´ì„œ ì €ìž¥í•œë‹¤.
-	//"Rect"ì™¸ì— ë‹¤ë¥¸ ë©”ì‰¬ì™€ì˜ êµì°¨ ì—¬ë¶€ë„ í™•ì¸í•´ì•¼ í•˜ê±°ë‚˜, 3~4ê°œì˜ íŠ¹ì • ë Œë”ëŸ¬ì™€ ë ˆì´ì˜ êµì°¨ì—¬ë¶€ë§Œ í™•ì¸í•˜ëŠ” ì§€ê¸ˆ ë°©ì‹ì—ì„œ 
-	// í™”ë©´ ë‚´ ìž„ì˜ì˜ í´ë¦­ì§€ì  ì¢Œí‘œë¥¼ ë°›ì•„ì˜¬ í•„ìš”ê°€ ìƒê¸´ë‹¤ë©´ êµ¬ì¡° ë³€ê²½í•  ê²ƒ.
+	//¸Å°³º¯¼ö·Î ¹ÞÀº, ·¹ÀÌ¿ÍÀÇ ±³Â÷ ¿©ºÎ¸¦ ¾Ë°í½ÍÀº ·»´õ·¯ÀÇ ¿ùµåÇà·ÄÀ» "Rect"ÀÇ ³× Á¤Á¡¿¡ Àû¿ëÇØ¼­ ÀúÀåÇÑ´Ù.
+	//"Rect"¿Ü¿¡ ´Ù¸¥ ¸Þ½¬¿ÍÀÇ ±³Â÷ ¿©ºÎµµ È®ÀÎÇØ¾ß ÇÏ°Å³ª, 3~4°³ÀÇ Æ¯Á¤ ·»´õ·¯¿Í ·¹ÀÌÀÇ ±³Â÷¿©ºÎ¸¸ È®ÀÎÇÏ´Â Áö±Ý ¹æ½Ä¿¡¼­ 
+	// È­¸é ³» ÀÓÀÇÀÇ Å¬¸¯ÁöÁ¡ ÁÂÇ¥¸¦ ¹Þ¾Æ¿Ã ÇÊ¿ä°¡ »ý±ä´Ù¸é ±¸Á¶ º¯°æÇÒ °Í.
 
 	float distance1 = 0.f;
 	float distance2 = 0.f;
-	//ì—¬ê¸°ì„œëŠ” ë³„ í•„ìš” ì—†ì„ê²ƒ ê°™ì§€ë§Œ ê·¸ëž˜ë„ í•¨ìˆ˜ì—ì„œ ìš”êµ¬í•˜ë¯€ë¡œ ë ˆì´ ê¸¸ì´ë„ ë°›ì„ ì¤€ë¹„ë„ í•´ ë‘”ë‹¤. 
+	//¿©±â¼­´Â º° ÇÊ¿ä ¾øÀ»°Í °°Áö¸¸ ±×·¡µµ ÇÔ¼ö¿¡¼­ ¿ä±¸ÇÏ¹Ç·Î ·¹ÀÌ ±æÀÌµµ ¹ÞÀ» ÁØºñµµ ÇØ µÐ´Ù. 
 
 	bool result1 = DirectX::TriangleTests::Intersects(
 		cameraWorldPosition.directXVector_,
@@ -106,8 +106,8 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderP
 		rectVertexWorldPosition[3],
 		distance2
 	);
-	//DirectX::TriangleTests::Intersects()í•¨ìˆ˜ëŠ” ë„¤ìž„ìŠ¤íŽ˜ì´ìŠ¤ ì´ë¦„ì²˜ëŸ¼ ì‚¼ê°í˜• ê¸°ì¤€ìœ¼ë¡œ êµì°¨ ì—¬ë¶€ë¥¼ íŒì •í•˜ëŠ”ë° 
-	// ì—¬ê¸°ì„œëŠ” ì‚¬ê°í˜•ê³¼ ë ˆì´ì˜ êµì°¨ ì—¬ë¶€ê°€ í•„ìš”í•˜ë¯€ë¡œ ì‚¼ê°í˜• ë‘ê°œë¥¼ í™•ì¸í•œë‹¤.
+	//DirectX::TriangleTests::Intersects()ÇÔ¼ö´Â ³×ÀÓ½ºÆäÀÌ½º ÀÌ¸§Ã³·³ »ï°¢Çü ±âÁØÀ¸·Î ±³Â÷ ¿©ºÎ¸¦ ÆÇÁ¤ÇÏ´Âµ¥ 
+	// ¿©±â¼­´Â »ç°¢Çü°ú ·¹ÀÌÀÇ ±³Â÷ ¿©ºÎ°¡ ÇÊ¿äÇÏ¹Ç·Î »ï°¢Çü µÎ°³¸¦ È®ÀÎÇÑ´Ù.
 
 	if (true == result1 || true == result2)
 	{
@@ -117,7 +117,7 @@ bool Mouse::IsPointing(const float4x4& _worldWorldMatrix, const float4& _renderP
 	{
 		return false;
 	}
-
+	
 }
 
 void Mouse::Start()
@@ -143,7 +143,7 @@ void Mouse::Start()
 
 void Mouse::Update(float _DeltaTime)
 {
-	//ì „íˆ¬ë§µì—ì„œì˜ ë™ìž‘.
+	//ÀüÅõ¸Ê¿¡¼­ÀÇ µ¿ÀÛ.
 	if (ProjectionMode::Orthographic == this->GetLevel()->GetMainCamera()->GetProjectionMode())
 	{
 		this->GetTransform().SetWorldPosition(
@@ -154,29 +154,29 @@ void Mouse::Update(float _DeltaTime)
 		//	this->GetLevel()->GetUICamera()->GetMousePositionInWorldSpace()
 		//);
 
-		if (true == isAiming_)	//í™œì„±í™”ëœ í”Œë ˆì´ì–´ ë¬´ê¸° ì¤‘ì— ë‹¨ì°½ ë“±ì˜ ì›í•˜ëŠ” ë°©í–¥ìœ¼ë¡œ íˆ¬ì‚¬ì²´ë¥¼ ë‚ ë¦¬ëŠ” ë¬´ê¸°ê°€ ìžˆëŠ” ê²½ìš°.
+		if (true == isAiming_)	//È°¼ºÈ­µÈ ÇÃ·¹ÀÌ¾î ¹«±â Áß¿¡ ´ÜÃ¢ µîÀÇ ¿øÇÏ´Â ¹æÇâÀ¸·Î Åõ»çÃ¼¸¦ ³¯¸®´Â ¹«±â°¡ ÀÖ´Â °æ¿ì.
 		{
 			aimLineRenderer_->GetTransform().SetWorldPosition(
 				this->GetLevel()->GetMainCamera()->ConvertWorldPositionToViewPosition(pivotWorldPosition_)
 			);
-			//ì—ìž„ë¼ì¸ ë Œë”ëŸ¬ì˜ ì¤‘ì‹¬ì¶•ì„ ìž¡ì•„ì¤€ë‹¤. ì¤‘ì‹¬ì¶• ìœ„ì¹˜ëŠ” ì™¸ë¶€ì—ì„œ í”Œë ˆì´ì–´ ì›”ë“œì¢Œí‘œë¥¼ ë„£ì–´ì¤„ ê²ƒ.
-
+			//¿¡ÀÓ¶óÀÎ ·»´õ·¯ÀÇ Áß½ÉÃàÀ» Àâ¾ÆÁØ´Ù. Áß½ÉÃà À§Ä¡´Â ¿ÜºÎ¿¡¼­ ÇÃ·¹ÀÌ¾î ¿ùµåÁÂÇ¥¸¦ ³Ö¾îÁÙ °Í.
+			
 			float4 aimingVector = this->GetTransform().GetWorldPosition() - aimLineRenderer_->GetTransform().GetWorldPosition();
-			//ì—ìž„ë¼ì¸ì´ í–¥í•´ì•¼ í•  ë°©í–¥ ë²¡í„°.
+			//¿¡ÀÓ¶óÀÎÀÌ ÇâÇØ¾ß ÇÒ ¹æÇâ º¤ÅÍ.
 
 			aimingVector.z = 0.f;
-			//2D ê¸°ì¤€ìœ¼ë¡œë§Œ ìƒê°í•  ê²ƒì´ë¯€ë¡œ zê°’ì€ 0ìœ¼ë¡œ ë§Œë“¤ì–´ì„œ ì˜¤ì°¨ë¥¼ ì¤„ì¸ë‹¤.
+			//2D ±âÁØÀ¸·Î¸¸ »ý°¢ÇÒ °ÍÀÌ¹Ç·Î z°ªÀº 0À¸·Î ¸¸µé¾î¼­ ¿ÀÂ÷¸¦ ÁÙÀÎ´Ù.
 
 			aimingVector /= aimingVector.Length();
-			//ì •ê·œí™”.
+			//Á¤±ÔÈ­.
 
 			aimLineAngle_ = 0;
-			//ì—ìž„ë¼ì¸ì˜ ê°ë„. 0ì´ë©´ ì—ìž„ë¼ì¸ì´ (0, 1, 0) ë°©í–¥ì„ í–¥í•œë‹¤.
+			//¿¡ÀÓ¶óÀÎÀÇ °¢µµ. 0ÀÌ¸é ¿¡ÀÓ¶óÀÎÀÌ (0, 1, 0) ¹æÇâÀ» ÇâÇÑ´Ù.
 
 			if (0 < aimingVector.x)
 			{
 				aimLineAngle_ = -acosf(aimingVector.y) * GameEngineMath::RadianToDegree;
-				//ì´ ë¶€ë¶„ì´ ì—†ìœ¼ë©´ ì—ìž„ë¼ì¸ì´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë„˜ì–´ê°€ì§€ ì•ŠëŠ”ë‹¤.
+				//ÀÌ ºÎºÐÀÌ ¾øÀ¸¸é ¿¡ÀÓ¶óÀÎÀÌ ¿À¸¥ÂÊÀ¸·Î ³Ñ¾î°¡Áö ¾Ê´Â´Ù.
 			}
 			else
 			{
@@ -186,12 +186,12 @@ void Mouse::Update(float _DeltaTime)
 			aimLineRenderer_->GetTransform().SetWorldRotation(0.f, 0.f, aimLineAngle_);
 		}
 	}
-	//ì›”ë“œë§µ, í´ë¦¬ì–´ë ˆë²¨ì—ì„œì˜ ë™ìž‘.
+	//¿ùµå¸Ê, Å¬¸®¾î·¹º§¿¡¼­ÀÇ µ¿ÀÛ.
 	else 
 	{
 		if (true == isAiming_)
 		{
-			MsgBoxAssert("ë§ˆìš°ìŠ¤í¬ì¸í„° ë Œë”ëŸ¬ ì „í™˜ì€ ì „íˆ¬ë§µì—ì„œë§Œ ì˜ë¯¸ ìžˆëŠ” ê¸°ëŠ¥ìž…ë‹ˆë‹¤.");
+			MsgBoxAssert("¸¶¿ì½ºÆ÷ÀÎÅÍ ·»´õ·¯ ÀüÈ¯Àº ÀüÅõ¸Ê¿¡¼­¸¸ ÀÇ¹Ì ÀÖ´Â ±â´ÉÀÔ´Ï´Ù.");
 			return;
 		}
 
@@ -203,7 +203,7 @@ void Mouse::Update(float _DeltaTime)
 			this->GetLevel()->GetUICamera()->GetMousePositionInWorldSpace()
 		);
 
-		//ë©”ì¸ì¹´ë©”ë¼ê°€ ì›ê·¼íˆ¬ì˜ì¼ë•ŒëŠ” ë§ˆìš°ìŠ¤í¬ì¸í„° ì•¡í„°ì™€ ë Œë”ëŸ¬ ìœ„ì¹˜ ìž¡ì•„ì£¼ëŠ”ê²ƒ ì™¸ì— íŠ¹ë³„ížˆ í•  ì¼ì´ ì—†ë‹¤.
+		//¸ÞÀÎÄ«¸Þ¶ó°¡ ¿ø±ÙÅõ¿µÀÏ¶§´Â ¸¶¿ì½ºÆ÷ÀÎÅÍ ¾×ÅÍ¿Í ·»´õ·¯ À§Ä¡ Àâ¾ÆÁÖ´Â°Í ¿Ü¿¡ Æ¯º°È÷ ÇÒ ÀÏÀÌ ¾ø´Ù.
 	}
 }
 

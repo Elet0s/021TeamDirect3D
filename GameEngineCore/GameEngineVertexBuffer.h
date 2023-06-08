@@ -5,23 +5,23 @@ class GameEngineInputLayoutDesc;
 class GameEngineVertexBuffer : public GameEngineRes<GameEngineVertexBuffer>
 {
 
-	//ë²„í…ìŠ¤: ì •ì , ê¼­ì§€ì . ë‹¤ê°í˜•ì—ì„œ ë‘ê°œ ì´ìƒì˜ ì„ ì´ ë§Œë‚˜ëŠ” ì . ì‚¬ì‹¤ ì  í˜•íƒœë¡œ ê·¸ë¦´ì§€ ë§ì§€ë„ ì„ íƒí•  ìˆ˜ ìžˆë‹¤.
-	//í˜„ìž¬ëŠ” ë²„í…ìŠ¤ì— ìœ„ì¹˜ ì •ë³´ë°–ì— ì—†ì§€ë§Œ ì›ëž˜ DirectXì—ëŠ” ìœ„ì¹˜ì •ë³´ ë¿ë§Œ ì•„ë‹ˆë¼ ìƒ‰, ë¹›, í…ìŠ¤ì²˜ ë“±ì˜ ì •ë³´ë„ ê°™ì´ í¬í•¨í•´ì„œ, 
-	//FVF(Flexible Vertex Format)ì´ë¼ëŠ” ê°œë…ìœ¼ë¡œ ëª¨ì•„ì„œ ì œê³µí•˜ê³  ìžˆë‹¤.
+	//¹öÅØ½º: Á¤Á¡, ²ÀÁöÁ¡. ´Ù°¢Çü¿¡¼­ µÎ°³ ÀÌ»óÀÇ ¼±ÀÌ ¸¸³ª´Â Á¡. »ç½Ç Á¡ ÇüÅÂ·Î ±×¸±Áö ¸»Áöµµ ¼±ÅÃÇÒ ¼ö ÀÖ´Ù.
+	//ÇöÀç´Â ¹öÅØ½º¿¡ À§Ä¡ Á¤º¸¹Û¿¡ ¾øÁö¸¸ ¿ø·¡ DirectX¿¡´Â À§Ä¡Á¤º¸ »Ó¸¸ ¾Æ´Ï¶ó »ö, ºû, ÅØ½ºÃ³ µîÀÇ Á¤º¸µµ °°ÀÌ Æ÷ÇÔÇØ¼­, 
+	//FVF(Flexible Vertex Format)ÀÌ¶ó´Â °³³äÀ¸·Î ¸ð¾Æ¼­ Á¦°øÇÏ°í ÀÖ´Ù.
 
 
 	friend GameEngineRes<GameEngineVertexBuffer>;
-	//GameEngineVertexBufferí´ëž˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìžë¥¼ GameEngineResí´ëž˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
+	//GameEngineVertexBufferÅ¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ý.
 
 
-	//ê·¸ëž˜í”½ ë¦¬ì†ŒìŠ¤ë“¤ ì¤‘ ë²„í¼(ë²„í…ìŠ¤ ë²„í¼, ì¸ë±ìŠ¤ ë²„í¼, ìƒìˆ˜ ë²„í¼, ìŠ¤íŠ¸ë¦¼ ì¶œë ¥ ë²„í¼)ëŠ” 
-	// ë¦¬ì†ŒìŠ¤ë·° ì—†ì´ë„ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•  ìˆ˜ ìžˆë‹¤.
+	//±×·¡ÇÈ ¸®¼Ò½ºµé Áß ¹öÆÛ(¹öÅØ½º ¹öÆÛ, ÀÎµ¦½º ¹öÆÛ, »ó¼ö ¹öÆÛ, ½ºÆ®¸² Ãâ·Â ¹öÆÛ)´Â 
+	// ¸®¼Ò½ººä ¾øÀÌµµ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÒ ¼ö ÀÖ´Ù.
 private:
 	GameEngineVertexBuffer();
 	~GameEngineVertexBuffer();
-	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ìž/ì†Œë©¸ìžë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
-	//ì´ í”„ë ˆìž„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìžê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
-	//í”„ë¡œê·¸ëž¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ëž˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
+	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ý¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ý¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
+	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹Ýµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
+	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµÐ´Ù.
 
 	GameEngineVertexBuffer(const GameEngineVertexBuffer& _other) = delete;
 	GameEngineVertexBuffer(GameEngineVertexBuffer&& _other) noexcept = delete;
@@ -99,15 +99,15 @@ private:
 	);
 
 private:
-	ID3D11Buffer* vertexBuffer_;				//ë²„í…ìŠ¤ ì •ë³´ë¥¼ ì €ìž¥í•  ë²„í¼ ì¸í„°íŽ˜ì´ìŠ¤.
+	ID3D11Buffer* vertexBuffer_;				//¹öÅØ½º Á¤º¸¸¦ ÀúÀåÇÒ ¹öÆÛ ÀÎÅÍÆäÀÌ½º.
 
-	//ë²„í¼ ìƒì„± ê´€ë ¨ ì •ë³´.
-	D3D11_SUBRESOURCE_DATA resData_;	//ë²„í¼ì˜ ì´ˆê¸°ê°’.
-	D3D11_BUFFER_DESC vertexBufferDesc_;		//ë²„í¼ì˜ ìƒì„± ëª…ì„¸ì„œ.
+	//¹öÆÛ »ý¼º °ü·Ã Á¤º¸.
+	D3D11_SUBRESOURCE_DATA resData_;	//¹öÆÛÀÇ ÃÊ±â°ª.
+	D3D11_BUFFER_DESC vertexBufferDesc_;		//¹öÆÛÀÇ »ý¼º ¸í¼¼¼­.
 
-	UINT vertexSize_;		//ë²„í¼ í•œê°œì˜ í¬ê¸°.
-	UINT vertexCount_;		//ë²„í¼ ê°œìˆ˜.
-	UINT offset_;			//ì„¸íŒ…ì„ ì‹œìž‘í•  ë²„í¼ì˜, ë²„í¼ ì‹œìž‘ì ìœ¼ë¡œë¶€í„°ì˜ ê±°ë¦¬(byte).
+	UINT vertexSize_;		//¹öÆÛ ÇÑ°³ÀÇ Å©±â.
+	UINT vertexCount_;		//¹öÆÛ °³¼ö.
+	UINT offset_;			//¼¼ÆÃÀ» ½ÃÀÛÇÒ ¹öÆÛÀÇ, ¹öÆÛ ½ÃÀÛÁ¡À¸·ÎºÎÅÍÀÇ °Å¸®(byte).
 
 	const GameEngineInputLayoutDesc* inputLayoutDesc_;
 

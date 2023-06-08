@@ -21,15 +21,15 @@
 template<typename ResType>
 class GameEngineRes : public GameEngineNameObject
 {
-	//ë¦¬ì†ŒìŠ¤ í´ëž˜ìŠ¤ë“¤ì˜ ì¤‘ë³µë˜ëŠ” ì½”ë“œë¥¼ ìž¬í™œìš©í•˜ê¸° ìœ„í•œ í…œí”Œë¦¿ ëª©ì ì˜ í´ëž˜ìŠ¤.
+	//¸®¼Ò½º Å¬·¡½ºµéÀÇ Áßº¹µÇ´Â ÄÚµå¸¦ ÀçÈ°¿ëÇÏ±â À§ÇÑ ÅÛÇÃ¸´ ¸ñÀûÀÇ Å¬·¡½º.
 
-	//í…œí”Œë¦¿ í´ëž˜ìŠ¤ë¥¼ ìƒì†í•˜ë©´, ìƒì†ë°›ì€ í´ëž˜ìŠ¤ í˜•ì‹ì˜ ìƒˆ í´ëž˜ìŠ¤ê°€ ë§Œë“¤ì–´ì§€ëŠ”ê²ƒê³¼ ê°™ë‹¤.
-	// ê·¸ëŸ¬ë¯€ë¡œ, ì•„ëž˜ ì»¨í…Œì´ë„ˆë„ ìƒì†ë°›ì€ í´ëž˜ìŠ¤ ê°œìˆ˜ë§Œí¼ ìƒì„±ëœë‹¤.
+	//ÅÛÇÃ¸´ Å¬·¡½º¸¦ »ó¼ÓÇÏ¸é, »ó¼Ó¹ÞÀº Å¬·¡½º Çü½ÄÀÇ »õ Å¬·¡½º°¡ ¸¸µé¾îÁö´Â°Í°ú °°´Ù.
+	// ±×·¯¹Ç·Î, ¾Æ·¡ ÄÁÅ×ÀÌ³Êµµ »ó¼Ó¹ÞÀº Å¬·¡½º °³¼ö¸¸Å­ »ý¼ºµÈ´Ù.
 
 
 protected:
 	GameEngineRes() /*: isOriginal_(true)*/ {}
-	~GameEngineRes() {}	//ResourceDestroy()í•¨ìˆ˜ì—ì„œ ê° ë¦¬ì†ŒìŠ¤í´ëž˜ìŠ¤ ì†Œë©¸ìžë“¤ì„ ì§ì ‘ í˜¸ì¶œí•˜ë¯€ë¡œ virtualì„ ë¶™ì´ì§€ ì•Šì•„ë„ ë¬¸ì œ ì—†ë‹¤.
+	~GameEngineRes() {}	//ResourceDestroy()ÇÔ¼ö¿¡¼­ °¢ ¸®¼Ò½ºÅ¬·¡½º ¼Ò¸êÀÚµéÀ» Á÷Á¢ È£ÃâÇÏ¹Ç·Î virtualÀ» ºÙÀÌÁö ¾Ê¾Æµµ ¹®Á¦ ¾ø´Ù.
 
 	GameEngineRes(const GameEngineRes& _other) = delete;
 	GameEngineRes(GameEngineRes&& _other) noexcept = delete;
@@ -42,10 +42,10 @@ public:
 		typename std::map<std::string, ResType*>::iterator findIter;
 		{
 			std::lock_guard<std::mutex> lockInst(namedResLock_);
-			//std::lock_guard<std::mutex>: std::mutexì˜ ëž˜í¼ í´ëž˜ìŠ¤.
-			//ì§€ì—­ë³€ìˆ˜ë¡œ ìƒì„±ë˜ë©´ì„œ ìƒì„±ìž ë§¤ê°œë³€ìˆ˜ë¡œ ë„£ì–´ì§„ std::mutex ê°ì²´ì˜ lock() í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´ì„œ ë©”ëª¨ë¦¬ì— ì ‘ê·¼ì œí•œì„ ê±¸ê³ ,
-			//ìŠ¤ì½”í”„ê°€ ë‹«ížˆê³  ì†Œë©¸ë  ë•Œ ì†Œë©¸ìžì—ì„œ std::mutexì˜ unlock() í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´ì„œ ë©”ëª¨ë¦¬ì— ê±¸ë¦° ì ‘ê·¼ì œí•œì„ í•´ì œí•˜ê²Œ í•œë‹¤.
-			//ê·¸ëž˜ì„œ í•œë²ˆ ìƒì„±ë§Œ í•´ ë‘ë©´ ìžë™ìœ¼ë¡œ ìž ê¸ˆê³¼ í•´ì œë¥¼ í•´ ì¤€ë‹¤.
+			//std::lock_guard<std::mutex>: std::mutexÀÇ ·¡ÆÛ Å¬·¡½º.
+			//Áö¿ªº¯¼ö·Î »ý¼ºµÇ¸é¼­ »ý¼ºÀÚ ¸Å°³º¯¼ö·Î ³Ö¾îÁø std::mutex °´Ã¼ÀÇ lock() ÇÔ¼ö¸¦ È£ÃâÇØ¼­ ¸Þ¸ð¸®¿¡ Á¢±ÙÁ¦ÇÑÀ» °É°í,
+			//½ºÄÚÇÁ°¡ ´ÝÈ÷°í ¼Ò¸êµÉ ¶§ ¼Ò¸êÀÚ¿¡¼­ std::mutexÀÇ unlock() ÇÔ¼ö¸¦ È£ÃâÇØ¼­ ¸Þ¸ð¸®¿¡ °É¸° Á¢±ÙÁ¦ÇÑÀ» ÇØÁ¦ÇÏ°Ô ÇÑ´Ù.
+			//±×·¡¼­ ÇÑ¹ø »ý¼º¸¸ ÇØ µÎ¸é ÀÚµ¿À¸·Î Àá±Ý°ú ÇØÁ¦¸¦ ÇØ ÁØ´Ù.
 
 			findIter = namedRes_.find(GameEngineString::ToUpperReturn(_resName));
 			if (namedRes_.end() == findIter)
@@ -77,8 +77,8 @@ public:
 			}
 		}
 
-		//ì‚¬ì‹¤ ë¦¬ì†ŒìŠ¤ë¥¼ í”„ë¡œê·¸ëž¨ ëë‚ ë•Œê¹Œì§€ ì•ˆ ì§€ì›Œë„ í•´ê²°ë˜ëŠ” ë¬¸ì œì§€ë§Œ,
-		//ê·¸ëž˜ë„ ë§‰ì„ ìˆ˜ ìžˆëŠ”ê±´ ìµœëŒ€í•œ ë‹¤ ë§‰ì•„ë‘”ë‹¤.
+		//»ç½Ç ¸®¼Ò½º¸¦ ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¾È Áö¿öµµ ÇØ°áµÇ´Â ¹®Á¦Áö¸¸,
+		//±×·¡µµ ¸·À» ¼ö ÀÖ´Â°Ç ÃÖ´ëÇÑ ´Ù ¸·¾ÆµÐ´Ù.
 	}
 
 	//bool IsOriginal()
@@ -111,16 +111,16 @@ protected:
 
 		{
 			std::lock_guard<std::mutex> lockInst(namedResLock_);
-			//std::lock_guard<std::mutex>: std::mutexì˜ ëž˜í¼ í´ëž˜ìŠ¤.
-			//ì§€ì—­ë³€ìˆ˜ë¡œ ìƒì„±ë˜ë©´ì„œ ìƒì„±ìž ë§¤ê°œë³€ìˆ˜ë¡œ ë„£ì–´ì§„ std::mutex ê°ì²´ì˜ lock() í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´ì„œ ë©”ëª¨ë¦¬ì— ì ‘ê·¼ì œí•œì„ ê±¸ê³ ,
-			//ìŠ¤ì½”í”„ê°€ ë‹«ížˆê³  ì†Œë©¸ë  ë•Œ ì†Œë©¸ìžì—ì„œ std::mutexì˜ unlock() í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´ì„œ ë©”ëª¨ë¦¬ì— ê±¸ë¦° ì ‘ê·¼ì œí•œì„ í•´ì œí•˜ê²Œ í•œë‹¤.
-			//ê·¸ëž˜ì„œ í•œë²ˆ ìƒì„±ë§Œ í•´ ë‘ë©´ ìžë™ìœ¼ë¡œ ìž ê¸ˆê³¼ í•´ì œë¥¼ í•´ ì¤€ë‹¤.
+			//std::lock_guard<std::mutex>: std::mutexÀÇ ·¡ÆÛ Å¬·¡½º.
+			//Áö¿ªº¯¼ö·Î »ý¼ºµÇ¸é¼­ »ý¼ºÀÚ ¸Å°³º¯¼ö·Î ³Ö¾îÁø std::mutex °´Ã¼ÀÇ lock() ÇÔ¼ö¸¦ È£ÃâÇØ¼­ ¸Þ¸ð¸®¿¡ Á¢±ÙÁ¦ÇÑÀ» °É°í,
+			//½ºÄÚÇÁ°¡ ´ÝÈ÷°í ¼Ò¸êµÉ ¶§ ¼Ò¸êÀÚ¿¡¼­ std::mutexÀÇ unlock() ÇÔ¼ö¸¦ È£ÃâÇØ¼­ ¸Þ¸ð¸®¿¡ °É¸° Á¢±ÙÁ¦ÇÑÀ» ÇØÁ¦ÇÏ°Ô ÇÑ´Ù.
+			//±×·¡¼­ ÇÑ¹ø »ý¼º¸¸ ÇØ µÎ¸é ÀÚµ¿À¸·Î Àá±Ý°ú ÇØÁ¦¸¦ ÇØ ÁØ´Ù.
 			insertResult = namedRes_.insert(std::make_pair(newRes->GetNameCopy(), newRes));
 		}
 
 		if (false == insertResult.second)
 		{
-			MsgBoxAssertString(newRes->GetNameCopy() + ": ì´ë¯¸ ì¡´ìž¬í•˜ëŠ” ë¦¬ì†ŒìŠ¤ ì´ë¦„ìž…ë‹ˆë‹¤.");
+			MsgBoxAssertString(newRes->GetNameCopy() + ": ÀÌ¹Ì Á¸ÀçÇÏ´Â ¸®¼Ò½º ÀÌ¸§ÀÔ´Ï´Ù.");
 			return nullptr;
 		}
 
@@ -140,7 +140,7 @@ protected:
 		ResType* newRes = new ResType();
 		if (nullptr == newRes)
 		{
-			MsgBoxAssert("newRes ìƒì„± ì‹¤íŒ¨!");
+			MsgBoxAssert("newRes »ý¼º ½ÇÆÐ!");
 			return nullptr;
 		}
 		newRes->SetName(GameEngineString::ToUpperReturn(_resName));
@@ -156,22 +156,22 @@ private:
 	static std::map<std::string, ResType*> namedRes_;
 	static std::list<ResType*> unnamedRes_;
 
-	static std::mutex namedResLock_;	//namedRes_ì˜ ë®¤í…ìŠ¤.
-	static std::mutex unnamedResLock_;	//unnamedRes_ì˜ ë®¤í…ìŠ¤.
-	//0ë²ˆìŠ¤ë ˆë“œê°€ 1ë²ˆìŠ¤ë ˆë“œê°€ namedRes_ì™€ unnamedRes_ì— ë­”ê°€ ìž‘ì—…í•˜ëŠ” ë™ì•ˆ 2ë²ˆìŠ¤ë ˆë“œê°€ ì–´ëŠ ì»¨í…Œì´ë„ˆì— ì ‘ê·¼í•  ì§€
-	// ì•Œ ìˆ˜ ì—†ìœ¼ë¯€ë¡œ ê° ì»¨í…Œì´ë„ˆë§ˆë‹¤ ê°ê°ì˜ ë®¤í…ìŠ¤ê°€ í•„ìš”í•˜ë‹¤.
+	static std::mutex namedResLock_;	//namedRes_ÀÇ ¹ÂÅØ½º.
+	static std::mutex unnamedResLock_;	//unnamedRes_ÀÇ ¹ÂÅØ½º.
+	//0¹ø½º·¹µå°¡ 1¹ø½º·¹µå°¡ namedRes_¿Í unnamedRes_¿¡ ¹º°¡ ÀÛ¾÷ÇÏ´Â µ¿¾È 2¹ø½º·¹µå°¡ ¾î´À ÄÁÅ×ÀÌ³Ê¿¡ Á¢±ÙÇÒ Áö
+	// ¾Ë ¼ö ¾øÀ¸¹Ç·Î °¢ ÄÁÅ×ÀÌ³Ê¸¶´Ù °¢°¢ÀÇ ¹ÂÅØ½º°¡ ÇÊ¿äÇÏ´Ù.
 
-	//std::mutex: ì—¬ëŸ¬ ìŠ¤ë ˆë“œë“¤ì´ ê³µìœ í•  ìˆ˜ ìžˆëŠ” íŠ¹ì • ë©”ëª¨ë¦¬ ì˜ì—­ì— í•œê°œ ìŠ¤ë ˆë“œë§Œ ì ‘ê·¼í•  ìˆ˜ ìžˆê²Œ í•´ì„œ
-	// ê²½ìŸ ìƒíƒœ(Race Condition) ë°œìƒì„ ì˜ˆë°©í•˜ëŠ” í´ëž˜ìŠ¤.
-	// ìž ê¸´ ë©”ëª¨ë¦¬ëŠ” ì‚¬ì‹¤ìƒ ì‹±ê¸€ìŠ¤ë ˆë”© ìƒíƒœê°€ ë˜ì–´ ë©€í‹°ìŠ¤ë ˆë”©ì˜ ì˜ë¯¸ê°€ ì‚¬ë¼ì§€ë¯€ë¡œ ë‚¨ë°œí•´ì„  ì•ˆëœë‹¤.
-	//lock()í•¨ìˆ˜ë¡œ ë©”ëª¨ë¦¬ë¥¼ ìž ê·¼ ìƒíƒœì—ì„œ ê°™ì€ ìŠ¤ë ˆë“œì—ì„œ í•œë²ˆ ë” lock() í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ê±°ë‚˜ unlock()í•¨ìˆ˜ í˜¸ì¶œì„ ìžŠì–´ë²„ë¦¬ë©´
-	//ìž ê¸ˆ í•´ì œê°€ ì•ˆë˜ëŠ” deadlockìƒíƒœê°€ ë˜ì–´ ë‹¤ì‹œëŠ” ê·¸ ë©”ëª¨ë¦¬ì— ì ‘ê·¼í•  ìˆ˜ ì—†ê²Œ ëœë‹¤.
-	//mutexëŠ” mutual exclusion(ìƒí˜¸ ë°°ì œ)ì˜ ì¤„ìž„ë§ì´ë¼ê³  í•œë‹¤.
+	//std::mutex: ¿©·¯ ½º·¹µåµéÀÌ °øÀ¯ÇÒ ¼ö ÀÖ´Â Æ¯Á¤ ¸Þ¸ð¸® ¿µ¿ª¿¡ ÇÑ°³ ½º·¹µå¸¸ Á¢±ÙÇÒ ¼ö ÀÖ°Ô ÇØ¼­
+	// °æÀï »óÅÂ(Race Condition) ¹ß»ýÀ» ¿¹¹æÇÏ´Â Å¬·¡½º.
+	// Àá±ä ¸Þ¸ð¸®´Â »ç½Ç»ó ½Ì±Û½º·¹µù »óÅÂ°¡ µÇ¾î ¸ÖÆ¼½º·¹µùÀÇ ÀÇ¹Ì°¡ »ç¶óÁö¹Ç·Î ³²¹ßÇØ¼± ¾ÈµÈ´Ù.
+	//lock()ÇÔ¼ö·Î ¸Þ¸ð¸®¸¦ Àá±Ù »óÅÂ¿¡¼­ °°Àº ½º·¹µå¿¡¼­ ÇÑ¹ø ´õ lock() ÇÔ¼ö¸¦ È£ÃâÇÏ°Å³ª unlock()ÇÔ¼ö È£ÃâÀ» ÀØ¾î¹ö¸®¸é
+	//Àá±Ý ÇØÁ¦°¡ ¾ÈµÇ´Â deadlock»óÅÂ°¡ µÇ¾î ´Ù½Ã´Â ±× ¸Þ¸ð¸®¿¡ Á¢±ÙÇÒ ¼ö ¾ø°Ô µÈ´Ù.
+	//mutex´Â mutual exclusion(»óÈ£ ¹èÁ¦)ÀÇ ÁÙÀÓ¸»ÀÌ¶ó°í ÇÑ´Ù.
 
-	//ê²½ìŸ ìƒíƒœ(Race Condition): ì—¬ëŸ¬ ìŠ¤ë ˆë“œê°€ ê³µìœ í•˜ëŠ” ë©”ëª¨ë¦¬ì˜ ë°ì´í„°ì— ë™ì‹œì— ì ‘ê·¼í•´ì„œ ì—°ì‚°ì˜ ê²°ê³¼ê°€ ì™œê³¡ë˜ëŠ” ìƒíƒœ. 
+	//°æÀï »óÅÂ(Race Condition): ¿©·¯ ½º·¹µå°¡ °øÀ¯ÇÏ´Â ¸Þ¸ð¸®ÀÇ µ¥ÀÌÅÍ¿¡ µ¿½Ã¿¡ Á¢±ÙÇØ¼­ ¿¬»êÀÇ °á°ú°¡ ¿Ö°îµÇ´Â »óÅÂ. 
 };
 
-//í…œí”Œë¦¿ì„ ê°€ì§„ ì •ì  ë©¤ë²„ë³€ìˆ˜ëŠ” ì´ˆê¸°í™”ë¥¼ ì—¬ê¸°ì„œ í•œë‹¤.
+//ÅÛÇÃ¸´À» °¡Áø Á¤Àû ¸â¹öº¯¼ö´Â ÃÊ±âÈ­¸¦ ¿©±â¼­ ÇÑ´Ù.
 template<typename ResType>
 std::map<std::string, ResType*> GameEngineRes<ResType>::namedRes_;
 

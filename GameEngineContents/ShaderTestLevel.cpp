@@ -43,25 +43,25 @@ void ShaderTestLevel::Start()
 
 	lighting_ = CreateActor<GameEngineLighting>(0, "Lighting");
 	lighting_ = CreateActor<GameEngineLighting>(0, "TestLevelLighting");
-	//í…ŒìŠ¤íŠ¸ë ˆë²¨ì— ì¡°ëª… ì¶”ê°€.
+	//Å×½ºÆ®·¹º§¿¡ Á¶¸í Ãß°¡.
 
 	lighting_->GetTransform().SetWorldRotation(45.f, 45.f, 0.f);
-	//ì¡°ëª… ê°ë„ ì„¤ì •.
+	//Á¶¸í °¢µµ ¼³Á¤.
 
 	lighting_->GetLightingData().mainLightColor_ = float4(0.7f, 0.7f, 0.7f);
-	//ì •ë°˜ì‚¬ê´‘, ë‚œë°˜ì‚¬ê´‘ ìƒ‰, ë°ê¸° ì„¤ì •.
+	//Á¤¹İ»ç±¤, ³­¹İ»ç±¤ »ö, ¹à±â ¼³Á¤.
 
 	lighting_->GetLightingData().ambientLightColor_ = float4(0.1f, 0.1f, 0.1f);
-	//í™˜ê²½ê´‘ ìƒ‰, ë°ê¸° ì„¤ì •.
+	//È¯°æ±¤ »ö, ¹à±â ¼³Á¤.
 
 	lighting_->GetLightingData().specularLightRatio_ = 0.f;
-	//ì •ë°˜ì‚¬ê´‘ ì‚¬ìš© ì•ˆí•¨.
+	//Á¤¹İ»ç±¤ »ç¿ë ¾ÈÇÔ.
 
 	lighting_->GetLightingData().diffuseLightRatio_ = 2.f;
-	//ë‚œë°˜ì‚¬ê´‘ì„ ë‘ë°°ë¡œ ì ìš©.
+	//³­¹İ»ç±¤À» µÎ¹è·Î Àû¿ë.
 
 	this->GetMainCamera()->PushLighting(lighting_);
-	//ë©”ì¸ì¹´ë©”ë¼ì— ì¡°ëª… ë“±ë¡.
+	//¸ŞÀÎÄ«¸Ş¶ó¿¡ Á¶¸í µî·Ï.
 
 
 	//typedef struct D3D11_TEXTURE2D_DESC

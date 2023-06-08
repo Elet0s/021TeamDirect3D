@@ -4,7 +4,7 @@
 
 SharpeningStone::SharpeningStone() 
 {
-	name_ = "ìˆ«ëŒ";
+	name_ = "¼ýµ¹";
 	SetName(std::string_view("SharpeningStone"));
 	myRank_ = Rank::Normal;
 }
@@ -19,8 +19,8 @@ void SharpeningStone::Init()
 
 	std::string sDamege = std::to_string(PlayerInfo_.atk_).substr(0, std::to_string(PlayerInfo_.atk_).find(".") + 3);
 	std::string sDamegeNext = std::to_string(PlayerInfo_.atk_ + 0.1f).substr(0, std::to_string(PlayerInfo_.atk_ + 0.1f).find(".") + 3);
-
-	etc_ = sDamege + "-> " + sDamegeNext + "ê¸°ë³¸ í”¼í•´";
+		
+	etc_ = sDamege + "-> " + sDamegeNext + "±âº» ÇÇÇØ";
 }
 
 void SharpeningStone::Effect()

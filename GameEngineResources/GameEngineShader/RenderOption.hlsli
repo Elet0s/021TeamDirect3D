@@ -3,11 +3,11 @@ cbuffer RenderOption : register(b10)
     float deltaTime_;
     float sumDeltaTime_;
     int isAnimation_;
-    int vertexInversion_; //ê·¸ë¦¼ììš© ì •ì  ì¢Œìš° ë’¤ì§‘í˜ í‘œì‹œ ë³€ìˆ˜. ì¢Œìš° ë’¤ì§‘ì–´ì•¼ í•˜ë©´ -1 ëŒ€ì….
-    float pivotPosX_; //í”¼ë´‡í¬ìŠ¤ X
-    float pivotPosY_; //í”¼ë´‡í¬ìŠ¤ Y
-    float lightingRotationX_; //ì¡°ëª… Xì¶• ê°ë„. ê¸°ë³¸ê°’ 30ë„.
-    float lightingRotationY_; //ì¡°ëª… Yì¶• ê°ë„. ê¸°ë³¸ê°’ 0ë„.
+    int vertexInversion_;   //±×¸²ÀÚ¿ë Á¤Á¡ ÁÂ¿ì µÚÁıÈû Ç¥½Ã º¯¼ö. ÁÂ¿ì µÚÁı¾î¾ß ÇÏ¸é -1 ´ëÀÔ.
+    float pivotPosX_;       //ÇÇº¿Æ÷½º X
+    float pivotPosY_;       //ÇÇº¿Æ÷½º Y
+    float lightingRotationX_; //Á¶¸í XÃà °¢µµ. ±âº»°ª 30µµ.
+    float lightingRotationY_; //Á¶¸í YÃà °¢µµ. ±âº»°ª 0µµ.
 }
 
 struct InstRenderOption
@@ -15,9 +15,9 @@ struct InstRenderOption
     float deltaTime_;
     float sumDeltaTime_;
     int isAnimation_;
-    int vertexInversion_; //ê·¸ë¦¼ììš© ì •ì  ì¢Œìš° ë’¤ì§‘í˜ í‘œì‹œ ë³€ìˆ˜. ì¢Œìš° ë’¤ì§‘ì–´ì•¼ í•˜ë©´ -1 ëŒ€ì….
-    float pivotPosX_; //í”¼ë´‡í¬ìŠ¤ X.
-    float pivotPosY_; //í”¼ë´‡í¬ìŠ¤ Y.
-    float lightingRotationX_; //ì¡°ëª… Xì¶• ê°ë„.
-    float lightingRotationY_; //ì¡°ëª… Yì¶• ê°ë„.
+    int vertexInversion_; //±×¸²ÀÚ¿ë Á¤Á¡ ÁÂ¿ì µÚÁıÈû Ç¥½Ã º¯¼ö. ÁÂ¿ì µÚÁı¾î¾ß ÇÏ¸é -1 ´ëÀÔ.
+    float pivotPosX_; //ÇÇº¿Æ÷½º X.
+    float pivotPosY_; //ÇÇº¿Æ÷½º Y.
+    float lightingRotationX_; //Á¶¸í XÃà °¢µµ.
+    float lightingRotationY_; //Á¶¸í YÃà °¢µµ.
 };

@@ -4,7 +4,7 @@
 
 BlackBlood::BlackBlood() 
 {
-	name_ = "ê²€ì€ í”¼";
+	name_ = "°ËÀº ÇÇ";
 	SetName(std::string_view("BlackBlood"));
 	myRank_ = Rank::Normal;
 	maxLevel_ = 5;
@@ -24,8 +24,8 @@ void BlackBlood::Init()
 	std::string sMaxHpNext = std::to_string(PlayerInfo_.maxHp_ - 5.0f).substr(0, std::to_string(PlayerInfo_.maxHp_ - 5.f).find("."));
 
 
-	etc_ = sHealing + " -> " + sHealingNext + " ì²´ë ¥ ìž¬ìƒ\n"
-		+ sMaxHp + " ->" + sMaxHpNext + " ìµœëŒ€ ì²´ë ¥ ";
+	etc_ = sHealing + " -> " + sHealingNext + " Ã¼·Â Àç»ý\n"
+		+ sMaxHp + " ->" + sMaxHpNext + " ÃÖ´ë Ã¼·Â ";
 }
 
 void BlackBlood::Effect()

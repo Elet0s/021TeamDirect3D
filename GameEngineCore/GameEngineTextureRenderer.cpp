@@ -103,7 +103,7 @@ void FrameAnimation::Update(float _deltaTime)
 	}
 	else
 	{
-		MsgBoxAssert("í…ìŠ¤ì³ê°€ ì¤€ë¹„ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("ÅØ½ºÃÄ°¡ ÁØºñµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
 		return;
 	}
 }
@@ -130,7 +130,7 @@ void GameEngineTextureRenderer::SetTexture(const std::string_view& _textureName)
 {
 	if (nullptr == GameEngineTexture::Find(_textureName))
 	{
-		MsgBoxAssertString(std::string(_textureName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í…ìŠ¤ì²˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_textureName) + ": ±×·± ÀÌ¸§ÀÇ ÅØ½ºÃ³°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -141,7 +141,7 @@ void GameEngineTextureRenderer::SetTexture(GameEngineTexture* _texture)
 {
 	if (nullptr == _texture)
 	{
-		MsgBoxAssert("í…ìŠ¤ì²˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("ÅØ½ºÃ³°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -154,7 +154,7 @@ void GameEngineTextureRenderer::SetFolderTextureToIndex(const std::string_view& 
 	GameEngineFolderTexture* folderTexture = GameEngineFolderTexture::Find(_textureName);
 	if (nullptr == folderTexture)
 	{
-		MsgBoxAssertString(std::string(_textureName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í´ë” í…ìŠ¤ì²˜ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_textureName) + ": ±×·± ÀÌ¸§ÀÇ Æú´õ ÅØ½ºÃ³°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -176,7 +176,7 @@ void GameEngineTextureRenderer::SetTexture(GameEngineTexture* _texture, int _ind
 {
 	if (nullptr == _texture)
 	{
-		MsgBoxAssert("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” í…ìŠ¤ì³ì…ë‹ˆë‹¤.");
+		MsgBoxAssert("Á¸ÀçÇÏÁö ¾Ê´Â ÅØ½ºÃÄÀÔ´Ï´Ù.");
 		return;
 	}
 
@@ -198,40 +198,40 @@ void GameEngineTextureRenderer::SetPivot(PivotMode _pivot)
 {
 	switch (_pivot)
 	{
-		case PivotMode::Top:
-			atlasDataInst_.pivotPos_ = float4(0.f, -0.5f, 0.f, 0.f);
-			break;
-		case PivotMode::Center:
-			atlasDataInst_.pivotPos_ = float4::Zero;
-			break;
-		case PivotMode::Bot:
-			atlasDataInst_.pivotPos_ = float4(0.f, 0.5f, 0.f, 0.f);
-			break;
-		case PivotMode::Left:
-			atlasDataInst_.pivotPos_ = float4(0.5f, 0.f, 0.f, 0.f);
-			break;
-		case PivotMode::Right:
-			atlasDataInst_.pivotPos_ = float4(-0.5f, 0.f, 0.f, 0.f);
-			break;
-		case PivotMode::LeftTop:
-			atlasDataInst_.pivotPos_ = float4(0.5f, -0.5f, 0.f, 0.f);
-			break;
-		case PivotMode::RightTop:
-			atlasDataInst_.pivotPos_ = float4(-0.5f, -0.5f, 0.f, 0.f);
-			break;
-		case PivotMode::LeftBot:
-			atlasDataInst_.pivotPos_ = float4(0.5f, 0.5f, 0.f, 0.f);
-			break;
-		case PivotMode::RightBot:
-			atlasDataInst_.pivotPos_ = float4(-0.5f, 0.5f, 0.f, 0.f);
-			break;
-		case PivotMode::Custom:
-			//_pivot == Customì¼ë•ŒëŠ” ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠëŠ”ë‹¤.
-			break;
+	case PivotMode::Top:
+		atlasDataInst_.pivotPos_ = float4(0.f, -0.5f, 0.f, 0.f);
+		break;
+	case PivotMode::Center:
+		atlasDataInst_.pivotPos_ = float4::Zero;
+		break;
+	case PivotMode::Bot:
+		atlasDataInst_.pivotPos_ = float4(0.f, 0.5f, 0.f, 0.f);
+		break;
+	case PivotMode::Left:
+		atlasDataInst_.pivotPos_ = float4(0.5f, 0.f, 0.f, 0.f);
+		break;
+	case PivotMode::Right:
+		atlasDataInst_.pivotPos_ = float4(-0.5f, 0.f, 0.f, 0.f);
+		break;
+	case PivotMode::LeftTop:
+		atlasDataInst_.pivotPos_ = float4(0.5f, -0.5f, 0.f, 0.f);
+		break;
+	case PivotMode::RightTop:
+		atlasDataInst_.pivotPos_ = float4(-0.5f, -0.5f, 0.f, 0.f);
+		break;
+	case PivotMode::LeftBot:
+		atlasDataInst_.pivotPos_ = float4(0.5f, 0.5f, 0.f, 0.f);
+		break;
+	case PivotMode::RightBot:
+		atlasDataInst_.pivotPos_ = float4(-0.5f, 0.5f, 0.f, 0.f);
+		break;
+	case PivotMode::Custom:
+		//_pivot == CustomÀÏ¶§´Â ¾Æ¹«°Íµµ ÇÏÁö ¾Ê´Â´Ù.
+		break;
 
-		default:
-			MsgBoxAssert("ì¡´ì¬í•  ìˆ˜ ì—†ëŠ” í”¼ë´‡ëª¨ë“œì…ë‹ˆë‹¤.");
-			return;
+	default:
+		MsgBoxAssert("Á¸ÀçÇÒ ¼ö ¾ø´Â ÇÇº¿¸ğµåÀÔ´Ï´Ù.");
+		return;
 	}
 
 	pivotMode_ = _pivot;
@@ -248,11 +248,11 @@ void GameEngineTextureRenderer::CreateFrameAnimation_CutTexture(const std::strin
 
 	if (allAnimations_.end() != allAnimations_.find(uppercaseAnimationName))
 	{
-		MsgBoxAssertString(std::string(_animationName) + ": ê°™ì€ ì´ë¦„ì˜ ì• ë‹ˆë©”ì´ì…˜ì´ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_animationName) + ": °°Àº ÀÌ¸§ÀÇ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
 		return;
 	}
 
-	FrameAnimation& newAnimation = allAnimations_[uppercaseAnimationName];	//ìƒì„±ê³¼ ë™ì‹œì— ì‚½ì….
+	FrameAnimation& newAnimation = allAnimations_[uppercaseAnimationName];	//»ı¼º°ú µ¿½Ã¿¡ »ğÀÔ.
 	newAnimation.info_ = _desc;
 	newAnimation.info_.parentRenderer_ = this;
 	newAnimation.parentRenderer_ = this;
@@ -266,11 +266,11 @@ void GameEngineTextureRenderer::CreateFrameAnimation_FolderTexture(const std::st
 
 	if (allAnimations_.end() != allAnimations_.find(uppercaseAnimationName))
 	{
-		MsgBoxAssertString(std::string(_animationName) + ": ê°™ì€ ì´ë¦„ì˜ ì• ë‹ˆë©”ì´ì…˜ì´ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_animationName) + ": °°Àº ÀÌ¸§ÀÇ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
 		return;
 	}
 
-	FrameAnimation& newAnimation = allAnimations_[uppercaseAnimationName];	//ìƒì„±ê³¼ ë™ì‹œì— ì‚½ì….
+	FrameAnimation& newAnimation = allAnimations_[uppercaseAnimationName];	//»ı¼º°ú µ¿½Ã¿¡ »ğÀÔ.
 	newAnimation.info_ = _desc;
 	newAnimation.info_.parentRenderer_ = this;
 	newAnimation.parentRenderer_ = this;
@@ -295,7 +295,7 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(
 
 	if (allAnimations_.end() == allAnimations_.find(uppercaseAnimationName))
 	{
-		MsgBoxAssertString(std::string(_animationName) + ": ê·¸ëŸ° ì´ë¦„ì˜ ì• ë‹ˆë©”ì´ì…˜ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_animationName) + ": ±×·± ÀÌ¸§ÀÇ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return;
 	}
 
@@ -325,7 +325,7 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(
 		}
 		else
 		{
-			MsgBoxAssertString(std::string(_animationName) + ": í…ìŠ¤ì²˜ê°€ ì¤€ë¹„ë˜ì§€ ì•Šì€ ì• ë‹ˆë©”ì´ì…˜ì…ë‹ˆë‹¤.");
+			MsgBoxAssertString(std::string(_animationName) + ": ÅØ½ºÃ³°¡ ÁØºñµÇÁö ¾ÊÀº ¾Ö´Ï¸ŞÀÌ¼ÇÀÔ´Ï´Ù.");
 			return;
 		}
 	}

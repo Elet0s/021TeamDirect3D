@@ -4,7 +4,7 @@
 
 LowPressure::LowPressure() 
 {
-	name_ = "ì €ê¸°ì••";
+	name_ = "Àú±â¾Ð";
 	SetName(std::string_view("LowPressure"));
 	myRank_ = Rank::Spotted;
 	maxLevel_ = 999;
@@ -23,7 +23,7 @@ void LowPressure::Init()
 
 
 
-	etc_ = sRuting_Range + "m -> " + sRuting_RangeNext + "m íšë“ ë°˜ê²½ ";
+	etc_ = sRuting_Range + "m -> " + sRuting_RangeNext + "m È¹µæ ¹Ý°æ ";
 }
 
 void LowPressure::Effect()

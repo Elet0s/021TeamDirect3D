@@ -38,7 +38,7 @@ void GameEngineRWTexture::CSSetUnorderedAccessView(int _bindPoint)
 {
     if (true == unorderedAccessViews_.empty())
     {
-        MsgBoxAssert("ì„¸íŒ…í•  ìˆœì„œì—†ëŠ” ì ‘ê·¼ ë·°ê°€ í•˜ë‚˜ë„ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("¼¼ÆÃÇÒ ¼ø¼­¾ø´Â Á¢±Ù ºä°¡ ÇÏ³ªµµ ¾ø½À´Ï´Ù.");
         return;
     }
 

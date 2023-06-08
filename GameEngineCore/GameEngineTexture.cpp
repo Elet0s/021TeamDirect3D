@@ -91,16 +91,16 @@ ID3D11RenderTargetView* GameEngineTexture::CreateRenderTargetView()
 	if (nullptr != renderTargetView_)
 	{
 		return renderTargetView_;
-		//ì´ë¯¸ ë Œë”íƒ€ê²Ÿë·°ê°€ ìƒì„±ë˜ì–´ ìˆë‹¤ë©´ ë‹¤ì‹œ ìƒì„±í•˜ì§€ ì•Šê³  ìƒì„±ë˜ì–´ ìˆëŠ”ê²ƒì„ ë°˜í™˜í•œë‹¤.
+		//ÀÌ¹Ì ·»´õÅ¸°Ùºä°¡ »ı¼ºµÇ¾î ÀÖ´Ù¸é ´Ù½Ã »ı¼ºÇÏÁö ¾Ê°í »ı¼ºµÇ¾î ÀÖ´Â°ÍÀ» ¹İÈ¯ÇÑ´Ù.
 	}
 
-	if (S_OK != GameEngineDevice::GetDevice()->CreateRenderTargetView(	//ë Œë”íƒ€ê²Ÿë·°ë¥¼ ìƒì„±í•˜ëŠ” í•¨ìˆ˜.
-		texture2D_,	//ë Œë”íƒ€ê²Ÿë·°ê°€ ìƒì„±ë˜ëŠ”ë° í•„ìš”í•œ ë¦¬ì†ŒìŠ¤.
-		NULL,	 //ë Œë”íƒ€ê²Ÿë·°ë¥¼ ìƒì„±í•  ë•Œ í•„ìš”í•œ ì„¸ë¶€ì •ë³´. 
-		&renderTargetView_	//ê²°ê³¼ë¬¼ì„ ë°›ì„ ë Œë”íƒ€ê²Ÿë·° ì¸í„°í˜ì´ìŠ¤ í¬ì¸í„°ì˜ ì£¼ì†Œ. 
+	if (S_OK != GameEngineDevice::GetDevice()->CreateRenderTargetView(	//·»´õÅ¸°Ùºä¸¦ »ı¼ºÇÏ´Â ÇÔ¼ö.
+		texture2D_,	//·»´õÅ¸°Ùºä°¡ »ı¼ºµÇ´Âµ¥ ÇÊ¿äÇÑ ¸®¼Ò½º.
+		NULL,	 //·»´õÅ¸°Ùºä¸¦ »ı¼ºÇÒ ¶§ ÇÊ¿äÇÑ ¼¼ºÎÁ¤º¸. 
+		&renderTargetView_	//°á°ú¹°À» ¹ŞÀ» ·»´õÅ¸°Ùºä ÀÎÅÍÆäÀÌ½º Æ÷ÀÎÅÍÀÇ ÁÖ¼Ò. 
 	))
 	{
-		MsgBoxAssert("ë Œë”íƒ€ê²Ÿë·° ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("·»´õÅ¸°Ùºä »ı¼º ½ÇÆĞ.");
 		return nullptr;
 	}
 
@@ -120,7 +120,7 @@ ID3D11ShaderResourceView* GameEngineTexture::CreateShaderResourceView()
 		&shaderResourceView_
 	))
 	{
-		MsgBoxAssert("ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·° ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("¼ÎÀÌ´õ¸®¼Ò½ººä »ı¼º ½ÇÆĞ.");
 		return nullptr;
 	}
 
@@ -140,7 +140,7 @@ ID3D11UnorderedAccessView* GameEngineTexture::CreateUnorderedAccessView()
 		&unorderedAccessView_
 	))
 	{
-		MsgBoxAssert("ìˆœì„œì—†ëŠ” ì—°ê²°ë·° ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("¼ø¼­¾ø´Â ¿¬°áºä »ı¼º ½ÇÆĞ.");
 		return nullptr;
 	}
 
@@ -160,7 +160,7 @@ ID3D11DepthStencilView* GameEngineTexture::CreateDepthStencilView()
 		&depthStencilView_
 	))
 	{
-		MsgBoxAssert("ê¹Šì´ ìŠ¤í…ì‹¤ ë²„í¼ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("±íÀÌ ½ºÅÙ½Ç ¹öÆÛ »ı¼º ½ÇÆĞ.");
 		return nullptr;
 	}
 
@@ -171,7 +171,7 @@ void GameEngineTexture::VSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == this->shaderResourceView_)
 	{
-		MsgBoxAssert("ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¼ÎÀÌ´õ¸®¼Ò½ººä°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -186,7 +186,7 @@ void GameEngineTexture::CSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == this->shaderResourceView_)
 	{
-		MsgBoxAssert("ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¼ÎÀÌ´õ¸®¼Ò½ººä°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -201,7 +201,7 @@ void GameEngineTexture::PSSetShaderResource(int _bindPoint)
 {
 	if (nullptr == this->shaderResourceView_)
 	{
-		MsgBoxAssert("ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·°ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¼ÎÀÌ´õ¸®¼Ò½ººä°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -236,7 +236,7 @@ void GameEngineTexture::CSSetUnorderedAccessView(int _bindPoint)
 {
 	if (nullptr == this->unorderedAccessView_)
 	{
-		MsgBoxAssert("ìˆœì„œì—†ëŠ” ì—°ê²° ë·°ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¼ø¼­¾ø´Â ¿¬°á ºä°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
@@ -253,7 +253,7 @@ void GameEngineTexture::Cut(const std::string_view& _textureName, int _x, int _y
 	GameEngineTexture* findTexture = GameEngineTexture::Find(_textureName);
 	if (nullptr == findTexture)
 	{
-		MsgBoxAssertString(std::string(_textureName) + ": ê·¸ëŸ° ì´ë¦„ì˜ í…ìŠ¤ì³ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_textureName) + ": ±×·± ÀÌ¸§ÀÇ ÅØ½ºÃÄ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return;
 	}
 	else
@@ -302,7 +302,7 @@ PixelColor GameEngineTexture::GetPixelToPixelColor(int _x, int _y)
 	}
 
 	DXGI_FORMAT format = scratchImage_.GetMetadata().format;
-	//ìƒ‰ìƒì´ ë­”ê°€ ì´ìƒí•˜ë‹¤ë©´ ì—¬ê¸°ì„œ í¬ë§· í™•ì¸.
+	//»ö»óÀÌ ¹º°¡ ÀÌ»óÇÏ´Ù¸é ¿©±â¼­ Æ÷¸Ë È®ÀÎ.
 
 	uint8_t* color = scratchImage_.GetImages()->pixels;
 
@@ -366,218 +366,218 @@ PixelColor GameEngineTexture::GetPixelToPixelColor(int _x, int _y)
 		//case DXGI_FORMAT_R8G8B8A8_TYPELESS:
 		//	break;
 
-		case DXGI_FORMAT_R8G8B8A8_UNORM:
-		{
-			size_t index = _y * scratchImage_.GetMetadata().width + _x;
-			color = color + (index * 4);
+	case DXGI_FORMAT_R8G8B8A8_UNORM:
+	{
+		size_t index = _y * scratchImage_.GetMetadata().width + _x;
+		color = color + (index * 4);
 
-			returnColor.r = color[0];
-			returnColor.g = color[1];
-			returnColor.b = color[2];
-			returnColor.a = color[3];
-			break;
-		}
+		returnColor.r = color[0];
+		returnColor.g = color[1];
+		returnColor.b = color[2];
+		returnColor.a = color[3];
+		break;
+	}
 
-		//case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
-		//	break;
-		//case DXGI_FORMAT_R8G8B8A8_UINT:
-		//	break;
-		//case DXGI_FORMAT_R8G8B8A8_SNORM:
-		//	break;
-		//case DXGI_FORMAT_R8G8B8A8_SINT:
-		//	break;
-		//case DXGI_FORMAT_R16G16_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_R16G16_FLOAT:
-		//	break;
-		//case DXGI_FORMAT_R16G16_UNORM:
-		//	break;
-		//case DXGI_FORMAT_R16G16_UINT:
-		//	break;
-		//case DXGI_FORMAT_R16G16_SNORM:
-		//	break;
-		//case DXGI_FORMAT_R16G16_SINT:
-		//	break;
-		//case DXGI_FORMAT_R32_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_D32_FLOAT:
-		//	break;
-		//case DXGI_FORMAT_R32_FLOAT:
-		//	break;
-		//case DXGI_FORMAT_R32_UINT:
-		//	break;
-		//case DXGI_FORMAT_R32_SINT:
-		//	break;
-		//case DXGI_FORMAT_R24G8_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_D24_UNORM_S8_UINT:
-		//	break;
-		//case DXGI_FORMAT_R24_UNORM_X8_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_X24_TYPELESS_G8_UINT:
-		//	break;
-		//case DXGI_FORMAT_R8G8_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_R8G8_UNORM:
-		//	break;
-		//case DXGI_FORMAT_R8G8_UINT:
-		//	break;
-		//case DXGI_FORMAT_R8G8_SNORM:
-		//	break;
-		//case DXGI_FORMAT_R8G8_SINT:
-		//	break;
-		//case DXGI_FORMAT_R16_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_R16_FLOAT:
-		//	break;
-		//case DXGI_FORMAT_D16_UNORM:
-		//	break;
-		//case DXGI_FORMAT_R16_UNORM:
-		//	break;
-		//case DXGI_FORMAT_R16_UINT:
-		//	break;
-		//case DXGI_FORMAT_R16_SNORM:
-		//	break;
-		//case DXGI_FORMAT_R16_SINT:
-		//	break;
-		//case DXGI_FORMAT_R8_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_R8_UNORM:
-		//	break;
-		//case DXGI_FORMAT_R8_UINT:
-		//	break;
-		//case DXGI_FORMAT_R8_SNORM:
-		//	break;
-		//case DXGI_FORMAT_R8_SINT:
-		//	break;
-		//case DXGI_FORMAT_A8_UNORM:
-		//	break;
-		//case DXGI_FORMAT_R1_UNORM:
-		//	break;
-		//case DXGI_FORMAT_R9G9B9E5_SHAREDEXP:
-		//	break;
-		//case DXGI_FORMAT_R8G8_B8G8_UNORM:
-		//	break;
-		//case DXGI_FORMAT_G8R8_G8B8_UNORM:
-		//	break;
-		//case DXGI_FORMAT_BC1_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_BC1_UNORM:
-		//	break;
-		//case DXGI_FORMAT_BC1_UNORM_SRGB:
-		//	break;
-		//case DXGI_FORMAT_BC2_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_BC2_UNORM:
-		//	break;
-		//case DXGI_FORMAT_BC2_UNORM_SRGB:
-		//	break;
-		//case DXGI_FORMAT_BC3_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_BC3_UNORM:
-		//	break;
-		//case DXGI_FORMAT_BC3_UNORM_SRGB:
-		//	break;
-		//case DXGI_FORMAT_BC4_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_BC4_UNORM:
-		//	break;
-		//case DXGI_FORMAT_BC4_SNORM:
-		//	break;
-		//case DXGI_FORMAT_BC5_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_BC5_UNORM:
-		//	break;
-		//case DXGI_FORMAT_BC5_SNORM:
-		//	break;
-		//case DXGI_FORMAT_B5G6R5_UNORM:
-		//	break;
-		//case DXGI_FORMAT_B5G5R5A1_UNORM:
-		//	break;
-		case DXGI_FORMAT_B8G8R8A8_UNORM:
-		{
-			size_t index = _y * scratchImage_.GetMetadata().width + _x;
-			color = color + (index * 4);
+	//case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
+	//	break;
+	//case DXGI_FORMAT_R8G8B8A8_UINT:
+	//	break;
+	//case DXGI_FORMAT_R8G8B8A8_SNORM:
+	//	break;
+	//case DXGI_FORMAT_R8G8B8A8_SINT:
+	//	break;
+	//case DXGI_FORMAT_R16G16_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_R16G16_FLOAT:
+	//	break;
+	//case DXGI_FORMAT_R16G16_UNORM:
+	//	break;
+	//case DXGI_FORMAT_R16G16_UINT:
+	//	break;
+	//case DXGI_FORMAT_R16G16_SNORM:
+	//	break;
+	//case DXGI_FORMAT_R16G16_SINT:
+	//	break;
+	//case DXGI_FORMAT_R32_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_D32_FLOAT:
+	//	break;
+	//case DXGI_FORMAT_R32_FLOAT:
+	//	break;
+	//case DXGI_FORMAT_R32_UINT:
+	//	break;
+	//case DXGI_FORMAT_R32_SINT:
+	//	break;
+	//case DXGI_FORMAT_R24G8_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_D24_UNORM_S8_UINT:
+	//	break;
+	//case DXGI_FORMAT_R24_UNORM_X8_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_X24_TYPELESS_G8_UINT:
+	//	break;
+	//case DXGI_FORMAT_R8G8_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_R8G8_UNORM:
+	//	break;
+	//case DXGI_FORMAT_R8G8_UINT:
+	//	break;
+	//case DXGI_FORMAT_R8G8_SNORM:
+	//	break;
+	//case DXGI_FORMAT_R8G8_SINT:
+	//	break;
+	//case DXGI_FORMAT_R16_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_R16_FLOAT:
+	//	break;
+	//case DXGI_FORMAT_D16_UNORM:
+	//	break;
+	//case DXGI_FORMAT_R16_UNORM:
+	//	break;
+	//case DXGI_FORMAT_R16_UINT:
+	//	break;
+	//case DXGI_FORMAT_R16_SNORM:
+	//	break;
+	//case DXGI_FORMAT_R16_SINT:
+	//	break;
+	//case DXGI_FORMAT_R8_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_R8_UNORM:
+	//	break;
+	//case DXGI_FORMAT_R8_UINT:
+	//	break;
+	//case DXGI_FORMAT_R8_SNORM:
+	//	break;
+	//case DXGI_FORMAT_R8_SINT:
+	//	break;
+	//case DXGI_FORMAT_A8_UNORM:
+	//	break;
+	//case DXGI_FORMAT_R1_UNORM:
+	//	break;
+	//case DXGI_FORMAT_R9G9B9E5_SHAREDEXP:
+	//	break;
+	//case DXGI_FORMAT_R8G8_B8G8_UNORM:
+	//	break;
+	//case DXGI_FORMAT_G8R8_G8B8_UNORM:
+	//	break;
+	//case DXGI_FORMAT_BC1_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_BC1_UNORM:
+	//	break;
+	//case DXGI_FORMAT_BC1_UNORM_SRGB:
+	//	break;
+	//case DXGI_FORMAT_BC2_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_BC2_UNORM:
+	//	break;
+	//case DXGI_FORMAT_BC2_UNORM_SRGB:
+	//	break;
+	//case DXGI_FORMAT_BC3_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_BC3_UNORM:
+	//	break;
+	//case DXGI_FORMAT_BC3_UNORM_SRGB:
+	//	break;
+	//case DXGI_FORMAT_BC4_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_BC4_UNORM:
+	//	break;
+	//case DXGI_FORMAT_BC4_SNORM:
+	//	break;
+	//case DXGI_FORMAT_BC5_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_BC5_UNORM:
+	//	break;
+	//case DXGI_FORMAT_BC5_SNORM:
+	//	break;
+	//case DXGI_FORMAT_B5G6R5_UNORM:
+	//	break;
+	//case DXGI_FORMAT_B5G5R5A1_UNORM:
+	//	break;
+	case DXGI_FORMAT_B8G8R8A8_UNORM:
+	{
+		size_t index = _y * scratchImage_.GetMetadata().width + _x;
+		color = color + (index * 4);
 
-			returnColor.r = color[2];
-			returnColor.g = color[1];
-			returnColor.b = color[0];
-			returnColor.a = color[3];
+		returnColor.r = color[2];
+		returnColor.g = color[1];
+		returnColor.b = color[0];
+		returnColor.a = color[3];
 
-			break;
-		}
-		//case DXGI_FORMAT_B8G8R8X8_UNORM:
-		//	break;
-		//case DXGI_FORMAT_R10G10B10_XR_BIAS_A2_UNORM:
-		//	break;
-		//case DXGI_FORMAT_B8G8R8A8_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:
-		//	break;
-		//case DXGI_FORMAT_B8G8R8X8_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_B8G8R8X8_UNORM_SRGB:
-		//	break;
-		//case DXGI_FORMAT_BC6H_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_BC6H_UF16:
-		//	break;
-		//case DXGI_FORMAT_BC6H_SF16:
-		//	break;
-		//case DXGI_FORMAT_BC7_TYPELESS:
-		//	break;
-		//case DXGI_FORMAT_BC7_UNORM:
-		//	break;
-		//case DXGI_FORMAT_BC7_UNORM_SRGB:
-		//	break;
-		//case DXGI_FORMAT_AYUV:
-		//	break;
-		//case DXGI_FORMAT_Y410:
-		//	break;
-		//case DXGI_FORMAT_Y416:
-		//	break;
-		//case DXGI_FORMAT_NV12:
-		//	break;
-		//case DXGI_FORMAT_P010:
-		//	break;
-		//case DXGI_FORMAT_P016:
-		//	break;
-		//case DXGI_FORMAT_420_OPAQUE:
-		//	break;
-		//case DXGI_FORMAT_YUY2:
-		//	break;
-		//case DXGI_FORMAT_Y210:
-		//	break;
-		//case DXGI_FORMAT_Y216:
-		//	break;
-		//case DXGI_FORMAT_NV11:
-		//	break;
-		//case DXGI_FORMAT_AI44:
-		//	break;
-		//case DXGI_FORMAT_IA44:
-		//	break;
-		//case DXGI_FORMAT_P8:
-		//	break;
-		//case DXGI_FORMAT_A8P8:
-		//	break;
-		//case DXGI_FORMAT_B4G4R4A4_UNORM:
-		//	break;
-		//case DXGI_FORMAT_P208:
-		//	break;
-		//case DXGI_FORMAT_V208:
-		//	break;
-		//case DXGI_FORMAT_V408:
-		//	break;
-		//case DXGI_FORMAT_SAMPLER_FEEDBACK_MIN_MIP_OPAQUE:
-		//	break;
-		//case DXGI_FORMAT_SAMPLER_FEEDBACK_MIP_REGION_USED_OPAQUE:
-		//	break;
-		//case DXGI_FORMAT_FORCE_UINT:
-		//	break;
+		break;
+	}
+	//case DXGI_FORMAT_B8G8R8X8_UNORM:
+	//	break;
+	//case DXGI_FORMAT_R10G10B10_XR_BIAS_A2_UNORM:
+	//	break;
+	//case DXGI_FORMAT_B8G8R8A8_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:
+	//	break;
+	//case DXGI_FORMAT_B8G8R8X8_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_B8G8R8X8_UNORM_SRGB:
+	//	break;
+	//case DXGI_FORMAT_BC6H_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_BC6H_UF16:
+	//	break;
+	//case DXGI_FORMAT_BC6H_SF16:
+	//	break;
+	//case DXGI_FORMAT_BC7_TYPELESS:
+	//	break;
+	//case DXGI_FORMAT_BC7_UNORM:
+	//	break;
+	//case DXGI_FORMAT_BC7_UNORM_SRGB:
+	//	break;
+	//case DXGI_FORMAT_AYUV:
+	//	break;
+	//case DXGI_FORMAT_Y410:
+	//	break;
+	//case DXGI_FORMAT_Y416:
+	//	break;
+	//case DXGI_FORMAT_NV12:
+	//	break;
+	//case DXGI_FORMAT_P010:
+	//	break;
+	//case DXGI_FORMAT_P016:
+	//	break;
+	//case DXGI_FORMAT_420_OPAQUE:
+	//	break;
+	//case DXGI_FORMAT_YUY2:
+	//	break;
+	//case DXGI_FORMAT_Y210:
+	//	break;
+	//case DXGI_FORMAT_Y216:
+	//	break;
+	//case DXGI_FORMAT_NV11:
+	//	break;
+	//case DXGI_FORMAT_AI44:
+	//	break;
+	//case DXGI_FORMAT_IA44:
+	//	break;
+	//case DXGI_FORMAT_P8:
+	//	break;
+	//case DXGI_FORMAT_A8P8:
+	//	break;
+	//case DXGI_FORMAT_B4G4R4A4_UNORM:
+	//	break;
+	//case DXGI_FORMAT_P208:
+	//	break;
+	//case DXGI_FORMAT_V208:
+	//	break;
+	//case DXGI_FORMAT_V408:
+	//	break;
+	//case DXGI_FORMAT_SAMPLER_FEEDBACK_MIN_MIP_OPAQUE:
+	//	break;
+	//case DXGI_FORMAT_SAMPLER_FEEDBACK_MIP_REGION_USED_OPAQUE:
+	//	break;
+	//case DXGI_FORMAT_FORCE_UINT:
+	//	break;
 
-		default:
-			MsgBoxAssert("ì¤€ë¹„ë˜ì§€ ì•Šì€ í¬ë§·ì…ë‹ˆë‹¤.");
-			break;
+	default:
+		MsgBoxAssert("ÁØºñµÇÁö ¾ÊÀº Æ÷¸ËÀÔ´Ï´Ù.");
+		break;
 	}
 
 
@@ -601,13 +601,13 @@ void GameEngineTexture::LoadTexture(const std::string_view& _path)
 			scratchImage_
 		))
 		{
-			MsgBoxAssertString(std::string(_path) + ": í…ìŠ¤ì³ ë¡œë“œ ì‹¤íŒ¨.");
+			MsgBoxAssertString(std::string(_path) + ": ÅØ½ºÃÄ ·Îµå ½ÇÆĞ.");
 			return;
 		}
 	}
 	else if (uppercaseExtension == ".DDS")
 	{
-		MsgBoxAssert("DDS: ì•„ì§ ì²˜ë¦¬ ì¤€ë¹„ë˜ì§€ ì•Šì€ ì´ë¯¸ì§€ í¬ë§·ì…ë‹ˆë‹¤.");
+		MsgBoxAssert("DDS: ¾ÆÁ÷ Ã³¸® ÁØºñµÇÁö ¾ÊÀº ÀÌ¹ÌÁö Æ÷¸ËÀÔ´Ï´Ù.");
 		return;
 	}
 	else if (uppercaseExtension == ".PNG")
@@ -619,14 +619,14 @@ void GameEngineTexture::LoadTexture(const std::string_view& _path)
 			scratchImage_						  //
 		))
 		{
-			MsgBoxAssertString(std::string(_path) + ": í…ìŠ¤ì³ ë¡œë“œ ì‹¤íŒ¨.");
+			MsgBoxAssertString(std::string(_path) + ": ÅØ½ºÃÄ ·Îµå ½ÇÆĞ.");
 			return;
 		}
 	}
 
 
-	//GameEngineDevice::GetDevice()->CreateShaderResourceView(); ì‚¬ìš©í•˜ì§€ ì•ŠìŒ.
-	//ëŒ€ì‹  ë” ì‰¬ìš´ DirectXTexì˜ ì…°ì´ë”ë¦¬ì†ŒìŠ¤ë·° ìƒì„±í•¨ìˆ˜ ì‚¬ìš©.
+	//GameEngineDevice::GetDevice()->CreateShaderResourceView(); »ç¿ëÇÏÁö ¾ÊÀ½.
+	//´ë½Å ´õ ½¬¿î DirectXTexÀÇ ¼ÎÀÌ´õ¸®¼Ò½ººä »ı¼ºÇÔ¼ö »ç¿ë.
 
 	if (S_OK != DirectX::CreateShaderResourceView(//
 		GameEngineDevice::GetDevice(),			  //
@@ -636,7 +636,7 @@ void GameEngineTexture::LoadTexture(const std::string_view& _path)
 		&shaderResourceView_					  //
 	))
 	{
-		MsgBoxAssertString(std::string(_path) + ": ì…°ì´ë” ë¦¬ì†ŒìŠ¤ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssertString(std::string(_path) + ": ¼ÎÀÌ´õ ¸®¼Ò½º »ı¼º ½ÇÆĞ.");
 		return;
 	}
 
@@ -649,12 +649,12 @@ void GameEngineTexture::CreateTexture(const D3D11_TEXTURE2D_DESC& _desc)
 	desc_ = _desc;
 
 	if (S_OK != GameEngineDevice::GetDevice()->CreateTexture2D(
-		&desc_,	//í…ìŠ¤ì²˜2D ìƒì„±ìš© ëª…ì„¸ì„œ.
-		nullptr,			//í…ìŠ¤ì²˜ ìƒì„±ì‹œ í•„ìš”í•œ ì´ˆê¸°ë°ì´í„°.
-		&texture2D_			//ìƒì„±í•œ í…ìŠ¤ì²˜ë¥¼ ë°›ì„ ID3D11Texture2D ì¸í„°í˜ì´ìŠ¤ í¬ì¸í„°.
+		&desc_,	//ÅØ½ºÃ³2D »ı¼º¿ë ¸í¼¼¼­.
+		nullptr,			//ÅØ½ºÃ³ »ı¼º½Ã ÇÊ¿äÇÑ ÃÊ±âµ¥ÀÌÅÍ.
+		&texture2D_			//»ı¼ºÇÑ ÅØ½ºÃ³¸¦ ¹ŞÀ» ID3D11Texture2D ÀÎÅÍÆäÀÌ½º Æ÷ÀÎÅÍ.
 	))
 	{
-		MsgBoxAssert("í…ìŠ¤ì²˜ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("ÅØ½ºÃ³ »ı¼º ½ÇÆĞ.");
 		return;
 	}
 }

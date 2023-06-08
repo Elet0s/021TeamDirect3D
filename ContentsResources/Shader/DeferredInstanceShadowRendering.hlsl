@@ -5,17 +5,17 @@
 struct Input
 {
     float4 localPosition_ : POSITION;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
-    uint instanceIndex_ : SV_InstanceID; //ì¸ìŠ¤í„´ìŠ¤ ì‹ë³„ë²ˆí˜¸.
-    uint colorTextureIndex_ : COLORTEXTUREINDEX; //í…ìŠ¤ì²˜ ì¸ë±ìŠ¤. ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  í…ìŠ¤ì²˜ ë²ˆí˜¸.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
+    uint instanceIndex_ : SV_InstanceID; //ÀÎ½ºÅÏ½º ½Äº°¹øÈ£.
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ÅØ½ºÃ³ ÀÎµ¦½º. ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ÅØ½ºÃ³ ¹øÈ£.
 };
 
 struct Output
 {
     float4 wvpPosition_ : SV_Position;
     float4 shadowPosition_ : POSITION;
-    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: í…ìŠ¤ì³ì˜ UVê°’ì„ ì˜ë¯¸í•˜ëŠ” ì‹œë§¨í‹±ë„¤ì„. í…ìŠ¤ì³ì¢Œí‘œë¥¼ ëœ»í•˜ëŠ” Texture Coordinateì˜ ì¤„ì„ë§.
-    uint colorTextureIndex_ : COLORTEXTUREINDEX; //í…ìŠ¤ì²˜ ì¸ë±ìŠ¤. ì¸ìŠ¤í„´ìŠ¤ë³„ë¡œ ì‚¬ìš©í•  í…ìŠ¤ì²˜ ë²ˆí˜¸.
+    float4 texcoord_ : TEXCOORD; //TEXCOORD[n]: ÅØ½ºÃÄÀÇ UV°ªÀ» ÀÇ¹ÌÇÏ´Â ½Ã¸ÇÆ½³×ÀÓ. ÅØ½ºÃÄÁÂÇ¥¸¦ ¶æÇÏ´Â Texture CoordinateÀÇ ÁÙÀÓ¸».
+    uint colorTextureIndex_ : COLORTEXTUREINDEX; //ÅØ½ºÃ³ ÀÎµ¦½º. ÀÎ½ºÅÏ½ºº°·Î »ç¿ëÇÒ ÅØ½ºÃ³ ¹øÈ£.
 };
 
 //cbuffer PixelData : register(b0)
@@ -51,7 +51,7 @@ float4 DeferredInstanceShadowRendering_PS(Output _input) : SV_Target0
 }
 
 
-struct InstAtlasData     //ì¸ìŠ¤í„´ì‹±ìš© ì•„í‹€ë¼ìŠ¤ë°ì´í„°.
+struct InstAtlasData     //ÀÎ½ºÅÏ½Ì¿ë ¾ÆÆ²¶ó½ºµ¥ÀÌÅÍ.
 {
     float2 textureFramePos_;
     float2 textureFrameSize_;
@@ -60,7 +60,7 @@ struct InstAtlasData     //ì¸ìŠ¤í„´ì‹±ìš© ì•„í‹€ë¼ìŠ¤ë°ì´í„°.
 
 StructuredBuffer<InstTransformData> Inst_TransformData : register(t12);
 StructuredBuffer<InstRenderOption> Inst_RenderOption : register(t13);
-Texture2DArray Inst_Textures : register(t14);
+Texture2DArray Inst_Textures : register(t14);  
 StructuredBuffer<InstAtlasData> Inst_AtlasData : register(t15);
 
 Output DeferredInstanceShadowRendering_VSINST(Input _input)
@@ -70,21 +70,21 @@ Output DeferredInstanceShadowRendering_VSINST(Input _input)
     float4 vertexPos = _input.localPosition_;
     vertexPos += Inst_AtlasData[_input.instanceIndex_].pivotPos_;
     vertexPos.x = ((-sin(radians(Inst_RenderOption[_input.instanceIndex_].lightingRotationY_)) * (vertexPos.y + 0.5f) + vertexPos.x)) * Inst_RenderOption[_input.instanceIndex_].vertexInversion_;
-    //ì •ì ì¢Œí‘œë¥¼ shadowAngle_ë§Œí¼ ê¸°ìš¸ì—¬ ì¤€ë‹¤.
+    //Á¤Á¡ÁÂÇ¥¸¦ shadowAngle_¸¸Å­ ±â¿ï¿© ÁØ´Ù.
     
     vertexPos.y = tan(radians(Inst_RenderOption[_input.instanceIndex_].lightingRotationX_)) * (vertexPos.y + 0.5f) - 0.5f;
     
     result.wvpPosition_ 
         = mul(vertexPos, Inst_TransformData[_input.instanceIndex_].worldViewProjectionMatrix_);
-     //ì •ì ì˜ wvpë³€í™˜ ìœ„ì¹˜ ê³„ì‚°.
+     //Á¤Á¡ÀÇ wvpº¯È¯ À§Ä¡ °è»ê.
     
     result.shadowPosition_ = result.wvpPosition_;
-    //ê·¸ë¦¼ìì˜ íˆ¬ì˜ê³µê°„ ë‚´ ìœ„ì¹˜ ì „ë‹¬.
+    //±×¸²ÀÚÀÇ Åõ¿µ°ø°£ ³» À§Ä¡ Àü´Ş.
     
     if (-1 == Inst_RenderOption[_input.instanceIndex_].vertexInversion_)
     {
         _input.texcoord_.x = 1.f - _input.texcoord_.x;
-        //ì˜¤ë¸Œì íŠ¸ê°€ ì¢Œìš°ë°˜ì „ë˜ë©´ texcoordë„ ì¢Œìš°ë°˜ì „í•´ì„œ ê·¸ë ¤ì§€ê²Œ í•œë‹¤.
+        //¿ÀºêÁ§Æ®°¡ ÁÂ¿ì¹İÀüµÇ¸é texcoordµµ ÁÂ¿ì¹İÀüÇØ¼­ ±×·ÁÁö°Ô ÇÑ´Ù.
     }
     
     result.texcoord_.x = (_input.texcoord_.x * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.x)
@@ -92,10 +92,10 @@ Output DeferredInstanceShadowRendering_VSINST(Input _input)
     result.texcoord_.y = (_input.texcoord_.y * Inst_AtlasData[_input.instanceIndex_].textureFrameSize_.y)
         + Inst_AtlasData[_input.instanceIndex_].textureFramePos_.y;
     result.texcoord_.z = 0.f;
-    //ì¸ìŠ¤í„´ìŠ¤ë³„ í…ìŠ¤ì²˜ uvì¢Œí‘œ ê³„ì‚°.
+    //ÀÎ½ºÅÏ½ºº° ÅØ½ºÃ³ uvÁÂÇ¥ °è»ê.
 
     result.colorTextureIndex_ = _input.colorTextureIndex_;
-    //í…ìŠ¤ì²˜ ë°°ì—´ ë‚´ ì»¬ëŸ¬ í…ìŠ¤ì²˜ ë²ˆí˜¸ë¥¼ í”½ì…€ì…°ì´ë”ë¡œ ì „ë‹¬.
+    //ÅØ½ºÃ³ ¹è¿­ ³» ÄÃ·¯ ÅØ½ºÃ³ ¹øÈ£¸¦ ÇÈ¼¿¼ÎÀÌ´õ·Î Àü´Ş.
     
     return result;
 }
@@ -108,13 +108,13 @@ float4 DeferredInstanceShadowRendering_PSINST(Output _input) : SV_Target0
     );
     
     float4 shadowDepth = float4(1.f, 0.f, 0.f, 1.f);
-    //ê·¸ë¦¼ìì˜ ê¸°ë³¸ ê¹Šì´ê°’ì„ 1ë¡œ ì„¤ì •í•˜ì—¬ ê°€ì¥ ë’¤ë¡œ ê°€ê²Œ í•œë‹¤.
+    //±×¸²ÀÚÀÇ ±âº» ±íÀÌ°ªÀ» 1·Î ¼³Á¤ÇÏ¿© °¡Àå µÚ·Î °¡°Ô ÇÑ´Ù.
   
     if (0.0f < sampledColor.a)
     {
         shadowDepth = float4(_input.shadowPosition_.z / _input.shadowPosition_.w, 0.f, 0.f, 1.f);
-        //ê·¸ë¦¼ìì˜ íˆ¬ì˜ê³µê°„ ë‚´ zê°’ì„ ê¹Šì´ê°’ìœ¼ë¡œ ë®ì–´ ì”Œìš´ë‹¤.
-        //ì‚¬ì‹¤ ì§êµíˆ¬ì˜ì´ë©´ wê°€ 1 ê³ ì •ì´ë¯€ë¡œ í•„ìš”ì—†ëŠ” ì—°ì‚°ì´ì§€ë§Œ ì›ê·¼íˆ¬ì˜ë„ ì‚¬ìš©í•˜ë¯€ë¡œ wë¡œ ë‚˜ëˆ„ì–´ì¤€ë‹¤.
+        //±×¸²ÀÚÀÇ Åõ¿µ°ø°£ ³» z°ªÀ» ±íÀÌ°ªÀ¸·Î µ¤¾î ¾º¿î´Ù.
+        //»ç½Ç Á÷±³Åõ¿µÀÌ¸é w°¡ 1 °íÁ¤ÀÌ¹Ç·Î ÇÊ¿ä¾ø´Â ¿¬»êÀÌÁö¸¸ ¿ø±ÙÅõ¿µµµ »ç¿ëÇÏ¹Ç·Î w·Î ³ª´©¾îÁØ´Ù.
     }
     else
     {

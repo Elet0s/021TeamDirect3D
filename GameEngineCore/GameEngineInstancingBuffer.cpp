@@ -29,7 +29,7 @@ GameEngineInstancingBuffer* GameEngineInstancingBuffer::Create(size_t _count, si
 void GameEngineInstancingBuffer::CreateInstancingBuffer(size_t _count, size_t _size)
 {
     this->Release();
-    //ê¸°ì¡´ ì¸ìŠ¤í„´ì‹±ë²„í¼ì˜ ë°ì´í„°ëŠ” ì „ë¶€ ì´ˆê¸°í™”.
+    //±âÁ¸ ÀÎ½ºÅÏ½Ì¹öÆÛÀÇ µ¥ÀÌÅÍ´Â ÀüºÎ ÃÊ±âÈ­.
 
     bufferCount_ = _count;
     dataSize_ = _size;
@@ -37,16 +37,16 @@ void GameEngineInstancingBuffer::CreateInstancingBuffer(size_t _count, size_t _s
     instancingBufferDesc_ = { 0 };
 
     instancingBufferDesc_.ByteWidth = static_cast<UINT>(bufferCount_ * dataSize_);
-    //ì¸ìŠ¤í„´ì‹±ë²„í¼ì˜ ì „ì²´ í¬ê¸° ë“±ë¡.
+    //ÀÎ½ºÅÏ½Ì¹öÆÛÀÇ ÀüÃ¼ Å©±â µî·Ï.
 
     instancingBufferDesc_.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
-    //ìˆ˜ì‹œë¡œ ë‚´ìš©ì„ ë°”ê¿”ì¤˜ì•¼ í•˜ë¯€ë¡œ CPUì•¡ì„¸ìŠ¤ê°€ ê°€ëŠ¥í•˜ê²Œ í•œë‹¤.
+    //¼ö½Ã·Î ³»¿ëÀ» ¹Ù²ãÁà¾ß ÇÏ¹Ç·Î CPU¾×¼¼½º°¡ °¡´ÉÇÏ°Ô ÇÑ´Ù.
 
     instancingBufferDesc_.Usage = D3D11_USAGE_DYNAMIC;
-    //ìƒìˆ˜ë²„í¼ì²˜ëŸ¼ ëŸ°íƒ€ì„ ì¤‘ê°„ì— ìˆ˜ì‹œë¡œ ë‚´ìš©ì´ ë°”ë€” ì˜ˆì •ì´ë‹ˆê¹Œ ë™ì ìœ¼ë¡œ ì§€ì •.
+    //»ó¼ö¹öÆÛÃ³·³ ·±Å¸ÀÓ Áß°£¿¡ ¼ö½Ã·Î ³»¿ëÀÌ ¹Ù²ğ ¿¹Á¤ÀÌ´Ï±î µ¿ÀûÀ¸·Î ÁöÁ¤.
 
     instancingBufferDesc_.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
-    //ì¸ìŠ¤í„´ì‹± ë²„í¼ëŠ” ì •ì ë²„í¼ì™€ í•¨ê»˜ IA1ë‹¨ê³„ì—ì„œ GPUë¡œ ì „ë‹¬ë˜ì–´ ì •ì ì…°ì´ë”ë¥¼ í†µí•´ í™”ë©´ì— ë°°ì¹˜ëœë‹¤.
+    //ÀÎ½ºÅÏ½Ì ¹öÆÛ´Â Á¤Á¡¹öÆÛ¿Í ÇÔ²² IA1´Ü°è¿¡¼­ GPU·Î Àü´ŞµÇ¾î Á¤Á¡¼ÎÀÌ´õ¸¦ ÅëÇØ È­¸é¿¡ ¹èÄ¡µÈ´Ù.
 
     if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(
         &instancingBufferDesc_,
@@ -54,7 +54,7 @@ void GameEngineInstancingBuffer::CreateInstancingBuffer(size_t _count, size_t _s
         &instancingBuffer_
     ))
     {
-        MsgBoxAssert("ì¸ìŠ¤í„´ì‹± ë²„í¼ ìƒì„± ì‹¤íŒ¨.");
+        MsgBoxAssert("ÀÎ½ºÅÏ½Ì ¹öÆÛ »ı¼º ½ÇÆĞ.");
         return;
     }
 }
@@ -63,17 +63,17 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _byteWidth
 {
     if (nullptr == _data)
     {
-        MsgBoxAssertString(this->GetNameCopy() + ": ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssertString(this->GetNameCopy() + ": µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
     if (instancingBufferDesc_.ByteWidth != _byteWidth)
     {
-        MsgBoxAssertString(this->GetNameCopy() + ": ì¸ìŠ¤í„´ì‹± ë²„í¼ì˜ ì „ì²´ í¬ê¸°ê°€ ì•ˆ ë§ìŠµë‹ˆë‹¤.");
+        MsgBoxAssertString(this->GetNameCopy() + ": ÀÎ½ºÅÏ½Ì ¹öÆÛÀÇ ÀüÃ¼ Å©±â°¡ ¾È ¸Â½À´Ï´Ù.");
         return;
     }
 
-    //êµ¬ì¡°í™”ë²„í¼ì— í•´ë‹¹í•˜ëŠ” GPU ë‚´ ë©”ëª¨ë¦¬ì˜ì—­ì— ë§¤í•‘ì‹œí‚¬ CPU ë©”ëª¨ë¦¬ì˜ ì£¼ì†Œê°’.
+    //±¸Á¶È­¹öÆÛ¿¡ ÇØ´çÇÏ´Â GPU ³» ¸Ş¸ğ¸®¿µ¿ª¿¡ ¸ÅÇÎ½ÃÅ³ CPU ¸Ş¸ğ¸®ÀÇ ÁÖ¼Ò°ª.
     D3D11_MAPPED_SUBRESOURCE mappedPtrInCPU = { 0 };
 
     memset(&mappedPtrInCPU, 0, sizeof(mappedPtrInCPU));
@@ -89,7 +89,7 @@ void GameEngineInstancingBuffer::ChangeData(const void* _data, size_t _byteWidth
 
     if (nullptr == mappedPtrInCPU.pData)
     {
-        MsgBoxAssert("ê·¸ë˜í”½ì¹´ë“œ ë²„í¼ì— ì ‘ê·¼í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("±×·¡ÇÈÄ«µå ¹öÆÛ¿¡ Á¢±ÙÇÏÁö ¸øÇß½À´Ï´Ù.");
         return;
     }
 

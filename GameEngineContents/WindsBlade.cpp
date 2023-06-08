@@ -11,7 +11,7 @@ WindsBlade::WindsBlade()
 	windPum_(0),
 	updateStart_(false)
 {
-	name_ = "ë°”ëŒì˜ ì¹¼ë‚ ";
+	name_ = "¹Ù¶÷ÀÇ Ä®³¯";
 	SetName(std::string_view("WindsBlade"));
 	myRank_ = Rank::Rare;
 	maxLevel_ = 7;
@@ -27,8 +27,8 @@ void WindsBlade::Init()
 	StateSet();
 	std::string sDamege = std::to_string(static_cast<int>(floor(WindsBladeWeaponInfo_.weaponAtk_)));
 	std::string sAttackSpeed = std::to_string(WindsBladeWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(WindsBladeWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
-
-	etc_ = "ìì‹ ì˜ ì–‘ ì˜†ìœ¼ë¡œ\në°”ëŒì˜ ì¹¼ë‚ ì„ ì†Œí™˜í•©ë‹ˆë‹¤\n" + sDamege + "ì˜ í”¼í•´\n" + sAttackSpeed + "ì´ˆ ë§ˆë‹¤ ê³µê²©\n" + std::to_string(WindsBladeWeaponInfo_.weaponPassNum_) + "ê´€í†µ ";
+	
+	etc_ = "ÀÚ½ÅÀÇ ¾ç ¿·À¸·Î\n¹Ù¶÷ÀÇ Ä®³¯À» ¼ÒÈ¯ÇÕ´Ï´Ù\n" + sDamege + "ÀÇ ÇÇÇØ\n" + sAttackSpeed + "ÃÊ ¸¶´Ù °ø°İ\n" + std::to_string(WindsBladeWeaponInfo_.weaponPassNum_) + "°üÅë ";
 
 }
 
@@ -79,7 +79,7 @@ void WindsBlade::LevelEndEvent()
 {
 
 
-
+	
 }
 void WindsBlade::Shoothing(float _deltaTime)
 {

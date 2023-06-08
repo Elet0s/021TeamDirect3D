@@ -5,13 +5,13 @@ class GameEngineInputLayoutDesc;
 class GameEngineVertexShader;
 class GameEngineInputLayout : public GameEngineRes<GameEngineInputLayout>
 {
-	//ì¸í’‹ë ˆì´ì•„ì›ƒ: 
-	//ì¸í’‹ ì–´ì…ˆë¸”ëŸ¬ ë‹¨ê³„ì—ì„œ ê·¸ë˜í”½ì¹´ë“œ ë©”ëª¨ë¦¬ì— ì €ì¥ëœ ë©”ì‰¬ì˜ ëª¨ë“  êµ¬ì¡°ì •ë³´(ë²„í…ìŠ¤ ì •ë³´)ê°€ ì–´ë–¤ í˜•ì‹ìœ¼ë¡œ êµ¬ì„±ë˜ì–´ìˆëŠ”ì§€ì— 
-	// ëŒ€í•œ ì •ë³´ë¥¼ ë²„í…ìŠ¤ì…°ì´ë”ì—ê²Œ ë„˜ê¸°ê¸° ìœ„í•œ ì¸í„°í˜ì´ìŠ¤.
-	//ìƒì„±í•˜ëŠ”ë° ë²„í…ìŠ¤ ì •ë³´ì™€ ë²„í…ìŠ¤ì…°ì´ë”ê°€ ëª¨ë‘ í•„ìš”í•˜ë‹¤.
+	//ÀÎÇ²·¹ÀÌ¾Æ¿ô: 
+	//ÀÎÇ² ¾î¼Àºí·¯ ´Ü°è¿¡¼­ ±×·¡ÇÈÄ«µå ¸Ş¸ğ¸®¿¡ ÀúÀåµÈ ¸Ş½¬ÀÇ ¸ğµç ±¸Á¶Á¤º¸(¹öÅØ½º Á¤º¸)°¡ ¾î¶² Çü½ÄÀ¸·Î ±¸¼ºµÇ¾îÀÖ´ÂÁö¿¡ 
+	// ´ëÇÑ Á¤º¸¸¦ ¹öÅØ½º¼ÎÀÌ´õ¿¡°Ô ³Ñ±â±â À§ÇÑ ÀÎÅÍÆäÀÌ½º.
+	//»ı¼ºÇÏ´Âµ¥ ¹öÅØ½º Á¤º¸¿Í ¹öÅØ½º¼ÎÀÌ´õ°¡ ¸ğµÎ ÇÊ¿äÇÏ´Ù.
 
 	friend GameEngineRes<GameEngineInputLayout>;
-	//GameEngineInputLayout í´ë˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìë¥¼ GameEngineResí´ë˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
+	//GameEngineInputLayout Å¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ı.
 
 	friend class GameEngineMaterial;
 	//??
@@ -30,14 +30,14 @@ private:
 public:
 	void Set();
 
-	//ì¸í’‹ ë ˆì´ì•„ì›ƒ ìƒì„± í•¨ìˆ˜. 
+	//ÀÎÇ² ·¹ÀÌ¾Æ¿ô »ı¼º ÇÔ¼ö. 
 	static GameEngineInputLayout* Create(
 		const GameEngineInputLayoutDesc& _desc,
 		GameEngineVertexShader* _vertexShader
 	);
 
 private:
-	//ID3D11InputLayout* ìƒì„± í•¨ìˆ˜.
+	//ID3D11InputLayout* »ı¼º ÇÔ¼ö.
 	void CreateInputLayout(
 		const GameEngineInputLayoutDesc& _desc,
 		GameEngineVertexShader* _vertexShader

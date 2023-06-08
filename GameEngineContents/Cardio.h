@@ -1,6 +1,7 @@
 #pragma once
 #include "Skill.h"
 
+// Ό³Έν :
 class Cardio : public Skill
 {
 public:

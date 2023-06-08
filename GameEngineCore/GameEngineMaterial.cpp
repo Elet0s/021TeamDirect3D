@@ -51,7 +51,7 @@ void GameEngineMaterial::SetVertexShader(const std::string_view& _name)
 
 	if (nullptr == vertexShader_)
 	{
-		MsgBoxAssertString(std::string(_name) + ": ê·¸ëŸ° ì´ë¦„ì˜ ë²„í…ìŠ¤ì…°ì´ë”ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_name) + ": ±×·± ÀÌ¸§ÀÇ ¹öÅØ½º¼ÎÀÌ´õ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return;
 	}
 }
@@ -62,7 +62,7 @@ void GameEngineMaterial::SetVertexShader(GameEngineVertexShader* _vertexShader)
 
 	if (nullptr == vertexShader_)
 	{
-		MsgBoxAssert("ë²„í…ìŠ¤ì…°ì´ë”ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¹öÅØ½º¼ÎÀÌ´õ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return;
 	}
 }
@@ -73,7 +73,7 @@ void GameEngineMaterial::SetRasterizer(const std::string_view& _name)
 
 	if (nullptr == rasterizer_)
 	{
-		MsgBoxAssertString(std::string(_name) + ": ê·¸ëŸ° ì´ë¦„ì˜ ë˜ìŠ¤í„°ë¼ì´ì €ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_name) + ": ±×·± ÀÌ¸§ÀÇ ·¡½ºÅÍ¶óÀÌÀú°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return;
 	}
 }
@@ -84,7 +84,7 @@ void GameEngineMaterial::SetPixelShader(const std::string_view& _name)
 
 	if (nullptr == pixelShader_)
 	{
-		MsgBoxAssertString(std::string(_name) + ": ê·¸ëŸ° ì´ë¦„ì˜ í”½ì…€ì…°ì´ë”ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_name) + ": ±×·± ÀÌ¸§ÀÇ ÇÈ¼¿¼ÎÀÌ´õ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return;
 	}
 }
@@ -95,7 +95,7 @@ void GameEngineMaterial::SetDepthStencil_OutputMerger(const std::string_view& _n
 
 	if (nullptr == depthStencil_)
 	{
-		MsgBoxAssertString(std::string(_name) + ": ê·¸ëŸ° ì´ë¦„ì˜ ê¹Šì´ìŠ¤í…ì‹¤ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_name) + ": ±×·± ÀÌ¸§ÀÇ ±íÀÌ½ºÅÙ½ÇÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return;
 	}
 }
@@ -133,7 +133,7 @@ void GameEngineMaterial::SetBlend_OutputMerger(const std::string_view& _name)
 
 	if (nullptr == blend_)
 	{
-		MsgBoxAssertString(std::string(_name) + ": ê·¸ëŸ° ì´ë¦„ì˜ ë¸”ë Œë“œê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+		MsgBoxAssertString(std::string(_name) + ": ±×·± ÀÌ¸§ÀÇ ºí·»µå°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 		return;
 	}
 }

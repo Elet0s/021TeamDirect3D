@@ -4,8 +4,8 @@
 
 struct Input
 {
-    //ë©¤ë²„ë³€ìˆ˜ê°„ ìˆœì„œëŠ” ì „í˜€ ì¤‘ìš”í•˜ì§€ ì•Šë‹¤. ì¸í’‹ ë ˆì´ì•„ì›ƒì„ í†µí•´ ê° ë©¤ë²„ë³€ìˆ˜ì˜ ì˜¤í”„ì…‹ê°’ë§Œ ì •í™•ížˆ ì•Œë ¤ì£¼ë©´ ëœë‹¤.
-    //ë‹¨ì§€ íŽ¸ì˜ë¥¼ ìœ„í•´ì„œ ë˜ë„ë¡ ìˆœì„œë¥¼ ì§€í‚¬ ë¿ì´ë‹¤.
+    //¸â¹öº¯¼ö°£ ¼ø¼­´Â ÀüÇô Áß¿äÇÏÁö ¾Ê´Ù. ÀÎÇ² ·¹ÀÌ¾Æ¿ôÀ» ÅëÇØ °¢ ¸â¹öº¯¼öÀÇ ¿ÀÇÁ¼Â°ª¸¸ Á¤È®È÷ ¾Ë·ÁÁÖ¸é µÈ´Ù.
+    //´ÜÁö ÆíÀÇ¸¦ À§ÇØ¼­ µÇµµ·Ï ¼ø¼­¸¦ ÁöÅ³ »ÓÀÌ´Ù.
     float4 pos_ : POSITION;
     float4 normal_ : NORMAL;
 };
@@ -19,17 +19,17 @@ struct Output
 
 Output LightTest_VS(Input _input)
 {
-    Output newOutput = (Output) 0; //Outputíƒ€ìž… ë³€ìˆ˜ newOutputì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”.
+    Output newOutput = (Output) 0; //OutputÅ¸ÀÔ º¯¼ö newOutputÀ» 0À¸·Î ÃÊ±âÈ­.
 
-    newOutput.wvpPos_ = mul(_input.pos_, worldViewProjectionMatrix_); //ì •ì ì¢Œí‘œì— WVPí–‰ë ¬ ì ìš©.
+    newOutput.wvpPos_ = mul(_input.pos_, worldViewProjectionMatrix_); //Á¤Á¡ÁÂÇ¥¿¡ WVPÇà·Ä Àû¿ë.
     
-    newOutput.viewSpacePos_ = mul(_input.pos_, worldViewMatrix_); //ì •ì ì¢Œí‘œì— ì›”ë“œí–‰ë ¬ê³¼ ë·°í–‰ë ¬ë§Œ ì ìš©.
+    newOutput.viewSpacePos_ = mul(_input.pos_, worldViewMatrix_); //Á¤Á¡ÁÂÇ¥¿¡ ¿ùµåÇà·Ä°ú ºäÇà·Ä¸¸ Àû¿ë.
     
-    _input.normal_.w = 0.f; //ì•„ëž˜ ê³„ì‚°ì— ì˜ˆìƒí•˜ì§€ ëª»í•œ ì˜í–¥ì„ ì£¼ëŠ”ê²ƒì„ ë§‰ê¸° ìœ„í•´ wë¥¼ 0ìœ¼ë¡œ ë§Œë“ ë‹¤.
+    _input.normal_.w = 0.f; //¾Æ·¡ °è»ê¿¡ ¿¹»óÇÏÁö ¸øÇÑ ¿µÇâÀ» ÁÖ´Â°ÍÀ» ¸·±â À§ÇØ w¸¦ 0À¸·Î ¸¸µç´Ù.
     
-    newOutput.viewSpaceNormal_ = mul(_input.normal_, worldViewMatrix_); //ë²•ì„ ë²¡í„°ì— ì›”ë“œí–‰ë ¬ê³¼ ë·°í–‰ë ¬ë§Œ ì ìš©.
+    newOutput.viewSpaceNormal_ = mul(_input.normal_, worldViewMatrix_); //¹ý¼±º¤ÅÍ¿¡ ¿ùµåÇà·Ä°ú ºäÇà·Ä¸¸ Àû¿ë.
     
-    newOutput.viewSpaceNormal_.w = 0.f; //ë²•ì„ ë²¡í„°ëŠ” ì´ë™ì´ ì ìš©ë˜ë©´ ì•ˆë˜ëŠ” ë°©í–¥ë²¡í„°ì´ë¯€ë¡œ wë¥¼ 0ìœ¼ë¡œ ë§Œë“ ë‹¤.
+    newOutput.viewSpaceNormal_.w = 0.f; //¹ý¼±º¤ÅÍ´Â ÀÌµ¿ÀÌ Àû¿ëµÇ¸é ¾ÈµÇ´Â ¹æÇâº¤ÅÍÀÌ¹Ç·Î w¸¦ 0À¸·Î ¸¸µç´Ù.
     
     return newOutput;
 }
@@ -48,8 +48,8 @@ float4 LightTest_PS(Output _input) : SV_Target0
     if (diffuseLight.r > 0.f || diffuseLight.g > 0.f || diffuseLight.b > 0.f)
     {
         specularLight = CalAllSpecularLight(_input.viewSpacePos_, _input.viewSpaceNormal_);
-        //ë‚œë°˜ì‚¬ê´‘ì˜ rgbê°’ì¤‘ í•˜ë‚˜ë¼ë„ 0ì„ ë„˜ì„ë•Œë§Œ ì •ë°˜ì‚¬ê´‘ì„ ê³„ì‚°í•œë‹¤.
-        //ì•ˆê·¸ëŸ¬ë©´ ì¡°ëª…ì´ ë’·ë©´ìœ¼ë¡œ ëŒì•„ê°€ì„œ ì¹´ë©”ë¼ì— ë¹›ì´ ë¹„ì¹˜ì§€ ì•ŠëŠ”ë°ë„ ì •ë°˜ì‚¬ê´‘ì´ ë¹„ì¹œë‹¤.
+        //³­¹Ý»ç±¤ÀÇ rgb°ªÁß ÇÏ³ª¶óµµ 0À» ³ÑÀ»¶§¸¸ Á¤¹Ý»ç±¤À» °è»êÇÑ´Ù.
+        //¾È±×·¯¸é Á¶¸íÀÌ µÞ¸éÀ¸·Î µ¹¾Æ°¡¼­ Ä«¸Þ¶ó¿¡ ºûÀÌ ºñÄ¡Áö ¾Ê´Âµ¥µµ Á¤¹Ý»ç±¤ÀÌ ºñÄ£´Ù.
     }
    
     float4 ambientLight = CalAllAmbientLight();

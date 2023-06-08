@@ -1,7 +1,7 @@
 #pragma once
 #include "Skill.h"
 
-// μ„¤λª… :
+// Ό³Έν :
 class TensString : public Skill
 {
 public:

@@ -29,13 +29,13 @@ void GameEngineDepthStencil::Set()
 {
     if (nullptr == depthStencilState_)
     {
-        MsgBoxAssert("ê¹Šì´ ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("±íÀÌ ½ºÅÙ½Ç ½ºÅ×ÀÌÆ®°¡ ¾ø½À´Ï´Ù.");
         return;
     }
 
-    GameEngineDevice::GetDC()->OMSetDepthStencilState(//ê¹Šì´ ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸ë¥¼ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°ì‹œí‚¤ëŠ” í•¨ìˆ˜. 
-        depthStencilState_, //ì—°ê²°í•  ê¹Šì´ ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸.
-        0                   //ê¹Šì´ ìŠ¤í…ì‹¤ í…ŒìŠ¤íŠ¸ë¥¼ ìˆ˜í–‰í•  ë•Œ í•„ìš”í•œ ê¸°ì¤€ ê°’??
+    GameEngineDevice::GetDC()->OMSetDepthStencilState(//±íÀÌ ½ºÅÙ½Ç ½ºÅ×ÀÌÆ®¸¦ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°á½ÃÅ°´Â ÇÔ¼ö. 
+        depthStencilState_, //¿¬°áÇÒ ±íÀÌ ½ºÅÙ½Ç ½ºÅ×ÀÌÆ®.
+        0                   //±íÀÌ ½ºÅÙ½Ç Å×½ºÆ®¸¦ ¼öÇàÇÒ ¶§ ÇÊ¿äÇÑ ±âÁØ °ª??
     );
 }
 
@@ -43,12 +43,12 @@ void GameEngineDepthStencil::CreateDepthStencilState(const D3D11_DEPTH_STENCIL_D
 {
     depthStencilDesc_ = _desc;
 
-    if (S_OK != GameEngineDevice::GetDevice()->CreateDepthStencilState(//ê¹Šì´ ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸ ìƒì„± í•¨ìˆ˜.
-        &depthStencilDesc_, //ê¹Šì´ ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸ ìƒì„±ì‹œ í•„ìš”í•œ ëª…ì„¸ì„œ.
-        &depthStencilState_ //ìƒì„±í•  ID3D11DepthStencilState ì¸í„°í˜ì´ìŠ¤ í¬ì¸í„°.
+    if (S_OK != GameEngineDevice::GetDevice()->CreateDepthStencilState(//±íÀÌ ½ºÅÙ½Ç ½ºÅ×ÀÌÆ® »ı¼º ÇÔ¼ö.
+        &depthStencilDesc_, //±íÀÌ ½ºÅÙ½Ç ½ºÅ×ÀÌÆ® »ı¼º½Ã ÇÊ¿äÇÑ ¸í¼¼¼­.
+        &depthStencilState_ //»ı¼ºÇÒ ID3D11DepthStencilState ÀÎÅÍÆäÀÌ½º Æ÷ÀÎÅÍ.
     ))
     {
-        MsgBoxAssert("ê¹Šì´ ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸ ìƒì„± ì‹¤íŒ¨.");
+        MsgBoxAssert("±íÀÌ ½ºÅÙ½Ç ½ºÅ×ÀÌÆ® »ı¼º ½ÇÆĞ.");
         return;
     }
 }

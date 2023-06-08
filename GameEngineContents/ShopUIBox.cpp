@@ -30,54 +30,54 @@ void ShopUIBox::Start()
 	mainrenderer_->GetTransform().SetWorldPosition(-300, 0, 0);
 
 	mainrenderer_->GetPixelData().mulColor_.a = 0.85f;
-
+	
 	buttons_.reserve(4);
 
 	ShopButton* button1_ = GetLevel()->CreateActor<ShopButton>();
 	button1_->GetTransform().SetWorldPosition(-300, 200, -1.f);
-	button1_->SetText("HP íšŒë³µ");
+	button1_->SetText("HP È¸º¹");
 	button1_->SetPrice(1000);
 	button1_->CreateClickEvent(
 		[=]()
 		{
 			PlayerInfo* Pinfo = &Player::GetPlayerInst().GetPlayerInfo();
 			Pinfo->hp_ = Pinfo->maxHp_;
-
+			
 		}
 	);
 	buttons_.push_back(button1_); //0 
 
 	ShopButton* button2_ = GetLevel()->CreateActor<ShopButton>();
 	button2_->GetTransform().SetWorldPosition(-300, 120, -1.f);
-	button2_->SetText("ì¹´ë“œ ë½‘ê¸°");
+	button2_->SetText("Ä«µå »Ì±â");
 	button2_->SetPrice(3000);
 	button2_->CreateClickEvent(
 		[=]()
 		{
 			RenderOff();
 			soulCardSelectBox_ = GetLevel()->CreateActor<SoulCardSelectBox>();
-
+		
 		}
 	);
 	buttons_.push_back(button2_); // 1
 
 	ShopButton* button3_ = GetLevel()->CreateActor<ShopButton>();
 	button3_->GetTransform().SetWorldPosition(-300, 40, -1.f);
-	button3_->SetText("íˆ¬ì‚¬ì²´ ê°œìˆ˜ ì¦ê°€ +5");
+	button3_->SetText("Åõ»çÃ¼ °³¼ö Áõ°¡ +5");
 	button3_->SetPrice(1000);
 	button3_->CreateClickEvent(
 		[=]()
 		{
 			PlayerInfo* Pinfo = &Player::GetPlayerInst().GetPlayerInfo();
-			Pinfo->addProjectile_ += 5;
-
+	Pinfo->addProjectile_ += 5;
+			
 		}
 	);
 	buttons_.push_back(button3_);  //2
 
 	ShopButton* button4_ = GetLevel()->CreateActor<ShopButton>();
 	button4_->GetTransform().SetWorldPosition(-300, -40, -1.f);
-	button4_->SetText("ìƒì  ì´ˆê¸°í™”");
+	button4_->SetText("»óÁ¡ ÃÊ±âÈ­");
 	button4_->SetPrice(5000);
 	button4_->CreateClickEvent(
 		[=]()
@@ -100,13 +100,13 @@ void ShopUIBox::Start()
 		buttonFontRenderer_->ChangeCamera(CameraOrder::UICamera);
 		buttonFontRenderer_->SetLeftAndRightSort(LeftAndRightSort::Center);
 		buttonFontRenderer_->SetSize(30.f);
-		buttonFontRenderer_->SetText("ë‹¤ìŒ ìŠ¤í…Œì´ì§€");
+		buttonFontRenderer_->SetText("´ÙÀ½ ½ºÅ×ÀÌÁö");
 	}
 }
 
 void ShopUIBox::Update(float _deltaTime)
 {
-
+	
 	if (true == buttonrenderer_->IsUpdate() &&
 		true == GetLevel<ShopLevel>()->GetMousePointer()->IsPointing(buttonrenderer_->GetTransformData().worldWorldMatrix_, float4::Zero, true)
 		)

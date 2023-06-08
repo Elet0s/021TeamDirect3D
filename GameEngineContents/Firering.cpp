@@ -10,7 +10,7 @@ Firering::Firering()
 	, addRadian_(0)
 	, atkTimer_(0)
 {
-	name_ = "ÌôîÏóºÎ∞òÏßÄ";
+	name_ = "»≠ø∞π›¡ˆ";
 	SetName(std::string_view("Firering"));
 	myRank_ = Rank::Epic;
 	maxLevel_ = 7;
@@ -26,7 +26,7 @@ void Firering::Init()
 	std::string sAttackSpeed = std::to_string(fireringAuraWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(fireringAuraWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 	std::string sRange = std::to_string(fireringAuraWeaponInfo_.weaponRange_).substr(0, std::to_string(fireringAuraWeaponInfo_.weaponRange_).find(".") + 3);
 
-	etc_ = "Î≤îÏúÑ ÌîºÌï¥Î•º ÏûÖÌûôÎãàÎã§\nÏπòÎ™ÖÌÉÄÍ∞Ä Î∞úÏÉùÌïòÏßÄ ÏïäÏäµÎãàÎã§\n" + sDamege + "Ïùò ÌîºÌï¥\n" + sAttackSpeed + "Ï¥à ÎßàÎã§ Í≥µÍ≤©\nÎ≤îÏúÑ" + sRange + "m ";
+	etc_ = "π¸¿ß «««ÿ∏¶ ¿‘»¸¥œ¥Ÿ\nƒ°∏Ì≈∏∞° πﬂª˝«œ¡ˆ æ Ω¿¥œ¥Ÿ\n" + sDamege + "¿« «««ÿ\n" + sAttackSpeed + "√  ∏∂¥Ÿ ∞¯∞›\nπ¸¿ß" + sRange + "m ";
 }
 void Firering::Effect()
 {
@@ -111,7 +111,7 @@ void Firering::StateSet()
 	fireringAuraWeaponInfo_.weaponSize_ = 100 * Info->projectileSize_ * PInfo->projectileSize_Result;
 	fireringAuraWeaponInfo_.weaponDuration_ = 100 * Info->projectileduration_ * PInfo->projectileDuration_Result;
 	fireringAuraWeaponInfo_.weaponSpeed_ = 100 * Info->projectilespeed_ * PInfo->projectileSpeed_Result / 100;
-
+	
 }
 
 void Firering::Update(float _deltaTime)
@@ -126,24 +126,24 @@ void Firering::Update(float _deltaTime)
 	atkTimer_ += _deltaTime;
 
 
-	if  (atkTimer_ < fireringAuraWeaponInfo_.weaponAtkSpeed_ / 2)
-	{
-		circleRendererA_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
-		circleRendererB_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
-		circleRendererC_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
-		circleRendererD_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
-		circleCenterRenderer_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
-	}
-	else if (atkTimer_ > fireringAuraWeaponInfo_.weaponAtkSpeed_ / 2)
-	{
-		circleRendererA_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
-		circleRendererB_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
-		circleRendererC_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
-		circleRendererD_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
-		circleCenterRenderer_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
-	}
+		if  (atkTimer_ < fireringAuraWeaponInfo_.weaponAtkSpeed_ / 2)
+		{
+			circleRendererA_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
+			circleRendererB_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
+			circleRendererC_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
+			circleRendererD_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
+			circleCenterRenderer_->GetPixelData().mulColor_ -= float4(0.0f, 0.0f, 0.0f, 0.1f);
+		}
+		else if (atkTimer_ > fireringAuraWeaponInfo_.weaponAtkSpeed_ / 2)
+		{
+			circleRendererA_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
+			circleRendererB_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
+			circleRendererC_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
+			circleRendererD_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
+			circleCenterRenderer_->GetPixelData().mulColor_ += float4(0.0f, 0.0f, 0.0f, 0.1f);
+		}
 
-	if (atkTimer_ > fireringAuraWeaponInfo_.weaponAtkSpeed_)
+	 if (atkTimer_ > fireringAuraWeaponInfo_.weaponAtkSpeed_)
 	{
 		circleRendererA_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.f);
 		circleRendererB_->GetPixelData().mulColor_ = float4(1.0f, 1.0f, 0.0f, 1.f);
@@ -200,6 +200,6 @@ void Firering::RotateRenderer(float _deltaTime)
 CollisionReturn Firering::FireringToMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	dynamic_cast<Monster*>(_Other->GetActor())->flash_ = true;
-	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= fireringAuraWeaponInfo_.weaponAtk_; //Îç∞ÎØ∏ÏßÄÏ§å
+	dynamic_cast<Monster*>(_Other->GetActor())->GetMonsterInfo().hp_ -= fireringAuraWeaponInfo_.weaponAtk_; //µ•πÃ¡ˆ¡‹
 	return CollisionReturn::Continue;
 }

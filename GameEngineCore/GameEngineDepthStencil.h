@@ -4,17 +4,17 @@
 
 class GameEngineDepthStencil : public GameEngineRes<GameEngineDepthStencil>
 {
-	//ê¹Šì´ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸ ìƒì„± ë° ê´€ë¦¬ í´ëž˜ìŠ¤.
+	//±íÀÌ½ºÅÙ½Ç ½ºÅ×ÀÌÆ® »ý¼º ¹× °ü¸® Å¬·¡½º.
 
 	friend GameEngineRes<GameEngineDepthStencil>;
-	//GameEngineDepthStencil í´ëž˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìžë¥¼ GameEngineResí´ëž˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
+	//GameEngineDepthStencil Å¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ý.
 
 private:
 	GameEngineDepthStencil();
 	~GameEngineDepthStencil();
-	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ìž/ì†Œë©¸ìžë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
-	//ì´ í”„ë ˆìž„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìžê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
-	//í”„ë¡œê·¸ëž¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ëž˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
+	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ý¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ý¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
+	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹Ýµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
+	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµÐ´Ù.
 
 	GameEngineDepthStencil(const GameEngineDepthStencil& _other) = delete;
 	GameEngineDepthStencil(GameEngineDepthStencil&& _other) noexcept = delete;
@@ -27,51 +27,51 @@ public:
 		const std::string_view& _name,
 		const D3D11_DEPTH_STENCIL_DESC& _desc
 	);
-	void Set();	//í•´ë‹¹ ë¦¬ì†ŒìŠ¤ë¥¼ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜.
+	void Set();	//ÇØ´ç ¸®¼Ò½º¸¦ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö.
 
 private:
 	void CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC& _desc);
 
 private:
-	ID3D11DepthStencilState* depthStencilState_;	//ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•  ê¹Šì´ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸
+	ID3D11DepthStencilState* depthStencilState_;	//·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÒ ±íÀÌ½ºÅÙ½Ç ½ºÅ×ÀÌÆ®
 
 	//typedef struct D3D11_DEPTH_STENCIL_DESC
 	//{
-	//	BOOL DepthEnable;						ê¹Šì´í…ŒìŠ¤íŠ¸ë¥¼ í™œì„±í™” ì—¬ë¶€.
-	//	D3D11_DEPTH_WRITE_MASK DepthWriteMask;	ê¹Šì´í…ŒìŠ¤íŠ¸ ê²°ê³¼ë¥¼ ê¸°ì¡´ ê¹Šì´ ë°ì´í„°ì™€ ë¹„êµí•  ì§€ ì—¬ë¶€??
+	//	BOOL DepthEnable;						±íÀÌÅ×½ºÆ®¸¦ È°¼ºÈ­ ¿©ºÎ.
+	//	D3D11_DEPTH_WRITE_MASK DepthWriteMask;	±íÀÌÅ×½ºÆ® °á°ú¸¦ ±âÁ¸ ±íÀÌ µ¥ÀÌÅÍ¿Í ºñ±³ÇÒ Áö ¿©ºÎ??
 
 	//		typedef 
 	//		enum D3D11_DEPTH_WRITE_MASK
 	//		{
-	//			D3D11_DEPTH_WRITE_MASK_ZERO = 0,	ê¸°ì¡´ ê¹Šì´ ë°ì´í„°ì™€ ë¹„êµ ì•ˆ í•¨.
-	//			D3D11_DEPTH_WRITE_MASK_ALL = 1		ê¸°ì¡´ ê¹Šì´ ë°ì´í„°ì™€ ë¹„êµ í•¨.
+	//			D3D11_DEPTH_WRITE_MASK_ZERO = 0,	±âÁ¸ ±íÀÌ µ¥ÀÌÅÍ¿Í ºñ±³ ¾È ÇÔ.
+	//			D3D11_DEPTH_WRITE_MASK_ALL = 1		±âÁ¸ ±íÀÌ µ¥ÀÌÅÍ¿Í ºñ±³ ÇÔ.
 	//		} 	D3D11_DEPTH_WRITE_MASK;
 	// 
 	// 
-	//	D3D11_COMPARISON_FUNC DepthFunc;		ê¹Šì´í…ŒìŠ¤íŠ¸ ë°©ì‹.
+	//	D3D11_COMPARISON_FUNC DepthFunc;		±íÀÌÅ×½ºÆ® ¹æ½Ä.
 	//	
 	//		typedef 
 	//		enum D3D11_COMPARISON_FUNC
 	//		{
-	//			D3D11_COMPARISON_NEVER = 1,			ì•„ë¬´ê²ƒë„ í†µê³¼ì‹œí‚¤ì§€ ì•ŠìŒ.
-	//			D3D11_COMPARISON_LESS = 2,			ê°’ì´ ìž‘ì€ ê²ƒë§Œ í†µê³¼.
-	//			D3D11_COMPARISON_EQUAL = 3,			ê°’ì´ ê°™ì€ ê²ƒë§Œ í†µê³¼.
-	//			D3D11_COMPARISON_LESS_EQUAL = 4,	ê°’ì´ ìž‘ê±°ë‚˜ ê°™ì€ ê²ƒë§Œ í†µê³¼.
-	//			D3D11_COMPARISON_GREATER = 5,		ê°’ì´ í° ê²ƒë§Œ í†µê³¼.
-	//			D3D11_COMPARISON_NOT_EQUAL = 6,		ê°’ì´ ê°™ì§€ ì•Šì€ ê²ƒë§Œ í†µê³¼.
-	//			D3D11_COMPARISON_GREATER_EQUAL = 7,	ê°’ì´ í¬ê±°ë‚˜ ê°™ì€ ê²ƒë§Œ í†µê³¼.
-	//			D3D11_COMPARISON_ALWAYS = 8			ì–¸ì œë‚˜ í†µê³¼.
+	//			D3D11_COMPARISON_NEVER = 1,			¾Æ¹«°Íµµ Åë°ú½ÃÅ°Áö ¾ÊÀ½.
+	//			D3D11_COMPARISON_LESS = 2,			°ªÀÌ ÀÛÀº °Í¸¸ Åë°ú.
+	//			D3D11_COMPARISON_EQUAL = 3,			°ªÀÌ °°Àº °Í¸¸ Åë°ú.
+	//			D3D11_COMPARISON_LESS_EQUAL = 4,	°ªÀÌ ÀÛ°Å³ª °°Àº °Í¸¸ Åë°ú.
+	//			D3D11_COMPARISON_GREATER = 5,		°ªÀÌ Å« °Í¸¸ Åë°ú.
+	//			D3D11_COMPARISON_NOT_EQUAL = 6,		°ªÀÌ °°Áö ¾ÊÀº °Í¸¸ Åë°ú.
+	//			D3D11_COMPARISON_GREATER_EQUAL = 7,	°ªÀÌ Å©°Å³ª °°Àº °Í¸¸ Åë°ú.
+	//			D3D11_COMPARISON_ALWAYS = 8			¾ðÁ¦³ª Åë°ú.
 	//		} 	D3D11_COMPARISON_FUNC;			
 	// 
 	// 
-	//	BOOL StencilEnable;						ìŠ¤í…ì‹¤í…ŒìŠ¤íŠ¸ë¥¼ í™œì„±í™” ì—¬ë¶€.
+	//	BOOL StencilEnable;						½ºÅÙ½ÇÅ×½ºÆ®¸¦ È°¼ºÈ­ ¿©ºÎ.
 	//	UINT8 StencilReadMask;					??
 	//	UINT8 StencilWriteMask;					??
 	//	D3D11_DEPTH_STENCILOP_DESC FrontFace;	??
 	//	D3D11_DEPTH_STENCILOP_DESC BackFace;	??
 	//} 	D3D11_DEPTH_STENCIL_DESC;
 
-	D3D11_DEPTH_STENCIL_DESC depthStencilDesc_;		//ê¹Šì´ìŠ¤í…ì‹¤ ìŠ¤í…Œì´íŠ¸ë¥¼ ë§Œë“¤ë•Œ í•„ìš”í•œ ìƒì„¸ ì •ë³´.
+	D3D11_DEPTH_STENCIL_DESC depthStencilDesc_;		//±íÀÌ½ºÅÙ½Ç ½ºÅ×ÀÌÆ®¸¦ ¸¸µé¶§ ÇÊ¿äÇÑ »ó¼¼ Á¤º¸.
 
 };
 

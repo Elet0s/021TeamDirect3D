@@ -3,15 +3,15 @@
 
 class GameEngineRandom
 {
-	//ë‚œìˆ˜ ìƒì„± í´ëž˜ìŠ¤.
+	//³­¼ö »ý¼º Å¬·¡½º.
 
 public:
 
 	static GameEngineRandom mainRandom_;
-	//ê²Œìž„ì—”ì§„ ëžœë¤ì„ ë‹¨ìˆœ ì§€ì—­ë³€ìˆ˜ë¡œ í•˜ë©´ ê°™ì€ ì´ˆ ì•ˆì— ì—¬ëŸ¬ë²ˆ ë‚œìˆ˜ë¥¼ ìš”êµ¬í–ˆì„ë•Œ, 
-	// ê°™ì€ ì‹œë“œê°’ì˜ ì—¬ëŸ¬ ì§€ì—­ë³€ìˆ˜ë“¤ì´ ê°™ì€ ë‚œìˆ˜ í•œê°œì”©ë§Œ ìƒì„±, ë°˜í™˜í•˜ê³  ì†Œë©¸ë˜ì§€ë§Œ,
-	// mainRandom_ì€ ì •ì  ë©¤ë²„ë³€ìˆ˜ì´ë¯€ë¡œ ë°ì´í„° ì˜ì—­ì— í•œê°œë§Œ ë§Œë“¤ì–´ì§€ê³  í”„ë¡œê·¸ëž¨ì´ ëë‚ ë•Œ ì†Œë©¸ë˜ê¸° ë•Œë¬¸ì—, 
-	// ê°™ì€ ì´ˆ ì•ˆì— ë‚œìˆ˜ë¥¼ ì—¬ëŸ¬ë²ˆ ìš”êµ¬í•´ë„ í•œê°œì˜ mainRandom_ì´ ê°ê° ë‹¤ë¥¸ ë‚œìˆ˜ë¥¼ ìƒì„±í•œë‹¤.
+	//°ÔÀÓ¿£Áø ·£´ýÀ» ´Ü¼ø Áö¿ªº¯¼ö·Î ÇÏ¸é °°Àº ÃÊ ¾È¿¡ ¿©·¯¹ø ³­¼ö¸¦ ¿ä±¸ÇßÀ»¶§, 
+	// °°Àº ½Ãµå°ªÀÇ ¿©·¯ Áö¿ªº¯¼öµéÀÌ °°Àº ³­¼ö ÇÑ°³¾¿¸¸ »ý¼º, ¹ÝÈ¯ÇÏ°í ¼Ò¸êµÇÁö¸¸,
+	// mainRandom_Àº Á¤Àû ¸â¹öº¯¼öÀÌ¹Ç·Î µ¥ÀÌÅÍ ¿µ¿ª¿¡ ÇÑ°³¸¸ ¸¸µé¾îÁö°í ÇÁ·Î±×·¥ÀÌ ³¡³¯¶§ ¼Ò¸êµÇ±â ¶§¹®¿¡, 
+	// °°Àº ÃÊ ¾È¿¡ ³­¼ö¸¦ ¿©·¯¹ø ¿ä±¸ÇØµµ ÇÑ°³ÀÇ mainRandom_ÀÌ °¢°¢ ´Ù¸¥ ³­¼ö¸¦ »ý¼ºÇÑ´Ù.
 
 
 public:
@@ -27,7 +27,7 @@ public:
 public:
 	int RandomInt(int _min, int _max)
 	{
-		//ëŒ€ë¶€ë¶„ì˜ ë‚œìˆ˜ ì•Œê³ ë¦¬ì¦˜ì´ ë§ˆì§€ë§‰ ì œí•œì„ í• ë•Œ %ë¥¼ ì‚¬ìš©í•˜ë¯€ë¡œ _max -1ê¹Œì§€ ë‚˜ì˜¨ë‹¤ëŠ”ê²ƒì„ í•­ìƒ ì—¼ë‘í•´ ë‘˜ ê²ƒ.
+		//´ëºÎºÐÀÇ ³­¼ö ¾Ë°í¸®ÁòÀÌ ¸¶Áö¸· Á¦ÇÑÀ» ÇÒ¶§ %¸¦ »ç¿ëÇÏ¹Ç·Î _max -1±îÁö ³ª¿Â´Ù´Â°ÍÀ» Ç×»ó ¿°µÎÇØ µÑ °Í.
 		std::uniform_int_distribution<int> intDistribution(_min, _max);
 		return intDistribution(mt_);
 	}
@@ -60,7 +60,7 @@ public:
 
 
 private:
-	std::mt19937_64 mt_;	//Mersenne Twister ìœ ì‚¬ë‚œìˆ˜ ìƒì„±ê¸°.
+	std::mt19937_64 mt_;	//Mersenne Twister À¯»ç³­¼ö »ý¼º±â.
 
 
 

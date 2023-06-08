@@ -17,7 +17,7 @@ Spear::Spear()
 	duringtime_(0),
 	consecutiveCounter_(0)
 {
-	name_ = "ë‹¨ì°½";
+	name_ = "´ÜÃ¢";
 	SetName(std::string_view("Spear"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 7;
@@ -33,7 +33,7 @@ void Spear::Init()
 	std::string sAttackSpeed = std::to_string(spearWeaponInfo_.weaponAtkSpeed_).substr(0, std::to_string(spearWeaponInfo_.weaponAtkSpeed_).find(".") + 3);
 
 
-	etc_ = "íˆ¬ì‚¬ì²´ë¥¼ ì¡°ì¤€ëœ ë°©í–¥ìœ¼ë¡œ\në°œì‚¬í•©ë‹ˆë‹¤\n"+ sDamege + "ì˜ í”¼í•´\n" + sAttackSpeed +"ì´ˆ ë§ˆë‹¤ ê³µê²©\níˆ¬ì‚¬ì²´" + std::to_string(spearWeaponInfo_.weaponProjectileNum_)+ " ê°œ\n" + std::to_string(spearWeaponInfo_.weponConsecutiveAtkNum_) + "ì—°ì† ê³µê²© ";
+	etc_ = "Åõ»çÃ¼¸¦ Á¶ÁØµÈ ¹æÇâÀ¸·Î\n¹ß»çÇÕ´Ï´Ù\n"+ sDamege + "ÀÇ ÇÇÇØ\n" + sAttackSpeed +"ÃÊ ¸¶´Ù °ø°İ\nÅõ»çÃ¼" + std::to_string(spearWeaponInfo_.weaponProjectileNum_)+ " °³\n" + std::to_string(spearWeaponInfo_.weponConsecutiveAtkNum_) + "¿¬¼Ó °ø°İ ";
 }
 void Spear::Effect()
 {

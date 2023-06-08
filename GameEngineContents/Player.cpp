@@ -25,17 +25,17 @@ Player::Player()
 	flashTimer_(0),
 	dashRechargeTimer_(0),
 	healingTimer_(0)
-
+	
 {
 	if (true == isInitialized_ && nullptr == mainPlayer_)
 	{
-		//í”Œë ˆì´ì–´ ì •ìƒ ìƒì„±.
+		//ÇÃ·¹ÀÌ¾î Á¤»ó »ý¼º.
 		playerInfo_ = new PlayerInfo();
 		playerPassiveInfo_ = new PlayerPassiveInfo();
 	}
 	else
 	{
-		MsgBoxAssert("í”Œë ˆì´ì–´ ìƒì„±ìžë¥¼ ì§ì ‘ í˜¸ì¶œí•˜ì§€ ë§ˆì„¸ìš”.");
+		MsgBoxAssert("ÇÃ·¹ÀÌ¾î »ý¼ºÀÚ¸¦ Á÷Á¢ È£ÃâÇÏÁö ¸¶¼¼¿ä.");
 		return;
 	}
 }
@@ -115,80 +115,80 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(GameEngineCollision* _Th
 	int random_ = GameEngineRandom::mainRandom_.RandomInt(1, 4);
 	switch (A->GetObjectOrder())
 	{
-		case ItemObjectOrder::GreenExp:
-			playerInfo_->exp_ += 5;
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
-			}
-			else if (random_ == 4)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
-			}
+	case ItemObjectOrder::GreenExp:
+		playerInfo_->exp_ += 5;
+		if (random_ == 1)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
+		}
+		else if (random_ == 2)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
+		}
+		else if (random_ == 3)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
+		}
+		else if (random_ == 4)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
+		}
 
-			break;
-		case ItemObjectOrder::YellowExp:
-			playerInfo_->exp_ += 20;
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
-			}
-			else if (random_ == 4)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
-			}
-			break;
-		case ItemObjectOrder::RedExp:
-			playerInfo_->exp_ += 40;
-			if (random_ == 1)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
-			}
-			else if (random_ == 2)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
-			}
-			else if (random_ == 3)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
-			}
-			else if (random_ == 4)
-			{
-				GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
-			}
-			break;
-		case ItemObjectOrder::Meet:
-			playerInfo_->hp_ += 30;
-			GameEngineSound::SoundPlayOneshot("Eat.wav");
-			if (playerInfo_->maxHp_ < playerInfo_->hp_)
-			{
-				playerInfo_->hp_ = playerInfo_->maxHp_;
-			}
-			break;
-		case ItemObjectOrder::Gold:
-			playerInfo_->gold_ += 10;
-			GameEngineSound::SoundPlayOneshot("GoldCoin.wav");
-			break;
-		case ItemObjectOrder::Voidbead:
-			for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)
-			{
-				ItemObjectOrder B =Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() ;
+		break;
+	case ItemObjectOrder::YellowExp:
+		playerInfo_->exp_ += 20;
+		if (random_ == 1)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
+		}
+		else if (random_ == 2)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
+		}
+		else if (random_ == 3)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
+		}
+		else if (random_ == 4)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
+		}
+		break;
+	case ItemObjectOrder::RedExp:
+		playerInfo_->exp_ += 40;
+		if (random_ == 1)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_A.wav");
+		}
+		else if (random_ == 2)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_B.wav");
+		}
+		else if (random_ == 3)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_C.wav");
+		}
+		else if (random_ == 4)
+		{
+			GameEngineSound::SoundPlayOneshot("XP_Gain_D.wav");
+		}
+		break;
+	case ItemObjectOrder::Meet:
+		playerInfo_->hp_ += 30;
+		GameEngineSound::SoundPlayOneshot("Eat.wav");
+		if (playerInfo_->maxHp_ < playerInfo_->hp_)
+		{
+			playerInfo_->hp_ = playerInfo_->maxHp_;
+		}
+		break;
+	case ItemObjectOrder::Gold:
+		playerInfo_->gold_ += 10;
+		GameEngineSound::SoundPlayOneshot("GoldCoin.wav");
+		break;
+	case ItemObjectOrder::Voidbead:
+		for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)
+		{
+			ItemObjectOrder B =Monster::GetItemObjectManager()->GetallObjectContainer()[i]->GetObjectOrder() ;
 				if (B == ItemObjectOrder::GreenExp)
 				{
 					Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
@@ -201,9 +201,9 @@ CollisionReturn Player::PlayerToGameItemObjectCollision(GameEngineCollision* _Th
 				{
 					Monster::GetItemObjectManager()->GetallObjectContainer()[i]->chasePlayer_ = true;
 				}
-			}
+		}
 	}
-
+	
 	for (size_t i = 0; i < Monster::GetItemObjectManager()->GetallObjectContainer().size(); i++)
 	{
 		if (Monster::GetItemObjectManager()->GetallObjectContainer()[i] == A)
@@ -314,7 +314,7 @@ void Player::ReChargeDash(float _deltaTime)
 {
 	if (dashRechargeTimer_ <= 0&& playerInfo_->dashCount_< playerInfo_->dashFullCharge_)
 	{
-		dashRechargeTimer_ = playerInfo_->dashReChargeTime_;
+ 		dashRechargeTimer_ = playerInfo_->dashReChargeTime_;
 		playerInfo_->dashCount_ += 1;
 	}
 	else if (dashRechargeTimer_ > 0)
@@ -419,24 +419,24 @@ void Player::Update(float _deltaTime)
 	ReChargeDash(_deltaTime);
 
 	PlayerDeathEvent();
-	ColCheak();
+ 	ColCheak();
 	LevelUpEvent();
 	FlashPlayer(_deltaTime);
-	if (true == GameEngineInput::GetInst().IsDown("Skill15On")) //ë‚˜ì¤‘ì— ì¹´ë“œ ë½‘ìœ¼ë©´ ì˜¬ë ¤ì£¼ëŠ”ê±¸ë¡œ ëŒ€ì²´í•  ê²ƒìž„
+	if (true == GameEngineInput::GetInst().IsDown("Skill15On")) //³ªÁß¿¡ Ä«µå »ÌÀ¸¸é ¿Ã·ÁÁÖ´Â°É·Î ´ëÃ¼ÇÒ °ÍÀÓ
 	{
 		if (playerSkillManager_->GetSkillList()[5][2]->currentlevel_ < 1)
 		{
 			playerSkillManager_->GetSkillList()[5][2]->currentlevel_ += 1;
 		}
 	}
-	if (true == GameEngineInput::GetInst().IsDown("Skill04On")) //ë‚˜ì¤‘ì— ì¹´ë“œ ë½‘ìœ¼ë©´ ì˜¬ë ¤ì£¼ëŠ”ê±¸ë¡œ ëŒ€ì²´í•  ê²ƒìž„
+	if (true == GameEngineInput::GetInst().IsDown("Skill04On")) //³ªÁß¿¡ Ä«µå »ÌÀ¸¸é ¿Ã·ÁÁÖ´Â°É·Î ´ëÃ¼ÇÒ °ÍÀÓ
 	{
 		if (playerSkillManager_->GetSkillList()[5][7]->currentlevel_ < 1)
 		{
 			playerSkillManager_->GetSkillList()[5][7]->currentlevel_ += 1;
 		}
 	}
-	if (true == GameEngineInput::GetInst().IsDown("Skill05On")) //ë‚˜ì¤‘ì— ì¹´ë“œ ë½‘ìœ¼ë©´ ì˜¬ë ¤ì£¼ëŠ”ê±¸ë¡œ ëŒ€ì²´í•  ê²ƒìž„
+	if (true == GameEngineInput::GetInst().IsDown("Skill05On")) //³ªÁß¿¡ Ä«µå »ÌÀ¸¸é ¿Ã·ÁÁÖ´Â°É·Î ´ëÃ¼ÇÒ °ÍÀÓ
 	{
 		if (playerSkillManager_->GetSkillList()[5][6]->currentlevel_ < 1)
 		{
@@ -456,7 +456,7 @@ void Player::CreatePlayer(GameEngineLevel* _thisLevel, const float4& _initPositi
 {
 	if (nullptr != mainPlayer_)
 	{
-		MsgBoxAssert("í”Œë ˆì´ì–´ê°€ ì´ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
+		MsgBoxAssert("ÇÃ·¹ÀÌ¾î°¡ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
 		return;
 	}
 

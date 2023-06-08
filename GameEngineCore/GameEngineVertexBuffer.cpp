@@ -31,7 +31,7 @@ GameEngineVertexBuffer* GameEngineVertexBuffer::Create(
 )
 {
 	GameEngineVertexBuffer* newRes = CreateNamedRes(_name);
-	newRes->inputLayoutDesc_ = &_info;	//const ìë£Œí˜•* ë³€ìˆ˜ì— const ìë£Œí˜•&ì˜ ì£¼ì†Œê°’ì„ ë„£ì–´ì£¼ë¯€ë¡œ ë³µì‚¬í•˜ëŠ”ë° ì•„ë¬´ ë¬¸ì œ ì—†ë‹¤.
+	newRes->inputLayoutDesc_ = &_info;	//const ÀÚ·áÇü* º¯¼ö¿¡ const ÀÚ·áÇü&ÀÇ ÁÖ¼Ò°ªÀ» ³Ö¾îÁÖ¹Ç·Î º¹»çÇÏ´Âµ¥ ¾Æ¹« ¹®Á¦ ¾ø´Ù.
 	newRes->CreateVertexBuffer(_initialData, _vertexSize, _vertexCount);
 	return newRes;
 }
@@ -44,7 +44,7 @@ GameEngineVertexBuffer* GameEngineVertexBuffer::Create(
 )
 {
 	GameEngineVertexBuffer* newRes = CreateUnnamedRes();
-	newRes->inputLayoutDesc_ = &_info;	//const ìë£Œí˜•* ë³€ìˆ˜ì— const ìë£Œí˜•&ì˜ ì£¼ì†Œê°’ì„ ë„£ì–´ì£¼ë¯€ë¡œ ë³µì‚¬í•˜ëŠ”ë° ì•„ë¬´ ë¬¸ì œ ì—†ë‹¤.
+	newRes->inputLayoutDesc_ = &_info;	//const ÀÚ·áÇü* º¯¼ö¿¡ const ÀÚ·áÇü&ÀÇ ÁÖ¼Ò°ªÀ» ³Ö¾îÁÖ¹Ç·Î º¹»çÇÏ´Âµ¥ ¾Æ¹« ¹®Á¦ ¾ø´Ù.
 	newRes->CreateVertexBuffer(_initialData, _vertexSize, _vertexCount);
 	return newRes;
 }
@@ -53,24 +53,24 @@ void GameEngineVertexBuffer::Set()
 {
 	if (nullptr == vertexBuffer_)
 	{
-		MsgBoxAssert("ë²„í…ìŠ¤ ë²„í¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¹öÅØ½º ¹öÆÛ°¡ ¾ø½À´Ï´Ù.");
 		return;
 	}
 
-	//ë‚˜ëˆ ì„œ ê·¸ë¦´ ìˆ˜ ìˆëŠ” ê¸°ëŠ¥ì„ ì§€ì›í•˜ê¸´ í•˜ì§€ë§Œ, ì“¸ ì¼ì€ ì—†ì„ ê²ƒ ê°™ë‹¤.
-	GameEngineDevice::GetDC()->IASetVertexBuffers(	//ì¸í’‹ ì–´ì…ˆë¸”ëŸ¬ ê³¼ì •ì—ì„œ ë²„í…ìŠ¤ë²„í¼ë“¤ì„ íŒŒì´í”„ë¼ì¸ì— ì—°ê²°í•˜ëŠ” í•¨ìˆ˜. 
-		0,				//ë²„í…ìŠ¤ë²„í¼ ë°°ì—´ì„ ì„¸íŒ…í•  ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì˜ ìŠ¬ë¡¯ ë²ˆí˜¸. í›„ì† ì›ì†Œë“¤ì€ ì•”ì‹œì ìœ¼ë¡œ ë‹¤ìŒ ë²ˆí˜¸ ìŠ¬ë¡¯ì— ì—°ê²°ëœë‹¤ê³  í•œë‹¤.
-		//D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNTê°œê¹Œì§€ ë™ì‹œ ì„¸íŒ…ì´ ê°€ëŠ¥í•˜ë‹¤ê³  í•œë‹¤. í•˜ì§€ë§Œ ì“¸ ì¼ì€ ì—†ì„ ê²ƒ ê°™ë‹¤. 
+	//³ª´²¼­ ±×¸± ¼ö ÀÖ´Â ±â´ÉÀ» Áö¿øÇÏ±ä ÇÏÁö¸¸, ¾µ ÀÏÀº ¾øÀ» °Í °°´Ù.
+	GameEngineDevice::GetDC()->IASetVertexBuffers(	//ÀÎÇ² ¾î¼Àºí·¯ °úÁ¤¿¡¼­ ¹öÅØ½º¹öÆÛµéÀ» ÆÄÀÌÇÁ¶óÀÎ¿¡ ¿¬°áÇÏ´Â ÇÔ¼ö. 
+		0,				//¹öÅØ½º¹öÆÛ ¹è¿­À» ¼¼ÆÃÇÒ µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®ÀÇ ½½·Ô ¹øÈ£. ÈÄ¼Ó ¿ø¼ÒµéÀº ¾Ï½ÃÀûÀ¸·Î ´ÙÀ½ ¹øÈ£ ½½·Ô¿¡ ¿¬°áµÈ´Ù°í ÇÑ´Ù.
+		//D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT°³±îÁö µ¿½Ã ¼¼ÆÃÀÌ °¡´ÉÇÏ´Ù°í ÇÑ´Ù. ÇÏÁö¸¸ ¾µ ÀÏÀº ¾øÀ» °Í °°´Ù. 
 
-		1,				//ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì— ì„¸íŒ…í•  ë²„í…ìŠ¤ ë²„í¼ ë°°ì—´ì˜ ì›ì†Œ ê°œìˆ˜.
-		//D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT - ì²«ë²ˆì§¸ ì›ì†Œë¡œ ë„£ì–´ì¤€ ê°’.
+		1,				//µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®¿¡ ¼¼ÆÃÇÒ ¹öÅØ½º ¹öÆÛ ¹è¿­ÀÇ ¿ø¼Ò °³¼ö.
+		//D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT - Ã¹¹øÂ° ¿ø¼Ò·Î ³Ö¾îÁØ °ª.
 
-		&vertexBuffer_,		//ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì— ì„¸íŒ…í•  ë²„í¼ ë°°ì—´ì˜ ì£¼ì†Œê°’. 
-		//ìƒì„±í• ë•Œ ë°”ì¸ë“œí”Œë˜ê·¸ë¥¼ D3D11_BIND_VERTEX_BUFFERë¡œ ì„¤ì •í•´ì¤€ ë²„í¼ì—¬ì•¼ ì—¬ê¸°ì— ì—°ê²°í•  ìˆ˜ ìˆë‹¤.
+		&vertexBuffer_,		//µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®¿¡ ¼¼ÆÃÇÒ ¹öÆÛ ¹è¿­ÀÇ ÁÖ¼Ò°ª. 
+		//»ı¼ºÇÒ¶§ ¹ÙÀÎµåÇÃ·¡±×¸¦ D3D11_BIND_VERTEX_BUFFER·Î ¼³Á¤ÇØÁØ ¹öÆÛ¿©¾ß ¿©±â¿¡ ¿¬°áÇÒ ¼ö ÀÖ´Ù.
 
-		&vertexSize_,	//ë²„í¼ ë°°ì—´ì˜ ì›ì†Œê°„ ê°„ê²© == ë²„í…ìŠ¤ë²„í¼ í•œê°œì˜ í¬ê¸°.
+		&vertexSize_,	//¹öÆÛ ¹è¿­ÀÇ ¿ø¼Ò°£ °£°İ == ¹öÅØ½º¹öÆÛ ÇÑ°³ÀÇ Å©±â.
 
-		&offset_		//ì„¸íŒ…ì„ ì‹œì‘í•  ë°°ì—´ ë‚´ ë²„í¼ì˜ ì›ì†Œ ë²ˆí˜¸ * ë²„í¼ í¬ê¸°.
+		&offset_		//¼¼ÆÃÀ» ½ÃÀÛÇÒ ¹è¿­ ³» ¹öÆÛÀÇ ¿ø¼Ò ¹øÈ£ * ¹öÆÛ Å©±â.
 	);
 }
 
@@ -85,35 +85,35 @@ void GameEngineVertexBuffer::CreateVertexBuffer(
 
 	if (0 > vertexSize_)
 	{
-		MsgBoxAssert("ì •ì  í•œê°œ í¬ê¸°ê°€ 0ì…ë‹ˆë‹¤.");
+		MsgBoxAssert("Á¤Á¡ ÇÑ°³ Å©±â°¡ 0ÀÔ´Ï´Ù.");
 		return;
 	}
 
 	if (0 > vertexCount_)
 	{
-		MsgBoxAssert("ì •ì  ê°œìˆ˜ê°€ 0ì…ë‹ˆë‹¤.");
+		MsgBoxAssert("Á¤Á¡ °³¼ö°¡ 0ÀÔ´Ï´Ù.");
 		return;
 	}
 
-	resData_.pSysMem = _initialData;	//ë²„í¼ ì´ˆê¸°ë°ì´í„° ì„¤ì •.
-	//GPUê°€ ë²„í…ìŠ¤ë²„í¼ ì „ì²´ í¬ê¸°ë§Œí¼ ìê¸° ë©”ëª¨ë¦¬ì— í• ë‹¹í•˜ëŠ”ë° í•„ìš”í•˜ë¯€ë¡œ ë²„í…ìŠ¤ë²„í¼ì— ëŒ€í•œ ì •ë³´ë¥¼ ì¤˜ì•¼ í•œë‹¤.
+	resData_.pSysMem = _initialData;	//¹öÆÛ ÃÊ±âµ¥ÀÌÅÍ ¼³Á¤.
+	//GPU°¡ ¹öÅØ½º¹öÆÛ ÀüÃ¼ Å©±â¸¸Å­ ÀÚ±â ¸Ş¸ğ¸®¿¡ ÇÒ´çÇÏ´Âµ¥ ÇÊ¿äÇÏ¹Ç·Î ¹öÅØ½º¹öÆÛ¿¡ ´ëÇÑ Á¤º¸¸¦ Áà¾ß ÇÑ´Ù.
 
-	vertexBufferDesc_.ByteWidth = vertexSize_ * vertexCount_;	//ë²„í¼ êµ¬ì¡°ì²´ì˜ ë°”ì´íŠ¸í¬ê¸° ë“±ë¡.
+	vertexBufferDesc_.ByteWidth = vertexSize_ * vertexCount_;	//¹öÆÛ ±¸Á¶Ã¼ÀÇ ¹ÙÀÌÆ®Å©±â µî·Ï.
 
-	vertexBufferDesc_.CPUAccessFlags = 0;	//CPUì˜ ë²„í¼ ì ‘ê·¼ í—ˆìš© ì—¬ë¶€. 0: ì½ê¸°/ì“°ê¸° ë‘˜ë‹¤ ë¶ˆê°€. 
+	vertexBufferDesc_.CPUAccessFlags = 0;	//CPUÀÇ ¹öÆÛ Á¢±Ù Çã¿ë ¿©ºÎ. 0: ÀĞ±â/¾²±â µÑ´Ù ºÒ°¡. 
 
 
-	vertexBufferDesc_.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;		//ì´ ë²„í¼ë¥¼ ì–´ë–¤ ë°©ì‹ìœ¼ë¡œ ì‚¬ìš©í• ì§€ ë“±ë¡. 
-	//D3D11_USAGE::D3D11_USAGE_DEFAULT: GPUê°€ ì½ê¸°/ì“°ê¸° ê°€ëŠ¥í•œ ë¦¬ì†ŒìŠ¤. CPUëŠ” ì´ˆê¸°í™” ì‹œì ì´ ì§€ë‚˜ë©´ ì ‘ê·¼ ë¶ˆê°€.
+	vertexBufferDesc_.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;		//ÀÌ ¹öÆÛ¸¦ ¾î¶² ¹æ½ÄÀ¸·Î »ç¿ëÇÒÁö µî·Ï. 
+	//D3D11_USAGE::D3D11_USAGE_DEFAULT: GPU°¡ ÀĞ±â/¾²±â °¡´ÉÇÑ ¸®¼Ò½º. CPU´Â ÃÊ±âÈ­ ½ÃÁ¡ÀÌ Áö³ª¸é Á¢±Ù ºÒ°¡.
 
-	vertexBufferDesc_.BindFlags = D3D11_BIND_VERTEX_BUFFER;	//ì´ ë²„í¼ë¥¼ íŒŒì´í”„ë¼ì¸ì— ì–´ë–¤ ìš©ë„ë¡œ ì‚¬ìš©í•˜ëŠ”ê°€.
-	//D3D11_BIND_VERTEX_BUFFER: ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì— ë²„í…ìŠ¤ë²„í¼ë¡œ ì‚¬ìš©.
+	vertexBufferDesc_.BindFlags = D3D11_BIND_VERTEX_BUFFER;	//ÀÌ ¹öÆÛ¸¦ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¾î¶² ¿ëµµ·Î »ç¿ëÇÏ´Â°¡.
+	//D3D11_BIND_VERTEX_BUFFER: ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¹öÅØ½º¹öÆÛ·Î »ç¿ë.
 
 	vertexBufferDesc_.StructureByteStride = 0;
-	//ë‚´ë¶€ êµ¬ì¡°ë¥¼ ì•Œ ìˆ˜ ì—†ëŠ” ë‹¤ì´ë ‰íŠ¸X ì œê³µ ë²„í¼ê°€ ì•„ë‹Œ, ë™ì¼í•œ í¬ê¸°ì˜ ì›ì†Œë“¤ë¡œ êµ¬ì„±ëœ êµ¬ì¡°í™” ë²„í¼ë¥¼ ë§Œë“¤ ë•Œ í•„ìš”í•˜ë‹¤ê³  í•œë‹¤.
-	// 0: êµ¬ì¡°í™” ë²„í¼ë¥¼ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ.
+	//³»ºÎ ±¸Á¶¸¦ ¾Ë ¼ö ¾ø´Â ´ÙÀÌ·ºÆ®X Á¦°ø ¹öÆÛ°¡ ¾Æ´Ñ, µ¿ÀÏÇÑ Å©±âÀÇ ¿ø¼Òµé·Î ±¸¼ºµÈ ±¸Á¶È­ ¹öÆÛ¸¦ ¸¸µé ¶§ ÇÊ¿äÇÏ´Ù°í ÇÑ´Ù.
+	// 0: ±¸Á¶È­ ¹öÆÛ¸¦ »ç¿ëÇÏÁö ¾ÊÀ½.
 
-	vertexBufferDesc_.MiscFlags = 0;	//ë²„í¼ì— ê´€ë ¨ëœ ë¶€ê°€ ì˜µì…˜ ì„¤ì •. 0: ë¶€ê°€ ì˜µì…˜ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ.	
+	vertexBufferDesc_.MiscFlags = 0;	//¹öÆÛ¿¡ °ü·ÃµÈ ºÎ°¡ ¿É¼Ç ¼³Á¤. 0: ºÎ°¡ ¿É¼Ç »ç¿ëÇÏÁö ¾ÊÀ½.	
 
 	if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(
 		&vertexBufferDesc_,
@@ -121,7 +121,7 @@ void GameEngineVertexBuffer::CreateVertexBuffer(
 		&vertexBuffer_
 	))
 	{
-		MsgBoxAssert("ë²„í…ìŠ¤ ë²„í¼ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("¹öÅØ½º ¹öÆÛ »ı¼º ½ÇÆĞ.");
 		return;
 	}
 }

@@ -4,7 +4,7 @@
 
 Clumsy::Clumsy() 
 {
-	name_ = "ì–´ì„¤í””";
+	name_ = "¾î¼³ÇÄ";
 	SetName(std::string_view("Clumsy"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 1;
@@ -25,8 +25,8 @@ void Clumsy::Init()
 	std::string sDefNext = std::to_string(ceil(PlayerInfo_.def_ * PlayerPInfo_.defMul_Result / 100) - 2.f).substr(0, std::to_string(ceil(PlayerInfo_.def_ * PlayerPInfo_.defMul_Result / 100) - 2.0f).find("."));
 
 
-	etc_ = sAddProjectile + " -> " + sAddProjectileNext + " ì¶”ê°€ íˆ¬ì‚¬ì²´ \n"
-		+ sDef + " -> " + sDefNext + " ë°©ì–´ë ¥ ";
+	etc_ = sAddProjectile + " -> " + sAddProjectileNext + " Ãß°¡ Åõ»çÃ¼ \n"
+		+ sDef + " -> " + sDefNext + " ¹æ¾î·Â ";
 
 }
 

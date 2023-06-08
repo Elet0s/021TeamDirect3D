@@ -17,42 +17,42 @@ void GameEngineDevice::CreateDevice()
 {
 	if (nullptr == GameEngineWindow::GetInst().GetHWND())
 	{
-		MsgBoxAssert("ìœˆë„ìš°ê°€ ìƒì„±ë˜ì§€ ì•Šì•˜ëŠ”ë° ë””ë°”ì´ìŠ¤ ì´ˆê¸°í™”ë¥¼ í•˜ë ¤ê³  í–ˆìŠµë‹ˆë‹¤..");
+		MsgBoxAssert("À©µµ¿ì°¡ »ý¼ºµÇÁö ¾Ê¾Ò´Âµ¥ µð¹ÙÀÌ½º ÃÊ±âÈ­¸¦ ÇÏ·Á°í Çß½À´Ï´Ù..");
 		return;
 	}
 
 	int iFlag = 0;
 #ifdef _DEBUG
-	iFlag = D3D11_CREATE_DEVICE_DEBUG;	//ë‹¤ì´ë ‰íŠ¸X11ì˜ ë””ë²„ê·¸ ë ˆì´ì–´ ì¼œê¸°(enable).
+	iFlag = D3D11_CREATE_DEVICE_DEBUG;	//´ÙÀÌ·ºÆ®X11ÀÇ µð¹ö±× ·¹ÀÌ¾î ÄÑ±â(enable).
 #endif 
 
 	D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0;
-	//ì‚¬ìš©í•˜ë ¤ëŠ” ë‹¤ì´ë ‰íŠ¸Xë²„ì „ ì„¸íŒ…: 11.0.
+	//»ç¿ëÇÏ·Á´Â ´ÙÀÌ·ºÆ®X¹öÀü ¼¼ÆÃ: 11.0.
 	//D3D_FEATURE_LEVEL featureLevels[3] = { D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0, D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_9_0 };
-	//ì‚¬ìš©í•  ë‹¤ì´ë ‰íŠ¸X ë²„ì „ì´ ì—¬ëŸ¬ê°œë¼ë©´ ì´ë ‡ê²Œ ì´ˆê¸°í™”í•´ì„œ ë§¤ê°œë³€ìˆ˜ pFeatureLevelì— ì£¼ì†Œê°’ì„ ë„£ì–´ì¤€ë‹¤.
+	//»ç¿ëÇÒ ´ÙÀÌ·ºÆ®X ¹öÀüÀÌ ¿©·¯°³¶ó¸é ÀÌ·¸°Ô ÃÊ±âÈ­ÇØ¼­ ¸Å°³º¯¼ö pFeatureLevel¿¡ ÁÖ¼Ò°ªÀ» ³Ö¾îÁØ´Ù.
 
-	if (S_OK != D3D11CreateDevice(	//ë‹¤ì´ë ‰íŠ¸X ë””ë°”ì´ìŠ¤, ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ ìƒì„± í•¨ìˆ˜.
-		NULL,				//ë¹„ë””ì˜¤ ì–´ëŒ‘í„°ì˜ í¬ì¸í„°. NULLì´ë©´ ê¸°ë³¸ ì–´ëŒ‘í„° ì‚¬ìš©.
-		D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_HARDWARE,	//ë“œë¼ì´ë²„ íƒ€ìž…: í•˜ë“œì›¨ì–´ == ê·¸ëž˜í”½ì¹´ë“œ. 
-		NULL,				//ì†Œí”„íŠ¸ì›¨ì–´ ëž˜ìŠ¤í„°ë¼ì´ì € í•¸ë“¤. ìœ„ì—ì„œ D3D_DRIVER_TYPE_SOFTWAREë¥¼ ë„£ì§€ ì•Šì•˜ë‹¤ë©´ NULL.
-		iFlag,				//í™œì„±í™”í•  ëŸ°íƒ€ìž„ ë ˆì´ì–´: ë””ë²„ê·¸ ë ˆì´ì–´.
-		NULL, 				//ì‚¬ìš©í•  í”¼ì²˜ ë ˆë²¨(ì‹œìŠ¤í…œì—ì„œ ì‚¬ìš©ê°€ëŠ¥í•œ ë‹¤ì´ë ‰íŠ¸X ë²„ì „)ë°°ì—´ì˜ ì£¼ì†Œê°’. 
-		//NULLì´ë©´ ìžë™ìœ¼ë¡œ í•´ë‹¹ ì‹œìŠ¤í…œì—ì„œ ê°€ëŠ¥í•œ ìµœì‹  ë²„ì „ì„ ì„ íƒí•œë‹¤.
+	if (S_OK != D3D11CreateDevice(	//´ÙÀÌ·ºÆ®X µð¹ÙÀÌ½º, µð¹ÙÀÌ½º ÄÁÅØ½ºÆ® »ý¼º ÇÔ¼ö.
+		NULL,				//ºñµð¿À ¾î´ðÅÍÀÇ Æ÷ÀÎÅÍ. NULLÀÌ¸é ±âº» ¾î´ðÅÍ »ç¿ë.
+		D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_HARDWARE,	//µå¶óÀÌ¹ö Å¸ÀÔ: ÇÏµå¿þ¾î == ±×·¡ÇÈÄ«µå. 
+		NULL,				//¼ÒÇÁÆ®¿þ¾î ·¡½ºÅÍ¶óÀÌÀú ÇÚµé. À§¿¡¼­ D3D_DRIVER_TYPE_SOFTWARE¸¦ ³ÖÁö ¾Ê¾Ò´Ù¸é NULL.
+		iFlag,				//È°¼ºÈ­ÇÒ ·±Å¸ÀÓ ·¹ÀÌ¾î: µð¹ö±× ·¹ÀÌ¾î.
+		NULL, 				//»ç¿ëÇÒ ÇÇÃ³ ·¹º§(½Ã½ºÅÛ¿¡¼­ »ç¿ë°¡´ÉÇÑ ´ÙÀÌ·ºÆ®X ¹öÀü)¹è¿­ÀÇ ÁÖ¼Ò°ª. 
+		//NULLÀÌ¸é ÀÚµ¿À¸·Î ÇØ´ç ½Ã½ºÅÛ¿¡¼­ °¡´ÉÇÑ ÃÖ½Å ¹öÀüÀ» ¼±ÅÃÇÑ´Ù.
 
-		0,					//ì‚¬ìš©í•  í”¼ì²˜ ë ˆë²¨ ë°°ì—´ í¬ê¸°. 
-		D3D11_SDK_VERSION,	//SDKë²„ì „ ì„¸íŒ…. MSDNì—ë„ ê·¸ëƒ¥ ì €ë ‡ê²Œ í•˜ë¼ê³ ë§Œ ë˜ì–´ ìžˆìŒ.
-		&device_,			//ì´ˆê¸°í™”í•  ë‹¤ì´ë ‰íŠ¸X ë””ë°”ì´ìŠ¤ í¬ì¸í„°ì˜ ì£¼ì†Œê°’.
-		&featureLevel,		//pFeatureLevelì— ë„£ì–´ì¤€ í”¼ì²˜ ë ˆë²¨ ì¤‘ í˜„ìž¬ ì‚¬ìš© ê°€ëŠ¥í•œ ê°€ìž¥ ìµœì‹  ë²„ì „ì„ ë°˜í™˜í•œë‹¤.
-		&deviceContext_		//ì´ˆê¸°í™”í•  ë‹¤ì´ë ‰íŠ¸X ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ í¬ì¸í„°ì˜ ì£¼ì†Œê°’.
+		0,					//»ç¿ëÇÒ ÇÇÃ³ ·¹º§ ¹è¿­ Å©±â. 
+		D3D11_SDK_VERSION,	//SDK¹öÀü ¼¼ÆÃ. MSDN¿¡µµ ±×³É Àú·¸°Ô ÇÏ¶ó°í¸¸ µÇ¾î ÀÖÀ½.
+		&device_,			//ÃÊ±âÈ­ÇÒ ´ÙÀÌ·ºÆ®X µð¹ÙÀÌ½º Æ÷ÀÎÅÍÀÇ ÁÖ¼Ò°ª.
+		&featureLevel,		//pFeatureLevel¿¡ ³Ö¾îÁØ ÇÇÃ³ ·¹º§ Áß ÇöÀç »ç¿ë °¡´ÉÇÑ °¡Àå ÃÖ½Å ¹öÀüÀ» ¹ÝÈ¯ÇÑ´Ù.
+		&deviceContext_		//ÃÊ±âÈ­ÇÒ ´ÙÀÌ·ºÆ®X µð¹ÙÀÌ½º ÄÁÅØ½ºÆ® Æ÷ÀÎÅÍÀÇ ÁÖ¼Ò°ª.
 	))
 	{
-		MsgBoxAssert("ë””ë°”ì´ìŠ¤ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("µð¹ÙÀÌ½º »ý¼º ½ÇÆÐ.");
 		return;
 	}
 
 	if (featureLevel != D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0)
 	{
-		MsgBoxAssert("ë‹¤ì´ë ‰íŠ¸X11ì„ ì§€ì›í•˜ì§€ ì•ŠëŠ” ê·¸ëž˜í”½ ì¹´ë“œìž…ë‹ˆë‹¤.");
+		MsgBoxAssert("´ÙÀÌ·ºÆ®X11À» Áö¿øÇÏÁö ¾Ê´Â ±×·¡ÇÈ Ä«µåÀÔ´Ï´Ù.");
 		return;
 	}
 
@@ -60,31 +60,31 @@ void GameEngineDevice::CreateDevice()
 	//	enum D3D_DRIVER_TYPE
 	//{
 	//	D3D_DRIVER_TYPE_UNKNOWN = 0,								
-	// ë“œë¼ì´ë²„ íƒ€ìž…: ì•Œ ìˆ˜ ì—†ìŒ.
+	// µå¶óÀÌ¹ö Å¸ÀÔ: ¾Ë ¼ö ¾øÀ½.
 	// 
 	//	D3D_DRIVER_TYPE_HARDWARE = (D3D_DRIVER_TYPE_UNKNOWN + 1),	
-	// ë“œë¼ì´ë²„ íƒ€ìž…: í•˜ë“œì›¨ì–´ == ê·¸ëž˜í”½ì¹´ë“œ.
+	// µå¶óÀÌ¹ö Å¸ÀÔ: ÇÏµå¿þ¾î == ±×·¡ÇÈÄ«µå.
 	//  
 	//	D3D_DRIVER_TYPE_REFERENCE = (D3D_DRIVER_TYPE_HARDWARE + 1),	
-	// ë“œë¼ì´ë²„ íƒ€ìž…: ë ˆí¼ëŸ°ìŠ¤. ë³´í†µ~
+	// µå¶óÀÌ¹ö Å¸ÀÔ: ·¹ÆÛ·±½º. º¸Åë~
 	// 
 	//	D3D_DRIVER_TYPE_NULL = (D3D_DRIVER_TYPE_REFERENCE + 1),		
-	// ë“œë¼ì´ë²„ íƒ€ìž…: ë„(ì‚¬ìš© ì•ˆ í•¨). ë³´í†µ~
+	// µå¶óÀÌ¹ö Å¸ÀÔ: ³Î(»ç¿ë ¾È ÇÔ). º¸Åë~
 	// 
 	//	D3D_DRIVER_TYPE_SOFTWARE = (D3D_DRIVER_TYPE_NULL + 1),		
-	// ë“œë¼ì´ë²„ íƒ€ìž…: ì†Œí”„íŠ¸ì›¨ì–´. ê·¸ëž˜í”½ì¹´ë“œê°€ í•˜ëŠ” ì¼ì„ CPUê°€ í•˜ê²Œ í•˜ëŠ” ì†Œí”„íŠ¸ì›¨ì–´ ë“œë¼ì´ë²„ ì‚¬ìš©. ë§¤ìš° ëŠë¦¼.
+	// µå¶óÀÌ¹ö Å¸ÀÔ: ¼ÒÇÁÆ®¿þ¾î. ±×·¡ÇÈÄ«µå°¡ ÇÏ´Â ÀÏÀ» CPU°¡ ÇÏ°Ô ÇÏ´Â ¼ÒÇÁÆ®¿þ¾î µå¶óÀÌ¹ö »ç¿ë. ¸Å¿ì ´À¸².
 	// 
 	//	D3D_DRIVER_TYPE_WARP = (D3D_DRIVER_TYPE_SOFTWARE + 1)		
-	// ë“œë¼ì´ë²„ íƒ€ìž…: WARP(Window Advanced Rasterizing Platform). ~.ë‹¤ì´ë ‰íŠ¸x 10ê¹Œì§€ë§Œ ì§€ì›ë¨.
+	// µå¶óÀÌ¹ö Å¸ÀÔ: WARP(Window Advanced Rasterizing Platform). ~.´ÙÀÌ·ºÆ®x 10±îÁö¸¸ Áö¿øµÊ.
 	//} 	D3D_DRIVER_TYPE;
 
-	//ë©€í‹°ìŠ¤ë ˆë“œ ë¡œë”©ìš© ì˜µì…˜.
-	HRESULT result = CoInitializeEx(	//COM ê°ì²´ë¥¼ ì‚¬ìš©í•˜ë ¤ëŠ” ìŠ¤ë ˆë“œì—ì„œ COM ê°ì²´ë¥¼ ì´ˆê¸°í™”í•˜ê³  ë™ì‹œì„± ëª¨ë¸ì„ ê²°ì •í•˜ëŠ” í•¨ìˆ˜.
-		NULL,							//ì˜ˆì•½ë˜ì–´ ìžˆë‹¤ê³ ë§Œ í•˜ëŠ” ë³€ìˆ˜. ê·¸ëƒ¥ MSDNì—ì„œë„ NULL ë„£ìœ¼ë¼ê³ ë§Œ í•œë‹¤.
+	//¸ÖÆ¼½º·¹µå ·Îµù¿ë ¿É¼Ç.
+	HRESULT result = CoInitializeEx(	//COM °´Ã¼¸¦ »ç¿ëÇÏ·Á´Â ½º·¹µå¿¡¼­ COM °´Ã¼¸¦ ÃÊ±âÈ­ÇÏ°í µ¿½Ã¼º ¸ðµ¨À» °áÁ¤ÇÏ´Â ÇÔ¼ö.
+		NULL,							//¿¹¾àµÇ¾î ÀÖ´Ù°í¸¸ ÇÏ´Â º¯¼ö. ±×³É MSDN¿¡¼­µµ NULL ³ÖÀ¸¶ó°í¸¸ ÇÑ´Ù.
 		COINIT_MULTITHREADED			//????
 	);
 
-	//CoUninitialize() í•¨ìˆ˜ëŠ” í˜¸ì¶œí•˜ì§€ ì•Šì•„ë„ ë˜ë‚˜??
+	//CoUninitialize() ÇÔ¼ö´Â È£ÃâÇÏÁö ¾Ê¾Æµµ µÇ³ª??
 }
 
 void GameEngineDevice::CreateSwapChain()
@@ -93,192 +93,192 @@ void GameEngineDevice::CreateSwapChain()
 
 	DXGI_SWAP_CHAIN_DESC scInfo = { 0 };
 
-	scInfo.BufferDesc.Width = screenSize.UIX();		//í™”ë©´ ê°€ë¡œê¸¸ì´.
-	scInfo.BufferDesc.Height = screenSize.UIY();		//í™”ë©´ ì„¸ë¡œê¸¸ì´.
+	scInfo.BufferDesc.Width = screenSize.UIX();		//È­¸é °¡·Î±æÀÌ.
+	scInfo.BufferDesc.Height = screenSize.UIY();		//È­¸é ¼¼·Î±æÀÌ.
 
-	scInfo.BufferDesc.RefreshRate.Denominator = 1;	//ì£¼ì‚¬ìœ¨ ë¶„ëª¨ == ë‹¨ìœ„ì‹œê°„: 1ì´ˆ.
-	scInfo.BufferDesc.RefreshRate.Numerator = 60;	//ì£¼ì‚¬ìœ¨ ë¶„ìž == ë‹¨ìœ„ì‹œê°„ë‹¹ í™”ë©´ ê°±ì‹  íšŸìˆ˜: 60ë²ˆ.
+	scInfo.BufferDesc.RefreshRate.Denominator = 1;	//ÁÖ»çÀ² ºÐ¸ð == ´ÜÀ§½Ã°£: 1ÃÊ.
+	scInfo.BufferDesc.RefreshRate.Numerator = 60;	//ÁÖ»çÀ² ºÐÀÚ == ´ÜÀ§½Ã°£´ç È­¸é °»½Å È½¼ö: 60¹ø.
 
-	scInfo.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;	//ë””ìŠ¤í”Œë ˆì´ í¬ë§·. 
-	//DXGI_FORMAT_R8G8B8A8_UNORM: 8ë°”ì´íŠ¸ì˜ 0~1ë¡œ ë¬´ë¶€í˜¸ ì •ê·œí™”ëœ ì •ìˆ˜ê°’ì„ RGBAìˆœ ìƒ‰ìƒê°’ ì €ìž¥ìš©ìœ¼ë¡œ ì‚¬ìš©.
+	scInfo.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;	//µð½ºÇÃ·¹ÀÌ Æ÷¸Ë. 
+	//DXGI_FORMAT_R8G8B8A8_UNORM: 8¹ÙÀÌÆ®ÀÇ 0~1·Î ¹«ºÎÈ£ Á¤±ÔÈ­µÈ Á¤¼ö°ªÀ» RGBA¼ø »ö»ó°ª ÀúÀå¿ëÀ¸·Î »ç¿ë.
 
 	scInfo.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	//ìŠ¤ìº”ë¼ì¸ ìˆœì„œ(ìƒˆë¡œìš´ í™”ë©´ì„ ê·¸ë¦´ë•Œ ì–´ë–¤ í”½ì…€ ìˆœì„œëŒ€ë¡œ ìƒ‰ì„ ë°”ê¿€ì§€ì— ëŒ€í•œ ì •ë³´): ëª…ì‹œí•˜ì§€ ì•ŠìŒ.
-	//ì• ì´ˆì— ì–´ë–¤ ë°©ì‹ìœ¼ë¡œ í•˜ë“  ë„ˆë¬´ ë¹¨ë¼ì„œ ëŠë‚„ ìˆ˜ë„ ì—†ìœ¼ë¯€ë¡œ ì˜ë¯¸ ì—†ë‹¤.
+	//½ºÄµ¶óÀÎ ¼ø¼­(»õ·Î¿î È­¸éÀ» ±×¸±¶§ ¾î¶² ÇÈ¼¿ ¼ø¼­´ë·Î »öÀ» ¹Ù²ÜÁö¿¡ ´ëÇÑ Á¤º¸): ¸í½ÃÇÏÁö ¾ÊÀ½.
+	//¾ÖÃÊ¿¡ ¾î¶² ¹æ½ÄÀ¸·Î ÇÏµç ³Ê¹« »¡¶ó¼­ ´À³¥ ¼öµµ ¾øÀ¸¹Ç·Î ÀÇ¹Ì ¾ø´Ù.
 
 	scInfo.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-	//ì´ë¯¸ì§€ í¬ê¸° ì¡°ì • ë°©ì‹: ëª…ì‹œí•˜ì§€ ì•ŠìŒ.
+	//ÀÌ¹ÌÁö Å©±â Á¶Á¤ ¹æ½Ä: ¸í½ÃÇÏÁö ¾ÊÀ½.
 
-	scInfo.SampleDesc.Count = 1;	//ë©€í‹°ìƒ˜í”Œë§ì— ì°¸ì¡°í•  í”½ì…€ë‹¹ ìƒ˜í”Œ ê°œìˆ˜: 1ê°œ(ì°¸ì¡° ì•ˆí•¨).
-	scInfo.SampleDesc.Quality = 0;	//ë©€í‹°ìƒ˜í”Œë§ í’ˆì§ˆ ìˆ˜ì¤€: 0 == ë©€í‹°ìƒ˜í”Œë§ ì•ˆí•¨.
-	//ìŠ¤ì™‘ì²´ì¸ì—ì„  ë²„í¼ ìŠ¤ì™‘ë§Œ ì„¤ì •í•˜ê³ , ìƒ˜í”Œë§ì´ í•„ìš”í•˜ë‹¤ë©´ ë°±ë²„í¼ì— í•´ì•¼ í•˜ë¯€ë¡œ ìŠ¤ì™‘ì²´ì¸ ì„¤ì •ì„ ë§Œì§€ëŠ” ê±´ ì•„ë¬´ ì˜ë¯¸ ì—†ë‹¤. 
+	scInfo.SampleDesc.Count = 1;	//¸ÖÆ¼»ùÇÃ¸µ¿¡ ÂüÁ¶ÇÒ ÇÈ¼¿´ç »ùÇÃ °³¼ö: 1°³(ÂüÁ¶ ¾ÈÇÔ).
+	scInfo.SampleDesc.Quality = 0;	//¸ÖÆ¼»ùÇÃ¸µ Ç°Áú ¼öÁØ: 0 == ¸ÖÆ¼»ùÇÃ¸µ ¾ÈÇÔ.
+	//½º¿ÒÃ¼ÀÎ¿¡¼± ¹öÆÛ ½º¿Ò¸¸ ¼³Á¤ÇÏ°í, »ùÇÃ¸µÀÌ ÇÊ¿äÇÏ´Ù¸é ¹é¹öÆÛ¿¡ ÇØ¾ß ÇÏ¹Ç·Î ½º¿ÒÃ¼ÀÎ ¼³Á¤À» ¸¸Áö´Â °Ç ¾Æ¹« ÀÇ¹Ì ¾ø´Ù. 
 
 	scInfo.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT | DXGI_USAGE_SHADER_INPUT;
-	//ìŠ¤ì™‘ì²´ì¸ì´ ê°€ì§„ ë²„í¼ ì‚¬ìš© ë°©ì‹: í™”ë©´ì— ì¶œë ¥í•  ë Œë”íƒ€ê²Ÿìœ¼ë¡œ | ì…°ì´ë”ë¥¼ ê±°ì¹œ ê²°ê³¼ë¬¼ì„ ë°›ëŠ” ìš©ë„ë¡œ.
+	//½º¿ÒÃ¼ÀÎÀÌ °¡Áø ¹öÆÛ »ç¿ë ¹æ½Ä: È­¸é¿¡ Ãâ·ÂÇÒ ·»´õÅ¸°ÙÀ¸·Î | ¼ÎÀÌ´õ¸¦ °ÅÄ£ °á°ú¹°À» ¹Þ´Â ¿ëµµ·Î.
 
 	scInfo.OutputWindow = GameEngineWindow::GetInst().GetHWND();
-	//ì§€ì •í•œ ë Œë”íƒ€ê²Ÿì„ ì¶œë ¥í•  ìœˆë„ìš°ì˜ í•¸ë“¤.
+	//ÁöÁ¤ÇÑ ·»´õÅ¸°ÙÀ» Ãâ·ÂÇÒ À©µµ¿ìÀÇ ÇÚµé.
 
-	scInfo.BufferCount = 2;		//ìŠ¤ì™‘ì²´ì¸ì´ ê°€ì§„ ë²„í¼ ì¤‘ ì‚¬ìš©í•  ë²„í¼ ê°œìˆ˜: ì „ë©´ ë²„í¼ì™€ ë°±ë²„í¼ 2ê°œ.
+	scInfo.BufferCount = 2;		//½º¿ÒÃ¼ÀÎÀÌ °¡Áø ¹öÆÛ Áß »ç¿ëÇÒ ¹öÆÛ °³¼ö: Àü¸é ¹öÆÛ¿Í ¹é¹öÆÛ 2°³.
 
 	scInfo.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	//ë°±ë²„í¼ ì „í™˜ë°©ì‹: ë°±ë²„í¼ì˜ ì´ë¯¸ì§€ë¥¼ í”Œë¦½ ë°©ì‹ìœ¼ë¡œ ì „ë©´ ë²„í¼ì— ë³µì‚¬í•˜ê³ , ë°±ë²„í¼ì˜ ê¸°ì¡´ ì´ë¯¸ì§€ëŠ” ë²„ë¦°ë‹¤.
+	//¹é¹öÆÛ ÀüÈ¯¹æ½Ä: ¹é¹öÆÛÀÇ ÀÌ¹ÌÁö¸¦ ÇÃ¸³ ¹æ½ÄÀ¸·Î Àü¸é ¹öÆÛ¿¡ º¹»çÇÏ°í, ¹é¹öÆÛÀÇ ±âÁ¸ ÀÌ¹ÌÁö´Â ¹ö¸°´Ù.
 
 	// enum DXGI_SWAP_EFFECT
 	//{
-	//		DXGI_SWAP_EFFECT_DISCARD = 0,			ë°±ë²„í¼ì˜ ì´ë¯¸ì§€ë¥¼ bitbltë°©ì‹ìœ¼ë¡œ ì „ë©´ ë²„í¼ì— ë³µì‚¬í•˜ê³ , ë°±ë²„í¼ì˜ ê¸°ì¡´ ì´ë¯¸ì§€ëŠ” ë²„ë¦°ë‹¤.
-	//		DXGI_SWAP_EFFECT_SEQUENTIAL = 1,		ë°±ë²„í¼ì˜ ì´ë¯¸ì§€ë¥¼ bitbltë°©ì‹ìœ¼ë¡œ ì „ë©´ ë²„í¼ì— ë³µì‚¬í•˜ê³ , ë°±ë²„í¼ì˜ ê¸°ì¡´ ì´ë¯¸ì§€ëŠ” ë‚¨ê¸´ë‹¤.
-	//		DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = 3,	ë°±ë²„í¼ë¥¼ í”Œë¦½ ë°©ì‹ìœ¼ë¡œ ì „ë©´ ë²„í¼ì™€ êµì²´í•˜ê³ , ì „ë©´ ë²„í¼ê°€ ê°€ì§€ê³  ìžˆë˜ ì´ë¯¸ì§€ëŠ” ë‚¨ê¸´ë‹¤.
-	//		DXGI_SWAP_EFFECT_FLIP_DISCARD = 4		ë°±ë²„í¼ë¥¼ í”Œë¦½ ë°©ì‹ìœ¼ë¡œ ì „ë©´ ë²„í¼ì™€ êµì²´í•˜ê³ , ì „ë©´ ë²„í¼ê°€ ê°€ì§€ê³  ìžˆë˜ ì´ë¯¸ì§€ëŠ” ë²„ë¦°ë‹¤.
+	//		DXGI_SWAP_EFFECT_DISCARD = 0,			¹é¹öÆÛÀÇ ÀÌ¹ÌÁö¸¦ bitblt¹æ½ÄÀ¸·Î Àü¸é ¹öÆÛ¿¡ º¹»çÇÏ°í, ¹é¹öÆÛÀÇ ±âÁ¸ ÀÌ¹ÌÁö´Â ¹ö¸°´Ù.
+	//		DXGI_SWAP_EFFECT_SEQUENTIAL = 1,		¹é¹öÆÛÀÇ ÀÌ¹ÌÁö¸¦ bitblt¹æ½ÄÀ¸·Î Àü¸é ¹öÆÛ¿¡ º¹»çÇÏ°í, ¹é¹öÆÛÀÇ ±âÁ¸ ÀÌ¹ÌÁö´Â ³²±ä´Ù.
+	//		DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = 3,	¹é¹öÆÛ¸¦ ÇÃ¸³ ¹æ½ÄÀ¸·Î Àü¸é ¹öÆÛ¿Í ±³Ã¼ÇÏ°í, Àü¸é ¹öÆÛ°¡ °¡Áö°í ÀÖ´ø ÀÌ¹ÌÁö´Â ³²±ä´Ù.
+	//		DXGI_SWAP_EFFECT_FLIP_DISCARD = 4		¹é¹öÆÛ¸¦ ÇÃ¸³ ¹æ½ÄÀ¸·Î Àü¸é ¹öÆÛ¿Í ±³Ã¼ÇÏ°í, Àü¸é ¹öÆÛ°¡ °¡Áö°í ÀÖ´ø ÀÌ¹ÌÁö´Â ¹ö¸°´Ù.
 	//}		DXGI_SWAP_EFFECT;
-	//	ì¼ì¼ížˆ ë³µì‚¬í•˜ëŠ” bitbltë°©ì‹ë³´ë‹¤ í•˜ë“œì›¨ì–´ì ìœ¼ë¡œ ì „í›„ ë²„í¼ë¥¼ êµì²´í•˜ëŠ” í”Œë¦½ ë°©ì‹ì´ ë” íš¨ìœ¨ì ì´ë©°, 
-	//	DirectX12ë¶€í„°ëŠ” í”Œë¦½ ë°©ì‹ë§Œ ì“°ì¸ë‹¤ê³  í•œë‹¤.
+	//	ÀÏÀÏÈ÷ º¹»çÇÏ´Â bitblt¹æ½Äº¸´Ù ÇÏµå¿þ¾îÀûÀ¸·Î ÀüÈÄ ¹öÆÛ¸¦ ±³Ã¼ÇÏ´Â ÇÃ¸³ ¹æ½ÄÀÌ ´õ È¿À²ÀûÀÌ¸ç, 
+	//	DirectX12ºÎÅÍ´Â ÇÃ¸³ ¹æ½Ä¸¸ ¾²ÀÎ´Ù°í ÇÑ´Ù.
 
 
 	scInfo.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	//DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH: 
-	//ì „ì²´í™”ë©´/ì°½ëª¨ë“œ ì „í™˜ì‹œ ëª¨ë‹ˆí„° í•´ìƒë„ê°€ ê·¸ì— ë§žëŠ” í•´ìƒë„ë¡œ ìžë™ ì¡°ì •.
+	//ÀüÃ¼È­¸é/Ã¢¸ðµå ÀüÈ¯½Ã ¸ð´ÏÅÍ ÇØ»óµµ°¡ ±×¿¡ ¸Â´Â ÇØ»óµµ·Î ÀÚµ¿ Á¶Á¤.
 
-	scInfo.Windowed = true;		//true: ì°½ëª¨ë“œ, false : ì „ì²´í™”ë©´.
+	scInfo.Windowed = true;		//true: Ã¢¸ðµå, false : ÀüÃ¼È­¸é.
 
 
 
 	//ID3D11Device != IDXGIDevice.
 
 	IDXGIDevice* pDevice = nullptr;
-	//ê·¸ëƒ¥ DXGI ì¸í„°íŽ˜ì´ìŠ¤ í¬ì¸í„° ì¤‘ ID3D11Device* ê°€ ìžˆì„ë•Œ ê°€ìž¥ ë¨¼ì € ê°€ì ¸ì˜¬ ìˆ˜ ìžˆì–´ì„œ ì‚¬ìš©í•œ ê²ƒ.
+	//±×³É DXGI ÀÎÅÍÆäÀÌ½º Æ÷ÀÎÅÍ Áß ID3D11Device* °¡ ÀÖÀ»¶§ °¡Àå ¸ÕÀú °¡Á®¿Ã ¼ö ÀÖ¾î¼­ »ç¿ëÇÑ °Í.
 
 
-	//ë””ìŠ¤í”Œë ˆì´ ì–´ëŒ‘í„°(ë Œë”ë§ ì •ë³´ë¥¼ ëª¨ë‹ˆí„°ì— ê·¸ë¦¬ëŠ” ìž¥ë¹„. ëŒ€ê°œëŠ” ê·¸ëž˜í”½ì¹´ë“œ)ì˜ ê¸°ëŠ¥ì„ ì¶”ìƒí™”í•œ COM ê°ì²´ì™€ ì—°ê²°ëœ ì¸í„°íŽ˜ì´ìŠ¤ í¬ì¸í„°.
+	//µð½ºÇÃ·¹ÀÌ ¾î´ðÅÍ(·»´õ¸µ Á¤º¸¸¦ ¸ð´ÏÅÍ¿¡ ±×¸®´Â Àåºñ. ´ë°³´Â ±×·¡ÇÈÄ«µå)ÀÇ ±â´ÉÀ» Ãß»óÈ­ÇÑ COM °´Ã¼¿Í ¿¬°áµÈ ÀÎÅÍÆäÀÌ½º Æ÷ÀÎÅÍ.
 	IDXGIAdapter* pAdapter = nullptr;
 
-	//ëª¨ë‹ˆí„°ì— ê·¸ë ¤ì§€ëŠ” í™”ë©´ ê°±ì‹  ê´€ë ¨ ê¸°ëŠ¥ì„ ê°€ì§„ COM ê°ì²´ì™€ ì—°ê²°ëœ ì¸í„°íŽ˜ì´ìŠ¤ í¬ì¸í„°.
+	//¸ð´ÏÅÍ¿¡ ±×·ÁÁö´Â È­¸é °»½Å °ü·Ã ±â´ÉÀ» °¡Áø COM °´Ã¼¿Í ¿¬°áµÈ ÀÎÅÍÆäÀÌ½º Æ÷ÀÎÅÍ.
 	IDXGIFactory* pFactory = nullptr;
-	//ì´ íŒ©í† ë¦¬ê°€ CreateSwapChain() í•¨ìˆ˜ë¥¼ ê°€ì§€ê³  ìžˆë‹¤.
+	//ÀÌ ÆÑÅä¸®°¡ CreateSwapChain() ÇÔ¼ö¸¦ °¡Áö°í ÀÖ´Ù.
 
 
-	//GUID(Globally Unique IDentifier): ìš´ì˜ì²´ì œê°€ í˜„ìž¬ ì‹¤í–‰ì¤‘ì¸ í”„ë¡œì„¸ìŠ¤ë“¤ì„ êµ¬ë¶„í•˜ê¸° ìœ„í•´ ì •í•˜ëŠ”, 
-	// ê±°ì˜ ì™„ë²½í•˜ê²Œ ì¤‘ë³µë˜ì§€ ì•Šì„ 8-4-4-4-12ìžë¦¬ ê°’. COM í”„ë¡œê·¸ëž˜ë°ì˜ í•µì‹¬ ìš”ì†Œë¼ê³  í•œë‹¤.
-	// ì™„ë²½í•œ ë‚œìˆ˜ë¥¼ ë§Œë“¤ ìˆ˜ ì—†ëŠ” íŠ¹ì„±ìƒ ë‚®ì€ í™•ë¥ ë¡œ ì¤‘ë³µë˜ëŠ” ê°’ì´ ë‚˜ì˜¤ê¸°ë„ í•œë‹¤ê³  í•œë‹¤.
+	//GUID(Globally Unique IDentifier): ¿î¿µÃ¼Á¦°¡ ÇöÀç ½ÇÇàÁßÀÎ ÇÁ·Î¼¼½ºµéÀ» ±¸ºÐÇÏ±â À§ÇØ Á¤ÇÏ´Â, 
+	// °ÅÀÇ ¿Ïº®ÇÏ°Ô Áßº¹µÇÁö ¾ÊÀ» 8-4-4-4-12ÀÚ¸® °ª. COM ÇÁ·Î±×·¡¹ÖÀÇ ÇÙ½É ¿ä¼Ò¶ó°í ÇÑ´Ù.
+	// ¿Ïº®ÇÑ ³­¼ö¸¦ ¸¸µé ¼ö ¾ø´Â Æ¯¼º»ó ³·Àº È®·ü·Î Áßº¹µÇ´Â °ªÀÌ ³ª¿À±âµµ ÇÑ´Ù°í ÇÑ´Ù.
 
-	//__uuidof(): ê° í”„ë¡œì„¸ìŠ¤ë“¤ë§ˆë‹¤ì˜ ë‹¤ì´ë ‰íŠ¸ ì¸í„°íŽ˜ì´ìŠ¤ë“¤ì„ êµ¬ë¶„í•˜ê¸° ìœ„í•´ ê°€ì§€ê³  ìžˆëŠ” 
-	// UUID(Universally Unique IDentifier, ë²”ìš© ê³ ìœ  ì‹ë³„ìž. GUIDì˜ í•˜ìœ„ë¶„ë¥˜. code first ë§ˆì´ê·¸ë ˆì´ì…˜ ë•Œ ìž„ì˜ë¡œ ì •í•´ì§„ë‹¤)
-	// ê°’ì„ ê°€ì ¸ì˜¤ëŠ” ì—°ì‚°ìž.
+	//__uuidof(): °¢ ÇÁ·Î¼¼½ºµé¸¶´ÙÀÇ ´ÙÀÌ·ºÆ® ÀÎÅÍÆäÀÌ½ºµéÀ» ±¸ºÐÇÏ±â À§ÇØ °¡Áö°í ÀÖ´Â 
+	// UUID(Universally Unique IDentifier, ¹ü¿ë °íÀ¯ ½Äº°ÀÚ. GUIDÀÇ ÇÏÀ§ºÐ·ù. code first ¸¶ÀÌ±×·¹ÀÌ¼Ç ¶§ ÀÓÀÇ·Î Á¤ÇØÁø´Ù)
+	// °ªÀ» °¡Á®¿À´Â ¿¬»êÀÚ.
 
-	device_->QueryInterface(				//ì£¼ì–´ì§„ UUIDì— í•´ë‹¹í•˜ëŠ”, COM ê°ì²´ì™€ ì—°ê²°ëœ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ ìš”ì²­í•´ì„œ ë°›ì•„ì˜¤ëŠ” í•¨ìˆ˜.
-		__uuidof(IDXGIDevice), 				//ì´ í”„ë¡œì„¸ìŠ¤ê°€ í•„ìš”ë¡œ í•˜ëŠ” ì¸í„°íŽ˜ì´ìŠ¤ì˜ UUID.
-		reinterpret_cast<void**>(&pDevice)	//ìš”ì²­í•œ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ ë°›ì„ IDXGIDevice* íƒ€ìž… ë³€ìˆ˜.
+	device_->QueryInterface(				//ÁÖ¾îÁø UUID¿¡ ÇØ´çÇÏ´Â, COM °´Ã¼¿Í ¿¬°áµÈ ÀÎÅÍÆäÀÌ½º¸¦ ¿äÃ»ÇØ¼­ ¹Þ¾Æ¿À´Â ÇÔ¼ö.
+		__uuidof(IDXGIDevice), 				//ÀÌ ÇÁ·Î¼¼½º°¡ ÇÊ¿ä·Î ÇÏ´Â ÀÎÅÍÆäÀÌ½ºÀÇ UUID.
+		reinterpret_cast<void**>(&pDevice)	//¿äÃ»ÇÑ ÀÎÅÍÆäÀÌ½º¸¦ ¹ÞÀ» IDXGIDevice* Å¸ÀÔ º¯¼ö.
 	);
 	if (nullptr == pDevice)
 	{
-		MsgBoxAssert("ë””ë°”ì´ìŠ¤ ì¶”ì¶œ ì‹¤íŒ¨.");
+		MsgBoxAssert("µð¹ÙÀÌ½º ÃßÃâ ½ÇÆÐ.");
 		return;
 	}
 
-	pDevice->GetParent(						//pDeviceì˜ ë¶€ëª¨ COM ê°ì²´ì˜ ì¸í„°íŽ˜ì´ìŠ¤ì¸ IDXGIAdapterë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜.
-		__uuidof(IDXGIAdapter),				//ì´ í”„ë¡œì„¸ìŠ¤ê°€ í•„ìš”ë¡œ í•˜ëŠ” ë¶€ëª¨ COM ê°ì²´ì˜ ì¸í„°íŽ˜ì´ìŠ¤ì˜ GUID.
-		reinterpret_cast<void**>(&pAdapter)	//ìš”ì²­í•œ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ ë°›ì„ IDXGIAdapter* íƒ€ìž… ë³€ìˆ˜.
+	pDevice->GetParent(						//pDeviceÀÇ ºÎ¸ð COM °´Ã¼ÀÇ ÀÎÅÍÆäÀÌ½ºÀÎ IDXGIAdapter¸¦ °¡Á®¿À´Â ÇÔ¼ö.
+		__uuidof(IDXGIAdapter),				//ÀÌ ÇÁ·Î¼¼½º°¡ ÇÊ¿ä·Î ÇÏ´Â ºÎ¸ð COM °´Ã¼ÀÇ ÀÎÅÍÆäÀÌ½ºÀÇ GUID.
+		reinterpret_cast<void**>(&pAdapter)	//¿äÃ»ÇÑ ÀÎÅÍÆäÀÌ½º¸¦ ¹ÞÀ» IDXGIAdapter* Å¸ÀÔ º¯¼ö.
 	);
 	if (nullptr == pAdapter)
 	{
-		MsgBoxAssert("ì–´ëŒ‘í„° ì¶”ì¶œ ì‹¤íŒ¨.");
+		MsgBoxAssert("¾î´ðÅÍ ÃßÃâ ½ÇÆÐ.");
 		return;
 	}
-	//GetAdapter(&pAdapter)ê°€ ì•„ë‹ˆë¼ GetParent() í•¨ìˆ˜ë¡œ ì–´ëŒ‘í„° ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ ê°€ì ¸ì˜¤ëŠ” ì´ìœ ëŠ”?? ë””ë°”ì´ìŠ¤ì™€ ì—°ê²°ëœ ì¸í„°íŽ˜ì´ìŠ¤ë“¤ì´ í•„ìš”í•´ì„œ??
-	// ->ê·¸ëƒ¥ ìŠ¤ì™‘ì²´ì¸ ìƒì„± ì ˆì°¨ë“¤ ì¤‘ í•˜ë‚˜ì¼ ë¿ì´ë‹¤. ë‹¤ë¥¸ ë°©ì‹ìœ¼ë¡œ ìƒì„±í•´ë„ ë¬¸ì œ ì—†ë‹¤.
+	//GetAdapter(&pAdapter)°¡ ¾Æ´Ï¶ó GetParent() ÇÔ¼ö·Î ¾î´ðÅÍ ÀÎÅÍÆäÀÌ½º¸¦ °¡Á®¿À´Â ÀÌÀ¯´Â?? µð¹ÙÀÌ½º¿Í ¿¬°áµÈ ÀÎÅÍÆäÀÌ½ºµéÀÌ ÇÊ¿äÇØ¼­??
+	// ->±×³É ½º¿ÒÃ¼ÀÎ »ý¼º ÀýÂ÷µé Áß ÇÏ³ªÀÏ »ÓÀÌ´Ù. ´Ù¸¥ ¹æ½ÄÀ¸·Î »ý¼ºÇØµµ ¹®Á¦ ¾ø´Ù.
 
 
 
-	pAdapter->GetParent(						//pAdapterì˜ ë¶€ëª¨ COM ê°ì²´ì˜ ì¸í„°íŽ˜ì´ìŠ¤ì¸ IDXGIFactoryë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜.
-		__uuidof(IDXGIFactory),					//ì´ í”„ë¡œì„¸ìŠ¤ê°€ í•„ìš”ë¡œ í•˜ëŠ” ë¶€ëª¨ COM ê°ì²´ì˜ ì¸í„°íŽ˜ì´ìŠ¤ì˜ GUID.
-		reinterpret_cast<void**>(&pFactory)		//ìš”ì²­í•œ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ ë°›ì„ IDXGIFactory* íƒ€ìž… ë³€ìˆ˜.
+	pAdapter->GetParent(						//pAdapterÀÇ ºÎ¸ð COM °´Ã¼ÀÇ ÀÎÅÍÆäÀÌ½ºÀÎ IDXGIFactory¸¦ °¡Á®¿À´Â ÇÔ¼ö.
+		__uuidof(IDXGIFactory),					//ÀÌ ÇÁ·Î¼¼½º°¡ ÇÊ¿ä·Î ÇÏ´Â ºÎ¸ð COM °´Ã¼ÀÇ ÀÎÅÍÆäÀÌ½ºÀÇ GUID.
+		reinterpret_cast<void**>(&pFactory)		//¿äÃ»ÇÑ ÀÎÅÍÆäÀÌ½º¸¦ ¹ÞÀ» IDXGIFactory* Å¸ÀÔ º¯¼ö.
 	);
 	if (nullptr == pFactory)
 	{
-		MsgBoxAssert("íŒ©í† ë¦¬ ì¶”ì¶œ ì‹¤íŒ¨.");
+		MsgBoxAssert("ÆÑÅä¸® ÃßÃâ ½ÇÆÐ.");
 		return;
 	}
 
-	//CreateDXGIFactory()ê°€ ì•„ë‹ˆë¼ GetParent() í•¨ìˆ˜ë¡œ íŒ©í† ë¦¬ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ ê°€ì ¸ì˜¤ëŠ” ì´ìœ ëŠ”??
-	// ->ê·¸ëƒ¥ ìŠ¤ì™‘ì²´ì¸ ìƒì„± ì ˆì°¨ë“¤ ì¤‘ í•˜ë‚˜ì¼ ë¿ì´ë‹¤. ë‹¤ë¥¸ ë°©ì‹ìœ¼ë¡œ ìƒì„±í•´ë„ ë¬¸ì œ ì—†ë‹¤.
+	//CreateDXGIFactory()°¡ ¾Æ´Ï¶ó GetParent() ÇÔ¼ö·Î ÆÑÅä¸® ÀÎÅÍÆäÀÌ½º¸¦ °¡Á®¿À´Â ÀÌÀ¯´Â??
+	// ->±×³É ½º¿ÒÃ¼ÀÎ »ý¼º ÀýÂ÷µé Áß ÇÏ³ªÀÏ »ÓÀÌ´Ù. ´Ù¸¥ ¹æ½ÄÀ¸·Î »ý¼ºÇØµµ ¹®Á¦ ¾ø´Ù.
 
-	if (S_OK != pFactory->CreateSwapChain(	//ìŠ¤ì™‘ì²´ì¸ ìƒì„± í•¨ìˆ˜.
-		device_,		//ìŠ¤ì™‘ì²´ì¸ì„ ë§Œë“¤ë•Œ í•„ìš”í•œ ë””ë°”ì´ìŠ¤ì˜ í¬ì¸í„°. NULLì´ë©´ ì•ˆëœë‹¤.
-		&scInfo,		//ìŠ¤ì™‘ì²´ì¸ ìƒì„±ì‹œ í•„ìš”í•œ ëª…ì„¸ì„œê°€ ì €ìž¥ëœ DXGI_SWAP_CHAIN_DESCêµ¬ì¡°ì²´ì˜ í¬ì¸í„°. ì—­ì‹œ NULLì´ë©´ ì•ˆëœë‹¤.
-		&swapChain_		//ìƒì„±í•´ì„œ ë°˜í™˜í•  ìŠ¤ì™‘ì²´ì¸ ë³€ìˆ˜ì˜ í¬ì¸í„°.
+	if (S_OK != pFactory->CreateSwapChain(	//½º¿ÒÃ¼ÀÎ »ý¼º ÇÔ¼ö.
+		device_,		//½º¿ÒÃ¼ÀÎÀ» ¸¸µé¶§ ÇÊ¿äÇÑ µð¹ÙÀÌ½ºÀÇ Æ÷ÀÎÅÍ. NULLÀÌ¸é ¾ÈµÈ´Ù.
+		&scInfo,		//½º¿ÒÃ¼ÀÎ »ý¼º½Ã ÇÊ¿äÇÑ ¸í¼¼¼­°¡ ÀúÀåµÈ DXGI_SWAP_CHAIN_DESC±¸Á¶Ã¼ÀÇ Æ÷ÀÎÅÍ. ¿ª½Ã NULLÀÌ¸é ¾ÈµÈ´Ù.
+		&swapChain_		//»ý¼ºÇØ¼­ ¹ÝÈ¯ÇÒ ½º¿ÒÃ¼ÀÎ º¯¼öÀÇ Æ÷ÀÎÅÍ.
 	))
 	{
-		MsgBoxAssert("swapchain_ ìƒì„± ì‹¤íŒ¨.");
+		MsgBoxAssert("swapchain_ »ý¼º ½ÇÆÐ.");
 		return;
 	}
 
-	//ìŠ¤ì™‘ì²´ì¸ì„ ìƒì„±í•˜ê¸° ìœ„í•´ì„œë§Œ ë§Œë“  ë³€ìˆ˜ë“¤ì´ë¯€ë¡œ ìŠ¤ì™‘ì²´ì¸ì„ ë§Œë“¤ê³  ë‚œ í›„ ë°”ë¡œ ì •ë¦¬í•œë‹¤.
+	//½º¿ÒÃ¼ÀÎÀ» »ý¼ºÇÏ±â À§ÇØ¼­¸¸ ¸¸µç º¯¼öµéÀÌ¹Ç·Î ½º¿ÒÃ¼ÀÎÀ» ¸¸µé°í ³­ ÈÄ ¹Ù·Î Á¤¸®ÇÑ´Ù.
 	pFactory->Release();
 	pAdapter->Release();
 	pDevice->Release();
 
-	//ë‹¤ì´ë ‰íŠ¸ê°€ ì œê³µí•˜ëŠ” ì¸í„°íŽ˜ì´ìŠ¤ì˜ í¬ì¸í„°ë“¤ì€ ë ˆí¼ëŸ°ìŠ¤ ì¹´ìš´íŒ… ë°©ì‹ì¸ë°,
-	//ComPtrê°™ì€ ë³´ì¡°í´ëž˜ìŠ¤ë¥¼ ì“°ì§€ ì•ŠëŠ”ë‹¤ë©´ ë‚´ê°€ ì§ì ‘ Release()ë¥¼ í˜¸ì¶œí•´ì¤˜ì•¼ í•œë‹¤.
-	//ComPtr í´ëž˜ìŠ¤ëŠ” COM ê°ì²´ë¥¼ ìœ„í•œ smart pointerë¼ í•  ìˆ˜ ìžˆìœ¼ë©°, 
-	//ì´ í´ëž˜ìŠ¤ë¥¼ ì“°ë©´ ê°œë°œìžê°€ ì§ì ‘ Release()ë¥¼ í˜¸ì¶œí•  í•„ìš”ê°€ ì—†ë‹¤.
-	//COM ê°ì²´ì˜ ìˆ˜ëª… ê´€ë¦¬ë¥¼ ë•ê¸° ìœ„í•´, Windows ëŸ°íƒ€ìž„ ë¼ì´ë¸ŒëŸ¬ë¦¬(WRL)ì€ Microsoft::WRL::Comptr ì´ë¼ëŠ” 
-	//í´ëž˜ìŠ¤ë¥¼ ì œê³µí•œë‹¤(wrl.h í—¤ë”íŒŒì¼ì„ ì¸í´ë£¨ë“œ í•´ì•¼ ì‚¬ìš©ê°€ëŠ¥í•˜ë‹¤).
+	//´ÙÀÌ·ºÆ®°¡ Á¦°øÇÏ´Â ÀÎÅÍÆäÀÌ½ºÀÇ Æ÷ÀÎÅÍµéÀº ·¹ÆÛ·±½º Ä«¿îÆÃ ¹æ½ÄÀÎµ¥,
+	//ComPtr°°Àº º¸Á¶Å¬·¡½º¸¦ ¾²Áö ¾Ê´Â´Ù¸é ³»°¡ Á÷Á¢ Release()¸¦ È£ÃâÇØÁà¾ß ÇÑ´Ù.
+	//ComPtr Å¬·¡½º´Â COM °´Ã¼¸¦ À§ÇÑ smart pointer¶ó ÇÒ ¼ö ÀÖÀ¸¸ç, 
+	//ÀÌ Å¬·¡½º¸¦ ¾²¸é °³¹ßÀÚ°¡ Á÷Á¢ Release()¸¦ È£ÃâÇÒ ÇÊ¿ä°¡ ¾ø´Ù.
+	//COM °´Ã¼ÀÇ ¼ö¸í °ü¸®¸¦ µ½±â À§ÇØ, Windows ·±Å¸ÀÓ ¶óÀÌºê·¯¸®(WRL)Àº Microsoft::WRL::Comptr ÀÌ¶ó´Â 
+	//Å¬·¡½º¸¦ Á¦°øÇÑ´Ù(wrl.h Çì´õÆÄÀÏÀ» ÀÎÅ¬·çµå ÇØ¾ß »ç¿ë°¡´ÉÇÏ´Ù).
 
-	//ì…°ì–´ë“œ í¬ì¸í„°: í•œ ê°œì˜ ë©”ëª¨ë¦¬ ì˜ì—­ì„ ì—¬ëŸ¬ ê°œì˜ í¬ì¸í„°ê°€ ë‚˜ëˆ„ì–´ ê°€ì ¸ì•¼ í•  ë•Œ,
-	// ìƒˆë¡œ í• ë‹¹í•  ë•Œë§ˆë‹¤ ë ˆí¼ëŸ°ìŠ¤ íšŸìˆ˜ë¥¼ ì¦ê°€ì‹œí‚¤ê³ , í•´ì œí•  ë•Œë§ˆë‹¤ ë ˆí¼ëŸ°ìŠ¤ ì¹´ìš´íŠ¸ë¥¼ ê°ì†Œì‹œì¼œì„œ 
-	// ë ˆí¼ëŸ°ìŠ¤ ì¹´ìš´íŠ¸ê°€ 0ì´ ë  ë•Œë§Œ ì§„ì§œ ë©”ëª¨ë¦¬ í•´ì œë¥¼ í•´ì„œ 
-	// ëŒ•ê¸€ë§ í¬ì¸í„°ê°€ ìƒê¸¸ ê°€ëŠ¥ì„±ì„ ì—†ì• ëŠ” ë°©ì‹ì˜ í¬ì¸í„°ì´ë‹¤.
+	//¼Î¾îµå Æ÷ÀÎÅÍ: ÇÑ °³ÀÇ ¸Þ¸ð¸® ¿µ¿ªÀ» ¿©·¯ °³ÀÇ Æ÷ÀÎÅÍ°¡ ³ª´©¾î °¡Á®¾ß ÇÒ ¶§,
+	// »õ·Î ÇÒ´çÇÒ ¶§¸¶´Ù ·¹ÆÛ·±½º È½¼ö¸¦ Áõ°¡½ÃÅ°°í, ÇØÁ¦ÇÒ ¶§¸¶´Ù ·¹ÆÛ·±½º Ä«¿îÆ®¸¦ °¨¼Ò½ÃÄÑ¼­ 
+	// ·¹ÆÛ·±½º Ä«¿îÆ®°¡ 0ÀÌ µÉ ¶§¸¸ ÁøÂ¥ ¸Þ¸ð¸® ÇØÁ¦¸¦ ÇØ¼­ 
+	// ´ó±Û¸µ Æ÷ÀÎÅÍ°¡ »ý±æ °¡´É¼ºÀ» ¾ø¾Ö´Â ¹æ½ÄÀÇ Æ÷ÀÎÅÍÀÌ´Ù.
 
-	ID3D11Texture2D* backBufferTexture = nullptr;	//í™”ë©´ì— ìµœì¢…ì ìœ¼ë¡œ ë‚´ë³´ë‚´ëŠ” í…ìŠ¤ì³.
-	if (S_OK != swapChain_->GetBuffer(	//ìŠ¤ì™‘ì²´ì¸ì˜ ë°±ë²„í¼ë“¤ ì¤‘ í•˜ë‚˜ì— ì ‘ê·¼í•  ìˆ˜ ìžˆê²Œ í•´ì£¼ëŠ” í•¨ìˆ˜.
-		0,								//0ë²ˆ ë²„í¼ì— ì ‘ê·¼.
-		__uuidof(ID3D11Texture2D),					//ë²„í¼ë¥¼ ì¡°ì¢…í•˜ê¸° ìœ„í•œ ì¸í„°íŽ˜ì´ìŠ¤ì˜ GUID.
-		reinterpret_cast<void**>(&backBufferTexture)//ì–»ì–´ì˜¬ ë°±ë²„í¼ì˜ ID3D11Texture2D ì¸í„°íŽ˜ì´ìŠ¤ì˜ í¬ì¸í„°.
+	ID3D11Texture2D* backBufferTexture = nullptr;	//È­¸é¿¡ ÃÖÁ¾ÀûÀ¸·Î ³»º¸³»´Â ÅØ½ºÃÄ.
+	if (S_OK != swapChain_->GetBuffer(	//½º¿ÒÃ¼ÀÎÀÇ ¹é¹öÆÛµé Áß ÇÏ³ª¿¡ Á¢±ÙÇÒ ¼ö ÀÖ°Ô ÇØÁÖ´Â ÇÔ¼ö.
+		0,								//0¹ø ¹öÆÛ¿¡ Á¢±Ù.
+		__uuidof(ID3D11Texture2D),					//¹öÆÛ¸¦ Á¶Á¾ÇÏ±â À§ÇÑ ÀÎÅÍÆäÀÌ½ºÀÇ GUID.
+		reinterpret_cast<void**>(&backBufferTexture)//¾ò¾î¿Ã ¹é¹öÆÛÀÇ ID3D11Texture2D ÀÎÅÍÆäÀÌ½ºÀÇ Æ÷ÀÎÅÍ.
 	))
 	{
-		MsgBoxAssert("ë°±ë²„í¼ì˜ í…ìŠ¤ì³ë¥¼ ì–»ì–´ì˜¤ëŠ” ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+		MsgBoxAssert("¹é¹öÆÛÀÇ ÅØ½ºÃÄ¸¦ ¾ò¾î¿À´Â µ¥ ½ÇÆÐÇß½À´Ï´Ù.");
 		return;
 	}
 
 	backBufferRenderTarget_ = GameEngineRenderTarget::Create("BackBuffer RenderTarget");
-	//ë°±ë²„í¼ ìš©ë„ë¡œ ì“¸ ë¹ˆ ê¹¡í†µ ë Œë”íƒ€ê²Ÿ ìƒì„±.
+	//¹é¹öÆÛ ¿ëµµ·Î ¾µ ºó ±øÅë ·»´õÅ¸°Ù »ý¼º.
 
 	backBufferRenderTarget_->CreateRenderTargetTexture(backBufferTexture, float4::Blue);
-	//ìŠ¤ì™‘ì²´ì¸ì—ì„œ ë°›ì•„ì˜¨ ë°±ë²„í¼ í…ìŠ¤ì²˜ë¡œ ë Œë”íƒ€ê²Ÿë·°ë¥¼ ë§Œë“ ë‹¤.
+	//½º¿ÒÃ¼ÀÎ¿¡¼­ ¹Þ¾Æ¿Â ¹é¹öÆÛ ÅØ½ºÃ³·Î ·»´õÅ¸°Ùºä¸¦ ¸¸µç´Ù.
 
 	backBufferRenderTarget_->CreateDepthTexture(0);
-	//ê¹Šì´ìŠ¤í…ì‹¤ë·°ë¥¼ ë§Œë“œëŠ”ë° ì‚¬ìš©í•  í…ìŠ¤ì²˜ë¥¼ ìƒì„±í•œë‹¤.
+	//±íÀÌ½ºÅÙ½Çºä¸¦ ¸¸µå´Âµ¥ »ç¿ëÇÒ ÅØ½ºÃ³¸¦ »ý¼ºÇÑ´Ù.
 }
 
 void GameEngineDevice::RenderStart()
 {
 	backBufferRenderTarget_->Clear();
-	//ë°±ë²„í¼ì— ë‚¨ì•„ìžˆë˜ ì´ì „ í”½ì…€ì •ë³´ë“¤ì€ ì „ë¶€ í•œ ìƒ‰ìœ¼ë¡œ ë®ì–´ì„œ ì§€ìš´ë‹¤.
+	//¹é¹öÆÛ¿¡ ³²¾ÆÀÖ´ø ÀÌÀü ÇÈ¼¿Á¤º¸µéÀº ÀüºÎ ÇÑ »öÀ¸·Î µ¤¾î¼­ Áö¿î´Ù.
 
 	backBufferRenderTarget_->SetRenderTarget();
-	//ë‹¤ì‹œ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì— ì—°ê²°í•´ ë Œë”ë§ í•  ì¤€ë¹„ë¥¼ í•œë‹¤.
+	//´Ù½Ã µð¹ÙÀÌ½º ÄÁÅØ½ºÆ®¿¡ ¿¬°áÇØ ·»´õ¸µ ÇÒ ÁØºñ¸¦ ÇÑ´Ù.
 }
 
 void GameEngineDevice::RenderEnd()
 {
-	HRESULT presentResult = swapChain_->Present(	//ë°±ë²„í¼ë¥¼ ì „ë©´ ë²„í¼ë¡œ êµì²´í•˜ëŠ” í•¨ìˆ˜.
-		0,	//ë™ê¸°í™” ì§€ì—° ê°„ê²©. 0: ìˆ˜ì§ë™ê¸°í™” ì—†ì´ ì¦‰ì‹œ ë°±ë²„í¼ë¥¼ êµì²´í•´ì„œ í™”ë©´ì— ë„ìš´ë‹¤. 
-		//1~4: në²ˆì§¸ í”„ë ˆìž„ ê³µë°± ì´í›„ ë°±ë²„í¼ë¥¼ í™”ë©´ì— ë„ìš´ë‹¤.
-		0	//ì¶œë ¥ ë¶€ê°€ ì˜µì…˜. 0: ë¶€ê°€ì˜µì…˜ ì—†ì´ í˜„ìž¬ ë²„í¼ë¶€í„° ì¶œë ¥í•œë‹¤.
+	HRESULT presentResult = swapChain_->Present(	//¹é¹öÆÛ¸¦ Àü¸é ¹öÆÛ·Î ±³Ã¼ÇÏ´Â ÇÔ¼ö.
+		0,	//µ¿±âÈ­ Áö¿¬ °£°Ý. 0: ¼öÁ÷µ¿±âÈ­ ¾øÀÌ Áï½Ã ¹é¹öÆÛ¸¦ ±³Ã¼ÇØ¼­ È­¸é¿¡ ¶ç¿î´Ù. 
+		//1~4: n¹øÂ° ÇÁ·¹ÀÓ °ø¹é ÀÌÈÄ ¹é¹öÆÛ¸¦ È­¸é¿¡ ¶ç¿î´Ù.
+		0	//Ãâ·Â ºÎ°¡ ¿É¼Ç. 0: ºÎ°¡¿É¼Ç ¾øÀÌ ÇöÀç ¹öÆÛºÎÅÍ Ãâ·ÂÇÑ´Ù.
 	);
-	if (presentResult == DXGI_ERROR_DEVICE_REMOVED ||	//DXGI_ERROR_DEVICE_REMOVED: GPUê°€ ë¬¼ë¦¬ì ìœ¼ë¡œ ì œê±°ë˜ì—ˆê±°ë‚˜ ì—…ê·¸ë ˆì´ë“œ ì§„í–‰ ì¤‘. 
-		presentResult == DXGI_ERROR_DEVICE_RESET	//DXGI_ERROR_DEVICE_RESET: ë””ë°”ì´ìŠ¤ ìƒì„±ì— ë­”ê°€ ë¬¸ì œê°€ ìžˆì—ˆìŒ.
+	if (presentResult == DXGI_ERROR_DEVICE_REMOVED ||	//DXGI_ERROR_DEVICE_REMOVED: GPU°¡ ¹°¸®ÀûÀ¸·Î Á¦°ÅµÇ¾ú°Å³ª ¾÷±×·¹ÀÌµå ÁøÇà Áß. 
+		presentResult == DXGI_ERROR_DEVICE_RESET	//DXGI_ERROR_DEVICE_RESET: µð¹ÙÀÌ½º »ý¼º¿¡ ¹º°¡ ¹®Á¦°¡ ÀÖ¾úÀ½.
 		)
 	{
-		MsgBoxAssert("ë”ë¸”ë²„í¼ë§ ì‹¤íŒ¨.");
+		MsgBoxAssert("´õºí¹öÆÛ¸µ ½ÇÆÐ.");
 		return;
 	}
 	//if (S_OK != presemtResult)
 	//{
-	//	MsgBoxAssert("ë”ë¸”ë²„í¼ë§ ì‹¤íŒ¨.");
+	//	MsgBoxAssert("´õºí¹öÆÛ¸µ ½ÇÆÐ.");
 	//	return;
 	//}
-	// ìœˆë„ìš°ê°€ ìµœì†Œí™”ë˜ì—ˆê±°ë‚˜ ë‹¤ë¥¸ ìœˆë„ìš°ì— ê°€ë ¸ê±°ë‚˜ í•˜ëŠ” ì‹ìœ¼ë¡œ ìœˆë„ìš°ì™€ ë Œë”ë§ ìƒíƒœì— ë”°ë¼ì„œ ì •ìƒì ì¸ ë Œë”ë§ ì¤‘ì—ë„
-	// S_OKê°€ ì•„ë‹Œ DXGI_STATUS_OCCLUDED, DXGI_STATUS_CLIPPED ë”°ìœ„ì˜ ê²°ê³¼ê°€ ë‚˜ì˜¬ ìˆ˜ ìžˆê¸° ë•Œë¬¸ì—
-	// í”„ë ˆì  í…Œì´ì…˜ ê²°ê³¼ë¡œ S_OKë§Œ í—ˆìš©í•˜ë©´ ë¬¸ì œê°€ ìƒê¸¸ ìˆ˜ ìžˆë‹¤.
+	// À©µµ¿ì°¡ ÃÖ¼ÒÈ­µÇ¾ú°Å³ª ´Ù¸¥ À©µµ¿ì¿¡ °¡·È°Å³ª ÇÏ´Â ½ÄÀ¸·Î À©µµ¿ì¿Í ·»´õ¸µ »óÅÂ¿¡ µû¶ó¼­ Á¤»óÀûÀÎ ·»´õ¸µ Áß¿¡µµ
+	// S_OK°¡ ¾Æ´Ñ DXGI_STATUS_OCCLUDED, DXGI_STATUS_CLIPPED µûÀ§ÀÇ °á°ú°¡ ³ª¿Ã ¼ö ÀÖ±â ¶§¹®¿¡
+	// ÇÁ·¹Á¨Å×ÀÌ¼Ç °á°ú·Î S_OK¸¸ Çã¿ëÇÏ¸é ¹®Á¦°¡ »ý±æ ¼ö ÀÖ´Ù.
 }

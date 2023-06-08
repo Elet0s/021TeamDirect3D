@@ -13,15 +13,15 @@ public:
 	Mouse& operator=(Mouse&& _Other) noexcept = delete;
 
 public:
-	//ê¸°ë³¸ ë§ˆìš°ìŠ¤í¬ì¸í„° <-> ì—ì„ë¼ì¸ ë§ˆìš°ìŠ¤ í¬ì¸í„° êµì²´ í•¨ìˆ˜. ì „íˆ¬ë§µì—ì„œë§Œ ì‚¬ìš©í•  ê²ƒ.
+	//±âº» ¸¶¿ì½ºÆ÷ÀÎÅÍ <-> ¿¡ÀÓ¶óÀÎ ¸¶¿ì½º Æ÷ÀÎÅÍ ±³Ã¼ ÇÔ¼ö. ÀüÅõ¸Ê¿¡¼­¸¸ »ç¿ëÇÒ °Í.
 	void ChangeMousePointerRenderer(bool _isAiming);
 
-	//ì—ì„ë¼ì¸ í”¼ë´‡ ìœ„ì¹˜ ì—…ë°ì´íŠ¸ í•¨ìˆ˜. ì „íˆ¬ë§µì—ì„œë§Œ ì‚¬ìš©í•  ê²ƒ.
+	//¿¡ÀÓ¶óÀÎ ÇÇº¿ À§Ä¡ ¾÷µ¥ÀÌÆ® ÇÔ¼ö. ÀüÅõ¸Ê¿¡¼­¸¸ »ç¿ëÇÒ °Í.
 	void UpdatePivotPosition(const float4& _renderPivot);
 
-	//ë§ˆìš°ìŠ¤ í¬ì¸í„°ê°€ ë„£ì–´ì¤€ ì›”ë“œì¢Œí‘œì˜ ë©”ì‰¬ë¥¼ ê°€ë¦¬í‚¤ê³  ìˆëŠ”ì§€ íŒì •í•˜ëŠ” í•¨ìˆ˜.
+	//¸¶¿ì½º Æ÷ÀÎÅÍ°¡ ³Ö¾îÁØ ¿ùµåÁÂÇ¥ÀÇ ¸Ş½¬¸¦ °¡¸®Å°°í ÀÖ´ÂÁö ÆÇÁ¤ÇÏ´Â ÇÔ¼ö.
 	bool IsPointing(const float4x4& _worldWorldMatrix, const float4& _pivot, bool _isUI = false);
-	//"Rect"ë©”ì‰¬ ê¸°ì¤€ìœ¼ë¡œë§Œ êµ¬í˜„í•¨.
+	//"Rect"¸Ş½¬ ±âÁØÀ¸·Î¸¸ ±¸ÇöÇÔ.
 
 public:
 	float GetAimLineAngle() const
@@ -40,9 +40,9 @@ private:
 	GameEngineTextureRenderer* crossHairRenderer_;
 	GameEngineTextureRenderer* aimLineRenderer_;
 
-	float4 mousePositionInWorldSpace_;	//ì›”ë“œìŠ¤í˜ì´ìŠ¤ ë§ˆìš°ìŠ¤ ìœ„ì¹˜.
-	float4 pivotWorldPosition_;	//ì—ì„ë¼ì¸ í”¼ë´‡ì˜ ì›”ë“œ í¬ì§€ì…˜.
-	bool isAiming_;	//true: ì—ì„ë¼ì¸ ë§ˆìš°ìŠ¤í¬ì¸í„°ë¡œ ë³€ê²½. false: ê¸°ë³¸ ë§ˆìš°ìŠ¤í¬ì¸í„° ì‚¬ìš©.
+	float4 mousePositionInWorldSpace_;	//¿ùµå½ºÆäÀÌ½º ¸¶¿ì½º À§Ä¡.
+	float4 pivotWorldPosition_;	//¿¡ÀÓ¶óÀÎ ÇÇº¿ÀÇ ¿ùµå Æ÷Áö¼Ç.
+	bool isAiming_;	//true: ¿¡ÀÓ¶óÀÎ ¸¶¿ì½ºÆ÷ÀÎÅÍ·Î º¯°æ. false: ±âº» ¸¶¿ì½ºÆ÷ÀÎÅÍ »ç¿ë.
 	float aimLineAngle_;
-	float4 localVertexPosition_[4];	//"Rect"ë©”ì‰¬ì˜ 4ê°œ ì •ì ì˜ ë¡œì»¬ì¢Œí‘œ ëª¨ìŒ. 
+	float4 localVertexPosition_[4];	//"Rect"¸Ş½¬ÀÇ 4°³ Á¤Á¡ÀÇ ·ÎÄÃÁÂÇ¥ ¸ğÀ½. 
 };

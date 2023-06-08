@@ -39,23 +39,23 @@ void GameEngineTime::Reset()
 void GameEngineTime::Update()
 {
 	std::chrono::steady_clock::time_point current = std::chrono::steady_clock::now();
-	//ì´ë²ˆ ë£¨í”„ì˜ ì‹œì‘ì‹œê°„ì„ time_pointí˜•ìœ¼ë¡œ ì €ì¥í•œë‹¤.
+	//ÀÌ¹ø ·çÇÁÀÇ ½ÃÀÛ½Ã°£À» time_pointÇüÀ¸·Î ÀúÀåÇÑ´Ù.
 
 	std::chrono::duration<double> time_span = 
 		std::chrono::duration_cast<std::chrono::duration<double>>(current - prev_);
-	//ì´ë²ˆ ë£¨í”„ì˜ ì‹œì‘ì‹œê°„ - ì§€ë‚œ ë£¨í”„ì˜ ì‹œì‘ì‹œê°„ = ì§€ë‚œ ë£¨í”„ë¥¼ ìˆ˜í–‰í•˜ëŠ”ë° ê±¸ë¦° ì‹œê°„ == ë¸íƒ€íƒ€ì„.
-	//ë¸íƒ€íƒ€ì„ì„ duration<double>í˜•íƒœë¡œ ì €ì¥í•œë‹¤.
+	//ÀÌ¹ø ·çÇÁÀÇ ½ÃÀÛ½Ã°£ - Áö³­ ·çÇÁÀÇ ½ÃÀÛ½Ã°£ = Áö³­ ·çÇÁ¸¦ ¼öÇàÇÏ´Âµ¥ °É¸° ½Ã°£ == µ¨Å¸Å¸ÀÓ.
+	//µ¨Å¸Å¸ÀÓÀ» duration<double>ÇüÅÂ·Î ÀúÀåÇÑ´Ù.
 
-	//std::chrono::duration<Rep, Period = std::ratio<1>>: íŠ¹ì • ê¸¸ì´ì˜ ì‹œê°„ ê°„ê²©ì´ ëª‡ í‹±ì¸ì§€, 
-	// Repì— ë„£ì–´ì¤€ í˜•ì‹ìœ¼ë¡œ ì €ì¥í•˜ëŠ” í´ë˜ìŠ¤.
-	//í‹±ê°„ ê°„ê²©ì€ Period / 1ì´ˆ ê°„ê²©ì´ê³ , í…œí”Œë¦¿ ë§¤ê°œë³€ìˆ˜ Periodì— ì•„ë¬´ ê°’ë„ ë„£ì–´ì£¼ì§€ ì•Šìœ¼ë©´ ê¸°ë³¸ê°’ì¸ std::ratio<1>ì´ ì…ë ¥ë˜ì–´ ì´ˆë‹¹ 1í‹±ìœ¼ë¡œ ì„¤ì •ëœë‹¤. 
+	//std::chrono::duration<Rep, Period = std::ratio<1>>: Æ¯Á¤ ±æÀÌÀÇ ½Ã°£ °£°İÀÌ ¸î Æ½ÀÎÁö, 
+	// Rep¿¡ ³Ö¾îÁØ Çü½ÄÀ¸·Î ÀúÀåÇÏ´Â Å¬·¡½º.
+	//Æ½°£ °£°İÀº Period / 1ÃÊ °£°İÀÌ°í, ÅÛÇÃ¸´ ¸Å°³º¯¼ö Period¿¡ ¾Æ¹« °ªµµ ³Ö¾îÁÖÁö ¾ÊÀ¸¸é ±âº»°ªÀÎ std::ratio<1>ÀÌ ÀÔ·ÂµÇ¾î ÃÊ´ç 1Æ½À¸·Î ¼³Á¤µÈ´Ù. 
 
-	//std::ratio<Num, Denom = 1>: Num / Denomì˜ í˜•íƒœë¡œ ì…ë ¥ë°›ì€ ë¶„ìˆ˜ë‚˜ ë¹„ìœ¨ì„ í‘œí˜„, ê³„ì‚°í•˜ëŠ” í´ë˜ìŠ¤. 
-
+	//std::ratio<Num, Denom = 1>: Num / DenomÀÇ ÇüÅÂ·Î ÀÔ·Â¹ŞÀº ºĞ¼ö³ª ºñÀ²À» Ç¥Çö, °è»êÇÏ´Â Å¬·¡½º. 
+	
 	deltaTimeD_ = time_span.count(); 
-	//std::chrono::duration::count(): duration<double>í˜•íƒœë¡œ ì €ì¥ëœ ë¸íƒ€íƒ€ì„ì´ ëª‡ í‹±ì¸ì§€ ê³„ì‚°í•œë‹¤. 
-	// durationí´ë˜ìŠ¤ ìƒì„±ìì˜ ë‘ë²ˆì§¸ í…œí”Œë¦¿ ë§¤ê°œë³€ìˆ˜ Periodì— ì•„ë¬´ ê°’ë„ ë„£ì–´ì£¼ì§€ ì•Šì•˜ìœ¼ë¯€ë¡œ ì´ˆë‹¹ 1í‹±ìœ¼ë¡œ ê³„ì‚°ëœë‹¤.
-	//std::chrono::duration<Rep, Period>::count(): durationí˜•ì‹ì˜ ë³€ìˆ˜ì— ì €ì¥ëœ ì‹œê°„ì´ ëª‡ í‹±ì¸ì§€ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.  
+	//std::chrono::duration::count(): duration<double>ÇüÅÂ·Î ÀúÀåµÈ µ¨Å¸Å¸ÀÓÀÌ ¸î Æ½ÀÎÁö °è»êÇÑ´Ù. 
+	// durationÅ¬·¡½º »ı¼ºÀÚÀÇ µÎ¹øÂ° ÅÛÇÃ¸´ ¸Å°³º¯¼ö Period¿¡ ¾Æ¹« °ªµµ ³Ö¾îÁÖÁö ¾Ê¾ÒÀ¸¹Ç·Î ÃÊ´ç 1Æ½À¸·Î °è»êµÈ´Ù.
+	//std::chrono::duration<Rep, Period>::count(): durationÇü½ÄÀÇ º¯¼ö¿¡ ÀúÀåµÈ ½Ã°£ÀÌ ¸î Æ½ÀÎÁö ¹İÈ¯ÇÏ´Â ÇÔ¼ö.  
 
 	deltaTimeF_ = static_cast<float>(deltaTimeD_);
 
@@ -65,20 +65,20 @@ void GameEngineTime::Update()
 
 	fpsCheckTime_ -= deltaTimeD_;
 
-	if (-1 == frameLimit_)	//í”„ë ˆì„ ì œí•œì„ í•  ìƒê°ì´ ì—†ë‹¤ëŠ” ì˜ë¯¸.
+	if (-1 == frameLimit_)	//ÇÁ·¹ÀÓ Á¦ÇÑÀ» ÇÒ »ı°¢ÀÌ ¾ø´Ù´Â ÀÇ¹Ì.
 	{
 		isUpdateOn_ = true;
 
-		if (DBL_EPSILON <= deltaTimeD_)	//ë¸íƒ€íƒ€ì„ì´ ê·¹ë„ë¡œ ì‘ì€ ê°’ì´ë¼ë©´ ë¬´ì‹œ.
+		if (DBL_EPSILON <= deltaTimeD_)	//µ¨Å¸Å¸ÀÓÀÌ ±Øµµ·Î ÀÛÀº °ªÀÌ¶ó¸é ¹«½Ã.
 		{
 			++frameCount_;
 			totalFPS_ += static_cast<int>(1.0 / deltaTimeD_);
 
-			if (0 >= fpsCheckTime_)	//1ì´ˆê°„ í‰ê·  í”„ë ˆì„ ìˆ˜ ê³„ì‚°.
+			if (0 >= fpsCheckTime_)	//1ÃÊ°£ Æò±Õ ÇÁ·¹ÀÓ ¼ö °è»ê.
 			{
-				averageFPS_ = totalFPS_ / frameCount_;		//ì´ˆë‹¹ í‰ê·  í”„ë ˆì„ ìˆ˜ ê°±ì‹ .
+				averageFPS_ = totalFPS_ / frameCount_;		//ÃÊ´ç Æò±Õ ÇÁ·¹ÀÓ ¼ö °»½Å.
 
-				fpsCheckTime_ = 1.0;	//ë‚¨ì€ FPSê°±ì‹  ê°„ê²© 1ì´ˆë¡œ ë³µêµ¬.
+				fpsCheckTime_ = 1.0;	//³²Àº FPS°»½Å °£°İ 1ÃÊ·Î º¹±¸.
 				frameCount_ = 0;
 				totalFPS_ = 0;
 			}
@@ -86,7 +86,7 @@ void GameEngineTime::Update()
 	}
 	else 		
 	{
-		if (DBL_EPSILON <= deltaTimeD_)	//ë¸íƒ€íƒ€ì„ì´ ê·¹ë„ë¡œ ì‘ì€ ê°’ì´ë¼ë©´ ë¬´ì‹œ.
+		if (DBL_EPSILON <= deltaTimeD_)	//µ¨Å¸Å¸ÀÓÀÌ ±Øµµ·Î ÀÛÀº °ªÀÌ¶ó¸é ¹«½Ã.
 		{
 			curFrameTime_ -= deltaTimeD_;
 			sumDeltaTimeF_ += deltaTimeF_;
@@ -99,10 +99,10 @@ void GameEngineTime::Update()
 				sumDeltaTimeF_ = static_cast<float>(frameInterval_ - curFrameTime_);
 				curFrameTime_ = frameInterval_;
 
-				if (0 >= fpsCheckTime_)	//1ì´ˆê°„ í‰ê·  í”„ë ˆì„ ìˆ˜ ê³„ì‚°.
+				if (0 >= fpsCheckTime_)	//1ÃÊ°£ Æò±Õ ÇÁ·¹ÀÓ ¼ö °è»ê.
 				{
-					averageFPS_ = frameCount_;		//ì´ˆë‹¹ í‰ê·  í”„ë ˆì„ ìˆ˜ ê°±ì‹ .
-					fpsCheckTime_ = 1.0;	//ë‚¨ì€ FPSê°±ì‹  ê°„ê²© 1ì´ˆë¡œ ë³µêµ¬.
+					averageFPS_ = frameCount_;		//ÃÊ´ç Æò±Õ ÇÁ·¹ÀÓ ¼ö °»½Å.
+					fpsCheckTime_ = 1.0;	//³²Àº FPS°»½Å °£°İ 1ÃÊ·Î º¹±¸.
 					frameCount_ = 0;
 					totalFPS_ = 0;
 				}

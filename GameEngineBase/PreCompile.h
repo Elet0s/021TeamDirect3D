@@ -30,9 +30,9 @@
 
 #include <d3d11_4.h>
 #include <d3dcompiler.h>
-#include <DirectXPackedVector.h>	//MSì—ì„œ ë§Œë“  SIMDì—°ì‚°ì„ ì‚¬ìš©í•˜ëŠ” í•¨ìˆ˜ë“¤ì„ ì œê³µë°›ì„ ìˆ˜ ìžˆë‹¤.	
-//SIMD(Single Instruction Multiple Data): í•œë²ˆì˜ ì§€ì‹œë¡œ, ì •ë ¬ëœ ì—¬ëŸ¬ ê°’ë“¤ì„ ì·¨ê¸‰í•˜ëŠ” ì—°ì‚°ì„ ë™ì‹œì— ì²˜ë¦¬í•˜ëŠ” ëª…ë ¹ì–´ ì§‘í•©.
-//ëŒ€ëŸ‰ì˜ ë‹¨ìˆœ ì‚¬ì¹™ì—°ì‚°ë“¤ì„ ë¹ ë¥´ê²Œ ì²˜ë¦¬í•  ìˆ˜ ìžˆìœ¼ë¯€ë¡œ 3Dë Œë”ë§ì´ë‚˜ ë¨¸ì‹ ëŸ¬ë‹ ë“±ì„ êµ¬í˜„í• ë•Œ ìœ ë¦¬í•´ì§„ë‹¤.
+#include <DirectXPackedVector.h>	//MS¿¡¼­ ¸¸µç SIMD¿¬»êÀ» »ç¿ëÇÏ´Â ÇÔ¼öµéÀ» Á¦°ø¹ÞÀ» ¼ö ÀÖ´Ù.	
+//SIMD(Single Instruction Multiple Data): ÇÑ¹øÀÇ Áö½Ã·Î, Á¤·ÄµÈ ¿©·¯ °ªµéÀ» Ãë±ÞÇÏ´Â ¿¬»êÀ» µ¿½Ã¿¡ Ã³¸®ÇÏ´Â ¸í·É¾î ÁýÇÕ.
+//´ë·®ÀÇ ´Ü¼ø »çÄ¢¿¬»êµéÀ» ºü¸£°Ô Ã³¸®ÇÒ ¼ö ÀÖÀ¸¹Ç·Î 3D·»´õ¸µÀÌ³ª ¸Ó½Å·¯´× µîÀ» ±¸ÇöÇÒ¶§ À¯¸®ÇØÁø´Ù.
 #include <DirectXCollision.h>
 
 #pragma comment(lib, "d3d11")

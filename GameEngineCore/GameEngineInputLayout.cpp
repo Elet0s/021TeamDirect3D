@@ -22,15 +22,15 @@ void GameEngineInputLayout::CreateInputLayout(
     GameEngineVertexShader* _vertexShader
 )
 {
-    if (S_OK != GameEngineDevice::GetDevice()->CreateInputLayout(	//ì¸í’‹ë ˆì´ì•„ì›ƒ ìƒì„± í•¨ìˆ˜.
-        &_desc.descs_[0],									//ì¸í’‹ë ˆì´ì•„ì›ƒ ìƒì„±ì‹œ í•„ìš”í•œ D3D11_INPUT_ELEMENT_DESCí¬ì¸í„° ë°°ì—´ ì²«ë²ˆì§¸ ì›ì†Œì˜ í¬ì¸í„°.
-        static_cast<UINT>(_desc.descs_.size()),				//D3D11_INPUT_ELEMENT_DESCí¬ì¸í„° ë°°ì—´ì˜ í¬ê¸°.
-        _vertexShader->binaryCode_->GetBufferPointer(),	    //ì»´íŒŒì¼ëœ ì…°ì´ë” ë°”ì´ë„ˆë¦¬ì½”ë“œ
-        _vertexShader->binaryCode_->GetBufferSize(),		//ì»´íŒŒì¼ëœ ì…°ì´ë” ë°”ì´ë„ˆë¦¬ì½”ë“œ í¬ê¸°.
-        &inputLayout_                                       //ìƒì„±ëœ ì¸í’‹ë ˆì´ì•„ì›ƒì„ ë°›ì„ ID3D11InputLayoutí¬ì¸í„°.
+    if (S_OK != GameEngineDevice::GetDevice()->CreateInputLayout(	//ÀÎÇ²·¹ÀÌ¾Æ¿ô »ı¼º ÇÔ¼ö.
+        &_desc.descs_[0],									//ÀÎÇ²·¹ÀÌ¾Æ¿ô »ı¼º½Ã ÇÊ¿äÇÑ D3D11_INPUT_ELEMENT_DESCÆ÷ÀÎÅÍ ¹è¿­ Ã¹¹øÂ° ¿ø¼ÒÀÇ Æ÷ÀÎÅÍ.
+        static_cast<UINT>(_desc.descs_.size()),				//D3D11_INPUT_ELEMENT_DESCÆ÷ÀÎÅÍ ¹è¿­ÀÇ Å©±â.
+        _vertexShader->binaryCode_->GetBufferPointer(),	    //ÄÄÆÄÀÏµÈ ¼ÎÀÌ´õ ¹ÙÀÌ³Ê¸®ÄÚµå
+        _vertexShader->binaryCode_->GetBufferSize(),		//ÄÄÆÄÀÏµÈ ¼ÎÀÌ´õ ¹ÙÀÌ³Ê¸®ÄÚµå Å©±â.
+        &inputLayout_                                       //»ı¼ºµÈ ÀÎÇ²·¹ÀÌ¾Æ¿ôÀ» ¹ŞÀ» ID3D11InputLayoutÆ÷ÀÎÅÍ.
     ))
     {
-        MsgBoxAssert("ì¸í’‹ë ˆì´ì•„ì›ƒ ìƒì„± ì‹¤íŒ¨.");
+        MsgBoxAssert("ÀÎÇ²·¹ÀÌ¾Æ¿ô »ı¼º ½ÇÆĞ.");
         return;
     }
 }
@@ -39,7 +39,7 @@ void GameEngineInputLayout::Set()
 {
     if (nullptr == inputLayout_)
     {
-        MsgBoxAssert("ì¸í’‹ë ˆì´ì•„ì›ƒì´ ì—†ìŠµë‹ˆë‹¤.");
+        MsgBoxAssert("ÀÎÇ²·¹ÀÌ¾Æ¿ôÀÌ ¾ø½À´Ï´Ù.");
         return;
     }
 

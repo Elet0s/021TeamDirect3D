@@ -4,18 +4,18 @@
 
 class GameEngineInstancingBuffer : public GameEngineRes<GameEngineInstancingBuffer>
 {
-	//ì¸ìŠ¤í„´ìŠ¤ë Œë”ë§ì— í•„ìš”í•œ ì •ë³´()ë“¤ì„ GPUë¡œ ë³´ë‚´ê¸° ì „ì— í•œë° ëª¨ì•„ ì €ì¥í•˜ëŠ” ë²„í¼.
-	//ë²„í…ìŠ¤ë²„í¼ì˜ ì¼ì¢….
+	//ÀÎ½ºÅÏ½º·»´õ¸µ¿¡ ÇÊ¿äÇÑ Á¤º¸()µéÀ» GPU·Î º¸³»±â Àü¿¡ ÇÑµ¥ ¸ğ¾Æ ÀúÀåÇÏ´Â ¹öÆÛ.
+	//¹öÅØ½º¹öÆÛÀÇ ÀÏÁ¾.
 
 	friend GameEngineRes<GameEngineInstancingBuffer>;
-	//GameEngineInstancingBuffer í´ë˜ìŠ¤ì˜ í”„ë¼ì´ë¹— ì†Œë©¸ìë¥¼ GameEngineResí´ë˜ìŠ¤ì—ì„œ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ë°©ë²•.
+	//GameEngineInstancingBuffer Å¬·¡½ºÀÇ ÇÁ¶óÀÌºø ¼Ò¸êÀÚ¸¦ GameEngineResÅ¬·¡½º¿¡¼­ È£ÃâÇÏ±â À§ÇÑ ¹æ¹ı.
 
 private:
 	GameEngineInstancingBuffer();
 	~GameEngineInstancingBuffer();
-	//ì™¸ë¶€ì—ì„œ ì œë©‹ëŒ€ë¡œ ë¦¬ì†ŒìŠ¤ë¥¼ ìƒì„±/ì‚­ì œí•˜ëŠ”ê±¸ ë§‰ê¸° ìœ„í•´ì„œ ìƒì„±ì/ì†Œë©¸ìë¥¼ í”„ë¼ì´ë¹—ìœ¼ë¡œ ì§€ì •í•´ì„œ ì™¸ë¶€ ì ‘ê·¼ì„ ë§‰ëŠ”ë‹¤.
-	//ì´ í”„ë ˆì„ì›Œí¬ì˜ ë¦¬ì†ŒìŠ¤ëŠ” ë°˜ë“œì‹œ ì†Œë©¸ìê°€ ì•„ë‹ˆë¼ ResourceDestroy()í•¨ìˆ˜ì—ì„œ ì œê±°í•´ì•¼ í•œë‹¤.
-	//í”„ë¡œê·¸ë¨ ëë‚ ë•Œê¹Œì§€ ë¦¬ì†ŒìŠ¤ì‚­ì œë¥¼ ì•ˆí•˜ë©´ ëë‚˜ëŠ” ë¬¸ì œì§€ë§Œ ê·¸ë˜ë„ ìµœëŒ€í•œ ë§‰ì•„ë‘”ë‹¤.
+	//¿ÜºÎ¿¡¼­ Á¦¸Ú´ë·Î ¸®¼Ò½º¸¦ »ı¼º/»èÁ¦ÇÏ´Â°É ¸·±â À§ÇØ¼­ »ı¼ºÀÚ/¼Ò¸êÀÚ¸¦ ÇÁ¶óÀÌºøÀ¸·Î ÁöÁ¤ÇØ¼­ ¿ÜºÎ Á¢±ÙÀ» ¸·´Â´Ù.
+	//ÀÌ ÇÁ·¹ÀÓ¿öÅ©ÀÇ ¸®¼Ò½º´Â ¹İµå½Ã ¼Ò¸êÀÚ°¡ ¾Æ´Ï¶ó ResourceDestroy()ÇÔ¼ö¿¡¼­ Á¦°ÅÇØ¾ß ÇÑ´Ù.
+	//ÇÁ·Î±×·¥ ³¡³¯¶§±îÁö ¸®¼Ò½º»èÁ¦¸¦ ¾ÈÇÏ¸é ³¡³ª´Â ¹®Á¦Áö¸¸ ±×·¡µµ ÃÖ´ëÇÑ ¸·¾ÆµĞ´Ù.
 
 	GameEngineInstancingBuffer(const GameEngineInstancingBuffer& _other) = delete;
 	GameEngineInstancingBuffer(GameEngineInstancingBuffer&& _other) noexcept = delete;
@@ -53,7 +53,7 @@ private:
 private:
 	ID3D11Buffer* instancingBuffer_;
 	D3D11_BUFFER_DESC instancingBufferDesc_;
-	size_t bufferCount_;	//ë²„í¼ì— ì €ì¥ëœ ë°ì´í„° ê°¯ìˆ˜.
-	size_t dataSize_;		//ë°ì´í„° ë‹¨ìœ„ í¬ê¸°.
+	size_t bufferCount_;	//¹öÆÛ¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ °¹¼ö.
+	size_t dataSize_;		//µ¥ÀÌÅÍ ´ÜÀ§ Å©±â.
 };
 

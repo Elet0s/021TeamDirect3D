@@ -72,9 +72,9 @@ struct RenderOption
 	float deltaTime_ = 0.f;
 	float sumDeltaTime_ = 0.f;
 	int isAnimation_ = 0;
-	int vertexInversion_ = 1;   //ê·¸ë¦¼ììš© ì •ì  ì¢Œìš° ë’¤ì§‘í˜ í‘œì‹œ ë³€ìˆ˜. ì¢Œìš° ë’¤ì§‘ì–´ì•¼ í•˜ë©´ -1 ëŒ€ì….
-	float pivotPosX_ = 0.f;     //í”¼ë´‡í¬ìŠ¤ X
-	float pivotPosY_ = 0.f;     //í”¼ë´‡í¬ìŠ¤ Y
-	float lightingRotationX_ = 0.f;  //ì¡°ëª… Xì¶• ê°ë„. 
-	float lightingRotationY_ = 0.f;  //ì¡°ëª… Yì¶• ê°ë„. 
+	int vertexInversion_ = 1;   //±×¸²ÀÚ¿ë Á¤Á¡ ÁÂ¿ì µÚÁıÈû Ç¥½Ã º¯¼ö. ÁÂ¿ì µÚÁı¾î¾ß ÇÏ¸é -1 ´ëÀÔ.
+	float pivotPosX_ = 0.f;     //ÇÇº¿Æ÷½º X
+	float pivotPosY_ = 0.f;     //ÇÇº¿Æ÷½º Y
+	float lightingRotationX_ = 0.f;  //Á¶¸í XÃà °¢µµ. 
+	float lightingRotationY_ = 0.f;  //Á¶¸í YÃà °¢µµ. 
 };

@@ -17,20 +17,20 @@ public:
 
 public:
 
-	void Stop() // í”Œë ˆì´ì–´ ë©ˆì¶¤
+	void Stop() // ÇÃ·¹ÀÌ¾î ¸ØÃã
 	{
 		BGMPlayer_.Stop();
 	}
 
-	void VolumeSet(float _Volume) // í”Œë ˆì´ì–´ ë³¼ë¥¨ ì„¸íŒ…
+	void VolumeSet(float _Volume) // ÇÃ·¹ÀÌ¾î º¼·ı ¼¼ÆÃ
 	{
 		BGMPlayer_.Volume(_Volume);
 	}
-	void SpeedSet(float _Speed) //í”Œë ˆì´ì–´ ì¬ìƒì†ë„ ì„¸íŒ…
+	void SpeedSet(float _Speed) //ÇÃ·¹ÀÌ¾î Àç»ı¼Óµµ ¼¼ÆÃ
 	{
 		BGMPlayer_.PlaySpeed(_Speed);
 	}
-	void ChangeBgm(std::string _BgmName, float _volume = 1.0f) // ì¬ìƒìŒì•… ë³€ê²½
+	void ChangeBgm(std::string _BgmName, float _volume = 1.0f) // Àç»ıÀ½¾Ç º¯°æ
 	{
 		if (false == BGMPlayer_.IsControlHandleEmpty())
 		{
@@ -40,7 +40,7 @@ public:
 		BGMPlayer_ = GameEngineSound::SoundPlayControl(_BgmName);
 	}
 
-	void Destroy() // ì¢…ë£Œí• ë•Œ í˜¸ì¶œí•´ì¤„ê²ƒ
+	void Destroy() // Á¾·áÇÒ¶§ È£ÃâÇØÁÙ°Í
 	{
 		if (BGMPlay_ != nullptr)
 		{

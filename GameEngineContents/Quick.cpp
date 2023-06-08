@@ -4,7 +4,7 @@
 
 Quick::Quick() 
 {
-	name_ = "Ïã†ÏÜç";
+	name_ = "Ω≈º”";
 	SetName(std::string_view("Quick"));
 	myRank_ = Rank::UnCommon;
 	maxLevel_ = 1;
@@ -26,10 +26,10 @@ void Quick::Init()
 	std::string sProjectileSize = std::to_string(PlayerPInfo_.projectileSize_Result).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result).find(".")) + "%";
 	std::string sProjectileSizeNext = std::to_string(PlayerPInfo_.projectileSize_Result - 25.0f).substr(0, std::to_string(PlayerPInfo_.projectileSize_Result - 25.0f).find(".")) + "%";
 
-
-	etc_ = sProjectileSpeed + " -> " + sProjectileSpeedNext + " Ìà¨ÏÇ¨Ï≤¥ ÏÜçÎèÑ\n"
-		+ sSpeed + " -> " + sSpeedNext + " Ïù¥ÎèôÏÜçÎèÑ\n"
-		+ sProjectileSize + " -> " + sProjectileSizeNext + " Ìà¨ÏÇ¨Ï≤¥ ÌÅ¨Í∏∞ ";
+	
+	etc_ = sProjectileSpeed + " -> " + sProjectileSpeedNext + " ≈ıªÁ√º º”µµ\n"
+		+ sSpeed + " -> " + sSpeedNext + " ¿Ãµøº”µµ\n"
+		+ sProjectileSize + " -> " + sProjectileSizeNext + " ≈ıªÁ√º ≈©±‚ ";
 
 }
 

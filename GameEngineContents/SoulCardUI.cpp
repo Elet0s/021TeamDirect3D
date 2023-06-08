@@ -88,13 +88,13 @@ void SoulCardUI::Start()
 		skillName_->SetColor(TextColor_);
 	}
 
-
-
+	
+	
 	{
 		GameEngineFontRenderer* font = CreateComponent<GameEngineFontRenderer>();
 		font->SetPositionMode(FontPositionMode::World);
 		font->SetSize(18.f);
-		font->SetText("ë ˆë²¨ : ", "Free Pixel");
+		font->SetText("·¹º§ : ", "Free Pixel");
 		font->GetTransform().SetLocalMove(float4(-84.f, 40.f, -10.f));
 		font->SetColor(TextColor_);
 		font->ChangeCamera(CameraOrder::UICamera);
@@ -113,7 +113,7 @@ void SoulCardUI::Start()
 	{
 		Rank_ = CreateComponent<GameEngineFontRenderer>();
 		Rank_->SetPositionMode(FontPositionMode::World);
-		Rank_->SetText("ì¼ë°˜", "Free Pixel");
+		Rank_->SetText("ÀÏ¹Ý", "Free Pixel");
 		Rank_->SetSize(16.f);
 		Rank_->GetTransform().SetLocalMove(float4(-84.f, 20.f, -10.f));
 		Rank_->SetColor(RankColor_);
@@ -127,7 +127,7 @@ void SoulCardUI::Start()
 		cardColision_->SetDebugSetting(CollisionType::CT_AABB, float4::Red);
 	}
 
-
+	
 }
 
 void SoulCardUI::Update(float _deltaTime)
@@ -214,7 +214,7 @@ void SoulCardUI::Update(float _deltaTime)
 			}
 		}
 	}
-
+	
 }
 
 void SoulCardUI::ColorChange(Appear _Value)
@@ -225,7 +225,7 @@ void SoulCardUI::ColorChange(Appear _Value)
 		TextColor_.a = 1.0f;
 		RankColor_.a = 1.0f;
 		ColorCheck_ = Appear::True;
-
+	
 	}
 
 	if (Appear::False == _Value)
@@ -246,7 +246,7 @@ void SoulCardUI::ColorChange(Appear _Value)
 	}
 	Level_->SetColor(TextColor_);
 	Rank_->SetColor(RankColor_);
-
+	
 }
 
 void SoulCardUI::Setting()
@@ -260,7 +260,7 @@ void SoulCardUI::Setting()
 	{
 		WeaponDraw();
 	}
-
+	
 
 
 
@@ -316,7 +316,7 @@ void SoulCardUI::CardDraw()
 	{
 		std::vector <std::vector<Skill*>> SkillList = Player::GetPlayerInst().GetSkillManager()->GetSkillList();
 		int RankRandom = 0;
-
+		
 		int Randomnum = GameEngineRandom::mainRandom_.RandomInt(1, 100);
 
 		if (Randomnum <= 30)
@@ -369,38 +369,38 @@ void SoulCardUI::CardDraw()
 	{
 		switch (mySkill_->GetRank())
 		{
-			case Rank::Spotted:
-				template_->SetTexture("SoulCardSpotted.png");
-				Rank_->SetText("ë”ëŸ½í˜€ì§„", "Free Pixel");
-				Rank_->SetColor(float4::White);
-				RankColor_ = float4::White;
-				break;
-			case Rank::Normal:
-				template_->SetTexture("SoulCardNormal.png");
-				Rank_->SetText("ì¼ë°˜", "Free Pixel");
-				Rank_->SetColor(float4::White);
-				RankColor_ = float4::White;
-				break;
-			case Rank::UnCommon:
-				template_->SetTexture("SoulCardUnCommon.png");
-				Rank_->SetText("ì–¸ì»¤ë¨¼", "Free Pixel");
-				Rank_->SetColor(float4(0.f, 1.f, 0.f));
-				RankColor_ = float4(0.f, 1.f, 0.f);
-				break;
-			case Rank::Rare:
-				template_->SetTexture("SoulCardRare.png");
-				Rank_->SetText("ë ˆì–´", "Free Pixel");
-				Rank_->SetColor(float4(0.f, 0.f, 1.f));
-				RankColor_ = float4(0.f, 0.f, 1.f);
-				break;
-			case Rank::Epic:
-				template_->SetTexture("SoulCardEpic.png");
-				Rank_->SetText("ì—í”½", "Free Pixel");
-				Rank_->SetColor(float4(1.0f, 0.0f, 1.f));
-				RankColor_ = float4(1.0f, 0.0f, 1.f);
-				break;
-			default:
-				break;
+		case Rank::Spotted:
+			template_->SetTexture("SoulCardSpotted.png");
+			Rank_->SetText("´õ·´ÇôÁø", "Free Pixel");
+			Rank_->SetColor(float4::White);
+			RankColor_ = float4::White;
+			break;
+		case Rank::Normal:
+			template_->SetTexture("SoulCardNormal.png");
+			Rank_->SetText("ÀÏ¹Ý", "Free Pixel");
+			Rank_->SetColor(float4::White);
+			RankColor_ = float4::White;
+			break;
+		case Rank::UnCommon:
+			template_->SetTexture("SoulCardUnCommon.png");
+			Rank_->SetText("¾ðÄ¿¸Õ", "Free Pixel");
+			Rank_->SetColor(float4(0.f, 1.f, 0.f));
+			RankColor_ = float4(0.f, 1.f, 0.f);
+			break;
+		case Rank::Rare:
+			template_->SetTexture("SoulCardRare.png");
+			Rank_->SetText("·¹¾î", "Free Pixel");
+			Rank_->SetColor(float4(0.f, 0.f, 1.f));
+			RankColor_ = float4(0.f, 0.f, 1.f);
+			break;
+		case Rank::Epic:
+			template_->SetTexture("SoulCardEpic.png");
+			Rank_->SetText("¿¡ÇÈ", "Free Pixel");
+			Rank_->SetColor(float4(1.0f, 0.0f, 1.f));
+			RankColor_ = float4(1.0f, 0.0f, 1.f);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -445,7 +445,7 @@ void SoulCardUI::WeaponDraw()
 	std::vector <std::vector<Skill*>> SkillList = Player::GetPlayerInst().GetSkillManager()->GetSkillList();
 	int IndexRandom = 0;
 	IndexRandom = GameEngineRandom::mainRandom_.RandomInt(0, static_cast<int>(SkillList[5].size() - 1));
-
+	
 	mySkill_ = SkillList[5][IndexRandom];
 
 
@@ -471,38 +471,38 @@ void SoulCardUI::WeaponDraw()
 	{
 		switch (mySkill_->GetRank())
 		{
-			case Rank::Spotted:
-				template_->SetTexture("SoulCardSpotted.png");
-				Rank_->SetText("ë”ëŸ½í˜€ì§„", "Free Pixel");
-				Rank_->SetColor(float4::White);
-				RankColor_ = float4::White;
-				break;
-			case Rank::Normal:
-				template_->SetTexture("SoulCardNormal.png");
-				Rank_->SetText("ì¼ë°˜", "Free Pixel");
-				Rank_->SetColor(float4::White);
-				RankColor_ = float4::White;
-				break;
-			case Rank::UnCommon:
-				template_->SetTexture("SoulCardUnCommon.png");
-				Rank_->SetText("ì–¸ì»¤ë¨¼", "Free Pixel");
-				Rank_->SetColor(float4(0.f, 1.f, 0.f));
-				RankColor_ = float4(0.f, 1.f, 0.f);
-				break;
-			case Rank::Rare:
-				template_->SetTexture("SoulCardRare.png");
-				Rank_->SetText("ë ˆì–´", "Free Pixel");
-				Rank_->SetColor(float4(0.f, 0.f, 1.f));
-				RankColor_ = float4(0.f, 0.f, 1.f);
-				break;
-			case Rank::Epic:
-				template_->SetTexture("SoulCardEpic.png");
-				Rank_->SetText("ì—í”½", "Free Pixel");
-				Rank_->SetColor(float4(1.0f, 0.0f, 1.f));
-				RankColor_ = float4(1.0f, 0.0f, 1.f);
-				break;
-			default:
-				break;
+		case Rank::Spotted:
+			template_->SetTexture("SoulCardSpotted.png");
+			Rank_->SetText("´õ·´ÇôÁø", "Free Pixel");
+			Rank_->SetColor(float4::White);
+			RankColor_ = float4::White;
+			break;
+		case Rank::Normal:
+			template_->SetTexture("SoulCardNormal.png");
+			Rank_->SetText("ÀÏ¹Ý", "Free Pixel");
+			Rank_->SetColor(float4::White);
+			RankColor_ = float4::White;
+			break;
+		case Rank::UnCommon:
+			template_->SetTexture("SoulCardUnCommon.png");
+			Rank_->SetText("¾ðÄ¿¸Õ", "Free Pixel");
+			Rank_->SetColor(float4(0.f, 1.f, 0.f));
+			RankColor_ = float4(0.f, 1.f, 0.f);
+			break;
+		case Rank::Rare:
+			template_->SetTexture("SoulCardRare.png");
+			Rank_->SetText("·¹¾î", "Free Pixel");
+			Rank_->SetColor(float4(0.f, 0.f, 1.f));
+			RankColor_ = float4(0.f, 0.f, 1.f);
+			break;
+		case Rank::Epic:
+			template_->SetTexture("SoulCardEpic.png");
+			Rank_->SetText("¿¡ÇÈ", "Free Pixel");
+			Rank_->SetColor(float4(1.0f, 0.0f, 1.f));
+			RankColor_ = float4(1.0f, 0.0f, 1.f);
+			break;
+		default:
+			break;
 		}
 	}
 
